@@ -1,0 +1,31 @@
+.funnel {
+  height: 100%;
+  position: relative;
+}
+.funnel-outline-1 {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 24px;
+}
+.layer-216 {
+  height: 24px;
+  width: 24px;
+}
+.vector-118 {
+  height: 75.00%;
+  left: 15.61%;
+  position: absolute;
+  top: 16.67%;
+  width: 68.75%;
+}
+.vector9 {
+  height: 2.08%;
+  left: 48.96%;
+  position: absolute;
+  top: 48.96%;
+  width: 2.08%;
+}

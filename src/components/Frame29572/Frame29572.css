@@ -1,0 +1,27 @@
+.frame-28132 {
+  height: 24px;
+  left: 40px;
+  position: relative;
+  top: 24px;
+  width: 126px;
+}
+.frame-29572 {
+  height: 72px;
+  left: 0px;
+  position: absolute;
+  top: 256px;
+  width: 728px;
+}
+.most-newest {
+  color: var(--caribbean-green);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 24px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}

@@ -1,0 +1,38 @@
+.frame-2815 {
+  background-color: rgba(213,167,167,1.0);
+  background-size: 100% 100%;
+  border-radius: 100px;
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 48px;
+}
+.frame-2960 {
+  border-radius: 4px;
+  height: 48px;
+  left: 64px;
+  position: absolute;
+  top: 0px;
+  width: 584px;
+}
+.frame-2961 {
+  height: 48px;
+  left: 40px;
+  position: absolute;
+  top: 660px;
+  width: 648px;
+}
+.frame-29612 {
+  bottom: 40px;
+  top: unset;
+}
+.text-375 {
+  height: 24px;
+  left: 16px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 12px;
+  white-space: nowrap;
+}

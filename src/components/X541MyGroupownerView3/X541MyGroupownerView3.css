@@ -1,0 +1,87 @@
+.close-outline-116 {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 568px;
+  position: absolute;
+  top: 16px;
+  width: 24px;
+}
+.delete-group {
+  left: 24px;
+  letter-spacing: 0.00px;
+  line-height: 32px;
+  position: absolute;
+  top: 24px;
+  white-space: nowrap;
+}
+.delete-group-1 {
+  height: 24px;
+  left: calc(50.00% - 48px);
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: calc(50.00% - 12px);
+  white-space: nowrap;
+}
+.frame-196312 {
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 608px;
+}
+.frame-196413 {
+  background-color: rgba(25,27,29,1.0);
+  border-radius: 4px;
+  height: 256px;
+  left: 416px;
+  overflow: hidden;
+  position: absolute;
+  top: 384px;
+  width: 608px;
+}
+.frame-19662 {
+  background-color: var(--rusty-red);
+  border-radius: 4px;
+  height: 48px;
+  left: 221px;
+  position: absolute;
+  top: 0px;
+  width: 200px;
+}
+.frame-3734 {
+  height: 48px;
+  left: 24px;
+  position: absolute;
+  top: 184px;
+  width: 421px;
+}
+.rectangle-85712 {
+  background-color: rgba(0,0,0,1.0);
+  height: 100%;
+  left: 0px;
+  opacity: 0.8;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.text-1111 {
+  height: 48px;
+  left: 24px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 96px;
+  width: 533px;
+}
+.x541-my-group-owner-view2 {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 1024px;
+  min-width: 1440px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}

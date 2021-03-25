@@ -1,0 +1,50 @@
+.grid {
+  height: 24px;
+  left: 4px;
+  position: relative;
+  top: 4px;
+  width: 24px;
+}
+.grid-1 {
+  height: 100%;
+  position: relative;
+}
+.grid-outline-2 {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 3px;
+  width: 24px;
+}
+.layer-27 {
+  height: 18px;
+  width: 18px;
+}
+.vector-63 {
+  height: 44.44%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 44.44%;
+}
+.vector-73 {
+  height: 44.44%;
+  left: 55.56%;
+  position: absolute;
+  top: 0px;
+  width: 44.44%;
+}
+.vector-83 {
+  height: 44.44%;
+  left: 0px;
+  position: absolute;
+  top: 55.56%;
+  width: 44.44%;
+}
+.vector-93 {
+  height: 44.44%;
+  left: 55.56%;
+  position: absolute;
+  top: 55.56%;
+  width: 44.44%;
+}

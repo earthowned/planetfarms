@@ -1,0 +1,77 @@
+.frame-2079 {
+  background-color: rgba(58,58,58,1.0);
+  border-radius: 4px;
+  box-shadow: 0px 16px 40px rgba(0,0,0,0.18);;
+  height: 224px;
+  left: 888px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 472px;
+  width: 184px;
+}
+.frame-20792 {
+  opacity: unset;
+}
+.frame-2080 {
+  height: 24px;
+  left: 16px;
+  position: relative;
+  top: 16px;
+  width: 118px;
+}
+.frame-2080-1 {
+  height: 24px;
+  left: 16px;
+  position: relative;
+  top: 16px;
+  width: 131px;
+}
+.frame-2081 {
+  height: 56px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 184px;
+}
+.frame-2082 {
+  height: 56px;
+  left: 0px;
+  position: absolute;
+  top: 168px;
+  width: 184px;
+}
+.frame-2083 {
+  height: 56px;
+  left: 0px;
+  position: absolute;
+  top: 112px;
+  width: 184px;
+}
+.frame-2084 {
+  height: 56px;
+  left: 0px;
+  position: absolute;
+  top: 56px;
+  width: 184px;
+}
+.text-466 {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}
+.text-468 {
+  color: var(--rusty-red);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}

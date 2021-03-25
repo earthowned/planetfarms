@@ -1,0 +1,79 @@
+.address9 {
+  color: var(--monsoon);
+  font-family: 'Inter', Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 24px;
+  white-space: nowrap;
+}
+.follow4 {
+  color: var(--caribbean-green);
+  font-family: 'Inter', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 32px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}
+.frame-29263 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 184px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 184px;
+}
+.frame-29272 {
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 192px;
+  width: 158px;
+}
+.frame-29283 {
+  height: 24px;
+  left: 0px;
+  position: absolute;
+  top: 248px;
+  width: 82px;
+}
+.frame-2940 {
+  height: 272px;
+  left: 288px;
+  position: absolute;
+  top: 824px;
+  width: 184px;
+}
+.frame-2941 {
+  left: 520px;
+}
+.frame-2942 {
+  left: 752px;
+}
+.frame-2943 {
+  left: 984px;
+}
+.frame-2944 {
+  left: 1216px;
+}
+.name5 {
+  color: var(--quarter-spanish-white);
+  font-family: 'Inter', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}

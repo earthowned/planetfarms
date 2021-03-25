@@ -1,0 +1,26 @@
+.frame-28133 {
+  height: 24px;
+  left: 40px;
+  position: relative;
+  width: 138px;
+}
+.frame-29623 {
+  height: 24px;
+  left: 0px;
+  position: absolute;
+  top: 600px;
+  width: 728px;
+}
+.show-more-replies {
+  color: var(--caribbean-green);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 24px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}

@@ -1,0 +1,218 @@
+.box-1 {
+  height: 24px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 24px;
+}
+.chevron-right-outline-111 {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 307px;
+  position: absolute;
+  top: 44px;
+  transform: rotate(90deg);
+  width: 24px;
+}
+.edit-3 {
+  height: 24px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 24px;
+}
+.edit-information {
+  color: var(--caribbean-green);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 24px;
+  left: 28px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+}
+.frame-2798 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 1546px;
+  left: 287px;
+  position: absolute;
+  top: 159px;
+  width: 1114px;
+}
+.frame-2798-1 {
+  border-radius: 4px;
+  height: 48px;
+  left: 192px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 168px;
+}
+.frame-298 {
+  background-color: var(--licorice);
+  height: 112px;
+  left: 0px;
+  position: absolute;
+  top: 976px;
+  width: 1112px;
+}
+.frame-29823 {
+  background-color: var(--licorice);
+  height: 112px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 1112px;
+}
+.frame-29835 {
+  height: 24px;
+  left: 30px;
+  position: relative;
+  top: 12px;
+  width: 109px;
+}
+.frame-29845 {
+  background-color: var(--licorice);
+  height: 112px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 1088px;
+  width: 1112px;
+}
+.frame-3003 {
+  border-radius: 4px;
+  height: 48px;
+  left: 576px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 168px;
+}
+.frame-3004 {
+  border-radius: 4px;
+  height: 48px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 168px;
+}
+.frame-3005 {
+  background-color: var(--quarter-spanish-white);
+  border-radius: 4px;
+  height: 48px;
+  left: 384px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 168px;
+}
+.frame-3436 {
+  height: 48px;
+  left: 40px;
+  position: absolute;
+  top: 112px;
+  width: 744px;
+}
+.frame-3440 {
+  height: 24px;
+  left: 40px;
+  position: absolute;
+  top: 361px;
+  width: 148px;
+}
+.rectangle-87 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 111px;
+  width: 1112px;
+}
+.rectangle-8752 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 423px;
+  width: 1112px;
+}
+.resources {
+  left: 32px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}
+.text-362 {
+  color: var(--white);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  left: 40px;
+  letter-spacing: 0.00px;
+  line-height: 32px;
+  position: absolute;
+  top: 40px;
+  white-space: nowrap;
+}
+.text-365 {
+  left: 40px;
+  letter-spacing: 0.00px;
+  line-height: 32px;
+  position: absolute;
+  top: 40px;
+  white-space: nowrap;
+}
+.vector-125 {
+  height: 33.33%;
+  left: 8.33%;
+  position: absolute;
+  top: 22.85%;
+  width: 83.33%;
+}
+.vector-214 {
+  height: 52.08%;
+  left: 45.83%;
+  position: absolute;
+  top: 44.96%;
+  width: 8.33%;
+}
+.vector-38 {
+  height: 83.33%;
+  left: 4.17%;
+  position: absolute;
+  top: 12.50%;
+  width: 83.33%;
+}
+.vector-47 {
+  height: 68.75%;
+  left: 28.38%;
+  position: absolute;
+  top: 2.87%;
+  width: 68.75%;
+}
+.vector13 {
+  height: 91.67%;
+  left: 8.33%;
+  position: absolute;
+  top: 4.17%;
+  width: 83.33%;
+}
+.x9-2-enterprise-user-view {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 2804px;
+  min-width: 1440px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}

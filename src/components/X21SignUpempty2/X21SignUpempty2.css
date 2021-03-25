@@ -1,0 +1,155 @@
+.badpassword111 {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 50.00%;
+  white-space: nowrap;
+}
+.frame-19214 {
+  height: 100px;
+  left: 0px;
+  position: absolute;
+  top: 120px;
+  width: 504px;
+}
+.frame-19315 {
+  height: 452px;
+  left: 80px;
+  position: absolute;
+  top: 192px;
+  width: 504px;
+}
+.frame-19325 {
+  height: 704px;
+  left: 0px;
+  position: absolute;
+  top: 160px;
+  width: 740px;
+}
+.frame-19344 {
+  height: 48px;
+  left: 16px;
+  position: absolute;
+  top: 16px;
+  width: 167px;
+}
+.frame-19352 {
+  height: 56px;
+  left: 0px;
+  position: absolute;
+  top: 260px;
+  width: 504px;
+}
+.frame-2855 {
+  background-color: var(--caribbean-green);
+  border-radius: 4px;
+  height: 48px;
+  left: 304px;
+  position: absolute;
+  top: 0px;
+  width: 200px;
+}
+.frame-44 {
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 504px;
+}
+.frame-656 {
+  background-color: var(--licorice);
+  border: 1px solid var(--rusty-red);
+  border-radius: 4px;
+  height: 80px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 504px;
+}
+.frame-935 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 80px;
+  left: 80px;
+  overflow: hidden;
+  position: absolute;
+  top: 864px;
+  width: 504px;
+}
+.frame-95 {
+  height: 48px;
+  left: 40px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 127px;
+}
+.password-error {
+  color: var(--rusty-red);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 12px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  position: absolute;
+  top: calc(50.00% + 34px);
+  white-space: nowrap;
+}
+.password4 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 24px);
+  white-space: nowrap;
+}
+.sign-up2 {
+  height: 24px;
+  left: calc(50.00% - 28px);
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: calc(50.00% - 12px);
+  white-space: nowrap;
+}
+.span06 {
+  color: rgba(248,235,223,1.0);
+  line-height: 16px;
+}
+.span16 {
+  color: rgba(143,146,161,1.0);
+  font-family: 'Inter', Helvetica;
+  font-weight: 500;
+  line-height: 16px;
+}
+.span26 {
+  color: rgba(0,198,136,1.0);
+  line-height: 16px;
+  text-decoration: underline;
+}
+.text-14 {
+  color: transparent;
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 127px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 12px);
+  white-space: nowrap;
+}
+.x21-sign-up-empty {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 1024px;
+  min-width: 1440px;
+  position: relative;
+  width: 100%;
+}

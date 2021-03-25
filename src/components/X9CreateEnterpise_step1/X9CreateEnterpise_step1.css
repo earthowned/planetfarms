@@ -1,0 +1,85 @@
+.close-outline-17 {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 560px;
+  position: absolute;
+  top: 28px;
+  width: 24px;
+}
+.continue2 {
+  height: 24px;
+  left: calc(50.00% - 34px);
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: calc(50.00% - 12px);
+  white-space: nowrap;
+}
+.create-enterprise2 {
+  left: 24px;
+  letter-spacing: 0.00px;
+  line-height: 32px;
+  position: absolute;
+  top: 24px;
+  white-space: nowrap;
+}
+.frame-19633 {
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 608px;
+}
+.frame-19643 {
+  background-color: rgba(25,27,29,1.0);
+  border-radius: 4px;
+  height: 800px;
+  left: 416px;
+  overflow: hidden;
+  position: absolute;
+  top: 248px;
+  width: 608px;
+}
+.frame-28516 {
+  background-color: var(--caribbean-green);
+  border-radius: 4px;
+  height: 48px;
+  left: 24px;
+  position: absolute;
+  top: 728px;
+  width: 200px;
+}
+.rectangle-8573 {
+  background-color: rgba(0,0,0,1.0);
+  height: 100%;
+  left: 0px;
+  opacity: 0.8;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.step-1-of-2 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 24px;
+  left: calc(50.00% - 56px);
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: calc(50.00% + 340px);
+  white-space: nowrap;
+}
+.x9-create-enterpise-step1 {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 1296px;
+  min-width: 1440px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}

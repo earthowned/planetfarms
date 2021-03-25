@@ -1,0 +1,27 @@
+.close-outline-12 {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 504px;
+  position: absolute;
+  top: 20px;
+  width: 24px;
+}
+.close-outline-13 {
+  background-color: rgba(43,43,44,0.3);
+  border-radius: 4px;
+  left: 528px;
+  overflow: hidden;
+  top: 8px;
+}
+.close-outline-14 {
+  left: 576px;
+  top: 16px;
+}
+.close-outline-15 {
+  background-color: rgba(43,43,44,0.3);
+  border-radius: 4px;
+  left: 522px;
+  overflow: hidden;
+  top: 8px;
+}

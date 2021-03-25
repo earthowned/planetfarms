@@ -1,0 +1,19 @@
+.frame-1929 {
+  height: 128px;
+  left: 80px;
+  position: absolute;
+  top: 0px;
+  width: 503px;
+}
+.welcome-back2 {
+  color: var(--quarter-spanish-white);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 40px;
+  font-weight: 600;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 48px;
+  position: absolute;
+  top: 40px;
+  white-space: nowrap;
+}

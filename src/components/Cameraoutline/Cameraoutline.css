@@ -1,0 +1,50 @@
+.camera {
+  height: 100%;
+  position: relative;
+}
+.camera-outline {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 28px;
+  position: absolute;
+  top: 0px;
+  width: 24px;
+}
+.camera-outline2 {
+  left: 29px;
+}
+.camera-outline3 {
+  left: 688px;
+  top: 28px;
+}
+.camera-outline4 {
+  left: 64px;
+  opacity: 0.5;
+  top: 28px;
+}
+.layer-213 {
+  height: 24px;
+  width: 24px;
+}
+.vector-210 {
+  height: 2.08%;
+  left: 48.96%;
+  position: absolute;
+  top: 48.96%;
+  width: 2.08%;
+}
+.vector-35 {
+  height: 75.00%;
+  left: 8.33%;
+  position: absolute;
+  top: 12.50%;
+  width: 83.33%;
+}
+.vector-45 {
+  height: 29.17%;
+  left: 35.42%;
+  position: absolute;
+  top: 43.75%;
+  width: 29.17%;
+}

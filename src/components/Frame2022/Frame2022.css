@@ -1,0 +1,17 @@
+.frame-2022 {
+  background-color: var(--licorice);
+  height: 158px;
+  left: 158px;
+  opacity: 0.4;
+  position: absolute;
+  top: 0px;
+  width: 158px;
+}
+.oct-31 {
+  left: 55px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 8px;
+  white-space: nowrap;
+}

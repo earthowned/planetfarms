@@ -1,0 +1,112 @@
+.frame-196918 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 336px;
+  left: 40px;
+  position: absolute;
+  top: 40px;
+  width: 1032px;
+}
+.frame-27968 {
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: rgba(255,255,255,0.16);
+  border-radius: 4px;
+  height: 48px;
+  left: 888px;
+  overflow: hidden;
+  position: absolute;
+  top: 416px;
+  width: 184px;
+}
+.frame-27987 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 994px;
+  left: 287px;
+  position: absolute;
+  top: 159px;
+  width: 1114px;
+}
+.frame-27997 {
+  height: 648px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 1112px;
+}
+.frame-28155 {
+  background-color: rgba(213,167,167,1.0);
+  background-size: 100% 100%;
+  border-radius: 100px;
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 48px;
+}
+.frame-29545 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 704px;
+  left: 288px;
+  position: absolute;
+  top: 1192px;
+  width: 728px;
+}
+.frame-29603 {
+  border-radius: 4px;
+  height: 48px;
+  left: 64px;
+  position: absolute;
+  top: 0px;
+  width: 584px;
+}
+.frame-29615 {
+  height: 48px;
+  left: 40px;
+  position: absolute;
+  top: 616px;
+  width: 648px;
+}
+.paper-plane-outline-12 {
+  height: 24px;
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  width: 24px;
+}
+.rectangle-87514 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 647px;
+  width: 1112px;
+}
+.text-1191 {
+  height: 24px;
+  left: 16px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 12px;
+  white-space: nowrap;
+}
+.vector26 {
+  height: 81.25%;
+  left: 14.38%;
+  position: absolute;
+  top: 13.24%;
+  width: 81.25%;
+}
+.x5-2-1-group-page-inside-user-view-1 {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 2392px;
+  min-width: 1440px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}

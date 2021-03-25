@@ -1,0 +1,28 @@
+.frame-1965 {
+  height: 160px;
+  left: 24px;
+  position: absolute;
+  top: 440px;
+  width: 560px;
+}
+.frame-19652 {
+  top: 544px;
+}
+.frame-19653 {
+  top: 544px;
+}
+.frame-6511 {
+  background-color: var(--shark-2);
+  border-radius: 4px;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+.text-119 {
+  left: 16px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 16px;
+  white-space: nowrap;
+}

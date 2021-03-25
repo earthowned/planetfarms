@@ -1,0 +1,38 @@
+.frame-23332 {
+  background-color: var(--shark);
+  height: 88px;
+  left: 288px;
+  position: absolute;
+  top: 1216px;
+  width: 1112px;
+}
+.frame-282913 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 298px;
+  left: 287px;
+  overflow: hidden;
+  position: absolute;
+  top: 159px;
+  width: 1114px;
+}
+.text7 {
+  color: var(--quarter-spanish-white);
+  font-family: 'Inter', Helvetica;
+  font-size: 24px;
+  font-weight: 500;
+  height: 96px;
+  left: 40px;
+  letter-spacing: 0.00px;
+  line-height: 32px;
+  position: absolute;
+  top: 1336px;
+}
+.x33-add-new-block {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 1304px;
+  min-width: 1440px;
+  position: relative;
+  width: 100%;
+}

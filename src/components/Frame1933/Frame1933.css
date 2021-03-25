@@ -1,0 +1,37 @@
+.frame-1933 {
+  height: 48px;
+  left: 16px;
+  position: relative;
+  top: 16px;
+  width: 105px;
+}
+.frame-19332 {
+  left: 15px;
+}
+.frame-9 {
+  height: 48px;
+  left: 40px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 65px;
+}
+.mikhail {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 50.00%;
+  white-space: nowrap;
+}
+.username2 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 24px);
+  white-space: nowrap;
+}

@@ -1,0 +1,83 @@
+.arrow-forward {
+  height: 100%;
+  position: relative;
+}
+.arrow-forward-outline-1 {
+  align-items: flex-start;
+  display: flex;
+  left: 12px;
+  position: relative;
+  top: 12px;
+  width: 24px;
+}
+.frame-2970 {
+  background-color: var(--caribbean-green);
+  border-radius: 100px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.5);;
+  height: 6.06%;
+  left: 115.92%;
+  overflow: hidden;
+  position: absolute;
+  top: 14.65%;
+  width: 4.32%;
+}
+.frame-2970-1 {
+  top: 47.98%;
+}
+.frame-2970-2 {
+  top: 81.31%;
+}
+.frame-29702 {
+  bottom: 112px;
+  height: 48px;
+  left: 1040px;
+  top: unset;
+  width: 48px;
+}
+.frame-29703 {
+  bottom: 112px;
+  height: 48px;
+  left: 1040px;
+  top: unset;
+  width: 48px;
+}
+.frame-29704 {
+  bottom: 116px;
+  height: 48px;
+  left: 1040px;
+  top: unset;
+  width: 48px;
+}
+.frame-3065 {
+  left: 93.53%;
+  top: 13.64%;
+}
+.frame-3065-1 {
+  left: 93.53%;
+  top: 80.30%;
+}
+.frame-30652 {
+  height: 26.09%;
+  left: 36.96%;
+  position: relative;
+  top: 36.96%;
+  width: 26.09%;
+}
+.layer-221 {
+  height: 24px;
+  width: 24px;
+}
+.vector-164 {
+  height: 2.08%;
+  left: 48.96%;
+  position: absolute;
+  top: 48.96%;
+  width: 2.08%;
+}
+.vector-174 {
+  height: 60.42%;
+  left: 16.67%;
+  position: absolute;
+  top: 19.79%;
+  width: 66.67%;
+}

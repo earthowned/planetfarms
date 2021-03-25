@@ -1,0 +1,491 @@
+.add-my-card {
+  height: 24px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 32px;
+  white-space: nowrap;
+}
+.date-of-birhday2 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 24px);
+  white-space: nowrap;
+}
+.email4 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 24px);
+  white-space: nowrap;
+}
+.frame-19339 {
+  height: 24px;
+  left: 24px;
+  position: absolute;
+  top: 24px;
+  width: 0px;
+}
+.frame-19592 {
+  background-color: var(--licorice);
+  height: 1056px;
+  left: 0px;
+  position: absolute;
+  top: 200px;
+  width: 320px;
+}
+.frame-196912 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 256px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 288px;
+}
+.frame-27954 {
+  height: 48px;
+  left: 16px;
+  position: absolute;
+  top: 40px;
+  width: 288px;
+}
+.frame-2819-1 {
+  height: 48px;
+  left: 16px;
+  overflow: hidden;
+  position: absolute;
+  top: 120px;
+  width: 147px;
+}
+.frame-2819-2 {
+  height: 48px;
+  left: 16px;
+  overflow: hidden;
+  position: absolute;
+  top: 120px;
+  width: 110px;
+}
+.frame-28193 {
+  height: 48px;
+  left: 16px;
+  overflow: hidden;
+  position: absolute;
+  top: 120px;
+  width: 73px;
+}
+.frame-28203 {
+  height: 48px;
+  left: 16px;
+  overflow: hidden;
+  position: absolute;
+  top: 184px;
+  width: 96px;
+}
+.frame-33186 {
+  height: 56px;
+  left: 98px;
+  position: absolute;
+  top: 12px;
+  width: 93px;
+}
+.frame-3362 {
+  background-color: rgba(255,255,255,0.16);
+  border-radius: 4px;
+  height: 80px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 264px;
+  width: 288px;
+}
+.frame-3406 {
+  background-color: var(--white);
+  border-radius: 4px;
+  height: 48px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 72px;
+  width: 288px;
+}
+.frame-3407 {
+  background-color: var(--white);
+  border-radius: 4px;
+  height: 48px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 144px;
+  width: 288px;
+}
+.frame-3408 {
+  background-color: var(--licorice);
+  height: 24px;
+  left: 130px;
+  position: absolute;
+  top: 0px;
+  width: 29px;
+}
+.frame-3409 {
+  height: 24px;
+  left: 0px;
+  position: absolute;
+  top: 216px;
+  width: 288px;
+}
+.frame-3505 {
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 120px;
+  width: 320px;
+}
+.frame-3506 {
+  background-color: var(--licorice);
+  height: 512px;
+  left: 0px;
+  position: absolute;
+  top: 1296px;
+  width: 320px;
+}
+.frame-3536 {
+  height: 256px;
+  left: 0px;
+  position: absolute;
+  top: 400px;
+  width: 320px;
+}
+.frame-3537 {
+  height: 192px;
+  left: 0px;
+  position: absolute;
+  top: 656px;
+  width: 320px;
+}
+.frame-3538 {
+  height: 208px;
+  left: 0px;
+  position: absolute;
+  top: 848px;
+  width: 320px;
+}
+.frame-3539 {
+  height: 344px;
+  left: 16px;
+  position: absolute;
+  top: 128px;
+  width: 288px;
+}
+.frame-3739 {
+  height: 320px;
+  left: 16px;
+  position: absolute;
+  top: 40px;
+  width: 288px;
+}
+.frame-915 {
+  height: 48px;
+  left: 16px;
+  overflow: hidden;
+  position: absolute;
+  top: 56px;
+  width: 135px;
+}
+.group7 {
+  height: 67.33%;
+  left: 11.54%;
+  position: relative;
+  top: 16.18%;
+  width: 76.92%;
+}
+.last-name3 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 24px);
+  white-space: nowrap;
+}
+.mikhailgmailpro2 {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 50.00%;
+  white-space: nowrap;
+}
+.mobile-header-logo {
+  background-color: rgba(20,20,20,0.8);
+  bottom: 0px;
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  width: 320px;
+}
+.mobile-header-logo-1 {
+  background-color: rgba(0,0,0,0.5);
+  height: 48px;
+  left: calc(50.00% - 160px);
+  position: absolute;
+  top: 0px;
+  width: 320px;
+}
+.number6 {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 50.00%;
+  white-space: nowrap;
+}
+.numbers-of-visits2 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 24px);
+  white-space: nowrap;
+}
+.or2 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 3px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}
+.pay-pal-1 {
+  height: 32px;
+  left: 82px;
+  overflow: hidden;
+  position: relative;
+  top: 8px;
+  width: 124px;
+}
+.phone-12 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 24px);
+  white-space: nowrap;
+}
+.phone7 {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 50.00%;
+  white-space: nowrap;
+}
+.plus-12 {
+  height: 24px;
+  left: 34px;
+  position: absolute;
+  top: 0px;
+  width: 24px;
+}
+.rectangle-867-1 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 191px;
+  width: 320px;
+}
+.rectangle-867-2 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 12px;
+  width: 288px;
+}
+.rectangle-8673 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 255px;
+  width: 320px;
+}
+.stripe-wordmark-blurple-1 {
+  height: 40px;
+  left: calc(50.00% - 44px);
+  position: relative;
+  top: calc(50.00% - 20px);
+  width: 88px;
+}
+.text-695 {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 50.00%;
+  white-space: nowrap;
+}
+.text-697 {
+  color: var(--white);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  width: 290px;
+}
+.ugryumov2 {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 50.00%;
+  white-space: nowrap;
+}
+.vector-108 {
+  height: 70.31%;
+  left: 4.74%;
+  position: absolute;
+  top: 22.18%;
+  width: 16.13%;
+}
+.vector-1113 {
+  height: 34.38%;
+  left: 6.27%;
+  position: absolute;
+  top: 20.09%;
+  width: 12.50%;
+}
+.vector-1211 {
+  height: 82.81%;
+  left: 0px;
+  position: absolute;
+  top: -0.75%;
+  width: 18.95%;
+}
+.vector-136 {
+  height: 79.84%;
+  left: 56.34%;
+  position: absolute;
+  top: 20.63%;
+  width: 22.16%;
+}
+.vector-137 {
+  height: 66.67%;
+  left: 45.83%;
+  position: absolute;
+  top: 16.67%;
+  width: 8.33%;
+}
+.vector-146 {
+  height: 8.33%;
+  left: 16.67%;
+  position: absolute;
+  top: 45.83%;
+  width: 66.67%;
+}
+.vector-220 {
+  height: 20.42%;
+  left: 46.96%;
+  position: absolute;
+  top: -1.63%;
+  width: 7.39%;
+}
+.vector-312 {
+  height: 61.27%;
+  left: 46.96%;
+  position: absolute;
+  top: 20.80%;
+  width: 7.39%;
+}
+.vector-410 {
+  height: 61.27%;
+  left: 33.08%;
+  position: absolute;
+  top: 20.46%;
+  width: 12.56%;
+}
+.vector-59 {
+  height: 76.12%;
+  left: 18.75%;
+  position: absolute;
+  top: 6.73%;
+  width: 12.56%;
+}
+.vector-69 {
+  height: 63.13%;
+  left: -0.41%;
+  position: absolute;
+  top: 19.91%;
+  width: 18.47%;
+}
+.vector-79 {
+  height: 71.88%;
+  left: 28.56%;
+  position: absolute;
+  top: 20.01%;
+  width: 39.92%;
+}
+.vector-88 {
+  height: 59.38%;
+  left: 67.75%;
+  position: absolute;
+  top: 20.01%;
+  width: 32.26%;
+}
+.vector-98 {
+  height: 87.50%;
+  left: 0.65%;
+  position: absolute;
+  top: 1.97%;
+  width: 19.35%;
+}
+.vector19 {
+  height: 61.27%;
+  left: 78.97%;
+  position: absolute;
+  top: 20.80%;
+  width: 21.42%;
+}
+.welcome-back5 {
+  left: 16px;
+  letter-spacing: 0.00px;
+  line-height: 32px;
+  position: absolute;
+  top: 24px;
+  white-space: nowrap;
+}
+.x104-my-personals {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 1896px;
+  min-width: 320px;
+  position: relative;
+  width: 100%;
+}

@@ -1,0 +1,24 @@
+.frame-30672 {
+  background-color: var(--licorice);
+  height: 132px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 1112px;
+}
+.frame-3273 {
+  background-color: unset;
+  height: 120px;
+}
+.text-316 {
+  color: var(--quarter-spanish-white);
+  font-family: 'Inter', Helvetica;
+  font-size: 32px;
+  font-weight: 600;
+  left: 40px;
+  letter-spacing: 0.00px;
+  line-height: 40px;
+  position: absolute;
+  top: 40px;
+  white-space: nowrap;
+}

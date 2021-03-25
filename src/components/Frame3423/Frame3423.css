@@ -1,0 +1,127 @@
+.frame-29042 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border: 1.5px solid var(--shark-2);
+  border-radius: 100px;
+  height: 40px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 40px;
+}
+.frame-3392 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 100px;
+  height: 40px;
+  left: 24px;
+  position: absolute;
+  top: 0px;
+  width: 40px;
+}
+.frame-3393 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 100px;
+  height: 40px;
+  left: 48px;
+  position: absolute;
+  top: 0px;
+  width: 40px;
+}
+.frame-3421 {
+  background-color: var(--caribbean-green);
+  border-radius: 4px;
+  height: 48px;
+  left: 24px;
+  overflow: hidden;
+  position: absolute;
+  top: 128px;
+  width: 328px;
+}
+.frame-3423 {
+  background-color: var(--shark-2);
+  border-radius: 4px;
+  height: 288px;
+  left: 696px;
+  overflow: hidden;
+  position: absolute;
+  top: 648px;
+  width: 376px;
+}
+.frame-3424 {
+  height: 40px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 88px;
+}
+.frame-3425 {
+  height: 40px;
+  left: 24px;
+  position: absolute;
+  top: 224px;
+  width: 328px;
+}
+.frame-3429 {
+  height: 200px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 376px;
+}
+.frame-3435 {
+  height: 80px;
+  left: 24px;
+  position: absolute;
+  top: 24px;
+  width: 328px;
+}
+.join-messenger {
+  height: 24px;
+  left: 106px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 12px;
+  white-space: nowrap;
+}
+.rectangle-8754 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 199px;
+  width: 376px;
+}
+.text-356 {
+  height: 48px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  width: 330px;
+}
+.text-357 {
+  height: 24px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 56px;
+  white-space: nowrap;
+  width: 330px;
+}
+.text-358 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  height: 48px;
+  left: 96px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: -4px;
+  width: 236px;
+}

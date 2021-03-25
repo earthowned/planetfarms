@@ -1,0 +1,121 @@
+.frame-19433 {
+  background-color: var(--licorice);
+  height: 1024px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 248px;
+}
+.frame-19443 {
+  background-color: rgba(58,58,58,1.0);
+  height: 200px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 80px;
+  width: 247px;
+}
+.frame-19453 {
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 247px;
+}
+.frame-19746 {
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 104px;
+  width: 248px;
+}
+.frame-19772 {
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 200px;
+  width: 248px;
+}
+.frame-19782 {
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 248px;
+  width: 248px;
+}
+.frame-27912 {
+  background-color: var(--licorice);
+  bottom: 0px;
+  height: 259px;
+  left: calc(50.00% - 124px);
+  position: absolute;
+  width: 248px;
+}
+.frame-28510 {
+  background-color: var(--caribbean-green);
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 211px;
+  width: 248px;
+}
+.frame-28914 {
+  border-radius: 2px;
+  height: 32px;
+  left: 199px;
+  position: absolute;
+  top: 24px;
+  width: 32px;
+}
+.group-19432 {
+  bottom: 0px;
+  height: 299px;
+  left: calc(50.00% - 124px);
+  position: absolute;
+  width: 248px;
+}
+.rectangle-859-13 {
+  background-color: var(--licorice);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.rectangle-8597 {
+  background-color: rgba(255,255,255,0.1);
+  height: 100%;
+  left: 247px;
+  position: absolute;
+  top: 0px;
+  width: 1px;
+}
+.text-60 {
+  left: 56px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 12px;
+  white-space: nowrap;
+}
+.text-78 {
+  color: var(--shark);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  height: 24px;
+  left: calc(50.00% - 54px);
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: calc(50.00% - 12px);
+  white-space: nowrap;
+}
+.union2 {
+  bottom: 48px;
+  height: 211px;
+  left: calc(50.00% - 124px);
+  position: absolute;
+  width: 248px;
+}

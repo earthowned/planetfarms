@@ -1,0 +1,48 @@
+.file-text {
+  height: 100%;
+  position: relative;
+}
+.file-text-outline {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 20px;
+  position: absolute;
+  top: 0px;
+  width: 24px;
+}
+.file-text-outline2 {
+  left: 0px;
+}
+.layer-214 {
+  height: 24px;
+  width: 24px;
+}
+.vector-54 {
+  height: 2.08%;
+  left: 48.96%;
+  position: absolute;
+  top: 48.96%;
+  width: 2.08%;
+}
+.vector-64 {
+  height: 8.33%;
+  left: 33.33%;
+  position: absolute;
+  top: 66.67%;
+  width: 33.33%;
+}
+.vector-74 {
+  height: 8.33%;
+  left: 33.33%;
+  position: absolute;
+  top: 50.00%;
+  width: 20.83%;
+}
+.vector-84 {
+  height: 83.33%;
+  left: 16.67%;
+  position: absolute;
+  top: 8.33%;
+  width: 66.67%;
+}

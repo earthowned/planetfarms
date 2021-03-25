@@ -1,0 +1,80 @@
+.frame-280112 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 100px;
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 48px;
+}
+.frame-28029 {
+  height: 88px;
+  left: 64px;
+  position: absolute;
+  top: 0px;
+  width: 492px;
+}
+.frame-28126 {
+  height: 88px;
+  left: 40px;
+  position: relative;
+  top: 24px;
+  width: 556px;
+}
+.frame-29594 {
+  height: 152px;
+  left: 0px;
+  position: absolute;
+  top: 464px;
+  width: 728px;
+}
+.name16 {
+  color: var(--quarter-spanish-white);
+  font-family: 'Inter', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 24px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}
+.span020 {
+  color: rgba(0,198,136,1.0);
+  line-height: 16px;
+}
+.span120 {
+  color: rgba(248,235,223,1.0);
+  font-family: 'Inter', Helvetica;
+  font-weight: 500;
+  line-height: 16px;
+}
+.span210 {
+  color: rgba(248,235,223,1.0);
+  line-height: 16px;
+}
+.text-1189 {
+  color: transparent;
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 32px;
+  white-space: nowrap;
+  width: 494px;
+}
+.text-1190 {
+  height: 24px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 64px;
+  white-space: nowrap;
+}

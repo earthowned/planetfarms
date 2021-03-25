@@ -1,0 +1,17 @@
+.chevrons-left {
+  height: 24px;
+  left: 4px;
+  position: absolute;
+  top: 8px;
+  width: 24px;
+}
+.chevrons-right {
+  left: 220px;
+}
+.vector-stroke2 {
+  height: 58.33%;
+  left: 33.33%;
+  position: absolute;
+  top: 20.83%;
+  width: 33.33%;
+}

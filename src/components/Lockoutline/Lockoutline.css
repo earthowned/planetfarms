@@ -1,0 +1,33 @@
+.lock-outline {
+  align-items: flex-end;
+  display: flex;
+  height: 24px;
+  padding: 1.9px 4px;
+  width: 24px;
+}
+.overlap-group2 {
+  height: 20px;
+  position: relative;
+  width: 16px;
+}
+.vector-15 {
+  height: 1px;
+  left: 8px;
+  position: absolute;
+  top: 10px;
+  width: 1px;
+}
+.vector-16 {
+  height: 20px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 16px;
+}
+.vector-17 {
+  height: 6px;
+  left: 5px;
+  position: absolute;
+  top: 10px;
+  width: 6px;
+}

@@ -1,0 +1,30 @@
+.date {
+  color: var(--quarter-spanish-white);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 24px;
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  position: absolute;
+  top: 239px;
+  white-space: nowrap;
+}
+.frame-1969 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 279px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.rectangle-1200 {
+  background-color: rgba(0,0,0,0.75);
+  height: 279px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}

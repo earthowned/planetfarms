@@ -1,0 +1,40 @@
+.layer-212 {
+  height: 24px;
+  width: 24px;
+}
+.vector-117 {
+  height: 58.33%;
+  left: 7.31%;
+  position: absolute;
+  top: 20.83%;
+  width: 85.42%;
+}
+.vector8 {
+  height: 2.08%;
+  left: 48.96%;
+  position: absolute;
+  top: 48.96%;
+  width: 2.08%;
+}
+.video {
+  height: 100%;
+  position: relative;
+}
+.video-outline {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 26px;
+  position: absolute;
+  top: 0px;
+  width: 24px;
+}
+.video-outline2 {
+  left: 648px;
+  top: 28px;
+}
+.video-outline3 {
+  left: unset;
+  position: relative;
+  top: unset;
+}

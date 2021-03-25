@@ -1,0 +1,34 @@
+.frame-28913 {
+  background-color: rgba(42,42,42,1.0);
+  bottom: 259px;
+  height: 40px;
+  left: calc(50.00% - 124px);
+  position: absolute;
+  width: 248px;
+}
+.rectangle-8605 {
+  background-color: var(--onyx);
+  bottom: 0px;
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+.rectangle-861 {
+  background-color: var(--onyx);
+  bottom: 39px;
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+.text-57 {
+  height: 12px;
+  left: calc(50.00% - 26px);
+  letter-spacing: 0.00px;
+  line-height: 12px;
+  position: absolute;
+  text-align: center;
+  top: calc(50.00% - 7px);
+  white-space: nowrap;
+}

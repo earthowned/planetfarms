@@ -1,0 +1,136 @@
+.frame-1987 {
+  height: 158px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 158px;
+}
+.frame-2027 {
+  height: 158px;
+  left: 948px;
+  position: absolute;
+  top: 0px;
+  width: 164px;
+}
+.frame-2049 {
+  height: 158px;
+  left: 0px;
+  position: absolute;
+  top: 632px;
+  width: 158px;
+}
+.frame-2055 {
+  height: 158px;
+  left: 948px;
+  position: absolute;
+  top: 632px;
+  width: 164px;
+}
+.frame-2892 {
+  height: 790px;
+  left: 0px;
+  position: absolute;
+  top: 56px;
+  width: 1112px;
+}
+.frame-2901 {
+  height: 846px;
+  left: 288px;
+  position: absolute;
+  top: 240px;
+  width: 1112px;
+}
+.rectangle-860-1 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: -80px;
+  position: absolute;
+  top: 395px;
+  transform: rotate(-90deg);
+  width: 790px;
+}
+.rectangle-860-2 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 78px;
+  position: absolute;
+  top: 395px;
+  transform: rotate(-90deg);
+  width: 790px;
+}
+.rectangle-860-3 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 236px;
+  position: absolute;
+  top: 395px;
+  transform: rotate(-90deg);
+  width: 790px;
+}
+.rectangle-860-4 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 394px;
+  position: absolute;
+  top: 395px;
+  transform: rotate(-90deg);
+  width: 790px;
+}
+.rectangle-860-5 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 552px;
+  position: absolute;
+  top: 395px;
+  transform: rotate(-90deg);
+  width: 790px;
+}
+.rectangle-860-6 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 157px;
+  width: 1112px;
+}
+.rectangle-860-7 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 315px;
+  width: 1112px;
+}
+.rectangle-860-8 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 473px;
+  width: 1112px;
+}
+.rectangle-860-9 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 631px;
+  width: 1112px;
+}
+.rectangle-8606 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: -238px;
+  position: absolute;
+  top: 395px;
+  transform: rotate(-90deg);
+  width: 790px;
+}
+.x4-2-calendar-with-events {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 1126px;
+  min-width: 1440px;
+  position: relative;
+  width: 100%;
+}

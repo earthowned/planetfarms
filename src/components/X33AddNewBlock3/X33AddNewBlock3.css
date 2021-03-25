@@ -1,0 +1,57 @@
+.frame-196924 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 496px;
+  left: 40px;
+  position: absolute;
+  top: 120px;
+  width: 1032px;
+}
+.frame-23333 {
+  background-color: var(--shark);
+  height: 88px;
+  left: 288px;
+  position: absolute;
+  top: 1152px;
+  width: 1112px;
+}
+.frame-282915 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 874px;
+  left: 287px;
+  overflow: hidden;
+  position: absolute;
+  top: 159px;
+  width: 1114px;
+}
+.name19 {
+  left: 437px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 632px;
+  white-space: nowrap;
+}
+.text9 {
+  color: var(--quarter-spanish-white);
+  font-family: 'Inter', Helvetica;
+  font-size: 24px;
+  font-weight: 500;
+  height: 96px;
+  left: 40px;
+  letter-spacing: 0.00px;
+  line-height: 32px;
+  position: absolute;
+  top: 1336px;
+}
+.x33-add-new-block2 {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 1240px;
+  min-width: 1440px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}

@@ -1,0 +1,142 @@
+.frame-19213 {
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 120px;
+  width: 504px;
+}
+.frame-19314 {
+  height: 432px;
+  left: 80px;
+  position: absolute;
+  top: 192px;
+  width: 504px;
+}
+.frame-19324 {
+  height: 704px;
+  left: 0px;
+  position: absolute;
+  top: 160px;
+  width: 740px;
+}
+.frame-19333 {
+  height: 24px;
+  left: 16px;
+  position: relative;
+  top: 28px;
+  width: 106px;
+}
+.frame-19343 {
+  height: 24px;
+  left: 16px;
+  position: absolute;
+  top: 28px;
+  width: 102px;
+}
+.frame-1935 {
+  height: 56px;
+  left: 0px;
+  position: absolute;
+  top: 240px;
+  width: 504px;
+}
+.frame-2854 {
+  background-color: var(--caribbean-green);
+  border-radius: 4px;
+  height: 48px;
+  left: 304px;
+  position: absolute;
+  top: 0px;
+  width: 200px;
+}
+.frame-43 {
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 504px;
+}
+.frame-65-12 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+}
+.frame-655 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 80px;
+  overflow: hidden;
+}
+.frame-934 {
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: 80px;
+  left: 80px;
+  overflow: hidden;
+  position: absolute;
+  top: 864px;
+  width: 504px;
+}
+.password3 {
+  left: 32px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}
+.sign-up {
+  height: 24px;
+  left: calc(50.00% - 28px);
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: calc(50.00% - 12px);
+  white-space: nowrap;
+}
+.span04 {
+  color: rgba(248,235,223,1.0);
+  line-height: 16px;
+}
+.span14 {
+  color: rgba(143,146,161,1.0);
+  font-family: 'Inter', Helvetica;
+  font-weight: 500;
+  line-height: 16px;
+}
+.span24 {
+  color: rgba(0,198,136,1.0);
+  line-height: 16px;
+  text-decoration: underline;
+}
+.text-11 {
+  color: transparent;
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 127px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 12px);
+  white-space: nowrap;
+}
+.username3 {
+  left: 32px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}
+.x2-1-sign-up-empty-1 {
+  background-color: rgba(0,0,0,1.0);
+  height: 100vh;
+  min-height: 1024px;
+  min-width: 1440px;
+  position: relative;
+  width: 100%;
+}

@@ -1,0 +1,41 @@
+.checkmark-circle-2 {
+  height: 100%;
+  position: relative;
+}
+.component-1 {
+  align-items: flex-start;
+  background-color: var(--caribbean-green);
+  border-radius: 100px;
+  display: flex;
+  height: 24px;
+  left: 536px;
+  overflow: hidden;
+  position: absolute;
+  top: 20px;
+  width: 24px;
+}
+.layer-234 {
+  height: 24px;
+  width: 24px;
+}
+.vector-140 {
+  height: 83.33%;
+  left: 8.33%;
+  position: absolute;
+  top: 8.33%;
+  width: 83.33%;
+}
+.vector-224 {
+  height: 35.42%;
+  left: 30.20%;
+  position: absolute;
+  top: 32.28%;
+  width: 39.58%;
+}
+.vector23 {
+  height: 2.08%;
+  left: 48.96%;
+  position: absolute;
+  top: 48.96%;
+  width: 2.08%;
+}

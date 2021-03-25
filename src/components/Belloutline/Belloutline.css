@@ -1,0 +1,35 @@
+.bell {
+  height: 100%;
+  position: relative;
+}
+.bell-outline {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 59px;
+  position: absolute;
+  top: 12px;
+  width: 24px;
+}
+.bell-outline2 {
+  left: 1005px;
+  top: 28px;
+}
+.layer-29 {
+  height: 24px;
+  width: 24px;
+}
+.vector-222 {
+  height: 2.08%;
+  left: 48.96%;
+  position: absolute;
+  top: 48.96%;
+  width: 2.08%;
+}
+.vector-232 {
+  height: 85.42%;
+  left: 12.50%;
+  position: absolute;
+  top: 7.30%;
+  width: 75.00%;
+}

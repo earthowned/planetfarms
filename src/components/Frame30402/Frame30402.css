@@ -1,0 +1,39 @@
+.frame-3040-2 {
+  border-radius: 4px;
+  height: 290px;
+  left: -1px;
+  overflow: hidden;
+  position: absolute;
+  top: 47px;
+  width: calc(100.00% - 702px);
+}
+.frame-3040-3 {
+  height: 288px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 704px);
+}
+.frame-30413 {
+  left: 351px;
+}
+.frame-30422 {
+  left: 703px;
+}
+.frame-32394 {
+  height: 24px;
+  left: 16px;
+  position: absolute;
+  top: 176px;
+  width: 234px;
+}
+.text-738 {
+  height: 48px;
+  left: 16px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 224px;
+  width: 189px;
+}

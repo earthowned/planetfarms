@@ -1,0 +1,38 @@
+.frame-196910 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 336px;
+  left: 40px;
+  position: absolute;
+  top: 40px;
+  width: 1032px;
+}
+.frame-27964 {
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: rgba(255,255,255,0.16);
+  border-radius: 4px;
+  height: 48px;
+  left: 888px;
+  overflow: hidden;
+  position: absolute;
+  top: 416px;
+  width: 184px;
+}
+.frame-27992 {
+  height: 976px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 1112px;
+}
+.rectangle-8757 {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 1078px;
+  width: 1112px;
+}

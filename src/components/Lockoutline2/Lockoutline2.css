@@ -1,0 +1,41 @@
+.layer-23 {
+  height: 24px;
+  width: 24px;
+}
+.lock {
+  height: 100%;
+  position: relative;
+}
+.lock-outline2 {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  left: 0px;
+  position: absolute;
+  top: 12px;
+  width: 24px;
+}
+.lock-outline3 {
+  top: 0px;
+}
+.vector-102 {
+  height: 83.33%;
+  left: 16.67%;
+  position: absolute;
+  top: 8.56%;
+  width: 66.67%;
+}
+.vector-112 {
+  height: 25.00%;
+  left: 37.50%;
+  position: absolute;
+  top: 50.00%;
+  width: 25.00%;
+}
+.vector-92 {
+  height: 2.08%;
+  left: 48.96%;
+  position: absolute;
+  top: 48.96%;
+  width: 2.08%;
+}
