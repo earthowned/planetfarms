@@ -1,7 +1,21 @@
+.default-i905507538 {
+  height: 24px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 95px;
+  text-align: center;
+  white-space: nowrap;
+}
 .frame-4 {
-  height: 80px;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 504px;
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  align-items: center;
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: var(--white);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0 51px;
+  width: 200px;
 }
