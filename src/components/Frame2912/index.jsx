@@ -8,7 +8,8 @@ function Frame2912(props) {
   return (
     <div className={`frame-2912 ${className || ""}`}>
       <Searchoutline1 vector={searchoutline1Props.vector} vector2={searchoutline1Props.vector2} />
-      <div className="search ibmplexsans-normal-monsoon-16px">{search}</div>
+      {/* <div className="search ibmplexsans-normal-monsoon-16px">{search}</div> */}
+      <input type="text" className="search ibmplexsans-normal-monsoon-16px" placeholder="Search.." />
     </div>
   );
 }

@@ -86,6 +86,9 @@
   position: absolute;
   top: 0px;
   white-space: nowrap;
+  background:#141414;
+  border-style:none ;
+  outline:none;
 }
 .sign-up {
   height: 24px;
@@ -96,6 +99,10 @@
   text-align: center;
   top: calc(50.00% - 12px);
   white-space: nowrap;
+  border-style:none ;
+  outline:none;
+  background-color: rgba(0,198,136,1.0);
+  cursor: pointer;
 }
 .span04 {
   color: rgba(248,235,223,1.0);
@@ -131,6 +138,11 @@
   position: absolute;
   top: 0px;
   white-space: nowrap;
+  background:#141414;
+  border-style:none ;
+  outline:none;
+  
+
 }
 .x2-1-sign-up-empty-1 {
   background-color: rgba(0,0,0,1.0);
@@ -139,4 +151,57 @@
   min-width: 1440px;
   position: relative;
   width: 100%;
+}
+
+.frame-95 {
+  height: 48px;
+  left: 40px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 127px;
+}
+.password4 {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans', Helvetica;
+  font-size: 14px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: calc(50.00% - 24px);
+  white-space: nowrap;
+}
+.badpassword111 {
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  top: 50.00%;
+  white-space: nowrap;
+}
+.frame-19214 {
+  height: 100px;
+  left: 0px;
+  position: absolute;
+  top: 120px;
+  width: 504px;
+}
+.frame-656 {
+  background-color: var(--licorice);
+  border: 1px solid var(--rusty-red);
+  border-radius: 4px;
+  height: 80px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 504px;
+}
+.frame-19344 {
+  height: 48px;
+  left: 16px;
+  position: absolute;
+  top: 16px;
+  width: 167px;
 }

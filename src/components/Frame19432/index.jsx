@@ -30,6 +30,7 @@ function Frame19432(props) {
   } = props;
 
   return (
+    /**SideBar */
     <div className="frame-19433">
       <div className="frame-19453">
         <Link to="/slim-sidebar">
