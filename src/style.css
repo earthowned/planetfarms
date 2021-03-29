@@ -6073,6 +6073,7 @@
   --shark: rgba(43, 43, 44, 1);
   --shark-2: rgba(33, 34, 37, 1);
   --white: rgba(255, 255, 255, 1);
+  --black: rgba(0, 0, 0, 1);
 }
 :root {
   --caribbean-green: rgba(0, 198, 136, 1);
