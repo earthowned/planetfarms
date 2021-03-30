@@ -11,6 +11,8 @@ import Messenger from './Screens/Messenger/Messenger';
 import Library from './Screens/Library/Library';
 import Dashboard from './Screens/Dashboard/Dashboard';
 import './App.css';
+// Community
+import  X0300CommunityPagenews from './screen/Community-News/index'
 
 function App() {
   return (
@@ -37,6 +39,9 @@ function App() {
         <Route path="/messenger">
            <Messenger />
          </Route>
+        <Route path="/community-page-news">
+         <X0300CommunityPagenews />
+        </Route>
       </Switch>
     </Router>
   );
