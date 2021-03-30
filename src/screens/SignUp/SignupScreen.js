@@ -1,57 +1,41 @@
 import React,{useState} from "react";
 import "./style.css";
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
+import Logo from "../../components/Logo/Logo";
+import Banner from "../../components/Banner/Banner";
 
 
 function App() {
-  return <X0200SignUpempty {...X0200SignUpemptyData} />;
+  return <SignupScreen {...X0200SignUpemptyData} />;
 }
 
 export default App;
 
 
-function X0200SignUpempty(props) {
+function SignupScreen(props) {
   const {
     welcomeBack,
-    vector,
-    vector1,
-    vector2,
-    vector3,
-    vector4,
-    vector5,
+    
    
     spanText,
     spanText2,
     spanText3,
     text2,
-    vector6,
-    vector7,
-    vector8,
-    vector9,
+    
     google,
-    subtract,
+    
     facebook,
-    spanText4,
-    spanText5,
-    spanText6,
-    vector10,
-    vector11,
-    vector12,
-    vector13,
-    vector14,
-    vector15,
-    vector16,
-    vector17,
-    vector18,
-    vector19,
-    lockoutlineProps,
-    eyeoffoutline2Props,
-    defaultButtonProps,
+    
   } = props;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [terms, setTerms] = useState(false);
+  const [active, setActive] = useState(false);
+  const [activePassword, setPasswordActive] = useState(false);
+  
   const [userError, setUserError] = useState(false);
+  const [termsError, setTermsError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
   const history = useHistory();
@@ -61,14 +45,18 @@ const registerUser = () => {
 
   if(!password) setPasswordError(true);
 
-  if(username && password) {
+  if(!terms) setTermsError(true);
+
+  if(username && password && terms ) {
     history.push('/register-complete');
   }
+  
 }
 
 const userChange = (e) => {
   setUsername(e.target.value);
   setUserError(false);
+  setActive(true);
 }
 
 const passwordChange = (e) => {
@@ -76,16 +64,26 @@ const passwordChange = (e) => {
   setPasswordError(false);
 }
 
+
+const changeTerms = (e) => {
+  setTerms(!terms);
+  setTermsError(false);
+}
+
   return (
     <div className="x02-0-0-sign-up-empty smart-layers-pointers ">
       <div className="sign-up-form">
         <h1 className="welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px">{welcomeBack}</h1>
+        
+        {/* form */}
         <div className="form-container">
-          <div className={`default-input border-1px-onyx ${userError && "user-error"}`}>
+          
+          <div className={`default-input ${userError ? "user-error" : active ? "active" : "border-1px-onyx"} `}>
             <div className="person-outline">
               <img className="user-icon" src="../../img/person-outline.png" />
               
             </div>
+            {username ? <div className="text ibmplexsans-regular-normal-monsoon-14px">username</div> : <div>&nbsp;</div>}
             <input 
             value={username} 
             onChange={(e) => userChange(e)} 
@@ -95,7 +93,7 @@ const passwordChange = (e) => {
           </div>
           {userError && <p className="error-message">Username Error</p>}
 
-              <div className={`password-default border-1px-onyx ${passwordError && "password-error"}`}>
+              <div className={`password-default ${passwordError ? "password-error" : activePassword ? "active" : "border-1px-onyx"} `}>
                 <div className="frame-1934">
                   <div className="lock-outline">
                       <div className="overlap-group">
@@ -103,6 +101,7 @@ const passwordChange = (e) => {
                         
                       </div>
                     </div>
+                    {password ? <div className="text ibmplexsans-regular-normal-monsoon-14px">password</div> : <div>&nbsp;</div>}
                   <input 
                 value={password} 
                 type="password"
@@ -117,19 +116,25 @@ const passwordChange = (e) => {
 
           <div className="button-group">
             <div className="terms">
+              
               <div className="checkboxunchecked">
-                <input type="checkbox" />
+                <input type="checkbox" value={terms} onChange={(e) => changeTerms(e)} />
               </div>
+              
+
               <p className="text-1 ibmplexsans-regular-normal-quarter-spanish-white-16px">
                 <span className="span0-lQtl1i">{spanText}</span>
                 <span className="span1-lQtl1i">{spanText2}</span>
                 <span className="span2-lQtl1i">{spanText3}</span>
               </p>
             </div>
-            <button className="default-button" onClick={registerUser}>
+           
+
+            <button className="default-button" onClick={() => registerUser()}>
                 <div className="default-i166223488 valign-text-middle ibmplexsans-semi-bold-shark-16px">Sign Up</div>
               </button>
           </div>
+           {termsError && <p className="error-message">Please read the terms of service</p>}
 
           <div className="o-auth-container">
             <div className="text-2 ibmplexsans-regular-normal-quarter-spanish-white-16px">{text2}</div>
@@ -153,24 +158,19 @@ const passwordChange = (e) => {
       </div>
       <div className="sign-in-container border-1px-onyx">
         <p className="text-3 ibmplexsans-semi-bold-white-16px">
-          <span className="span0-hsNx6X">{spanText4}</span>
-          <span className="span1-hsNx6X">{spanText5}</span>
-          <span className="span2-hsNx6X">{spanText6}</span>
+          <span className="span0-hsNx6X">Already have an Account?</span>
+         
+          <Link className="span2-hsNx6X" to="/"> Sign In</Link>
         </p>
       </div>
 
       <div className="image-wrapper">
-        <img className="vector" src={vector} />
-        <img className="vector-1" src={vector1} />
-        <img className="vector-2" src={vector2} />
-        <img className="vector-3" src={vector3} />
-        <img className="vector-4" src={vector4} />
-        <img className="vector-5" src={vector5} />
+       <Logo />
       </div>
       <div className="banner-container">
         <div className="banner-images">
           <div className="overlap-group-3">
-            <img  src="../../img/BannerIcon.png" />
+           <Banner />
           </div>
         </div>
       </div>

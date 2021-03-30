@@ -2,33 +2,27 @@ import React from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
  
-// Login
-import X0100LoginEmpty from "./components/Login";
-// import X0111Loginfiled from "./components/X0111Loginfiled";
-// import X0112Errorfiled from "./components/X0112Errorfiled";
-// // Signup
-// import X0200SignUpempty from "./components/X0200SignUpempty";
-// import X0211SignUpfilled from "./components/X0211SignUpfilled";
-// import X0212SignUperror from "./components/X0212SignUperror";
-// import X0220SignUpfiled from "./components/X0220SignUpfiled";
-// Community
-
-
-import Signup from './components/signup/index'
-import RegisterComplete from './components/congratulation/index'
+// Screens
+import LoginScreen from "./screens/Login/LoginScreen";
+import SignupScreen from './screens/SignUp/SignupScreen';
+import DashboardScreen from './screens/DashboardScreen';
+import CongratulationScreen from './screens/Congratulation/CongratulationScreen'
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/register">
-          <Signup />
+          <SignupScreen />
+        </Route>
+        <Route path="/dashboard">
+          <DashboardScreen />
         </Route>
         <Route path="/register-complete">
-          <RegisterComplete />
+          <CongratulationScreen />
         </Route>
-        <Route path="/login">
-          <X0100LoginEmpty {...X0100LoginEmptyData} />
+        <Route path="/" exact>
+          <LoginScreen {...X0100LoginEmptyData} />
         </Route>
       </Switch>
     </Router>
