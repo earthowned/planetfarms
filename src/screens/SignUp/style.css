@@ -326,16 +326,13 @@
   font-size: 16px;
   font-weight: 600;
 }
-.x02-0-0-sign-up-empty .span0-lQtl1i {
-  color: rgba(248, 235, 223, 1);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
-  font-size: 16px;
-}
+
 .x02-0-0-sign-up-empty .span1-hsNx6X {
   color: rgba(143, 146, 161, 1);
   font-family: "Inter-Medium", Helvetica;
   font-size: 16px;
   font-weight: 500;
+  margin-left: 4px;
 }
 .x02-0-0-sign-up-empty .span1-lQtl1i {
   color: rgba(248, 235, 223, 1);
@@ -604,4 +601,22 @@
 .error-message {
   color: red;
   margin-top: 6px;
+}
+
+.text {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+}
+
+.default-input {
+  position: relative;
+}
+
+.password-default {
+  position: relative;
+}
+
+.active {
+  border: 1px solid rgba(0, 198, 136, 1);
 }
