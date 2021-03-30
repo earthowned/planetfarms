@@ -1,14 +1,14 @@
 import React from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 // Login
-import X0100LoginEmpty from "./components/X0100LoginEmpty";
-import X0111Loginfiled from "./components/X0111Loginfiled";
-import X0112Errorfiled from "./components/X0112Errorfiled";
-// Signup
-import X0200SignUpempty from "./components/X0200SignUpempty";
-import X0211SignUpfilled from "./components/X0211SignUpfilled";
-import X0212SignUperror from "./components/X0212SignUperror";
-import X0220SignUpfiled from "./components/X0220SignUpfiled";
+import X0100LoginEmpty from "./components/Login";
+// import X0111Loginfiled from "./components/X0111Loginfiled";
+// import X0112Errorfiled from "./components/X0112Errorfiled";
+// // Signup
+// import X0200SignUpempty from "./components/X0200SignUpempty";
+// import X0211SignUpfilled from "./components/X0211SignUpfilled";
+// import X0212SignUperror from "./components/X0212SignUperror";
+// import X0220SignUpfiled from "./components/X0220SignUpfiled";
 // Community
 
 
@@ -16,27 +16,10 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/:path(|01-0-0-login-empty)">
+        <Route path="/login">
           <X0100LoginEmpty {...X0100LoginEmptyData} />
         </Route>
-        <Route path="/01-1-1-login-filed">
-          <X0111Loginfiled {...X0111LoginfiledData} />
-        </Route>
-        <Route path="/01-1-2-error-filed">
-          <X0112Errorfiled {...X0112ErrorfiledData} />
-        </Route>
-        <Route path="/02-0-0-sign-up-empty">
-          <X0200SignUpempty {...X0200SignUpemptyData} />
-        </Route>
-        <Route path="/02-1-1-sign-up-filled">
-          <X0211SignUpfilled {...X0211SignUpfilledData} />
-        </Route>
-        <Route path="/02-1-2-sign-up-error">
-          <X0212SignUperror {...X0212SignUperrorData} />
-        </Route>
-        <Route path="/02-2-0-sign-up-filed">
-          <X0220SignUpfiled {...X0220SignUpfiledData} />
-        </Route>
+       
       </Switch>
     </Router>
   );
@@ -57,16 +40,16 @@ const eyeoffoutline2Data = {
 };
 
 const X0100LoginEmptyData = {
-    vector: "",
+    vector: "/img/vector.svg",
     vector2: "/img/vector@2x.svg",
     vector3: "/img/vector-994@2x.png",
-    vector4: "",
-    vector5: "",
+    vector4: "img/vector-4.svg",
+    vector5: "img/vector-5.svg",
     vector6: "/img/vector-1246@2x.png",
     welcomeBack: "Sign In",
-    vector7: "",
-    vector8: "",
-    vector9: "",
+    vector7: "img/vector-7.png",
+    vector8: "img/vector-8.png",
+    vector9: "img/vector-9.png",
     username: "Username",
     password: "Password",
     vector10: "",
@@ -75,7 +58,7 @@ const X0100LoginEmptyData = {
     signIn: "Sign in",
     forgotPassword: "Forgot Password?",
     text1: "Sign In with services",
-    vector11: "",
+    vector11: "/img/vector.svg",
     vector12: "",
     vector13: "",
     vector14: "",
