@@ -1,7 +1,5 @@
 import React from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-
- 
 // Screens
 import LoginScreen from "./Screens/Login/LoginScreen";
 import SignupScreen from './Screens/SignUp/SignupScreen';
@@ -13,6 +11,7 @@ import './App.css';
 // Community
 import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
 import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
+import DashboardComponent from "./screen/dashboard/index";
 
 function App() {
   return (
@@ -21,17 +20,17 @@ function App() {
         <Route path="/register">
           <SignupScreen />
         </Route>
+        <Route path="/dashboard">
+          <DashboardComponent />
+        </Route>
         <Route path="/register-complete">
           <CongratulationScreen />
         </Route>
-        <Route path="/" exact>
+        <Route path="/:path(|login)" exact>
           <LoginScreen {...X0100LoginEmptyData} />
         </Route>
         <Route path="/library">
            <Library />
-         </Route>
-         <Route path="/dashboard">
-           <Dashboard/>
          </Route>
         <Route path="/messenger">
            <Messenger />
