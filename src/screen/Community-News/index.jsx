@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
-import Dashboard from '../../components/SideBar/index'
-
+import SideBar from "../../components/SideBar/index";
+import NavBar from "../../components/NavBar/index";
 function App() {
   return <X0300CommunityPagenews {...X0300CommunityPagenewsData} />;
 }
@@ -43,14 +43,13 @@ function X0300CommunityPagenews(props) {
 
   return (
     <div className="x03-0-0-community-page-news">
-      <Dashboard {...dashboardProps} />
+      <SideBar />
       <div className="flex-col-4">
-        <Dashboardnav {...dashboardnavProps} />
+        <NavBar />
         <div className="flex-row-4">
           <div className="search border-1px-onyx">
             <div className="search-outline-1">
               <div className="overlap-group-6">
-                {/* <img className="vector-19" src="img/search-outline 1.png" /> */}
                 <img className="vector-20" src="img/search-outline 1.png" />
               </div>
             </div>
@@ -138,12 +137,18 @@ function X0300CommunityPagenews(props) {
               </div>
             </div>
             <div className="frame-3469">
-              <Frame3501 farming="PEOPLE" text16="Fueling the ethanol industry" />
+              <Frame3501
+                farming="PEOPLE"
+                text16="Fueling the ethanol industry"
+              />
               <p className="text-19 ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane,
-                and grain or indirectly from paper waste.
+                Ethanol, which is sometimes known as ethyl alcohol, is a kind of
+                alcohol derived from corn, sugarcane, and grain or indirectly
+                from paper waste.
               </p>
-              <div className="date-1 ibmplexsans-regular-normal-quarter-spanish-white-14px">November 01, 2020</div>
+              <div className="date-1 ibmplexsans-regular-normal-quarter-spanish-white-14px">
+                November 01, 2020
+              </div>
             </div>
           </div>
         </div>
@@ -172,406 +177,6 @@ function X0300CommunityPagenews(props) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-// function Dashboard(props) {
-//   const {
-//     vector,
-//     vector2,
-//     vector3,
-//     vector4,
-//     vector5,
-//     vector6,
-//     vector7,
-//     vector8,
-//     vector9,
-//     vector10,
-//     vector11,
-//     vector12,
-//     vector13,
-//     vector14,
-//     vector15,
-//     vector16,
-//     text1,
-//     text3,
-//     text2,
-//     text4,
-//     vector17,
-//     vector18,
-//     text14,
-//     number,
-//     number2,
-//     number3,
-//     number4,
-//     text13,
-//     union,
-//     vector19,
-//     vector20,
-//     text5,
-//     graduationCap,
-//     text6,
-//     chevronsLeftProps,
-//     chevronsLeft2Props,
-//     frame2849Props,
-//     frame28492Props,
-//     frame28493Props,
-//     frame28494Props,
-//     frame28495Props,
-//     frame28496Props,
-//     frame2857Props,
-//     frame28497Props,
-//     frame28498Props,
-//     frame28499Props,
-//     frame2885Props,
-//     frame284910Props,
-//     frame28572Props,
-//     frame284911Props,
-//     frame284912Props,
-//     frame284913Props,
-//     frame28852Props,
-//     frame284914Props,
-//     frame284915Props,
-//     frame284916Props,
-//     frame284917Props,
-//     frame28853Props,
-//     frame284918Props,
-//     frame28573Props,
-//     frame284919Props,
-//     frame284920Props,
-//     frame284921Props,
-//     frame28854Props,
-//     frame284922Props,
-//     frame28574Props,
-//     frame284923Props,
-//     frame284924Props,
-//     frame284925Props,
-//     frame28855Props,
-//     frame2855Props,
-//     frame28552Props,
-//     frame28553Props,
-//     frame28554Props,
-//   } = props;
-
-//   return (
-//     <div className="dashboard">
-//       <div className="title-icon">
-//         <div className="frame">
-//           <img className="vector" src={vector} />
-//           <img className="vector-8" src="/img/Vector1.png" />
-//           <img className="vector-1" src="img/Vector2.png" />
-//           <img className="vector-2" src="img/Vector3.png" />
-//           <img className="vector-1" src="img/Vector4.png" />
-//           <img className="vector-2" src="img/Vector5.png" />
-//         </div>
-//         <div className="frame-2891 border-1px-quarter-spanish-white">
-//           <div className="grid-outline-2">
-//             <div className="flex-col">
-//               <img
-//                 className="vector-3"
-//                 src="img/grid.png"
-//                 style={{ height: "20px", width: "20px" }}
-//               />
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//       <div className="overlap-group1">
-//         <div className="menu-list">
-//           <div className="active-menu">
-//             <div className="user-management">
-//               <div className="flex-row">
-//                 <img className="vector-5" src={vector11} />
-//                 <img className="vector-3" src={vector12} />
-//                 <img className="vector-5" src={vector13} />
-//               </div>
-//               <div className="flex-row-1">
-//                 <img className="vector-6" src={vector14} />
-//                 <img className="vector-9" src={vector15} />
-//                 <img className="vector-6" src={vector16} />
-//               </div>
-//             </div>
-//             <div className="text-1 ibmplexsans-semi-bold-shark-16px">
-//               {text1}
-//             </div>
-//           </div>
-//           <div className="text-3 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-//             {text3}
-//           </div>
-//           <div className="text-2 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-//             {text2}
-//           </div>
-//           <div className="text-4 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-//             {text4}
-//           </div>
-//           <div className="frame-1977"></div>
-//           <div className="frame-1978"></div>
-//         </div>
-//         <div className="rectangle-859"></div>
-//         <div className="arrow-icon">
-//           <div className="chevrons-right-1">
-//             <img className="vector-7" src="img/arrow-icon.png" />
-//             <img className="vector-7" src="img/arrow-icon.png" />
-//           </div>
-//         </div>
-//         <div className="calender">
-//           <div className="frame-2891-1">
-//             <div className="rectangle-861"></div>
-//             <div className="flex-row-2">
-//               <ChevronsLeft src={chevronsLeftProps.src} />
-//               <div className="text-14 valign-text-middle ibmplexsans-regular-normal-ebb-14px">
-//                 {text14}
-//               </div>
-//               <ChevronsLeft
-//                 src={chevronsLeft2Props.src}
-//                 className="chevrons-right"
-//               />
-//             </div>
-//             <div className="rectangle-860"></div>
-//           </div>
-//           <div className="overlap-group">
-//             <div className="frame-2791">
-//               <div className="rectangle-859-4"></div>
-//               <div className="group-1942">
-//                 <div className="flex-row-3">
-//                   <div className="flex-col-1">
-//                     <Frame2849>{frame2849Props.children}</Frame2849>
-//                     <Frame2849>{frame28492Props.children}</Frame2849>
-//                     <Frame2849>{frame28493Props.children}</Frame2849>
-//                     <Frame2849>{frame28494Props.children}</Frame2849>
-//                     <Frame2849>{frame28495Props.children}</Frame2849>
-//                     <div className="frame-288">
-//                       <div className="number valign-text-middle ibmplexsans-regular-normal-ebb-14px">
-//                         {number}
-//                       </div>
-//                       <div className="rectangle-859-2"></div>
-//                     </div>
-//                   </div>
-//                   <div className="flex-col-1">
-//                     <Frame2849>{frame28496Props.children}</Frame2849>
-//                     <Frame2857>{frame2857Props.children}</Frame2857>
-//                     <Frame2849>{frame28497Props.children}</Frame2849>
-//                     <Frame2849>{frame28498Props.children}</Frame2849>
-//                     <Frame2849>{frame28499Props.children}</Frame2849>
-//                     <Frame2885>{frame2885Props.children}</Frame2885>
-//                   </div>
-//                   <div className="flex-col-1">
-//                     <Frame2849>{frame284910Props.children}</Frame2849>
-//                     <Frame2857>{frame28572Props.children}</Frame2857>
-//                     <Frame2849>{frame284911Props.children}</Frame2849>
-//                     <Frame2849>{frame284912Props.children}</Frame2849>
-//                     <Frame2849>{frame284913Props.children}</Frame2849>
-//                     <Frame2885>{frame28852Props.children}</Frame2885>
-//                   </div>
-//                   <div className="flex-col-1">
-//                     <Frame2849>{frame284914Props.children}</Frame2849>
-//                     <Frame2849>{frame284915Props.children}</Frame2849>
-//                     <Frame2849>{frame284916Props.children}</Frame2849>
-//                     <div className="frame-2873">
-//                       <div className="number-3 valign-text-middle">
-//                         {number2}
-//                       </div>
-//                     </div>
-//                     <Frame2849>{frame284917Props.children}</Frame2849>
-//                     <Frame2885>{frame28853Props.children}</Frame2885>
-//                   </div>
-//                   <div className="flex-col-1">
-//                     <Frame2849>{frame284918Props.children}</Frame2849>
-//                     <Frame2857>{frame28573Props.children}</Frame2857>
-//                     <Frame2849>{frame284919Props.children}</Frame2849>
-//                     <Frame2849>{frame284920Props.children}</Frame2849>
-//                     <Frame2849>{frame284921Props.children}</Frame2849>
-//                     <Frame2885>{frame28854Props.children}</Frame2885>
-//                   </div>
-//                   <div className="flex-col-1">
-//                     <Frame2849>{frame284922Props.children}</Frame2849>
-//                     <Frame2857>{frame28574Props.children}</Frame2857>
-//                     <Frame2849>{frame284923Props.children}</Frame2849>
-//                     <Frame2849>{frame284924Props.children}</Frame2849>
-//                     <Frame2849>{frame284925Props.children}</Frame2849>
-//                     <Frame2885>{frame28855Props.children}</Frame2885>
-//                   </div>
-//                 </div>
-//                 <div className="flex-col-3">
-//                   <Frame2855>{frame2855Props.children}</Frame2855>
-//                   <div className="frame-28-1">
-//                     <div className="overlap-group37">
-//                       <div className="rectangle-865"></div>
-//                       <div className="number-1 valign-text-middle ibmplexsans-bold-caribbean-green-14px">
-//                         {number3}
-//                       </div>
-//                     </div>
-//                     <div className="overlap-group-3">
-//                       <div className="rectangle-859-3"></div>
-//                       <div className="rectangle-860-2"></div>
-//                     </div>
-//                   </div>
-//                   <Frame2855>{frame28552Props.children}</Frame2855>
-//                   <Frame2855>{frame28553Props.children}</Frame2855>
-//                   <Frame2855>{frame28554Props.children}</Frame2855>
-//                   <div className="frame-2890">
-//                     <div className="number-2 valign-text-middle ibmplexsans-regular-normal-onyx-14px">
-//                       {number4}
-//                     </div>
-//                     <div className="rectangle-859-5"></div>
-//                   </div>
-//                 </div>
-//               </div>
-//               <div className="frame-285 border-1px-caribbean-green">
-//                 <div className="text-13 valign-text-middle">{text13}</div>
-//               </div>
-//             </div>
-//             {/* <img className="union" src={union} /> */}
-//           </div>
-//         </div>
-//       </div>
-//       <div className="library-menuu-button">
-//         <div className="book">
-//           <div className="overlap-group-4">
-//             <img className="vector-11" src="img/book.png" />
-//           </div>
-//         </div>
-//         <div className="text-5 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-//           {text5}
-//         </div>
-//       </div>
-//       <div className="course-menu-button">
-//         <div className="graduation-cap-1">
-//           <img className="graduation-cap" src="img/graduation-cap 1.png" />
-//         </div>
-//         <div className="text-6 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-//           {text6}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-function ChevronsLeft(props) {
-  const { src, className } = props;
-
-  return (
-    <div className={`chevrons-left ${className || ""}`}>
-      <img className="vector-stroke" src="img/left.png" />
-    </div>
-  );
-}
-
-function Frame2849(props) {
-  const { children } = props;
-
-  return (
-    <div className="frame-28">
-      <div className="place valign-text-middle ibmplexsans-regular-normal-ebb-14px">
-        {children}
-      </div>
-      <div className="overlap-group-1">
-        <div className="rectangle-859-1"></div>
-        <div className="rectangle-860-1"></div>
-      </div>
-    </div>
-  );
-}
-
-function Frame2857(props) {
-  const { children } = props;
-
-  return (
-    <div className="frame-28">
-      <div className="overlap-group-2">
-        <div className="number-1 valign-text-middle ibmplexsans-bold-caribbean-green-14px">
-          {children}
-        </div>
-        <div className="rectangle-86"></div>
-      </div>
-      <div className="overlap-group-1">
-        <div className="rectangle-859-1"></div>
-        <div className="rectangle-860-1"></div>
-      </div>
-    </div>
-  );
-}
-
-function Frame2885(props) {
-  const { children } = props;
-
-  return (
-    <div className="frame-288">
-      <div className="number-2 valign-text-middle ibmplexsans-regular-normal-ebb-14px">
-        {children}
-      </div>
-      <div className="rectangle-859-2"></div>
-    </div>
-  );
-}
-
-function Frame2855(props) {
-  const { children } = props;
-
-  return (
-    <div className="frame-28-1">
-      <div className="text-12 valign-text-middle ibmplexsans-regular-normal-ebb-14px">
-        {children}
-      </div>
-      <div className="overlap-group-3">
-        <div className="rectangle-859-3"></div>
-        <div className="rectangle-860-2"></div>
-      </div>
-    </div>
-  );
-}
-
-function Dashboardnav(props) {
-  const {
-    ragrariansI1161397,
-    vector2,
-    vector3,
-    text15,
-    vector4,
-    vector5,
-    vector6,
-    vector7,
-    avatar,
-  } = props;
-
-  return (
-    <div className="dashboard-nav">
-      <h1 className="ragrarians-i1161397 ibmplexsans-semi-bold-quarter-spanish-white-24px">
-        {ragrariansI1161397}
-      </h1>
-      <div className="dashboard-account">
-        <div className="person-outline-1">
-          <img
-            className="vector-12"
-            src="img/person.png"
-            style={{ height: "20px", width: "20px" }}
-          />
-          {/* <img className="vector-13" src="img/person.png" /> */}
-          {/* <img className="vector-14" src="img/person.png" /> */}
-        </div>
-        <div className="text-15 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-          {text15}
-        </div>
-      </div>
-      <div className="avatar-icons">
-        <div className="email-outline">
-          <div className="overlap-group-5">
-            <img className="vector-15" src="img/email-icon.png" />
-            <img className="vector-16" src="img/email-icon.png" />
-          </div>
-        </div>
-        <div className="bell-outline">
-          <div className="overlap-group1-1">
-            <img className="vector-17" src="img/bell-icon.png" />
-            <img className="vector-18" src="img/bell-icon.png " />
-          </div>
-        </div>
-        <div
-          className="avatar"
-          style={{ backgroundImage: `url("img/avatar.png")` }}
-        ></div>
       </div>
     </div>
   );
