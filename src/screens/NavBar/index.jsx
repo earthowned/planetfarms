@@ -1,33 +1,31 @@
 import React from "react";
 import './style.css'
 
-function NavBar(props) {
+function NavBar() {
  
   return (
-    <div className="dashboard-nav">
-      <h1 className="ragrarians-i1161397 ibmplexsans-semi-bold-quarter-spanish-white-24px">Ragrarians News</h1>
-      <div className="dashboard-account">
-        <div className="person-outline-1">
+    <div className="navbar">
+      <h1 className="title__navbar title_text_white_24px ibmplexsans-semi-bold-quarter-spanish-white-24px">Ragrarians News</h1>
+      <div className="account__navbar">
+        <div className="navbar__person-outline-1">
         <img
-          className="vector-12"
+          className="navbar__person__image"
          src="img/person.png"
-          style={{ height: "20px", width: "20px" }}
         />
-          
         </div>
-        <div className="text-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">My DashBoard</div>
+        <div className="myAccount__navbar title_text_white_16px  ibmplexsans-semi-bold-quarter-spanish-white-16px">My DashBoard</div>
       </div>
       <div className="avatar-icons">
         <div className="email-outline">
-          <div className="overlap-group">
-          <img className="vector-15" src="img/email-icon.png" />
-             <img className="vector-16" src="img/email-icon.png" />
+          <div className="email_group">
+          {/* <img className="vector-15" src="img/email-icon.png" /> */}
+             <img className="email-image" src="img/email-icon.png" />
           </div>
         </div>
         <div className="bell-outline">
-          <div className="overlap-group1">
-          <img className="vector-17" src="img/bell-icon.png" />
-            <img className="vector-18" src="img/bell-icon.png " />
+          <div className=" bell__group">
+          {/* <img className="vector-17" src="img/bell-icon.png" /> */}
+            <img className="bell-image" src="img/bell-icon.png " />
           </div>
         </div>
         <div

@@ -8,7 +8,11 @@
   display: flex;
   height: 56px;
   min-width: 247px;
-  padding: 0 24px;
+  /* padding: 0 24px; */
+}
+.active-menu .menu__text{
+  background-color: var(--caribbean-green);
+  color: var(--onyx);
 }
 .arrow-icon {
   align-items: center;
@@ -20,7 +24,7 @@
   left: 231px;
   overflow: hidden;
   padding: 0 4px;
-  position: absolute;
+  position: fixed;
   top: 172px;
   transform: rotate(180deg);
   width: 32px;
@@ -58,7 +62,7 @@
 .chevrons-right {
   margin-left: 69px;
 }
-.chevrons-right-1 {
+.arrow-right {
   align-items: center;
   display: flex;
   height: 24px;
@@ -78,14 +82,14 @@
   top: 344px;
   width: 247px;
 }
-.dashboard {
+.sidebar {
   background-color: var(--licorice);
   height: 1024px;
   overflow: hidden;
   position: relative;
   width: 248px;
 }
-.flex-col {
+.grid-flex {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -140,7 +144,7 @@
   height: 210px;
   min-width: 210px;
 }
-.frame {
+.title__icon {
   align-items: flex-end;
   display: flex;
   overflow: hidden;
@@ -205,7 +209,7 @@
   display: flex;
   width: 38px;
 }
-.frame-2891 {
+.sidebar__grid {
   align-items: center;
   border-radius: 2px;
   display: flex;
@@ -279,7 +283,7 @@
   font-style: normal;
   font-weight: 400;
 }
-.ibmplexsans-semi-bold-quarter-spanish-white-16px {
+.semi-bold-quarter-white-16px {
   color: var(--quarter-spanish-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
   font-size: 16px;
@@ -317,6 +321,7 @@
   position: absolute;
   top: 80px;
   width: 247px;
+  cursor: pointer;
 }
 .number {
   height: 20px;
@@ -354,7 +359,7 @@
   text-align: center;
   width: 22px;
 }
-.overlap-group {
+.sidebar__menu {
   height: 1024px;
   left: 0px;
   position: absolute;
@@ -387,7 +392,7 @@
   position: relative;
   width: 248px;
 }
-.overlap-group1-1 {
+.libarary-group {
   height: 22px;
   position: relative;
   width: 18px;
@@ -495,13 +500,31 @@
   top: 0px;
   width: 4px;
 }
-.text-1 {
-  letter-spacing: 0px;
+.menu__text {
+  /* letter-spacing: 0px;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
   min-width: 83px;
   white-space: nowrap;
+  padding: 10px;
+  background-color: var(--onyx);
+  border: none;
+  outline: none;
+  cursor: pointer; */
+
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-right: 79px;
+  margin-top: 24px;
+  min-height: 24px;
+  min-width: 56px;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+  background-color: var(--onyx);
+  cursor: pointer;
+  text-decoration: none;
 }
 .button {
   background-color: green;
@@ -544,15 +567,23 @@
   min-height: 24px;
   min-width: 56px;
   white-space: nowrap;
+  border: none;
+  outline: none;
+  background-color: var(--onyx);
+  cursor: pointer;
 }
 .text-3 {
   letter-spacing: 0px;
   line-height: 24px;
   margin-right: 64px;
-  margin-top: 12px;
+  margin-top: 24px;
   min-height: 24px;
   min-width: 71px;
   white-space: nowrap;
+  border: none;
+  outline: none;
+  background-color: var(--onyx);
+  cursor: pointer;
 }
 .text-4 {
   letter-spacing: 0px;
@@ -562,8 +593,12 @@
   min-height: 24px;
   min-width: 88px;
   white-space: nowrap;
+  border: none;
+  outline: none;
+  background-color: var(--onyx);
+  cursor: pointer;
 }
-.text-5 {
+.library-text {
   letter-spacing: 0px;
   line-height: 24px;
   margin-left: 8px;
@@ -571,7 +606,7 @@
   min-width: 55px;
   white-space: nowrap;
 }
-.text-6 {
+.course-text {
   letter-spacing: 0px;
   line-height: 24px;
   margin-left: 8px;
@@ -579,7 +614,7 @@
   min-width: 62px;
   white-space: nowrap;
 }
-.title-icon {
+.sidebar__title__icon {
   align-items: center;
   display: flex;
   height: 80px;
@@ -604,13 +639,14 @@
   padding: 4px 0;
   width: 24px;
 }
-.vector {
+
+.icon-1 {
   align-self: flex-start;
   height: 24px;
   margin-top: -0.02px;
   width: 25px;
 }
-.vector-1 {
+.icon-2 {
   height: 24px;
   margin-bottom: -0.02px;
   margin-left: 1px;
@@ -623,42 +659,46 @@
   top: 15px;
   width: 18px;
 }
-.vector-11 {
+.libarary-image {
   height: 22px;
   left: 0px;
   position: absolute;
   top: 0px;
   width: 18px;
 }
-.vector-2 {
+.icon-3 {
   height: 24px;
   margin-bottom: -0.02px;
   margin-left: 1px;
   width: 26px;
 }
-.vector-3 {
-  height: 8px;
-  width: 8px;
+.grid-image {
+  height: 20px;
+  width: 20px;
 }
 .vector-4 {
   height: 8px;
   margin-top: 2px;
   width: 8px;
 }
-.vector-5 {
-  height: 8px;
-  width: 4px;
+.ragrarians__image {
+  height: 15px;
+  width: 25px;
+  margin-left: 11px;
+  
 }
 .vector-6 {
   height: 7px;
   width: 4px;
 }
-.vector-7 {
+.arrow-image {
   height: 12px;
   transform: rotate(-180deg);
   width: 7px;
+  z-index: 999;
+  position: relative;
 }
-.vector-8 {
+.icon-1 {
   height: 24px;
   margin-bottom: -0.02px;
   margin-left: 2px;

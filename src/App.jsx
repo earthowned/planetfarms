@@ -13,6 +13,7 @@ import Dashboard from './Screens/Dashboard/Dashboard';
 import './App.css';
 // Community
 import  X0300CommunityPagenews from './screen/Community-News/index'
+import X0300CommunityPageViewsnews from './screen/Community-ViewPage/index'
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
          </Route>
         <Route path="/community-page-news">
          <X0300CommunityPagenews />
+        </Route>
+        <Route path="/community-page-news-view">
+         <X0300CommunityPageViewsnews />
         </Route>
       </Switch>
     </Router>
