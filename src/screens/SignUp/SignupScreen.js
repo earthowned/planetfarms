@@ -3,6 +3,8 @@ import "./style.css";
 import {useHistory, Link} from 'react-router-dom';
 import Logo from "../../components/Logo/Logo";
 import Banner from "../../components/Banner/Banner";
+import InputComponent from "../../components/Input/InputComponent";
+import Button from "../../components/Button/Button";
 
 
 function App() {
@@ -78,42 +80,21 @@ const changeTerms = (e) => {
         {/* form */}
         <div className="form-container">
           
-          <div className={`default-input ${userError ? "user-error" : active ? "active" : "border-1px-onyx"} `}>
-            <div className="person-outline">
-              <img className="user-icon" src="../../img/person-outline.png" />
-              
-            </div>
-            {username ? <div className="text ibmplexsans-regular-normal-monsoon-14px">username</div> : <div>&nbsp;</div>}
-            <input 
-            value={username} 
-            onChange={(e) => userChange(e)} 
-            className="username ibmplexsans-regular-normal-monsoon-16px"
-            placeholder="username"
-            ></input>
-          </div>
-          {userError && <p className="error-message">Username Error</p>}
+           <InputComponent text={username} 
+               error={userError} 
+               image="../../img/person-outline.png" 
+               changeHandler={userChange}
+               name="username"
+               />
 
-              <div className={`password-default ${passwordError ? "password-error" : activePassword ? "active" : "border-1px-onyx"} `}>
-                <div className="frame-1934">
-                  <div className="lock-outline">
-                      <div className="overlap-group">
-                        <img className="password-icon" src="../../img/lock-outline.svg" />
-                        
-                      </div>
-                    </div>
-                    {password ? <div className="text ibmplexsans-regular-normal-monsoon-14px">password</div> : <div>&nbsp;</div>}
-                  <input 
-                value={password} 
-                type="password"
-                onChange={(e) => passwordChange(e)} 
-                className="password ibmplexsans-regular-normal-monsoon-16px"
-                placeholder="password"
-                ></input>
-                </div>
+               <InputComponent text={password} 
+               error={passwordError} 
+               image="../../img/lock-outline.svg" 
+               changeHandler={passwordChange}
+               password="password"
+               name="password"
+               />
                
-              </div>
-               {passwordError && <p className="error-message">Password Error</p>}
-
           <div className="button-group">
             <div className="terms">
               
@@ -129,10 +110,8 @@ const changeTerms = (e) => {
               </p>
             </div>
            
-
-            <button className="default-button" onClick={() => registerUser()}>
-                <div className="default-i166223488 valign-text-middle ibmplexsans-semi-bold-shark-16px">Sign Up</div>
-              </button>
+            <Button clickHandler={registerUser} name="Sign Up" />
+            
           </div>
            {termsError && <p className="error-message">Please read the terms of service</p>}
 

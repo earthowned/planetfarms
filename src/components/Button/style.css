@@ -1,0 +1,33 @@
+.default-btn {
+  align-items: center;
+  background-color: var(--caribbean-green);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  color: black;
+  overflow: hidden;
+  padding: 0 59px;
+  width: 180px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.default-btn:hover {
+  background: #02f2a7;
+}
+
+.btn-text {
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.border-active {
+  border: 1px solid var(--caribbean-green);
+}
