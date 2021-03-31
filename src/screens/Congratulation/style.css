@@ -39,21 +39,15 @@
   font-style: normal;
   font-weight: 600;
 }
-.ibmplexsans-semi-bold-shark-16px {
-  color: var(--shark);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-}
+
 .x02-2-0-sign-up-filed {
   align-items: flex-start;
   background-color: black;
   display: flex;
   flex-direction: column;
-  height: 1024px;
+  height: 100vh;
   padding: 60px 0;
-  width: 1440px;
+  width: 100vw;
 }
 .x02-2-0-sign-up-filed .banner-images {
   align-items: flex-end;
@@ -69,18 +63,18 @@
   white-space: nowrap;
 }
 .x02-2-0-sign-up-filed .button-wrapper {
-  align-items: flex-start;
+  justify-content: space-between;
   display: flex;
   margin-top: 40px;
   min-width: 440px;
 }
 .x02-2-0-sign-up-filed .congratulation-container {
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-evenly;
   display: flex;
-  height: 864px;
+  flex-wrap: wrap;
   margin-top: 60px;
-  min-width: 1440px;
-  padding: 96px 80px;
+  min-width: 100%;
 }
 .x02-2-0-sign-up-filed .continue {
   height: 24px;
@@ -129,18 +123,26 @@
   align-self: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 536px;
-  width: 477px;
+  width: 30%;
+  margin-right: 3%;
 }
 .x02-2-0-sign-up-filed .flex-col-1 {
   align-items: flex-start;
+  justify-content: flex-start;
   display: flex;
   flex-direction: column;
-  margin-bottom: 216px;
-  margin-left: 3px;
-  min-height: 200px;
-  width: 440px;
+  width: 30%;
+  margin-top: 6.8em;
 }
+
+.x02-2-0-sign-up-filed .flex-col-2 {
+  margin-top: 6.8em;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
 .x02-2-0-sign-up-filed .frame-1935 {
   align-items: center;
   background-color: var(--caribbean-green);
@@ -204,7 +206,7 @@
   overflow: hidden;
   width: 50%;
 }
-.x02-2-0-sign-up-filed .input-container {
+/* .x02-2-0-sign-up-filed .input-container {
   align-items: center;
   background-color: var(--licorice);
   border-radius: 4px;
@@ -213,7 +215,7 @@
   overflow: hidden;
   padding: 0 16px;
   width: 440px;
-}
+} */
 .x02-2-0-sign-up-filed .last-name {
   letter-spacing: 0px;
   line-height: 24px;
@@ -301,12 +303,7 @@
   min-height: 24px;
   white-space: nowrap;
 }
-.x02-2-0-sign-up-filed .x-container {
-  align-items: flex-start;
-  display: flex;
-  margin-top: 40px;
-  width: 440px;
-}
+
 :root {
   --caribbean-green: rgba(0, 198, 136, 1);
   --licorice: rgba(20, 20, 20, 1);
@@ -326,7 +323,7 @@
   align-items: flex-end;
   display: flex;
   height: 40px;
-  left: 80px;
+  left: 40px;
   overflow: hidden;
   position: absolute;
   top: 60px;

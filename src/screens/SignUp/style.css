@@ -43,13 +43,13 @@
   font-style: normal;
   font-weight: 600;
 }
-.ibmplexsans-semi-bold-shark-16px {
+/* .ibmplexsans-semi-bold-shark-16px {
   color: var(--shark);
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-}
+} */
 .ibmplexsans-semi-bold-white-16px {
   color: transparent;
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
@@ -82,7 +82,8 @@
   width: 481px;
 }
 .x02-0-0-sign-up-empty .button-group {
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   display: flex;
   height: 56px;
   margin-top: 40px;
@@ -100,7 +101,7 @@
   padding: 0 3px;
   width: 24px;
 }
-.x02-0-0-sign-up-empty .default-button {
+/* .x02-0-0-sign-up-empty .default-button {
   align-items: center;
   background-color: var(--caribbean-green);
   border-radius: 4px;
@@ -113,11 +114,11 @@
   cursor: pointer;
   border: none;
   outline: none;
-}
+} */
 
-.x02-0-0-sign-up-empty .default-button:hover {
+/* .x02-0-0-sign-up-empty .default-button:hover {
   background: #02f2a7;
-}
+} */
 
 .x02-0-0-sign-up-empty .default-i166223488 {
   height: 24px;

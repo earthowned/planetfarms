@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Link, useHistory} from 'react-router-dom';
 import Banner from "../../components/Banner/Banner";
+import Button from "../../components/Button/Button";
+import InputComponent from "../../components/Input/InputComponent";
 import Logo from "../../components/Logo/Logo";
 import "./style.css";
 
@@ -16,7 +18,7 @@ function LoginScreen(props) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  
    const [userError, setUserError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
@@ -25,6 +27,7 @@ function LoginScreen(props) {
   const userChange = (e) => {
     setUsername(e.target.value);
     setUserError(false);
+     
   }
 
   const passwordChange = (e) => {
@@ -40,10 +43,7 @@ function LoginScreen(props) {
 
     if(username === "admin" && password === 'password') {
       history.push('/dashboard');
-    } else {
-      setUserError(true);
-      setPasswordError(true);
-    }
+    } 
   };
 
   return (
@@ -57,7 +57,7 @@ function LoginScreen(props) {
             <div className="overlap-group1">
               <Banner />
             </div>
-          </div>
+          </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         </div>
         <div className="sign-in">
           <h1 className="welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px">
@@ -65,43 +65,23 @@ function LoginScreen(props) {
           </h1>
           <div className="from-container">
             
-              <div className={`default-input ${userError ? "user-error" : "border-1px-onyx"}`}>
-                
-                <div className="person-outline">
-                 <img className="user-icon" src="../../img/person-outline.png" />
-                 
-                </div>
-                {/* <div className="frame-9"> */}
-                {username ? <div className="text ibmplexsans-regular-normal-monsoon-14px">username</div> : <div>&nbsp;</div>}
-                <input
-                  type="text"
-                  className="username ibmplexsans-regular-normal-monsoon-16px"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => userChange(e)}
-                />
-              </div>
-               {userError && <p className="error-message">Username Error</p>}
                
-            <div className={`password-default ${passwordError ? "password-error" : "border-1px-onyx "}`}>
-              <div className="frame-1934">
-                 <div className="lock-outline">
-                    <div className="overlap-group1-1">
-                      <img className="password-icon" src="../../img/lock-outline.svg" />
-                    </div>
-                  </div>
-                  {password ? <div className="text ibmplexsans-regular-normal-monsoon-14px">password</div> : <div>&nbsp;</div>}
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="password ibmplexsans-regular-normal-monsoon-16px"
-                  value={password}
-                  onChange={(e) => passwordChange(e)}
-                />
-              </div>
-            </div>
-             {passwordError && <p className="error-message">Password Error</p>}
-
+               <InputComponent text={username} 
+               error={userError} 
+               image="../../img/person-outline.png" 
+               changeHandler={userChange}
+               name="username"
+           
+               />
+               
+               <InputComponent text={password} 
+               error={passwordError} 
+               image="../../img/lock-outline.svg" 
+               changeHandler={passwordChange}
+               password="password"
+               name="password"
+               />
+            
             <div className="remember">
               <div className="frame-92">
                 <div className="checkmark-square-2-outline-1">
@@ -120,14 +100,7 @@ function LoginScreen(props) {
             </div>
 
             <div className="button">
-              <button className="default-button" onClick={(e) => handleOnClick(e)}>
-                <div
-                  type="submit"
-                  className="valign-text-middle ibmplexsans-semi-bold-shark-16px"
-                >
-                  Sign In
-                </div>
-              </button>
+             <Button name="sign in" clickHandler={handleOnClick} />
               <a href="google.com" target="_blank" className="forgot-password valign-text-middle ibmplexsans-semi-bold-caribbean-green-16px">
                 Forgot Password?
               </a>

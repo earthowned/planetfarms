@@ -3,6 +3,8 @@ import "./style.css";
 import Logo from "../../components/Logo/Logo";
 import {useHistory} from 'react-router-dom';
 import {useDropzone} from 'react-dropzone';
+import InputComponent from '../../components/Input/InputComponent';
+import Button from '../../components/Button/Button';
 
 function App() {
   return <CongratulationScreen {...X0220SignUpfiledData} />;
@@ -99,93 +101,75 @@ const submitForm = () => {
           <h1 className="welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px">{welcomeBack}</h1>
           <p className="welcome-back-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">{welcomeBack2}</p>
           
-          <div className="x-container">
-            <div className={`input-container ${firstnameError ? "error" : "border-1px-onyx"}`}>
-              <div className="frame-9">
-                {firstname ? (<div className="first-name ibmplexsans-regular-normal-monsoon-14px">First Name</div>) : <div>&nbsp;</div>}
-                <input value={firstname} 
-                onChange={(e) => changeFirstname(e)}
-                placeholder="First Name"
-                className="input mikhail ibmplexsans-regular-normal-quarter-spanish-white-16px"></input>
-              </div>
-            </div>
+          <div className="form-container">
+              <InputComponent text={firstname} 
+               error={firstnameError} 
+               changeHandler={changeFirstname}
+               name="firstname"
+               />
+          
+          
+          
+            <InputComponent text={email} 
+               error={emailError} 
+               changeHandler={changeEmail}
+               name="email"
+               />
+         
+          
+            <InputComponent text={birthday} 
+               error={birthdayError} 
+               changeHandler={changeBirthday}
+               name="birthday"
+               />
           </div>
           
-          <div className="x-container">
-            <div className={`input-container ${emailError ? "error" : "border-1px-onyx"}`}>
-              <div className="frame-9-1">
-                {email ? <div className="email ibmplexsans-regular-normal-monsoon-14px">email</div> : <div>&nbsp;</div>}
-                <input 
-                placeholder="email"
-                value={email}
-                onChange={(e) => changeEmail(e)}
-                className="input text-1 ibmplexsans-regular-normal-quarter-spanish-white-16px"></input>
-              </div>
-            </div>
-          </div>
-          <div className="x-container">
-            <div className={`input-container ${birthdayError ? "error" : "border-1px-onyx"}`}>
-              <div className="frame-9-2">
-                {birthday ? <div className="birthday ibmplexsans-regular-normal-monsoon-14px">birthday</div> : <div>&nbsp;</div>}
-                <input 
-                placeholder="Birthday"
-                type="date"
-                value={birthday}
-                onChange={(e) => changeBirthday(e)}
-                className="input phone ibmplexsans-regular-normal-quarter-spanish-white-16px"></input>
-              </div>
-            </div>
-          </div>
           <div className="button-wrapper">
             <button onClick={() => history.push('/dashboard')} className="btn frame-4 border-0-5px-quarter-spanish-white">
               <div className="default-i905507538 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
                 Skip for now
               </div>
             </button>
-            <button onClick={() => submitForm()} className="btn frame-1935">
-              <div className="continue valign-text-middle ibmplexsans-semi-bold-shark-16px">Continue</div>
-            </button>
+            
+            <Button clickHandler={submitForm} name="Continue" />
+            
           </div>
 
-        </div>
+          </div>
+        
         <div className="flex-col-1">
-          <div className="last-name-container">
-            <div className={`input-container ${lastnameError ? "error" : "border-1px-onyx"}`}>
-              <div className="frame-9-3">
-                {lastname ? <div className="last-name ibmplexsans-regular-normal-monsoon-14px">Last Name</div> : <div>&nbsp;</div>}
-                <input 
-                placeholder="Last Name"
-                value={lastname}
-                onChange={(e) => changeLastname(e)}
-                className="input ugrymov ibmplexsans-regular-normal-quarter-spanish-white-16px"></input>
-              </div>
-            </div>
-          </div>
-          <div className="x-container">
-            <div className={`input-container ${phoneError ? "error" : "border-1px-onyx"}`}>
-              <div className="frame-9-4">
-                {phone ? <div className="text-2 ibmplexsans-regular-normal-monsoon-14px">Phone No.</div> : <div>&nbsp;</div>}
-                <input 
-                placeholder="Phone No."
-                value={phone}
-                onChange={(e) => changePhone(e)}
-                className="input text-3 ibmplexsans-regular-normal-quarter-spanish-white-16px"></input>
-              </div>
-            </div>
-          </div>
-        </div>
-       
-        {/* <div className="file-drop-container border-1px-quarter-spanish-white">
-          <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">{text4}</p>
-        </div> */}
+          
+            <InputComponent text={lastname} 
+               error={lastnameError} 
+               changeHandler={changeLastname}
+               name="lastname"
+               />
+          
 
+          
+            <InputComponent text={phone} 
+               error={phoneError} 
+               changeHandler={changePhone}
+               name="phone"
+               />
+          
+        </div>
+
+        <div className="flex-col-2">
         <div className="file-drop-container border-1px-quarter-spanish-white" {...getRootProps()}>
           <input {...getInputProps()} />
          {files.length > 0 ? <img className="avatar" src="https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"/> : <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Drag &amp; Drop files in this area or <span className="file-upload">Click Here to attach</span></p>}
         </div>
+        </div>
+       
+       </div>
+        {/* <div className="file-drop-container border-1px-quarter-spanish-white">
+          <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">{text4}</p>
+        </div> */}
 
+         
       </div>
-    </div>
+    
   );
 }
 
