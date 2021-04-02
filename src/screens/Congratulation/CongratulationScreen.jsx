@@ -1,10 +1,10 @@
 import React,{useState} from "react";
-import "./style.css";
-import Logo from "../../components/Logo/Logo";
+import "./congratulation-screen.css";
+import Logo from "../../Components/Logo/Logo";
 import {useHistory} from 'react-router-dom';
 import {useDropzone} from 'react-dropzone';
-import InputComponent from '../../components/Input/InputComponent';
-import Button from '../../components/Button/Button';
+import InputComponent from '../../Components/Input/InputComponent';
+import Button from '../../Components/Button/Button';
 
 function App() {
   return <CongratulationScreen {...X0220SignUpfiledData} />;

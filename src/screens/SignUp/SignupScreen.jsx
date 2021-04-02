@@ -1,10 +1,10 @@
 import React,{useState} from "react";
-import "./style.css";
+import "./signup-screen.css";
 import {useHistory, Link} from 'react-router-dom';
-import Logo from "../../components/Logo/Logo";
-import Banner from "../../components/Banner/Banner";
-import InputComponent from "../../components/Input/InputComponent";
-import Button from "../../components/Button/Button";
+import Logo from "../../Components/Logo/Logo";
+import Banner from "../../Components/Banner/Banner";
+import InputComponent from "../../Components/Input/InputComponent";
+import Button from "../../Components/Button/Button";
 
 
 function App() {

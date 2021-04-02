@@ -3,10 +3,10 @@ import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
  
 // Screens
-import LoginScreen from "./screens/Login/LoginScreen";
-import SignupScreen from './screens/SignUp/SignupScreen';
-import DashboardScreen from './screens/DashboardScreen';
-import CongratulationScreen from './screens/Congratulation/CongratulationScreen'
+import LoginScreen from "./Screens/Login/LoginScreen";
+import SignupScreen from './Screens/SignUp/SignupScreen';
+import DashboardScreen from './Screens/DashboardScreen';
+import CongratulationScreen from './Screens/Congratulation/CongratulationScreen';
 
 function App() {
   return (

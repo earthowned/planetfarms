@@ -1,5 +1,5 @@
 import React from 'react'
-import "./style.css";
+import "./input-component.css";
 
 const InputComponent = ({text, error, image, changeHandler, name, active}) => {
    

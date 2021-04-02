@@ -1,5 +1,5 @@
 import React from 'react'
-import "./style.css"
+import "./button.css"
 
 const Button = ({name, clickHandler}) => {
     return (

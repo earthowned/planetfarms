@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {Link, useHistory} from 'react-router-dom';
-import Banner from "../../components/Banner/Banner";
-import Button from "../../components/Button/Button";
-import InputComponent from "../../components/Input/InputComponent";
-import Logo from "../../components/Logo/Logo";
-import "./style.css";
+import Banner from "../../Components/Banner/Banner";
+import Button from "../../Components/Button/Button";
+import InputComponent from "../../Components/Input/InputComponent";
+import Logo from "../../Components/Logo/Logo";
+import "./login-screen.css";
 
 function LoginScreen(props) {
   const {
