@@ -1,0 +1,77 @@
+.message-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+.message-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  padding: 10px 20px;
+  color: #fff;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.message-slot-header {
+  margin: 18px 0;
+  text-align: center;
+  color: #8b8b8b;
+}
+
+.message-card .img-wrapper {
+  width: 10%;
+}
+
+.message-content {
+  width: 70%;
+}
+.message-card p {
+  font-size: 14px;
+  margin: 0;
+  margin-top: 4px;
+}
+
+.message-card img {
+  width: 100%;
+}
+
+.message-card span {
+  width: 10%;
+}
+
+.message-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  padding: 10px 20px;
+  color: #fff;
+  margin-bottom: 10px;
+  margin-top: 0;
+  border-top: 1px solid #3a3939;
+  margin-left: 10px;
+}
+
+.message-input-container .message-input {
+  width: 80%;
+  display: block;
+  margin-left: 20px;
+  resize: none;
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+}
+
+.message-input-container .img-wrapper-2 {
+  width: 50%;
+  display: flex;
+}
+
+.message-input-container .img-wrapper-1 {
+  width: 10%;
+}
