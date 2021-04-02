@@ -6,14 +6,8 @@ import {useDropzone} from 'react-dropzone';
 import InputComponent from '../../Components/Input/InputComponent';
 import Button from '../../Components/Button/Button';
 
-function App() {
-  return <CongratulationScreen {...X0220SignUpfiledData} />;
-}
 
-export default App;
-
-
-function CongratulationScreen(props) {
+function CongratulationScreen(props = X0220SignUpfiledData) {
   const {
     welcomeBack,
     welcomeBack2,
@@ -173,6 +167,7 @@ const submitForm = () => {
   );
 }
 
+export default CongratulationScreen;
 
 function Frame4(props) {
   const { children } = props;
