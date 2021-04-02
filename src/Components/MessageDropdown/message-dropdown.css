@@ -1,0 +1,47 @@
+.message-dropdown {
+  position: absolute;
+  width: 360px;
+  color: #fff;
+  top: 2em;
+  background: #191b1d;
+  border-radius: 4px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.message-dropdown::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background-color: #191b1d;
+  left: 50%;
+  top: -0.8em;
+  transform: translate(-50%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.message-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.secondary-btn {
+  outline: none;
+  border: none;
+  padding: 1em;
+  width: 200px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.16);
+
+  color: #fff;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.btn-container {
+  margin-top: 10px;
+}
