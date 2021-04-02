@@ -135,7 +135,7 @@ function MyLibraryTiles(props) {
   return (
     <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
       <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
-      <img className="frame-2926" src={src} />
+      <img className="frame-2926" src={src} alt='my-group-tile' />
       </div>
     </div>
   );
