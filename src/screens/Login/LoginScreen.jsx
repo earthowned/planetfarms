@@ -113,19 +113,19 @@ function LoginScreen(props) {
               </div>
               <div className="button-1">
 
-                <a target="_blank" href="www.google.com" className="link-btn google-button border-0-5px-quarter-spanish-white">
+                <a target="_blank" href="https://google.com" className="link-btn google-button border-0-5px-quarter-spanish-white">
                   <div className="logo-googleg-48-dp-1">
                     <div className="overlap-group1-3">
                       
-                      <img className="vector-17" src="../../img/google-icon.png" />
+                      <img className="subtract-1" src="../../img/google-icon.png" />
                     </div>
                   </div>
-                  <div className="google ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                  <div className="google valign-text-middle ibmplexsans-semi-bold-gallery-16px">
                     {google}
                   </div>
                 </a>
 
-                <a target="_blank" href="www.facebook.com" className="link-btn facebook-button border-0-5px-quarter-spanish-white">
+                <a target="_blank" href="https://facebook.com" className="link-btn facebook-button border-0-5px-quarter-spanish-white">
                   
                   <img className="subtract-1" src="../../img/facebook-icon.png" />
                   <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
@@ -140,8 +140,7 @@ function LoginScreen(props) {
 
       <div className="frame-93 border-1px-onyx">
         <p className="text-2 ibmplexsans-regular-normal-white-16px">
-          <span className="span0">Don't have an account yet?</span>
-          
+          <span className="span0">Don't have an account yet? </span>
           <Link to="/register" className="span2">Become a member!</Link>
         </p>
       </div>
