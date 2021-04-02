@@ -5,7 +5,6 @@ import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 // Screens
 import LoginScreen from "./Screens/Login/LoginScreen";
 import SignupScreen from './Screens/SignUp/SignupScreen';
-import DashboardScreen from './Screens/DashboardScreen';
 import CongratulationScreen from './Screens/Congratulation/CongratulationScreen';
 import Messenger from './Screens/Messenger/Messenger';
 import Library from './Screens/Library/Library';
@@ -22,9 +21,6 @@ function App() {
         <Route path="/register">
           <SignupScreen />
         </Route>
-        <Route path="/dashboard">
-          <DashboardScreen />
-        </Route>
         <Route path="/register-complete">
           <CongratulationScreen />
         </Route>
@@ -34,7 +30,7 @@ function App() {
         <Route path="/library">
            <Library />
          </Route>
-         <Route path="/dashboard1">
+         <Route path="/dashboard">
            <Dashboard/>
          </Route>
         <Route path="/messenger">
