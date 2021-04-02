@@ -1,0 +1,30 @@
+.library-list-container {
+  color: #fff;
+  list-style: none;
+  display: flex;
+  margin: 0;
+  margin-left: -2em;
+}
+.library-list-container li {
+  margin-right: 0.5em;
+  margin-left: 0;
+}
+.library-list-item {
+  background: #000;
+  border: 0.5px solid #fff;
+  padding: 1em 1.2em;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.library-list-item:hover {
+  color: #000;
+  background: #fff;
+}
+
+.library-list-item:focus {
+  color: #000;
+  background: #fff;
+}
