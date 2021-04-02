@@ -1,0 +1,53 @@
+.call-modal-container {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  z-index: 999;
+  margin-left: -50vw;
+  margin-top: -12vh;
+}
+
+.call-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 999;
+  background: #191b1d;
+  width: 80%;
+  height: 70%;
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.call-modal .img-wrapper {
+  width: 200px;
+  height: 200px;
+}
+
+.call-modal .img-wrapper img {
+  width: 100%;
+}
+
+.call-button {
+  display: flex;
+}
+
+.call-button button {
+  background: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.resize {
+  position: absolute;
+  bottom: 5.5em;
+  right: 5em;
+  cursor: pointer;
+}
