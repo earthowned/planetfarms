@@ -9,7 +9,7 @@ const Messenger = () => {
    
     return (
         <>
-        <DashboardLayout>
+        <DashboardLayout title="Messenger">
             <MessengerMain />  
         </DashboardLayout>
         </>

@@ -5,12 +5,14 @@ import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 // Screens
 import LoginScreen from "./Screens/Login/LoginScreen";
 import SignupScreen from './Screens/SignUp/SignupScreen';
-import DashboardScreen from './Screens/DashboardScreen';
 import CongratulationScreen from './Screens/Congratulation/CongratulationScreen';
 import Messenger from './Screens/Messenger/Messenger';
 import Library from './Screens/Library/Library';
 import Dashboard from './Screens/Dashboard/Dashboard';
 import './App.css';
+// Community
+import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
+import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
 
 function App() {
   return (
@@ -18,9 +20,6 @@ function App() {
       <Switch>
         <Route path="/register">
           <SignupScreen />
-        </Route>
-        <Route path="/dashboard">
-          <DashboardScreen />
         </Route>
         <Route path="/register-complete">
           <CongratulationScreen />
@@ -31,12 +30,18 @@ function App() {
         <Route path="/library">
            <Library />
          </Route>
-         <Route path="/dashboard1">
+         <Route path="/dashboard">
            <Dashboard/>
          </Route>
         <Route path="/messenger">
            <Messenger />
          </Route>
+        <Route path="/community-page-news">
+         <X0300CommunityPagenews />
+        </Route>
+        <Route path="/community-page-news-view">
+         <X0300CommunityPageViewsnews />
+        </Route>
       </Switch>
     </Router>
   );
