@@ -1,6 +1,10 @@
 import React from 'react'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Link, useHistory } from 'react-router-dom'
+=======
+import { Link } from 'react-router-dom'
+>>>>>>> ef76177b... dropdown-messages-notifications
 import './sidebar.css'
 
 const Sidebar = ({setToggle, toggle}) => {
@@ -28,10 +32,15 @@ const Sidebar = ({setToggle, toggle}) => {
 
 =======
                     <li className="list-items">
+<<<<<<< HEAD
                         <img src="./img/user-management.png" /> <span>Ragarians
                     
                         </span>
 >>>>>>> 901c388a... messenger-file-structure-changed
+=======
+                        <img src="./img/user-management.png" /> <span>Ragarians</span>
+
+>>>>>>> ef76177b... dropdown-messages-notifications
                    <ul className="dropdown-container">
                         <li className="dropdown-item">Members</li>
                         <li className="dropdown-item">Groups</li>
@@ -39,12 +48,18 @@ const Sidebar = ({setToggle, toggle}) => {
                     </ul>
                     </li>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <li className="list-items">
                         <Link className="nav-link" to="/library" ><img src="./img/book.png" /> <span>Library</span></Link>
                     </li>
 =======
                     <li className="list-items"><img src="./img/book.png" /> <span>Library</span></li>
 >>>>>>> 901c388a... messenger-file-structure-changed
+=======
+                    <li className="list-items">
+                        <Link className="nav-link" to="/library" ><img src="./img/book.png" /> <span>Library</span></Link>
+                    </li>
+>>>>>>> ef76177b... dropdown-messages-notifications
                     <li className="list-items"><img src="./img/graduation.png" /> <span>Course</span></li>
                 </ul>
         </>

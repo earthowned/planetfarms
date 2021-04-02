@@ -1,9 +1,7 @@
 import './message-dropdown.css';
-<<<<<<< HEAD
 import {useHistory} from 'react-router-dom';
-=======
 import {Link} from 'react-router-dom';
->>>>>>> 901c388a... messenger-file-structure-changed
+
 import React from 'react'
 import MessageCard from '../MessageCard/MessageCard';
 
@@ -36,35 +34,22 @@ const contacts = [
             date: "08/4/2020"
         },
     ]
-<<<<<<< HEAD
+
 const MessageDropdown = ({clickHandler, message, btnName, handleClick}) => {
    
     return (
         <div className="message-dropdown">
             <div className="message-dropdown-header">
                 <h4>{message}</h4>
-=======
-const MessageDropdown = ({clickHandler}) => {
-    
-    return (
-        <div className="message-dropdown">
-            <div className="message-dropdown-header">
-                <h4>Your messages</h4>
->>>>>>> 901c388a... messenger-file-structure-changed
                 <div onClick={() => clickHandler(false)}><img  src="./img/close-outline.png" /></div>
             </div>
             {
                 contacts.map(contact => (
-<<<<<<< HEAD
+
                     <MessageCard contact={contact}  />
                 ))
             }
             <button onClick={() => handleClick()} className="btn-container secondary-btn">{btnName}</button>
-=======
-                    <MessageCard contact={contact} />
-                ))
-            }
->>>>>>> 901c388a... messenger-file-structure-changed
         </div>
     )
 }

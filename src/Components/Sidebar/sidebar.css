@@ -28,18 +28,11 @@
 .list-items {
   width: 100%;
   height: 30px;
-<<<<<<< HEAD
+  margin-left: -40px;
   border-radius: 4px;
   cursor: pointer;
   padding: 10px;
   margin-bottom: 20px;
-=======
-
-  margin-left: -40px;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 20px 10px;
->>>>>>> 901c388a... messenger-file-structure-changed
 }
 
 .list-items:first-child:hover {
@@ -97,7 +90,6 @@
   width: 100%;
   height: 100%;
 }
-<<<<<<< HEAD
 
 .nav-link {
   text-decoration: none;
@@ -114,5 +106,3 @@
 .nav-link {
   text-decoration: none;
 }
-=======
->>>>>>> 901c388a... messenger-file-structure-changed
