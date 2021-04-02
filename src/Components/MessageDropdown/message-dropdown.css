@@ -28,3 +28,20 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.secondary-btn {
+  outline: none;
+  border: none;
+  padding: 1em;
+  width: 200px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.16);
+
+  color: #fff;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.btn-container {
+  margin-top: 10px;
+}

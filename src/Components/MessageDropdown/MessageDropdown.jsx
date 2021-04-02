@@ -1,5 +1,5 @@
 import './message-dropdown.css';
-import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import React from 'react'
 import MessageCard from '../MessageCard/MessageCard';
 
@@ -32,19 +32,20 @@ const contacts = [
             date: "08/4/2020"
         },
     ]
-const MessageDropdown = ({clickHandler}) => {
-    
+const MessageDropdown = ({clickHandler, message, btnName, handleClick}) => {
+   
     return (
         <div className="message-dropdown">
             <div className="message-dropdown-header">
-                <h4>Your messages</h4>
+                <h4>{message}</h4>
                 <div onClick={() => clickHandler(false)}><img  src="./img/close-outline.png" /></div>
             </div>
             {
                 contacts.map(contact => (
-                    <MessageCard contact={contact} />
+                    <MessageCard contact={contact}  />
                 ))
             }
+            <button onClick={() => handleClick()} className="btn-container secondary-btn">{btnName}</button>
         </div>
     )
 }
