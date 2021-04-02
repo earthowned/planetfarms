@@ -12,8 +12,8 @@ import Library from './Screens/Library/Library';
 import Dashboard from './Screens/Dashboard/Dashboard';
 import './App.css';
 // Community
-import  X0300CommunityPagenews from './screen/Community-News/index'
-import X0300CommunityPageViewsnews from './screen/Community-ViewPage/index'
+import X0300CommunityPagenews from './Screen/CommunityNews/CommunityNews'
+import X0300CommunityPageViewsnews from './Screen/CommunityNewsView/CommunityNewsView'
 
 function App() {
   return (
