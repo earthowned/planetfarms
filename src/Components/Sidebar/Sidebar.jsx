@@ -1,15 +1,10 @@
-import React, {useState} from 'react'
-import HeaderComponent from '../Header/HeaderComponent';
-import MessengerMain from '../MessengerMain/MessengerMain';
-import './style.css'
+import React from 'react'
+import './sidebar.css'
 
-const Sidebar = () => {
-    const [toggle, setToggle] = useState(false);
+const Sidebar = ({setToggle, toggle}) => {
     return (
         <>
-        <div className="container">
-            <div className={toggle ? "sidebar-container" : "sidebar-container active"}>
-                <button className="nav-icon" onClick={() => setToggle(!toggle)}><img src="./img/nav-icon.png" /> </button>
+       <button className="nav-icon" onClick={() => setToggle(!toggle)}><img src="./img/nav-icon.png" /> </button>
                 <div className="logo-container">
                     <div className="img-container">
                         <img src="../../img/logo.png" />
@@ -32,13 +27,6 @@ const Sidebar = () => {
                     <li className="list-items"><img src="./img/book.png" /> <span>Library</span></li>
                     <li className="list-items"><img src="./img/graduation.png" /> <span>Course</span></li>
                 </ul>
-            </div>
-            <div className="section-container">
-            <HeaderComponent />
-            <MessengerMain />
-            </div>
-            </div>
-            
         </>
     )
 }

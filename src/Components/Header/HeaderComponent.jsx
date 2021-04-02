@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import MessageDropdown from '../MessageDropdown/MessageDropdown'
-import './style.css'
+import './header-component.css'
 
 const HeaderComponent = () => {
     const [active, setActive] = useState(false);
@@ -10,10 +10,12 @@ const HeaderComponent = () => {
             <h3>Messenger</h3>
             <ul>
                 <li><img src="./img/person.png" /><span>My dashboard</span></li>
-                <li onClick={() => setActive(true)} className="message"><img src="./img/message.png" />
+                <li onClick={() => setActive(!active)} 
+                className="message">
+                <img src="./img/message.png" />
                 {active || <div className="message-noti">6
                 </div>}
-                {active && <MessageDropdown />}
+                {active && <MessageDropdown clickHandler={setActive}/>}
                 </li>
                 <li><img src="./img/bell.png" /></li>
                 <li><img src="./img/user.png" /></li>
