@@ -89,6 +89,12 @@
   overflow: hidden;
   width: 1440px;
 }
+.x03-1-0-news-page .back-btn {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 16px;
+  min-width: 69px;
+}
 .x03-1-0-news-page .bell-outline {
   align-items: flex-end;
   display: flex;
@@ -184,8 +190,8 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 210px;
-  width: 38px;
+  min-height: 18px;
+  width: 8px;
 }
 .x03-1-0-news-page .flex-col-1 {
   align-items: flex-start;
@@ -198,16 +204,16 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 18px;
-  width: 8px;
+  margin-left: 40px;
+  min-height: 1328px;
+  width: 1114px;
 }
 .x03-1-0-news-page .flex-col-3 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
-  min-height: 1328px;
-  width: 1114px;
+  min-height: 210px;
+  width: 38px;
 }
 .x03-1-0-news-page .flex-col-4 {
   align-items: flex-start;
@@ -224,23 +230,23 @@
   min-width: 210px;
 }
 .x03-1-0-news-page .flex-row-1 {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 4px;
+  min-width: 16px;
+}
+.x03-1-0-news-page .flex-row-2 {
   align-items: center;
   display: flex;
   margin-left: 4px;
   margin-top: 7px;
   min-width: 240px;
 }
-.x03-1-0-news-page .flex-row-2 {
+.x03-1-0-news-page .flex-row-3 {
   align-items: flex-start;
   display: flex;
   margin-top: 40px;
   min-width: 295px;
-}
-.x03-1-0-news-page .flex-row-3 {
-  align-items: flex-start;
-  display: flex;
-  margin-left: 4px;
-  min-width: 16px;
 }
 .x03-1-0-news-page .flex-row-4 {
   align-items: flex-start;
@@ -326,7 +332,7 @@
   min-width: 1112px;
 }
 .x03-1-0-news-page .frame-1969 {
-  background-image: url();
+  background-image: url('');
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 4px;
@@ -365,13 +371,6 @@
   top: 172px;
   transform: rotate(180deg);
   width: 32px;
-}
-.x03-1-0-news-page .frame-2488 {
-  align-items: center;
-  display: flex;
-  margin-top: 24px;
-  overflow: hidden;
-  width: 250px;
 }
 .x03-1-0-news-page .frame-2791 {
   align-items: flex-start;
@@ -452,12 +451,6 @@
   min-width: 32px;
   padding: 0 4px;
 }
-.x03-1-0-news-page .frame-2923 {
-  align-items: flex-start;
-  display: flex;
-  margin-top: 16px;
-  min-width: 69px;
-}
 .x03-1-0-news-page .graduation-cap {
   height: 18px;
   width: 24px;
@@ -496,6 +489,7 @@
   height: 24px;
   padding: 7px 4px;
   width: 24px;
+  position: relative;
 }
 .x03-1-0-news-page .number {
   height: 20px;
@@ -538,7 +532,7 @@
   position: relative;
   width: 248px;
 }
-.x03-1-0-news-page .overlap-group-1 {
+.x03-1-0-news-page .news-group-1 {
   height: 35px;
   left: 0px;
   position: absolute;
@@ -546,11 +540,9 @@
   width: 35px;
 }
 .x03-1-0-news-page .overlap-group1 {
-  height: 1368px;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 263px;
+  height: 10px;
+  position: relative;
+  width: 16px;
 }
 .x03-1-0-news-page .overlap-group1-1 {
   height: 16px;
@@ -558,9 +550,11 @@
   width: 20px;
 }
 .x03-1-0-news-page .overlap-group1-2 {
-  height: 10px;
-  position: relative;
-  width: 16px;
+  height: 1368px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 263px;
 }
 .x03-1-0-news-page .overlap-group2 {
   height: 22px;
@@ -842,6 +836,13 @@
   min-width: 62px;
   white-space: nowrap;
 }
+.x03-1-0-news-page .title-time {
+  align-items: center;
+  display: flex;
+  margin-top: 24px;
+  overflow: hidden;
+  width: 250px;
+}
 .x03-1-0-news-page .union {
   height: 211px;
   left: 0px;
@@ -867,7 +868,7 @@
 .x03-1-0-news-page .vector-1 {
   height: 24px;
   margin-bottom: -0.02px;
-  margin-left: 2px;
+  margin-left: 1px;
   width: 25px;
 }
 .x03-1-0-news-page .vector-10 {
@@ -895,8 +896,8 @@
 .x03-1-0-news-page .vector-14 {
   height: 24px;
   margin-bottom: -0.02px;
-  margin-left: 1px;
-  width: 26px;
+  margin-left: 2px;
+  width: 25px;
 }
 .x03-1-0-news-page .vector-15 {
   height: 16px;
@@ -926,7 +927,7 @@
   height: 24px;
   margin-bottom: -0.02px;
   margin-left: 1px;
-  width: 25px;
+  width: 26px;
 }
 .x03-1-0-news-page .vector-3 {
   height: 8px;
@@ -970,15 +971,16 @@
   height: 2px;
   left: 0px;
   position: absolute;
-  top: 4px;
+  top: 2px;
   width: 16px;
 }
 .x03-1-0-news-page .vector-stroke-2 {
-  height: 10px;
+  height: 20px;
   left: 0px;
-  position: absolute;
   top: 0px;
-  width: 6px;
+  width: 26px;
+  position: absolute;
+
 }
 .x03-1-0-news-page .your-business-goals {
   height: 28px;
