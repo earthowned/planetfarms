@@ -1,9 +1,16 @@
 import React,{useState} from 'react'
 import SearchComponent from '../SearchComponent/SearchComponent';
+<<<<<<< HEAD
 
 import './messenger-main.css';
 import MessageCard from '../MessageCard/MessageCard';
 import MessageRightComponent from '../MessageRightComponent/MessageRightComponent';
+=======
+import MessageLeftComponent from '../MessageLeftComponent/MessageLeftComponent';
+
+import './messenger-main.css';
+import MessageCard from '../MessageCard/MessageCard';
+>>>>>>> 901c388a... messenger-file-structure-changed
 
 const contacts = [
         {
@@ -68,7 +75,11 @@ const MessengerMain = () => {
                </div>
                {active ? (
                    <div className="col-2-alternative">
+<<<<<<< HEAD
                        <MessageRightComponent setActive={setActive}></MessageRightComponent>
+=======
+                       <MessageLeftComponent></MessageLeftComponent>
+>>>>>>> 901c388a... messenger-file-structure-changed
                     </div>
                )  : (<div className="col-2">
                    <h4>Select chat to start messaging</h4>

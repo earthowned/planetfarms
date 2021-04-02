@@ -105,6 +105,11 @@
 .list-items {
   width: 100%;
   height: 30px;
+<<<<<<< HEAD
+=======
+
+  margin-left: -40px;
+>>>>>>> 901c388a... messenger-file-structure-changed
   border-radius: 4px;
   cursor: pointer;
   padding: 20px 10px;
