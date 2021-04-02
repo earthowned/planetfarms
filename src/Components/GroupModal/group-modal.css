@@ -1,0 +1,94 @@
+.group-container {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  z-index: 999;
+  margin-left: -50vw;
+  margin-top: -12vh;
+}
+.group-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 999;
+  background: #191b1d;
+  width: 40%;
+  height: 85%;
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.group-modal-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.group-modal-header button {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.group-modal-header button:hover {
+  transform: scale(1.1);
+}
+
+.default-btn {
+  background: #029c6b;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  width: 150px;
+  height: 50px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.default-btn:hover {
+  background: #00c688;
+}
+
+.modal-btn {
+  width: 65%;
+  margin-top: 20px;
+}
+
+.modal-users {
+  margin-top: 20px;
+  width: 65%;
+  height: 500px;
+}
+
+.search-bar {
+  width: 70%;
+  margin-top: 20px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
