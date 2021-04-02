@@ -1,5 +1,7 @@
 import React from "react";
-import "./style.css"
+import "./main-dashboard.css";
+import {  Link } from "react-router-dom";
+
 
 function DashboardComponent() {
   return (
@@ -32,14 +34,14 @@ function DashboardComponent() {
             <div className="my-profile ibmplexsans-semi-bold-quarter-spanish-white-16px">My Profile</div>
           </div>
           {/* achivements  */}
-          <div className="achivements border-1px-onyx">
+          <Link to="/achievements" className="achivements border-1px-onyx">
             <div className="award">
               <div className="overlap-group-9">
                 <img className="vector-23" src="./img/award.png" />
               </div>
             </div>
             <div className="achievements ibmplexsans-semi-bold-quarter-spanish-white-16px">Achievements</div>
-          </div>
+          </Link>
           {/* surveys */}
           <div className="surveys border-1px-onyx">
             <div className="check-square-1">

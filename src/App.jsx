@@ -6,12 +6,12 @@ import SignupScreen from './Screens/SignUp/SignupScreen';
 import CongratulationScreen from './Screens/Congratulation/CongratulationScreen';
 import Messenger from './Screens/Messenger/Messenger';
 import Library from './Screens/Library/Library';
-import Dashboard from './Screens/Dashboard/Dashboard';
 import './App.css';
 // Community
 import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
 import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
-import DashboardComponent from "./screen/dashboard/index";
+import DashboardComponent from "./Screens/Dashboard/MainDashboard";
+import Achievements from "./Screens/Dashboard/Achievements";
 
 function App() {
   return (
@@ -19,9 +19,6 @@ function App() {
       <Switch>
         <Route path="/register">
           <SignupScreen />
-        </Route>
-        <Route path="/dashboard">
-          <DashboardComponent />
         </Route>
         <Route path="/register-complete">
           <CongratulationScreen />
@@ -40,6 +37,12 @@ function App() {
         </Route>
         <Route path="/community-page-news-view">
          <X0300CommunityPageViewsnews />
+         </Route>
+        <Route path="/dashboard">
+          <DashboardComponent />
+        </Route>
+        <Route path="/achievements">
+          <Achievements />
         </Route>
       </Switch>
     </Router>
