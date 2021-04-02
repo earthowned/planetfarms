@@ -3,9 +3,9 @@ import MessageSlot from '../MessageSlot/MessageSlot';
 import GroupModal from '../GroupModal/GroupModal';
 import CallModal from '../CallModal/CallModal';
 
-import "./message-left-component.css";
+import "./message-right-component.css";
 
-const MessageLeftComponent = () => {
+const MessageRightComponent = ({setActive}) => {
     const [addGroup, setAddGroup] = useState(false);
     const [call, setCall] = useState(false);
 
@@ -21,16 +21,17 @@ const MessageLeftComponent = () => {
             
             <div className="account-section">
 
-            <div className="img-wrapper">
+                    <div className="img-wrapper">
+                        <img src="./img/user2.png"></img>
+                    </div>
 
-             <img src="./img/user2.png"></img>
-            </div>
-             <div className="account-user">
-                 <h4 className="heading-4">Besie Cooper</h4>
-                 <div className="date">
-                     <span>Last seen 2 hours ago</span>
-                 </div>
-             </div>
+                    <div className="account-user">
+                        <h4 className="heading-4">Besie Cooper</h4>
+                        <div className="date">
+                            <span>Last seen 2 hours ago</span>
+                        </div>
+                    </div>
+            
             </div>
             
              <ul className="messenger-list-container">
@@ -46,4 +47,4 @@ const MessageLeftComponent = () => {
     )
 }
 
-export default MessageLeftComponent
+export default MessageRightComponent

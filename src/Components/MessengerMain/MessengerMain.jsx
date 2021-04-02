@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
 import SearchComponent from '../SearchComponent/SearchComponent';
-import MessageLeftComponent from '../MessageLeftComponent/MessageLeftComponent';
 
 import './messenger-main.css';
 import MessageCard from '../MessageCard/MessageCard';
+import MessageRightComponent from '../MessageRightComponent/MessageRightComponent';
 
 const contacts = [
         {
@@ -68,7 +68,7 @@ const MessengerMain = () => {
                </div>
                {active ? (
                    <div className="col-2-alternative">
-                       <MessageLeftComponent></MessageLeftComponent>
+                       <MessageRightComponent setActive={setActive}></MessageRightComponent>
                     </div>
                )  : (<div className="col-2">
                    <h4>Select chat to start messaging</h4>
