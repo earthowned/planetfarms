@@ -2,9 +2,11 @@ import React from "react";
 import "./achievements.css";
 import {  Link } from "react-router-dom";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 
 function Achievements() {
   return(
+    <DashboardLayout>
 <div className="x10-2-0-my-achievements">
       {/* comes from another branch */}
       <div className="flex-col">
@@ -108,6 +110,7 @@ function Achievements() {
         </div>
       </div>
     </div>
+    </DashboardLayout>
   )
 }
 
