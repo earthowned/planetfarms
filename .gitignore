@@ -4,7 +4,6 @@ package-lock.json
 yarn.lock
 /build
 
-
 .DS_Store
 **/.DS_Store
 .DS_Store?
