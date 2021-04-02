@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import './sidebar.css'
 
 const Sidebar = ({setToggle, toggle}) => {
+  let history = useHistory();
     return (
         <>
        <button className="nav-icon" onClick={() => setToggle(!toggle)}><img src="./img/nav-icon.png" /> </button>
@@ -15,7 +16,7 @@ const Sidebar = ({setToggle, toggle}) => {
                     </div>
                 </div>
                 <ul className="list-container">
-                    <li className="list-items">
+                    <li className="list-items" onClick={() => history.push('/community-page-news')}>
                         <img src="./img/user-management.png" /> <span>Ragarians</span>
 
                    <ul className="dropdown-container">
