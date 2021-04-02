@@ -8,6 +8,9 @@ import SignupScreen from './Screens/SignUp/SignupScreen';
 import DashboardScreen from './Screens/DashboardScreen';
 import CongratulationScreen from './Screens/Congratulation/CongratulationScreen';
 import Messenger from './Screens/Messenger/Messenger';
+import Library from './Screens/Library/Library';
+import Dashboard from './Screens/Dashboard/Dashboard';
+import './App.css';
 
 function App() {
   return (
@@ -25,6 +28,12 @@ function App() {
         <Route path="/" exact>
           <LoginScreen {...X0100LoginEmptyData} />
         </Route>
+        <Route path="/library">
+           <Library />
+         </Route>
+         <Route path="/dashboard1">
+           <Dashboard/>
+         </Route>
         <Route path="/messenger">
            <Messenger />
          </Route>
