@@ -3,7 +3,7 @@ import MessageSlot from '../MessageSlot/MessageSlot';
 import GroupModal from '../GroupModal/GroupModal';
 import CallModal from '../CallModal/CallModal';
 
-import "./style.css";
+import "./message-left-component.css";
 
 const MessageLeftComponent = () => {
     const [addGroup, setAddGroup] = useState(false);

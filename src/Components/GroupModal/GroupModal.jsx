@@ -1,7 +1,7 @@
 import React from 'react'
 import GroupUsers from '../GroupUsers/GroupUsers'
 import SearchComponent from '../SearchComponent/SearchComponent'
-import "./style.css"
+import "./group-modal.css"
 
 const GroupModal = ({clickHandler}) => {
     return (
