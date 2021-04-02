@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css'
+import './message-card.css'
 const MessageCard = ({contact, clickHandler}) => {
     return (
         <button className="contact-card" key={contact.name} onClick={() => clickHandler(true)}>

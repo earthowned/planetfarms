@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import SearchComponent from '../SearchComponent/SearchComponent';
 import MessageLeftComponent from '../MessageLeftComponent/MessageLeftComponent';
 
-import './style.css';
+import './messenger-main.css';
 import MessageCard from '../MessageCard/MessageCard';
 
 const contacts = [

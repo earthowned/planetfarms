@@ -24,6 +24,7 @@
 
 .message {
   position: relative;
+  cursor: pointer;
 }
 
 .message-noti {

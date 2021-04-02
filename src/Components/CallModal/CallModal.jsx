@@ -1,4 +1,4 @@
-import './style.css';
+import './call-modal.css';
 
 
 const CallModal = ({clickHandler}) => {
