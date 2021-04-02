@@ -4,8 +4,9 @@ import "./community-news.css";
 import NavBar from "../../Components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import NewsCard from "../../Components/NewsCard/NewsCard";
+import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 function App() {
-  return <X0300CommunityPagenews {...X0300CommunityPagenewsData} />;
+  return <DashboardLayout title="Ragrarians News"><X0300CommunityPagenews {...X0300CommunityPagenewsData} /></DashboardLayout>;
 }
 
 export default App;
@@ -26,7 +27,6 @@ function X0300CommunityPagenews(props) {
     <div className="x03-0-0-community-page-news">
       {/* <SideBar /> */}
       <div className="flex-col-4">
-        <NavBar />
         <div className="flex-row-4">
           <div className="search border-1px-onyx">
             <div className="search-outline-1">
