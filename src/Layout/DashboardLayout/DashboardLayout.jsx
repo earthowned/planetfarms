@@ -2,7 +2,7 @@ import {useState} from 'react'
 import HeaderComponent from '../../Components/Header/HeaderComponent'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 
-const DashboardLayout = ({children}) => {
+const DashboardLayout = ({title, children}) => {
     const [toggle, setToggle] = useState(false);
     return (
         <div>
@@ -11,7 +11,7 @@ const DashboardLayout = ({children}) => {
                 <Sidebar setToggle={setToggle} toggle={toggle}/>
             </div>
             <div className="section-container">
-                <HeaderComponent />
+                <HeaderComponent title={title}/>
                 {children}
             </div> 
             </div>
