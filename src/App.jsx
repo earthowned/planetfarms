@@ -1,18 +1,17 @@
 import React from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-
- 
 // Screens
 import LoginScreen from "./Screens/Login/LoginScreen";
 import SignupScreen from './Screens/SignUp/SignupScreen';
 import CongratulationScreen from './Screens/Congratulation/CongratulationScreen';
 import Messenger from './Screens/Messenger/Messenger';
 import Library from './Screens/Library/Library';
-import Dashboard from './Screens/Dashboard/Dashboard';
 import './App.css';
 // Community
 import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
 import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
+import DashboardComponent from "./Screens/Dashboard/MainDashboard";
+import Achievements from "./Screens/Dashboard/Achievements";
 
 function App() {
   return (
@@ -24,14 +23,11 @@ function App() {
         <Route path="/register-complete">
           <CongratulationScreen />
         </Route>
-        <Route path="/" exact>
+        <Route path="/:path(|login)" exact>
           <LoginScreen {...X0100LoginEmptyData} />
         </Route>
         <Route path="/library">
            <Library />
-         </Route>
-         <Route path="/dashboard">
-           <Dashboard/>
          </Route>
         <Route path="/messenger">
            <Messenger />
@@ -41,6 +37,12 @@ function App() {
         </Route>
         <Route path="/community-page-news-view">
          <X0300CommunityPageViewsnews />
+         </Route>
+        <Route path="/dashboard">
+          <DashboardComponent />
+        </Route>
+        <Route path="/achievements">
+          <Achievements />
         </Route>
       </Switch>
     </Router>
@@ -299,6 +301,3 @@ const X0212SignUperrorData = {
     vector22: "",
     lockoutlineProps: lockoutlineData,
 };
-
-
-
