@@ -3,16 +3,15 @@ import './community-news-view.css'
 // import SideBar from '../../Components/Sidebar'
 import NavBar from '../../Components/Navbar/Navbar'
 import { Link } from "react-router-dom";
+import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 
 function App() {
   return (
+    <DashboardLayout title="Ragrarians News">
     <div className="x03-1-0-news-page">
-      {/* <div className="overlap-group"> */}
-        <div className="rectangle-1196"></div>
-        {/* <SideBar /> */}
-      {/* </div> */}
+      
       <div className="flex-col-2">
-         <NavBar />
+         
         <div className="back-btn">
           <div className="icons-arrows-left">
             <div className="news-group1">
@@ -82,6 +81,7 @@ function App() {
         </div>
       </div>
     </div>
+    </DashboardLayout>
   );
 }
 
