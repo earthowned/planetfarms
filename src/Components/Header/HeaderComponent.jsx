@@ -3,7 +3,7 @@ import MessageDropdown from '../MessageDropdown/MessageDropdown'
 import './header-component.css'
 import {useHistory} from 'react-router-dom';
 
-const HeaderComponent = () => {
+const HeaderComponent = ({title}) => {
     const [active, setActive] = useState(false);
     const [notification, setNotification] = useState(false);
 
@@ -24,9 +24,9 @@ const HeaderComponent = () => {
     return (
         <>
         <header className="header-container">
-            <h3>Messenger</h3>
+            <h3>{title}</h3>
             <ul>
-                <li><img src="./img/person.png" /><span>My dashboard</span></li>
+                <li onClick={() => history.push('/community-page-news')}><img src="./img/person.png" /><span>My dashboard</span></li>
                 <li onClick={() => messageNoti()} 
                 className="message">
                 <img src="./img/message.png" />

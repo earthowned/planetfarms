@@ -42,7 +42,7 @@ function LoginScreen(props) {
     if(!password) setPasswordError(true);
 
     if(username === "admin" && password === 'password') {
-      history.push('/dashboard');
+      history.push('/community-page-news');
     } 
   };
 
