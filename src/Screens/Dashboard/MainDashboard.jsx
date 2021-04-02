@@ -1,11 +1,12 @@
 import React from "react";
 import "./main-dashboard.css";
 import {  Link } from "react-router-dom";
+import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 
 
 function DashboardComponent() {
   return (
-
+    <DashboardLayout>
     <div className="x10-1-0-my-dashboard">
       {/* comes from another branch */}
       <div className="flex-col-5">
@@ -111,6 +112,7 @@ function DashboardComponent() {
         </div>
       </div>
     </div>
+    </DashboardLayout>
   );
 }
 
