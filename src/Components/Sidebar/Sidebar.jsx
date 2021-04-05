@@ -1,19 +1,11 @@
-import React from 'react'
-<<<<<<< HEAD
-<<<<<<< HEAD
+import {useState} from 'react'
 import { Link, useHistory } from 'react-router-dom'
-=======
-import { Link } from 'react-router-dom'
->>>>>>> ef76177b... dropdown-messages-notifications
 import './sidebar.css'
 
 const Sidebar = ({setToggle, toggle}) => {
   let history = useHistory();
-=======
-import './sidebar.css'
+  const [dropdownActive, setDropdownActive] = useState(true);
 
-const Sidebar = ({setToggle, toggle}) => {
->>>>>>> 901c388a... messenger-file-structure-changed
     return (
         <>
        <button className="nav-icon" onClick={() => setToggle(!toggle)}><img src="./img/nav-icon.png" /> </button>
@@ -25,42 +17,30 @@ const Sidebar = ({setToggle, toggle}) => {
                         <img src="../../img/square-icon.png" />
                     </div>
                 </div>
+
                 <ul className="list-container">
-<<<<<<< HEAD
                     <li className="list-items" onClick={() => history.push('/community-page-news')}>
+                        <div className="align-content">
                         <img src="./img/user-management.png" /> <span>Ragarians</span>
-
-=======
-                    <li className="list-items">
-<<<<<<< HEAD
-                        <img src="./img/user-management.png" /> <span>Ragarians
-                    
-                        </span>
->>>>>>> 901c388a... messenger-file-structure-changed
-=======
-                        <img src="./img/user-management.png" /> <span>Ragarians</span>
-
->>>>>>> ef76177b... dropdown-messages-notifications
-                   <ul className="dropdown-container">
-                        <li className="dropdown-item">Members</li>
-                        <li className="dropdown-item">Groups</li>
-                        <li className="dropdown-item">Enterprises</li>
-                    </ul>
+                        </div>
+                           { dropdownActive && <ul className="dropdown-container">
+                                    <li className="dropdown-item">Members</li>
+                                    <li className="dropdown-item">Groups</li>
+                                    <li className="dropdown-item">Enterprises</li>
+                                </ul>}
                     </li>
-<<<<<<< HEAD
-<<<<<<< HEAD
+                    <Link className="nav-link" to="/library" >
                     <li className="list-items">
-                        <Link className="nav-link" to="/library" ><img src="./img/book.png" /> <span>Library</span></Link>
+                        <div className="align-content">
+                        <img src="./img/book.png" /> <span>Library</span>
+                        </div>
                     </li>
-=======
-                    <li className="list-items"><img src="./img/book.png" /> <span>Library</span></li>
->>>>>>> 901c388a... messenger-file-structure-changed
-=======
+                    </Link>
                     <li className="list-items">
-                        <Link className="nav-link" to="/library" ><img src="./img/book.png" /> <span>Library</span></Link>
-                    </li>
->>>>>>> ef76177b... dropdown-messages-notifications
-                    <li className="list-items"><img src="./img/graduation.png" /> <span>Course</span></li>
+                        <div className="align-content">
+                        <img src="./img/graduation.png" /> <span>Course</span>
+                        </div>
+                        </li>
                 </ul>
         </>
     )

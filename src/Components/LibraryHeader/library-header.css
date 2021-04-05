@@ -3,8 +3,10 @@
   list-style: none;
   display: flex;
   margin: 0;
-  margin-left: -2em;
+  margin-left: -4em;
+  width: 100%;
 }
+
 .library-list-container li {
   margin-right: 0.5em;
   margin-left: 0;
@@ -27,4 +29,31 @@
 .library-list-item:focus {
   color: #000;
   background: #fff;
+}
+
+.library-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.library-sub-header {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  margin-top: 2em;
+  justify-content: flex-end;
+}
+
+.library-sub-header-1 {
+  width: 80%;
+}
+
+.library-sub-header-2 {
+  width: 20%;
+}
+
+.library-list-item.active {
+  background: #fff;
+  color: #000;
 }

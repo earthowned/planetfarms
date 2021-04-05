@@ -28,11 +28,12 @@ const HeaderComponent = ({title}) => {
             <h3>{title}</h3>
             <ul>
                 <li onClick={() => history.push('/dashboard')}><img src="./img/person.png" /><span>My dashboard</span></li>
-                <li onClick={() => messageNoti()}> 
+                <li onClick={() => messageNoti()}
+                className="message"
+                > 
                 <img src="./img/message.png" />
                 {active || <div className="message-noti">6
                 </div>}
-
                 {active && <MessageDropdown clickHandler={setActive} message="Your messages" btnName="See all messages" handleClick={handleClick}/>}
                 </li>
                 <li onClick={() => notificationNoti()}

@@ -1,0 +1,63 @@
+.listview-container > h4 {
+  width: 100%;
+  margin-bottom: 2em;
+  margin-top: 4em;
+}
+
+.listview-inner-container {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #3a3939;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.listview-inner-container .image-wrapper {
+  height: 100%;
+}
+.listview-inner-container .image-wrapper img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.listview-inner-container .list-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80px;
+  margin-left: 2em;
+}
+
+.listview-inner-container .list-content h4 {
+  font-size: 24px;
+}
+.listview-inner-container .list-btn-wrapper {
+  display: flex;
+  flex: 0.7;
+  margin-left: 2em;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.secondary-btn-border {
+  outline: none;
+  border: 1px solid #3a3939;
+  border-radius: 4px;
+  padding: 1em 2em;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+
+  cursor: pointer;
+}
+
+.btn-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
