@@ -1,0 +1,69 @@
+.filter-by-category {
+    letter-spacing: 0px;
+    line-height: 24px;
+    margin-left: 8px;
+    min-height: 24px;
+    white-space: nowrap;
+  }
+  .filter-category {
+    align-items: center;
+    background-color: var(--licorice);
+    border-radius: 4px;
+    display: flex;
+    height: 48px;
+    margin-left: 40px;
+    overflow: hidden;
+    padding: 0 16px;
+    width: 344px;
+  }
+
+  .border-1px-onyx {
+    border: 1px solid var(--onyx);
+  }
+
+  .fllter-by-category-text {
+    align-items: flex-start;
+    display: flex;
+    min-width: 162px;
+  }
+  .funnel-outline-1 {
+    align-items: flex-end;
+    display: flex;
+    height: 24px;
+    padding: 2px 3.7px;
+    width: 24px;
+  }
+  .overlap-group-5 {
+    height: 18px;
+    position: relative;
+    width: 16px;
+  }
+  .ibmplexsans-semi-bold-quarter-spanish-white-16px {
+    color: var(--quarter-spanish-white);
+    font-family: "IBM Plex Sans", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .chevron-right-outline-1 {
+    align-items: flex-start;
+    display: flex;
+    height: 24px;
+    margin-left: 126px;
+    padding: 8.7px 6.3px;
+    transform: rotate(90deg);
+    width: 24px;
+  }
+  .overlap-group1-1 {
+    height: 6px;
+    position: relative;
+    width: 10px;
+  }
+  .filter-image {
+    height: 1px;
+    left: 8px;
+    position: absolute;
+    top: 8px;
+    width: 1px;
+      
+  }
