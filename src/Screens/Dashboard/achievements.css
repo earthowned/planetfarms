@@ -1,0 +1,1446 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600");
+* {
+  box-sizing: border-box;
+}
+
+progress {
+  align-items: center;
+  background-color: #74E7A0;
+  border-radius: 4px;
+  display: flex;
+  min-width: 1032px;
+}
+
+.border-1px-caribbean-green {
+  border: 1px solid var(--caribbean-green);
+}
+.border-1px-onyx {
+  border: 1px solid var(--onyx);
+}
+.border-1px-quarter-spanish-white {
+  border: 1px solid var(--quarter-spanish-white);
+}
+.ibmplexsans-bold-caribbean-green-14px {
+  color: var(--caribbean-green);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+}
+.ibmplexsans-normal-ebb-14px {
+  color: var(--ebb);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-normal-onyx-14px {
+  color: var(--onyx);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-normal-quarter-spanish-white-16px {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-semi-bold-caribbean-green-16px {
+  color: var(--caribbean-green);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-monsoon-16px {
+  color: var(--monsoon);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-14px {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-16px {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-24px {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-shark-16px {
+  color: var(--shark);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+.x10-2-0-my-achievements {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 1);
+  display: flex;
+  width: 1440px;
+}
+.x10-2-0-my-achievements .achievements-1 {
+  align-items: flex-end;
+  background-color: var(--eerie-black);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  margin-top: 24px;
+  min-width: 1032px;
+}
+.x10-2-0-my-achievements .achievements-2 {
+  align-items: flex-start;
+  background-color: var(--eerie-black);
+  border-radius: 4px;
+  display: flex;
+  min-width: 1032px;
+}
+.x10-2-0-my-achievements .achievements-bell {
+  align-items: flex-end;
+  display: flex;
+  height: 24px;
+  margin-left: 35px;
+  padding: 1.7px 3px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .achievements-email-outline {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 2px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .achievements-header {
+  align-items: center;
+  display: flex;
+  height: 80px;
+  min-width: 1112px;
+}
+.x10-2-0-my-achievements .achievements-hero {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  height: 1056px;
+  margin-top: 40px;
+  overflow: hidden;
+  width: 1112px;
+}
+.x10-2-0-my-achievements .achievements-info {
+  align-items: center;
+  display: flex;
+  height: 264px;
+  min-width: 1112px;
+  padding: 0 40px;
+}
+.x10-2-0-my-achievements .achievements-pbtions {
+  align-items: center;
+  display: flex;
+  margin-left: 40px;
+  min-width: 166px;
+}
+.x10-2-0-my-achievements .achievements-profile {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 100px;
+  height: 48px;
+  margin-left: 35px;
+  width: 48px;
+}
+.x10-2-0-my-achievements .achievements-progress-table {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  min-height: 408px;
+  width: 1032px;
+}
+.x10-2-0-my-achievements .achievements-progressbar {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 536px;
+  padding: 32px 0;
+  width: 1112px;
+}
+.x10-2-0-my-achievements .achievements-sub {
+  align-items: center;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/frame-3028-2@1x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  box-shadow: 0px 12px 24px rgba(35, 152, 171, 0.24);
+  display: flex;
+  height: 48px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0 24px;
+  position: absolute;
+  top: 0px;
+  width: 1032px;
+}
+.x10-2-0-my-achievements .back-button-item {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 16px;
+  min-width: 69px;
+  text-decoration: none;
+}
+.x10-2-0-my-achievements .book {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 3px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .chevrons-left {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 8px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .chevrons-right-1 {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 5px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .chevrons-right.chevrons-left {
+  margin-left: 69px;
+}
+.x10-2-0-my-achievements .course-bar-3 {
+  align-items: flex-end;
+  background-color: var(--eerie-black);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  margin-top: 24px;
+  min-width: 1032px;
+}
+.x10-2-0-my-achievements .course-bar-4 {
+  align-items: center;
+  background-color: var(--eerie-black);
+  border-radius: 4px;
+  display: flex;
+  min-width: 1032px;
+}
+.x10-2-0-my-achievements .course-finisherd-bar-2 {
+  align-items: center;
+  background-color: var(--eerie-black);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  min-width: 1032px;
+  padding: 0 14px;
+}
+.x10-2-0-my-achievements .courses-bar-1 {
+  align-items: center;
+  background-color: var(--eerie-black);
+  border-radius: 4px;
+  display: flex;
+  margin-top: 24px;
+  min-width: 1032px;
+}
+.x10-2-0-my-achievements .courses-bar-2 {
+  align-items: flex-end;
+  background-color: var(--eerie-black);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  margin-top: 24px;
+  min-width: 1032px;
+}
+.x10-2-0-my-achievements .finished-achievements {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  min-height: 120px;
+  width: 1032px;
+}
+.x10-2-0-my-achievements .finished-achievements-1 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 536px;
+  padding: 40px 0;
+  width: 1112px;
+}
+.x10-2-0-my-achievements .flex-col {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  min-height: 1216px;
+  width: 1112px;
+}
+.x10-2-0-my-achievements .flex-col-1 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  width: 35px;
+}
+.x10-2-0-my-achievements .flex-col-2 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  width: 38px;
+}
+.x10-2-0-my-achievements .flex-col-3 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2px;
+  min-height: 18px;
+  width: 8px;
+}
+.x10-2-0-my-achievements .flex-col-4 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  min-height: 184px;
+  width: 400px;
+}
+.x10-2-0-my-achievements .flex-col-5 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 18px;
+  width: 8px;
+}
+.x10-2-0-my-achievements .flex-row {
+  align-items: flex-start;
+  display: flex;
+  height: 210px;
+  min-width: 210px;
+}
+.x10-2-0-my-achievements .flex-row-1 {
+  align-items: center;
+  display: flex;
+  margin-left: 4px;
+  margin-top: 7px;
+  min-width: 240px;
+}
+.x10-2-0-my-achievements .flex-row-2 {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 1px;
+  margin-top: 1px;
+  min-width: 22px;
+}
+.x10-2-0-my-achievements .flex-row-3 {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 4px;
+  min-width: 16px;
+}
+.x10-2-0-my-achievements .frame {
+  align-items: flex-end;
+  display: flex;
+  overflow: hidden;
+  width: 160px;
+}
+.x10-2-0-my-achievements .frame-1943 {
+  background-color: var(--licorice);
+  height: 1256px;
+  position: relative;
+  width: 248px;
+}
+.x10-2-0-my-achievements .frame-1944 {
+  align-items: center;
+  background-color: var(--shark);
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 80px;
+  width: 247px;
+}
+.x10-2-0-my-achievements .frame-1945 {
+  align-items: center;
+  display: flex;
+  height: 80px;
+  left: 0px;
+  min-width: 247px;
+  padding: 0 16px;
+  position: absolute;
+  top: 0px;
+}
+.x10-2-0-my-achievements .frame-1947 {
+  align-items: center;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  height: 64px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0 24px;
+  position: absolute;
+  top: 280px;
+  width: 247px;
+}
+.x10-2-0-my-achievements .frame-1948 {
+  align-items: center;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  height: 64px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0 24px;
+  position: absolute;
+  top: 344px;
+  width: 247px;
+}
+.x10-2-0-my-achievements .frame-1953 {
+  align-items: flex-start;
+  align-self: flex-start;
+  display: flex;
+  margin-left: 24px;
+  min-width: 113px;
+}
+.x10-2-0-my-achievements .frame-1977 {
+  height: 48px;
+  margin-left: 1px;
+  margin-top: 12px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .frame-1978 {
+  height: 48px;
+  margin-left: 1px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .frame-2303 {
+  align-items: center;
+  background-color: var(--caribbean-green);
+  border-radius: 100px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  height: 32px;
+  left: 231px;
+  overflow: hidden;
+  padding: 0 4px;
+  position: absolute;
+  top: 172px;
+  transform: rotate(180deg);
+  width: 32px;
+}
+.x10-2-0-my-achievements .frame-2791 {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  display: flex;
+  flex-direction: column;
+  left: 0px;
+  min-height: 259px;
+  position: absolute;
+  top: 0px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .frame-28 {
+  height: 35px;
+  position: relative;
+  width: 35px;
+}
+.x10-2-0-my-achievements .frame-28-1 {
+  height: 35px;
+  position: relative;
+  width: 38px;
+}
+.x10-2-0-my-achievements .frame-2848 {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 571px;
+  min-width: 137px;
+}
+.x10-2-0-my-achievements .frame-285 {
+  align-items: center;
+  background-color: var(--caribbean-green);
+  display: flex;
+  height: 48px;
+  justify-content: flex-end;
+  min-width: 248px;
+  padding: 0 68px;
+}
+.x10-2-0-my-achievements .frame-2873 {
+  align-items: flex-start;
+  background-color: var(--caribbean-green);
+  display: flex;
+  height: 35px;
+  padding: 7px 6px;
+  width: 35px;
+}
+.x10-2-0-my-achievements .frame-288 {
+  align-items: center;
+  display: flex;
+  width: 35px;
+}
+.x10-2-0-my-achievements .frame-2890 {
+  align-items: center;
+  display: flex;
+  width: 38px;
+}
+.x10-2-0-my-achievements .frame-2891 {
+  align-items: flex-start;
+  background-color: rgba(42, 42, 42, 1);
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .frame-2891-1 {
+  align-items: center;
+  border-radius: 2px;
+  display: flex;
+  height: 32px;
+  margin-left: 23px;
+  min-width: 32px;
+  padding: 0 4px;
+}
+.x10-2-0-my-achievements .frame-3027 {
+  align-items: center;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/frame-3027-1@1x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  box-shadow: 0px 12px 24px rgba(35, 152, 171, 0.24);
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0 24px;
+  width: 899px;
+}
+.x10-2-0-my-achievements .frame-3027-1 {
+  align-items: center;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/frame-3027@1x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  box-shadow: 0px 12px 24px rgba(35, 152, 171, 0.24);
+  display: flex;
+  height: 48px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0 24px;
+  position: absolute;
+  top: 0px;
+  width: 1001px;
+}
+.x10-2-0-my-achievements .frame-3052 {
+  align-items: center;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  height: 24px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0 142px;
+  position: absolute;
+  top: 0px;
+  width: 368px;
+}
+.x10-2-0-my-achievements .frame-3053 {
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/frame-3053-1@2x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  box-shadow: 0px 12px 24px rgba(35, 152, 171, 0.24);
+  height: 24px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 95px;
+}
+.x10-2-0-my-achievements .frame-3054 {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  margin-top: 8px;
+  min-width: 272px;
+}
+.x10-2-0-my-achievements .frame-3055 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  min-height: 96px;
+  width: 272px;
+}
+.x10-2-0-my-achievements .graduation-cap {
+  height: 18px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .graduation-cap-1 {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .grid-outline-2 {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 3px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .group {
+  align-items: flex-start;
+  display: flex;
+  height: 47px;
+  justify-content: center;
+  left: 0px;
+  min-width: 72px;
+  position: absolute;
+  top: 0px;
+}
+.x10-2-0-my-achievements .group-1 {
+  height: 48px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 72px;
+}
+.x10-2-0-my-achievements .group-1942 {
+  align-items: flex-start;
+  display: flex;
+  min-width: 248px;
+}
+.x10-2-0-my-achievements .group-1943 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 0px;
+  min-height: 299px;
+  position: absolute;
+  top: 957px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .icons-arrows-left {
+  align-items: flex-end;
+  display: flex;
+  height: 24px;
+  padding: 7px 4px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .my-achievements-prog {
+  height: 24px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 16px;
+  margin-top: 12px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .my-achievements-tota {
+  height: 24px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 16px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .name {
+  letter-spacing: 0px;
+  line-height: 32px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .number {
+  height: 20px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  margin-top: 1px;
+  min-height: 20px;
+  text-align: center;
+  width: 22px;
+}
+.x10-2-0-my-achievements .number-1 {
+  height: 20px;
+  left: 0px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  width: 22px;
+}
+.x10-2-0-my-achievements .number-2 {
+  height: 20px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  margin-bottom: 1px;
+  min-height: 20px;
+  text-align: center;
+  width: 22px;
+}
+.x10-2-0-my-achievements .number-3 {
+  color: var(--shark);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  height: 32px;
+  left: 27px;
+  letter-spacing: 0px;
+  line-height: 32px;
+  position: absolute;
+  top: 5px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .number-4 {
+  color: var(--shark);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  height: 20px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  min-height: 20px;
+  text-align: center;
+  width: 22px;
+}
+.x10-2-0-my-achievements .overlap-group {
+  align-items: center;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/frame-3053@2x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  display: flex;
+  height: 24px;
+  justify-content: flex-end;
+  min-width: 228px;
+  padding: 0 72px;
+}
+.x10-2-0-my-achievements .overlap-group-1 {
+  height: 35px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 35px;
+}
+.x10-2-0-my-achievements .overlap-group-2 {
+  align-items: center;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/frame-3028-2@1x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  justify-content: flex-end;
+  min-width: 1032px;
+  padding: 0 14px;
+}
+.x10-2-0-my-achievements .overlap-group-3 {
+  height: 47px;
+  position: relative;
+  width: 72px;
+}
+.x10-2-0-my-achievements .overlap-group-4 {
+  height: 16px;
+  position: relative;
+  width: 20px;
+}
+.x10-2-0-my-achievements .overlap-group-5 {
+  border-radius: 4px;
+  height: 24px;
+  position: relative;
+  width: 368px;
+}
+.x10-2-0-my-achievements .overlap-group-6 {
+  height: 259px;
+  position: relative;
+  width: 248px;
+}
+.x10-2-0-my-achievements .overlap-group-7 {
+  align-items: center;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/frame-3028@2x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  min-width: 491px;
+  padding: 0 24px;
+}
+.x10-2-0-my-achievements .overlap-group-8 {
+  height: 22px;
+  position: relative;
+  width: 18px;
+}
+.x10-2-0-my-achievements .overlap-group-9 {
+  height: 10px;
+  position: relative;
+  width: 16px;
+}
+.x10-2-0-my-achievements .overlap-group1 {
+  height: 48px;
+  margin-top: -0.38px;
+  position: relative;
+  width: 72px;
+}
+.x10-2-0-my-achievements .overlap-group1-1 {
+  border-radius: 4px;
+  height: 56px;
+  margin-bottom: -8px;
+  position: relative;
+  width: 1032px;
+}
+.x10-2-0-my-achievements .overlap-group1-2 {
+  height: 20px;
+  position: relative;
+  width: 18px;
+}
+.x10-2-0-my-achievements .overlap-group2 {
+  align-items: center;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/frame-3028-1@1x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  min-width: 667px;
+  padding: 0 24px;
+}
+.x10-2-0-my-achievements .overlap-group3 {
+  align-items: flex-start;
+  border-radius: 4px;
+  display: flex;
+  height: 56px;
+  margin-bottom: -8px;
+  min-width: 1032px;
+}
+.x10-2-0-my-achievements .overlap-group3-1 {
+  height: 35px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 38px;
+}
+.x10-2-0-my-achievements .overlap-group37 {
+  height: 23px;
+  left: 9px;
+  position: absolute;
+  top: 4px;
+  width: 25px;
+}
+.x10-2-0-my-achievements .overlap-group4 {
+  height: 1256px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 263px;
+}
+.x10-2-0-my-achievements .overlap-group9 {
+  height: 23px;
+  left: 7px;
+  position: absolute;
+  top: 4px;
+  width: 24px;
+}
+.x10-2-0-my-achievements .percent {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 759px;
+  min-height: 24px;
+  min-width: 27px;
+  text-align: right;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .percent-1 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 490px;
+  min-height: 24px;
+  min-width: 37px;
+  text-align: right;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .percent-2 {
+  left: 970px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  position: absolute;
+  text-align: right;
+  top: 12px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .percent-3 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 314px;
+  min-height: 24px;
+  min-width: 37px;
+  text-align: right;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .percent-4 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 586px;
+  min-height: 24px;
+  min-width: 47px;
+  text-align: right;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .percent-5 {
+  align-self: center;
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-bottom: 8px;
+  margin-left: 82px;
+  min-height: 24px;
+  min-width: 37px;
+  text-align: right;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .percent-6 {
+  color: transparent;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 980px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  position: absolute;
+  text-align: right;
+  top: 12px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .person-outline-1 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  padding: 3px 0;
+  width: 24px;
+}
+.x10-2-0-my-achievements .phone {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 16px;
+  letter-spacing: 0px;
+  line-height: 16px;
+  min-height: 16px;
+  min-width: 81px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .place {
+  height: 20px;
+  left: 7px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  position: absolute;
+  text-align: center;
+  top: 7px;
+  width: 22px;
+}
+.x10-2-0-my-achievements .place-1 {
+  height: 24px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .profile {
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/profile@2x.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 184px;
+  width: 184px;
+}
+.x10-2-0-my-achievements .ragrarians-i1473337 {
+  letter-spacing: 0px;
+  line-height: 32px;
+  min-height: 32px;
+  min-width: 198px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .rectangle-859 {
+  background-color: var(--licorice);
+  height: 35px;
+  margin-left: 6px;
+  width: 1px;
+}
+.x10-2-0-my-achievements .rectangle-859-1 {
+  background-color: var(--licorice);
+  height: 35px;
+  left: 34px;
+  position: absolute;
+  top: 0px;
+  width: 1px;
+}
+.x10-2-0-my-achievements .rectangle-859-2 {
+  background-color: var(--licorice);
+  height: 35px;
+  margin-left: 5px;
+  width: 1px;
+}
+.x10-2-0-my-achievements .rectangle-859-3 {
+  background-color: var(--licorice);
+  height: 35px;
+  left: 37px;
+  position: absolute;
+  top: 0px;
+  width: 1px;
+}
+.x10-2-0-my-achievements .rectangle-859-4 {
+  background-color: var(--onyx);
+  height: 1256px;
+  left: 247px;
+  position: absolute;
+  top: 0px;
+  width: 1px;
+}
+.x10-2-0-my-achievements .rectangle-859-5 {
+  background-color: var(--licorice);
+  height: 1px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .rectangle-860 {
+  background-color: var(--onyx);
+  height: 1px;
+  margin-top: 7px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .rectangle-860-1 {
+  background-color: var(--licorice);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 34px;
+  width: 35px;
+}
+.x10-2-0-my-achievements .rectangle-860-2 {
+  background-color: var(--licorice);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 34px;
+  width: 38px;
+}
+.x10-2-0-my-achievements .rectangle-861 {
+  background-color: var(--onyx);
+  height: 1px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .rectangle-862 {
+  background-color: var(--rusty-red);
+  border-radius: 100px;
+  height: 4px;
+  left: 20px;
+  position: absolute;
+  top: 0px;
+  width: 4px;
+}
+.x10-2-0-my-achievements .rectangle-865 {
+  background-color: var(--rusty-red);
+  border-radius: 100px;
+  height: 4px;
+  left: 21px;
+  position: absolute;
+  top: 0px;
+  width: 4px;
+}
+.x10-2-0-my-achievements .span0 {
+  color: rgba(43, 43, 44, 1);
+}
+.x10-2-0-my-achievements .span0-1 {
+  color: rgba(248, 235, 223, 1);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+}
+.x10-2-0-my-achievements .span1 {
+  color: rgba(248, 235, 223, 1);
+}
+.x10-2-0-my-achievements .span1-1 {
+  color: rgba(248, 235, 223, 1);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+}
+.x10-2-0-my-achievements .text- {
+  letter-spacing: 0px;
+  line-height: 32px;
+  margin-left: 40px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text--1 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 351px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text--2 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 368px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-1 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-10 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 361px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-12 {
+  height: 24px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-13 {
+  color: var(--shark);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 16px;
+  letter-spacing: 0px;
+  line-height: 16px;
+  min-height: 16px;
+  min-width: 37px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-14 {
+  color: var(--monsoon);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 12px;
+  height: 32px;
+  letter-spacing: 0px;
+  line-height: 16px;
+  margin-top: 8px;
+  min-height: 32px;
+  width: 239px;
+}
+.x10-2-0-my-achievements .text-15 {
+  color: rgba(255, 255, 255, 1);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-16 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-right: 86px;
+  margin-top: 24px;
+  min-height: 24px;
+  min-width: 49px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-17 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-right: 72px;
+  margin-top: 28px;
+  min-height: 24px;
+  min-width: 63px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-18 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-right: 58px;
+  margin-top: 24px;
+  min-height: 24px;
+  min-width: 77px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-19 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  min-width: 55px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-20 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  min-width: 62px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-26 {
+  height: 20px;
+  left: 9px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  position: absolute;
+  text-align: center;
+  top: 7px;
+  width: 22px;
+}
+.x10-2-0-my-achievements .text-27 {
+  color: var(--shark);
+  font-family: "IBM Plex Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  height: 24px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 110px;
+  text-align: center;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-28 {
+  height: 12px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  margin-bottom: 2px;
+  margin-left: 70px;
+  min-height: 12px;
+  min-width: 53px;
+  text-align: center;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .text-4 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 208px;
+  white-space: nowrap;
+}
+.x10-2-0-my-achievements .total-achievements {
+  align-items: flex-start;
+  background-color: var(--shark-2);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  height: 128px;
+  margin-left: 24px;
+  margin-top: 56px;
+  overflow: hidden;
+  padding: 16px 0;
+  width: 400px;
+}
+.x10-2-0-my-achievements .total-achievements-progressbar {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  margin-top: 12px;
+  min-width: 368px;
+}
+.x10-2-0-my-achievements .union {
+  height: 211px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 248px;
+}
+.x10-2-0-my-achievements .unknown-1 {
+  align-items: flex-end;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0.3px 0;
+  width: 72px;
+}
+.x10-2-0-my-achievements .user-management {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  padding: 4px 0;
+  width: 24px;
+}
+.x10-2-0-my-achievements .vector {
+  height: 1px;
+  left: 10px;
+  position: absolute;
+  top: 8px;
+  width: 1px;
+}
+.x10-2-0-my-achievements .vector-1 {
+  height: 24px;
+  margin-bottom: -0.02px;
+  margin-left: 1px;
+  width: 25px;
+}
+.x10-2-0-my-achievements .vector-10 {
+  height: 4px;
+  left: 0px;
+  position: absolute;
+  top: 15px;
+  width: 18px;
+}
+.x10-2-0-my-achievements .vector-11 {
+  height: 6px;
+  left: 11px;
+  position: absolute;
+  top: 0px;
+  width: 25px;
+}
+.x10-2-0-my-achievements .vector-12 {
+  height: 7px;
+  width: 14px;
+}
+.x10-2-0-my-achievements .vector-13 {
+  height: 20px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 18px;
+}
+.x10-2-0-my-achievements .vector-14 {
+  height: 8px;
+  width: 14px;
+}
+.x10-2-0-my-achievements .vector-15 {
+  height: 8px;
+  margin-left: 0px;
+  width: 8px;
+}
+.x10-2-0-my-achievements .vector-16 {
+  height: 24px;
+  margin-bottom: -0.02px;
+  margin-left: 2px;
+  width: 25px;
+}
+.x10-2-0-my-achievements .vector-17 {
+  height: 1px;
+  width: 1px;
+}
+.x10-2-0-my-achievements .vector-18 {
+  align-self: flex-start;
+  height: 24px;
+  margin-top: -0.02px;
+  width: 25px;
+}
+.x10-2-0-my-achievements .vector-19 {
+  height: 22px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 18px;
+}
+.x10-2-0-my-achievements .vector-2 {
+  height: 24px;
+  margin-bottom: -0.02px;
+  margin-left: 1px;
+  width: 26px;
+}
+.x10-2-0-my-achievements .vector-3 {
+  height: 8px;
+  width: 8px;
+}
+.x10-2-0-my-achievements .vector-4 {
+  height: 8px;
+  margin-top: 2px;
+  width: 8px;
+}
+.x10-2-0-my-achievements .vector-5 {
+  height: 8px;
+  width: 4px;
+}
+.x10-2-0-my-achievements .vector-6 {
+  height: 7px;
+  width: 4px;
+}
+.x10-2-0-my-achievements .vector-7 {
+  height: 12px;
+  transform: rotate(-180deg);
+  width: 7px;
+}
+.x10-2-0-my-achievements .vector-8 {
+  height: 1px;
+  left: 9px;
+  position: absolute;
+  top: 10px;
+  width: 1px;
+}
+.x10-2-0-my-achievements .vector-9 {
+  height: 16px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 20px;
+}
+.x10-2-0-my-achievements .vector-stroke {
+  height: 14px;
+  width: 8px;
+}
+.x10-2-0-my-achievements .vector-stroke-1 {
+  height: 2px;
+  left: 0px;
+  position: absolute;
+  top: 4px;
+  width: 16px;
+}
+.x10-2-0-my-achievements .vector-stroke-2 {
+  height: 10px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 6px;
+}
+.x10-2-0-my-achievements .your-achievements-level {
+  align-items: center;
+  background-color: var(--shark-2);
+  border-radius: 4px;
+  display: flex;
+  height: 128px;
+  margin-top: 24px;
+  overflow: hidden;
+  padding: 0 16px;
+  width: 400px;
+}
+:root {
+  --caribbean-green: rgba(0, 198, 136, 1);
+  --ebb: rgba(227, 227, 227, 1);
+  --eerie-black: rgba(25, 27, 29, 1);
+  --licorice: rgba(20, 20, 20, 1);
+  --monsoon: rgba(137, 137, 137, 1);
+  --onyx: rgba(58, 57, 57, 1);
+  --quarter-spanish-white: rgba(248, 235, 223, 1);
+  --rusty-red: rgba(218, 52, 67, 1);
+  --shark: rgba(43, 43, 44, 1);
+  --shark-2: rgba(33, 34, 37, 1);
+}
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
