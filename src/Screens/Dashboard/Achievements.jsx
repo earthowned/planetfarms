@@ -6,7 +6,7 @@ import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 
 function Achievements() {
   return(
-    <DashboardLayout>
+    <DashboardLayout title="My Achievements">
 <div className="x10-2-0-my-achievements">
       {/* comes from another branch */}
       <div className="flex-col">

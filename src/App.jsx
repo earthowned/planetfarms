@@ -10,8 +10,11 @@ import './App.css';
 // Community
 import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
 import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
+
+// Dashboard 
 import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
+import MyLibrary from "./Screens/Dashboard/MyLibrary";
 
 function App() {
   return (
@@ -43,6 +46,9 @@ function App() {
         </Route>
         <Route path="/achievements">
           <Achievements />
+        </Route>
+        <Route path="/mylibrary">
+          <MyLibrary />
         </Route>
       </Switch>
     </Router>
