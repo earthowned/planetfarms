@@ -44,11 +44,11 @@ function X0300CommunityPagenews(props) {
         </div>
 
         <div className="flex-row-5">
-          <Link to="/community-page-news-view">
+          <Link  to="/community-page-news-view" >
             <NewsCard />
           </Link>
 
-          <div className="filter-container border-1px-onyx">
+          <div className="filter-container border-1px-onyx" >
             <p className="text-22 ibmplexsans-semi-bold-quarter-spanish-white-16px">
               {text22}
             </p>

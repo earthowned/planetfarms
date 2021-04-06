@@ -18,4 +18,5 @@ const SearchComponent = ({className}) => {
     )
 }
 
+
 export default SearchComponent
