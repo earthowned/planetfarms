@@ -15,6 +15,7 @@ import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNe
 import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
 import MyLibrary from "./Screens/Dashboard/MyLibrary";
+import MyProfile from "./Screens/Dashboard/MyProfile";
 
 function App() {
   return (
@@ -49,6 +50,9 @@ function App() {
         </Route>
         <Route path="/mylibrary">
           <MyLibrary />
+        </Route>
+        <Route path="/myProfile">
+          <MyProfile />
         </Route>
       </Switch>
     </Router>

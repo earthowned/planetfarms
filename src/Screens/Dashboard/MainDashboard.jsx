@@ -26,12 +26,12 @@ function DashboardComponent() {
             </div>
           </div>
           {/* my-profile  */}
-          <div className="dashboard-my-profile border-1px-onyx">
+          <Link to="/myProfile"  className="dashboard-my-profile border-1px-onyx">
             <div className="user">
               <img className="vector-21" alt="My Profile" src="./img/user.png" />
             </div>
             <div className="my-profile ibmplexsans-semi-bold-quarter-spanish-white-16px">My Profile</div>
-          </div>
+          </Link>
           {/* achivements  */}
           <Link to="/achievements" className="achivements border-1px-onyx">
             <div className="award">

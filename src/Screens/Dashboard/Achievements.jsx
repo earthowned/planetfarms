@@ -7,10 +7,8 @@ import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 function Achievements() {
   return(
     <DashboardLayout title="My Achievements">
-<div className="x10-2-0-my-achievements">
-      {/* comes from another branch */}
+     <div className="x10-2-0-my-achievements">
       <div className="flex-col">
-              {/* comes from another branch */}
         <Link to="/dashboard" className="back-button-item">
           <div className="icons-arrows-left">
             <div className="overlap-group-9">
