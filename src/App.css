@@ -7,6 +7,10 @@ body {
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
 }
 
+.nav-link {
+  text-decoration: none;
+}
+
 /* layout */
 
 .container {

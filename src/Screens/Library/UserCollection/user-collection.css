@@ -1,0 +1,49 @@
+.farming-main-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.farming-collection-header {
+  color: #fff;
+  margin-top: 2em;
+}
+
+.farming-inner-container {
+  width: 25%;
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 2em 0;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.farming-inner-container .libraryCard-content {
+  position: absolute;
+
+  bottom: 1em;
+  left: 2em;
+}
+
+.farming-inner-container .libraryCard-content h4 {
+  margin-top: 0;
+}
+
+.farming-inner-container .libraryCard-content button {
+  margin-top: 1.5em;
+}
+.btn-positioning {
+  position: absolute;
+  top: 1em;
+  left: 2em;
+}
+
+.fixed-width {
+  width: 160px;
+  height: 48px;
+}

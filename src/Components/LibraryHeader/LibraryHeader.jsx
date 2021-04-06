@@ -1,24 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Filter from '../Filter/Filter'
 import SearchComponent from '../SearchComponent/SearchComponent'
+
+import { Link, useLocation} from 'react-router-dom';
 import "./library-header.css"
 
-const LibraryHeader = () => {
+const LibraryHeader = ({setActive}) => {
+     let {pathname} = useLocation();
+    
     return (
         <>
         <div className="library-container">
             <ul className="library-list-container">
                 <li >
-                    <button className="library-list-item active">All files</button>
+                    <Link className={`nav-link ${(pathname === "/library") ? "library-list-item active" : "library-list-item"}`} to="/library">All files</Link>
                     </li>
                 <li >
-                    <button className="library-list-item">My library & collections</button></li>
+                    <Link className={`nav-link ${(pathname === "/library/collection") ? "library-list-item active" : "library-list-item"}`} to="/library/collection">My library & collections</Link></li>
                 <li >
-                    <button className="library-list-item">Users collection</button></li>
+                    <Link className={`nav-link ${(pathname === "/library/collection/users") ? "library-list-item active" : "library-list-item"}`} to="/library/collection/users">Users collection</Link></li>
                 <li >
-                    <button className="library-list-item">Saved collection</button></li>
+                    <Link className={`nav-link ${(pathname === "/library/collection/saved") ? "library-list-item active" : "library-list-item"}`} to="/library/collection/saved">Saved collection</Link></li>
             </ul>
-            <button className="default-btn">Add files</button>
+            <button className="default-btn" onClick={() => setActive(true)}>Add files</button>
         </div>
         <div className="library-sub-header">
               <div className="library-sub-header-1">

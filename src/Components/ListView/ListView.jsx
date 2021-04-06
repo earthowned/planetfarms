@@ -34,12 +34,12 @@ const groupCollection = [
         active: false,
     },
 ]
-const ListView = ({data, title}) => {
+const ListView = ({data, title, setNewCollection}) => {
     const [ active, setActive] = useState(false);
     const [modalActive, setModalActive] = useState(false);
     return (
         <>
-        {modalActive && <GroupModal clickHandler={setModalActive} data={groupCollection} btnName="add to collections"/>}
+        {modalActive && <GroupModal clickHandler={setModalActive} data={groupCollection} btnName="add to collections" setNewCollection={setNewCollection}/>}
         <div className="listview-container">
         <h4>{title}</h4>
            { data.map(item => {
@@ -56,9 +56,8 @@ const ListView = ({data, title}) => {
                         <div className="list-btn-wrapper">
                             <span>Add to</span>
                             <button className="secondary-btn-border btn-img-wrapper" onClick={() => setActive(!active)}>
-                                {active ? (<><img src="./img/checkmark-outline.svg" /> <span>Added</span></>) : (<><img src="./img/book.svg" /> <span>My library</span></>)}
-                                
-                                </button>
+                                {active ? (<><img src="./img/checkmark-outline.svg" /> <span>Added</span></>) : (<><img src="./img/book.svg" /> <span>My library</span></>)}    
+                            </button>
                             <button className="secondary-btn-border" onClick={() => setModalActive(!modalActive)}>Collections</button>
                         </div>
                     </div>

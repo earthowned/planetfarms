@@ -1,8 +1,11 @@
-import React from 'react'
+import {useState} from 'react'
 import LibraryHeader from '../../Components/LibraryHeader/LibraryHeader'
 import './library.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 import ListView from '../../Components/ListView/ListView';
+import SimpleModal from '../../Components/SimpleModal/SimpleModal';
+import CollectionModal from '../../Components/CollectionModal/CollectionModal';
+
 
 const articles = [
     {
@@ -41,19 +44,28 @@ const videos = [
 ]
 
 const Library = () => {
+    const [newCollection, setNewCollection] = useState(false);
+    const [active, setActive] = useState(false);
+    
     return (
+        <>
+        {newCollection && <SimpleModal setNewCollection={setNewCollection}/>}
+        {active && <CollectionModal setActive={setActive}/>}
         <DashboardLayout title="library">
            <div className="library-main-container">
-           <LibraryHeader />
+               
+           <LibraryHeader setActive={setActive}/>
            <div className="list-container">
-           <ListView title="Articles" data={articles} />
+           <ListView title="Articles" data={articles} setNewCollection={setNewCollection}/>
            </div>
 
            <div className="list-container">
-           <ListView title="Videos" data={videos} />
+           <ListView title="Videos" data={videos} setNewCollection={setNewCollection}/>
             </div>
+
             </div>
          </DashboardLayout>
+         </>
     )
 }
 

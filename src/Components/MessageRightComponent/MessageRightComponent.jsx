@@ -7,22 +7,22 @@ import "./message-right-component.css";
 
 const groupUsers = [
     {
-        image: "./img/user.png",
+        image: "/img/user.png",
         name: "Jane Cooper",
         active: false,
     },
     {
-        image: "./img/user2.png",
+        image: "/img/user2.png",
         name: "Ronald Richards",
         active: true,
     },
     {
-        image: "./img/user-2.png",
+        image: "/img/user-2.png",
         name: "Janny Wilson",
         active: true,
     },
     {
-        image: "./img/user.png",
+        image: "/img/user.png",
         name: "Cody Fisher",
         active: false,
     },
@@ -44,7 +44,7 @@ const MessageRightComponent = ({setActive}) => {
             <div className="account-section">
 
                     <div className="img-wrapper">
-                        <img src="./img/user2.png"></img>
+                        <img src="/img/user2.png"></img>
                     </div>
 
                     <div className="account-user">
@@ -57,10 +57,10 @@ const MessageRightComponent = ({setActive}) => {
             </div>
             
              <ul className="messenger-list-container">
-                 <li className="messenger-list-item" onClick={() => makeCall()}><img src="./img/person-add.png"></img></li>
-                 <li className="messenger-list-item" onClick={() => setCall(true)}><img src="./img/phonecall.png"></img></li>
-                 <li className="messenger-list-item"><img src="./img/video-outline.png"></img></li>
-                 <li className="messenger-list-item"><img src="./img/toggle-btn.png"></img></li>
+                 <li className="messenger-list-item" onClick={() => makeCall()}><img src="/img/person-add.png"></img></li>
+                 <li className="messenger-list-item" onClick={() => setCall(true)}><img src="/img/phonecall.png"></img></li>
+                 <li className="messenger-list-item"><img src="/img/video-outline.png"></img></li>
+                 <li className="messenger-list-item"><img src="/img/toggle-btn.png"></img></li>
              </ul>
              </div>
          </div>
