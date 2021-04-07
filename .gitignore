@@ -20,8 +20,4 @@ Thumbs.db
 !.vscode/extensions.json
 *.code-workspace
 
-<<<<<<< HEAD
 .history/
-=======
-.history/
->>>>>>> 901c388a... messenger-file-structure-changed
