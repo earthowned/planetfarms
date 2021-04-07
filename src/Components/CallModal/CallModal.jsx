@@ -16,6 +16,7 @@ const CallModal = ({clickHandler}) => {
                     <button><img src="./img/cancel-call.png" /></button>
                     <button onClick={() => clickHandler(false)}><img src="./img/cross.png" /></button>
                 </div>
+                
                 <div className="resize">
                     <img src="./img/resize.png" />
                 </div>
