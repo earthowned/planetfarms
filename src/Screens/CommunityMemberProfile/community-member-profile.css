@@ -700,7 +700,7 @@
     top: 0px;
     width: 18px;
   }
-  .default-i905517068 {
+  .message-btn-text{
     height: 24px;
     letter-spacing: 0.00px;
     line-height: 24px;
@@ -721,7 +721,7 @@
     padding: 0 67px;
     width: 248px;
   }
-  .additional-information {
+  .additional-information-container {
     align-items: flex-start;
     display: flex;
     height: 144px;
@@ -743,11 +743,18 @@
     min-height: 24px;
     white-space: nowrap;
   }
-  .date-of-birhday {
+  .date-of-birhday-text {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
     white-space: nowrap;
+  }
+  .phone-text{
+    letter-spacing: 0.00px;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+
   }
   .default-btn {
     align-items: center;
@@ -769,7 +776,7 @@
     overflow: hidden;
     width: 96px;
   }
-  .email {
+  .email-text {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
@@ -838,7 +845,7 @@
     min-width: 52px;
     white-space: nowrap;
   }
-  .frame-2819 {
+  .last-name {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -847,7 +854,7 @@
     overflow: hidden;
     width: 76px;
   }
-  .frame-2823 {
+  .additional-information-login {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -856,7 +863,7 @@
     overflow: hidden;
     width: 91px;
   }
-  .frame-2823-1 {
+  .email-container {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -876,7 +883,7 @@
     overflow: hidden;
     width: 110px;
   }
-  .frame-2824-1 {
+  .phone-container {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -891,7 +898,7 @@
     margin-top: 16px;
     min-width: 69px;
   }
-  .frame-9 {
+  .first-name-input {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -926,13 +933,13 @@
     min-height: 24px;
     white-space: nowrap;
   }
-  .mikhail {
+  .name {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
     white-space: nowrap;
   }
-  .mikhailgmailpro {
+  .email-address {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
@@ -955,7 +962,7 @@
     position: relative;
     width: 16px;
   }
-  .phone {
+  .date-text {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
@@ -987,25 +994,31 @@
     height: 248px;
     width: 248px;
   }
-  .rectangle-867 {
+  .border-line {
     background-color: var(--onyx);
     height: 1px;
     margin-top: 39px;
     width: 744px;
   }
-  .text-2 {
+  .personal-information-text {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
     white-space: nowrap;
   }
-  .text-3 {
+  .phone-number {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
     white-space: nowrap;
   }
-  .text-4 {
+  .login-date {
+    letter-spacing: 0.00px;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+  }
+  .additional-information-text{
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;

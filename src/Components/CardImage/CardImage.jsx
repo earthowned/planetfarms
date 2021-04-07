@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import './card-image.css'
+import "./card-image.css";
 
 const profileData = [
   {
@@ -95,67 +95,50 @@ const profileData = [
   },
 ];
 
-function CardImage(props) {
-  const { className } = props;
+const Follow = () => {
   const [follow, setFollow] = useState(false);
 
   const handleOnClick = () => {
     setFollow(!follow);
   };
+  return (
+    <div className="follow-container">
+      <div className="person-add-outline-2-1">
+        <div className="flex-row-7">
+          <img style={{ height: "20px", width: "20px", cursor: "pointer" }} src={follow ? "img/follow-icon.svg" : "img/followed-icon.svg"}/>
+        </div>
+      </div>
+      <div className={
+          follow  ? "follow ibmplexsans-semi-bold-caribbean-green-16px": "follow ibmplexsans-semi-bold-monsoon-16px"
+        }
+        style={{ cursor: "pointer" }}
+        onClick={handleOnClick}
+      >
+        {follow ? "Follow" : "Followed"}
+      </div>
+    </div>
+  );
+};
 
+function CardImage(props) {
+  const { className } = props;
   return (
     <>
       {profileData.map((profile) => {
         return (
           <div key={profile._id} className={`card-image-1 ${className || ""}`}>
-            <Link
-              to={`/community-members-profile/${profile._id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <div
-                className="frame-2926"
-                style={{ backgroundImage: `url(${profile.Image})` }}
-              ></div>
-              <div className="name-2">
-                <div className="name-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {profile.name}
-                </div>
-
-                <div className="text-2 ibmplexsans-normal-monsoon-14px ">
-                  {profile.text2}
-                </div>
+            <Link  to={`/community-members-profile/${profile._id}`}  style={{ textDecoration: "none" }}  >
+              <div className="profile-card-image"  style={{ backgroundImage: `url(${profile.Image})` }}></div>
+              <div className="profile-card-name">
+                <div className="card-name ibmplexsans-semi-bold-quarter-spanish-white-16px">{profile.name} </div>
+                <div className="card-text ibmplexsans-normal-monsoon-14px ">{profile.text2}</div>
               </div>
             </Link>
-
-            <div className="follow-2">
-              <div className="person-add-outline-2-1">
-                <div className="flex-row-7">
-                  <img
-                    style={{ height: "20px", width: "20px", cursor: "pointer" }}
-                    src={
-                      follow ? "img/follow-icon.svg" : "img/followed-icon.svg"
-                    }
-                    // src="img/follow-icon.svg"
-                  />
-                </div>
-              </div>
-              <div
-                className={
-                  follow
-                    ? "follow ibmplexsans-semi-bold-caribbean-green-16px"
-                    : "followed ibmplexsans-semi-bold-monsoon-16px"
-                }
-                style={{ cursor: "pointer" }}
-                onClick={handleOnClick}
-              >
-                {follow ? "Follow" : "Followed"}
-              </div>
-            </div>
+            {Follow()}
           </div>
         );
       })}
     </>
   );
 }
-
 export default CardImage;

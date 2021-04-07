@@ -14,6 +14,91 @@ function App() {
 
 export default App;
 
+const PersonalInformation=()=>{
+  return(
+    <div className="x-information">
+    <div className="flex-row-5">
+    <div className="flex-col-8">
+      <div className="personal-information-text ibmplexsans-semi-bold-quarter-spanish-white-16px"> Personal infromation</div>
+      <div className="first-name-input">
+        <div className="first-name ibmplexsans-regular-normal-monsoon-14px"> First name</div>
+        <div className="name ibmplexsans-semi-bold-quarter-spanish-white-16px"> Mikhail</div>
+      </div>
+    </div>
+    <div className="last-name">
+      <div className="first-name ibmplexsans-regular-normal-monsoon-14px">Last Name </div>
+      <div className="name ibmplexsans-semi-bold-quarter-spanish-white-16px">  Ugryum</div>
+    </div>
+    <div className="dob">
+      <div className="date-of-birhday-text ibmplexsans-regular-normal-monsoon-14px">Date of birhday </div>
+      <div className="date-text ibmplexsans-semi-bold-quarter-spanish-white-16px"> 08/23/1995</div>
+    </div>
+  </div>
+  <div className="border-line"></div>
+  </div>
+  )
+}
+
+const ContactInformation=()=>{
+  return(
+    <div className="x-information">
+    <div className="flex-row-4">
+      <div className="flex-col-5">
+        <div className="contact-information ibmplexsans-semi-bold-quarter-spanish-white-16px"> Contact information </div>
+        <div className="email-container">
+          <div className="email-text ibmplexsans-regular-normal-monsoon-14px"> Email</div>
+          <div className="email-address ibmplexsans-semi-bold-quarter-spanish-white-16px">  mikhail@gmail.pro </div>
+        </div>
+      </div>
+      <div className="phone-container">
+        <div className="phone-text ibmplexsans-regular-normal-monsoon-14px">Phone</div>
+        <div className="phone-number ibmplexsans-semi-bold-quarter-spanish-white-16px"> +1 (233) 369-50-15 </div>
+      </div>
+    </div>
+    <div className="border-line"></div>
+  </div>
+  )
+}
+
+const AdditionalInformation=()=>{
+  return(
+    <div className="additional-information-container">
+    <div className="flex-col-7">
+      <div className="additional-information-text ibmplexsans-semi-bold-quarter-spanish-white-16px">Additional information </div>
+      <div className="additional-information-login">
+        <div className="last-login ibmplexsans-regular-normal-monsoon-14px"> Last login </div>
+        <div className="login-date ibmplexsans-semi-bold-quarter-spanish-white-16px"> 09/22/2020  </div>
+      </div>
+    </div>
+    <div className="frame-2824">
+      <div className="numbers-of-visits ibmplexsans-regular-normal-monsoon-14px"> Numbers of visits</div>
+      <div className="number-5 ibmplexsans-semi-bold-quarter-spanish-white-16px"> 153</div>
+    </div>
+  </div>
+  )
+}
+
+const ProfileImage=()=>{
+  return(
+    <div className="flex-col-4">
+    <div
+      className="profile-image"
+      style={{ backgroundImage: `url("/img/profile-image.svg") ` }}
+    ></div>
+    <div className="button">
+      <div className="msg-btn border-0-5px-quarter-spanish-white">
+       <div className="message-btn-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px"> Write message</div>
+      </div>
+      <div className="default-btn">
+        <div className="follow ibmplexsans-semi-bold-shark-16px"> Follow</div>
+      </div>
+    </div>
+  </div>
+
+  )
+}
+
+
 function CommunityMembersProfile() {
   return (
     <div className="x08-1-0-community-members">
@@ -23,118 +108,14 @@ function CommunityMembersProfile() {
         </Link>
         <div className="profie-details border-1px-onyx">
           <div className="information-container">
-            <div className="x-information">
-              <div className="flex-row-5">
-                <div className="flex-col-8">
-                  <div className="text-2 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Personal infromation
-                  </div>
-                  <div className="frame-9">
-                    <div className="first-name ibmplexsans-regular-normal-monsoon-14px">
-                      First name
-                    </div>
-                    <div className="mikhail ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                      Mikhail
-                    </div>
-                  </div>
-                </div>
-                <div className="frame-2819">
-                  <div className="last-name ibmplexsans-regular-normal-monsoon-14px">
-                    Last Name
-                  </div>
-                  <div className="ugryumov ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Ugryum
-                  </div>
-                </div>
-                <div className="dob">
-                  <div className="date-of-birhday ibmplexsans-regular-normal-monsoon-14px">
-                    Date of birhday
-                  </div>
-                  <div className="phone ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    08/23/1995
-                  </div>
-                </div>
-              </div>
-              <div className="rectangle-867"></div>
-            </div>
-            <div className="x-information">
-              <div className="flex-row-4">
-                <div className="flex-col-5">
-                  <div className="contact-information ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Contact information
-                  </div>
-                  <div className="frame-2823-1">
-                    <div className="email ibmplexsans-regular-normal-monsoon-14px">
-                      Email
-                    </div>
-                    <div className="mikhailgmailpro ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                      mikhail@gmail.pro
-                    </div>
-                  </div>
-                </div>
-                <div className="frame-2824-1">
-                  <div className="phone ibmplexsans-regular-normal-monsoon-14px">
-                    Phone
-                  </div>
-                  <div className="text-3 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    +1 (233) 369-50-15
-                  </div>
-                </div>
-              </div>
-              <div className="rectangle-867"></div>
-            </div>
-            <div className="additional-information">
-              <div className="flex-col-7">
-                <div className="text-4 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  Additional information
-                </div>
-                <div className="frame-2823">
-                  <div className="last-login ibmplexsans-regular-normal-monsoon-14px">
-                    Last login
-                  </div>
-                  <div className="phone ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    09/22/2020
-                  </div>
-                </div>
-              </div>
-              <div className="frame-2824">
-                <div className="numbers-of-visits ibmplexsans-regular-normal-monsoon-14px">
-                  Numbers of visits
-                </div>
-                <div className="number-5 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  153
-                </div>
-              </div>
-            </div>
+              {PersonalInformation()}
+           {ContactInformation()}
+           {AdditionalInformation()}
           </div>
-          <div className="flex-col-4">
-            <div
-              className="profile-image"
-              style={{ backgroundImage: `url("/img/profile-image.svg") ` }}
-            ></div>
-            <div className="button">
-              <Msgbtn>Write message</Msgbtn>
-              <div className="default-btn">
-                <div className="follow ibmplexsans-semi-bold-shark-16px">
-                  Follow
-                </div>
-              </div>
-            </div>
-          </div>
+          {ProfileImage()}
         </div>
       </div>
     </div>
   );
 }
 
-function Msgbtn(props) {
-  const { children } = props;
-
-  return (
-    <div className="msg-btn border-0-5px-quarter-spanish-white">
-      <div className="default-i905517068 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-        {children}
-      </div>
-    </div>
-  );
-}
