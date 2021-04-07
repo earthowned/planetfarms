@@ -13,6 +13,8 @@ import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNe
 import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
 import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
+import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
+import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
 
 function App() {
   return (
@@ -41,6 +43,12 @@ function App() {
          </Route>
          <Route path="/community-switching">
           <AllCommunitiesCard />
+        </Route>
+        <Route path="/community-members">
+          <CommunityMembers />
+        </Route>
+        <Route path="/community-members-profile/:id">
+          <CommunityMembersProfile />
         </Route>
         <Route path="/dashboard">
           <DashboardComponent />
