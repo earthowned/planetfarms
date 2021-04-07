@@ -1,33 +1,20 @@
-import React from "react";
+import {useState} from "react";
 import "./community-news.css";
-// import SideBar from "../../Components/Sidebar/index";
-import NavBar from "../../Components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import NewsCard from "../../Components/NewsCard/NewsCard";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
-function App() {
-  return <DashboardLayout title="Ragrarians News"><X0300CommunityPagenews {...X0300CommunityPagenewsData} /></DashboardLayout>;
-}
+import NewsAddModal from "../../Components/NewAddModal/NewsAddModal";
 
-export default App;
-
-function X0300CommunityPagenews(props) {
-  const {
-    addNews,
-    text22,
-    farming,
-    people,
-    nature,
-    carsIndustry,
-    mediaNews,
-    seeAllTopics,
-  } = props;
+function CommunityPagenews() {
+  const [addModal, setAddModal] = useState(false);
 
   return (
+    <>
+    {addModal && <NewsAddModal />}
+    <DashboardLayout title="Ragrarians News">
     <div className="x03-0-0-community-page-news">
-      {/* <SideBar /> */}
       <div className="flex-col-4">
-        <div className="flex-row-4">
+        <div className="flex-row-2">
           <div className="search border-1px-onyx">
             <div className="search-outline-1">
               <div className="overlap-group-6">
@@ -36,11 +23,7 @@ function X0300CommunityPagenews(props) {
             </div>
             <input type="text" placeholder="Search..." className="search-1" />
           </div>
-          <div className="add-news-button">
-            <div className="add-news ibmplexsans-semi-bold-shark-16px">
-              {addNews}
-            </div>
-          </div>
+          <button className="default-btn" onClick={() => setAddModal(true)}>Add News</button>
         </div>
 
         <div className="flex-row-5">
@@ -50,55 +33,48 @@ function X0300CommunityPagenews(props) {
 
           <div className="filter-container border-1px-onyx">
             <p className="text-22 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-              {text22}
+              Discover more of what matters to you
             </p>
             <div className="flex-row-6">
               <div className="filter-button-5 border-1px-onyx">
                 <div className="farming-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {farming}
+                  Farming
                 </div>
               </div>
               <div className="filter-button-2 border-1px-onyx">
                 <div className="people ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {people}
+                  People
                 </div>
               </div>
               <div className="filter-button-1 border-1px-onyx">
                 <div className="nature ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {nature}
+                  Nature
                 </div>
               </div>
             </div>
             <div className="flex-row-7">
               <div className="filter-button-4 border-1px-onyx">
                 <div className="cars-industry ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {carsIndustry}
+                  Cars Industry
                 </div>
               </div>
               <div className="filter-button-3 border-1px-onyx">
                 <div className="media-news ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {mediaNews}
+                  Media News
                 </div>
               </div>
             </div>
             <div className="see-all-topics ibmplexsans-semi-bold-quarter-spanish-white-16px">
-              {seeAllTopics}
+              See All Topics
             </div>
           </div>
         </div>
       </div>
     </div>
+    </DashboardLayout>
+    </>
   );
 }
 
-const X0300CommunityPagenewsData = {
-  search: "Search…",
-  addNews: "Add news",
-  text22: "Discover more of what matters to you",
-  farming: "Farming",
-  people: "People",
-  nature: "Nature",
-  carsIndustry: "Cars industry",
-  mediaNews: "Media news",
-  seeAllTopics: "See all topics",
-};
+
+export default CommunityPagenews;

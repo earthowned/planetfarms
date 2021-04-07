@@ -1,5 +1,6 @@
 .default-btn {
   align-items: center;
+  justify-content: center;
   background-color: var(--caribbean-green);
   border-radius: 4px;
   display: flex;
@@ -11,6 +12,7 @@
   cursor: pointer;
   border: none;
   outline: none;
+  text-align: center;
 }
 
 .default-btn:hover {

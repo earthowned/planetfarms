@@ -7,15 +7,16 @@ import CongratulationScreen from './Screens/Congratulation/CongratulationScreen'
 import Messenger from './Screens/Messenger/Messenger';
 import Library from './Screens/Library/Library';
 import './App.css';
-// Community
-import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
-import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
+
 import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
 import Collection from "./Screens/Library/Collection/Collection";
 import UserCollection from "./Screens/Library/UserCollection/UserCollection";
 import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
 import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
+import CommunityPagenews from "./Screens/CommunityNews/CommunityNews";
+import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
+import NewsAdd from "./Screens/CommunityNews/NewsAdd/NewsAdd";
 
 function App() {
   return (
@@ -45,8 +46,11 @@ function App() {
         <Route path="/messenger">
            <Messenger />
          </Route>
-        <Route path="/community-page-news">
-         <X0300CommunityPagenews />
+        <Route exact path="/community-page-news">
+         <CommunityPagenews />
+        </Route>
+        <Route path="/community-page-news/add-news">
+         <NewsAdd />
         </Route>
         <Route path="/community-page-news-view">
          <X0300CommunityPageViewsnews />
@@ -66,20 +70,6 @@ function App() {
 }
 
 export default App;
-
-
-const lockoutlineData = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-};
-
-const eyeoffoutline2Data = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-    vector4: "",
-};
 
 const X0100LoginEmptyData = {
     vector: "/img/vector.svg",
@@ -114,8 +104,7 @@ const X0100LoginEmptyData = {
     vector16: "",
     vector17: "",
     vector18: "",
-    lockoutlineProps: lockoutlineData,
-    eyeoffoutline2Props: eyeoffoutline2Data,
+    
 };
 
 const X0111LoginfiledData = {
@@ -153,8 +142,7 @@ const X0111LoginfiledData = {
     vector16: "",
     vector17: "",
     vector18: "",
-    lockoutlineProps: lockoutlineData,
-    eyeoffoutline2Props: eyeoffoutline2Data,
+    
 };
 
 const X0112ErrorfiledData = {
@@ -179,35 +167,20 @@ const X0112ErrorfiledData = {
     signIn: "Sign in",
     forgotPassword: "Forgot Password?",
     text2: "Sign In with services",
-    vector11: "",
-    vector12: "",
-    vector13: "",
-    vector14: "",
+    
     google: "Google",
     subtract2: "",
     facebook: "Facebook",
     spanText: "Don't have an account yet?",
     spanText2: "  ",
     spanText3: "Become a member!",
-    vector15: "",
-    vector16: "",
-    vector17: "",
-    vector18: "",
-    lockoutlineProps: lockoutlineData,
-    eyeoffoutline2Props: eyeoffoutline2Data,
+    
+    
 };
 
 const X0200SignUpemptyData = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-    vector4: "",
-    vector5: "",
-    vector6: "",
+    
     welcomeBack: "Become a member",
-    vector7: "",
-    vector8: "",
-    vector9: "",
     username: "Username",
     password: "Password",
     vector10: "",
@@ -231,8 +204,6 @@ const X0200SignUpemptyData = {
     vector17: "",
     vector18: "",
     vector19: "",
-    lockoutlineProps: lockoutlineData,
-    eyeoffoutline2Props: eyeoffoutline2Data,
 };
 
 const X0211SignUpfilledData = {
@@ -271,8 +242,7 @@ const X0211SignUpfilledData = {
     vector17: "",
     vector18: "",
     vector19: "",
-    lockoutlineProps: lockoutlineData,
-    eyeoffoutline2Props: eyeoffoutline2Data,
+    
 };
 
 const X0212SignUperrorData = {
@@ -315,5 +285,5 @@ const X0212SignUperrorData = {
     vector20: "",
     vector21: "",
     vector22: "",
-    lockoutlineProps: lockoutlineData,
+    
 };
