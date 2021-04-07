@@ -8,6 +8,7 @@ const GroupModal = ({clickHandler, setNewCollection, data, btnName}) => {
             setNewCollection(true)
             clickHandler(false)
     }
+    
     return (
         <>
         <div className="group-container">
@@ -15,7 +16,7 @@ const GroupModal = ({clickHandler, setNewCollection, data, btnName}) => {
 
             <div className="group-modal-header">
                 <h4>{btnName}</h4>
-                <button onClick={() => clickHandler(false)}><img src="./img/close-outline.png" /></button>
+                <button onClick={() => clickHandler(false)}><img src="/img/close-outline.png" /></button>
             </div>
 
             <div className="search-bar">
@@ -27,7 +28,7 @@ const GroupModal = ({clickHandler, setNewCollection, data, btnName}) => {
             </div>
 
             <div className="modal-btn">
-            {btnName == "add to collections" && <div className="add-collection"><img src="./img/plus.svg" /> <button 
+            {btnName == "add to collections" && <div className="add-collection"><img src="/img/plus.svg" /> <button 
             >Create new collection</button></div>}
             <button className="default-btn" onClick={() => collectionAdded()}>
                {btnName}

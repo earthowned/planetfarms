@@ -1,45 +1,12 @@
 import {useState} from 'react'
 import './listview.css';
-import GroupModal from '../GroupModal/GroupModal';
 
-const groupCollection = [
-    {
-        image: "./img/user.png",
-        name: "My favorite collection",
-        active: false,
-    },
-    {
-        image: "./img/user2.png",
-        name: "Travelling collection",
-        active: true,
-    },
-    {
-        image: "./img/user-2.png",
-        name: "Business Collection #1",
-        active: true,
-    },
-    {
-        image: "./img/user.png",
-        name: "Files for beginners",
-        active: false,
-    },
-    {
-        image: "./img/user-2.png",
-        name: "Farming Collection",
-        active: false,
-    },
-    {
-        image: "./img/user.png",
-        name: "Be Creative!",
-        active: false,
-    },
-]
-const ListView = ({data, title, setNewCollection}) => {
+const ListView = ({data, title, setNewCollection, setModalActive, modalActive}) => {
     const [ active, setActive] = useState(false);
-    const [modalActive, setModalActive] = useState(false);
+    
     return (
         <>
-        {modalActive && <GroupModal clickHandler={setModalActive} data={groupCollection} btnName="add to collections" setNewCollection={setNewCollection}/>}
+        
         <div className="listview-container">
         <h4>{title}</h4>
            { data.map(item => {

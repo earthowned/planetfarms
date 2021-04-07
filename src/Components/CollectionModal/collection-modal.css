@@ -12,8 +12,8 @@
 }
 
 .collection-modal-inner-container {
-  width: 50%;
-  height: 50%;
+  width: 35%;
+  height: 80%;
   background: #191b1d;
   padding: 2em 1.6em;
 
@@ -48,6 +48,7 @@
 .collection-modal-inner-container .drag-drop h6 {
   width: 50%;
   text-align: center;
+  line-height: 1.5;
 }
 
 .default-input-variation {
@@ -57,8 +58,12 @@
   margin-bottom: 1em;
   background: #212225;
   border: 1px solid #191b1d;
-  color: #8a8a8a;
+  color: #fff;
 
   outline: none;
-  padding: 1em 0.5em;
+  padding: 1em 1em;
+}
+
+.btn-size {
+  width: 200px;
 }

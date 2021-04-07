@@ -1,6 +1,3 @@
 .library-main-container {
-  width: clamp(90%, 80%, 90%);
-  min-width: 65%;
-  margin-left: 5%;
-  position: relative;
+  width: 100%;
 }

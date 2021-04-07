@@ -3,54 +3,38 @@ import './user-collection.css'
 
 import LibraryHeader from '../../../Components/LibraryHeader/LibraryHeader'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
+import CollectionModal from '../../../Components/CollectionModal/CollectionModal'
+import SimpleModal from '../../../Components/SimpleModal/SimpleModal'
+import {farming, groupCollection} from '../CollectionData'
+import GroupModal from '../../../Components/GroupModal/GroupModal'
 
-const farming = [
-    {
-        category: "farming",
-        title: "Business collection",
-        users: 365,
-        img: "/img/farming.svg"
-    },
-    {
-        category: "farming",
-        title: "Business collection",
-        users: 365,
-        img: "/img/farming.svg"
-    },
-    {
-        category: "farming",
-        title: "Business collection",
-        users: 365,
-        img: "/img/farming.svg"
-    },
-    {
-        category: "farming",
-        title: "Business collection",
-        users: 365,
-        img: "/img/farming.svg"
-    },
-    {
-        category: "farming",
-        title: "Business collection",
-        users: 365,
-        img: "/img/farming.svg"
-    },
-    {
-        category: "farming",
-        title: "Business collection",
-        users: 365,
-        img: "/img/farming.svg"
-    },
-]
 const UserCollection = () => {
 
     const [active, setActive] = useState(false);
+    const [modalActive, setModalActive] = useState(false);
+
+    const [groupModal, setGroupModal] = useState(false);
+    const [newCollection, setNewCollection] = useState(false);
+
+    
+    function openAddCollection () {
+        setGroupModal(true);
+        setModalActive(false);
+    }
 
     return (
         <>
+        {groupModal && <GroupModal clickHandler={setGroupModal} 
+        data={groupCollection} btnName="add to collections" 
+        setNewCollection={setNewCollection}/>}
+
+        {modalActive && <CollectionModal setActive={setModalActive} openAddCollection={openAddCollection}/>}
+
+         {newCollection && <SimpleModal setNewCollection={setNewCollection}/>}
+
          <DashboardLayout title="library">
                   <div className="library-main-container">
-                    <LibraryHeader />
+                    <LibraryHeader setActive={setModalActive}/>
                   </div>  
 
                   <h4 className="farming-collection-header">Farming Collections</h4>
