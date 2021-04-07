@@ -68,18 +68,18 @@ function LoginScreen(props) {
                
                <InputComponent text={username} 
                error={userError} 
-               image="../../img/person-outline.png" 
+               image="/img/person-green-outline.svg" 
                changeHandler={userChange}
-               name="username"
+               name="Username"
            
                />
                
                <InputComponent text={password} 
                error={passwordError} 
-               image="../../img/lock-outline.svg" 
+               image="/img/lock-outline.svg" 
                changeHandler={passwordChange}
                password="password"
-               name="password"
+               name="Password"
                />
             
             <div className="remember">
@@ -100,7 +100,7 @@ function LoginScreen(props) {
             </div>
 
             <div className="button">
-             <Button name="sign in" clickHandler={handleOnClick} />
+             <Button name="Sign In" clickHandler={handleOnClick} />
               <a href="google.com" target="_blank" className="forgot-password valign-text-middle ibmplexsans-semi-bold-caribbean-green-16px">
                 Forgot Password?
               </a>
@@ -117,7 +117,7 @@ function LoginScreen(props) {
                   <div className="logo-googleg-48-dp-1">
                     <div className="overlap-group1-3">
                       
-                      <img className="subtract-1" src="../../img/google-icon.png" />
+                      <img className="subtract-1" src="/img/google-icon.svg" alt="google-icon" />
                     </div>
                   </div>
                   <div className="google valign-text-middle ibmplexsans-semi-bold-gallery-16px">
@@ -127,7 +127,7 @@ function LoginScreen(props) {
 
                 <a target="_blank" href="https://facebook.com" className="link-btn facebook-button border-0-5px-quarter-spanish-white">
                   
-                  <img className="subtract-1" src="../../img/facebook-icon.png" />
+                  <img className="subtract-1" src="/img/facebook-icon.svg" alt="facebook-icon" />
                   <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
                     {facebook}
                   </div>

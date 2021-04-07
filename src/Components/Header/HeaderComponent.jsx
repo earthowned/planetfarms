@@ -26,20 +26,20 @@ const HeaderComponent = ({title}) => {
         <header className="header-container">
             <h3>{title}</h3>
             <ul>
-                <li onClick={() => history.push('/dashboard')}><img src="./img/person.png" /><span>My dashboard</span></li>
+                <li onClick={() => history.push('/dashboard')}><img src="/img/person-green-outline.svg" alt="person-green-outline" /><span>My dashboard</span></li>
                 <li onClick={() => messageNoti()} 
                 className="message">
-                <img src="./img/message.png" />
+                <img src="/img/email.svg" alt="email-icon" />
                 {active || <div className="message-noti">6
                 </div>}
                 {active && <MessageDropdown clickHandler={setActive} message="Your messages" btnName="See all messages" handleClick={handleClick}/>}
                 </li>
                 <li onClick={() => notificationNoti()}
                 className="message">
-                    <img src="./img/bell.png" />
+                    <img src="/img/bell-icon.svg" alt="bell-icon" />
                     {notification && <MessageDropdown clickHandler={setNotification} message="Your notification" btnName="See all notifications" handleClick={handleClick}/>}
                 </li>
-                <li><img src="./img/user.png" /></li>
+                <li><img src="/img/avatar-img.svg" alt="avatar-img" /></li>
             </ul>
 
             </header>

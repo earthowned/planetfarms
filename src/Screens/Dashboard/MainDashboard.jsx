@@ -60,7 +60,7 @@ function DashboardComponent() {
             <div className="my-library-tile">
               <div className="book-1">
                 <div className="overlap-group-11">
-                  <img className="vector-28" src="./img/book.png" alt="book" />
+                  <img className="vector-28" src="/img/book-outlined.svg" alt="book" />
                 </div>
               </div>
               <div className="my-library ibmplexsans-semi-bold-quarter-spanish-white-24px">My library</div>
@@ -69,7 +69,7 @@ function DashboardComponent() {
             <div className="x-tile">
               <div className="book-open-1">
                 <div className="overlap-group-12">
-                  <img className="vector-30" src="./img/book-open-1.png" />
+                  <img className="vector-30" src="/img/book-open 1.svg" />
                 </div>
               </div>
               <div className="my-courses ibmplexsans-semi-bold-quarter-spanish-white-24px">My courses</div>
@@ -78,7 +78,7 @@ function DashboardComponent() {
             <div className="x-tile">
               <div className="users-1">
                 <div className="flex-row-4">
-                  <img className="vector-31" src="./img/users-1.png" />
+                  <img className="vector-31" src="/img/users 1.svg" />
                 </div>
               </div>
               <div className="my-groups ibmplexsans-semi-bold-quarter-spanish-white-24px">My groups</div>
