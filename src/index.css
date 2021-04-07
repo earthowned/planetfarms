@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap");
+
 body {
   background: black;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+}
+
+* {
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
 }
