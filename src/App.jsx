@@ -15,6 +15,7 @@ import Achievements from "./Screens/Dashboard/Achievements";
 import Collection from "./Screens/Library/Collection/Collection";
 import UserCollection from "./Screens/Library/UserCollection/UserCollection";
 import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
+import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
 
 function App() {
   return (
@@ -50,6 +51,9 @@ function App() {
         <Route path="/community-page-news-view">
          <X0300CommunityPageViewsnews />
          </Route>
+         <Route path="/community-switching">
+          <AllCommunitiesCard />
+        </Route>
         <Route path="/dashboard">
           <DashboardComponent />
         </Route>

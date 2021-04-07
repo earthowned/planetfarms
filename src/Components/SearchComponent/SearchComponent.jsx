@@ -1,7 +1,7 @@
 import React from 'react'
 import './search-component.css';
 
-const SearchComponent = () => {
+const SearchComponent = ({className}) => {
     return (
         
         <div className="search-container">
