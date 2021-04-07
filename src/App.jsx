@@ -12,6 +12,7 @@ import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
 import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
 import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
+import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
         <Route path="/community-page-news-view">
          <X0300CommunityPageViewsnews />
          </Route>
+         <Route path="/community-switching">
+          <AllCommunitiesCard />
+        </Route>
         <Route path="/dashboard">
           <DashboardComponent />
         </Route>
