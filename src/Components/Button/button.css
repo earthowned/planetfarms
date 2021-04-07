@@ -3,11 +3,11 @@
   background-color: var(--caribbean-green);
   border-radius: 4px;
   display: flex;
-  height: 48px;
+  justify-content: center;
+
   color: black;
   overflow: hidden;
-  padding: 0 59px;
-  width: 180px;
+  padding: 1em 2em;
   cursor: pointer;
   border: none;
   outline: none;
