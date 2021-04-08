@@ -1,7 +1,6 @@
 import React from "react";
 import "./community-news.css";
 // import SideBar from "../../Components/Sidebar/index";
-import NavBar from "../../Components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import NewsCard from "../../Components/NewsCard/NewsCard";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';

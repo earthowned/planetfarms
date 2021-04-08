@@ -68,7 +68,7 @@ function LoginScreen(props) {
                
                <InputComponent text={username} 
                error={userError} 
-               image="/img/person-green-outline.svg" 
+               image="/img/user-green-outline.svg" 
                changeHandler={userChange}
                name="Username"
            
@@ -150,60 +150,6 @@ function LoginScreen(props) {
 
 export default LoginScreen;
 
-function Lockoutline(props) {
-  const { vector, vector2, vector3 } = props;
 
-  return (
-    <div className="lock-outline">
-      <div className="overlap-group1-1">
-        <img className="vector-9" src={vector} />
-        <img className="vector-10" src={vector2} />
-        <img className="vector-11" src={vector3} />
-      </div>
-    </div>
-  );
-}
 
-function Eyeoffoutline2(props) {
-  const { vector, vector2, vector3, vector4 } = props;
-
-  return (
-    <div className="eye-off-outline-2">
-      <div className="overlap-group2">
-        <img className="vector-12" src={vector} />
-        <img className="vector-13" src={vector2} />
-        <img className="vector-14" src={vector3} />
-        <img className="vector-15" src={vector4} />
-      </div>
-    </div>
-  );
-}
-
-function DefaultButton(props) {
-  const { children } = props;
-
-  return (
-    <div className="default-button">
-      <div className="default-i166454252 valign-text-middle ibmplexsans-semi-bold-shark-16px">
-        {children}
-      </div>
-    </div>
-  );
-}
-const lockoutlineData = {
-  vector: "",
-  vector2: "",
-  vector3: "",
-};
-
-const eyeoffoutline2Data = {
-  vector: "",
-  vector2: "",
-  vector3: "",
-  vector4: "",
-};
-
-const defaultButtonData = {
-  children: "Sign In",
-};
 

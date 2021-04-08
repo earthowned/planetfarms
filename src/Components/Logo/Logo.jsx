@@ -4,7 +4,7 @@ import "./logo.css";
 const Logo = () => {
     return (
         <>
-          <img className="logo-img" src="/img/logo.svg" alt="logo.svg"  />
+          <img className="logo-img" src="/img/logo.svg" alt="logo"  />
         </>
     )
 }

@@ -26,7 +26,7 @@ const HeaderComponent = ({title}) => {
         <header className="header-container">
             <h3>{title}</h3>
             <ul>
-                <li onClick={() => history.push('/dashboard')}><img src="/img/person-green-outline.svg" alt="person-green-outline" /><span>My dashboard</span></li>
+                <li onClick={() => history.push('/dashboard')}><img src="/img/user-green-outline.svg" alt="user-green-outline" /><span>My dashboard</span></li>
                 <li onClick={() => messageNoti()} 
                 className="message">
                 <img src="/img/email.svg" alt="email-icon" />

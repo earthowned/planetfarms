@@ -10,7 +10,7 @@ const GroupModal = ({clickHandler}) => {
 
             <div className="group-modal-header">
                 <h4>Add members</h4>
-                <button onClick={() => clickHandler(false)} ><img src="./img/close-outline.png" /></button>
+                <button onClick={() => clickHandler(false)} ><img src="/img/close-outline.svg" alt="close-outline" /></button>
             </div>
 
             <div className="search-bar">

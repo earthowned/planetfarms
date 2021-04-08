@@ -8,28 +8,28 @@ import MessageRightComponent from '../MessageRightComponent/MessageRightComponen
 const contacts = [
         {
             name: "Bessie Cooper",
-            img: "./img/contact.png",
+            img: "/img/avatar-msg.svg",
             message: "Hi there! Can you help with co..",
             date: "08/12/2020",
             notfication: 2
         },
         {
             name: "Bessie Cooper",
-            img: "./img/user2.png",
+            img: "/img/avatar-img.svg",
             message: "Hi there! Can you help with co..",
             date: "18/1/2020",
             notfication: 12
         },
         {
             name: "Bessie Cooper",
-            img: "./img/contact.png",
+            img:"/img/avatar-img.svg",
             message: "Hi there! Can you help with co..",
             date: "08/8/2019",
             notfication: 5
         },
         {
             name: "Bessie Cooper",
-            img: "./img/user2.png",
+            img:  "/img/avatar-msg.svg",
             message: "Hi there! Can you help with co..",
             date: "08/4/2020"
         },

@@ -1,7 +1,7 @@
 import React from "react";
 import './community-news-view.css'
 // import SideBar from '../../Components/Sidebar'
-import NavBar from '../../Components/Navbar/Navbar'
+
 import { Link } from "react-router-dom";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 

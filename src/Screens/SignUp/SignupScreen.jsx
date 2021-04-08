@@ -78,7 +78,7 @@ function SignupScreen(props) {
           <InputComponent
             text={username}
             error={userError}
-            image="/img/person-green-outline.svg"
+            image="/img/user-green-outline.svg"
             changeHandler={userChange}
             name="Username"
           />
@@ -146,7 +146,7 @@ function SignupScreen(props) {
               >
                 <img
                   className="subtract"
-                  src="/img/facebook-icon.png"
+                  src="/img/facebook-icon.svg"
                   alt="facebook-icon"
                 />
                 <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
