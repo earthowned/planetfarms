@@ -118,7 +118,7 @@ const VideoInputContainer = () => {
 
 const Button = ({name}) => {
     return (
-        <button className="default-btn btn-size">Add Video block</button>
+        <button className="default-btn btn-size">{name}</button>
     )
 }
 
