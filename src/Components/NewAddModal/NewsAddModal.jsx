@@ -21,7 +21,6 @@ const NewsAddModal = () => {
                     <Link className="nav-link" to="/community-page-news/add-news"><button className="default-btn btn-variation">Continue</button></Link>
                 </div>
             </div>
-        
     )
 }
 
