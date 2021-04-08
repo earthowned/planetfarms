@@ -1,10 +1,16 @@
-import React from 'react'
+
 import GroupUsers from '../GroupUsers/GroupUsers'
 import SearchComponent from '../SearchComponent/SearchComponent'
 import "./group-modal.css"
 
-const GroupModal = ({clickHandler}) => {
+const GroupModal = ({clickHandler, setNewCollection, data, btnName}) => {
+    function collectionAdded () {
+            setNewCollection(true)
+            clickHandler(false)
+    }
+    
     return (
+        <>
         <div className="group-container">
             <div className="group-modal">
 
@@ -18,18 +24,19 @@ const GroupModal = ({clickHandler}) => {
             </div>
                 
             <div className="modal-users">
-                 <GroupUsers />
+                 <GroupUsers data={data}/>
             </div>
 
             <div className="modal-btn">
-            <button className="default-btn">
-               Add members
+            {btnName == "add to collections" && <div className="add-collection"><img src="/img/plus.svg" /> <button 
+            >Create new collection</button></div>}
+            <button className="default-btn" onClick={() => collectionAdded()}>
+               {btnName}
             </button>
             </div>
-            </div>
-            
-                
+            </div>     
         </div>
+        </>
     )
 }
 

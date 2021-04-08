@@ -5,6 +5,28 @@ import CallModal from '../CallModal/CallModal';
 
 import "./message-right-component.css";
 
+const groupUsers = [
+    {
+        image: "/img/user.png",
+        name: "Jane Cooper",
+        active: false,
+    },
+    {
+        image: "/img/user2.png",
+        name: "Ronald Richards",
+        active: true,
+    },
+    {
+        image: "/img/user-2.png",
+        name: "Janny Wilson",
+        active: true,
+    },
+    {
+        image: "/img/user.png",
+        name: "Cody Fisher",
+        active: false,
+    },
+]
 const MessageRightComponent = ({setActive}) => {
     const [addGroup, setAddGroup] = useState(false);
     const [call, setCall] = useState(false);
@@ -14,7 +36,7 @@ const MessageRightComponent = ({setActive}) => {
     }
     return (
         <>
-        {addGroup && <GroupModal clickHandler={setAddGroup} />}
+        {addGroup && <GroupModal clickHandler={setAddGroup} data={groupUsers} btnName="add members"/>}
         {call && <CallModal clickHandler={setCall} />}
          <div className="message-header">
              <div className="message-account">

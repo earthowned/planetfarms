@@ -12,6 +12,9 @@ import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
 import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
 import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
+import Collection from "./Screens/Library/Collection/Collection";
+import UserCollection from "./Screens/Library/UserCollection/UserCollection";
+import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
 import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
 
 function App() {
@@ -27,8 +30,17 @@ function App() {
         <Route path="/:path(|login)" exact>
           <LoginScreen {...X0100LoginEmptyData} />
         </Route>
-        <Route path="/library">
+        <Route exact path="/library">
            <Library />
+         </Route>
+        <Route exact path="/library/collection">
+           <Collection />
+         </Route>
+        <Route path="/library/collection/users">
+           <UserCollection />
+         </Route>
+        <Route path="/library/collection/saved">
+           <SavedCollection />
          </Route>
         <Route path="/messenger">
            <Messenger />

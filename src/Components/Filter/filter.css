@@ -1,0 +1,42 @@
+.filter-container {
+  width: 200px;
+  position: relative;
+}
+
+.filter-title {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  z-index: 999;
+  border: 1px solid #3a3939;
+  cursor: pointer;
+  padding: 1em;
+  width: 150px;
+}
+
+.filter-dropdown {
+  color: #fff;
+  position: absolute;
+  top: 4em;
+  background: rgba(0, 0, 0, 0.8);
+  margin-top: 0.5em;
+  border: 1px solid #3a3939;
+  border-radius: 4px;
+  z-index: 2000;
+}
+
+.filter-dropdown li {
+  padding: 1em 2em;
+  width: 150px;
+  cursor: pointer;
+}
+
+.filter-dropdown li:hover {
+  background: #00c688;
+}
+
+.dropdown-icon {
+}

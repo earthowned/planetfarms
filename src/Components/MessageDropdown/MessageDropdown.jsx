@@ -1,5 +1,11 @@
-import './message-dropdown.css';
 import React from 'react'
+import './message-dropdown.css';
+
+import {useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+
+
+
 import MessageCard from '../MessageCard/MessageCard';
 
 const contacts = [
@@ -31,6 +37,7 @@ const contacts = [
             date: "08/4/2020"
         },
     ]
+
 const MessageDropdown = ({clickHandler, message, btnName, handleClick}) => {
    
     return (
@@ -41,6 +48,7 @@ const MessageDropdown = ({clickHandler, message, btnName, handleClick}) => {
             </div>
             {
                 contacts.map(contact => (
+
                     <MessageCard contact={contact}  />
                 ))
             }

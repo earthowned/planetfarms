@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./sidebar.css";
 
 const Sidebar = ({ setToggle, toggle }) => {
   let history = useHistory();
+  const [dropdownActive, setDropdownActive] = useState(true);
   return (
     <>
       <button className="nav-icon" onClick={() => setToggle(!toggle)}>

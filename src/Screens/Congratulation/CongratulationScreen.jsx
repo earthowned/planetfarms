@@ -11,8 +11,6 @@ function CongratulationScreen(props = X0220SignUpfiledData) {
   const {
     welcomeBack,
     welcomeBack2,
-    xcontinue,
-    text4,
   } = props;
 
 const [firstname, setFirstname] = useState('');  
@@ -42,6 +40,8 @@ const [files, setFiles] = useState([])
       )
     },
   })
+
+  console.log(files[0]);
 
 let history = useHistory();
 
@@ -152,7 +152,7 @@ const submitForm = () => {
         <div className="flex-col-2">
         <div className="file-drop-container border-1px-quarter-spanish-white" {...getRootProps()}>
           <input {...getInputProps()} />
-         {files.length > 0 ? <img className="avatar" src="https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"/> : <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Drag &amp; Drop files in this area or <span className="file-upload">Click Here to attach</span></p>}
+         {files.length > 0 ? <img className="avatar" src={files[0].preview} /> : <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Drag &amp; Drop files in this area or <span className="file-upload">Click Here to attach</span></p>}
         </div>
         </div>
        

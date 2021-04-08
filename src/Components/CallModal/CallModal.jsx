@@ -16,6 +16,7 @@ const CallModal = ({clickHandler}) => {
                     <button><img src="/img/mute-microphone-icon.svg" alt="microphone-icon" /></button>
                     <button onClick={() => clickHandler(false)}><img src="/img/end-call-icon.svg" alt="end-call-icon" /></button>
                 </div>
+                
                 <div className="resize">
                     <img src="/img/resize-icon.svg" alt="resize-icon" />
                 </div>
