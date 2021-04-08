@@ -52,7 +52,7 @@
 }
 
 .popup-box {
-  width: 90%;
+  width: 95%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -66,5 +66,5 @@
 .popup-btn-wrapper {
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 35%;
 }

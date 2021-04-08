@@ -1,6 +1,8 @@
 import {useState} from 'react'
 import NewsCreateModal from '../../../Components/NewsCreateModal/NewsCreateModal';
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
+import {useParams} from 'react-router-dom';
+
 import './news-add.css'
 
 const NewsAdd = () => {
@@ -47,6 +49,8 @@ function NewsAddMainContainer ({setCreateVideoModal, setCreateImageModal, setCre
         setCreateTextModal(true);
         setTextActive(true);
     }
+
+    
     return(
         <div className="news-add-main-container">
             <NewsAddContainer createVideo={createVideo} createImage={createImage} createText={createText}/>  
@@ -56,9 +60,11 @@ function NewsAddMainContainer ({setCreateVideoModal, setCreateImageModal, setCre
 }
 
 function NewsAddContainer ({createVideo, createImage, createText}) {
+    const {id} = useParams();
+    console.log(id);
     return(
          <div className="news-add-container">
-             <h4>How to be rich in 2020 and make business?</h4>
+             <h4>{id}</h4>
                 <div className="news-add-inner-container">
                     <button onClick={() => createVideo()} className="add-btn"><img src="/img/video-outline.svg" /> <span>Add video</span></button>
                     <button onClick={() => createImage()} className="add-btn"><img src="/img/camera-outline.svg" /> <span>Add image</span></button>
