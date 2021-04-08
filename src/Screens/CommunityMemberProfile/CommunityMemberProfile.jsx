@@ -43,7 +43,7 @@ const DataField=({data:{ title,first_inputTitle,first_inputValue,second_inputTit
 
 
 const PersonalInformation=()=>{
-  const data = {
+  const PersonalInformationdata = {
     title: "Personal infromation",
     first_inputTitle:"First name",
     first_inputValue:"Mikhail" ,
@@ -53,12 +53,12 @@ const PersonalInformation=()=>{
     third_inputValue:"08/05/2021"
   }
   return(
-  <DataField data={data} />
+  <DataField data={PersonalInformationdata} />
   )
 }
 
 const ContactInformation=()=>{
-  const data = {
+  const ContactInformationdatadata = {
     title: "Contact information",
     first_inputTitle:"Email",
     first_inputValue:"johndoe@gmail.com" ,
@@ -66,12 +66,12 @@ const ContactInformation=()=>{
     second_inputValue:"+1 61 2575684",
   }
   return(
-  <DataField data={data}  />
+  <DataField data={ContactInformationdatadata}  />
   )
 }
 
 const AdditionalInformation=()=>{
-  const data = {
+  const AdditionalInformationdata = {
     title: "Additional information",
     first_inputTitle:"Last login",
     first_inputValue:"09/22/2020" ,
@@ -79,7 +79,7 @@ const AdditionalInformation=()=>{
     second_inputValue:"153",
   }
   return(
-  <DataField data={data}    />
+  <DataField data={AdditionalInformationdata}    />
 
   )
 }
