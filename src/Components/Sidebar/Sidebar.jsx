@@ -45,4 +45,4 @@ const Sidebar = ({ setToggle, toggle }) => {
   );
 };
 
-export default Sidebar;
+export default Sidebar
