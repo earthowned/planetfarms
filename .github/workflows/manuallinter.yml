@@ -1,7 +1,6 @@
 name: Manual Lint Code Base
 
 on:
-  push:
   workflow_dispatch:
     inputs:
 
