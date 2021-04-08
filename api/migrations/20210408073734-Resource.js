@@ -9,10 +9,10 @@ module.exports = {
           autoIncrement: true
         },
         title: {
-          type: Sequelize.JSON
+          type: Sequelize.TEXT
         },
         resourceFor: {
-          type: Sequelize.JSON
+          type: Sequelize.TEXT
         },
         publisher: {
           type: Sequelize.STRING,
@@ -30,7 +30,7 @@ module.exports = {
           type: Sequelize.STRING,
         },
         subject: {
-          type: Sequelize.JSON,
+          type: Sequelize.TEXT,
         },
         articleDate: {
           type: Sequelize.DATE,
@@ -42,52 +42,49 @@ module.exports = {
           type: Sequelize.STRING,
         },
         author: {
-          type: Sequelize.DATE,
+          type: Sequelize.STRING,
         },
         sum: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.DOUBLE,
         },
         level: {
-          type: Sequelize.JSON,
+          type: Sequelize.TEXT,
         },
         languages: {
-          type: Sequelize.JSON,
+          type: Sequelize.TEXT,
         },
         timesRated: {
           type: Sequelize.STRING
         },
         tag: {
-          type: Sequelize.JSON,
+          type: Sequelize.TEXT,
         },
         year: {
           type: Sequelize.DATE,
         },
         averageRating: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.DOUBLE,
         },
         filename: {
           type: Sequelize.STRING,
         },
         mediaType: {
-          type: Sequelize.DATE,
+          type: Sequelize.STRING,
         },
         description: {
           type: Sequelize.TEXT,
-        },
-        sendOnAccept: {
-          type: Sequelize.INTEGER,
         },
         tags: {
           type: Sequelize.STRING,
         },
         medium: {
-          type: Sequelize.DATE,
+          type: Sequelize.STRING,
         },
         isDownloadable: {
           type: Sequelize.BOOLEAN
         },
         resourceType: {
-          type: Sequelize.DATE,
+          type: Sequelize.STRING,
         },
         openUrl: {
           type: Sequelize.STRING,
@@ -99,7 +96,7 @@ module.exports = {
           type: Sequelize.DATE,
         },
         attachments: {
-          type: Sequelize.JSON,
+          type: Sequelize.TEXT,
         }
       }
     );

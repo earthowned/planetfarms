@@ -9,13 +9,13 @@ module.exports = {
     while(amount--) {
       data.push({
         title: faker.name.title(),
-        resourceFor: faker.datatype.json(),
+        resourceFor: faker.lorem.word(),
         publisher: faker.name.firstName(),
-        linkToLicense: faker.name.firstName(),
+        linkToLicense: faker.lorem.words(),
         uploadDate: faker.date.past(),
         addedBy: faker.name.firstName(),
         openWith: faker.system.commonFileType(),
-        subject: faker.datatype.json(),
+        subject: faker.lorem.sentence(),
         articleDate: faker.date.past(),
         kind: faker.name.firstName(),
         language: faker.address.city(),
@@ -30,15 +30,14 @@ module.exports = {
         filename: faker.system.commonFileName(),
         mediaType: faker.system.commonFileType(),
         description: faker.lorem.paragraph(),
-        sendOnAccept: faker.datatype.boolean(),
-        tags: faker.datatype.json(),
+        tags: '',
         medium: faker.name.firstName(),
         isDownloadable: faker.datatype.boolean(),
         resourceType: faker.system.commonFileType(),
         openUrl: faker.internet.url(),
         createdDate: faker.date.past(),
         updatedDate: faker.date.past(),
-        attachments: faker.datatype.json(),
+        attachments: faker.lorem.sentence(),
       });
     }
     return queryInterface.bulkInsert('resources', data, {});
