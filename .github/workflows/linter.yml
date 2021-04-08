@@ -3,8 +3,6 @@ name: Lint Code Base
 on:
   push:
     branches-ignore: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   build:
@@ -15,12 +13,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
 
       - name: Lint Code Base
         uses: github/super-linter@v3
         env:
-          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
