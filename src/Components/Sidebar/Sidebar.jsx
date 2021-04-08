@@ -4,6 +4,7 @@ import "./sidebar.css";
 
 const Sidebar = ({ setToggle, toggle }) => {
   let history = useHistory();
+  const [dropdownActive, setDropdownActive] = useState(true);
   return (
     <>
       <button className="nav-icon" onClick={() => setToggle(!toggle)}>

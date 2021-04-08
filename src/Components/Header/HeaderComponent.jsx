@@ -21,6 +21,7 @@ const HeaderComponent = ({title}) => {
   function handleClick() {
     history.push("/messenger");
   }
+
     return (
         <>
         <header className="header-container">
@@ -41,7 +42,6 @@ const HeaderComponent = ({title}) => {
                 </li>
                 <li><img src="/img/avatar-img.svg" alt="avatar-img" /></li>
             </ul>
-
             </header>
         </>
     )

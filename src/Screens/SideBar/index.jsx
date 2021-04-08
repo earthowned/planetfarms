@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import { NavLink } from "react-router-dom";
+
 function SideBar(props) {
   const [active, setActive] = useState({});
   const handleOnClick = () => {
