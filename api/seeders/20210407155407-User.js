@@ -1,4 +1,3 @@
-'use strict';
 
 const faker = require('faker');
 
@@ -10,17 +9,16 @@ module.exports = {
 
     while(amount--) {
       data.push({
-        user: faker.name.findName(),
-        password: faker.internet.password(),
         email: faker.internet.email(),
-        created_at: date,
-        updated_at: date,
+        password: faker.internet.password(),
+        createdAt: date,
+        updatedAt: date,
       });
     }
-    return queryInterface.bulkInsert('Users', data, {});
+    return queryInterface.bulkInsert('users', data, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Users', null, {});
+    return queryInterface.bulkInsert('users', null, {});
   }
 };
