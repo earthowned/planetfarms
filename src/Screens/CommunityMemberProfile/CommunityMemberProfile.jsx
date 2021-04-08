@@ -11,10 +11,12 @@ function App() {
     </DashboardLayout>
   );
 }
+
 export default App;
 
-const DataField=({title,first_inputTitle,first_inputValue,second_inputTitle,second_inputValue,third_inputTitle,third_inputValue})=>{
+const DataField=({data:{ title,first_inputTitle,first_inputValue,second_inputTitle,second_inputValue,third_inputTitle,third_inputValue}})=>{
   return(
+  
   <div className="x-information">
      <div className="flex-row-4">
        <div className="flex-col-5">
@@ -27,8 +29,8 @@ const DataField=({title,first_inputTitle,first_inputValue,second_inputTitle,seco
        <div className="phone-container">
          <div className="phone-text ibmplexsans-regular-normal-monsoon-14px">{second_inputTitle}</div>
          <div className="phone-number ibmplexsans-semi-bold-quarter-spanish-white-16px"> {second_inputValue} </div>
-       </div>
-       <div className="dob">
+       </div> 
+        <div className="dob">
        <div className="date-of-birhday-text ibmplexsans-regular-normal-monsoon-14px">{third_inputTitle} </div>
        <div className="date-text ibmplexsans-semi-bold-quarter-spanish-white-16px">{third_inputValue} </div>
      </div>
@@ -36,21 +38,49 @@ const DataField=({title,first_inputTitle,first_inputValue,second_inputTitle,seco
      <div className="border-line"></div>
    </div>
   )
+
 }
 
+
 const PersonalInformation=()=>{
+  const data = {
+    title: "Personal infromation",
+    first_inputTitle:"First name",
+    first_inputValue:"Mikhail" ,
+    second_inputTitle:"Last Name" ,
+    second_inputValue:"Ugryum",
+    third_inputTitle:"Date of birhday",
+    third_inputValue:"08/05/2021"
+  }
   return(
-  <DataField title={"Personal infromation"} first_inputTitle={"First name"}  first_inputValue={"Mikhail"}  second_inputTitle={"Last Name"} second_inputValue={"Ugryum"} third_inputTitle={"Date of birhday"} third_inputValue={"08/23/1995"}   />
+  <DataField data={data} />
   )
 }
+
 const ContactInformation=()=>{
+  const data = {
+    title: "Contact information",
+    first_inputTitle:"Email",
+    first_inputValue:"johndoe@gmail.com" ,
+    second_inputTitle:"Phone" ,
+    second_inputValue:"+1 61 2575684",
+  }
   return(
-  <DataField title={"Contact information"} first_inputTitle={"Email"}  first_inputValue={"mikhail@gmail.pro"}  second_inputTitle={"Phone"} second_inputValue={"+1 (233) 369-50-15"}  />
+  <DataField data={data}  />
   )
 }
+
 const AdditionalInformation=()=>{
+  const data = {
+    title: "Additional information",
+    first_inputTitle:"Last login",
+    first_inputValue:"09/22/2020" ,
+    second_inputTitle:"Numbers of visits" ,
+    second_inputValue:"153",
+  }
   return(
-  <DataField title={"Additional information"} first_inputTitle={"Last login"}  first_inputValue={"09/22/2020 "}  second_inputTitle={"Numbers of visits"} second_inputValue={"153"}    />
+  <DataField data={data}    />
+
   )
 }
 
@@ -70,6 +100,7 @@ const ProfileImage=()=>{
       </div>
     </div>
   </div>
+
   )
 }
 
