@@ -7,39 +7,45 @@ const NewsAdd = () => {
     const [createVideoModal, setCreateVideoModal] = useState(false);
     const [createImageModal, setCreateImageModal] = useState(false);
     const [createTextModal, setCreateTextModal] = useState(false);
+     const [videoActive, setVideoActive] = useState(true);
+    const [imageActive, setImageActive] = useState(true);
+    const [textActive, setTextActive] = useState(true);
 
     return (
         <>
-        {createVideoModal && <NewsCreateModal type="video"/>}
-        {createImageModal && <NewsCreateModal type="image"/>}
-        {createTextModal && <NewsCreateModal type="text"/>}
+        {createVideoModal && <NewsCreateModal type="video" videoActive={videoActive} setVideoActive={setVideoActive}/>}
+        {createImageModal && <NewsCreateModal type="image" imageActive={imageActive} setImageActive={setImageActive} />}
+        {createTextModal && <NewsCreateModal type="text" textActive={textActive} setTextActive={setTextActive}/>}
            <DashboardLayout title="Add News">
             {/* back button comes here */}
             <NewsAddMainContainer setCreateVideoModal={setCreateVideoModal} setCreateImageModal={setCreateImageModal}
-            setCreateTextModal={setCreateTextModal}/>
+            setCreateTextModal={setCreateTextModal} setTextActive={setTextActive} setImageActive={setImageActive} setVideoActive={setVideoActive}/>
             </DashboardLayout>
         </>
     )
 }
 
-function NewsAddMainContainer ({setCreateVideoModal, setCreateImageModal, setCreateTextModal}) {
+function NewsAddMainContainer ({setCreateVideoModal, setCreateImageModal, setCreateTextModal, setVideoActive, setImageActive, setTextActive}) {
 
     function createVideo () {
         setCreateVideoModal(true);
         setCreateImageModal(false);
         setCreateTextModal(false);
+        setVideoActive(true);
     }
 
     function createImage () {
         setCreateVideoModal(false);
         setCreateImageModal(true);
         setCreateTextModal(false);
+        setImageActive(true);
     }
 
     function createText () {
         setCreateVideoModal(false);
         setCreateImageModal(false);
         setCreateTextModal(true);
+        setTextActive(true);
     }
     return(
         <div className="news-add-main-container">
