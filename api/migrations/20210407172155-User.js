@@ -1,22 +1,54 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    Promise.all([
-      queryInterface.addColumn('Users', 'user', Sequelize.STRING),
-      queryInterface.addColumn('Users', 'email', Sequelize.STRING),
-      queryInterface.addColumn('Users', 'password', Sequelize.STRING),
-      queryInterface.addColumn('Users', 'created_at', Sequelize.STRING),
-      queryInterface.addColumn('Users', 'updated_at', Sequelize.STRING),
-    ]);
+    queryInterface.createTable('Users',
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
+        },
+        email: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        password: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        createdAt: {
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          type: Sequelize.DATE
+        },
+      }
+    );
   },
 
   down: async (queryInterface, Sequelize) => {
-    Promise.all([
-      queryInterface.removeColumn('Users', 'user'),
-      queryInterface.removeColumn('Users', 'email'),
-      queryInterface.removeColumn('Users', 'password'),
-      queryInterface.removeColumn('Users', 'created_at'),
-      queryInterface.removeColumn('Users', 'updated_at'),
-    ]);
+    queryInterface.dropTable('Users',
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
+        },
+        email: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        password: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        createdAt: {
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          type: Sequelize.DATE
+        },
+      }
+    );
   }
 };
