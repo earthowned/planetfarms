@@ -156,6 +156,7 @@
 
 .list-container .text-active{
   background: #00c688;
+  fill:"black"
   /* width: 100%;
   border-radius: 4px;
   height: 50px;
@@ -179,4 +180,10 @@
   height: 50px;
   padding: 1.2rem;
 
+}
+.icon:hover{
+  fill:"black"
+}
+.icon{
+  fill:"green"
 }

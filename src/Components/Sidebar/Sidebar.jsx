@@ -39,7 +39,7 @@ const Sidebar = ({ setToggle, toggle }) => {
         <li className="list-items"> 
           <div onClick={handleOnClick} className={`${pathname === '/community-page-news' ? " text-menu text-active" :"text-menu" }`}>
             <div  onClick={() => history.push("/community-page-news")} className="align-content">   
-              <img src="/img/user-management.png" /> <span >Ragarians</span>   
+             <img src="/img/rag-icon.svg" /> <span >Ragarians</span>
             </div>
           </div>
           {dropdownActive  && (
