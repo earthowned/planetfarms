@@ -6,11 +6,9 @@ import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 
 function DashboardComponent() {
   return (
-    <DashboardLayout>
+    <DashboardLayout title="My Dashboard">
     <div className="x10-1-0-my-dashboard">
-      {/* comes from another branch */}
       <div className="flex-col-5">
-              {/* comes from another branch */}
         <div className="dashboard-hero border-1px-onyx">
           <div className="dashboard-info">
             <img className="dashboard-profile-pic" src="/img/DashboardProfilePic.png" alt="dashboard-profile" />
@@ -28,12 +26,12 @@ function DashboardComponent() {
             </div>
           </div>
           {/* my-profile  */}
-          <div className="dashboard-my-profile border-1px-onyx">
+          <Link to="/myProfile"  className="dashboard-my-profile border-1px-onyx">
             <div className="user">
               <img className="vector-21" src="/img/user.svg" alt="user-icon" />
             </div>
             <div className="my-profile ibmplexsans-semi-bold-quarter-spanish-white-16px">My Profile</div>
-          </div>
+          </Link>
           {/* achivements  */}
           <Link to="/achievements" className="achivements border-1px-onyx">
             <div className="award">
@@ -64,7 +62,9 @@ function DashboardComponent() {
                 </div>
               </div>
               <div className="my-library ibmplexsans-semi-bold-quarter-spanish-white-24px">My library</div>
-              <SeeAllButton>See all items</SeeAllButton>
+              <Link to="/mylibrary" className="link-decoration">
+                <SeeAllButton>See all items</SeeAllButton>
+              </Link>
             </div>
             <div className="x-tile">
               <div className="book-open-1">
@@ -119,9 +119,7 @@ function DashboardComponent() {
 export default DashboardComponent;
 
 
-function SeeAllButton(props) {
-  const { children } = props;
-
+function SeeAllButton({ children }) {
   return (
     <div className="frame-4 border-0-5px-quarter-spanish-white">
       <div className="default-i905517 ibmplexsans-semi-bold-quarter-spanish-white-16px">
@@ -132,8 +130,7 @@ function SeeAllButton(props) {
 }
 
 
-function MyLibraryTiles(props) {
-  const { src, overlapGroup8, text8, className } = props;
+function MyLibraryTiles({ src, overlapGroup8, text8, className }) {
   return (
     <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
       <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
@@ -143,19 +140,17 @@ function MyLibraryTiles(props) {
   );
 }
 
-function MyCourseTiles(props) {
-  const { src, overlapGroup8, text8, className } = props;
+function MyCourseTiles({ src, overlapGroup8, text8, className }) {
   return (
     <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
       <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
-      <img className="frame-2926" src={src} />
+      <img className="frame-2926" src={src} alt="my-group-tile" />
       </div>
     </div>
   );
 }
 
-function MyGroupTiles(props) {
-  const { src, overlapGroup8, text8, className } = props;
+function MyGroupTiles({ src, overlapGroup8, text8, className }) {
   return (
     <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
       <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
