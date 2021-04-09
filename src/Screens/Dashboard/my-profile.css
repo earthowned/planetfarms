@@ -1,0 +1,1107 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+* {
+  box-sizing: border-box;
+}
+.border-0-5px-quarter-spanish-white {
+  border: 0.5px solid var(--quarter-spanish-white);
+}
+.border-1px-caribbean-green {
+  border: 1px solid var(--caribbean-green);
+}
+.border-1px-onyx {
+  border: 1px solid var(--onyx);
+}
+.border-1px-quarter-spanish-white {
+  border: 1px solid var(--quarter-spanish-white);
+}
+.ibmplexsans-bold-caribbean-green-14px {
+  color: var(--caribbean-green);
+  font-family: "IBM Plex Sans-Bold", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+}
+.ibmplexsans-bold-shark-14px {
+  color: var(--shark);
+  font-family: "IBM Plex Sans-Bold", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+}
+.ibmplexsans-bold-shark-16px {
+  color: var(--shark);
+  font-family: "IBM Plex Sans-Bold", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+}
+.ibmplexsans-regular-normal-ebb-14px {
+  color: var(--ebb);
+  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-regular-normal-monsoon-14px {
+  color: var(--monsoon);
+  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-regular-normal-onyx-14px {
+  color: var(--onyx);
+  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-14px {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-16px {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-24px {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-white-16px {
+  color: white;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+.x10-4-0-my-personals {
+  align-items: flex-start;
+  background-color: black;
+  display: flex;
+  width: 1440px;
+}
+.x10-4-0-my-personals .additional-info {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  min-height: 152px;
+  padding: 16px 0;
+  width: 784px;
+}
+.x10-4-0-my-personals .bell-outline {
+  align-items: flex-end;
+  display: flex;
+  height: 24px;
+  margin-left: 35px;
+  padding: 1.7px 3px;
+  width: 24px;
+}
+.x10-4-0-my-personals .book {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 3px;
+  width: 24px;
+}
+.x10-4-0-my-personals .chevrons-left {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 8px;
+  width: 24px;
+}
+.x10-4-0-my-personals .chevrons-right-1 {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 5px;
+  width: 24px;
+}
+.x10-4-0-my-personals .chevrons-right.chevrons-left {
+  margin-left: 69px;
+}
+.x10-4-0-my-personals .contact-info {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  min-height: 152px;
+  width: 784px;
+}
+.x10-4-0-my-personals .contact-information {
+  letter-spacing: 0px;
+  line-height: 32px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .date-of-birhday {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .date-of-birth {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  margin-left: 144px;
+  overflow: hidden;
+  width: 96px;
+}
+.x10-4-0-my-personals .default-i905517658 {
+  height: 24px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 122px;
+  text-align: center;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .e-mail {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  overflow: hidden;
+  width: 141px;
+}
+.x10-4-0-my-personals .edit-information {
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  align-items: center;
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  margin-top: 24px;
+  overflow: hidden;
+  padding: 0 62px;
+  width: 248px;
+}
+.x10-4-0-my-personals .email {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .email-outline {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 2px;
+  width: 24px;
+}
+.x10-4-0-my-personals .first-name {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  overflow: hidden;
+  width: 67px;
+}
+.x10-4-0-my-personals .first-name-1 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .flex-col {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 18px;
+  width: 8px;
+}
+.x10-4-0-my-personals .flex-col-1 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  width: 35px;
+}
+.x10-4-0-my-personals .flex-col-2 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  min-height: 960px;
+  width: 1112px;
+}
+.x10-4-0-my-personals .flex-col-3 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2px;
+  min-height: 18px;
+  width: 8px;
+}
+.x10-4-0-my-personals .flex-col-4 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  width: 38px;
+}
+.x10-4-0-my-personals .flex-row {
+  align-items: flex-start;
+  display: flex;
+  height: 210px;
+  min-width: 210px;
+}
+.x10-4-0-my-personals .flex-row-1 {
+  align-items: center;
+  display: flex;
+  margin-left: 4px;
+  margin-top: 7px;
+  min-width: 240px;
+}
+.x10-4-0-my-personals .flex-row-2 {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 4px;
+  min-width: 16px;
+}
+.x10-4-0-my-personals .flex-row-3 {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 1px;
+  margin-top: 1px;
+  min-width: 22px;
+}
+.x10-4-0-my-personals .flex-row-4 {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 24px;
+  min-width: 530px;
+}
+.x10-4-0-my-personals .flex-row-5 {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 24px;
+  min-width: 361px;
+}
+.x10-4-0-my-personals .flex-row-6 {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 24px;
+  min-width: 324px;
+}
+.x10-4-0-my-personals .frame {
+  align-items: flex-end;
+  display: flex;
+  overflow: hidden;
+  width: 160px;
+}
+.x10-4-0-my-personals .frame-1943 {
+  background-color: var(--licorice);
+  height: 1024px;
+  position: relative;
+  width: 248px;
+}
+.x10-4-0-my-personals .frame-1944 {
+  align-items: center;
+  background-color: var(--shark);
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 80px;
+  width: 247px;
+}
+.x10-4-0-my-personals .frame-1945 {
+  align-items: center;
+  display: flex;
+  height: 80px;
+  left: 0px;
+  min-width: 247px;
+  padding: 0 16px;
+  position: absolute;
+  top: 0px;
+}
+.x10-4-0-my-personals .frame-1947 {
+  align-items: center;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  height: 64px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0 24px;
+  position: absolute;
+  top: 280px;
+  width: 247px;
+}
+.x10-4-0-my-personals .frame-1948 {
+  align-items: center;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  height: 64px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0 24px;
+  position: absolute;
+  top: 344px;
+  width: 247px;
+}
+.x10-4-0-my-personals .frame-1951 {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 100px;
+  height: 48px;
+  margin-left: 35px;
+  width: 48px;
+}
+.x10-4-0-my-personals .frame-1953 {
+  align-items: flex-start;
+  align-self: flex-start;
+  display: flex;
+  margin-left: 24px;
+  min-width: 113px;
+}
+.x10-4-0-my-personals .frame-1954 {
+  align-items: center;
+  display: flex;
+  height: 80px;
+  min-width: 1112px;
+}
+.x10-4-0-my-personals .frame-1973 {
+  align-items: center;
+  display: flex;
+  margin-left: 40px;
+  min-width: 166px;
+}
+.x10-4-0-my-personals .frame-1977 {
+  height: 48px;
+  margin-left: 1px;
+  margin-top: 12px;
+  width: 248px;
+}
+.x10-4-0-my-personals .frame-1978 {
+  height: 48px;
+  margin-left: 1px;
+  width: 248px;
+}
+.x10-4-0-my-personals .frame-2303 {
+  align-items: center;
+  background-color: var(--caribbean-green);
+  border-radius: 100px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  height: 32px;
+  left: 231px;
+  overflow: hidden;
+  padding: 0 4px;
+  position: absolute;
+  top: 172px;
+  transform: rotate(180deg);
+  width: 32px;
+}
+.x10-4-0-my-personals .frame-2791 {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  display: flex;
+  flex-direction: column;
+  left: 0px;
+  min-height: 259px;
+  position: absolute;
+  top: 0px;
+  width: 248px;
+}
+.x10-4-0-my-personals .frame-28 {
+  height: 35px;
+  position: relative;
+  width: 35px;
+}
+.x10-4-0-my-personals .frame-28-2 {
+  height: 35px;
+  position: relative;
+  width: 38px;
+}
+.x10-4-0-my-personals .frame-2848 {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 656px;
+  min-width: 137px;
+}
+.x10-4-0-my-personals .frame-285 {
+  align-items: center;
+  background-color: var(--caribbean-green);
+  display: flex;
+  height: 48px;
+  justify-content: flex-end;
+  min-width: 248px;
+  padding: 0 68px;
+}
+.x10-4-0-my-personals .frame-2873 {
+  align-items: flex-start;
+  background-color: var(--caribbean-green);
+  display: flex;
+  height: 35px;
+  padding: 7px 6px;
+  width: 35px;
+}
+.x10-4-0-my-personals .frame-288 {
+  align-items: center;
+  display: flex;
+  width: 35px;
+}
+.x10-4-0-my-personals .frame-2890 {
+  align-items: center;
+  display: flex;
+  width: 38px;
+}
+.x10-4-0-my-personals .frame-2891 {
+  align-items: center;
+  border-radius: 2px;
+  display: flex;
+  height: 32px;
+  margin-left: 23px;
+  min-width: 32px;
+  padding: 0 4px;
+}
+.x10-4-0-my-personals .frame-2891-1 {
+  align-items: flex-start;
+  background-color: rgba(42, 42, 42, 1);
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  width: 248px;
+}
+.x10-4-0-my-personals .frame-2923 {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 16px;
+  min-width: 69px;
+}
+.x10-4-0-my-personals .graduation-cap {
+  height: 18px;
+  width: 24px;
+}
+.x10-4-0-my-personals .graduation-cap-1 {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  width: 24px;
+}
+.x10-4-0-my-personals .grid-outline-2 {
+  align-items: center;
+  display: flex;
+  height: 24px;
+  padding: 0 3px;
+  width: 24px;
+}
+.x10-4-0-my-personals .group-1942 {
+  align-items: flex-start;
+  display: flex;
+  min-width: 248px;
+}
+.x10-4-0-my-personals .group-1943 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 0px;
+  min-height: 299px;
+  position: absolute;
+  top: 725px;
+  width: 248px;
+}
+/* .x10-4-0-my-personals .icons-arrows-left {
+  align-items: flex-end;
+  display: flex;
+  height: 24px;
+  padding: 7px 4px;
+  width: 24px;
+} */
+.x10-4-0-my-personals .last-login {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .last-login-1 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  overflow: hidden;
+  width: 91px;
+}
+.x10-4-0-my-personals .last-name {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .last-name-1 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  margin-left: 147px;
+  overflow: hidden;
+  width: 76px;
+}
+.x10-4-0-my-personals .mikhail {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .mikhailgmailpro {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .number {
+  height: 20px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  margin-top: 1px;
+  min-height: 20px;
+  text-align: center;
+  width: 22px;
+}
+.x10-4-0-my-personals .number-1 {
+  height: 20px;
+  left: 0px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  width: 22px;
+}
+.x10-4-0-my-personals .number-2 {
+  height: 20px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  margin-bottom: 1px;
+  min-height: 20px;
+  text-align: center;
+  width: 22px;
+}
+.x10-4-0-my-personals .number-3 {
+  height: 20px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  min-height: 20px;
+  text-align: center;
+  width: 22px;
+}
+.x10-4-0-my-personals .number-4 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .number-of-visit {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  margin-left: 123px;
+  overflow: hidden;
+  width: 110px;
+}
+.x10-4-0-my-personals .numbers-of-visits {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .overlap-group-1 {
+  height: 35px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 35px;
+}
+.x10-4-0-my-personals .overlap-group-2 {
+  height: 22px;
+  position: relative;
+  width: 18px;
+}
+.x10-4-0-my-personals .overlap-group-3 {
+  height: 259px;
+  position: relative;
+  width: 248px;
+}
+.x10-4-0-my-personals .overlap-group-4 {
+  height: 10px;
+  position: relative;
+  width: 16px;
+}
+.x10-4-0-my-personals .overlap-group1 {
+  height: 20px;
+  position: relative;
+  width: 18px;
+}
+.x10-4-0-my-personals .overlap-group2 {
+  height: 1024px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 263px;
+}
+.x10-4-0-my-personals .overlap-group3 {
+  height: 35px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 38px;
+}
+.x10-4-0-my-personals .overlap-group36 {
+  height: 23px;
+  left: 9px;
+  position: absolute;
+  top: 4px;
+  width: 25px;
+}
+.x10-4-0-my-personals .overlap-group8 {
+  height: 23px;
+  left: 7px;
+  position: absolute;
+  top: 4px;
+  width: 24px;
+}
+.x10-4-0-my-personals .person-outline-1 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  padding: 3px 0;
+  width: 24px;
+}
+.x10-4-0-my-personals .personal-info {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 152px;
+  width: 784px;
+}
+.x10-4-0-my-personals .phone {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .phone-1 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .phone-2 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  margin-left: 73px;
+  overflow: hidden;
+  width: 147px;
+}
+.x10-4-0-my-personals .phone-3 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .place-1 {
+  height: 24px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .profile {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  height: 800px;
+  margin-top: 40px;
+  min-width: 1112px;
+  padding: 24px 40px;
+}
+.x10-4-0-my-personals .profile-info {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 488px;
+  width: 784px;
+}
+.x10-4-0-my-personals .profile-pic {
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606accbda73434d7e931b595/img/profile-pic@2x.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 248px;
+  width: 248px;
+}
+.x10-4-0-my-personals .profile-pic-1 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  min-height: 320px;
+  width: 248px;
+}
+.x10-4-0-my-personals .ragrarians-i2073184 {
+  letter-spacing: 0px;
+  line-height: 32px;
+  min-height: 32px;
+  min-width: 113px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .rectangle-859 {
+  background-color: var(--licorice);
+  height: 35px;
+  margin-left: 6px;
+  width: 1px;
+}
+.x10-4-0-my-personals .rectangle-859-1 {
+  background-color: var(--licorice);
+  height: 35px;
+  left: 34px;
+  position: absolute;
+  top: 0px;
+  width: 1px;
+}
+.x10-4-0-my-personals .rectangle-859-2 {
+  background-color: var(--licorice);
+  height: 35px;
+  margin-left: 5px;
+  width: 1px;
+}
+.x10-4-0-my-personals .rectangle-859-3 {
+  background-color: var(--licorice);
+  height: 35px;
+  left: 37px;
+  position: absolute;
+  top: 0px;
+  width: 1px;
+}
+.x10-4-0-my-personals .rectangle-859-4 {
+  background-color: var(--licorice);
+  height: 1px;
+  width: 248px;
+}
+.x10-4-0-my-personals .rectangle-859-5 {
+  background-color: var(--onyx);
+  height: 1024px;
+  left: 247px;
+  position: absolute;
+  top: 0px;
+  width: 1px;
+}
+.x10-4-0-my-personals .rectangle-860 {
+  background-color: var(--onyx);
+  height: 1px;
+  margin-top: 7px;
+  width: 248px;
+}
+.x10-4-0-my-personals .rectangle-860-1 {
+  background-color: var(--licorice);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 34px;
+  width: 35px;
+}
+.x10-4-0-my-personals .rectangle-860-2 {
+  background-color: var(--licorice);
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  top: 34px;
+  width: 38px;
+}
+.x10-4-0-my-personals .rectangle-861 {
+  background-color: var(--onyx);
+  height: 1px;
+  width: 248px;
+}
+.x10-4-0-my-personals .rectangle-862 {
+  background-color: var(--rusty-red);
+  border-radius: 100px;
+  height: 4px;
+  left: 20px;
+  position: absolute;
+  top: 0px;
+  width: 4px;
+}
+.x10-4-0-my-personals .rectangle-865 {
+  background-color: var(--rusty-red);
+  border-radius: 100px;
+  height: 4px;
+  left: 21px;
+  position: absolute;
+  top: 0px;
+  width: 4px;
+}
+.x10-4-0-my-personals .rectangle-867 {
+  background-color: var(--onyx);
+  height: 1px;
+  margin-top: 31px;
+  width: 744px;
+}
+.x10-4-0-my-personals .text- {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-1 {
+  letter-spacing: 0px;
+  line-height: 32px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-10 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  min-width: 62px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-16 {
+  height: 20px;
+  left: 9px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  position: absolute;
+  text-align: center;
+  top: 7px;
+  width: 22px;
+}
+.x10-4-0-my-personals .text-17 {
+  height: 24px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 110px;
+  text-align: center;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-18 {
+  height: 12px;
+  letter-spacing: 0px;
+  line-height: 12px;
+  margin-bottom: 2px;
+  margin-left: 70px;
+  min-height: 12px;
+  min-width: 53px;
+  text-align: center;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-2 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-3 {
+  letter-spacing: 0px;
+  line-height: 32px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-6 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-right: 86px;
+  margin-top: 24px;
+  min-height: 24px;
+  min-width: 49px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-7 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-right: 72px;
+  margin-top: 28px;
+  min-height: 24px;
+  min-width: 63px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-8 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-right: 58px;
+  margin-top: 24px;
+  min-height: 24px;
+  min-width: 77px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .text-9 {
+  letter-spacing: 0px;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  min-width: 55px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .ugryumov {
+  letter-spacing: 0px;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+.x10-4-0-my-personals .union {
+  height: 211px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 248px;
+}
+.x10-4-0-my-personals .user-management {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  padding: 4px 0;
+  width: 24px;
+}
+.x10-4-0-my-personals .vector {
+  height: 1px;
+  left: 10px;
+  position: absolute;
+  top: 8px;
+  width: 1px;
+}
+.x10-4-0-my-personals .vector-1 {
+  height: 24px;
+  margin-bottom: -0.02px;
+  margin-left: 1px;
+  width: 25px;
+}
+.x10-4-0-my-personals .vector-10 {
+  height: 1px;
+  left: 9px;
+  position: absolute;
+  top: 10px;
+  width: 1px;
+}
+.x10-4-0-my-personals .vector-11 {
+  height: 7px;
+  width: 14px;
+}
+.x10-4-0-my-personals .vector-12 {
+  height: 16px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 20px;
+}
+.x10-4-0-my-personals .vector-13 {
+  height: 24px;
+  margin-bottom: -0.02px;
+  margin-left: 2px;
+  width: 25px;
+}
+.x10-4-0-my-personals .vector-14 {
+  height: 22px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 18px;
+}
+.x10-4-0-my-personals .vector-15 {
+  height: 4px;
+  left: 0px;
+  position: absolute;
+  top: 15px;
+  width: 18px;
+}
+.x10-4-0-my-personals .vector-16 {
+  height: 8px;
+  margin-left: 0px;
+  width: 8px;
+}
+.x10-4-0-my-personals .vector-17 {
+  height: 20px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 18px;
+}
+.x10-4-0-my-personals .vector-18 {
+  height: 1px;
+  width: 1px;
+}
+.x10-4-0-my-personals .vector-2 {
+  height: 24px;
+  margin-bottom: -0.02px;
+  margin-left: 1px;
+  width: 26px;
+}
+.x10-4-0-my-personals .vector-3 {
+  height: 8px;
+  width: 8px;
+}
+.x10-4-0-my-personals .vector-4 {
+  height: 8px;
+  margin-top: 2px;
+  width: 8px;
+}
+.x10-4-0-my-personals .vector-5 {
+  height: 8px;
+  width: 4px;
+}
+.x10-4-0-my-personals .vector-6 {
+  height: 7px;
+  width: 4px;
+}
+.x10-4-0-my-personals .vector-7 {
+  height: 12px;
+  transform: rotate(-180deg);
+  width: 7px;
+}
+.x10-4-0-my-personals .vector-8 {
+  height: 8px;
+  width: 14px;
+}
+.x10-4-0-my-personals .vector-9 {
+  align-self: flex-start;
+  height: 24px;
+  margin-top: -0.02px;
+  width: 25px;
+}
+.x10-4-0-my-personals .vector-stroke-2 {
+  height: 14px;
+  width: 8px;
+}
+:root {
+  --caribbean-green: rgba(0, 198, 136, 1);
+  --ebb: rgba(227, 227, 227, 1);
+  --licorice: rgba(20, 20, 20, 1);
+  --monsoon: rgba(137, 137, 137, 1);
+  --onyx: rgba(58, 57, 57, 1);
+  --quarter-spanish-white: rgba(248, 235, 223, 1);
+  --rusty-red: rgba(218, 52, 67, 1);
+  --shark: rgba(43, 43, 44, 1);
+}
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
