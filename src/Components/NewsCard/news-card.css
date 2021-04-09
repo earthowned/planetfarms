@@ -1,48 +1,55 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600|Inter:500");
+
 * {
   box-sizing: border-box;
 }
+
 .address {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 16px;
   min-height: 16px;
   min-width: 70px;
   white-space: nowrap;
 }
+
 .border-0-5px-quarter-spanish-white {
   border: 0.5px solid var(--quarter-spanish-white);
 }
+
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
+
 .date {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 16px;
   margin-top: 16px;
   min-height: 16px;
   white-space: nowrap;
 }
+
 .farming {
   letter-spacing: 1px;
   line-height: 16px;
   min-height: 16px;
   white-space: nowrap;
 }
+
 .frame-time {
   align-items: flex-start;
-  /* background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/6062b55af1390a7ba4307713/img/frame-1969@1x.png); */
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 4px;
   display: flex;
   height: 279px;
-  left: 0px;
+  left: 0;
   overflow: hidden;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 728px;
 }
+
 .frame-text {
   align-items: flex-start;
   display: flex;
@@ -53,6 +60,7 @@
   top: 79px;
   width: 630px;
 }
+
 .frame-3470 {
   -webkit-backdrop-filter: blur(10px) brightness(100%);
   align-items: center;
@@ -65,6 +73,7 @@
   padding: 0 22px;
   width: 116px;
 }
+
 .frame-3501 {
   align-items: flex-start;
   display: flex;
@@ -72,6 +81,7 @@
   min-height: 56px;
   width: 312px;
 }
+
 .ibmplexsans-normal-quarter-spanish-white-14px {
   color: var(--quarter-spanish-white);
   font-family: "IBM Plex Sans", Helvetica;
@@ -79,6 +89,7 @@
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-normal-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
   font-family: "IBM Plex Sans", Helvetica;
@@ -86,6 +97,7 @@
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-semi-bold-caribbean-green-14px {
   color: var(--caribbean-green);
   font-family: "IBM Plex Sans", Helvetica;
@@ -93,6 +105,7 @@
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
   color: var(--quarter-spanish-white);
   font-family: "IBM Plex Sans", Helvetica;
@@ -100,6 +113,7 @@
   font-style: normal;
   font-weight: 600;
 }
+
 .news-card {
   align-items: flex-start;
   border-radius: 4px;
@@ -107,14 +121,16 @@
   height: 280px;
   overflow: hidden;
   width: 728px;
-  margin: 25px;
+  margin-bottom: 1.2em;
 }
+
 .newsCard-group {
   border-radius: 4px;
   height: 279px;
   position: relative;
   width: 728px;
 }
+
 .newsCard-group1 {
   align-items: flex-start;
   background-color: var(--black);
@@ -124,24 +140,32 @@
   min-width: 728px;
   padding: 16px;
 }
+
 .text-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   margin-top: 8px;
   min-height: 32px;
   white-space: nowrap;
 }
+
 .news-text {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 16px;
   min-height: 72px;
   width: 632px;
 }
+
 :root {
   --black: rgba(0, 0, 0, 0.75);
   --caribbean-green: rgba(0, 198, 136, 1);
   --onyx: rgba(58, 57, 57, 1);
   --quarter-spanish-white: rgba(248, 235, 223, 1);
   --white: rgba(255, 255, 255, 0.16);
+}
+
+.subtitle {
+  width: 100%;
+  margin-top: 0.4em;
 }
