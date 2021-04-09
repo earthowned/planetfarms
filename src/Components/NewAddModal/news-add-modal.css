@@ -16,7 +16,6 @@
   width: 35%;
   height: 40%;
   padding: 4em;
-
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -39,11 +38,9 @@
   width: 100%;
   height: 40px;
   margin-bottom: 1em;
-
   background: #212225;
   border: 1px solid #3a3939;
   outline: none;
-
   color: #fff;
   padding-left: 1.5em;
 }
@@ -51,6 +48,7 @@
 .modal-input:last-child {
   margin-bottom: 2em;
 }
+
 .news-modal-header img {
   cursor: pointer;
 }

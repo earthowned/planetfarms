@@ -4,8 +4,6 @@
   background-color: var(--caribbean-green);
   border-radius: 4px;
   display: flex;
-  justify-content: center;
-
   color: black;
   overflow: hidden;
   padding: 1em 2em;
@@ -20,12 +18,11 @@
 }
 
 .btn-text {
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   display: flex;
-
   justify-content: center;
   align-items: center;
 }
