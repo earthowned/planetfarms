@@ -3,6 +3,7 @@ import "./community-news.css";
 import { Link } from "react-router-dom";
 import NewsCard from "../../Components/NewsCard/NewsCard";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
+import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 import NewsAddModal from "../../Components/NewAddModal/NewsAddModal";
 
 function App() {

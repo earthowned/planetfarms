@@ -80,7 +80,7 @@ function SideBar(props) {
       </div>
       <div className="course-menu-button">
         <div className="graduation-cap-1">
-          <img className="graduation-cap" src="img/graduation-cap 1.png" />
+          <img className="graduation-cap" src="img/graduation-cap-1.png" />
         </div>
         <div className="course-text semi-bold-quarter-white-16px">
           Courses

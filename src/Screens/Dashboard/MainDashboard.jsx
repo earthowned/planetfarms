@@ -6,14 +6,12 @@ import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 
 function DashboardComponent() {
   return (
-    <DashboardLayout>
+    <DashboardLayout title="My Dashboard">
     <div className="x10-1-0-my-dashboard">
-      {/* comes from another branch */}
       <div className="flex-col-5">
-              {/* comes from another branch */}
         <div className="dashboard-hero border-1px-onyx">
           <div className="dashboard-info">
-            <img className="dashboard-profile-pic" src="./img/DashboardProfilePic.png" alt="dashboard-profile" />
+            <img className="dashboard-profile-pic" src="/img/DashboardProfilePic.png" alt="dashboard-profile" />
             <div className="flex-col-6">
               <div className="info-my-detail">
                 <div className="mikhail-ugryumov ibmplexsans-semi-bold-quarter-spanish-white-24px">
@@ -28,17 +26,17 @@ function DashboardComponent() {
             </div>
           </div>
           {/* my-profile  */}
-          <div className="dashboard-my-profile border-1px-onyx">
+          <Link to="/myProfile"  className="dashboard-my-profile border-1px-onyx">
             <div className="user">
-              <img className="vector-21" src="./img/user.png" />
+              <img className="vector-21" src="/img/user.svg" alt="user-icon" />
             </div>
             <div className="my-profile ibmplexsans-semi-bold-quarter-spanish-white-16px">My Profile</div>
-          </div>
+          </Link>
           {/* achivements  */}
           <Link to="/achievements" className="achivements border-1px-onyx">
             <div className="award">
               <div className="overlap-group-9">
-                <img className="vector-23" src="./img/award.png" />
+                <img className="vector-23" src="/img/award.svg" alt="award-icon" />
               </div>
             </div>
             <div className="achievements ibmplexsans-semi-bold-quarter-spanish-white-16px">Achievements</div>
@@ -47,7 +45,7 @@ function DashboardComponent() {
           <div className="surveys border-1px-onyx">
             <div className="check-square-1">
               <div className="overlap-group-10">
-                <img className="vector-25" src="./img/check-square1.png" />
+                <img className="vector-25" src="/img/check-square.svg" alt="check-square" />
               </div>
             </div>
             <div className="surveys-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">Surveys</div>
@@ -60,16 +58,18 @@ function DashboardComponent() {
             <div className="my-library-tile">
               <div className="book-1">
                 <div className="overlap-group-11">
-                  <img className="vector-28" src="./img/book.png" alt="book" />
+                  <img className="vector-28" src="/img/book-outlined.svg" alt="book-icon" />
                 </div>
               </div>
               <div className="my-library ibmplexsans-semi-bold-quarter-spanish-white-24px">My library</div>
-              <SeeAllButton>See all items</SeeAllButton>
+              <Link to="/mylibrary" className="link-decoration">
+                <SeeAllButton>See all items</SeeAllButton>
+              </Link>
             </div>
             <div className="x-tile">
               <div className="book-open-1">
                 <div className="overlap-group-12">
-                  <img className="vector-30" src="./img/book-open-1.png" />
+                  <img className="vector-30" src="/img/book-open-1.svg" alt="book-open-icon" />
                 </div>
               </div>
               <div className="my-courses ibmplexsans-semi-bold-quarter-spanish-white-24px">My courses</div>
@@ -78,7 +78,7 @@ function DashboardComponent() {
             <div className="x-tile">
               <div className="users-1">
                 <div className="flex-row-4">
-                  <img className="vector-31" src="./img/users-1.png" />
+                  <img className="vector-31" src="/img/users-1.svg" alt="user" />
                 </div>
               </div>
               <div className="my-groups ibmplexsans-semi-bold-quarter-spanish-white-24px">My groups</div>
@@ -89,24 +89,24 @@ function DashboardComponent() {
           {/* library .. 1 */}
           <div className="flex">
             <div className="flex-row-2">
-              <MyLibraryTiles overlapGroup8={"./img/my-group-tile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061"  />
-              <MyLibraryTiles src={"./img/Frame3060.png"} className="frame-3061" />
-              <MyLibraryTiles src={"./img/Frame3061.png"}  className="frame-3061"/>
-              <MyLibraryTiles src={"./img/Frame3061.png"}  className="frame-3061"/>
+              <MyLibraryTiles overlapGroup8={"/img/my-group-tile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061"  />
+              <MyLibraryTiles src={"/img/Frame3060.png"} className="frame-3061" />
+              <MyLibraryTiles src={"/img/Frame3061.png"}  className="frame-3061"/>
+              <MyLibraryTiles src={"/img/Frame3061.png"}  className="frame-3061"/>
             </div>
             {/* courses */}
             <div className="flex-row-2">
-              <MyCourseTiles src={"./img/MyCourseTiles2.png"} overlapGroup8="" text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyCourseTiles src={"./img/MyCourseTiles2.png"} overlapGroup8="" text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyCourseTiles src={"./img/AddMoreTiles.png"}/>
+              <MyCourseTiles src={"/img/MyCourseTiles2.png"} overlapGroup8="" text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
+              <MyCourseTiles src={"/img/MyCourseTiles2.png"} overlapGroup8="" text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
+              <MyCourseTiles src={"/img/AddMoreTiles.png"}/>
             </div>
 
             {/* group */}
             <div className="flex-row-2">
-              <MyGroupTiles overlapGroup8={"./img/myGroupTile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyGroupTiles overlapGroup8={"./img/framelib3016.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyGroupTiles overlapGroup8={"./img/framelib3061.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyGroupTiles overlapGroup8={"./img/myGroupTile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
+              <MyGroupTiles overlapGroup8={"/img/myGroupTile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
+              <MyGroupTiles overlapGroup8={"/img/framelib3016.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
+              <MyGroupTiles overlapGroup8={"/img/framelib3061.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
+              <MyGroupTiles overlapGroup8={"/img/myGroupTile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
             </div>
           </div>
         </div>
@@ -119,9 +119,7 @@ function DashboardComponent() {
 export default DashboardComponent;
 
 
-function SeeAllButton(props) {
-  const { children } = props;
-
+function SeeAllButton({ children }) {
   return (
     <div className="frame-4 border-0-5px-quarter-spanish-white">
       <div className="default-i905517 ibmplexsans-semi-bold-quarter-spanish-white-16px">
@@ -132,8 +130,7 @@ function SeeAllButton(props) {
 }
 
 
-function MyLibraryTiles(props) {
-  const { src, overlapGroup8, text8, className } = props;
+function MyLibraryTiles({ src, overlapGroup8, text8, className }) {
   return (
     <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
       <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
@@ -143,19 +140,17 @@ function MyLibraryTiles(props) {
   );
 }
 
-function MyCourseTiles(props) {
-  const { src, overlapGroup8, text8, className } = props;
+function MyCourseTiles({ src, overlapGroup8, text8, className }) {
   return (
     <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
       <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
-      <img className="frame-2926" src={src} />
+      <img className="frame-2926" src={src} alt="my-group-tile" />
       </div>
     </div>
   );
 }
 
-function MyGroupTiles(props) {
-  const { src, overlapGroup8, text8, className } = props;
+function MyGroupTiles({ src, overlapGroup8, text8, className }) {
   return (
     <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
       <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>

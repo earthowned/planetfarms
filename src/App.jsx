@@ -7,9 +7,10 @@ import CongratulationScreen from './Screens/Congratulation/CongratulationScreen'
 import Messenger from './Screens/Messenger/Messenger';
 import Library from './Screens/Library/Library';
 import './App.css';
-
 import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
+import MyLibrary from "./Screens/Dashboard/MyLibrary";
+import MyProfile from "./Screens/Dashboard/MyProfile";
 import Collection from "./Screens/Library/Collection/Collection";
 import UserCollection from "./Screens/Library/UserCollection/UserCollection";
 import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
@@ -71,6 +72,12 @@ function App() {
         </Route>
         <Route path="/achievements">
           <Achievements />
+        </Route>
+        <Route path="/mylibrary">
+          <MyLibrary />
+        </Route>
+        <Route path="/myProfile">
+          <MyProfile />
         </Route>
       </Switch>
     </Router>

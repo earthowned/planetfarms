@@ -11,7 +11,7 @@ const newsData = [
       grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic also the main
       type of alcohol in most alcoholic…`,
     published_On: "November 01, 2020",
-    bgImage:"/img/bg-news-image-2.png"
+    bgImage:"/img/bg-image1.svg"
   },
 
   {
@@ -23,7 +23,7 @@ const newsData = [
       grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic also the main
       type of alcohol in most alcoholic…`,
     published_On: "November 02, 2020",
-    bgImage:"/img/bg-news-image.png"
+    bgImage:"/img/bg-image2.svg"
   },
   {
     _id:3,
@@ -34,7 +34,7 @@ const newsData = [
       grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic also the main
       type of alcohol in most alcoholic…`,
     published_On: "November 03, 2020",
-    bgImage:"/img/bg-news-image-2.png"
+    bgImage:"/img/bg-image2.svg"
   },
 ];
 
