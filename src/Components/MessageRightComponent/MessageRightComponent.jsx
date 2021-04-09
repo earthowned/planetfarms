@@ -44,7 +44,7 @@ const MessageRightComponent = ({setActive}) => {
             <div className="account-section">
 
                     <div className="img-wrapper">
-                        <img src="/img/user2.png"></img>
+                        <img src="/img/avatar-img.svg"></img>
                     </div>
 
                     <div className="account-user">
@@ -57,10 +57,10 @@ const MessageRightComponent = ({setActive}) => {
             </div>
             
              <ul className="messenger-list-container">
-                 <li className="messenger-list-item" onClick={() => makeCall()}><img src="/img/person-add.png"></img></li>
-                 <li className="messenger-list-item" onClick={() => setCall(true)}><img src="/img/phonecall.png"></img></li>
-                 <li className="messenger-list-item"><img src="/img/video-outline.png"></img></li>
-                 <li className="messenger-list-item"><img src="/img/toggle-btn.png"></img></li>
+                 <li className="messenger-list-item" onClick={() => makeCall()}><img src="/img/person-add-outline.svg"></img></li>
+                 <li className="messenger-list-item" onClick={() => setCall(true)}><img src="/img/phone-call-outline.svg"></img></li>
+                 <li className="messenger-list-item"><img src="/img/video-outline.svg"></img></li>
+                 <li className="messenger-list-item"><img src="/img/more-horizontal-outline-1.svg"></img></li>
              </ul>
              </div>
          </div>

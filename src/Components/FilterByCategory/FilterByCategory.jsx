@@ -8,7 +8,7 @@ const FilterByCategory = () => {
           <div className="funnel-outline-1">
             <div className="overlap-group-5">
             
-              <img className="filter-image" src="img/filter-by-category.svg" />
+              <img className="filter-image" src="img/filter-by-category.svg" alt="filter-category" />
               
             </div>
           </div>

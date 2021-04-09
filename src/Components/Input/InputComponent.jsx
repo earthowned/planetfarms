@@ -9,7 +9,7 @@ const InputComponent = ({text, error, image, changeHandler, name, active}) => {
           <div className={`default-input ${error ? "user-error" : "border-1px-onyx"}`}>
                 
                 <div className="person-outline">
-                {image && <img className="user-icon" src={image} />}
+                {image && <img className="user-icon" src={image}  alt="person-outline" />}
                  
                 </div>
                 {/* <div className="frame-9"> */}
