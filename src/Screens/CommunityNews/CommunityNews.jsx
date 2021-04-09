@@ -7,13 +7,15 @@ import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 import NewsAddModal from "../../Components/NewAddModal/NewsAddModal";
 
 function App() {
-  return <DashboardLayout title="Ragrarians News"><CommunityPagenews {...X0300CommunityPagenewsData} /></DashboardLayout>;
+  const [addModal, setAddModal] = useState(false);
+
+  return <DashboardLayout title="Ragrarians News">{addModal && <NewsAddModal />}<CommunityPagenews {...X0300CommunityPagenewsData} setAddModal={setAddModal}/></DashboardLayout>;
 }
 
 export default App;
 
 function CommunityPagenews(props) {
-  const [addModal, setAddModal] = useState(false);
+  
   
     const {
     addNews,
@@ -24,17 +26,17 @@ function CommunityPagenews(props) {
     carsIndustry,
     mediaNews,
     seeAllTopics,
+    setAddModal
   } = props;
 
 
   return (
     <>
-    {addModal && <NewsAddModal />}
-    
-    <div className="x03-0-0-community-page-news">
-      <div className="flex-col-4">
-        <div className="flex-row-2">
-          <div className="search border-1px-onyx">
+    <div className="community-page-news">
+      
+        <div className="community-news-second-header">
+
+          <div className="search-bar search border-1px-onyx">
             <div className="search-outline-1">
               <div className="overlap-group-6">
                 <img className="vector-20" src="img/search-outline 1.png" />
@@ -42,53 +44,31 @@ function CommunityPagenews(props) {
             </div>
             <input type="text" placeholder="Search..." className="search-1" />
           </div>
-          <button className="default-btn" onClick={() => setAddModal(true)}>{addNews}</button>
+
+          <button className="default-btn default-btn-variation" onClick={() => setAddModal(true)}>{addNews}</button>
+
         </div>
 
-        <div className="flex-row-5">
+        <div className="community-news-cards">
           <Link to="/community-page-news-view">
             <NewsCard />
           </Link>
-
-          <div className="filter-container border-1px-onyx">
-            <p className="text-22 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-            {text22}
-            </p>
-            <div className="flex-row-6">
-              <div className="filter-button-5 border-1px-onyx">
-                <div className="farming-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {farming}
-                </div>
-              </div>
-              <div className="filter-button-2 border-1px-onyx">
-                <div className="people ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {people}
-                </div>
-              </div>
-              <div className="filter-button-1 border-1px-onyx">
-                <div className="nature ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {nature}
-                </div>
-              </div>
-            </div>
-            <div className="flex-row-7">
-              <div className="filter-button-4 border-1px-onyx">
-                <div className="cars-industry ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {carsIndustry}
-                </div>
-              </div>
-              <div className="filter-button-3 border-1px-onyx">
-                <div className="media-news ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {mediaNews}
-                </div>
-              </div>
-            </div>
-            <div className="see-all-topics ibmplexsans-semi-bold-quarter-spanish-white-16px">
-              {seeAllTopics}
-            </div>
-          </div>
         </div>
-      </div>
+
+        <div className="community-news-right-bar">
+          <div className="community-news-right-bar-inner-container">
+          <h4>{text22}</h4>
+          <div className="community-news-filter-container">
+            <h6>{farming}</h6>
+            <h6>{people}</h6>
+            <h6>{nature}</h6>
+            <h6>{carsIndustry}</h6>
+            <h6>{mediaNews}</h6>
+          </div>
+          <Link to="/community-switching" className="nav-link">{seeAllTopics}</Link>
+          </div>
+         </div>
+
     </div>
     
     </>

@@ -1,10 +1,10 @@
 body {
   background: black;
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
 }
 
 * {
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
 }
 
 .nav-link {
@@ -79,4 +79,20 @@ body {
   transition: all 0.5s ease-in-out;
   left: 4%;
   transform: rotate(180deg);
+}
+
+/* default btn styling */
+
+.default-btn {
+  background: #029c6b;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  height: 50px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.default-btn:hover {
+  background: #00c688;
 }
