@@ -37,7 +37,7 @@ const Sidebar = ({ setToggle, toggle }) => {
           </Link>
         </li>
         <li className="list-items">
-          <img src="/img/graduation-cap 1.svg" alt="graduation-icon" />{" "}
+          <img src="/img/graduation-cap-1.svg" alt="graduation-icon" />{" "}
           <span>Course</span>
         </li>
       </ul>

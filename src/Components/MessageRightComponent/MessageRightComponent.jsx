@@ -60,7 +60,7 @@ const MessageRightComponent = ({setActive}) => {
                  <li className="messenger-list-item" onClick={() => makeCall()}><img src="/img/person-add-outline.svg"></img></li>
                  <li className="messenger-list-item" onClick={() => setCall(true)}><img src="/img/phone-call-outline.svg"></img></li>
                  <li className="messenger-list-item"><img src="/img/video-outline.svg"></img></li>
-                 <li className="messenger-list-item"><img src="/img/more-horizontal-outline 1.svg"></img></li>
+                 <li className="messenger-list-item"><img src="/img/more-horizontal-outline-1.svg"></img></li>
              </ul>
              </div>
          </div>
