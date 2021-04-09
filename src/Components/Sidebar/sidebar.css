@@ -1,8 +1,11 @@
-/* ====== */
+
 .logo-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+.logo-container.active{
+  left: 5%;
 }
 .img-container {
   width: 150px;
@@ -31,31 +34,43 @@
   width: 100%;
   border-radius: 4px;
   cursor: pointer;
-  padding: 1.4em;
+  /* padding: 1.4em; */
   margin-bottom: 20px;
 }
-
-
-.list-items:first-child:hover {
+/* .list-items:first-child:hover {
   background: #2b2b2c;
   height: auto;
   width: 100%;
-}
-.list-items-menu {
+} */
+
+/* .list-items-menu {
   width: 100%;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   padding: 1em;
-}
-.list-items-menu:hover {
+ 
+} */
+/* .list-items-menu:hover {
   background: #00c688;
+} */
+.sidebar-container.active .list-items-menu:hover{
+  background:none;
+}
+.sidebar-container.active .list-items:hover{
+  background:none;
+}
+.sidebar-container.active .dropdown-item{
+  display: none;
+}
+.sidebar-container.active .list-items-menu span{
+  display: none;
 }
 
 .dropdown-container {
   width: 100%;
   list-style: none;
-  transition: all 0.5s -1s ease-in-out;
+  /* transition: all 0.5s -1s ease-in-out; */
   height: auto;
   display: none;
 }
@@ -68,19 +83,27 @@
   border-radius: 4px;
 }
 
-.dropdown-item > strong {
-  margin-left: 22px;
+.dropdown-item strong {
+  margin-left: 42px;
 }
 
 .dropdown-item:hover {
   background: #00c688;
   
 }
+.list-items{
+  background-color:#2b2b2c;
+  height: auto;
+  width: 100%;
 
-.list-items:hover .dropdown-container {
+}
+
+.list-items .dropdown-container {
+  
   transition: all 0.5s 1s ease-in-out;
   display: block;
 }
+
 
 .nav-icon {
   width: 50px;
@@ -120,13 +143,40 @@
   padding: 1em;
 } */
 
-.list-items:hover {
+/* .list-items:hover {
   background: #00c688;
-}
+} */
+
 
 .align-content {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+ 
 }
 
+
+.list-container .text-active{
+  background: #00c688;
+  /* width: 100%;
+  border-radius: 4px;
+  height: 50px;
+  padding: 1.2rem; */
+
+}
+.list-container .text-menu{
+  width: 100%;
+  border-radius: 4px;
+  height: 50px;
+  padding: 1.2rem;
+
+}
+.list-container.active .text-passive{
+  background: none;
+}
+.list-container .text-passive{
+  background: #2b2b2c;
+  width: 100%;
+  border-radius: 4px;
+  height: 50px;
+  padding: 1.2rem;
+
+}
