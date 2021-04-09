@@ -68,18 +68,18 @@ function LoginScreen(props) {
                
                <InputComponent text={username} 
                error={userError} 
-               image="../../img/person-outline.png" 
+               image="/img/user-green-outline.svg" 
                changeHandler={userChange}
-               name="username"
+               name="Username"
            
                />
                
                <InputComponent text={password} 
                error={passwordError} 
-               image="../../img/lock-outline.svg" 
+               image="/img/lock-outline.svg" 
                changeHandler={passwordChange}
                password="password"
-               name="password"
+               name="Password"
                />
             
             <div className="remember">
@@ -100,7 +100,7 @@ function LoginScreen(props) {
             </div>
 
             <div className="button">
-             <Button name="sign in" clickHandler={handleOnClick} />
+             <Button name="Sign In" clickHandler={handleOnClick} />
               <a href="google.com" target="_blank" className="forgot-password valign-text-middle ibmplexsans-semi-bold-caribbean-green-16px">
                 Forgot Password?
               </a>
@@ -117,7 +117,7 @@ function LoginScreen(props) {
                   <div className="logo-googleg-48-dp-1">
                     <div className="overlap-group1-3">
                       
-                      <img className="subtract-1" src="../../img/google-icon.png" />
+                      <img className="subtract-1" src="/img/google-icon.svg" alt="google-icon" />
                     </div>
                   </div>
                   <div className="google valign-text-middle ibmplexsans-semi-bold-gallery-16px">
@@ -127,7 +127,7 @@ function LoginScreen(props) {
 
                 <a target="_blank" href="https://facebook.com" className="link-btn facebook-button border-0-5px-quarter-spanish-white">
                   
-                  <img className="subtract-1" src="../../img/facebook-icon.png" />
+                  <img className="subtract-1" src="/img/facebook-icon.svg" alt="facebook-icon" />
                   <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
                     {facebook}
                   </div>
@@ -150,60 +150,6 @@ function LoginScreen(props) {
 
 export default LoginScreen;
 
-function Lockoutline(props) {
-  const { vector, vector2, vector3 } = props;
 
-  return (
-    <div className="lock-outline">
-      <div className="overlap-group1-1">
-        <img className="vector-9" src={vector} />
-        <img className="vector-10" src={vector2} />
-        <img className="vector-11" src={vector3} />
-      </div>
-    </div>
-  );
-}
 
-function Eyeoffoutline2(props) {
-  const { vector, vector2, vector3, vector4 } = props;
-
-  return (
-    <div className="eye-off-outline-2">
-      <div className="overlap-group2">
-        <img className="vector-12" src={vector} />
-        <img className="vector-13" src={vector2} />
-        <img className="vector-14" src={vector3} />
-        <img className="vector-15" src={vector4} />
-      </div>
-    </div>
-  );
-}
-
-function DefaultButton(props) {
-  const { children } = props;
-
-  return (
-    <div className="default-button">
-      <div className="default-i166454252 valign-text-middle ibmplexsans-semi-bold-shark-16px">
-        {children}
-      </div>
-    </div>
-  );
-}
-const lockoutlineData = {
-  vector: "",
-  vector2: "",
-  vector3: "",
-};
-
-const eyeoffoutline2Data = {
-  vector: "",
-  vector2: "",
-  vector3: "",
-  vector4: "",
-};
-
-const defaultButtonData = {
-  children: "Sign In",
-};
 

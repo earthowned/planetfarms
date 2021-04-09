@@ -1,10 +1,10 @@
 import React from "react";
 import "./community-news.css";
 // import SideBar from "../../Components/Sidebar/index";
-import NavBar from "../../Components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import NewsCard from "../../Components/NewsCard/NewsCard";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
+import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 function App() {
   return <DashboardLayout title="Ragrarians News"><X0300CommunityPagenews {...X0300CommunityPagenewsData} /></DashboardLayout>;
 }
@@ -28,14 +28,8 @@ function X0300CommunityPagenews(props) {
       {/* <SideBar /> */}
       <div className="flex-col-4">
         <div className="flex-row-4">
-          <div className="search border-1px-onyx">
-            <div className="search-outline-1">
-              <div className="overlap-group-6">
-                <img className="vector-20" src="img/search-outline 1.png" />
-              </div>
-            </div>
-            <input type="text" placeholder="Search..." className="search-1" />
-          </div>
+        
+          <SearchComponent className={"search border-1px-onyx"} />
           <div className="add-news-button">
             <div className="add-news ibmplexsans-semi-bold-shark-16px">
               {addNews}

@@ -15,8 +15,8 @@ const GroupModal = ({clickHandler, setNewCollection, data, btnName}) => {
             <div className="group-modal">
 
             <div className="group-modal-header">
-                <h4>{btnName}</h4>
-                <button onClick={() => clickHandler(false)}><img src="/img/close-outline.png" /></button>
+                <h4>Add members</h4>
+                <button onClick={() => clickHandler(false)} ><img src="/img/close-outline.svg" alt="close-outline" /></button>
             </div>
 
             <div className="search-bar">
