@@ -23,7 +23,6 @@ function AllCommunities(props) {
           <SearchComponent className={"search border-1px-onyx"} />
           <FilterByCategory />
         </div>
-
         <CommunitiesCard />
       </div>
     </div>
