@@ -3,7 +3,7 @@ import "./button.css"
 
 const Button = ({name, clickHandler}) => {
     return (
-            <button className="default-btn" onClick={(e) => clickHandler(e)}>
+            <button className="btn-default" onClick={(e) => clickHandler(e)}>
                 <div
                   type="submit"
                   className="btn-text"

@@ -3,7 +3,7 @@ import React from 'react'
 const Banner = () => {
     return (
         <>
-           <img  src="../../img/BannerIcon.png" />  
+           <img  src="/img/banner-icon.svg" alt="banner-icon" />  
         </>
     )
 }
