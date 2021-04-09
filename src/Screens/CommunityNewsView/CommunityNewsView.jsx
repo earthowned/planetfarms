@@ -1,7 +1,7 @@
 import React from "react";
 import './community-news-view.css'
 // import SideBar from '../../Components/Sidebar'
-import NavBar from '../../Components/Navbar/Navbar'
+
 import { Link } from "react-router-dom";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 
@@ -15,12 +15,13 @@ function App() {
         <div className="back-btn">
           <div className="icons-arrows-left">
             <div className="news-group1">
-              <img className="vector-stroke-2" src="/img/left-btn.png" />
+              <img className="vector-stroke-2" src="/img/back-btn.svg" alt="back-btn" />
               
             </div>
           </div>
           <Link to="/community-page-news">
           <div className="place-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Back</div>
+          
 
           </Link>
         </div>
@@ -65,15 +66,16 @@ function App() {
           source of fuel commonly blended with gasoline to oxygenate the fuel at the gas pump. Ethanol fuel can also be
           used on its own to power vehicles.
         </p>
-        <div className="flex-row-3">
+        <div className="button-row-3">
           <div className="button-secondary-default-1 border-0-5px-quarter-spanish-white">
-            <img className="f1" src="/img/facebook.png" />
+            <img className="f1" src="/img/facebook-share-icon.svg" alt="facebook-icon" />
             <div className="your-business-goals valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px">
               Repost
             </div>
           </div>
+         
           <div className="button-secondary-default border-0-5px-quarter-spanish-white">
-            <img className="shape" src="/img/twitter-icon.png" />
+            <img className="shape" src="/img/twitter-shape-icon.svg" alt="twitter-icon" />
             <div className="your-business-goals-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px">
               Tweet
             </div>
