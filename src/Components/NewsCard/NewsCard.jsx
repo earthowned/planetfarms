@@ -59,7 +59,7 @@ function NewsCard() {
                   <div className="farming ibmplexsans-semi-bold-caribbean-green-14px">
                     {news.title}
                   </div>
-                  <h1 className="text-1 ibmplexsans-semi-bold-quarter-spanish-white-24px">
+                  <h1 className="subtitle ibmplexsans-semi-bold-quarter-spanish-white-24px">
                     {news.subtitle}
                   </h1>
                 </div>
