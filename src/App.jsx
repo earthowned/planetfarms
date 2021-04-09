@@ -7,11 +7,6 @@ import CongratulationScreen from './Screens/Congratulation/CongratulationScreen'
 import Messenger from './Screens/Messenger/Messenger';
 import Library from './Screens/Library/Library';
 import './App.css';
-// Community
-import  X0300CommunityPagenews from './Screens/CommunityNews/CommunityNews'
-import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
-
-// Dashboard 
 import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
 import MyLibrary from "./Screens/Dashboard/MyLibrary";
@@ -20,6 +15,9 @@ import Collection from "./Screens/Library/Collection/Collection";
 import UserCollection from "./Screens/Library/UserCollection/UserCollection";
 import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
 import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
+import CommunityPagenews from "./Screens/CommunityNews/CommunityNews";
+import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
+import NewsAdd from "./Screens/CommunityNews/NewsAdd/NewsAdd";
 import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
 import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
 
@@ -51,8 +49,11 @@ function App() {
         <Route path="/messenger">
            <Messenger />
          </Route>
-        <Route path="/community-page-news">
-         <X0300CommunityPagenews />
+        <Route exact path="/community-page-news">
+         <CommunityPagenews />
+        </Route>
+        <Route path="/community-page-news/:id">
+         <NewsAdd />
         </Route>
         <Route path="/community-page-news-view">
          <X0300CommunityPageViewsnews />
@@ -84,20 +85,6 @@ function App() {
 }
 
 export default App;
-
-
-const lockoutlineData = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-};
-
-const eyeoffoutline2Data = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-    vector4: "",
-};
 
 const X0100LoginEmptyData = {
     vector: "/img/vector.svg",
@@ -132,7 +119,186 @@ const X0100LoginEmptyData = {
     vector16: "",
     vector17: "",
     vector18: "",
-    lockoutlineProps: lockoutlineData,
-    eyeoffoutline2Props: eyeoffoutline2Data,
+    
 };
 
+const X0111LoginfiledData = {
+    vector: "",
+    vector2: "",
+    vector3: "",
+    vector4: "",
+    vector5: "",
+    vector6: "",
+    welcomeBack: "Sign In",
+    vector7: "",
+    vector8: "",
+    vector9: "",
+    username: "Username",
+    mikhail: "Mikhail",
+    password: "Password",
+    text1: "• • • • • • • • • •",
+    vector10: "",
+    subtract: "",
+    rememberMe: "Remember Me",
+    signIn: "Sign in",
+    forgotPassword: "Forgot Password?",
+    text2: "Sign In with services",
+    vector11: "",
+    vector12: "",
+    vector13: "",
+    vector14: "",
+    google: "Google",
+    subtract2: "",
+    facebook: "Facebook",
+    spanText: "Don't have an account yet?",
+    spanText2: "  ",
+    spanText3: "Become a member!",
+    vector15: "",
+    vector16: "",
+    vector17: "",
+    vector18: "",
+    
+};
+
+const X0112ErrorfiledData = {
+    vector: "",
+    vector2: "",
+    vector3: "",
+    vector4: "",
+    vector5: "",
+    vector6: "",
+    welcomeBack: "Sign In",
+    vector7: "",
+    vector8: "",
+    vector9: "",
+    username: "Username",
+    mikhail: "Mikhail",
+    usernameError: "Username error",
+    password: "Password",
+    text1: "• • • • • • • • • •",
+    vector10: "",
+    subtract: "",
+    rememberMe: "Remember Me",
+    signIn: "Sign in",
+    forgotPassword: "Forgot Password?",
+    text2: "Sign In with services",
+    
+    google: "Google",
+    subtract2: "",
+    facebook: "Facebook",
+    spanText: "Don't have an account yet?",
+    spanText2: "  ",
+    spanText3: "Become a member!",
+    
+    
+};
+
+const X0200SignUpemptyData = {
+    
+    welcomeBack: "Become a member",
+    username: "Username",
+    password: "Password",
+    vector10: "",
+    vector11: "",
+    spanText: "I agree with",
+    spanText2: " ",
+    spanText3: "Terms of Service ",
+    signUp: "Sign up",
+    text2: "Sign In with services",
+    vector12: "",
+    vector13: "",
+    vector14: "",
+    vector15: "",
+    google: "Google",
+    subtract: "",
+    facebook: "Facebook",
+    spanText4: "Already have an account?",
+    spanText5: " ",
+    spanText6: "Sign in!",
+    vector16: "",
+    vector17: "",
+    vector18: "",
+    vector19: "",
+};
+
+const X0211SignUpfilledData = {
+    vector: "",
+    vector2: "",
+    vector3: "",
+    vector4: "",
+    vector5: "",
+    vector6: "",
+    welcomeBack: "Become a member",
+    vector7: "",
+    vector8: "",
+    vector9: "",
+    username: "Username",
+    mikhail: "Mikhail",
+    password: "Password",
+    text1: "• • • • • • • • • •",
+    vector10: "",
+    vector11: "",
+    spanText: "I agree with",
+    spanText2: " ",
+    spanText3: "Terms of Service ",
+    signUp: "Sign up",
+    text3: "Sign In with services",
+    vector12: "",
+    vector13: "",
+    vector14: "",
+    vector15: "",
+    google: "Google",
+    subtract: "",
+    facebook: "Facebook",
+    spanText4: "Already have an account?",
+    spanText5: " ",
+    spanText6: "Sign in!",
+    vector16: "",
+    vector17: "",
+    vector18: "",
+    vector19: "",
+    
+};
+
+const X0212SignUperrorData = {
+    vector: "",
+    vector2: "",
+    vector3: "",
+    vector4: "",
+    vector5: "",
+    vector6: "",
+    welcomeBack: "Become a member",
+    vector7: "",
+    vector8: "",
+    vector9: "",
+    username: "Username",
+    mikhail: "Mikhail",
+    password: "Password",
+    badpassword111: "Badpassword111",
+    vector10: "",
+    vector11: "",
+    vector12: "",
+    passwordError: "Password error",
+    vector13: "",
+    vector14: "",
+    spanText: "I agree with",
+    spanText2: " ",
+    spanText3: "Terms of Service ",
+    signUp: "Sign up",
+    text2: "Sign In with services",
+    vector15: "",
+    vector16: "",
+    vector17: "",
+    vector18: "",
+    google: "Google",
+    subtract: "",
+    facebook: "Facebook",
+    spanText4: "Already have an account?",
+    spanText5: " ",
+    spanText6: "Sign in!",
+    vector19: "",
+    vector20: "",
+    vector21: "",
+    vector22: "",
+    
+};

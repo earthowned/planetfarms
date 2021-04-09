@@ -1,18 +1,21 @@
-import React from "react";
+import {useState} from "react";
 import "./community-news.css";
-// import SideBar from "../../Components/Sidebar/index";
 import { Link } from "react-router-dom";
 import NewsCard from "../../Components/NewsCard/NewsCard";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 import SearchComponent from '../../Components/SearchComponent/SearchComponent'
+import NewsAddModal from "../../Components/NewAddModal/NewsAddModal";
+
 function App() {
-  return <DashboardLayout title="Ragrarians News"><X0300CommunityPagenews {...X0300CommunityPagenewsData} /></DashboardLayout>;
+  return <DashboardLayout title="Ragrarians News"><CommunityPagenews {...X0300CommunityPagenewsData} /></DashboardLayout>;
 }
 
 export default App;
 
-function X0300CommunityPagenews(props) {
-  const {
+function CommunityPagenews(props) {
+  const [addModal, setAddModal] = useState(false);
+  
+    const {
     addNews,
     text22,
     farming,
@@ -23,18 +26,23 @@ function X0300CommunityPagenews(props) {
     seeAllTopics,
   } = props;
 
+
   return (
+    <>
+    {addModal && <NewsAddModal />}
+    
     <div className="x03-0-0-community-page-news">
-      {/* <SideBar /> */}
       <div className="flex-col-4">
-        <div className="flex-row-4">
-        
-          <SearchComponent className={"search border-1px-onyx"} />
-          <div className="add-news-button">
-            <div className="add-news ibmplexsans-semi-bold-shark-16px">
-              {addNews}
+        <div className="flex-row-2">
+          <div className="search border-1px-onyx">
+            <div className="search-outline-1">
+              <div className="overlap-group-6">
+                <img className="vector-20" src="img/search-outline 1.png" />
+              </div>
             </div>
+            <input type="text" placeholder="Search..." className="search-1" />
           </div>
+          <button className="default-btn" onClick={() => setAddModal(true)}>{addNews}</button>
         </div>
 
         <div className="flex-row-5">
@@ -44,7 +52,7 @@ function X0300CommunityPagenews(props) {
 
           <div className="filter-container border-1px-onyx">
             <p className="text-22 ibmplexsans-semi-bold-quarter-spanish-white-16px">
-              {text22}
+            {text22}
             </p>
             <div className="flex-row-6">
               <div className="filter-button-5 border-1px-onyx">
@@ -82,6 +90,8 @@ function X0300CommunityPagenews(props) {
         </div>
       </div>
     </div>
+    
+    </>
   );
 }
 
