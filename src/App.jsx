@@ -20,6 +20,8 @@ import Collection from "./Screens/Library/Collection/Collection";
 import UserCollection from "./Screens/Library/UserCollection/UserCollection";
 import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
 import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
+import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
+import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
 
 function App() {
   return (
@@ -57,6 +59,12 @@ function App() {
          </Route>
          <Route path="/community-switching">
           <AllCommunitiesCard />
+        </Route>
+        <Route path="/community-members">
+          <CommunityMembers />
+        </Route>
+        <Route path="/community-members-profile/:id">
+          <CommunityMembersProfile />
         </Route>
         <Route path="/dashboard">
           <DashboardComponent />
