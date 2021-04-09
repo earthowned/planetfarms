@@ -28,7 +28,7 @@ body {
 }
 
 .sidebar-container {
-  width: 25%;
+  width: 15%;
   background-color: #141414;
 
   /* padding: 20px; */
@@ -39,23 +39,37 @@ body {
 /* when sidebar is active */
 
 .sidebar-container.active {
-  width: 6%;
+  width: 4%;
   overflow: hidden;
-  transition: all 0.5s ease-in-out;
+  /* transition: all 0.5s ease-in-out; */
+  padding: 0;
+  padding-top: 20px;
+ 
 }
 
 .sidebar-container.active .logo-container .img-container {
   width: 100%;
-  overflow: hidden;
   display: none;
+  height: 5px;
+ 
+}
+
+.sidebar-container.active .list-items image {
+left: 3%;
 }
 
 .sidebar-container.active .logo-container .img-container-2 {
   transition: 0.5s ease-in-out;
   display: block;
+ margin-left: 17px;
 }
 
 .sidebar-container.active .list-items span {
+  opacity: 0;
+  transition: all 0.5s -0.5s ease-in-out;
+  
+}
+.sidebar-container.active .list-items-menu span {
   opacity: 0;
   transition: all 0.5s -0.5s ease-in-out;
 }
@@ -69,15 +83,15 @@ body {
   width: 100%;
 }
 
-.sidebar-container.active .list-items:first-child:hover {
+/* .sidebar-container.active .list-items:first-child:hover {
   transition: none;
   height: 30px;
   background: none;
-}
+} */
 
 .sidebar-container.active .nav-icon {
   transition: all 0.5s ease-in-out;
-  left: 4%;
+  left: 3%;
   transform: rotate(180deg);
 }
 

@@ -1,9 +1,14 @@
-/* ====== */
+
 .logo-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
+
+.logo-container.active {
+  left: 5%;
+}
+
 .img-container {
   width: 150px;
 }
@@ -31,35 +36,55 @@
   width: 100%;
   border-radius: 4px;
   cursor: pointer;
-  padding: 1.4em;
   margin-bottom: 20px;
 }
 
-.list-items:first-child:hover {
-  background: #2b2b2c;
-  height: 200px;
+.sidebar-container.active .list-items-menu:hover {
+  background:none;
+}
+
+.sidebar-container.active .list-items:hover {
+  background:none;
+}
+
+.sidebar-container.active .dropdown-item {
+  display: none;
+}
+
+.sidebar-container.active .list-items-menu span {
+  display: none;
 }
 
 .dropdown-container {
   width: 100%;
-
   list-style: none;
-  transition: all 0.5s -1s ease-in-out;
+  height: auto;
   display: none;
 }
 
 .dropdown-item {
-  margin: 20px;
-  width: 50%;
-  padding: 10px;
+  margin: 0px;
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px;
   border-radius: 4px;
+}
+
+.dropdown-item strong {
+  margin-left: 42px;
 }
 
 .dropdown-item:hover {
   background: #00c688;
 }
 
-.list-items:hover .dropdown-container {
+.list-items {
+  background-color:#2b2b2c;
+  height: auto;
+  width: 100%;
+}
+
+.list-items .dropdown-container {
   transition: all 0.5s 1s ease-in-out;
   display: block;
 }
@@ -72,11 +97,9 @@
   background: transparent;
   outline: none;
   border: none;
-
-  left: 19%;
+  left: 12%;
   top: 204px;
   cursor: pointer;
-
   transition: all 0.5s ease-in-out;
 }
 
@@ -96,19 +119,38 @@
   color: #fff;
 }
 
-.list-items {
-  width: 100%;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 1em;
-}
-
-.list-items:hover {
-  background: #00c688;
-}
-
 .align-content {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+}
+
+.list-container .text-active {
+  background: #00c688;
+  fill:"black"
+}
+
+.list-container .text-menu{
+  width: 100%;
+  border-radius: 4px;
+  height: 50px;
+  padding: 1.2rem;
+}
+
+.list-container.active .text-passive{
+  background: none;
+}
+
+.list-container .text-passive{
+  background: #2b2b2c;
+  width: 100%;
+  border-radius: 4px;
+  height: 50px;
+  padding: 1.2rem;
+}
+
+.icon:hover{
+  fill:"black"
+}
+
+.icon{
+  fill:"green"
 }

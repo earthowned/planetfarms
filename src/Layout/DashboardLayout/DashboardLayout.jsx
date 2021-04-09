@@ -3,7 +3,7 @@ import HeaderComponent from '../../Components/Header/HeaderComponent'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 
 const DashboardLayout = ({title, children}) => {
-    const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(true);
     return (
         <div>
            <div className="container">
