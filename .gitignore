@@ -1,8 +1,5 @@
-
-api/node_modules
-api/package-lock.json
-
-
+/api/node_modules
+/api/package-lock.json
 /node_modules
 package-lock.json
 yarn.lock
