@@ -107,8 +107,13 @@
   height: 280px;
   overflow: hidden;
   width: 728px;
-  margin: 25px;
+  margin-bottom: 1.2em;
 }
+
+/* .news-card:not(:last-child) {
+  margin-bottom: 1.2em;
+} */
+
 .newsCard-group {
   border-radius: 4px;
   height: 279px;
@@ -144,4 +149,9 @@
   --onyx: rgba(58, 57, 57, 1);
   --quarter-spanish-white: rgba(248, 235, 223, 1);
   --white: rgba(255, 255, 255, 0.16);
+}
+
+.subtitle {
+  width: 100%;
+  margin-top: 0.4em;
 }
