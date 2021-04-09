@@ -35,7 +35,7 @@ const CollectionModal = ({setActive, openAddCollection}) => {
                     </div>
                             
 
-                <div>
+                <div className="collection-input-container">
                     <input className="default-input-variation" placeholder="Collection title">
                         
                     </input><br />
