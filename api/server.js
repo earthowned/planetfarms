@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const userRoutes = require('./routes/userRouter.js');
-const sequelize = require('./config/database.js')
+const courseRoutes = require('./routes/courseRouter.js');
+const sequelize = require('./config/database.js');
 
 const PORT = process.env.port || 5000;
 
@@ -11,6 +12,7 @@ app.use(express.json());
 //routes 
 app.use('/api/users', userRoutes);
 
+app.use('/api/courses', courseRoutes);
 
 //home page response
 app.get('/', (request, response) => {
