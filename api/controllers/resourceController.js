@@ -1,4 +1,6 @@
 const Resource = require("../models/resourceModel.js");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 // @desc    Fetch all resources
 // @route   GET /api/resources
@@ -16,8 +18,9 @@ const paginate = ({ page, pageSize }) => {
 const getResources = (req, res) => {
   const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
+  const order = req.query.order || 'ASC';
 
-  Resource.findAll({ offset: page, limit: pageSize })
+  Resource.findAll({ offset: page, limit: pageSize, order: [['title', order]] })
     .then(resources => {
       paginate({ page, pageSize });
       res.json({ resources, page, pageSize }).status(200);
@@ -47,9 +50,9 @@ const getResourcesById = (req, res) => {
   const id = req.params.id;
 
   Resource.findByPk(id)
-  .then((product) => {
-    if (product) {
-      res.json(product);
+  .then(resource => {
+    if (resource) {
+      res.json(resource);
     } else {
       res.status(404);
       throw new Error('Resource not found');
@@ -59,11 +62,52 @@ const getResourcesById = (req, res) => {
 };
 
 const deleteResources = (req, res) => {
-
+  const id = req.params.id;
+  Resource.findByPk(id).then(resource => {
+    if (resource){
+      const { id } = resource;
+      Resource.destroy({ where: {id}})
+      .then(() => res.json({ message:'Resource Deleted !!!' }).status(200))
+      .catch((err) => res.json( { error: err.message }).status(400));
+    } else {
+      res.status(404);
+      throw new Error('Resource not found');
+    }
+  })
 };
 
+// @desc    Update a resource
+// @route   PUT /api/resource/:id
+// @access  Public
 const updateResources = (req, res) => {
-
+  const {
+    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments,
+  } = req.body;
+  const id = req.params.id;
+  Resource.findByPk(id).then(product => {
+    if (product) {
+      const { id } = product;
+      Resource.update({
+          title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments,
+        },
+        { where: { id } })
+        .then(() => res.json({ message:'Resource Updated !!!' }).status(200))
+        .catch((err) => res.json( { error: err.message }).status(400));
+      }
+      res.status(404)
+      throw new Error('Resource not found')
+  });
 };
 
-module.exports = { getResources, addResource, getResourcesById, deleteResources, updateResources };
+// @desc    Search title
+// @route   POST /api/resource/search
+// @access  Private
+const searchResourcesTitle = (req, res) => {
+  let { title } = req.query;
+
+  Resource.findAll({ where: { title: { [Op.like]: '%' + title + '%' } } })
+    .then(title => res.json({ title }).status(200))
+    .catch(err => res.json({ error: err }).status(400));
+};
+
+module.exports = { getResources, addResource, getResourcesById, deleteResources, updateResources, searchResourcesTitle };
