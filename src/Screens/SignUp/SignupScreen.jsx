@@ -166,10 +166,11 @@ function SignupScreen(props) {
               <p className="text-3 ibmplexsans-semi-bold-white-16px">
               <span className="span0-hsNx6X">Already have an Account?</span>
 
-              <Link className="span2-hsNx6X" to="/">
+              
+            </p>
+            <Link className="span2-hsNx6X" to="/">
                 Sign In
               </Link>
-            </p>
             </div>
         </div>
       </div>

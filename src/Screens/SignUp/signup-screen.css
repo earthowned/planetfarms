@@ -84,7 +84,7 @@
   justify-content: space-between;
   display: flex;
   height: 56px;
-  min-width: 504px;
+  width: 100%;
 }
 .x02-0-0-sign-up-empty .checkboxunchecked {
   align-items: flex-start;
@@ -116,7 +116,7 @@
   height: 80px;
   overflow: hidden;
   padding: 0 16px;
-  width: 504px;
+  width: inherit;
 }
 .x02-0-0-sign-up-empty .eye-off-outline-2 {
   align-items: flex-end;
@@ -215,9 +215,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
   min-height: 96px;
-  width: 504px;
+  margin-top: 2em;
 }
 .x02-0-0-sign-up-empty .overlap-group {
   height: 20px;
@@ -607,4 +606,76 @@
   display: flex;
   flex-direction: column;
   height: inherit;
+}
+
+@media only screen and (max-width: 1080px) {
+  .banner-container {
+    display: none;
+  }
+
+  .icons {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .x02-0-0-sign-up-empty .form-container {
+    width: 350px;
+  }
+
+  .x02-0-0-sign-up-empty .button-group {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .x02-0-0-sign-up-empty .terms {
+    margin-bottom: 1em;
+  }
+
+  .x02-0-0-sign-up-empty .o-auth-container {
+    margin: 0 auto;
+    margin-top: 2em;
+  }
+
+  .x02-0-0-sign-up-empty .icon-container {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .x02-0-0-sign-up-empty .icon-container a {
+    margin: 0;
+  }
+
+  .x02-0-0-sign-up-empty .icon-container a:first-child {
+    margin-bottom: 1em;
+  }
+
+  .signup-option {
+    width: 100%;
+    margin-top: 40%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signup-option p {
+    margin-bottom: 10px;
+  }
+
+  .btn-default {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .x02-0-0-sign-up-empty .welcome-back {
+    font-size: 1.5em;
+  }
+  .x02-0-0-sign-up-empty .form-container {
+    width: 250px;
+  }
 }

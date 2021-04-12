@@ -131,8 +131,9 @@ function LoginScreen(props) {
             <div className="signup-option">
               <p className="text-2 ibmplexsans-regular-normal-white-16px">
                 <span className="span0">Don't have an account yet? </span>
-                <Link to="/register" className="span2">Become a member!</Link>
+                
               </p>
+              <Link to="/register" className="span2">Become a member!</Link>
             </div>
 
           </div>
