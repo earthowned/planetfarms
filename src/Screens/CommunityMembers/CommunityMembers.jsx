@@ -19,7 +19,6 @@ function CommunityMembers() {
     <div className="x08-0-0-community-members">
       <div className="flex-col-4">
         <SearchComponent className={"search-bar border-1px-onyx"} />
-
         <div className="flex-row-5">
           <CardImage follow="Follow" />
         </div>

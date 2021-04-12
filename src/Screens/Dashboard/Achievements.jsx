@@ -3,27 +3,14 @@ import "./achievements.css";
 import {  Link } from "react-router-dom";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
+import BackButton from "../../Components/BackButton/BackButton";
 
 function Achievements() {
   return(
     <DashboardLayout title="My Achievements">
      <div className="x10-2-0-my-achievements">
       <div className="flex-col">
-        <Link to="/dashboard" className="back-button-item">
-          <div className="icons-arrows-left">
-            <div className="overlap-group-9">
-              <img
-                className="vector-stroke-1"
-                src="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/vector--stroke-@2x.png"
-              />
-              <img
-                className="vector-stroke-2"
-                src="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/vector--stroke--1@2x.png"
-              />
-            </div>
-          </div>
-          <div className="place-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Back</div>
-        </Link>
+        <BackButton location={"/dashboard"} />
         <div className="achievements-hero border-1px-onyx">
           <div className="achievements-info">
             <div className="profile"></div>
