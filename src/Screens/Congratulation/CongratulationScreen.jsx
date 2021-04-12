@@ -7,11 +7,9 @@ import InputComponent from '../../Components/Input/InputComponent';
 import Button from '../../Components/Button/Button';
 
 
-function CongratulationScreen(props = X0220SignUpfiledData) {
-  const {
-    welcomeBack,
-    welcomeBack2,
-  } = props;
+function CongratulationScreen() {
+  const welcomeBack= "Congratulations!";
+  const welcomeBack2= "Please fill these fields to communicate with other people easier:";
 
 const [firstname, setFirstname] = useState('');  
 const [email, setEmail] = useState('');  
@@ -90,11 +88,14 @@ const submitForm = () => {
          <Logo />
       </div>
 
+    <div className="congratulation-header-wrapper">
+        <h1 className="congratulation-header">{welcomeBack}</h1>
+        <p className="congratulation-sub-title">{welcomeBack2}</p>
+    </div>
+
       <div className="congratulation-container">
-        <div className="flex-col">
-          <h1 className="welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px">{welcomeBack}</h1>
-          <p className="welcome-back-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">{welcomeBack2}</p>
-          
+        
+        <div className="congratulation-col-1">
           <div className="form-container">
               <InputComponent text={firstname} 
                error={firstnameError} 
@@ -102,15 +103,12 @@ const submitForm = () => {
                name="firstname"
                />
           
-          
-          
             <InputComponent text={email} 
                error={emailError} 
                changeHandler={changeEmail}
                name="email"
                />
          
-          
             <InputComponent text={birthday} 
                error={birthdayError} 
                changeHandler={changeBirthday}
@@ -126,20 +124,17 @@ const submitForm = () => {
             </button>
             
             <Button clickHandler={submitForm} name="Continue" />
-            
           </div>
 
           </div>
         
-        <div className="flex-col-1">
+        <div className="congratulation-col-2">
           
             <InputComponent text={lastname} 
                error={lastnameError} 
                changeHandler={changeLastname}
                name="lastname"
                />
-          
-
           
             <InputComponent text={phone} 
                error={phoneError} 
@@ -149,7 +144,7 @@ const submitForm = () => {
           
         </div>
 
-        <div className="flex-col-2">
+        <div className="congratulation-col-3">
         <div className="file-drop-container border-1px-quarter-spanish-white" {...getRootProps()}>
           <input {...getInputProps()} />
          {files.length > 0 ? <img className="avatar" src={files[0].preview} /> : <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Drag &amp; Drop files in this area or <span className="file-upload">Click Here to attach</span></p>}
@@ -157,11 +152,7 @@ const submitForm = () => {
         </div>
        
        </div>
-        {/* <div className="file-drop-container border-1px-quarter-spanish-white">
-          <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">{text4}</p>
-        </div> */}
 
-         
       </div>
     
   );

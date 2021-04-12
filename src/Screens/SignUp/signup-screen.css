@@ -59,21 +59,19 @@
 }
 .x02-0-0-sign-up-empty {
   background-color: black;
-  height: 1024px;
-  pointer-events: auto;
-  position: relative;
-  transition: all 0.2s ease;
-  width: 1440px;
+  min-height: 100vh;
+  width: 100vw;
 }
 .x02-0-0-sign-up-empty .banner-container {
-  align-items: flex-start;
+  /* align-items: flex-start;
   display: flex;
   height: 1024px;
   left: 740px;
   padding: 241px 109px;
   position: absolute;
   top: 0px;
-  width: 700px;
+  width: 700px; */
+  /* margin-top: 8%; */
 }
 .x02-0-0-sign-up-empty .banner-images {
   align-items: flex-start;
@@ -86,7 +84,6 @@
   justify-content: space-between;
   display: flex;
   height: 56px;
-  margin-top: 40px;
   min-width: 504px;
 }
 .x02-0-0-sign-up-empty .checkboxunchecked {
@@ -101,7 +98,6 @@
   padding: 0 3px;
   width: 24px;
 }
-
 
 .x02-0-0-sign-up-empty .default-i166223488 {
   height: 24px;
@@ -330,6 +326,7 @@
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
+  margin-left: 0.5em;
 }
 .x02-0-0-sign-up-empty .span2-lQtl1i {
   color: rgba(248, 235, 223, 1);
@@ -601,6 +598,13 @@
 .active {
   border: 1px solid rgba(0, 198, 136, 1);
 }
-.checkbox{
+.checkbox {
   margin-top: 11px;
+}
+
+.sign-up {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: inherit;
 }

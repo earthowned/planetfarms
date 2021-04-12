@@ -41,12 +41,9 @@
 }
 
 .x02-2-0-sign-up-filed {
-  align-items: flex-start;
   background-color: black;
-  display: flex;
-  flex-direction: column;
   height: 100vh;
-  padding: 60px 0;
+  padding: 2% 5%;
   width: 100vw;
 }
 .x02-2-0-sign-up-filed .banner-images {
@@ -65,17 +62,8 @@
 .x02-2-0-sign-up-filed .button-wrapper {
   justify-content: space-between;
   display: flex;
-  margin-top: 40px;
-  min-width: 440px;
 }
-.x02-2-0-sign-up-filed .congratulation-container {
-  align-items: flex-start;
-  justify-content: space-evenly;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 60px;
-  min-width: 100%;
-}
+
 .x02-2-0-sign-up-filed .continue {
   height: 24px;
   letter-spacing: 0px;
@@ -106,11 +94,9 @@
   border-radius: 4px;
   display: flex;
   height: 320px;
-  margin-bottom: 96px;
-  margin-left: 40px;
   overflow: hidden;
-
   width: 320px;
+  border: 2px dashed #f8ebdf;
 }
 .x02-2-0-sign-up-filed .first-name {
   letter-spacing: 0px;
@@ -137,10 +123,6 @@
 
 .x02-2-0-sign-up-filed .flex-col-2 {
   margin-top: 6.8em;
-}
-
-.form-container {
-  margin-top: 20px;
 }
 
 .x02-2-0-sign-up-filed .frame-1935 {
@@ -295,6 +277,7 @@
   line-height: 48px;
   min-height: 48px;
   white-space: nowrap;
+  color: #fff;
 }
 .x02-2-0-sign-up-filed .welcome-back-1 {
   letter-spacing: 0px;
@@ -323,11 +306,10 @@
   align-items: flex-end;
   display: flex;
   height: 40px;
-  left: 40px;
-  overflow: hidden;
-  position: absolute;
-  top: 60px;
+
   width: 256px;
+  margin-bottom: 6em;
+  margin-top: 0.6em;
 }
 
 .input {
@@ -359,4 +341,44 @@
 .avatar {
   width: 100%;
   height: 100%;
+}
+
+.x02-2-0-sign-up-filed .congratulation-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.congratulation-header-wrapper {
+  color: #fff;
+  margin-top: 4em;
+  margin-bottom: 3em;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  white-space: nowrap;
+}
+
+.congratulation-header-wrapper .congratulation-header {
+  font-size: 4rem;
+  margin-bottom: 0.3em;
+  margin-left: 0;
+}
+
+.congratulation-sub-title {
+  font-size: 1em;
+}
+
+.congratulation-col-1 {
+}
+
+.congratulation-col-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.congratulation-col-3 {
+}
+
+[class^="congratulation-col-"]:not(:last-child) {
+  width: 35%;
 }
