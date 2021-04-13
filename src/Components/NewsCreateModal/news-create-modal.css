@@ -71,3 +71,8 @@
 .text-area-variation-2 {
   height: 300px;
 }
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+}
