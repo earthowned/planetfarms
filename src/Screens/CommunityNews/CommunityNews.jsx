@@ -14,6 +14,28 @@ function App() {
 
 export default App;
 
+const CommunityRight=({text,farming,people,nature,carsIndustry,mediaNews,seeAllTopics})=>{
+  return(
+    <>
+    
+    <div className="community-news-right-bar">
+          <div className="community-news-right-bar-inner-container">
+          <h4>{text}</h4>
+          <div className="community-news-filter-container">
+            <h6>{farming}</h6>
+            <h6>{people}</h6>
+            <h6>{nature}</h6>
+            <h6>{carsIndustry}</h6>
+            <h6>{mediaNews}</h6>
+          </div>
+          <Link to="/community-switching" className="nav-link">{seeAllTopics}</Link>
+          </div>
+         </div>
+
+    </>
+  )
+}
+
 function CommunityPagenews(props) {
   
   
@@ -33,44 +55,17 @@ function CommunityPagenews(props) {
   return (
     <>
     <div className="community-page-news">
-      
         <div className="community-news-second-header">
-
-          <div className="search-bar search border-1px-onyx">
-            <div className="search-outline-1">
-              <div className="overlap-group-6">
-                <img className="vector-20" src="img/search-outline 1.png" />
-              </div>
-            </div>
-            <input type="text" placeholder="Search..." className="search-1" />
-          </div>
-
+          <SearchComponent className={"search border-1px-onyx"} />
           <button className="default-btn default-btn-variation" onClick={() => setAddModal(true)}>{addNews}</button>
-
         </div>
-
         <div className="community-news-cards">
           <Link to="/community-page-news-view">
             <NewsCard />
           </Link>
         </div>
-
-        <div className="community-news-right-bar">
-          <div className="community-news-right-bar-inner-container">
-          <h4>{text22}</h4>
-          <div className="community-news-filter-container">
-            <h6>{farming}</h6>
-            <h6>{people}</h6>
-            <h6>{nature}</h6>
-            <h6>{carsIndustry}</h6>
-            <h6>{mediaNews}</h6>
-          </div>
-          <Link to="/community-switching" className="nav-link">{seeAllTopics}</Link>
-          </div>
-         </div>
-
+        <CommunityRight text={text22} farming={farming} people={people} nature={nature} carsIndustry={carsIndustry} mediaNews={mediaNews} seeAllTopics={seeAllTopics} />
     </div>
-    
     </>
   );
 }

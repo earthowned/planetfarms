@@ -1,30 +1,15 @@
 import React from "react";
 import './community-news-view.css'
-// import SideBar from '../../Components/Sidebar'
-
 import { Link } from "react-router-dom";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
+import BackButton from '../../Components/BackButton/BackButton'
 
 function App() {
   return (
     <DashboardLayout title="Ragrarians News">
     <div className="x03-1-0-news-page">
-      
       <div className="flex-col-2">
-         
-        <div className="back-btn">
-          <div className="icons-arrows-left">
-            <div className="news-group1">
-              <img className="vector-stroke-2" src="/img/back-btn.svg" alt="back-btn" />
-              
-            </div>
-          </div>
-          <Link to="/community-page-news">
-          <div className="place-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Back</div>
-          
-
-          </Link>
-        </div>
+        <BackButton location={"/community-page-news"} />
         <h1 className="text-1 valign-text-middle">Fueling the ethanol industry</h1>
         <div className="title-time">
           <div className="due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px">
@@ -34,7 +19,6 @@ function App() {
           <div className="due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px">4 min read</div>
         </div>
         <div className="frame-1969" style={{backgroundImage: `url("img/newsbg-image.png")`}}>
-
         </div>
         <p className="text- valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
           Over the last ten years, the emphasis on reducing fuel emissions has been an agenda for many governments. In a
@@ -73,7 +57,6 @@ function App() {
               Repost
             </div>
           </div>
-         
           <div className="button-secondary-default border-0-5px-quarter-spanish-white">
             <img className="shape" src="/img/twitter-shape-icon.svg" alt="twitter-icon" />
             <div className="your-business-goals-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px">

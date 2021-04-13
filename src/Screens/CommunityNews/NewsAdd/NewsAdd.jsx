@@ -4,6 +4,7 @@ import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import {useParams} from 'react-router-dom';
 
 import './news-add.css'
+import BackButton from '../../../Components/BackButton/BackButton';
 
 const NewsAdd = () => {
     const [createVideoModal, setCreateVideoModal] = useState(false);
@@ -34,6 +35,7 @@ const NewsAdd = () => {
         {createImageModal && <NewsCreateModal setContent={setContent} type="image" imageActive={imageActive} setImageActive={setImageActive} />}
         {createTextModal && <NewsCreateModal setContent={setContent} type="text" textActive={textActive} setTextActive={setTextActive}/>}
            <DashboardLayout title="Add News">
+               <BackButton  location={"/community-page-news"} />
             {/* back button comes here */}
             <NewsAddMainContainer setCreateVideoModal={setCreateVideoModal} setCreateImageModal={setCreateImageModal}
             setCreateTextModal={setCreateTextModal} setTextActive={setTextActive} setImageActive={setImageActive} setVideoActive={setVideoActive}
