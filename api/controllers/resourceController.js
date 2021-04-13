@@ -33,11 +33,11 @@ const getResources = (req, res) => {
 // @access  Public
 const addResource = (req, res) => {
   const {
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments,
+    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
   } = req.body
 
   Resource.create({
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments,
+    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
   })
     .then(() => res.json({ message: 'Resource Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
@@ -64,11 +64,11 @@ const getResourcesById = (req, res) => {
 const deleteResources = (req, res) => {
   const id = req.params.id
   Resource.findByPk(id).then(resource => {
-    if (resource){
+    if (resource) {
       const { id } = resource
       Resource.destroy({ where: { id } })
-      .then(() => res.json({ message: 'Resource Deleted !!!' }).status(200))
-      .catch((err) => res.json( { error: err.message }).status(400))
+        .then(() => res.json({ message: 'Resource Deleted !!!' }).status(200))
+        .catch((err) => res.json({ error: err.message }).status(400))
     } else {
       res.status(404)
       throw new Error('Resource not found')
@@ -81,21 +81,21 @@ const deleteResources = (req, res) => {
 // @access  Public
 const updateResources = (req, res) => {
   const {
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments,
+    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
   } = req.body
   const id = req.params.id
   Resource.findByPk(id).then(resource => {
     if (resource) {
       const { id } = resource
       Resource.update({
-          title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments,
-        },
-        { where: { id } })
+        title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
+      },
+      { where: { id } })
         .then(() => res.json({ message: 'Resource Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
-      }
-      res.status(404)
-      throw new Error('Resource not found')
+    }
+    res.status(404)
+    throw new Error('Resource not found')
   })
 }
 
