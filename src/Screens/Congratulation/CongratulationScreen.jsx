@@ -116,16 +116,6 @@ const submitForm = () => {
                />
           </div>
           
-          <div className="button-wrapper">
-            <button onClick={() => history.push('/community-page-news')} className="btn frame-4 border-0-5px-quarter-spanish-white">
-              <div className="default-i905507538 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                Skip for now
-              </div>
-            </button>
-            
-            <Button clickHandler={submitForm} name="Continue" />
-          </div>
-
           </div>
         
         <div className="congratulation-col-2">
@@ -152,6 +142,16 @@ const submitForm = () => {
         </div>
        
        </div>
+
+       <div className="button-wrapper">
+            <button onClick={() => history.push('/community-page-news')} className="btn frame-4 border-0-5px-quarter-spanish-white">
+              <div className="default-i905507538 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                Skip for now
+              </div>
+            </button>
+            
+            <Button clickHandler={submitForm} name="Continue" />
+          </div>
 
       </div>
     
