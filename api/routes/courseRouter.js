@@ -3,7 +3,7 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 const shortid = require('shortid');
-const addCourse = require('../controllers/courseController.js');
+const { getCourses, addCourse, updateCourse, getCourseById, deleteCourse, searchCoursesTitle } = require('../controllers/courseController.js');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -33,7 +33,16 @@ const upload = multer({
   },
 });
 
- router.route('/add').post(upload.array("productPicture"), addCourse);
+router.route('/').get(getCourses); 
+
+// for upload we have just worked with images jpg|jpeg|png for other types of file we need to work.
+router.route('/add').post(upload.single('avatar'), addCourse);
+router.route('/search').get(searchCoursesTitle);
+router
+  .route('/:id')
+  .get(getCourseById)
+  .delete(deleteCourse)
+  .put(updateCourse);
 
  module.exports = router;
  
