@@ -941,27 +941,23 @@
 
 .community-page-news {
   display: grid;
-  flex-direction: column;
-  width: 100%;
-  grid:
-    "header header"
-    "main right"
-    "main right";
-  grid-gap: 2.5em;
+  width: 97%;
+  height: 100%;
+  grid-template-rows: 5% 40% 55%;
+  grid-template-columns: 70% 30%;
+  grid-gap: 3%;
   margin-top: 1.5em;
 }
 
 .community-news-second-header {
-  width: 100%;
   display: flex;
-  align-items: center;
-  align-content: baseline;
   justify-content: space-between;
-  grid-area: header;
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
 }
 
 .search-bar {
-  width: 70%;
+  width: 75%;
   margin: 0;
 }
 
@@ -970,11 +966,13 @@
 }
 
 .community-news-cards {
-  grid-area: main;
+  grid-column: 1 / 2;
+  grid-row: 2 / -1;
 }
 
 .community-news-right-bar {
-  grid-area: right;
+  grid-column: 2 / -1;
+  grid-row: 2 / 3;
 }
 
 .community-news-right-bar-inner-container {
@@ -990,7 +988,7 @@
 
 .community-news-right-bar-inner-container .community-news-filter-container {
   display: flex;
-  flex-basis: 200px;
+
   flex-wrap: wrap;
   margin: 1em 0;
 }

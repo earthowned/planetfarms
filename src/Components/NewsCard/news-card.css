@@ -47,7 +47,7 @@
   overflow: hidden;
   position: absolute;
   top: 0;
-  width: 728px;
+  width: 100%;
 }
 
 .frame-text {
@@ -120,7 +120,7 @@
   display: flex;
   height: 280px;
   overflow: hidden;
-  width: 728px;
+  width: 100%;
   margin-bottom: 1.2em;
 }
 
@@ -128,7 +128,7 @@
   border-radius: 4px;
   height: 279px;
   position: relative;
-  width: 728px;
+  width: 100%;
 }
 
 .newsCard-group1 {
@@ -137,7 +137,7 @@
   display: flex;
   height: 279px;
   justify-content: flex-end;
-  min-width: 728px;
+  width: 100%;
   padding: 16px;
 }
 
