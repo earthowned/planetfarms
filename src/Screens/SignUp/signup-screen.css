@@ -105,6 +105,10 @@
   white-space: nowrap;
 }
 
+.default-input {
+  position: relative;
+}
+
 .x02-0-0-sign-up-empty .default-input {
   align-items: center;
   background-color: var(--licorice);
@@ -271,6 +275,10 @@
   background: inherit;
 }
 
+.password-default {
+  position: relative;
+}
+
 .x02-0-0-sign-up-empty .password-default {
   align-items: center;
   background-color: var(--licorice);
@@ -320,14 +328,14 @@
 
 .x02-0-0-sign-up-empty .span0-hsNx6X {
   color: rgba(248, 235, 223, 1);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
 }
 
 .x02-0-0-sign-up-empty .span1-hsNx6X {
   color: rgba(143, 146, 161, 1);
-  font-family: "Inter-Medium", Helvetica;
+  font-family: "Inter-Medium", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 500;
   margin-left: 4px;
@@ -335,14 +343,14 @@
 
 .x02-0-0-sign-up-empty .span1-lQtl1i {
   color: rgba(248, 235, 223, 1);
-  font-family: "Inter-Medium", Helvetica;
+  font-family: "Inter-Medium", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
 
 .x02-0-0-sign-up-empty .span2-hsNx6X {
   color: rgba(0, 198, 136, 1);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
@@ -351,7 +359,7 @@
 
 .x02-0-0-sign-up-empty .span2-lQtl1i {
   color: rgba(248, 235, 223, 1);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
@@ -402,7 +410,6 @@
   min-height: 24px;
   min-width: 76px;
   white-space: nowrap;
-
   outline: none;
   border: none;
   background: inherit;
@@ -640,14 +647,6 @@
   left: 50px;
 }
 
-.default-input {
-  position: relative;
-}
-
-.password-default {
-  position: relative;
-}
-
 .active {
   border: 1px solid rgba(0, 198, 136, 1);
 }
@@ -712,7 +711,6 @@
   .signup-option {
     width: 100%;
     margin-top: 40%;
-
     display: flex;
     flex-direction: column;
   }
