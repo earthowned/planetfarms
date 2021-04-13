@@ -9,7 +9,7 @@ const NewsAddModal = () => {
                 <div className="news-modal-inner-container">
                     <div className="news-modal-header">
                         <h4>Add news</h4>
-                        <img src="/img/close-outline.png" alt="close-icon" />
+                        <img src="/img/close-outline.svg" alt="close-icon" />
                     </div>
                     <div className="news-modal-content">
                         <input className="modal-input" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="News Title" /><br />
@@ -19,7 +19,7 @@ const NewsAddModal = () => {
                             <option>Business</option>
                         </select>
                     </div>
-                    <Link className="nav-link" to={`/community-page-news/${title}`}><button className="default-btn btn-variation">Continue</button></Link>
+                    <Link className="nav-link" to={`/community-page-news/${title}`}><button className="default-btn-btn btn-variation">Continue</button></Link>
                 </div>
             </div>
     )
