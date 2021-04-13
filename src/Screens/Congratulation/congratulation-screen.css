@@ -1,54 +1,60 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
 * {
   box-sizing: border-box;
 }
+
 .border-0-5px-quarter-spanish-white {
   border: 0.5px solid var(--quarter-spanish-white);
 }
+
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
+
 .border-1px-quarter-spanish-white {
   border: 1px solid var(--quarter-spanish-white);
 }
+
 .ibmplexsans-regular-normal-monsoon-14px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-regular-normal-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-40px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 40px;
   font-style: normal;
   font-weight: 600;
 }
 
 .x02-2-0-sign-up-filed {
-  align-items: flex-start;
   background-color: black;
-  display: flex;
-  flex-direction: column;
   height: 100vh;
-  padding: 60px 0;
+  padding: 2% 5%;
   width: 100vw;
 }
+
 .x02-2-0-sign-up-filed .banner-images {
   align-items: flex-end;
   display: flex;
@@ -56,68 +62,65 @@
   overflow: hidden;
   width: 256px;
 }
+
 .x02-2-0-sign-up-filed .birthday {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .button-wrapper {
   justify-content: space-between;
   display: flex;
-  margin-top: 40px;
-  min-width: 440px;
+  width: 35%;
 }
-.x02-2-0-sign-up-filed .congratulation-container {
-  align-items: flex-start;
-  justify-content: space-evenly;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 60px;
-  min-width: 100%;
-}
+
 .x02-2-0-sign-up-filed .continue {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 69px;
   text-align: center;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .default-i905507538 {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 95px;
   text-align: center;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .email {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .file-drop-container {
   align-items: center;
   justify-content: center;
   border-radius: 4px;
   display: flex;
   height: 320px;
-  margin-bottom: 96px;
-  margin-left: 40px;
   overflow: hidden;
-
   width: 320px;
+  border: 2px dashed #f8ebdf;
 }
+
 .x02-2-0-sign-up-filed .first-name {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .flex-col {
   align-items: flex-start;
   align-self: flex-start;
@@ -126,6 +129,7 @@
   width: 30%;
   margin-right: 3%;
 }
+
 .x02-2-0-sign-up-filed .flex-col-1 {
   align-items: flex-start;
   justify-content: flex-start;
@@ -139,10 +143,6 @@
   margin-top: 6.8em;
 }
 
-.form-container {
-  margin-top: 20px;
-}
-
 .x02-2-0-sign-up-filed .frame-1935 {
   align-items: center;
   background-color: var(--caribbean-green);
@@ -154,6 +154,7 @@
   min-width: 200px;
   padding: 0 64px;
 }
+
 .x02-2-0-sign-up-filed .frame-4 {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
@@ -166,6 +167,7 @@
   padding: 0 51px;
   width: 200px;
 }
+
 .x02-2-0-sign-up-filed .frame-9 {
   align-items: flex-start;
   display: flex;
@@ -174,6 +176,7 @@
   overflow: hidden;
   width: 50%;
 }
+
 .x02-2-0-sign-up-filed .frame-9-1 {
   align-items: flex-start;
   display: flex;
@@ -182,6 +185,7 @@
   overflow: hidden;
   width: 50%;
 }
+
 .x02-2-0-sign-up-filed .frame-9-2 {
   align-items: flex-start;
   display: flex;
@@ -190,6 +194,7 @@
   overflow: hidden;
   width: 50%;
 }
+
 .x02-2-0-sign-up-filed .frame-9-3 {
   align-items: flex-start;
   display: flex;
@@ -198,6 +203,7 @@
   overflow: hidden;
   width: 50%;
 }
+
 .x02-2-0-sign-up-filed .frame-9-4 {
   align-items: flex-start;
   display: flex;
@@ -206,98 +212,103 @@
   overflow: hidden;
   width: 50%;
 }
-/* .x02-2-0-sign-up-filed .input-container {
-  align-items: center;
-  background-color: var(--licorice);
-  border-radius: 4px;
-  display: flex;
-  height: 80px;
-  overflow: hidden;
-  padding: 0 16px;
-  width: 440px;
-} */
+
 .x02-2-0-sign-up-filed .last-name {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .last-name-container {
   align-items: flex-start;
   display: flex;
   width: 440px;
   margin-top: 20px;
 }
+
 .x02-2-0-sign-up-filed .mikhail {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .phone {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .text-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .text-2 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .text-3 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .text-4 {
   height: 72px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 72px;
   text-align: center;
   width: 166px;
 }
+
 .x02-2-0-sign-up-filed .ugrymov {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-2-0-sign-up-filed .vector {
   align-self: flex-start;
   height: 40px;
   margin-top: -0.03px;
   width: 40px;
 }
+
 .x02-2-0-sign-up-filed .vector-1 {
   height: 40px;
   margin-bottom: -0.03px;
   margin-left: 3px;
   width: 40px;
 }
+
 .x02-2-0-sign-up-filed .vector-2 {
   height: 40px;
   margin-bottom: -0.03px;
   margin-left: 2px;
   width: 40px;
 }
+
 .x02-2-0-sign-up-filed .welcome-back {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 48px;
   min-height: 48px;
   white-space: nowrap;
+  color: #fff;
 }
+
 .x02-2-0-sign-up-filed .welcome-back-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 16px;
   min-height: 24px;
@@ -313,6 +324,7 @@
   --shark: rgba(43, 43, 44, 1);
   --white: rgba(255, 255, 255, 0.16);
 }
+
 .valign-text-middle {
   display: flex;
   flex-direction: column;
@@ -323,11 +335,9 @@
   align-items: flex-end;
   display: flex;
   height: 40px;
-  left: 40px;
-  overflow: hidden;
-  position: absolute;
-  top: 60px;
   width: 256px;
+  margin-bottom: 6em;
+  margin-top: 0.6em;
 }
 
 .input {
@@ -359,4 +369,107 @@
 .avatar {
   width: 100%;
   height: 100%;
+}
+
+.x02-2-0-sign-up-filed .congratulation-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.congratulation-header-wrapper {
+  color: #fff;
+  margin-top: 4em;
+  margin-bottom: 3em;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  white-space: nowrap;
+}
+
+.congratulation-header-wrapper .congratulation-header {
+  font-size: 4rem;
+  margin-bottom: 0.3em;
+  margin-left: 0;
+}
+
+.congratulation-sub-title {
+  font-size: 1em;
+}
+
+.congratulation-col-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+[class^="congratulation-col-"]:not(:last-child) {
+  width: 35%;
+}
+
+@media only screen and (max-width: 1280px) {
+  [class^="congratulation-col-"]:not(:last-child) {
+    width: 30%;
+  }
+
+  .x02-2-0-sign-up-filed .button-wrapper {
+    width: 30%;
+  }
+
+  .x02-2-0-sign-up-filed .frame-4 {
+    padding: 0 0.2em;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1em;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  [class^="congratulation-col-"]:not(:last-child) {
+    width: 100%;
+  }
+
+  .x02-2-0-sign-up-filed .frame-4 {
+    padding: 0 0.2em;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1em;
+  }
+
+  .congratulation-col-3 {
+    order: -1;
+    margin: 0 auto;
+    margin-bottom: 2em;
+  }
+
+  .x02-2-0-sign-up-filed .button-wrapper {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .x02-2-0-sign-up-filed .frame-4 {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 1em;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .congratulation-header-wrapper .congratulation-header {
+    font-size: 3rem;
+  }
+
+  .congratulation-sub-title {
+    font-size: 0.8em;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .congratulation-header-wrapper .congratulation-header {
+    font-size: 2.5rem;
+  }
+
+  .congratulation-sub-title {
+    font-size: 0.6em;
+  }
 }

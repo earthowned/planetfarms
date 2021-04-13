@@ -1,99 +1,92 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
 * {
   box-sizing: border-box;
 }
+
 .border-0-5px-quarter-spanish-white {
   border: 0.5px solid var(--quarter-spanish-white);
 }
+
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
+
 .ibmplexsans-regular-normal-monsoon-16px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-regular-normal-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-semi-bold-gallery-16px {
   color: var(--gallery);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-40px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 40px;
   font-style: normal;
   font-weight: 600;
 }
-/* .ibmplexsans-semi-bold-shark-16px {
-  color: var(--shark);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-} */
+
 .ibmplexsans-semi-bold-white-16px {
   color: transparent;
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .x02-0-0-sign-up-empty {
   background-color: black;
-  height: 1024px;
-  pointer-events: auto;
-  position: relative;
-  transition: all 0.2s ease;
-  width: 1440px;
+  min-height: 100vh;
+  width: 100vw;
 }
-.x02-0-0-sign-up-empty .banner-container {
-  align-items: flex-start;
-  display: flex;
-  height: 1024px;
-  left: 740px;
-  padding: 241px 109px;
-  position: absolute;
-  top: 0px;
-  width: 700px;
-}
+
 .x02-0-0-sign-up-empty .banner-images {
   align-items: flex-start;
   display: flex;
   overflow: hidden;
   width: 481px;
 }
+
 .x02-0-0-sign-up-empty .button-group {
   align-items: center;
   justify-content: space-between;
   display: flex;
   height: 56px;
-  margin-top: 40px;
-  min-width: 504px;
+  width: 100%;
 }
+
 .x02-0-0-sign-up-empty .checkboxunchecked {
   align-items: flex-start;
   display: flex;
   width: 24px;
 }
+
 .x02-0-0-sign-up-empty .checkmark-square-2-outline-2 {
   align-items: center;
   display: flex;
@@ -102,16 +95,20 @@
   width: 24px;
 }
 
-
 .x02-0-0-sign-up-empty .default-i166223488 {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 59px;
   text-align: center;
   white-space: nowrap;
 }
+
+.default-input {
+  position: relative;
+}
+
 .x02-0-0-sign-up-empty .default-input {
   align-items: center;
   background-color: var(--licorice);
@@ -120,8 +117,9 @@
   height: 80px;
   overflow: hidden;
   padding: 0 16px;
-  width: 504px;
+  width: inherit;
 }
+
 .x02-0-0-sign-up-empty .eye-off-outline-2 {
   align-items: flex-end;
   display: flex;
@@ -130,9 +128,10 @@
   padding: 2.5px 1.7px;
   width: 24px;
 }
+
 .x02-0-0-sign-up-empty .facebook {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 16px;
   min-height: 24px;
@@ -140,6 +139,7 @@
   text-align: center;
   white-space: nowrap;
 }
+
 .x02-0-0-sign-up-empty .facebook-button {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: flex-end;
@@ -153,6 +153,7 @@
   padding: 12px 62px;
   width: 240px;
 }
+
 .x02-0-0-sign-up-empty .form-container {
   align-items: flex-start;
   display: flex;
@@ -161,19 +162,22 @@
   min-height: 432px;
   width: 504px;
 }
+
 .x02-0-0-sign-up-empty .frame-1934 {
   align-items: flex-start;
   display: flex;
   min-width: 102px;
 }
+
 .x02-0-0-sign-up-empty .google {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
   min-width: 54px;
   white-space: nowrap;
 }
+
 .x02-0-0-sign-up-empty .google-button {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
@@ -186,12 +190,14 @@
   padding: 0 76px;
   width: 240px;
 }
+
 .x02-0-0-sign-up-empty .icon-container {
   align-items: flex-start;
   display: flex;
   margin-top: 24px;
   min-width: 504px;
 }
+
 .x02-0-0-sign-up-empty .image-wrapper {
   align-items: flex-end;
   display: flex;
@@ -202,6 +208,7 @@
   top: 60px;
   width: 256px;
 }
+
 .x02-0-0-sign-up-empty .lock-outline {
   align-items: flex-end;
   display: flex;
@@ -209,58 +216,69 @@
   padding: 1.9px 4px;
   width: 24px;
 }
+
 .x02-0-0-sign-up-empty .logo-googleg-48-dp-1 {
   align-items: flex-start;
   display: flex;
   overflow: hidden;
   width: 24px;
 }
+
 .x02-0-0-sign-up-empty .o-auth-container {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
   min-height: 96px;
-  width: 504px;
+  margin-top: 2em;
 }
+
 .x02-0-0-sign-up-empty .overlap-group {
   height: 20px;
   position: relative;
   width: 16px;
 }
+
 .x02-0-0-sign-up-empty .overlap-group-1 {
   height: 18px;
   position: relative;
   width: 18px;
 }
+
 .x02-0-0-sign-up-empty .overlap-group-2 {
   height: 24px;
   margin-top: -0.14px;
   position: relative;
   width: 24px;
 }
+
 .x02-0-0-sign-up-empty .overlap-group-3 {
   height: 541px;
   margin-top: -0.25px;
   position: relative;
   width: 481px;
 }
+
 .x02-0-0-sign-up-empty .overlap-group1 {
   height: 19px;
   position: relative;
   width: 21px;
 }
+
 .x02-0-0-sign-up-empty .password {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
   white-space: nowrap;
-
   outline: none;
   border: none;
   background: inherit;
 }
+
+.password-default {
+  position: relative;
+}
+
 .x02-0-0-sign-up-empty .password-default {
   align-items: center;
   background-color: var(--licorice);
@@ -272,6 +290,7 @@
   padding: 0 16px;
   width: 504px;
 }
+
 .x02-0-0-sign-up-empty .person-outline {
   align-items: center;
   display: flex;
@@ -280,6 +299,7 @@
   padding: 3px 0;
   width: 24px;
 }
+
 .x02-0-0-sign-up-empty .sign-in-container {
   align-items: center;
   background-color: var(--licorice);
@@ -293,55 +313,63 @@
   top: 864px;
   width: 504px;
 }
+
 .x02-0-0-sign-up-empty .sign-up-form {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  left: 0px;
+  left: 0;
   min-height: 704px;
   padding: 80px;
   position: absolute;
   top: 160px;
   width: 740px;
 }
+
 .x02-0-0-sign-up-empty .span0-hsNx6X {
   color: rgba(248, 235, 223, 1);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
 }
 
 .x02-0-0-sign-up-empty .span1-hsNx6X {
   color: rgba(143, 146, 161, 1);
-  font-family: "Inter-Medium", Helvetica;
+  font-family: "Inter-Medium", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 500;
   margin-left: 4px;
 }
+
 .x02-0-0-sign-up-empty .span1-lQtl1i {
   color: rgba(248, 235, 223, 1);
-  font-family: "Inter-Medium", Helvetica;
+  font-family: "Inter-Medium", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
+
 .x02-0-0-sign-up-empty .span2-hsNx6X {
   color: rgba(0, 198, 136, 1);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
+  margin-left: 0.5em;
 }
+
 .x02-0-0-sign-up-empty .span2-lQtl1i {
   color: rgba(248, 235, 223, 1);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
 }
+
 .x02-0-0-sign-up-empty .subtract {
   height: 24px;
   width: 24px;
 }
+
 .x02-0-0-sign-up-empty .terms {
   align-items: flex-start;
   align-self: center;
@@ -349,59 +377,66 @@
   overflow: hidden;
   width: 245px;
 }
+
 .x02-0-0-sign-up-empty .text-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x02-0-0-sign-up-empty .text-2 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 2px;
   min-height: 24px;
   min-width: 150px;
   white-space: nowrap;
 }
+
 .x02-0-0-sign-up-empty .text-3 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 251px;
   white-space: nowrap;
 }
+
 .x02-0-0-sign-up-empty .username {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
   min-width: 76px;
   white-space: nowrap;
-
   outline: none;
   border: none;
   background: inherit;
 }
+
 .x02-0-0-sign-up-empty .vector {
   height: 40px;
   margin-bottom: -0.03px;
   margin-left: 2px;
   width: 40px;
 }
+
 .x02-0-0-sign-up-empty .vector-1 {
   height: 40px;
   margin-bottom: -0.03px;
   margin-left: 3px;
   width: 40px;
 }
+
 .x02-0-0-sign-up-empty .vector-10 {
   height: 12px;
-  left: 0px;
+  left: 0;
   position: absolute;
   top: 5px;
   width: 14px;
 }
+
 .x02-0-0-sign-up-empty .vector-11 {
   height: 12px;
   left: 7px;
@@ -409,6 +444,7 @@
   top: 2px;
   width: 14px;
 }
+
 .x02-0-0-sign-up-empty .vector-12 {
   height: 1px;
   left: 9px;
@@ -416,17 +452,20 @@
   top: 9px;
   width: 1px;
 }
+
 .x02-0-0-sign-up-empty .vector-13 {
   height: 18px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 18px;
 }
+
 .x02-0-0-sign-up-empty .vector-14 {
   height: 24px;
   width: 24px;
 }
+
 .x02-0-0-sign-up-empty .vector-15 {
   height: 10px;
   left: 1px;
@@ -434,39 +473,45 @@
   top: 14px;
   width: 19px;
 }
+
 .x02-0-0-sign-up-empty .vector-16 {
   height: 11px;
-  left: 0px;
+  left: 0;
   position: absolute;
   top: 7px;
   width: 6px;
 }
+
 .x02-0-0-sign-up-empty .vector-17 {
   height: 10px;
   left: 1px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 20px;
 }
+
 .x02-0-0-sign-up-empty .vector-18 {
   align-self: flex-start;
   height: 40px;
   margin-top: -0.03px;
   width: 40px;
 }
+
 .x02-0-0-sign-up-empty .vector-19 {
   height: 182px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 182px;
 }
+
 .x02-0-0-sign-up-empty .vector-2 {
   height: 40px;
   margin-bottom: -0.03px;
   margin-left: 2px;
   width: 40px;
 }
+
 .x02-0-0-sign-up-empty .vector-20 {
   height: 174px;
   left: 224px;
@@ -474,6 +519,7 @@
   top: 367px;
   width: 201px;
 }
+
 .x02-0-0-sign-up-empty .vector-21 {
   height: 176px;
   left: 91px;
@@ -481,6 +527,7 @@
   top: 182px;
   width: 176px;
 }
+
 .x02-0-0-sign-up-empty .vector-22 {
   height: 186px;
   left: 267px;
@@ -488,31 +535,36 @@
   top: 182px;
   width: 214px;
 }
+
 .x02-0-0-sign-up-empty .vector-3 {
   height: 40px;
   margin-bottom: -0.03px;
   margin-left: 2px;
   width: 40px;
 }
+
 .x02-0-0-sign-up-empty .vector-4 {
   height: 40px;
   margin-bottom: -0.03px;
   margin-left: 2px;
   width: 40px;
 }
+
 .x02-0-0-sign-up-empty .vector-5 {
   height: 40px;
   margin-bottom: -0.03px;
   margin-left: 2px;
   width: 40px;
 }
+
 .x02-0-0-sign-up-empty .vector-6 {
   height: 20px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 16px;
 }
+
 .x02-0-0-sign-up-empty .vector-7 {
   height: 6px;
   left: 5px;
@@ -520,6 +572,7 @@
   top: 10px;
   width: 6px;
 }
+
 .x02-0-0-sign-up-empty .vector-8 {
   height: 1px;
   left: 10px;
@@ -527,19 +580,22 @@
   top: 9px;
   width: 1px;
 }
+
 .x02-0-0-sign-up-empty .vector-9 {
   height: 19px;
   left: 1px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 19px;
 }
+
 .x02-0-0-sign-up-empty .welcome-back {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 48px;
   min-height: 48px;
   white-space: nowrap;
 }
+
 :root {
   --caribbean-green: rgba(0, 198, 136, 1);
   --gallery: rgba(238, 238, 238, 1);
@@ -550,6 +606,7 @@
   --quarter-spanish-white-2: rgba(248, 235, 223, 0.16);
   --shark: rgba(43, 43, 44, 1);
 }
+
 .valign-text-middle {
   display: flex;
   flex-direction: column;
@@ -590,17 +647,89 @@
   left: 50px;
 }
 
-.default-input {
-  position: relative;
-}
-
-.password-default {
-  position: relative;
-}
-
 .active {
   border: 1px solid rgba(0, 198, 136, 1);
 }
-.checkbox{
+
+.checkbox {
   margin-top: 11px;
+}
+
+.sign-up {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+}
+
+@media only screen and (max-width: 1080px) {
+  .banner-container {
+    display: none;
+  }
+
+  .icons {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .x02-0-0-sign-up-empty .form-container {
+    width: 350px;
+  }
+
+  .x02-0-0-sign-up-empty .button-group {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .x02-0-0-sign-up-empty .terms {
+    margin-bottom: 1em;
+  }
+
+  .x02-0-0-sign-up-empty .o-auth-container {
+    margin: 0 auto;
+    margin-top: 2em;
+  }
+
+  .x02-0-0-sign-up-empty .icon-container {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .x02-0-0-sign-up-empty .icon-container a {
+    margin: 0;
+  }
+
+  .x02-0-0-sign-up-empty .icon-container a:first-child {
+    margin-bottom: 1em;
+  }
+
+  .signup-option {
+    width: 100%;
+    margin-top: 40%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signup-option p {
+    margin-bottom: 10px;
+  }
+
+  .btn-default {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .x02-0-0-sign-up-empty .welcome-back {
+    font-size: 1.5em;
+  }
+
+  .x02-0-0-sign-up-empty .form-container {
+    width: 250px;
+  }
 }

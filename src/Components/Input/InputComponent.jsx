@@ -1,7 +1,7 @@
 import React from 'react'
 import "./input-component.css";
 
-const InputComponent = ({text, error, image, changeHandler, name, active}) => {
+const InputComponent = ({text, error, image, changeHandler, name}) => {
    
     return (
         <>

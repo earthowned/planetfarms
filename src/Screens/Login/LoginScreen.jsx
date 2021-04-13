@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {Link, useHistory} from 'react-router-dom';
 import Banner from "../../Components/Banner/Banner";
 import Button from "../../Components/Button/Button";
@@ -10,7 +10,6 @@ function LoginScreen(props) {
   const {
     welcomeBack,
     rememberMe,
-    forgotPassword,
     text1,
     google,
     facebook,
@@ -48,24 +47,20 @@ function LoginScreen(props) {
 
   return (
     <div className="x01-0-0-login-empty">
-      <div className="icons">
-         <Logo />
-      </div>
-      <div className="overlap-group">
-        <div className="banner-container">
-          <div className="banner-images">
-            <div className="overlap-group1">
-              <Banner />
-            </div>
-          </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-        </div>
+      {/* content wrapper */}
+      <div className="content-wrapper">
+
+      {/* sign in form */}
         <div className="sign-in">
+          <div className="icons">
+              <Logo />
+            </div>
           <h1 className="welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px">
             {welcomeBack}
           </h1>
+          
           <div className="from-container">
             
-               
                <InputComponent text={username} 
                error={userError} 
                image="/img/user-green-outline.svg" 
@@ -86,10 +81,8 @@ function LoginScreen(props) {
               <div className="frame-92">
                 <div className="checkmark-square-2-outline-1">
                   <div className="overlap-group1-2">
-                    {/* <img className="vector-16" src={vector13} />
-                    <img className="subtract" src={subtract} /> */}
-
-                    <input type="checkbox" />
+                    
+                    <input type="checkbox" id="checkbox-variation"/>
 
                   </div>
                 </div>
@@ -99,7 +92,7 @@ function LoginScreen(props) {
               </div>
             </div>
 
-            <div className="button">
+            <div className="button-wrapper">
              <Button name="Sign In" clickHandler={handleOnClick} />
               <a href="google.com" target="_blank" className="forgot-password valign-text-middle ibmplexsans-semi-bold-caribbean-green-16px">
                 Forgot Password?
@@ -134,16 +127,29 @@ function LoginScreen(props) {
                 </a>
               </div>
             </div>
+
+            <div className="signup-option">
+              <p className="text-2 ibmplexsans-regular-normal-white-16px">
+                <span className="span0">Don't have an account yet? </span>
+                
+              </p>
+              <Link to="/register" className="span2">Become a member!</Link>
+            </div>
+
           </div>
         </div>
-      </div>
+        
 
-      <div className="frame-93 border-1px-onyx">
-        <p className="text-2 ibmplexsans-regular-normal-white-16px">
-          <span className="span0">Don't have an account yet? </span>
-          <Link to="/register" className="span2">Become a member!</Link>
-        </p>
-      </div>
+        {/* banner-container */}
+        <div className="banner-container">
+          <div className="banner-images">
+            <div className="overlap-group1">
+              <Banner />
+            </div>
+          </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        </div>
+        
+      </div>      
     </div>
   );
 }

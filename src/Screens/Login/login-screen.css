@@ -64,21 +64,17 @@
   font-style: normal;
   font-weight: 600;
 }
-.x01-0-0-login-empty {
-  background-color: black;
-  height: 1024px;
-  position: relative;
-  width: 1440px;
-}
+
 .x01-0-0-login-empty .banner-container {
-  align-items: flex-start;
-  display: flex;
-  height: 1024px;
-  left: 739px;
-  padding: 241px 109px;
-  position: absolute;
-  top: 0px;
-  width: 700px;
+  /* align-items: flex-start; */
+  /* display: flex; */
+  /* height: 100vh; */
+  /* left: 739px; */
+  /* padding: 241px 109px;
+  position: absolute; */
+  /* top: 0px; */
+  /* width: 700px; */
+  /* margin-top: 8%; */
 }
 .x01-0-0-login-empty .banner-images {
   align-items: flex-start;
@@ -87,11 +83,12 @@
   width: 481px;
 }
 
-.button {
+.button-wrapper {
   align-items: center;
   display: flex;
-  margin-top: 40px;
-  min-width: 504px;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 2em;
 }
 
 .x01-0-0-login-empty .button-1 {
@@ -209,14 +206,14 @@
   overflow: hidden;
   padding: 0 78px;
   position: absolute;
-  top: 864px;
+  bottom: 0;
   width: 504px;
 }
 .x01-0-0-login-empty .from-container {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 2em;
   min-height: 488px;
   width: 503px;
 }
@@ -250,11 +247,11 @@
   align-items: flex-end;
   display: flex;
   height: 40px;
-  left: 80px;
-  overflow: hidden;
+  /* left: 80px; */
+  /* overflow: hidden;
   position: absolute;
-  top: 60px;
-  width: 256px;
+  top: 2em;
+  width: 256px; */
 }
 .x01-0-0-login-empty .lock-outline {
   align-items: flex-end;
@@ -278,11 +275,13 @@
   width: 504px;
 }
 .x01-0-0-login-empty .overlap-group {
-  height: 1024px;
-  left: 0px;
+  /* height: 100vh; */
+  /* left: 0px;
   position: absolute;
-  top: 0px;
-  width: 1439px;
+  top: 0px; */
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
 }
 .x01-0-0-login-empty .overlap-group1 {
   height: 541px;
@@ -343,7 +342,7 @@
 .x01-0-0-login-empty .remember {
   align-items: flex-start;
   display: flex;
-  margin-top: 40px;
+
   min-width: 140px;
 }
 .x01-0-0-login-empty .remember-me {
@@ -357,12 +356,12 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  left: 0px;
-  min-height: 704px;
-  padding: 48px 80px;
-  position: absolute;
-  top: 160px;
-  width: 740px;
+  height: inherit;
+  /* left: 0px; */
+  /* padding: 0 80px; */
+  /* position: absolute; */
+  /* top: 160px;
+  width: 740px; */
 }
 .x01-0-0-login-empty .span0 {
   color: rgba(248, 235, 223, 1);
@@ -381,6 +380,7 @@
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
+  margin-left: 0.5em;
 }
 .x01-0-0-login-empty .subtract {
   height: 18px;
@@ -402,11 +402,11 @@
   white-space: nowrap;
 }
 .x01-0-0-login-empty .text-2 {
-  letter-spacing: 0px;
+  /* letter-spacing: 0px;
   line-height: 24px;
   min-height: 24px;
   min-width: 346px;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
 .x01-0-0-login-empty .username {
   letter-spacing: 0px;
@@ -634,4 +634,103 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
+}
+
+.signup-option {
+  width: 504px;
+  background: #141414;
+  border: 1px solid #3a3939;
+  border-radius: 4px;
+  padding: 1.5em 1em;
+  text-align: center;
+  margin-top: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.x01-0-0-login-empty {
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.overlap-group1-2 #checkbox-variation {
+  border: 2px solid #8a8a8a;
+  background: red;
+  color: red;
+}
+
+@media only screen and (max-width: 1080px) {
+  .banner-container {
+    display: none;
+  }
+
+  .icons {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .x01-0-0-login-empty .from-container {
+    width: 350px;
+  }
+
+  .button-wrapper {
+    flex-direction: column;
+  }
+
+  .x01-0-0-login-empty .forgot-password {
+    margin: 0;
+    margin-top: 1em;
+  }
+
+  .x01-0-0-login-empty .button-1 {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .x01-0-0-login-empty .button-1 a {
+    margin: 0;
+  }
+
+  .x01-0-0-login-empty .button-1 a:first-child {
+    margin-bottom: 1em;
+  }
+
+  .x01-0-0-login-empty .oauth-container {
+    width: 100%;
+  }
+
+  .signup-option {
+    width: 100%;
+    margin-top: 40%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signup-option p {
+    margin-bottom: 10px;
+  }
+
+  .btn-default {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .x01-0-0-login-empty .from-container {
+    width: 250px;
+  }
 }
