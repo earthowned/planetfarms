@@ -15,14 +15,11 @@ export default App;
 function SignupScreen(props) {
   const {
     welcomeBack,
-
     spanText,
     spanText2,
     spanText3,
     text2,
-
     google,
-
     facebook,
   } = props;
 
@@ -30,7 +27,7 @@ function SignupScreen(props) {
   const [password, setPassword] = useState("");
   const [terms, setTerms] = useState(false);
   const [active, setActive] = useState(false);
-  const [activePassword, setPasswordActive] = useState(false);
+  
 
   const [userError, setUserError] = useState(false);
   const [termsError, setTermsError] = useState(false);
@@ -67,11 +64,20 @@ function SignupScreen(props) {
   };
 
   return (
-    <div className="x02-0-0-sign-up-empty smart-layers-pointers ">
-      <div className="sign-up-form">
-        <h1 className="welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px">
-          {welcomeBack}
-        </h1>
+    <div className="x02-0-0-sign-up-empty">
+
+    {/* content wrapper */}
+      <div className="content-wrapper">
+
+     {/* sign in form */}
+        <div className="sign-up">
+                <div className="icons">
+                  <Logo />
+                </div>
+
+          <h1 className="welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px">
+            {welcomeBack}
+          </h1>
 
         {/* form */}
         <div className="form-container">
@@ -155,21 +161,21 @@ function SignupScreen(props) {
               </a>
             </div>
           </div>
+
+          <div className="signup-option">
+              <p className="text-3 ibmplexsans-semi-bold-white-16px">
+              <span className="span0-hsNx6X">Already have an Account?</span>
+
+              
+            </p>
+            <Link className="span2-hsNx6X" to="/">
+                Sign In
+              </Link>
+            </div>
         </div>
       </div>
-      <div className="sign-in-container border-1px-onyx">
-        <p className="text-3 ibmplexsans-semi-bold-white-16px">
-          <span className="span0-hsNx6X">Already have an Account?</span>
+      
 
-          <Link className="span2-hsNx6X" to="/">
-            Sign In
-          </Link>
-        </p>
-      </div>
-
-      <div className="image-wrapper">
-        <Logo />
-      </div>
       <div className="banner-container">
         <div className="banner-images">
           <div className="overlap-group-3">
@@ -177,18 +183,18 @@ function SignupScreen(props) {
           </div>
         </div>
       </div>
+      
+      </div>
     </div>
   );
 }
 
 const X0200SignUpemptyData = {
   welcomeBack: "Become a member",
-
   spanText: "I agree with",
   spanText2: " ",
   spanText3: "Terms of Service ",
   text2: "Sign In with services",
-
   google: "Google",
   subtract: "",
   facebook: "Facebook",
