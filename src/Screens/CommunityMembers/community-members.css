@@ -87,7 +87,7 @@
   background-color: black;
   display: flex;
   overflow: hidden;
-  width: 1440px;
+  width: 100%;
 }
 /* .x08-0-0-community-members .address {
   letter-spacing: 0px;
@@ -190,7 +190,7 @@
   flex-direction: column;
   margin-left: 40px;
   min-height: 1096px;
-  width: 1112px;
+  width: 100%;
 }
 /* .x08-0-0-community-members .flex-row {
   align-items: flex-start;
