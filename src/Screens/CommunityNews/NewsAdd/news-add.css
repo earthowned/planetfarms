@@ -64,3 +64,29 @@
   justify-content: space-between;
   width: 35%;
 }
+
+.new-content-container {
+  justify-content: center;
+  width: 100%;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.new-content-container h2 {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}
+
+.new-content-container img {
+  width: 100%;
+}
+
+.new-content-container h6 {
+  background: #8a8a8a;
+  text-align: center;
+  font-size: 1em;
+}
+
+.new-content-container h4 {
+  margin: 1em 0;
+}
