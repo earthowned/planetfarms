@@ -45,9 +45,7 @@ const communityData = [
 const CommunitiesCard = () => {
   return (
     <>
-    <div  style={{width:"100%",display:"flex",flexWrap:"wrap"}}>
-
-    
+    <div className="card-container" >
       {communityData.map((community) => {
         return (
           <div key={community._id} className="card-row-1">

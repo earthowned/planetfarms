@@ -31,7 +31,7 @@ const Sidebar = ({ setToggle, toggle }) => {
           <img src="/img/logo.svg" />
         </div>
         <div className="img-container-2">
-          <img src="/img/grid-icon.png" />
+          <img src="/img/grid-icon.svg" />
         </div>
       </div>
 

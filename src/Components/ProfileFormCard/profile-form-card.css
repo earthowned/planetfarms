@@ -1,0 +1,126 @@
+.x-information {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    min-height: 144px;
+    width: 784px;
+  }
+  .x-information-flex-row {
+    align-items: flex-end;
+    display: flex;
+    height: 88px;
+    min-width: 361px;
+  }
+  .x-information-flex-col {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    min-height: 88px;
+    width: 151px;
+  }
+  .contact-information {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+  }
+  .ibmplexsans-semi-bold-quarter-spanish-white-16px {
+    color: var(--quarter-spanish-white);
+    font-family: "IBM Plex Sans-SemiBold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .email-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: 48px;
+    margin-top: 16px;
+    width: 100%;
+  }
+  .email-text {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+  }
+  .email-text input{
+    width: 100%;
+  }
+  .ibmplexsans-regular-normal-monsoon-14px {
+    color: var(--monsoon);
+    font-family: "IBM Plex Sans-Regular", Helvetica;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+  }  
+
+  .email-address {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+    background: #141414;
+    border: none;
+    outline: none;
+  }
+  .ibmplexsans-semi-bold-quarter-spanish-white-16px {
+    color: var(--quarter-spanish-white);
+    font-family: "IBM Plex Sans-SemiBold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .phone-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: 48px;
+    margin-left: 63px;
+    width: 147px;
+  }
+  .phone-text {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+  }
+  .ibmplexsans-regular-normal-monsoon-14px {
+    color: var(--monsoon);
+    font-family: "IBM Plex Sans-Regular", Helvetica;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .phone-number {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+    background: #141414;
+    border: none;
+    outline: none;
+  }
+
+  .ibmplexsans-semi-bold-quarter-spanish-white-16px {
+    color: var(--quarter-spanish-white);
+    font-family: "IBM Plex Sans-SemiBold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .dob {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: 48px;
+    margin-left: 144px;
+    width: 100%;
+  }
+  .border-line {
+    background-color: var(--onyx);
+    height: 1px;
+    margin-top: 39px;
+    width: 744px;
+  }
