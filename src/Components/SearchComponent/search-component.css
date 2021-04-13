@@ -45,7 +45,7 @@
   height: 48px;
   overflow: hidden;
   padding: 0 16px;
-  width: 728px;
+  width: 100%;
 }
 .search-1 {
   color: rgba(137, 137, 137, 1);
@@ -57,7 +57,7 @@
   min-height: 24px;
   min-width: 65px;
   white-space: nowrap;
-  background-color: #141414 ;
+  background-color: #141414;
   border: none;
   outline: none;
 }

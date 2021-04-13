@@ -13,7 +13,7 @@
   border: 1px solid #3a3939;
   cursor: pointer;
   padding: 11px;
-  width: 150px;
+  width: 100%;
 }
 
 .filter-dropdown {
@@ -25,15 +25,15 @@
   border: 1px solid #3a3939;
   border-radius: 4px;
   z-index: 2000;
+  width: 100%;
 }
 
 .filter-dropdown li {
   padding: 1em 2em;
-  width: 150px;
+  width: 100%;
   cursor: pointer;
 }
 
 .filter-dropdown li:hover {
   background: #00c688;
 }
-
