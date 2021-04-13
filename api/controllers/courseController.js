@@ -50,7 +50,7 @@ const addCourse = (req, res) => {
     steps
   })
     .then(() => res.json({ message: 'Course Created !!!' }).status(200))
-    .catch((err) => res.json( { error: err.message }).status(400))
+    .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Update a course
@@ -76,12 +76,12 @@ const updateCourse = (req, res) => {
         creator,
         steps
       },
-        { where: { id } })
+      { where: { id } })
         .then(() => res.json({ message: 'Course Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
-      }
-      res.status(404)
-      throw new Error('Course not found')
+    }
+    res.status(404)
+    throw new Error('Course not found')
   })
 }
 
@@ -100,7 +100,7 @@ const getCourseById = (req, res) => {
         throw new Error('Course not found')
       }
     })
-.catch((err) => res.json({ error: err.message }).status(400))
+    .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Delete a course
