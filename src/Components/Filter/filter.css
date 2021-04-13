@@ -8,12 +8,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
   top: 10px;
   z-index: 999;
   border: 1px solid #3a3939;
   cursor: pointer;
-  padding: 1em;
+  padding: 11px;
   width: 150px;
 }
 
@@ -38,5 +37,3 @@
   background: #00c688;
 }
 
-.dropdown-icon {
-}
