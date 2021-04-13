@@ -11,6 +11,7 @@
   border: none;
   outline: none;
   text-align: center;
+  width: 180px;
 }
 
 .default-btn:hover {
