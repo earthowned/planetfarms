@@ -1,30 +1,32 @@
-const express = require('express');
-const app = express();
-const userRoutes = require('./routes/userRouter.js');
-const resourceRoutes = require('./routes/resourceRouter.js');
-const sequelize = require('./config/database.js');
+const express = require('express')
+const app = express()
+const userRoutes = require('./routes/userRouter.js')
+const resourceRoutes = require('./routes/resourceRouter.js')
+const courseRoutes = require('./routes/courseRouter.js')
+const sequelize = require('./config/database.js')
 
-const PORT = process.env.port || 5000;
+const PORT = process.env.port || 5000
 
 // middleware
-app.use(express.json());
+app.use(express.json())
 
-//routes 
-app.use('/api/users', userRoutes);
-app.use('/api/resources', resourceRoutes);
+// routes
+app.use('/api/users', userRoutes)
+app.use('/api/resources', resourceRoutes)
 
+app.use('/api/courses', courseRoutes)
 
-//home page response
+// home page response
 app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API on planetfarms' });
+  response.json({ info: 'Node.js, Express, and Postgres API on planetfarms' })
 })
 
-// port connection 
+// port connection
 app.listen(PORT, () => {
-  console.log(`PlanetFarms is running on PORT ${PORT}.`);
+  console.log(`PlanetFarms is running on PORT ${PORT}.`)
 })
 
-//database connection
+// database connection
 sequelize.authenticate()
   .then(() => console.log('Connection has been established successfully.'))
-  .catch(err => console.log(`Error: ${err}`));
+  .catch(err => console.log(`Error: ${err}`))
