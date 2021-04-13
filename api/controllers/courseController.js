@@ -39,10 +39,18 @@ const addCourse = (req, res) => {
   const __dirname = path.resolve(path.dirname(''))
   Courses.create({
     _attachments: path.join(path.dirname(__dirname), '/uploads' + req.file.filename),
-    title, description, languageOfInstruction, memberLimit, method, gradeLevel, subjectLevel, creator, steps
+    title,
+    description,
+    languageOfInstruction,
+    memberLimit,
+    method,
+    gradeLevel,
+    subjectLevel,
+    creator,
+    steps
   })
-  .then(() => res.json({ message:'Course Created !!!' }).status(200))
-  .catch((err) => res.json( { error: err.message }).status(400))
+    .then(() => res.json({ message: 'Course Created !!!' }).status(200))
+    .catch((err) => res.json( { error: err.message }).status(400))
 }
 
 // @desc    Update a course
@@ -57,12 +65,20 @@ const updateCourse = (req, res) => {
     if (product) {
       const { id } = product
       Courses.update({
-        _attachments: path.join(path.dirname(__dirname), "/uploads" + req.file.filename),
-        title, description, languageOfInstruction, memberLimit, method, gradeLevel, subjectLevel, creator, steps
+        _attachments: path.join(path.dirname(__dirname), '/uploads' + req.file.filename),
+        title,
+        description,
+        languageOfInstruction,
+        memberLimit,
+        method,
+        gradeLevel,
+        subjectLevel,
+        creator,
+        steps
       },
         { where: { id } })
-        .then(() => res.json({ message:'Course Updated !!!' }).status(200))
-        .catch((err) => res.json( { error: err.message }).status(400))
+        .then(() => res.json({ message: 'Course Updated !!!' }).status(200))
+        .catch((err) => res.json({ error: err.message }).status(400))
       }
       res.status(404)
       throw new Error('Course not found')
@@ -76,15 +92,15 @@ const getCourseById = (req, res) => {
   const id = req.params.id
 
   Courses.findByPk(id)
-  .then(course => {
-    if (course) {
-      res.json(course)
-    } else {
-      res.status(404)
-      throw new Error('Course not found')
-    }
-  })
-.catch((err) => res.json( { error: err.message }).status(400))
+    .then(course => {
+      if (course) {
+        res.json(course)
+      } else {
+        res.status(404)
+        throw new Error('Course not found')
+      }
+    })
+.catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Delete a course
@@ -96,7 +112,7 @@ const deleteCourse = (req, res) => {
     if (resource) {
       const { id } = resource
       Courses.destroy({ where: { id } })
-        .then(() => res.json({ message:'Course Deleted !!!' }).status(200))
+        .then(() => res.json({ message: 'Course Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
       res.status(404)

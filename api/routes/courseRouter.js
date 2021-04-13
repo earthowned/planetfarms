@@ -10,11 +10,11 @@ const storage = multer.diskStorage({
     cb(null, path.join(path.dirname(__dirname), '/uploads'))
   },
   filename: function (req, file, cb) {
-    cb(null, shortid.generate() + "-" + file.originalname)
+    cb(null, shortid.generate() + '-' + file.originalname)
   }
 })
 
-function checkFileType(file, cb) {
+function checkFileType (file, cb) {
   const filetypes = /jpg|jpeg|png/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
@@ -22,7 +22,7 @@ function checkFileType(file, cb) {
   if (extname && mimetype) {
     return cb(null, true)
   } else {
-    cb('Images only!')
+    throw new Error('Course not found')
   }
 }
 
@@ -33,7 +33,7 @@ const upload = multer({
   }
 })
 
-router.route('/').get(getCourses) 
+router.route('/').get(getCourses)
 
 // for upload we have just worked with images jpg|jpeg|png for other types of file we need to work.
 router.route('/add').post(upload.single('avatar'), addCourse)
