@@ -38,7 +38,7 @@ const addCourse = (req, res) => {
   } = req.body
   const __dirname = path.resolve(path.dirname(''))
   Courses.create({
-    _attachments: path.join(path.dirname(__dirname), '/uploads' + req.file.filename),
+    _attachments: 'uploads/' + req.file.filename,
     title,
     description,
     languageOfInstruction,
@@ -65,7 +65,7 @@ const updateCourse = (req, res) => {
     if (product) {
       const { id } = product
       Courses.update({
-        _attachments: path.join(path.dirname(__dirname), '/uploads' + req.file.filename),
+        _attachments: 'uploads/' + req.file.filename,
         title,
         description,
         languageOfInstruction,
