@@ -6,7 +6,6 @@ const shortid = require('shortid')
 const fs = require('fs')
 const { getCourses, addCourse, updateCourse, getCourseById, deleteCourse, searchCoursesTitle } = require('../controllers/courseController.js')
 
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = path.join(path.dirname(__dirname), '/files', '/uploads')
