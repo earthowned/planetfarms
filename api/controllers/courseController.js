@@ -1,5 +1,4 @@
 const Courses = require('../models/courseModel.js')
-const path = require('path')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 

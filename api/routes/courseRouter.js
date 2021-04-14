@@ -9,7 +9,7 @@ const { getCourses, addCourse, updateCourse, getCourseById, deleteCourse, search
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    dir = path.join(path.dirname(__dirname), '/files', '/uploads')
+    const dir = path.join(path.dirname(__dirname), '/files', '/uploads')
     fs.mkdirSync(dir)
     cb(null, dir)
   },
