@@ -36,7 +36,6 @@ const addCourse = (req, res) => {
   const {
     title, description, languageOfInstruction, memberLimit, method, gradeLevel, subjectLevel, creator, steps
   } = req.body
-  const __dirname = path.resolve(path.dirname(''))
   Courses.create({
     _attachments: 'uploads/' + req.file.filename,
     title,
