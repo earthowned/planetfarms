@@ -1,5 +1,4 @@
 const Courses = require('../models/courseModel.js')
-const path = require('path')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
@@ -36,9 +35,8 @@ const addCourse = (req, res) => {
   const {
     title, description, languageOfInstruction, memberLimit, method, gradeLevel, subjectLevel, creator, steps
   } = req.body
-  const __dirname = path.resolve(path.dirname(''))
   Courses.create({
-    _attachments: path.join(path.dirname(__dirname), '/uploads' + req.file.filename),
+    _attachments: 'uploads/' + req.file.filename,
     title,
     description,
     languageOfInstruction,
@@ -65,7 +63,7 @@ const updateCourse = (req, res) => {
     if (product) {
       const { id } = product
       Courses.update({
-        _attachments: path.join(path.dirname(__dirname), '/uploads' + req.file.filename),
+        _attachments: 'uploads/' + req.file.filename,
         title,
         description,
         languageOfInstruction,

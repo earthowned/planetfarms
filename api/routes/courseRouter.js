@@ -3,11 +3,14 @@ const express = require('express')
 const multer = require('multer')
 const router = express.Router()
 const shortid = require('shortid')
+const fs = require('fs')
 const { getCourses, addCourse, updateCourse, getCourseById, deleteCourse, searchCoursesTitle } = require('../controllers/courseController.js')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(path.dirname(__dirname), '/uploads'))
+    const dir = path.join(path.dirname(__dirname), '/files', '/uploads')
+    fs.mkdirSync(dir)
+    cb(null, dir)
   },
   filename: function (req, file, cb) {
     cb(null, shortid.generate() + '-' + file.originalname)
