@@ -22,3 +22,6 @@ Thumbs.db
 *.code-workspace
 
 .history/
+
+/api/files/*
+!/api/files/empty
