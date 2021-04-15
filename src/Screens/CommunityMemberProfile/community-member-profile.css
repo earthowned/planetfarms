@@ -1254,9 +1254,15 @@
   font-weight: 600;
 }
 
-
 .valign-text-middle {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media only screen and (max-width: 370px) {
+  .default-btn-btn {
+    width: 100px;
+    padding: 0 0 0 22px;
+  }
 }

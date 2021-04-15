@@ -9,7 +9,7 @@ import Filter from "../../Components/Filter/Filter";
 
 function App() {
   const [addModal, setAddModal] = useState(false);
-  return <DashboardLayout title="Ragrarians News">{addModal && <NewsAddModal />}<CommunityPagenews {...X0300CommunityPagenewsData} setAddModal={setAddModal}/></DashboardLayout>;
+  return <DashboardLayout title="Ragrarians News">{addModal && <NewsAddModal setAddModal={setAddModal}/>}<CommunityPagenews {...X0300CommunityPagenewsData} setAddModal={setAddModal}/></DashboardLayout>;
 }
 
 export default App;
@@ -18,19 +18,19 @@ const CommunityRight=({text,farming,people,nature,carsIndustry,mediaNews,seeAllT
   
   return(
     <>
-   <div className="community-news-right-bar">
-         <div className="community-news-right-bar-inner-container">
-          <h4>{text}</h4>
-           <div className="community-news-filter-container">
-            <h6>{farming}</h6>
-            <h6>{people}</h6>
-            <h6>{nature}</h6>
-            <h6>{carsIndustry}</h6>
-            <h6>{mediaNews}</h6>
-          </div>
-          <Link to="/community-switching" className="nav-link">{seeAllTopics}</Link>
-          </div>
-         </div>
+      <div className="community-news-right-bar">
+            <div className="community-news-right-bar-inner-container">
+                <h4>{text}</h4>
+                <div className="community-news-filter-container">
+                  <h6>{farming}</h6>
+                  <h6>{people}</h6>
+                  <h6>{nature}</h6>
+                  <h6>{carsIndustry}</h6>
+                  <h6>{mediaNews}</h6>
+                </div>
+                <Link to="/community-switching" className="nav-link">{seeAllTopics}</Link>
+            </div>
+      </div>
     </>
   )
 }

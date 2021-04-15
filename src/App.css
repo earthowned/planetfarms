@@ -44,30 +44,27 @@ body {
   /* transition: all 0.5s ease-in-out; */
   padding: 0;
   padding-top: 20px;
- 
 }
 
 .sidebar-container.active .logo-container .img-container {
   width: 100%;
   display: none;
   height: 5px;
- 
 }
 
 .sidebar-container.active .list-items image {
-left: 3%;
+  left: 3%;
 }
 
 .sidebar-container.active .logo-container .img-container-2 {
   transition: 0.5s ease-in-out;
   display: block;
- margin-left: 17px;
+  margin-left: 17px;
 }
 
 .sidebar-container.active .list-items span {
   opacity: 0;
   transition: all 0.5s -0.5s ease-in-out;
-  
 }
 .sidebar-container.active .list-items-menu span {
   opacity: 0;
