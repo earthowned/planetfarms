@@ -16,7 +16,7 @@ export const listResources = (sort = '', pageNumber = '') => async (
     )
     dispatch({
       type: RESOURCE_LIST_SUCCESS,
-      payload: data,
+      payload: data
     })
   } catch (error) {
     dispatch({
@@ -24,7 +24,7 @@ export const listResources = (sort = '', pageNumber = '') => async (
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message,
+          : error.message
     })
   }
 }

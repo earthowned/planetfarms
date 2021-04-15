@@ -13,7 +13,7 @@ export const resourceListReducer = (state = { resources: [] }, action) => {
         loading: false,
         resources: action.payload.resources,
         pages: action.payload.pages,
-        page: action.payload.page,
+        page: action.payload.page
       }
     case RESOURCE_LIST_FAIL:
       return { loading: false, error: action.payload }
