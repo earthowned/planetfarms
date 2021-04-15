@@ -56,40 +56,9 @@ function CommunityGroup() {
           <CommunityGroupCard />
           <CommunityGroupCard />
           <CommunityGroupCard />
-         
-          {/* <div className="card-2 border-1px-onyx">
-            <div className="frame-1969-2"></div>
-            <div className="frame-2794">
-              <div className="ecology ibmplexsans-semi-bold-caribbean-green-14px">
-                ECOLOGY
-              </div>
-              <div className="text- ibmplexsans-semi-bold-quarter-spanish-white-24px">
-                Let’s save our nature together! Community for nature lovers!
-              </div>
-            </div>
-            <div className="frame-3477">
-              <div className={`frame-2793-1`}>
-                <div className="frame-2793-item ibmplexsans-regular-normal-monsoon-16px">
-                  2,564 followers
-                </div>
-                <p className="frame-2793-item ibmplexsans-regular-normal-monsoon-16px">
-                  Last publication: 2 days ago
-                </p>
-              </div>
-              <div className="frame-2796-1">
-                <div className="frame-5-1 border-0-5px-quarter-spanish-white">
-                  <div className="default-i905516418 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Don't recommend
-                  </div>
-                </div>
-                <div className={`frame-2792`}>
-                  <div className="follow ibmplexsans-semi-bold-shark-16px">
-                    Follow
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
+          <CommunityGroupCard />
+          <CommunityGroupCard />
+          <CommunityGroupCard />
         </div>
       </div>
     </div>

@@ -22,6 +22,7 @@ import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
 import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
 import UserInfo from "./Screens/CabinetUserInfo/CabinetUserInfo";
 import CommunityGroup from './Screens/CommunityGroup/CommunityGroup';
+import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage';
 
 function App() {
   return (
@@ -71,6 +72,9 @@ function App() {
         </Route>
         <Route path="/community-group" >
           <CommunityGroup />
+        </Route>
+        <Route path="/community-group-view-page" >
+          <CommunityGroupViewPage />
         </Route>
         <Route path="/dashboard">
           <DashboardComponent />

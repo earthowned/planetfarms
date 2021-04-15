@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./community-group-card.css";
 
 const CommunityGroupCard = () => {
+  const [follow, setFollow] = useState(false);
+  const followClick = () => {
+    setFollow(!follow);
+  };
   return (
     <div className="card-1 border-1px-onyx">
       <div className="card-container"></div>
@@ -23,42 +27,35 @@ const CommunityGroupCard = () => {
             Last publication: 2 days ago
           </p>
         </div>
-        <div className="frame-2796-1">
-          <div className="frame-5-1 border-0-5px-quarter-spanish-white">
-            <div className="default-i905516418 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-              Don't recommend
+        {follow ? (
+          <div className="follow-btn border-0-5px-quarter-spanish-white">
+            <div
+              className="btn-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px"
+              onClick={followClick}
+            >
+              Unfollow
             </div>
           </div>
-          <div className={`frame-2792`}>
-            <div className="follow ibmplexsans-semi-bold-shark-16px">
-              Follow
+        ) : (
+          <div className="frame-2796-1">
+            <div className="frame-5-1 border-0-5px-quarter-spanish-white">
+              <div className="default-i905516418 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                Don't recommend
+              </div>
+            </div>
+            <div className={`frame-2792`}>
+              <div
+                className="follow ibmplexsans-semi-bold-shark-16px"
+                onClick={followClick}
+              >
+                Follow
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
 };
 
-//  <div className="frame-2796-1">
-// <div className="frame-5-1 border-0-5px-quarter-spanish-white">
-// <div className="default-i905516418 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-//   Don't recommend
-// </div>
-// </div>
-// <div className={`frame-2792`}>
-// <div className="follow ibmplexsans-semi-bold-shark-16px">
-//   Follow
-// </div>
-// </div>
-// </div>
-
-//follow
-{
-  /* <div className="follow-btn border-0-5px-quarter-spanish-white">
-<div className="btn-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-  Unfollow
-</div>
-</div> */
-}
 export default CommunityGroupCard;

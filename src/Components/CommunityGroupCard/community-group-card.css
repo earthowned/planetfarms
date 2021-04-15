@@ -73,6 +73,7 @@
     overflow: hidden;
     padding: 0 46px;
     width: 164px;
+    cursor: pointer;
   }
   .btn-text {
     height: 24px;

@@ -866,6 +866,8 @@
     min-height: 24px;
     min-width: 52px;
     white-space: nowrap;
+    cursor: pointer;
+
   }
   .frame-2792 {
     align-items: center;
