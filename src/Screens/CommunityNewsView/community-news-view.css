@@ -85,9 +85,9 @@
   align-items: flex-start;
   background-color: rgba(0, 0, 0, 1);
   display: flex;
-  height: 1368px;
+  height: 100%;
   overflow: hidden;
-  width: 1440px;
+  width: 100%;
 }
 .x03-1-0-news-page .back-btn {
   align-items: flex-start;
@@ -170,9 +170,9 @@
   white-space: nowrap;
 }
 .x03-1-0-news-page .ellipse-15 {
-  height: 2px;
+  height: 100%;
   margin-left: 9px;
-  width: 2px;
+  width: 100%;
 }
 .x03-1-0-news-page .email-outline {
   align-items: center;
@@ -204,9 +204,9 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
-  min-height: 1328px;
-  width: 1114px;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 .x03-1-0-news-page .flex-col-3 {
   align-items: flex-start;
@@ -332,13 +332,13 @@
   min-width: 1112px;
 }
 .x03-1-0-news-page .frame-1969 {
-  background-image: url('');
+  background-image: url("");
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 4px;
-  height: 496px;
+  height: 100%;
   margin-top: 24px;
-  width: 1112px;
+  width: 100%;
 }
 .x03-1-0-news-page .frame-1973 {
   align-items: center;
@@ -729,12 +729,10 @@
   width: 17px;
 }
 .x03-1-0-news-page .text- {
-  height: 192px;
   letter-spacing: 0px;
   line-height: 24px;
   margin-top: 40px;
-  min-height: 192px;
-  width: 1114px;
+  width: 100%;
 }
 .x03-1-0-news-page .text-1 {
   color: var(--quarter-spanish-white);
@@ -837,11 +835,10 @@
   white-space: nowrap;
 }
 .x03-1-0-news-page .title-time {
-  align-items: center;
   display: flex;
   margin-top: 24px;
   overflow: hidden;
-  width: 250px;
+  width: 100%;
 }
 .x03-1-0-news-page .union {
   height: 211px;
@@ -980,7 +977,6 @@
   top: 0px;
   width: 26px;
   position: absolute;
-
 }
 .x03-1-0-news-page .your-business-goals {
   height: 28px;
@@ -1016,4 +1012,54 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* new css */
+
+.text-container {
+  width: 100%;
+  color: #fff;
+  line-height: 24px;
+  font-family: IBM Plex Sans;
+  font-weight: 400;
+}
+
+.text-container > p {
+  margin-top: 1em;
+  text-align: justify;
+}
+
+.news-view-title {
+  color: #fff;
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  display: flex;
+  align-items: center;
+  margin-top: 1em;
+}
+
+@media only screen and (max-width: 400px) {
+  .x03-1-0-news-page .button-row-3 {
+    width: 100%;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .x03-1-0-news-page .button-secondary-default-1 {
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+    margin: 0;
+    margin-bottom: 1em;
+  }
+
+  .x03-1-0-news-page .button-secondary-default {
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+    margin: 0;
+  }
 }
