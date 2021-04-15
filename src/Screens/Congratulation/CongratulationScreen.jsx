@@ -124,21 +124,24 @@ const submitForm = () => {
               </div>
 
           <div className="row-1-col">
-            <InputComponent text={birthday} 
-               error={birthdayError} 
-               changeHandler={changeBirthday}
-               name="birthday"
+            <InputComponent text={phone} 
+               error={phoneError} 
+               changeHandler={changePhone}
+               name="phone"
                />
             </div>
           </div>
 
            
           <div className="congratulation-row">
-            <InputComponent text={phone} 
-               error={phoneError} 
-               changeHandler={changePhone}
-               name="phone"
+            <div className="row-1-col">
+            <InputComponent text={birthday} 
+               error={birthdayError} 
+               changeHandler={changeBirthday}
+               name="birthday"
                />
+            </div>
+            
           </div>
           
           </div>
