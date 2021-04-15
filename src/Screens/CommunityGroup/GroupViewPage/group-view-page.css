@@ -1055,7 +1055,7 @@
     min-width: 58px;
     white-space: nowrap;
   }
-  .frame-2808 {
+  .filter-field {
     align-items: center;
     background-color: var(--licorice);
     border-radius: 4px;
@@ -1125,7 +1125,7 @@
     margin-left: 39px;
     min-height: 2684px;
     position: relative;
-    width: 1114px;
+    width: 100%;
   }
   .group-flex-row-5 {
     align-items: flex-start;
@@ -1282,7 +1282,7 @@
     min-width: 100px;
     position: relative;
   }
-  .frame-2810 {
+  .search-btn-group {
     align-items: center;
     background-color: var(--caribbean-green);
     border-radius: 4px;
@@ -1581,6 +1581,32 @@
     min-height: 32px;
     white-space: nowrap;
   }
+  .follow-option {
+    align-items: flex-start;
+    background-color: var(--onyx-2);
+    border-radius: 4px;
+    box-shadow: 0px 16px 40px rgba(0,0,0,0.18);;
+    display: flex;
+    flex-direction: column;
+    height: 168px;
+    padding: 16px;
+    width: 224px;
+    margin-top: 10px;
+    margin-left: 171px;
+  }
+  .follow-option-item {
+    letter-spacing: 0.00px;
+    line-height: 24px;
+    margin-top: 32px;
+    min-height: 24px;
+    white-space: nowrap;
+  }
+  .write-a-message {
+    letter-spacing: 0.00px;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+  }
   .group-user-post-text {
     height: 48px;
     letter-spacing: 0.00px;
@@ -1659,7 +1685,7 @@
     display: flex;
     height: 2392px;
     position: relative;
-    width: 1440px;
+    width: 100%;
   }
   .youre-follower {
     letter-spacing: 0.00px;

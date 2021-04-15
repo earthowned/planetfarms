@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BackButton from "../../../Components/BackButton/BackButton";
 import CommunityGroupPost from "../../../Components/CommunityGroupPost/CommunityGroupPost";
 import DashboardLayout from "../../../Layout/DashboardLayout/DashboardLayout";
@@ -16,6 +16,10 @@ function App() {
 export default App;
 
 function CommunityGroupViewPage() {
+    const [followers,setFollowers]=useState(false)
+    const handleFollowClick=()=>{
+        setFollowers(!followers)
+    }
   return (
     <div className="x05-2-0-group-page-inside-user-view">
       <div className="flex-col-4">
@@ -34,22 +38,39 @@ function CommunityGroupViewPage() {
                   you gonna like it! Be a part of our still small, but amazing
                   community!
                 </p>
+              
                 <div className="followers-group">
                   <div className="group-followers-text valign-text-middle ibmplexsans-semi-bold-monsoon-16px">
                     2,564 followers
                   </div>
                 </div>
               </div>
+                <div>
+
+                
               <div className="community-group-follow-btn border-0-5px-quarter-spanish-white">
-                <div className="youre-follower ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                <div className="youre-follower ibmplexsans-semi-bold-quarter-spanish-white-16px" onClick={handleFollowClick}>
                   You’re follower
                 </div>
+               
                 <img src="/img/chevron-right-outline.svg" alt="arrow-icon" />
+                
               </div>
+              {followers &&   <div className="follow-option">
+                  <div className="write-a-message ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                    Write a message
+                  </div>
+                  <div className="follow-option-item ibmplexsans-semi-bold-quarter-spanish-white-16px">Unfollow</div>
+                  <div className="follow-option-item ibmplexsans-semi-bold-rusty-red-16px">Report group</div>
+                </div>}
+            
+              </div>
+
+             
             </div>
             <div className="group-boderline"></div>
           </div>
-          <GroupPhoto {...groupPhotoData} />
+          <GroupPhoto />
         </div>
         <div className="group-flex-row-7">
           <div>
@@ -81,50 +102,35 @@ function CommunityGroupViewPage() {
 
 
 function GroupPhoto(props) {
-  const {
-    enterprisePhotosI5,
-    photo1,
-    photo2,
-    photo3,
-    rectangle876,
-  } = props;
-
   return (
     <div className="group-photo">
       <div className="group-photo-title">
         <div className="enterprise-photos-i5 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
-          {enterprisePhotosI5}
+          Group Photos
         </div>
-        
-        <div className={`chevron-right-outline-1-1 }`}>
-      <div className="overlap-group-5">
-        <img className="vector-19" src="vector.png" />
-      </div>
-    </div>
       </div>
       <div className="flex-row-4">
         <div
           className="photo"
-          style={{ backgroundImage: `url(${photo1})` }}
+          style={{ backgroundImage: `url(${'/img/group-photo-2.svg'})` }}
         ></div>
         <div
           className="frame-296"
-          style={{ backgroundImage: `url(${photo2})` }}
+          style={{ backgroundImage: `url(${'/img/group-photo-1.svg'})` }}
         ></div>
         <div
           className="frame-296"
-          style={{ backgroundImage: `url(${photo2})` }}
+          style={{ backgroundImage: `url(${'/img/group-photo-3.svg'})` }}
         ></div>
         <div
           className="frame-296"
-          style={{ backgroundImage: `url(${photo3})` }}
+          style={{ backgroundImage: `url(${'/img/group-photo-2.svg'})` }}
         ></div>
         <div className="overlap-group1-2">
           <div
             className="frame-2969"
-            style={{ backgroundImage: `url(${photo1})` }}
+            style={{ backgroundImage: `url(${'/img/group-photo-1.svg'})` }}
           >
-            <img className="rectangle-876" src={rectangle876} />
           </div>
           <div className="arrow">
             <div className="arrow-forward-outline-1">
@@ -141,16 +147,7 @@ function GroupPhoto(props) {
 
 
 
-const groupPhotoData = {
-  enterprisePhotosI5: "Group photos",
-  photo1: "/img/group-photo-1.svg",
-  photo2: "/img/group-photo-2.svg",
-  photo3: "/img/group-photo-3.svg",
-  photo1: "/img/group-photo-1.svg",
-  photo2: "/img/group-photo-2.svg",
-  photo3: "/img/group-photo-3.svg",
-  rectangle876: "rectangle-876.png",
-};
+
 
 const filter = () => {
   return (
@@ -158,7 +155,7 @@ const filter = () => {
       <div className="search-filters ibmplexsans-semi-bold-quarter-spanish-white-16px">
         Search filters
       </div>
-      <div className={`frame-2808 border-1px-onyx }`}>
+      <div className={`filter-field border-1px-onyx }`}>
         <div className="by-date ibmplexsans-semi-bold-monsoon-16px">
           By Date
         </div>
@@ -168,7 +165,7 @@ const filter = () => {
       </div>
     </div>
       </div>
-      <div className={`frame-2808 border-1px-onyx }`}>
+      <div className={`filter-field border-1px-onyx }`}>
         <div className="by-date ibmplexsans-semi-bold-monsoon-16px">
           Popular
         </div>
@@ -178,7 +175,7 @@ const filter = () => {
       </div>
     </div>
       </div>
-      <div className="frame-2810">
+      <div className="search-btn-group">
         <div className="group-search ibmplexsans-semi-bold-shark-16px">
           Search
         </div>

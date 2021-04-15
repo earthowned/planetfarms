@@ -5122,6 +5122,13 @@ body {
    font-style: normal;
    font-weight: 600;
  }
+ .ibmplexsans-semi-bold-rusty-red-16px {
+  color: var(--rusty-red);
+  font-family: var(--font-family-ibm_plex_sans-semibold);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 600;
+}
  :root {
    --black: rgba(0, 0, 0, 1);
    --caribbean-green: rgba(0, 198, 136, 1);
