@@ -942,7 +942,7 @@
 .community-page-news {
   display: grid;
   width: 97%;
-  height: 100%;
+  height: 80%;
   grid-template-rows: 5% 5% 90%;
   grid-template-columns: 70% 30%;
   grid-gap: 3%;

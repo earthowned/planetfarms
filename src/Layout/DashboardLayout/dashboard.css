@@ -1,9 +1,10 @@
 .layout-container {
   width: 100%;
+  min-height: 100vh;
   padding: 2em 3em;
 }
 
-.layout-container h1 {
+.layout-container > h1 {
   color: #fff;
   font-size: 24px;
   font-weight: 600;
@@ -38,7 +39,7 @@
 }
 
 @media only screen and (max-width: 1020px) {
-  .layout-container h1 {
+  .layout-container > h1 {
     margin-bottom: 2em;
   }
 }

@@ -24,7 +24,7 @@
 .date {
   letter-spacing: 0;
   line-height: 16px;
-  margin-top: 16px;
+  margin-top: 12px;
   min-height: 16px;
   white-space: nowrap;
 }
@@ -168,4 +168,51 @@
 .subtitle {
   width: 100%;
   margin-top: 0.4em;
+}
+
+/*truncating the text*/
+html {
+  --lh: 1.4rem;
+  line-height: var(--lh);
+}
+.overflow {
+  --max-lines: 3;
+  position: relative;
+  max-height: calc(var(--lh) * var(--max-lines));
+  overflow: hidden;
+  padding-right: 1rem; /* space for ellipsis */
+}
+
+.module {
+  width: 100%;
+  margin: 0 0 1em 0;
+  overflow: hidden;
+}
+
+.overflow::before {
+  position: absolute;
+  content: "...";
+  /*   inset-block-end: 0;
+  inset-inline-end: 0; */
+  bottom: 5%;
+  right: 0;
+  color: #fff;
+}
+
+@media only screen and (max-width: 1200px) {
+  .date {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .overflow::before {
+    position: absolute;
+    content: "...";
+    /*   inset-block-end: 0;
+  inset-inline-end: 0; */
+    bottom: 0.4em;
+    right: 0;
+    color: #fff;
+  }
 }
