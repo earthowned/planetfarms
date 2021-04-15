@@ -23,7 +23,7 @@ const InputComponent = ({text, error, image, changeHandler, name}) => {
                   id="userInput"
                 />
               </div>
-               {error && <p className="error-message">{name && name}</p>}  
+               <p className="error-message">{error ? name && name : " "} </p>
               </div>
         </>
     )

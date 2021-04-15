@@ -97,6 +97,8 @@
 
 .error-message {
   color: red;
-  margin-top: 6px;
+  margin-top: 8px;
   font-family: "IBM Plex Sans-Regular", Helvetica;
+  width: 500px;
+  height: 10px;
 }

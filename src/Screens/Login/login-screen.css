@@ -656,10 +656,11 @@
 }
 
 .content-wrapper {
+  width: 90%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100%;
+  margin: 0 auto;
 }
 
 .overlap-group1-2 #checkbox-variation {

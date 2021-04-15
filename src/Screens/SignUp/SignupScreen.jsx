@@ -118,9 +118,8 @@ function SignupScreen(props) {
 
             <Button clickHandler={registerUser} name="Sign Up" />
           </div>
-          {termsError && (
-            <p className="error-message">Please read the terms of service</p>
-          )}
+          <p className="error-message">{termsError ? "Please read the terms of service" : " "}</p>
+          
 
           <div className="o-auth-container">
             <div className="text-2 ibmplexsans-regular-normal-quarter-spanish-white-16px">
