@@ -982,7 +982,7 @@
 
   padding: 2em;
 
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
 }
 
 .community-news-right-bar-inner-container .community-news-filter-container {

@@ -1161,7 +1161,7 @@
   width: 100%;
   color: #fff;
   line-height: 24px;
-  font-family: IBM Plex Sans;
+  font-family: "IBM Plex Sans", sans-serif;
   font-weight: 400;
 }
 
@@ -1172,7 +1172,7 @@
 
 .news-view-title {
   color: #fff;
-  font-family: IBM Plex Sans;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
