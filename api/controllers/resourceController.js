@@ -104,8 +104,9 @@ const updateResources = (req, res) => {
 // @access  Private
 const searchResourcesTitle = (req, res) => {
   const { title } = req.query
+  const order = req.query.order || 'ASC'
 
-  Resource.findAll({ where: { title: { [Op.like]: '%' + title + '%' } } })
+  Resource.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
     .then(title => res.json({ title }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
