@@ -15,7 +15,7 @@
   width: 8px;
 }
 
-.flex-col-1 { 
+.flex-col-1 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;

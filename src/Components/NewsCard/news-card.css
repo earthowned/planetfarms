@@ -163,6 +163,8 @@
   --onyx: rgba(58, 57, 57, 1);
   --quarter-spanish-white: rgba(248, 235, 223, 1);
   --white: rgba(255, 255, 255, 0.16);
+  --lh: 1.4rem;
+  --max-lines: 3;
 }
 
 .subtitle {
@@ -172,15 +174,11 @@
 
 /* truncating the text */
 html {
-  --lh: 1.4rem;
-
   line-height: var(--lh);
 }
 
 .overflow {
-  --max-lines: 3;
   position: relative;
-
   max-height: calc(var(--lh) * var(--max-lines));
   overflow: hidden;
   padding-right: 1rem; /* space for ellipsis */
