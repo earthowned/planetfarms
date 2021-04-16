@@ -178,7 +178,7 @@
 
 .x03-1-0-news-page .due-to-the-advantage {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 149px;
@@ -187,7 +187,7 @@
 
 .x03-1-0-news-page .due-to-the-advantage-1 {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 11px;
   min-height: 24px;
@@ -211,7 +211,7 @@
 
 .x03-1-0-news-page .f1 {
   height: 15px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   width: 8px;
 }
 
@@ -304,9 +304,9 @@
 .x03-1-0-news-page .frame-1943 {
   background-color: var(--licorice);
   height: 1368px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 248px;
 }
 
@@ -316,7 +316,7 @@
   display: flex;
   flex-direction: column;
   height: 200px;
-  left: 0px;
+  left: 0;
   overflow: hidden;
   position: absolute;
   top: 80px;
@@ -327,11 +327,11 @@
   align-items: center;
   display: flex;
   height: 80px;
-  left: 0px;
+  left: 0;
   min-width: 247px;
   padding: 0 16px;
   position: absolute;
-  top: 0px;
+  top: 0;
 }
 
 .x03-1-0-news-page .frame-1947 {
@@ -340,7 +340,7 @@
   border-radius: 4px;
   display: flex;
   height: 64px;
-  left: 0px;
+  left: 0;
   overflow: hidden;
   padding: 0 24px;
   position: absolute;
@@ -354,7 +354,7 @@
   border-radius: 4px;
   display: flex;
   height: 64px;
-  left: 0px;
+  left: 0;
   overflow: hidden;
   padding: 0 24px;
   position: absolute;
@@ -412,7 +412,7 @@
   align-items: center;
   background-color: var(--caribbean-green);
   border-radius: 100px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
   display: flex;
   height: 32px;
   left: 231px;
@@ -429,10 +429,10 @@
   background-color: var(--licorice);
   display: flex;
   flex-direction: column;
-  left: 0px;
+  left: 0;
   min-height: 259px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 248px;
 }
 
@@ -544,7 +544,7 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  left: 0px;
+  left: 0;
   min-height: 299px;
   position: absolute;
   top: 1069px;
@@ -562,7 +562,7 @@
 
 .x03-1-0-news-page .number {
   height: 20px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 12px;
   margin-top: 1px;
   min-height: 20px;
@@ -572,8 +572,8 @@
 
 .x03-1-0-news-page .number-1 {
   height: 20px;
-  left: 0px;
-  letter-spacing: 0px;
+  left: 0;
+  letter-spacing: 0;
   line-height: 12px;
   position: absolute;
   text-align: center;
@@ -583,7 +583,7 @@
 
 .x03-1-0-news-page .number-2 {
   height: 20px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 12px;
   margin-bottom: 1px;
   min-height: 20px;
@@ -593,7 +593,7 @@
 
 .x03-1-0-news-page .number-3 {
   height: 20px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 12px;
   min-height: 20px;
   text-align: center;
@@ -608,9 +608,9 @@
 
 .x03-1-0-news-page .news-group-1 {
   height: 35px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 35px;
 }
 
@@ -628,9 +628,9 @@
 
 .x03-1-0-news-page .overlap-group1-2 {
   height: 1368px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 263px;
 }
 
@@ -654,9 +654,9 @@
 
 .x03-1-0-news-page .overlap-group3 {
   height: 35px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 38px;
 }
 
@@ -688,7 +688,7 @@
 .x03-1-0-news-page .place {
   height: 20px;
   left: 7px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 12px;
   position: absolute;
   text-align: center;
@@ -698,7 +698,7 @@
 
 .x03-1-0-news-page .place-1 {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
@@ -710,7 +710,7 @@
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 24px;
   font-weight: 600;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
   min-width: 191px;
@@ -722,7 +722,7 @@
   height: 1420px;
   left: 247px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 1px;
 }
 
@@ -731,7 +731,7 @@
   height: 1368px;
   left: 247px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 1px;
 }
 
@@ -740,7 +740,7 @@
   height: 35px;
   left: 34px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 1px;
 }
 
@@ -756,7 +756,7 @@
   height: 35px;
   left: 37px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 1px;
 }
 
@@ -783,7 +783,7 @@
 .x03-1-0-news-page .rectangle-860-1 {
   background-color: var(--licorice);
   height: 1px;
-  left: 0px;
+  left: 0;
   position: absolute;
   top: 34px;
   width: 35px;
@@ -792,7 +792,7 @@
 .x03-1-0-news-page .rectangle-860-2 {
   background-color: var(--licorice);
   height: 1px;
-  left: 0px;
+  left: 0;
   position: absolute;
   top: 34px;
   width: 38px;
@@ -810,7 +810,7 @@
   height: 4px;
   left: 20px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 4px;
 }
 
@@ -820,18 +820,18 @@
   height: 4px;
   left: 21px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 4px;
 }
 
 .x03-1-0-news-page .shape {
   height: 14px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   width: 17px;
 }
 
 .x03-1-0-news-page .text- {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 40px;
   width: 100%;
@@ -843,7 +843,7 @@
   font-size: 40px;
   font-weight: 600;
   height: 48px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 48px;
   margin-top: 40px;
   min-height: 48px;
@@ -853,7 +853,7 @@
 .x03-1-0-news-page .text-15 {
   height: 20px;
   left: 9px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 12px;
   position: absolute;
   text-align: center;
@@ -863,7 +863,7 @@
 
 .x03-1-0-news-page .text-16 {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 110px;
@@ -873,7 +873,7 @@
 
 .x03-1-0-news-page .text-17 {
   height: 12px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 12px;
   margin-bottom: 2px;
   margin-left: 70px;
@@ -884,7 +884,7 @@
 }
 
 .x03-1-0-news-page .text-18 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
@@ -892,7 +892,7 @@
 }
 
 .x03-1-0-news-page .text-4 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
@@ -901,7 +901,7 @@
 }
 
 .x03-1-0-news-page .text-5 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-right: 79px;
   margin-top: 24px;
@@ -911,7 +911,7 @@
 }
 
 .x03-1-0-news-page .text-6 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-right: 64px;
   margin-top: 12px;
@@ -921,7 +921,7 @@
 }
 
 .x03-1-0-news-page .text-7 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-right: 47px;
   margin-top: 24px;
@@ -931,7 +931,7 @@
 }
 
 .x03-1-0-news-page .text-8 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
@@ -940,7 +940,7 @@
 }
 
 .x03-1-0-news-page .text-9 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
@@ -957,9 +957,9 @@
 
 .x03-1-0-news-page .union {
   height: 211px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 248px;
 }
 
@@ -994,7 +994,7 @@
 
 .x03-1-0-news-page .vector-11 {
   height: 4px;
-  left: 0px;
+  left: 0;
   position: absolute;
   top: 15px;
   width: 18px;
@@ -1022,9 +1022,9 @@
 
 .x03-1-0-news-page .vector-15 {
   height: 16px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 20px;
 }
 
@@ -1042,9 +1042,9 @@
 
 .x03-1-0-news-page .vector-18 {
   height: 20px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 18px;
 }
 
@@ -1084,15 +1084,15 @@
 
 .x03-1-0-news-page .vector-8 {
   height: 22px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 18px;
 }
 
 .x03-1-0-news-page .vector-9 {
   height: 8px;
-  margin-left: 0px;
+  margin-left: 0;
   width: 8px;
 }
 
@@ -1103,7 +1103,7 @@
 
 .x03-1-0-news-page .vector-stroke-1 {
   height: 2px;
-  left: 0px;
+  left: 0;
   position: absolute;
   top: 2px;
   width: 16px;
@@ -1111,15 +1111,15 @@
 
 .x03-1-0-news-page .vector-stroke-2 {
   height: 20px;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   width: 26px;
   position: absolute;
 }
 
 .x03-1-0-news-page .your-business-goals {
   height: 28px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 28px;
   margin-left: 16px;
   min-height: 28px;
@@ -1129,7 +1129,7 @@
 
 .x03-1-0-news-page .your-business-goals-1 {
   height: 28px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 28px;
   margin-left: 11px;
   min-height: 28px;
