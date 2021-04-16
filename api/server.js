@@ -4,11 +4,13 @@ const userRoutes = require('./routes/userRouter.js')
 const resourceRoutes = require('./routes/resourceRouter.js')
 const courseRoutes = require('./routes/courseRouter.js')
 const sequelize = require('./config/database.js')
+var cors = require('cors')
 
 const PORT = process.env.port || 5000
 
 // middleware
 app.use(express.json())
+app.use(cors())
 
 // routes
 app.use('/api/users', userRoutes)
