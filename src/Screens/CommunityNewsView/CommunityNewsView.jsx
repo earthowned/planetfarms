@@ -1,26 +1,27 @@
 import React from "react";
 import './community-news-view.css'
-import { Link } from "react-router-dom";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 import BackButton from '../../Components/BackButton/BackButton'
 
 function App() {
   return (
-    <DashboardLayout title="Ragrarians News">
+    <DashboardLayout >
     <div className="x03-1-0-news-page">
       <div className="flex-col-2">
         <BackButton location={"/community-page-news"} />
-        <h1 className="text-1 valign-text-middle">Fueling the ethanol industry</h1>
+        <h1 className="news-view-title">Fueling the ethanol industry</h1>
         <div className="title-time">
           <div className="due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px">
             November 01, 2020
           </div>
-          <img className="ellipse-15" src="/img/newsbg-image.png" />
           <div className="due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px">4 min read</div>
         </div>
         <div className="frame-1969" style={{backgroundImage: `url("img/newsbg-image.png")`}}>
+          <img className="ellipse-15" src="/img/newsbg-image.png" />
         </div>
-        <p className="text- valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
+
+        <div className="text-container">
+        <p>
           Over the last ten years, the emphasis on reducing fuel emissions has been an agenda for many governments. In a
           bid to reduce their collective carbon footprint, many people have started looking for a way to control their
           impact on the environment. It is due to such a situation that the use of Ethanol fuel has increased in many
@@ -35,7 +36,7 @@ function App() {
           source of fuel commonly blended with gasoline to oxygenate the fuel at the gas pump. Ethanol fuel can also be
           used on its own to power vehicles.
         </p>
-        <p className="text- valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
+        <p>
           Over the last ten years, the emphasis on reducing fuel emissions has been an agenda for many governments. In a
           bid to reduce their collective carbon footprint, many people have started looking for a way to control their
           impact on the environment. It is due to such a situation that the use of Ethanol fuel has increased in many
@@ -50,6 +51,7 @@ function App() {
           source of fuel commonly blended with gasoline to oxygenate the fuel at the gas pump. Ethanol fuel can also be
           used on its own to power vehicles.
         </p>
+        </div>
         <div className="button-row-3">
           <div className="button-secondary-default-1 border-0-5px-quarter-spanish-white">
             <img className="f1" src="/img/facebook-share-icon.svg" alt="facebook-icon" />

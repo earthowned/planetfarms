@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "./sidebar.css";
 
 const Sidebar = ({ setToggle, toggle }) => {
   let history = useHistory();
   const [dropdownActive, setDropdownActive] = useState(true);
   let {pathname}=useLocation()
-  const [activeBar,setActiveBar]=useState()
+  const [activeBar, setActiveBar]=useState()
 
   const handleOnClick=()=>{
       setDropdownActive(!dropdownActive)
