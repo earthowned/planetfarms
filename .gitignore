@@ -4,6 +4,7 @@
 package-lock.json
 yarn.lock
 /build
+.env
 
 .DS_Store
 **/.DS_Store
