@@ -5,7 +5,7 @@ This stack consists of [PostgreSQL](https://www.postgresql.org/), [Express](http
 
 ## Getting Started
 
-After you clone the repositiry. You can create .env file or if you already have ./.env file than you can add REACT_APP_BASE_URL = http://127.0.0.1:5000 as environment variable.
+After you clone the repository. You can create or edit `.env` file and add `REACT_APP_BASE_URL = http://127.0.0.1:5000` as environment variable.
 
 ### `yarn install`
 
