@@ -340,9 +340,8 @@
   width: 24px;
 }
 .x01-0-0-login-empty .remember {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
-
   min-width: 140px;
 }
 .x01-0-0-login-empty .remember-me {
@@ -647,16 +646,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2em;
 }
 
 .x01-0-0-login-empty {
   background-color: black;
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 .content-wrapper {
-  width: 90%;
+  width: 95%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -715,7 +716,7 @@
 
   .signup-option {
     width: 100%;
-    margin-top: 40%;
+    margin-top: 20%;
 
     display: flex;
     flex-direction: column;

@@ -39,8 +39,6 @@ const [files, setFiles] = useState([])
     },
   })
 
-  console.log(files[0]);
-
 let history = useHistory();
 
 const changeFirstname = (e) => {
@@ -64,8 +62,9 @@ const changeBirthday = (e) => {
   setBirthdayError(false);
 }
 
-const submitForm = () => {
-  
+const submitForm = (e) => {
+  e.preventDefault();
+
   if(!firstname) setFirstnameError(true);
 
   if(!lastname) setLastnameError(true);
@@ -83,7 +82,7 @@ const submitForm = () => {
 }
 
   return (
-    <div className="x02-2-0-sign-up-filed">
+    <form className="x02-2-0-sign-up-filed">
       <div className="icons">
          <Logo />
       </div>
@@ -102,6 +101,7 @@ const submitForm = () => {
                error={firstnameError} 
                changeHandler={changeFirstname}
                name="firstname"
+               autoFocus="autoFocus"
                />
             </div>
 
@@ -141,7 +141,6 @@ const submitForm = () => {
                name="birthday"
                />
             </div>
-            
           </div>
           
           </div>
@@ -165,7 +164,7 @@ const submitForm = () => {
             <Button clickHandler={submitForm} name="Continue" />
       </div>
 
-      </div>
+      </form>
     
   );
 }

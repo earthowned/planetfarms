@@ -85,6 +85,8 @@
   outline: none;
   border: none;
   background: inherit;
+  width: 100%;
+  height: 100%;
 }
 
 .ibmplexsans-regular-normal-monsoon-16px {
@@ -101,4 +103,12 @@
   font-family: "IBM Plex Sans-Regular", Helvetica;
   width: 500px;
   height: 10px;
+}
+
+.foucsed-input {
+  border: red;
+}
+
+.default-input:focus-within {
+  border: 1px solid #00c688;
 }
