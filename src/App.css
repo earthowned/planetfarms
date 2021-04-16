@@ -96,3 +96,7 @@ body {
 .default-btn:hover {
   background: #00c688;
 }
+
+input[type="checkbox"] {
+  background: #900;
+}
