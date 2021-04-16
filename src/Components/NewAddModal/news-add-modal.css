@@ -15,8 +15,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 35%;
-  height: 40%;
+  width: 50%;
+  height: 50%;
   padding: 4em;
   top: 50%;
   left: 50%;
@@ -64,7 +64,8 @@
   color: #fff;
   text-decoration: none;
 }
-.default-btn-btn{
+
+.default-btn-btn {
   align-items: center;
   background-color: var(--caribbean-green);
   border-radius: 4px;
@@ -74,4 +75,23 @@
   padding: 0 97px;
   width: 248px;
   margin-top: 10px;
+}
+
+@media only screen and (max-width: 750px) {
+  .news-modal-inner-container {
+    width: 75%;
+    height: 55%;
+  }
+
+  .news-modal-content {
+    margin-top: 3em;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .news-modal-inner-container {
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+  }
 }
