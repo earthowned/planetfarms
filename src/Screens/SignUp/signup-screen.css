@@ -149,7 +149,6 @@
   border-radius: 4px;
   display: flex;
   height: 48px;
-
   overflow: hidden;
   padding: 12px 62px;
   width: 240px;
@@ -701,6 +700,7 @@
 
   .x02-0-0-sign-up-empty .terms {
     margin-bottom: 1em;
+    width: 100%;
   }
 
   .x02-0-0-sign-up-empty .o-auth-container {
@@ -741,10 +741,6 @@
 
   .x02-0-0-sign-up-empty .facebook-button:last-child {
     margin-left: 0;
-  }
-
-  .x02-0-0-sign-up-empty .terms {
-    width: 100%;
   }
 
   .button-group-container-1 {

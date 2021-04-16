@@ -19,7 +19,10 @@ function LoginScreen(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
-   const [userError, setUserError] = useState(false);
+  const [terms, setTerms] = useState(false);
+  const [termsError, setTermsError] = useState(false);
+
+  const [userError, setUserError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
   const history = useHistory();
@@ -40,6 +43,8 @@ function LoginScreen(props) {
     if(!username) setUserError(true);
 
     if(!password) setPasswordError(true);
+
+    if (!terms) setTermsError(true);
 
     if(username === "admin" && password === 'password') {
       history.push('/community-page-news');
@@ -79,7 +84,7 @@ function LoginScreen(props) {
                />
             
             <div className="remember">
-              <Checkbox />
+              <Checkbox termsError={termsError} setTermsError={setTermsError} terms={terms} setTerms={setTerms}/>
               <div className="remember-me ibmplexsans-semi-bold-quarter-spanish-white-16px">
                 {rememberMe}
               </div>

@@ -75,6 +75,8 @@
   justify-content: space-between;
   display: flex;
   width: 35%;
+  margin-bottom: 2em;
+  margin-top: 0;
 }
 
 .x02-2-0-sign-up-filed .continue {
@@ -415,11 +417,6 @@
   margin-right: 5%;
 }
 
-.x02-2-0-sign-up-filed .button-wrapper {
-  margin-bottom: 2em;
-  margin-top: 0;
-}
-
 @media only screen and (max-width: 1280px) {
   .x02-2-0-sign-up-filed .button-wrapper {
     width: 30%;
@@ -455,9 +452,6 @@
     margin: 0 auto;
     margin-bottom: 2em;
     order: -1;
-  }
-
-  .congratulation-col-3 {
     width: 100%;
   }
 
@@ -476,6 +470,7 @@
   .congratulation-row {
     flex-direction: column;
   }
+
   .congratulation-row:last-child {
     width: 100%;
   }
