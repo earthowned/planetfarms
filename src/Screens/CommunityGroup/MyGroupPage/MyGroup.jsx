@@ -4,7 +4,6 @@ import CommunityGroupPost from "../../../Components/CommunityGroupPost/Community
 import CommunityGroupPhotos from "../../../Components/CommunityGroupPhotos/CommunityGroupPhotos";
 import NewsCreateModal from "../../../Components/NewsCreateModal/NewsCreateModal";
 import DashboardLayout from "../../../Layout/DashboardLayout/DashboardLayout";
-import CommunityViewPost from "../../../Components/CommunityViewPost/CommunityViewPost";
 
 function App() {
   const [editGroupModal, setEditGroupModal] = useState(false);
@@ -72,7 +71,6 @@ function CommunityGroupViewPage({ setEditGroupModal }) {
             </div>
             <div className="group-boderline"></div>
           </div>
-          {/* <CommunityViewPost /> */}
           <CommunityGroupPhotos />
         </div>
         <div className="group-flex-row-7">
@@ -102,48 +100,6 @@ function CommunityGroupViewPage({ setEditGroupModal }) {
   );
 }
 
-// function GroupPhoto(props) {
-//   return (
-//     <div className="group-photo">
-//       <div className="group-photo-title">
-//         <div className="enterprise-photos-i5 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
-//           Group Photos
-//         </div>
-//       </div>
-//       <div className="flex-row-4">
-//         <div
-//           className="photo"
-//           style={{ backgroundImage: `url(${"/img/group-photo-2.svg"})` }}
-//         ></div>
-//         <div
-//           className="frame-296"
-//           style={{ backgroundImage: `url(${"/img/group-photo-1.svg"})` }}
-//         ></div>
-//         <div
-//           className="frame-296"
-//           style={{ backgroundImage: `url(${"/img/group-photo-3.svg"})` }}
-//         ></div>
-//         <div
-//           className="frame-296"
-//           style={{ backgroundImage: `url(${"/img/group-photo-2.svg"})` }}
-//         ></div>
-//         <div className="overlap-group1-2">
-//           <div
-//             className="frame-2969"
-//             style={{ backgroundImage: `url(${"/img/group-photo-1.svg"})` }}
-//           ></div>
-//           <div className="arrow">
-//             <div className="arrow-forward-outline-1">
-//               <div className="overlap-group-6">
-//                 <img className="group-arrow-icon" src="img/arrow-icon.svg" />
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 
 const filter = () => {
   return (

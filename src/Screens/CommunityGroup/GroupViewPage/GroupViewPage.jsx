@@ -97,7 +97,6 @@ function CommunityGroupViewPage() {
             right now with my business!!! `}
             />
           </div>
-
           {/*** filter */}
           {filter()}
         </div>

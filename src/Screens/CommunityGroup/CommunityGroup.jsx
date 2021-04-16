@@ -38,7 +38,8 @@ function CommunityGroup({ setCreateGroupModal }) {
       <div className="x05-0-0-all-groups">
         <div className="group-flex-col-4">
           <div className="flex-row-5">
-            <div className="all-groups-1 border-1px-quarter-spanish-white">
+            <div style={{display:"flex",justifyContent:"space-between"}}>
+               <div className="all-groups-1 border-1px-quarter-spanish-white">
               <div className="all-groups ibmplexsans-semi-bold-shark-16px">
                 All Groups
               </div>
@@ -48,11 +49,9 @@ function CommunityGroup({ setCreateGroupModal }) {
                 Your Groups
               </div>
             </div>
+            </div>
             <div className="create-group">
-              <div
-                className="create-group-1 ibmplexsans-semi-bold-shark-16px"
-                onClick={() => handleClickCreate()}
-              >
+              <div className="create-group-1 ibmplexsans-semi-bold-shark-16px" onClick={() => handleClickCreate()}>
                 Create Group
               </div>
             </div>
@@ -63,9 +62,6 @@ function CommunityGroup({ setCreateGroupModal }) {
             {/* <FilterByCategory /> comes here */}
           </div>
           <div className="flex-row-4">
-            <CommunityGroupCard location={"/community-group-view-page"} />
-            <CommunityGroupCard location={"/community-group-view-page"} />
-            <CommunityGroupCard location={"/community-group-view-page"} />
             <CommunityGroupCard location={"/community-group-view-page"} />
             <CommunityGroupCard location={"/community-group-view-page"} />
             <CommunityGroupCard location={"/community-group-view-page"} />
