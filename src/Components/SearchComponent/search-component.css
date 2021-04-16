@@ -13,7 +13,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 100%;
 }
 
@@ -34,9 +33,11 @@
   border: none;
   cursor: pointer;
 }
+
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
+
 .search {
   align-items: center;
   background-color: var(--licorice);
@@ -47,9 +48,10 @@
   padding: 0 16px;
   width: 100%;
 }
+
 .search-1 {
   color: rgba(137, 137, 137, 1);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   letter-spacing: 0px;
   line-height: 24px;

@@ -84,7 +84,7 @@
 
 .ibmplexsans-normal-quarter-spanish-white-14px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -92,7 +92,7 @@
 
 .ibmplexsans-normal-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -100,7 +100,7 @@
 
 .ibmplexsans-semi-bold-caribbean-green-14px {
   color: var(--caribbean-green);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -108,7 +108,7 @@
 
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -170,7 +170,7 @@
   margin-top: 0.4em;
 }
 
-/*truncating the text*/
+/* truncating the text */
 html {
   --lh: 1.4rem;
   line-height: var(--lh);
@@ -192,8 +192,6 @@ html {
 .overflow::before {
   position: absolute;
   content: "...";
-  /*   inset-block-end: 0;
-  inset-inline-end: 0; */
   bottom: 5%;
   right: 0;
   color: #fff;
@@ -209,8 +207,6 @@ html {
   .overflow::before {
     position: absolute;
     content: "...";
-    /*   inset-block-end: 0;
-  inset-inline-end: 0; */
     bottom: 0.4em;
     right: 0;
     color: #fff;

@@ -9,7 +9,7 @@
 
 .header-container h3 {
   font-size: 24px;
-  font-family: IBM Plex Sans;
+  font-family: "IBM Plex Sans", sans-serif;
   font-weight: 600;
   text-transform: capitalize;
 }
@@ -17,17 +17,14 @@
 .header-container ul {
   list-style: none;
   display: flex;
-
   align-items: center;
-
   font-size: 16px;
-  font-family: IBM Plex Sans;
+  font-family: "IBM Plex Sans", sans-serif;
   font-weight: 600;
 }
 
 .header-container ul li {
   display: flex;
-
   justify-content: space-evenly;
   align-items: center;
 }

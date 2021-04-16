@@ -9,13 +9,12 @@
 }
 
 .back-text {
-  font-family: IBM Plex Sans;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   color: #fff;
-
   margin-left: 10px;
 }
 

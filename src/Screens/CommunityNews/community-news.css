@@ -979,15 +979,12 @@
   border: 1px solid #3a3939;
   border-radius: 4px;
   color: #fff;
-
   padding: 2em;
-
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
 }
 
 .community-news-right-bar-inner-container .community-news-filter-container {
   display: flex;
-
   flex-wrap: wrap;
   margin: 1em 0;
 }
@@ -999,9 +996,7 @@
   margin-top: 1em;
 }
 
-.community-news-right-bar-inner-container
-  .community-news-filter-container
-  h6:not(:last-child) {
+.community-news-right-bar-inner-container .community-news-filter-container h6:not(:last-child) {
   margin-right: 1em;
 }
 
