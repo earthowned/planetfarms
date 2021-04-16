@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./news-card.css";
 
 const newsData = [
@@ -9,7 +8,7 @@ const newsData = [
     subtitle: "Fueling the ethanol industry",
     description: ` Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and
       grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic also the main
-      type of alcohol in most alcoholic…`,
+      type of alcohol in most alcoholic …`,
     published_On: "November 01, 2020",
     bgImage:"/img/bg-image1.svg"
   },
@@ -21,7 +20,7 @@ const newsData = [
     subtitle: "Fueling the ethanol industry",
     description: ` Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and
       grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic also the main
-      type of alcohol in most alcoholic…`,
+      type of alcohol in most alcoholic …`,
     published_On: "November 02, 2020",
     bgImage:"/img/bg-image2.svg"
   },
@@ -32,7 +31,7 @@ const newsData = [
     subtitle: "Fueling the ethanol industry",
     description: ` Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and
       grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic also the main
-      type of alcohol in most alcoholic…`,
+      type of alcohol in most alcoholic …`,
     published_On: "November 03, 2020",
     bgImage:"/img/bg-image2.svg"
   },
@@ -63,9 +62,11 @@ function NewsCard() {
                     {news.subtitle}
                   </h1>
                 </div>
+                <div className="overflow module">
                 <p className="news-text ibmplexsans-normal-quarter-spanish-white-16px">
                   {news.description}
                 </p>
+                </div>
                 <div className="date ibmplexsans-normal-quarter-spanish-white-14px">
                   {news.published_On}
                 </div>

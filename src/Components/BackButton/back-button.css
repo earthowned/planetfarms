@@ -1,7 +1,23 @@
 .back-btn-container {
-  display: flex;
-  color: white;
-  align-items: center;
-  justify-content: space-around;
   width: 7%;
+}
+
+.back-btn-inner-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.back-text {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.back-link {
+  text-decoration: none;
 }

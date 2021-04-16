@@ -2,14 +2,15 @@ import {useState} from 'react'
 import './news-add-modal.css'
 import {Link} from 'react-router-dom';
 
-const NewsAddModal = () => {
+const NewsAddModal = ({setAddModal}) => {
     const [title, setTitle] = useState();
     return (
             <div className="news-modal-container">
                 <div className="news-modal-inner-container">
                     <div className="news-modal-header">
                         <h4>Add news</h4>
-                        <img src="/img/close-outline.svg" alt="close-icon" />
+                        <img src="/img/close-outline.svg" alt="close-icon" 
+                        onClick={() => setAddModal(false)}/>
                     </div>
                     <div className="news-modal-content">
                         <input className="modal-input" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="News Title" /><br />
