@@ -31,7 +31,7 @@
 }
 
 .username-error {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 16px;
   min-height: 16px;
   min-width: 87px;
@@ -60,36 +60,31 @@
   height: 100%;
 }
 
-.text {
-  position: absolute;
-  top: 10px;
-  left: 50px;
-}
-
 .ibmplexsans-regular-normal-monsoon-14px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
 }
 
 .username {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
   min-width: 76px;
   white-space: nowrap;
-
   outline: none;
   border: none;
   background: inherit;
+  width: 100%;
+  height: 100%;
 }
 
 .ibmplexsans-regular-normal-monsoon-16px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -97,6 +92,16 @@
 
 .error-message {
   color: red;
-  margin-top: 6px;
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  margin-top: 8px;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
+  width: 500px;
+  height: 10px;
+}
+
+.foucsed-input {
+  border: red;
+}
+
+.default-input:focus-within {
+  border: 1px solid #00c688;
 }

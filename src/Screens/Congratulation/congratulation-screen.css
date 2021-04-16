@@ -53,6 +53,7 @@
   height: 100vh;
   padding: 2% 5%;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 .x02-2-0-sign-up-filed .banner-images {
@@ -74,6 +75,8 @@
   justify-content: space-between;
   display: flex;
   width: 35%;
+  margin-bottom: 2em;
+  margin-top: 0;
 }
 
 .x02-2-0-sign-up-filed .continue {
@@ -396,20 +399,25 @@
   font-size: 1em;
 }
 
-.congratulation-col-2 {
-  display: flex;
-  flex-direction: column;
-}
-
 [class^="congratulation-col-"]:not(:last-child) {
   width: 35%;
 }
 
-@media only screen and (max-width: 1280px) {
-  [class^="congratulation-col-"]:not(:last-child) {
-    width: 30%;
-  }
+.congratulation-col-1 {
+  flex: 1;
+  margin-right: 2em;
+}
 
+.congratulation-row {
+  display: flex;
+}
+
+.row-1-col {
+  width: 47.5%;
+  margin-right: 5%;
+}
+
+@media only screen and (max-width: 1280px) {
   .x02-2-0-sign-up-filed .button-wrapper {
     width: 30%;
   }
@@ -427,6 +435,12 @@
     width: 100%;
   }
 
+  .x02-2-0-sign-up-filed .congratulation-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .x02-2-0-sign-up-filed .frame-4 {
     padding: 0 0.2em;
     align-items: center;
@@ -435,14 +449,34 @@
   }
 
   .congratulation-col-3 {
-    order: -1;
     margin: 0 auto;
     margin-bottom: 2em;
+    order: -1;
+    width: 100%;
+  }
+
+  .x02-2-0-sign-up-filed .button-wrapper {
+    width: 45%;
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .row-1-col {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .congratulation-row {
+    flex-direction: column;
+  }
+
+  .congratulation-row:last-child {
+    width: 100%;
   }
 
   .x02-2-0-sign-up-filed .button-wrapper {
     width: 100%;
-    justify-content: space-around;
   }
 }
 

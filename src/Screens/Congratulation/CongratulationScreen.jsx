@@ -39,8 +39,6 @@ const [files, setFiles] = useState([])
     },
   })
 
-  console.log(files[0]);
-
 let history = useHistory();
 
 const changeFirstname = (e) => {
@@ -64,8 +62,9 @@ const changeBirthday = (e) => {
   setBirthdayError(false);
 }
 
-const submitForm = () => {
-  
+const submitForm = (e) => {
+  e.preventDefault();
+
   if(!firstname) setFirstnameError(true);
 
   if(!lastname) setLastnameError(true);
@@ -83,7 +82,7 @@ const submitForm = () => {
 }
 
   return (
-    <div className="x02-2-0-sign-up-filed">
+    <form className="x02-2-0-sign-up-filed">
       <div className="icons">
          <Logo />
       </div>
@@ -96,49 +95,61 @@ const submitForm = () => {
       <div className="congratulation-container">
         
         <div className="congratulation-col-1">
-          <div className="form-container">
+          <div className="congratulation-row">
+            <div className="row-1-col">
               <InputComponent text={firstname} 
                error={firstnameError} 
                changeHandler={changeFirstname}
                name="firstname"
+               autoFocus="autoFocus"
                />
-          
+            </div>
+
+            <div className="row-1-col">
+               <InputComponent text={lastname} 
+               error={lastnameError} 
+               changeHandler={changeLastname}
+               name="lastname"
+               />
+              </div>
+            </div>
+
+          <div className="congratulation-row">
+            <div className="row-1-col">
             <InputComponent text={email} 
                error={emailError} 
                changeHandler={changeEmail}
                name="email"
                />
-         
-            <InputComponent text={birthday} 
-               error={birthdayError} 
-               changeHandler={changeBirthday}
-               name="birthday"
-               />
-          </div>
-          
-          </div>
-        
-        <div className="congratulation-col-2">
-          
-            <InputComponent text={lastname} 
-               error={lastnameError} 
-               changeHandler={changeLastname}
-               name="lastname"
-               />
-          
+              </div>
+
+          <div className="row-1-col">
             <InputComponent text={phone} 
                error={phoneError} 
                changeHandler={changePhone}
                name="phone"
                />
-          
-        </div>
+            </div>
+          </div>
 
+           
+          <div className="congratulation-row">
+            <div className="row-1-col">
+            <InputComponent text={birthday} 
+               error={birthdayError} 
+               changeHandler={changeBirthday}
+               name="birthday"
+               />
+            </div>
+          </div>
+          
+          </div>
+        
         <div className="congratulation-col-3">
-        <div className="file-drop-container border-1px-quarter-spanish-white" {...getRootProps()}>
-          <input {...getInputProps()} />
-         {files.length > 0 ? <img className="avatar" src={files[0].preview} /> : <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Drag &amp; Drop files in this area or <span className="file-upload">Click Here to attach</span></p>}
-        </div>
+          <div className="file-drop-container border-1px-quarter-spanish-white" {...getRootProps()}>
+            <input {...getInputProps()} />
+          {files.length > 0 ? <img className="avatar" src={files[0].preview} /> : <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Drag &amp; Drop files in this area or <span className="file-upload">Click Here to attach</span></p>}
+          </div>
         </div>
        
        </div>
@@ -151,9 +162,9 @@ const submitForm = () => {
             </button>
             
             <Button clickHandler={submitForm} name="Continue" />
-          </div>
-
       </div>
+
+      </form>
     
   );
 }

@@ -1,7 +1,9 @@
-import React from 'react'
+import {useRef} from 'react'
 import "./input-component.css";
 
-const InputComponent = ({text, error, image, changeHandler, name}) => {
+const InputComponent = ({text, error, image, changeHandler, name, autoFocus}) => {
+   const userInput = useRef();
+
    
     return (
         <>
@@ -14,17 +16,18 @@ const InputComponent = ({text, error, image, changeHandler, name}) => {
                 </div>
                 {/* <div className="frame-9"> */}
                 {text ? <div className="text ibmplexsans-regular-normal-monsoon-14px">{name && name}</div> : <div>&nbsp;</div>}
-                <input
-                  type={name === "password" ? 'password' : name==="birthday" ? 'date' : name==="email" ? "email" : 'text'}
+                <input ref={userInput}
+                  type={name === "Password" ? 'password' : name==="birthday" ? 'date' : name==="email" ? "email" : 'text'}
                   className="username ibmplexsans-regular-normal-monsoon-16px"
                   placeholder={name && name}
                   value={text}
                   onChange={(e) => changeHandler(e)}
                   id="userInput"
+                  autoFocus = {autoFocus === "autoFocus" && true}
                 />
               </div>
-               {error && <p className="error-message">{name && name}</p>}  
-              </div>
+               <p className="error-message">{error ? name && name : " "} </p>
+         </div>
         </>
     )
 }

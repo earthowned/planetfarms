@@ -5,6 +5,7 @@ import Logo from "../../Components/Logo/Logo";
 import Banner from "../../Components/Banner/Banner";
 import InputComponent from "../../Components/Input/InputComponent";
 import Button from "../../Components/Button/Button";
+import Checkbox from "../../Components/Checkbox/Checkbox";
 
 function App() {
   return <SignupScreen {...X0200SignUpemptyData} />;
@@ -70,7 +71,7 @@ function SignupScreen(props) {
       <div className="content-wrapper">
 
      {/* sign in form */}
-        <div className="sign-up">
+        <form className="sign-up">
                 <div className="icons">
                   <Logo />
                 </div>
@@ -87,6 +88,7 @@ function SignupScreen(props) {
             image="/img/user-green-outline.svg"
             changeHandler={userChange}
             name="Username"
+            autoFocus="autoFocus"
           />
 
           <InputComponent
@@ -99,54 +101,44 @@ function SignupScreen(props) {
           />
 
           <div className="button-group">
+            <div className="button-group-container-1">
             <div className="terms">
-              <div className="checkboxunchecked">
-                <input
-                  type="checkbox"
-                  value={terms}
-                  onChange={(e) => changeTerms(e)}
-                  className="checkbox"
-                />
-              </div>
-
-              <p className="text-1 ibmplexsans-regular-normal-quarter-spanish-white-16px">
+              <Checkbox termsError={termsError} setTermsError={setTermsError} terms={terms} setTerms={setTerms}/>
+              <p className="checkbox-text">
                 <span className="span0-lQtl1i">{spanText}</span>
                 <span className="span1-lQtl1i">{spanText2}</span>
                 <span className="span2-lQtl1i">{spanText3}</span>
               </p>
             </div>
+            <p className="error-message">{termsError ? "Please read the terms of service" : " "}</p>
+            </div>
 
             <Button clickHandler={registerUser} name="Sign Up" />
           </div>
-          {termsError && (
-            <p className="error-message">Please read the terms of service</p>
-          )}
+         
+          
 
           <div className="o-auth-container">
             <div className="text-2 ibmplexsans-regular-normal-quarter-spanish-white-16px">
               {text2}
             </div>
             <div className="icon-container">
-              <a
-                href="www.google.com"
+               <a
+                href="https://www.facebook.com/"
                 target="_blank"
-                className="link-btn google-button border-0-5px-quarter-spanish-white"
+                className="link-btn facebook-button border-0-5px-quarter-spanish-white"
               >
-                <div className="logo-googleg-48-dp-1">
-                  <div className="overlap-group-2">
-                    <img
-                      className="vector-14"
-                      src="/img/google-icon.svg"
-                      alt="google-icon"
-                    />
-                  </div>
-                </div>
-                <div className="google ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                <img
+                  className="subtract"
+                  src="/img/google-icon.svg"
+                  alt="facebook-icon"
+                />
+                <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
                   {google}
                 </div>
               </a>
               <a
-                href="www.facebook.com"
+                href="https://www.facebook.com/"
                 target="_blank"
                 className="link-btn facebook-button border-0-5px-quarter-spanish-white"
               >
@@ -163,17 +155,16 @@ function SignupScreen(props) {
           </div>
 
           <div className="signup-option">
-              <p className="text-3 ibmplexsans-semi-bold-white-16px">
+            <p className="text-3 ibmplexsans-semi-bold-white-16px">
               <span className="span0-hsNx6X">Already have an Account?</span>
-
-              
             </p>
             <Link className="span2-hsNx6X" to="/">
                 Sign In
               </Link>
-            </div>
+          </div>
+
         </div>
-      </div>
+      </form>
       
 
       <div className="banner-container">
