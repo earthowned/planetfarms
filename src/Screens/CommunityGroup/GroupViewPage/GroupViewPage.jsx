@@ -66,7 +66,7 @@ function CommunityGroupViewPage() {
             
               </div>
 
-             
+          
             </div>
             <div className="group-boderline"></div>
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CommunityGroupCard from "../../Components/CommunityGroupCard/CommunityGroupCard";
 import FilterByCategory from "../../Components/FilterByCategory/FilterByCategory";
 import SearchComponent from "../../Components/SearchComponent/SearchComponent";
@@ -27,6 +27,14 @@ function Button() {
 }
 
 function CommunityGroup() {
+  const [addGroupModal,setAddGroupModal]=useState(false)
+  const [groupActive,setGroupActive]=useState(true)
+
+  const handleClickCreate=()=>{
+
+  }
+
+
   return (
     <div className="x05-0-0-all-groups">
       <div className="flex-col-4">
@@ -42,9 +50,10 @@ function CommunityGroup() {
             </div>
           </div>
           <div className="create-group">
-            <div className="create-group-1 ibmplexsans-semi-bold-shark-16px">
+            <div className="create-group-1 ibmplexsans-semi-bold-shark-16px" onClick={handleClickCreate}>
               Create group
             </div>
+            {/* {createVideoModal && <NewsCreateModal type="video" videoActive={videoActive} setVideoActive={setVideoActive}/>} */}
           </div>
         </div>
         <div className="flex-row-4">
