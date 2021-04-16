@@ -15,7 +15,7 @@
   width: 8px;
 }
 
-.flex-col-1 {
+.flex-col-1 { 
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -906,16 +906,6 @@
   white-space: nowrap;
 }
 
-.last-name {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  height: 48px;
-  margin-left: 56px;
-  overflow: hidden;
-  width: 76px;
-}
-
 .additional-information-login {
   align-items: flex-start;
   display: flex;
@@ -983,6 +973,13 @@
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  margin-left: 56px;
+  overflow: hidden;
+  width: 76px;
 }
 
 .name {

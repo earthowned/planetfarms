@@ -173,11 +173,14 @@
 /* truncating the text */
 html {
   --lh: 1.4rem;
+
   line-height: var(--lh);
 }
+
 .overflow {
   --max-lines: 3;
   position: relative;
+
   max-height: calc(var(--lh) * var(--max-lines));
   overflow: hidden;
   padding-right: 1rem; /* space for ellipsis */
