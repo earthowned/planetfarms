@@ -1,21 +1,30 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./community-group-card.css";
 
-const CommunityGroupCard = () => {
+const CommunityGroupCard = ({location}) => {
   const [follow, setFollow] = useState(false);
   const followClick = () => {
     setFollow(!follow);
   };
   return (
     <div className="card-1 border-1px-onyx">
-      <div className="card-container"></div>
+      <Link to={location} style={{textDecoration:"none"}}>
+       <div className="card-container"></div>
+      </Link>
+     
       <div className="card-text-container">
-        <div className="farmers ibmplexsans-semi-bold-caribbean-green-14px">
+        <Link to={location} style={{textDecoration:"none"}}>
+          <div className="farmers ibmplexsans-semi-bold-caribbean-green-14px">
           FARMERS
         </div>
-        <div className="think-like-a-farmer ibmplexsans-semi-bold-quarter-spanish-white-24px">
+        </Link>
+      <Link  to={location} style={{textDecoration:"none"}}>
+       <div className="think-like-a-farmer ibmplexsans-semi-bold-quarter-spanish-white-24px">
           Think like a farmer
         </div>
+      </Link>
+       
       </div>
 
       <div className="follower-container">

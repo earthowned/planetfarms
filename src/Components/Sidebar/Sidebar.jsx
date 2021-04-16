@@ -49,8 +49,8 @@ const Sidebar = ({ setToggle, toggle }) => {
                   <strong>Members</strong>
                 </li>
               </div>        
-              <div className={`${pathname === '/community-groups' ? "  text-active" :"" }`}>
-                <li className="dropdown-item">
+              <div className={`${pathname === '/community-group' ? "  text-active" :"" }`}>
+                <li onClick={()=>history.push('/community-group')} className="dropdown-item">
                   <strong> Groups</strong>
                 </li>
               </div>

@@ -1,25 +1,32 @@
 import React, { useState } from "react";
 import BackButton from "../../../Components/BackButton/BackButton";
 import CommunityGroupPost from "../../../Components/CommunityGroupPost/CommunityGroupPost";
+import NewsCreateModal from "../../../Components/NewsCreateModal/NewsCreateModal";
 import DashboardLayout from "../../../Layout/DashboardLayout/DashboardLayout";
 
-import "./group-view-page.css";
 
 function App() {
+    const [editGroupModal, setEditGroupModal] = useState(false);
+  const [groupEditActive, setGroupEditActive] = useState(true);
   return (
+      <>
+    {editGroupModal && <NewsCreateModal type="edit-group" groupEditActive={groupEditActive} setGroupEditActive={setGroupEditActive} />}
     <DashboardLayout title="Community Group">
-      <CommunityGroupViewPage />
+      <CommunityGroupViewPage setEditGroupModal={setEditGroupModal}  />
     </DashboardLayout>
+    </>
   );
 }
 
 export default App;
 
-function CommunityGroupViewPage() {
-    const [followers,setFollowers]=useState(false)
-    const handleFollowClick=()=>{
-        setFollowers(!followers)
-    }
+function CommunityGroupViewPage({setEditGroupModal}) {
+  
+    
+    const handleClickCreate=()=>{
+        setEditGroupModal(true);
+      }
+   
   return (
     <div className="x05-2-0-group-page-inside-user-view">
       <div className="flex-col-4">
@@ -49,21 +56,13 @@ function CommunityGroupViewPage() {
 
                 
               <div className="community-group-follow-btn border-0-5px-quarter-spanish-white">
-                <div className="youre-follower ibmplexsans-semi-bold-quarter-spanish-white-16px" onClick={handleFollowClick}>
-                  You’re follower
+                <div className="youre-follower ibmplexsans-semi-bold-quarter-spanish-white-16px" onClick={handleClickCreate}>
+                  Edit groups
                 </div>
                
                 <img src="/img/chevron-right-outline.svg" alt="arrow-icon" />
                 
               </div>
-              {followers &&   <div className="follow-option">
-                  <div className="write-a-message ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Write a message
-                  </div>
-                  <div className="follow-option-item ibmplexsans-semi-bold-quarter-spanish-white-16px">Unfollow</div>
-                  <div className="follow-option-item ibmplexsans-semi-bold-rusty-red-16px">Report group</div>
-                </div>}
-            
               </div>
 
           
@@ -73,7 +72,7 @@ function CommunityGroupViewPage() {
           <GroupPhoto />
         </div>
         <div className="group-flex-row-7">
-          <div style={{overflowY:"scroll"}}>
+          <div>
             <CommunityGroupPost
               title={"Think like a farmer"}
               timestamps={"November 18 at 05:45 AM"}

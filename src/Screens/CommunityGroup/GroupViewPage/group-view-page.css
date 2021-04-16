@@ -1123,7 +1123,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 39px;
-    min-height: 2684px;
+   
     position: relative;
     width: 100%;
   }
@@ -1143,7 +1143,7 @@
   .group-flex-row-7 {
     align-items: flex-start;
     display: flex;
-    height: 704px;
+    height: 100%;
     margin-left: 1px;
     margin-top: 39px;
     min-width: 1112px;
@@ -1571,7 +1571,7 @@
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
-    min-width: 346px;
+    min-width: 456px;
     white-space: nowrap;
   }
   .group-user-post-title {
@@ -1683,7 +1683,7 @@
     align-items: flex-start;
     background-color: var(--black);
     display: flex;
-    height: 2392px;
+    height: 100%;
     position: relative;
     width: 100%;
   }
