@@ -39,7 +39,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
   const handleAddResource = (e) => {
     if(!title) setResourceTitleError(true)
     if(!description) setResourceDescriptionError(true)
-    if (!title && !description) {
+    if (title && description) {
       dispatch(createProduct({title, description}))
       setActive(false)
     }
