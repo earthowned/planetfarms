@@ -54,7 +54,6 @@
   height: 90%;
   z-index: 5000;
   padding: 0 2em;
-
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
@@ -66,7 +65,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   color: #fff;
   font-size: 1.5em;
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
