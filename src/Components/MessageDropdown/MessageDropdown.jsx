@@ -1,10 +1,6 @@
 import React from 'react'
 import './message-dropdown.css';
-
-import {useHistory} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-
-
 
 import MessageCard from '../MessageCard/MessageCard';
 
@@ -46,7 +42,7 @@ const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileVie
             ? <div className="message-dropdown">
                 <div className="message-dropdown-header">
                     <h4>{message}</h4>
-                    <div onClick={() => clickHandler(false)}><img  src="/img/close-outline.svg" alt="close-outline" /></div>
+                    <div  onClick={() => clickHandler(false)}><img src="/img/close-outline.svg" alt="close-outline" /></div>
                 </div>
                 {
                     contacts.map(contact => (
@@ -59,14 +55,14 @@ const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileVie
             : <div className="message-dropdown-mobile">
                 <div className="message-dropdown-mobile-header">
                     <h4>{message}</h4>
-                    <div onClick={() => clickHandler(false)}><img  src="/img/close-outline.svg" alt="close-outline" /></div>
+                    <div className="close-btn" onClick={() => clickHandler(false)}><img  src="/img/close-outline.svg" alt="close-outline" /></div>
                 </div>
                 {
                     contacts.map(contact => (
                         <MessageCard contact={contact}  />
                     ))
                 }
-                <Link to="/messenger" className="btn-container secondary-btn">{btnName}</Link>
+                <Link to="/messenger" onClick={() => clickHandler(false)} className="btn-container secondary-btn nav-link">{btnName}</Link>
                 </div>
         }
        </>

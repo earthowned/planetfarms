@@ -3,7 +3,7 @@ import HeaderComponent from '../../Components/Header/HeaderComponent'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import "./dashboard.css";
 
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import MessageDropdown from '../../Components/MessageDropdown/MessageDropdown';
 
 
@@ -16,7 +16,9 @@ const DashboardLayout = ({title, children}) => {
     const [messageActive, setMessageActive] = useState(false);
     const [userActive, setUserActive] = useState(false);
 
-    
+  const {pathname} = useLocation();
+  
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   function calculateWidth () {
@@ -30,6 +32,11 @@ const DashboardLayout = ({title, children}) => {
       window.removeEventListener("resize",calculateWidth);
     }
   },[calculateWidth])
+
+  useEffect(() => {
+    if(pathname === '/dashboard') setUserActive(true)
+    if(pathname === '/messenger') setMessageActive(true)
+  }, [setMessageActive, setUserActive])
 
   function activeBurger () {
     setSidebar(!sidebar)
@@ -92,7 +99,7 @@ const DashboardLayout = ({title, children}) => {
     return (
         <div>
           {
-              windowWidth > 1200 ? <div className="container">
+              windowWidth > 1023 ? <div className="container">
             <div className={toggle ? "sidebar-container" : "sidebar-container active"}>
                 <Sidebar setToggle={setToggle} toggle={toggle}/>
             </div>
@@ -101,7 +108,12 @@ const DashboardLayout = ({title, children}) => {
                 {children}
             </div> 
             </div> : (<>
-            {messageActive && <MessageDropdown mobileView="mobileView" btnName="see more" clickHandler={setMessageActive} message="Messages" />}
+            {messageActive && <MessageDropdown mobileView="mobileView" btnName="see more" 
+            clickHandler={setMessageActive} 
+            message="Your Messages" />}
+            {notificationActive && <MessageDropdown mobileView="mobileView" btnName="see more" 
+            clickHandler={setNotificationActive} 
+            message="Your Notifications" />}
             <div className="layout-container">
                 <div className="dashboard-header">
                     <img src="/img/p-icon.svg" />
@@ -113,10 +125,10 @@ const DashboardLayout = ({title, children}) => {
                 <div >{children}</div>
                 <div className="space-taker"></div>
             </div>
+  
             <div className="footer-nav">
-
-              <div className={`mobile-tab-wrapper ${userActive && "active"}`}>
-                <UserMenu activeUser={activeUser} />
+              <div className={`mobile-tab-wrapper ${userActive && "active"} `}>
+                <Link to="/dashboard"><UserMenu activeUser={activeUser} /></Link>
               </div>
 
               <div className={`mobile-tab-wrapper ${messageActive && "active"}`}>
