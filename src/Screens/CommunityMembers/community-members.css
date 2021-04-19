@@ -1,87 +1,102 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600|Inter:500,600");
+
 * {
   box-sizing: border-box;
 }
+
 .border-1px-caribbean-green {
   border: 1px solid var(--caribbean-green);
 }
+
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
+
 .border-1px-quarter-spanish-white {
   border: 1px solid var(--quarter-spanish-white);
 }
+
 .ibmplexsans-bold-caribbean-green-14px {
   color: var(--caribbean-green);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
 }
+
 .ibmplexsans-normal-ebb-14px {
   color: var(--ebb);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-normal-monsoon-14px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-normal-onyx-14px {
   color: var(--onyx);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-semi-bold-caribbean-green-16px {
   color: var(--caribbean-green);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-monsoon-16px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans", Helvetica;
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .inter-medium-monsoon-14px {
   color: var(--monsoon);
-  font-family: "Inter", Helvetica;
+  font-family: "Inter", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
 }
+
 .inter-semi-bold-caribbean-green-16px {
   color: var(--caribbean-green);
-  font-family: "Inter", Helvetica;
+  font-family: "Inter", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .inter-semi-bold-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "Inter", Helvetica;
+  font-family: "Inter", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .x08-0-0-community-members {
   align-items: flex-start;
   background-color: black;
@@ -90,76 +105,6 @@
   width: 1440px;
 }
 
-/* 
-.x08-0-0-community-members .flex-col {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  min-height: 18px;
-  width: 8px;
-}
-.x08-0-0-community-members .flex-col-1 {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  min-height: 210px;
-  width: 35px;
-}
-.x08-0-0-community-members .flex-col-2 {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  margin-left: 2px;
-  min-height: 18px;
-  width: 8px;
-}
-.x08-0-0-community-members .flex-col-3 {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  min-height: 210px;
-  width: 38px;
-} */
-/* .community-members .flex-col-4 {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  margin-left: 40px;
-  min-height: 1096px;
-  width: 1112px;
-} */
-/* .x08-0-0-community-members .flex-row {
-  align-items: flex-start;
-  display: flex;
-  height: 210px;
-  min-width: 210px;
-}
-.x08-0-0-community-members .flex-row-1 {
-  align-items: flex-start;
-  display: flex;
-  height: 272px;
-  margin-top: 48px;
-  min-width: 1112px;
-}
-.x08-0-0-community-members .flex-row-2 {
-  align-items: center;
-  display: flex;
-  margin-left: 4.25px;
-  min-width: 16px;
-}
-.x08-0-0-community-members .flex-row-3 {
-  align-items: center;
-  display: flex;
-  margin-left: 4px;
-  margin-top: 7px;
-  min-width: 240px;
-}
-.x08-0-0-community-members .flex-row-4 {
-  align-items: flex-start;
-  display: flex;
-  margin-left: 4px;
-  min-width: 16px;
-} */
 .community-members .flex-row-5 {
   align-items: flex-start;
   display: flex;
@@ -170,12 +115,6 @@
   grid-column: 1 / 2;
   grid-row: 2 / -1;
 }
-
-
-
-
-
-
 
 :root {
   --caribbean-green: rgba(0, 198, 136, 1);
@@ -189,17 +128,15 @@
   --shark-2: rgba(42, 42, 42, 1);
 }
 
-
 /**new css */
-.community-members{
+.community-members {
   display: grid;
   width: 97%;
   height: 80%;
   margin-top: 1.5em;
-
 }
 
-.community-members-flex-col{
+.community-members-flex-col {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -207,37 +144,31 @@
   min-height: 1096px;
   width: 100%;
 }
-.community-members-flex-row{
+
+.community-members-flex-row {
    align-items: flex-start;
   display: flex;
-  flex-wrap: wrap; 
- 
- 
-  /* height: 272px;
-  margin-top: 40px;
-  min-width: 1112px;
-  flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 
 @media only screen and (max-width:1200px) {
- .community-members-flex-col{
-   width: auto
- }
-
-
+  .community-members-flex-col{
+    width: auto
+  }
 }
 @media only screen and (max-width:1020px) {
   .search-container {
     width: 100%;
   }
 }
+
 @media only screen and (max-width:800px) {
-  .community-members{
+  .community-members {
     display: flex;
     align-items: flex-start;
   }
 }
 
-.search-container{
+.search-container {
   margin-bottom: 10px;
 }
