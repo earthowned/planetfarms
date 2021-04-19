@@ -6,7 +6,7 @@
 
 .add-card {
   align-items: center;
-  background-color: rgba(255,255,255,0.16);
+  background-color: rgba(255, 255, 255, 0.16);
   border-radius: 4px;
   display: flex;
   height: 80px;
@@ -110,7 +110,7 @@
 
 .or {
   color: var(--monsoon);
-  font-family: 'IBM Plex Sans-SemiBold', Helvetica;
+  font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0;
@@ -157,14 +157,14 @@
   align-items: flex-start;
   display: flex;
   height: 24px;
-  padding: 4.0px 4.0px;
+  padding: 4px 4px;
   width: 24px;
 }
 
 .boderline {
   background-color: var(--onyx);
   height: 1px;
-  left: 0px;
+  left: 0;
   position: absolute;
   top: 12px;
   width: 512px;
@@ -197,7 +197,7 @@
   align-items: center;
   display: flex;
   height: 40px;
-  padding: 6.0px 9.9px;
+  padding: 6px 9.9px;
   width: 88px;
 }
 
@@ -208,10 +208,10 @@
   min-height: 24px;
   white-space: nowrap;
 }
-  
+
 .payment-container {
   align-items: flex-start;
-  background-color: rgba(0,0,0,1.0);
+  background-color: rgba(0, 0, 0, 1);
   display: flex;
   height: 1108px;
   position: relative;
@@ -342,4 +342,3 @@
   flex-direction: column;
   justify-content: center;
 }
-  
