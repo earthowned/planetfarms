@@ -469,6 +469,7 @@
   display: flex;
   width: 35px;
 }
+
 .number-2 {
   height: 20px;
   letter-spacing: 0;
@@ -497,7 +498,7 @@
 
 .number-3 {
   color: var(--shark);
-  font-family: "IBM Plex Sans-Bold", Helvetica;
+  font-family: "IBM Plex Sans-Bold", Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 700;
   height: 20px;
@@ -566,6 +567,7 @@
   text-align: center;
   width: 22px;
 }
+
 .rectangle-859-8 {
   background-color: var(--licorice);
   height: 35px;
@@ -585,7 +587,7 @@
 
 .text-9 {
   color: var(--shark);
-  font-family: "IBM Plex Sans-Bold", Helvetica;
+  font-family: "IBM Plex Sans-Bold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 700;
   height: 24px;
@@ -1094,6 +1096,7 @@
   padding: 0 16px;
   width: 768px;
 }
+
 .search-groups {
   letter-spacing: 0;
   line-height: 24px;
@@ -1306,9 +1309,9 @@
 :root {
   --caribbean-green: rgba(0, 198, 136, 1);
   --ebb: rgba(227, 227, 227, 1);
-  --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", Helvetica;
-  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", Helvetica;
-  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", Helvetica;
+  --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", helvetica, sans-serif;
   --font-size-12px: 12px;
   --font-size-14px: 14px;
   --font-size-16px: 16px;
