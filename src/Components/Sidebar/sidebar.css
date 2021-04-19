@@ -16,6 +16,13 @@
   width: 100%;
 }
 
+.dropdown-container {
+  width: 100%;
+  list-style: none;
+  height: auto;
+  display: none;
+}
+
 .list-items {
   background-color: #2b2b2c;
   height: auto;
@@ -74,13 +81,6 @@
 }
 
 .sidebar-container.active .list-items-menu span {
-  display: none;
-}
-
-.dropdown-container {
-  width: 100%;
-  list-style: none;
-  height: auto;
   display: none;
 }
 
