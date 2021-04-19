@@ -237,3 +237,7 @@
     align-items: flex-start;
   }
 }
+
+.search-container{
+  margin-bottom: 10px;
+}
