@@ -321,9 +321,9 @@
 :root {
   --caribbean-green: rgba(0, 198, 136, 1);
   --ebb: rgba(227, 227, 227, 1);
-  --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", Helvetica, sans-serif;
-  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", Helvetica, sans-serif;
-  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", helvetica, sans-serif;
   --font-size-14px: 14px;
   --font-size-16px: 16px;
   --font-size-24px: 24px;
