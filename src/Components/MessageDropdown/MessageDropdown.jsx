@@ -38,22 +38,38 @@ const contacts = [
         },
     ]
 
-const MessageDropdown = ({clickHandler, message, btnName, handleClick}) => {
-   
+const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileView}) => {
     return (
-        <div className="message-dropdown">
-            <div className="message-dropdown-header">
-                <h4>{message}</h4>
-                <div onClick={() => clickHandler(false)}><img  src="/img/close-outline.svg" alt="close-outline" /></div>
-            </div>
-            {
-                contacts.map(contact => (
+        <>
+        {
+            !mobileView 
+            ? <div className="message-dropdown">
+                <div className="message-dropdown-header">
+                    <h4>{message}</h4>
+                    <div onClick={() => clickHandler(false)}><img  src="/img/close-outline.svg" alt="close-outline" /></div>
+                </div>
+                {
+                    contacts.map(contact => (
 
-                    <MessageCard contact={contact}  />
-                ))
-            }
-            <button onClick={() => handleClick()} className="btn-container secondary-btn">{btnName}</button>
-        </div>
+                        <MessageCard contact={contact}  />
+                    ))
+                }
+                <button onClick={() => handleClick()} className="btn-container secondary-btn">{btnName}</button>
+                </div>
+            : <div className="message-dropdown-mobile">
+                <div className="message-dropdown-mobile-header">
+                    <h4>{message}</h4>
+                    <div onClick={() => clickHandler(false)}><img  src="/img/close-outline.svg" alt="close-outline" /></div>
+                </div>
+                {
+                    contacts.map(contact => (
+                        <MessageCard contact={contact}  />
+                    ))
+                }
+                <Link to="/messenger" className="btn-container secondary-btn">{btnName}</Link>
+                </div>
+        }
+       </>
     )
 }
 
