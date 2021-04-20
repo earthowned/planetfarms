@@ -4,6 +4,31 @@
 
 .text-area-variation {
   height: 100px;
+  resize: none;
+}
+
+.button-delete {
+  background-color: #191b1d;
+  outline: none;
+  border: none;
+  color: red;
+  margin: 10px;
+}
+
+.trash-icon {
+  height: 15px;
+}
+
+.button-cancel {
+  background: rgba(255, 255, 255, 0.16);
+  color: white;
+  border-radius: 4px;
+  height: 50px;
+  outline: none;
+  border: none;
+  font-weight: bolder;
+  width: 200px;
+  margin-left: 20px;
 }
 
 .video-row-3 {
