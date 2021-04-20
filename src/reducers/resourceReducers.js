@@ -4,7 +4,11 @@ import {
   RESOURCE_LIST_FAIL,
   RESOURCE_SEARCH_REQUEST,
   RESOURCE_SEARCH_SUCCESS,
-  RESOURCE_SEARCH_FAIL
+  RESOURCE_SEARCH_FAIL,
+  RESOURCE_CREATE_REQUEST,
+  RESOURCE_CREATE_SUCCESS,
+  RESOURCE_CREATE_FAIL,
+  RESOURCE_CREATE_RESET
 } from '../constants/resourceConstants'
 
 export const resourceListReducer = (state = { resources: [] }, action) => {
@@ -30,6 +34,21 @@ export const resourceListReducer = (state = { resources: [] }, action) => {
       }
     case RESOURCE_SEARCH_FAIL:
       return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const resourceCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case RESOURCE_CREATE_REQUEST:
+      return { loading: true }
+    case RESOURCE_CREATE_SUCCESS:
+      return { loading: false, success: true, resource: action.payload }
+    case RESOURCE_CREATE_FAIL:
+      return { loading: false, error: action.payload }
+    case RESOURCE_CREATE_RESET:
+      return {}
     default:
       return state
   }
