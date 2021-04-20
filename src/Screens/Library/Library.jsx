@@ -6,17 +6,15 @@ import ListView from '../../Components/ListView/ListView'
 import SimpleModal from '../../Components/SimpleModal/SimpleModal'
 import CollectionModal from '../../Components/CollectionModal/CollectionModal'
 import GroupModal from '../../Components/GroupModal/GroupModal'
-import { groupCollection } from './CollectionData'
+import { groupCollection, videos } from './CollectionData'
 import { useDispatch, useSelector } from 'react-redux'
 import { listResources } from '../../actions/resourceActions'
 
 const Library = () => {
-    const dispatch = useDispatch()
-    const resourceList = useSelector((state) => state.listResources)
-    const { resources } = resourceList
-    useEffect(() => {
-        dispatch(listResources('', ''))
-    }, [dispatch])
+    let resourceList = useSelector((state) => state.listResources)
+    let data = useSelector((state) => state.listResources)
+    let resources = resourceList.resources
+    if (data) resources = data.resources
 
     const [newCollection, setNewCollection] = useState(false)
     const [active, setActive] = useState(false)
