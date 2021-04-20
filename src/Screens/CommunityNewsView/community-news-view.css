@@ -950,8 +950,7 @@
 
 .x03-1-0-news-page .title-time {
   display: flex;
-  margin-top: 24px;
-  overflow: hidden;
+  margin-top: 10px;
   width: 100%;
 }
 
