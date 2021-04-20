@@ -1094,7 +1094,7 @@
   height: 48px;
   overflow: hidden;
   padding: 0 16px;
-  width: 768px;
+  /* width: 768px; */
 }
 
 .search-groups {
@@ -1310,8 +1310,10 @@
   --caribbean-green: rgba(0, 198, 136, 1);
   --ebb: rgba(227, 227, 227, 1);
   --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", helvetica, sans-serif;
-  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", helvetica, sans-serif;
-  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", helvetica,
+    sans-serif;
+  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", helvetica,
+    sans-serif;
   --font-size-12px: 12px;
   --font-size-14px: 14px;
   --font-size-16px: 16px;
