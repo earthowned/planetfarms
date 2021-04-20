@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import "./sidebar.css";
 
-const Sidebar = ({ setToggle, toggle, mobileView }) => {
+const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
   let history = useHistory();
   const [dropdownActive, setDropdownActive] = useState(true);
   let {pathname}=useLocation()
@@ -82,7 +82,8 @@ const Sidebar = ({ setToggle, toggle, mobileView }) => {
         </li>
       </ul>
       </>
-    : <ul className="list-container">
+    : <div className={`mobile-view-dropdown-container ${burgerActive && "slide"}`}>
+     <ul className="list-container">
         <li className="list-items"> 
           <div onClick={handleOnClick} className={`${pathname === '/community-page-news' ? " text-menu text-active" :"text-menu" }`}>
             <div  onClick={() => history.push("/community-page-news")} className="align-content">   
@@ -126,6 +127,7 @@ const Sidebar = ({ setToggle, toggle, mobileView }) => {
           </div>
         </li>
       </ul>
+      </div>
     }
     </>
   );

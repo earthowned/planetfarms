@@ -5,7 +5,7 @@ import "./dashboard.css";
 
 import {Link, useLocation} from 'react-router-dom';
 import MessageDropdown from '../../Components/MessageDropdown/MessageDropdown';
-
+import {TABLET_SIZE} from '../../constants/sizeConstants'
 
 const DashboardLayout = ({title, children}) => {
     const [toggle, setToggle] = useState(true);
@@ -99,7 +99,7 @@ const DashboardLayout = ({title, children}) => {
     return (
         <div>
           {
-              windowWidth > 1023 ? <div className="container">
+              windowWidth > TABLET_SIZE ? <div className="container">
             <div className={toggle ? "sidebar-container" : "sidebar-container active"}>
                 <Sidebar setToggle={setToggle} toggle={toggle}/>
             </div>
@@ -108,19 +108,19 @@ const DashboardLayout = ({title, children}) => {
                 {children}
             </div> 
             </div> : (<>
-            {messageActive && <MessageDropdown mobileView="mobileView" btnName="see more" 
-            clickHandler={setMessageActive} 
-            message="Your Messages" />}
-            {notificationActive && <MessageDropdown mobileView="mobileView" btnName="see more" 
+            <MessageDropdown mobileView="mobileView" btnName="see more" 
+            clickHandler={setMessageActive} messageActive={messageActive}
+            message="Your Messages" />
+            <MessageDropdown mobileView="mobileView" btnName="see more" 
             clickHandler={setNotificationActive} 
-            message="Your Notifications" />}
+            message="Your Notifications" notificationActive={notificationActive}/>
+            <Sidebar mobileView="mobileView" burgerActive={burgerActive}/>
             <div className="layout-container">
                 <div className="dashboard-header">
                     <img src="/img/p-icon.svg" />
                     <img src="/img/grid-icon.svg" />
                     <img src="/img/mobile-user.svg" />
                 </div>
-                {sidebar && <Sidebar mobileView="mobileView" />}
                 <h1>{title}</h1>
                 <div >{children}</div>
                 <div className="space-taker"></div>

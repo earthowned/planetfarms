@@ -34,7 +34,7 @@ const contacts = [
         },
     ]
 
-const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileView}) => {
+const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileView, messageActive, notificationActive}) => {
     return (
         <>
         {
@@ -52,7 +52,8 @@ const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileVie
                 }
                 <button onClick={() => handleClick()} className="btn-container secondary-btn">{btnName}</button>
                 </div>
-            : <div className="message-dropdown-mobile">
+            : <div className={`message-dropdown-mobile ${messageActive && "slide"} ${notificationActive && "slide"}`}>
+                <div className="message-dropdown-mobile-inner-container">
                 <div className="message-dropdown-mobile-header">
                     <h4>{message}</h4>
                     <div className="close-btn" onClick={() => clickHandler(false)}><img  src="/img/close-outline.svg" alt="close-outline" /></div>
@@ -62,8 +63,9 @@ const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileVie
                         <MessageCard contact={contact}  />
                     ))
                 }
-                <Link to="/messenger" onClick={() => clickHandler(false)} className="btn-container secondary-btn nav-link">{btnName}</Link>
+                <Link to="/messenger" onClick={() => clickHandler(false)} className="mobile-btn btn-container secondary-btn nav-link">{btnName}</Link>
                 </div>
+              </div>
         }
        </>
     )
