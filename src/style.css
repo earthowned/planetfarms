@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 
 body {
   background: black;
@@ -7,6 +8,7 @@ body {
 
 * {
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  box-sizing: border-box;
 }
 
 .border-1px-caribbean-green {
@@ -126,20 +128,15 @@ body {
   --white: rgba(255, 255, 255, 1);
   --white2: rgba(255, 255, 255, 0.16);
   --black: rgba(0, 0, 0, 1);
-  --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", Helvetica;
-  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", Helvetica;
-  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", Helvetica;
-  --font-family-inter-medium: "Inter-Medium", Helvetica;
-  --font-family-inter-semibold: "Inter-SemiBold", Helvetica;
+  --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", helvetica, sans-serif;
+  --font-family-inter-medium: "Inter-Medium", helvetica, sans-serif;
+  --font-family-inter-semibold: "Inter-SemiBold", helvetica, sans-serif;
   --font-size-14px: 14px;
   --font-size-16px: 16px;
   --font-size-24px: 24px;
   --font-size-xl: 40px;
-}
-
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-* {
-  box-sizing: border-box;
 }
 
 .border-0-5px-quarter-spanish-white {
@@ -242,11 +239,11 @@ body {
 }
 
 .ibmplexsans-semi-bold-rusty-red-16px {
-color: var(--rusty-red);
-font-family: var(--font-family-ibm_plex_sans-semibold);
-font-size: var(--font-size-16px);
-font-style: normal;
-font-weight: 600;
+  color: var(--rusty-red);
+  font-family: var(--font-family-ibm_plex_sans-semibold);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 600;
 }
 
 .valign-text-middle {
@@ -254,4 +251,3 @@ font-weight: 600;
   flex-direction: column;
   justify-content: center;
 }
-

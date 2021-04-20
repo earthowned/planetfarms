@@ -1695,21 +1695,21 @@
 
 .span0 {
   color: rgba(0, 198, 136, 1);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
 }
 
 .span1 {
   color: rgba(248, 235, 223, 1);
-  font-family: "Inter-Medium", Helvetica;
+  font-family: "Inter-Medium", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
 
 .span2 {
   color: rgba(248, 235, 223, 1);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
 }
 
