@@ -82,7 +82,7 @@ export const videos = [
         img: "/img/sky.svg",
     },
     {
-        title: "How to make business in 2021",
+        title: "How to make business in 2021mm",
         category: "Business",
         img: "/img/mountain.svg",
     },
