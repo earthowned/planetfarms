@@ -100,3 +100,21 @@ body {
 input[type="checkbox"] {
   background: #900;
 }
+
+@media only screen and (max-width: 1300px) {
+  .sidebar-container {
+    width: 20%;
+  }
+
+  .sidebar-container.active {
+    width: 6%;
+  }
+
+  .nav-icon {
+    left: 15%;
+  }
+
+  .sidebar-container.active .nav-icon {
+    left: 4%;
+  }
+}

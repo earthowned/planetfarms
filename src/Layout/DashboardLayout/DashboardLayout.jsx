@@ -23,7 +23,7 @@ const DashboardLayout = ({title, children}) => {
     return (
         <div>
           {
-              windowWidth > 1200 ? <div className="container">
+              windowWidth > 1023 ? <div className="container">
             <div className={toggle ? "sidebar-container" : "sidebar-container active"}>
                 <Sidebar setToggle={setToggle} toggle={toggle}/>
             </div>

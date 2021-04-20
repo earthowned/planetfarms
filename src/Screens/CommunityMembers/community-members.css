@@ -102,7 +102,16 @@
   background-color: black;
   display: flex;
   overflow: hidden;
-  width: 1440px;
+  width: 100%;
+}
+
+.x08-0-0-community-members .flex-col-4 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  min-height: 1096px;
+  width: 100%;
 }
 
 .community-members .flex-row-5 {
@@ -114,6 +123,7 @@
   flex-wrap: wrap;
   grid-column: 1 / 2;
   grid-row: 2 / -1;
+  width: 100%;
 }
 
 :root {

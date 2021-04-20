@@ -688,13 +688,39 @@
   color: red;
 }
 
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 1200px) {
+  .x01-0-0-login-empty .from-container {
+    width: 460px;
+  }
+
+  .x01-0-0-login-empty .oauth-container {
+    width: 460px;
+  }
+
+  .x01-0-0-login-empty .button-1 {
+    min-width: 460px;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
   .banner-container {
     display: none;
   }
 
   .icons {
     margin: 0 auto;
+  }
+
+  .x01-0-0-login-empty .from-container {
+    width: 504px;
+  }
+
+  .x01-0-0-login-empty .oauth-container {
+    width: 504px;
+  }
+
+  .x01-0-0-login-empty .button-1 {
+    min-width: 504px;
   }
 }
 
