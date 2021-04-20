@@ -2,6 +2,9 @@ import {
   RESOURCE_LIST_REQUEST,
   RESOURCE_LIST_SUCCESS,
   RESOURCE_LIST_FAIL,
+  RESOURCE_SEARCH_REQUEST,
+  RESOURCE_SEARCH_SUCCESS,
+  RESOURCE_SEARCH_FAIL,
   RESOURCE_CREATE_REQUEST,
   RESOURCE_CREATE_SUCCESS,
   RESOURCE_CREATE_FAIL,
@@ -20,6 +23,16 @@ export const resourceListReducer = (state = { resources: [] }, action) => {
         page: action.payload.page
       }
     case RESOURCE_LIST_FAIL:
+      return { loading: false, error: action.payload }
+    case RESOURCE_SEARCH_REQUEST:
+      return { loading: true, resources: [] }
+    case RESOURCE_SEARCH_SUCCESS:
+      return {
+        loading: false,
+        resources: action.payload.resources,
+        order: action.payload.order
+      }
+    case RESOURCE_SEARCH_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
