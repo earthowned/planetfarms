@@ -1,0 +1,243 @@
+
+  .survey-card-text {
+    letter-spacing: 0.00px;
+    line-height: 24px;
+    margin-left: 8px;
+    min-height: 24px;
+    margin-top: 20px;
+  }
+ 
+  
+  .survey-card {
+    align-items: flex-start;
+    background-color: var(--licorice);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 528px;
+    overflow: hidden;
+    width: 500px;
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+ 
+  .survey-card-image {
+    background-size: 100% 100%;
+    border-radius: 4px;
+    height: 239px;
+    width: 497px;
+  }
+  .subtext-option {
+    align-items: flex-start;
+    display: flex;
+    height: 48px;
+    margin-top: 16px;
+    min-width: 344px;
+    position: relative;
+  }
+  .survey-card-subtext {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 24px;
+    margin-top: 80px;
+    min-height: 112px;
+    position: relative;
+    width: 344px;
+  }
+  
+  .subtext-item {
+    letter-spacing: 0.00px;
+    line-height: 24px;
+    min-height: 24px;
+    white-space: nowrap;
+  }
+ 
+  .btn-first {
+    height: 24px;
+    letter-spacing: 0.00px;
+    line-height: 24px;
+    min-height: 24px;
+    min-width: 60px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .option-btn {
+    -webkit-backdrop-filter: blur(16px) brightness(100%);
+    align-items: center;
+    backdrop-filter: blur(16px) brightness(100%);
+    background-color: var(--white);
+    border-radius: 4px;
+    display: flex;
+    height: 48px;
+    overflow: hidden;
+    padding: 0 51px;
+    width: 164px;
+    
+  }
+ .option-btn-second{
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  align-items: center;
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: var(--caribbean-green);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0 51px;
+  width: 164px;
+  margin-left: 10px;
+
+ }
+ .btn-second{
+   color: black !important;
+ }
+
+  
+  .survey-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    min-height: 1256px;
+    position: relative;
+    width: 100%;
+  }
+  .survey-card-container{
+    display: flex;
+    flex-wrap: wrap;
+  }
+ 
+ 
+ 
+  .my-surveys {
+    align-items: flex-start;
+    background-color: var(--black);
+    display: flex;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+  @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600");
+  * {
+    box-sizing: border-box;
+  }
+  .border-0-5px-quarter-spanish-white {
+    border: 0.5px solid var(--quarter-spanish-white);
+  }
+  .border-0-5px-white-2 {
+    border: 0.5px solid var(--white-2);
+  }
+  .border-1px-caribbean-green {
+    border: 1px solid var(--caribbean-green);
+  }
+  .border-1px-onyx {
+    border: 1px solid var(--onyx);
+  }
+  .border-1px-quarter-spanish-white {
+    border: 1px solid var(--quarter-spanish-white);
+  }
+  .ibmplexsans-bold-caribbean-green-14px {
+    color: var(--caribbean-green);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-14px);
+    font-style: normal;
+    font-weight: 700;
+  }
+  .ibmplexsans-bold-shark-14px {
+    color: var(--shark);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-14px);
+    font-style: normal;
+    font-weight: 700;
+  }
+  .ibmplexsans-bold-shark-16px {
+    color: var(--shark);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-16px);
+    font-style: normal;
+    font-weight: 700;
+  }
+  .ibmplexsans-normal-ebb-14px {
+    color: var(--ebb);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-14px);
+    font-style: normal;
+    font-weight: 400;
+  }
+  .ibmplexsans-normal-monsoon-16px {
+    color: var(--monsoon);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-16px);
+    font-style: normal;
+    font-weight: 400;
+  }
+  .ibmplexsans-normal-onyx-14px {
+    color: var(--onyx);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-14px);
+    font-style: normal;
+    font-weight: 400;
+  }
+  .ibmplexsans-semi-bold-quarter-spanish-white-14px {
+    color: var(--quarter-spanish-white);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-14px);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .ibmplexsans-semi-bold-quarter-spanish-white-16px {
+    color: var(--quarter-spanish-white);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-16px);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .ibmplexsans-semi-bold-quarter-spanish-white-24px {
+    color: var(--quarter-spanish-white);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-24px);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .ibmplexsans-semi-bold-shark-16px {
+    color: var(--shark);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-16px);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .ibmplexsans-semi-bold-white-16px-2 {
+    color: var(--white-2);
+    font-family: var(--font-family-ibm_plex_sans);
+    font-size: var(--font-size-16px);
+    font-style: normal;
+    font-weight: 600;
+  }
+  :root {
+    --black: rgba(0, 0, 0, 1);
+    --caribbean-green: rgba(0, 198, 136, 1);
+    --ebb: rgba(227, 227, 227, 1);
+    --font-family-ibm_plex_sans: "IBM Plex Sans", Helvetica;
+    --font-size-14px: 14px;
+    --font-size-16px: 16px;
+    --font-size-24px: 24px;
+    --licorice: rgba(20, 20, 20, 1);
+    --monsoon: rgba(137, 137, 137, 1);
+    --onyx: rgba(58, 57, 57, 1);
+    --quarter-spanish-white: rgba(248, 235, 223, 1);
+    --rusty-red: rgba(218, 52, 67, 1);
+    --shark: rgba(43, 43, 44, 1);
+    --shark-2: rgba(42, 42, 42, 1);
+    --white: rgba(255, 255, 255, 0.16);
+    --white-2: rgba(255, 255, 255, 1);
+  }
+  
+  .valign-text-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
