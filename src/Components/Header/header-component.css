@@ -56,3 +56,11 @@
   text-align: center;
   font-size: 11px;
 }
+
+@media only screen and (max-width: 900px) {
+  .header-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 48px;
+    width: 320px;
+  }
+}
