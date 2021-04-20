@@ -105,7 +105,7 @@ const Follow = () => {
     <div className="follow-container">
       <div className="person-add-outline-2-1">
         <div className="flex-row-7">
-          <img style={{ height: "20px", width: "20px", cursor: "pointer" }} src={follow ? "img/follow-icon.svg" : "img/followed-icon.svg"}/>
+          <img style={{ height: "20px", width: "20px", cursor: "pointer" ,marginLeft:"15px" }} src={follow ? "img/follow-icon.svg" : "img/followed-icon.svg"}/>
         </div>
       </div>
       <div className={

@@ -20,6 +20,7 @@ import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNe
 import NewsAdd from "./Screens/CommunityNews/NewsAdd/NewsAdd";
 import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
 import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
+import UserInfo from "./Screens/CabinetUserInfo/CabinetUserInfo";
 
 function App() {
   return (
@@ -78,6 +79,9 @@ function App() {
         </Route>
         <Route path="/myProfile">
           <MyProfile />
+        </Route>
+        <Route path="/userInfo">
+          <UserInfo />
         </Route>
       </Switch>
     </Router>
