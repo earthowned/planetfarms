@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import {Link, useHistory} from 'react-router-dom';
 import Banner from "../../Components/Banner/Banner";
 import Button from "../../Components/Button/Button";
+import Checkbox from "../../Components/Checkbox/Checkbox";
 import InputComponent from "../../Components/Input/InputComponent";
 import Logo from "../../Components/Logo/Logo";
 import "./login-screen.css";
@@ -18,7 +19,10 @@ function LoginScreen(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
-   const [userError, setUserError] = useState(false);
+  const [terms, setTerms] = useState(false);
+  const [termsError, setTermsError] = useState(false);
+
+  const [userError, setUserError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
   const history = useHistory();
@@ -40,6 +44,8 @@ function LoginScreen(props) {
 
     if(!password) setPasswordError(true);
 
+    if (!terms) setTermsError(true);
+
     if(username === "admin" && password === 'password') {
       history.push('/community-page-news');
     } 
@@ -51,7 +57,7 @@ function LoginScreen(props) {
       <div className="content-wrapper">
 
       {/* sign in form */}
-        <div className="sign-in">
+        <form className="sign-in">
           <div className="icons">
               <Logo />
             </div>
@@ -66,7 +72,7 @@ function LoginScreen(props) {
                image="/img/user-green-outline.svg" 
                changeHandler={userChange}
                name="Username"
-           
+              autoFocus="autoFocus"
                />
                
                <InputComponent text={password} 
@@ -78,15 +84,7 @@ function LoginScreen(props) {
                />
             
             <div className="remember">
-              <div className="frame-92">
-                <div className="checkmark-square-2-outline-1">
-                  <div className="overlap-group1-2">
-                    
-                    <input type="checkbox" id="checkbox-variation"/>
-
-                  </div>
-                </div>
-              </div>
+              <Checkbox termsError={termsError} setTermsError={setTermsError} terms={terms} setTerms={setTerms}/>
               <div className="remember-me ibmplexsans-semi-bold-quarter-spanish-white-16px">
                 {rememberMe}
               </div>
@@ -137,7 +135,7 @@ function LoginScreen(props) {
             </div>
 
           </div>
-        </div>
+        </form>
         
 
         {/* banner-container */}

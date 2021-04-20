@@ -85,4 +85,4 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
     )
 }
 
-export default CollectionModal
+export default CollectionModal;

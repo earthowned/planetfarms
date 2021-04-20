@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "./sidebar.css";
 
 const Sidebar = ({ setToggle, toggle }) => {
   let history = useHistory();
   const [dropdownActive, setDropdownActive] = useState(true);
   let {pathname}=useLocation()
-  const [activeBar,setActiveBar]=useState()
+  const [activeBar, setActiveBar]=useState()
 
   const handleOnClick=()=>{
       setDropdownActive(!dropdownActive)
@@ -49,8 +49,8 @@ const Sidebar = ({ setToggle, toggle }) => {
                   <strong>Members</strong>
                 </li>
               </div>        
-              <div className={`${pathname === '/community-groups' ? "  text-active" :"" }`}>
-                <li className="dropdown-item">
+              <div className={`${pathname === '/community-group' ? "  text-active" :"" }`}>
+                <li onClick={()=>history.push('/community-group')} className="dropdown-item">
                   <strong> Groups</strong>
                 </li>
               </div>
