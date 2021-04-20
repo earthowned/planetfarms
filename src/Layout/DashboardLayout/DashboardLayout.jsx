@@ -118,9 +118,9 @@ const DashboardLayout = ({title, children}) => {
             <Sidebar mobileView="mobileView" burgerActive={burgerActive}/>
             <div className="layout-container">
                 <div className="dashboard-header">
-                    <img src="/img/p-icon.svg" />
-                    <img src="/img/grid-icon.svg" />
-                    <img src="/img/mobile-user.svg" />
+                    <img src="/img/p-icon.svg" alt="p-icon" />
+                    <img src="/img/grid-icon.svg" alt="grid-icon" />
+                    <img src="/img/mobile-user.svg" alt="user-icon" />
                 </div>
                 <h1>{title}</h1>
                 <div >{children}</div>
@@ -143,8 +143,8 @@ const DashboardLayout = ({title, children}) => {
               <div className={`mobile-tab-wrapper ${burgerActive && "active"}`}>
                 <Hamburger activeBurger={activeBurger} />
               </div>
-                </div>
-                </>
+            </div>
+            </>
             )
           } 
         </div>
