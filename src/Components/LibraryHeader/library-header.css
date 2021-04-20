@@ -50,11 +50,11 @@
   margin: 0;
 }
 
-.library-sub-header-2 {
-  width: 10%;
-}
-
 .library-list-item.active {
   background: #fff;
   color: #000;
+}
+
+.library-btn-container {
+  width: 200px;
 }

@@ -3,19 +3,20 @@ import './listview.css';
 
 const ListView = ({data, title, setNewCollection, setModalActive, modalActive}) => {
     const [ active, setActive] = useState(false);
-    
+
     return (
         <>
-        
         <div className="listview-container">
         <h4>{title}</h4>
-           { data.map(item => {
+
+        <div className="listview-box-container">
+           { data && data.map(item => {
                 return (
-                    
                     <div key={item.title} className="listview-inner-container">
                         <div className="image-wrapper">
                             <img src={item.img} />
                         </div>
+                        
                         <div className="list-content">
                             <h4>{item.title}</h4>
                             <p>{item.category}</p>
@@ -27,10 +28,11 @@ const ListView = ({data, title, setNewCollection, setModalActive, modalActive}) 
                             </button>
                             <button className="secondary-btn-border" onClick={() => setModalActive(!modalActive)}>Collections</button>
                         </div>
+                        
                     </div>
-                    
                 )
             })}
+        </div>
          </div>
         </>
     )

@@ -26,6 +26,7 @@ const Library = () => {
         setModalActive(true)
         setActive(false)
     }
+
     
     return (
         <>
@@ -41,6 +42,7 @@ const Library = () => {
            <div className="library-main-container">
                
            <LibraryHeader setActive={setActive}/>
+
            <div className="list-container">
            <ListView title="Articles" data={resources} 
            setNewCollection={setNewCollection}
@@ -56,7 +58,6 @@ const Library = () => {
            setModalActive={setModalActive}
            />
             </div>
-
             </div>
          </DashboardLayout>
          </>
