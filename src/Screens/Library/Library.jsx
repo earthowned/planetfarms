@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import LibraryHeader from '../../Components/LibraryHeader/LibraryHeader'
 import './library.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
@@ -6,7 +6,7 @@ import ListView from '../../Components/ListView/ListView'
 import SimpleModal from '../../Components/SimpleModal/SimpleModal'
 import CollectionModal from '../../Components/CollectionModal/CollectionModal'
 import GroupModal from '../../Components/GroupModal/GroupModal'
-import {groupCollection, videos} from './CollectionData'
+import { groupCollection } from './CollectionData'
 import { useDispatch, useSelector } from 'react-redux'
 import { listResources } from '../../actions/resourceActions'
 
@@ -50,7 +50,7 @@ const Library = () => {
            </div>
 
            <div className="list-container">
-           <ListView title="Videos" data={videos} 
+           <ListView title="Videos" data={resources} 
            setNewCollection={setNewCollection}
            modalActive={modalActive}
            setModalActive={setModalActive}
