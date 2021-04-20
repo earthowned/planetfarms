@@ -1,110 +1,114 @@
 .card-image-1 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    min-height: 272px;
-    margin-left: 2%;
-    margin-bottom: 4%;
-    width: 18%;
-    cursor: pointer;
-    
-  }
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 272px;
+  margin-left: 2%;
+  margin-bottom: 4%;
+  width: 18%;
+  cursor: pointer;
+}
 
-  .profile-card-image {
-    background-position: 50% 50%;
-    background-size: cover;
-    border-radius: 4px;
-    height: 184px;
-    width: 184px;
-    margin: 11px;
-  }
+.profile-card-image {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 184px;
+  width: 184px;
+  margin: 11px;
+}
 
-  .profile-card-name {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    margin-top: 8px;
-    min-height: 48px;
-    width: 138px;
-  }
-  .card-name {
-    letter-spacing: 0px;
-    line-height: 24px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
+.profile-card-name {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  min-height: 48px;
+  width: 138px;
+}
 
-  .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-    color: var(--quarter-spanish-white);
-    font-family: "IBM Plex Sans", Helvetica;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-  }
+.card-name {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+  margin-left: 20px;
+}
 
-  .card-text {
-    letter-spacing: 0px;
-    line-height: 24px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
+.ibmplexsans-semi-bold-quarter-spanish-white-16px {
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
 
-  .ibmplexsans-normal-monsoon-14px {
-    color: var(--monsoon);
-    font-family: "IBM Plex Sans", Helvetica;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-  }
+.card-text {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+  margin-left: 20px;
+}
 
-  .text-2 {
-    letter-spacing: 0px;
-    line-height: 24px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
+.ibmplexsans-normal-monsoon-14px {
+  color: var(--monsoon);
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
 
-  .follow-container {
-    align-items: flex-start;
-    display: flex;
-    margin-top: 8px;
-    min-width: 82px;
-  }
-  .person-add-outline-2-1 {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 24px;
-    padding: 3px 2px;
-    width: 24px;
-  }
+.text-2 {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
 
-  .flex-row-7 {
-    align-items: center;
-    display: flex;
-    margin-left: 4px;
-    min-width: 16px;
-  }
+.follow-container {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 8px;
+  min-width: 82px;
+}
 
-  .follow {
-    letter-spacing: 0px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  
-  .ibmplexsans-semi-bold-caribbean-green-16px {
-    color: var(--caribbean-green);
-    font-family: "IBM Plex Sans", Helvetica;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-  }
-  .ibmplexsans-semi-bold-monsoon-16px {
-    color: var(--monsoon);
-    font-family: "IBM Plex Sans", Helvetica;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-  }
+.person-add-outline-2-1 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  padding: 3px 2px;
+  width: 24px;
+}
+
+.flex-row-7 {
+  align-items: center;
+  display: flex;
+  margin-left: 4px;
+  min-width: 16px;
+}
+
+.follow {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+  margin-left: 20px;
+}
+
+.ibmplexsans-semi-bold-caribbean-green-16px {
+  color: var(--caribbean-green);
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.ibmplexsans-semi-bold-monsoon-16px {
+  color: var(--monsoon);
+  font-family: "IBM Plex Sans", Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}

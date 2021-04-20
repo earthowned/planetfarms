@@ -1,0 +1,344 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+* {
+  box-sizing: border-box;
+}
+
+.add-card {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  display: flex;
+  height: 80px;
+  margin-top: 24px;
+  overflow: hidden;
+  padding: 0 24px;
+  width: 512px;
+}
+
+.add-my-card {
+  height: 24px;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-left: 2px;
+  margin-top: 8px;
+  min-height: 24px;
+  min-width: 95px;
+  white-space: nowrap;
+}
+
+.coinbase-1 {
+  align-items: flex-end;
+  display: flex;
+  height: 28px;
+  padding: 0.7px 1px;
+  width: 122px;
+}
+
+.contact-information {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+
+.course-reports {
+  color: var(--white);
+  font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 112px;
+  white-space: nowrap;
+}
+
+.payment-flex-col-4 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  min-height: 1068px;
+  position: relative;
+  width: 1112px;
+}
+
+.add-card-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: 185px;
+  min-height: 56px;
+  width: 93px;
+}
+
+.payment-info-card-2 {
+  align-items: center;
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  margin-left: 24px;
+  overflow: hidden;
+  padding: 0 47px;
+  width: 208px;
+}
+
+.payment-info-card {
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0 24px;
+  width: 208px;
+}
+
+.or-container {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  display: flex;
+  height: 24px;
+  justify-content: flex-end;
+  left: 241px;
+  min-width: 29px;
+  padding: 0 1px;
+  position: absolute;
+  top: 0;
+}
+
+.or {
+  color: var(--monsoon);
+  font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+
+.plus-icon-image {
+  height: 16px;
+  position: relative;
+  width: 16px;
+}
+
+.payment-overlap-group {
+  height: 24px;
+  position: relative;
+  width: 512px;
+}
+
+.pay-pal-1 {
+  align-items: flex-start;
+  display: flex;
+  height: 32px;
+  overflow: hidden;
+  width: 124px;
+}
+
+.payment-info {
+  align-items: flex-start;
+  display: flex;
+  min-width: 440px;
+}
+
+.payment-information {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 159px;
+  white-space: nowrap;
+}
+
+.plus-icon {
+  align-items: flex-start;
+  display: flex;
+  height: 24px;
+  padding: 4px 4px;
+  width: 24px;
+}
+
+.boderline {
+  background-color: var(--onyx);
+  height: 1px;
+  left: 0;
+  position: absolute;
+  top: 12px;
+  width: 512px;
+}
+
+.payment-card-container {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  min-height: 416px;
+  padding: 40px;
+  width: 1112px;
+}
+
+.payment-card-container-item {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 24px;
+  min-width: 512px;
+}
+
+.payment-card-container-item img {
+  margin-left: 10px;
+}
+
+.stripe-wordmark-blurple-1 {
+  align-items: center;
+  display: flex;
+  height: 40px;
+  padding: 6px 9.9px;
+  width: 88px;
+}
+
+.payment-text {
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-top: 40px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+
+.payment-container {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 1);
+  display: flex;
+  height: 1108px;
+  position: relative;
+  width: 100%;
+}
+
+.border-0-5px-quarter-spanish-white {
+  border: 0.5px solid var(--quarter-spanish-white);
+}
+
+.border-0-5px-white {
+  border: 0.5px solid var(--white);
+}
+
+.border-1px-caribbean-green {
+  border: 1px solid var(--caribbean-green);
+}
+
+.border-1px-onyx {
+  border: 1px solid var(--onyx);
+}
+
+.border-1px-quarter-spanish-white {
+  border: 1px solid var(--quarter-spanish-white);
+}
+
+.ibmplexsans-bold-caribbean-green-14px {
+  color: var(--caribbean-green);
+  font-family: var(--font-family-ibm_plex_sans-bold);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.ibmplexsans-bold-shark-14px {
+  color: var(--shark2);
+  font-family: var(--font-family-ibm_plex_sans-bold);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.ibmplexsans-bold-shark-16px {
+  color: var(--shark2);
+  font-family: var(--font-family-ibm_plex_sans-bold);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.ibmplexsans-regular-normal-ebb-14px {
+  color: var(--ebb);
+  font-family: var(--font-family-ibm_plex_sans-regular);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.ibmplexsans-regular-normal-monsoon-14px {
+  color: var(--monsoon);
+  font-family: var(--font-family-ibm_plex_sans-regular);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.ibmplexsans-regular-normal-onyx-14px {
+  color: var(--onyx);
+  font-family: var(--font-family-ibm_plex_sans-regular);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.ibmplexsans-regular-normal-quarter-spanish-white-16px {
+  color: var(--quarter-spanish-white);
+  font-family: var(--font-family-ibm_plex_sans-regular);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.ibmplexsans-semi-bold-quarter-spanish-white-16px {
+  color: var(--quarter-spanish-white);
+  font-family: var(--font-family-ibm_plex_sans-semibold);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.ibmplexsans-semi-bold-quarter-spanish-white-24px {
+  color: var(--quarter-spanish-white);
+  font-family: var(--font-family-ibm_plex_sans-semibold);
+  font-size: var(--font-size-24px);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.ibmplexsans-semi-bold-shark-16px {
+  color: var(--shark2);
+  font-family: var(--font-family-ibm_plex_sans-semibold);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 600;
+}
+
+:root {
+  --caribbean-green: rgba(0, 198, 136, 1);
+  --ebb: rgba(227, 227, 227, 1);
+  --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", helvetica, sans-serif;
+  --font-family-ibm_plex_sans-semibold: "IBM Plex Sans-SemiBold", helvetica, sans-serif;
+  --font-size-14px: 14px;
+  --font-size-16px: 16px;
+  --font-size-24px: 24px;
+  --licorice: rgba(20, 20, 20, 1);
+  --monsoon: rgba(137, 137, 137, 1);
+  --onyx: rgba(58, 57, 57, 1);
+  --quarter-spanish-white: rgba(248, 235, 223, 1);
+  --rusty-red: rgba(218, 52, 67, 1);
+  --shark: rgba(42, 42, 42, 1);
+  --shark2: rgba(43, 43, 44, 1);
+  --white: rgba(255, 255, 255, 1);
+}
+
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
