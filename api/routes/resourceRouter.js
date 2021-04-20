@@ -37,7 +37,7 @@ const upload = multer({
   }
 })
 router.route('/').get(getResources)
-router.route('/add').post(upload.single('avatar'),addResource)
+router.route('/add').post(upload.single('avatar'), addResource)
 router.route('/search').get(searchResourcesTitle)
 router
   .route('/:id')
