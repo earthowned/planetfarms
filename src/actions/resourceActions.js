@@ -37,7 +37,7 @@ export const searchResources = (search) => async (
 ) => {
   try {
     dispatch({ type: RESOURCE_SEARCH_REQUEST })
-    const { data } = await axios.get(`${ process.env.REACT_APP_API_BASE_URL }/api/resources/search?title=${search}`)
+    const { data } = await axios.get(`${ process.env.REACT_APP_API_BASE_URL }/api/resources/search?title=${ search }`)
     dispatch({
       type: RESOURCE_SEARCH_SUCCESS,
       payload: data

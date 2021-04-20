@@ -26,7 +26,7 @@ export const resourceListReducer = (state = { resources: [] }, action) => {
       return {
         loading: false,
         resources: action.payload.resources,
-        order: action.payload.order,
+        order: action.payload.order
       }
     case RESOURCE_SEARCH_FAIL:
       return { loading: false, error: action.payload }
