@@ -47,3 +47,15 @@
   width: 160px;
   height: 48px;
 }
+
+@media only screen and (max-width: 1400px) {
+  .farming-inner-container {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 840px) {
+  .farming-inner-container {
+    width: 100%;
+  }
+}

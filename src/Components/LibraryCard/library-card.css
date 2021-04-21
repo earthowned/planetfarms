@@ -57,3 +57,16 @@
   margin-top: 0.6em;
   color: #fff;
 }
+
+@media only screen and (max-width: 900px) {
+  .libraryCard-inner-container {
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .libraryCard-inner-container {
+    width: 100%;
+    margin-right: 0;
+  }
+}

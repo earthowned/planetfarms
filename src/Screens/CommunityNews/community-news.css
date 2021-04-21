@@ -996,7 +996,9 @@
   margin-top: 1em;
 }
 
-.community-news-right-bar-inner-container .community-news-filter-container h6:not(:last-child) {
+.community-news-right-bar-inner-container
+  .community-news-filter-container
+  h6:not(:last-child) {
   margin-right: 1em;
 }
 
@@ -1022,7 +1024,7 @@
     width: 20%;
   }
 
-  .filter-container {
+  .community-page-news .filter-container {
     width: 100%;
     grid-row: 2 / 3;
     grid-column: 1 / -1;
