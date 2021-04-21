@@ -1,4 +1,5 @@
 import React from 'react'
+import './survey-card.css'
 
 const surveyData = [
     {
