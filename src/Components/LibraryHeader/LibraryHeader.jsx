@@ -12,7 +12,7 @@ const LibraryHeader = ({setActive}) => {
      const [search, setSearch] = useState(null)
      useEffect(() => {
         if(search) dispatch(searchResources(search))
-        if(!search) dispatch(listResources())
+        if(!search) dispatch(listResources({}))
     }, [search, dispatch])
     return (
         <>

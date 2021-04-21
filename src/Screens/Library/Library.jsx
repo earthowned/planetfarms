@@ -19,10 +19,20 @@ const Library = () => {
     const [newCollection, setNewCollection] = useState(false)
     const [active, setActive] = useState(false)
     const [modalActive, setModalActive] = useState(false)
+    let [pageNumber, setPageNumber] = useState(1);
+    const dispatch = useDispatch()
 
     function openAddCollection () {
         setModalActive(true)
         setActive(false)
+    }
+
+    useEffect(() => {
+      dispatch(listResources({pageNumber}))
+    }, [pageNumber, dispatch])
+
+    function handelPagination (num, multiplier) {
+      setPageNumber(pageNumber += num * multiplier)
     }
     
     return (
@@ -45,6 +55,10 @@ const Library = () => {
            modalActive={modalActive}
            setModalActive={setModalActive}
            />
+              <div className="pagination">
+                <button disabled={pageNumber === 1} onClick={ () => handelPagination(1, -1)}>❮{pageNumber -1}</button>
+                <button onClick={ () => handelPagination(1, +1)}>❯{pageNumber +1}</button>
+              </div>
            </div>
 
            <div className="list-container">
