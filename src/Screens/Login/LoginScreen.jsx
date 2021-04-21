@@ -6,6 +6,16 @@ import Checkbox from "../../Components/Checkbox/Checkbox";
 import InputComponent from "../../Components/Input/InputComponent";
 import Logo from "../../Components/Logo/Logo";
 import "./login-screen.css";
+import { Auth } from 'aws-amplify';
+
+async function signIn(username, password) {
+    try {
+        const user = await Auth.signIn(username, password);
+        console.log(user);
+    } catch (error) {
+        console.log('error signing in', error);
+    }
+}
 
 function LoginScreen(props) {
   const {
@@ -46,9 +56,10 @@ function LoginScreen(props) {
 
     if (!terms) setTermsError(true);
 
-    if(username === "admin" && password === 'password') {
+    signIn(username, password);
+    /*if(username === "admin" && password === 'password') {
       history.push('/community-page-news');
-    } 
+    } */
   };
 
   return (
