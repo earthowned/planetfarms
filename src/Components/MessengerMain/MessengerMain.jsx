@@ -34,9 +34,11 @@ const contacts = [
             date: "08/4/2020"
         },
     ]
+
 const MessengerMain = () => {
-    const [active, setActive] = useState(false);
     
+    const [active, setActive] = useState(false);
+
     return (
         <>
            <div className="messenger-wrapper">
@@ -66,6 +68,7 @@ const MessengerMain = () => {
                        }
                </div>
                </div>
+               
                {active ? (
                    <div className="col-2-alternative">
                        <MessageRightComponent setActive={setActive}></MessageRightComponent>
