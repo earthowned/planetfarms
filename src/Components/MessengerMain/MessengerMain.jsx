@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
 import SearchComponent from '../SearchComponent/SearchComponent';
-import './messenger-main.css';
 import MessageCard from '../MessageCard/MessageCard';
 import MessageRightComponent from '../MessageRightComponent/MessageRightComponent';
 
+import './messenger-main.css';
 
 const contacts = [
         {
@@ -41,7 +41,7 @@ const MessengerMain = () => {
         <>
            <div className="messenger-wrapper">
                <div className="col-1">
-                   <SearchComponent />
+                   <SearchComponent className="search-btn" />
 
                     {/* contact-component */}
                    <div className="contact-container">
