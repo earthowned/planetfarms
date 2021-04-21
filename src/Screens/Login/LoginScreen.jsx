@@ -87,7 +87,7 @@ function LoginScreen(props) {
   const passwordChange = (e) => {
     setPassword(e.target.value)
     setPasswordError(false)
-}
+  }
 
   const handleOnClick = (e) => {
     if (!username) setUserError(true)
@@ -101,7 +101,12 @@ function LoginScreen(props) {
 
   const loginWithFacebook = (e) => {
     e.preventDefault()
-    Auth.federatedSignIn()
+    Auth.federatedSignIn({provider: 'Facebook'})
+  }
+
+  const loginWithGoogle = (e) => {
+    e.preventDefault()
+    Auth.federatedSignIn({provider: 'Google'})
   }
 
   return (
@@ -157,7 +162,7 @@ function LoginScreen(props) {
               </div>
               <div className="button-1">
 
-                <a target="_blank" href="https://google.com" className="link-btn google-button border-0-5px-quarter-spanish-white">
+                <button onclick={ loginWithGoogle } className="link-btn google-button border-0-5px-quarter-spanish-white">
                   <div className="logo-googleg-48-dp-1">
                     <div className="overlap-group1-3">
                       
@@ -167,7 +172,7 @@ function LoginScreen(props) {
                   <div className="google valign-text-middle ibmplexsans-semi-bold-gallery-16px">
                     {google}
                   </div>
-                </a>
+                </button>
                 <button onClick={ loginWithFacebook } className="link-btn facebook-button border-0-5px-quarter-spanish-white">
                   <img className="subtract-1" src="/img/facebook-icon.svg" alt="facebook-icon" />
                   <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
