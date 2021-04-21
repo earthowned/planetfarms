@@ -21,7 +21,6 @@
 .library-list-item {
   background: #000;
   border: 0.5px solid #fff;
-
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
@@ -29,7 +28,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 200px;
   height: 50px;
 }
@@ -101,8 +99,6 @@
 }
 
 @media only screen and (max-width: 840px) {
-  .library-container {
-  }
   .library-sub-header-1 {
     width: 100%;
   }

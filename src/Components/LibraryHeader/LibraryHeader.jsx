@@ -17,20 +17,18 @@ const LibraryHeader = ({setActive}) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
      let {pathname} = useLocation();
-    
-     
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    function calculateWidth () {
-            setWindowWidth(window.innerWidth);
-        }
 
     useEffect(() => {
-        window.addEventListener("resize", calculateWidth);
+        window.addEventListener("resize",  function () {
+            setWindowWidth(window.innerWidth);
+        });
 
         return () => {
-        window.removeEventListener("resize",calculateWidth);
+        window.removeEventListener("resize", function () {
+            setWindowWidth(window.innerWidth);
+        });
         }
-    },[calculateWidth])
+    },[windowWidth])
 
     return (
         <div className="library-main-header-container">
