@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./my-courses-card.css";
 
 const MyCoursesCard = () => {
@@ -42,6 +43,8 @@ const myCourses = () => {
         <div className="my-courses-title ibmplexsans-semi-bold-quarter-spanish-white-24px">
           My courses
         </div>
+        <Link to="/mycoursePage" style={{textDecoration:"none"}} >
+       
         <div className="course-card-container">
           {courseData.map((data) => {
             return (
@@ -67,6 +70,7 @@ const myCourses = () => {
             );
           })}
         </div>
+        </Link>
       </div>
     </>
   );

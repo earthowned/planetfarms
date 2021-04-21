@@ -13,6 +13,7 @@ import MyLibrary from "./Screens/Dashboard/MyLibrary";
 import MyProfile from "./Screens/Dashboard/MyProfile";
 import MySurvey from "./Screens/Dashboard/MySurvey";
 import MyCourse from "./Screens/Dashboard/MyCourses";
+import MyCoursePage from "./Screens/Dashboard/CoursePage/CoursePage";
 import Collection from "./Screens/Library/Collection/Collection";
 import UserCollection from "./Screens/Library/UserCollection/UserCollection";
 import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
@@ -83,6 +84,9 @@ function App() {
         </Route>
         <Route path="/mycourse">
           <MyCourse />
+        </Route>
+        <Route path="/mycoursePage">
+          <MyCoursePage />
         </Route>
         <Route path="/myProfile">
           <MyProfile />
