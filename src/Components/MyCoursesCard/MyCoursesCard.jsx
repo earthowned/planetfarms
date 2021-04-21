@@ -43,33 +43,32 @@ const myCourses = () => {
         <div className="my-courses-title ibmplexsans-semi-bold-quarter-spanish-white-24px">
           My courses
         </div>
-        <Link to="/mycoursePage" style={{textDecoration:"none"}} >
-       
-        <div className="course-card-container">
-          {courseData.map((data) => {
-            return (
-              <div
-                className="course-card"
-                style={{ backgroundImage: `url(${data.bgImage})` }}
-              >
-                <div className="card-text-container">
-                  <div className="course-name-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
-                    {data.name}
+        <Link to="/mycoursePage" style={{ textDecoration: "none" }}>
+          <div className="course-card-container">
+            {courseData.map((data) => {
+              return (
+                <div
+                  className="course-card"
+                  style={{ backgroundImage: `url(${data.bgImage})` }}
+                >
+                  <div className="card-text-container">
+                    <div className="course-name-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
+                      {data.name}
+                    </div>
+                    <p className="course-text-2 valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
+                      {data.activity}
+                    </p>
                   </div>
-                  <p className="course-text-2 valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                    {data.activity}
-                  </p>
-                </div>
-                <div className="lesson-index">
-                  <div className="lesson-index-bar"></div>
-                  <div className="lessons-number valign-text-middle">
-                    {data.lesson}
+                  <div className="lesson-index">
+                    <div className="lesson-index-bar"></div>
+                    <div className="lessons-number valign-text-middle">
+                      {data.lesson}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
         </Link>
       </div>
     </>

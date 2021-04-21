@@ -18,7 +18,7 @@ function CoursePage() {
     <div className="course-page">
       <div className="course-page-flex-col-4">
         <BackButton location={"/mycourse"} />
-          <CourseDescription />
+        <CourseDescription />
       </div>
     </div>
   );

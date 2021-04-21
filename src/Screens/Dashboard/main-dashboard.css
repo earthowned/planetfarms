@@ -387,18 +387,7 @@
   padding: 32px 0;
   width: 216px;
 }
-:root {
-  --abbey: rgba(79, 81, 85, 1);
-  --caribbean-green: rgba(0, 198, 136, 1);
-  --ebb: rgba(227, 227, 227, 1);
-  --licorice: rgba(20, 20, 20, 1);
-  --onyx: rgba(58, 57, 57, 1);
-  --quarter-spanish-white: rgba(248, 235, 223, 1);
-  --rusty-red: rgba(218, 52, 67, 1);
-  --shark: rgba(33, 34, 37, 1);
-  --shark-2: rgba(43, 43, 44, 1);
-  --monsoon: rgba(137, 137, 137, 1);
-}
+
 
 ::-webkit-scrollbar {
   width: 0px;
@@ -459,4 +448,7 @@
   margin-top: 24px;
   min-height: 48px;
   width: 186px;
+}
+.link-router{
+  text-decoration: none;
 }
