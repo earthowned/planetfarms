@@ -8,125 +8,124 @@ body {
 * {
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
 }
-  @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-  @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600");
-  * {
-    box-sizing: border-box;
-  }
-  .border-0-5px-quarter-spanish-white {
-    border: 0.5px solid var(--quarter-spanish-white);
-  }
-  .border-0-5px-white-2 {
-    border: 0.5px solid var(--white-2);
-  }
-  .border-1px-caribbean-green {
-    border: 1px solid var(--caribbean-green);
-  }
-  .border-1px-onyx {
-    border: 1px solid var(--onyx);
-  }
-  .border-1px-quarter-spanish-white {
-    border: 1px solid var(--quarter-spanish-white);
-  }
-  .ibmplexsans-bold-caribbean-green-14px {
-    color: var(--caribbean-green);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-14px);
-    font-style: normal;
-    font-weight: 700;
-  }
-  .ibmplexsans-bold-shark-14px {
-    color: var(--shark);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-14px);
-    font-style: normal;
-    font-weight: 700;
-  }
-  .ibmplexsans-bold-shark-16px {
-    color: var(--shark);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-16px);
-    font-style: normal;
-    font-weight: 700;
-  }
-  .ibmplexsans-normal-ebb-14px {
-    color: var(--ebb);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-14px);
-    font-style: normal;
-    font-weight: 400;
-  }
-  .ibmplexsans-normal-monsoon-16px {
-    color: var(--monsoon);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-16px);
-    font-style: normal;
-    font-weight: 400;
-  }
-  .ibmplexsans-normal-onyx-14px {
-    color: var(--onyx);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-14px);
-    font-style: normal;
-    font-weight: 400;
-  }
-  .ibmplexsans-semi-bold-quarter-spanish-white-14px {
-    color: var(--quarter-spanish-white);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-14px);
-    font-style: normal;
-    font-weight: 600;
-  }
-  .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-    color: var(--quarter-spanish-white);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-16px);
-    font-style: normal;
-    font-weight: 600;
-  }
-  .ibmplexsans-semi-bold-quarter-spanish-white-24px {
-    color: var(--quarter-spanish-white);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-24px);
-    font-style: normal;
-    font-weight: 600;
-  }
-  .ibmplexsans-semi-bold-shark-16px {
-    color: var(--shark);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-16px);
-    font-style: normal;
-    font-weight: 600;
-  }
-  .ibmplexsans-semi-bold-white-16px-2 {
-    color: var(--white-2);
-    font-family: var(--font-family-ibm_plex_sans);
-    font-size: var(--font-size-16px);
-    font-style: normal;
-    font-weight: 600;
-  }
-  :root {
-    --black: rgba(0, 0, 0, 1);
-    --caribbean-green: rgba(0, 198, 136, 1);
-    --ebb: rgba(227, 227, 227, 1);
-    --font-family-ibm_plex_sans: "IBM Plex Sans", Helvetica;
-    --font-size-14px: 14px;
-    --font-size-16px: 16px;
-    --font-size-24px: 24px;
-    --licorice: rgba(20, 20, 20, 1);
-    --monsoon: rgba(137, 137, 137, 1);
-    --onyx: rgba(58, 57, 57, 1);
-    --quarter-spanish-white: rgba(248, 235, 223, 1);
-    --rusty-red: rgba(218, 52, 67, 1);
-    --shark: rgba(43, 43, 44, 1);
-    --shark-2: rgba(42, 42, 42, 1);
-    --white: rgba(255, 255, 255, 0.16);
-    --white-2: rgba(255, 255, 255, 1);
-  }
-  
-  .valign-text-middle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-   
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600");
+* {
+  box-sizing: border-box;
+}
+.border-0-5px-quarter-spanish-white {
+  border: 0.5px solid var(--quarter-spanish-white);
+}
+.border-0-5px-white-2 {
+  border: 0.5px solid var(--white-2);
+}
+.border-1px-caribbean-green {
+  border: 1px solid var(--caribbean-green);
+}
+.border-1px-onyx {
+  border: 1px solid var(--onyx);
+}
+.border-1px-quarter-spanish-white {
+  border: 1px solid var(--quarter-spanish-white);
+}
+.ibmplexsans-bold-caribbean-green-14px {
+  color: var(--caribbean-green);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 700;
+}
+.ibmplexsans-bold-shark-14px {
+  color: var(--shark);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 700;
+}
+.ibmplexsans-bold-shark-16px {
+  color: var(--shark);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 700;
+}
+.ibmplexsans-normal-ebb-14px {
+  color: var(--ebb);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-normal-monsoon-16px {
+  color: var(--monsoon);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-normal-onyx-14px {
+  color: var(--onyx);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 400;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-14px {
+  color: var(--quarter-spanish-white);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-16px {
+  color: var(--quarter-spanish-white);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-quarter-spanish-white-24px {
+  color: var(--quarter-spanish-white);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-24px);
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-shark-16px {
+  color: var(--shark);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 600;
+}
+.ibmplexsans-semi-bold-white-16px-2 {
+  color: var(--white-2);
+  font-family: var(--font-family-ibm_plex_sans);
+  font-size: var(--font-size-16px);
+  font-style: normal;
+  font-weight: 600;
+}
+:root {
+  --black: rgba(0, 0, 0, 1);
+  --caribbean-green: rgba(0, 198, 136, 1);
+  --ebb: rgba(227, 227, 227, 1);
+  --font-family-ibm_plex_sans: "IBM Plex Sans", Helvetica;
+  --font-size-14px: 14px;
+  --font-size-16px: 16px;
+  --font-size-24px: 24px;
+  --licorice: rgba(20, 20, 20, 1);
+  --monsoon: rgba(137, 137, 137, 1);
+  --onyx: rgba(58, 57, 57, 1);
+  --quarter-spanish-white: rgba(248, 235, 223, 1);
+  --rusty-red: rgba(218, 52, 67, 1);
+  --shark: rgba(43, 43, 44, 1);
+  --shark-2: rgba(42, 42, 42, 1);
+  --white: rgba(255, 255, 255, 0.16);
+  --white-2: rgba(255, 255, 255, 1);
+}
+
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
