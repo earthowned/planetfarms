@@ -32,6 +32,15 @@
   align-items: center;
 }
 
+.add-collection button {
+  border: none;
+  color: #00c688;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
 .group-modal-header button {
   background: none;
   outline: none;
@@ -85,15 +94,6 @@
   margin: 2em 0;
 }
 
-.add-collection button {
-  border: none;
-  color: #00c688;
-  background: none;
-  outline: none;
-  cursor: pointer;
-  font-size: 1em;
-}
-
 .add-collection button:hover {
   text-decoration: underline;
 }
@@ -104,4 +104,10 @@
   height: 100%;
   z-index: 2000;
   background: red;
+}
+
+@media only screen and (max-width: 850px) {
+  .group-modal {
+    width: 85%;
+  }
 }
