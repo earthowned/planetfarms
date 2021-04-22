@@ -7,6 +7,9 @@ import {Link, useLocation} from 'react-router-dom';
 import MessageDropdown from '../../Components/MessageDropdown/MessageDropdown';
 import {TABLET_SIZE} from '../../constants/sizeConstants'
 
+// importing custom hooks sizefinder to calculate window width from utils
+import useSizeFinder from '../../utils/SizeFinder';
+
 const DashboardLayout = ({title, children}) => {
     const [toggle, setToggle] = useState(true);
     const [sidebar, setSidebar] = useState(false);
@@ -17,27 +20,16 @@ const DashboardLayout = ({title, children}) => {
     const [userActive, setUserActive] = useState(false);
 
   const {pathname} = useLocation();
-  
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  function calculateWidth () {
-    setWindowWidth(window.innerWidth);
-  }
-
-  useEffect(() => {
-    window.addEventListener("resize", calculateWidth);
-
-    return () => {
-      window.removeEventListener("resize",calculateWidth);
-    }
-  },[calculateWidth])
 
   useEffect(() => {
     if(pathname === '/dashboard') setUserActive(true)
     if(pathname === '/messenger') setMessageActive(true)
   }, [setMessageActive, setUserActive])
 
+  // using custom function
+  let windowWidth = useSizeFinder();
+
+  //mobile button functionality
   function activeBurger () {
     setSidebar(!sidebar)
     setBurgerActive(!burgerActive)

@@ -11,15 +11,17 @@ const CallModal = ({clickHandler}) => {
                 </div>
 
                 <div className="call-button">
+                    
                     <button><img src="/img/users-icon.svg" alt="user-icon" /></button>
                     <button><img src="/img/video-off-icon.svg" alt="video-off-icon" /></button>
                     <button><img src="/img/mute-microphone-icon.svg" alt="microphone-icon" /></button>
                     <button onClick={() => clickHandler(false)}><img src="/img/end-call-icon.svg" alt="end-call-icon" /></button>
-                </div>
-                
-                <div className="resize">
+                    
+                    <div className="resize">
                     <img src="/img/resize-icon.svg" alt="resize-icon" />
                 </div>
+                </div>
+                
             </div>
        </div>
        

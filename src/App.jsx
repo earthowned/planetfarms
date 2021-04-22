@@ -24,6 +24,7 @@ import UserInfo from "./Screens/CabinetUserInfo/CabinetUserInfo";
 import CommunityGroup from './Screens/CommunityGroup/CommunityGroup';
 import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage';
 import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup';
+import MobileMessage from "./Components/MobileMessage/MobileMessage";
 
 function App() {
   return (
@@ -50,8 +51,11 @@ function App() {
         <Route path="/library/collection/saved">
            <SavedCollection />
          </Route>
-        <Route path="/messenger">
+        <Route exact path="/messenger">
            <Messenger />
+         </Route>
+         <Route path="/messenger/:id">
+           <MobileMessage />
          </Route>
         <Route exact path="/community-page-news">
          <CommunityPagenews />
