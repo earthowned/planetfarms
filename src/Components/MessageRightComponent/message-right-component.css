@@ -11,6 +11,7 @@
 .message-header .img-wrapper {
   width: 50px;
   height: 50px;
+  margin-right: 10px;
 }
 
 .message-header .img-wrapper img {
@@ -32,7 +33,6 @@
 }
 
 .account-section {
-  width: 35%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,3 +56,4 @@
 .messenger-list-item:hover {
   transform: scale(1.1);
 }
+

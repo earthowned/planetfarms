@@ -15,7 +15,6 @@
 
 .col-2 {
   width: 60%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,8 +26,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 90%;
-  padding: 10px 20px;
+  width: 100%;
   color: #fff;
   cursor: pointer;
   font-size: 16px;
@@ -43,4 +41,40 @@
 .col-2-alternative {
   width: 60%;
   height: 100%;
+}
+
+@media only screen and (max-width: 850px){
+  .messenger-wrapper{
+    flex-direction: column;
+  }
+
+  .col-1 {
+    width: 100%;
+  }
+
+  .col-2-alternative {
+    width: 100%;
+     position: fixed;
+    z-index: 5000;
+  }
+
+  .col-2 {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 850px){
+  .contact-card {
+    padding: 4px 8px; 
+  }
+
+  .contact-text {
+    font-size: 12px;
+    width: 40%;
+    margin-left: 4px;
+  }
+
+  .contact-noti span {
+    font-size: 12px;
+  }
 }

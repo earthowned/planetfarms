@@ -34,11 +34,13 @@ const MessageRightComponent = ({setActive}) => {
     function makeCall () {
         setAddGroup(true);
     }
+
     return (
         <>
         {addGroup && <GroupModal clickHandler={setAddGroup} data={groupUsers} btnName="add members"/>}
         {call && <CallModal clickHandler={setCall} />}
-         <div className="message-header">
+
+                <div className="message-header">
              <div className="message-account">
             
             <div className="account-section">
@@ -56,15 +58,15 @@ const MessageRightComponent = ({setActive}) => {
             
             </div>
             
-             <ul className="messenger-list-container">
-                 <li className="messenger-list-item" onClick={() => makeCall()}><img src="/img/person-add-outline.svg"></img></li>
-                 <li className="messenger-list-item" onClick={() => setCall(true)}><img src="/img/phone-call-outline.svg"></img></li>
-                 <li className="messenger-list-item"><img src="/img/video-outline.svg"></img></li>
-                 <li className="messenger-list-item"><img src="/img/more-horizontal-outline-1.svg"></img></li>
-             </ul>
-             </div>
-         </div>
-         <MessageSlot />
+                    <ul className="messenger-list-container">
+                        <li className="messenger-list-item" onClick={() => makeCall()}><img src="/img/person-add-outline.svg"></img></li>
+                        <li className="messenger-list-item" onClick={() => setCall(true)}><img src="/img/phone-call-outline.svg"></img></li>
+                        <li className="messenger-list-item"><img src="/img/video-outline.svg"></img></li>
+                        <li className="messenger-list-item"><img src="/img/more-horizontal-outline-1.svg"></img></li>
+                    </ul>
+                    </div>
+                </div>
+                <MessageSlot />
         </>
     )
 }
