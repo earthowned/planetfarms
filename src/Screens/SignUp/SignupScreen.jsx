@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import "./signup-screen.css";
-import { useHistory, Link } from "react-router-dom";
-import Logo from "../../Components/Logo/Logo";
-import Banner from "../../Components/Banner/Banner";
-import InputComponent from "../../Components/Input/InputComponent";
-import Button from "../../Components/Button/Button";
-import Checkbox from "../../Components/Checkbox/Checkbox";
+import React, { useState } from "react"
+import "./signup-screen.css"
+import { useHistory, Link } from "react-router-dom"
+import Logo from "../../Components/Logo/Logo"
+import Banner from "../../Components/Banner/Banner"
+import InputComponent from "../../Components/Input/InputComponent"
+import Button from "../../Components/Button/Button"
+import Checkbox from "../../Components/Checkbox/Checkbox"
 
 function App() {
-  return <SignupScreen {...X0200SignUpemptyData} />;
+  return <SignupScreen {...X0200SignUpemptyData} />
 }
 
 export default App;
@@ -22,47 +22,41 @@ function SignupScreen(props) {
     text2,
     google,
     facebook,
-  } = props;
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [terms, setTerms] = useState(false);
-  const [active, setActive] = useState(false);
-  
-
-  const [userError, setUserError] = useState(false);
-  const [termsError, setTermsError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  } = props
 
   const history = useHistory();
 
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [terms, setTerms] = useState(false)
+  const [active, setActive] = useState(false)
+
+  const [userError, setUserError] = useState("")
+  const [termsError, setTermsError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
+  const [passwordLengthError, setPasswordLengthError] = useState(false)
+
   const registerUser = () => {
-    if (!username) setUserError(true);
-
-    if (!password) setPasswordError(true);
-
-    if (!terms) setTermsError(true);
+    if (!username) setUserError('empty')
+    if (!password) setPasswordError(true)
+    if (password.length < 6) setPasswordLengthError(true)
+    if (!terms) setTermsError(true)
 
     if (username && password && terms) {
-      history.push("/register-complete");
+      history.push("/register-complete", { username, password });
     }
-  };
+  }
 
   const userChange = (e) => {
-    setUsername(e.target.value);
-    setUserError(false);
-    setActive(true);
+    setUsername(e.target.value)
+    setUserError(false)
+    setActive(true)
   };
 
   const passwordChange = (e) => {
-    setPassword(e.target.value);
-    setPasswordError(false);
-  };
-
-  const changeTerms = (e) => {
-    setTerms(!terms);
-    setTermsError(false);
-  };
+    setPassword(e.target.value)
+    setPasswordError(false)
+  }
 
   return (
     <div className="x02-0-0-sign-up-empty">
@@ -87,17 +81,17 @@ function SignupScreen(props) {
             error={userError}
             image="/img/user-green-outline.svg"
             changeHandler={userChange}
-            name="Username"
+            name={ userError === 'UsernameExistsException' ? 'Username already exists' : "Username" }
             autoFocus="autoFocus"
           />
 
           <InputComponent
             text={password}
-            error={passwordError}
+            error={passwordLengthError ? passwordLengthError : passwordError}
             image="/img/lock-outline.svg"
             changeHandler={passwordChange}
             password="password"
-            name="Password"
+            name={passwordLengthError ? "Password must be greater than length 6" : "Password"}
           />
 
           <div className="button-group">
@@ -125,8 +119,9 @@ function SignupScreen(props) {
             <div className="icon-container">
                <a
                 href="https://www.facebook.com/"
+                alt="facebook"
                 target="_blank"
-                className="link-btn facebook-button border-0-5px-quarter-spanish-white"
+                className="link-btn facebook-button border-0-5px-quarter-spanish-white" rel="noreferrer"
               >
                 <img
                   className="subtract"
@@ -140,7 +135,7 @@ function SignupScreen(props) {
               <a
                 href="https://www.facebook.com/"
                 target="_blank"
-                className="link-btn facebook-button border-0-5px-quarter-spanish-white"
+                className="link-btn facebook-button border-0-5px-quarter-spanish-white" rel="noreferrer"
               >
                 <img
                   className="subtract"
@@ -177,7 +172,7 @@ function SignupScreen(props) {
       
       </div>
     </div>
-  );
+  )
 }
 
 const X0200SignUpemptyData = {
@@ -189,5 +184,5 @@ const X0200SignUpemptyData = {
   google: "Google",
   subtract: "",
   facebook: "Facebook",
-  spanText4: "Already have an account?",
-};
+  spanText4: "Already have an account?"
+}

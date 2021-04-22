@@ -1,21 +1,12 @@
-import React, { useState} from "react";
-import {Link, useHistory} from 'react-router-dom';
-import Banner from "../../Components/Banner/Banner";
-import Button from "../../Components/Button/Button";
-import Checkbox from "../../Components/Checkbox/Checkbox";
-import InputComponent from "../../Components/Input/InputComponent";
-import Logo from "../../Components/Logo/Logo";
-import "./login-screen.css";
-import { Auth } from 'aws-amplify';
-
-async function signIn(username, password) {
-    try {
-        const user = await Auth.signIn(username, password);
-        console.log(user);
-    } catch (error) {
-        console.log('error signing in', error);
-    }
-}
+import React, { useState} from "react"
+import {Link, useHistory} from 'react-router-dom'
+import Banner from "../../Components/Banner/Banner"
+import Button from "../../Components/Button/Button"
+import Checkbox from "../../Components/Checkbox/Checkbox"
+import InputComponent from "../../Components/Input/InputComponent"
+import Logo from "../../Components/Logo/Logo"
+import "./login-screen.css"
+import { Auth } from 'aws-amplify'
 
 function LoginScreen(props) {
   const {
@@ -23,44 +14,58 @@ function LoginScreen(props) {
     rememberMe,
     text1,
     google,
-    facebook,
-  } = props;
+    facebook
+  } = props
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   
-  const [terms, setTerms] = useState(false);
-  const [termsError, setTermsError] = useState(false);
+  const [terms, setTerms] = useState(false)
+  const [termsError, setTermsError] = useState(false)
 
-  const [userError, setUserError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [userError, setUserError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
 
-  const history = useHistory();
+  const history = useHistory()
+
+  async function signIn(username, password) {
+    try {
+        const user = await Auth.signIn(username, password)
+        if (user) history.push('/community-page-news')
+    } catch (error) {
+        const code = error.code
+        switch (code) {
+            case 'NotAuthorizedException':
+              setUserError('NotAuthorizedException')
+              setPasswordError('NotAuthorizedException')
+              return 
+            default:
+                return false
+        }
+    }
+}
+
   
   const userChange = (e) => {
-    setUsername(e.target.value);
-    setUserError(false);
+    setUsername(e.target.value)
+    setUserError(false)
      
   }
 
   const passwordChange = (e) => {
-    setPassword(e.target.value);
-    setPasswordError(false);
+    setPassword(e.target.value)
+    setPasswordError(false)
 }
 
   const handleOnClick = (e) => {
-    
-    if(!username) setUserError(true);
+    if (!username) setUserError(true)
+    if (password.length <6) setPasswordError(true)
+    if (!terms) setTermsError(true)
 
-    if(!password) setPasswordError(true);
-
-    if (!terms) setTermsError(true);
-
-    signIn(username, password);
-    /*if(username === "admin" && password === 'password') {
-      history.push('/community-page-news');
-    } */
-  };
+    if(username && password.length > 6) {
+      signIn(username, password)
+    }
+  }
 
   return (
     <div className="x01-0-0-login-empty">
@@ -82,7 +87,7 @@ function LoginScreen(props) {
                error={userError} 
                image="/img/user-green-outline.svg" 
                changeHandler={userChange}
-               name="Username"
+               name= { userError === 'NotAuthorizedException' ? "Incorrect username or password." : "Username" }
               autoFocus="autoFocus"
                />
                
@@ -91,7 +96,7 @@ function LoginScreen(props) {
                image="/img/lock-outline.svg" 
                changeHandler={passwordChange}
                password="password"
-               name="Password"
+               name= { passwordError === 'NotAuthorizedException' ? "Incorrect username or password."  : "Password" }
                />
             
             <div className="remember">
@@ -160,10 +165,10 @@ function LoginScreen(props) {
         
       </div>      
     </div>
-  );
+  )
 }
 
-export default LoginScreen;
+export default LoginScreen
 
 
 

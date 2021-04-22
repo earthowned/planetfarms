@@ -1,45 +1,67 @@
-import React,{useState} from "react";
-import "./congratulation-screen.css";
-import Logo from "../../Components/Logo/Logo";
-import {useHistory} from 'react-router-dom';
-import {useDropzone} from 'react-dropzone';
-import InputComponent from '../../Components/Input/InputComponent';
-import Button from '../../Components/Button/Button';
-
+import React,{useState} from "react"
+import "./congratulation-screen.css"
+import Logo from "../../Components/Logo/Logo"
+import {useHistory, useLocation} from 'react-router-dom'
+import {useDropzone} from 'react-dropzone'
+import InputComponent from '../../Components/Input/InputComponent'
+import Button from '../../Components/Button/Button'
+import { Auth } from 'aws-amplify'
+import ConformModal from '../../Components/SimpleModal/ConformModal'
 
 function CongratulationScreen() {
-  const welcomeBack= "Congratulations!";
-  const welcomeBack2= "Please fill these fields to communicate with other people easier:";
+  const welcomeBack= "Congratulations!"
+  const welcomeBack2= "Please fill these fields to communicate with other people easier:"
 
-const [firstname, setFirstname] = useState('');  
-const [email, setEmail] = useState('');  
-const [lastname, setLastname] = useState('');  
-const [birthday, setBirthday] = useState('');  
-const [phone, setPhone] = useState('');  
+const [firstname, setFirstname] = useState('')
+const [email, setEmail] = useState('')
+const [lastname, setLastname] = useState('')
+const [birthday, setBirthday] = useState('')
+const [phone, setPhone] = useState('')
 
-
-const [firstnameError, setFirstnameError] = useState('');  
-const [emailError, setEmailError] = useState('');  
-const [lastnameError, setLastnameError] = useState('');  
-const [birthdayError, setBirthdayError] = useState('');  
-const [phoneError, setPhoneError] = useState('');  
-
+const [firstnameError, setFirstnameError] = useState('') 
+const [emailError, setEmailError] = useState('')
+const [lastnameError, setLastnameError] = useState('') 
+const [birthdayError, setBirthdayError] = useState('') 
+const [phoneError, setPhoneError] = useState('')
 const [files, setFiles] = useState([])
+const [modalActive, setModalActive] = useState(false)
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
+const { getRootProps, getInputProps } = useDropzone({
+  accept: "image/*",
+  onDrop: (acceptedFiles) => {
+    setFiles(
+      acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
       )
-    },
-  })
+    )
+  }
+})
 
-let history = useHistory();
+let location = useLocation()
+let history = useHistory()
+const username = location?.state?.username
+const password = location?.state?.password
+
+
+async function signUp() {
+  console.log(username, password,email, phone)
+  try {
+    const user = await Auth.signUp({
+      username,
+      password,
+        attributes: {
+          email,
+          phone
+      }
+    })
+    console.log(user)
+    setModalActive(true)
+  } catch (error) {
+    console.log('error signing up:', error)
+  }
+}
 
 const changeFirstname = (e) => {
   setFirstname(e.target.value)
@@ -55,28 +77,22 @@ const changeEmail = (e) => {
 }
 const changePhone = (e) => {
   setPhone(e.target.value)
-  setPhoneError(false);
+  setPhoneError(false)
 }
 const changeBirthday = (e) => {
   setBirthday(e.target.value)
-  setBirthdayError(false);
+  setBirthdayError(false)
 }
 
 const submitForm = (e) => {
-  e.preventDefault();
-
-  if(!firstname) setFirstnameError(true);
-
-  if(!lastname) setLastnameError(true);
-
-  if(!phone) setPhoneError(true);
-
-  if(!birthday) setBirthdayError(true);
-
-  if(!email) setEmailError(true);
-
+  e.preventDefault()
+  if(!firstname) setFirstnameError(true)
+  if(!lastname) setLastnameError(true)
+  if(!phone) setPhoneError(true)
+  if(!birthday) setBirthdayError(true)
+  if(!email) setEmailError(true)
   if(firstname && lastname && phone && birthday && email) {
-    history.push('/community-page-news')
+    signUp()
   }
 
 }
@@ -91,6 +107,8 @@ const submitForm = (e) => {
         <h1 className="congratulation-header">{welcomeBack}</h1>
         <p className="congratulation-sub-title">{welcomeBack2}</p>
     </div>
+
+    {modalActive && <ConformModal username={ username } password={ password } />}
 
       <div className="congratulation-container">
         
@@ -165,14 +183,13 @@ const submitForm = (e) => {
       </div>
 
       </form>
-    
-  );
+  )
 }
 
 export default CongratulationScreen;
 
 function Frame4(props) {
-  const { children } = props;
+  const { children } = props
 
   return (
     <div className="frame-4 border-0-5px-quarter-spanish-white">
@@ -180,11 +197,11 @@ function Frame4(props) {
         {children}
       </div>
     </div>
-  );
+  )
 }
 const frame4Data = {
-    children: "Skip for now",
-};
+    children: "Skip for now"
+}
 
 const X0220SignUpfiledData = {
     vector2: "",
@@ -206,6 +223,6 @@ const X0220SignUpfiledData = {
     text2: "Phone Number (optional)",
     text3: "+1 (987) 123-55-12",
     text4: "Drag & Drop files in this area or Click Here to attach",
-    frame4Props: frame4Data,
-};
+    frame4Props: frame4Data
+}
 

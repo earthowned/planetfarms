@@ -1,0 +1,28 @@
+.conform-modal-container {
+  position: fixed;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  z-index: 2000;
+  color: #fff;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.conform-modal-inner-container {
+  width: 30%;
+  height: 30%;
+  background: #191b1d;
+  padding: 2em 1.6em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.conform-modal-inner-container > h4 {
+  font-size: 1.8em;
+}
