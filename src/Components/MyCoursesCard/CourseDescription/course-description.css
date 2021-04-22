@@ -3,41 +3,46 @@
   position: relative;
   width: 1112px;
 }
+
 .course-description {
   align-items: flex-start;
   background-color: var(--licorice);
   display: flex;
   flex-direction: column;
-  left: 0px;
+  left: 0;
   min-height: 440px;
   position: absolute;
   top: 40px;
   width: 1112px;
 }
+
 .course-page-name {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 32px;
   font-weight: 600;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 40px;
   margin-left: 40px;
   min-height: 40px;
   white-space: nowrap;
 }
+
 .course-page-description {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 40px;
   margin-top: 24px;
   min-height: 120px;
   width: 534px;
 }
+
 .course-bar-wrapper {
   height: 72px;
   position: relative;
   width: 846px;
 }
+
 .green-line-2 {
   background-color: var(--caribbean-green);
   height: 1px;
@@ -46,6 +51,7 @@
   top: 19px;
   width: 155px;
 }
+
 .green-line-1 {
   background-color: var(--caribbean-green);
   height: 1px;
@@ -55,6 +61,7 @@
   top: 19px;
   width: 155px;
 }
+
 .green-line {
   background-color: var(--caribbean-green);
   height: 1px;
@@ -74,6 +81,7 @@
   top: 19px;
   width: 155px;
 }
+
 .lesson-indicator {
   align-items: center;
   display: flex;
@@ -82,23 +90,26 @@
   min-height: 72px;
   opacity: 0.2;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 65px;
 }
 
 .lesson-3.lesson-indicator {
   left: 388px;
 }
+
 .lesson-4.lesson-indicator {
   left: 582px;
 }
+
 .ellipse-round-icon {
   height: 40px;
   width: 40px;
 }
+
 .lesson-text {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 2px;
   margin-top: 8px;
@@ -115,12 +126,13 @@
   min-height: 72px;
   opacity: 0.2;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 70px;
 }
+
 .final-test-text {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 2px;
   margin-top: 8px;
@@ -128,16 +140,18 @@
   min-width: 72px;
   white-space: nowrap;
 }
+
 .lesson-1 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  left: 0px;
+  left: 0;
   min-height: 72px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 65px;
 }
+
 .component-3 {
   align-items: center;
   background-size: 100% 100%;
@@ -146,6 +160,7 @@
   min-width: 40px;
   padding: 0 8px;
 }
+
 .ellipse-icon {
   height: 24px;
   width: 24px;
@@ -153,7 +168,7 @@
 
 .lesson-1-text {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 2px;
   margin-top: 8px;
@@ -161,6 +176,7 @@
   min-width: 67px;
   white-space: nowrap;
 }
+
 .subscriber-btn {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
@@ -176,13 +192,15 @@
   top: 40px;
   width: 240px;
 }
+
 .subscriber-btn-text {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 140px;
   white-space: nowrap;
 }
+
 .course-arrow-icon {
   height: 6px;
   left: -2px;
@@ -191,6 +209,7 @@
   transform: rotate(-90deg);
   width: 10px;
 }
+
 .layer-2 {
   align-items: flex-start;
   display: flex;
@@ -214,6 +233,7 @@
   display: flex;
   width: 100%;
 }
+
 .course-bar {
   align-items: flex-end;
   display: flex;
@@ -234,6 +254,7 @@
   overflow: hidden;
   width: 1114px;
 }
+
 .lessons-container {
   align-items: center;
   display: flex;
@@ -262,6 +283,7 @@
   overflow: hidden;
   width: 1114px;
 }
+
 .more-course-feature-title {
   align-items: center;
   display: flex;
@@ -270,15 +292,17 @@
   min-width: 1112px;
   padding: 0 38px;
 }
+
 .more-course-title {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
   min-width: 246px;
   white-space: nowrap;
 }
+
 .see-all-users {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 692px;
   min-height: 24px;
@@ -286,6 +310,7 @@
   text-decoration: underline;
   white-space: nowrap;
 }
+
 .more-course {
   align-items: flex-start;
   align-self: flex-end;
@@ -293,6 +318,7 @@
   height: 248px;
   margin: 20px;
 }
+
 .more-course-wrapper {
   align-items: flex-start;
   display: flex;
@@ -300,6 +326,7 @@
   min-height: 248px;
   width: 184px;
 }
+
 .more-course-image {
   background-position: 50% 50%;
   background-size: cover;
@@ -307,6 +334,7 @@
   height: 184px;
   width: 184px;
 }
+
 .more-course-text {
   align-items: flex-start;
   display: flex;
@@ -315,14 +343,16 @@
   min-height: 56px;
   width: 111px;
 }
+
 .more-course-name {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .more-course-write-message {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 8px;
   min-height: 24px;
@@ -337,19 +367,22 @@
   position: relative;
   width: 1032px;
 }
+
 .lessons-title {
   align-self: flex-start;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   margin-left: 40px;
   min-height: 32px;
   white-space: nowrap;
 }
+
 .lesson-image {
   height: 160px;
   object-fit: cover;
   width: 264px;
 }
+
 .lesson-name {
   align-items: flex-start;
   display: flex;
@@ -358,28 +391,32 @@
   min-height: 160px;
   width: 448px;
 }
+
 .lesson-name-text {
   height: 32px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
   white-space: nowrap;
 }
+
 .lesson-description {
   height: 72px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 16px;
   min-height: 72px;
   width: 450px;
 }
+
 .see-lesson-text {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 16px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .unlock-lesson-container {
   align-items: flex-start;
   display: flex;
@@ -387,19 +424,21 @@
   margin-top: 40px;
   min-width: 1032px;
 }
+
 .unlock-lesson-wrapper {
   height: 152px;
   position: relative;
   width: 1032px;
 }
+
 .unlock.lesson-intro {
   align-items: flex-end;
   height: 152px;
-  left: 0px;
+  left: 0;
   margin-top: unset;
   opacity: 0.3;
   position: absolute;
-  top: 0px;
+  top: 0;
 }
 
 .lesson-intro {
@@ -419,14 +458,16 @@
   top: 40px;
   width: 165px;
 }
+
 .icon-lock {
   height: 40px;
   position: relative;
   width: 32px;
 }
+
 .unlock-text {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 2px;
   margin-top: 8px;

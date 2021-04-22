@@ -53,7 +53,7 @@ body {
 }
 
 .ibmplexsans-bold-caribbean-green-14px {
-  olor: var(--caribbean-green);
+  color: var(--caribbean-green);
   font-family: var(--font-family-ibm_plex_sans);
   font-size: var(--font-size-14px);
   font-style: normal;
@@ -95,15 +95,7 @@ body {
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
   color: var(--quarter-spanish-white);
   font-family: var(--font-family-ibm_plex_sans-regular);
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-}
-
-.ibmplexsans-semi-bold-shark-16px {
-  color: var(--shark);
-  font-family: var(--font-family-ibm_plex_sans-regular);
-  font-size: 16px;
+  font-size: var(--font-size-24px);
   font-style: normal;
   font-weight: 600;
 }
@@ -149,10 +141,6 @@ body {
   --font-size-xl: 40px;
 }
 
-.border-0-5px-quarter-spanish-white {
-  border: 0.5px solid var(--quarter-spanish-white);
-}
-
 .ibmplexsans-bold-shark-14px {
   color: var(--shark);
   font-family: var(--font-family-ibm_plex_sans-bold);
@@ -169,11 +157,6 @@ body {
   font-weight: 700;
 }
 
-.ibmplexsans-normal-ebb-14px {
-  color: var(--ebb);
-  font-family: var(--font-family-ibm_plex_sans);
-}
-
 .ibmplexsans-regular-normal-ebb-14px {
   color: var(--ebb);
   font-family: var(--font-family-ibm_plex_sans-regular);
@@ -181,23 +164,12 @@ body {
   font-style: normal;
   font-weight: 400;
 }
-
-.ibmplexsans-normal-monsoon-16px {
-  color: var(--monsoon);
-  font-family: var(--font-family-ibm_plex_sans);
-}
-
 .ibmplexsans-regular-normal-monsoon-16px {
   color: var(--monsoon);
   font-family: var(--font-family-ibm_plex_sans-regular);
   font-size: var(--font-size-16px);
   font-style: normal;
   font-weight: 400;
-}
-
-.ibmplexsans-normal-onyx-14px {
-  color: var(--onyx);
-  font-family: var(--font-family-ibm_plex_sans);
 }
 
 .ibmplexsans-regular-normal-onyx-14px {
@@ -248,14 +220,6 @@ body {
   font-weight: 600;
 }
 
-.ibmplexsans-semi-bold-quarter-spanish-white-24px {
-  color: var(--quarter-spanish-white);
-  font-family: var(--font-family-ibm_plex_sans);
-  font-size: var(--font-size-24px);
-  font-style: normal;
-  font-weight: 600;
-}
-
 .ibmplexsans-semi-bold-quarter-spanish-white-40px {
   color: var(--quarter-spanish-white);
   font-family: var(--font-family-ibm_plex_sans-semibold);
@@ -266,7 +230,7 @@ body {
 
 .ibmplexsans-semi-bold-shark-16px {
   color: var(--shark);
-  font-family: var(--font-family-ibm_plex_sans);
+  font-family: var(--font-family-ibm_plex_sans-regular);
   font-size: var(--font-size-16px);
   font-style: normal;
   font-weight: 600;
