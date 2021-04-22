@@ -1,0 +1,107 @@
+.card-1 {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  height: 528px;
+  overflow: hidden;
+  width: auto;
+  margin: 8px;
+}
+
+.card-container {
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60753cd917d10c4e51900ad9/img/frame-1969@1x.png);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  height: 256px;
+  width: 536px;
+}
+
+.card-text-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  margin-top: 24px;
+  min-height: 56px;
+  width: 296px;
+}
+
+.farmers {
+  letter-spacing: 1px;
+  line-height: 16px;
+  min-height: 16px;
+  white-space: nowrap;
+}
+
+.think-like-a-farmer {
+  letter-spacing: 0;
+  line-height: 32px;
+  margin-top: 8px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+
+.follower-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  margin-top: 56px;
+  min-height: 112px;
+  position: relative;
+  width: 199px;
+}
+
+.follower-number-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 48px;
+  width: 199px;
+}
+
+.follower-number-item {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+
+.follow-btn {
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  align-items: center;
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: var(--white);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  margin-top: 16px;
+  overflow: hidden;
+  padding: 0 46px;
+  width: 164px;
+  cursor: pointer;
+}
+
+.btn-text {
+  height: 24px;
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 69px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ibmplexsans-semi-bold-caribbean-green-14px {
+  color: var(--caribbean-green);
+  font-family: var(--font-family-ibm_plex_sans-semibold);
+  font-size: var(--font-size-14px);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.border-1px-onyx {
+  border: 1px solid var(--onyx);
+}
