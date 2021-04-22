@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect} from "react";
+import{useState, useRef, useEffect} from "react";
 import "./main-dashboard.css";
 import {  Link } from "react-router-dom";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
@@ -44,7 +44,6 @@ const MyCourseData = [
         img: "/img/man-cap.svg"
     }
 ]
-
 function DashboardComponent() {
   return (
     <DashboardLayout title="My Dashboard">
