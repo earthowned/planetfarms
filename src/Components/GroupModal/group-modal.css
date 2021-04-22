@@ -105,3 +105,9 @@
   z-index: 2000;
   background: red;
 }
+
+@media only screen and (max-width: 850px ) {
+  .group-modal {
+    width: 85%;
+  }
+}
