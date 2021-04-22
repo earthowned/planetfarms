@@ -1,53 +1,44 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-
 * {
   box-sizing: border-box;
 }
-
 .border-0-5px-quarter-spanish-white {
   border: 0.5px solid var(--quarter-spanish-white);
 }
-
 .border-1px-abbey {
   border: 1px solid var(--abbey);
 }
-
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
-
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
-
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
 }
-
 .x10-1-0-my-dashboard {
   align-items: flex-start;
   background-color: rgba(0, 0, 0, 1);
   display: flex;
-  width: 1440px;
+  width: 100%;
 }
-
 .x10-1-0-my-dashboard .achievements {
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 24px;
   margin-top: 8px;
   min-height: 24px;
   min-width: 108px;
   white-space: nowrap;
 }
-
 .x10-1-0-my-dashboard .achivements {
   align-items: flex-end;
   background-color: var(--shark);
@@ -61,7 +52,6 @@
   width: 136px;
   text-decoration: none;
 }
-
 .x10-1-0-my-dashboard .award {
   align-items: flex-end;
   align-self: center;
@@ -70,7 +60,6 @@
   padding: 0.5px 7px;
   width: 40px;
 }
-
 .x10-1-0-my-dashboard .book-1 {
   align-items: flex-start;
   display: flex;
@@ -79,7 +68,6 @@
   padding: 2px 5.5px;
   width: 40px;
 }
-
 .x10-1-0-my-dashboard .book-open-1 {
   align-items: center;
   display: flex;
@@ -88,7 +76,6 @@
   padding: 0 2.2px;
   width: 40px;
 }
-
 .x10-1-0-my-dashboard .check-square-1 {
   align-items: center;
   align-self: center;
@@ -105,70 +92,62 @@
   border-radius: 4px;
   display: flex;
   margin-top: 16px;
-  min-width: 1112px;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 1em;
 }
 
 .x10-1-0-my-dashboard .dashboard-info {
   align-items: center;
   display: flex;
   height: 184px;
-  min-width: 496px;
-  padding: 0 24px;
 }
-
 .x10-1-0-my-dashboard .dashboard-main-container {
   align-items: center;
   background-color: var(--licorice);
   border-radius: 4px;
   display: flex;
-  height: 792px;
+  height: 100%;
   margin-top: 40px;
   overflow: hidden;
-  padding: 8px 0;
-  width: 1112px;
+  width: 100%;
 }
-
 .x10-1-0-my-dashboard .dashboard-my-profile {
-  align-items: flex-end;
-  background-color: var(--shark);
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  height: 136px;
-  margin-left: 152px;
-  overflow: hidden;
-  padding: 32px 28px;
-  width: 136px;
+     align-items: flex-end;
+    background-color: var(--shark);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 136px;
+    margin-left: 16px;
+    overflow: hidden;
+    padding: 32px 13px;
+    width: 136px;
+    text-decoration: none;
 }
-
+  
 .x10-1-0-my-dashboard .dashboard-profile-pic {
-  background-image: url();
-  background-position: 50% 50%;
-  background-size: cover;
   border-radius: 4px;
-  height: 136px;
-  width: 136px;
+  padding: 0;
+  margin: 0;
+  height: 150px;
 }
-
 .x10-1-0-my-dashboard .default-i905517 {
   height: 24px;
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 24px;
   min-height: 24px;
   min-width: 97px;
   text-align: center;
   white-space: nowrap;
 }
-
 .x10-1-0-my-dashboard .flex-col-5 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
   min-height: 1112px;
-  width: 1112px;
+  width: 100%;
 }
-
 .x10-1-0-my-dashboard .flex-col-6 {
   align-items: flex-start;
   display: flex;
@@ -177,7 +156,6 @@
   min-height: 136px;
   width: 200px;
 }
-
 .x10-1-0-my-dashboard .flex-col-7 {
   align-items: flex-start;
   display: flex;
@@ -185,7 +163,6 @@
   min-height: 744px;
   width: 216px;
 }
-
 .x10-1-0-my-dashboard .flex-row-2 {
   align-items: center;
   display: flex;
@@ -195,7 +172,6 @@
   width: 900px;
   overflow-x: auto;
 }
-
 .x10-1-0-my-dashboard .frame-3061 {
   background-color: rgba(243, 243, 243, 1);
   margin-top: unset;
@@ -210,7 +186,6 @@
   border-radius: 4px;
   display: flex;
   height: 48px;
-  margin-top: 16px;
   overflow: hidden;
   padding: 0 42px;
   width: 184px;
@@ -224,7 +199,6 @@
   min-height: 48px;
   width: 158px;
 }
-
 .x10-1-0-my-dashboard .info-my-detail {
   align-items: flex-start;
   display: flex;
@@ -232,34 +206,30 @@
   min-height: 56px;
   width: 200px;
 }
-
 .x10-1-0-my-dashboard .mikhail-ugryumov {
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 32px;
   min-height: 32px;
   white-space: nowrap;
 }
-
 .x10-1-0-my-dashboard .my-communities {
   color: var(--caribbean-green);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica;
   font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
-
 .x10-1-0-my-dashboard .my-courses {
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 32px;
   margin-left: 16px;
   margin-top: 16px;
   min-height: 32px;
   white-space: nowrap;
 }
-
 .x10-1-0-my-dashboard .my-group-tile {
   height: 216px;
   margin-left: 1px;
@@ -267,25 +237,22 @@
   margin-right: 15px;
   width: 216px;
 }
-
 .x10-1-0-my-dashboard .my-groups {
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 32px;
   margin-left: 16px;
   margin-top: 16px;
   min-height: 32px;
   white-space: nowrap;
 }
-
 .x10-1-0-my-dashboard .my-library {
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 32px;
   margin-left: 16px;
   margin-top: 16px;
   min-height: 32px;
   white-space: nowrap;
 }
-
 .x10-1-0-my-dashboard .my-library-tile {
   align-items: flex-start;
   background-color: var(--shark);
@@ -297,28 +264,24 @@
   padding: 32px 0;
   width: 216px;
 }
-
 .x10-1-0-my-dashboard .my-profile {
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 24px;
   margin-top: 8px;
   min-height: 24px;
   min-width: 77px;
   white-space: nowrap;
 }
-
 .x10-1-0-my-dashboard .overlap-group-10 {
   height: 32px;
   position: relative;
   width: 34px;
 }
-
 .x10-1-0-my-dashboard .overlap-group-11 {
   height: 36px;
   position: relative;
   width: 29px;
 }
-
 .x10-1-0-my-dashboard .overlap-group-12 {
   height: 32px;
   position: relative;
@@ -364,7 +327,7 @@
 }
 
 .x10-1-0-my-dashboard .surveys-1 {
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 24px;
   margin-top: 8px;
   min-height: 24px;
@@ -374,33 +337,31 @@
 
 .x10-1-0-my-dashboard .text--2 {
   height: 48px;
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 24px;
   min-height: 48px;
   width: 186px;
 }
 
 .x10-1-0-my-dashboard .user {
-  align-items: flex-start;
+  align-items: flex-end;
   align-self: center;
   display: flex;
-  flex-direction: column;
   height: 40px;
-  margin-left: 1px;
-  padding: 3.9px 5.5px;
+  padding: 0.5px 7px;
   width: 40px;
 }
 
 .x10-1-0-my-dashboard .vector-21 {
-  top: 0;
+  top: 0px;
   width: 26px;
 }
 
 .x10-1-0-my-dashboard .vector-23 {
   height: 26px;
-  left: 0;
+  left: 0px;
   position: absolute;
-  top: 0;
+  top: 0px;
   width: 26px;
 }
 
@@ -414,16 +375,16 @@
 
 .x10-1-0-my-dashboard .vector-28 {
   height: 36px;
-  left: 0;
+  left: 0px;
   position: absolute;
-  top: 0;
+  top: 0px;
   width: 29px;
 }
 
 .x10-1-0-my-dashboard .vector-30 {
   height: 32px;
   position: absolute;
-  top: 0;
+  top: 0px;
 }
 
 .x10-1-0-my-dashboard .x-tile {
@@ -439,22 +400,34 @@
   width: 216px;
 }
 
+:root {
+  --abbey: rgba(79, 81, 85, 1);
+  --caribbean-green: rgba(0, 198, 136, 1);
+  --ebb: rgba(227, 227, 227, 1);
+  --licorice: rgba(20, 20, 20, 1);
+  --onyx: rgba(58, 57, 57, 1);
+  --quarter-spanish-white: rgba(248, 235, 223, 1);
+  --rusty-red: rgba(218, 52, 67, 1);
+  --shark: rgba(33, 34, 37, 1);
+  --shark-2: rgba(43, 43, 44, 1);
+  --monsoon: rgba(137, 137, 137, 1);
+}
+
 ::-webkit-scrollbar {
-  width: 0;
+  width: 0px;
   background: transparent; /* make scrollbar transparent */
 }
 
 .x10-1-0-my-dashboard .text-1 {
-  letter-spacing: 0;
+  letter-spacing: 0px;
   line-height: 24px;
-  margin-left: 8px;
   min-height: 24px;
   white-space: nowrap;
 }
 
 .ibmplexsans-regular-normal-monsoon-16px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
+  font-family: "IBM Plex Sans-Regular", Helvetica;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -497,13 +470,237 @@
 
 .library-text {
   height: 48px;
-  letter-spacing: 0;
+  letter-spacing: 0.00px;
   line-height: 24px;
   margin-top: 24px;
   min-height: 48px;
   width: 186px;
 }
 
-.link-router {
+/* new css */
+.link-decoration {
+text-decoration: none;
+}
+
+.dashboard-my-profile-side-header {
+  display: flex;
+}
+
+.dasboard-my-profile-box {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #212225;
+  border: 1px solid #3A3939;
+  color: #fff;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.dasboard-my-profile-box img {
+  margin-bottom: 10px;
+}
+
+.dasboard-my-profile-box:not(:last-child){
+  margin-right: 14px;
+}
+
+.dashboard-inner-container {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  color: #fff;
+  font-family: IBM Plex Sans;
+  width: 100%;
+}
+
+.mylibrary-container {
+  display: flex;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.mycourse-container {
+  display: flex;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.mygroup-container {
+  display: flex;
+  position: relative;
+  overflow-y: hidden;
+}
+
+div[class$="-container--header"] {
+  background: #212225;
+  border-radius: 4px;
+  margin: 0 24px 24px 0;
+  width: 250px;
+  height: 250px;
+  padding: 2em 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+div[class$="-container--header"] h4 {
+  font-size: 24px;
+}
+
+.mylibrary-container--tiles{
+  display: flex;
+  position: absolute;
+  overflow-x: scroll;
+  left: 17em;
+  right: 0;
+  top: 0;
+  bottom: -40px;
+  scroll-behavior: smooth;
+}
+
+.mycourse-container--tiles{
+  display: flex;
+  position: absolute;
+  overflow-x: scroll;
+  left: 17em;
+  right: 0;
+  top: 0;
+  bottom: -40px;
+  scroll-behavior: smooth;
+}
+
+.mygroup-container--tiles{
+  display: flex;
+  position: absolute;
+  overflow-x: scroll;
+  left: 17em;
+  right: 0;
+  top: 0;
+  bottom: -40px;
+  scroll-behavior: smooth;
+}
+
+.tiles-container {
+  position: relative;
+  margin-right: 24px;
+}
+
+.tiles-container-img-wrapper {
+  width: 250px;
+  height: 250px;
+}
+
+.tiles-container-img-wrapper img{
+  width: 100%;
+  height: 100%;
+}
+
+.tiles-container h4 {
+  font-size: 18px;
+  position: absolute;
+  bottom: 20%;
+  line-height: 1.5;
+  padding: 0 .5em;
+}
+
+.scroll-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.add-container {
+  background: #212225;
+    border-radius: 4px;
+    padding: 2em 1em;
+    margin: 0 24px 24px 0;
+    min-width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+
+}
+
+.add-container img {
+  width: 40%;
+  height: 40%;
+  margin-bottom: 1em;
+}
+
+@media only screen and (max-width: 1200px) {
+  .x10-1-0-my-dashboard .flex-col-6{
+    width: 150px;
+    margin-left: 10px;
+  }
+
+  .dasboard-my-profile-box {
+    width: 110px;
+  }
+
+  .dasboard-my-profile-box:not(:last-child) {
+    margin-right: 8px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+    .x10-1-0-my-dashboard .dashboard-info {
+      flex-direction: column;
+      height: auto;
+  }
+
+  .x10-1-0-my-dashboard .info-my-community {
+    margin-top: 0;
+  }
+
+  .x10-1-0-my-dashboard .dashboard-hero {
+    padding-top: 1em;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .x10-1-0-my-dashboard .dashboard-hero {
+    flex-direction: column;
+    padding-bottom: 1em;
+  }
+
+  .x10-1-0-my-dashboard .dashboard-info {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .x10-1-0-my-dashboard .dashboard-profile-pic {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .x10-1-0-my-dashboard .flex-col-6 {
+    margin: 20px 0;
+    margin-left: 20px;
+  }
+
+  .dashboard-my-profile-side-header {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .dasboard-my-profile-box {
+    width: 100%;
+    flex-direction: row;
+    height: 70px;
+  }
+
+  .dasboard-my-profile-box:not(:last-child) {
+    margin-bottom: 10px;
+  }
 }

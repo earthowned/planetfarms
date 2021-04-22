@@ -1,8 +1,49 @@
-import React from "react";
+import {useState, useRef, useEffect} from "react";
 import "./main-dashboard.css";
 import {  Link } from "react-router-dom";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 
+const DashboardData = [
+    {
+        category: "farming",
+        title: "How to farm in 2020 and don't lose you business",
+        img: "/img/man-cap.svg"
+    },
+    {
+        category: "farming",
+        title: "Be happy and find your self! Motivation 2020",
+        img: "/img/man-cap.svg"
+    },
+    {
+        category: "farming",
+        title: "How to farm in 2020 and don't lose you business",
+        img: "/img/man-cap.svg"
+    },
+    {
+        category: "farming",
+        title: "Be happy and find your self! Motivation 2020",
+        img: "/img/man-cap.svg"
+    },
+    {
+        category: "farming",
+        title: "How to farm in 2020 and don't lose you business",
+        img: "/img/man-cap.svg"
+    },
+
+]
+
+const MyCourseData = [
+   {
+        category: "farming",
+        title: "How to farm in 2020 and don't lose you business",
+        img: "/img/man-cap.svg"
+    },
+    {
+        category: "farming",
+        title: "Be happy and find your self! Motivation 2020",
+        img: "/img/man-cap.svg"
+    }
+]
 
 function DashboardComponent() {
   return (
@@ -25,100 +66,27 @@ function DashboardComponent() {
               </div>
             </div>
           </div>
-          {/* my-profile  */}
-          <Link to="/myProfile"  className="dashboard-my-profile border-1px-onyx">
-            <div className="user">
-              <img className="vector-21" src="/img/user.svg" alt="user-icon" />
-            </div>
-            <div className="my-profile ibmplexsans-semi-bold-quarter-spanish-white-16px">My Profile</div>
-          </Link>
-          {/* achivements  */}
-          <Link to="/achievements" className="achivements border-1px-onyx">
-            <div className="award">
-              <div className="overlap-group-9">
-                <img className="vector-23" src="/img/award.svg" alt="award-icon" />
-              </div>
-            </div>
-            <div className="achievements ibmplexsans-semi-bold-quarter-spanish-white-16px">Achievements</div>
-          </Link>
-          {/* surveys */}
-          <Link to="/mysurvey">
-          <div className="surveys border-1px-onyx">
-            <div className="check-square-1">
-              <div className="overlap-group-10">
-                <img className="vector-25" src="/img/check-square.svg" alt="check-square" />
-              </div>
-            </div>
-            <div className="surveys-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">Surveys</div>
+
+          <div className="dashboard-my-profile-side-header">
+            {/* my-profile  */}
+            <Link to="/myProfile" className="dasboard-my-profile-box">
+              <img src="/img/user.svg" alt="user-icon" />
+              <h4>My Profile</h4>
+            </Link>
+            {/* achivements  */}
+            <Link to="/achievements" className="dasboard-my-profile-box">
+              <img src="/img/award.svg" alt="award-icon" />
+              <h4>Achievements</h4>
+            </Link>
+            {/* surveys */}
+            <Link to="/surveys" className="dasboard-my-profile-box">
+              <img src="/img/check-square.svg" alt="survey-icon" />
+              <h4>Surveys</h4>
+            </Link>
           </div>
-          </Link>
+          
         </div>
-
-        {/* Main Tile */}
-        <div className="dashboard-main-container border-1px-onyx">
-          <div className="flex-col-7">
-            <div className="my-library-tile">
-              <div className="book-1">
-                <div className="overlap-group-11">
-                  <img className="vector-28" src="/img/book-outlined.svg" alt="book-icon" />
-                </div>
-              </div>
-              <div className="my-library ibmplexsans-semi-bold-quarter-spanish-white-24px">My library</div>
-              <Link to="/mylibrary" className="link-router">
-                <SeeAllButton>See all items</SeeAllButton>
-              </Link>
-            </div>
-            <div className="x-tile">
-              <div className="book-open-1">
-                <div className="overlap-group-12">
-                  <img className="vector-30" src="/img/book-open-1.svg" alt="book-open-icon" />
-                </div>
-              </div>
-              
-                <div className="my-courses ibmplexsans-semi-bold-quarter-spanish-white-24px">My courses</div>
-                <Link to="/mycourse" className="link-router">
-              <SeeAllButton>See all items</SeeAllButton>
-              </Link>
-            
-            </div>
-            <div className="x-tile">
-              <div className="users-1">
-                <div className="flex-row-4">
-                  <img className="vector-31" src="/img/users-1.svg" alt="user" />
-                </div>
-              </div>
-              <div className="my-groups ibmplexsans-semi-bold-quarter-spanish-white-24px">My groups</div>
-              <SeeAllButton>See all items</SeeAllButton>
-            </div>
-          </div>
-
-          {/* library .. 1 */}
-          <div className="flex">
-            <div className="flex-row-2">
-              <MyLibraryTiles overlapGroup8={"/img/my-group-tile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061"  />
-              <MyLibraryTiles src={"/img/Frame3060.png"} className="frame-3061" />
-              <MyLibraryTiles src={"/img/Frame3061.png"}  className="frame-3061"/>
-              <MyLibraryTiles src={"/img/Frame3061.png"}  className="frame-3061"/>
-            </div>
-            {/* courses */}
-           
-            
-            <div className="flex-row-2">
-              <MyCourseTiles src={"/img/MyCourseTiles2.png"} overlapGroup8="" text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyCourseTiles src={"/img/MyCourseTiles2.png"} overlapGroup8="" text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyCourseTiles src={"/img/AddMoreTiles.png"}/>
-            </div>
-            
-
-            {/* group */}
-            <div className="flex-row-2">
-              <MyGroupTiles overlapGroup8={"/img/myGroupTile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyGroupTiles overlapGroup8={"/img/framelib3016.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyGroupTiles overlapGroup8={"/img/framelib3061.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-              <MyGroupTiles overlapGroup8={"/img/myGroupTile.png"} text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
-            </div>
-          </div>
-        </div>
+        <MainContainer />
       </div>
     </div>
     </DashboardLayout>
@@ -138,34 +106,96 @@ function SeeAllButton({ children }) {
   );
 }
 
+function MainContainer () {
+  const [libraryScrollActive, setLibraryScrollActive] = useState(true);
+  const [coursesScrollActive, setCoursesScrollActive] = useState(true);
+  const [groupScrollActive, setGroupScrollActive] = useState(true);
+  
+  const scrollLibraryRef = useRef();
+  const scrollCoursesRef = useRef();
+  const scrollGroupRef = useRef();
+  
+  const scrollRight = (scrollParam) => {
+    scrollParam.current.scrollLeft += 500;
+  }
 
-function MyLibraryTiles({ src, overlapGroup8, text8, className }) {
+  useEffect(() => {
+    if(document.querySelector('.mylibrary-container--tiles').offsetWidth >= scrollLibraryRef.current.scrollWidth) setLibraryScrollActive(false);
+    if(document.querySelector('.mycourse-container--tiles').offsetWidth >= scrollCoursesRef.current.scrollWidth) setCoursesScrollActive(false);
+    if(document.querySelector('.mygroup-container--tiles').offsetWidth >= scrollGroupRef.current.scrollWidth) setGroupScrollActive(false);
+  }, [scrollGroupRef, scrollLibraryRef, scrollCoursesRef])
+  
   return (
-    <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
-      <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
-      <img className="frame-2926" src={src} alt='my-group-tile' />
-      </div>
-    </div>
-  );
+        <div className="dashboard-main-container border-1px-onyx">
+          <div className="dashboard-inner-container">
+            <div className="mylibrary-container">
+              {/* my library container */}
+              <div className="mylibrary-container--header">
+                <img src="/img/book-outlined.svg" alt="book-icon" />
+                <h4>My library</h4>
+                 <Link to="/mylibrary" className="link-decoration">
+                    <SeeAllButton>See all items</SeeAllButton>
+                  </Link>
+              </div>
+              <div className="mylibrary-container--tiles" ref={scrollLibraryRef}>
+                <Tiles data={DashboardData} title="Add Library"/>
+              </div>
+               {libraryScrollActive && <img className="scroll-icon" onClick={() => scrollRight(scrollLibraryRef)} src="/img/scroll-icon.svg" alt="scroll-icon"/>}
+            </div>
+
+            {/* my course container */}
+            <div className="mycourse-container">
+              <div className="mycourse-container--header">
+                <img src="/img/book-open-1.svg" alt="book-open-icon" />
+                <h4>My courses</h4>
+                 <Link to="/mylibrary" className="link-decoration">
+                    <SeeAllButton>See all items</SeeAllButton>
+                  </Link>
+              </div>
+              <div className="mycourse-container--tiles" ref={scrollCoursesRef}>
+                  <Tiles data={MyCourseData} title="Add Course"/>
+              </div>
+              {coursesScrollActive && <img className="scroll-icon" src="/img/scroll-icon.svg" onClick={() => scrollRight(scrollCoursesRef)} alt="scroll-icon"/>}
+            </div>
+
+            {/* my group container */}
+            <div className="mygroup-container">
+              <div className="mygroup-container--header">
+                <img src="/img/my-group.svg" alt="user" />
+                <h4>My groups</h4>
+                 <Link to="/mylibrary" className="link-decoration">
+                    <SeeAllButton>See all items</SeeAllButton>
+                  </Link>
+              </div>
+              <div ref={scrollGroupRef} className="mygroup-container--tiles">
+                <Tiles data={DashboardData} title="Add Groups"/>
+              </div>
+             {groupScrollActive && <img className="scroll-icon" src="/img/scroll-icon.svg" onClick={() => scrollRight(scrollGroupRef)} alt="scroll-icon"/>}
+            </div>
+            </div>
+        </div>
+  )
 }
 
-function MyCourseTiles({ src, overlapGroup8, text8, className }) {
+function Tiles({data, title}) {
   return (
-    <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
-      <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
-      <img className="frame-2926" src={src} alt="my-group-tile" />
-      </div>
-    </div>
-  );
+    <>
+    {
+    data.map(item => {
+      return (
+        <div className="tiles-container" key={item.title}>
+          <div className="tiles-container-img-wrapper">
+          <img src={item.img} alt={item.title}></img>
+          </div>
+          <h4>{item.title}</h4>
+        </div>
+      )
+    })
+    }
+    <div className="add-container">
+                    <img src="/img/plus-icon.svg" alt="add-icon" />
+                    <h4>{title}</h4>
+    </div>    
+    </>
+  )
 }
-
-function MyGroupTiles({ src, overlapGroup8, text8, className }) {
-  return (
-    <div className={`my-group-tile border-1px-abbey ${className || ""}`}>
-      <div className="overlap-group8" style={{ backgroundImage: `url(${overlapGroup8})` }}>
-        <p className="text--2 ibmplexsans-semi-bold-quarter-spanish-white-16px">{text8}</p>
-      </div>
-    </div>
-  );
-}
-
