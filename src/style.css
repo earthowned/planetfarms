@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600");
 
 body {
   background: black;
@@ -7,27 +9,29 @@ body {
 
 * {
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-}
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600");
-* {
   box-sizing: border-box;
 }
+
 .border-0-5px-quarter-spanish-white {
   border: 0.5px solid var(--quarter-spanish-white);
 }
+
 .border-0-5px-white-2 {
   border: 0.5px solid var(--white-2);
 }
+
 .border-1px-caribbean-green {
   border: 1px solid var(--caribbean-green);
 }
+
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
+
 .border-1px-quarter-spanish-white {
   border: 1px solid var(--quarter-spanish-white);
 }
+
 .ibmplexsans-bold-caribbean-green-14px {
   color: var(--caribbean-green);
   font-family: var(--font-family-ibm_plex_sans);
@@ -35,6 +39,7 @@ body {
   font-style: normal;
   font-weight: 700;
 }
+
 .ibmplexsans-bold-shark-14px {
   color: var(--shark);
   font-family: var(--font-family-ibm_plex_sans);
@@ -42,6 +47,7 @@ body {
   font-style: normal;
   font-weight: 700;
 }
+
 .ibmplexsans-bold-shark-16px {
   color: var(--shark);
   font-family: var(--font-family-ibm_plex_sans);
@@ -49,6 +55,7 @@ body {
   font-style: normal;
   font-weight: 700;
 }
+
 .ibmplexsans-normal-ebb-14px {
   color: var(--ebb);
   font-family: var(--font-family-ibm_plex_sans);
@@ -56,6 +63,7 @@ body {
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-normal-monsoon-16px {
   color: var(--monsoon);
   font-family: var(--font-family-ibm_plex_sans);
@@ -63,6 +71,7 @@ body {
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-normal-onyx-14px {
   color: var(--onyx);
   font-family: var(--font-family-ibm_plex_sans);
@@ -70,6 +79,7 @@ body {
   font-style: normal;
   font-weight: 400;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-14px {
   color: var(--quarter-spanish-white);
   font-family: var(--font-family-ibm_plex_sans);
@@ -77,6 +87,7 @@ body {
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
   font-family: var(--font-family-ibm_plex_sans);
@@ -84,6 +95,7 @@ body {
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
   color: var(--quarter-spanish-white);
   font-family: var(--font-family-ibm_plex_sans);
@@ -91,6 +103,7 @@ body {
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-shark-16px {
   color: var(--shark);
   font-family: var(--font-family-ibm_plex_sans);
@@ -98,6 +111,7 @@ body {
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-white-16px-2 {
   color: var(--white-2);
   font-family: var(--font-family-ibm_plex_sans);
@@ -105,11 +119,12 @@ body {
   font-style: normal;
   font-weight: 600;
 }
+
 :root {
   --black: rgba(0, 0, 0, 1);
   --caribbean-green: rgba(0, 198, 136, 1);
   --ebb: rgba(227, 227, 227, 1);
-  --font-family-ibm_plex_sans: "IBM Plex Sans", Helvetica;
+  --font-family-ibm_plex_sans: "IBM Plex Sans", helvetica, sans-serif;
   --font-size-14px: 14px;
   --font-size-16px: 16px;
   --font-size-24px: 24px;
