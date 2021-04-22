@@ -50,11 +50,9 @@ function LoginScreen(props) {
   }
 
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  
+  const [password, setPassword] = useState('')  
   const [terms, setTerms] = useState(false)
   const [termsError, setTermsError] = useState(false)
-
   const [userError, setUserError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
 
@@ -76,7 +74,6 @@ function LoginScreen(props) {
         }
     }
   }
-
   
   const userChange = (e) => {
     setUsername(e.target.value)
