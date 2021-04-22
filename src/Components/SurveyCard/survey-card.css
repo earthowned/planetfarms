@@ -25,7 +25,7 @@
   min-height: 24px;
   margin-top: 20px;
 }
- 
+
 .survey-card-subtext {
   align-items: flex-start;
   display: flex;
@@ -38,7 +38,7 @@
 }
 
 .subtext-item {
-  letter-spacing:  0;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
@@ -63,7 +63,7 @@
   height: 48px;
   overflow: hidden;
   padding: 0 51px;
-  width: 164px; 
+  width: 164px;
 }
 
 .btn-first {
@@ -76,7 +76,7 @@
   white-space: nowrap;
 }
 
-.option-btn-second{
+.option-btn-second {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
   backdrop-filter: blur(16px) brightness(100%);
@@ -90,7 +90,7 @@
   margin-left: 10px;
 }
 
-.btn-second{
+.btn-second {
   color: black !important;
 }
  

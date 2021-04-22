@@ -31,7 +31,7 @@
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 4px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.06);;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   height: 288px;
@@ -74,7 +74,7 @@
   background-color: rgb(101, 235, 101);
   background-size: 100% 100%;
   border-radius: 4px;
-  box-shadow: 0 12px 24px rgba(35,152,171,0.24);;
+  box-shadow: 0 12px 24px rgba(35, 152, 171, 0.24);
   height: 24px;
   width: 61px;
 }
