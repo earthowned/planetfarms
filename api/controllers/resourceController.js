@@ -107,7 +107,7 @@ const searchResourcesTitle = (req, res) => {
   const order = req.query.order || 'ASC'
 
   Resource.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
-    .then(title => res.json({ title }).status(200))
+    .then(resources => res.json({ resources }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 

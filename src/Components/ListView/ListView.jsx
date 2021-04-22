@@ -1,5 +1,5 @@
-import {useState} from 'react'
-import './listview.css';
+import { useState } from 'react'
+import './listview.css'
 
 const ListView = ({data, title, setNewCollection, setModalActive, modalActive}) => {
     const [ active, setActive] = useState(false);
@@ -34,6 +34,7 @@ const ListView = ({data, title, setNewCollection, setModalActive, modalActive}) 
             })}
         </div>
          </div>
+
         </>
     )
 }
