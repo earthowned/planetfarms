@@ -33,15 +33,7 @@
   min-width: 22px;
 }
 
-.flex-row-1 {
-  align-items: center;
-  display: flex;
-  height: 24px;
-  margin-left: 4px;
-  margin-top: 7px;
-  min-width: 240px;
-  position: relative;
-}
+
 
 .flex-row-2 {
   align-items: flex-start;

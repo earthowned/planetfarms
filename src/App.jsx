@@ -22,6 +22,8 @@ import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
 import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
 import UserInfo from "./Screens/CabinetUserInfo/CabinetUserInfo";
 import CommunityGroup from './Screens/CommunityGroup/CommunityGroup';
+import Enterprises from './Screens/Enterprises/Enterprises';
+import EnterprisesViewPage from './Screens/Enterprises/EnterprisesViewPage/EnterprisesViewPage';
 import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage';
 import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup';
 
@@ -76,6 +78,12 @@ function App() {
         </Route>
         <Route path="/community-group-view-page" >
           <CommunityGroupViewPage />
+        </Route>
+        <Route path="/enterprises" >
+          <Enterprises />
+        </Route>
+        <Route path="/enterprises-view" >
+          <EnterprisesViewPage />
         </Route>
         <Route path="/my-group-view-page" >
           <MyGroupViewPage />

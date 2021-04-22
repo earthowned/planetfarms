@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BackButton from "../../../Components/BackButton/BackButton";
+import FarmsDetailsCard from "../../../Components/FarmsDetailsCard/FarmsDetailsCard";
 import CommunityGroupPhotos from "../../../Components/CommunityGroupPhotos/CommunityGroupPhotos";
 import CommunityGroupPost from "../../../Components/CommunityGroupPost/CommunityGroupPost";
 import CommunityViewPost from "../../../Components/CommunityViewPost/CommunityViewPost";
@@ -19,17 +20,25 @@ export default App;
 
 function CommunityGroupViewPage() {
   const [followers, setFollowers] = useState(false);
-  const handleFollowClick = () => {
-    setFollowers(!followers);
-  };
+  // const handleFollowClick = () => {
+  //   setFollowers(!followers);
+  // };
   return (
     <div className="x05-2-0-group-page-inside-user-view">
       <div className="flex-col-4">
         <BackButton location={"/community-group"} />
         <div className="first-card border-1px-onyx">
           <div className="posts-farmer">
-            <div className="group-bg-image"></div>
-            <div className="flex-row-6">
+         
+            <FarmsDetailsCard image={"https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-1969@1x.png"}
+            title="Think like a farmer"
+            description=" Hi there! We’re a most kind and friendly society for everyone!
+            We post here some news about farming, nature and etc… We hope
+            you gonna like it! Be a part of our still small, but amazing
+            community!"
+            followerNumber=" 2,564 followers"
+            />
+            {/* <div className="flex-row-6">
               <div className="post-title-group">
                 <h1 className="post-title-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-40px">
                   Think like a farmer
@@ -72,7 +81,7 @@ function CommunityGroupViewPage() {
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
             <div className="group-boderline"></div>
           </div>
           {/* <GroupPhoto /> */}
