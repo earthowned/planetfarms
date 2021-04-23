@@ -113,15 +113,17 @@
   width: 100%;
 }
 .x10-1-0-my-dashboard .dashboard-my-profile {
-    align-items: flex-end;
+     align-items: flex-end;
     background-color: var(--shark);
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     height: 136px;
+    margin-left: 16px;
     overflow: hidden;
-    padding: 32px 36px;
+    padding: 32px 13px;
     width: 136px;
+    text-decoration: none;
 }
   
 .x10-1-0-my-dashboard .dashboard-profile-pic {
