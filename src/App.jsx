@@ -83,6 +83,7 @@ Amplify.configure({
          // OPTIONAL - Hosted UI configuration
         oauth: {
             domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
+            scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
             redirectSignIn: 'http://localhost:3000/',
             redirectSignOut: 'http://localhost:3000/',
             responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
