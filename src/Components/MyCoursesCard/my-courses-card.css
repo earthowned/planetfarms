@@ -1,0 +1,94 @@
+.course-card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-text-container {
+  margin-top: 90px;
+  margin-left: 35px;
+}
+
+.my-course-container {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  height: auto;
+  margin-top: 40px;
+  overflow: hidden;
+  padding: 36px 40px;
+  width: 1112px;
+}
+
+.my-courses-title {
+  letter-spacing: 0;
+  line-height: 32px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+
+.course-card {
+  align-items: center;
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  height: 288px;
+  margin-top: 36px;
+  overflow: hidden;
+  padding: 16px 0;
+  position: relative;
+  width: 328px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.course-name-text {
+  height: 64px;
+  letter-spacing: 0;
+  line-height: 32px;
+  min-height: 64px;
+  width: 294px;
+}
+
+.course-text-2 {
+  height: 24px;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-top: 16px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+
+.lesson-index {
+  align-items: center;
+  background-color: var(--eerie-black);
+  border-radius: 4px;
+  display: flex;
+  margin-top: 16px;
+  min-width: 296px;
+}
+
+.lesson-index-bar {
+  background-color: rgb(101, 235, 101);
+  background-size: 100% 100%;
+  border-radius: 4px;
+  box-shadow: 0 12px 24px rgba(35, 152, 171, 0.24);
+  height: 24px;
+  width: 61px;
+}
+
+.lessons-number {
+  color: var(--quarter-spanish-white);
+  font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  height: 16px;
+  letter-spacing: 0;
+  line-height: 16px;
+  margin-left: 55px;
+  min-height: 16px;
+  min-width: 67px;
+  white-space: nowrap;
+}

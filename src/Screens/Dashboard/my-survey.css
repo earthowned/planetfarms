@@ -1,0 +1,24 @@
+.survey-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  min-height: 1256px;
+  position: relative;
+  width: 100%;
+}
+
+.survey-card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.my-surveys {
+  align-items: flex-start;
+  background-color: var(--black);
+  display: flex;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}

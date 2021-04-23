@@ -1,0 +1,19 @@
+
+.my-courses-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  position: relative;
+  width: 1112px;
+}
+
+.my-courses-dashboard {
+  align-items: flex-start;
+  background-color: var(--black);
+  display: flex;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  width: 1440px;
+}
