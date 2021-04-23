@@ -1283,17 +1283,6 @@
   margin-top: 39px;
   min-width: 1112px;
 }
-
-.group-bg-image {
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-1969@1x.png);
-  background-position: 50% 50%;
-  background-size: cover;
-  border-radius: 4px;
-  height: 336px;
-  width: 1032px;
-  margin-top: 30px;
-}
-
 .followers-group {
   align-items: flex-start;
   display: flex;
@@ -1301,7 +1290,6 @@
   overflow: hidden;
   width: 116px;
 }
-
 .community-group-follow-btn {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;

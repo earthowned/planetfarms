@@ -827,7 +827,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    min-height: 976px;
+    height: 741px;
     width: 1112px;
   }
   .enterprise-follower {
@@ -843,7 +843,7 @@
     position: relative;
     width: 184px;
   }
-  .flex-col-4 {
+  .enterprise-messenger-container {
     align-items: flex-end;
     display: flex;
     flex-direction: column;
@@ -851,15 +851,14 @@
     min-height: 520px;
     width: 376px;
   }
-  .second-container-col-1 {
+  .event-container {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
     min-height: 520px;
-    width: 616px;
-
+    width: auto;
   }
-  .second-container {
+  .event-messenger-container {
     align-items: flex-start;
     display: flex;
     height: 520px;
@@ -872,11 +871,11 @@
     height: 8px;
     width: 8px;
   }
-  .col-1-text-container {
+  .event-text-container {
     align-items: center;
     display: flex;
     height: 40px;
-    justify-content: flex-end;
+    justify-content:space-between;
     margin-top: 24px;
     min-width: 568px;
   }
@@ -887,7 +886,7 @@
     overflow: hidden;
     width: 113px;
   }
-  .frame-2904 {
+  .enterprise-messenger-lower-avatar-1 {
     background-position: 50% 50%;
     background-size: cover;
     border: 1.5px solid var(--shark-32);
@@ -898,7 +897,7 @@
     top: 0px;
     width: 40px;
   }
-  .frame-3392 {
+  .enterprise-messenger-lower-avatar-2 {
     background-position: 50% 50%;
     background-size: cover;
     border-radius: 100px;
@@ -908,7 +907,7 @@
     top: 0px;
     width: 40px;
   }
-  .frame-3393 {
+  .enterprise-messenger-lower-avatar-3 {
     background-position: 50% 50%;
     background-size: cover;
     border-radius: 100px;
@@ -918,7 +917,7 @@
     top: 0px;
     width: 40px;
   }
-  .frame-3421 {
+  .enterprise-messenger-btn {
     align-items: center;
     background-color: var(--caribbean-green);
     border-radius: 4px;
@@ -929,18 +928,18 @@
     padding: 0 103px;
     width: 328px;
   }
-  .frame-3424 {
+  .enterprise-messenger-lower-wrapper {
     align-items: flex-start;
     display: flex;
     min-width: 88px;
   }
-  .frame-3425 {
+  .enterprise-messenger-lower {
     align-items: flex-start;
     display: flex;
-    margin-top: 24px;
+    margin-top: 40px;
     min-width: 328px;
   }
-  .frame-3429 {
+  .enterprises-messenger-text-container {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -967,7 +966,7 @@
     padding: 0 43px;
     width: 216px;
   }
-  .frame-3435 {
+  .enterprises-messenger-text-wrapper {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -979,7 +978,7 @@
     object-fit: cover;
     width: 1032px;
   }
-  .join-messenger {
+  .enterprise-messenger-btn-text {
     height: 24px;
     letter-spacing: 0.00px;
     line-height: 24px;
@@ -987,15 +986,15 @@
     min-width: 119px;
     white-space: nowrap;
   }
-  .joinmsg {
+  .enterprise-messenger-wrapper {
     align-items: center;
-    background-color: var(--shark-32);
+    background-color: var(--shark);
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    height: 288px;
-    margin-top: 184px;
-    overflow: hidden;
+    height: 332px;
+    margin-top: 40px;
+    
     width: 376px;
   }
   .calenderButton-text {
@@ -1005,30 +1004,26 @@
     min-width: 128px;
     white-space: nowrap;
   }
-  .second-container-wrapper{
+  .event-container-wrapper{
     align-items: center;
     background-color: var(--shark);
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    height: 288px;
     margin-top: 40px;
-    overflow: hidden;
     padding: 24px 0;
     width: 616px;
   }
-  .overlap-group-5 {
+  .enterprise-messenger-lower-overlap-group {
     height: 40px;
     position: relative;
     width: 88px;
   }
-  .first-event-date-1 {
+  .event-date-1 {
     letter-spacing: 0.00px;
     line-height: 24px;
-    margin-left: 275px;
     min-height: 24px;
     min-width: 91px;
-    white-space: nowrap;
   }
   .second-event-date-1 {
     letter-spacing: 0.00px;
@@ -1064,6 +1059,11 @@
     margin-top: 142px;
     width: 1112px;
   }
+  .hr-lines{
+    background-color: var(--onyx);
+    height: 1px;
+    width: 1112px;
+  }
   .surname {
     height: 48px;
     letter-spacing: 0.00px;
@@ -1079,14 +1079,15 @@
     min-height: 72px;
     width: 531px;
   }
-  .text-3 {
+  .enterprises-messenger-text-1 {
     height: 48px;
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 48px;
     width: 330px;
+    margin-top: 32px;
   }
-  .text-4 {
+  .enterprises-messenger-text-2 {
     height: 24px;
     letter-spacing: 0.00px;
     line-height: 24px;
@@ -1094,7 +1095,7 @@
     min-height: 24px;
     white-space: nowrap;
   }
-  .text-5 {
+  .enterprise-messenger-lower-text {
     height: 48px;
     letter-spacing: 0.00px;
     line-height: 24px;
@@ -1103,7 +1104,7 @@
     min-height: 48px;
     width: 236px;
   }
-  .container-text-title {
+  .event-text-title {
     align-self: flex-start;
     height: 24px;
     letter-spacing: 0.00px;
@@ -1112,13 +1113,12 @@
     min-height: 24px;
     white-space: nowrap;
   }
-  .first-event-text-1 {
+  .event-text-1 {
     letter-spacing: 0.00px;
     line-height: 24px;
-    margin-left: 16px;
     min-height: 24px;
-    min-width: 172px;
-    white-space: nowrap;
+    width: 395px;
+
   }
   .second-event-text-1 {
     letter-spacing: 0.00px;
@@ -1894,9 +1894,8 @@
     display: flex;
     flex-direction: column;
     margin-top: 39px;
-    min-height: 1546px;
     position: relative;
-    width: 1114px;
+    width: 100%;
   }
   .file-text-outline {
     align-items: flex-end;
@@ -1913,12 +1912,11 @@
     min-width: 69px;
     white-space: nowrap;
   }
-  .flex-col-7 {
+  .enterprise-user-view-wrapper {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
     margin-left: 39px;
-    min-height: 3236px;
     position: relative;
     width: 1114px;
   }
@@ -2299,11 +2297,10 @@
     top: 0px;
     width: 6px;
   }
-  .x09-0-1-enterprise-user-view {
+  .enterprise-user-view {
     align-items: flex-start;
     background-color: var(--black);
     display: flex;
-    height: 2804px;
     overflow: hidden;
     position: relative;
     width: 1440px;
