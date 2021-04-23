@@ -42,6 +42,7 @@ function DashboardComponent() {
             <div className="achievements ibmplexsans-semi-bold-quarter-spanish-white-16px">Achievements</div>
           </Link>
           {/* surveys */}
+          <Link to="/mysurvey">
           <div className="surveys border-1px-onyx">
             <div className="check-square-1">
               <div className="overlap-group-10">
@@ -50,6 +51,7 @@ function DashboardComponent() {
             </div>
             <div className="surveys-1 ibmplexsans-semi-bold-quarter-spanish-white-16px">Surveys</div>
           </div>
+          </Link>
         </div>
 
         {/* Main Tile */}
@@ -62,7 +64,7 @@ function DashboardComponent() {
                 </div>
               </div>
               <div className="my-library ibmplexsans-semi-bold-quarter-spanish-white-24px">My library</div>
-              <Link to="/mylibrary" className="link-decoration">
+              <Link to="/mylibrary" className="link-router">
                 <SeeAllButton>See all items</SeeAllButton>
               </Link>
             </div>
@@ -72,8 +74,12 @@ function DashboardComponent() {
                   <img className="vector-30" src="/img/book-open-1.svg" alt="book-open-icon" />
                 </div>
               </div>
-              <div className="my-courses ibmplexsans-semi-bold-quarter-spanish-white-24px">My courses</div>
+              
+                <div className="my-courses ibmplexsans-semi-bold-quarter-spanish-white-24px">My courses</div>
+                <Link to="/mycourse" className="link-router">
               <SeeAllButton>See all items</SeeAllButton>
+              </Link>
+            
             </div>
             <div className="x-tile">
               <div className="users-1">
@@ -95,11 +101,14 @@ function DashboardComponent() {
               <MyLibraryTiles src={"/img/Frame3061.png"}  className="frame-3061"/>
             </div>
             {/* courses */}
+           
+            
             <div className="flex-row-2">
               <MyCourseTiles src={"/img/MyCourseTiles2.png"} overlapGroup8="" text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
               <MyCourseTiles src={"/img/MyCourseTiles2.png"} overlapGroup8="" text8="Be happy, find your self! Motivation 2020" className="frame-3061" />
               <MyCourseTiles src={"/img/AddMoreTiles.png"}/>
             </div>
+            
 
             {/* group */}
             <div className="flex-row-2">

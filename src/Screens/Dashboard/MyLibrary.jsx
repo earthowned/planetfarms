@@ -5,12 +5,12 @@ import BackButton from '../../Components/BackButton/BackButton';
 
 function MyLibrary() {
   return (
-    <DashboardLayout title="My Profile">
+    <DashboardLayout title="My Library">
     <div className="x10-3-0-my-library">
       <div className="flex-col-3">
-        <div className="frame-2923">
+        {/* <div className="frame-2923"> */}
           <BackButton location="/dashboard" />
-        </div>
+        {/* </div> */}
           {/* <component-comming-soon></component-comming-soon> */}
         <div className="my-library border-1px-onyx">
           <div className="articles">
@@ -45,6 +45,7 @@ function MyLibrary() {
                 overlapGroup="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/video-1@2x.png"
                 playButton1="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6062e54b21e052fe79fa34b5/img/vector-15@2x.png"
                 text5="Be happy, find your self! Motivation 2020"
+                className="video-"
               />
             </div>
             <Videos
@@ -102,3 +103,5 @@ function Videos({ overlapGroup, playButton1, text5, className }) {
     </div>
   );
 }
+
+
