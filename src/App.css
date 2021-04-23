@@ -91,6 +91,7 @@ body {
   height: 50px;
   font-weight: bolder;
   cursor: pointer;
+  width: 100%;
 }
 
 .default-btn:hover {

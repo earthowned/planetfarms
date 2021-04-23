@@ -19,6 +19,7 @@
 .listview-inner-container .image-wrapper {
   height: 100%;
 }
+
 .listview-inner-container .image-wrapper img {
   width: 100%;
   height: 100%;
@@ -37,6 +38,7 @@
 .listview-inner-container .list-content h4 {
   font-size: 24px;
 }
+
 .listview-inner-container .list-btn-wrapper {
   display: flex;
   flex: 0.7;
@@ -52,7 +54,6 @@
   padding: 1em 2em;
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
-
   cursor: pointer;
 }
 
@@ -60,4 +61,87 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 1350px) {
+  .secondary-btn-border {
+    padding: 0.6em 0.7em;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .secondary-btn-border {
+    padding: 0.4em 0.6em;
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .listview-box-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .listview-inner-container {
+    width: 45%;
+    height: 500px;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
+    padding-bottom: 0.6em;
+  }
+
+  .listview-inner-container:not(:last-child) {
+    margin-right: 5%;
+  }
+
+  .listview-inner-container .image-wrapper {
+    height: 50%;
+    width: 100%;
+  }
+
+  .listview-inner-container .list-content {
+    flex: 0 0;
+    margin-left: 0;
+    font-size: 14px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .listview-inner-container .list-content h4 {
+    margin-bottom: 0.4em;
+  }
+
+  .listview-inner-container .list-btn-wrapper {
+    width: 100%;
+    height: 20%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  .secondary-btn-border {
+    width: 100%;
+    height: 80px;
+    margin-top: 0.6em;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .listview-inner-container {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .listview-inner-container {
+    padding: 0 10px;
+    height: auto;
+    padding-bottom: 10px;
+  }
 }
