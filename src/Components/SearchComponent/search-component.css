@@ -24,6 +24,8 @@
   outline: none;
   border: none;
   color: rgb(126, 118, 118);
+  width: 100%;
+  height: 100%;
 }
 
 .edit-btn {
@@ -39,7 +41,7 @@
 
 .search {
   align-items: center;
-  background-color: var(--licorice);
+  background-color: black;
   border-radius: 4px;
   display: flex;
   height: 48px;
