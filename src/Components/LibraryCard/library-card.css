@@ -19,7 +19,7 @@
 
 .trasnsparent-btn {
   outline: none;
-  border: 0.5px solid #ffffff;
+  border: 0.5px solid #fff;
   background: rgba(255, 255, 255, 0.16);
   font-weight: 400;
   color: #fff;
@@ -56,4 +56,17 @@
   font-size: 1.8em;
   margin-top: 0.6em;
   color: #fff;
+}
+
+@media only screen and (max-width: 900px) {
+  .libraryCard-inner-container {
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .libraryCard-inner-container {
+    width: 100%;
+    margin-right: 0;
+  }
 }

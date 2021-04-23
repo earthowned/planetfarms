@@ -6,18 +6,43 @@ import { Link, useLocation} from 'react-router-dom';
 import "./library-header.css"
 import { searchResources, listResources } from '../../actions/resourceActions';
 
+const data = [
+    "All files",
+    "My library & collections",
+    "Users collection",
+    "Saved collection"
+]
+
 const LibraryHeader = ({setActive}) => {
-     let {pathname} = useLocation()
-     const dispatch = useDispatch()
-     const [search, setSearch] = useState(null)
-     useEffect(() => {
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    let {pathname} = useLocation();
+
+    const dispatch = useDispatch()
+    const [search, setSearch] = useState(null)
+    useEffect(() => {
         if(search) dispatch(searchResources(search))
         if(!search) dispatch(listResources())
     }, [search, dispatch])
+
+    useEffect(() => {
+        window.addEventListener("resize",  function () {
+            setWindowWidth(window.innerWidth);
+        });
+
+        return () => {
+        window.removeEventListener("resize", function () {
+            setWindowWidth(window.innerWidth);
+        });
+        }
+    },[windowWidth])
+
     return (
-        <>
+        <div className="library-main-header-container">
         <div className="library-container">
-            <ul className="library-list-container">
+            {windowWidth > 839
+            ? <><ul className="library-list-container">
                 <li >
                     <Link className={ `nav-link ${ (pathname === "/library") ? "library-list-item active" : "library-list-item" }` } to="/library">All files</Link>
                     </li>
@@ -28,17 +53,24 @@ const LibraryHeader = ({setActive}) => {
                 <li >
                     <Link className={ `nav-link ${ (pathname === "/library/collection/saved") ? "library-list-item active" : "library-list-item" }` } to="/library/collection/saved">Saved collection</Link></li>
             </ul>
-            <button className="default-btn" onClick={ () => setActive(true) }>Add files</button>
+            <SearchComponent search = { search } setSearch={ setSearch } className="search-btn margin-0"/> 
+            </>
+            : <>
+            <Filter data={data} newFilter="new" />
+            <SearchComponent search = { search } setSearch={ setSearch } className="search search-btn margin-0"/> 
+            </>
+        }
         </div>
         <div className="library-sub-header">
               <div className="library-sub-header-1">
-              <SearchComponent search = { search } setSearch={ setSearch } className={"search border-1px-onyx"} /> 
+              <div className="library-btn-container"><button className="default-btn" onClick={() => setActive(true)}>Add files</button></div>
               </div>
+              
               <div className="library-sub-header-2">
               <Filter />
               </div>
-           </div>
-        </>
+        </div>
+        </div>
     )
 }
 

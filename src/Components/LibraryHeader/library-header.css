@@ -1,9 +1,16 @@
+.library-main-header-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 120px;
+  margin-top: 2em;
+}
+
 .library-list-container {
   color: #fff;
   list-style: none;
   display: flex;
   margin: 0;
-  width: 100%;
 }
 
 .library-list-container li {
@@ -14,11 +21,15 @@
 .library-list-item {
   background: #000;
   border: 0.5px solid #fff;
-  padding: 1em 1.2em;
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
   outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 50px;
 }
 
 .library-list-item:hover {
@@ -33,16 +44,16 @@
 
 .library-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  margin-top: 1.5em;
+  align-items: center;
 }
 
 .library-sub-header {
   display: flex;
-  width: 100%;
-  margin-top: 2em;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .library-sub-header-1 {
@@ -50,11 +61,67 @@
   margin: 0;
 }
 
-.library-sub-header-2 {
-  width: 10%;
-}
-
 .library-list-item.active {
   background: #fff;
   color: #000;
+}
+
+.library-btn-container {
+  width: 200px;
+}
+
+@media only screen and (max-width: 1350px) {
+  .library-list-item {
+    width: 170px;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  .library-list-item {
+    text-align: center;
+    width: 140px;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .library-sub-header-2 .filter-container {
+    width: none;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .library-list-item {
+    text-align: center;
+    width: 120px;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 840px) {
+  .library-sub-header-1 {
+    width: 100%;
+  }
+
+  .library-sub-header-2 {
+    width: 100%;
+  }
+
+  .library-btn-container {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .library-main-header-container {
+    flex-direction: column;
+    height: 200px;
+  }
+
+  .library-container .filter-container {
+    width: 100%;
+  }
+
+  .library-sub-header-2 .filter-container {
+    width: 100%;
+  }
 }

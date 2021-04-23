@@ -24,7 +24,7 @@ const SavedCollection = () => {
         data={groupCollection} btnName="add to collections" 
         openAddCollection={openAddCollection}
         setNewCollection={setNewCollection}/>}
-    {newCollection && <SimpleModal setNewCollection={setNewCollection}/>}
+        {newCollection && <SimpleModal setNewCollection={setNewCollection}/>}
     
         {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection}/>}
              <DashboardLayout title="library">
