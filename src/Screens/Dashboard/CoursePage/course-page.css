@@ -1,0 +1,17 @@
+.course-page {
+  align-items: flex-start;
+  background-color: var(--black);
+  display: flex;
+  height: auto;
+  position: relative;
+  width: 100%;
+}
+
+.course-page-flex-col-4 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 39px;
+  position: relative;
+  width: 100%;
+}

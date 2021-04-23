@@ -1,0 +1,95 @@
+.survey-card {
+  align-items: flex-start;
+  background-color: var(--licorice);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  height: 528px;
+  overflow: hidden;
+  width: 500px;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.survey-card-image {
+  background-size: 100% 100%;
+  border-radius: 4px;
+  height: 239px;
+  width: 497px;
+}
+
+.survey-card-text {
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-left: 8px;
+  min-height: 24px;
+  margin-top: 20px;
+}
+
+.survey-card-subtext {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  margin-top: 80px;
+  min-height: 112px;
+  position: relative;
+  width: 344px;
+}
+
+.subtext-item {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  white-space: nowrap;
+}
+
+.subtext-option {
+  align-items: flex-start;
+  display: flex;
+  height: 48px;
+  margin-top: 16px;
+  min-width: 344px;
+  position: relative;
+}
+
+.option-btn {
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  align-items: center;
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: var(--white);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0 51px;
+  width: 164px;
+}
+
+.btn-first {
+  height: 24px;
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 60px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.option-btn-second {
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  align-items: center;
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: var(--caribbean-green);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0 51px;
+  width: 164px;
+  margin-left: 10px;
+}
+
+.btn-second {
+  color: black !important;
+}

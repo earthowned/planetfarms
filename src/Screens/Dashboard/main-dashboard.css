@@ -1,44 +1,53 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
 * {
   box-sizing: border-box;
 }
+
 .border-0-5px-quarter-spanish-white {
   border: 0.5px solid var(--quarter-spanish-white);
 }
+
 .border-1px-abbey {
   border: 1px solid var(--abbey);
 }
+
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
   color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
 }
+
 .x10-1-0-my-dashboard {
   align-items: flex-start;
   background-color: rgba(0, 0, 0, 1);
   display: flex;
   width: 1440px;
 }
+
 .x10-1-0-my-dashboard .achievements {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 8px;
   min-height: 24px;
   min-width: 108px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .achivements {
   align-items: flex-end;
   background-color: var(--shark);
@@ -52,6 +61,7 @@
   width: 136px;
   text-decoration: none;
 }
+
 .x10-1-0-my-dashboard .award {
   align-items: flex-end;
   align-self: center;
@@ -60,6 +70,7 @@
   padding: 0.5px 7px;
   width: 40px;
 }
+
 .x10-1-0-my-dashboard .book-1 {
   align-items: flex-start;
   display: flex;
@@ -68,6 +79,7 @@
   padding: 2px 5.5px;
   width: 40px;
 }
+
 .x10-1-0-my-dashboard .book-open-1 {
   align-items: center;
   display: flex;
@@ -76,6 +88,7 @@
   padding: 0 2.2px;
   width: 40px;
 }
+
 .x10-1-0-my-dashboard .check-square-1 {
   align-items: center;
   align-self: center;
@@ -85,6 +98,7 @@
   padding: 0 2.2px;
   width: 40px;
 }
+
 .x10-1-0-my-dashboard .dashboard-hero {
   align-items: center;
   background-color: var(--licorice);
@@ -93,6 +107,7 @@
   margin-top: 16px;
   min-width: 1112px;
 }
+
 .x10-1-0-my-dashboard .dashboard-info {
   align-items: center;
   display: flex;
@@ -100,6 +115,7 @@
   min-width: 496px;
   padding: 0 24px;
 }
+
 .x10-1-0-my-dashboard .dashboard-main-container {
   align-items: center;
   background-color: var(--licorice);
@@ -111,6 +127,7 @@
   padding: 8px 0;
   width: 1112px;
 }
+
 .x10-1-0-my-dashboard .dashboard-my-profile {
   align-items: flex-end;
   background-color: var(--shark);
@@ -123,6 +140,7 @@
   padding: 32px 28px;
   width: 136px;
 }
+
 .x10-1-0-my-dashboard .dashboard-profile-pic {
   background-image: url();
   background-position: 50% 50%;
@@ -131,15 +149,17 @@
   height: 136px;
   width: 136px;
 }
+
 .x10-1-0-my-dashboard .default-i905517 {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 97px;
   text-align: center;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .flex-col-5 {
   align-items: flex-start;
   display: flex;
@@ -148,6 +168,7 @@
   min-height: 1112px;
   width: 1112px;
 }
+
 .x10-1-0-my-dashboard .flex-col-6 {
   align-items: flex-start;
   display: flex;
@@ -156,6 +177,7 @@
   min-height: 136px;
   width: 200px;
 }
+
 .x10-1-0-my-dashboard .flex-col-7 {
   align-items: flex-start;
   display: flex;
@@ -163,6 +185,7 @@
   min-height: 744px;
   width: 216px;
 }
+
 .x10-1-0-my-dashboard .flex-row-2 {
   align-items: center;
   display: flex;
@@ -172,10 +195,12 @@
   width: 900px;
   overflow-x: auto;
 }
+
 .x10-1-0-my-dashboard .frame-3061 {
   background-color: rgba(243, 243, 243, 1);
   margin-top: unset;
 }
+
 .x10-1-0-my-dashboard .frame-4 {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
@@ -190,6 +215,7 @@
   padding: 0 42px;
   width: 184px;
 }
+
 .x10-1-0-my-dashboard .info-my-community {
   align-items: flex-start;
   display: flex;
@@ -198,6 +224,7 @@
   min-height: 48px;
   width: 158px;
 }
+
 .x10-1-0-my-dashboard .info-my-detail {
   align-items: flex-start;
   display: flex;
@@ -205,30 +232,34 @@
   min-height: 56px;
   width: 200px;
 }
+
 .x10-1-0-my-dashboard .mikhail-ugryumov {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-communities {
   color: var(--caribbean-green);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-courses {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   margin-left: 16px;
   margin-top: 16px;
   min-height: 32px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-group-tile {
   height: 216px;
   margin-left: 1px;
@@ -236,22 +267,25 @@
   margin-right: 15px;
   width: 216px;
 }
+
 .x10-1-0-my-dashboard .my-groups {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   margin-left: 16px;
   margin-top: 16px;
   min-height: 32px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-library {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   margin-left: 16px;
   margin-top: 16px;
   min-height: 32px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-library-tile {
   align-items: flex-start;
   background-color: var(--shark);
@@ -263,34 +297,40 @@
   padding: 32px 0;
   width: 216px;
 }
+
 .x10-1-0-my-dashboard .my-profile {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 8px;
   min-height: 24px;
   min-width: 77px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .overlap-group-10 {
   height: 32px;
   position: relative;
   width: 34px;
 }
+
 .x10-1-0-my-dashboard .overlap-group-11 {
   height: 36px;
   position: relative;
   width: 29px;
 }
+
 .x10-1-0-my-dashboard .overlap-group-12 {
   height: 32px;
   position: relative;
   width: 36px;
 }
+
 .x10-1-0-my-dashboard .overlap-group-9 {
   height: 39px;
   position: relative;
   width: 26px;
 }
+
 .x10-1-0-my-dashboard .overlap-group8 {
   align-items: flex-end;
   background-position: 50% 50%;
@@ -300,6 +340,7 @@
   justify-content: flex-end;
   min-width: 216px;
 }
+
 .x10-1-0-my-dashboard .person-outline-1 {
   align-items: center;
   display: flex;
@@ -308,6 +349,7 @@
   padding: 3px 0;
   width: 24px;
 }
+
 .x10-1-0-my-dashboard .surveys {
   align-items: flex-end;
   background-color: var(--shark);
@@ -320,21 +362,24 @@
   padding: 32px 36px;
   width: 136px;
 }
+
 .x10-1-0-my-dashboard .surveys-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 8px;
   min-height: 24px;
   min-width: 61px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .text--2 {
   height: 48px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 48px;
   width: 186px;
 }
+
 .x10-1-0-my-dashboard .user {
   align-items: flex-start;
   align-self: center;
@@ -345,17 +390,20 @@
   padding: 3.9px 5.5px;
   width: 40px;
 }
+
 .x10-1-0-my-dashboard .vector-21 {
-  top: 0px;
+  top: 0;
   width: 26px;
 }
+
 .x10-1-0-my-dashboard .vector-23 {
   height: 26px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 26px;
 }
+
 .x10-1-0-my-dashboard .vector-25 {
   height: 19px;
   left: 10px;
@@ -363,18 +411,21 @@
   top: 1px;
   width: 24px;
 }
+
 .x10-1-0-my-dashboard .vector-28 {
   height: 36px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 29px;
 }
+
 .x10-1-0-my-dashboard .vector-30 {
   height: 32px;
   position: absolute;
-  top: 0px;
+  top: 0;
 }
+
 .x10-1-0-my-dashboard .x-tile {
   align-items: flex-start;
   background-color: var(--shark);
@@ -387,26 +438,14 @@
   padding: 32px 0;
   width: 216px;
 }
-:root {
-  --abbey: rgba(79, 81, 85, 1);
-  --caribbean-green: rgba(0, 198, 136, 1);
-  --ebb: rgba(227, 227, 227, 1);
-  --licorice: rgba(20, 20, 20, 1);
-  --onyx: rgba(58, 57, 57, 1);
-  --quarter-spanish-white: rgba(248, 235, 223, 1);
-  --rusty-red: rgba(218, 52, 67, 1);
-  --shark: rgba(33, 34, 37, 1);
-  --shark-2: rgba(43, 43, 44, 1);
-  --monsoon: rgba(137, 137, 137, 1);
-}
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 0;
   background: transparent; /* make scrollbar transparent */
 }
 
 .x10-1-0-my-dashboard .text-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   min-height: 24px;
@@ -415,7 +454,7 @@
 
 .ibmplexsans-regular-normal-monsoon-16px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -429,6 +468,7 @@
   display: flex;
   min-width: 40px;
 }
+
 .library-conatainer {
   align-items: flex-start;
   border-radius: 4px;
@@ -437,6 +477,7 @@
   overflow: hidden;
   width: 218px;
 }
+
 .library-group {
   align-items: flex-end;
   background-position: 50% 50%;
@@ -447,16 +488,22 @@
   padding: 16px 14px;
   width: 216px;
 }
+
 .library-play-button-1 {
   background-size: 100% 100%;
   height: 40px;
   width: 40px;
 }
+
 .library-text {
   height: 48px;
-  letter-spacing: 0.00px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 24px;
   min-height: 48px;
   width: 186px;
+}
+
+.link-router {
+  text-decoration: none;
 }
