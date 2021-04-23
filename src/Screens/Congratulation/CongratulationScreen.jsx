@@ -53,10 +53,8 @@ async function signUp() {
       password,
         attributes: {
           email,
-          phone
       }
     })
-    console.log(user)
     setModalActive(true)
   } catch (error) {
     console.log('error signing up:', error)

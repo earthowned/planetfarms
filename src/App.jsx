@@ -81,13 +81,12 @@ Amplify.configure({
         //clientMetadata: { myCustomKey: 'myCustomValue' },
 
          // OPTIONAL - Hosted UI configuration
-        /*oauth: {
-            domain: 'domain_name',
-            scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+        oauth: {
+            domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
             redirectSignIn: 'http://localhost:3000/',
             redirectSignOut: 'http://localhost:3000/',
-            responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
-        }*/
+            responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
+        }
     }
 });
 
