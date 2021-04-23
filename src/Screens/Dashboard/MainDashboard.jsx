@@ -2,6 +2,7 @@ import {useState, useRef, useEffect} from "react";
 import "./main-dashboard.css";
 import {  Link } from "react-router-dom";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
+import useSizeFinder from '../../utils/SizeFinder';
 
 const DashboardData = [
     {
@@ -46,6 +47,8 @@ const MyCourseData = [
 ]
 
 function DashboardComponent() {
+  const windowWidth = useSizeFinder();
+
   return (
     <DashboardLayout title="My Dashboard">
     <div className="x10-1-0-my-dashboard">
@@ -70,23 +73,56 @@ function DashboardComponent() {
           <div className="dashboard-my-profile-side-header">
             {/* my-profile  */}
             <Link to="/myProfile" className="dasboard-my-profile-box">
+              <div>
               <img src="/img/user.svg" alt="user-icon" />
               <h4>My Profile</h4>
+              </div>
+              {windowWidth < 721 && <img src="/img/right-arrow.svg" alt="arrow right" />}
             </Link>
             {/* achivements  */}
             <Link to="/achievements" className="dasboard-my-profile-box">
+              <div>
               <img src="/img/award.svg" alt="award-icon" />
               <h4>Achievements</h4>
+              </div>
+              {windowWidth < 721 && <img src="/img/right-arrow.svg" alt="arrow right" />}
             </Link>
             {/* surveys */}
             <Link to="/surveys" className="dasboard-my-profile-box">
+              <div>
               <img src="/img/check-square.svg" alt="survey-icon" />
               <h4>Surveys</h4>
+              </div>
+              {windowWidth < 721 && <img src="/img/right-arrow.svg" alt="arrow right" />}
             </Link>
           </div>
           
         </div>
-        <MainContainer />
+        {windowWidth < 721 
+        ? <div className="mobile-container-dasboard-my-profile-box">
+        <Link to="/library" className="dasboard-my-profile-box">
+              <div>
+              <img src="/img/book-outlined.svg" alt="book-icon" />
+              <h4>My library</h4>
+              </div>
+              <img src="/img/right-arrow.svg" alt="arrow right" />
+          </Link>
+          <Link to="/courses" className="dasboard-my-profile-box">
+              <div>
+              <img src="/img/book-open-1.svg" alt="book-open-icon" />
+              <h4>My courses</h4>
+              </div>
+              <img src="/img/right-arrow.svg" alt="arrow right" />
+          </Link>
+          <Link to="/mygroups" className="dasboard-my-profile-box">
+              <div>
+              <img src="/img/my-group.svg" alt="user" />
+              <h4>My groups</h4>
+              </div>
+              <img src="/img/right-arrow.svg" alt="arrow right" />
+          </Link>
+        </div>
+        : <MainContainer />}
       </div>
     </div>
     </DashboardLayout>

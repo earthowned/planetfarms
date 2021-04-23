@@ -145,7 +145,6 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 1112px;
   width: 100%;
 }
 .x10-1-0-my-dashboard .flex-col-6 {
@@ -702,5 +701,30 @@ div[class$="-container--header"] h4 {
 
   .dasboard-my-profile-box:not(:last-child) {
     margin-bottom: 10px;
+  }
+
+  .dasboard-my-profile-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .dasboard-my-profile-box div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dasboard-my-profile-box div img {
+    margin-right: 8px;
+  }
+
+  .mobile-container-dasboard-my-profile-box {
+    width: 100%;
+    padding: 1em;
+    background-color: var(--licorice);
+    border-radius: 4px;
+    border: 1px solid var(--onyx);
   }
 }
