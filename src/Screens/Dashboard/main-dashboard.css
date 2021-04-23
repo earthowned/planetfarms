@@ -1,16 +1,21 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
 * {
   box-sizing: border-box;
 }
+
 .border-0-5px-quarter-spanish-white {
   border: 0.5px solid var(--quarter-spanish-white);
 }
+
 .border-1px-abbey {
   border: 1px solid var(--abbey);
 }
+
 .border-1px-onyx {
   border: 1px solid var(--onyx);
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
   color: var(--quarter-spanish-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
@@ -18,6 +23,7 @@
   font-style: normal;
   font-weight: 600;
 }
+
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
   color: var(--quarter-spanish-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
@@ -25,12 +31,14 @@
   font-style: normal;
   font-weight: 600;
 }
+
 .x10-1-0-my-dashboard {
   align-items: flex-start;
   background-color: rgba(0, 0, 0, 1);
   display: flex;
   width: 100%;
 }
+
 .x10-1-0-my-dashboard .achievements {
   letter-spacing: 0px;
   line-height: 24px;
@@ -39,6 +47,7 @@
   min-width: 108px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .achivements {
   align-items: flex-end;
   background-color: var(--shark);
@@ -52,6 +61,7 @@
   width: 136px;
   text-decoration: none;
 }
+
 .x10-1-0-my-dashboard .award {
   align-items: flex-end;
   align-self: center;
@@ -60,6 +70,7 @@
   padding: 0.5px 7px;
   width: 40px;
 }
+
 .x10-1-0-my-dashboard .book-1 {
   align-items: flex-start;
   display: flex;
@@ -68,6 +79,7 @@
   padding: 2px 5.5px;
   width: 40px;
 }
+
 .x10-1-0-my-dashboard .book-open-1 {
   align-items: center;
   display: flex;
@@ -76,6 +88,7 @@
   padding: 0 2.2px;
   width: 40px;
 }
+
 .x10-1-0-my-dashboard .check-square-1 {
   align-items: center;
   align-self: center;
@@ -102,6 +115,7 @@
   display: flex;
   height: 184px;
 }
+
 .x10-1-0-my-dashboard .dashboard-main-container {
   align-items: center;
   background-color: var(--licorice);
@@ -112,6 +126,7 @@
   overflow: hidden;
   width: 100%;
 }
+
 .x10-1-0-my-dashboard .dashboard-my-profile {
      align-items: flex-end;
     background-color: var(--shark);
@@ -132,6 +147,7 @@
   margin: 0;
   height: 150px;
 }
+
 .x10-1-0-my-dashboard .default-i905517 {
   height: 24px;
   letter-spacing: 0px;
@@ -141,12 +157,14 @@
   text-align: center;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .flex-col-5 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   width: 100%;
 }
+
 .x10-1-0-my-dashboard .flex-col-6 {
   align-items: flex-start;
   display: flex;
@@ -155,6 +173,7 @@
   min-height: 136px;
   width: 200px;
 }
+
 .x10-1-0-my-dashboard .flex-col-7 {
   align-items: flex-start;
   display: flex;
@@ -162,6 +181,7 @@
   min-height: 744px;
   width: 216px;
 }
+
 .x10-1-0-my-dashboard .flex-row-2 {
   align-items: center;
   display: flex;
@@ -171,6 +191,7 @@
   width: 900px;
   overflow-x: auto;
 }
+
 .x10-1-0-my-dashboard .frame-3061 {
   background-color: rgba(243, 243, 243, 1);
   margin-top: unset;
@@ -198,6 +219,7 @@
   min-height: 48px;
   width: 158px;
 }
+
 .x10-1-0-my-dashboard .info-my-detail {
   align-items: flex-start;
   display: flex;
@@ -205,12 +227,14 @@
   min-height: 56px;
   width: 200px;
 }
+
 .x10-1-0-my-dashboard .mikhail-ugryumov {
   letter-spacing: 0px;
   line-height: 32px;
   min-height: 32px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-communities {
   color: var(--caribbean-green);
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
@@ -221,6 +245,7 @@
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-courses {
   letter-spacing: 0px;
   line-height: 32px;
@@ -229,6 +254,7 @@
   min-height: 32px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-group-tile {
   height: 216px;
   margin-left: 1px;
@@ -236,6 +262,7 @@
   margin-right: 15px;
   width: 216px;
 }
+
 .x10-1-0-my-dashboard .my-groups {
   letter-spacing: 0px;
   line-height: 32px;
@@ -244,6 +271,7 @@
   min-height: 32px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-library {
   letter-spacing: 0px;
   line-height: 32px;
@@ -252,6 +280,7 @@
   min-height: 32px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .my-library-tile {
   align-items: flex-start;
   background-color: var(--shark);
@@ -263,6 +292,7 @@
   padding: 32px 0;
   width: 216px;
 }
+
 .x10-1-0-my-dashboard .my-profile {
   letter-spacing: 0px;
   line-height: 24px;
@@ -271,16 +301,19 @@
   min-width: 77px;
   white-space: nowrap;
 }
+
 .x10-1-0-my-dashboard .overlap-group-10 {
   height: 32px;
   position: relative;
   width: 34px;
 }
+
 .x10-1-0-my-dashboard .overlap-group-11 {
   height: 36px;
   position: relative;
   width: 29px;
 }
+
 .x10-1-0-my-dashboard .overlap-group-12 {
   height: 32px;
   position: relative;
@@ -397,24 +430,6 @@
   overflow: hidden;
   padding: 32px 0;
   width: 216px;
-}
-
-:root {
-  --abbey: rgba(79, 81, 85, 1);
-  --caribbean-green: rgba(0, 198, 136, 1);
-  --ebb: rgba(227, 227, 227, 1);
-  --licorice: rgba(20, 20, 20, 1);
-  --onyx: rgba(58, 57, 57, 1);
-  --quarter-spanish-white: rgba(248, 235, 223, 1);
-  --rusty-red: rgba(218, 52, 67, 1);
-  --shark: rgba(33, 34, 37, 1);
-  --shark-2: rgba(43, 43, 44, 1);
-  --monsoon: rgba(137, 137, 137, 1);
-}
-
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* make scrollbar transparent */
 }
 
 .x10-1-0-my-dashboard .text-1 {
@@ -547,6 +562,14 @@ div[class$="-container--header"] {
   align-items: flex-start;
 }
 
+.tiles-container h4 {
+  font-size: 18px;
+  position: absolute;
+  bottom: 20%;
+  line-height: 1.5;
+  padding: 0 .5em;
+}
+
 div[class$="-container--header"] h4 {
   font-size: 24px;
 }
@@ -599,14 +622,6 @@ div[class$="-container--header"] h4 {
   height: 100%;
 }
 
-.tiles-container h4 {
-  font-size: 18px;
-  position: absolute;
-  bottom: 20%;
-  line-height: 1.5;
-  padding: 0 .5em;
-}
-
 .scroll-icon {
   position: absolute;
   right: 0;
@@ -626,7 +641,6 @@ div[class$="-container--header"] h4 {
     justify-content: center;
     flex-direction: column;
     position: relative;
-
 }
 
 .add-container img {
