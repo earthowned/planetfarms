@@ -13,7 +13,8 @@ const DashboardData = [
     {
         category: "farming",
         title: "Be happy and find your self! Motivation 2020",
-        img: "/img/man-cap.svg"
+        img: "/img/man-cap.svg",
+        type: "video"
     },
     {
         category: "farming",
@@ -23,7 +24,8 @@ const DashboardData = [
     {
         category: "farming",
         title: "Be happy and find your self! Motivation 2020",
-        img: "/img/man-cap.svg"
+        img: "/img/man-cap.svg",
+        type: "video"
     },
     {
         category: "farming",
@@ -48,7 +50,6 @@ const MyCourseData = [
 
 function DashboardComponent() {
   const windowWidth = useSizeFinder();
-
   return (
     <DashboardLayout title="My Dashboard">
     <div className="x10-1-0-my-dashboard">
@@ -73,27 +74,15 @@ function DashboardComponent() {
           <div className="dashboard-my-profile-side-header">
             {/* my-profile  */}
             <Link to="/myProfile" className="dasboard-my-profile-box">
-              <div>
-              <img src="/img/user.svg" alt="user-icon" />
-              <h4>My Profile</h4>
-              </div>
-              {windowWidth < 721 && <img src="/img/right-arrow.svg" alt="arrow right" />}
+              <HeaderContent title="My Profile" image="/img/user.svg" />
             </Link>
             {/* achivements  */}
             <Link to="/achievements" className="dasboard-my-profile-box">
-              <div>
-              <img src="/img/award.svg" alt="award-icon" />
-              <h4>Achievements</h4>
-              </div>
-              {windowWidth < 721 && <img src="/img/right-arrow.svg" alt="arrow right" />}
+              <HeaderContent title="Achievements" image="/img/award.svg" />
             </Link>
             {/* surveys */}
             <Link to="/surveys" className="dasboard-my-profile-box">
-              <div>
-              <img src="/img/check-square.svg" alt="survey-icon" />
-              <h4>Surveys</h4>
-              </div>
-              {windowWidth < 721 && <img src="/img/right-arrow.svg" alt="arrow right" />}
+              <HeaderContent title="Surveys" image="/img/check-square.svg" />
             </Link>
           </div>
           
@@ -101,25 +90,13 @@ function DashboardComponent() {
         {windowWidth < 721 
         ? <div className="mobile-container-dasboard-my-profile-box">
         <Link to="/library" className="dasboard-my-profile-box">
-              <div>
-              <img src="/img/book-outlined.svg" alt="book-icon" />
-              <h4>My library</h4>
-              </div>
-              <img src="/img/right-arrow.svg" alt="arrow right" />
+              <MobileViewHeaderContent title="My library" image="/img/book-outlined.svg"/>
           </Link>
           <Link to="/courses" className="dasboard-my-profile-box">
-              <div>
-              <img src="/img/book-open-1.svg" alt="book-open-icon" />
-              <h4>My courses</h4>
-              </div>
-              <img src="/img/right-arrow.svg" alt="arrow right" />
+              <MobileViewHeaderContent title="My courses" image="/img/book-open-1.svg"/>
           </Link>
           <Link to="/mygroups" className="dasboard-my-profile-box">
-              <div>
-              <img src="/img/my-group.svg" alt="user" />
-              <h4>My groups</h4>
-              </div>
-              <img src="/img/right-arrow.svg" alt="arrow right" />
+              <MobileViewHeaderContent title="My groups" image="/img/my-group.svg"/>
           </Link>
         </div>
         : <MainContainer />}
@@ -131,7 +108,30 @@ function DashboardComponent() {
 
 export default DashboardComponent;
 
+function HeaderContent ({title,image}) {
+  const windowWidth = useSizeFinder();
+  return(
+    <>
+      <div className="dasboard-my-profile-box--content">
+          <img src={image} alt={title} />
+          <h4>{title}</h4>
+      </div>
+      {windowWidth < 721 && <img src="/img/right-arrow.svg" alt="arrow right" />}
+    </>
+  )
+}
 
+function MobileViewHeaderContent ({title, image}) {
+  return (
+    <>
+      <div>
+        <img src={image} alt="user" />
+        <h4>{title}</h4>
+      </div>
+      <img src="/img/right-arrow.svg" alt="arrow right" />
+    </>
+  )
+}
 function SeeAllButton({ children }) {
   return (
     <div className="frame-4 border-0-5px-quarter-spanish-white">
@@ -155,11 +155,13 @@ function MainContainer () {
     scrollParam.current.scrollLeft += 500;
   }
 
+  const windowWidth = useSizeFinder();
+
   useEffect(() => {
     if(document.querySelector('.mylibrary-container--tiles').offsetWidth >= scrollLibraryRef.current.scrollWidth) setLibraryScrollActive(false);
     if(document.querySelector('.mycourse-container--tiles').offsetWidth >= scrollCoursesRef.current.scrollWidth) setCoursesScrollActive(false);
     if(document.querySelector('.mygroup-container--tiles').offsetWidth >= scrollGroupRef.current.scrollWidth) setGroupScrollActive(false);
-  }, [scrollGroupRef, scrollLibraryRef, scrollCoursesRef])
+  }, [windowWidth])
   
   return (
         <div className="dashboard-main-container border-1px-onyx">
@@ -224,6 +226,7 @@ function Tiles({data, title}) {
           <img src={item.img} alt={item.title}></img>
           </div>
           <h4>{item.title}</h4>
+          {item.type && <img className="video-icon" src="/img/video-icon.svg" alt={item.type} />}
         </div>
       )
     })

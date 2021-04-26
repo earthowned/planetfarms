@@ -562,6 +562,13 @@ div[class$="-container--header"] {
   align-items: flex-start;
 }
 
+.dasboard-my-profile-box--content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .tiles-container h4 {
   font-size: 18px;
   position: absolute;
@@ -612,6 +619,14 @@ div[class$="-container--header"] h4 {
   margin-right: 24px;
 }
 
+.video-icon {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  cursor: pointer;
+}
+
 .tiles-container-img-wrapper {
   width: 250px;
   height: 250px;
@@ -626,6 +641,7 @@ div[class$="-container--header"] h4 {
   position: absolute;
   right: 0;
   top: 50%;
+  cursor: pointer;
   transform: translateY(-50%);
 }
 
@@ -682,7 +698,7 @@ div[class$="-container--header"] h4 {
 @media only screen and (max-width: 720px) {
   .x10-1-0-my-dashboard .dashboard-hero {
     flex-direction: column;
-    padding-bottom: 1em;
+    padding: 2.5em 1em 3em;
   }
 
   .x10-1-0-my-dashboard .dashboard-info {
@@ -711,23 +727,21 @@ div[class$="-container--header"] h4 {
     width: 100%;
     flex-direction: row;
     height: 70px;
+     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
   }
 
   .dasboard-my-profile-box:not(:last-child) {
     margin-bottom: 10px;
   }
 
-  .dasboard-my-profile-box {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-  }
-
   .dasboard-my-profile-box div {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
   }
 
   .dasboard-my-profile-box div img {
@@ -736,7 +750,7 @@ div[class$="-container--header"] h4 {
 
   .mobile-container-dasboard-my-profile-box {
     width: 100%;
-    padding: 1em;
+    padding: 3em 1em;
     background-color: var(--licorice);
     border-radius: 4px;
     border: 1px solid var(--onyx);

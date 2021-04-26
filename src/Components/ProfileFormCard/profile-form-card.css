@@ -3,13 +3,12 @@
     display: flex;
     flex-direction: column;
     min-height: 144px;
-    width: 784px;
+    width: 100%;
   }
   .x-information-flex-row {
     align-items: flex-end;
     display: flex;
     height: 88px;
-    min-width: 361px;
   }
   .x-information-flex-col {
     align-items: flex-start;
@@ -124,3 +123,61 @@
     margin-top: 39px;
     width: 744px;
   }
+
+  .myProfile-container {
+    font-family: IBM Plex Sans;
+    color: #fff;
+    margin-top: 1em;
+    width: 100%;
+  }
+
+  .myProfile-container:not(:last-child) {
+    border-bottom: .8px solid #8a8a8a;
+    margin-bottom: 1em;
+  }
+
+  .myProfile-container-row-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .myProfile-container-row {
+    display: flex;
+  }
+
+  .myProfile-container-row .form-group {
+    display: flex;
+    flex-direction: column; 
+    margin: 2em 0;    
+  }
+
+.myProfile-container-row .form-group label{
+  color: #8a8a8a;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.myProfile-container-row .form-group input {
+  outline: none;
+  background: inherit;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 700px) {
+  .myProfile-container-row .form-group {
+    margin: .6em 0;
+  }
+
+  .myProfile-container-row-title {
+    margin-bottom: .6em;
+  }
+
+  .myProfile-container:not(:last-child) {
+    padding-bottom: 1.6em;
+  }
+}
