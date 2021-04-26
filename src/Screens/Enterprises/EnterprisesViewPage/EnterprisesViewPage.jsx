@@ -135,25 +135,12 @@ function EnterprisesPhoto() {
 }
 function EnterpriseDetails(props) {
   const {
-    image,
-    surname,
-    text2,
-    dueToTheAdvantage,
     text6,
-    text7,
-    phone,
-    text8,
-    phone2,
-    text9,
-    phone3,
     openInCalendar,
-    youreFollower,
     text3,
     text4,
     joinMessenger,
-   
     text5,
-    chevronRightOutline1Props,
   } = props;
 
   return (
@@ -185,20 +172,31 @@ function EnterpriseDetails(props) {
             </div>
           </div>
         </div>
-        <div className="enterprise-messenger-container">
+        <JoinMessenger />
+        
+      </div>
+      <div className="rectangle-875-1"></div>
+    </div>
+  );
+}
+ 
+/** side join messenger screen */
+const JoinMessenger=()=>{
+  return(
+    <div className="enterprise-messenger-container">
           <div className="enterprise-messenger-wrapper">
             <div className="enterprises-messenger-text-container">
               <div className="enterprises-messenger-text-wrapper">
                 <p className="enterprises-messenger-text-1  valign-text-middle ibmplexsans-normal-quarter-spanish-white-16px">
-                  {text3}
+                Would you like to communicate with other this enterpise users?
                 </p>
                 <div className="enterprises-messenger-text-2  valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                  {text4}
+                Join our free messenger!
                 </div>
               </div>
               <div className="enterprise-messenger-btn">
                 <div className="enterprise-messenger-btn-text valign-text-middle ibmplexsans-semi-bold-shark-16px">
-                  {joinMessenger}
+                Join messenger
                 </div>
               </div>
               <div className="rectangle-875"></div>
@@ -221,18 +219,14 @@ function EnterpriseDetails(props) {
                 </div>
               </div>
               <p className="enterprise-messenger-lower-text valign-text-middle ibmplexsans-normal-monsoon-14px">
-                {text5}
+              Bessy, Misha and 175 more users already follow us! 
               </p>
             </div>
           </div>
         </div>
-      </div>
-      <div className="rectangle-875-1"></div>
-    </div>
-  );
+
+  )
 }
-
-
 
 
 
