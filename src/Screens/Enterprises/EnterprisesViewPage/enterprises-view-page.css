@@ -84,9 +84,9 @@
   border: 1.5px solid var(--shark-32);
   border-radius: 100px;
   height: 40px;
-  left: 0px;
+  left: 0;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 40px;
 }
 
@@ -97,7 +97,7 @@
   height: 40px;
   left: 24px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 40px;
 }
 
@@ -108,7 +108,7 @@
   height: 40px;
   left: 48px;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 40px;
 }
 
@@ -169,7 +169,7 @@
 
 .enterprise-messenger-btn-text {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 119px;
@@ -188,7 +188,7 @@
 }
 
 .calenderButton-text {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 128px;
@@ -213,7 +213,7 @@
 }
 
 .event-date-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 91px;
@@ -241,7 +241,7 @@
 
 .text-2 {
   height: 72px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 24px;
   min-height: 72px;
@@ -250,7 +250,7 @@
 
 .enterprises-messenger-text-1 {
   height: 48px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 48px;
   width: 330px;
@@ -259,7 +259,7 @@
 
 .enterprises-messenger-text-2 {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-top: 8px;
   min-height: 24px;
@@ -268,7 +268,7 @@
 
 .enterprise-messenger-lower-text {
   height: 48px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
   margin-top: -4px;
@@ -279,7 +279,7 @@
 .event-text-title {
   align-self: flex-start;
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 24px;
   min-height: 24px;
@@ -287,7 +287,7 @@
 }
 
 .event-text-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   width: 395px;
@@ -332,7 +332,7 @@
 
 .enterprise-photos {
   height: 32px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
   min-width: 200px;
@@ -367,7 +367,7 @@
 
 .name {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
@@ -375,7 +375,7 @@
 
 .edit-information {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   margin-left: 4px;
   min-height: 24px;
