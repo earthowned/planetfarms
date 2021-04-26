@@ -81,7 +81,7 @@ function DashboardComponent() {
               <HeaderContent title="Achievements" image="/img/award.svg" />
             </Link>
             {/* surveys */}
-            <Link to="/surveys" className="dasboard-my-profile-box">
+            <Link to="/mysurvey" className="dasboard-my-profile-box">
               <HeaderContent title="Surveys" image="/img/check-square.svg" />
             </Link>
           </div>

@@ -1106,6 +1106,10 @@
   justify-content: center;
 }
 
+.edit-information-container {
+  margin-top: 1.5em;
+}
+
 .edit-information-container img {
   width: 100%;
   height: 250px;

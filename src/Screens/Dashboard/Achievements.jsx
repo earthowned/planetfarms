@@ -1,6 +1,6 @@
 import React from "react";
 import "./achievements.css";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 import BackButton from "../../Components/BackButton/BackButton";
@@ -35,7 +35,7 @@ function Achievements() {
                   </div>
                 </div>
                 <div className="frame-3055">
-                  <div className="text-12 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                  <div className="achivement-level-content">
                     Your achievement level: 4
                   </div>
                   <div className="frame-3054">
@@ -56,10 +56,10 @@ function Achievements() {
                   <span className="span1-1">245</span>
                 </span>
               </div>
-              <p className="my-achievements-prog valign-text-middle ibmplexsans-normal-quarter-spanish-white-16px">
+              <p className="progress-bar-content">
                 <span>
-                  <span className="span0-1">My achievement progress: </span>
-                  <span className="span1-1">56/245 (26%)</span>
+                  <span >My achievement progress: </span>
+                  <span >56/245 (26%)</span>
                 </span>
               </p>
               <div className="total-achievements-progressbar">
@@ -72,9 +72,10 @@ function Achievements() {
               </div>
             </div>
           </div>
+
           <div className="achievements-progressbar">
             {/* header */}
-            <div className="text- ibmplexsans-semi-bold-quarter-spanish-white-24px">Achievements in progress</div>
+            <h4 className="achievements-progressbar--header">Achievements in progress</h4>
 
             <div className="achievements-progress-table">
               <ProgressBar text="Be a member of 10 communities at least (5/10)" percent="50" />
@@ -86,7 +87,7 @@ function Achievements() {
             </div>
           </div>
           <div className="finished-achievements-1">
-            <div className="text- ibmplexsans-semi-bold-quarter-spanish-white-24px">Finished achievements</div>
+            <h4 className="achievements-progressbar--header">Finished achievements</h4>
             <div className="finished-achievements">
             <ProgressBar text="Be a member of 10 communities at least (10/10)" percent="70" />
             <ProgressBar text="Make 15 unique posts in your own groups (15/15)" percent="95" />

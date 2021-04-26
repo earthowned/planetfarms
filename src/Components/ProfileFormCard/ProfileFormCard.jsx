@@ -5,7 +5,6 @@ import './profile-form-card.css'
 
 const ProfileFormCard = ({data:{ title,first_inputTitle,first_inputValue,second_inputTitle,second_inputValue,third_inputTitle,third_inputValue}}) => {
     return (
-      
       <div className="myProfile-container">
             <h2 className="myProfile-container-row-title">{title}</h2>
             <div className="myProfile-container-row">
