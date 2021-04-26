@@ -359,8 +359,7 @@ const X0211SignUpfilledData = {
     vector16: "",
     vector17: "",
     vector18: "",
-    vector19: "",
-    
+    vector19: "", 
 };
 
 const X0212SignUperrorData = {
@@ -403,5 +402,4 @@ const X0212SignUperrorData = {
     vector20: "",
     vector21: "",
     vector22: "",
-    
-};
+}

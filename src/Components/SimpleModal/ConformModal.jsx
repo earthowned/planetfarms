@@ -14,7 +14,6 @@ const ConformModal = ({ username, password }) => {
     setCodeError(false)
   }
   
-console.log(username, password)
   async function confirmSignUp() {
     try {
       await Auth.confirmSignUp(username, code)
