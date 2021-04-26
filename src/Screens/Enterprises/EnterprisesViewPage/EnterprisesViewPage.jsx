@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BackButton from "../../../Components/BackButton/BackButton";
 import CommunityGroupPost from "../../../Components/CommunityGroupPost/CommunityGroupPost";
 import FarmsDetailsCard from "../../../Components/FarmsDetailsCard/FarmsDetailsCard";
@@ -16,7 +16,11 @@ function App() {
 
 export default App;
 
+
+
+
 function EnterprisesPage() {
+ 
   return (
     <div className="enterprise-user-view screen">
       <div className="enterprise-user-view-wrapper">
@@ -25,7 +29,8 @@ function EnterprisesPage() {
           <EnterpriseDetails {...enterpriseDetailsData} />
           <AdditionalInformation />
           <EnterprisesProduct />
-          <EnterprisePhotos {...frame2956Data} />
+          {/* <EnterprisePhotos {...frame2956Data} /> */}
+          <EnterprisesPhoto />
         </div>
         <div className="group-flex-row-7">
           <div>
@@ -67,14 +72,7 @@ function EnterprisesProduct() {
         /> */}
         <div className={`chevron-right-outline-1-2 chevron-right-outline-1-1`}>
           <div className="overlap-group-6">
-            <img
-              className="vector-20"
-              src="https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector@2x.png"
-            />
-            <img
-              className="vector-19"
-              src="https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector-3@2x.png"
-            />
+          <img src="/img/chevron-right-outline.svg" />
           </div>
         </div>
       </div>
@@ -84,30 +82,60 @@ function EnterprisesProduct() {
 }
 
 function AdditionalInformation() {
+  const [isActive,setIsActive]=useState(false)
+  const [btnActive,setBtnActive]=useState(false)
   return (
     <>
-      <div className="title">
+      <div className="title" onClick={()=>setIsActive(!isActive)}>
         <div className="enterprise-photos valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
           Additional Information
         </div>
         <div className={`chevron-right-outline-1-2 chevron-right-outline-1-1`}>
           <div className="overlap-group-6">
-            <img
-              className="vector-20"
-              src="https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector@2x.png"
-            />
-            <img
-              className="vector-19"
-              src="https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector-3@2x.png"
-            />
+          <img src="/img/chevron-right-outline.svg" />
           </div>
         </div>
       </div>
+      {isActive && <div className="accordin-content">
+        <div className="accordin-button">
+      <button className="btn-accordin tasks-button" > <img src="/img/checkmark-square.svg" />Tasks</button>
+      <button className="btn-accordin"> <img src="/img/dollar-sign.svg" /> Finances</button>
+      <button className="btn-accordin"> <img src="/img/pie-chart-outline.svg" />  Reports</button>
+      <button className="btn-accordin" > <img src="/img/file-text-outline.svg" /> Materials</button>
+
+        </div>  </div>}
       <div className="hr-lines"></div>
     </>
   );
 }
 
+function EnterprisesPhoto() {
+  const [isActive,setIsActive]=useState(false)
+  return (
+    <>
+      <div className="title" onClick={()=>setIsActive(!isActive)}>
+        <div className="enterprise-photos valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
+          Enterprises Photo
+        </div>
+       
+        <div className={`chevron-right-outline-1-2 chevron-right-outline-1-1`}>
+          <div className="overlap-group-6">
+           
+            <img src="/img/chevron-right-outline.svg" />
+          </div>
+        </div>
+         
+      </div>
+     {isActive && <div className="flex-row-6">
+        {/** picture slider component  component comes  here */}
+        
+        
+      </div>}
+      <div className="hr-lines"></div>
+      
+    </>
+  );
+}
 function EnterpriseDetails(props) {
   const {
     image,
@@ -209,21 +237,6 @@ function EnterpriseDetails(props) {
   );
 }
 
-function ChevronRightOutline1(props) {
-  const { vector2, className } = props;
-
-  return (
-    <div className={`chevron-right-outline-1-2 ${className || ""}`}>
-      <div className="overlap-group-6">
-        <img
-          className="vector-20"
-          src="https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector@2x.png"
-        />
-        <img className="vector-19" src={vector2} />
-      </div>
-    </div>
-  );
-}
 
 function EnterprisePhotos(props) {
   const {
@@ -243,10 +256,7 @@ function EnterprisePhotos(props) {
         <div className="enterprise-photos valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
           {enterprisePhotosI5}
         </div>
-        {/* <ChevronRightOutline1
-          vector2={chevronRightOutline1Props.vector2}
-          className="chevron-right-outline-1-1"
-        /> */}
+       
         <div className={`chevron-right-outline-1-2 chevron-right-outline-1-1`}>
           <div className="overlap-group-6">
             <img
@@ -278,10 +288,7 @@ function EnterprisePhotos(props) {
           style={{ backgroundImage: `url(${frame2968})` }}
         ></div>
         <div className="overlap-group1-2">
-          <Frame2969
-            frame2969={frame2969Props.frame2969}
-            rectangle876={frame2969Props.rectangle876}
-          />
+         
           <div className="frame-2970">
             <div className="arrow-forward-outline-1">
               <div className="overlap-group-7">
@@ -299,18 +306,7 @@ function EnterprisePhotos(props) {
   );
 }
 
-function Frame2969(props) {
-  const { frame2969, rectangle876 } = props;
 
-  return (
-    <div
-      className="frame-2969"
-      style={{ backgroundImage: `url(${frame2969})` }}
-    >
-      <img className="rectangle-876" src={rectangle876} />
-    </div>
-  );
-}
 
 const chevronRightOutline1Data = {
   vector2:

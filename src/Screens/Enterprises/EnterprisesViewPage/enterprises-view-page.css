@@ -843,6 +843,35 @@
     position: relative;
     width: 184px;
   }
+  .accordin-button {
+    display:flex;
+    justify-content: space-between;
+    width: 500px;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  .btn-accordin{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin: 0 0 10px 10px;
+    min-width: 150px;
+    background-color: black;
+    color: white;
+    border: 1px solid wheat;
+    height: 45px;
+  }
+  .btn-accordin:focus{
+    background-color: white;
+    color: black;
+  }
+  .active-button{
+    background-color: black;
+    color: white;
+    border: 1px solid wheat;
+    
+   
+  }
   .enterprise-messenger-container {
     align-items: flex-end;
     display: flex;
