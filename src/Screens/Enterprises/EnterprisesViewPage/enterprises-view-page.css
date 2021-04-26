@@ -1,848 +1,11 @@
-.book {
-    align-items: center;
-    display: flex;
-    height: 24px;
-    padding: 0 3px;
-    width: 24px;
-  }
-  .flex-col {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    margin-left: 2px;
-    min-height: 18px;
-    width: 8px;
-  }
-  .flex-col-1 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    min-height: 210px;
-    position: relative;
-    width: 35px;
-  }
-  .flex-col-2 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    min-height: 210px;
-    position: relative;
-    width: 38px;
-  }
-  .flex-col-3 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    min-height: 18px;
-    width: 8px;
-  }
-  .flex-row {
-    align-items: flex-start;
-    display: flex;
-    margin-left: 1px;
-    margin-top: 1px;
-    min-width: 22px;
-  }
-  .flex-row-1 {
-    align-items: center;
-    display: flex;
-    height: 24px;
-    margin-left: 4px;
-    margin-top: 7px;
-    min-width: 240px;
-    position: relative;
-  }
-  .flex-row-2 {
-    align-items: flex-start;
-    display: flex;
-    height: 210px;
-    min-width: 210px;
-  }
-  .flex-row-3 {
-    align-items: flex-start;
-    display: flex;
-    margin-left: 4px;
-    min-width: 16px;
-  }
-  .frame {
-    align-items: flex-end;
-    display: flex;
-    overflow: hidden;
-    width: 160px;
-  }
-  .frame-1944 {
-    align-items: center;
-    background-color: var(--shark);
-    display: flex;
-    flex-direction: column;
-    height: 200px;
-    left: 0px;
-    overflow: hidden;
-    position: absolute;
-    top: 80px;
-    width: 247px;
-  }
-  .frame-1945 {
-    align-items: center;
-    display: flex;
-    height: 80px;
-    left: 0px;
-    min-width: 247px;
-    padding: 0 16px;
-    position: absolute;
-    top: 0px;
-  }
-  .frame-1947 {
-    align-items: center;
-    background-color: var(--licorice);
-    border-radius: 4px;
-    display: flex;
-    height: 64px;
-    left: 0px;
-    overflow: hidden;
-    padding: 0 24px;
-    position: absolute;
-    top: 280px;
-    width: 247px;
-  }
-  .frame-1948 {
-    align-items: center;
-    background-color: var(--licorice);
-    border-radius: 4px;
-    display: flex;
-    height: 64px;
-    left: 0px;
-    overflow: hidden;
-    padding: 0 24px;
-    position: absolute;
-    top: 344px;
-    width: 247px;
-  }
-  .frame-1953 {
-    align-items: flex-start;
-    align-self: flex-start;
-    display: flex;
-    margin-left: 24px;
-    min-width: 113px;
-  }
-  .frame-197 {
-    height: 48px;
-    margin-left: 1.0px;
-    width: 248px;
-  }
-  .frame-2791 {
-    align-items: flex-start;
-    background-color: var(--licorice);
-    display: flex;
-    flex-direction: column;
-    left: 0px;
-    min-height: 259px;
-    position: absolute;
-    top: 0px;
-    width: 248px;
-  }
-  .frame-28 {
-    height: 35px;
-    position: relative;
-    width: 35px;
-  }
-  .frame-2862 {
-    height: 35px;
-    position: relative;
-    width: 38px;
-  }
-  .frame-2891 {
-    align-items: center;
-    border-radius: 2px;
-    display: flex;
-    height: 32px;
-    margin-left: 23px;
-    min-width: 32px;
-    padding: 0 4px;
-  }
-  .frame-2891-1 {
-    align-items: flex-start;
-    background-color: var(--shark-22);
-    display: flex;
-    flex-direction: column;
-    height: 40px;
-    width: 248px;
-  }
-  .grid-outline-2 {
-    align-items: center;
-    display: flex;
-    height: 24px;
-    padding: 0 3px;
-    width: 24px;
-  }
-  .group-1942 {
-    align-items: flex-start;
-    display: flex;
-    min-width: 248px;
-  }
-  .group-1943 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    left: 0px;
-    min-height: 299px;
-    position: absolute;
-    top: 2505px;
-    width: 248px;
-  }
-  .number {
-    height: 20px;
-    left: 0px;
-    letter-spacing: 0.00px;
-    line-height: 12px;
-    position: absolute;
-    text-align: center;
-    top: 3px;
-    width: 22px;
-  }
-  .overlap-group {
-    height: 259px;
-    position: relative;
-    width: 248px;
-  }
-  .overlap-group-1 {
-    height: 23px;
-    left: 7px;
-    position: absolute;
-    top: 4px;
-    width: 24px;
-  }
-  .overlap-group-2 {
-    height: 35px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 35px;
-  }
-  .overlap-group-3 {
-    height: 22px;
-    position: relative;
-    width: 18px;
-  }
-  .overlap-group36 {
-    height: 35px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 38px;
-  }
-  .overlap-group37 {
-    height: 23px;
-    left: 9px;
-    position: absolute;
-    top: 4px;
-    width: 25px;
-  }
-  .overlap-group4 {
-    height: 2804px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 263px;
-  }
-  .rectangle-859 {
-    background-color: var(--onyx);
-    height: 2804px;
-    left: 247px;
-    position: absolute;
-    top: 0px;
-    width: 1px;
-  }
-  .rectangle-859-1 {
-    background-color: var(--licorice);
-    height: 35px;
-    left: 34px;
-    position: absolute;
-    top: 0px;
-    width: 1px;
-  }
-  .rectangle-859-2 {
-    background-color: var(--licorice);
-    height: 35px;
-    left: 37px;
-    position: absolute;
-    top: 0px;
-    width: 1px;
-  }
-  .rectangle-859-3 {
-    background-color: var(--licorice);
-    height: 1px;
-    width: 248px;
-  }
-  .rectangle-86 {
-    background-color: var(--rusty-red);
-    border-radius: 100px;
-    height: 4px;
-    left: 20px;
-    position: absolute;
-    top: 0px;
-    width: 4px;
-  }
-  .rectangle-860 {
-    background-color: var(--onyx);
-    height: 1px;
-    margin-top: 7px;
-    width: 248px;
-  }
-  .rectangle-860-1 {
-    background-color: var(--licorice);
-    height: 1px;
-    left: 0px;
-    position: absolute;
-    top: 34px;
-    width: 35px;
-  }
-  .rectangle-860-2 {
-    background-color: var(--licorice);
-    height: 1px;
-    left: 0px;
-    position: absolute;
-    top: 34px;
-    width: 38px;
-  }
-  .rectangle-861 {
-    background-color: var(--onyx);
-    height: 1px;
-    width: 248px;
-  }
-  .rectangle-865 {
-    background-color: var(--rusty-red);
-    border-radius: 100px;
-    height: 4px;
-    left: 21px;
-    position: absolute;
-    top: 0px;
-    width: 4px;
-  }
-  .side {
-    background-color: var(--licorice);
-    height: 2804px;
-    position: relative;
-    width: 248px;
-  }
-  .text-30 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .text-31 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-right: 86.0px;
-    margin-top: 24px;
-    min-height: 24px;
-    min-width: 49px;
-    white-space: nowrap;
-  }
-  .text-32 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-right: 72.0px;
-    margin-top: 28px;
-    min-height: 24px;
-    min-width: 63px;
-    white-space: nowrap;
-  }
-  .text-34 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    min-width: 55px;
-    white-space: nowrap;
-  }
-  .text-35 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    min-width: 62px;
-    white-space: nowrap;
-  }
-  .text-43 {
-    height: 12px;
-    letter-spacing: 0.00px;
-    line-height: 12px;
-    margin-bottom: 2.0px;
-    margin-left: 70px;
-    min-height: 12px;
-    min-width: 53px;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .union {
-    height: 211px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 248px;
-  }
-  .user-management {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    height: 24px;
-    padding: 4px 0;
-    width: 24px;
-  }
-  .vector {
-    height: 22px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 18px;
-  }
-  .vector-1 {
-    height: 24px;
-    margin-bottom: -0.02px;
-    margin-left: 1px;
-    width: 25px;
-  }
-  .vector-10 {
-    align-self: flex-start;
-    height: 24px;
-    margin-top: -0.02px;
-    width: 25px;
-  }
-  .vector-2 {
-    height: 24px;
-    margin-bottom: -0.02px;
-    margin-left: 1px;
-    width: 26px;
-  }
-  .vector-3 {
-    height: 8px;
-    width: 8px;
-  }
-  .vector-4 {
-    height: 8px;
-    margin-top: 2px;
-    width: 8px;
-  }
-  .vector-5 {
-    height: 8px;
-    width: 4px;
-  }
-  .vector-6 {
-    height: 7px;
-    width: 4px;
-  }
-  .vector-7 {
-    height: 4px;
-    left: 0px;
-    position: absolute;
-    top: 15px;
-    width: 18px;
-  }
-  .vector-8 {
-    height: 7px;
-    width: 14px;
-  }
-  .vector-9 {
-    height: 24px;
-    margin-bottom: -0.02px;
-    margin-left: 2px;
-    width: 25px;
-  }
-  .frame-1976 {
-    align-items: center;
-    background-color: var(--caribbean-green);
-    display: flex;
-    height: 48px;
-    margin-left: 1.0px;
-    margin-top: 12px;
-    min-width: 248px;
-    padding: 0 56px;
-  }
-  .text-33 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 77px;
-    white-space: nowrap;
-  }
-  .chevrons-right-1 {
-    align-items: center;
-    display: flex;
-    height: 24px;
-    padding: 0 5px;
-    width: 24px;
-  }
-  .frame-2303 {
-    align-items: center;
-    background-color: var(--caribbean-green);
-    border-radius: 100px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.15);;
-    display: flex;
-    height: 32px;
-    left: 231px;
-    overflow: hidden;
-    padding: 0 4px;
-    position: absolute;
-    top: 172px;
-    transform: rotate(180deg);
-    width: 32px;
-  }
-  .vector-11 {
-    height: 12px;
-    transform: rotate(-180deg);
-    width: 7px;
-  }
-  .chevrons-left {
-    align-items: center;
-    display: flex;
-    height: 24px;
-    padding: 0 8px;
-    width: 24px;
-  }
-  .chevrons-right.chevrons-left {
-    margin-left: 69px;
-    position: relative;
-  }
-  .vector-stroke {
-    height: 14px;
-    width: 8px;
-  }
-  .frame-2849 {
-    height: 35px;
-    position: relative;
-    width: 35px;
-  }
-  .overlap-group1 {
-    height: 35px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 35px;
-  }
-  .place {
-    height: 20px;
-    left: 7px;
-    letter-spacing: 0.00px;
-    line-height: 12px;
-    position: absolute;
-    text-align: center;
-    top: 7px;
-    width: 22px;
-  }
-  .rectangle-859-4 {
-    background-color: var(--licorice);
-    height: 35px;
-    left: 34px;
-    position: absolute;
-    top: 0px;
-    width: 1px;
-  }
-  .rectangle-860-3 {
-    background-color: var(--licorice);
-    height: 1px;
-    left: 0px;
-    position: absolute;
-    top: 34px;
-    width: 35px;
-  }
-  .frame-2884 {
-    align-items: center;
-    display: flex;
-    width: 35px;
-  }
-  .number-1 {
-    height: 20px;
-    letter-spacing: 0.00px;
-    line-height: 12px;
-    margin-top: 1.0px;
-    min-height: 20px;
-    text-align: center;
-    width: 22px;
-  }
-  .rectangle-859-5 {
-    background-color: var(--licorice);
-    height: 35px;
-    margin-left: 5px;
-    width: 1px;
-  }
-  .frame-288.frame-2885 {
-    height: 35px;
-    position: relative;
-  }
-  .frame-2885 {
-    align-items: center;
-    display: flex;
-    width: 35px;
-  }
-  .number-2 {
-    height: 20px;
-    letter-spacing: 0.00px;
-    line-height: 12px;
-    margin-bottom: 1.0px;
-    min-height: 20px;
-    text-align: center;
-    width: 22px;
-  }
-  .rectangle-859-6 {
-    background-color: var(--licorice);
-    height: 35px;
-    margin-left: 5px;
-    width: 1px;
-  }
-  .frame-2873 {
-    align-items: flex-start;
-    background-color: var(--caribbean-green);
-    display: flex;
-    height: 35px;
-    padding: 7px 6px;
-    width: 35px;
-  }
-  .number-3 {
-    height: 20px;
-    letter-spacing: 0.00px;
-    line-height: 12px;
-    min-height: 20px;
-    text-align: center;
-    width: 22px;
-  }
-  .frame-2855 {
-    height: 35px;
-    position: relative;
-    width: 38px;
-  }
-  .overlap-group35 {
-    height: 35px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 38px;
-  }
-  .rectangle-859-7 {
-    background-color: var(--licorice);
-    height: 35px;
-    left: 37px;
-    position: absolute;
-    top: 0px;
-    width: 1px;
-  }
-  .rectangle-860-4 {
-    background-color: var(--licorice);
-    height: 1px;
-    left: 0px;
-    position: absolute;
-    top: 34px;
-    width: 38px;
-  }
-  .text-41 {
-    height: 20px;
-    left: 9px;
-    letter-spacing: 0.00px;
-    line-height: 12px;
-    position: absolute;
-    text-align: center;
-    top: 7px;
-    width: 22px;
-  }
-  .frame-2890 {
-    align-items: center;
-    display: flex;
-    width: 38px;
-  }
-  .number-4 {
-    height: 20px;
-    letter-spacing: 0.00px;
-    line-height: 12px;
-    margin-bottom: 1.0px;
-    min-height: 20px;
-    text-align: center;
-    width: 22px;
-  }
-  .rectangle-859-8 {
-    background-color: var(--licorice);
-    height: 35px;
-    margin-left: 6px;
-    width: 1px;
-  }
-  .frame-285 {
-    align-items: center;
-    background-color: var(--caribbean-green);
-    display: flex;
-    height: 48px;
-    justify-content: flex-end;
-    min-width: 248px;
-    padding: 0 68px;
-  }
-  .text-42 {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 110px;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .graduation-cap {
-    height: 18px;
-    width: 24px;
-  }
-  .graduation-cap-1 {
-    align-items: center;
-    display: flex;
-    height: 24px;
-    width: 24px;
-  }
-  .bell-outline {
-    align-items: flex-end;
-    display: flex;
-    height: 24px;
-    margin-left: 35px;
-    padding: 1.7px 3.0px;
-    width: 24px;
-  }
-  .email-outline {
-    align-items: center;
-    display: flex;
-    height: 24px;
-    padding: 0 2px;
-    width: 24px;
-  }
-  .frame-1951 {
-    background-position: 50% 50%;
-    background-size: cover;
-    border-radius: 100px;
-    height: 48px;
-    margin-left: 35px;
-    width: 48px;
-  }
-  .frame-1973 {
-    align-items: center;
-    display: flex;
-    margin-left: 40px;
-    min-width: 166px;
-  }
-  .frame-2848 {
-    align-items: flex-start;
-    display: flex;
-    margin-left: 514px;
-    min-width: 137px;
-  }
-  .nav {
-    align-items: center;
-    display: flex;
-    height: 80px;
-    margin-left: 1px;
-    min-width: 1112px;
-  }
-  .overlap-group-4 {
-    height: 16px;
-    position: relative;
-    width: 20px;
-  }
-  .overlap-group1-1 {
-    height: 20px;
-    position: relative;
-    width: 18px;
-  }
-  .person-outline-1 {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 24px;
-    padding: 3.0px 0;
-    width: 24px;
-  }
-  .ragrarians-i1432723 {
-    letter-spacing: 0.00px;
-    line-height: 32px;
-    min-height: 32px;
-    min-width: 255px;
-    white-space: nowrap;
-  }
-  .text-1 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .vector-12 {
-    height: 16px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 20px;
-  }
-  .vector-13 {
-    height: 1px;
-    width: 1px;
-  }
-  .vector-14 {
-    height: 8px;
-    width: 14px;
-  }
-  .vector-15 {
-    height: 20px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 18px;
-  }
-  .vector-16 {
-    height: 1px;
-    left: 9px;
-    position: absolute;
-    top: 10px;
-    width: 1px;
-  }
-  .vector-17 {
-    height: 1px;
-    left: 10px;
-    position: absolute;
-    top: 8px;
-    width: 1px;
-  }
-  .vector-18 {
-    height: 8px;
-    margin-left: 0.0px;
-    width: 8px;
-  }
-  .description {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    min-height: 192px;
-    width: 529px;
-  }
-  .due-to-the-advantage {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .enterprise-details {
+.enterprise-details {
     align-items: center;
     display: flex;
     flex-direction: column;
     height: 741px;
     width: 1112px;
   }
-  .enterprise-follower {
-    -webkit-backdrop-filter: blur(16px) brightness(100%);
-    align-items: center;
-    backdrop-filter: blur(16px) brightness(100%);
-    background-color: var(--white2);
-    border-radius: 4px;
-    display: flex;
-    height: 48px;
-    overflow: hidden;
-    padding: 0 22px;
-    position: relative;
-    width: 184px;
-  }
+
   .accordin-button {
     display:flex;
     justify-content: space-between;
@@ -850,6 +13,7 @@
     padding: 20px;
     border-radius: 4px;
   }
+
   .btn-accordin{
     display: flex;
     align-items: center;
@@ -861,17 +25,18 @@
     border: 1px solid wheat;
     height: 45px;
   }
+
   .btn-accordin:focus{
     background-color: white;
     color: black;
   }
+
   .active-button{
     background-color: black;
     color: white;
     border: 1px solid wheat;
-    
-   
   }
+
   .enterprise-messenger-container {
     align-items: flex-end;
     display: flex;
@@ -880,6 +45,7 @@
     min-height: 520px;
     width: 376px;
   }
+
   .event-container {
     align-items: flex-start;
     display: flex;
@@ -887,6 +53,7 @@
     min-height: 520px;
     width: auto;
   }
+
   .event-messenger-container {
     align-items: flex-start;
     display: flex;
@@ -894,12 +61,14 @@
     margin-top: 40px;
     min-width: 1032px;
   }
+
   .green-dot {
     background-color: var(--caribbean-green);
     border-radius: 100px;
     height: 8px;
     width: 8px;
   }
+
   .event-text-container {
     align-items: center;
     display: flex;
@@ -908,13 +77,7 @@
     margin-top: 24px;
     min-width: 568px;
   }
-  .frame-2488 {
-    align-items: flex-start;
-    display: flex;
-    margin-top: 24px;
-    overflow: hidden;
-    width: 113px;
-  }
+ 
   .enterprise-messenger-lower-avatar-1 {
     background-position: 50% 50%;
     background-size: cover;
@@ -926,6 +89,7 @@
     top: 0px;
     width: 40px;
   }
+
   .enterprise-messenger-lower-avatar-2 {
     background-position: 50% 50%;
     background-size: cover;
@@ -936,6 +100,7 @@
     top: 0px;
     width: 40px;
   }
+
   .enterprise-messenger-lower-avatar-3 {
     background-position: 50% 50%;
     background-size: cover;
@@ -946,6 +111,7 @@
     top: 0px;
     width: 40px;
   }
+
   .enterprise-messenger-btn {
     align-items: center;
     background-color: var(--caribbean-green);
@@ -957,17 +123,20 @@
     padding: 0 103px;
     width: 328px;
   }
+
   .enterprise-messenger-lower-wrapper {
     align-items: flex-start;
     display: flex;
     min-width: 88px;
   }
+
   .enterprise-messenger-lower {
     align-items: flex-start;
     display: flex;
     margin-top: 40px;
     min-width: 328px;
   }
+
   .enterprises-messenger-text-container {
     align-items: center;
     display: flex;
@@ -975,13 +144,7 @@
     min-height: 200px;
     width: 376px;
   }
-  .col-1-text-container-2 {
-    align-items: center;
-    display: flex;
-    height: 40px;
-    justify-content: flex-end;
-    min-width: 568px;
-  }
+  
   .calenderButton {
     align-items: center;
     align-self: flex-start;
@@ -995,6 +158,7 @@
     padding: 0 43px;
     width: 216px;
   }
+
   .enterprises-messenger-text-wrapper {
     align-items: flex-start;
     display: flex;
@@ -1002,11 +166,7 @@
     min-height: 80px;
     width: 328px;
   }
-  .image {
-    height: 336px;
-    object-fit: cover;
-    width: 1032px;
-  }
+  
   .enterprise-messenger-btn-text {
     height: 24px;
     letter-spacing: 0.00px;
@@ -1015,6 +175,7 @@
     min-width: 119px;
     white-space: nowrap;
   }
+
   .enterprise-messenger-wrapper {
     align-items: center;
     background-color: var(--shark);
@@ -1023,9 +184,9 @@
     flex-direction: column;
     height: 332px;
     margin-top: 40px;
-    
     width: 376px;
   }
+
   .calenderButton-text {
     letter-spacing: 0.00px;
     line-height: 24px;
@@ -1033,6 +194,7 @@
     min-width: 128px;
     white-space: nowrap;
   }
+
   .event-container-wrapper{
     align-items: center;
     background-color: var(--shark);
@@ -1043,63 +205,40 @@
     padding: 24px 0;
     width: 616px;
   }
+
   .enterprise-messenger-lower-overlap-group {
     height: 40px;
     position: relative;
     width: 88px;
   }
+
   .event-date-1 {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
     min-width: 91px;
   }
-  .second-event-date-1 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 210px;
-    min-height: 24px;
-    min-width: 91px;
-    white-space: nowrap;
-  }
-  .phone-2 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 146px;
-    min-height: 24px;
-    min-width: 91px;
-    white-space: nowrap;
-  }
-  .rectangle-875 {
-    background-color: var(--onyx);
-    height: 1px;
-    margin-top: 23px;
-    width: 376px;
-  }
+
   .hr-line{
     background-color: var(--onyx);
     height: 1px;
     margin-top: 23px;
     width: 100%;
   }
+
   .rectangle-875-1 {
     background-color: var(--onyx);
     height: 1px;
     margin-top: 142px;
     width: 1112px;
   }
+
   .hr-lines{
     background-color: var(--onyx);
     height: 1px;
     width: 1112px;
   }
-  .surname {
-    height: 48px;
-    letter-spacing: 0.00px;
-    line-height: 48px;
-    min-height: 48px;
-    white-space: nowrap;
-  }
+  
   .text-2 {
     height: 72px;
     letter-spacing: 0.00px;
@@ -1108,6 +247,7 @@
     min-height: 72px;
     width: 531px;
   }
+
   .enterprises-messenger-text-1 {
     height: 48px;
     letter-spacing: 0.00px;
@@ -1116,6 +256,7 @@
     width: 330px;
     margin-top: 32px;
   }
+
   .enterprises-messenger-text-2 {
     height: 24px;
     letter-spacing: 0.00px;
@@ -1124,6 +265,7 @@
     min-height: 24px;
     white-space: nowrap;
   }
+
   .enterprise-messenger-lower-text {
     height: 48px;
     letter-spacing: 0.00px;
@@ -1133,6 +275,7 @@
     min-height: 48px;
     width: 236px;
   }
+
   .event-text-title {
     align-self: flex-start;
     height: 24px;
@@ -1142,40 +285,19 @@
     min-height: 24px;
     white-space: nowrap;
   }
+
   .event-text-1 {
     letter-spacing: 0.00px;
     line-height: 24px;
     min-height: 24px;
     width: 395px;
+  }
 
-  }
-  .second-event-text-1 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 16px;
-    min-height: 24px;
-    min-width: 238px;
-    white-space: nowrap;
-  }
-  .text-9 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 16px;
-    min-height: 24px;
-    min-width: 299px;
-    white-space: nowrap;
-  }
-  .youre-follower {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 114px;
-    white-space: nowrap;
-  }
   .chevron-right-outline-1-1.chevron-right-outline-1-2 {
     margin-left: 14px;
     position: relative;
   }
+
   .chevron-right-outline-1-2 {
     align-items: flex-start;
     display: flex;
@@ -1185,77 +307,29 @@
     transform: rotate(90deg);
     width: 24px;
   }
+
   .chevron-right-outline-1-3.chevron-right-outline-1-2 {
     margin-left: 207px;
     position: relative;
   }
+
   .chevron-right-outline-1-4.chevron-right-outline-1-2 {
     margin-left: 6px;
     position: relative;
     transform: rotate(-90deg);
   }
+
   .chevron-right-outline-1.chevron-right-outline-1-2 {
     margin-left: 40px;
     position: relative;
   }
-  .overlap-group-6 {
+
+  .enterprises-overlap {
     height: 6px;
     position: relative;
     width: 10px;
   }
-  .vector-19 {
-    height: 6px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 10px;
-  }
-  .vector-20 {
-    height: 1px;
-    left: 5px;
-    position: absolute;
-    top: 3px;
-    width: 1px;
-  }
-  .flex-row-5 {
-    align-items: center;
-    display: flex;
-    height: 32px;
-    margin-left: 40px;
-    min-width: 291px;
-    position: relative;
-  }
-  .frame-2982 {
-    align-items: flex-start;
-    background-color: var(--licorice);
-    display: flex;
-    flex-direction: column;
-    left: 0px;
-    min-height: 112px;
-    position: absolute;
-    top: 0px;
-    width: 1112px;
-  }
-  .rectangle-875-2 {
-    background-color: var(--onyx);
-    height: 1px;
-    margin-top: 39px;
-    width: 1112px;
-  }
-  .text-10 {
-    letter-spacing: 0.00px;
-    line-height: 32px;
-    min-height: 32px;
-    min-width: 253px;
-    white-space: nowrap;
-  }
-  .arrow-forward-outline-1 {
-    align-items: flex-end;
-    display: flex;
-    height: 24px;
-    padding: 4.7px 4px;
-    width: 24px;
-  }
+
   .enterprise-photos {
     height: 32px;
     letter-spacing: 0.00px;
@@ -1264,17 +338,7 @@
     min-width: 200px;
     white-space: nowrap;
   }
-  .enterprises-photos {
-    align-items: flex-end;
-    background-color: var(--licorice);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    height: 344px;
-    overflow: hidden;
-    padding: 16px 0;
-    width: 1112px;
-  }
+  
   .flex-row-6 {
     align-items: flex-start;
     display: flex;
@@ -1282,45 +346,7 @@
     margin-top: 20px;
     min-width: 1096px;
   }
-  .flex-row-item {
-    background-size: 100% 100%;
-    border-radius: 4px;
-    height: 200px;
-    margin-left: 24px;
-    width: 200px;
-  }
-  .frame-2970 {
-    align-items: center;
-    background-color: var(--caribbean-green);
-    border-radius: 100px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.5);;
-    display: flex;
-    height: 48px;
-    left: 104px;
-    overflow: hidden;
-    padding: 0 12px;
-    position: absolute;
-    top: 76px;
-    width: 48px;
-  }
-  .overlap-group-7 {
-    height: 14px;
-    position: relative;
-    width: 16px;
-  }
-  .overlap-group1-2 {
-    border-radius: 4px;
-    height: 200px;
-    margin-left: 24px;
-    position: relative;
-    width: 200px;
-  }
-  .photo-1 {
-    background-size: 100% 100%;
-    border-radius: 4px;
-    height: 200px;
-    width: 200px;
-  }
+
   .title {
     align-items: center;
     align-self: center;
@@ -1329,44 +355,7 @@
     min-width: 1032px;
     position: relative;
   }
-  .vector-21 {
-    height: 14px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 16px;
-  }
-  .vector-22 {
-    height: 1px;
-    left: 8px;
-    position: absolute;
-    top: 7px;
-    width: 1px;
-  }
-  .frame-2969 {
-    align-items: flex-start;
-    background-size: 100% 100%;
-    border-radius: 4px;
-    display: flex;
-    height: 200px;
-    left: 0px;
-    overflow: hidden;
-    position: absolute;
-    top: 0px;
-    width: 200px;
-  }
-  .rectangle-876 {
-    height: 200px;
-    width: 177px;
-  }
-  .address {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
+
   .enterprise-post {
     align-items: flex-start;
     display: flex;
@@ -1375,201 +364,7 @@
     margin-top: 39px;
     min-width: 1112px;
   }
-  .flex-col-6 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    min-height: 1492px;
-    width: 728px;
-  }
-  .flex-row-7 {
-    align-items: flex-start;
-    display: flex;
-    height: 32px;
-    margin-top: 24px;
-    min-width: 648px;
-  }
-  .flex-row-8 {
-    align-items: flex-start;
-    display: flex;
-    margin-top: 24px;
-    min-width: 648px;
-  }
-  .frame-2801 {
-    align-items: center;
-    background-color: var(--licorice);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    height: 256px;
-    margin-left: 40px;
-    overflow: hidden;
-    padding: 16px 0;
-    position: relative;
-    width: 344px;
-  }
-  .frame-2801-1 {
-    background-position: 50% 50%;
-    background-size: cover;
-    border-radius: 100px;
-    height: 48px;
-    width: 48px;
-  }
-  .frame-2802 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    margin-left: 16px;
-    min-height: 112px;
-    width: 492px;
-  }
-  .frame-2802-1 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    margin-left: 16px;
-    min-height: 88px;
-    width: 492px;
-  }
-  .frame-2804 {
-    align-items: flex-start;
-    display: flex;
-    min-width: 106px;
-    position: relative;
-  }
-  .frame-2804-1 {
-    align-items: flex-start;
-    display: flex;
-    min-width: 98px;
-    position: relative;
-  }
-  .frame-2805 {
-    align-items: flex-start;
-    display: flex;
-    margin-left: 450px;
-    min-width: 100px;
-    position: relative;
-  }
-  .frame-2805-1 {
-    align-items: flex-start;
-    align-self: flex-end;
-    display: flex;
-    margin-left: 431px;
-    min-width: 111px;
-    position: relative;
-  }
-  .frame-2812 {
-    align-items: flex-start;
-    display: flex;
-    height: 112px;
-    margin-left: 40px;
-    min-width: 556px;
-  }
-  .frame-2812-1 {
-    align-items: flex-start;
-    display: flex;
-    height: 88px;
-    margin-left: 40px;
-    margin-top: 24px;
-    min-width: 556px;
-  }
-  .frame-2813 {
-    align-items: flex-start;
-    display: flex;
-    margin-left: 40px;
-    margin-top: 24px;
-    min-width: 126px;
-    position: relative;
-  }
-  .frame-2815 {
-    background-size: 100% 100%;
-    border-radius: 100px;
-    height: 48px;
-    width: 48px;
-  }
-  .frame-2954 {
-    align-items: flex-start;
-    background-color: var(--licorice);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    min-height: 704px;
-    width: 728px;
-  }
-  .frame-2955 {
-    align-items: flex-start;
-    background-color: var(--licorice);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-    min-height: 748px;
-    width: 728px;
-  }
-  .frame-2956 {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    min-height: 564px;
-    position: relative;
-    width: 728px;
-  }
-  .frame-2956-1 {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    min-height: 256px;
-    position: relative;
-    width: 728px;
-  }
-  .frame-2958 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    margin-top: 24px;
-    min-height: 136px;
-    width: 728px;
-  }
-  .frame-2960 {
-    align-items: center;
-    border-radius: 4px;
-    display: flex;
-    height: 48px;
-    margin-left: 16px;
-    min-width: 584px;
-    padding: 0 16px;
-    position: relative;
-  }
-  .frame-2961 {
-    align-items: flex-start;
-    align-self: center;
-    display: flex;
-    margin-top: 40px;
-    min-width: 648px;
-  }
-  .frame-2961-1 {
-    align-items: flex-start;
-    align-self: center;
-    display: flex;
-    margin-top: 48px;
-    min-width: 648px;
-  }
-  .frame-2962 {
-    background-position: 50% 50%;
-    background-size: cover;
-    border-radius: 4px;
-    height: 288px;
-    margin-top: 16px;
-    width: 648px;
-  }
-  .most-newest {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 96px;
-    white-space: nowrap;
-  }
+
   .name {
     height: 24px;
     letter-spacing: 0.00px;
@@ -1577,335 +372,7 @@
     min-height: 24px;
     white-space: nowrap;
   }
-  .no-comments-yet {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 40px;
-    margin-top: 24px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .rectangle-875-3 {
-    background-color: var(--onyx);
-    height: 1px;
-    margin-top: 15px;
-    width: 728px;
-  }
-  .rectangle-875-4 {
-    align-self: center;
-    background-color: var(--onyx);
-    height: 1px;
-    margin-top: 23px;
-    width: 648px;
-  }
-  .rectangle-875-5 {
-    background-color: var(--onyx);
-    height: 1px;
-    margin-top: 39px;
-    width: 728px;
-  }
-  .search-filters {
-    align-self: flex-start;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 16px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .span0 {
-    color: rgba(0,198,136,1.0);
-    font-family: 'IBM Plex Sans', Helvetica;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  .span1 {
-    color: rgba(248,235,223,1.0);
-    font-family: 'Inter', Helvetica;
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .span2 {
-    color: rgba(248,235,223,1.0);
-    font-family: 'IBM Plex Sans', Helvetica;
-    font-size: 16px;
-  }
-  .text-2-1 {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-top: 8px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .text-21 {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 2.0px;
-    margin-top: 36px;
-    min-height: 24px;
-    white-space: nowrap;
-    width: 650px;
-  }
-  .text-22 {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 346px;
-    white-space: nowrap;
-  }
-  .text-24 {
-    height: 48px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 2.0px;
-    margin-top: 24px;
-    min-height: 48px;
-    width: 650px;
-  }
-  .text-25 {
-    height: 48px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-top: 8px;
-    min-height: 48px;
-    width: 494px;
-  }
-  .text-29 {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 201px;
-    white-space: nowrap;
-  }
-  .frame-2801-2 {
-    background-position: 50% 50%;
-    background-size: cover;
-    border-radius: 100px;
-    height: 72px;
-    width: 72px;
-  }
-  .frame-2802-2 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    margin-left: 16px;
-    min-height: 60px;
-    width: 208px;
-  }
-  .frame-2803-1 {
-    align-items: center;
-    align-self: flex-start;
-    display: flex;
-    margin-left: 40px;
-    min-width: 296px;
-  }
-  .frame-2803.frame-2803-1 {
-    height: 72px;
-    position: relative;
-  }
-  .text-23 {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-top: 4px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .think-like-a-farmer {
-    height: 32px;
-    letter-spacing: 0.00px;
-    line-height: 32px;
-    min-height: 32px;
-    white-space: nowrap;
-  }
-  .message-square-outline-1 {
-    align-items: flex-end;
-    display: flex;
-    height: 24px;
-    padding: 2px;
-    width: 24px;
-  }
-  .message-square-outline-1-1.message-square-outline-1 {
-    position: relative;
-  }
-  .overlap-group-8 {
-    height: 19px;
-    position: relative;
-    width: 20px;
-  }
-  .vector-23 {
-    height: 1px;
-    left: 10px;
-    position: absolute;
-    top: 9px;
-    width: 1px;
-  }
-  .vector-24 {
-    height: 2px;
-    left: 13px;
-    position: absolute;
-    top: 7px;
-    width: 2px;
-  }
-  .vector-25 {
-    height: 2px;
-    left: 5px;
-    position: absolute;
-    top: 7px;
-    width: 2px;
-  }
-  .vector-26 {
-    height: 2px;
-    left: 9px;
-    position: absolute;
-    top: 7px;
-    width: 2px;
-  }
-  .vector-27 {
-    height: 19px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 20px;
-  }
-  .eye-outline-1 {
-    align-items: flex-start;
-    display: flex;
-    height: 24px;
-    padding: 4.7px 1.5px;
-    width: 24px;
-  }
-  .eye-outline-1-1.eye-outline-1 {
-    position: relative;
-  }
-  .overlap-group-9 {
-    height: 14px;
-    position: relative;
-    width: 21px;
-  }
-  .vector-28 {
-    height: 14px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 21px;
-  }
-  .vector-29 {
-    height: 1px;
-    left: 10px;
-    position: absolute;
-    top: 7px;
-    width: 1px;
-  }
-  .vector-30 {
-    height: 7px;
-    left: 7px;
-    position: absolute;
-    top: 4px;
-    width: 7px;
-  }
-  .overlap-group-10 {
-    height: 20px;
-    position: relative;
-    width: 20px;
-  }
-  .paper-plane-outline-1 {
-    align-items: flex-end;
-    display: flex;
-    height: 24px;
-    margin-left: 327px;
-    overflow: hidden;
-    padding: 1.3px 0;
-    width: 24px;
-  }
-  .paper-plane-outline-1-1.paper-plane-outline-1 {
-    margin-left: 182px;
-    position: relative;
-  }
-  .vector-31 {
-    height: 20px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 20px;
-  }
-  .vector-32 {
-    height: 1px;
-    left: 13px;
-    position: absolute;
-    top: 9px;
-    width: 1px;
-  }
-  .by-date {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 57px;
-    white-space: nowrap;
-  }
-  .frame-2808 {
-    align-items: center;
-    border-radius: 4px;
-    display: flex;
-    height: 48px;
-    margin-top: 24px;
-    overflow: hidden;
-    padding: 0 12px;
-    position: relative;
-    width: 312px;
-  }
-  .frame-2809.frame-2808 {
-    margin-top: 16px;
-  }
-  .frame-2810 {
-    align-items: center;
-    background-color: var(--caribbean-green);
-    border-radius: 4px;
-    display: flex;
-    height: 48px;
-    margin-top: 16px;
-    overflow: hidden;
-    padding: 0 128px;
-    width: 312px;
-  }
-  .search {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 54px;
-    white-space: nowrap;
-  }
-  .box-1 {
-    align-items: flex-end;
-    display: flex;
-    height: 24px;
-    padding: 0.7px 2.0px;
-    width: 24px;
-  }
-  .checkmark-square-outline-1 {
-    align-items: center;
-    display: flex;
-    height: 24px;
-    padding: 0 3px;
-    width: 24px;
-  }
-  .dollar-sign-1 {
-    align-items: flex-start;
-    display: flex;
-    padding: 0 5px;
-    width: 24px;
-  }
-  .edit-3 {
-    align-items: flex-start;
-    display: flex;
-    height: 24px;
-    padding: 0.7px 0.7px;
-    width: 24px;
-  }
+
   .edit-information {
     height: 24px;
     letter-spacing: 0.00px;
@@ -1916,6 +383,7 @@
     text-align: center;
     white-space: nowrap;
   }
+
   .enterprises-view {
     align-items: flex-start;
     background-color: var(--licorice);
@@ -1926,21 +394,7 @@
     position: relative;
     width: 100%;
   }
-  .file-text-outline {
-    align-items: flex-end;
-    display: flex;
-    height: 24px;
-    padding: 2.0px 4px;
-    width: 24px;
-  }
-  .finances {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    min-width: 69px;
-    white-space: nowrap;
-  }
+ 
   .enterprise-user-view-wrapper {
     align-items: flex-start;
     display: flex;
@@ -1949,383 +403,7 @@
     position: relative;
     width: 1114px;
   }
-  .flex-row-10 {
-    align-items: flex-start;
-    display: flex;
-    height: 24px;
-    margin-left: 40px;
-    margin-top: 48px;
-    min-width: 915px;
-  }
-  .flex-row-11 {
-    align-items: flex-start;
-    display: flex;
-    height: 24px;
-    margin-left: 40px;
-    margin-top: 16px;
-    min-width: 892px;
-  }
-  .flex-row-9 {
-    align-items: flex-start;
-    align-self: center;
-    display: flex;
-    height: 24px;
-    margin-right: 68.0px;
-    margin-top: 17px;
-    min-width: 964px;
-  }
-  .frame-2798 {
-    align-items: center;
-    border-radius: 4px;
-    display: flex;
-    height: 48px;
-    margin-left: 24px;
-    overflow: hidden;
-    padding: 0 32px;
-    width: 168px;
-  }
-  .frame-2923 {
-    align-items: flex-start;
-    display: flex;
-    margin-left: 1px;
-    margin-top: 16px;
-    min-width: 69px;
-  }
-  .frame-2982-1 {
-    align-items: center;
-    background-color: var(--licorice);
-    display: flex;
-    height: 112px;
-    left: 0px;
-    min-width: 1112px;
-    padding: 0 40px;
-    position: absolute;
-    top: 0px;
-  }
-  .frame-2984 {
-    align-items: flex-start;
-    background-color: var(--licorice);
-    display: flex;
-    flex-direction: column;
-    height: 112px;
-    overflow: hidden;
-    width: 1112px;
-  }
-  .frame-3003 {
-    align-items: center;
-    border-radius: 4px;
-    display: flex;
-    height: 48px;
-    margin-left: 24px;
-    overflow: hidden;
-    padding: 0 31px;
-    width: 168px;
-  }
-  .frame-3004 {
-    align-items: center;
-    border-radius: 4px;
-    display: flex;
-    height: 48px;
-    overflow: hidden;
-    padding: 0 45px;
-    width: 168px;
-  }
-  .frame-3005 {
-    align-items: center;
-    background-color: var(--quarter-spanish-white);
-    border-radius: 4px;
-    display: flex;
-    height: 48px;
-    margin-left: 24px;
-    overflow: hidden;
-    padding: 0 27px;
-    width: 168px;
-  }
-  .frame-3436 {
-    align-items: flex-start;
-    display: flex;
-    margin-left: 40px;
-    min-width: 744px;
-  }
-  .frame-3440 {
-    align-items: flex-start;
-    display: flex;
-    margin-left: 40px;
-    margin-top: 48px;
-    min-width: 148px;
-  }
-  .icons-arrows-left {
-    align-items: flex-end;
-    display: flex;
-    height: 24px;
-    padding: 7.0px 4px;
-    width: 24px;
-  }
-  .materials {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    min-width: 72px;
-    white-space: nowrap;
-  }
-  .overlap-group-11 {
-    height: 112px;
-    position: relative;
-    width: 1112px;
-  }
-  .overlap-group-12 {
-    height: 20px;
-    position: relative;
-    width: 16px;
-  }
-  .overlap-group-13 {
-    background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60814bcc20bdddf897339de8/img/vector-22@2x.png);
-    background-size: 100% 100%;
-    height: 22px;
-    position: relative;
-    width: 20px;
-  }
-  .overlap-group-14 {
-    height: 18px;
-    position: relative;
-    width: 18px;
-  }
-  .overlap-group-15 {
-    height: 22px;
-    position: relative;
-    width: 22px;
-  }
-  .overlap-group-16 {
-    height: 10px;
-    position: relative;
-    width: 16px;
-  }
-  .overlap-group-17 {
-    height: 24px;
-    position: relative;
-    width: 14px;
-  }
-  .place-1 {
-    height: 24px;
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .rectangle-875-6 {
-    background-color: var(--onyx);
-    height: 1px;
-    margin-top: 38px;
-    width: 1112px;
-  }
-  .rectangle-876-1 {
-    background-color: var(--onyx);
-    height: 1px;
-    left: 0px;
-    position: absolute;
-    top: 111px;
-    width: 1112px;
-  }
-  .resources {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    min-width: 79px;
-    white-space: nowrap;
-  }
-  .span0-1 {
-    color: rgba(137,137,137,1.0);
-    font-family: 'IBM Plex Sans', Helvetica;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  .span1-1 {
-    color: rgba(248,235,223,1.0);
-    font-family: 'IBM Plex Sans', Helvetica;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  .states-delivery-5 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 128px;
-    min-height: 24px;
-    min-width: 132px;
-    white-space: nowrap;
-  }
-  .tasks {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 8px;
-    min-height: 24px;
-    min-width: 44px;
-    white-space: nowrap;
-  }
-  .text-12 {
-    letter-spacing: 0.00px;
-    line-height: 32px;
-    min-height: 32px;
-    min-width: 235px;
-    white-space: nowrap;
-  }
-  .text-13 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 187px;
-    white-space: nowrap;
-  }
-  .text-14 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 177px;
-    min-height: 24px;
-    min-width: 165px;
-    white-space: nowrap;
-  }
-  .text-15 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 199px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .text-16 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 164px;
-    white-space: nowrap;
-  }
-  .text-17 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 281px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .text-18 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    min-height: 24px;
-    min-width: 236px;
-    white-space: nowrap;
-  }
-  .text-19 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 232px;
-    min-height: 24px;
-    white-space: nowrap;
-  }
-  .vector-33 {
-    height: 8px;
-    left: 0px;
-    position: absolute;
-    top: 4px;
-    width: 20px;
-  }
-  .vector-34 {
-    height: 1px;
-    left: 9px;
-    position: absolute;
-    top: 9px;
-    width: 1px;
-  }
-  .vector-35 {
-    height: 2px;
-    left: 4px;
-    position: absolute;
-    top: 10px;
-    width: 5px;
-  }
-  .vector-36 {
-    height: 18px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 18px;
-  }
-  .vector-37 {
-    height: 2px;
-    left: 4px;
-    position: absolute;
-    top: 14px;
-    width: 8px;
-  }
-  .vector-38 {
-    height: 24px;
-    left: 6px;
-    position: absolute;
-    top: 0px;
-    width: 2px;
-  }
-  .vector-39 {
-    height: 16px;
-    left: 0px;
-    position: absolute;
-    top: 4px;
-    width: 14px;
-  }
-  .vector-40 {
-    height: 16px;
-    left: 6px;
-    position: absolute;
-    top: 0px;
-    width: 16px;
-  }
-  .vector-41 {
-    height: 20px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 16px;
-  }
-  .vector-42 {
-    height: 12px;
-    left: 9px;
-    position: absolute;
-    top: 10px;
-    width: 2px;
-  }
-  .vector-43 {
-    height: 10px;
-    left: 6px;
-    position: absolute;
-    top: 3px;
-    width: 12px;
-  }
-  .vector-44 {
-    height: 1px;
-    left: 8px;
-    position: absolute;
-    top: 10px;
-    width: 1px;
-  }
-  .vector-45 {
-    height: 20px;
-    left: 0px;
-    position: absolute;
-    top: 2px;
-    width: 20px;
-  }
-  .vector-stroke-1 {
-    height: 2px;
-    left: 0px;
-    position: absolute;
-    top: 4px;
-    width: 16px;
-  }
-  .vector-stroke-2 {
-    height: 10px;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 6px;
-  }
+ 
   .enterprise-user-view {
     align-items: flex-start;
     background-color: var(--black);
@@ -2334,38 +412,9 @@
     position: relative;
     width: 1440px;
   }
-  .year-1999 {
-    letter-spacing: 0.00px;
-    line-height: 24px;
-    margin-left: 200px;
-    min-height: 24px;
-    min-width: 83px;
-    white-space: nowrap;
-  }
-  
-  @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-  @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700,600|Inter:500");
-  * {
-    box-sizing: border-box;
-  }
-  .container-center-horizontal {
-    pointer-events: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
-  .container-center-horizontal > * {
-    pointer-events: auto;
-    flex-shrink: 0;
-  }
+
   .screen a {
     text-decoration: none;
     display: contents;
-  }
-  .valign-text-middle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
   

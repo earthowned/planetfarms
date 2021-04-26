@@ -29,7 +29,7 @@ function EnterprisesPage() {
           <EnterpriseDetails {...enterpriseDetailsData} />
           <AdditionalInformation />
           <EnterprisesProduct />
-          {/* <EnterprisePhotos {...frame2956Data} /> */}
+    
           <EnterprisesPhoto />
         </div>
         <div className="group-flex-row-7">
@@ -66,12 +66,9 @@ function EnterprisesProduct() {
         <div className="enterprise-photos valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
           Enterprises Products
         </div>
-        {/* <ChevronRightOutline1
-          vector2={chevronRightOutline1Props.vector2}
-          className="chevron-right-outline-1-1"
-        /> */}
+        
         <div className={`chevron-right-outline-1-2 chevron-right-outline-1-1`}>
-          <div className="overlap-group-6">
+          <div className="enterprises-overlap">
           <img src="/img/chevron-right-outline.svg" />
           </div>
         </div>
@@ -91,7 +88,7 @@ function AdditionalInformation() {
           Additional Information
         </div>
         <div className={`chevron-right-outline-1-2 chevron-right-outline-1-1`}>
-          <div className="overlap-group-6">
+          <div className="enterprises-overlap">
           <img src="/img/chevron-right-outline.svg" />
           </div>
         </div>
@@ -119,7 +116,7 @@ function EnterprisesPhoto() {
         </div>
        
         <div className={`chevron-right-outline-1-2 chevron-right-outline-1-1`}>
-          <div className="overlap-group-6">
+          <div className="enterprises-overlap">
            
             <img src="/img/chevron-right-outline.svg" />
           </div>
@@ -154,9 +151,7 @@ function EnterpriseDetails(props) {
     text3,
     text4,
     joinMessenger,
-    frame2904,
-    frame3392,
-    frame3393,
+   
     text5,
     chevronRightOutline1Props,
   } = props;
@@ -213,15 +208,15 @@ function EnterpriseDetails(props) {
                 <div className="enterprise-messenger-lower-overlap-group ">
                   <div
                     className="enterprise-messenger-lower-avatar-1 "
-                    style={{ backgroundImage: `url(${frame2904})` }}
+                    style={{ backgroundImage: `url("/img/avatar-img.svg")` }}
                   ></div>
                   <div
                     className="enterprise-messenger-lower-avatar-2 border-2px-shark-2"
-                    style={{ backgroundImage: `url(${frame3392})` }}
+                    style={{ backgroundImage: `url("/img/avatar-msg.svg")` }}
                   ></div>
                   <div
                     className="enterprise-messenger-lower-avatar-3 border-2px-shark-2"
-                    style={{ backgroundImage: `url(${frame3393})` }}
+                    style={{ backgroundImage: `url("/img/avatar-img.svg")` }}
                   ></div>
                 </div>
               </div>
@@ -238,80 +233,9 @@ function EnterpriseDetails(props) {
 }
 
 
-function EnterprisePhotos(props) {
-  const {
-    enterprisePhotosI5,
-    frame2965,
-    frame2966,
-    frame2967,
-    frame2968,
-    vector2,
-    chevronRightOutline1Props,
-    frame2969Props,
-  } = props;
-
-  return (
-    <div className="enterprises-photos">
-      <div className="title">
-        <div className="enterprise-photos valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
-          {enterprisePhotosI5}
-        </div>
-       
-        <div className={`chevron-right-outline-1-2 chevron-right-outline-1-1`}>
-          <div className="overlap-group-6">
-            <img
-              className="vector-20"
-              src="https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector@2x.png"
-            />
-            <img
-              className="vector-19"
-              src="https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector-3@2x.png"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="flex-row-6">
-        <div
-          className="photo-1"
-          style={{ backgroundImage: `url(${frame2965})` }}
-        ></div>
-        <div
-          className="flex-row-item"
-          style={{ backgroundImage: `url(${frame2966})` }}
-        ></div>
-        <div
-          className="flex-row-item"
-          style={{ backgroundImage: `url(${frame2967})` }}
-        ></div>
-        <div
-          className="flex-row-item"
-          style={{ backgroundImage: `url(${frame2968})` }}
-        ></div>
-        <div className="overlap-group1-2">
-         
-          <div className="frame-2970">
-            <div className="arrow-forward-outline-1">
-              <div className="overlap-group-7">
-                <img
-                  className="vector-22"
-                  src="https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector@2x.png"
-                />
-                <img className="vector-21" src={vector2} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 
 
-const chevronRightOutline1Data = {
-  vector2:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector-3@2x.png",
-};
 
 const enterpriseDetailsData = {
   image:
@@ -332,43 +256,11 @@ const enterpriseDetailsData = {
   text3: "Would you like to communicate with other this enterpise users?",
   text4: "Join our free messenger!",
   joinMessenger: "Join messenger",
-  frame2904:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60814bcc20bdddf897339de8/img/frame-2904@2x.png",
-  frame3392:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60814bcc20bdddf897339de8/img/frame-3392@2x.png",
-  frame3393:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60814bcc20bdddf897339de8/img/frame-3393@2x.png",
   text5: "Bessy, Misha and 175 more users already follow us! ",
-  chevronRightOutline1Props: chevronRightOutline1Data,
+  
 };
 
-const chevronRightOutline14Data = {
-  vector2:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector-3@2x.png",
-};
 
-const frame2969Data = {
-  frame2969:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-2969@2x.png",
-  rectangle876:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/rectangle-876@2x.png",
-};
-
-const frame2956Data = {
-  enterprisePhotosI5: "Enterprise photos",
-  frame2965:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-2965@2x.png",
-  frame2966:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-2966@2x.png",
-  frame2967:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-2967@2x.png",
-  frame2968:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-2968@2x.png",
-  vector2:
-    "https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/vector-1@2x.png",
-  chevronRightOutline1Props: chevronRightOutline14Data,
-  frame2969Props: frame2969Data,
-};
 
 const Events = ({ event, date }) => {
   return (
