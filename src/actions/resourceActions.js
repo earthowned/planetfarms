@@ -61,7 +61,7 @@ export const createProduct = (newResource) => async (dispatch, getState) => {
     dispatch({
       type: RESOURCE_CREATE_REQUEST
     })
-    const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/resources/add`, newResource)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, newResource)
     dispatch({
       type: RESOURCE_CREATE_SUCCESS,
       payload: data
