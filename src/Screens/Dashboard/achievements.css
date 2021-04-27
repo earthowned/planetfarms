@@ -1548,6 +1548,12 @@ progress {
 
 }
 
+@media only screen and (max-width: 550px) { 
+  .achievements-progressbar--header {
+    margin-top: 1em;
+  }
+}
+
 @media only screen and (max-width: 400px) {
   .x10-2-0-my-achievements .your-achievements-level {
     flex-direction: column;

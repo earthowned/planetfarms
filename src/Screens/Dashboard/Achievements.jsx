@@ -79,7 +79,7 @@ function Achievements() {
 
             <div className="achievements-progress-table">
               <ProgressBar text="Be a member of 10 communities at least (5/10)" percent="50" />
-              <ProgressBar text="Finish five star course in this year" percent="1" />
+              <ProgressBar text="Finish five star course in this year" percent="0" />
               <ProgressBar text="Make 15 unique posts in your own groups (14/15)" percent="97" />
               <ProgressBar text="Be a member of 10 communities at least (7/10)" percent="73" />
               <ProgressBar text="Make 15 unique posts in your own groups (14/15)" percent="97" />
