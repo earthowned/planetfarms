@@ -61,15 +61,15 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
               : <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
                 Drag and Drop files in this area or Click Here to attach</h6>}
           </div>
-          {pathname === '/library' ?
-            <>
-              <div className="collection-input-container">
-                <input className="default-input-variation" error={resourceTitleError} onChange={(e) => resourceDescriptionChange(e)} placeholder="Resource title" /><br />
-                <input className="default-input-variation text-area-variation" error={resourceDescriptionError} onChange={(e) => resourceTitleChange(e)} placeholder="Resource description" /><br />
-              </div>
-              <button className="default-btn btn-size" onClick={handleAddResource}>Submit</button>
-            </>
-            : <> <div className="collection-input-container">
+          { pathname === '/library' ?
+          <>
+            <div className="collection-input-container">
+              <input className="default-input-variation" error={ resourceTitleError }  onChange={ (e) => resourceTitleChange(e) } placeholder="Resource title" /><br />
+              <input className="default-input-variation text-area-variation" error={ resourceDescriptionError } onChange={ (e) => resourceDescriptionChange(e) } placeholder="Resource description" /><br />
+            </div>
+            <button className="default-btn btn-size" onClick={ handleAddResource }>Submit</button>
+          </>
+          : <> <div className="collection-input-container">
               <input className="default-input-variation" placeholder="Collection title" /> <br />
               <select className="default-input-variation" placeholder="Collection title">
                 <option>Select category</option>
