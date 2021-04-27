@@ -1281,6 +1281,7 @@
   margin-top: 39px;
   min-width: 1112px;
 }
+
 .followers-group {
   align-items: flex-start;
   display: flex;
@@ -1288,6 +1289,7 @@
   overflow: hidden;
   width: 116px;
 }
+
 .community-group-follow-btn {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
