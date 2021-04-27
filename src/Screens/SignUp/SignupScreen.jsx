@@ -6,6 +6,8 @@ import Banner from "../../Components/Banner/Banner"
 import InputComponent from "../../Components/Input/InputComponent"
 import Button from "../../Components/Button/Button"
 import Checkbox from "../../Components/Checkbox/Checkbox"
+import { useDispatch } from 'react-redux'
+import { register } from "../../actions/userAction"
 
 function App() {
   return <SignupScreen {...X0200SignUpemptyData} />
@@ -35,6 +37,7 @@ function SignupScreen(props) {
   const [termsError, setTermsError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [passwordLengthError, setPasswordLengthError] = useState(false)
+  const dispatch = useDispatch()
 
   const registerUser = () => {
     if (!username) setUserError('empty')
@@ -43,6 +46,9 @@ function SignupScreen(props) {
     if (!terms) setTermsError(true)
 
     if (username && password && terms) {
+      if (process.env.REACT_APP_LOCAL_DATABASE_AUTH) {
+        return dispatch(register(username, password))
+      }
       history.push("/register-complete", { username, password });
     }
   }
