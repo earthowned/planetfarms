@@ -20,7 +20,6 @@ const getResources = (req, res) => {
 
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
-  // const order = req.query.order || 'ASC'
   Resource.findAll({ offset: page, limit: pageSize })
     .then(resources => {
       paginate({ page, pageSize })
