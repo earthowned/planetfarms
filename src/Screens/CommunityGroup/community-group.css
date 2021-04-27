@@ -786,7 +786,6 @@
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
   backdrop-filter: blur(16px) brightness(100%);
-  background-color: var(--white);
   border-radius: 4px;
   display: flex;
   height: 48px;
