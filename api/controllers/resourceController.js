@@ -16,8 +16,14 @@ const getResources = (req, res) => {
     .then(resources => {
       res.json({ resources, page, pageSize }).status(200)
     })
+    
     .catch((err) => res.json({ err }).status(400))
+  
+
+  
 }
+
+
 
 // @desc    Add individual resource
 // @route   POST /api/resources/add
