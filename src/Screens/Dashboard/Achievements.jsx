@@ -1,6 +1,5 @@
 import React from "react";
 import "./achievements.css";
-import { Link } from "react-router-dom";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 import BackButton from "../../Components/BackButton/BackButton";

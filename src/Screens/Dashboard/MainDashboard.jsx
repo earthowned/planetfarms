@@ -89,10 +89,10 @@ function DashboardComponent() {
         </div>
         {windowWidth < 721 
         ? <div className="mobile-container-dasboard-my-profile-box">
-        <Link to="/library" className="dasboard-my-profile-box">
+        <Link to="/mylibrary" className="dasboard-my-profile-box">
               <MobileViewHeaderContent title="My library" image="/img/book-outlined.svg"/>
           </Link>
-          <Link to="/courses" className="dasboard-my-profile-box">
+          <Link to="/mycourse" className="dasboard-my-profile-box">
               <MobileViewHeaderContent title="My courses" image="/img/book-open-1.svg"/>
           </Link>
           <Link to="/mygroups" className="dasboard-my-profile-box">
@@ -186,7 +186,7 @@ function MainContainer () {
               <div className="mycourse-container--header">
                 <img src="/img/book-open-1.svg" alt="book-open-icon" />
                 <h4>My courses</h4>
-                 <Link to="/mylibrary" className="link-decoration">
+                 <Link to="/mycourse" className="link-decoration">
                     <SeeAllButton>See all items</SeeAllButton>
                   </Link>
               </div>
@@ -201,7 +201,7 @@ function MainContainer () {
               <div className="mygroup-container--header">
                 <img src="/img/my-group.svg" alt="user" />
                 <h4>My groups</h4>
-                 <Link to="/mylibrary" className="link-decoration">
+                 <Link to="/mygroups" className="link-decoration">
                     <SeeAllButton>See all items</SeeAllButton>
                   </Link>
               </div>
