@@ -16,20 +16,17 @@ const paginate = ({ page, pageSize }) => {
 }
 
 const getResources = (req, res) => {
-
-
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
-  Resource.findAll({ offset: page, limit: pageSize })
+  const order = req.query.order || 'DESC'
+  const ordervalue = order && [['title',  order]] 
+  Resource.findAll({ offset: page, limit: pageSize,ordervalue  })
     .then(resources => {
       paginate({ page, pageSize })
       res.json({ resources, page, pageSize }).status(200)
     })
     
     .catch((err) => res.json({ err }).status(400))
-  
-
-  
 }
 
 
@@ -42,6 +39,10 @@ const addResource = (req, res) => {
     title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
   } = req.body
 
+  if (req.file) {
+    categoryObj.categoryImage =
+      process.env.API + "/public/" + req.file.filename;
+  }
   Resource.create({
     title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
   })
