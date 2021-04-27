@@ -16,17 +16,24 @@ const paginate = ({ page, pageSize }) => {
 }
 
 const getResources = (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
-  const order = req.query.order || 'ASC'
 
-  Resource.findAll({ offset: page, limit: pageSize, order: [['title', order]] })
+
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 0
+  // const order = req.query.order || 'ASC'
+  Resource.findAll({ offset: page, limit: pageSize })
     .then(resources => {
       paginate({ page, pageSize })
       res.json({ resources, page, pageSize }).status(200)
     })
+    
     .catch((err) => res.json({ err }).status(400))
+  
+
+  
 }
+
+
 
 // @desc    Add individual resource
 // @route   POST /api/resources/add
