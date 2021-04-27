@@ -41,7 +41,11 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
     if (!title) setResourceTitleError(true)
     if (!description) setResourceDescriptionError(true)
     if (title && description) {
+<<<<<<< HEAD
       dispatch(createResource({ title, description, files }))
+=======
+      dispatch(createProduct({title, description,files}))
+>>>>>>> 2b2ced08 (resource listing api)
       setActive(false)
     }
   }
@@ -54,12 +58,12 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
             <h4>{pathname === '/library' ? 'Create Resources' : 'Create Collection'}</h4>
             <img src="/img/close-outline.svg" onClick={() => setActive(false)} alt="close-icon" />
           </div>
-          <div className="drag-drop" {...getRootProps()}>
-            <input {...getInputProps()} />
-            {files.length > 0
-              ? <img className="avatar" src={files[0].preview} alt="files[0].preview" />
-              : <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                Drag and Drop files in this area or Click Here to attach</h6>}
+          <div className="drag-drop" { ...getRootProps() }>
+            <input { ...getInputProps() } />
+              { files.length > 0 
+                ? <img className="avatar" name="avatar" src={files[0].preview}  alt="files[0].preview" /> 
+                : <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                  Drag and Drop files in this area or Click Here to attach</h6> }
           </div>
           { pathname === '/library' ?
           <>
