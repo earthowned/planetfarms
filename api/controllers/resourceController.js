@@ -18,6 +18,9 @@ const getResources = (req, res) => {
     })
     
     .catch((err) => res.json({ err }).status(400))
+  
+
+  
 }
 
 
