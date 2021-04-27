@@ -159,7 +159,7 @@ function LoginScreen(props) {
               </div>
               <div className="button-1">
 
-                <button onclick={ loginWithGoogle } className="link-btn google-button border-0-5px-quarter-spanish-white">
+                <button onClick={ loginWithGoogle } className="link-btn google-button border-0-5px-quarter-spanish-white">
                   <div className="logo-googleg-48-dp-1">
                     <div className="overlap-group1-3">
                       
