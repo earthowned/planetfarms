@@ -22,10 +22,7 @@ function MyProfile() {
               <ContactInformation />
               <AdditionalInformation />
             </div>
-            <div className="profile-pic-1">
-              <div className="profile-pic"></div>
-              <EditInformation>Edit information</EditInformation>
-            </div>
+            <EditInformation />
           </div>
         </div>
       </div>
@@ -35,12 +32,11 @@ function MyProfile() {
 
 export default MyProfile;
 
-function EditInformation({ children }) {
+function EditInformation() {
   return (
-    <div className="edit-information border-0-5px-quarter-spanish-white">
-      <div className="default-i905517658 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-        {children}
-      </div>
-    </div>
+   <div className="edit-information-container">
+     <img src="/img/DashboardProfilePic.png" />
+     <button className="edit-btn">Edit Information</button>
+   </div>
   );
 }

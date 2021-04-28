@@ -1,46 +1,34 @@
-import "../achievements.css";
+import useSizeFinder from "../../../utils/SizeFinder";
+import "./progress-bar.css";
 
 const ProgressBar = (props) => {
   const { percent, text } = props;
 
-  const containerStyles = {
-    height: 45,
-    width: '100%',
-    backgroundColor: "#050404",
-    borderRadius: 5,
-    marginBottom: 20,
-    display: 'flex',
-    justifyContent: 'space-between',
-  }
-
   const fillerStyles = {
-    height: '100%',
     width: `${percent}%`,
-    backgroundColor: "#74E7A0",
-    borderRadius: 'inherit',
-    textAlign: 'center',
-  }
-  const textStyle = {
-    paddingTop: 13,
-    textAlign: 'left',
-    paddingLeft: 20,
-    fontWeight: "bold",
   }
 
-  const percentText = {
-    paddingTop: 13,
-    color: "#74E7A0",
-    fontWeight: 1200,
-    paddingRight: 4,
-  }
+  const windowWidth = useSizeFinder();
 
   return (
-    <div style={containerStyles}>
-      <div style={fillerStyles}>
-      <p style={textStyle}>{text}</p>
+    <>
+    {
+      windowWidth >= 550 
+      ? <div className="progress-container">
+        <div style={fillerStyles} className="filler"></div>
+        <p className="text-style">{text}</p>
+        <p className="percent-text">{percent}%</p>
       </div>
-      <p style={percentText}>{percent}%</p>
-    </div>
+      : <div className="progres-main-container">
+        <p className="progress-des">{text}</p>
+        <div className="progress-bar">
+          <div style={fillerStyles} className="filler-style">
+          </div>
+          <p className="progress-percent-text">{percent}%</p>
+        </div>
+      </div>
+  }
+  </>
   );
 };
 

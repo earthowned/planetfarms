@@ -92,7 +92,6 @@ const DashboardLayout = ({title, children}) => {
         <div>
           {
               windowWidth > TABLET_SIZE ? <div className="container">
-
             <div className={toggle ? "sidebar-container" : "sidebar-container active"}>
                 <Sidebar setToggle={setToggle} toggle={toggle}/>
             </div>
