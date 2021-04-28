@@ -1650,7 +1650,7 @@ progress {
     margin-left: 14px;
   }
 
-.
+}
 
 @media only screen and (max-width: 1024px) {
 
@@ -1694,7 +1694,7 @@ progress {
     margin-top: 1em;
   }
 
-.
+}
 
 @media only screen and (max-width: 400px) {
   .x10-2-0-my-achievements .your-achievements-level {
@@ -1703,4 +1703,4 @@ progress {
     padding: 1em 0;
   }
 
-.
+}
