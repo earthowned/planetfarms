@@ -63,7 +63,7 @@ function MyLibrary() {
           <h4 className="article-header">Articles</h4>
           <div className="articles">
             {
-              articles.map(item => {
+             articles && articles.map(item => {
                 return (
                   <div className="article-card" key={item.id}>
                     <div className="article-background" style={{backgroundImage: `url(${item.img})`}}>
@@ -81,15 +81,11 @@ function MyLibrary() {
           <h4 className="article-header">Videos</h4>
           <div className="articles">
             {
-              articles.map(item => {
+             videos && videos.map(item => {
                 return (
                   <div className="article-card" key={item.id}>
-                    <div className="article-background" style={{backgroundImage: `url(${item.img})`}}>
-                      <div className="article-content">
-                        <h6>{item.category}</h6>
-                        <h4>{item.title}</h4>
-                        <p>{item.time}</p>
-                      </div>
+                    <div className="video-background" style={{backgroundImage: `url(${item.img})`}}>
+                        <img src="/img/video-icon.svg" />
                     </div>
                   </div>
                 )

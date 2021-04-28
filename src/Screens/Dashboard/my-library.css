@@ -1300,6 +1300,16 @@
   background-size: cover;
 }
 
+.video-background {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .article-content {
   font-family: IBM Plex Sans;
   font-style: normal;
