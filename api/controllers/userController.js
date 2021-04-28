@@ -1,6 +1,24 @@
 const generateToken = require('../utils/generateToken.js');
 const User = require('../models/userModel.js');
 
+// @desc    Auth user & get token
+// @route   POST /api/users/login
+// @access  Public
+const authUser = async (req, res) => {
+  const { name, password } = req.body
+
+  const user = await User.findOne({ name })
+  if (user) {
+    res.json({
+      _id: user.dataValues.id,
+      name: user.dataValues.name,
+      token: generateToken(user._id),
+    })
+  } else {
+    res.status(401)
+    throw new Error('Invalid email or password')
+  }
+}
 
 // @desc    Register a new user
 // @route   POST /api/users
@@ -8,7 +26,6 @@ const User = require('../models/userModel.js');
 const registerUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    console.log(name, password)
     const userExists = await User.findOne({ where: { name } })
 
     if (userExists) {
@@ -39,4 +56,4 @@ const registerUser = async (req, res) => {
 }
 
 
-module.exports = registerUser
+module.exports = { registerUser, authUser }
