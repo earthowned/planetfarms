@@ -19,7 +19,6 @@ function MyCourses() {
       <div className="my-courses-container">
         <BackButton location={"/dashboard"} />
         <MyCoursesCard />
-      
       </div>
     </div>
   );
