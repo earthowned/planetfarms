@@ -9,16 +9,10 @@ const Op = Sequelize.Op
 const getResources = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
-<<<<<<< HEAD
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
   // const {offset, limit} = queryUtils.paginate({ page, pageSize })
   Resource.findAll({ offset: page, limit: pageSize, ordervalue })
-=======
-  const order = req.query.order || 'DESC'
-  const ordervalue = order && [['title',  order]] 
-  Resource.findAll({ offset: page, limit: pageSize,ordervalue  })
->>>>>>> 1c1fba13 (resource listing api)
     .then(resources => {
       res.json({ resources, page, pageSize }).status(200)
     })
