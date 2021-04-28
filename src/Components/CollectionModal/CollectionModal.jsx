@@ -41,11 +41,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
     if (!title) setResourceTitleError(true)
     if (!description) setResourceDescriptionError(true)
     if (title && description) {
-<<<<<<< HEAD
       dispatch(createResource({ title, description, files }))
-=======
-      dispatch(createProduct({title, description,files}))
->>>>>>> 2b2ced08 (resource listing api)
       setActive(false)
     }
   }
