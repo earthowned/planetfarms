@@ -102,14 +102,14 @@ const courseDetail = () => {
             </div>
             <div className="course-page-boderline"></div>
           </div>
-          <div className="subscriber-btn border-0-5px-quarter-spanish-white">
-            <div className="subscriber-btn-text ibmplexsans-semi-bold-quarter-spanish-white-16px">
+          <button className="subscriber-btn border-0-5px-quarter-spanish-white">
+            <span>
               You are subscriber
-            </div>
+            </span>
             <div className="layer-2">
               <img src="/img/chevron-right-outline.svg" className3="course-arrow-icon" alt="right-arrow-icon" />
             </div>
-          </div>
+          </button>
         </div>
       </div>
   );
@@ -153,49 +153,23 @@ const lessonCourse = () => {
   ];
 
   return (
-    <>
-      <div className="lessons-container">
-        <div className="lessons-title ibmplexsans-semi-bold-quarter-spanish-white-24px">
-          Lessons
-        </div>
-        {lessonData.map((data) => {
-          return (
-            <>
-              <div className={`${data.className1} : " " `}>
-                <div className={`${data.className2} : "" `}>
-                  <div className={`lesson-intro ${data.className3}  } }`}>
-                    <img className="lesson-image" src={data.bgImage} />
-                    <div className="lesson-name">
-                      <div className="lesson-name-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
-                        {data.name}
-                      </div>
-                      <p className="lesson-description valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                        {data.description}
-                      </p>
-                      <div className="see-lesson-text ibmplexsans-semi-bold-caribbean-green-16px">
-                        {data.lesson}
+    <div className="lessons-container">
+              <h3>Lessons</h3>
+              {
+                lessonData.map(data => {
+                  return (
+                    <div className="lesson-card">
+                      <img className="lesson-card-img" src={data.bgImage} />
+                      <div className="lesson-card-content">
+                        <h3>{data.name}</h3>
+                        <p>{data.description}</p>
+                        <button>{data.lesson}</button>
                       </div>
                     </div>
-                  </div>
-                  {data.finish && (
-                    <div className="lock-icon-wrapper">
-                      <div className="lock-outline">
-                        <div className=" icon-lock">
-                          <img src="img/lock-white-outlined.svg" />
-                        </div>
-                      </div>
-                      <div className="unlock-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                        {data.finish}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </>
-          );
-        })}
-      </div>
-    </>
+                  )
+                })
+              }
+    </div>
   );
 };
 

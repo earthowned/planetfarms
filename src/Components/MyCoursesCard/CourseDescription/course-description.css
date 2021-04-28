@@ -180,7 +180,6 @@
 
 .subscriber-btn {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
-  
   backdrop-filter: blur(16px) brightness(100%);
   background-color: var(--white2);
   border-radius: 4px;
@@ -188,16 +187,20 @@
   align-items: center;
   justify-content: space-between;
   height: 48px;
-  
-  overflow: hidden;
-  padding: 0 34px;
-  width: 240px;
+  padding: 0 14px;
+  width: 20%;
+}
+
+.subscriber-btn span {
+  color: #fff;
+  font-size: 14px;
 }
 
 .subscriber-btn-text {
   letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
+  width: 100%;
 }
 
 .course-arrow-icon {
@@ -258,15 +261,21 @@
 }
 
 .lessons-container {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  min-height: 696px;
-  padding: 24px 0;
-  position: relative;
-  width: 1112px;
+  width: 100%;
+  padding: 1em 2em;
 }
 
+.lessons-container > h3 {
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #fff;
+  padding-bottom: 1em;
+}
 .course-page-boderline {
   background-color: var(--onyx);
   height: 1px;
@@ -405,6 +414,15 @@
   width: 450px;
 }
 
+.lesson-desc {
+  color: #fff;
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+
 .see-lesson-text {
   letter-spacing: 0;
   line-height: 24px;
@@ -476,6 +494,47 @@
   width: 100%;
 }
 
+.lesson-card {
+  padding: 1em 0;
+  max-width: 700px;
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: normal;
+  color: #fff;
+  display: flex;
+  height: 160px;
+}
+
+.lesson-card img {
+  margin-right: 2em;
+}
+
+.lesson-card-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.lesson-card-content > h3 {
+  font-size: 24px;
+}
+
+.lesson-card-content p{
+ font-size: 14px;
+ line-height: 1.4;
+}
+
+.lesson-card-content button {
+  outline: none;
+  border: none;
+  background: none;
+  color: #00C688;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 800px) {
   .course-details-wrapper {
     flex-direction: column-reverse;
@@ -488,10 +547,26 @@
   .course-description {
     width: 100%;
   }
+
+   .subscriber-btn {
+    width: 40%;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .lesson-card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
 }
+
+
 
 @media screen and (max-width: 450px) {
   .subscriber-btn {
     width: 100%;
+    padding: 0 10px;
+    font-size: 10px;
   }
 }
