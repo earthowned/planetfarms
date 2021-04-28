@@ -1328,7 +1328,7 @@
   align-items: center;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #00C688;
+  color: #00c688;
 }
 
 .article-content h4 {
@@ -1350,7 +1350,7 @@
   .article-card {
     flex: 0 1 calc(50% - 1em);
     margin-bottom: 1em;
-  } 
+  }
 }
 
 @media only screen and (max-width: 650px) {
