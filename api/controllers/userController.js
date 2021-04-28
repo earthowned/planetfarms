@@ -5,18 +5,22 @@ const User = require('../models/userModel.js');
 // @route   POST /api/users/login
 // @access  Public
 const authUser = async (req, res) => {
-  const { name, password } = req.body
-
-  const user = await User.findOne({ name })
-  if (user) {
-    res.json({
-      _id: user.dataValues.id,
-      name: user.dataValues.name,
-      token: generateToken(user._id),
-    })
-  } else {
-    res.status(401)
-    throw new Error('Invalid email or password')
+  try {
+    const { name, password } = req.body
+    const user = await User.findOne({ where: { name } })
+    console.log(user)
+    if (user) {
+      res.json({
+        id: user.dataValues.id,
+        name: user.dataValues.name,
+        token: generateToken(user.dataValues.id),
+      })
+    } else {
+      res.status(401)
+      throw new Error('Invalid email or password')
+    }
+  } catch (e) {
+    console.log(e)
   }
 }
 
@@ -39,7 +43,6 @@ const registerUser = async (req, res) => {
     })
 
     if (user) {
-      console.log('idot', user.dataValues.id)
       res.status(201).json({
         id: user.dataValues.id,
         name: user.dataValues.name,
@@ -54,6 +57,5 @@ const registerUser = async (req, res) => {
     throw new Error(`Error ${err}`)
   }
 }
-
 
 module.exports = { registerUser, authUser }

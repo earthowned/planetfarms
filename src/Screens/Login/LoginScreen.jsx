@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import {Link, useHistory} from 'react-router-dom'
 import Banner from "../../Components/Banner/Banner"
 import Button from "../../Components/Button/Button"
@@ -7,7 +7,7 @@ import InputComponent from "../../Components/Input/InputComponent"
 import Logo from "../../Components/Logo/Logo"
 import "./login-screen.css"
 import { Auth, Hub } from 'aws-amplify'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userAction'
 
 function LoginScreen(props) {
@@ -20,7 +20,10 @@ function LoginScreen(props) {
   } = props
 
   const [user, setUser] = useState(null)
-  console.log(user)
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const {  loading, error, userInfo } = userLogin
 
   useEffect(() => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -42,8 +45,12 @@ function LoginScreen(props) {
       }
     })
 
+    if (userInfo) {
+      history.push('/community-page-news')
+    }
+
     getUser().then(userData => setUser(userData))
-  }, [])
+  }, [history, userInfo])
 
   function getUser() {
     return Auth.currentAuthenticatedUser()
@@ -57,9 +64,6 @@ function LoginScreen(props) {
   const [termsError, setTermsError] = useState(false)
   const [userError, setUserError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
-
-  const history = useHistory()
-  const dispatch = useDispatch()
 
 
   async function signIn(username, password) {
@@ -97,6 +101,7 @@ function LoginScreen(props) {
 
     if(username && password.length > 6) {
       if (process.env.REACT_APP_LOCAL_DATABASE_AUTH) {
+        console.log('hay')
         return dispatch(login(username, password))
       }
       signIn(username, password)

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./signup-screen.css"
 import { useHistory, Link } from "react-router-dom"
 import Logo from "../../Components/Logo/Logo"
@@ -6,7 +6,7 @@ import Banner from "../../Components/Banner/Banner"
 import InputComponent from "../../Components/Input/InputComponent"
 import Button from "../../Components/Button/Button"
 import Checkbox from "../../Components/Checkbox/Checkbox"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { register } from "../../actions/userAction"
 
 function App() {
@@ -38,6 +38,15 @@ function SignupScreen(props) {
   const [passwordError, setPasswordError] = useState(false)
   const [passwordLengthError, setPasswordLengthError] = useState(false)
   const dispatch = useDispatch()
+
+  const userRegister = useSelector((state) => state.userRegister)
+  const { loading, error, userInfo } = userRegister
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/register-complete")
+    }
+  }, [history, userInfo])
 
   const registerUser = () => {
     if (!username) setUserError('empty')
