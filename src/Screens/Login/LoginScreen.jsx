@@ -7,6 +7,8 @@ import InputComponent from "../../Components/Input/InputComponent"
 import Logo from "../../Components/Logo/Logo"
 import "./login-screen.css"
 import { Auth, Hub } from 'aws-amplify'
+import { useDispatch } from 'react-redux'
+import { login } from '../../actions/userAction'
 
 function LoginScreen(props) {
   const {
@@ -57,6 +59,8 @@ function LoginScreen(props) {
   const [passwordError, setPasswordError] = useState(false)
 
   const history = useHistory()
+  const dispatch = useDispatch()
+
 
   async function signIn(username, password) {
     try {
@@ -92,6 +96,9 @@ function LoginScreen(props) {
     if (!terms) setTermsError(true)
 
     if(username && password.length > 6) {
+      if (process.env.REACT_APP_LOCAL_DATABASE_AUTH) {
+        return dispatch(login(username, password))
+      }
       signIn(username, password)
     }
   }
