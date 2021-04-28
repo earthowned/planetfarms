@@ -1,6 +1,17 @@
+.my-course-container-wrapper {
+  width: 100%;
+  margin-top: 2em;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  color: #f8ebdf;
+}
+
 .course-card-container {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .card-text-container {
@@ -16,7 +27,7 @@
   margin-top: 40px;
   overflow: hidden;
   padding: 36px 40px;
-  width: 1112px;
+  width: 100%;
 }
 
 .my-courses-title {
@@ -24,24 +35,37 @@
   line-height: 32px;
   min-height: 32px;
   white-space: nowrap;
+  margin-bottom: 2em;
 }
 
 .course-card {
-  align-items: center;
-  background-position: 50% 50%;
-  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 4px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  height: 300px;
+  flex: 0 1 calc(30% - 1em);
+  max-width: 400px;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 288px;
-  margin-top: 36px;
-  overflow: hidden;
-  padding: 16px 0;
+  align-items: flex-start;
+  padding: 1em;
   position: relative;
-  width: 328px;
-  margin-left: 15px;
-  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.course-card:not(:last-child) {
+  margin-right: 1em;
+}
+
+.course-card-inner-container {
+  position: absolute;
+  bottom: 2em;
+}
+
+.course-card-content {
+  width: 100%;
 }
 
 .course-name-text {
@@ -62,12 +86,11 @@
 }
 
 .lesson-index {
-  align-items: center;
   background-color: var(--eerie-black);
   border-radius: 4px;
   display: flex;
+  align-items: center;
   margin-top: 16px;
-  min-width: 296px;
 }
 
 .lesson-index-bar {
@@ -91,4 +114,94 @@
   min-height: 16px;
   min-width: 67px;
   white-space: nowrap;
+}
+
+.my-course-inner-container {
+  background: #141414;
+  width: 100%;
+  margin-bottom: 2em;
+  padding: 2em;
+}
+
+.my-course-inner-container h4 {
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 1.5em;
+}
+
+.my-course-inner-container link {
+  text-decoration: none;
+}
+
+.my-course-card-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.my-course-card {
+  max-width: 328px;
+  flex: 0 1 32%;
+  height: 288px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 4px;
+  margin-bottom: 1.5em;
+  padding: 1em 1.5em;
+  position: relative;
+}
+
+.my-course-card:not(:last-child) {
+  margin-right: 1.5em;
+}
+
+.my-course-content {
+  position: absolute;
+  width: 85%;
+  bottom: 2em;
+}
+
+.my-course-content h3 {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.my-course-content p {
+  font-weight: normal;
+  font-size: 16px;
+  margin-top: 1em;
+}
+
+.lesson-progress {
+  width: 100%;
+  height: 24px;
+  font-size: 12px;
+  background: #191b1d;
+  text-align: center;
+  line-height: 24px;
+  position: relative;
+  margin-top: 1.5em;
+}
+
+.lesson-completed {
+  width: 20%;
+  height: 100%;
+  background: #00c688;
+  position: absolute;
+}
+
+@media only screen and (max-width: 1300px) {
+  .my-course-card {
+    flex-basis: 50%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .my-course-card {
+    flex-basis: 100%;
+  }
+
+  .my-course-card:not(:last-child) {
+    margin-right: 0;
+  }
 }
