@@ -17,13 +17,12 @@ export default CourseDescription;
 
 const courseDetail = () => {
   return (
-    <div>
       <div className="description-course-page">
         <div className="bg-image"></div>
         <div className="course-details-wrapper">
           <div className="course-description">
-            <h1 className="course-page-name">Jimmy Beam personal course</h1>
-            <p className="course-page-description ibmplexsans-regular-normal-quarter-spanish-white-16px">
+            <h1 className="course-title" >Jimmy Beam personal course</h1>
+            <p className="course-desc">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -113,7 +112,6 @@ const courseDetail = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

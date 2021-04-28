@@ -1,29 +1,32 @@
 .course-details-wrapper {
-  height: 440px;
-  position: relative;
-  width: 1112px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2em;
 }
 
 .course-description {
-  align-items: flex-start;
-  background-color: var(--licorice);
-  display: flex;
-  flex-direction: column;
-  left: 0;
-  min-height: 440px;
-  position: absolute;
-  top: 40px;
-  width: 1112px;
+  width: 60%;
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  letter-spacing: 0;
+}
+
+.course-title {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.course-desc {
+   line-height: 24px;
+  margin-top: 24px;
+  color: var(--quarter-spanish-white);
 }
 
 .course-page-name {
-  color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: 600;
   letter-spacing: 0;
   line-height: 40px;
-  margin-left: 40px;
   min-height: 40px;
   white-space: nowrap;
 }
@@ -31,10 +34,8 @@
 .course-page-description {
   letter-spacing: 0;
   line-height: 24px;
-  margin-left: 40px;
   margin-top: 24px;
   min-height: 120px;
-  width: 534px;
 }
 
 .course-bar-wrapper {
@@ -179,17 +180,17 @@
 
 .subscriber-btn {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
-  align-items: center;
+  
   backdrop-filter: blur(16px) brightness(100%);
   background-color: var(--white2);
   border-radius: 4px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 48px;
-  left: 832px;
+  
   overflow: hidden;
   padding: 0 34px;
-  position: absolute;
-  top: 40px;
   width: 240px;
 }
 
@@ -197,8 +198,6 @@
   letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
-  min-width: 140px;
-  white-space: nowrap;
 }
 
 .course-arrow-icon {
@@ -221,12 +220,15 @@
   transform: rotate(90deg);
 }
 
+.description-course-page {
+  width: 100%;
+}
+
 .bg-image {
   background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/607fbf4f636b54e6f9b34253/img/bg-image@1x.png);
-  background-position: 50% 50%;
   background-size: cover;
   height: 336px;
-  width: 1112px;
+  width: 100%;
 }
 
 .more-course-container {
@@ -239,8 +241,8 @@
   display: flex;
   height: 136px;
   margin-top: 40px;
-  padding: 24px 50px;
-  width: 1112px;
+  padding: 24px 0;
+  width: 100%;
 }
 
 .course-page-container {
@@ -252,7 +254,7 @@
   height: auto;
   margin-top: 39px;
   overflow: hidden;
-  width: 1114px;
+  width: 100%;
 }
 
 .lessons-container {
@@ -269,7 +271,6 @@
   background-color: var(--onyx);
   height: 1px;
   margin-top: 39px;
-  width: 1112px;
 }
 
 .more-course-feature-container {
@@ -281,15 +282,15 @@
   height: auto;
   margin-top: 38px;
   overflow: hidden;
-  width: 1114px;
+  width: 100%;
 }
 
 .more-course-feature-title {
   align-items: center;
   display: flex;
   height: 120px;
-  justify-content: flex-end;
-  min-width: 1112px;
+  justify-content: space-between;
+  width: 100%;
   padding: 0 38px;
 }
 
@@ -297,18 +298,13 @@
   letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
-  min-width: 246px;
-  white-space: nowrap;
 }
 
 .see-all-users {
   letter-spacing: 0;
   line-height: 24px;
-  margin-left: 692px;
   min-height: 24px;
-  min-width: 96px;
   text-decoration: underline;
-  white-space: nowrap;
 }
 
 .more-course {
@@ -474,4 +470,28 @@
   min-height: 24px;
   min-width: 167px;
   white-space: nowrap;
+}
+
+.course-description-container {
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .course-details-wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .subscriber-btn {
+    margin-bottom: 2em;
+  }
+
+  .course-description {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .subscriber-btn {
+    width: 100%;
+  }
 }
