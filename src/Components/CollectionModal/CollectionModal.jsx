@@ -63,8 +63,8 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
           { pathname === '/library' ?
           <>
             <div className="collection-input-container">
-              <input className="default-input-variation" error={ resourceTitleError } onChange={ (e) => resourceDescriptionChange(e) } placeholder="Resource title" /><br />
-              <input className="default-input-variation text-area-variation" error={ resourceDescriptionError } onChange={ (e) => resourceTitleChange(e) } placeholder="Resource description" /><br />
+              <input className="default-input-variation" error={ resourceTitleError }  onChange={ (e) => resourceTitleChange(e) } placeholder="Resource title" /><br />
+              <input className="default-input-variation text-area-variation" error={ resourceDescriptionError } onChange={ (e) => resourceDescriptionChange(e) } placeholder="Resource description" /><br />
             </div>
             <button className="default-btn btn-size" onClick={ handleAddResource }>Submit</button>
           </>
