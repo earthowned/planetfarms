@@ -1,5 +1,10 @@
 .my-course-container-wrapper {
   width: 100%;
+  margin-top: 2em;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  color: #f8ebdf;
 }
 
 .course-card-container {
@@ -109,16 +114,6 @@
   min-height: 16px;
   min-width: 67px;
   white-space: nowrap;
-}
-
-/* new css */
-.my-course-container-wrapper {
-  width: 100%;
-  margin-top: 2em;
-   font-family: 'IBM Plex Sans', sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  color: #f8ebdf;
 }
 
 .my-course-inner-container {
