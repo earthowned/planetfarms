@@ -15,7 +15,6 @@ const Library = () => {
     let data = useSelector((state) => state.listResources)
     let resources = resourceList.resources
     if (data) resources = data.resources
-
     const [newCollection, setNewCollection] = useState(false)
     const [active, setActive] = useState(false)
     const [modalActive, setModalActive] = useState(false)
