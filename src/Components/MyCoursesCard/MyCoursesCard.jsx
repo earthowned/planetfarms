@@ -1,19 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./my-courses-card.css";
 
-const MyCoursesCard = () => {
-  return (
-    <div>
-      {myCourses()} {specialCourse()}
-    </div>
-  );
-};
-
-export default MyCoursesCard;
-
-const myCourses = () => {
-  const courseData = [
+ const courseData = [
     {
       _id: 1,
       name: " Jimmy Beam personal business course",
@@ -21,61 +9,15 @@ const myCourses = () => {
       lesson: "1/8 lessons",
       bgImage: "/img/course-card-1.svg",
     },
-
     {
       _id: 2,
-      name: " Jimmy Beam personal business course",
-      activity: " Last activity: 7 days ago",
-      lesson: "1/8 lessons",
-      bgImage: "/img/course-card-1.svg",
-    },
-    {
-      _id: 3,
       name: " Jimmy Beam personal business course",
       activity: " Last activity: 7 days ago",
       lesson: "1/8 lessons",
       bgImage: "/img/course-card-2.svg",
     },
   ];
-  return (
-    <>
-      <div className="my-course-container border-1px-onyx">
-        <div className="my-courses-title ibmplexsans-semi-bold-quarter-spanish-white-24px">
-          My courses
-        </div>
-        <Link to="/mycoursePage" style={{ textDecoration: "none" }}>
-          <div className="course-card-container">
-            {courseData.map((data) => {
-              return (
-                <div
-                  className="course-card"
-                  style={{ backgroundImage: `url(${data.bgImage})` }}
-                >
-                  <div className="card-text-container">
-                    <div className="course-name-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
-                      {data.name}
-                    </div>
-                    <p className="course-text-2 valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                      {data.activity}
-                    </p>
-                  </div>
-                  <div className="lesson-index">
-                    <div className="lesson-index-bar"></div>
-                    <div className="lessons-number valign-text-middle">
-                      {data.lesson}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </Link>
-      </div>
-    </>
-  );
-};
 
-const specialCourse = () => {
   const specialCourseData = [
     {
       _id: 1,
@@ -97,34 +39,46 @@ const specialCourse = () => {
       bgImage: "/img/special-course-card.svg",
     },
   ];
+
+const MyCoursesCard = () => {
   return (
-    <>
-      <div className="my-course-container border-1px-onyx">
-        <div className="my-courses-title ibmplexsans-semi-bold-quarter-spanish-white-24px">
-          Special for you
-        </div>
-        <div className="course-card-container">
-          {specialCourseData.map((data) => {
-            return (
-              <>
-                <div
-                  className="course-card"
-                  style={{ backgroundImage: `url(${data.bgImage})` }}
-                >
-                  <div className="card-text-container">
-                    <div className="course-name-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
-                      {data.name}
-                    </div>
-                    <p className="course-text-2 valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                      {data.status}
-                    </p>
-                  </div>
-                </div>
-              </>
-            );
-          })}
+    <div className="my-course-container-wrapper">
+      <div className="my-course-inner-container">
+          <h4>My courses</h4>
+          <div className="my-course-card-container">
+        <CourseCard data={courseData}/>
         </div>
       </div>
-    </>
+      <div className="my-course-inner-container">
+          <h4>Special for you</h4>
+          <div className="my-course-card-container">
+        <CourseCard data={specialCourseData}/>
+        </div>
+      </div>
+    </div>
   );
 };
+
+export default MyCoursesCard;
+
+const CourseCard = ({data}) => {
+  return (
+    data && data.map(item => {
+      return (<>
+            <div className="my-course-card" key={item._id} style={{backgroundImage: `url(${item.bgImage})`}}>
+              <div className="my-course-content">
+                <h3>{item.name}</h3>
+                <p>{item.activity || item.status}</p>
+                {
+                  item.lesson && <div className="lesson-progress">
+                      <div className="lesson-completed"></div>
+                      <span>{item.lesson}</span>
+                    </div>
+                }
+              </div>
+            </div>
+        </>
+      )
+    })
+  )
+}
