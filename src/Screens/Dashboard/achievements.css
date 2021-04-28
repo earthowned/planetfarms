@@ -1611,7 +1611,7 @@ progress {
 }
 
 .achivement-level-content {
-  font-family: IBM Plex Sans;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-size: 16px;
   color: #fff;
@@ -1619,7 +1619,6 @@ progress {
 
 .progress-bar-content {
   width: 90%;
-  color: #fff;
   margin: 0 auto;
   color: rgba(248, 235, 223, 1);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
@@ -1628,7 +1627,7 @@ progress {
 }
 
 .achievements-progressbar--header {
-  font-family: IBM Plex Sans;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -1652,7 +1651,6 @@ progress {
 }
 
 @media only screen and (max-width: 1024px) {
-
   .x10-2-0-my-achievements .achievements-hero {
     padding: 1em;
   }
@@ -1666,22 +1664,16 @@ progress {
   .x10-2-0-my-achievements .flex-col-4 {
     margin-left: 0;
     margin-top: 2em;
+    width: 100%;
   }
 
   .x10-2-0-my-achievements .total-achievements {
     margin-left: 0;
     margin-top: 2em;
+    width: 100%;
   }
 
   .x10-2-0-my-achievements .profile {
-    width: 100%;
-  }
-
-  .x10-2-0-my-achievements .flex-col-4 {
-    width: 100%;
-  }
-
-  .x10-2-0-my-achievements .total-achievements {
     width: 100%;
   }
 }
