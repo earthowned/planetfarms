@@ -1,5 +1,5 @@
 'use strict';
-
+//todo relation mapping between collection and resources 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     queryInterface.createTable('collections',{
