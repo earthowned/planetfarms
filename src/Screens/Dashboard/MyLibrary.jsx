@@ -3,6 +3,54 @@ import "./my-library.css";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 import BackButton from '../../Components/BackButton/BackButton';
 
+const articles = [
+  {
+    id: 1,
+    img: "https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png",
+    title: "How to farm in 2020 and don’t lose you business",
+    category: "FARMING",
+    time: "5 min read"
+  },
+  {
+    id: 2,
+    img: "https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-2@2x.png",
+    title: "How to farm in 2020 and don’t lose you business",
+    category: "NEWS",
+    time: "5 min read"
+  },
+  {
+    id: 3,
+    img: "https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png",
+    title: "How to farm in 2020 and don’t lose you business",
+    category: "FARMING",
+    time: "5 min read"
+  },
+]
+
+const videos = [
+  {
+    id: 1,
+    img: "https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png",
+    title: "How to farm in 2020 and don’t lose you business",
+    category: "FARMING",
+    time: "5 min read"
+  },
+  {
+    id: 2,
+    img: "https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-2@2x.png",
+    title: "How to farm in 2020 and don’t lose you business",
+    category: "NEWS",
+    time: "5 min read"
+  },
+  {
+    id: 3,
+    img: "https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png",
+    title: "How to farm in 2020 and don’t lose you business",
+    category: "FARMING",
+    time: "5 min read"
+  },
+]
+
 function MyLibrary() {
   return (
     <DashboardLayout title="My Library">
@@ -11,55 +59,38 @@ function MyLibrary() {
         {/* <div className="frame-2923"> */}
           <BackButton location="/dashboard" />
         {/* </div> */}
-          {/* <component-comming-soon></component-comming-soon> */}
         <div className="my-library border-1px-onyx">
+          <h4 className="article-header">Articles</h4>
           <div className="articles">
-            <div className="flex-col-2">
-              <div className="articles-1 valign-text-middle inter-medium-quarter-spanish-white-16px">Articles</div>
-              <Articles
-                overlapGroup="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png"
-                farming="FARMING"
-                text2="How to farm in 2020 and don’t lose you business"
-                address="5 min read"
-              />
-            </div>
-            <Articles
-              overlapGroup="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-2@2x.png"
-              farming="NEWS"
-              text2="How to farm in 2020 and don’t lose you business"
-              address="5 min read"
-              className="article-"
-            />
-            <Articles
-              overlapGroup="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-3@2x.png"
-              farming="NEWS"
-              text2="How to farm in 2020 and don’t lose you business"
-              address="5 min read"
-              className="article-"
-            />
+            {
+             articles && articles.map(item => {
+                return (
+                  <div className="article-card" key={item.id}>
+                    <div className="article-background" style={{backgroundImage: `url(${item.img})`}}>
+                      <div className="article-content">
+                        <h6>{item.category}</h6>
+                        <h4>{item.title}</h4>
+                        <p>{item.time}</p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
-          <div className="vidoes">
-            <div className="flex-col-2">
-              <div className="videos valign-text-middle inter-medium-quarter-spanish-white-16px">Videos</div>
-              <Videos
-                overlapGroup="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/video-1@2x.png"
-                playButton1="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6062e54b21e052fe79fa34b5/img/vector-15@2x.png"
-                text5="Be happy, find your self! Motivation 2020"
-                className="video-"
-              />
-            </div>
-            <Videos
-              overlapGroup="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/video-2@2x.png"
-              playButton1="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6062e54b21e052fe79fa34b5/img/vector-15@2x.png"
-              text5="Be happy, find your self! Motivation 2020"
-              className="video-"
-            />
-            <Videos
-              overlapGroup="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/video-3@2x.png"
-              playButton1="https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6062e54b21e052fe79fa34b5/img/vector-15@2x.png"
-              text5="Be happy, find your self! Motivation 2020"
-              className="video-"
-            />
+          <h4 className="article-header">Videos</h4>
+          <div className="articles">
+            {
+             videos && videos.map(item => {
+                return (
+                  <div className="article-card" key={item.id}>
+                    <div className="video-background" style={{backgroundImage: `url(${item.img})`}}>
+                        <img src="/img/video-icon.svg" />
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
         </div>
       </div>
