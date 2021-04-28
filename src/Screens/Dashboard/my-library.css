@@ -120,7 +120,7 @@
   margin-top: 1em;
 }
 
-.x10-3-0-my-library .article-header{
+.x10-3-0-my-library .article-header {
   color: #fff;
   font-weight: 500;
   font-size: 16px;
@@ -235,7 +235,7 @@
 .x10-3-0-my-library .flex-col-3 {
   align-items: flex-start;
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   width: 100%;
 }
 
@@ -1311,10 +1311,10 @@
 }
 
 .article-content {
-  font-family: IBM Plex Sans;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: 600;
-  color: #F8EBDF;
+  color: #f8ebdf;
   width: 100%;
   padding: 1em 1.5em;
   position: absolute;
@@ -1347,18 +1347,14 @@
 }
 
 @media only screen and (max-width: 950px) {
-  /* .article-card {
-    max-width: 400px;
-  } */
-.article-card {
-  flex: 0 1 calc(50% - 1em);
-  margin-bottom: 1em;
-}
-  
+  .article-card {
+    flex: 0 1 calc(50% - 1em);
+    margin-bottom: 1em;
+  } 
 }
 
 @media only screen and (max-width: 650px) {
   .article-card {
-  flex: 0 1 100%;
-}
+    flex: 0 1 100%;
+  }
 }
