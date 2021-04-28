@@ -3,9 +3,8 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
   position: relative;
-  width: 1112px;
+  width: 100%;
 }
 
 .my-courses-dashboard {
@@ -15,5 +14,5 @@
   height: auto;
   overflow: hidden;
   position: relative;
-  width: 1440px;
+  width: 100%;
 }
