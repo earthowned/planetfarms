@@ -27,7 +27,7 @@ const ConfirmModal = ({ username, password }) => {
     } catch (error) {
       console.log('error signing in', error)
     }
-}
+  }
   return (
     <>
       <div className="confirm-modal-container">
