@@ -19,7 +19,7 @@
 }
 
 .course-desc {
-   line-height: 24px;
+  line-height: 24px;
   margin-top: 24px;
   color: var(--quarter-spanish-white);
 }
@@ -268,7 +268,7 @@
 }
 
 .lessons-container > h3 {
-  font-family: IBM Plex Sans;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -276,6 +276,7 @@
   color: #fff;
   padding-bottom: 1em;
 }
+
 .course-page-boderline {
   background-color: var(--onyx);
   height: 1px;
@@ -417,7 +418,7 @@
 
 .lesson-desc {
   color: #fff;
-  font-family: IBM Plex Sans;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -498,7 +499,7 @@
 .lesson-card {
   padding: 1em 0;
   max-width: 700px;
-  font-family: IBM Plex Sans;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   color: #fff;
@@ -522,16 +523,16 @@
   font-size: 24px;
 }
 
-.lesson-card-content p{
- font-size: 14px;
- line-height: 1.4;
+.lesson-card-content p {
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .lesson-card-content button {
   outline: none;
   border: none;
   background: none;
-  color: #00C688;
+  color: #00c688;
   font-size: 14px;
   padding: 0;
   cursor: pointer;
@@ -553,16 +554,13 @@
 
   .subscriber-btn {
     margin-bottom: 2em;
+    width: 40%;
+    padding: 0 10px;
+    font-size: 10px;
   }
 
   .course-description {
     width: 100%;
-  }
-
-   .subscriber-btn {
-    width: 40%;
-    padding: 0 10px;
-    font-size: 10px;
   }
 
   .lesson-card {
@@ -594,7 +592,6 @@
     height: 50px;
   }
 }
-
 
 @media screen and (max-width: 450px) {
   .subscriber-btn {
