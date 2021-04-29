@@ -7,7 +7,7 @@ const CourseDescription = () => {
   return (
     <>
       <div className="course-page-container border-1px-onyx">
-        {courseDetail()}
+        <CourseDetail />
         {lessonCourse()}
       </div>
       <MoreCourse />
@@ -17,7 +17,59 @@ const CourseDescription = () => {
 
 export default CourseDescription;
 
-const courseDetail = () => {
+const lessons = [
+   {
+     name: "Lesson 1",
+     unlock: true
+   },
+   {
+     name: "Lesson 2",
+     unlock: false
+   },
+   {
+     name: "Lesson 3",
+     unlock: false
+   },
+   {
+     name: "Lesson 4",
+     unlock: false
+   },
+   {
+     name: "Lesson 5",
+     unlock: false
+   },   
+  ]
+
+const ProgressBar = () => {
+  const lessonLength = lessons.filter(item => item.unlock === true).length;
+  const lessonIndicator = lessonLength * (115 / lessons.length);
+  const accurateIndicator = lessonIndicator === 115 ? 92 : lessonIndicator;
+  const windowWidth = useSizeFinder();
+
+  return (
+     <div className="lesson-bar">
+              {windowWidth > 600 
+              ? <div style={{width: `${accurateIndicator}%`}} className="lesson-progress-indicator"></div> 
+              : <div style={{height: `${accurateIndicator}%`}} className="lesson-progress-indicator"></div> 
+              }
+
+              {
+                lessons && lessons.map(item => {
+                  return (
+                    <div className="lesson-progress-content" key={item}>
+                      <div className={item.unlock ? "circle-wrapper-active" : "circle-wrapper"}>
+                       {item.unlock && <div className="circle"></div>}
+                      </div>
+                      <h4 className={item.unlock ? "lesson-progress-heading-active" : "lesson-progress-heading"}>{item.name}</h4>
+                    </div>
+                  )
+                })
+              }
+            </div>
+  )
+  }
+
+const CourseDetail = () => {
   return (
       <div className="description-course-page">
         <div className="bg-image"></div>
@@ -33,76 +85,9 @@ const courseDetail = () => {
               nulla.
             </p>
 
-            <div className="course-bar">
-              <div className="course-bar-wrapper ">
-                <div className=" green-line-2"></div>
-                <div className="green-line-1"></div>
-                <div className="green-line "></div>
-                <div className="green-line-3"></div>
+            {/* lesson progress bar */}
+           <ProgressBar />
 
-                <div className={` lesson-indicator`}>
-                  <img
-                    className="ellipse-round-icon"
-                    src="/img/ellipse-round-icon.svg" 
-                    alt="ellipse-round-icon"
-                  />
-                  <div className="lesson-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Lesson 2
-                  </div>
-                </div>
-
-                <div className={`lesson-indicator lesson-3 `}>
-                  <img
-                    className="ellipse-round-icon"
-                    src="/img/ellipse-round-icon.svg"
-                    alt="ellipse-round-icon"
-                  />
-                  <div className="lesson-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Lesson 3
-                  </div>
-                </div>
-
-                <div className={`lesson-indicator lesson-4 `}>
-                  <img
-                    className="ellipse-round-icon"
-                    src="/img/ellipse-round-icon.svg"
-                    alt="ellipse-round-icon"
-                  />
-                  <div className="lesson-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Lesson 4
-                  </div>
-                </div>
-
-                <div className="final-test">
-                  <img
-                    className="ellipse-703"
-                    src="/img/ellipse-round-icon.svg"
-                    alt="ellipse-round-icon"
-                  />
-                  <div className="final-test-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Final test
-                  </div>
-                </div>
-                <div className="lesson-1">
-                  <div
-                    className="component-3"
-                    style={{
-                      backgroundImage: `url("/img/ellipse-round-icon.svg")`,
-                    }}
-                  >
-                    <img
-                      className="ellipse-icon"
-                      src="/img/ellipse-icon.svg"
-                      alt="ellipse-icon"
-                    />
-                  </div>
-                  <div className="lesson-1-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                    Lesson 1
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="course-page-boderline"></div>
           </div>
           <div className="secondary-btn-container">
           <Secondarybtn name="You are subscriber" image="/img/down-arrow.svg" />
@@ -154,14 +139,19 @@ const lessonCourse = () => {
               <h3>Lessons</h3>
               {
                 lessonData.map(data => {
-                  return (
-                    <div className="lesson-card">
+                  return (<div className="lesson-card-wrapper">
+                   {data.finish && <div className="lock-lesson">
+                        <img src="/img/lesson-lock.svg" />
+                        <h4>{data.finish}</h4>
+                        </div>}
+                    <div className= {data.finish ? "lesson-card lock-active" : "lesson-card"}>
                       <img className="lesson-card-img" src={data.bgImage} />
                       <div className="lesson-card-content">
                         <h3>{data.name}</h3>
                         <p>{data.description}</p>
                         <button>{data.lesson}</button>
                       </div>
+                    </div>
                     </div>
                   )
                 })
