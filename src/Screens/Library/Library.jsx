@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import LibraryHeader from '../../Components/LibraryHeader/LibraryHeader'
 import './library.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
@@ -6,9 +6,8 @@ import ListView from '../../Components/ListView/ListView'
 import SimpleModal from '../../Components/SimpleModal/SimpleModal'
 import CollectionModal from '../../Components/CollectionModal/CollectionModal'
 import GroupModal from '../../Components/GroupModal/GroupModal'
-import { groupCollection, videos } from './CollectionData'
-import { useDispatch, useSelector } from 'react-redux'
-import { listResources } from '../../actions/resourceActions'
+import { groupCollection } from './CollectionData'
+import { useSelector } from 'react-redux'
 
 const Library = () => {
     let resourceList = useSelector((state) => state.listResources)
