@@ -1,8 +1,8 @@
-const Sequelize = require("sequelize");
-const db = require("../config/database.js");
+const Sequelize = require('sequelize')
+const db = require('../config/database.js')
 
 const Collection = db.define(
-  "collections",
+  'collections',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -23,6 +23,6 @@ const Collection = db.define(
     }
   },
   { timestamps: true }
-);
+)
 
-module.exports = Collection;
+module.exports = Collection
