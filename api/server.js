@@ -4,18 +4,19 @@ const userRoutes = require('./routes/userRouter.js')
 const resourceRoutes = require('./routes/resourceRouter.js')
 const courseRoutes = require('./routes/courseRouter.js')
 const sequelize = require('./config/database.js')
-var cors = require('cors')
+const cors = require('cors')
+const dotenv = require('dotenv')
 
 const PORT = process.env.port || 5000
 
 // middleware
 app.use(express.json())
 app.use(cors())
+dotenv.config()
 
 // routes
 app.use('/api/users', userRoutes)
 app.use('/api/resources', resourceRoutes)
-
 app.use('/api/courses', courseRoutes)
 
 // home page response

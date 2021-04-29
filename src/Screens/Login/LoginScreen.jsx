@@ -1,11 +1,14 @@
-import React, { useState} from "react";
-import {Link, useHistory} from 'react-router-dom';
-import Banner from "../../Components/Banner/Banner";
-import Button from "../../Components/Button/Button";
-import Checkbox from "../../Components/Checkbox/Checkbox";
-import InputComponent from "../../Components/Input/InputComponent";
-import Logo from "../../Components/Logo/Logo";
-import "./login-screen.css";
+import React, { useState, useEffect } from "react"
+import {Link, useHistory} from 'react-router-dom'
+import Banner from "../../Components/Banner/Banner"
+import Button from "../../Components/Button/Button"
+import Checkbox from "../../Components/Checkbox/Checkbox"
+import InputComponent from "../../Components/Input/InputComponent"
+import Logo from "../../Components/Logo/Logo"
+import "./login-screen.css"
+import { Auth, Hub } from 'aws-amplify'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../actions/userAction'
 
 function LoginScreen(props) {
   const {
@@ -13,43 +16,106 @@ function LoginScreen(props) {
     rememberMe,
     text1,
     google,
-    facebook,
-  } = props;
+    facebook
+  } = props
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const [terms, setTerms] = useState(false);
-  const [termsError, setTermsError] = useState(false);
+  const [user, setUser] = useState(null)
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const {  loading, error, userInfo } = userLogin
 
-  const [userError, setUserError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  useEffect(() => {
+    Hub.listen('auth', ({ payload: { event, data } }) => {
+      console.log(event)
+      switch (event) {
+        case 'signIn':
+        case 'cognitoHostedUI':
+          getUser().then(userData => setUser(userData))
+          break
+        case 'signOut':
+          setUser(null)
+          break
+        case 'signIn_failure':
+        case 'cognitoHostedUI_failure':
+          console.log('Sign in failure', data)
+          break
+        default:
+          console.log('Sign in failure')
+      }
+    })
 
-  const history = useHistory();
+    if (userInfo) {
+      history.push('/community-page-news')
+    }
+
+    getUser().then(userData => setUser(userData))
+  }, [history, userInfo])
+
+  function getUser() {
+    return Auth.currentAuthenticatedUser()
+      .then(userData => userData)
+      .catch(() => console.log('Not signed in'));
+  }
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')  
+  const [terms, setTerms] = useState(false)
+  const [termsError, setTermsError] = useState(false)
+  const [userError, setUserError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
+
+
+  async function signIn(username, password) {
+    try {
+        const user = await Auth.signIn(username, password)
+        if (user) history.push('/community-page-news')
+    } catch (error) {
+        const code = error.code
+        switch (code) {
+            case 'NotAuthorizedException':
+              setUserError('NotAuthorizedException')
+              setPasswordError('NotAuthorizedException')
+              return 
+            default:
+                return false
+        }
+    }
+  }
   
   const userChange = (e) => {
-    setUsername(e.target.value);
-    setUserError(false);
+    setUsername(e.target.value)
+    setUserError(false)
      
   }
 
   const passwordChange = (e) => {
-    setPassword(e.target.value);
-    setPasswordError(false);
-}
+    setPassword(e.target.value)
+    setPasswordError(false)
+  }
 
   const handleOnClick = (e) => {
-    
-    if(!username) setUserError(true);
+    if (!username) setUserError(true)
+    if (password.length <6) setPasswordError(true)
+    if (!terms) setTermsError(true)
 
-    if(!password) setPasswordError(true);
+    if(username && password.length > 6) {
+      if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
+        return dispatch(login(username, password))
+      }
+      signIn(username, password)
+    }
+  }
 
-    if (!terms) setTermsError(true);
+  const loginWithFacebook = (e) => {
+    e.preventDefault()
+    Auth.federatedSignIn({provider: 'Facebook'})
+  }
 
-    if(username === "admin" && password === 'password') {
-      history.push('/community-page-news');
-    } 
-  };
+  const loginWithGoogle = (e) => {
+    e.preventDefault()
+    Auth.federatedSignIn({provider: 'Google'})
+  }
 
   return (
     <div className="x01-0-0-login-empty">
@@ -71,7 +137,7 @@ function LoginScreen(props) {
                error={userError} 
                image="/img/user-green-outline.svg" 
                changeHandler={userChange}
-               name="Username"
+               name= { userError === 'NotAuthorizedException' ? "Incorrect username or password." : "Username" }
               autoFocus="autoFocus"
                />
                
@@ -80,7 +146,7 @@ function LoginScreen(props) {
                image="/img/lock-outline.svg" 
                changeHandler={passwordChange}
                password="password"
-               name="Password"
+               name= { passwordError === 'NotAuthorizedException' ? "Incorrect username or password."  : "Password" }
                />
             
             <div className="remember">
@@ -104,7 +170,7 @@ function LoginScreen(props) {
               </div>
               <div className="button-1">
 
-                <a target="_blank" href="https://google.com" className="link-btn google-button border-0-5px-quarter-spanish-white">
+                <button onClick={ loginWithGoogle } className="link-btn google-button border-0-5px-quarter-spanish-white">
                   <div className="logo-googleg-48-dp-1">
                     <div className="overlap-group1-3">
                       
@@ -114,15 +180,13 @@ function LoginScreen(props) {
                   <div className="google valign-text-middle ibmplexsans-semi-bold-gallery-16px">
                     {google}
                   </div>
-                </a>
-
-                <a target="_blank" href="https://facebook.com" className="link-btn facebook-button border-0-5px-quarter-spanish-white">
-                  
+                </button>
+                <button onClick={ loginWithFacebook } className="link-btn facebook-button border-0-5px-quarter-spanish-white">
                   <img className="subtract-1" src="/img/facebook-icon.svg" alt="facebook-icon" />
                   <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
                     {facebook}
                   </div>
-                </a>
+                </button>
               </div>
             </div>
 
@@ -149,11 +213,7 @@ function LoginScreen(props) {
         
       </div>      
     </div>
-  );
+  )
 }
 
-export default LoginScreen;
-
-
-
-
+export default LoginScreen
