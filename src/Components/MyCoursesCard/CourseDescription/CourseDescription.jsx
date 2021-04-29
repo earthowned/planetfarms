@@ -1,4 +1,6 @@
 import React from "react";
+import useSizeFinder from "../../../utils/SizeFinder";
+import Secondarybtn from "../../SecondaryBtn/Secondarybtn";
 import "./course-description.css";
 
 const CourseDescription = () => {
@@ -8,7 +10,7 @@ const CourseDescription = () => {
         {courseDetail()}
         {lessonCourse()}
       </div>
-      {moreCourse()}
+      <MoreCourse />
     </>
   );
 };
@@ -17,13 +19,12 @@ export default CourseDescription;
 
 const courseDetail = () => {
   return (
-    <div>
       <div className="description-course-page">
         <div className="bg-image"></div>
         <div className="course-details-wrapper">
           <div className="course-description">
-            <h1 className="course-page-name">Jimmy Beam personal course</h1>
-            <p className="course-page-description ibmplexsans-regular-normal-quarter-spanish-white-16px">
+            <h1 className="course-title" >Jimmy Beam personal course</h1>
+            <p className="course-desc">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -103,17 +104,11 @@ const courseDetail = () => {
             </div>
             <div className="course-page-boderline"></div>
           </div>
-          <div className="subscriber-btn border-0-5px-quarter-spanish-white">
-            <div className="subscriber-btn-text ibmplexsans-semi-bold-quarter-spanish-white-16px">
-              You are subscriber
-            </div>
-            <div className="layer-2">
-              <img src="/img/chevron-right-outline.svg" className3="course-arrow-icon" alt="right-arrow-icon" />
-            </div>
+          <div className="secondary-btn-container">
+          <Secondarybtn name="You are subscriber" image="/img/down-arrow.svg" />
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
@@ -155,53 +150,28 @@ const lessonCourse = () => {
   ];
 
   return (
-    <>
-      <div className="lessons-container">
-        <div className="lessons-title ibmplexsans-semi-bold-quarter-spanish-white-24px">
-          Lessons
-        </div>
-        {lessonData.map((data) => {
-          return (
-            <>
-              <div className={`${data.className1} : " " `}>
-                <div className={`${data.className2} : "" `}>
-                  <div className={`lesson-intro ${data.className3}  } }`}>
-                    <img className="lesson-image" src={data.bgImage} />
-                    <div className="lesson-name">
-                      <div className="lesson-name-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px">
-                        {data.name}
-                      </div>
-                      <p className="lesson-description valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                        {data.description}
-                      </p>
-                      <div className="see-lesson-text ibmplexsans-semi-bold-caribbean-green-16px">
-                        {data.lesson}
+    <div className="lessons-container">
+              <h3>Lessons</h3>
+              {
+                lessonData.map(data => {
+                  return (
+                    <div className="lesson-card">
+                      <img className="lesson-card-img" src={data.bgImage} />
+                      <div className="lesson-card-content">
+                        <h3>{data.name}</h3>
+                        <p>{data.description}</p>
+                        <button>{data.lesson}</button>
                       </div>
                     </div>
-                  </div>
-                  {data.finish && (
-                    <div className="lock-icon-wrapper">
-                      <div className="lock-outline">
-                        <div className=" icon-lock">
-                          <img src="img/lock-white-outlined.svg" />
-                        </div>
-                      </div>
-                      <div className="unlock-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                        {data.finish}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </>
-          );
-        })}
-      </div>
-    </>
+                  )
+                })
+              }
+    </div>
   );
 };
 
-const moreCourse = () => {
+
+const MoreCourse = () => {
   const moreCourseData = [
     {
       _id: 1,
@@ -236,9 +206,11 @@ const moreCourse = () => {
     },
   ];
 
+  const screenSize = useSizeFinder();
+
   return (
     <>
-      <div className="more-course-feature-container border-1px-onyx">
+      <div className="more-course-feature-container">
         <div className="more-course-feature-title">
           <div className="more-course-title ibmplexsans-semi-bold-quarter-spanish-white-24px">
             Also study this course
@@ -272,7 +244,10 @@ const moreCourse = () => {
           })}
         </div>
 
-        <div className="text valign-text-middle"></div>
+          {
+            screenSize < 650 && <div className="secondary-btn-container margin-left-1"><Secondarybtn name="See all users" /></div>
+          }
+        
       </div>
     </>
   );

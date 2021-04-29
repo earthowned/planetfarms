@@ -14,7 +14,6 @@ const Library = () => {
     let data = useSelector((state) => state.listResources)
     let resources = resourceList.resources
     if (data) resources = data.resources
-
     const [newCollection, setNewCollection] = useState(false)
     const [active, setActive] = useState(false)
     const [modalActive, setModalActive] = useState(false)
@@ -23,7 +22,6 @@ const Library = () => {
         setModalActive(true)
         setActive(false)
     }
-
     
     return (
         <>
@@ -41,6 +39,7 @@ const Library = () => {
            <LibraryHeader setActive={setActive}/>
 
            <div className="list-container">
+              
            <ListView title="Articles" data={resources} 
            setNewCollection={setNewCollection}
            modalActive={modalActive}
