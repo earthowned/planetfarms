@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "test",
-    "password": "pass",
+    "username": "postgres",
+    "password": "root",
     "database": "planetfarms",
     "host": "127.0.0.1",
     "dialect": "postgres"

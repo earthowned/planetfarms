@@ -1,7 +1,7 @@
 const Sequelize=require('sequelize')
 const db=require('../config/database.js')
 
-const Collection=db.define("resources",
+const Collection=db.define("collections",
 {
     name:{
         type:Sequelize.TEXT,
@@ -15,6 +15,6 @@ const Collection=db.define("resources",
     linkId:{
         type:Sequelize.INTEGER
     }
-},{timestamps:false})
+},{timestamps:true})
 
 module.exports=Collection;
