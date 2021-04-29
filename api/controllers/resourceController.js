@@ -9,11 +9,11 @@ const Op = Sequelize.Op
 const getResources = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
-  const order = req.query.order || 'DESC'
+  const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  Resource.findAll({ offset: page, limit: pageSize, ordervalue })
+  // const {offset, limit} = queryUtils.paginate({ page, pageSize })
+  Resource.findAll({ offset: page, limit: pageSize, order: ordervalue })
     .then(resources => {
-      queryUtils.paginate({ page, pageSize })
       res.json({ resources, page, pageSize }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
