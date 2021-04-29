@@ -62,7 +62,7 @@ export const createResource = (newResource) => async (dispatch, getState) => {
     })
 
     const { userLogin: { userInfo } } = getState()
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}`, } }
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, newResource, config)
     dispatch({
       type: RESOURCE_CREATE_SUCCESS,

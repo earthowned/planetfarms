@@ -1,4 +1,3 @@
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     queryInterface.removeColumn('users', 'email', Sequelize.STRING)

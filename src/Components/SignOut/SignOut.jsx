@@ -17,7 +17,7 @@ const SignOutModel = ({setModalActive}) => {
 
   return (
     <>
-      <div className="conform-modal-container">
+      <div className="confirm-modal-container">
           <button className="secondary-btn" onClick={() => signOut()}>Sign Out</button>
       </div>
     </>

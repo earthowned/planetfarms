@@ -11,21 +11,15 @@ import {
 
 export const register = (name, password) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_REGISTER_REQUEST,
-    })
-
-    console.log(name, password)
+    dispatch({ type: USER_REGISTER_REQUEST })
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-      { name, password },
+      { name, password }
     )
-
     dispatch({
       type: USER_REGISTER_SUCCESS,
-      payload: data,
+      payload: data
     })
-
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
@@ -33,34 +27,28 @@ export const register = (name, password) => async (dispatch) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message,
+          : error.message
     })
   }
 }
 
 export const login = (name, password) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_LOGIN_REQUEST,
-    })
-
+    dispatch({ type: USER_LOGIN_REQUEST })
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     }
-
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
       { name, password },
       config
     )
-
     dispatch({
       type: USER_LOGIN_SUCCESS,
-      payload: data,
+      payload: data
     })
-
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
@@ -68,7 +56,7 @@ export const login = (name, password) => async (dispatch) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message,
+          : error.message
     })
   }
 }

@@ -6,7 +6,7 @@ import {useDropzone} from 'react-dropzone'
 import InputComponent from '../../Components/Input/InputComponent'
 import Button from '../../Components/Button/Button'
 import { Auth } from 'aws-amplify'
-import ConformModal from '../../Components/SimpleModal/ConformModal'
+import ConfirmModal from '../../Components/SimpleModal/ConfirmModal'
 
 function CongratulationScreen() {
   const welcomeBack= "Congratulations!"
@@ -106,7 +106,7 @@ const submitForm = (e) => {
         <p className="congratulation-sub-title">{welcomeBack2}</p>
     </div>
 
-    {modalActive && <ConformModal username={ username } password={ password } />}
+    {modalActive && <ConfirmModal username={ username } password={ password } />}
 
       <div className="congratulation-container">
         

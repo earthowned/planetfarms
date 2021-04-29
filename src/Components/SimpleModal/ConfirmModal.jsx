@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import InputComponent from '../Input/InputComponent'
-import './conform-modal.css'
+import './confirm-modal.css'
 import { Auth } from 'aws-amplify'
 import { useHistory } from 'react-router-dom'
 
-const ConformModal = ({ username, password }) => {
+const ConfirmModal = ({ username, password }) => {
   const [code, setCode] = useState('')
   const [codeError, setCodeError] = useState('')
   let history = useHistory()
@@ -30,9 +30,9 @@ const ConformModal = ({ username, password }) => {
 }
   return (
     <>
-      <div className="conform-modal-container">
-          <div className="conform-modal-inner-container">
-          <h4>Please Enter your Conformation code</h4>
+      <div className="confirm-modal-container">
+          <div className="confirm-modal-inner-container">
+          <h4>Please Enter your Confirmation code</h4>
           <InputComponent
             text={code}
             error={codeError}
@@ -41,11 +41,11 @@ const ConformModal = ({ username, password }) => {
             name="Code"
             autoFocus="autoFocus"
           />
-          <button className="secondary-btn" onClick={() => confirmSignUp()}>Conform</button>
+          <button className="secondary-btn" onClick={() => confirmSignUp()}>Confirm</button>
           </div>
       </div>
     </>
   )
 }
 
-export default ConformModal
+export default ConfirmModal
