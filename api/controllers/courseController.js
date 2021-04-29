@@ -1,20 +1,11 @@
 const Courses = require('../models/courseModel.js')
 const Sequelize = require('sequelize')
+const queryUtils = require('../utils/query.js')
 const Op = Sequelize.Op
 
 // @desc    Fetch all course
 // @route   GET /api/courses
 // @access  Public
-const paginate = ({ page, pageSize }) => {
-  const offset = page * pageSize
-  const limit = offset + pageSize
-
-  return {
-    offset,
-    limit
-  }
-}
-
 const getCourses = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
@@ -22,7 +13,7 @@ const getCourses = (req, res) => {
 
   Courses.findAll({ offset: page, limit: pageSize, order: [['title', order]] })
     .then(courses => {
-      paginate({ page, pageSize })
+      // queryUtils.paginate({ page, pageSize })
       res.json({ courses, page, pageSize }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
