@@ -1,4 +1,6 @@
 import React from "react";
+import useSizeFinder from "../../../utils/SizeFinder";
+import Secondarybtn from "../../SecondaryBtn/Secondarybtn";
 import "./course-description.css";
 
 const CourseDescription = () => {
@@ -8,7 +10,7 @@ const CourseDescription = () => {
         {courseDetail()}
         {lessonCourse()}
       </div>
-      {moreCourse()}
+      <MoreCourse />
     </>
   );
 };
@@ -102,14 +104,9 @@ const courseDetail = () => {
             </div>
             <div className="course-page-boderline"></div>
           </div>
-          <button className="subscriber-btn border-0-5px-quarter-spanish-white">
-            <span>
-              You are subscriber
-            </span>
-            <div className="layer-2">
-              <img src="/img/chevron-right-outline.svg" className3="course-arrow-icon" alt="right-arrow-icon" />
-            </div>
-          </button>
+          <div className="secondary-btn-container">
+          <Secondarybtn name="You are subscriber" image="/img/down-arrow.svg" />
+          </div>
         </div>
       </div>
   );
@@ -173,7 +170,8 @@ const lessonCourse = () => {
   );
 };
 
-const moreCourse = () => {
+
+const MoreCourse = () => {
   const moreCourseData = [
     {
       _id: 1,
@@ -208,9 +206,11 @@ const moreCourse = () => {
     },
   ];
 
+  const screenSize = useSizeFinder();
+
   return (
     <>
-      <div className="more-course-feature-container border-1px-onyx">
+      <div className="more-course-feature-container">
         <div className="more-course-feature-title">
           <div className="more-course-title ibmplexsans-semi-bold-quarter-spanish-white-24px">
             Also study this course
@@ -244,7 +244,10 @@ const moreCourse = () => {
           })}
         </div>
 
-        <div className="text valign-text-middle"></div>
+          {
+            screenSize < 650 && <div className="secondary-btn-container margin-left-1"><Secondarybtn name="See all users" /></div>
+          }
+        
       </div>
     </>
   );

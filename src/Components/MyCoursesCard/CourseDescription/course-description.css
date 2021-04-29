@@ -292,6 +292,7 @@
   margin-top: 38px;
   overflow: hidden;
   width: 100%;
+  border: 1px solid var(--onyx);
 }
 
 .more-course-feature-title {
@@ -300,7 +301,7 @@
   height: 120px;
   justify-content: space-between;
   width: 100%;
-  padding: 0 38px;
+  padding: 0 1em;
 }
 
 .more-course-title {
@@ -532,7 +533,17 @@
   background: none;
   color: #00C688;
   font-size: 14px;
+  padding: 0;
   cursor: pointer;
+}
+
+.secondary-btn-container {
+  width: 200px;
+  margin-bottom: 2em;
+}
+
+.margin-left-1 {
+  margin-left: 1em;
 }
 
 @media screen and (max-width: 800px) {
@@ -559,8 +570,30 @@
     flex-direction: column;
     height: auto;
   }
+
+  .lesson-card-content {
+    margin-top: 1.5em;
+  }
+
+  .lesson-card-content p {
+    margin: 1em 0;
+  }
 }
 
+@media screen and (max-width: 650px) {
+  .see-all-users {
+    display: none;
+  }
+
+  .more-course-feature-container {
+    border: none;
+    background: none;
+  }
+
+  .more-course-feature-title {
+    height: 50px;
+  }
+}
 
 
 @media screen and (max-width: 450px) {
@@ -568,5 +601,13 @@
     width: 100%;
     padding: 0 10px;
     font-size: 10px;
+  }
+
+  .secondary-btn-container {
+    width: 100%;
+  }
+
+  .margin-left-1 {
+    margin-left: 0;
   }
 }
