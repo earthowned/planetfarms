@@ -40,7 +40,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
     if(!title) setResourceTitleError(true)
     if(!description) setResourceDescriptionError(true)
     if (title && description) {
-      dispatch(createProduct({title, description}))
+      dispatch(createProduct({title, description,files}))
       setActive(false)
     }
   }
@@ -56,7 +56,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
           <div className="drag-drop" { ...getRootProps() }>
             <input { ...getInputProps() } />
               { files.length > 0 
-                ? <img className="avatar" src={files[0].preview}  alt="files[0].preview" /> 
+                ? <img className="avatar" name="avatar" src={files[0].preview}  alt="files[0].preview" /> 
                 : <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
                   Drag and Drop files in this area or Click Here to attach</h6> }
           </div>
