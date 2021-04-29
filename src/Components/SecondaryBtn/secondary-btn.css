@@ -1,0 +1,14 @@
+.secondary-btn-variant {
+  outline: none;
+  background: rgba(255, 255, 255, 0.16);
+  border: 0.5px solid #f8ebdf;
+  border-radius: 4px;
+  color: #fff;
+  width: 100%;
+  height: 48px;
+  text-align: center;
+}
+
+.secondary-btn-variant img {
+  margin-left: 1em;
+}
