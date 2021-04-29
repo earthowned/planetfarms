@@ -57,8 +57,9 @@ function CommunityGroup({ setCreateGroupModal }) {
             </div>
           </div>
           <div className="flex-row-4">
-            <SearchComponent className={"search-bar border-1px-onyx"} />
-
+            <div className="community-group-search-container">
+            <SearchComponent className="search-bar" />
+            </div>
             {/* <FilterByCategory /> comes here */}
           </div>
           <div className="flex-row-4">
