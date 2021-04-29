@@ -499,8 +499,8 @@
 }
 
 .lesson-card-wrapper {
-   max-width: 700px;
-   position: relative;
+  max-width: 700px;
+  position: relative;
 }
 
 .lesson-card {
@@ -515,7 +515,7 @@
 }
 
 .lesson-card.lock-active {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .lock-lesson {
@@ -532,10 +532,10 @@
   color: #fff;
   margin-top: 10px;
   font-family: IBM Plex Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 24px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .lesson-card img {
@@ -602,7 +602,7 @@ line-height: 24px;
 
 .lesson-progress-indicator {
   height: 1px;
-  background: #00C688;
+  background: #00c688;
   position: absolute;
   z-index: -1;
   top: 25%;
@@ -634,7 +634,7 @@ line-height: 24px;
   height: 40px;
   border-radius: 50%;
   background: #141414;
-  border: 3px solid #00C688;
+  border: 3px solid #00c688;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -646,7 +646,7 @@ line-height: 24px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #00C688;
+  background: #00c688;
 }
 
 .lesson-progress-heading {
@@ -687,7 +687,7 @@ line-height: 24px;
     width: 40px;
   }
 
-  .lock-lesson h4{
+  .lock-lesson h4 {
     font-size: 1.6em;
     margin-top: 1em;
   }
@@ -699,18 +699,18 @@ line-height: 24px;
     align-items: flex-start;
   }
 
-  .lesson-bar::before{
-  width: 1px;
-  height: 90%;
-  top: 1em;
-  left: 1.2em;
+  .lesson-bar::before {
+    width: 1px;
+    height: 90%;
+    top: 1em;
+    left: 1.2em;
   }
 
-  .lesson-progress-indicator{
-  width: 1px;
-  height: 90%;
-  top: 1em;
-  left: 1.2em;
+  .lesson-progress-indicator {
+    width: 1px;
+    height: 90%;
+    top: 1em;
+    left: 1.2em;
   }
 
   .lesson-progress-content {
@@ -727,11 +727,11 @@ line-height: 24px;
 
   .circle-wrapper {
     margin-bottom: 0;
-    }
+  }
 
   .circle-wrapper-active {
     margin-bottom: 0;
-    }
+  }
 }
 
 @media screen and (max-width: 650px) {
