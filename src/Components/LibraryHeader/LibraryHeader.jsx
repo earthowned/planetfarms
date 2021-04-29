@@ -57,17 +57,19 @@ const LibraryHeader = ({setActive}) => {
             </>
             : <>
             <Filter data={data} newFilter="new" />
+            <div className="library-search-container">
             <SearchComponent search = { search } setSearch={ setSearch } className="search search-btn margin-0"/> 
+            </div>
             </>
         }
         </div>
         <div className="library-sub-header">
               <div className="library-sub-header-1">
-              <div className="library-btn-container"><button className="default-btn" onClick={() => setActive(true)}>Add files</button></div>
-              </div>
-              
-              <div className="library-sub-header-2">
-              <Filter />
+                <div className="library-btn-container"><button className="default-btn" onClick={() => setActive(true)}>Add files</button></div>
+                </div>
+                
+                <div className="library-sub-header-2">
+                <Filter />
               </div>
         </div>
         </div>
