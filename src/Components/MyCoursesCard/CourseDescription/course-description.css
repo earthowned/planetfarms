@@ -1,29 +1,32 @@
 .course-details-wrapper {
-  height: 440px;
-  position: relative;
-  width: 1112px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2em;
 }
 
 .course-description {
-  align-items: flex-start;
-  background-color: var(--licorice);
-  display: flex;
-  flex-direction: column;
-  left: 0;
-  min-height: 440px;
-  position: absolute;
-  top: 40px;
-  width: 1112px;
+  width: 60%;
+  color: var(--quarter-spanish-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  letter-spacing: 0;
+}
+
+.course-title {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.course-desc {
+  line-height: 24px;
+  margin-top: 24px;
+  color: var(--quarter-spanish-white);
 }
 
 .course-page-name {
-  color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: 600;
   letter-spacing: 0;
   line-height: 40px;
-  margin-left: 40px;
   min-height: 40px;
   white-space: nowrap;
 }
@@ -31,10 +34,8 @@
 .course-page-description {
   letter-spacing: 0;
   line-height: 24px;
-  margin-left: 40px;
   margin-top: 24px;
   min-height: 120px;
-  width: 534px;
 }
 
 .course-bar-wrapper {
@@ -179,26 +180,27 @@
 
 .subscriber-btn {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
-  align-items: center;
   backdrop-filter: blur(16px) brightness(100%);
   background-color: var(--white2);
   border-radius: 4px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 48px;
-  left: 832px;
-  overflow: hidden;
-  padding: 0 34px;
-  position: absolute;
-  top: 40px;
-  width: 240px;
+  padding: 0 14px;
+  width: 20%;
+}
+
+.subscriber-btn span {
+  color: #fff;
+  font-size: 14px;
 }
 
 .subscriber-btn-text {
   letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
-  min-width: 140px;
-  white-space: nowrap;
+  width: 100%;
 }
 
 .course-arrow-icon {
@@ -221,12 +223,15 @@
   transform: rotate(90deg);
 }
 
+.description-course-page {
+  width: 100%;
+}
+
 .bg-image {
   background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/607fbf4f636b54e6f9b34253/img/bg-image@1x.png);
-  background-position: 50% 50%;
   background-size: cover;
   height: 336px;
-  width: 1112px;
+  width: 100%;
 }
 
 .more-course-container {
@@ -239,8 +244,8 @@
   display: flex;
   height: 136px;
   margin-top: 40px;
-  padding: 24px 50px;
-  width: 1112px;
+  padding: 24px 0;
+  width: 100%;
 }
 
 .course-page-container {
@@ -252,24 +257,30 @@
   height: auto;
   margin-top: 39px;
   overflow: hidden;
-  width: 1114px;
+  width: 100%;
 }
 
 .lessons-container {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  min-height: 696px;
-  padding: 24px 0;
-  position: relative;
-  width: 1112px;
+  width: 100%;
+  padding: 1em 2em;
+}
+
+.lessons-container > h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #fff;
+  padding-bottom: 1em;
 }
 
 .course-page-boderline {
   background-color: var(--onyx);
   height: 1px;
   margin-top: 39px;
-  width: 1112px;
 }
 
 .more-course-feature-container {
@@ -281,34 +292,30 @@
   height: auto;
   margin-top: 38px;
   overflow: hidden;
-  width: 1114px;
+  width: 100%;
+  border: 1px solid var(--onyx);
 }
 
 .more-course-feature-title {
   align-items: center;
   display: flex;
   height: 120px;
-  justify-content: flex-end;
-  min-width: 1112px;
-  padding: 0 38px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1em;
 }
 
 .more-course-title {
   letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
-  min-width: 246px;
-  white-space: nowrap;
 }
 
 .see-all-users {
   letter-spacing: 0;
   line-height: 24px;
-  margin-left: 692px;
   min-height: 24px;
-  min-width: 96px;
   text-decoration: underline;
-  white-space: nowrap;
 }
 
 .more-course {
@@ -409,6 +416,15 @@
   width: 450px;
 }
 
+.lesson-desc {
+  color: #fff;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+
 .see-lesson-text {
   letter-spacing: 0;
   line-height: 24px;
@@ -474,4 +490,121 @@
   min-height: 24px;
   min-width: 167px;
   white-space: nowrap;
+}
+
+.course-description-container {
+  width: 100%;
+}
+
+.lesson-card {
+  padding: 1em 0;
+  max-width: 700px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: #fff;
+  display: flex;
+  height: 160px;
+}
+
+.lesson-card img {
+  margin-right: 2em;
+}
+
+.lesson-card-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.lesson-card-content > h3 {
+  font-size: 24px;
+}
+
+.lesson-card-content p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.lesson-card-content button {
+  outline: none;
+  border: none;
+  background: none;
+  color: #00c688;
+  font-size: 14px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.secondary-btn-container {
+  width: 200px;
+  margin-bottom: 2em;
+}
+
+.margin-left-1 {
+  margin-left: 1em;
+}
+
+@media screen and (max-width: 800px) {
+  .course-details-wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .subscriber-btn {
+    margin-bottom: 2em;
+    width: 40%;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .course-description {
+    width: 100%;
+  }
+
+  .lesson-card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .lesson-card-content {
+    margin-top: 1.5em;
+  }
+
+  .lesson-card-content p {
+    margin: 1em 0;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .see-all-users {
+    display: none;
+  }
+
+  .more-course-feature-container {
+    border: none;
+    background: none;
+  }
+
+  .more-course-feature-title {
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .subscriber-btn {
+    width: 100%;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .secondary-btn-container {
+    width: 100%;
+  }
+
+  .margin-left-1 {
+    margin-left: 0;
+  }
 }
