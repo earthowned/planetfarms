@@ -1,27 +1,28 @@
-const Sequelize=require('sequelize')
-const db=require('../config/database.js')
+const Sequelize = require("sequelize");
+const db = require("../config/database.js");
 
-const Collection = db.define("collections",
-{
+const Collection = db.define(
+  "collections",
+  {
     id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     name: {
-        type: Sequelize.TEXT
+      type: Sequelize.TEXT
     },
     docType: {
-        type: Sequelize.TEXT
+      type: Sequelize.TEXT
     },
     resourceType: {
-        type: Sequelize.TEXT
+      type: Sequelize.TEXT
     },
     linkId: {
-        type: Sequelize.INTEGER
+      type: Sequelize.INTEGER
     }
-},
- {timestamps: true}
-)
+  },
+  { timestamps: true }
+);
 
 module.exports = Collection;
