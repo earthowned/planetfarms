@@ -13,7 +13,7 @@ const getCourses = (req, res) => {
 
   Courses.findAll({ offset: page, limit: pageSize, order: [['title', order]] })
     .then(courses => {
-      //queryUtils.paginate({ page, pageSize })
+      // queryUtils.paginate({ page, pageSize })
       res.json({ courses, page, pageSize }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
