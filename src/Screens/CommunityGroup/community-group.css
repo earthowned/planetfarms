@@ -1309,3 +1309,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.community-group-search-container {
+  width: 60%;
+}
