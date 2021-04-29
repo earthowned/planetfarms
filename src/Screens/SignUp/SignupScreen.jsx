@@ -53,7 +53,7 @@ function SignupScreen(props) {
     if (!terms) setTermsError(true)
 
     if (username && password && terms) {
-      if (process.env.REACT_APP_LOCAL_DATABASE_AUTH === true) {
+      if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
         return dispatch(register(username, password))
       }
       history.push("/register-complete", { username, password })

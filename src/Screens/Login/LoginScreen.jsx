@@ -100,7 +100,7 @@ function LoginScreen(props) {
     if (!terms) setTermsError(true)
 
     if(username && password.length > 6) {
-      if (process.env.REACT_APP_LOCAL_DATABASE_AUTH === true) {
+      if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
         return dispatch(login(username, password))
       }
       signIn(username, password)
