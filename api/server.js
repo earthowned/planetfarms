@@ -3,6 +3,7 @@ const app = express()
 const userRoutes = require('./routes/userRouter.js')
 const resourceRoutes = require('./routes/resourceRouter.js')
 const courseRoutes = require('./routes/courseRouter.js')
+const newsRoutes = require('./routes/newsRouter')
 const sequelize = require('./config/database.js')
 const cors = require('cors')
 const dotenv = require('dotenv')
@@ -18,6 +19,7 @@ dotenv.config()
 app.use('/api/users', userRoutes)
 app.use('/api/resources', resourceRoutes)
 app.use('/api/courses', courseRoutes)
+app.use('/api/news', newsRoutes)
 
 // home page response
 app.get('/', (request, response) => {
