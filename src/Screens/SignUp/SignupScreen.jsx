@@ -122,9 +122,9 @@ function SignupScreen(props) {
               <Button clickHandler={registerUser} name="Sign Up" />
             </div>
             <div className="o-auth-container">
-              <div className="text-2 ibmplexsans-regular-normal-quarter-spanish-white-16px">
+              <h4 className="o-auth-heading">
                 {text2}
-              </div>
+              </h4>
               <div className="icon-container">
                 <a
                   href="https://www.facebook.com/"
@@ -158,8 +158,8 @@ function SignupScreen(props) {
               </div>
             </div>
             <div className="signup-option">
-              <p className="text-3 ibmplexsans-semi-bold-white-16px">
-                <span className="span0-hsNx6X">Already have an Account?</span>
+              <p className="">
+                Already have an Account?
               </p>
               <Link className="span2-hsNx6X" to="/">
                 Sign In
