@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Button from "../../Components/Button/Button";
 import CommunityGroupCard from "../../Components/CommunityGroupCard/CommunityGroupCard";
+import Filter from "../../Components/Filter/Filter";
 import FilterByCategory from "../../Components/FilterByCategory/FilterByCategory";
 import NewsCreateModal from "../../Components/NewsCreateModal/NewsCreateModal";
 import SearchComponent from "../../Components/SearchComponent/SearchComponent";
@@ -37,8 +39,10 @@ function CommunityGroup({ setCreateGroupModal }) {
     <>
       <div className="x05-0-0-all-groups">
         <div className="group-flex-col-4">
+
+          <div className="community-group-main-header-container">
           <div className="flex-row-5">
-            <div style={{display:"flex",justifyContent:"space-between"}}>
+            <div id="community-group-link-header" style={{justifyContent:"space-between"}}>
                <div className="all-groups-1 border-1px-quarter-spanish-white">
               <div className="all-groups ibmplexsans-semi-bold-shark-16px">
                 All Groups
@@ -50,19 +54,19 @@ function CommunityGroup({ setCreateGroupModal }) {
               </div>
             </div>
             </div>
-            <div className="create-group">
-              <div className="create-group-1 ibmplexsans-semi-bold-shark-16px" onClick={() => handleClickCreate()}>
-                Create Group
-              </div>
-            </div>
-          </div>
-          <div className="flex-row-4">
             <div className="community-group-search-container">
             <SearchComponent className="search-bar" />
             </div>
-            {/* <FilterByCategory /> comes here */}
           </div>
-          <div className="flex-row-4">
+          <div className="button-filter-container">
+            <div className="community-group-header-btn-container">
+            <Button name="Create group"/>
+            </div>
+            {/* <FilterByCategory /> comes here */}
+            <Filter />
+          </div>
+          </div>
+          <div className="community-group-container">
             <CommunityGroupCard location={"/community-group-view-page"} />
             <CommunityGroupCard location={"/community-group-view-page"} />
             <CommunityGroupCard location={"/community-group-view-page"} />
