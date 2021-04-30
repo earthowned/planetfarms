@@ -118,7 +118,7 @@ const DashboardLayout = ({title, children}) => {
                    <img className="mobile-logo" src="/img/logo.svg" alt="text logo of planet farm" />
                     {/* <img src="/img/p-icon.svg" alt="p-icon" /> */}
                     {/* <img src="/img/grid-icon.svg" alt="grid-icon" /> */}
-                    <img src="/img/mobile-user.svg" alt="user-icon" />
+                    {/* <img src="/img/mobile-user.svg" alt="user-icon" /> */}
                 </div>
                 <h1>{title}</h1>
                 <div >{children}</div>
