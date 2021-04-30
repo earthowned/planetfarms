@@ -5,6 +5,10 @@
   padding: 0 1em;
 }
 
+.logo {
+  width: 100%;
+}
+
 .logo-container.active {
   left: 5%;
 }

@@ -115,9 +115,10 @@ const DashboardLayout = ({title, children}) => {
             <Sidebar mobileView="mobileView" burgerActive={burgerActive}/>
             <div className="layout-container">
                 <div className="dashboard-header">
-                    <img src="/img/p-icon.svg" alt="p-icon" />
-                    <img src="/img/grid-icon.svg" alt="grid-icon" />
-                    { modalActive ? < SignOutModel setModalActive={setModalActive} /> : <img onClick={(e) => SignOutModal(e)} src="/img/mobile-user.svg" alt="user-icon" /> }
+                   <img className="mobile-logo" src="/img/logo.svg" alt="text logo of planet farm" />
+                    {/* <img src="/img/p-icon.svg" alt="p-icon" /> */}
+                    {/* <img src="/img/grid-icon.svg" alt="grid-icon" /> */}
+                    <img src="/img/mobile-user.svg" alt="user-icon" />
                 </div>
                 <h1>{title}</h1>
                 <div >{children}</div>
