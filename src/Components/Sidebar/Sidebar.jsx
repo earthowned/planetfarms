@@ -29,12 +29,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
         <img src="/img/sidebar-arrow-icon.svg" />
       </button>
       <div className="logo-container">
-        <div className="img-container">
-          <img src="/img/logo.svg" />
-        </div>
-        <div className="img-container-2">
-          <img src="/img/grid-icon.svg" />
-        </div>
+        <img className="logo" src="/img/logo.svg" />
       </div>
 
       <ul className="list-container">
