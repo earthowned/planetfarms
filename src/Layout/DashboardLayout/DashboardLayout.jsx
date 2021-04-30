@@ -1,25 +1,23 @@
 import {useState, useEffect} from 'react'
 import HeaderComponent from '../../Components/Header/HeaderComponent'
 import Sidebar from '../../Components/Sidebar/Sidebar'
-import "./dashboard.css"
+import "./dashboard.css";
 
-import {Link, useLocation} from 'react-router-dom'
-import MessageDropdown from '../../Components/MessageDropdown/MessageDropdown'
+import {Link, useLocation} from 'react-router-dom';
+import MessageDropdown from '../../Components/MessageDropdown/MessageDropdown';
 import {TABLET_SIZE} from '../../constants/sizeConstants'
 
 // importing custom hooks sizefinder to calculate window width from utils
-import useSizeFinder from '../../utils/SizeFinder'
-import SignOutModel from '../../Components/SignOut/SignOut'
+import useSizeFinder from '../../utils/SizeFinder';
 
 const DashboardLayout = ({title, children}) => {
-    const [toggle, setToggle] = useState(true)
-    const [sidebar, setSidebar] = useState(false)
+    const [toggle, setToggle] = useState(true);
+    const [sidebar, setSidebar] = useState(false);
 
-    const [burgerActive, setBurgerActive] = useState(false)
-    const [notificationActive, setNotificationActive] = useState(false)
-    const [messageActive, setMessageActive] = useState(false)
-    const [userActive, setUserActive] = useState(false)
-    const [modalActive, setModalActive] = useState(false)
+    const [burgerActive, setBurgerActive] = useState(false);
+    const [notificationActive, setNotificationActive] = useState(false);
+    const [messageActive, setMessageActive] = useState(false);
+    const [userActive, setUserActive] = useState(false);
 
   const {pathname} = useLocation();
 
@@ -75,10 +73,6 @@ const DashboardLayout = ({title, children}) => {
     setUserActive(false)
   }
 
-  function SignOutModal(e) {
-    setModalActive(true)
-  }
-
   function activeUser () {
     setUserActive(!userActive)
 
@@ -115,9 +109,10 @@ const DashboardLayout = ({title, children}) => {
             <Sidebar mobileView="mobileView" burgerActive={burgerActive}/>
             <div className="layout-container">
                 <div className="dashboard-header">
-                    <img src="/img/p-icon.svg" alt="p-icon" />
-                    <img src="/img/grid-icon.svg" alt="grid-icon" />
-                    { modalActive ? < SignOutModel setModalActive={setModalActive} /> : <img onClick={(e) => SignOutModal(e)} src="/img/mobile-user.svg" alt="user-icon" /> }
+                   <img className="mobile-logo" src="/img/logo.svg" alt="text logo of planet farm" />
+                    {/* <img src="/img/p-icon.svg" alt="p-icon" /> */}
+                    {/* <img src="/img/grid-icon.svg" alt="grid-icon" /> */}
+                    <img src="/img/mobile-user.svg" alt="user-icon" />
                 </div>
                 <h1>{title}</h1>
                 <div >{children}</div>
@@ -128,14 +123,17 @@ const DashboardLayout = ({title, children}) => {
               <div onClick={() => activeUser()} className={`mobile-tab-wrapper ${userActive && "active"} `}>
                 <Link to="/dashboard"><UserMenu activeUser={activeUser} /></Link>
               </div>
+
               <div onClick={() => activeMessage()} className={`mobile-tab-wrapper ${messageActive && "active"}`}>
                 <MessageMenu activeMessage={activeMessage}/>
               </div>
+                    
               <div onClick={() => activeNotification()} className={`mobile-tab-wrapper ${notificationActive && "active"}`}> 
                 <NotificationMenu activeNotification={activeNotification} />
               </div>
-              <div onClick={(e) => { activeBurger(); SignOutModal(e) } } className={`mobile-tab-wrapper ${burgerActive && "active"}`}>
-                <Hamburger activeBurger={activeBurger} />
+                    
+              <div onClick={() => activeBurger()} className={`mobile-tab-wrapper ${burgerActive && "active"}`}>
+                <Hamburger />
               </div>
             </div>
             </>

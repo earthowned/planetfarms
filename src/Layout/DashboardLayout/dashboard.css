@@ -19,6 +19,10 @@
   justify-content: space-between;
 }
 
+.mobile-logo {
+  width: 200px;
+}
+
 .footer-nav {
   position: fixed;
   z-index: 5000;
@@ -73,4 +77,9 @@
   .layout-container {
     padding: 1em 1.5em;
   }
+
+  .mobile-logo {
+  width: 150px;
 }
+}
+
