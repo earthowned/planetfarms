@@ -8,8 +8,13 @@ import {
   NEWS_SEARCH_FAIL,
   NEWS_CREATE_REQUEST,
   NEWS_CREATE_SUCCESS,
-  NEWS_CREATE_FAIL
+  NEWS_CREATE_FAIL,
+  NEWS_DELETE_REQUEST,
+  NEWS_DELETE_SUCCESS,
+  NEWS_DELETE_FAIL
 } from '../constants/newsConstants'
+
+import logout from './userAction'
 
 export const listNews = (sort = '', pageNumber = '') => async (
   dispatch
@@ -76,6 +81,34 @@ export const createNews = (newNews) => async (dispatch, getState) => {
     dispatch({
       type: NEWS_CREATE_FAIL,
       payload: message
+    })
+  }
+}
+
+export const deleteNews = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: NEWS_DELETE_REQUEST,
+    })
+
+    const { userLogin: { userInfo } } = getState()
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}`, config)
+
+    dispatch({
+      type: NEWS_DELETE_SUCCESS,
+    })
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: NEWS_DELETE_FAIL,
+      payload: message,
     })
   }
 }

@@ -93,9 +93,9 @@ const getNewsById = (req, res) => {
 // @access  Public
 const deleteNews = (req, res) => {
   const id = req.params.id
-  News.findByPk(id).then(resource => {
-    if (resource) {
-      const { id } = resource
+  News.findByPk(id).then(news => {
+    if (news) {
+      const { id } = news
       News.destroy({ where: { id } })
         .then(() => res.json({ message: 'News Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
