@@ -36,7 +36,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
     setResourceDescriptionError(false)
   }
 
-  const handleAddResource = (e) => {
+  const handleAddResource = async (e) => {
     e.preventDefault()
     if (!title) setResourceTitleError(true)
     if (!description) setResourceDescriptionError(true)
@@ -44,6 +44,12 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
       dispatch(createResource({ title, description, files }))
       setActive(false)
     }
+  }
+
+ 
+  const fileChange=(e)=>{
+    setFiles(e.target.files[0])
+
   }
 
   return (
@@ -55,7 +61,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
             <img src="/img/close-outline.svg" onClick={() => setActive(false)} alt="close-icon" />
           </div>
           <div className="drag-drop" { ...getRootProps() }>
-            <input { ...getInputProps() } />
+            <input { ...getInputProps() } onChange={(e)=>fileChange(e)} />
               { files.length > 0 
                 ? <img className="avatar" name="avatar" src={files[0].preview}  alt="files[0].preview" /> 
                 : <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
