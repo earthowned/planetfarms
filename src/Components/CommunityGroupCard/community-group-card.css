@@ -23,6 +23,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 2em;
 }
 
 .farmers {
@@ -108,10 +109,6 @@
   margin-top: 1em;
 }
 
-.card-text-container {
-  margin-bottom: 2em;
-}
-
 .community-group-card-inner-content {
   width: 100%;
   padding: 2em;
@@ -136,7 +133,7 @@
 }
 
 @media only screen and (max-width: 1024px) {
-   .card-1 {
+  .card-1 {
     flex-basis: 45%;
   }
 
