@@ -10,10 +10,8 @@ import { groupCollection } from './CollectionData'
 import { useSelector } from 'react-redux'
 
 const Library = () => {
-    let resourceList = useSelector((state) => state.listResources)
-    let data = useSelector((state) => state.listResources)
-    let resources = resourceList.resources
-    if (data) resources = data.resources
+    const resourceList = useSelector((state) => state.listResources)
+    const resources = resourceList.searchResources ? resourceList.searchResources : resourceList.resources
     const [newCollection, setNewCollection] = useState(false)
     const [active, setActive] = useState(false)
     const [modalActive, setModalActive] = useState(false)
