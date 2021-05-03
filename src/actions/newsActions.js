@@ -14,7 +14,7 @@ import {
   NEWS_DELETE_FAIL
 } from '../constants/newsConstants'
 
-import logout from './userAction'
+import { logout } from './userAction'
 
 export const listNews = (sort = '', pageNumber = '') => async (
   dispatch
@@ -88,7 +88,7 @@ export const createNews = (newNews) => async (dispatch, getState) => {
 export const deleteNews = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: NEWS_DELETE_REQUEST,
+      type: NEWS_DELETE_REQUEST
     })
 
     const { userLogin: { userInfo } } = getState()
@@ -96,7 +96,7 @@ export const deleteNews = (id) => async (dispatch, getState) => {
     await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}`, config)
 
     dispatch({
-      type: NEWS_DELETE_SUCCESS,
+      type: NEWS_DELETE_SUCCESS
     })
   } catch (error) {
     const message =
@@ -108,7 +108,7 @@ export const deleteNews = (id) => async (dispatch, getState) => {
     }
     dispatch({
       type: NEWS_DELETE_FAIL,
-      payload: message,
+      payload: message
     })
   }
 }

@@ -11,7 +11,7 @@ const getNews = (req, res) => {
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
   News.findAll({ offset: page, limit: pageSize, order: ordervalue })
-    .then(news =>res.json({ news, page, pageSize }).status(200))
+    .then(news => res.json({ news, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
 
@@ -114,8 +114,7 @@ const searchNewsTitle = (req, res) => {
   const order = req.query.order || 'ASC'
 
   News.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
-    .then(title => { console.log(title)
-       res.json({ title }).status(200)})
+    .then(title => res.json({ title }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 
