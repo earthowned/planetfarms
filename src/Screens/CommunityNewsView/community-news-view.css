@@ -87,20 +87,6 @@
   color: #fff;
 }
 
-.x03-1-0-news-page .button-secondary-default-1 {
-  -webkit-backdrop-filter: blur(16px) brightness(100%);
-  align-items: center;
-  backdrop-filter: blur(16px) brightness(100%);
-  background-color: rgba(255, 255, 255, 0.16);
-  border-radius: 4px;
-  display: flex;
-  height: 48px;
-  justify-content: flex-end;
-  min-width: 139px;
-  padding: 0 22px;
-  color: #fff;
-}
-
 .border-0-5px-quarter-spanish-white {
   border: 0.5px solid var(--quarter-spanish-white);
 }

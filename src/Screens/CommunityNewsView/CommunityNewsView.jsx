@@ -53,7 +53,7 @@ function App() {
         </p>
         </div>
         <div className="button-row-3">
-          <div className="button-secondary-default-1 border-0-5px-quarter-spanish-white">
+          <div className="button-secondary-default border-0-5px-quarter-spanish-white">
             <img className="f1" src="/img/facebook-share-icon.svg" alt="facebook-icon" />
             <div className="your-business-goals valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px">
               Repost
