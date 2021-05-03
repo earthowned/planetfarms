@@ -13,7 +13,16 @@ You can install dependencies by `npm install` in your Frontend and after that yo
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs only Frontend in the development mode.\
+You can enter `npm start` in the base directory.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+Runs only Backend in the development mode.\
+You can go to Back by `cd api` and enter `npm start`.\
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
+
+Runs Backend as well as Frontend in the development mode.\
+You can enter `npm run dev` in the base directory.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\

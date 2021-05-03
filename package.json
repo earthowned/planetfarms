@@ -24,13 +24,16 @@
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
+    "concurrently": "^6.0.2",
     "parcel-plugin-static-files-copy": "^2.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api": "npm start --prefix api",
+    "dev": "concurrently \"npm run start\" \"npm run api\""
   },
   "eslintConfig": {
     "extends": [
