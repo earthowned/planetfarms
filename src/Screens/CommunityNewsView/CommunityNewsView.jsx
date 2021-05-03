@@ -29,7 +29,6 @@ function App() {
           Many of these are concerned with what this fuel really is and how big a dent it makes in our lives and
           pockets.
           <br />
-          <br />
           Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and
           grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic beverages obtained
          (gin, vodka, and whiskey) or sugarcane (rums). It’s also a
@@ -43,7 +42,6 @@ function App() {
           countries. However, those  of fuel have many questions about Ethanol.
           Many of these are concerned with what this fuel really is and how big a dent it makes in our lives and
           pockets.
-          <br />
           <br />
           Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and
           grain or indirectly from paper waste. It’s also in most alcoholic beverages obtained
