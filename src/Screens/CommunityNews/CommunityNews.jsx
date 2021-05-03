@@ -10,12 +10,12 @@ import useSizeFinder from "../../utils/SizeFinder";
 import { useDispatch, useSelector } from 'react-redux'
 import { searchNews, listNews } from "../../actions/newsActions";
 
-function App() {
+function CommunityNews() {
   const [addModal, setAddModal] = useState(false);
   return <DashboardLayout title="Ragrarians News">{addModal && <NewsAddModal setAddModal={setAddModal} />}<CommunityPagenews {...X0300CommunityPagenewsData} setAddModal={setAddModal} /></DashboardLayout>;
 }
 
-export default App;
+export default CommunityNews
 
 const CommunityRight = ({ text, farming, people, nature, carsIndustry, mediaNews, seeAllTopics }) => {
 
@@ -81,14 +81,12 @@ function CommunityPagenews(props) {
           <button className="default-btn default-btn-variation" onClick={() => setAddModal(true)}>{addNews}</button>
         </div>
         <div className="community-news-cards">
-          <Link to="/community-page-news-view">
             <NewsCard news={news} />
-          </Link>
         </div>
         {(windowWidth < 1200) ? <Filter /> : <CommunityRight text={text22} farming={farming} people={people} nature={nature} carsIndustry={carsIndustry} mediaNews={mediaNews} seeAllTopics={seeAllTopics} />}
       </div>
     </>
-  );
+  )
 }
 
 const X0300CommunityPagenewsData = {
@@ -101,4 +99,4 @@ const X0300CommunityPagenewsData = {
   carsIndustry: "Cars industry",
   mediaNews: "Media news",
   seeAllTopics: "See all topics",
-};
+}

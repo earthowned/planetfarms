@@ -19,7 +19,7 @@ import UserCollection from "./Screens/Library/UserCollection/UserCollection";
 import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
 import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
 import CommunityPagenews from "./Screens/CommunityNews/CommunityNews";
-import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
+import CommunityNewsViewPage from './Screens/CommunityNewsView/CommunityNewsView'
 import NewsAdd from "./Screens/CommunityNews/NewsAdd/NewsAdd";
 import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
 import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
@@ -132,7 +132,7 @@ function App() {
          <NewsAdd />
         </Route>
         <Route path="/community-page-news-view">
-         <X0300CommunityPageViewsnews />
+         <CommunityNewsViewPage />
          </Route>
          <Route path="/community-switching">
           <AllCommunitiesCard />
