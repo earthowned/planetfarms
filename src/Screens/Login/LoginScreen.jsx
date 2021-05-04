@@ -163,32 +163,13 @@ function LoginScreen(props) {
               </a>
             </div>
 
-            {/* o-auth */}
-            <div className="oauth-container">
-              <div className="text-1 ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                {text1}
-              </div>
-              <div className="button-1">
-
-                <button onClick={ loginWithGoogle } className="link-btn google-button border-0-5px-quarter-spanish-white">
-                  <div className="logo-googleg-48-dp-1">
-                    <div className="overlap-group1-3">
-                      
-                      <img className="subtract-1" src="/img/google-icon.svg" alt="google-icon" />
-                    </div>
-                  </div>
-                  <div className="google valign-text-middle ibmplexsans-semi-bold-gallery-16px">
-                    {google}
-                  </div>
-                </button>
-                <button onClick={ loginWithFacebook } className="link-btn facebook-button border-0-5px-quarter-spanish-white">
-                  <img className="subtract-1" src="/img/facebook-icon.svg" alt="facebook-icon" />
-                  <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
-                    {facebook}
-                  </div>
-                </button>
-              </div>
-            </div>
+            <OauthContainer 
+            loginWithFacebook={loginWithFacebook}
+            loginWithGoogle={loginWithGoogle}
+            google={google}
+            facebook={facebook}
+            name={text1}
+            />
 
             <div className="signup-option">
               <p className="ibmplexsans-regular-normal-white-16px">
@@ -197,12 +178,18 @@ function LoginScreen(props) {
               </p>
               <Link to="/register" className="span2">Become a member!</Link>
             </div>
-
           </div>
         </form>
-        
+        <BannerContainer />
+      </div>      
+    </div>
+  )
+}
 
-        {/* banner-container */}
+export default LoginScreen
+
+function BannerContainer () {
+  return(
         <div className="banner-container">
           <div className="banner-images">
             <div className="overlap-group1">
@@ -210,10 +197,24 @@ function LoginScreen(props) {
             </div>
           </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         </div>
-        
-      </div>      
-    </div>
   )
 }
 
-export default LoginScreen
+function OauthContainer ({loginWithGoogle, loginWithFacebook, google, facebook, name}) {
+  return (
+            <div className="oauth-container">
+              <h4>{name}</h4>
+              <div className="o-auth-btn-wrapper">
+                  <button onClick={ loginWithGoogle } className="google-btn">
+                    <img src="/img/google-icon.svg" alt="google-icon" />
+                    <h4>{google}</h4>
+                  </button>
+
+                  <button onClick={ loginWithFacebook } className="facebook-btn">
+                    <img src="/img/facebook-icon.svg" alt="facebook-icon" />
+                    <h4>{google}</h4>
+                  </button>
+              </div>
+            </div>
+  )
+}
