@@ -128,7 +128,7 @@ function App() {
         <Route exact path="/community-page-news">
          <CommunityPagenews />
         </Route>
-        <Route path="/community-page-news/:id">
+        <Route path="/community-page-news/:title/:category">
          <NewsAdd />
         </Route>
         <Route path="/community-page-news-view">
