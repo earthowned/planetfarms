@@ -1,9 +1,10 @@
-import { useState } from "react";
-import "./news-create-modal.css";
-import { useDropzone } from "react-dropzone";
-import { Link } from "react-router-dom";
-import Button from "../Button/Button";
-import CreateVideo from "./NewsCreateVideo";
+import { useState } from "react"
+import "./news-create-modal.css"
+import { useDropzone } from "react-dropzone"
+import { Link } from "react-router-dom"
+import Button from "../Button/Button"
+import CreateVideo from "./NewsCreateVideo"
+import CreateImage from "./NewsCreateImage"
 
 const NewsCreateModal = ({
   type,
@@ -16,9 +17,9 @@ const NewsCreateModal = ({
   groupActive,
   setGroupActive,
   groupEditActive,
-  setGroupEditActive,
+  setGroupEditActive
 }) => {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([])
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -159,37 +160,6 @@ const EditGroup = ({
   );
 };
 
-const CreateImage = ({
-  getRootProps,
-  getInputProps,
-  files,
-  imageActive,
-  setImageActive,
-}) => {
-  return (
-    <>
-      {imageActive && (
-        <div className="collection-modal-container">
-          <div className="collection-modal-inner-container">
-            <CollectionModalHeader
-              title="Add photo"
-              setImageActive={setImageActive}
-            />
-
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
-
-            <PhotoInput />
-            <Button name="Add block" />
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
 
 function TextInputContainer() {
   return (
@@ -232,16 +202,7 @@ const CollectionModalHeader = ({
 }) => {
   return (
     <>
-      {title === "Add video" ? (
-        <div className="collection-modal-header">
-          <h4>{title}</h4>
-          <img
-            src="/img/close-outline.svg"
-            alt="close-icon"
-            onClick={() => setVideoActive(false)}
-          />
-        </div>
-      ) : title === "Create Group" ? (
+      {title === "Create Group" ? (
         <div className="collection-modal-header">
           <h4>{title}</h4>
           <img
@@ -257,15 +218,6 @@ const CollectionModalHeader = ({
             src="/img/close-outline.svg"
             alt="close-icon"
             onClick={() => setGroupEditActive(false)}
-          />
-        </div>
-      ) : title === "Add photo" ? (
-        <div className="collection-modal-header">
-          <h4>{title}</h4>
-          <img
-            src="/img/close-outline.png"
-            alt="close-icon"
-            onClick={() => setImageActive(false)}
           />
         </div>
       ) : (
@@ -323,22 +275,6 @@ const GroupEditContainer = () => {
   );
 };
 
-function PhotoInput() {
-  return (
-    <>
-      <div className="description">
-        <label>Add photo description</label> <ToggleSwitch />
-      </div>
-
-      <div className="photo-input-container">
-        <input
-          className="default-input-variation"
-          placeholder="Photo description"
-        ></input>
-      </div>
-    </>
-  );
-}
 
 const CreateText = ({ textActive, setTextActive }) => {
   return (
@@ -356,21 +292,7 @@ const CreateText = ({ textActive, setTextActive }) => {
         </div>
       )}
     </>
-  );
-};
-
-function ToggleSwitch() {
-  const [active, setActive] = useState(false);
-  return (
-    <>
-      <div className="toggle-main-container">
-        <div
-          onClick={() => setActive(!active)}
-          className={`${active ? "toggle-item active" : "toggle-item"}`}
-        ></div>
-        <div className="toggle-container"></div>
-      </div>
-    </>
-  );
+  )
 }
-export default NewsCreateModal;
+
+export default NewsCreateModal
