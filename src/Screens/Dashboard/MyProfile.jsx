@@ -7,6 +7,7 @@ import {
   ContactInformation,
   PersonalInformation,
 } from "../../Components/ProfileFormCard/ProfileFormCard";
+import EditInformation from "../../Components/EditInformation/EditInformation";
 
 function MyProfile() {
   return (
@@ -22,7 +23,7 @@ function MyProfile() {
               <ContactInformation />
               <AdditionalInformation />
             </div>
-            <EditInformation />
+            <EditInformation image="/img/DashboardProfilePic.png"/>
           </div>
         </div>
       </div>
@@ -32,11 +33,3 @@ function MyProfile() {
 
 export default MyProfile;
 
-function EditInformation() {
-  return (
-   <div className="edit-information-container">
-     <img src="/img/DashboardProfilePic.png" />
-     <button className="edit-btn">Edit Information</button>
-   </div>
-  );
-}

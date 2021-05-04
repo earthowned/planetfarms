@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Backbtn from "../../Components/BackButton/BackButton";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 // import DataField from '../../Components/ProfileFormCard/ProfileFormCard'
 import {
@@ -9,6 +7,8 @@ import {
   AdditionalInformation,
 } from "../../Components/ProfileFormCard/ProfileFormCard";
 import "./community-member-profile.css";
+import BackButton from "../../Components/BackButton/BackButton";
+import EditInformation from "../../Components/EditInformation/EditInformation";
 
 function App() {
   return (
@@ -20,41 +20,22 @@ function App() {
 
 export default App;
 
-const ProfileImage = () => {
-  return (
-    <div className="flex-col-4">
-      <div
-        className="profile-image"
-        style={{ backgroundImage: `url("/img/profile-image.svg") ` }}
-      ></div>
-      <div className="button">
-        <div className="msg-btn border-0-5px-quarter-spanish-white">
-          <div className="message-btn-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-            Write message
-          </div>
-        </div>
-        <div className="default-btn-btn">
-          <div className="follow ibmplexsans-semi-bold-shark-16px"> Follow</div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 function CommunityMembersProfile() {
   return (
-    <div className="x08-1-0-community-members">
-      <div className="flex-col-6">
-        <Backbtn location={"/community-members"} />
-        <div className="profie-details border-1px-onyx">
-          <div className="information-container">
-            <PersonalInformation />
-            <ContactInformation />
-            <AdditionalInformation />
+      <div className="x10-4-0-my-personals">
+        <div className="flex-col-2">
+          <div className="frame-2923">
+            <BackButton location="/dashboard"></BackButton>
           </div>
-          {ProfileImage()}
+          <div className="profile border-1px-onyx">
+            <div className="profile-info">
+              <PersonalInformation />
+              <ContactInformation />
+              <AdditionalInformation />
+            </div>
+            <EditInformation image="/img/profile-image.svg" follow="follow"/>
+          </div>
         </div>
       </div>
-    </div>
   );
 }
