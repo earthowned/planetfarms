@@ -20,14 +20,11 @@ function CommunityMembers() {
       <div className="community-members-flex-col">
         <div className="search-container">
         <SearchComponent className={"search border-1px-onyx"} />
-
         </div>
-        
         <div className="community-members-flex-row">
           <CardImage follow="Follow" />
           </div>
-        </div>
-      
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./card-image.css";
 
 const profileData = [
@@ -105,7 +105,7 @@ const Follow = () => {
     <div className="follow-container">
       <div className="person-add-outline-2-1">
         <div className="flex-row-7">
-          <img style={{ height: "20px", width: "20px", cursor: "pointer" ,marginLeft:"15px" }} src={follow ? "img/follow-icon.svg" : "img/followed-icon.svg"}/>
+          <img style={{ height: "20px", width: "20px", cursor: "pointer"}} src={follow ? "img/follow-icon.svg" : "img/followed-icon.svg"}/>
         </div>
       </div>
       <div className={
@@ -122,18 +122,20 @@ const Follow = () => {
 
 function CardImage(props) {
   const { className } = props;
+  const history = useHistory()
   return (
     <>
       {profileData.map((profile) => {
         return (
-          <div key={profile._id} className={`card-image-1 ${className || ""}`}>
-            <Link  to={`/community-members-profile/${profile._id}`}  style={{ textDecoration: "none" }}  >
-              <div className="profile-card-image"  style={{ backgroundImage: `url(${profile.Image})` }}></div>
+          <div onClick={() => history.push(`/community-members-profile/${profile._id}`)} key={profile._id} className="card-image-1">
+            
+              <div className="profile-card-image">
+              <img src={profile.Image} alt="group-profile"/>
+              </div>
               <div className="profile-card-name">
                 <div className="card-name ibmplexsans-semi-bold-quarter-spanish-white-16px">{profile.name} </div>
                 <div className="card-text ibmplexsans-normal-monsoon-14px ">{profile.text2}</div>
               </div>
-            </Link>
             {Follow()}
           </div>
         );
