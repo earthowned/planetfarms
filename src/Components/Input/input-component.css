@@ -84,7 +84,6 @@
 
 .ibmplexsans-regular-normal-monsoon-16px {
   color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -92,10 +91,9 @@
 
 .error-message {
   color: red;
-  margin-top: 8px;
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
-  width: 500px;
-  height: 10px;
+  margin: 6px 0;
+  line-height: 20px;
+  height: 12px;
 }
 
 .foucsed-input {

@@ -120,48 +120,16 @@ function SignupScreen(props) {
                 </div>
                 <p className="error-message">{termsError ? "Please read the terms of service" : " "}</p>
               </div>
+              <div className="sign-up-btn-container">
               <Button clickHandler={registerUser} name="Sign Up" />
+              </div>
             </div>
             <div className="o-auth-container">
               <OauthBtn
-            google={google}
-            facebook={facebook}
-            name={text2}
-            />
-              {/* <h4 className="o-auth-heading">
-                {text2}
-              </h4>
-              <div className="icon-container">
-                <a
-                  href="https://www.facebook.com/"
-                  alt="facebook"
-                  target="_blank"
-                  className="link-btn facebook-button border-0-5px-quarter-spanish-white" rel="noreferrer"
-                >
-                  <img
-                    className="subtract"
-                    src="/img/google-icon.svg"
-                    alt="facebook-icon"
-                  />
-                  <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
-                    {google}
-                  </div>
-                </a>
-                <a
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  className="link-btn facebook-button border-0-5px-quarter-spanish-white" rel="noreferrer"
-                >
-                  <img
-                    className="subtract"
-                    src="/img/facebook-icon.svg"
-                    alt="facebook-icon"
-                  />
-                  <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
-                    {facebook}
-                  </div>
-                </a>
-              </div> */}
+              google={google}
+              facebook={facebook}
+              name={text2}
+              />
             </div>
             <div className="signup-option">
               <p className="">
