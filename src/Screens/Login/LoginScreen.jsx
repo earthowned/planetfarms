@@ -9,6 +9,7 @@ import "./login-screen.css"
 import { Auth, Hub } from 'aws-amplify'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userAction'
+import OauthBtn from "../../Components/OauthBtn/OauthBtn"
 
 function LoginScreen(props) {
   const {
@@ -163,18 +164,19 @@ function LoginScreen(props) {
               </a>
             </div>
 
-            <OauthContainer 
+            <div className="oauth-container">
+            <OauthBtn
             loginWithFacebook={loginWithFacebook}
             loginWithGoogle={loginWithGoogle}
             google={google}
             facebook={facebook}
             name={text1}
             />
+            </div>
 
             <div className="signup-option">
               <p className="ibmplexsans-regular-normal-white-16px">
                 <span className="span0">Don't have an account yet? </span>
-                
               </p>
               <Link to="/register" className="span2">Become a member!</Link>
             </div>
@@ -197,24 +199,5 @@ function BannerContainer () {
             </div>
           </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         </div>
-  )
-}
-
-function OauthContainer ({loginWithGoogle, loginWithFacebook, google, facebook, name}) {
-  return (
-            <div className="oauth-container">
-              <h4>{name}</h4>
-              <div className="o-auth-btn-wrapper">
-                  <button onClick={ loginWithGoogle } className="google-btn">
-                    <img src="/img/google-icon.svg" alt="google-icon" />
-                    <h4>{google}</h4>
-                  </button>
-
-                  <button onClick={ loginWithFacebook } className="facebook-btn">
-                    <img src="/img/facebook-icon.svg" alt="facebook-icon" />
-                    <h4>{google}</h4>
-                  </button>
-              </div>
-            </div>
   )
 }
