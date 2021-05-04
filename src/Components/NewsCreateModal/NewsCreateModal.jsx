@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./news-create-modal.css";
 import { useDropzone } from "react-dropzone";
 import { Link } from "react-router-dom";
+import Button from "../Button/Button";
+import CreateVideo from "./NewsCreateVideo";
 
 const NewsCreateModal = ({
   type,
@@ -30,6 +32,7 @@ const NewsCreateModal = ({
       );
     },
   });
+
   return (
     <>
       {type === "video" && (
@@ -81,35 +84,6 @@ const NewsCreateModal = ({
   );
 };
 
-const CreateVideo = ({
-  getRootProps,
-  getInputProps,
-  files,
-  videoActive,
-  setVideoActive,
-}) => {
-  return (
-    <>
-      {videoActive && (
-        <div className="collection-modal-container">
-          <div className="collection-modal-inner-container">
-            <CollectionModalHeader
-              title="Add video"
-              setVideoActive={setVideoActive}
-            />
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
-            <VideoInputContainer />
-            <Button name="Add Video block" />
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
 const CreateGroup = ({
   getRootProps,
   getInputProps,
@@ -262,7 +236,7 @@ const CollectionModalHeader = ({
         <div className="collection-modal-header">
           <h4>{title}</h4>
           <img
-            src="/img/close-outline.png"
+            src="/img/close-outline.svg"
             alt="close-icon"
             onClick={() => setVideoActive(false)}
           />
@@ -308,31 +282,6 @@ const CollectionModalHeader = ({
   );
 };
 
-const VideoInputContainer = () => {
-  return (
-    <div className="video-input-container">
-      <input
-        className="default-input-variation"
-        placeholder="Video title"
-      ></input>
-      <br />
-      <textarea
-        className="default-input-variation text-area-variation"
-        placeholder="Video description"
-        cols="3"
-        rows="3"
-      ></textarea>
-
-      <div className="video-row-3">
-        <input
-          className="default-input-variation last-input-variation"
-          placeholder="Video link"
-        ></input>{" "}
-        <span>OR</span> <button className="secondary-btn">Choose video</button>
-      </div>
-    </div>
-  );
-};
 const GroupInputContainer = () => {
   return (
     <div className="video-input-container">
@@ -372,10 +321,6 @@ const GroupEditContainer = () => {
       ></textarea>
     </div>
   );
-};
-
-const Button = ({ name }) => {
-  return <button className="default-btn btn-size">{name}</button>;
 };
 
 function PhotoInput() {

@@ -16,11 +16,13 @@ const NewsAdd = () => {
     const [content, setContent] = useState({
         title: ""
     })
-    const {id} = useParams();
+    const { title, category } = useParams()
+    console.log(title, category)
 
     useEffect(() => {
         setContent({
-        title: id,
+        title,
+        category, 
         image: "",
         videoTitle: "",
         videoDesc: "",
@@ -36,7 +38,6 @@ const NewsAdd = () => {
         {createTextModal && <NewsCreateModal setContent={setContent} type="text" textActive={textActive} setTextActive={setTextActive}/>}
            <DashboardLayout title="Add News">
                <BackButton  location={"/community-page-news"} />
-            {/* back button comes here */}
             <NewsAddMainContainer setCreateVideoModal={setCreateVideoModal} setCreateImageModal={setCreateImageModal}
             setCreateTextModal={setCreateTextModal} setTextActive={setTextActive} setImageActive={setImageActive} setVideoActive={setVideoActive}
             content={content}
