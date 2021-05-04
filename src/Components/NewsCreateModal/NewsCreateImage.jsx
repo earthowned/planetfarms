@@ -4,6 +4,7 @@ import Button from "../Button/Button"
 
 const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive }) => {
   const [imageDescription, setImageDescription] = useState()
+  const [addDesctiption, setAddDesctiption] = useState(false)
 
   const [imageDescriptionError, setImageDescriptionError] = useState()
 
@@ -13,8 +14,8 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
   }
 
   const addImage = () => {
-    if (!imageDescription) setImageDescriptionError(true)
-    if (imageDescription) {
+    if (addDesctiption && !imageDescription) setImageDescriptionError(true)
+    if (!imageDescriptionError) {
       console.log(imageDescription)
       setImageActive(false)
     }
@@ -27,7 +28,7 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
             <div className="collection-modal-header">
               <h4>"Add photo"</h4>
               <img
-                src="/img/close-outline.png"
+                src="/img/close-outline.svg"
                 alt="close-icon"
                 onClick={() => setImageActive(false)}
               />
@@ -45,9 +46,9 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
             </div>
 
             <div className="description">
-              <label>Add photo description</label> <ToggleSwitch />
+              <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
             </div>
-
+                {addDesctiption ? 
             <div className="photo-input-container">
               <input
                 className="default-input-variation"
@@ -56,7 +57,7 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
                 onChange={(e) => imageDescriptionChange(e)}
               ></input>
               <p className="error-message">{imageDescriptionError ? 'Please enter Video Description' : " "} </p>
-            </div>
+            </div> : <div></div> }
             <Button name="Add block" clickHandler={addImage} />
           </div>
         </div>
@@ -65,14 +66,13 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
   )
 }
 
-function ToggleSwitch() {
-  const [active, setActive] = useState(false)
+function ToggleSwitch({setAddDesctiption, addDesctiption}) {
   return (
     <>
       <div className="toggle-main-container">
         <div
-          onClick={() => setActive(!active)}
-          className={`${active ? "toggle-item active" : "toggle-item"}`}
+          onClick={() => setAddDesctiption(!addDesctiption)}
+          className={`${addDesctiption ? "toggle-item active" : "toggle-item"}`}
         ></div>
         <div className="toggle-container"></div>
       </div>

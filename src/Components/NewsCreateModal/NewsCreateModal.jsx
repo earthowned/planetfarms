@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import Button from "../Button/Button"
 import CreateVideo from "./NewsCreateVideo"
 import CreateImage from "./NewsCreateImage"
+import CreateText from "./NewsTextModel"
 
 const NewsCreateModal = ({
   type,
@@ -160,23 +161,6 @@ const EditGroup = ({
   );
 };
 
-
-function TextInputContainer() {
-  return (
-    <div className="photo-input-container">
-      <input
-        className="default-input-variation"
-        placeholder="Collection title"
-      ></input>
-      <br />
-      <textarea
-        className="default-input-variation text-area-variation-2"
-        placeholder="Type text here "
-      ></textarea>
-    </div>
-  );
-}
-
 const DragDrop = ({ getInputProps, getRootProps, files }) => {
   return (
     <div className="drag-drop" {...getRootProps()}>
@@ -194,11 +178,8 @@ const DragDrop = ({ getInputProps, getRootProps, files }) => {
 
 const CollectionModalHeader = ({
   title,
-  setVideoActive,
-  setImageActive,
-  setTextActive,
   setGroupActive,
-  setGroupEditActive,
+  setGroupEditActive
 }) => {
   return (
     <>
@@ -211,22 +192,13 @@ const CollectionModalHeader = ({
             onClick={() => setGroupActive(false)}
           />
         </div>
-      ) : title === "Edit Group" ? (
+      ) : (
         <div className="collection-modal-header">
           <h4>{title}</h4>
           <img
             src="/img/close-outline.svg"
             alt="close-icon"
             onClick={() => setGroupEditActive(false)}
-          />
-        </div>
-      ) : (
-        <div className="collection-modal-header">
-          <h4>{title}</h4>
-          <img
-            src="/img/close-outline.png"
-            alt="close-icon"
-            onClick={() => setTextActive(false)}
           />
         </div>
       )}
@@ -275,24 +247,5 @@ const GroupEditContainer = () => {
   );
 };
 
-
-const CreateText = ({ textActive, setTextActive }) => {
-  return (
-    <>
-      {textActive && (
-        <div className="collection-modal-container">
-          <div className="collection-modal-inner-container">
-            <CollectionModalHeader
-              title="Add text"
-              setTextActive={setTextActive}
-            />
-            <TextInputContainer />
-            <Button name="Add block" />
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
 
 export default NewsCreateModal

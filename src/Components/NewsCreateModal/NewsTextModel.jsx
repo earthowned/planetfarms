@@ -1,0 +1,68 @@
+import { useState } from "react"
+import "./news-create-modal.css"
+import Button from "../Button/Button"
+
+const CreateText = ({ textActive, setTextActive }) => {
+  const [collectionTitle, setCollectionTitle] = useState()
+  const [collectionDescription, setCollectionDescription] = useState()
+
+  const [collectionTitleError, setCollectionTitleError] = useState()
+  const [collectionDescriptionError, setCollectionDescriptionError] = useState()
+
+  const collectionTitleChange = (e) => {
+    setCollectionTitle(e.target.value)
+    setCollectionTitleError(false)
+  }
+  const collectionDescriptionChange = (e) => {
+    setCollectionDescription(e.target.value)
+    setCollectionDescriptionError(false)
+  }
+
+  const addText = () => {
+    if (!collectionTitle) setCollectionTitleError(true)
+    if (!collectionDescription) setCollectionDescriptionError(true)
+    if (collectionTitle && collectionDescription) {
+      console.log(collectionTitle, collectionDescription)
+      setTextActive(false)
+    }
+  }
+  return (
+    <>
+      {textActive && (
+        <div className="collection-modal-container">
+          <div className="collection-modal-inner-container">
+            <div className="collection-modal-header">
+              <h4>Add text</h4>
+              <img
+                src="/img/close-outline.svg"
+                alt="close-icon"
+                onClick={() => setTextActive(false)}
+              />
+            </div>
+            <div className="photo-input-container">
+              <input
+                className="default-input-variation"
+                placeholder="Collection title"
+                value={collectionTitle}
+                onChange={(e) => collectionTitleChange(e)}
+              ></input>
+              <p className="error-message">{collectionTitleError ? 'Please enter Video Description' : " "} </p>
+
+              <br />
+              <textarea
+                className="default-input-variation text-area-variation-2"
+                placeholder="Type text here "
+                value={collectionDescription}
+                onChange={(e) => collectionDescriptionChange(e)}
+              ></textarea>
+              <p className="error-message">{collectionDescriptionError ? 'Please enter Video Description' : " "} </p>
+            </div>
+            <Button name="Add block" clickHandler={addText} />
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
+export default CreateText
