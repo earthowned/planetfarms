@@ -168,8 +168,6 @@
 }
 
 @media only screen and (max-width: 1280px) {
-  
-
   .x02-2-0-sign-up-filed .frame-4 {
     padding: 0 0.2em;
     align-items: center;
@@ -228,7 +226,7 @@
     font-size: 3rem;
   }
 
-   .congratulation-sub-title {
+  .congratulation-sub-title {
     font-size: 0.8em;
   }
 
