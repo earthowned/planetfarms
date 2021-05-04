@@ -8,6 +8,7 @@ import Button from "../../Components/Button/Button"
 import Checkbox from "../../Components/Checkbox/Checkbox"
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from "../../actions/userAction"
+import OauthBtn from "../../Components/OauthBtn/OauthBtn"
 
 function App() {
   return <SignupScreen {...X0200SignUpemptyData} />
@@ -122,7 +123,12 @@ function SignupScreen(props) {
               <Button clickHandler={registerUser} name="Sign Up" />
             </div>
             <div className="o-auth-container">
-              <h4 className="o-auth-heading">
+              <OauthBtn
+            google={google}
+            facebook={facebook}
+            name={text2}
+            />
+              {/* <h4 className="o-auth-heading">
                 {text2}
               </h4>
               <div className="icon-container">
@@ -155,7 +161,7 @@ function SignupScreen(props) {
                     {facebook}
                   </div>
                 </a>
-              </div>
+              </div> */}
             </div>
             <div className="signup-option">
               <p className="">
