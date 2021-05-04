@@ -45,6 +45,9 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
       setActive(false)
     }
   }
+  const fileChange =(e)=>{
+    setFiles(e.target.files[0])
+  }
 
  
   const fileChange=(e)=>{
