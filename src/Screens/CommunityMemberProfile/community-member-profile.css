@@ -29,7 +29,7 @@
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
   backdrop-filter: blur(16px) brightness(100%);
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: var(--background-color-light);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -39,7 +39,7 @@
 }
 
 .border-0-5px-quarter-spanish-white {
-  border: 0.5px solid var(--quarter-spanish-white);
+  border: 0.5px solid var(--primary-white);
 }
 
 .message-btn-text {
@@ -53,7 +53,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -62,7 +62,7 @@
 
 .default-btn-btn {
   align-items: center;
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -81,7 +81,7 @@
 }
 
 .ibmplexsans-semi-bold-shark-16px {
-  color: var(--shark);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -90,7 +90,7 @@
 
 .x08-1-0-community-members {
   align-items: flex-start;
-  background-color: black;
+  background-color: var(--background-color);
   display: flex;
   height: 1024px;
   position: relative;
@@ -109,7 +109,7 @@
 
 .profie-details {
   align-items: flex-start;
-  background-color: var(--licorice);
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   height: 832px;
