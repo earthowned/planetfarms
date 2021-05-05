@@ -2,6 +2,21 @@ import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import "./sidebar.css";
 
+const dropdown = [
+  {
+    name: 'Members',
+    slug: '/community-members'
+  },
+  {
+    name: 'Groups',
+    slug: '/community-group'
+  },
+  {
+    name: 'Enterprises',
+    slug: '/community-enterprises'
+  }
+]
+
 const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
   let history = useHistory();
   const [dropdownActive, setDropdownActive] = useState(true);
@@ -42,22 +57,18 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
             </div>
           </div>
           {dropdownActive  && (
-            <ul className="dropdown-container">
-              <div   className={`${pathname === '/community-members' ? "  text-active" :"" }`}>
-                <li onClick={()=>history.push('/community-members')} className="dropdown-item">
-                  <strong>Members</strong>
-                </li>
-              </div>        
-              <div className={`${pathname === '/community-group' ? "  text-active" :"" }`}>
-                <li onClick={()=>history.push('/community-group')} className="dropdown-item">
-                  <strong> Groups</strong>
+             <ul className="dropdown-container">
+              {
+                dropdown.map(item => {
+                  return (
+                     <div   className={`${pathname === `${item.slug}` ? "  text-active" :"" }`}>
+                <li onClick={()=>history.push(`${item.slug}`)} className="dropdown-item">
+                  <strong>{item.name}</strong>
                 </li>
               </div>
-              <div  className={`${pathname === '/community-enterprises' ? "  text-active" :"" }`}>
-                <li className="dropdown-item">
-                  <strong>Enterprises</strong>
-                </li>
-              </div>
+                  )
+                })
+              }
             </ul>
           )}
         </li>
@@ -89,21 +100,17 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
           </div>
           {dropdownActive  && (
             <ul className="dropdown-container">
-              <div   className={`${pathname === '/community-members' ? "  text-active" :"" }`}>
-                <li onClick={()=>history.push('/community-members')} className="dropdown-item">
-                  <strong>Members</strong>
-                </li>
-              </div>        
-              <div className={`${pathname === '/community-groups' ? "  text-active" :"" }`}>
-                <li className="dropdown-item">
-                  <strong> Groups</strong>
+              {
+                dropdown.map(item => {
+                  return (
+                     <div   className={`${pathname === `${item.slug}` ? "  text-active" :"" }`}>
+                <li onClick={()=>history.push(`${item.slug}`)} className="dropdown-item">
+                  <strong>{item.name}</strong>
                 </li>
               </div>
-              <div  className={`${pathname === '/community-enterprises' ? "  text-active" :"" }`}>
-                <li className="dropdown-item">
-                  <strong>Enterprises</strong>
-                </li>
-              </div>
+                  )
+                })
+              }
             </ul>
           )}
         </li>
