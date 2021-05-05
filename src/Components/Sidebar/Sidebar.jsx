@@ -18,7 +18,7 @@ const mainnav = [
       },
       {
         name: 'Enterprises',
-        slug: '/community-enterprises'
+        slug: '#'
       }
     ]
   },
@@ -30,7 +30,7 @@ const mainnav = [
   },
   {
     name: 'Course',
-    slug: '/course',
+    slug: '#',
     image: '/img/graduation-cap-1.svg',
     dropdown: []
   }
