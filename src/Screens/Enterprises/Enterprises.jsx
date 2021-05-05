@@ -1,21 +1,37 @@
 
-import React from "react";
+import React,{useState,useEffect} from "react";
 import "./enterprises.css";
 import SearchComponent from "../../Components/SearchComponent/SearchComponent";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import CommunityGroupCard from "../../Components/CommunityGroupCard/CommunityGroupCard";
+import NewsCreateModal from "../../Components/NewsCreateModal/NewsCreateModal";
 
 function App() {
+   const [createEnterpriseModal, setCreateEnterpriseModal] = useState(false);
+  const [enterpriseActive, setEnterpriseActive] = useState(true);
+
   return (
+    <>
+    {createEnterpriseModal && (
+      <NewsCreateModal
+        type="enterprise"
+        enterpriseActive={enterpriseActive}
+        setEnterpriseActive={setEnterpriseActive}
+      />
+    )}
     <DashboardLayout title="Ragrarians enterprises">
-      <Enterprises />
+      <Enterprises setCreateEnterpriseModal={setCreateEnterpriseModal} />
     </DashboardLayout>
+    </>
   );
 }
 
 export default App;
 
-function Enterprises() {
+function Enterprises({setCreateEnterpriseModal}) {
+  const handleClickCreate = () => {
+    setCreateEnterpriseModal(true);
+  };
   return (
     <div className="all-enterprises screen">
       <div className="enterprises-col">
@@ -38,7 +54,7 @@ function Enterprises() {
           </div>
           <div className="create-enterprises-wrapper">
             <div className="add-enterprises">
-              <div className="create-enterprise-text ibmplexsans-semi-bold-shark-16px">
+              <div className="create-enterprise-text ibmplexsans-semi-bold-shark-16px" onClick={handleClickCreate}>
                 Create Enterprise
               </div>
             </div>

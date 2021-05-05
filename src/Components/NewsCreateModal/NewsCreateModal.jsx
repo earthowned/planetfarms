@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./news-create-modal.css";
 import { useDropzone } from "react-dropzone";
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { createEnterprise, } from '../../actions/enterpriseAction'
 
 const NewsCreateModal = ({
   type,
@@ -15,6 +17,8 @@ const NewsCreateModal = ({
   setGroupActive,
   groupEditActive,
   setGroupEditActive,
+  enterpriseActive,
+  setEnterpriseActive
 }) => {
   const [files, setFiles] = useState([]);
 
@@ -39,6 +43,15 @@ const NewsCreateModal = ({
           files={files}
           videoActive={videoActive}
           setVideoActive={setVideoActive}
+        />
+      )}
+       {type === "enterprise" && (
+        <CreateEnterprise
+          getRootProps={getRootProps}
+          getInputProps={getInputProps}
+          files={files}
+          enterpriseActive={enterpriseActive}
+          setEnterpriseActive={setEnterpriseActive}
         />
       )}
       {type === "group" && (
@@ -185,6 +198,35 @@ const EditGroup = ({
   );
 };
 
+const CreateEnterprise = ({
+  getRootProps,
+  getInputProps,
+  files,
+  enterpriseActive,
+  setEnterpriseActive,
+}) => {
+  return (
+    <>
+      {enterpriseActive && (
+        <div className="collection-modal-container">
+          <div className="collection-modal-inner-container">
+            <CollectionModalHeader
+              title="Create Enterprise"
+              setEnterpriseActive={setEnterpriseActive}
+            />
+            <DragDrop
+              getInputProps={getInputProps}
+              getRootProps={getRootProps}
+              files={files}
+            />
+            <EnterpriseInputContainer   setEnterpriseActive={setEnterpriseActive} />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
 const CreateImage = ({
   getRootProps,
   getInputProps,
@@ -255,6 +297,7 @@ const CollectionModalHeader = ({
   setTextActive,
   setGroupActive,
   setGroupEditActive,
+  setEnterpriseActive
 }) => {
   return (
     <>
@@ -265,6 +308,15 @@ const CollectionModalHeader = ({
             src="/img/close-outline.png"
             alt="close-icon"
             onClick={() => setVideoActive(false)}
+          />
+        </div>
+      )  : title === "Create Enterprise" ? (
+        <div className="collection-modal-header">
+          <h4>{title}</h4>
+          <img
+            src="/img/close-outline.svg"
+            alt="close-icon"
+            onClick={() => setEnterpriseActive(false)}
           />
         </div>
       ) : title === "Create Group" ? (
@@ -370,6 +422,59 @@ const GroupEditContainer = () => {
         rows="3"
         value="Hi there! We’re a most kind and friendly society for everyone! We post here some news about farming, nature and etc… We hope you gonna like it! Be a part of our still small, but amazing community!"
       ></textarea>
+    </div>
+  );
+};
+
+const EnterpriseInputContainer = ({setEnterpriseActive}) => {
+  const [title, setEnterpriseTitle] = useState('')
+  const [description, setEnterpriseDescription] = useState('')
+  const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
+  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
+  const dispatch = useDispatch()
+
+  const enterpriseTitleChange = (e) => {
+    setEnterpriseTitle(e.target.value)
+    setEnterpriseTitleError(false)
+  }
+  const enterpriseDescriptionChange = (e) => {
+    setEnterpriseDescription(e.target.value)
+    setEnterpriseDescriptionError(false)
+  }
+  const handleAddEnterprise = (e) => {
+    e.preventDefault()
+    if (!title) setEnterpriseTitleError(true)
+    if (!description) setEnterpriseDescriptionError(true)
+    if (title && description) {
+      dispatch(createEnterprise({ title, description, }))
+      setEnterpriseActive(false)
+      
+    }
+  }
+  return (
+    <div className="video-input-container">
+      <input
+        className="default-input-variation"
+        placeholder="Enterprise title"
+        required="true"
+        error={enterpriseTitleError}
+        onChange={(e) => enterpriseTitleChange(e)}
+      ></input>
+      <br />
+      <textarea
+        className="default-input-variation text-area-variation"
+        placeholder="Enterprise description"
+        required="true"
+        cols="3"
+        rows="3"
+        error={enterpriseDescriptionError}
+        onChange={(e) => enterpriseDescriptionChange(e)}
+      ></textarea>
+       <select className="default-input-variation">
+                <option>Select category</option>
+                <option>Farmer</option>
+              </select>
+              <button className="default-btn btn-size" onClick={handleAddEnterprise}>Submit</button>
     </div>
   );
 };

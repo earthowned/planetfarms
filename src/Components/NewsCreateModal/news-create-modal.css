@@ -101,3 +101,11 @@
   width: 100px;
   height: 100px;
 }
+
+.enterprise-step {
+  margin-left: 19px;
+  margin-top: 18px;
+  color:whitesmoke;
+  font-size: 11px;
+  width: 50%;
+}
