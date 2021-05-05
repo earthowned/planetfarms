@@ -5,26 +5,24 @@ import './profile-form-card.css'
 
 const ProfileFormCard = ({data:{ title,first_inputTitle,first_inputValue,second_inputTitle,second_inputValue,third_inputTitle,third_inputValue}}) => {
     return (
-        <div className="x-information">
-        <div className="x-information-flex-row">
-          <div className="x-information-flex-col">
-           <div className="contact-information ibmplexsans-semi-bold-quarter-spanish-white-16px">{title} </div>
-           <div className="email-container">
-              <div className="email-text ibmplexsans-regular-normal-monsoon-14px"> {first_inputTitle}</div>
-              <input type="text" className="email-address ibmplexsans-semi-bold-quarter-spanish-white-16px" value={first_inputValue} />
+      <div className="myProfile-container">
+            <h2 className="myProfile-container-row-title">{title}</h2>
+            <div className="myProfile-container-row">
+              <div className="form-group">
+                <label>{first_inputTitle}</label>
+                <input value={first_inputValue} />
+              </div>
+              <div className="form-group">
+                <label>{second_inputTitle}</label>
+                <input value={second_inputValue} />
+              </div>
+              {third_inputTitle && <div className="form-group">
+                <label>{third_inputTitle}</label>
+                <input value={third_inputValue} />
+              </div>}
             </div>
-        </div>
-          <div className="phone-container">
-            <div className="phone-text ibmplexsans-regular-normal-monsoon-14px">{second_inputTitle}</div>
-            <input type="text" className="phone-number ibmplexsans-semi-bold-quarter-spanish-white-16px" value={second_inputValue} />
-          </div> 
-           <div className="dob">
-          <div className="date-of-birhday-text ibmplexsans-regular-normal-monsoon-14px">{third_inputTitle} </div>
-          <input type="text" className="date-text ibmplexsans-semi-bold-quarter-spanish-white-16px" value={third_inputValue}  />
-        </div>
-        </div>
-        <div className="border-line"></div>
       </div>
+      
     )
 }
 
@@ -69,7 +67,6 @@ export const PersonalInformation=()=>{
       second_inputValue:"153",
     }
     return(
-    <ProfileFormCard data={AdditionalInformationdata}    />
-  
+    <ProfileFormCard data={AdditionalInformationdata} />
     )
   }

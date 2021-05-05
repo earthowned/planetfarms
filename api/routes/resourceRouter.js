@@ -4,6 +4,7 @@ const fs = require('fs')
 const multer = require('multer')
 const shortid = require('shortid')
 const path = require('path')
+const { protect } = require('../middleware/authMiddleware')
 
 const { getResources, addResource, getResourcesById, deleteResources, updateResources, searchResourcesTitle } = require('../controllers/resourceController.js')
 
@@ -37,12 +38,12 @@ const upload = multer({
   }
 })
 router.route('/').get(getResources)
-router.route('/add').post(upload.single('avatar'), addResource)
+router.route('/add').post(protect, upload.single('avatar'), addResource)
 router.route('/search').get(searchResourcesTitle)
 router
   .route('/:id')
   .get(getResourcesById)
-  .delete(deleteResources)
-  .put(updateResources)
+  .delete(protect, deleteResources)
+  .put(protect, updateResources)
 
 module.exports = router

@@ -6,6 +6,7 @@ import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 import NewsAddModal from "../../Components/NewAddModal/NewsAddModal";
 import Filter from "../../Components/Filter/Filter";
+import useSizeFinder from "../../utils/SizeFinder";
 
 function App() {
   const [addModal, setAddModal] = useState(false);
@@ -48,19 +49,7 @@ function CommunityPagenews(props) {
     setAddModal
   } = props;
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  function calculateWidth () {
-    setWindowWidth(window.innerWidth);
-  }
-
-  useEffect(() => {
-    window.addEventListener("resize", calculateWidth);
-
-    return () => {
-      window.removeEventListener("resize",calculateWidth);
-    }
-  },[calculateWidth])
+  const windowWidth = useSizeFinder();
 
   return (
     <>

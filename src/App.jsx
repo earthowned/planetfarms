@@ -11,6 +11,9 @@ import DashboardComponent from "./Screens/Dashboard/MainDashboard";
 import Achievements from "./Screens/Dashboard/Achievements";
 import MyLibrary from "./Screens/Dashboard/MyLibrary";
 import MyProfile from "./Screens/Dashboard/MyProfile";
+import MySurvey from "./Screens/Dashboard/MySurvey";
+import MyCourse from "./Screens/Dashboard/MyCourses";
+import MyCoursePage from "./Screens/Dashboard/CoursePage/CoursePage";
 import Collection from "./Screens/Library/Collection/Collection";
 import UserCollection from "./Screens/Library/UserCollection/UserCollection";
 import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
@@ -22,8 +25,74 @@ import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
 import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
 import UserInfo from "./Screens/CabinetUserInfo/CabinetUserInfo";
 import CommunityGroup from './Screens/CommunityGroup/CommunityGroup';
+import Enterprises from './Screens/Enterprises/Enterprises';
+import EnterprisesViewPage from './Screens/Enterprises/EnterprisesViewPage/EnterprisesViewPage';
 import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage';
 import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup';
+import MobileMessage from "./Components/MobileMessage/MobileMessage";
+
+import Amplify, { Auth } from 'aws-amplify';
+
+Amplify.configure({
+    Auth: {
+
+        // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
+        //identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
+
+        // REQUIRED - Amazon Cognito Region
+        region: process.env.REACT_APP_COGNITO_REGION,
+
+        // OPTIONAL - Amazon Cognito Federated Identity Pool Region 
+        // Required only if it's different from Amazon Cognito Region
+        //identityPoolRegion: 'XX-XXXX-X',
+
+        // OPTIONAL - Amazon Cognito User Pool ID
+        userPoolId: process.env.REACT_APP_COGNITO_POOL_ID,
+
+        // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+        userPoolWebClientId: process.env.REACT_APP_COGNITO_CLIENT_ID,
+
+        // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
+        mandatorySignIn: false,
+
+        // OPTIONAL - Configuration for cookie storage
+        // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
+        /*cookieStorage: {
+        // REQUIRED - Cookie domain (only required if cookieStorage is provided)
+            domain: '.yourdomain.com',
+        // OPTIONAL - Cookie path
+            path: '/',
+        // OPTIONAL - Cookie expiration in days
+            expires: 365,
+        // OPTIONAL - See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+            sameSite: "strict" | "lax",
+        // OPTIONAL - Cookie secure flag
+        // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
+            secure: true
+        },*/
+
+        // OPTIONAL - customized storage object
+        //storage: MyStorage,
+
+        // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
+        authenticationFlowType: 'USER_PASSWORD_AUTH',
+
+        // OPTIONAL - Manually set key value pairs that can be passed to Cognito Lambda Triggers
+        //clientMetadata: { myCustomKey: 'myCustomValue' },
+
+         // OPTIONAL - Hosted UI configuration
+        oauth: {
+            domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
+            scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+            redirectSignIn: 'http://localhost:3000/',
+            redirectSignOut: 'http://localhost:3000/',
+            responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
+        }
+    }
+});
+
+// You can get the current config object
+const currentConfig = Auth.configure();
 
 function App() {
   return (
@@ -50,8 +119,11 @@ function App() {
         <Route path="/library/collection/saved">
            <SavedCollection />
          </Route>
-        <Route path="/messenger">
+        <Route exact path="/messenger">
            <Messenger />
+         </Route>
+         <Route path="/messenger/:id">
+           <MobileMessage />
          </Route>
         <Route exact path="/community-page-news">
          <CommunityPagenews />
@@ -77,6 +149,12 @@ function App() {
         <Route path="/community-group-view-page" >
           <CommunityGroupViewPage />
         </Route>
+        <Route path="/enterprises" >
+          <Enterprises />
+        </Route>
+        <Route path="/enterprises-view" >
+          <EnterprisesViewPage />
+        </Route>
         <Route path="/my-group-view-page" >
           <MyGroupViewPage />
         </Route>
@@ -88,6 +166,15 @@ function App() {
         </Route>
         <Route path="/mylibrary">
           <MyLibrary />
+        </Route>
+        <Route path="/mysurvey">
+          <MySurvey />
+        </Route>
+        <Route path="/mycourse">
+          <MyCourse />
+        </Route>
+        <Route path="/mycoursePage">
+          <MyCoursePage />
         </Route>
         <Route path="/myProfile">
           <MyProfile />
@@ -136,185 +223,4 @@ const X0100LoginEmptyData = {
     vector17: "",
     vector18: "",
     
-};
-
-const X0111LoginfiledData = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-    vector4: "",
-    vector5: "",
-    vector6: "",
-    welcomeBack: "Sign In",
-    vector7: "",
-    vector8: "",
-    vector9: "",
-    username: "Username",
-    mikhail: "Mikhail",
-    password: "Password",
-    text1: "• • • • • • • • • •",
-    vector10: "",
-    subtract: "",
-    rememberMe: "Remember Me",
-    signIn: "Sign in",
-    forgotPassword: "Forgot Password?",
-    text2: "Sign In with services",
-    vector11: "",
-    vector12: "",
-    vector13: "",
-    vector14: "",
-    google: "Google",
-    subtract2: "",
-    facebook: "Facebook",
-    spanText: "Don't have an account yet?",
-    spanText2: "  ",
-    spanText3: "Become a member!",
-    vector15: "",
-    vector16: "",
-    vector17: "",
-    vector18: "",
-    
-};
-
-const X0112ErrorfiledData = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-    vector4: "",
-    vector5: "",
-    vector6: "",
-    welcomeBack: "Sign In",
-    vector7: "",
-    vector8: "",
-    vector9: "",
-    username: "Username",
-    mikhail: "Mikhail",
-    usernameError: "Username error",
-    password: "Password",
-    text1: "• • • • • • • • • •",
-    vector10: "",
-    subtract: "",
-    rememberMe: "Remember Me",
-    signIn: "Sign in",
-    forgotPassword: "Forgot Password?",
-    text2: "Sign In with services",
-    
-    google: "Google",
-    subtract2: "",
-    facebook: "Facebook",
-    spanText: "Don't have an account yet?",
-    spanText2: "  ",
-    spanText3: "Become a member!",
-    
-    
-};
-
-const X0200SignUpemptyData = {
-    
-    welcomeBack: "Become a member",
-    username: "Username",
-    password: "Password",
-    vector10: "",
-    vector11: "",
-    spanText: "I agree with",
-    spanText2: " ",
-    spanText3: "Terms of Service ",
-    signUp: "Sign up",
-    text2: "Sign In with services",
-    vector12: "",
-    vector13: "",
-    vector14: "",
-    vector15: "",
-    google: "Google",
-    subtract: "",
-    facebook: "Facebook",
-    spanText4: "Already have an account?",
-    spanText5: " ",
-    spanText6: "Sign in!",
-    vector16: "",
-    vector17: "",
-    vector18: "",
-    vector19: "",
-};
-
-const X0211SignUpfilledData = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-    vector4: "",
-    vector5: "",
-    vector6: "",
-    welcomeBack: "Become a member",
-    vector7: "",
-    vector8: "",
-    vector9: "",
-    username: "Username",
-    mikhail: "Mikhail",
-    password: "Password",
-    text1: "• • • • • • • • • •",
-    vector10: "",
-    vector11: "",
-    spanText: "I agree with",
-    spanText2: " ",
-    spanText3: "Terms of Service ",
-    signUp: "Sign up",
-    text3: "Sign In with services",
-    vector12: "",
-    vector13: "",
-    vector14: "",
-    vector15: "",
-    google: "Google",
-    subtract: "",
-    facebook: "Facebook",
-    spanText4: "Already have an account?",
-    spanText5: " ",
-    spanText6: "Sign in!",
-    vector16: "",
-    vector17: "",
-    vector18: "",
-    vector19: "",
-    
-};
-
-const X0212SignUperrorData = {
-    vector: "",
-    vector2: "",
-    vector3: "",
-    vector4: "",
-    vector5: "",
-    vector6: "",
-    welcomeBack: "Become a member",
-    vector7: "",
-    vector8: "",
-    vector9: "",
-    username: "Username",
-    mikhail: "Mikhail",
-    password: "Password",
-    badpassword111: "Badpassword111",
-    vector10: "",
-    vector11: "",
-    vector12: "",
-    passwordError: "Password error",
-    vector13: "",
-    vector14: "",
-    spanText: "I agree with",
-    spanText2: " ",
-    spanText3: "Terms of Service ",
-    signUp: "Sign up",
-    text2: "Sign In with services",
-    vector15: "",
-    vector16: "",
-    vector17: "",
-    vector18: "",
-    google: "Google",
-    subtract: "",
-    facebook: "Facebook",
-    spanText4: "Already have an account?",
-    spanText5: " ",
-    spanText6: "Sign in!",
-    vector19: "",
-    vector20: "",
-    vector21: "",
-    vector22: "",
-    
-};
+}

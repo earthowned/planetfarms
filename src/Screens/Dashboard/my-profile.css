@@ -88,7 +88,7 @@
   align-items: flex-start;
   background-color: black;
   display: flex;
-  width: 1440px;
+  width: 100%;
 }
 .x10-4-0-my-personals .additional-info {
   align-items: flex-start;
@@ -235,9 +235,7 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
-  min-height: 960px;
-  width: 1112px;
+  width: 100%;
 }
 .x10-4-0-my-personals .flex-col-3 {
   align-items: flex-start;
@@ -730,22 +728,22 @@
   min-height: 24px;
   white-space: nowrap;
 }
+
 .x10-4-0-my-personals .profile {
-  align-items: flex-start;
   background-color: var(--licorice);
   border-radius: 4px;
-  display: flex;
-  height: 800px;
   margin-top: 40px;
-  min-width: 1112px;
   padding: 24px 40px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
+
 .x10-4-0-my-personals .profile-info {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 488px;
-  width: 784px;
 }
 .x10-4-0-my-personals .profile-pic {
   background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606accbda73434d7e931b595/img/profile-pic@2x.png);
@@ -1037,6 +1035,7 @@
   margin-left: 0px;
   width: 8px;
 }
+
 .x10-4-0-my-personals .vector-17 {
   height: 20px;
   left: 0px;
@@ -1044,64 +1043,111 @@
   top: 0px;
   width: 18px;
 }
+
 .x10-4-0-my-personals .vector-18 {
   height: 1px;
   width: 1px;
 }
+
 .x10-4-0-my-personals .vector-2 {
   height: 24px;
   margin-bottom: -0.02px;
   margin-left: 1px;
   width: 26px;
 }
+
 .x10-4-0-my-personals .vector-3 {
   height: 8px;
   width: 8px;
 }
+
 .x10-4-0-my-personals .vector-4 {
   height: 8px;
   margin-top: 2px;
   width: 8px;
 }
+
 .x10-4-0-my-personals .vector-5 {
   height: 8px;
   width: 4px;
 }
+
 .x10-4-0-my-personals .vector-6 {
   height: 7px;
   width: 4px;
 }
+
 .x10-4-0-my-personals .vector-7 {
   height: 12px;
   transform: rotate(-180deg);
   width: 7px;
 }
+
 .x10-4-0-my-personals .vector-8 {
   height: 8px;
   width: 14px;
 }
+
 .x10-4-0-my-personals .vector-9 {
   align-self: flex-start;
   height: 24px;
   margin-top: -0.02px;
   width: 25px;
 }
+
 .x10-4-0-my-personals .vector-stroke-2 {
   height: 14px;
   width: 8px;
 }
-:root {
-  --caribbean-green: rgba(0, 198, 136, 1);
-  --ebb: rgba(227, 227, 227, 1);
-  --licorice: rgba(20, 20, 20, 1);
-  --monsoon: rgba(137, 137, 137, 1);
-  --onyx: rgba(58, 57, 57, 1);
-  --quarter-spanish-white: rgba(248, 235, 223, 1);
-  --rusty-red: rgba(218, 52, 67, 1);
-  --shark: rgba(43, 43, 44, 1);
-}
+
 .valign-text-middle {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.edit-information-container {
+  margin-top: 1.5em;
+}
+
+.edit-information-container img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 14px;
+}
+
+.edit-information-container .edit-btn {
+  width: 100%;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 0.5px solid #F8EBDF;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+}
+
+@media only screen and (max-width: 1310px) {
+  .x10-4-0-my-personals .profile {
+    flex-direction: column-reverse;
+  }
+
+  .edit-information-container {
+    margin-bottom: 3em;
+}
+
+.x10-4-0-my-personals .profile-info {
+  width: 100%;
+}
+}
+
+@media only screen and (max-width: 700px) {
+  .myProfile-container-row {
+    flex-direction: column-reverse;
+  }
 }

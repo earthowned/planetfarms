@@ -33,16 +33,6 @@
   min-width: 22px;
 }
 
-.flex-row-1 {
-  align-items: center;
-  display: flex;
-  height: 24px;
-  margin-left: 4px;
-  margin-top: 7px;
-  min-width: 240px;
-  position: relative;
-}
-
 .flex-row-2 {
   align-items: flex-start;
   display: flex;
@@ -358,15 +348,6 @@
   height: 2392px;
   position: relative;
   width: 248px;
-}
-
-.text-14 {
-  letter-spacing: 0;
-  line-height: 24px;
-  margin-left: 8px;
-  min-height: 24px;
-  min-width: 83px;
-  white-space: nowrap;
 }
 
 .text-16 {
@@ -1292,16 +1273,6 @@
   min-width: 1112px;
 }
 
-.group-bg-image {
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-1969@1x.png);
-  background-position: 50% 50%;
-  background-size: cover;
-  border-radius: 4px;
-  height: 336px;
-  width: 1032px;
-  margin-top: 30px;
-}
-
 .followers-group {
   align-items: flex-start;
   display: flex;
@@ -1746,7 +1717,6 @@
   line-height: 24px;
   min-height: 24px;
   min-width: 201px;
-  white-space: nowrap;
   background-color: #141414;
   border: none;
   outline: none;

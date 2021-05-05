@@ -1,0 +1,28 @@
+.my-surveys {
+  align-items: flex-start;
+  background-color: var(--black);
+  display: flex;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.survey-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.survey-card-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
+

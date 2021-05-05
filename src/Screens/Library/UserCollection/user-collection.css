@@ -16,7 +16,6 @@
   background-size: cover;
   margin: 2em 0;
   position: relative;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -25,7 +24,6 @@
 
 .farming-inner-container .libraryCard-content {
   position: absolute;
-
   bottom: 1em;
   left: 2em;
 }
@@ -37,6 +35,7 @@
 .farming-inner-container .libraryCard-content button {
   margin-top: 1.5em;
 }
+
 .btn-positioning {
   position: absolute;
   top: 1em;
@@ -46,4 +45,16 @@
 .fixed-width {
   width: 160px;
   height: 48px;
+}
+
+@media only screen and (max-width: 1400px) {
+  .farming-inner-container {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 840px) {
+  .farming-inner-container {
+    width: 100%;
+  }
 }

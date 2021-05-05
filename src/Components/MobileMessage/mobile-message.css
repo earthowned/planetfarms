@@ -1,0 +1,39 @@
+.mobile-messenger-message-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.mobile-messenger-message-header {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #8a8a8a;
+  margin: 0 auto;
+}
+
+.mobile-message-dropdown {
+  position: absolute;
+  right: 2em;
+  top: 4em;
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  background: #212225;
+  width: auto;
+  height: auto;
+}
+
+.mobile-message-dropdown--item {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+}
+
+.mobile-message-dropdown--item img {
+  margin-right: 10px;
+  border-radius: 4px;
+}

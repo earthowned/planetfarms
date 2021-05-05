@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import './listview.css'
 
-const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }) => {
-    const [active, setActive] = useState(false)
+const ListView = ({data, title, setNewCollection, setModalActive, modalActive}) => {
+    const [ active, setActive] = useState(false);
+
     return (
         <>
             <div className="listview-container">
                 <h4>{title}</h4>
-                {data.map(item => {
+                {data && data.map(item => {
                     return (
                         <div key={item.id} className="listview-inner-container">
                             <div className="image-wrapper">
