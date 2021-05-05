@@ -12,12 +12,15 @@ const getResources = (req, res) => {
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
   // const {offset, limit} = queryUtils.paginate({ page, pageSize })
-  Resource.findAll({ offset: page, limit: pageSize, order: ordervalue })
+  Resource.findAll({ offset: page, limit: pageSize, ordervalue })
     .then(resources => {
       res.json({ resources, page, pageSize }).status(200)
     })
+    
     .catch((err) => res.json({ err }).status(400))
 }
+
+
 
 // @desc    Add individual resource
 // @route   POST /api/resources/add
@@ -26,7 +29,6 @@ const addResource = (req, res) => {
   const {
     title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
   } = req.body
-
   /* if (req.file) {
     categoryObj.categoryImage =
       process.env.API + '/public/' + req.file.filename;
