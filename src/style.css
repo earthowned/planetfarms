@@ -129,6 +129,7 @@ body {
   --white: rgba(255, 255, 255, 1);
   --white2: rgba(255, 255, 255, 0.16);
   --black: rgba(0, 0, 0, 1);
+  --black75: rgba(0, 0, 0, 0.75);
   --font-family-ibm_plex_sans: "IBM Plex Sans", helvetica, sans-serif;
   --font-family-ibm_plex_sans-bold: "IBM Plex Sans-Bold", helvetica, sans-serif;
   --font-family-ibm_plex_sans-regular: "IBM Plex Sans-Regular", helvetica, sans-serif;

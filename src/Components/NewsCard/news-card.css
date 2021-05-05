@@ -58,7 +58,6 @@
   -webkit-backdrop-filter: blur(10px) brightness(100%);
   align-items: center;
   backdrop-filter: blur(10px) brightness(100%);
-  background-color: var(--white);
   border-radius: 4px;
   display: flex;
   height: 32px;
@@ -126,7 +125,7 @@
 
 .newsCard-group1 {
   align-items: flex-start;
-  background-color: var(--black);
+  background-color: var(--black75);
   display: flex;
   height: 279px;
   justify-content: flex-end;
