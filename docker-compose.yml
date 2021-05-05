@@ -18,3 +18,20 @@ services:
       - 8080:80
     volumes:
       - ./api/files:/usr/share/nginx/html
+  proxy:
+    image: nginx:alpine
+    ports:
+      - 8090:80
+  frontend:
+    image: nginx:alpine
+    ports:
+      - 8091:80
+    volumes:
+      - ./build:/usr/share/nginx/html
+  api:
+    build: ./api
+    image: planetapi
+    ports:
+      - 8092:5000
+    depends_on:
+      - db
