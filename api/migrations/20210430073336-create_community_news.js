@@ -33,7 +33,16 @@ module.exports = {
         },
         _attachments: {
           type: Sequelize.STRING
-        }
+        },
+        textDetail: {
+          type: Sequelize.JSON
+        },
+        imageDetail: {
+          type: Sequelize.JSON
+        },
+        videoDetail: {
+          type: Sequelize.JSON
+        },
       }
     )
   },

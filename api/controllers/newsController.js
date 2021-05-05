@@ -20,19 +20,19 @@ const getNews = (req, res) => {
 // @access  Public
 const addNews = (req, res) => {
   const {
-    title, description, languageOfInstruction, memberLimit, method, gradeLevel, subjectLevel, creator, steps
+    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail
   } = req.body
   News.create({
     _attachments: 'uploads/' + req.file.filename,
     title,
-    description,
-    languageOfInstruction,
-    memberLimit,
-    method,
-    gradeLevel,
-    subjectLevel,
+    message,
+    docType,
+    readTime,
+    language,
     creator,
-    steps
+    textDetail,
+    imageDetail,
+    videoDetail
   })
     .then(() => res.json({ message: 'News Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
@@ -43,7 +43,7 @@ const addNews = (req, res) => {
 // @access  Public
 const updateNews = (req, res) => {
   const {
-    title, description, languageOfInstruction, memberLimit, method, gradeLevel, subjectLevel, creator, steps
+    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail
   } = req.body
   const id = req.params.id
   News.findByPk(id).then(product => {
@@ -52,14 +52,14 @@ const updateNews = (req, res) => {
       News.update({
         _attachments: 'uploads/' + req.file.filename,
         title,
-        description,
-        languageOfInstruction,
-        memberLimit,
-        method,
-        gradeLevel,
-        subjectLevel,
+        message,
+        docType,
+        readTime,
+        language,
         creator,
-        steps
+        textDetail,
+        imageDetail,
+        videoDetail
       },
       { where: { id } })
         .then(() => res.json({ message: 'News Updated !!!' }).status(200))

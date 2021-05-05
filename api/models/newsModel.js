@@ -26,6 +26,15 @@ const News = db.define("news",
     creator: {
       type: Sequelize.STRING
     },
+    textDetail: {
+      type: Sequelize.JSON
+    },
+    imageDetail: {
+      type: Sequelize.JSON
+    },
+    videoDetail: {
+      type: Sequelize.JSON
+    },
     _attachments: {
       type: Sequelize.STRING
     }
