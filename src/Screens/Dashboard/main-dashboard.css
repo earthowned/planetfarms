@@ -1,6 +1,6 @@
 .x10-1-0-my-dashboard {
   align-items: flex-start;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: var(--background-color);
   display: flex;
   width: 100%;
 }
@@ -14,7 +14,7 @@
 
 .x10-1-0-my-dashboard .dashboard-hero {
   align-items: center;
-  background-color: var(--licorice);
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   margin-top: 16px;
@@ -24,7 +24,7 @@
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--strokes);
 }
 
 .x10-1-0-my-dashboard .dashboard-info {
@@ -65,7 +65,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
   font-size: 24px;
   font-style: normal;
@@ -73,7 +73,7 @@
 }
 
 .ibmplexsans-regular-normal-monsoon-16px {
-  color: var(--monsoon);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-Regular", Helvetica;
   font-size: 16px;
   font-style: normal;
@@ -97,7 +97,7 @@
 }
 
 .x10-1-0-my-dashboard .my-communities {
-  color: var(--caribbean-green);
+  color: var(--primary-color);
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
   font-size: 16px;
   font-weight: 600;
@@ -119,7 +119,7 @@
   align-items: center;
   align-self: center;
   backdrop-filter: blur(16px) brightness(100%);
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: var(--background-color-light);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -129,7 +129,7 @@
 }
 
 .border-0-5px-quarter-spanish-white {
-  border: 0.5px solid var(--quarter-spanish-white);
+  border: 0.5px solid var(--strokes);
 }
 
 .x10-1-0-my-dashboard .default-i905517 {
@@ -143,7 +143,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica;
   font-size: 16px;
   font-style: normal;
@@ -152,7 +152,7 @@
 
 .x10-1-0-my-dashboard .dashboard-main-container {
   align-items: center;
-  background-color: var(--licorice);
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   height: 100%;
@@ -165,7 +165,7 @@
   display: flex;
   flex-direction: column;
   padding: 24px;
-  color: #fff;
+  color: var(--primary-white);
   font-family: IBM Plex Sans;
   width: 100%;
 }
@@ -191,9 +191,9 @@ text-decoration: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #212225;
-  border: 1px solid #3A3939;
-  color: #fff;
+  background: var(--background-color-light);
+  border: 1px solid var(--strokes);
+  color: var(--primary-white);
   text-decoration: none;
   cursor: pointer;
 }
@@ -219,7 +219,7 @@ text-decoration: none;
 }
 
 div[class$="-container--header"] {
-  background: #212225;
+  background: var(--primary-black);
   border-radius: 4px;
   margin: 0 24px 24px 0;
   width: 250px;
@@ -308,7 +308,7 @@ div[class$="-container--header"] h4 {
 }
 
 .add-container {
-  background: #212225;
+  background: var(--primary-black);
     border-radius: 4px;
     padding: 2em 1em;
     margin: 0 24px 24px 0;
@@ -413,8 +413,8 @@ div[class$="-container--header"] h4 {
   .mobile-container-dasboard-my-profile-box {
     width: 100%;
     padding: 3em 1em;
-    background-color: var(--licorice);
+    background-color: var(--background-color);
     border-radius: 4px;
-    border: 1px solid var(--onyx);
+    border: 1px solid var(--strokes);
   }
 }

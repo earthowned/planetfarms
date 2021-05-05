@@ -1,6 +1,6 @@
 .my-surveys {
   align-items: flex-start;
-  background-color: var(--black);
+  background-color: var(--background-color);
   display: flex;
   height: auto;
   overflow: hidden;

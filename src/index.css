@@ -33,6 +33,7 @@ body {
   --secondary-yellow: #EAA534;
   --secondary-blue: #3641D9;
   --background-color: #000;
+  --background-color-light: rgba(255, 255, 255, 0.16);
   --cards: #141414;
   --popups: #1d1f22;
   --strokes: #2b2b2b;
