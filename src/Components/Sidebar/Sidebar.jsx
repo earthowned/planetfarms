@@ -37,14 +37,7 @@ const mainnav = [
 ]
 
 const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
-  let history = useHistory();
-  const [dropdownActive, setDropdownActive] = useState(true);
-  let {pathname}=useLocation()
-  const [activeBar, setActiveBar]=useState()
-
-  const handleOnClick=()=>{
-      setDropdownActive(!dropdownActive)
-  }
+   const [dropdownActive, setDropdownActive] = useState(true);
 
   const handleToggle=()=>{
     setToggle(!toggle)
@@ -54,63 +47,40 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
         setDropdownActive(true)
     }
   }
-  
+
   return (
     <>
     {
       !mobileView 
       ? <><button className="nav-icon" onClick={()=>handleToggle()}>
-        <img src="/img/sidebar-arrow-icon.svg" />
+        <img src="/img/sidebar-arrow-icon.svg" alt="toggle icon with arrow sign"/>
       </button>
       <div className="logo-container">
         {toggle 
-        ? <img className="logo" src="/img/logo.svg" /> 
-        : <img className="logo-2" src="/img/p-icon.svg" />}
+        ? <img className="logo" src="/img/logo.svg" alt="full logo"/> 
+        : <img className="logo-2" src="/img/p-icon.svg" alt="p-icon logo"/>}
       </div>
-
-      <ul className="list-container">
-        {
-          mainnav.map(navitem => {
-            return (
-               <li className={navitem.dropdown.length > 0 ? "list-items" : "list-items-menu"} key={navitem.name}> 
-                  <div onClick={navitem.name === 'Ragarians' 
-                  ? handleOnClick 
-                  : navitem.name === 'Library'
-                  ? ()=>history.push(`${navitem.slug}`)
-                  : ()=>history.push(`${navitem.slug}`) } 
-                  className={`${pathname === `${navitem.slug}` ? " text-menu text-active" :"text-menu" }`}>
-                    <div  onClick={() => history.push(`${navitem.slug}`)} className="align-content">   
-                    <img src={navitem.image} alt="navigation"/> <span >{navitem.name}</span>
-                    </div>
-                  </div>{
-                    navitem.dropdown.length > 0 && <>
-                      {
-                        dropdownActive && (
-                          <ul className="dropdown-container">
-                            {
-                              navitem.dropdown.map(item => {
-                                return (
-                                  <div key={item.name}  className={`${pathname === `${item.slug}` ? "  text-active" :"" }`}>
-                                    <li onClick={()=>history.push(`${item.slug}`)} className="dropdown-item">
-                                      <strong>{item.name}</strong>
-                                    </li>
-                                  </div>
-                                )
-                              })
-                            }
-                          </ul>
-                        )
-                      }
-                  </>
-                  }
-              </li>
-            )
-          })
-        }
-      </ul>
+      <MainNav dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
       </>
     : <div className={`mobile-view-dropdown-container ${burgerActive && "slide"}`}>
-     <ul className="list-container">
+      <MainNav dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
+    </div>
+    }
+    </>
+  );
+};
+
+export default Sidebar;
+
+function MainNav ({dropdownActive, setDropdownActive}) {
+  let history = useHistory();
+  let {pathname}=useLocation();
+  const handleOnClick=()=>{
+      setDropdownActive(!dropdownActive)
+  }
+
+  return (
+    <ul className="list-container">
        {
           mainnav.map(navitem => {
             return (
@@ -150,10 +120,5 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
           })
         }
       </ul>
-    </div>
-    }
-    </>
-  );
-};
-
-export default Sidebar;
+  )
+}
