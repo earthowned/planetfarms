@@ -38,6 +38,8 @@ body {
   --popups: #1d1f22;
   --strokes: #2b2b2b;
   --dropdowns: #3a3a3a;
+   --onyx: rgba(58, 57, 57, 1);
+   --licorice: rgba(20, 20, 20, 1);
 }
 
 h1 {

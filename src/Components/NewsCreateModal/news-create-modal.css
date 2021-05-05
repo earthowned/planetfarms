@@ -8,10 +8,10 @@
 }
 
 .button-delete {
-  background-color: #191b1d;
+  background-color: var(--cards);
   outline: none;
   border: none;
-  color: red;
+  color: var(--secondary-red);
   margin: 10px;
 }
 
@@ -20,8 +20,8 @@
 }
 
 .button-cancel {
-  background: rgba(255, 255, 255, 0.16);
-  color: white;
+  background: var(--background-color-light);
+  color: var(--primary-white);
   border-radius: 4px;
   height: 50px;
   outline: none;
