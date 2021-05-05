@@ -2,18 +2,37 @@ import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import "./sidebar.css";
 
-const dropdown = [
+const mainnav = [
   {
-    name: 'Members',
-    slug: '/community-members'
+    name: 'Ragarians',
+    slug: '/community-page-news',
+    image: '/img/rag-icon.svg',
+    dropdown: [
+                {
+                  name: 'Members',
+                  slug: '/community-members'
+                },
+                {
+                  name: 'Groups',
+                  slug: '/community-group'
+                },
+                {
+                  name: 'Enterprises',
+                  slug: '/community-enterprises'
+                }
+              ]
   },
   {
-    name: 'Groups',
-    slug: '/community-group'
+    name: 'Library',
+    slug: '/library',
+    image: '/img/book.svg',
+    dropdown: []
   },
   {
-    name: 'Enterprises',
-    slug: '/community-enterprises'
+    name: 'Course',
+    slug: '/course',
+    image: '/img/graduation-cap-1.svg',
+    dropdown: []
   }
 ]
 
@@ -50,88 +69,88 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
       </div>
 
       <ul className="list-container">
-        <li className="list-items"> 
-          <div onClick={handleOnClick} className={`${pathname === '/community-page-news' ? " text-menu text-active" :"text-menu" }`}>
-            <div  onClick={() => history.push("/community-page-news")} className="align-content">   
-             <img src="/img/rag-icon.svg" /> <span >Ragarians</span>
-            </div>
-          </div>
-          {dropdownActive  && (
-             <ul className="dropdown-container">
-              {
-                dropdown.map(item => {
-                  return (
-                     <div   className={`${pathname === `${item.slug}` ? "  text-active" :"" }`}>
-                <li onClick={()=>history.push(`${item.slug}`)} className="dropdown-item">
-                  <strong>{item.name}</strong>
-                </li>
-              </div>
-                  )
-                })
-              }
-            </ul>
-          )}
-        </li>
-
-        <li className=" list-items-menu">      
-          <div onClick={()=>history.push('/library')}  className={`${pathname === '/library' ? "text-menu text-active" : "text-menu"}`}>
-            <div className="align-content">
-              <img src="/img/book.svg" /> <span>Library</span>
-            </div>
-          </div>
-        </li>
-        
-        <li className="list-items-menu">
-          <div className={`${pathname === '/course' ? "text-menu text-active" : "text-menu"}`}>
-            <div className="align-content">
-              <img src="/img/graduation-cap-1.svg" /> <span>Course</span>
-            </div>
-          </div>
-        </li>
+        {
+          mainnav.map(navitem => {
+            return (
+               <li className={navitem.dropdown.length > 0 ? "list-items" : "list-items-menu"} key={navitem.name}> 
+                  <div onClick={navitem.name === 'Ragarians' 
+                  ? handleOnClick 
+                  : navitem.name === 'Library'
+                  ? ()=>history.push(`${navitem.slug}`)
+                  : ()=>history.push(`${navitem.slug}`) } 
+                  className={`${pathname === `${navitem.slug}` ? " text-menu text-active" :"text-menu" }`}>
+                    <div  onClick={() => history.push(`${navitem.slug}`)} className="align-content">   
+                    <img src={navitem.image} alt="navigation"/> <span >{navitem.name}</span>
+                    </div>
+                  </div>{
+                    navitem.dropdown.length > 0 && <>
+                      {
+                        dropdownActive && (
+                          <ul className="dropdown-container">
+                            {
+                              navitem.dropdown.map(item => {
+                                return (
+                                  <div key={item.name}  className={`${pathname === `${item.slug}` ? "  text-active" :"" }`}>
+                                    <li onClick={()=>history.push(`${item.slug}`)} className="dropdown-item">
+                                      <strong>{item.name}</strong>
+                                    </li>
+                                  </div>
+                                )
+                              })
+                            }
+                          </ul>
+                        )
+                      }
+                  </>
+                  }
+              </li>
+            )
+          })
+        }
       </ul>
       </>
     : <div className={`mobile-view-dropdown-container ${burgerActive && "slide"}`}>
      <ul className="list-container">
-        <li className="list-items"> 
-          <div onClick={handleOnClick} className={`${pathname === '/community-page-news' ? " text-menu text-active" :"text-menu" }`}>
-            <div  onClick={() => history.push("/community-page-news")} className="align-content">   
-             <img src="/img/rag-icon.svg" /> <span >Ragarians</span>
-            </div>
-          </div>
-          {dropdownActive  && (
-            <ul className="dropdown-container">
-              {
-                dropdown.map(item => {
-                  return (
-                     <div   className={`${pathname === `${item.slug}` ? "  text-active" :"" }`}>
-                <li onClick={()=>history.push(`${item.slug}`)} className="dropdown-item">
-                  <strong>{item.name}</strong>
-                </li>
-              </div>
-                  )
-                })
-              }
-            </ul>
-          )}
-        </li>
-
-        <li className=" list-items-menu">      
-          <div onClick={()=>history.push('/library')}  className={`${pathname === '/library' ? "text-menu text-active" : "text-menu"}`}>
-            <div className="align-content">
-              <img src="/img/book.svg" /> <span>Library</span>
-            </div>
-          </div>
-        </li>
-        
-        <li className="list-items-menu">
-          <div className={`${pathname === '/course' ? "text-menu text-active" : "text-menu"}`}>
-            <div className="align-content">
-              <img src="/img/graduation-cap-1.svg" /> <span>Course</span>
-            </div>
-          </div>
-        </li>
+       {
+          mainnav.map(navitem => {
+            return (
+               <li className={navitem.dropdown.length > 0 ? "list-items" : "list-items-menu"} key={navitem.name}> 
+                  <div onClick={navitem.name === 'Ragarians' 
+                  ? handleOnClick 
+                  : navitem.name === 'Library'
+                  ? ()=>history.push(`${navitem.slug}`)
+                  : ()=>history.push(`${navitem.slug}`) } 
+                  className={`${pathname === `${navitem.slug}` ? " text-menu text-active" :"text-menu" }`}>
+                    <div  onClick={() => history.push(`${navitem.slug}`)} className="align-content">   
+                    <img src={navitem.image} alt="navigation"/> <span >{navitem.name}</span>
+                    </div>
+                  </div>{
+                    navitem.dropdown.length > 0 && <>
+                      {
+                        dropdownActive && (
+                          <ul className="dropdown-container">
+                            {
+                              navitem.dropdown.map(item => {
+                                return (
+                                  <div key={item.name}  className={`${pathname === `${item.slug}` ? "  text-active" :"" }`}>
+                              <li onClick={()=>history.push(`${item.slug}`)} className="dropdown-item">
+                                <strong>{item.name}</strong>
+                              </li>
+                            </div>
+                                )
+                              })
+                            }
+                          </ul>
+                        )
+                      }
+                  </>
+                  }
+             </li>
+            )
+          })
+        }
       </ul>
-      </div>
+    </div>
     }
     </>
   );
