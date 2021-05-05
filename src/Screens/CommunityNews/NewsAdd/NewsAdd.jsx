@@ -1,122 +1,127 @@
-import {useEffect, useState} from 'react'
-import NewsCreateModal from '../../../Components/NewsCreateModal/NewsCreateModal';
+import { useEffect, useState } from 'react'
+import NewsCreateModal from '../../../Components/NewsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-import {useParams} from 'react-router-dom';
-
+import { useParams } from 'react-router-dom'
 import './news-add.css'
-import BackButton from '../../../Components/BackButton/BackButton';
+import BackButton from '../../../Components/BackButton/BackButton'
+import CommunityNewsViewPage from '../../CommunityNewsView/CommunityNewsView'
 
 const NewsAdd = () => {
-    const [createVideoModal, setCreateVideoModal] = useState(false);
-    const [createImageModal, setCreateImageModal] = useState(false);
-    const [createTextModal, setCreateTextModal] = useState(false);
-     const [videoActive, setVideoActive] = useState(true);
-    const [imageActive, setImageActive] = useState(true);
-    const [textActive, setTextActive] = useState(true);
-    const [content, setContent] = useState({
-        title: ""
-    })
-    const { title, category } = useParams()
-    console.log(title, category)
+  const [createVideoModal, setCreateVideoModal] = useState(false)
+  const [createImageModal, setCreateImageModal] = useState(false)
+  const [createTextModal, setCreateTextModal] = useState(false)
+  const [videoActive, setVideoActive] = useState(true)
+  const [imageActive, setImageActive] = useState(true)
+  const [textActive, setTextActive] = useState(true)
+  const [isNews, setIsNews] = useState(false)
+  const [news, setNews] = useState({})
 
-    useEffect(() => {
-        setContent({
-        title,
-        category, 
-        image: "",
-        videoTitle: "",
-        videoDesc: "",
-        textTitle: "",
-        textDesc: "",
+  const [content, setContent] = useState({
+    title: ""
+  })
+  const { title, category } = useParams()
+
+  useEffect(() => {
+    setContent({
+      title,
+      category,
+      image: "",
+      videoTitle: "",
+      videoDesc: "",
+      textTitle: "",
+      textDesc: "",
     })
-    }, [])
-    
+
+    setIsNews(Object.keys(news).length > 1 ? true : false)
+  }, [news, title, category, setIsNews])
+
     return (
         <>
-        {createVideoModal && <NewsCreateModal setContent={setContent} content={content} type="video" videoActive={videoActive} setVideoActive={setVideoActive}/>}
-        {createImageModal && <NewsCreateModal setContent={setContent} type="image" imageActive={imageActive} setImageActive={setImageActive} />}
-        {createTextModal && <NewsCreateModal setContent={setContent} type="text" textActive={textActive} setTextActive={setTextActive}/>}
-           <DashboardLayout title="Add News">
-               <BackButton  location={"/community-page-news"} />
-            <NewsAddMainContainer setCreateVideoModal={setCreateVideoModal} setCreateImageModal={setCreateImageModal}
-            setCreateTextModal={setCreateTextModal} setTextActive={setTextActive} setImageActive={setImageActive} setVideoActive={setVideoActive}
-            content={content}
-            />
+            {createVideoModal && <NewsCreateModal setContent={setContent} setNews={setNews} content={content} type="video" videoActive={videoActive} setVideoActive={setVideoActive} />}
+            {createImageModal && <NewsCreateModal setContent={setContent} setNews={setNews} type="image" imageActive={imageActive} setImageActive={setImageActive} />}
+            {createTextModal && <NewsCreateModal setContent={setContent} setNews={setNews} type="text" textActive={textActive} setTextActive={setTextActive} />}
+            <DashboardLayout title="Add News">
+                <BackButton location={"/community-page-news"} />
+                { isNews ? <CommunityNewsViewPage newNews={news} /> : '' }
+                <NewsAddMainContainer setCreateVideoModal={setCreateVideoModal} setCreateImageModal={setCreateImageModal} isNews={isNews}
+                    setCreateTextModal={setCreateTextModal} setTextActive={setTextActive} setImageActive={setImageActive} setVideoActive={setVideoActive}
+                    content={content}
+                />
             </DashboardLayout>
         </>
     )
 }
 
-function NewsAddMainContainer ({setCreateVideoModal, setCreateImageModal, setCreateTextModal, setVideoActive, setImageActive, setTextActive, content}) {
+function NewsAddMainContainer({ setCreateVideoModal, setCreateImageModal, setCreateTextModal, setVideoActive, setImageActive, setTextActive, isNews, content }) {
 
-    function createVideo () {
-        setCreateVideoModal(true);
-        setCreateImageModal(false);
-        setCreateTextModal(false);
-        setVideoActive(true);
+    function createVideo() {
+        setCreateVideoModal(true)
+        setCreateImageModal(false)
+        setCreateTextModal(false)
+        setVideoActive(true)
     }
 
-    function createImage () {
-        setCreateVideoModal(false);
-        setCreateImageModal(true);
-        setCreateTextModal(false);
-        setImageActive(true);
+    function createImage() {
+        setCreateVideoModal(false)
+        setCreateImageModal(true)
+        setCreateTextModal(false)
+        setImageActive(true)
     }
 
-    function createText () {
-        setCreateVideoModal(false);
-        setCreateImageModal(false);
-        setCreateTextModal(true);
-        setTextActive(true);
+    function createText() {
+        setCreateVideoModal(false)
+        setCreateImageModal(false)
+        setCreateTextModal(true)
+        setTextActive(true)
     }
 
-    
-    return(
+
+    return (
         <div className="news-add-main-container">
-            <NewsAddContainer content={content} createVideo={createVideo} createImage={createImage} createText={createText}/>  
-            <PopUp />
-         </div>
-    )
-}
-
-function NewsAddContainer ({createVideo, createImage, createText, content}) {
-    return(
-         <div className="news-add-container">
-             <NewContent content={content} />
-             <div className="news-add-inner-container">
-                    <button onClick={() => createVideo()} className="add-btn" ><img src="/img/video-outline.svg" /> <span>Add video</span></button>
-                    <button onClick={() => createImage()} className="add-btn"><img src="/img/camera-outline.svg" /> <span>Add image</span></button>
-                    <button onClick={() => createText()} className="add-btn"><img src="/img/file-text-outline.svg" /><span>Add text</span></button>
-                </div>
+            <NewsAddContainer content={content} createVideo={createVideo} createImage={createImage} createText={createText} />
+            {  isNews ? <PopUp /> : ''}
         </div>
     )
 }
 
-function NewContent({content}) {
+function NewsAddContainer({ createVideo, createImage, createText, content }) {
+    return (
+        <div className="news-add-container">
+            <NewContent content={content} />
+            <div className="news-add-inner-container">
+                <button onClick={() => createVideo()} className="add-btn" ><img src="/img/video-outline.svg" alt="Add video" /> <span>Add video</span></button>
+                <button onClick={() => createImage()} className="add-btn"><img src="/img/camera-outline.svg" alt="Add new img" /> <span>Add image</span></button>
+                <button onClick={() => createText()} className="add-btn"><img src="/img/file-text-outline.svg" alt="Add text" /><span>Add text</span></button>
+            </div>
+        </div>
+    )
+}
+
+function NewContent({ content }) {
     return (
         <>
-        <div className="new-content-container">
-            <h2>{content.title}</h2>
-            {content.image && <img src={content.image} alt="new-image" />}
-            {content.videoTitle && <h6>{content.videoTitle}</h6>}
-            {content.textTitle && <h4>{content.textTitle}</h4>}
-            {content.textDesc && <p>{content.textDesc}</p>}
-        </div>
+            <div className="new-content-container">
+                <h2>{content.title}</h2>
+                {content.image && <img src={content.image} alt="new-img" />}
+                {content.videoTitle && <h6>{content.videoTitle}</h6>}
+                {content.textTitle && <h4>{content.textTitle}</h4>}
+                {content.textDesc && <p>{content.textDesc}</p>}
+            </div>
         </>
     )
 }
 
-function PopUp () {
-    const [activePopup, setActivePopup] = useState(true);
-    return(
+function PopUp() {
+    const [activePopup, setActivePopup] = useState(true)
+    return (
         <>
-        {activePopup && (<div className="popup-box">
-            <h4>Do you want to save edits?</h4>
-            <div className="popup-btn-wrapper">
-                <button onClick={() => setActivePopup(false)} className="secondary-btn">Cancel</button>
-                <button onClick={() => setActivePopup(false)} className="default-btn">Save Edits</button>
-            </div>
-        </div>)}
+            {activePopup && (<div className="popup-box">
+                <h4>Do you want to save?</h4>
+                <div className="popup-btn-wrapper">
+                    <button onClick={() => setActivePopup(false)} className="secondary-btn">Cancel</button>
+                    <button onClick={() => setActivePopup(false)} className="default-btn">Save</button>
+                </div>
+            </div>)}
         </>
     )
 }

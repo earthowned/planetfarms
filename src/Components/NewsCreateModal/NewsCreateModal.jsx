@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "./news-create-modal.css"
 import { useDropzone } from "react-dropzone"
 import { Link } from "react-router-dom"
@@ -18,9 +18,23 @@ const NewsCreateModal = ({
   groupActive,
   setGroupActive,
   groupEditActive,
-  setGroupEditActive
+  setGroupEditActive,
+  setNews
 }) => {
   const [files, setFiles] = useState([])
+  const [formTextDetail, setFormTextDetail] = useState({})
+  const [formImageDetail, setFormImageDetail] = useState({})
+  const [formVideoDetail, setFormVideoDetail] = useState({})
+
+  useEffect(() => {
+    setNews({
+      readTime: 2,
+      createdAt: 123,
+      textDetail: formTextDetail,
+      imageDetail: formImageDetail,
+      videoDetail: formVideoDetail
+  })
+  }, [setNews, formTextDetail, formImageDetail,formVideoDetail])
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -31,9 +45,9 @@ const NewsCreateModal = ({
             preview: URL.createObjectURL(file),
           })
         )
-      );
-    },
-  });
+      )
+    }
+  })
 
   return (
     <>
@@ -44,6 +58,7 @@ const NewsCreateModal = ({
           files={files}
           videoActive={videoActive}
           setVideoActive={setVideoActive}
+          setFormVideoDetail={setFormVideoDetail}
         />
       )}
       {type === "group" && (
@@ -71,6 +86,7 @@ const NewsCreateModal = ({
           files={files}
           imageActive={imageActive}
           setImageActive={setImageActive}
+          setFormImageDetail={setFormImageDetail}
         />
       )}
       {type === "text" && (
@@ -80,6 +96,7 @@ const NewsCreateModal = ({
           files={files}
           textActive={textActive}
           setTextActive={setTextActive}
+          setFormTextDetail={setFormTextDetail}
         />
       )}
     </>
@@ -122,7 +139,7 @@ const EditGroup = ({
   getInputProps,
   files,
   groupEditActive,
-  setGroupEditActive,
+  setGroupEditActive
 }) => {
   return (
     <>
@@ -140,7 +157,7 @@ const EditGroup = ({
             />
             <GroupEditContainer />
             <button className="button-delete">
-              <img className="trash-icon" src="/img/trash-icon.svg" /> Delete
+              <img className="trash-icon" src="/img/trash-icon.svg" alt="delete" /> Delete
               Groups
             </button>
             <div>
@@ -166,7 +183,7 @@ const DragDrop = ({ getInputProps, getRootProps, files }) => {
     <div className="drag-drop" {...getRootProps()}>
       <input {...getInputProps()} />
       {files.length > 0 ? (
-        <img className="avatar" src={files[0].preview} />
+        <img className="avatar" src={files[0].preview} alt="files[0].preview" />
       ) : (
         <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
           Drag & Drop files in this area or Click Here to attach video cover
@@ -244,8 +261,7 @@ const GroupEditContainer = () => {
         value="Hi there! We’re a most kind and friendly society for everyone! We post here some news about farming, nature and etc… We hope you gonna like it! Be a part of our still small, but amazing community!"
       ></textarea>
     </div>
-  );
-};
-
+  )
+}
 
 export default NewsCreateModal

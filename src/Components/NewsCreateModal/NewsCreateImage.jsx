@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./news-create-modal.css"
 import Button from "../Button/Button"
 
-const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive }) => {
+const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive, setFormImageDetail }) => {
   const [imageDescription, setImageDescription] = useState()
   const [addDesctiption, setAddDesctiption] = useState(false)
 
@@ -16,7 +16,7 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
   const addImage = () => {
     if (addDesctiption && !imageDescription) setImageDescriptionError(true)
     if (!imageDescriptionError) {
-      console.log(imageDescription)
+      setFormImageDetail(imageDescription)
       setImageActive(false)
     }
   }

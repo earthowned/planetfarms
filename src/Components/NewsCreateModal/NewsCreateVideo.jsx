@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./news-create-modal.css"
 import Button from "../Button/Button"
 
-const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideoActive }) => {
+const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideoActive, setFormVideoDetail }) => {
   const [videoTitle, setVideoTitle] = useState()
   const [videoDescription, setVideoDescription] = useState()
 
@@ -22,7 +22,7 @@ const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideo
     if (!videoTitle) setVideoTitleError(true)
     if (!videoDescription) setVideoDescriptionError(true)
     if (videoTitle && videoDescription) {
-      console.log(videoTitle, videoDescription)
+      setFormVideoDetail(videoTitle, videoDescription)
       setVideoActive(false)
     }
   }

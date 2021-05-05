@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./news-create-modal.css"
 import Button from "../Button/Button"
 
-const CreateText = ({ textActive, setTextActive }) => {
+const CreateText = ({ textActive, setTextActive, setFormTextDetail }) => {
   const [collectionTitle, setCollectionTitle] = useState()
   const [collectionDescription, setCollectionDescription] = useState()
 
@@ -22,7 +22,7 @@ const CreateText = ({ textActive, setTextActive }) => {
     if (!collectionTitle) setCollectionTitleError(true)
     if (!collectionDescription) setCollectionDescriptionError(true)
     if (collectionTitle && collectionDescription) {
-      console.log(collectionTitle, collectionDescription)
+      setFormTextDetail({collectionTitle, collectionDescription})
       setTextActive(false)
     }
   }
