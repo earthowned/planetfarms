@@ -3,7 +3,7 @@
 .container {
   display: flex;
   width: 100vw;
-  background: #000;
+  background: var(--background-color);
 }
 
 .section-container {
