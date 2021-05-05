@@ -77,9 +77,9 @@
   white-space: nowrap;
   outline: none;
   border: none;
-  background: inherit;
   width: 100%;
   height: 100%;
+  background: transparent;
 }
 
 .ibmplexsans-regular-normal-monsoon-16px {
