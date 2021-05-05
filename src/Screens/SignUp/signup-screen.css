@@ -45,6 +45,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  line-height: 25px;
 }
 
 .checkbox-text {
@@ -79,93 +80,7 @@
   flex-direction: column;
   min-height: 96px;
   margin-top: 2em;
-}
-
-.o-auth-heading {
-  color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-}
-
-.x02-0-0-sign-up-empty .icon-container {
-  align-items: flex-start;
-  display: flex;
-  margin-top: 24px;
-  min-width: 504px;
-}
-
-.link-btn {
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.x02-0-0-sign-up-empty .facebook-button {
-  -webkit-backdrop-filter: blur(16px) brightness(100%);
-  align-items: flex-end;
-  backdrop-filter: blur(16px) brightness(100%);
-  background-color: var(--quarter-spanish-white-2);
-  border-radius: 4px;
-  display: flex;
-  height: 48px;
-  overflow: hidden;
-  padding: 12px 62px;
-  width: 240px;
-}
-
-.x02-0-0-sign-up-empty .facebook-button:last-child {
-  margin-left: 24px;
-}
-
-.border-0-5px-quarter-spanish-white {
-  border: 0.5px solid var(--quarter-spanish-white);
-}
-
-.x02-0-0-sign-up-empty .facebook {
-  height: 24px;
-  letter-spacing: 0;
-  line-height: 24px;
-  margin-left: 16px;
-  min-height: 24px;
-  min-width: 74px;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.valign-text-middle {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.ibmplexsans-semi-bold-gallery-16px {
-  color: var(--gallery);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-}
-
-.x02-0-0-sign-up-empty .subtract {
-  height: 24px;
-  width: 24px;
-}
-
-.x02-0-0-sign-up-empty .text-3 {
-  letter-spacing: 0;
-  line-height: 24px;
-  min-height: 24px;
-  min-width: 251px;
-  white-space: nowrap;
-}
-
-.ibmplexsans-semi-bold-white-16px {
-  color: transparent;
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
+  width: 100%;
 }
 
 .x02-0-0-sign-up-empty .span2-hsNx6X {
@@ -306,7 +221,7 @@
     margin-bottom: 10px;
   }
 
-  .btn-default {
+  .sign-up-btn-container {
     width: 100%;
   }
 
