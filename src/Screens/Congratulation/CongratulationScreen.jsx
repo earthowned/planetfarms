@@ -7,6 +7,7 @@ import InputComponent from '../../Components/Input/InputComponent'
 import Button from '../../Components/Button/Button'
 import { Auth } from 'aws-amplify'
 import ConfirmModal from '../../Components/SimpleModal/ConfirmModal'
+import Secondarybtn from "../../Components/SecondaryBtn/Secondarybtn"
 
 function CongratulationScreen() {
   const welcomeBack= "Congratulations!"
@@ -158,9 +159,19 @@ const submitForm = (e) => {
                />
             </div>
           </div>
-          
+
+        <div className="congratulation-row">
+          <div className="button-wrapper">
+                <div className="congrats-btn">
+                <Secondarybtn name="Skip for now" clickHandler={() => history.push('/community-page-news')} />
+                </div>
+                <div className="congrats-btn">
+                <Button clickHandler={submitForm} name="Continue" />
+                </div>
           </div>
-        
+         </div>
+
+          </div>
         <div className="congratulation-col-3">
           <div className="file-drop-container border-1px-quarter-spanish-white" {...getRootProps()}>
             <input {...getInputProps()} />
@@ -170,15 +181,7 @@ const submitForm = (e) => {
        
        </div>
 
-       <div className="button-wrapper">
-            <button onClick={() => history.push('/community-page-news')} className="btn frame-4 border-0-5px-quarter-spanish-white">
-              <div className="default-i905507538 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                Skip for now
-              </div>
-            </button>
-            
-            <Button clickHandler={submitForm} name="Continue" />
-      </div>
+       
 
       </form>
   )
