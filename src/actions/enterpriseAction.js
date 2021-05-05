@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 import {
   ENTERPRISE_LIST_REQUEST,
   ENTERPRISE_LIST_SUCCESS,
@@ -9,16 +9,16 @@ import {
   ENTERPRISE_SEARCH_REQUEST,
   ENTERPRISE_SEARCH_SUCCESS,
   ENTERPRISE_SEARCH_FAIL
-} from "../constants/enterpriseConstants"
+} from '../constants/enterpriseConstants'
 
-export const listEnterprise = (sort = "", pageNumber = "") => async (
+export const listEnterprise = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
     dispatch({ type: ENTERPRISE_LIST_REQUEST })
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/enterprises`
-    );
+    )
     dispatch({
       type: ENTERPRISE_LIST_SUCCESS,
       payload: data
@@ -66,7 +66,7 @@ export const createEnterprise = (newEnterprise) => async (
 
     const {
       useLogin: { userInfo }
-    } = getState();
+    } = getState()
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add`,
