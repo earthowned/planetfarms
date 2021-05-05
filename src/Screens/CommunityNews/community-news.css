@@ -1,6 +1,6 @@
 .x03-0-0-community-page-news .search {
   align-items: center;
-  background-color: var(--licorice);
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -45,10 +45,10 @@
 }
 
 .community-news-right-bar-inner-container {
-  background: #141414;
-  border: 1px solid #3a3939;
+  background: var(--cards);
+  border: 1px solid var(--strokes);
   border-radius: 4px;
-  color: #fff;
+  color: var(--primary-white);
   padding: 2em;
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
 }
@@ -61,7 +61,7 @@
 
 .community-news-right-bar-inner-container .community-news-filter-container h6 {
   padding: 0.6em 0.6em;
-  border: 1px solid #3a3939;
+  border: 1px solid var(--strokes);
   border-radius: 4px;
   margin-top: 1em;
 }
@@ -77,7 +77,7 @@
 }
 
 .community-news-right-bar .nav-link {
-  color: #fff;
+  color: var(--primary-white);
   text-decoration: underline;
   display: block;
   margin-top: 2em;

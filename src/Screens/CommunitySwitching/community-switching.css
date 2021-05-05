@@ -63,7 +63,7 @@
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
   backdrop-filter: blur(16px) brightness(100%);
-  background-color: var(--white);
+  background-color: var(--primary-white);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -73,7 +73,7 @@
   width: 176px;
 }
 .border-0-5px-quarter-spanish-white {
-  border: 0.5px solid var(--quarter-spanish-white);
+  border: 0.5px solid var(--primary-white);
 }
 .default-i905516988 {
   height: 24px;
