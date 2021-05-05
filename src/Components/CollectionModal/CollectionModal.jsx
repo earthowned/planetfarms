@@ -36,7 +36,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
     setResourceDescriptionError(false)
   }
 
-  const handleAddResource = (e) => {
+  const handleAddResource = async (e) => {
     e.preventDefault()
     if (!title) setResourceTitleError(true)
     if (!description) setResourceDescriptionError(true)
@@ -44,6 +44,12 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
       dispatch(createResource({ title, description, files }))
       setActive(false)
     }
+  }
+
+ 
+  const fileChange=(e)=>{
+    setFiles(e.target.files[0])
+
   }
 
   return (
@@ -54,22 +60,22 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
             <h4>{pathname === '/library' ? 'Create Resources' : 'Create Collection'}</h4>
             <img src="/img/close-outline.svg" onClick={() => setActive(false)} alt="close-icon" />
           </div>
-          <div className="drag-drop" {...getRootProps()}>
-            <input {...getInputProps()} />
-            {files.length > 0
-              ? <img className="avatar" src={files[0].preview} alt="files[0].preview" />
-              : <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                Drag and Drop files in this area or Click Here to attach</h6>}
+          <div className="drag-drop" { ...getRootProps() }>
+            <input { ...getInputProps() } onChange={(e)=>fileChange(e)} />
+              { files.length > 0 
+                ? <img className="avatar" name="avatar" src={files[0].preview}  alt="files[0].preview" /> 
+                : <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                  Drag and Drop files in this area or Click Here to attach</h6> }
           </div>
-          {pathname === '/library' ?
-            <>
-              <div className="collection-input-container">
-                <input className="default-input-variation" error={resourceTitleError} onChange={(e) => resourceDescriptionChange(e)} placeholder="Resource title" /><br />
-                <input className="default-input-variation text-area-variation" error={resourceDescriptionError} onChange={(e) => resourceTitleChange(e)} placeholder="Resource description" /><br />
-              </div>
-              <button className="default-btn btn-size" onClick={handleAddResource}>Submit</button>
-            </>
-            : <> <div className="collection-input-container">
+          { pathname === '/library' ?
+          <>
+            <div className="collection-input-container">
+              <input className="default-input-variation" error={ resourceTitleError }  onChange={ (e) => resourceTitleChange(e) } placeholder="Resource title" /><br />
+              <input className="default-input-variation text-area-variation" error={ resourceDescriptionError } onChange={ (e) => resourceDescriptionChange(e) } placeholder="Resource description" /><br />
+            </div>
+            <button className="default-btn btn-size" onClick={ handleAddResource }>Submit</button>
+          </>
+          : <> <div className="collection-input-container">
               <input className="default-input-variation" placeholder="Collection title" /> <br />
               <select className="default-input-variation" placeholder="Collection title">
                 <option>Select category</option>

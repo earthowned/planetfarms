@@ -1,7 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const userRoutes = require('./routes/userRouter.js')
 const resourceRoutes = require('./routes/resourceRouter.js')
+const collectionRoutes = require('./routes/collectionRouter')
 const courseRoutes = require('./routes/courseRouter.js')
 const sequelize = require('./config/database.js')
 const cors = require('cors')
@@ -17,6 +19,7 @@ dotenv.config()
 // routes
 app.use('/api/users', userRoutes)
 app.use('/api/resources', resourceRoutes)
+app.use('/api/collection', collectionRoutes)
 app.use('/api/courses', courseRoutes)
 
 // home page response
