@@ -9,6 +9,7 @@ import "./login-screen.css"
 import { Auth, Hub } from 'aws-amplify'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userAction'
+import OauthBtn from "../../Components/OauthBtn/OauthBtn"
 
 function LoginScreen(props) {
   const {
@@ -163,46 +164,34 @@ function LoginScreen(props) {
               </a>
             </div>
 
-            {/* o-auth */}
             <div className="oauth-container">
-              <div className="text-1 ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                {text1}
-              </div>
-              <div className="button-1">
-
-                <button onClick={ loginWithGoogle } className="link-btn google-button border-0-5px-quarter-spanish-white">
-                  <div className="logo-googleg-48-dp-1">
-                    <div className="overlap-group1-3">
-                      
-                      <img className="subtract-1" src="/img/google-icon.svg" alt="google-icon" />
-                    </div>
-                  </div>
-                  <div className="google valign-text-middle ibmplexsans-semi-bold-gallery-16px">
-                    {google}
-                  </div>
-                </button>
-                <button onClick={ loginWithFacebook } className="link-btn facebook-button border-0-5px-quarter-spanish-white">
-                  <img className="subtract-1" src="/img/facebook-icon.svg" alt="facebook-icon" />
-                  <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
-                    {facebook}
-                  </div>
-                </button>
-              </div>
+            <OauthBtn
+            loginWithFacebook={loginWithFacebook}
+            loginWithGoogle={loginWithGoogle}
+            google={google}
+            facebook={facebook}
+            name={text1}
+            />
             </div>
 
             <div className="signup-option">
               <p className="ibmplexsans-regular-normal-white-16px">
                 <span className="span0">Don't have an account yet? </span>
-                
               </p>
               <Link to="/register" className="span2">Become a member!</Link>
             </div>
-
           </div>
         </form>
-        
+        <BannerContainer />
+      </div>      
+    </div>
+  )
+}
 
-        {/* banner-container */}
+export default LoginScreen
+
+function BannerContainer () {
+  return(
         <div className="banner-container">
           <div className="banner-images">
             <div className="overlap-group1">
@@ -210,10 +199,5 @@ function LoginScreen(props) {
             </div>
           </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         </div>
-        
-      </div>      
-    </div>
   )
 }
-
-export default LoginScreen
