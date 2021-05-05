@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import "./style.css"
-import "./index.css"
+import './style.css'
+import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import './index.css'
+
 import store from './store'
 import { Provider } from 'react-redux'
 

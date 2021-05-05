@@ -1,12 +1,12 @@
 
-const faker = require('faker');
+const faker = require('faker')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    let data = [];
-    let amount = 50;
+    const data = []
+    let amount = 50
 
-    while(amount--) {
+    while (amount--) {
       data.push({
         title: faker.name.title(),
         resourceFor: faker.lorem.word(),
@@ -37,14 +37,13 @@ module.exports = {
         openUrl: faker.internet.url(),
         createdDate: faker.date.past(),
         updatedDate: faker.date.past(),
-        attachments: faker.lorem.sentence(),
-      });
+        attachments: faker.lorem.sentence()
+      })
     }
-    return queryInterface.bulkInsert('resources', data, {});
+    return queryInterface.bulkInsert('resources', data, {})
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('resources', null, {});
-
+    return queryInterface.bulkInsert('resources', null, {})
   }
-};
+}
