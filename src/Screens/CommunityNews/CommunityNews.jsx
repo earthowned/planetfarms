@@ -1,44 +1,43 @@
-import { useEffect, useState } from "react";
-import "./community-news.css";
-import { Link, useHistory } from "react-router-dom";
-import NewsCard from "../../Components/NewsCard/NewsCard";
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
+import { useEffect, useState } from 'react'
+import './community-news.css'
+import { Link, useHistory } from 'react-router-dom'
+import NewsCard from '../../Components/NewsCard/NewsCard'
+import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import SearchComponent from '../../Components/SearchComponent/SearchComponent'
-import NewsAddModal from "../../Components/NewAddModal/NewsAddModal";
-import Filter from "../../Components/Filter/Filter";
-import useSizeFinder from "../../utils/SizeFinder";
+import NewsAddModal from '../../Components/NewAddModal/NewsAddModal'
+import Filter from '../../Components/Filter/Filter'
+import useSizeFinder from '../../utils/SizeFinder'
 import { useDispatch, useSelector } from 'react-redux'
-import { searchNews, listNews } from "../../actions/newsActions";
+import { searchNews, listNews } from '../../actions/newsActions'
 
-function CommunityNews() {
-  const [addModal, setAddModal] = useState(false);
-  return <DashboardLayout title="Ragrarians News">{addModal && <NewsAddModal setAddModal={setAddModal} />}<CommunityPagenews {...X0300CommunityPagenewsData} setAddModal={setAddModal} /></DashboardLayout>;
+function CommunityNews () {
+  const [addModal, setAddModal] = useState(false)
+  return <DashboardLayout title='Ragrarians News'>{addModal && <NewsAddModal setAddModal={setAddModal} />}<CommunityPagenews {...X0300CommunityPagenewsData} setAddModal={setAddModal} /></DashboardLayout>
 }
 
 export default CommunityNews
 
 const CommunityRight = ({ text, farming, people, nature, carsIndustry, mediaNews, seeAllTopics }) => {
-
   return (
     <>
-      <div className="community-news-right-bar">
-        <div className="community-news-right-bar-inner-container">
+      <div className='community-news-right-bar'>
+        <div className='community-news-right-bar-inner-container'>
           <h4>{text}</h4>
-          <div className="community-news-filter-container">
+          <div className='community-news-filter-container'>
             <h6>{farming}</h6>
             <h6>{people}</h6>
             <h6>{nature}</h6>
             <h6>{carsIndustry}</h6>
             <h6>{mediaNews}</h6>
           </div>
-          <Link to="/community-switching" className="nav-link">{seeAllTopics}</Link>
+          <Link to='/community-switching' className='nav-link'>{seeAllTopics}</Link>
         </div>
       </div>
     </>
   )
 }
 
-function CommunityPagenews(props) {
+function CommunityPagenews (props) {
   const {
     addNews,
     text22,
@@ -49,7 +48,7 @@ function CommunityPagenews(props) {
     mediaNews,
     seeAllTopics,
     setAddModal
-  } = props;
+  } = props
 
   const windowWidth = useSizeFinder()
 
@@ -57,7 +56,6 @@ function CommunityPagenews(props) {
   const { userInfo } = userLogin
   const history = useHistory()
   const [search, setSearch] = useState(null)
-
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -69,19 +67,19 @@ function CommunityPagenews(props) {
     if (!search) dispatch(listNews())
   }, [search, dispatch, history, userInfo])
 
-  let newsList = useSelector((state) => state.listNews)
+  const newsList = useSelector((state) => state.listNews)
   const news = newsList.searchNews ? newsList.searchNews : newsList.news
   return (
     <>
-      <div className="community-page-news">
-        <div className="community-news-second-header">
-          <div className="search-container-news">
-            <SearchComponent search={search} setSearch={setSearch} className={"search border-1px-onyx"} />
+      <div className='community-page-news'>
+        <div className='community-news-second-header'>
+          <div className='search-container-news'>
+            <SearchComponent search={search} setSearch={setSearch} className='search border-1px-onyx' />
           </div>
-          <button className="default-btn default-btn-variation" onClick={() => setAddModal(true)}>{addNews}</button>
+          <button className='default-btn default-btn-variation' onClick={() => setAddModal(true)}>{addNews}</button>
         </div>
-        <div className="community-news-cards">
-            <NewsCard news={news} />
+        <div className='community-news-cards'>
+          <NewsCard news={news} />
         </div>
         {(windowWidth < 1200) ? <Filter /> : <CommunityRight text={text22} farming={farming} people={people} nature={nature} carsIndustry={carsIndustry} mediaNews={mediaNews} seeAllTopics={seeAllTopics} />}
       </div>
@@ -90,13 +88,13 @@ function CommunityPagenews(props) {
 }
 
 const X0300CommunityPagenewsData = {
-  search: "Search…",
-  addNews: "Add news",
-  text22: "Discover more of what matters to you",
-  farming: "Farming",
-  people: "People",
-  nature: "Nature",
-  carsIndustry: "Cars industry",
-  mediaNews: "Media news",
-  seeAllTopics: "See all topics",
+  search: 'Search…',
+  addNews: 'Add news',
+  text22: 'Discover more of what matters to you',
+  farming: 'Farming',
+  people: 'People',
+  nature: 'Nature',
+  carsIndustry: 'Cars industry',
+  mediaNews: 'Media news',
+  seeAllTopics: 'See all topics'
 }

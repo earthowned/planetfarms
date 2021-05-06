@@ -45,7 +45,7 @@ module.exports = {
         },
         category: {
           type: Sequelize.STRING
-        },
+        }
       }
     )
   },

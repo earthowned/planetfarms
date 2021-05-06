@@ -1,8 +1,8 @@
-import { useState } from "react"
-import "./news-create-modal.css"
-import Button from "../Button/Button"
-import { savevideoDetail } from "../../actions/newsActions"
-import { useDispatch } from "react-redux"
+import { useState } from 'react'
+import './news-create-modal.css'
+import Button from '../Button/Button'
+import { savevideoDetail } from '../../actions/newsActions'
+import { useDispatch } from 'react-redux'
 
 const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideoActive }) => {
   const [videoTitle, setVideoTitle] = useState()
@@ -25,61 +25,61 @@ const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideo
     if (!videoTitle) setVideoTitleError(true)
     if (!videoDescription) setVideoDescriptionError(true)
     if (videoTitle && videoDescription) {
-      dispatch(savevideoDetail({videoTitle, videoDescription}))
+      dispatch(savevideoDetail({ videoTitle, videoDescription }))
       setVideoActive(false)
     }
   }
   return (
     <>
       {videoActive && (
-        <div className="collection-modal-container">
-          <div className="collection-modal-inner-container">
-            <div className="collection-modal-header">
+        <div className='collection-modal-container'>
+          <div className='collection-modal-inner-container'>
+            <div className='collection-modal-header'>
               <h4>Add video</h4>
               <img
-                src="/img/close-outline.svg"
-                alt="close-icon"
+                src='/img/close-outline.svg'
+                alt='close-icon'
                 onClick={() => setVideoActive(false)}
               />
             </div>
-            <div className="drag-drop" {...getRootProps()}>
+            <div className='drag-drop' {...getRootProps()}>
               <input {...getInputProps()} />
               {files.length > 0 ? (
-                <img className="avatar" src={files[0].preview} alt={files[0].preview} />
+                <img className='avatar' src={files[0].preview} alt={files[0].preview} />
               ) : (
-                <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+                <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
                   Drag & Drop files in this area or Click Here to attach video cover
                 </h6>
               )}
             </div>
-            <div className="video-input-container">
+            <div className='video-input-container'>
               <input
-                className="default-input-variation"
-                placeholder="Video title"
+                className='default-input-variation'
+                placeholder='Video title'
                 value={videoTitle}
                 onChange={(e) => videoTitleChange(e)}
-              ></input>
-              <p className="error-message">{videoTitleError ? 'Please enter Video Title' : " "} </p>
+              />
+              <p className='error-message'>{videoTitleError ? 'Please enter Video Title' : ' '} </p>
               <br />
               <textarea
-                className="default-input-variation text-area-variation"
-                placeholder="Video description"
-                cols="3"
-                rows="3"
+                className='default-input-variation text-area-variation'
+                placeholder='Video description'
+                cols='3'
+                rows='3'
                 value={videoDescription}
                 onChange={(e) => videoDescriptionChange(e)}
-              ></textarea>
-              <p className="error-message">{videoDescriptionError ? 'Please enter Video Description' : " "} </p>
+              />
+              <p className='error-message'>{videoDescriptionError ? 'Please enter Video Description' : ' '} </p>
 
-              <div className="video-row-3">
+              <div className='video-row-3'>
                 <input
-                  className="default-input-variation last-input-variation"
-                  placeholder="Video link"
-                ></input>{" "}
-                <span>OR</span> <button className="secondary-btn">Choose video</button>
+                  className='default-input-variation last-input-variation'
+                  placeholder='Video link'
+                />{' '}
+                <span>OR</span> <button className='secondary-btn'>Choose video</button>
               </div>
             </div>
-            <Button name="Add Video block" clickHandler={addVideo} />
+            <Button name='Add Video block' clickHandler={addVideo} />
           </div>
         </div>
       )}
