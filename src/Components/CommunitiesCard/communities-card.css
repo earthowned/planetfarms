@@ -53,7 +53,7 @@
     justify-content: center;
   }
   .ibmplexsans-semi-bold-quarter-spanish-white-32px {
-    color: var(--quarter-spanish-white);
+    color: var(--primary-white);
     font-family: "IBM Plex Sans", Helvetica;
     font-size: 32px;
     font-style: normal;
@@ -68,7 +68,7 @@
     white-space: nowrap;
   }
   .ibmplexsans-normal-quarter-spanish-white-16px {
-    color: var(--quarter-spanish-white);
+    color: var(--primary-white);
     font-family: "IBM Plex Sans", Helvetica;
     font-size: 16px;
     font-style: normal;

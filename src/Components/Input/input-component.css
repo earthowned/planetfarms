@@ -6,7 +6,7 @@
 
 .default-input {
   align-items: center;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   height: 80px;
@@ -43,7 +43,7 @@
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--dropdowns);
 }
 
 .person-outline {
@@ -61,7 +61,7 @@
 }
 
 .ibmplexsans-regular-normal-monsoon-14px {
-  color: var(--monsoon);
+  color: var(--primary-grey);
   font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -83,23 +83,23 @@
 }
 
 .ibmplexsans-regular-normal-monsoon-16px {
-  color: var(--monsoon);
+  color: var(--primary-grey);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
 }
 
 .error-message {
-  color: red;
+  color: var(--secondary-red);
   margin: 6px 0;
   line-height: 20px;
   height: 12px;
 }
 
 .foucsed-input {
-  border: red;
+  border: var(--secondary-red);
 }
 
 .default-input:focus-within {
-  border: 1px solid #00c688;
+  border: 1px solid var(--primary-color);
 }

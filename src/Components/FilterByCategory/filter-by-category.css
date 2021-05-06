@@ -7,7 +7,7 @@
   }
   .filter-category {
     align-items: center;
-    background-color: var(--licorice);
+    background-color: var(--cards);
     border-radius: 4px;
     display: flex;
     height: 48px;
@@ -18,7 +18,7 @@
   }
 
   .border-1px-onyx {
-    border: 1px solid var(--onyx);
+    border: 1px solid var(--dropdowns);
   }
 
   .fllter-by-category-text {
@@ -39,7 +39,7 @@
     width: 16px;
   }
   .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-    color: var(--quarter-spanish-white);
+    color: var(--primary-white);
     font-family: "IBM Plex Sans", Helvetica;
     font-size: 16px;
     font-style: normal;
