@@ -13,7 +13,16 @@ You can install dependencies by `npm install` in your Frontend and after that yo
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs only Frontend in the development mode.\
+You can enter `npm start` in the base directory.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+Runs only Backend in the development mode.\
+You can go to Back by `cd api` and enter `npm start`.\
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
+
+Runs Backend as well as Frontend in the development mode.\
+You can enter `npm run dev` in the base directory.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
@@ -30,3 +39,9 @@ To run docker first you need to install docker on your computer after than enter
 [Sequelize](https://sequelize.org/) is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
 
 Now to actually create that table in database you need to run `npx sequelize-cli db:migrate` command. This command will create table and to seed your database you can run `npx sequelize-cli db:seed:all`.
+
+### `npx standard --fix`
+
+[Standard JS](https://standardjs.com) is the easiest way to enforce code quality in your project.
+
+Just run `npx standard --fix` and say goodbye to messy or inconsistent code. For linting specific file run `npx standard --fix "path_of_file_or_folder"`

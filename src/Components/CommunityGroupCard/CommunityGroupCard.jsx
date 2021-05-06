@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Button from "../Button/Button";
+import Secondarybtn from "../SecondaryBtn/Secondarybtn";
 import "./community-group-card.css";
 
 const CommunityGroupCard = ({ location }) => {
@@ -7,12 +9,14 @@ const CommunityGroupCard = ({ location }) => {
   const followClick = () => {
     setFollow(!follow);
   };
+
   return (
     <div className="card-1 border-1px-onyx">
-      <Link to={location} style={{ textDecoration: "none" }}>
-        <div className="card-container"></div>
-      </Link>
+      {/* <Link to={location} style={{ textDecoration: "none" }}> */}
+        <div className="card-container" style={{backgroundImage: "url(/img/farmer.svg)"}}></div>
+      {/* </Link> */}
 
+      <div className="community-group-card-inner-content">
       <div className="card-text-container">
         <Link to={location} style={{ textDecoration: "none" }}>
           <div className="farmers ibmplexsans-semi-bold-caribbean-green-14px">
@@ -36,31 +40,22 @@ const CommunityGroupCard = ({ location }) => {
           </p>
         </div>
         {follow ? (
-          <div className="follow-btn border-0-5px-quarter-spanish-white">
-            <div
-              className="btn-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px"
-              onClick={followClick}
-            >
-              Unfollow
-            </div>
+          <div className="card-btn-container">
+          <div className="card-secondary-btn-wrapper">
+          <Secondarybtn clickHandler={followClick} name="Unfollow" />
+          </div>
           </div>
         ) : (
-          <div className="frame-2796-1">
-            <div className="frame-5-1 border-0-5px-quarter-spanish-white">
-              <div className="default-i905516418 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-                Don't recommend
-              </div>
+          <div className="card-btn-container">
+            <div className="card-secondary-btn-wrapper">
+            <Secondarybtn name="Don't recommend" />
             </div>
-            <div className={`frame-2792`}>
-              <div
-                className="follow ibmplexsans-semi-bold-shark-16px"
-                onClick={followClick}
-              >
-                Follow
-              </div>
+            <div className="card-secondary-btn-wrapper">
+            <Button name="Follow" clickHandler={followClick}></Button>
             </div>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

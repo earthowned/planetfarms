@@ -2,6 +2,11 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding: 0 1em;
+}
+
+.logo {
+  width: 100%;
 }
 
 .logo-container.active {
@@ -13,6 +18,14 @@
 }
 
 .img-container img {
+  width: 100%;
+}
+
+.img-container-2 {
+  width: 32px;
+}
+
+.img-container-2 img {
   width: 100%;
 }
 
@@ -169,6 +182,16 @@
 .mobile-view-dropdown-container.slide {
   height: 60%;
   transition: all ease-in-out 0.2s;
+}
+
+@media only screen and (max-width: 1800px) {
+  .img-container {
+    width: 100px;
+  }
+
+  .img-container-2 {
+    width: 20px;
+  }
 }
 
 @media only screen and (max-width: 500px) {

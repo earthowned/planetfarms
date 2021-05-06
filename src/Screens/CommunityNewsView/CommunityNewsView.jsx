@@ -74,7 +74,7 @@ function CommunityNewsViewPage({ newNews }) {
                   <br />
           Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and
           grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic beverages obtained
-          as a result of fermentation of a mash of grains (gin, vodka, and whiskey) or sugarcane (rums). It’s also a
+         (gin, vodka, and whiskey) or sugarcane (rums). It’s also a
           source of fuel commonly blended with gasoline to oxygenate the fuel at the gas pump. Ethanol fuel can also be
           used on its own to power vehicles.
         </p>
@@ -87,8 +87,9 @@ function CommunityNewsViewPage({ newNews }) {
                   pockets.
           <br />
                   <br />
+
           Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and
-          grain or indirectly from paper waste. It’s also the main type of alcohol in most alcoholic beverages obtained
+          grain or indirectly from paper waste. It’s also in most alcoholic beverages obtained
           as a result of fermentation of a mash of grains (gin, vodka, and whiskey) or sugarcane (rums). It’s also a
           source of fuel commonly blended with gasoline to oxygenate the fuel at the gas pump. Ethanol fuel can also be
           used on its own to power vehicles.
@@ -99,6 +100,7 @@ function CommunityNewsViewPage({ newNews }) {
                   <img className="f1" src="/img/facebook-share-icon.svg" alt="facebook-icon" />
                   <div className="your-business-goals valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px">
                     Repost
+
             </div>
                 </div>
                 <div className="button-secondary-default border-0-5px-quarter-spanish-white">

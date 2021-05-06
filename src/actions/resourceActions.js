@@ -19,6 +19,7 @@ export const listResources = (sort = '', pageNumber = '') => async (
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/resources`
     )
+    console.log("data",data)
     dispatch({
       type: RESOURCE_LIST_SUCCESS,
       payload: data
@@ -60,7 +61,6 @@ export const createResource = (newResource) => async (dispatch, getState) => {
     dispatch({
       type: RESOURCE_CREATE_REQUEST
     })
-
     const { userLogin: { userInfo } } = getState()
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, newResource, config)
