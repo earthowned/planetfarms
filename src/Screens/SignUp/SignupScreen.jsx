@@ -8,6 +8,7 @@ import Button from "../../Components/Button/Button"
 import Checkbox from "../../Components/Checkbox/Checkbox"
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from "../../actions/userAction"
+import OauthBtn from "../../Components/OauthBtn/OauthBtn"
 
 function App() {
   return <SignupScreen {...X0200SignUpemptyData} />
@@ -119,47 +120,20 @@ function SignupScreen(props) {
                 </div>
                 <p className="error-message">{termsError ? "Please read the terms of service" : " "}</p>
               </div>
+              <div className="sign-up-btn-container">
               <Button clickHandler={registerUser} name="Sign Up" />
+              </div>
             </div>
             <div className="o-auth-container">
-              <div className="text-2 ibmplexsans-regular-normal-quarter-spanish-white-16px">
-                {text2}
-              </div>
-              <div className="icon-container">
-                <a
-                  href="https://www.facebook.com/"
-                  alt="facebook"
-                  target="_blank"
-                  className="link-btn facebook-button border-0-5px-quarter-spanish-white" rel="noreferrer"
-                >
-                  <img
-                    className="subtract"
-                    src="/img/google-icon.svg"
-                    alt="facebook-icon"
-                  />
-                  <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
-                    {google}
-                  </div>
-                </a>
-                <a
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  className="link-btn facebook-button border-0-5px-quarter-spanish-white" rel="noreferrer"
-                >
-                  <img
-                    className="subtract"
-                    src="/img/facebook-icon.svg"
-                    alt="facebook-icon"
-                  />
-                  <div className="facebook valign-text-middle ibmplexsans-semi-bold-gallery-16px">
-                    {facebook}
-                  </div>
-                </a>
-              </div>
+              <OauthBtn
+              google={google}
+              facebook={facebook}
+              name={text2}
+              />
             </div>
             <div className="signup-option">
-              <p className="text-3 ibmplexsans-semi-bold-white-16px">
-                <span className="span0-hsNx6X">Already have an Account?</span>
+              <p className="">
+                Already have an Account?
               </p>
               <Link className="span2-hsNx6X" to="/">
                 Sign In

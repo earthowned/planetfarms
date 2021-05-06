@@ -7,6 +7,18 @@ body {
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
 }
 
+:root {
+  --caribbean-green: rgba(0, 198, 136, 1);
+  --gallery: rgba(238, 238, 238, 1);
+  --licorice: rgba(20, 20, 20, 1);
+  --monsoon: rgba(137, 137, 137, 1);
+  --onyx: rgba(58, 57, 57, 1);
+  --quarter-spanish-white: rgba(248, 235, 223, 1);
+  --quarter-spanish-white-2: rgba(248, 235, 223, 0.16);
+  --shark: rgba(43, 43, 44, 1);
+  --rusty-red: rgba(218, 52, 67, 1);
+}
+
 .nav-link {
   text-decoration: none;
 }
@@ -31,6 +43,7 @@ body {
   background-color: #141414;
   transition: all 0.5s ease-in-out;
   border: 1px solid #3a3939;
+  padding-top: 2.6em;
 }
 
 /* when sidebar is active */
@@ -54,7 +67,8 @@ body {
 .sidebar-container.active .logo-container .img-container-2 {
   transition: 0.5s ease-in-out;
   display: block;
-  margin-left: 17px;
+  margin-top: 1.3em;
+  width: 32px;
 }
 
 .sidebar-container.active .list-items span {
