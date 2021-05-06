@@ -43,6 +43,9 @@ module.exports = {
         videoDetail: {
           type: Sequelize.JSON
         },
+        category: {
+          type: Sequelize.STRING
+        },
       }
     )
   },

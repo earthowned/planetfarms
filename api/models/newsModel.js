@@ -35,6 +35,9 @@ const News = db.define("news",
     videoDetail: {
       type: Sequelize.JSON
     },
+    category: {
+      type: Sequelize.STRING
+    },
     _attachments: {
       type: Sequelize.STRING
     }

@@ -38,7 +38,7 @@ const upload = multer({
   }
 })
 router.route('/').get(getNews)
-router.route('/add').post(protect, upload.single('avatar'), addNews)
+router.route('/add').post(protect, addNews)
 router.route('/search').get(searchNewsTitle)
 router
   .route('/:id')

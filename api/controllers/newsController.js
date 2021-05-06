@@ -20,10 +20,10 @@ const getNews = (req, res) => {
 // @access  Public
 const addNews = (req, res) => {
   const {
-    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail
+    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category
   } = req.body
   News.create({
-    _attachments: 'uploads/' + req.file.filename,
+    // _attachments: 'uploads/' + req.file.filename,
     title,
     message,
     docType,
@@ -32,7 +32,8 @@ const addNews = (req, res) => {
     creator,
     textDetail,
     imageDetail,
-    videoDetail
+    videoDetail,
+    category
   })
     .then(() => res.json({ message: 'News Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
