@@ -19,30 +19,26 @@ const getEnterprises = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
-  const ordervalue = order && [['title',  order]] 
-  Enterprises.findAll({ offset: page, limit: pageSize,ordervalue  })
+  const ordervalue = order && [['title', order]]
+  Enterprises.findAll({ offset: page, limit: pageSize, ordervalue })
     .then(enterprises => {
       paginate({ page, pageSize })
       res.json({ enterprises, page, pageSize }).status(200)
     })
-    
+
     .catch((err) => res.json({ err }).status(400))
 }
-
-
 
 // @desc    Add individual enterprises
 // @route   POST /api/enterprises/add
 // @access  Public
 const addEnterprises = (req, res) => {
   const {
-    title, description,roles, attachments
+    title, description, roles, attachments
   } = req.body
 
-  
-  
   Enterprises.create({
-    title,  description, roles, attachments
+    title, description, roles, attachments
   })
     .then(() => res.json({ message: 'Enterprises Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
@@ -86,14 +82,14 @@ const deleteEnterprises = (req, res) => {
 // @access  Public
 const updateEnterprises = (req, res) => {
   const {
-    title,  description, roles, attachments
+    title, description, roles, attachments
   } = req.body
   const id = req.params.id
   Enterprises.findByPk(id).then(enterprises => {
     if (enterprises) {
       const { id } = enterprises
       Enterprises.update({
-        title,  description, roles,  attachments
+        title, description, roles, attachments
       },
       { where: { id } })
         .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))

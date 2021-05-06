@@ -1,8 +1,8 @@
-const Sequelize = require("sequelize")
-const db = require("../config/database.js")
+const Sequelize = require('sequelize')
+const db = require('../config/database.js')
 
 const Enterprises = db.define(
-  "enterprises",
+  'enterprises',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -16,7 +16,7 @@ const Enterprises = db.define(
       type: Sequelize.TEXT
     },
     attachments: {
-      type: Sequelize.BLOB("long")
+      type: Sequelize.BLOB('long')
     }
   },
   { timestamps: true }

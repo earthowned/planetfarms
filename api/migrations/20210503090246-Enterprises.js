@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable("enterprises", {
+    queryInterface.createTable('enterprises', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -15,16 +15,16 @@ module.exports = {
       roles: {
         type: Sequelize.ENUM,
         values: [
-          "Leaders",
-          "Farmer",
-          "Marketers/Sales",
-          "Mentors",
-          "Accountng"
+          'Leaders',
+          'Farmer',
+          'Marketers/Sales',
+          'Mentors',
+          'Accountng'
         ],
-        defaultValue: "Farmer"
+        defaultValue: 'Farmer'
       },
       attachments: {
-        type: Sequelize.BLOB("long")
+        type: Sequelize.BLOB('long')
       },
       createdAt: {
         type: Sequelize.DATE
@@ -36,6 +36,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("enterprises", {})
+    queryInterface.dropTable('enterprises', {})
   }
 }
