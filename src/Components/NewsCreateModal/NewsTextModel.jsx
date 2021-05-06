@@ -1,8 +1,11 @@
 import { useState } from "react"
 import "./news-create-modal.css"
 import Button from "../Button/Button"
+import { useDispatch } from "react-redux"
+import { savetextDetail } from "../../actions/newsActions"
 
-const CreateText = ({ textActive, setTextActive, setFormTextDetail }) => {
+
+const CreateText = ({ textActive, setTextActive }) => {
   const [collectionTitle, setCollectionTitle] = useState()
   const [collectionDescription, setCollectionDescription] = useState()
 
@@ -18,11 +21,12 @@ const CreateText = ({ textActive, setTextActive, setFormTextDetail }) => {
     setCollectionDescriptionError(false)
   }
 
+  const dispatch = useDispatch()
   const addText = () => {
     if (!collectionTitle) setCollectionTitleError(true)
     if (!collectionDescription) setCollectionDescriptionError(true)
     if (collectionTitle && collectionDescription) {
-      setFormTextDetail({collectionTitle, collectionDescription})
+      dispatch(savetextDetail({collectionTitle, collectionDescription}))
       setTextActive(false)
     }
   }

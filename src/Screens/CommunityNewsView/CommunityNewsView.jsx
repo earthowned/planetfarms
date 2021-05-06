@@ -26,13 +26,26 @@ function CommunityNewsViewPage({ newNews }) {
             <img className="ellipse-15" src="/img/newsbg-image.png" alt="community-single-article" />
           </div>
           <div className="text-container">
-          <p>
+              <p>
                 { newNews?.textDetail?.collectionTitle }
                   </p>
                 <p>
                 { newNews?.textDetail?.collectionDescription }
+              </p>
+          </div>
+          <div className="text-container">
+              <p>
+                { newNews?.imageDetail?.imageDescription }
+              </p>
+          </div>
+          <div className="text-container">
+              <p>
+                { newNews?.videoDetail?.videoTitle }
                   </p>
-              </div>
+                <p>
+                { newNews?.videoDetail?.videoDescription }
+              </p>
+          </div>
         </div>
         : <DashboardLayout >
           <div className="x03-1-0-news-page">

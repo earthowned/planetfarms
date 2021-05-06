@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import "./news-create-modal.css"
 import { useDropzone } from "react-dropzone"
 import { Link } from "react-router-dom"
@@ -19,22 +19,8 @@ const NewsCreateModal = ({
   setGroupActive,
   groupEditActive,
   setGroupEditActive,
-  setNews
 }) => {
   const [files, setFiles] = useState([])
-  const [formTextDetail, setFormTextDetail] = useState({})
-  const [formImageDetail, setFormImageDetail] = useState({})
-  const [formVideoDetail, setFormVideoDetail] = useState({})
-
-  useEffect(() => {
-    setNews({
-      readTime: 2,
-      createdAt: 123,
-      textDetail: formTextDetail,
-      imageDetail: formImageDetail,
-      videoDetail: formVideoDetail
-  })
-  }, [setNews, formTextDetail, formImageDetail,formVideoDetail])
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -58,7 +44,6 @@ const NewsCreateModal = ({
           files={files}
           videoActive={videoActive}
           setVideoActive={setVideoActive}
-          setFormVideoDetail={setFormVideoDetail}
         />
       )}
       {type === "group" && (
@@ -86,7 +71,6 @@ const NewsCreateModal = ({
           files={files}
           imageActive={imageActive}
           setImageActive={setImageActive}
-          setFormImageDetail={setFormImageDetail}
         />
       )}
       {type === "text" && (
@@ -96,7 +80,6 @@ const NewsCreateModal = ({
           files={files}
           textActive={textActive}
           setTextActive={setTextActive}
-          setFormTextDetail={setFormTextDetail}
         />
       )}
     </>

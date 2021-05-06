@@ -1,8 +1,10 @@
 import { useState } from "react"
 import "./news-create-modal.css"
 import Button from "../Button/Button"
+import { useDispatch } from "react-redux"
+import { saveimageDetail } from "../../actions/newsActions"
 
-const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive, setFormImageDetail }) => {
+const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive }) => {
   const [imageDescription, setImageDescription] = useState()
   const [addDesctiption, setAddDesctiption] = useState(false)
 
@@ -13,10 +15,11 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
     setImageDescriptionError(false)
   }
 
+  const dispatch = useDispatch()
   const addImage = () => {
     if (addDesctiption && !imageDescription) setImageDescriptionError(true)
     if (!imageDescriptionError) {
-      setFormImageDetail(imageDescription)
+      dispatch(saveimageDetail({addDesctiption, imageDescription}))
       setImageActive(false)
     }
   }

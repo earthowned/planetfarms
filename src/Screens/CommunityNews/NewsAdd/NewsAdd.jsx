@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom'
 import './news-add.css'
 import BackButton from '../../../Components/BackButton/BackButton'
 import CommunityNewsViewPage from '../../CommunityNewsView/CommunityNewsView'
+import { useDispatch, useSelector } from 'react-redux'
+import { createNews } from '../../../actions/newsActions'
+
 
 const NewsAdd = () => {
   const [createVideoModal, setCreateVideoModal] = useState(false)
@@ -13,13 +16,13 @@ const NewsAdd = () => {
   const [videoActive, setVideoActive] = useState(true)
   const [imageActive, setImageActive] = useState(true)
   const [textActive, setTextActive] = useState(true)
-  const [isNews, setIsNews] = useState(false)
-  const [news, setNews] = useState({})
+  const news = useSelector((state) => state.addNewNews !== {} ? state.addNewNews : '')
 
   const [content, setContent] = useState({
     title: ""
   })
   const { title, category } = useParams()
+
 
   useEffect(() => {
     setContent({
@@ -31,19 +34,16 @@ const NewsAdd = () => {
       textTitle: "",
       textDesc: "",
     })
-
-    setIsNews(Object.keys(news).length > 1 ? true : false)
-  }, [news, title, category, setIsNews])
-
+  }, [news, title, category])
     return (
         <>
-            {createVideoModal && <NewsCreateModal setContent={setContent} setNews={setNews} content={content} type="video" videoActive={videoActive} setVideoActive={setVideoActive} />}
-            {createImageModal && <NewsCreateModal setContent={setContent} setNews={setNews} type="image" imageActive={imageActive} setImageActive={setImageActive} />}
-            {createTextModal && <NewsCreateModal setContent={setContent} setNews={setNews} type="text" textActive={textActive} setTextActive={setTextActive} />}
+            {createVideoModal && <NewsCreateModal setContent={setContent} content={content} type="video" videoActive={videoActive} setVideoActive={setVideoActive} />}
+            {createImageModal && <NewsCreateModal setContent={setContent} type="image" imageActive={imageActive} setImageActive={setImageActive} />}
+            {createTextModal && <NewsCreateModal setContent={setContent} type="text" textActive={textActive} setTextActive={setTextActive} />}
             <DashboardLayout title="Add News">
                 <BackButton location={"/community-page-news"} />
-                { isNews ? <CommunityNewsViewPage newNews={news} /> : '' }
-                <NewsAddMainContainer setCreateVideoModal={setCreateVideoModal} setCreateImageModal={setCreateImageModal} isNews={isNews}
+                { news && <CommunityNewsViewPage newNews={news} /> }
+                <NewsAddMainContainer setCreateVideoModal={setCreateVideoModal} setCreateImageModal={setCreateImageModal} news={news} title={title} category={category}
                     setCreateTextModal={setCreateTextModal} setTextActive={setTextActive} setImageActive={setImageActive} setVideoActive={setVideoActive}
                     content={content}
                 />
@@ -52,7 +52,7 @@ const NewsAdd = () => {
     )
 }
 
-function NewsAddMainContainer({ setCreateVideoModal, setCreateImageModal, setCreateTextModal, setVideoActive, setImageActive, setTextActive, isNews, content }) {
+function NewsAddMainContainer({ setCreateVideoModal, setCreateImageModal, setCreateTextModal, setVideoActive, setImageActive, setTextActive, news, title, category, content }) {
 
     function createVideo() {
         setCreateVideoModal(true)
@@ -79,7 +79,7 @@ function NewsAddMainContainer({ setCreateVideoModal, setCreateImageModal, setCre
     return (
         <div className="news-add-main-container">
             <NewsAddContainer content={content} createVideo={createVideo} createImage={createImage} createText={createText} />
-            {  isNews ? <PopUp /> : ''}
+            {  news && <PopUp news={news} title={title} category={category} /> }
         </div>
     )
 }
@@ -111,15 +111,21 @@ function NewContent({ content }) {
     )
 }
 
-function PopUp() {
+function PopUp({news, title, category}) {
+    const newNews = { ...news, title, category}
     const [activePopup, setActivePopup] = useState(true)
+    const dispatch = useDispatch()
+    const handleOnClick = (e) => {
+      dispatch(createNews(newNews))
+      setActivePopup(false)
+    }
     return (
         <>
             {activePopup && (<div className="popup-box">
                 <h4>Do you want to save?</h4>
                 <div className="popup-btn-wrapper">
                     <button onClick={() => setActivePopup(false)} className="secondary-btn">Cancel</button>
-                    <button onClick={() => setActivePopup(false)} className="default-btn">Save</button>
+                    <button onClick={handleOnClick} className="default-btn">Save</button>
                 </div>
             </div>)}
         </>

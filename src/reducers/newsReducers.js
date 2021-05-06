@@ -8,7 +8,10 @@ import {
   NEWS_CREATE_REQUEST,
   NEWS_CREATE_SUCCESS,
   NEWS_CREATE_FAIL,
-  NEWS_CREATE_RESET
+  NEWS_CREATE_RESET,
+  NESW_SAVE_TEXT_DETAIL,
+  NESW_SAVE_IMAGE_DETAIL,
+  NESW_SAVE_VIDEO_DETAIL
 } from '../constants/newsConstants'
 
 export const newsListReducer = (state = { news: [] }, action) => {
@@ -49,6 +52,21 @@ export const newsCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case NEWS_CREATE_RESET:
       return {}
+    case NESW_SAVE_TEXT_DETAIL:
+      return {
+        ...state,
+        textDetail: action.payload,
+      }
+    case NESW_SAVE_IMAGE_DETAIL:
+      return {
+        ...state,
+        imageDetail: action.payload,
+      }
+      case NESW_SAVE_VIDEO_DETAIL:
+        return {
+          ...state,
+          videoDetail: action.payload,
+        }
     default:
       return state
   }

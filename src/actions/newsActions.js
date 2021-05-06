@@ -11,7 +11,10 @@ import {
   NEWS_CREATE_FAIL,
   NEWS_DELETE_REQUEST,
   NEWS_DELETE_SUCCESS,
-  NEWS_DELETE_FAIL
+  NEWS_DELETE_FAIL,
+  NESW_SAVE_TEXT_DETAIL,
+  NESW_SAVE_IMAGE_DETAIL,
+  NESW_SAVE_VIDEO_DETAIL
 } from '../constants/newsConstants'
 
 import { logout } from './userAction'
@@ -111,4 +114,25 @@ export const deleteNews = (id) => async (dispatch, getState) => {
       payload: message
     })
   }
+}
+
+export const savetextDetail = (data) => (dispatch) => {
+  dispatch({
+    type: NESW_SAVE_TEXT_DETAIL,
+    payload: data,
+  })
+}
+
+export const saveimageDetail = (data) => (dispatch) => {
+  dispatch({
+    type: NESW_SAVE_IMAGE_DETAIL,
+    payload: data,
+  })
+}
+
+export const savevideoDetail = (data) => (dispatch) => {
+  dispatch({
+    type: NESW_SAVE_VIDEO_DETAIL,
+    payload: data,
+  })
 }

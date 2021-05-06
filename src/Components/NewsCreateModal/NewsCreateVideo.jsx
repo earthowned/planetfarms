@@ -1,8 +1,10 @@
 import { useState } from "react"
 import "./news-create-modal.css"
 import Button from "../Button/Button"
+import { savevideoDetail } from "../../actions/newsActions"
+import { useDispatch } from "react-redux"
 
-const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideoActive, setFormVideoDetail }) => {
+const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideoActive }) => {
   const [videoTitle, setVideoTitle] = useState()
   const [videoDescription, setVideoDescription] = useState()
 
@@ -18,11 +20,12 @@ const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideo
     setVideoDescriptionError(false)
   }
 
+  const dispatch = useDispatch()
   const addVideo = () => {
     if (!videoTitle) setVideoTitleError(true)
     if (!videoDescription) setVideoDescriptionError(true)
     if (videoTitle && videoDescription) {
-      setFormVideoDetail(videoTitle, videoDescription)
+      dispatch(savevideoDetail({videoTitle, videoDescription}))
       setVideoActive(false)
     }
   }
