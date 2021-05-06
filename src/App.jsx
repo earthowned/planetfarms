@@ -30,6 +30,7 @@ import EnterprisesViewPage from './Screens/Enterprises/EnterprisesViewPage/Enter
 import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage'
 import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup'
 import MobileMessage from './Components/MobileMessage/MobileMessage'
+import Courses from "./Screens/Courses/Courses"
 
 import Amplify, { Auth } from 'aws-amplify'
 
@@ -154,7 +155,10 @@ function App() {
         <Route path='/community-group-view-page'>
           <CommunityGroupViewPage />
         </Route>
-        <Route path='/enterprises'>
+        <Route path="/courses" >
+          <Courses />
+        </Route>
+        <Route path="/enterprises" >
           <Enterprises />
         </Route>
         <Route path='/enterprises-view'>
@@ -227,5 +231,4 @@ const X0100LoginEmptyData = {
   vector16: '',
   vector17: '',
   vector18: ''
-
 }
