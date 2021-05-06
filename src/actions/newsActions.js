@@ -119,20 +119,20 @@ export const deleteNews = (id) => async (dispatch, getState) => {
 export const savetextDetail = (data) => (dispatch) => {
   dispatch({
     type: NESW_SAVE_TEXT_DETAIL,
-    payload: data,
+    payload: data
   })
 }
 
 export const saveimageDetail = (data) => (dispatch) => {
   dispatch({
     type: NESW_SAVE_IMAGE_DETAIL,
-    payload: data,
+    payload: data
   })
 }
 
 export const savevideoDetail = (data) => (dispatch) => {
   dispatch({
     type: NESW_SAVE_VIDEO_DETAIL,
-    payload: data,
+    payload: data
   })
 }

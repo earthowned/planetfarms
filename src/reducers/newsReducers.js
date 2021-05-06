@@ -55,18 +55,18 @@ export const newsCreateReducer = (state = {}, action) => {
     case NESW_SAVE_TEXT_DETAIL:
       return {
         ...state,
-        textDetail: action.payload,
+        textDetail: action.payload
       }
     case NESW_SAVE_IMAGE_DETAIL:
       return {
         ...state,
-        imageDetail: action.payload,
+        imageDetail: action.payload
       }
-      case NESW_SAVE_VIDEO_DETAIL:
-        return {
-          ...state,
-          videoDetail: action.payload,
-        }
+    case NESW_SAVE_VIDEO_DETAIL:
+      return {
+        ...state,
+        videoDetail: action.payload
+      }
     default:
       return state
   }

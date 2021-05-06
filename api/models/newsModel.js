@@ -1,7 +1,7 @@
-const Sequelize = require("sequelize");
-const db = require("../config/database.js");
+const Sequelize = require('sequelize')
+const db = require('../config/database.js')
 
-const News = db.define("news",
+const News = db.define('news',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -43,6 +43,6 @@ const News = db.define("news",
     }
   },
   { timestamps: true }
-);
+)
 
-module.exports = News;
+module.exports = News
