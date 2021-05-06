@@ -25,7 +25,7 @@
   text-align: center;
 }
 
-.filler+.text-style {
+.filler + .text-style {
   color: mediumspringgreen;
   mix-blend-mode: difference;
 }
@@ -34,7 +34,7 @@
   padding-top: 13px;
   color: #74e7a0;
   font-weight: 1200;
-  padding-right: 4px,
+  padding-right: 4px;
 }
 
 @media only screen and (max-width: 550px) {
