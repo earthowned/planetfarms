@@ -1,7 +1,7 @@
 .call-modal-container {
   width: 100vw;
   height: 100vh;
-  background: var(--background-color-light);
+  background: var(--background-color-modal);
   position: fixed;
   z-index: 999;
   margin-left: -50vw;

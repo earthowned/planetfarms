@@ -1,7 +1,7 @@
 .progress-container {
   height: 45px;
   width: 100%;
-  background-color: var(--background-color);
+  background-color: var(--cards);
   border-radius: 5px;
   margin-bottom: 20px;
   display: flex;

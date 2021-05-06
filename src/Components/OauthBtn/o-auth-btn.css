@@ -30,6 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .o-auth-btn-wrapper h4 {

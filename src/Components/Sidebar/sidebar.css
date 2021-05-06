@@ -49,7 +49,7 @@
 
 .list-container {
   width: 100%;
-  color: var(--pimary-white);
+  color: var(--primary-white);
   list-style: none;
   margin-top: 2em;
 }

@@ -14,7 +14,7 @@
 
 .x10-2-0-my-achievements .achievements-hero {
   align-items: flex-start;
-  background-color: var(--background-color);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,7 @@
 
 .x10-2-0-my-achievements .your-achievements-level {
   align-items: center;
-  background-color: var(--background-color);
+  background-color: var(--primary-black);
   border-radius: 4px;
   display: flex;
   height: 128px;
@@ -209,7 +209,7 @@
 
 .x10-2-0-my-achievements .total-achievements {
   align-items: flex-start;
-  background-color: var(--background-color);
+  background-color: var(--primary-black);
   border-radius: 4px;
   display: flex;
   flex-direction: column;

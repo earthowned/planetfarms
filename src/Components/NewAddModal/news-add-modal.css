@@ -1,6 +1,6 @@
 .news-modal-container {
   position: fixed;
-  background: var(--primary-black);
+  background: var(--background-color-modal);
   top: 0;
   left: 0;
   right: 0;

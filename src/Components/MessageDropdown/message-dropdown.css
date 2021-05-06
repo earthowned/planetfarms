@@ -35,8 +35,9 @@
   padding: 1em;
   width: 200px;
   border-radius: 4px;
-  background: var(--primary-grey);
+  background: var(--background-color-light);
   color: var(--primary-white);
+  border: 0.5px solid var(--primary-white);
   font-weight: 400;
   cursor: pointer;
   text-align: center;

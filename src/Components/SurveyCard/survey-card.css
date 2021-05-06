@@ -42,6 +42,7 @@
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
+  color: var(--primary-grey);
 }
 
 .subtext-option {
