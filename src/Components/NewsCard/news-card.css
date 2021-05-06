@@ -7,11 +7,11 @@
 }
 
 .border-0-5px-quarter-spanish-white {
-  border: 0.5px solid var(--quarter-spanish-white);
+  border: 0.5px solid var(--primary-white);
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--dropdowns);
 }
 
 .date {
@@ -75,7 +75,7 @@
 }
 
 .ibmplexsans-normal-quarter-spanish-white-14px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -83,7 +83,7 @@
 }
 
 .ibmplexsans-normal-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -91,7 +91,7 @@
 }
 
 .ibmplexsans-semi-bold-caribbean-green-14px {
-  color: var(--caribbean-green);
+  color: var(--primary-color);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -99,7 +99,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
@@ -125,7 +125,7 @@
 
 .newsCard-group1 {
   align-items: flex-start;
-  background-color: var(--black75);
+  background-color: var(--cards);
   display: flex;
   height: 279px;
   justify-content: flex-end;
@@ -177,7 +177,7 @@ html {
   content: "...";
   bottom: 5%;
   right: 0;
-  color: #fff;
+  color: var(--primary-white);
 }
 
 @media only screen and (max-width: 1200px) {
@@ -192,6 +192,6 @@ html {
     content: "...";
     bottom: 0.4em;
     right: 0;
-    color: #fff;
+    color: var(--primary-white);
   }
 }

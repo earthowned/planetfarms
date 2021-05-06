@@ -4,7 +4,7 @@
   font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: 600;
-  color: #f8ebdf;
+  color: var(--primary-white);
 }
 
 .course-card-container {
@@ -13,11 +13,6 @@
   flex-wrap: wrap;
   width: 100%;
 }
-
-/* .card-text-container {
-  margin-top: 90px;
-  margin-left: 35px;
-} */
 
 .my-course-container {
   align-items: flex-start;
