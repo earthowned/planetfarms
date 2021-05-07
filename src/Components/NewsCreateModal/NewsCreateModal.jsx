@@ -6,6 +6,8 @@ import Button from '../Button/Button'
 import CreateVideo from './NewsCreateVideo'
 import CreateImage from './NewsCreateImage'
 import CreateText from './NewsTextModel'
+import CollectionModalHeader from './CollectionModalHeader'
+import DragDrop from './DragDrop'
 
 const NewsCreateModal = ({
   type,
@@ -18,7 +20,7 @@ const NewsCreateModal = ({
   groupActive,
   setGroupActive,
   groupEditActive,
-  setGroupEditActive
+  setGroupEditActive,
 }) => {
   const [files, setFiles] = useState([])
 
@@ -28,11 +30,11 @@ const NewsCreateModal = ({
       setFiles(
         acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file)
+            preview: URL.createObjectURL(file),
           })
         )
       )
-    }
+    },
   })
 
   return (
@@ -86,27 +88,14 @@ const NewsCreateModal = ({
   )
 }
 
-const CreateGroup = ({
-  getRootProps,
-  getInputProps,
-  files,
-  groupActive,
-  setGroupActive
-}) => {
+const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroupActive }) => {
   return (
     <>
       {groupActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader
-              title='Create Group'
-              setGroupActive={setGroupActive}
-            />
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
+            <CollectionModalHeader title='Create Group' setGroupActive={setGroupActive} />
+            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
             <GroupInputContainer />
             <Link to='/my-group-view-page'>
               <Button name='Create Group' />
@@ -117,40 +106,23 @@ const CreateGroup = ({
     </>
   )
 }
-const EditGroup = ({
-  getRootProps,
-  getInputProps,
-  files,
-  groupEditActive,
-  setGroupEditActive
-}) => {
+const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGroupEditActive }) => {
   return (
     <>
       {groupEditActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader
-              title='Edit Group'
-              setGroupEditActive={setGroupEditActive}
-            />
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
+            <CollectionModalHeader title='Edit Group' setGroupEditActive={setGroupEditActive} />
+            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
             <GroupEditContainer />
             <button className='button-delete'>
-              <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' /> Delete
-              Groups
+              <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' /> Delete Groups
             </button>
             <div>
               <Link to='/my-group-view-page'>
                 <Button name='Edit Group' />
               </Link>
-              <button
-                className='button-cancel'
-                onClick={() => setGroupEditActive(false)}
-              >
+              <button className='button-cancel' onClick={() => setGroupEditActive(false)}>
                 Cancel
               </button>
             </div>
@@ -161,59 +133,10 @@ const EditGroup = ({
   )
 }
 
-const DragDrop = ({ getInputProps, getRootProps, files }) => {
-  return (
-    <div className='drag-drop' {...getRootProps()}>
-      <input {...getInputProps()} />
-      {files.length > 0 ? (
-        <img className='avatar' src={files[0].preview} alt='files[0].preview' />
-      ) : (
-        <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-          Drag & Drop files in this area or Click Here to attach video cover
-        </h6>
-      )}
-    </div>
-  )
-}
-
-const CollectionModalHeader = ({
-  title,
-  setGroupActive,
-  setGroupEditActive
-}) => {
-  return (
-    <>
-      {title === 'Create Group' ? (
-        <div className='collection-modal-header'>
-          <h4>{title}</h4>
-          <img
-            src='/img/close-outline.svg'
-            alt='close-icon'
-            onClick={() => setGroupActive(false)}
-          />
-        </div>
-      ) : (
-        <div className='collection-modal-header'>
-          <h4>{title}</h4>
-          <img
-            src='/img/close-outline.svg'
-            alt='close-icon'
-            onClick={() => setGroupEditActive(false)}
-          />
-        </div>
-      )}
-    </>
-  )
-}
-
 const GroupInputContainer = () => {
   return (
     <div className='video-input-container'>
-      <input
-        className='default-input-variation'
-        placeholder='Group title'
-        required='true'
-      />
+      <input className='default-input-variation' placeholder='Group title' required='true' />
       <br />
       <textarea
         className='default-input-variation text-area-variation'
@@ -228,12 +151,7 @@ const GroupInputContainer = () => {
 const GroupEditContainer = () => {
   return (
     <div className='video-input-container'>
-      <input
-        className='default-input-variation'
-        placeholder='Edit Title'
-        required='true'
-        value='Think like a farmer'
-      />
+      <input className='default-input-variation' placeholder='Edit Title' required='true' value='Think like a farmer' />
       <br />
       <textarea
         className='default-input-variation text-area-variation'

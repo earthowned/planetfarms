@@ -3,6 +3,8 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { savevideoDetail } from '../../actions/newsActions'
 import { useDispatch } from 'react-redux'
+import DragDrop from './DragDrop'
+import CollectionModalHeader from './CollectionModalHeader'
 
 const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideoActive }) => {
   const [videoTitle, setVideoTitle] = useState()
@@ -34,24 +36,8 @@ const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideo
       {videoActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <div className='collection-modal-header'>
-              <h4>Add video</h4>
-              <img
-                src='/img/close-outline.svg'
-                alt='close-icon'
-                onClick={() => setVideoActive(false)}
-              />
-            </div>
-            <div className='drag-drop' {...getRootProps()}>
-              <input {...getInputProps()} />
-              {files.length > 0 ? (
-                <img className='avatar' src={files[0].preview} alt={files[0].preview} />
-              ) : (
-                <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                  Drag & Drop files in this area or Click Here to attach video cover
-                </h6>
-              )}
-            </div>
+            <CollectionModalHeader title='Add video' setVideoActive={setVideoActive} />
+            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
             <div className='video-input-container'>
               <input
                 className='default-input-variation'
@@ -72,10 +58,7 @@ const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideo
               <p className='error-message'>{videoDescriptionError ? 'Please enter Video Description' : ' '} </p>
 
               <div className='video-row-3'>
-                <input
-                  className='default-input-variation last-input-variation'
-                  placeholder='Video link'
-                />{' '}
+                <input className='default-input-variation last-input-variation' placeholder='Video link' />{' '}
                 <span>OR</span> <button className='secondary-btn'>Choose video</button>
               </div>
             </div>

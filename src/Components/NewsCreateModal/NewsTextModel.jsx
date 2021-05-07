@@ -3,6 +3,7 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { useDispatch } from 'react-redux'
 import { savetextDetail } from '../../actions/newsActions'
+import CollectionModalHeader from './CollectionModalHeader'
 
 const CreateText = ({ textActive, setTextActive }) => {
   const [collectionTitle, setCollectionTitle] = useState()
@@ -34,14 +35,7 @@ const CreateText = ({ textActive, setTextActive }) => {
       {textActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <div className='collection-modal-header'>
-              <h4>Add text</h4>
-              <img
-                src='/img/close-outline.svg'
-                alt='close-icon'
-                onClick={() => setTextActive(false)}
-              />
-            </div>
+            <CollectionModalHeader title='Add text' setTextActive={setTextActive} />
             <div className='photo-input-container'>
               <input
                 className='default-input-variation'

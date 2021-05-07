@@ -12,7 +12,7 @@ import { searchNews, listNews } from '../../actions/newsActions'
 
 function CommunityNews () {
   const [addModal, setAddModal] = useState(false)
-  return <DashboardLayout title='Ragrarians News'>{addModal && <NewsAddModal setAddModal={setAddModal} />}<CommunityPagenews {...X0300CommunityPagenewsData} setAddModal={setAddModal} /></DashboardLayout>
+  return <DashboardLayout title='Ragrarians News'>{addModal && <NewsAddModal setAddModal={setAddModal} />}<CommunityPagenews {...CommunityPageNewsData} setAddModal={setAddModal} /></DashboardLayout>
 }
 
 export default CommunityNews
@@ -60,8 +60,7 @@ function CommunityPagenews (props) {
   const dispatch = useDispatch()
   useEffect(() => {
     if (!userInfo) {
-      console.log('hay')
-      // history.push('/login')
+      history.push('/login')
     }
     if (search) dispatch(searchNews(search))
     if (!search) dispatch(listNews())
@@ -74,7 +73,7 @@ function CommunityPagenews (props) {
       <div className='community-page-news'>
         <div className='community-news-second-header'>
           <div className='search-container-news'>
-            <SearchComponent search={search} setSearch={setSearch} className='search border-1px-onyx' />
+            <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
           </div>
           <button className='default-btn default-btn-variation' onClick={() => setAddModal(true)}>{addNews}</button>
         </div>
@@ -87,7 +86,7 @@ function CommunityPagenews (props) {
   )
 }
 
-const X0300CommunityPagenewsData = {
+const CommunityPageNewsData = {
   search: 'Search…',
   addNews: 'Add news',
   text22: 'Discover more of what matters to you',

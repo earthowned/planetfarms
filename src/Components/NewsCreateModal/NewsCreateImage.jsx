@@ -3,6 +3,8 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { useDispatch } from 'react-redux'
 import { saveimageDetail } from '../../actions/newsActions'
+import DragDrop from './DragDrop'
+import CollectionModalHeader from './CollectionModalHeader'
 
 const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive }) => {
   const [imageDescription, setImageDescription] = useState()
@@ -28,26 +30,8 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
       {imageActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <div className='collection-modal-header'>
-              <h4>"Add photo"</h4>
-              <img
-                src='/img/close-outline.svg'
-                alt='close-icon'
-                onClick={() => setImageActive(false)}
-              />
-            </div>
-
-            <div className='drag-drop' {...getRootProps()}>
-              <input {...getInputProps()} />
-              {files.length > 0 ? (
-                <img className='avatar' src={files[0].preview} alt={files[0].preview} />
-              ) : (
-                <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                  Drag & Drop files in this area or Click Here to attach image cover
-                </h6>
-              )}
-            </div>
-
+            <CollectionModalHeader title='Add photo' setImageActive={setImageActive} />
+            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
             <div className='description'>
               <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
             </div>
