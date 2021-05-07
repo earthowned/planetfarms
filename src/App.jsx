@@ -93,12 +93,13 @@ function amplifyConfig() {
   });
 }
 
+if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+  amplifyConfig()
+  // You can get the current config object
+  const currentConfig = Auth.configure()
+}
+
 function App() {
-  if(`process.env.REACT_APP_AUTH_METHOD` === 'cognito') {
-    amplifyConfig();
-    // You can get the current config object
-    const currentConfig = Auth.configure();
-  }
   return (
     <Router>
       <Switch>
