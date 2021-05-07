@@ -32,6 +32,7 @@ app.get('/', (request, response) => {
 // port connection
 app.listen(PORT, () => {
   console.log(`PlanetFarms is running on PORT ${PORT}.`)
+  console.log(`${process.env.DATABASE_HOST}`)
 })
 
 // database connection
