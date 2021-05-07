@@ -7,11 +7,10 @@
 .card-row-1 {
   align-items: flex-start;
   display: flex;
-  margin-top: 40px;
   min-width: 500px;
   flex-direction: column;
-  margin: 10px;  
-  }
+  margin: 40px 10px 10px;
+}
 
 .card-1-allCommunities {
   align-items: flex-end;
@@ -23,17 +22,16 @@
   height: 528px;
   overflow: hidden;
   padding: 24px;
-  width: 100%;
-    
-  }
-  
+  width: 100%;    
+}
+
 .card-1-text {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   min-height: 200px;
   width: 357px;
-  }
+}
 
 .card-1-title {
   align-items: flex-start;
@@ -41,7 +39,7 @@
   flex-direction: column;
   min-height: 112px;
   width: 357px;
-  }
+}
 
 .text-1-card {
   height: 80px;
@@ -49,21 +47,20 @@
   line-height: 40px;
   min-height: 80px;
   width: 445px;
-  }
+}
 
 .valign-text-middle {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  }
-  
+}
+
 .ibmplexsans-semi-bold-quarter-spanish-white-32px {
   color: var(--primary-white);
-  font-family: "IBM Plex Sans", Helvetica;
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
-  }
+}
 
 .address-1 {
   height: 24px;
@@ -72,13 +69,11 @@
   margin-top: 8px;
   min-height: 24px;
   white-space: nowrap;
-  }
+}
 
 .ibmplexsans-normal-quarter-spanish-white-16px {
   color: var(--primary-white);
-  font-family: "IBM Plex Sans", Helvetica;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  }
-  
+}
