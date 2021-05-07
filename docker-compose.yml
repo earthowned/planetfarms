@@ -32,6 +32,8 @@ services:
     build: ./api
     image: planetapi
     ports:
-      - 8092:5000
+      - 8092:80
     depends_on:
       - db
+    environment:
+      - port=80
