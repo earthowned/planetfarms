@@ -16,12 +16,8 @@ const Courses = () => {
                 <div className="courses-main-container">
                     <CoursesHeader setActive={setActive}/>
                 </div>
-                <div className="course-card-wrapper">
                     <CoursesCard category="Business Courses" setModalActive={setModalActive} />
-                </div>
-                <div className="course-card-wrapper">
                     <CoursesCard category="Farming Courses" setModalActive={setModalActive}/>
-                </div>
             </DashboardLayout>
         </>
     )

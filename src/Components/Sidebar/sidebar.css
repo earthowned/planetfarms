@@ -17,7 +17,7 @@
   width: 150px;
 }
 
-.img-container img {
+.img-container svg {
   width: 100%;
 }
 
@@ -146,7 +146,11 @@
 .list-container .text-active {
   background: var(--primary-color);
   fill: var(--background-color);
-  margin-top: 1em;
+  margin-top: .8em;
+}
+
+.list-container .text-active svg{
+  fill: black;
 }
 
 .list-container .text-menu {
@@ -154,6 +158,7 @@
   border-radius: 4px;
   height: 50px;
   padding: 1.2rem;
+  margin-top: .8em;
 }
 
 .list-container.active .text-passive {
