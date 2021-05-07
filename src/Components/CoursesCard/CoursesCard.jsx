@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useState} from 'react'
 import './courses-card.css'
 
 const data = [
@@ -63,8 +63,8 @@ const data = [
         cost: "Free",
     }
 ]
-const CoursesCard = ({category}) => {
-   
+const CoursesCard = ({category, setModalActive}) => {
+
     return (
         <div className="courses-card-container">
             <h4>{category}</h4>
@@ -78,7 +78,7 @@ const CoursesCard = ({category}) => {
                             backgroundSize: "cover",
                             backgroundRepeat: "no-repeat",
                             }}>
-                            <button className="collection-btn" onClick={() => console.log(!item.added)}>{item.added 
+                            <button className="collection-btn" onClick={() => setModalActive(true)}>{item.added 
                             ? <><img src="/img/close-outline.svg" alt="close icon"/><span>Remove from collection</span></>
                             : <><img src="/img/plus.svg" alt="add icon"/><span>Add to collection</span></>
                             }

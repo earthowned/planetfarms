@@ -146,6 +146,7 @@
 .list-container .text-active {
   background: var(--primary-color);
   fill: var(--background-color);
+  margin-top: 1em;
 }
 
 .list-container .text-menu {

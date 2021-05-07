@@ -3,7 +3,7 @@ import GroupUsers from '../GroupUsers/GroupUsers'
 import SearchComponent from '../SearchComponent/SearchComponent'
 import "./group-modal.css"
 
-const GroupModal = ({clickHandler, setNewCollection, data, btnName}) => {
+const GroupModal = ({clickHandler, setNewCollection, data, btnName, name}) => {
     function collectionAdded () {
             setNewCollection(true)
             clickHandler(false)
@@ -15,7 +15,7 @@ const GroupModal = ({clickHandler, setNewCollection, data, btnName}) => {
             <div className="group-modal">
 
             <div className="group-modal-header">
-                <h4>Add members</h4>
+                <h4>{name ? name : "Add members"}</h4>
                 <button onClick={() => clickHandler(false)} ><img src="/img/close-outline.svg" alt="close-outline" /></button>
             </div>
 
@@ -28,7 +28,7 @@ const GroupModal = ({clickHandler, setNewCollection, data, btnName}) => {
             </div>
 
             <div className="modal-btn">
-            {btnName == "add to collections" && <div className="add-collection"><img src="/img/plus.svg" /> <button 
+            {btnName === "add to collections" && <div className="add-collection"><img src="/img/plus.svg" /> <button 
             >Create new collection</button></div>}
             <button className="default-btn" onClick={() => collectionAdded()}>
                {btnName}
