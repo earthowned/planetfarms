@@ -6,9 +6,6 @@
   flex-direction: column;
   height: 528px;
   overflow: hidden;
-  flex: 0 1 calc(34% - 2em);
-  max-width: 750px;
-  margin-bottom: 2em;
 }
 
 .survey-card-image {
@@ -101,18 +98,6 @@
   font-weight: 600;
   font-size: 24px;
   line-height: 32px;
-}
-
-@media only screen and (max-width: 1500px) {
-  .survey-card {
-    flex: 0 1 calc(50% - 2em);
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .survey-card {
-    flex: 0 1 100%;
-  }
 }
 
 @media only screen and (max-width: 370px) {
