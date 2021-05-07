@@ -57,11 +57,10 @@
 
 .ibmplexsans-regular-normal-monsoon-14px {
   color: var(--primary-grey);
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-}  
+}
 
 .email-address {
   letter-spacing: 0;
@@ -87,14 +86,6 @@
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
-}
-
-.ibmplexsans-regular-normal-monsoon-14px {
-  color: var(--primary-grey);
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
 }
 
 .phone-number {
@@ -124,14 +115,13 @@
 }
 
 .myProfile-container {
-  font-family: IBM Plex Sans;
   color: #fff;
   margin-top: 1em;
   width: 100%;
 }
 
 .myProfile-container:not(:last-child) {
-  border-bottom: .8px solid (--primary-grey);
+  border-bottom: 0.8px solid (--primary-grey);
   margin-bottom: 1em;
 }
 
@@ -151,7 +141,7 @@
   margin: 2em 0;
 }
 
-.myProfile-container-row .form-group label{
+.myProfile-container-row .form-group label {
   color: var(--primary-grey);
   font-size: 14px;
   font-weight: 400;
@@ -169,11 +159,11 @@
 
 @media only screen and (max-width: 700px) {
   .myProfile-container-row .form-group {
-    margin: .6em 0;
+    margin: 0.6em 0;
   }
 
   .myProfile-container-row-title {
-    margin-bottom: .6em;
+    margin-bottom: 0.6em;
   }
 
   .myProfile-container:not(:last-child) {

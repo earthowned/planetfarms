@@ -3,6 +3,7 @@
   height: 100vh;
   position: relative;
 }
+
 .message-card {
   display: flex;
   align-items: center;
@@ -28,6 +29,7 @@
 .message-content {
   width: 70%;
 }
+
 .message-card p {
   font-size: 14px;
   margin: 0;

@@ -20,7 +20,6 @@
 
 .overhead-text {
   color: var(--primary-grey);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -113,8 +112,7 @@ input[type=date] {
   color: var(--primary-grey);
 }
 
-input[type=date]::-webkit-calendar-picker-indicator  {
-  /* color: var(--primary-grey); */
+input[type=date]::-webkit-calendar-picker-indicator {
   background: transparent;
   width: 68%;
   height: 100%;

@@ -43,8 +43,8 @@
   height: 100%;
 }
 
-@media only screen and (max-width: 850px){
-  .messenger-wrapper{
+@media only screen and (max-width: 850px) {
+  .messenger-wrapper {
     flex-direction: column;
   }
 
@@ -54,7 +54,7 @@
 
   .col-2-alternative {
     width: 100%;
-     position: fixed;
+    position: fixed;
     z-index: 5000;
   }
 
@@ -63,7 +63,7 @@
   }
 }
 
-@media only screen and (max-width: 850px){
+@media only screen and (max-width: 850px) {
   .contact-card {
     padding: 4px 8px; 
   }
