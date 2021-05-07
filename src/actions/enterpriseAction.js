@@ -34,12 +34,12 @@ export const listEnterprise = (sort = '', pageNumber = '') => async (
   }
 }
 
-export const searchEnterprise = (search) => async (dispatch) => {
+export const searchEnterprises = (search) => async (
+  dispatch
+) => {
   try {
     dispatch({ type: ENTERPRISE_SEARCH_REQUEST })
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/search?title=${search}`
-    )
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/search?title=${search}`)
     dispatch({
       type: ENTERPRISE_SEARCH_SUCCESS,
       payload: data
