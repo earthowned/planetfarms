@@ -53,6 +53,9 @@
   min-height: 24px;
   min-width: 80px;
   white-space: nowrap;
+  color: var(--background-color);
+  font-style: normal;
+  font-weight: 600;
 }
 
 .border-1px-quarter-spanish-white {
