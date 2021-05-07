@@ -35,5 +35,7 @@ const storage = multer.diskStorage({
 
   const multipleUpload=upload.fields([{name:'avatar'} ,{name:'attachment'}])
 
+  const uploadArray = multer({storage}).array('files')
 
-module.exports={multipleUpload}
+
+module.exports={multipleUpload, uploadArray}

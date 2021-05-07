@@ -57,12 +57,16 @@ export const searchResources = (search) => async (
 }
 
 export const createResource = (newResource) => async (dispatch, getState) => {
+  console.log(newResource);
   try {
     dispatch({
       type: RESOURCE_CREATE_REQUEST
     })
     const { userLogin: { userInfo } } = getState()
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+    const config = { headers: {
+      //Authorization: `Bearer ${userInfo.token}`,
+      "Content-Type": "multipart/form-data"
+    } }
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, newResource, config)
     dispatch({
       type: RESOURCE_CREATE_SUCCESS,

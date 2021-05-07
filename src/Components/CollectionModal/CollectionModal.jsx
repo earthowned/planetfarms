@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { createResource } from '../../actions/resourceActions'
 
 const CollectionModal = ({ setActive, openAddCollection }) => {
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState()
   const [title, setResourceTitle] = useState('')
   const [description, setResourceDescription] = useState('')
   const dispatch = useDispatch()
@@ -16,12 +16,11 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
+      setFiles(acceptedFiles)
+      acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
       )
     }
   })
@@ -41,7 +40,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
     if (!title) setResourceTitleError(true)
     if (!description) setResourceDescriptionError(true)
     if (title && description) {
-      dispatch(createResource({ title, description, files }))
+      dispatch(createResource({title, description, files}))
       setActive(false)
     }
   }
@@ -60,7 +59,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
           </div>
           <div className='drag-drop' {...getRootProps()}>
             <input {...getInputProps()} onChange={(e) => fileChange(e)} />
-            {files.length > 0
+            {(files != null && files.length > 0)
               ? <img className='avatar' name='avatar' src={files[0].preview} alt='files[0].preview' />
               : <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
                 Drag and Drop files in this area or Click Here to attach
