@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import useSizeFinder from "../../../utils/SizeFinder";
 import Secondarybtn from "../../SecondaryBtn/Secondarybtn";
 import "./course-description.css";
@@ -86,17 +86,33 @@ const CourseDetail = () => {
             </p>
 
             {/* lesson progress bar */}
-           <ProgressBar />
-
+            <ProgressBar />
           </div>
-          <div className="secondary-btn-container">
-          <Secondarybtn name="You are subscriber" image="/img/down-arrow.svg" />
-          </div>
+          <DropDownCourse />
         </div>
       </div>
   );
 };
 
+const DropDownCourse = () => {
+  const [courseDropDown, setCourseDropDown] = useState(false);
+
+  return (
+    <div className="dropdown-course-container">
+      <div className="dropdown-course-header" onClick={() => setCourseDropDown(!courseDropDown)}>
+        <h4>You are subscriber</h4>
+        <img src="/img/down-arrow.svg" alt="dropdown icon" />
+      </div>
+      {courseDropDown && <div className="dropdown-course-items">
+        <ul>
+          <li>Ask a question</li>
+          <li>Feedback</li>
+          <li>Leave Course</li>
+        </ul>
+      </div>}
+    </div>
+  )
+}
 const lessonCourse = () => {
   const lessonData = [
     {

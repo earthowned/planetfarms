@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 import './courses-card.css'
 
 const data = [
@@ -19,7 +20,7 @@ const data = [
         stars: 4.5,
         total: 5,
         added: false,
-        enroll: false,
+        enroll: true,
         cost: "Free"
     },
     {
@@ -39,7 +40,7 @@ const data = [
         stars: 1,
         total: 5,
         added: false,
-        enroll: false,
+        enroll: true,
         cost: 55
     },
     {
@@ -64,7 +65,7 @@ const data = [
     }
 ]
 const CoursesCard = ({category, setModalActive}) => {
-
+    const history = useHistory();
     return (
         <div className="course-card-wrapper">
         <div className="courses-card-container">
@@ -92,7 +93,7 @@ const CoursesCard = ({category, setModalActive}) => {
                                     <p>({item.total} total)</p>
                                 </div>
                                 <div className="enroll-container">
-                                    <button className="join-btn" onClick={() => console.log(item.total)}>{item.enroll 
+                                    <button className="join-btn" onClick={() => history.push('/mycoursepage')}>{item.enroll 
                                     ? <span>You're subscriber</span>
                                     : <span>Join Course</span>
                                     }</button>

@@ -149,16 +149,13 @@
   margin-top: .8em;
 }
 
-.list-container .text-active svg{
-  fill: black;
-}
-
 .list-container .text-menu {
   width: 100%;
   border-radius: 4px;
   height: 50px;
   padding: 1.2rem;
   margin-top: .8em;
+  cursor: pointer;
 }
 
 .list-container.active .text-passive {
