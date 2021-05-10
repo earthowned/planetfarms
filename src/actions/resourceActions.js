@@ -11,7 +11,7 @@ import {
   RESOURCE_CREATE_FAIL
 } from '../constants/resourceConstants'
 
-export const listResources = ({sort = '', pageNumber = 1}) => async (
+export const listResources = ({sort, pageNumber}) => async (
   dispatch
 ) => {
   try {

@@ -30,7 +30,7 @@ const LibraryHeader = ({ setActive }) => {
             history.push('/login')
         }
         if (search) dispatch(searchResources(search))
-        if (!search) dispatch(listResources())
+        if (!search) dispatch(listResources('', 0))
 
         window.addEventListener("resize", function () {
             setWindowWidth(window.innerWidth);

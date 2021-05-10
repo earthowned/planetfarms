@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LibraryHeader from '../../Components/LibraryHeader/LibraryHeader'
 import './library.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
@@ -7,7 +7,8 @@ import SimpleModal from '../../Components/SimpleModal/SimpleModal'
 import CollectionModal from '../../Components/CollectionModal/CollectionModal'
 import GroupModal from '../../Components/GroupModal/GroupModal'
 import { groupCollection } from './CollectionData'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { listResources } from '../../actions/resourceActions'
 
 const Library = () => {
     let resourceList = useSelector((state) => state.listResources)
@@ -17,7 +18,8 @@ const Library = () => {
     const [newCollection, setNewCollection] = useState(false)
     const [active, setActive] = useState(false)
     const [modalActive, setModalActive] = useState(false)
-    let [pageNumber, setPageNumber] = useState(1);
+    let [pageNumber, setPageNumber] = useState(0)
+    console.log(resourceList)
     const dispatch = useDispatch()
 
     function openAddCollection () {
@@ -56,8 +58,8 @@ const Library = () => {
            setModalActive={setModalActive}
            />
               <div className="pagination">
-                <button disabled={pageNumber === 1} onClick={ () => handelPagination(1, -1)}>❮{pageNumber -1}</button>
-                <button onClick={ () => handelPagination(1, +1)}>❯{pageNumber +1}</button>
+                <button disabled={pageNumber <1} onClick={ () => handelPagination(1, -1)}>❮{pageNumber -1}</button>
+                <button disabled={pageNumber >= resourceList.totalPages} onClick={ () => handelPagination(1, +1)}>❯{pageNumber +1}</button>
               </div>
            </div>
 
