@@ -34,7 +34,7 @@ body {
   --secondary-blue: #3641d9;
   --background-color: #000;
   --background-color-light: rgba(255, 255, 255, 0.16);
-  --background-color-image: rgba(0,0,0,.8);
+  --background-color-image: rgba(0, 0, 0, 0.8);
   --background-color-modal: rgba(0, 0, 0, 0.8);
   --cards: #141414;
   --popups: #1d1f22;

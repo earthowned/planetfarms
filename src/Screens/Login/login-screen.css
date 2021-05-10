@@ -136,7 +136,7 @@
 }
 
 .x01-0-0-login-empty .span0 {
-  color:  var(--primary-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
 }
@@ -176,7 +176,6 @@
   .x01-0-0-login-empty .button-1 {
     min-width: 460px;
   }
-
 }
 
 @media only screen and (max-width: 1023px) {

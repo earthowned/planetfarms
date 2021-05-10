@@ -21,13 +21,13 @@
   margin: 0 0 10px 10px;
   min-width: 150px;
   background-color: var(--background-color);
-  color:  var(--primary-white);
+  color: var(--primary-white);
   border: 1px solid var(--strokes);
   height: 45px;
 }
 
 .btn-accordin:focus {
-  background-color:  var(--primary-white);
+  background-color: var(--primary-white);
   color: var(--background-color);
 }
 
@@ -220,7 +220,7 @@
 }
 
 .hr-line {
-  background-color:var(--background-color);
+  background-color: var(--background-color);
   height: 1px;
   margin-top: 23px;
   width: 100%;
