@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useHistory } from "react-router";
 import useSizeFinder from "../../../utils/SizeFinder";
 import Secondarybtn from "../../SecondaryBtn/Secondarybtn";
 import "./course-description.css";
@@ -8,7 +9,7 @@ const CourseDescription = ({setFeedbackModal}) => {
     <>
       <div className="course-page-container border-1px-onyx">
         <CourseDetail setFeedbackModal={setFeedbackModal}/>
-        {lessonCourse()}
+       <LessonCourse />
       </div>
       <MoreCourse />
     </>
@@ -120,7 +121,7 @@ const DropDownCourse = ({setFeedbackModal}) => {
 }
 
 
-const lessonCourse = () => {
+const LessonCourse = () => {
   const lessonData = [
     {
       _id: 1,
@@ -156,6 +157,7 @@ const lessonCourse = () => {
       finish: "Finish Lesson",
     },
   ];
+  const history = useHistory();
 
   return (
     <div className="lessons-container">
@@ -172,7 +174,7 @@ const lessonCourse = () => {
                       <div className="lesson-card-content">
                         <h3>{data.name}</h3>
                         <p>{data.description}</p>
-                        <button>{data.lesson}</button>
+                        <button onClick={() => history.push('/mycoursepage/lesson-1')}>{data.lesson}</button>
                       </div>
                     </div>
                     </div>

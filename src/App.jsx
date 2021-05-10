@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 // Screens
+<<<<<<< HEAD
 import LoginScreen from './Screens/Login/LoginScreen'
 import SignupScreen from './Screens/SignUp/SignupScreen'
 import CongratulationScreen from './Screens/Congratulation/CongratulationScreen'
@@ -35,6 +36,43 @@ import Courses from "./Screens/Courses/Courses"
 import Amplify, { Auth } from 'aws-amplify'
 
 function amplifyConfig () {
+=======
+import LoginScreen from "./Screens/Login/LoginScreen";
+import SignupScreen from './Screens/SignUp/SignupScreen';
+import CongratulationScreen from './Screens/Congratulation/CongratulationScreen';
+import Messenger from './Screens/Messenger/Messenger';
+import Library from './Screens/Library/Library';
+import './App.css';
+import DashboardComponent from "./Screens/Dashboard/MainDashboard";
+import Achievements from "./Screens/Dashboard/Achievements";
+import MyLibrary from "./Screens/Dashboard/MyLibrary";
+import MyProfile from "./Screens/Dashboard/MyProfile";
+import MySurvey from "./Screens/Dashboard/MySurvey";
+import MyCourse from "./Screens/Dashboard/MyCourses";
+import MyCoursePage from "./Screens/Dashboard/CoursePage/CoursePage";
+import Collection from "./Screens/Library/Collection/Collection";
+import UserCollection from "./Screens/Library/UserCollection/UserCollection";
+import SavedCollection from "./Screens/Library/SavedCollection/SavedCollection";
+import AllCommunitiesCard from "./Screens/CommunitySwitching/CommunitySwitching";
+import CommunityPagenews from "./Screens/CommunityNews/CommunityNews";
+import X0300CommunityPageViewsnews from './Screens/CommunityNewsView/CommunityNewsView'
+import NewsAdd from "./Screens/CommunityNews/NewsAdd/NewsAdd";
+import CommunityMembers from "./Screens/CommunityMembers/CommunityMembers";
+import CommunityMembersProfile from "./Screens/CommunityMemberProfile/CommunityMemberProfile";
+import UserInfo from "./Screens/CabinetUserInfo/CabinetUserInfo";
+import CommunityGroup from './Screens/CommunityGroup/CommunityGroup';
+import Enterprises from './Screens/Enterprises/Enterprises';
+import EnterprisesViewPage from './Screens/Enterprises/EnterprisesViewPage/EnterprisesViewPage';
+import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage';
+import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup';
+import MobileMessage from "./Components/MobileMessage/MobileMessage";
+
+import Amplify, { Auth } from 'aws-amplify';
+import Courses from "./Screens/Courses/Courses";
+import LessonPage from "./Screens/Dashboard/LessonPage/LessonPage";
+
+function amplifyConfig() {
+>>>>>>> b3204844 (lesson-page added)
   Amplify.configure({
     Auth: {
 
@@ -182,10 +220,13 @@ function App() {
         <Route path='/mycourse'>
           <MyCourse />
         </Route>
-        <Route path='/mycoursePage'>
+        <Route exact path="/mycoursepage">
           <MyCoursePage />
         </Route>
-        <Route path='/myProfile'>
+        <Route path="/mycoursepage/:id">
+          <LessonPage />
+        </Route>
+        <Route path="/myProfile">
           <MyProfile />
         </Route>
         <Route path='/userInfo'>
