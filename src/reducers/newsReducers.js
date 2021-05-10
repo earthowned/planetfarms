@@ -68,8 +68,8 @@ export const newsCreateReducer = (state = {}, action) => {
         ...state,
         videoDetail: action.payload
       }
-      case NEWS_CLEAR:
-        return { }
+    case NEWS_CLEAR:
+      return { }
     default:
       return state
   }
