@@ -11,7 +11,8 @@ import {
   NEWS_CREATE_RESET,
   NESW_SAVE_TEXT_DETAIL,
   NESW_SAVE_IMAGE_DETAIL,
-  NESW_SAVE_VIDEO_DETAIL
+  NESW_SAVE_VIDEO_DETAIL,
+  NEWS_CLEAR
 } from '../constants/newsConstants'
 
 export const newsListReducer = (state = { news: [] }, action) => {
@@ -67,6 +68,8 @@ export const newsCreateReducer = (state = {}, action) => {
         ...state,
         videoDetail: action.payload
       }
+      case NEWS_CLEAR:
+        return { }
     default:
       return state
   }

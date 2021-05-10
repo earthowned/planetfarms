@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import NewsCreateModal from '../../../Components/NewsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import './news-add.css'
 import BackButton from '../../../Components/BackButton/BackButton'
 import CommunityNewsViewPage from '../../CommunityNewsView/CommunityNewsView'
@@ -16,6 +16,7 @@ const NewsAdd = () => {
   const [imageActive, setImageActive] = useState(true)
   const [textActive, setTextActive] = useState(true)
   const news = useSelector((state) => (state.addNewNews !== {} ? state.addNewNews : ''))
+  useSelector((state) =>   console.log(state))
 
   const { title, category } = useParams()
   return (
@@ -82,7 +83,7 @@ function NewsAddMainContainer({
         createImage={createImage}
         createText={createText}
       />
-      {news && <PopUp news={news} title={title} category={category} />}
+      <div>{Object.entries(news).length !== 0 && <PopUp news={news} title={title} category={category} />}</div>
     </div>
   )
 }
@@ -122,9 +123,16 @@ function PopUp({ news, title, category }) {
   const newNews = { ...news, title, category }
   const [activePopup, setActivePopup] = useState(true)
   const dispatch = useDispatch()
-  const handleOnClick = (e) => {
+  const history = useHistory()
+  const handleOnSaveClick = (e) => {
     dispatch(createNews(newNews))
     setActivePopup(false)
+    history.push('/community-page-news')
+  }
+
+  const handleOnCancelClick = (e) => {
+    setActivePopup(false)
+    history.push('/community-page-news')
   }
   return (
     <>
@@ -132,10 +140,10 @@ function PopUp({ news, title, category }) {
         <div className='popup-box'>
           <h4>Do you want to save?</h4>
           <div className='popup-btn-wrapper'>
-            <button onClick={() => setActivePopup(false)} className='secondary-btn'>
+            <button onClick={handleOnCancelClick} className='secondary-btn'>
               Cancel
             </button>
-            <button onClick={handleOnClick} className='default-btn'>
+            <button onClick={handleOnSaveClick} className='default-btn'>
               Save
             </button>
           </div>

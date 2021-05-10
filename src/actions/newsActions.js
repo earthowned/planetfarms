@@ -14,7 +14,8 @@ import {
   NEWS_DELETE_FAIL,
   NESW_SAVE_TEXT_DETAIL,
   NESW_SAVE_IMAGE_DETAIL,
-  NESW_SAVE_VIDEO_DETAIL
+  NESW_SAVE_VIDEO_DETAIL,
+  NEWS_CLEAR
 } from '../constants/newsConstants'
 
 import { logout } from './userAction'
@@ -75,6 +76,10 @@ export const createNews = (newNews) => async (dispatch, getState) => {
     dispatch({
       type: NEWS_CREATE_SUCCESS,
       payload: data
+    })
+    dispatch({
+      type: NEWS_CLEAR,
+      payload: data,
     })
   } catch (error) {
     const message =
