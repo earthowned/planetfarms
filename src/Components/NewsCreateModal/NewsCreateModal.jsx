@@ -125,6 +125,7 @@ const CreateGroup = ({
             <CollectionModalHeader
               title="Create Group"
               setGroupActive={setGroupActive}
+              groupActive= {groupActive}
             />
             <DragDrop
               getInputProps={getInputProps}
@@ -254,8 +255,11 @@ const CollectionModalHeader = ({
   setImageActive,
   setTextActive,
   setGroupActive,
+  groupActive,
   setGroupEditActive,
 }) => {
+  console.log(groupActive)
+  
   return (
     <>
       {title === "Add video" ? (
@@ -276,6 +280,7 @@ const CollectionModalHeader = ({
             onClick={() => setGroupActive(false)}
           />
         </div>
+        
       ) : title === "Edit Group" ? (
         <div className="collection-modal-header">
           <h4>{title}</h4>
