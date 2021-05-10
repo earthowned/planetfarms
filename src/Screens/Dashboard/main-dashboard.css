@@ -1,6 +1,6 @@
 .x10-1-0-my-dashboard {
   align-items: flex-start;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: var(--background-color);
   display: flex;
   width: 100%;
 }
@@ -14,7 +14,7 @@
 
 .x10-1-0-my-dashboard .dashboard-hero {
   align-items: center;
-  background-color: var(--licorice);
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   margin-top: 16px;
@@ -24,7 +24,7 @@
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--strokes);
 }
 
 .x10-1-0-my-dashboard .dashboard-info {
@@ -58,23 +58,23 @@
 }
 
 .x10-1-0-my-dashboard .mikhail-ugryumov {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
   white-space: nowrap;
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
-  color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  color: var(--primary-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
 }
 
 .ibmplexsans-regular-normal-monsoon-16px {
-  color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica;
+  color: var(--primary-white);
+  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -90,18 +90,18 @@
 }
 
 .x10-1-0-my-dashboard .text-1 {
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
 }
 
 .x10-1-0-my-dashboard .my-communities {
-  color: var(--caribbean-green);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  color: var(--primary-color);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
@@ -119,7 +119,7 @@
   align-items: center;
   align-self: center;
   backdrop-filter: blur(16px) brightness(100%);
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: var(--background-color-light);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -129,12 +129,12 @@
 }
 
 .border-0-5px-quarter-spanish-white {
-  border: 0.5px solid var(--quarter-spanish-white);
+  border: 0.5px solid var(--strokes);
 }
 
 .x10-1-0-my-dashboard .default-i905517 {
   height: 24px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
   min-width: 97px;
@@ -143,8 +143,8 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  color: var(--primary-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -152,7 +152,7 @@
 
 .x10-1-0-my-dashboard .dashboard-main-container {
   align-items: center;
-  background-color: var(--licorice);
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   height: 100%;
@@ -165,8 +165,8 @@
   display: flex;
   flex-direction: column;
   padding: 24px;
-  color: #fff;
-  font-family: IBM Plex Sans;
+  color: var(--primary-white);
+  font-family: 'IBM Plex Sans', sans-serif;
   width: 100%;
 }
 
@@ -177,7 +177,7 @@
 }
 
 .link-decoration {
-text-decoration: none;
+  text-decoration: none;
 }
 
 .dashboard-my-profile-side-header {
@@ -191,9 +191,9 @@ text-decoration: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #212225;
-  border: 1px solid #3A3939;
-  color: #fff;
+  background: var(--background-color-light);
+  border: 1px solid var(--strokes);
+  color: var(--primary-white);
   text-decoration: none;
   cursor: pointer;
 }
@@ -202,7 +202,7 @@ text-decoration: none;
   margin-bottom: 10px;
 }
 
-.dasboard-my-profile-box:not(:last-child){
+.dasboard-my-profile-box:not(:last-child) {
   margin-right: 14px;
 }
 
@@ -219,7 +219,7 @@ text-decoration: none;
 }
 
 div[class$="-container--header"] {
-  background: #212225;
+  background: var(--primary-black);
   border-radius: 4px;
   margin: 0 24px 24px 0;
   width: 250px;
@@ -236,14 +236,14 @@ div[class$="-container--header"] {
   position: absolute;
   bottom: 20%;
   line-height: 1.5;
-  padding: 0 .5em;
+  padding: 0 0.5em;
 }
 
 div[class$="-container--header"] h4 {
   font-size: 24px;
 }
 
-.mylibrary-container--tiles{
+.mylibrary-container--tiles {
   display: flex;
   position: absolute;
   overflow-x: scroll;
@@ -254,7 +254,7 @@ div[class$="-container--header"] h4 {
   scroll-behavior: smooth;
 }
 
-.mycourse-container--tiles{
+.mycourse-container--tiles {
   display: flex;
   position: absolute;
   overflow-x: scroll;
@@ -265,7 +265,7 @@ div[class$="-container--header"] h4 {
   scroll-behavior: smooth;
 }
 
-.mygroup-container--tiles{
+.mygroup-container--tiles {
   display: flex;
   position: absolute;
   overflow-x: scroll;
@@ -294,7 +294,7 @@ div[class$="-container--header"] h4 {
   height: 250px;
 }
 
-.tiles-container-img-wrapper img{
+.tiles-container-img-wrapper img {
   width: 100%;
   height: 100%;
 }
@@ -308,17 +308,17 @@ div[class$="-container--header"] h4 {
 }
 
 .add-container {
-  background: #212225;
-    border-radius: 4px;
-    padding: 2em 1em;
-    margin: 0 24px 24px 0;
-    min-width: 250px;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
+  background: var(--primary-black);
+  border-radius: 4px;
+  padding: 2em 1em;
+  margin: 0 24px 24px 0;
+  min-width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
 }
 
 .add-container img {
@@ -328,7 +328,7 @@ div[class$="-container--header"] h4 {
 }
 
 @media only screen and (max-width: 1200px) {
-  .x10-1-0-my-dashboard .flex-col-6{
+  .x10-1-0-my-dashboard .flex-col-6 {
     width: 150px;
     margin-left: 10px;
   }
@@ -343,9 +343,9 @@ div[class$="-container--header"] h4 {
 }
 
 @media only screen and (max-width: 900px) {
-    .x10-1-0-my-dashboard .dashboard-info {
-      flex-direction: column;
-      height: auto;
+  .x10-1-0-my-dashboard .dashboard-info {
+    flex-direction: column;
+    height: auto;
   }
 
   .x10-1-0-my-dashboard .info-my-community {
@@ -387,9 +387,8 @@ div[class$="-container--header"] h4 {
 
   .dasboard-my-profile-box {
     width: 100%;
-    flex-direction: row;
     height: 70px;
-     flex-direction: row;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
@@ -413,8 +412,8 @@ div[class$="-container--header"] h4 {
   .mobile-container-dasboard-my-profile-box {
     width: 100%;
     padding: 3em 1em;
-    background-color: var(--licorice);
+    background-color: var(--background-color);
     border-radius: 4px;
-    border: 1px solid var(--onyx);
+    border: 1px solid var(--strokes);
   }
 }

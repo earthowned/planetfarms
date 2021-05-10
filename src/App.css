@@ -1,24 +1,3 @@
-body {
-  background: black;
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-}
-
-* {
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-}
-
-:root {
-  --caribbean-green: rgba(0, 198, 136, 1);
-  --gallery: rgba(238, 238, 238, 1);
-  --licorice: rgba(20, 20, 20, 1);
-  --monsoon: rgba(137, 137, 137, 1);
-  --onyx: rgba(58, 57, 57, 1);
-  --quarter-spanish-white: rgba(248, 235, 223, 1);
-  --quarter-spanish-white-2: rgba(248, 235, 223, 0.16);
-  --shark: rgba(43, 43, 44, 1);
-  --rusty-red: rgba(218, 52, 67, 1);
-}
-
 .nav-link {
   text-decoration: none;
 }

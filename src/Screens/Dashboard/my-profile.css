@@ -1,6 +1,6 @@
 .x10-4-0-my-personals {
   align-items: flex-start;
-  background-color: black;
+  background-color: var(--background-color);
   display: flex;
   width: 100%;
 }
@@ -20,7 +20,7 @@
 }
 
 .x10-4-0-my-personals .profile {
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   margin-top: 40px;
   padding: 24px 40px;
@@ -31,7 +31,7 @@
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--background-color);
 }
 
 .x10-4-0-my-personals .profile-info {
@@ -40,14 +40,43 @@
   flex-direction: column;
 }
 
+.edit-information-container {
+  margin-top: 1.5em;
+}
+
+.edit-information-container img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 14px;
+}
+
+.edit-information-container .edit-btn {
+  width: 100%;
+  height: 48px;
+  background: var(--background-color-light);
+  border: 0.5px solid var(--primary-white);
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primary-white);
+}
+
 @media only screen and (max-width: 1310px) {
   .x10-4-0-my-personals .profile {
     flex-direction: column-reverse;
   }
-  
+
+  .edit-information-container {
+    margin-bottom: 3em;
+  }
+
   .x10-4-0-my-personals .profile-info {
-  width: 100%;
-}
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 700px) {
@@ -57,7 +86,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .x10-4-0-my-personals .profile {
-      padding: 1em;
+  .x10-4-0-my-personals .profile {
+    padding: 1em;
   }
 }

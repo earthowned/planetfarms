@@ -44,7 +44,7 @@ function CommunityGroup({ setCreateGroupModal }) {
           <div className="flex-row-5">
             <div id="community-group-link-header" style={{justifyContent:"space-between"}}>
                <div className="all-groups-1 border-1px-quarter-spanish-white">
-              <div className="all-groups ibmplexsans-semi-bold-shark-16px">
+              <div className="all-groups">
                 All Groups
               </div>
             </div>

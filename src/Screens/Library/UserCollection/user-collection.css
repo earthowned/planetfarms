@@ -4,7 +4,7 @@
 }
 
 .farming-collection-header {
-  color: #fff;
+  color: var(--primary-white);
   margin-top: 2em;
 }
 

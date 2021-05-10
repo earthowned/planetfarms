@@ -1,7 +1,7 @@
 .group-container {
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--background-color-modal);
   position: fixed;
   z-index: 999;
   margin-left: -50vw;
@@ -14,10 +14,10 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   z-index: 999;
-  background: #191b1d;
+  background: var(--cards);
   width: 40%;
   height: 85%;
-  color: #fff;
+  color: var(--primary-white);
   padding: 20px 0;
   display: flex;
   justify-content: space-around;
@@ -34,7 +34,7 @@
 
 .add-collection button {
   border: none;
-  color: #00c688;
+  color: var(--primary-color);
   background: none;
   outline: none;
   cursor: pointer;
@@ -76,17 +76,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--primary-white);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--primary-grey);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--dropowns);
 }
 
 .add-collection {
@@ -103,7 +103,7 @@
   width: 100%;
   height: 100%;
   z-index: 2000;
-  background: red;
+  background: redvar(--secondary-red);
 }
 
 @media only screen and (max-width: 850px) {

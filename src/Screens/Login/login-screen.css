@@ -32,7 +32,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-40px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 40px;
   font-style: normal;
@@ -63,7 +63,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -96,7 +96,7 @@
 }
 
 .ibmplexsans-semi-bold-caribbean-green-16px {
-  color: var(--caribbean-green);
+  color: var(--primary-color);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -115,8 +115,8 @@
 .signup-option {
   max-width: 504px;
   width: 100%;
-  background: #141414;
-  border: 1px solid #3a3939;
+  background: var(--cards);
+  border: 1px solid var(--strokes);
   border-radius: 4px;
   padding: 1.5em 1em;
   text-align: center;
@@ -136,13 +136,13 @@
 }
 
 .x01-0-0-login-empty .span0 {
-  color: rgba(248, 235, 223, 1);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
   font-size: 16px;
 }
 
 .x01-0-0-login-empty .span2 {
-  color: rgba(0, 198, 136, 1);
+  color: var(--primary-color);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -176,7 +176,6 @@
   .x01-0-0-login-empty .button-1 {
     min-width: 460px;
   }
-
 }
 
 @media only screen and (max-width: 1023px) {

@@ -3,6 +3,6 @@
 }
 
 .library-collection h4 {
-  color: #fff;
+  color: var(--primary-white);
   margin: 0;
 }

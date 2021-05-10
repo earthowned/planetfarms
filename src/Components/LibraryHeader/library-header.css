@@ -7,7 +7,7 @@
 }
 
 .library-list-container {
-  color: #fff;
+  color: var(--primary-white);
   list-style: none;
   display: flex;
   margin: 0;
@@ -19,10 +19,10 @@
 }
 
 .library-list-item {
-  background: #000;
-  border: 0.5px solid #fff;
+  background: var(--background-color);
+  border: 0.5px solid var(--primary-white);
   border-radius: 4px;
-  color: #fff;
+  color: var(--primary-white);
   cursor: pointer;
   outline: none;
   display: flex;
@@ -33,13 +33,13 @@
 }
 
 .library-list-item:hover {
-  color: #000;
-  background: #fff;
+  color: var(--background-color);
+  background: var(--primary-white);
 }
 
 .library-list-item:focus {
-  color: #000;
-  background: #fff;
+  color: var(--background-color);
+  background: var(--primary-white);
 }
 
 .library-container {
@@ -61,8 +61,8 @@
 }
 
 .library-list-item.active {
-  background: #fff;
-  color: #000;
+  background: var(--primary-white);
+  color: var(--background-color);
 }
 
 .library-btn-container {
