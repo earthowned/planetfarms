@@ -1,11 +1,10 @@
 .simple-modal-container {
   position: fixed;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--cards);
   height: 100%;
   z-index: 2000;
-  color: #fff;
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  color: var(--primary-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,9 +13,8 @@
 .simple-modal-inner-container {
   width: 30%;
   height: 30%;
-  background: #191b1d;
+  background: var(--cards);
   padding: 2em 1.6em;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;

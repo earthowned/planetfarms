@@ -1,0 +1,134 @@
+.flex-col-4 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  min-height: 384px;
+  width: 248px;
+}
+
+.profile-image {
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 4px;
+  height: 248px;
+  width: 248px;
+}
+
+.button {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  min-height: 112px;
+  position: relative;
+  width: 248px;
+}
+
+.msg-btn {
+  -webkit-backdrop-filter: blur(16px) brightness(100%);
+  align-items: center;
+  backdrop-filter: blur(16px) brightness(100%);
+  background-color: var(--background-color-light);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0 67px;
+  width: 248px;
+}
+
+.border-0-5px-quarter-spanish-white {
+  border: 0.5px solid var(--primary-white);
+}
+
+.message-btn-text {
+  height: 24px;
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 112px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ibmplexsans-semi-bold-quarter-spanish-white-16px {
+  color: var(--primary-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.default-btn-btn {
+  align-items: center;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  padding: 0 97px;
+  width: 248px;
+  margin-top: 10px;
+}
+
+.follow {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 24px;
+  min-width: 52px;
+  white-space: nowrap;
+}
+
+.ibmplexsans-semi-bold-shark-16px {
+  color: var(--primary-white);
+  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.x08-1-0-community-members {
+  align-items: flex-start;
+  background-color: var(--background-color);
+  display: flex;
+  height: 1024px;
+  position: relative;
+  width: 1440;
+}
+
+.flex-col-6 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40;
+  min-height: 984px;
+  position: relative;
+  width: 1112px;
+}
+
+.profie-details {
+  align-items: flex-start;
+  background-color: var(--background-color);
+  border-radius: 4px;
+  display: flex;
+  height: 832px;
+  margin-top: 32px;
+  min-width: 1112px;
+  padding: 24px 40;
+}
+
+.information-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 432px;
+  width: 784px;
+}
+
+@media only screen and (max-width: 370px) {
+  .default-btn-btn {
+    width: 100px;
+    padding: 0 0 0 22px;
+  }
+}

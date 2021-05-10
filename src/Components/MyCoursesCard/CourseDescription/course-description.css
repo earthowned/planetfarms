@@ -5,12 +5,12 @@
   align-items: flex-start;
   padding: 2em;
   margin: 0 auto;
-  border-bottom: 1.5px solid var(--onyx);
+  border-bottom: 1.5px solid var(--dropdowns);
 }
 
 .course-description {
   width: 60%;
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   letter-spacing: 0;
 }
@@ -23,7 +23,7 @@
 .course-desc {
   line-height: 24px;
   margin-top: 24px;
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
 }
 
 .course-page-name {
@@ -47,7 +47,7 @@
 }
 
 .green-line-2 {
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   height: 1px;
   left: 51px;
   position: absolute;
@@ -56,7 +56,7 @@
 }
 
 .green-line-1 {
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   height: 1px;
   left: 245px;
   opacity: 0.2;
@@ -66,7 +66,7 @@
 }
 
 .green-line {
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   height: 1px;
   left: 439px;
   opacity: 0.2;
@@ -76,7 +76,7 @@
 }
 
 .green-line-3 {
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   height: 1px;
   left: 633px;
   opacity: 0.2;
@@ -183,7 +183,7 @@
 .subscriber-btn {
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   backdrop-filter: blur(16px) brightness(100%);
-  background-color: var(--white2);
+  background-color: var(--primary-white);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -194,7 +194,7 @@
 }
 
 .subscriber-btn span {
-  color: #fff;
+  color: var(--primary-white);
   font-size: 14px;
 }
 
@@ -252,7 +252,7 @@
 
 .course-page-container {
   align-items: flex-start;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -275,19 +275,19 @@
   font-weight: 600;
   font-size: 24px;
   line-height: 32px;
-  color: #fff;
+  color: var(--primary-white);
   padding-bottom: 1em;
 }
 
 .course-page-boderline {
-  background-color: var(--onyx);
+  background-color: var(--cards);
   height: 1px;
   margin-top: 39px;
 }
 
 .more-course-feature-container {
   align-items: flex-start;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -295,7 +295,7 @@
   margin-top: 38px;
   overflow: hidden;
   width: 100%;
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--strokes);
 }
 
 .more-course-feature-title {
@@ -419,7 +419,7 @@
 }
 
 .lesson-desc {
-  color: #fff;
+  color: var(--primary-white);
   font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -509,7 +509,7 @@
   font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
-  color: #fff;
+  color: var(--primary-white);
   display: flex;
   height: 160px;
 }
@@ -529,7 +529,7 @@
 }
 
 .lock-lesson h4 {
-  color: #fff;
+  color: var(--primary-white);
   margin-top: 10px;
   font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
@@ -563,7 +563,7 @@
   outline: none;
   border: none;
   background: none;
-  color: #00c688;
+  color: var(--primary-color);
   font-size: 14px;
   padding: 0;
   cursor: pointer;
@@ -602,7 +602,7 @@
 
 .lesson-progress-indicator {
   height: 1px;
-  background: #00c688;
+  background: var(--primary-color);
   position: absolute;
   z-index: -1;
   top: 25%;
@@ -626,15 +626,15 @@
   justify-content: center;
   margin-bottom: 1em;
   position: relative;
-  background: #141414;
+  background: var(--cards);
 }
 
 .circle-wrapper-active {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #141414;
-  border: 3px solid #00c688;
+  background: var(--cards);
+  border: 3px solid var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -646,11 +646,11 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #00c688;
+  background: var(--primary-color);
 }
 
 .lesson-progress-heading {
-  color: rgb(124, 124, 124);
+  color: var(--primary-grey);
 }
 
 @media screen and (max-width: 800px) {

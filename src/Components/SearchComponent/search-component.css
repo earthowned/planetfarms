@@ -1,6 +1,6 @@
 .search-btn {
-  border: 1px solid #3a3939;
-  background: #141414;
+  border: 1px solid var(--dropdowns);
+  background: var(--cards);
   display: flex;
   align-items: center;
   padding: 8px 10px;
@@ -23,7 +23,7 @@
   background: transparent;
   outline: none;
   border: none;
-  color: rgb(126, 118, 118);
+  color: var(--primary-white);
   width: 100%;
   height: 100%;
 }
@@ -36,12 +36,12 @@
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--dropdowns);
 }
 
 .search {
   align-items: center;
-  background-color: black;
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -51,7 +51,7 @@
 }
 
 .search-1 {
-  color: rgba(137, 137, 137, 1);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   letter-spacing: 0;
@@ -60,7 +60,7 @@
   min-height: 24px;
   min-width: 65px;
   white-space: nowrap;
-  background-color: black;
+  background-color: var(--background-color);
   border: none;
   outline: none;
 }

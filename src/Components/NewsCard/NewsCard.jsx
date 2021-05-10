@@ -58,9 +58,9 @@ function NewsCard() {
                   <div className="farming ibmplexsans-semi-bold-caribbean-green-14px">
                     {news.title}
                   </div>
-                  <h1 className="subtitle ibmplexsans-semi-bold-quarter-spanish-white-24px">
+                  <h4 className="subtitle">
                     {news.subtitle}
-                  </h1>
+                  </h4>
                 </div>
                 <div className="overflow module">
                 <p className="news-text ibmplexsans-normal-quarter-spanish-white-16px">

@@ -1,7 +1,7 @@
 .message-header {
   width: 90%;
   height: 80px;
-  border-bottom: 1px solid #3a3939;
+  border-bottom: 1px solid var(--dropdowns);
   display: flex;
   align-items: center;
   margin: 10px;
@@ -25,7 +25,7 @@
 }
 
 .account-user {
-  color: #fff;
+  color: var(--primary-white);
 }
 
 .heading-4 {
@@ -40,7 +40,7 @@
 
 .date {
   font-size: 14px;
-  color: #8a8a8a;
+  color: var(--primary-grey);
 }
 
 .messenger-list-container {
@@ -56,4 +56,3 @@
 .messenger-list-item:hover {
   transform: scale(1.1);
 }
-

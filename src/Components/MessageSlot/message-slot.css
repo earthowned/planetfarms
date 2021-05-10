@@ -3,13 +3,14 @@
   height: 100vh;
   position: relative;
 }
+
 .message-card {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 90%;
   padding: 10px 20px;
-  color: #fff;
+  color: var(--primary-white);
   margin-bottom: 10px;
   margin-top: 0;
   line-height: 1.5;
@@ -18,7 +19,7 @@
 .message-slot-header {
   margin: 18px 0;
   text-align: center;
-  color: #8b8b8b;
+  color: var(--primary-grey);
 }
 
 .message-card .img-wrapper {
@@ -28,6 +29,7 @@
 .message-content {
   width: 70%;
 }
+
 .message-card p {
   font-size: 14px;
   margin: 0;
@@ -50,10 +52,10 @@
   bottom: 0;
   width: 90%;
   padding: 10px 20px;
-  color: #fff;
+  color: var(--primary-white);
   margin-bottom: 10px;
   margin-top: 0;
-  border-top: 1px solid #3a3939;
+  border-top: 1px solid var(--dropdowns);
   margin-left: 10px;
 }
 
@@ -65,7 +67,7 @@
   background: none;
   border: none;
   outline: none;
-  color: #fff;
+  color: var(--primary-white);
 }
 
 .message-input-container .img-wrapper-2 {
