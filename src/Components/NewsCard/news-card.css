@@ -125,7 +125,7 @@
 
 .newsCard-group1 {
   align-items: flex-start;
-  background-color: var(--cards);
+  background-color: var(--background-color-image);
   display: flex;
   height: 279px;
   justify-content: flex-end;
