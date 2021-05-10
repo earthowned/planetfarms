@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "aws-amplify": "^3.3.27",
+    "dotenv": "^8.2.0",
     "parcel-bundler": "^1.12.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -25,7 +26,8 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
     "concurrently": "^6.0.2",
-    "parcel-plugin-static-files-copy": "^2.5.0"
+    "parcel-plugin-static-files-copy": "^2.5.0",
+    "standard": "^16.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

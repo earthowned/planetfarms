@@ -33,9 +33,14 @@
 .x02-2-0-sign-up-filed .button-wrapper {
   justify-content: space-between;
   display: flex;
-  width: 35%;
+  width: 47.5%;
+  margin-right: 2em;
   margin-bottom: 2em;
   margin-top: 0;
+}
+
+.congrats-btn {
+  width: 45%;
 }
 
 .x02-2-0-sign-up-filed .frame-4 {
@@ -159,14 +164,10 @@
 
 .row-1-col {
   width: 47.5%;
-  margin-right: 5%;
+  margin-right: 2em;
 }
 
 @media only screen and (max-width: 1280px) {
-  .x02-2-0-sign-up-filed .button-wrapper {
-    width: 30%;
-  }
-
   .x02-2-0-sign-up-filed .frame-4 {
     padding: 0 0.2em;
     align-items: center;
@@ -199,11 +200,6 @@
     order: -1;
     width: 100%;
   }
-
-  .x02-2-0-sign-up-filed .button-wrapper {
-    width: 45%;
-    justify-content: space-around;
-  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -226,20 +222,26 @@
 }
 
 @media only screen and (max-width: 520px) {
-  .x02-2-0-sign-up-filed .frame-4 {
-    width: 100%;
-    margin: 0;
-    margin-bottom: 1em;
-  }
-}
-
-@media only screen and (max-width: 460px) {
   .congratulation-header-wrapper .congratulation-header {
     font-size: 3rem;
   }
 
   .congratulation-sub-title {
     font-size: 0.8em;
+  }
+
+  .x02-2-0-sign-up-filed .frame-4 {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 1em;
+  }
+
+  .congrats-btn {
+    width: 100%;
+  }
+
+  .congrats-btn:last-child {
+    margin-top: 1em;
   }
 }
 
@@ -250,5 +252,10 @@
 
   .congratulation-sub-title {
     font-size: 0.6em;
+  }
+
+  .x02-2-0-sign-up-filed .file-drop-container {
+    width: 250px;
+    height: 250px;
   }
 }

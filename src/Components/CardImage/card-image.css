@@ -2,19 +2,24 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 272px;
-  margin-left: 3%;
-  margin-bottom: 4%;
+  height: 272px;
+  margin-bottom: 2em;
+  margin-right: 2em;
   cursor: pointer;
+  flex: 0 1 17%;
 }
 
 .profile-card-image {
-  background-position: 50% 50%;
-  background-size: cover;
   border-radius: 4px;
+  width: 100%;
   height: 184px;
-  width: 184px;
-  margin: 11px;
+}
+
+.profile-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .profile-card-name {
@@ -31,7 +36,6 @@
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
-  margin-left: 20px;
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
@@ -47,7 +51,6 @@
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
-  margin-left: 20px;
 }
 
 .ibmplexsans-normal-monsoon-14px {
@@ -72,18 +75,6 @@
   min-width: 82px;
 }
 
-@media only screen and (max-width: 672px) {
-  .card-image-1 {
-    flex-basis: 242px;
-  }
-}
-
-@media only screen and (max-width: 668px) {
-  .card-image-1 {
-    width: 80%;
-  }
-}
-
 .person-add-outline-2-1 {
   align-items: center;
   display: flex;
@@ -96,7 +87,6 @@
 .flex-row-7 {
   align-items: center;
   display: flex;
-  margin-left: 4px;
   min-width: 16px;
 }
 
@@ -105,7 +95,7 @@
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
-  margin-left: 20px;
+  margin-left: 14px;
 }
 
 .ibmplexsans-semi-bold-caribbean-green-16px {
@@ -122,4 +112,39 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
+}
+
+@media only screen and (max-width: 1820px) {
+  .card-image-1 {
+    flex-basis: 22%;
+  }
+}
+
+@media only screen and (max-width: 1360px) {
+  .card-image-1 {
+    flex-basis: 20%;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .card-image-1 {
+    flex-basis: 28%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .card-image-1 {
+    flex-basis: 42%;
+  }
+
+  .card-image-1:nth-child(2) {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .card-image-1 {
+    flex-basis: 100%;
+    margin-right: 0;
+  }
 }

@@ -29,7 +29,7 @@ const ProfileFormCard = ({data:{ title,first_inputTitle,first_inputValue,second_
 
 export const PersonalInformation=()=>{
     const PersonalInformationdata = {
-      title: "Personal infromation",
+      title: "Personal information",
       first_inputTitle:"First name",
       first_inputValue:"Mikhail" ,
       second_inputTitle:"Last Name" ,

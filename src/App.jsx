@@ -33,7 +33,8 @@ import MobileMessage from "./Components/MobileMessage/MobileMessage";
 
 import Amplify, { Auth } from 'aws-amplify';
 
-Amplify.configure({
+function amplifyConfig() {
+  Amplify.configure({
     Auth: {
 
         // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
@@ -89,10 +90,14 @@ Amplify.configure({
             responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
         }
     }
-});
+  });
+}
 
-// You can get the current config object
-const currentConfig = Auth.configure();
+if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+  amplifyConfig()
+  // You can get the current config object
+  const currentConfig = Auth.configure()
+}
 
 function App() {
   return (
