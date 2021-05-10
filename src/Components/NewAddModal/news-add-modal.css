@@ -1,6 +1,6 @@
 .news-modal-container {
   position: fixed;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--background-color-modal);
   top: 0;
   left: 0;
   right: 0;
@@ -10,7 +10,7 @@
 
 .news-modal-inner-container {
   position: absolute;
-  background: #191b1d;
+  background: var(--cards);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +27,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  color: #fff;
+  color: var(--primary-white);
 }
 
 .news-modal-content {
@@ -40,10 +40,10 @@
   width: 100%;
   height: 40px;
   margin-bottom: 1em;
-  background: #212225;
-  border: 1px solid #3a3939;
+  background: var(--strokes);
+  border: 1px solid var(--dropdowns);
   outline: none;
-  color: #fff;
+  color: var(--primary-white);
   padding-left: 1.5em;
 }
 
@@ -57,17 +57,17 @@
 
 .btn-variation {
   padding: 1.7em 0;
-  color: #fff;
+  color: var(--primary-white);
 }
 
 .nav-link {
-  color: #fff;
+  color: (--primary-white);
   text-decoration: none;
 }
 
 .default-btn-btn {
   align-items: center;
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   border-radius: 4px;
   display: flex;
   height: 48px;

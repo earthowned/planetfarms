@@ -1,6 +1,6 @@
 .card-1 {
   align-items: flex-start;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -90,7 +90,7 @@
 }
 
 .ibmplexsans-semi-bold-caribbean-green-14px {
-  color: var(--caribbean-green);
+  color: var(--primary-color);
   font-family: var(--font-family-ibm_plex_sans-semibold);
   font-size: var(--font-size-14px);
   font-style: normal;
@@ -98,7 +98,7 @@
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--dropdowns);
 }
 
 .card-btn-container {

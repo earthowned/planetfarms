@@ -10,10 +10,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #3a3939;
+  border: 1px solid var(--dropdowns);
   border-radius: 4px;
   margin-bottom: 8px;
-  color: #fff;
+  color: var(--primary-white);
 }
 
 .listview-inner-container .image-wrapper {
@@ -49,11 +49,11 @@
 
 .secondary-btn-border {
   outline: none;
-  border: 1px solid #3a3939;
+  border: 1px solid var(--dropdowns);
   border-radius: 4px;
   padding: 1em 2em;
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
+  background: var(--background-color-light);
+  color: var(--primary-white);
   cursor: pointer;
 }
 

@@ -4,25 +4,25 @@
 }
 
 .filter-title {
-  color: #fff;
+  color: var(--primary-white);
   display: flex;
   justify-content: space-between;
   align-items: center;
   top: 10px;
   z-index: 999;
-  border: 1px solid #3a3939;
+  border: 1px solid var(--dropdowns);
   cursor: pointer;
   padding: 11px;
   width: 100%;
 }
 
 .filter-dropdown {
-  color: #fff;
+  color: var(--primary-white);
   position: absolute;
   top: 4em;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--background-color-light);
   margin-top: 0.5em;
-  border: 1px solid #3a3939;
+  border: 1px solid var(--dropdowns);
   border-radius: 4px;
   z-index: 2000;
   width: 100%;
@@ -35,5 +35,5 @@
 }
 
 .filter-dropdown li:hover {
-  background: #00c688;
+  background: var(--primary-color);
 }

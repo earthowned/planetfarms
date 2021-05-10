@@ -20,21 +20,21 @@
   padding: 15px;
   margin: 0 0 10px 10px;
   min-width: 150px;
-  background-color: black;
-  color: white;
-  border: 1px solid wheat;
+  background-color: var(--background-color);
+  color: var(--primary-white);
+  border: 1px solid var(--strokes);
   height: 45px;
 }
 
 .btn-accordin:focus {
-  background-color: white;
-  color: black;
+  background-color: var(--primary-white);
+  color: var(--background-color);
 }
 
 .active-button {
-  background-color: black;
-  color: white;
-  border: 1px solid wheat;
+  background-color: var(--background-color);
+  color: var(--primary-white);
+  border: 1px solid var(--strokes);
 }
 
 .enterprise-messenger-container {
@@ -63,7 +63,7 @@
 }
 
 .green-dot {
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   border-radius: 100px;
   height: 8px;
   width: 8px;
@@ -81,7 +81,7 @@
 .enterprise-messenger-lower-avatar-1 {
   background-position: 50% 50%;
   background-size: cover;
-  border: 1.5px solid var(--shark-32);
+  border: 1.5px solid var(--strokes);
   border-radius: 100px;
   height: 40px;
   left: 0;
@@ -114,7 +114,7 @@
 
 .enterprise-messenger-btn {
   align-items: center;
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -148,7 +148,7 @@
 .calenderButton {
   align-items: center;
   align-self: flex-start;
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -178,7 +178,7 @@
 
 .enterprise-messenger-wrapper {
   align-items: center;
-  background-color: var(--shark);
+  background-color: var(--strokes);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -197,7 +197,7 @@
 
 .event-container-wrapper {
   align-items: center;
-  background-color: var(--shark);
+  background-color: var(--strokes);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -220,21 +220,21 @@
 }
 
 .hr-line {
-  background-color: var(--onyx);
+  background-color: var(--background-color);
   height: 1px;
   margin-top: 23px;
   width: 100%;
 }
 
 .rectangle-875-1 {
-  background-color: var(--onyx);
+  background-color: var(--background-color);
   height: 1px;
   margin-top: 142px;
   width: 1112px;
 }
 
 .hr-lines {
-  background-color: var(--onyx);
+  background-color: var(--background-color);
   height: 1px;
   width: 1112px;
 }
