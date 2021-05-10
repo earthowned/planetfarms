@@ -1,6 +1,6 @@
 .x05-0-0-all-groups {
   align-items: flex-start;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: var(--background-color);
   display: flex;
   position: relative;
   width: 100%;
@@ -38,7 +38,7 @@
 
 .all-groups-1 {
   align-items: center;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--primary-white);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -53,16 +53,17 @@
   min-height: 24px;
   min-width: 80px;
   white-space: nowrap;
+  color: var(--background-color);
+  font-style: normal;
+  font-weight: 600;
 }
 
 .border-1px-quarter-spanish-white {
-  border: 1px solid var(--quarter-spanish-white);
+  border: 1px solid var(--primary-white);
 }
 
 .ibmplexsans-semi-bold-shark-16px {
-  color: var(--shark);
-  font-family: var(--font-family-ibm_plex_sans-semibold);
-  font-size: var(--font-size-16px);
+  color: var(--primary-white);
   font-style: normal;
   font-weight: 600;
 }
@@ -79,7 +80,7 @@
 }
 
 .border-class-1 {
-  border: 0.5px solid rgba(255, 255, 255, 1);
+  border: 0.5px solid var(--primary-white);
 }
 
 .your-groups {
@@ -91,9 +92,8 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
-  font-family: var(--font-family-ibm_plex_sans-semibold);
-  font-size: var(--font-size-16px);
+  color: var(--primary-white);
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }

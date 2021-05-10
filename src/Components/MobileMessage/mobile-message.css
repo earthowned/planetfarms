@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #8a8a8a;
+  border-bottom: 1px solid var(--primary-grey);
   margin: 0 auto;
 }
 
@@ -21,13 +21,13 @@
   z-index: 5000;
   display: flex;
   flex-direction: column;
-  background: #212225;
+  background: var(--primary-black);
   width: auto;
   height: auto;
 }
 
 .mobile-message-dropdown--item {
-  color: #fff;
+  color: var(--primary-white);
   display: flex;
   align-items: center;
   padding: 1em;

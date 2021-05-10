@@ -39,7 +39,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -54,7 +54,7 @@
 }
 
 .ibmplexsans-normal-monsoon-14px {
-  color: var(--monsoon);
+  color: var(--primary-grey);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -99,7 +99,7 @@
 }
 
 .ibmplexsans-semi-bold-caribbean-green-16px {
-  color: var(--caribbean-green);
+  color: var(--primary-color);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -107,7 +107,7 @@
 }
 
 .ibmplexsans-semi-bold-monsoon-16px {
-  color: var(--monsoon);
+  color: var(--primary-grey);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;

@@ -6,19 +6,19 @@
 }
 
 .news-add-container {
-  background: #141414;
-  border: 1px solid #3a3939;
+  background: var(--cards);
+  border: 1px solid var(--strokes);
   border-radius: 4px;
   padding: 3em 2em;
 }
 
 .news-add-container h4 {
-  color: #fff;
+  color: var(--primary-white);
   font-size: 2em;
 }
 
 .news-add-inner-container {
-  background: #2b2b2c;
+  background: var(--primary-black);
   border-radius: 4px;
   margin-top: 2em;
   padding: 2em;
@@ -30,9 +30,9 @@
 .news-add-inner-container .add-btn {
   width: 120px;
   height: 80px;
-  color: #fff;
-  border: 0.5px solid #f8ebdf;
-  background: rgba(255, 255, 255, 0.16);
+  color: var(--primary-white);
+  border: 0.5px solid var(--primary-white);
+  background: var(--background-color-light);
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
@@ -53,9 +53,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 1em 2em;
-  background: #2b2b2c;
+  background: var(--primary-black);
   border-radius: 4px;
-  color: #fff;
+  color: var(--primary-white);
   margin: 0 auto;
 }
 
@@ -68,7 +68,7 @@
 .new-content-container {
   justify-content: center;
   width: 100%;
-  color: #fff;
+  color: var(--primary-white);
   text-transform: capitalize;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .new-content-container h6 {
-  background: #8a8a8a;
+  background: var(--primary-grey);
   text-align: center;
   font-size: 1em;
 }

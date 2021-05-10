@@ -4,21 +4,21 @@
   background: inherit;
   outline: none;
   border: none;
-  color: #fff;
+  color: var(--primary-white);
   width: 100%;
   text-align: left;
   line-height: 1.5;
-  border-bottom: 1px solid #3a3939;
+  border-bottom: 1px solid var(--dropdowns);
   cursor: pointer;
   justify-content: space-around;
 }
 
 .contact-card:focus {
-  background: #212225;
+  background: var(--strokes);
 }
 
 .contact-card:hover {
-  background: #212225;
+  background: var(--strokes);
 }
 
 .img-wrapper {
@@ -48,11 +48,11 @@
 
 .contact-noti span {
   font-size: 14px;
-  color: #8a8a8a;
+  color: var(--primary-grey);
 }
 
 .contact-noti .noti {
-  background: #00c688;
+  background: var(--primary-color);
   width: 20px;
   height: 20px;
   border-radius: 4px;
@@ -60,7 +60,6 @@
 }
 
 .contact-header {
-  color: #8a8a8a;
-
+  color: var(--primary-grey);
   margin: 25px 0 10px 25px;
 }

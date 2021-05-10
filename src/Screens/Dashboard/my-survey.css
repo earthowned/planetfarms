@@ -1,6 +1,6 @@
 .my-surveys {
   align-items: flex-start;
-  background-color: var(--black);
+  background-color: var(--background-color);
   display: flex;
   height: auto;
   overflow: hidden;
@@ -14,15 +14,24 @@
   flex-direction: column;
   width: 100%;
   position: relative;
-  width: 100%;
 }
 
 .survey-card-container {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   margin-top: 2em;
+  display: grid;
+  grid-gap: 2em;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
 
+@media only screen and (max-width: 1320px) {
+  .survey-card-container {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
 
+@media only screen and (max-width: 600px) {
+  .survey-card-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}

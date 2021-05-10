@@ -1,10 +1,10 @@
 .btn-default {
   align-items: center;
   justify-content: center;
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   border-radius: 4px;
   display: flex;
-  color: black;
+  color: var(--background-color);
   overflow: hidden;
   padding: 1em 2em;
   cursor: pointer;
@@ -15,7 +15,7 @@
 }
 
 .default-btn:hover {
-  background: #02f2a7;
+  background: var(--primary-color);
 }
 
 .btn-text {
@@ -29,5 +29,5 @@
 }
 
 .border-active {
-  border: 1px solid var(--caribbean-green);
+  border: 1px solid var(--primary-color);
 }
