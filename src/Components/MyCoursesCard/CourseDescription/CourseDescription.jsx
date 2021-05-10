@@ -3,11 +3,11 @@ import useSizeFinder from "../../../utils/SizeFinder";
 import Secondarybtn from "../../SecondaryBtn/Secondarybtn";
 import "./course-description.css";
 
-const CourseDescription = () => {
+const CourseDescription = ({setFeedbackModal}) => {
   return (
     <>
       <div className="course-page-container border-1px-onyx">
-        <CourseDetail />
+        <CourseDetail setFeedbackModal={setFeedbackModal}/>
         {lessonCourse()}
       </div>
       <MoreCourse />
@@ -69,7 +69,7 @@ const ProgressBar = () => {
   )
   }
 
-const CourseDetail = () => {
+const CourseDetail = ({setFeedbackModal}) => {
   return (
       <div className="description-course-page">
         <div className="bg-image"></div>
@@ -88,14 +88,19 @@ const CourseDetail = () => {
             {/* lesson progress bar */}
             <ProgressBar />
           </div>
-          <DropDownCourse />
+          <DropDownCourse setFeedbackModal={setFeedbackModal}/>
         </div>
       </div>
   );
 };
 
-const DropDownCourse = () => {
+const DropDownCourse = ({setFeedbackModal}) => {
   const [courseDropDown, setCourseDropDown] = useState(false);
+
+  function submitFeedback () {
+    setFeedbackModal(true);
+    setCourseDropDown(false);
+  }
 
   return (
     <div className="dropdown-course-container">
@@ -106,13 +111,15 @@ const DropDownCourse = () => {
       {courseDropDown && <div className="dropdown-course-items">
         <ul>
           <li>Ask a question</li>
-          <li>Feedback</li>
+          <li onClick={submitFeedback}>Feedback</li>
           <li>Leave Course</li>
         </ul>
       </div>}
     </div>
   )
 }
+
+
 const lessonCourse = () => {
   const lessonData = [
     {
