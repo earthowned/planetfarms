@@ -120,9 +120,7 @@ const DropDownCourse = ({setFeedbackModal}) => {
   )
 }
 
-
-const LessonCourse = () => {
-  const lessonData = [
+const lessonData = [
     {
       _id: 1,
       name: "01. Introducing",
@@ -157,33 +155,39 @@ const LessonCourse = () => {
       finish: "Finish Lesson",
     },
   ];
-  const history = useHistory();
 
+const LessonCourse = () => {
   return (
     <div className="lessons-container">
               <h3>Lessons</h3>
               {
                 lessonData.map(data => {
-                  return (<div className="lesson-card-wrapper">
-                   {data.finish && <div className="lock-lesson">
-                        <img src="/img/lesson-lock.svg" />
-                        <h4>{data.finish}</h4>
-                        </div>}
-                    <div className= {data.finish ? "lesson-card lock-active" : "lesson-card"}>
-                      <img className="lesson-card-img" src={data.bgImage} />
-                      <div className="lesson-card-content">
-                        <h3>{data.name}</h3>
-                        <p>{data.description}</p>
-                        <button onClick={() => history.push('/mycoursepage/lesson-1')}>{data.lesson}</button>
-                      </div>
-                    </div>
-                    </div>
-                  )
+                  return (<LessonCourseSingle data={data} /> )
                 })
               }
     </div>
   );
 };
+
+const LessonCourseSingle = ({data}) => {
+  const history = useHistory();
+  return (
+    <div className="lesson-card-wrapper">
+      {data.finish && <div className="lock-lesson">
+          <img src="/img/lesson-lock.svg" />
+             <h4>{data.finish}</h4>
+      </div>}
+      <div className= {data.finish ? "lesson-card lock-active" : "lesson-card"}>
+         <img className="lesson-card-img" src={data.bgImage} />
+          <div className="lesson-card-content">
+              <h3>{data.name}</h3>
+              <p>{data.description}</p>
+              <button onClick={() => history.push('/mycoursepage/lesson-1')}>{data.lesson}</button>
+          </div>
+      </div>
+    </div>
+  )
+}
 
 
 const MoreCourse = () => {

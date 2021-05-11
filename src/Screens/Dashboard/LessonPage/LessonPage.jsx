@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import BackButton from '../../../Components/BackButton/BackButton'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import Button from '../../../Components/Button/Button';
@@ -15,6 +15,8 @@ const LessonPage = () => {
     )
 }
 
+const contents = [1, 2];
+
 const LessonDetail = () => {
     return (
         <div className="lesson-description-wrapper">
@@ -22,15 +24,25 @@ const LessonDetail = () => {
             <div className="lesson-description-img-wrapper">
                 <img src="/img/farm.svg" alt="green field with houses" />
             </div>
-            <div className="lesson-description-content">
-                <h4>Lorem ipsum</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            </div>
-            <div className="lesson-description-content">
-                <h4>Lorem ipsum</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            </div>
-            <div className="lesson-description-video">
+            {
+                contents.map(item => {
+                    return (
+                         <div key={item} className="lesson-description-content">
+                            <h4>Lorem ipsum</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        </div>
+                    )
+                })
+            }
+           <LessonVideo />
+           <LessonTest />
+        </div>
+    )
+}
+
+function LessonVideo () {
+    return (
+         <div className="lesson-description-video">
                 <div className="lesson-description-background">
                     <img src="/img/man.svg" alt="lesson-video"/>
                 </div>
@@ -45,7 +57,12 @@ const LessonDetail = () => {
                     <p>The wolf of wall street movie is about <br /> Jordan Belfort</p>
                 </div>
             </div>
-            <div className="lesson-test-panel">
+    )
+}
+
+function LessonTest () {
+    return (
+         <div className="lesson-test-panel">
                 <div className="lesson-test-panel-left">
                     <h3>Lesson test</h3>
                     <p>Make a lesson test where you can use new information that you know</p>
@@ -60,7 +77,6 @@ const LessonDetail = () => {
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
 
