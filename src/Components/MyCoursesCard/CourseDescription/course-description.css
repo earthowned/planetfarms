@@ -569,9 +569,58 @@
   cursor: pointer;
 }
 
-.secondary-btn-container {
+.dropdown-course-container {
   width: 200px;
-  margin-bottom: 2em;
+}
+
+.dropdown-course-header {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.16);
+  border: 0.5px solid #f8ebdf;
+  border-radius: 4px;
+  box-sizing: border-box;
+  backdrop-filter: blur(16px);
+  color: #f8ebdf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+  cursor: pointer;
+}
+
+.dropdown-course-header h4 {
+  margin-right: 12px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.dropdown-course-items {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  color: #fff;
+  margin-top: 14px;
+}
+
+.dropdown-course-items li {
+  width: 100%;
+  list-style-type: none;
+  padding: 16px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dropdown-course-items li:not(:last-child) {
+  margin-bottom: 4px;
+}
+
+.dropdown-course-items li:last-child {
+  color: #e63946;
+}
+
+.dropdown-course-items li:hover {
+  background: rgba(255, 255, 255, 0.19);
 }
 
 .margin-left-1 {
