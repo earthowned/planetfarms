@@ -79,7 +79,7 @@ export const createNews = (newNews) => async (dispatch, getState) => {
     })
     dispatch({
       type: NEWS_CLEAR,
-      payload: data,
+      payload: data
     })
   } catch (error) {
     const message =
