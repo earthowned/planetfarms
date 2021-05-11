@@ -14,13 +14,12 @@ import Pagination from '../../Components/Paginations/Paginations'
 const Library = () => {
   let resourceList = useSelector((state) => state.listResources)
   let data = useSelector((state) => state.listResources)
-  let resources = resourceList.resources
+  let resources = resourceList.searchResources ? resourceList.searchResources : resourceList.resources
   if (data) resources = data.resources
   const [newCollection, setNewCollection] = useState(false)
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
   let [pageNumber, setPageNumber] = useState(0)
-  console.log(resourceList)
   const dispatch = useDispatch()
 
   function openAddCollection() {
@@ -34,14 +33,11 @@ const Library = () => {
 
   return (
     <>
-      {modalActive && (
-        <GroupModal
-          clickHandler={setModalActive}
-          data={groupCollection}
-          btnName='add to collections'
-          setNewCollection={setNewCollection}
-        />
-      )}
+      {modalActive && <GroupModal
+        clickHandler={setModalActive}
+        data={groupCollection} btnName='add to collections'
+        setNewCollection={setNewCollection}
+                      />}
 
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
 
@@ -50,11 +46,9 @@ const Library = () => {
       <DashboardLayout title='library'>
         <div className='library-main-container'>
           <LibraryHeader setActive={setActive} />
-
           <div className='list-container'>
             <ListView
-              title='Articles'
-              data={resources}
+              title='Articles' data={resources}
               setNewCollection={setNewCollection}
               modalActive={modalActive}
               setModalActive={setModalActive}
@@ -64,8 +58,7 @@ const Library = () => {
 
           <div className='list-container'>
             <ListView
-              title='Videos'
-              data={resources}
+              title='Videos' data={resources}
               setNewCollection={setNewCollection}
               modalActive={modalActive}
               setModalActive={setModalActive}

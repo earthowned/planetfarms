@@ -1,12 +1,6 @@
-.text {
-  position: absolute;
-  top: 10px;
-  left: 50px;
-}
-
 .default-input {
   align-items: center;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   height: 80px;
@@ -14,6 +8,23 @@
   padding: 0 16px;
   width: inherit;
   position: relative;
+}
+
+.input-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.overhead-text {
+  color: var(--primary-grey);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: -2px;
+  margin-left: 6px;
 }
 
 .input-container {
@@ -43,7 +54,7 @@
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--dropdowns);
 }
 
 .person-outline {
@@ -60,18 +71,11 @@
   height: 100%;
 }
 
-.ibmplexsans-regular-normal-monsoon-14px {
-  color: var(--monsoon);
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-}
-
 .username {
   letter-spacing: 0;
   line-height: 24px;
   margin-left: 8px;
+  margin-bottom: 14px;
   min-height: 24px;
   min-width: 76px;
   white-space: nowrap;
@@ -83,23 +87,33 @@
 }
 
 .ibmplexsans-regular-normal-monsoon-16px {
-  color: var(--monsoon);
+  color: var(--primary-grey);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
 }
 
 .error-message {
-  color: red;
+  color: var(--secondary-red);
   margin: 6px 0;
   line-height: 20px;
   height: 12px;
 }
 
 .foucsed-input {
-  border: red;
+  border: var(--secondary-red);
 }
 
 .default-input:focus-within {
-  border: 1px solid #00c688;
+  border: 1px solid var(--primary-color);
+}
+
+input[type=date] {
+  color: var(--primary-grey);
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  width: 68%;
+  height: 100%;
 }

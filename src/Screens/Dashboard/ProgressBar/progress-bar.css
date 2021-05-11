@@ -1,13 +1,13 @@
 .progress-container {
   height: 45px;
   width: 100%;
-  background-color: #050404;
+  background-color: var(--cards);
   border-radius: 5px;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   position: relative;
-  border: 1px solid #3a3939;
+  border: 1px solid var(--strokes);
 }
 
 .text-style {
@@ -25,7 +25,7 @@
   text-align: center;
 }
 
-.filler+.text-style {
+.filler + .text-style {
   color: mediumspringgreen;
   mix-blend-mode: difference;
 }
@@ -34,7 +34,7 @@
   padding-top: 13px;
   color: #74e7a0;
   font-weight: 1200;
-  padding-right: 4px,
+  padding-right: 4px;
 }
 
 @media only screen and (max-width: 550px) {
@@ -46,18 +46,18 @@
   }
 
   .progress-des {
-    color: #fff;
+    color: var(--primary-white);
     margin-bottom: 14px;
   }
 
   .progress-bar {
     height: 45px;
     width: 100%;
-    background-color: #050404;
+    background-color: var(background-color);
     border-radius: 5px;
     margin-bottom: 20px;
     position: relative;
-    border: 1px solid #3a3939;
+    border: 1px solid var(--primary-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,7 +76,7 @@
   }
 
   .progress-percent-text {
-    color: #fff;
+    color: var(--primary-white);
     z-index: 2000;
   }
 }
