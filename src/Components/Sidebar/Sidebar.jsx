@@ -29,8 +29,8 @@ const mainnav = [
     dropdown: []
   },
   {
-    name: 'Course',
-    slug: '#',
+    name: 'Courses',
+    slug: '/courses',
     image: '/img/graduation-cap-1.svg',
     dropdown: []
   }
