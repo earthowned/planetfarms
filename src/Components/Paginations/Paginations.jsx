@@ -1,7 +1,7 @@
 import './pagination.css'
 
 const Pagination = ({ pageNumber, resourceList, setPageNumber }) => {
-  function handelPagination(num, multiplier) {
+  function handelPagination (num, multiplier) {
     setPageNumber((pageNumber += num * multiplier))
   }
 

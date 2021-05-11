@@ -13,12 +13,10 @@ const getResources = (req, res) => {
   Resource.findAndCountAll({ offset: page * pageSize, limit: pageSize, ordervalue })
     .then(resources => {
       const totalPages = Math.ceil(resources.count / pageSize)
-      res.json({ resources: resources.rows, totalItems:resources.count, totalPages, page, pageSize }).status(200)
+      res.json({ resources: resources.rows, totalItems: resources.count, totalPages, page, pageSize }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
-
-
 
 // @desc    Add individual resource
 // @route   POST /api/resources/add

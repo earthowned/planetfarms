@@ -12,17 +12,17 @@ import { listResources } from '../../actions/resourceActions'
 import Pagination from '../../Components/Paginations/Paginations'
 
 const Library = () => {
-  let resourceList = useSelector((state) => state.listResources)
-  let data = useSelector((state) => state.listResources)
+  const resourceList = useSelector((state) => state.listResources)
+  const data = useSelector((state) => state.listResources)
   let resources = resourceList.searchResources ? resourceList.searchResources : resourceList.resources
   if (data) resources = data.resources
   const [newCollection, setNewCollection] = useState(false)
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
-  let [pageNumber, setPageNumber] = useState(0)
+  const [pageNumber, setPageNumber] = useState(0)
   const dispatch = useDispatch()
 
-  function openAddCollection() {
+  function openAddCollection () {
     setModalActive(true)
     setActive(false)
   }
@@ -37,7 +37,7 @@ const Library = () => {
         clickHandler={setModalActive}
         data={groupCollection} btnName='add to collections'
         setNewCollection={setNewCollection}
-      />}
+                      />}
 
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
 
@@ -48,14 +48,14 @@ const Library = () => {
           <LibraryHeader setActive={setActive} />
           {['Articles', 'Videos'].map(type => (
             <div className='list-container'>
-            <ListView
-              title={type} data={resources}
-              setNewCollection={setNewCollection}
-              modalActive={modalActive}
-              setModalActive={setModalActive}
-            />
-            <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
-          </div>
+              <ListView
+                title={type} data={resources}
+                setNewCollection={setNewCollection}
+                modalActive={modalActive}
+                setModalActive={setModalActive}
+              />
+              <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
+            </div>
           ))}
         </div>
       </DashboardLayout>
