@@ -4,12 +4,10 @@
   background: var(--background-color-modal);
   position: fixed;
   z-index: 999;
-  margin-left: -50vw;
-  margin-top: -12vh;
 }
 
 .group-modal {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);

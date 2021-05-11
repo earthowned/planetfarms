@@ -3,9 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 
 import './filter.css'
 
-const Filter = ({ data, newFilter }) => {
+const Filter = ({ data, newFilter, name }) => {
   const [active, setActive] = useState(false)
-
   const { pathname } = useLocation()
 
   return (
