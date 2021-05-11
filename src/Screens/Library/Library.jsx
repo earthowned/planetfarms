@@ -9,71 +9,73 @@ import GroupModal from '../../Components/GroupModal/GroupModal'
 import { groupCollection } from './CollectionData'
 import { useSelector, useDispatch } from 'react-redux'
 import { listResources } from '../../actions/resourceActions'
+import Pagination from '../../Components/Paginations/Paginations'
 
 const Library = () => {
-    let resourceList = useSelector((state) => state.listResources)
-    let data = useSelector((state) => state.listResources)
-    let resources = resourceList.resources
-    if (data) resources = data.resources
-    const [newCollection, setNewCollection] = useState(false)
-    const [active, setActive] = useState(false)
-    const [modalActive, setModalActive] = useState(false)
-    let [pageNumber, setPageNumber] = useState(0)
-    console.log(resourceList)
-    const dispatch = useDispatch()
+  let resourceList = useSelector((state) => state.listResources)
+  let data = useSelector((state) => state.listResources)
+  let resources = resourceList.resources
+  if (data) resources = data.resources
+  const [newCollection, setNewCollection] = useState(false)
+  const [active, setActive] = useState(false)
+  const [modalActive, setModalActive] = useState(false)
+  let [pageNumber, setPageNumber] = useState(0)
+  console.log(resourceList)
+  const dispatch = useDispatch()
 
-    function openAddCollection () {
-        setModalActive(true)
-        setActive(false)
-    }
+  function openAddCollection() {
+    setModalActive(true)
+    setActive(false)
+  }
 
-    useEffect(() => {
-      dispatch(listResources({pageNumber}))
-    }, [pageNumber, dispatch])
+  useEffect(() => {
+    dispatch(listResources({ pageNumber }))
+  }, [pageNumber, dispatch])
 
-    function handelPagination (num, multiplier) {
-      setPageNumber(pageNumber += num * multiplier)
-    }
-    
-    return (
-        <>
-        {modalActive && <GroupModal clickHandler={setModalActive} 
-        data={groupCollection} btnName="add to collections" 
-        setNewCollection={setNewCollection}/>}
+  return (
+    <>
+      {modalActive && (
+        <GroupModal
+          clickHandler={setModalActive}
+          data={groupCollection}
+          btnName='add to collections'
+          setNewCollection={setNewCollection}
+        />
+      )}
 
-        {newCollection && <SimpleModal setNewCollection={setNewCollection}/>}
-        
-        {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection}/>}
+      {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
 
-        <DashboardLayout title="library">
-           <div className="library-main-container">
-               
-           <LibraryHeader setActive={setActive}/>
+      {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
 
-           <div className="list-container">
-              
-           <ListView title="Articles" data={resources} 
-           setNewCollection={setNewCollection}
-           modalActive={modalActive}
-           setModalActive={setModalActive}
-           />
-              <div className="pagination">
-                <button disabled={pageNumber <1} onClick={ () => handelPagination(1, -1)}>❮{pageNumber -1}</button>
-                <button disabled={pageNumber >= resourceList.totalPages} onClick={ () => handelPagination(1, +1)}>❯{pageNumber +1}</button>
-              </div>
-           </div>
+      <DashboardLayout title='library'>
+        <div className='library-main-container'>
+          <LibraryHeader setActive={setActive} />
 
-           <div className="list-container">
-           <ListView title="Videos" data={resources} 
-           setNewCollection={setNewCollection}
-           modalActive={modalActive}
-           setModalActive={setModalActive}
-           />
-            </div>
-            </div>
-         </DashboardLayout>
-         </>
-    )
+          <div className='list-container'>
+            <ListView
+              title='Articles'
+              data={resources}
+              setNewCollection={setNewCollection}
+              modalActive={modalActive}
+              setModalActive={setModalActive}
+            />
+            <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
+          </div>
+
+          <div className='list-container'>
+            <ListView
+              title='Videos'
+              data={resources}
+              setNewCollection={setNewCollection}
+              modalActive={modalActive}
+              setModalActive={setModalActive}
+            />
+            <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
+          </div>
+        </div>
+      </DashboardLayout>
+    </>
+  )
 }
 
 export default Library
