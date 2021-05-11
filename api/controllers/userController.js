@@ -50,4 +50,33 @@ const registerUser = async (req, res) => {
   }
 }
 
-module.exports = { registerUser, authUser }
+// @desc    Fetch all users
+// @route   GET /api/users
+// @access  Public
+const getUsers = (req, res) => {
+  User.findAll({})
+    .then((users) => {
+      res.json({ users }).status(200)
+    })
+    .catch((err) => res.json({ err }).status(400))
+}
+
+// @desc    Fetch single user
+// @route   GET /api/user/:id
+// @access  Public
+const getUserById = (req, res) => {
+  const id = req.params.id
+
+  User.findByPk(id)
+    .then((user) => {
+      if (user) {
+        res.json(user)
+      } else {
+        res.status(404)
+        throw new Error('User not found')
+      }
+    })
+    .catch((err) => res.json({ error: err.message }).status(400))
+}
+
+module.exports = { registerUser, authUser, getUsers, getUserById }
