@@ -72,39 +72,39 @@ const CoursesCard = ({ category, setModalActive }) => {
         <h4>{category}</h4>
         <div>
           {
-                data.map(item => {
-                  return (
-                    <div
-                      className='courses-card' key={item.title} style={{
-                        background: `linear-gradient(359.99deg, #000000 0.01%, rgba(25, 28, 33, 0.4) 99.99%), url(${item.image})`,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat'
-                      }}
-                    >
-                      <button className='collection-btn' onClick={() => setModalActive(true)}>{item.added
-                        ? <><img src='/img/close-outline.svg' alt='close icon' /><span>Remove from collection</span></>
-                        : <><img src='/img/plus.svg' alt='add icon' /><span>Add to collection</span></>}
-                      </button>
-                      <div className='card-content'>
-                        <h3>{item.title}</h3>
-                        <h3>{item.author}</h3>
-                        <div className='course-stars'>
-                          <Star num={item.stars} />
-                          <p>({item.total} total)</p>
-                        </div>
-                        <div className='enroll-container'>
-                          <button className='join-btn' onClick={() => history.push('/mycoursepage')}>{item.enroll
-                            ? <span>You're subscriber</span>
-                            : <span>Join Course</span>}
-                          </button>
-                          <h4>{item.cost === 'Free' ? item.cost : `$ ${item.cost}`}</h4>
-                        </div>
-                      </div>
+            data.map(item => {
+              return (
+                <div
+                  className='courses-card' key={item.title} style={{
+                    background: `linear-gradient(359.99deg, #000000 0.01%, rgba(25, 28, 33, 0.4) 99.99%), url(${item.image})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                >
+                  <button className='collection-btn' onClick={() => setModalActive(true)}>{item.added
+                    ? <><img src='/img/close-outline.svg' alt='close icon' /><span>Remove from collection</span></>
+                    : <><img src='/img/plus.svg' alt='add icon' /><span>Add to collection</span></>}
+                  </button>
+                  <div className='card-content'>
+                    <h3>{item.title}</h3>
+                    <h3>{item.author}</h3>
+                    <div className='course-stars'>
+                      <Star num={item.stars} />
+                      <p>({item.total} total)</p>
                     </div>
-                  )
-                })
-            }
+                    <div className='enroll-container'>
+                      <button className='join-btn' onClick={() => history.push('/mycoursepage')}>{item.enroll
+                        ? <span>You're subscriber</span>
+                        : <span>Join Course</span>}
+                      </button>
+                      <h4>{item.cost === 'Free' ? item.cost : `$ ${item.cost}`}</h4>
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     </div>
