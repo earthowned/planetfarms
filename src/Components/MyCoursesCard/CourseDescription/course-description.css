@@ -576,7 +576,7 @@
 .dropdown-course-header {
   width: 100%;
   background: rgba(255, 255, 255, 0.16);
-  border: 0.5px solid #F8EBDF;
+  border: 0.5px solid #f8ebdf;
   border-radius: 4px;
   box-sizing: border-box;
   backdrop-filter: blur(16px);
@@ -602,7 +602,7 @@
   margin-top: 14px;
 }
 
-.dropdown-course-items li{
+.dropdown-course-items li {
   width: 100%;
   list-style-type: none;
   padding: 16px 18px;
