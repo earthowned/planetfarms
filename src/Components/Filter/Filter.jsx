@@ -11,34 +11,34 @@ const Filter = ({ data, newFilter }) => {
   return (
     <>
       {
-            !newFilter ? <div className='filter-container'>
-              <div onClick={() => setActive(!active)} className='filter-title'>
-                <img src='/img/funnel-outline.svg' /> filter by <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
-              </div>
-              {active && <ul className='filter-dropdown'>
-                <li>Progress</li>
-                <li>Recent Uses</li>
-                <li>Most Used</li>
-                         </ul>}
-            </div>
-              : <div className='filter-container'>
-                <div onClick={() => setActive(!active)} className='filter-title'>
-                  {pathname === '/library' ? 'All files'
-                    : pathname === '/library/collection' ? 'My library & collections'
-                      : pathname === '/library/collection/users' ? 'Users collection'
-                        : 'Saved collection'} <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
-                </div>
-                {active && <ul className='filter-dropdown'>
-                  {
-                            data.length && data.map(item => (
-                              <Link className='nav-link' to={`${item.link}`}>
-                                <li onClick={() => setActive(false)}>{item.label}</li>
-                              </Link>
-                            ))
-                        }
-                </ul>}
-                </div>
-        }
+        !newFilter ? <div className='filter-container'>
+          <div onClick={() => setActive(!active)} className='filter-title'>
+            <img src='/img/funnel-outline.svg' /> filter by <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
+          </div>
+          {active && <ul className='filter-dropdown'>
+            <li>Progress</li>
+            <li>Recent Uses</li>
+            <li>Most Used</li>
+          </ul>}
+        </div>
+        : <div className='filter-container'>
+          <div onClick={() => setActive(!active)} className='filter-title'>
+            {pathname === '/library' ? 'All files'
+            : pathname === '/library/collection' ? 'My library & collections'
+            : pathname === '/library/collection/users' ? 'Users collection'
+            : 'Saved collection'} <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
+          </div>
+          {active && <ul className='filter-dropdown'>
+            {
+              data.length && data.map(item => (
+                <Link className='nav-link' to={`${item.link}`}>
+                  <li onClick={() => setActive(false)}>{item.label}</li>
+                </Link>
+              ))
+            }
+          </ul>}
+        </div>
+      }
     </>
   )
 }
