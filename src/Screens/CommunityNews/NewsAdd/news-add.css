@@ -10,10 +10,16 @@
   border: 1px solid var(--strokes);
   border-radius: 4px;
   padding: 3em 2em;
+  margin-bottom: 1em;
 }
 
 .news-add-container h4 {
   color: var(--primary-white);
+  font-size: 2em;
+}
+
+.new-title-container h2 {
+  color: #fff;
   font-size: 2em;
 }
 
