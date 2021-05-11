@@ -19,7 +19,7 @@ const Library = () => {
   const [newCollection, setNewCollection] = useState(false)
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
-  const [pageNumber, setPageNumber] = useState(0)
+  const [pageNumber, setPageNumber] = useState(1)
   const dispatch = useDispatch()
 
   function openAddCollection () {

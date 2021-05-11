@@ -7,10 +7,10 @@ const Op = Sequelize.Op
 // @access  Public
 const getResources = (req, res) => {
   const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
+  const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  Resource.findAndCountAll({ offset: page * pageSize, limit: pageSize, ordervalue })
+  Resource.findAndCountAll({ offset: (page-1) * pageSize, limit: pageSize, ordervalue })
     .then(resources => {
       const totalPages = Math.ceil(resources.count / pageSize)
       res.json({ resources: resources.rows, totalItems: resources.count, totalPages, page, pageSize }).status(200)
