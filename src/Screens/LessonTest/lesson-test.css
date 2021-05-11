@@ -1,7 +1,7 @@
 .test-wrapper {
   color: #fff;
   background: #141414;
-  border: 1px solid #3A3939;
+  border: 1px solid #3a3939;
   border-radius: 4px;
   width: 100%;
   margin-top: 24px;
@@ -19,12 +19,12 @@
 
 .question-wrapper {
   margin-bottom: 40px;
-  border-bottom: 1px solid #3A3939;
+  border-bottom: 1px solid #3a3939;
   padding: 0 40px 40px;
 }
 
 .question-wrapper img {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 
 .question-wrapper h4 {
