@@ -7,10 +7,14 @@ const {
   forgotPassword,
   forgotPasswordSubmit,
   resendCode,
-  confirmSignUpWithCode
+  confirmSignUpWithCode,
+  getUserById,
+  getUsers
 } = require('../controllers/userController.js')
+const { protect } = require('../middleware/authMiddleware')
 
-router.route('/').post(registerUser)
+router.route('/').post(registerUser).get(protect, getUsers)
+router.route('/:id').get(protect, getUserById) //.put(protect, updateUser)
 router.post('/login', authUser)
 router.post('/changePassword', changePassword)
 router.post('/forgotPassword', forgotPassword)
