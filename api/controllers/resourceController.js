@@ -10,7 +10,7 @@ const getResources = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  Resource.findAndCountAll({ offset: page, limit: pageSize, ordervalue })
+  Resource.findAndCountAll({ offset: page * pageSize, limit: pageSize, ordervalue })
     .then(resources => {
       const totalPages = Math.ceil(resources.count / pageSize)
       res.json({ resources: resources.rows, totalItems:resources.count, totalPages, page, pageSize }).status(200)

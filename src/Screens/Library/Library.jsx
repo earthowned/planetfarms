@@ -37,7 +37,7 @@ const Library = () => {
         clickHandler={setModalActive}
         data={groupCollection} btnName='add to collections'
         setNewCollection={setNewCollection}
-                      />}
+      />}
 
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
 
@@ -46,25 +46,17 @@ const Library = () => {
       <DashboardLayout title='library'>
         <div className='library-main-container'>
           <LibraryHeader setActive={setActive} />
-          <div className='list-container'>
+          {['Articles', 'Videos'].map(type => (
+            <div className='list-container'>
             <ListView
-              title='Articles' data={resources}
+              title={type} data={resources}
               setNewCollection={setNewCollection}
               modalActive={modalActive}
               setModalActive={setModalActive}
             />
             <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
           </div>
-
-          <div className='list-container'>
-            <ListView
-              title='Videos' data={resources}
-              setNewCollection={setNewCollection}
-              modalActive={modalActive}
-              setModalActive={setModalActive}
-            />
-            <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
-          </div>
+          ))}
         </div>
       </DashboardLayout>
     </>
