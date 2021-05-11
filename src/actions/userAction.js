@@ -41,8 +41,8 @@ export const login = (name, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     }
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
@@ -57,7 +57,10 @@ export const login = (name, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload: error.response && error.response.data.message ? error.response.data.message : error.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -66,7 +69,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
     const {
-      userLogin: { userInfo },
+      userLogin: { userInfo }
     } = getState()
     const config = {
       headers: {
@@ -96,14 +99,14 @@ export const updateUser = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST })
     const {
-      userLogin: { userInfo },
+      userLogin: { userInfo }
     } = getState()
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
+        Authorization: `Bearer ${userInfo.token}`
+      }
     }
 
     const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/${user.id}`, user, config)
@@ -129,13 +132,13 @@ export const listUsers = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_LIST_REQUEST })
     const {
-      userLogin: { userInfo },
+      userLogin: { userInfo }
     } = getState()
 
     const config = {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
+        Authorization: `Bearer ${userInfo.token}`
+      }
     }
 
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users`, config)
