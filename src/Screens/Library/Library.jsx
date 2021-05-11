@@ -10,54 +10,56 @@ import { groupCollection } from './CollectionData'
 import { useSelector } from 'react-redux'
 
 const Library = () => {
-    let resourceList = useSelector((state) => state.listResources)
-    let data = useSelector((state) => state.listResources)
-    let resources = resourceList.resources
-    if (data) resources = data.resources
-    const [newCollection, setNewCollection] = useState(false)
-    const [active, setActive] = useState(false)
-    const [modalActive, setModalActive] = useState(false)
+  const resourceList = useSelector((state) => state.listResources)
+  const resources = resourceList.searchResources ? resourceList.searchResources : resourceList.resources
+  const [newCollection, setNewCollection] = useState(false)
+  const [active, setActive] = useState(false)
+  const [modalActive, setModalActive] = useState(false)
 
-    function openAddCollection () {
-        setModalActive(true)
-        setActive(false)
-    }
-    
-    return (
-        <>
-        {modalActive && <GroupModal clickHandler={setModalActive} 
-        data={groupCollection} btnName="add to collections" 
-        setNewCollection={setNewCollection}/>}
+  function openAddCollection () {
+    setModalActive(true)
+    setActive(false)
+  }
 
-        {newCollection && <SimpleModal setNewCollection={setNewCollection}/>}
-        
-        {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection}/>}
+  return (
+    <>
+      {modalActive && <GroupModal
+        clickHandler={setModalActive}
+        data={groupCollection} btnName='add to collections'
+        setNewCollection={setNewCollection}
+                      />}
 
-        <DashboardLayout title="library">
-           <div className="library-main-container">
-               
-           <LibraryHeader setActive={setActive}/>
+      {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
 
-           <div className="list-container">
-              
-           <ListView title="Articles" data={resources} 
-           setNewCollection={setNewCollection}
-           modalActive={modalActive}
-           setModalActive={setModalActive}
-           />
-           </div>
+      {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
 
-           <div className="list-container">
-           <ListView title="Videos" data={resources} 
-           setNewCollection={setNewCollection}
-           modalActive={modalActive}
-           setModalActive={setModalActive}
-           />
-            </div>
-            </div>
-         </DashboardLayout>
-         </>
-    )
+      <DashboardLayout title='library'>
+        <div className='library-main-container'>
+
+          <LibraryHeader setActive={setActive} />
+
+          <div className='list-container'>
+
+            <ListView
+              title='Articles' data={resources}
+              setNewCollection={setNewCollection}
+              modalActive={modalActive}
+              setModalActive={setModalActive}
+            />
+          </div>
+
+          <div className='list-container'>
+            <ListView
+              title='Videos' data={resources}
+              setNewCollection={setNewCollection}
+              modalActive={modalActive}
+              setModalActive={setModalActive}
+            />
+          </div>
+        </div>
+      </DashboardLayout>
+    </>
+  )
 }
 
 export default Library
