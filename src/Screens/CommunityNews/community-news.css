@@ -35,11 +35,13 @@
 }
 
 .community-news-cards {
+  margin-top: 1.5em;
   grid-column: 1 / 2;
   grid-row: 2 / -1;
 }
 
 .community-news-right-bar {
+  margin-top: 1.5em;
   grid-column: 2 / -1;
   grid-row: 2 / 3;
 }
@@ -117,6 +119,7 @@
   .community-news-second-header button {
     width: 100%;
     margin-top: 1em;
+    padding: 1em;
   }
 
   .search-container-news {
