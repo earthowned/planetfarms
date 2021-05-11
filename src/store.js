@@ -2,10 +2,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { resourceListReducer } from './reducers/resourceReducers'
-import { groupListReducer  } from './reducers/communityGroupReducers'
+import { groupListReducer ,groupViewReducer } from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 
 const reducer = combineReducers({
+  groupView:groupViewReducer,
   listGroups:groupListReducer,
   listResources: resourceListReducer,
   userLogin: userLoginReducer,

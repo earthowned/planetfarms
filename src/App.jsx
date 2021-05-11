@@ -150,7 +150,7 @@ function App () {
         <Route path='/community-group'>
           <CommunityGroup />
         </Route>
-        <Route path='/community-group-view-page'>
+        <Route path='/community-group-view-page/:id'>
           <CommunityGroupViewPage />
         </Route>
         <Route path='/enterprises'>
