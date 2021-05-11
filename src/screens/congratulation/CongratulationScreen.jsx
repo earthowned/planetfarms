@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Auth } from 'aws-amplify'
 import { useForm } from 'react-hook-form'
 
@@ -9,6 +10,7 @@ import Button from '../../components/button/Button'
 import ConfirmModal from '../../components/simpleModal/ConfirmModal'
 import Secondarybtn from '../../components/secondaryBtn/Secondarybtn'
 import DragDrop from '../../components/dragDrop/DragDrop'
+import { updateUser } from '../../actions/userAction'
 import './Congratulation.scss'
 
 function CongratulationScreen () {
@@ -57,6 +59,7 @@ function CongratulationScreen () {
     // if (firstname && lastname && phone && birthday && email) {
     //   signUp({ firstname, lastname, phone, birthday, email });
     // }
+    return dispatch(updateUser({ firstName, lastName, phone, birthday, email, id:userInfo.id }))
   }
 
   return (
