@@ -57,7 +57,7 @@
   position: relative;
 }
 
-.lesson-description-video img{
+.lesson-description-video img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -142,10 +142,6 @@
   height: 20px;
 }
 
-.library-icon-wrapper {
-
-}
-
 .lesson-description--video-desription {
   position: absolute;
   bottom: 24px;
@@ -205,7 +201,7 @@
   height: 250px;
   background: #212225;
   border-radius: 4px;
-  border: 0.5px solid #FFFFFF;
+  border: 0.5px solid #fff;
   padding: 14px;
 }
 
@@ -226,10 +222,6 @@
   color: #8A8A8A;
   display: grid;
   place-items: center;
-}
-
-.lesson-test-panel-right--attempts {
-
 }
 
 .material-wrapper {
@@ -271,7 +263,7 @@
 }
 
 .download-all img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .document-wrapper {
@@ -293,7 +285,7 @@
 }
 
 .document img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .document-download-toggle {
@@ -309,17 +301,17 @@
 }
 
 .document-download-toggle div {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 14px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 14px;
+  cursor: pointer;
 }
 
 .document-download-toggle div img {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
 
 .document-download-toggle div:hover {

@@ -580,7 +580,7 @@
   border-radius: 4px;
   box-sizing: border-box;
   backdrop-filter: blur(16px);
-  color: #F8EBDF;
+  color: #f8ebdf;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -616,7 +616,7 @@
 }
 
 .dropdown-course-items li:last-child {
-  color: #E63946;
+  color: #e63946;
 }
 
 .dropdown-course-items li:hover {

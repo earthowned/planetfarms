@@ -52,19 +52,18 @@ const ProgressBar = () => {
       {windowWidth > 600
         ? <div style={{ width: `${accurateIndicator}%` }} className='lesson-progress-indicator' />
         : <div style={{ height: `${accurateIndicator}%` }} className='lesson-progress-indicator' />}
-
       {
-                lessons && lessons.map(item => {
-                  return (
-                    <div className='lesson-progress-content' key={item}>
-                      <div className={item.unlock ? 'circle-wrapper-active' : 'circle-wrapper'}>
-                        {item.unlock && <div className='circle' />}
-                      </div>
-                      <h4 className={item.unlock ? 'lesson-progress-heading-active' : 'lesson-progress-heading'}>{item.name}</h4>
-                    </div>
-                  )
-                })
-              }
+        lessons && lessons.map(item => {
+          return (
+            <div className='lesson-progress-content' key={item}>
+              <div className={item.unlock ? 'circle-wrapper-active' : 'circle-wrapper'}>
+                {item.unlock && <div className='circle' />}
+              </div>
+              <h4 className={item.unlock ? 'lesson-progress-heading-active' : 'lesson-progress-heading'}>{item.name}</h4>
+            </div>
+          )
+        })
+      }
     </div>
   )
 }
@@ -160,10 +159,10 @@ const LessonCourse = () => {
     <div className='lessons-container'>
       <h3>Lessons</h3>
       {
-                lessonData.map(data => {
-                  return (<LessonCourseSingle data={data} />)
-                })
-              }
+        lessonData.map(data => {
+          return (<LessonCourseSingle data={data} />)
+        })
+      }
     </div>
   )
 }
@@ -192,33 +191,33 @@ const MoreCourse = () => {
   const moreCourseData = [
     {
       _id: 1,
-      name: ' Dianne Russell',
-      message: '   Write message',
+      name: 'Dianne Russell',
+      message: 'Write message',
       bgImage: '/img/profile-image-2.svg'
     },
 
     {
       _id: 2,
-      name: ' Kristin Watson',
-      message: '   Write message',
+      name: 'Kristin Watson',
+      message: 'Write message',
       bgImage: '/img/profile-image-3.svg'
     },
     {
       _id: 3,
-      name: '  Leslie Alexander',
-      message: '   Write message',
+      name: 'Leslie Alexander',
+      message: 'Write message',
       bgImage: '/img/profile-image-4.svg'
     },
     {
       _id: 4,
-      name: '  Ralph Edwards',
-      message: '   Write message',
+      name: 'Ralph Edwards',
+      message: 'Write message',
       bgImage: '/img/profile-image-5.svg'
     },
     {
       _id: 5,
-      name: '  Guy Hawkins',
-      message: '   Write message',
+      name: 'Guy Hawkins',
+      message: 'Write message',
       bgImage: '/img/profile-image-6.svg'
     }
   ]
@@ -262,9 +261,8 @@ const MoreCourse = () => {
         </div>
 
         {
-            screenSize < 650 && <div className='secondary-btn-container margin-left-1'><Secondarybtn name='See all users' /></div>
-          }
-
+          screenSize < 650 && <div className='secondary-btn-container margin-left-1'><Secondarybtn name='See all users' /></div>
+        }
       </div>
     </>
   )

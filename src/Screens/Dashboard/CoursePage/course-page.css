@@ -32,12 +32,12 @@
   background: #191b1d;
   width: 500px;
   min-height: 400px;
-  color: #F8EBDF;
+  color: #f8ebdf;
   padding: 20px 20px;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  border: 1px solid #3A3939;
+  border: 1px solid #3a3939;
   border-radius: 4px;
 }
 
@@ -65,7 +65,7 @@
 
 .feedback-modal-rating {
   margin-top: 3.5em;
-  margin-bottom: .8em;
+  margin-bottom: 0.8em;
 }
 
 .stars {
@@ -79,7 +79,7 @@
 }
 
 .feedback-modal-rating #star:hover {
-  fill: #00C688;
+  fill: #00c688;
 }
 
 .feedback-modal-review textarea {
@@ -87,7 +87,7 @@
   height: 70px;
   background: #191b1d;
   resize: none;
-  border: 1px solid #3A3939;
+  border: 1px solid #3a3939;
   border-radius: 4px;
   color: #fff;
   padding: 10px;

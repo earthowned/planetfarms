@@ -25,15 +25,15 @@ const LessonDetail = () => {
         <img src='/img/farm.svg' alt='green field with houses' />
       </div>
       {
-                contents.map(item => {
-                  return (
-                    <div key={item} className='lesson-description-content'>
-                      <h4>Lorem ipsum</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                  )
-                })
-            }
+        contents.map(item => {
+          return (
+            <div key={item} className='lesson-description-content'>
+              <h4>Lorem ipsum</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            </div>
+          )
+        })
+      }
       <LessonVideo />
       <LessonTest />
     </div>
@@ -125,10 +125,10 @@ const MaterialComponent = () => {
       </div>
       <div className='document-wrapper'>
         {
-                document.map(item => {
-                  return (<Document item={item} />)
-                })
-            }
+          document.map(item => {
+            return (<Document item={item} />)
+          })
+        }
       </div>
     </div>
   )
@@ -151,11 +151,11 @@ const Document = ({ item }) => {
       <h4>{item.name}</h4>
       <img onClick={() => { dropItem(item.id) }} src='/img/more-horizontal.svg' alt='horizontal icon' />
       {
-               active === dropDownItem && <div key={item.id} className='document-download-toggle'>
-                 <div><img src='/img/download-icon.svg' alt='download icon' /> <span>Download</span></div>
-                 <div><img src='/img/book-outlined.svg' alt='library icon' /> <span>Add to my library</span></div>
-               </div>
-            }
+        active === dropDownItem && <div key={item.id} className='document-download-toggle'>
+          <div><img src='/img/download-icon.svg' alt='download icon' /> <span>Download</span></div>
+          <div><img src='/img/book-outlined.svg' alt='library icon' /> <span>Add to my library</span></div>
+        </div>
+      }
     </div>
   )
 }

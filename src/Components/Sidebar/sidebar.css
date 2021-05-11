@@ -146,7 +146,7 @@
 .list-container .text-active {
   background: var(--primary-color);
   fill: var(--background-color);
-  margin-top: .8em;
+  margin-top: 0.8em;
 }
 
 .list-container .text-menu {
@@ -154,7 +154,7 @@
   border-radius: 4px;
   height: 50px;
   padding: 1.2rem;
-  margin-top: .8em;
+  margin-top: 0.8em;
   cursor: pointer;
 }
 
