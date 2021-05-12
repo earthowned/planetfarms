@@ -19,9 +19,7 @@ import UserCollection from './Screens/Library/UserCollection/UserCollection'
 import SavedCollection from './Screens/Library/SavedCollection/SavedCollection'
 import AllCommunitiesCard from './Screens/CommunitySwitching/CommunitySwitching'
 import CommunityPagenews from './Screens/CommunityNews/CommunityNews'
-
 import CommunityNewsViewPage from './Screens/CommunityNewsView/CommunityNewsView'
-
 import NewsAdd from './Screens/CommunityNews/NewsAdd/NewsAdd'
 import CommunityMembers from './Screens/CommunityMembers/CommunityMembers'
 import CommunityMembersProfile from './Screens/CommunityMemberProfile/CommunityMemberProfile'
@@ -32,11 +30,8 @@ import EnterprisesViewPage from './Screens/Enterprises/EnterprisesViewPage/Enter
 import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage'
 import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup'
 import MobileMessage from './Components/MobileMessage/MobileMessage'
-
 import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
-
-
 import Amplify, { Auth } from 'aws-amplify'
 
 function amplifyConfig () {
@@ -99,7 +94,6 @@ function amplifyConfig () {
   })
 }
 
-
 if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
   amplifyConfig()
   // You can get the current config object
@@ -107,7 +101,6 @@ if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
 }
 
 function App () {
-
   return (
     <Router>
       <Switch>
@@ -141,13 +134,11 @@ function App () {
         <Route exact path='/community-page-news'>
           <CommunityPagenews />
         </Route>
-
         <Route path='/community-page-news/:title/:category'>
           <NewsAdd />
         </Route>
         <Route path='/community-page-news-view'>
           <CommunityNewsViewPage />
-
         </Route>
         <Route path='/community-switching'>
           <AllCommunitiesCard />
@@ -161,12 +152,9 @@ function App () {
         <Route path='/community-group'>
           <CommunityGroup />
         </Route>
-
         <Route path='/community-group-view-page/:id'>
           <CommunityGroupViewPage />
         </Route>
-
-        
         <Route path='/courses'>
           <Courses />
         </Route>
@@ -176,9 +164,7 @@ function App () {
         <Route path='/enterprises-view'>
           <EnterprisesViewPage />
         </Route>
-
         <Route path='/my-group-view-page/:id'>
-
           <MyGroupViewPage />
         </Route>
         <Route path='/dashboard'>
@@ -196,14 +182,12 @@ function App () {
         <Route path='/mycourse'>
           <MyCourse />
         </Route>
-
         <Route exact path='/mycoursepage'>
           <MyCoursePage />
         </Route>
         <Route path='/mycoursepage/:id'>
           <LessonPage />
         </Route>
-
         <Route path='/myProfile'>
           <MyProfile />
         </Route>
@@ -250,6 +234,4 @@ const X0100LoginEmptyData = {
   vector16: '',
   vector17: '',
   vector18: ''
-
-
 }

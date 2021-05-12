@@ -20,7 +20,7 @@ const NewsCreateModal = ({
   groupActive,
   setGroupActive,
   groupEditActive,
-  setGroupEditActive,
+  setGroupEditActive
 }) => {
   const [files, setFiles] = useState([])
 
@@ -30,11 +30,11 @@ const NewsCreateModal = ({
       setFiles(
         acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file),
+            preview: URL.createObjectURL(file)
           })
         )
       )
-    },
+    }
   })
 
   return (
@@ -137,29 +137,29 @@ const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGro
 
 const VideoInputContainer = () => {
   return (
-    <div className="video-input-container">
+    <div className='video-input-container'>
       <input
-        className="default-input-variation"
-        placeholder="Video title"
-      ></input>
+        className='default-input-variation'
+        placeholder='Video title'
+      />
       <br />
       <textarea
-        className="default-input-variation text-area-variation"
-        placeholder="Video description"
-        cols="3"
-        rows="3"
-      ></textarea>
+        className='default-input-variation text-area-variation'
+        placeholder='Video description'
+        cols='3'
+        rows='3'
+      />
 
-      <div className="video-row-3">
+      <div className='video-row-3'>
         <input
-          className="default-input-variation last-input-variation"
-          placeholder="Video link"
-        ></input>{" "}
-        <span>OR</span> <button className="secondary-btn">Choose video</button>
+          className='default-input-variation last-input-variation'
+          placeholder='Video link'
+        />{' '}
+        <span>OR</span> <button className='secondary-btn'>Choose video</button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const GroupInputContainer = () => {
   return (

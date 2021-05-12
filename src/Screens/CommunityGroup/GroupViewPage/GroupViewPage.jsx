@@ -18,7 +18,7 @@ const CommunityGroupViewPage = () => {
   const [followers, setFollowers] = useState(false)
   const groupSingle = useSelector((state) => state.groupView.group)
   const dispatch = useDispatch()
- 
+
   console.log(groupSingle)
   useEffect(() => {
     dispatch(listGroupById(id))
