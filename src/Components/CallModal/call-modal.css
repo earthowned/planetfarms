@@ -1,7 +1,7 @@
 .call-modal-container {
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--background-color-modal);
   position: fixed;
   z-index: 999;
   margin-left: -50vw;
@@ -14,10 +14,10 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   z-index: 999;
-  background: #191b1d;
+  background: var(--cards);
   width: 80%;
   height: 70%;
-  color: #fff;
+  color: var(--primary-white);
   padding: 20px 0;
   display: flex;
   justify-content: space-around;

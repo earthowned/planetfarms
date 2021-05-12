@@ -2,9 +2,72 @@
 
 body {
   background: black;
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 * {
-  font-family: "IBM Plex Sans-SemiBold", Helvetica;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* :root {
+  --caribbean-green: rgba(0, 198, 136, 1);
+  --gallery: rgba(238, 238, 238, 1);
+  --licorice: rgba(20, 20, 20, 1);
+  --monsoon: rgba(137, 137, 137, 1);
+  --onyx: rgba(58, 57, 57, 1);
+  --quarter-spanish-white: rgba(248, 235, 223, 1);
+  --quarter-spanish-white-2: rgba(248, 235, 223, 0.16);
+  --shark: rgba(43, 43, 44, 1); primary-black
+  --rusty-red: rgba(218, 52, 67, 1);
+} */
+
+:root {
+  --primary-color: rgba(0, 198, 136, 1);
+  --primary-black: #2b2b2c;
+  --primary-grey: #8a8a8a;
+  --primary-white: #f8ebdf;
+  --secondary-red: #da3443;
+  --secondary-black: #eaeaea;
+  --secondary-yellow: #eaa534;
+  --secondary-blue: #3641d9;
+  --background-color: #000;
+  --background-color-light: rgba(255, 255, 255, 0.16);
+  --background-color-image: rgba(0, 0, 0, 0.8);
+  --background-color-modal: rgba(0, 0, 0, 0.8);
+  --cards: #141414;
+  --popups: #1d1f22;
+  --strokes: #2b2b2b;
+  --dropdowns: #3a3a3a;
+}
+
+h1 {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+h4 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+h6 {
+  font-size: 14px;
+  line-height: 24px;
 }

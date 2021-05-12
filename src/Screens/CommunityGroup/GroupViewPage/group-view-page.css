@@ -1,6 +1,6 @@
 .x05-2-0-group-page-inside-user-view {
   align-items: flex-start;
-  background-color: var(--black);
+  background-color: var(--background-color);
   display: flex;
   height: 100%;
   position: relative;
@@ -18,7 +18,7 @@
 
 .first-card {
   align-items: flex-start;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
 }
 
 .group-boderline {
-  background-color: var(--onyx);
+  background-color: var(--strokes);
   height: 1px;
   margin-top: 39px;
   width: 1112px;
@@ -107,7 +107,7 @@
   -webkit-backdrop-filter: blur(16px) brightness(100%);
   align-items: center;
   backdrop-filter: blur(16px) brightness(100%);
-  background-color: var(--white2);
+  background-color: var(--primary-white);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -158,7 +158,7 @@
 /* community-group-photos css */
 .group-photo {
   align-items: flex-end;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -233,7 +233,7 @@
 
 .arrow {
   align-items: center;
-  background-color: var(--caribbean-green);
+  background-color: var(--primary-color);
   border-radius: 100px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -271,7 +271,7 @@
 /* communtiy group post css */
 .user-post-card {
   align-items: flex-start;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -387,8 +387,6 @@
   width: 19px;
 }
 
-
-
 .frame-2805 {
   align-items: flex-start;
   display: flex;
@@ -429,7 +427,7 @@
 }
 
 .comment-boderline {
-  background-color: var(--onyx);
+  background-color: var(--strokes);
   height: 1px;
   margin-top: 23px;
   width: 728px;
@@ -476,10 +474,6 @@
   top: 3px;
   width: 19px;
 }
-
-
-
-
 
 .user-cmnt-avatar {
   background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-2801-2@2x.png);
@@ -575,7 +569,7 @@
   line-height: 24px;
   min-height: 24px;
   min-width: 201px;
-  background-color: #141414;
+  background-color: var(--cards);
   border: none;
   outline: none;
 }

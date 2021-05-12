@@ -8,10 +8,10 @@
 }
 
 .button-delete {
-  background-color: #191b1d;
+  background-color: var(--cards);
   outline: none;
   border: none;
-  color: red;
+  color: var(--secondary-red);
   margin: 10px;
 }
 
@@ -20,8 +20,8 @@
 }
 
 .button-cancel {
-  background: rgba(255, 255, 255, 0.16);
-  color: white;
+  background: var(--background-color-light);
+  color: var(--primary-white);
   border-radius: 4px;
   height: 50px;
   outline: none;
@@ -52,12 +52,12 @@
 .toggle-container {
   width: 38px;
   height: 20px;
-  background: #27292c;
+  background: var(--primary-black);
   border-radius: 10px;
 }
 
 .toggle-item {
-  background: #fff;
+  background: var(--primary-white);
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -85,7 +85,7 @@
 .toggle-item.active + .toggle-container {
   width: 38px;
   height: 20px;
-  background: #00c688;
+  background: var(--primary-color);
   transition: all 0.2s ease-in-out;
 }
 

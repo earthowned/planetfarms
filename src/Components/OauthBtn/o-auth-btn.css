@@ -1,49 +1,51 @@
 .oauth-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .oauth-wrapper h4 {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
+  color: var(--primary-white);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .o-auth-btn-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
+
 .o-auth-btn-wrapper button {
-    background: rgba(248, 235, 223, 0.16);
-    border-radius: 4px;
-    border: 0.5px solid #F8EBDF;
-    width: 45%;
-    height: 48px;
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: var(--dropdowns);
+  border-radius: 4px;
+  border: 0.5px solid var(--primary-white);
+  width: 45%;
+  height: 48px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .o-auth-btn-wrapper h4 {
-    font-weight: 600;
-    margin-left: 14px;
+  font-weight: 600;
+  margin-left: 14px;
 }
 
 @media only screen and (max-width: 520px) {
-    .o-auth-btn-wrapper {
-        flex-direction: column;
-        margin-top: 12px;
-    }
-    .o-auth-btn-wrapper button {
-        width: 100%;
-        margin-top: 12px;
-    }
+  .o-auth-btn-wrapper {
+    flex-direction: column;
+    margin-top: 12px;
+  }
+
+  .o-auth-btn-wrapper button {
+    width: 100%;
+    margin-top: 12px;
+  }
 }

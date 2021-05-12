@@ -1,5 +1,5 @@
 .x02-0-0-sign-up-empty {
-  background-color: black;
+  background-color: var(--background-color);
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
@@ -49,20 +49,20 @@
 }
 
 .checkbox-text {
-  color: #fff;
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   margin-left: 0.4em;
 }
 
 .x02-0-0-sign-up-empty .span1-lQtl1i {
-  color: rgba(248, 235, 223, 1);
+  color: var(--primary-white);
   font-family: "Inter-Medium", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
 
 .x02-0-0-sign-up-empty .span2-lQtl1i {
-  color: rgba(248, 235, 223, 1);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -70,7 +70,7 @@
 }
 
 .error-message {
-  color: red;
+  color: var(--secondary-red);
   margin-top: 6px;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .x02-0-0-sign-up-empty .span2-hsNx6X {
-  color: rgba(0, 198, 136, 1);
+  color: var(--primary-color);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -117,11 +117,11 @@
 }
 
 .password-error {
-  border: 1px solid red;
+  border: 1px solid var(--secondary-red);
 }
 
 .user-error {
-  border: 1px solid red;
+  border: 1px solid var(--secondary-red);
 }
 
 .text {
@@ -131,7 +131,7 @@
 }
 
 .active {
-  border: 1px solid rgba(0, 198, 136, 1);
+  border: 1px solid var(--primary-color);
 }
 
 .checkbox {
@@ -139,7 +139,7 @@
 }
 
 .signup-option p {
-  color: rgba(248, 235, 223, 1);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;

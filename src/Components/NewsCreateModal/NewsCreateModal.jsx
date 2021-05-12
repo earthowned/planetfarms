@@ -2,8 +2,14 @@ import { useState } from 'react'
 import './news-create-modal.css'
 import { useDropzone } from 'react-dropzone'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { createEnterprise } from '../../actions/enterpriseAction'
+
+import Button from '../Button/Button'
+import CreateVideo from './NewsCreateVideo'
+import CreateImage from './NewsCreateImage'
+import CreateText from './NewsTextModel'
+import CollectionModalHeader from './CollectionModalHeader'
+import DragDrop from './DragDrop'
+
 
 const NewsCreateModal = ({
   type,
@@ -32,8 +38,11 @@ const NewsCreateModal = ({
           })
         )
       )
-    }
+
+    },
   })
+
+
   return (
     <>
       {type === 'video' && (
@@ -45,15 +54,8 @@ const NewsCreateModal = ({
           setVideoActive={setVideoActive}
         />
       )}
-      {type === 'enterprise' && (
-        <CreateEnterprise
-          getRootProps={getRootProps}
-          getInputProps={getInputProps}
-          files={files}
-          enterpriseActive={enterpriseActive}
-          setEnterpriseActive={setEnterpriseActive}
-        />
-      )}
+
+
       {type === 'group' && (
         <CreateGroup
           getRootProps={getRootProps}
@@ -94,56 +96,19 @@ const NewsCreateModal = ({
   )
 }
 
-const CreateVideo = ({
-  getRootProps,
-  getInputProps,
-  files,
-  videoActive,
-  setVideoActive
-}) => {
-  return (
-    <>
-      {videoActive && (
-        <div className='collection-modal-container'>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader
-              title='Add video'
-              setVideoActive={setVideoActive}
-            />
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
-            <VideoInputContainer />
-            <Button name='Add Video block' />
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
-const CreateGroup = ({
-  getRootProps,
-  getInputProps,
-  files,
-  groupActive,
-  setGroupActive
-}) => {
+
+const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroupActive }) => {
+
   return (
     <>
       {groupActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader
-              title='Create Group'
-              setGroupActive={setGroupActive}
-            />
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
+
+
+            <CollectionModalHeader title='Create Group' setGroupActive={setGroupActive} />
+            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
+
             <GroupInputContainer />
             <Link to='/my-group-view-page'>
               <Button name='Create Group' />
@@ -154,40 +119,29 @@ const CreateGroup = ({
     </>
   )
 }
-const EditGroup = ({
-  getRootProps,
-  getInputProps,
-  files,
-  groupEditActive,
-  setGroupEditActive
-}) => {
+
+const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGroupEditActive }) => {
+
   return (
     <>
       {groupEditActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader
-              title='Edit Group'
-              setGroupEditActive={setGroupEditActive}
-            />
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
+
+            <CollectionModalHeader title='Edit Group' setGroupEditActive={setGroupEditActive} />
+            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
             <GroupEditContainer />
             <button className='button-delete'>
-              <img className='trash-icon' src='/img/trash-icon.svg' /> Delete
-              Groups
+              <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' /> Delete Groups
+
             </button>
             <div>
               <Link to='/my-group-view-page'>
                 <Button name='Edit Group' />
               </Link>
-              <button
-                className='button-cancel'
-                onClick={() => setGroupEditActive(false)}
-              >
+
+              <button className='button-cancel' onClick={() => setGroupEditActive(false)}>
+
                 Cancel
               </button>
             </div>
@@ -196,36 +150,10 @@ const EditGroup = ({
       )}
     </>
   )
-}
 
-const CreateEnterprise = ({
-  getRootProps,
-  getInputProps,
-  files,
-  enterpriseActive,
-  setEnterpriseActive
-}) => {
-  return (
-    <>
-      {enterpriseActive && (
-        <div className='collection-modal-container'>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader
-              title='Create Enterprise'
-              setEnterpriseActive={setEnterpriseActive}
-            />
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
-            <EnterpriseInputContainer setEnterpriseActive={setEnterpriseActive} />
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
+
+
+
 
 const CreateImage = ({
   getRootProps,
@@ -310,16 +238,7 @@ const CollectionModalHeader = ({
             onClick={() => setVideoActive(false)}
           />
         </div>
-      ) : title === 'Create Enterprise' ? (
-        <div className='collection-modal-header'>
-          <h4>{title}</h4>
-          <img
-            src='/img/close-outline.svg'
-            alt='close-icon'
-            onClick={() => setEnterpriseActive(false)}
-          />
-        </div>
-      ) : title === 'Create Group' ? (
+      )  : title === 'Create Group' ? (
         <div className='collection-modal-header'>
           <h4>{title}</h4>
           <img
@@ -393,6 +312,7 @@ const GroupInputContainer = () => {
         placeholder='Group title'
         required='true'
       />
+
       <br />
       <textarea
         className='default-input-variation text-area-variation'
@@ -407,12 +327,9 @@ const GroupInputContainer = () => {
 const GroupEditContainer = () => {
   return (
     <div className='video-input-container'>
-      <input
-        className='default-input-variation'
-        placeholder='Edit Title'
-        required='true'
-        value='Think like a farmer'
-      />
+
+      <input className='default-input-variation' placeholder='Edit Title' required='true' value='Think like a farmer' />
+
       <br />
       <textarea
         className='default-input-variation text-area-variation'
@@ -424,59 +341,9 @@ const GroupEditContainer = () => {
       />
     </div>
   )
-}
 
-const EnterpriseInputContainer = ({ setEnterpriseActive }) => {
-  const [title, setEnterpriseTitle] = useState('')
-  const [description, setEnterpriseDescription] = useState('')
-  const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
-  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
-  const dispatch = useDispatch()
 
-  const enterpriseTitleChange = (e) => {
-    setEnterpriseTitle(e.target.value)
-    setEnterpriseTitleError(false)
-  }
-  const enterpriseDescriptionChange = (e) => {
-    setEnterpriseDescription(e.target.value)
-    setEnterpriseDescriptionError(false)
-  }
-  const handleAddEnterprise = (e) => {
-    e.preventDefault()
-    if (!title) setEnterpriseTitleError(true)
-    if (!description) setEnterpriseDescriptionError(true)
-    if (title && description) {
-      dispatch(createEnterprise({ title, description }))
-      setEnterpriseActive(false)
-    }
-  }
-  return (
-    <div className='video-input-container'>
-      <input
-        className='default-input-variation'
-        placeholder='Enterprise title'
-        required='true'
-        error={enterpriseTitleError}
-        onChange={(e) => enterpriseTitleChange(e)}
-      />
-      <br />
-      <textarea
-        className='default-input-variation text-area-variation'
-        placeholder='Enterprise description'
-        required='true'
-        cols='3'
-        rows='3'
-        error={enterpriseDescriptionError}
-        onChange={(e) => enterpriseDescriptionChange(e)}
-      />
-      <select className='default-input-variation'>
-        <option>Select category</option>
-        <option>Farmer</option>
-      </select>
-      <button className='default-btn btn-size' onClick={handleAddEnterprise}>Submit</button>
-    </div>
-  )
-}
+
 
 const Button = ({ name }) => {
   return <button className='default-btn btn-size'>{name}</button>
@@ -532,4 +399,7 @@ function ToggleSwitch () {
     </>
   )
 }
+
+
+
 export default NewsCreateModal
