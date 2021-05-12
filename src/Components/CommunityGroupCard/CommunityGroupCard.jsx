@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-
 import Button from '../Button/Button'
 import Secondarybtn from '../SecondaryBtn/Secondarybtn'
 import './community-group-card.css'
@@ -27,7 +26,6 @@ const CommunityGroupCard = ({ data, location }) => {
                   {item.title}
                 </div>
               </div>
-
               <div className='follower-container'>
                 <div className='follower-number-container'>
                   <div className='follower-number-item ibmplexsans-regular-normal-monsoon-16px'>
