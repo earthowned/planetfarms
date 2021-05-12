@@ -3,10 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 272px;
-  margin-bottom: 2em;
-  margin-right: 2em;
   cursor: pointer;
-  flex: 0 1 17%;
 }
 
 .profile-card-image {
@@ -20,6 +17,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 4px;
 }
 
 .profile-card-name {
@@ -112,39 +110,4 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-}
-
-@media only screen and (max-width: 1820px) {
-  .card-image-1 {
-    flex-basis: 22%;
-  }
-}
-
-@media only screen and (max-width: 1360px) {
-  .card-image-1 {
-    flex-basis: 20%;
-  }
-}
-
-@media only screen and (max-width: 780px) {
-  .card-image-1 {
-    flex-basis: 28%;
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  .card-image-1 {
-    flex-basis: 42%;
-  }
-
-  .card-image-1:nth-child(2) {
-    margin-right: 0;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .card-image-1 {
-    flex-basis: 100%;
-    margin-right: 0;
-  }
 }
