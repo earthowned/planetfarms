@@ -3,8 +3,8 @@ name: Docker Builder
 on:
   push:
 
-  relase:
-  types: [created]
+  release:
+    types: [created]
 
 jobs:
   build:
