@@ -11,7 +11,7 @@ import {
   ENTERPRISE_SEARCH_FAIL
 } from '../constants/enterpriseConstants'
 
-export const listEnterprise = (sort = '', pageNumber = '') => async (
+export const listEnterprises = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
@@ -19,6 +19,7 @@ export const listEnterprise = (sort = '', pageNumber = '') => async (
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/enterprises`
     )
+    console.log('enterprisedsgfgfhnbvxdfgh', data)
     dispatch({
       type: ENTERPRISE_LIST_SUCCESS,
       payload: data
@@ -64,14 +65,10 @@ export const createEnterprise = (newEnterprise) => async (
       type: ENTERPRISE_CREATE_REQUEST
     })
 
-    const {
-      useLogin: { userInfo }
-    } = getState()
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add`,
-      newEnterprise,
-      config
+      newEnterprise
+
     )
     dispatch({
       type: ENTERPRISE_CREATE_SUCCESS,

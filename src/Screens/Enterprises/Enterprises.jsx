@@ -57,10 +57,6 @@ const Enterprise = () => {
             </div>
             <div className='enterpriseCard'>
               <CommunityGroupCard data={data} />
-              <CommunityGroupCard />
-              <CommunityGroupCard />
-              <CommunityGroupCard />
-              <CommunityGroupCard />
             </div>
 
           </div>
