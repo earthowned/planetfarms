@@ -26,7 +26,8 @@ jobs:
           sudo apt update
           sudo apt install npm
           npm install
-          npm run build || true
+          npm run build
+          ls -la build
           export DOCKER_CLI_EXPERIMENTAL=enabled
           source .github/workflows/utils.sh
           repo="earthowned/planetfarms"
