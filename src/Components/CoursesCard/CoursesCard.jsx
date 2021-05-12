@@ -95,7 +95,7 @@ const CoursesCard = ({ category, setModalActive }) => {
                       <h4>{item.cost === 'Free' ? item.cost : `$ ${item.cost}`}</h4>
                     </div>
                   </div>
-                  </Background>
+                </Background>
               )
             })
           }
