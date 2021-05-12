@@ -23,14 +23,13 @@ services:
     ports:
       - 8090:80
   frontend:
-    image: nginx:alpine
+    #build: .
+    image: earthowned:farms
     ports:
       - 8091:80
-    volumes:
-      - ./build:/usr/share/nginx/html
   api:
-    build: ./api
-    image: planetapi
+    #build: ./api
+    image: earthowned:api
     ports:
       - 8092:80
     depends_on:
