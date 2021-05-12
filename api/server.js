@@ -5,6 +5,7 @@ const userRoutes = require('./routes/userRouter.js')
 const resourceRoutes = require('./routes/resourceRouter.js')
 const collectionRoutes = require('./routes/collectionRouter')
 const courseRoutes = require('./routes/courseRouter.js')
+const newsRoutes = require('./routes/newsRouter')
 const enterprisesRoutes = require('./routes/enterprisesRouter')
 const communityGroupsRoutes = require('./routes/communityGroupRouter')
 const sequelize = require('./config/database.js')
@@ -25,6 +26,7 @@ app.use('/api/collection', collectionRoutes)
 app.use('/api/enterprises', enterprisesRoutes)
 app.use('/api/groups', communityGroupsRoutes)
 app.use('/api/courses', courseRoutes)
+app.use('/api/news', newsRoutes)
 
 // home page response
 app.get('/', (request, response) => {

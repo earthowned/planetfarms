@@ -1,9 +1,9 @@
 .secondary-btn-variant {
   outline: none;
-  background: rgba(255, 255, 255, 0.16);
-  border: 0.5px solid #f8ebdf;
+  background: var(--background-color-light);
+  border: 0.5px solid var(--primary-white);
   border-radius: 4px;
-  color: #fff;
+  color: var(--primary-white);
   width: 100%;
   height: 48px;
   text-align: center;

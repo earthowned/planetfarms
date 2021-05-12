@@ -19,10 +19,10 @@
 
 .trasnsparent-btn {
   outline: none;
-  border: 0.5px solid #fff;
-  background: rgba(255, 255, 255, 0.16);
+  border: 0.5px solid var(--primary-white);
+  background: var(--background-color-light);
   font-weight: 400;
-  color: #fff;
+  color: var(--primary-white);
   padding: 0.4em 0.6em;
   border-radius: 4px;
   display: flex;
@@ -47,7 +47,7 @@
 }
 
 .libraryCard-content h6 {
-  color: #00c688;
+  color: var(--primary-color);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -55,7 +55,7 @@
 .libraryCard-content h4 {
   font-size: 1.8em;
   margin-top: 0.6em;
-  color: #fff;
+  color: var(--primary-white);
 }
 
 @media only screen and (max-width: 900px) {

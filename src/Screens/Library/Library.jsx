@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LibraryHeader from '../../Components/LibraryHeader/LibraryHeader'
 import './library.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
@@ -7,57 +7,60 @@ import SimpleModal from '../../Components/SimpleModal/SimpleModal'
 import CollectionModal from '../../Components/CollectionModal/CollectionModal'
 import GroupModal from '../../Components/GroupModal/GroupModal'
 import { groupCollection } from './CollectionData'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { listResources } from '../../actions/resourceActions'
+import Pagination from '../../Components/Paginations/Paginations'
 
 const Library = () => {
-    let resourceList = useSelector((state) => state.listResources)
-    let data = useSelector((state) => state.listResources)
-    let resources = resourceList.resources
-    if (data) resources = data.resources
-    const [newCollection, setNewCollection] = useState(false)
-    const [active, setActive] = useState(false)
-    const [modalActive, setModalActive] = useState(false)
+  const resourceList = useSelector((state) => state.listResources)
+  const data = useSelector((state) => state.listResources)
+  let resources = resourceList.searchResources ? resourceList.searchResources : resourceList.resources
+  if (data) resources = data.resources
+  const [newCollection, setNewCollection] = useState(false)
+  const [active, setActive] = useState(false)
+  const [modalActive, setModalActive] = useState(false)
+  const [pageNumber, setPageNumber] = useState(1)
+  const dispatch = useDispatch()
 
-    function openAddCollection () {
-        setModalActive(true)
-        setActive(false)
-    }
-    
-    return (
-        <>
-        {modalActive && <GroupModal clickHandler={setModalActive} 
-        data={groupCollection} btnName="add to collections" 
-        setNewCollection={setNewCollection}/>}
+  function openAddCollection () {
+    setModalActive(true)
+    setActive(false)
+  }
 
-        {newCollection && <SimpleModal setNewCollection={setNewCollection}/>}
-        
-        {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection}/>}
+  useEffect(() => {
+    dispatch(listResources({ pageNumber }))
+  }, [pageNumber, dispatch])
 
-        <DashboardLayout title="library">
-           <div className="library-main-container">
-               
-           <LibraryHeader setActive={setActive}/>
+  return (
+    <>
+      {modalActive && <GroupModal
+        clickHandler={setModalActive}
+        data={groupCollection} btnName='add to collections'
+        setNewCollection={setNewCollection}
+                      />}
 
-           <div className="list-container">
-              
-           <ListView title="Articles" data={resources} 
-           setNewCollection={setNewCollection}
-           modalActive={modalActive}
-           setModalActive={setModalActive}
-           />
-           </div>
+      {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
 
-           <div className="list-container">
-           <ListView title="Videos" data={resources} 
-           setNewCollection={setNewCollection}
-           modalActive={modalActive}
-           setModalActive={setModalActive}
-           />
+      {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
+
+      <DashboardLayout title='library'>
+        <div className='library-main-container'>
+          <LibraryHeader setActive={setActive} />
+          {['Articles', 'Videos'].map(type => (
+            <div className='list-container'>
+              <ListView
+                title={type} data={resources}
+                setNewCollection={setNewCollection}
+                modalActive={modalActive}
+                setModalActive={setModalActive}
+              />
+              <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
             </div>
-            </div>
-         </DashboardLayout>
-         </>
-    )
+          ))}
+        </div>
+      </DashboardLayout>
+    </>
+  )
 }
 
 export default Library

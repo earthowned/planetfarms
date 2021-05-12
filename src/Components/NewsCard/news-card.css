@@ -7,17 +7,17 @@
 }
 
 .border-0-5px-quarter-spanish-white {
-  border: 0.5px solid var(--quarter-spanish-white);
+  border: 0.5px solid var(--primary-white);
 }
 
 .border-1px-onyx {
-  border: 1px solid var(--onyx);
+  border: 1px solid var(--dropdowns);
 }
 
 .date {
   letter-spacing: 0;
   line-height: 16px;
-  margin-top: 12px;
+  margin-top: 18px;
   min-height: 16px;
   white-space: nowrap;
 }
@@ -35,7 +35,7 @@
   background-size: cover;
   border-radius: 4px;
   display: flex;
-  height: 279px;
+  height: 100%;
   left: 0;
   overflow: hidden;
   position: absolute;
@@ -48,9 +48,8 @@
   display: flex;
   flex-direction: column;
   left: 24px;
-  min-height: 176px;
   position: absolute;
-  top: 79px;
+  top: 50px;
   width: 90%;
 }
 
@@ -71,11 +70,10 @@
   display: flex;
   flex-direction: column;
   min-height: 56px;
-  width: 312px;
 }
 
 .ibmplexsans-normal-quarter-spanish-white-14px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -83,7 +81,7 @@
 }
 
 .ibmplexsans-normal-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -91,7 +89,7 @@
 }
 
 .ibmplexsans-semi-bold-caribbean-green-14px {
-  color: var(--caribbean-green);
+  color: var(--primary-color);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -99,7 +97,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
@@ -118,16 +116,16 @@
 
 .newsCard-group {
   border-radius: 4px;
-  height: 279px;
+  height: 100%;
   position: relative;
   width: 100%;
 }
 
 .newsCard-group1 {
   align-items: flex-start;
-  background-color: var(--black75);
+  background-color: var(--background-color-image);
   display: flex;
-  height: 279px;
+  height: 280px;
   justify-content: flex-end;
   width: 100%;
   padding: 16px;
@@ -138,60 +136,47 @@
   line-height: 32px;
   margin-top: 8px;
   min-height: 32px;
-  white-space: nowrap;
 }
 
 .news-text {
   letter-spacing: 0;
   line-height: 24px;
   margin-top: 16px;
-  min-height: 72px;
+  height: 72px;
   width: 100%;
+  padding-right: 14px;
+  overflow-y: hidden;
 }
 
 .subtitle {
   width: 100%;
   margin-top: 0.4em;
+  color: var(--primary-white);
+  font-size: 24px;
+  line-height: 25px;
 }
 
-/* truncating the text */
-html {
-  line-height: var(--lh);
-}
-
-.overflow {
-  position: relative;
-  max-height: calc(var(--lh) * var(--max-lines));
-  overflow: hidden;
-  padding-right: 1rem; /* space for ellipsis */
-}
-
-.module {
-  width: 100%;
-  margin: 0 0 1em 0;
-  overflow: hidden;
-}
-
-.overflow::before {
-  position: absolute;
-  content: "...";
-  bottom: 5%;
-  right: 0;
-  color: #fff;
-}
-
-@media only screen and (max-width: 1200px) {
-  .date {
-    margin-top: 10px;
+@media only screen and (max-width: 758px) {
+  .subtitle {
+    font-size: 16px;
   }
-}
 
-@media only screen and (max-width: 1100px) {
-  .overflow::before {
+  .news-text {
+    overflow-y: hidden;
+    position: relative;
+    font-size: 16px;
+  }
+
+  .news-text::after {
+    content: '...';
     position: absolute;
-    content: "...";
-    bottom: 0.4em;
+    bottom: 0;
     right: 0;
-    color: #fff;
+    background: inherit;
+    color: var(--primary-white);
+  }
+
+  .frame-text {
+    top: 70px;
   }
 }
