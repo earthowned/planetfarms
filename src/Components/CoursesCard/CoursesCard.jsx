@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router'
+import Background from '../Background/Background'
 import './courses-card.css'
 
 const data = [
@@ -74,14 +75,7 @@ const CoursesCard = ({ category, setModalActive }) => {
           {
             data.map(item => {
               return (
-                <div
-                  className='courses-card' key={item.title} style={{
-                    background: `linear-gradient(359.99deg, #000000 0.01%, rgba(25, 28, 33, 0.4) 99.99%), url(${item.image})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat'
-                  }}
-                >
+                <Background image={item.image}>
                   <button className='collection-btn' onClick={() => setModalActive(true)}>{item.added
                     ? <><img src='/img/close-outline.svg' alt='close icon' /><span>Remove from collection</span></>
                     : <><img src='/img/plus.svg' alt='add icon' /><span>Add to collection</span></>}
@@ -101,7 +95,7 @@ const CoursesCard = ({ category, setModalActive }) => {
                       <h4>{item.cost === 'Free' ? item.cost : `$ ${item.cost}`}</h4>
                     </div>
                   </div>
-                </div>
+                </Background>
               )
             })
           }
