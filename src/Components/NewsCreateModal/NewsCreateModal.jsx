@@ -10,7 +10,6 @@ import CreateText from './NewsTextModel'
 import CollectionModalHeader from './CollectionModalHeader'
 import DragDrop from './DragDrop'
 
-
 const NewsCreateModal = ({
   type,
   videoActive,
@@ -38,10 +37,8 @@ const NewsCreateModal = ({
           })
         )
       )
-
-    },
+    }
   })
-
 
   return (
     <>
@@ -54,7 +51,6 @@ const NewsCreateModal = ({
           setVideoActive={setVideoActive}
         />
       )}
-
 
       {type === 'group' && (
         <CreateGroup
@@ -96,15 +92,12 @@ const NewsCreateModal = ({
   )
 }
 
-
 const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroupActive }) => {
-
   return (
     <>
       {groupActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-
 
             <CollectionModalHeader title='Create Group' setGroupActive={setGroupActive} />
             <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
@@ -121,7 +114,6 @@ const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroup
 }
 
 const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGroupEditActive }) => {
-
   return (
     <>
       {groupEditActive && (
@@ -150,41 +142,6 @@ const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGro
       )}
     </>
   )
-
-
-
-
-
-const CreateImage = ({
-  getRootProps,
-  getInputProps,
-  files,
-  imageActive,
-  setImageActive
-}) => {
-  return (
-    <>
-      {imageActive && (
-        <div className='collection-modal-container'>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader
-              title='Add photo'
-              setImageActive={setImageActive}
-            />
-
-            <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-            />
-
-            <PhotoInput />
-            <Button name='Add block' />
-          </div>
-        </div>
-      )}
-    </>
-  )
 }
 
 function TextInputContainer () {
@@ -200,82 +157,6 @@ function TextInputContainer () {
         placeholder='Type text here '
       />
     </div>
-  )
-}
-
-const DragDrop = ({ getInputProps, getRootProps, files }) => {
-  return (
-    <div className='drag-drop' {...getRootProps()}>
-      <input {...getInputProps()} />
-      {files.length > 0 ? (
-        <img className='avatar' src={files[0].preview} />
-      ) : (
-        <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-          Drag & Drop files in this area or Click Here to attach video cover
-        </h6>
-      )}
-    </div>
-  )
-}
-
-const CollectionModalHeader = ({
-  title,
-  setVideoActive,
-  setImageActive,
-  setTextActive,
-  setGroupActive,
-  setGroupEditActive,
-  setEnterpriseActive
-}) => {
-  return (
-    <>
-      {title === 'Add video' ? (
-        <div className='collection-modal-header'>
-          <h4>{title}</h4>
-          <img
-            src='/img/close-outline.png'
-            alt='close-icon'
-            onClick={() => setVideoActive(false)}
-          />
-        </div>
-      )  : title === 'Create Group' ? (
-        <div className='collection-modal-header'>
-          <h4>{title}</h4>
-          <img
-            src='/img/close-outline.svg'
-            alt='close-icon'
-            onClick={() => setGroupActive(false)}
-          />
-        </div>
-      ) : title === 'Edit Group' ? (
-        <div className='collection-modal-header'>
-          <h4>{title}</h4>
-          <img
-            src='/img/close-outline.svg'
-            alt='close-icon'
-            onClick={() => setGroupEditActive(false)}
-          />
-        </div>
-      ) : title === 'Add photo' ? (
-        <div className='collection-modal-header'>
-          <h4>{title}</h4>
-          <img
-            src='/img/close-outline.png'
-            alt='close-icon'
-            onClick={() => setImageActive(false)}
-          />
-        </div>
-      ) : (
-        <div className='collection-modal-header'>
-          <h4>{title}</h4>
-          <img
-            src='/img/close-outline.png'
-            alt='close-icon'
-            onClick={() => setTextActive(false)}
-          />
-        </div>
-      )}
-    </>
   )
 }
 
@@ -304,6 +185,7 @@ const VideoInputContainer = () => {
     </div>
   )
 }
+
 const GroupInputContainer = () => {
   return (
     <div className='video-input-container'>
@@ -324,6 +206,7 @@ const GroupInputContainer = () => {
     </div>
   )
 }
+
 const GroupEditContainer = () => {
   return (
     <div className='video-input-container'>
@@ -341,12 +224,6 @@ const GroupEditContainer = () => {
       />
     </div>
   )
-
-
-
-
-const Button = ({ name }) => {
-  return <button className='default-btn btn-size'>{name}</button>
 }
 
 function PhotoInput () {
@@ -366,25 +243,6 @@ function PhotoInput () {
   )
 }
 
-const CreateText = ({ textActive, setTextActive }) => {
-  return (
-    <>
-      {textActive && (
-        <div className='collection-modal-container'>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader
-              title='Add text'
-              setTextActive={setTextActive}
-            />
-            <TextInputContainer />
-            <Button name='Add block' />
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
-
 function ToggleSwitch () {
   const [active, setActive] = useState(false)
   return (
@@ -399,7 +257,5 @@ function ToggleSwitch () {
     </>
   )
 }
-
-
 
 export default NewsCreateModal
