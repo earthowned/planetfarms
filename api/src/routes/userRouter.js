@@ -10,13 +10,15 @@ const {
   confirmSignUpWithCode,
   getUserById,
   getUsers,
-  updateUser
+  updateUser,
+  searchUserName
 } = require('../controllers/userController.js')
 const { protect } = require('../middleware/authMiddleware')
 
 router.route('/').post(registerUser).get(protect, getUsers)
 router.route('/:id').get(protect, getUserById).put(protect, updateUser)
 router.post('/login', authUser)
+router.route('/search').get(searchUserName)
 router.post('/changePassword', changePassword)
 router.post('/forgotPassword', forgotPassword)
 router.post('/forgotPasswordSubmit', forgotPasswordSubmit)

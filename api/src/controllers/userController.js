@@ -2,6 +2,8 @@ const generateToken = require('../utils/generateToken.js')
 const User = require('../models/userModel.js')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 function amplifyConfig () {
   Amplify.configure({
@@ -258,4 +260,16 @@ const updateUser = async (req, res) => {
   })
 }
 
-module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUsers, updateUser }
+// @desc    Search title
+// @route   POST /api/resource/search
+// @access  Private
+const searchUserName = (req, res) => {
+  const { name } = req.query
+  const order = req.query.order || 'ASC'
+
+  User.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
+    .then(users => res.json({ users }).status(200))
+    .catch(err => res.json({ error: err }).status(400))
+}
+
+module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUsers, updateUser, searchUserName }

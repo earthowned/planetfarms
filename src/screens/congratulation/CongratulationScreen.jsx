@@ -26,6 +26,9 @@ function CongratulationScreen () {
   const username = location?.state?.username
   const password = location?.state?.password
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+
   async function signUp ({ firstname, lastname, phone, birthday, email }) {
     console.log(username, password, email, phone)
     try {

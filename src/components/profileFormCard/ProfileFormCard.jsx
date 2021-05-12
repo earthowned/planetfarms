@@ -20,7 +20,6 @@ const ProfileFormCard = ({ data: { title, first_inputTitle, first_inputValue, se
         </div>}
       </div>
     </div>
-
   )
 }
 
@@ -46,9 +45,9 @@ export const ContactInformation = () => {
   const ContactInformationdatadata = {
     title: 'Contact information',
     first_inputTitle: 'Email',
-    first_inputValue: 'johndoe@gmail.com',
+    first_inputValue: user?.email,
     second_inputTitle: 'Phone',
-    second_inputValue: '+1 61 2575684'
+    second_inputValue: user?.phone
   }
   return (
     <ProfileFormCard data={ContactInformationdatadata} />
@@ -59,9 +58,9 @@ export const AdditionalInformation = () => {
   const AdditionalInformationdata = {
     title: 'Additional information',
     first_inputTitle: 'Last login',
-    first_inputValue: '09/22/2020',
+    first_inputValue: user?.lastLogin,
     second_inputTitle: 'Numbers of visits',
-    second_inputValue: '153'
+    second_inputValue: user?.numberOfVisits
   }
   return (
     <ProfileFormCard data={AdditionalInformationdata} />
