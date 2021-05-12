@@ -7,14 +7,14 @@ import "./my-courses-card.css";
       name: " Jimmy Beam personal business course",
       activity: " Last activity: 7 days ago",
       lesson: "1/8 lessons",
-      bgImage: "/img/course-card-1.svg",
+      bgImage: "/img/farmer.svg",
     },
     {
       _id: 2,
       name: " Jimmy Beam personal business course",
       activity: " Last activity: 7 days ago",
       lesson: "1/8 lessons",
-      bgImage: "/img/course-card-2.svg",
+      bgImage: "/img/farm.svg",
     },
   ];
 
@@ -23,20 +23,19 @@ import "./my-courses-card.css";
       _id: 1,
       name: "Find your inner power. J.McBell course",
       status: "Free Course",
-      bgImage: "/img/special-course-card.svg",
+      bgImage: "/img/farm.svg",
     },
-
     {
       _id: 2,
       name: "Find your inner power. J.McBell course",
       status: "Amount:$20",
-      bgImage: "/img/special-course-card-2.svg",
+      bgImage: "/img/farmer.svg",
     },
     {
       _id: 3,
       name: "  Find your inner power. J.McBell course",
       status: "Amount:$50",
-      bgImage: "/img/special-course-card.svg",
+      bgImage: "/img/farm.svg",
     },
   ];
 
@@ -65,7 +64,13 @@ const CourseCard = ({data}) => {
   return (
     data && data.map(item => {
       return (<>
-            <div className="my-course-card" key={item._id} style={{backgroundImage: `url(${item.bgImage})`}}>
+            <div className="my-course-card" key={item._id} style={{
+              background: `linear-gradient(359.99deg, #000000 0.01%, rgba(25, 28, 33, 0) 99.99%), url(${item.bgImage})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              }}>
+                {/* <img src={item.bgImage} alt={item.name} /> */}
               <div className="my-course-content">
                 <h3>{item.name}</h3>
                 <p>{item.activity || item.status}</p>
