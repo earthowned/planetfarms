@@ -21,6 +21,8 @@ const NewsCreateModal = ({
   setGroupActive,
   groupEditActive,
   setGroupEditActive,
+  enterpriseActive,
+  setEnterpriseActive
 }) => {
   const [files, setFiles] = useState([])
 
@@ -30,11 +32,11 @@ const NewsCreateModal = ({
       setFiles(
         acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file),
+            preview: URL.createObjectURL(file)
           })
         )
       )
-    },
+    }
   })
 
   return (
@@ -48,6 +50,7 @@ const NewsCreateModal = ({
           setVideoActive={setVideoActive}
         />
       )}
+
       {type === 'group' && (
         <CreateGroup
           getRootProps={getRootProps}
@@ -94,8 +97,10 @@ const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroup
       {groupActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
+
             <CollectionModalHeader title='Create Group' setGroupActive={setGroupActive} />
             <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
+
             <GroupInputContainer />
             <Link to='/my-group-view-page'>
               <Button name='Create Group' />
@@ -106,6 +111,7 @@ const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroup
     </>
   )
 }
+
 const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGroupEditActive }) => {
   return (
     <>
@@ -133,10 +139,56 @@ const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGro
   )
 }
 
+function TextInputContainer () {
+  return (
+    <div className='photo-input-container'>
+      <input
+        className='default-input-variation'
+        placeholder='Collection title'
+      />
+      <br />
+      <textarea
+        className='default-input-variation text-area-variation-2'
+        placeholder='Type text here '
+      />
+    </div>
+  )
+}
+
+const VideoInputContainer = () => {
+  return (
+    <div className='video-input-container'>
+      <input
+        className='default-input-variation'
+        placeholder='Video title'
+      />
+      <br />
+      <textarea
+        className='default-input-variation text-area-variation'
+        placeholder='Video description'
+        cols='3'
+        rows='3'
+      />
+
+      <div className='video-row-3'>
+        <input
+          className='default-input-variation last-input-variation'
+          placeholder='Video link'
+        />{' '}
+        <span>OR</span> <button className='secondary-btn'>Choose video</button>
+      </div>
+    </div>
+  )
+}
+
 const GroupInputContainer = () => {
   return (
     <div className='video-input-container'>
-      <input className='default-input-variation' placeholder='Group title' required='true' />
+      <input
+        className='default-input-variation'
+        placeholder='Group title'
+        required='true'
+      />
       <br />
       <textarea
         className='default-input-variation text-area-variation'
@@ -148,6 +200,7 @@ const GroupInputContainer = () => {
     </div>
   )
 }
+
 const GroupEditContainer = () => {
   return (
     <div className='video-input-container'>
@@ -162,6 +215,37 @@ const GroupEditContainer = () => {
         value='Hi there! We’re a most kind and friendly society for everyone! We post here some news about farming, nature and etc… We hope you gonna like it! Be a part of our still small, but amazing community!'
       />
     </div>
+  )
+}
+
+function PhotoInput () {
+  return (
+    <>
+      <div className='description'>
+        <label>Add photo description</label> <ToggleSwitch />
+      </div>
+      <div className='photo-input-container'>
+        <input
+          className='default-input-variation'
+          placeholder='Photo description'
+        />
+      </div>
+    </>
+  )
+}
+
+function ToggleSwitch () {
+  const [active, setActive] = useState(false)
+  return (
+    <>
+      <div className='toggle-main-container'>
+        <div
+          onClick={() => setActive(!active)}
+          className={`${active ? 'toggle-item active' : 'toggle-item'}`}
+        />
+        <div className='toggle-container' />
+      </div>
+    </>
   )
 }
 
