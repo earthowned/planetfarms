@@ -17,8 +17,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      #- name: Docker login
-      #  run: docker login -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
 
       - name: Docker build
         run:  |
@@ -32,5 +32,5 @@ jobs:
           source .github/workflows/utils.sh
           repo="earthowned/planetfarms"
           build_image "treehouses/nginx" amd64 "$repo"
-          # deploy_image "$repo" amd64
+          deploy_image "$repo" amd64
         
