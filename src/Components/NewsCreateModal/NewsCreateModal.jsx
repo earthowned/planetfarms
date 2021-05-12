@@ -95,6 +95,7 @@ const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroup
   return (
     <>
       {groupActive && (
+
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
 
