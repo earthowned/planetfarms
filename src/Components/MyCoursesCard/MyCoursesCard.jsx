@@ -1,4 +1,5 @@
 import React from "react";
+import Background from "../Background/Background";
 import "./my-courses-card.css";
 
  const courseData = [
@@ -64,12 +65,7 @@ const CourseCard = ({data}) => {
   return (
     data && data.map(item => {
       return (<>
-            <div className="my-course-card" key={item._id} style={{
-              background: `linear-gradient(359.99deg, #000000 0.01%, rgba(25, 28, 33, 0) 99.99%), url(${item.bgImage})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              }}>
+                <Background image={item.bgImage}>
                 {/* <img src={item.bgImage} alt={item.name} /> */}
               <div className="my-course-content">
                 <h3>{item.name}</h3>
@@ -81,7 +77,7 @@ const CourseCard = ({data}) => {
                     </div>
                 }
               </div>
-            </div>
+              </Background>
         </>
       )
     })
