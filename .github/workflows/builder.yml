@@ -22,13 +22,13 @@ jobs:
 
       - name: Docker build
         run:  |
-        sudo apt update
-        sudo apt install npm
-        npm install
-        npm run build
-        export DOCKER_CLI_EXPERIMENTAL=enabled
-        source .github/workflows/utils.sh
-        repo="earthowned/planetfarms"
-        build_image "treehouses/nginx" amd64 "$repo"
-        # deploy_image "$repo" amd64
+          sudo apt update
+          sudo apt install npm
+          npm install
+          npm run build
+          export DOCKER_CLI_EXPERIMENTAL=enabled
+          source .github/workflows/utils.sh
+          repo="earthowned/planetfarms"
+          build_image "treehouses/nginx" amd64 "$repo"
+          # deploy_image "$repo" amd64
         
