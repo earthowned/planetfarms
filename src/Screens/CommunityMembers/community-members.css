@@ -15,7 +15,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(184px, 1fr));
-  grid-gap: 48px;
+  grid-gap: 36px;
 }
 
 .search-container {
