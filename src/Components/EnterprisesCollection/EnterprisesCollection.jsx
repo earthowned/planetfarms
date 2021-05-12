@@ -39,7 +39,6 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
   }
 
   const handleAddEnterprise = async (e) => {
-    console.log(title, description)
     e.preventDefault()
     if (!title) setEnterpriseTitleError(true)
     if (!description) setEnterpriseDescriptionError(true)
@@ -102,14 +101,9 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
               <option>Farmers</option>
             </select>
           </div>
-
-          <button
-            className='default-btn btn-size'
-            onClick={handleAddEnterprise}
-          >
+          <button className='default-btn btn-size' onClick={handleAddEnterprise}>
             Create Enterprises
           </button>
-
         </div>
       </div>
     </>

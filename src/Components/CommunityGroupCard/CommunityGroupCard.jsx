@@ -16,9 +16,7 @@ const CommunityGroupCard = ({ location, data }) => {
         return (
 
           <div key={item.id} className='card-1 border-1px-onyx'>
-            {/* <Link to={location} style={{ textDecoration: "none" }}> */}
             <div className='card-container' style={{ backgroundImage: 'url(/img/farmer.svg)' }} />
-            {/* </Link> */}
 
             <div className='community-group-card-inner-content'>
               <div className='card-text-container'>

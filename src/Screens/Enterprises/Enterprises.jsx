@@ -8,21 +8,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { listEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
 
 const Enterprise = () => {
-  const enterpriseList = useSelector((state) => state.listEnterprise)
   const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
   const [search, setSearch] = useState(null)
+  const [active, setActive] = useState(false)
   const dispatch = useDispatch()
-
-  console.log(listEnterprises)
 
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
     if (!search) dispatch(listEnterprises())
   }, [search, dispatch])
-
-  console.log('enter', data)
-
-  const [active, setActive] = useState(false)
 
   return (
     <>
@@ -44,7 +38,6 @@ const Enterprise = () => {
                     </div>
                   </div>
                 </div>
-
                 <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
               </div>
               <div className='create-enterprises-wrapper'>
@@ -58,7 +51,6 @@ const Enterprise = () => {
             <div className='enterpriseCard'>
               <CommunityGroupCard data={data} />
             </div>
-
           </div>
         </div>
       </DashboardLayout>

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import './news-create-modal.css'
 import { useDropzone } from 'react-dropzone'
 import { Link } from 'react-router-dom'
-
 import Button from '../Button/Button'
 import CreateVideo from './NewsCreateVideo'
 import CreateImage from './NewsCreateImage'
@@ -119,21 +118,17 @@ const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGro
       {groupEditActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-
             <CollectionModalHeader title='Edit Group' setGroupEditActive={setGroupEditActive} />
             <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
             <GroupEditContainer />
             <button className='button-delete'>
               <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' /> Delete Groups
-
             </button>
             <div>
               <Link to='/my-group-view-page'>
                 <Button name='Edit Group' />
               </Link>
-
               <button className='button-cancel' onClick={() => setGroupEditActive(false)}>
-
                 Cancel
               </button>
             </div>
@@ -194,7 +189,6 @@ const GroupInputContainer = () => {
         placeholder='Group title'
         required='true'
       />
-
       <br />
       <textarea
         className='default-input-variation text-area-variation'
@@ -210,9 +204,7 @@ const GroupInputContainer = () => {
 const GroupEditContainer = () => {
   return (
     <div className='video-input-container'>
-
       <input className='default-input-variation' placeholder='Edit Title' required='true' value='Think like a farmer' />
-
       <br />
       <textarea
         className='default-input-variation text-area-variation'
@@ -232,7 +224,6 @@ function PhotoInput () {
       <div className='description'>
         <label>Add photo description</label> <ToggleSwitch />
       </div>
-
       <div className='photo-input-container'>
         <input
           className='default-input-variation'
