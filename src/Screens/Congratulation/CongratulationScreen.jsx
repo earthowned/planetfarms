@@ -12,7 +12,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../actions/userAction'
 
 function CongratulationScreen() {
-  const welcomeBack = 'Congratulations!'
+  const location = useLocation()
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const username = location?.state?.username
+  const password = location?.state?.password
+  const editInformations = location?.state?.editInformations
+
+  const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
 
   const [firstName, setFirstName] = useState('')
@@ -42,14 +49,8 @@ function CongratulationScreen() {
     }
   })
 
-  let location = useLocation()
-  let history = useHistory()
-  const dispatch = useDispatch()
-  const username = location?.state?.username
-  const password = location?.state?.password
-
   const userLogin = useSelector((state) => state.userLogin)
-  const {  loading, error, userInfo } = userLogin
+  const { loading, error, userInfo } = userLogin
 
   async function signUp() {
     try {
@@ -96,7 +97,9 @@ function CongratulationScreen() {
     if (!email) setEmailError(true)
     if (firstName && lastName && phone && birthday && email) {
       if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-        return dispatch(updateUser({ firstName, lastName, phone, birthday, email, id:userInfo.id }))
+        dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: userInfo.id }))
+        history.goBack()
+        return
       }
       signUp()
     }
@@ -110,7 +113,7 @@ function CongratulationScreen() {
 
       <div className='congratulation-header-wrapper'>
         <h1 className='congratulation-header'>{welcomeBack}</h1>
-        <p className='congratulation-sub-title'>{welcomeBack2}</p>
+        <p className='congratulation-sub-title'>{!editInformations && welcomeBack2}</p>
       </div>
 
       {modalActive && <ConfirmModal username={username} password={password} />}
@@ -152,7 +155,11 @@ function CongratulationScreen() {
           <div className='congratulation-row'>
             <div className='button-wrapper'>
               <div className='congrats-btn'>
-                <Secondarybtn name='Skip for now' clickHandler={() => history.push('/community-page-news')} />
+                {editInformations ? (
+                  <Secondarybtn name='Cancel' clickHandler={() => history.goBack()} />
+                ) : (
+                  <Secondarybtn name='Skip for now' clickHandler={() => history.push('/community-page-news')} />
+                )}
               </div>
               <div className='congrats-btn'>
                 <Button clickHandler={submitForm} name='Continue' />

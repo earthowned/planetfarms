@@ -1,5 +1,8 @@
 const generateToken = require('../utils/generateToken.js')
 const User = require('../models/userModel.js')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
+
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -105,4 +108,16 @@ const updateUser = async (req, res) => {
   })
 }
 
-module.exports = { registerUser, authUser, getUsers, getUserById, updateUser }
+// @desc    Search title
+// @route   POST /api/resource/search
+// @access  Private
+const searchUserName = (req, res) => {
+  const { name } = req.query
+  const order = req.query.order || 'ASC'
+
+  User.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
+    .then(users => res.json({ users }).status(200))
+    .catch(err => res.json({ error: err }).status(400))
+}
+
+module.exports = { registerUser, authUser, getUsers, getUserById, updateUser, searchUserName }

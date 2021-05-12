@@ -11,11 +11,13 @@ import BackButton from '../../Components/BackButton/BackButton'
 import EditInformation from '../../Components/EditInformation/EditInformation'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails } from '../../actions/userAction'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-function CommunityMembersProfile({ history }) {
+function CommunityMembersProfile() {
   const { id } = useParams()
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
@@ -31,6 +33,10 @@ function CommunityMembersProfile({ history }) {
     }
   }, [dispatch, history, id, userInfo])
 
+  const editUserInformation = () => {
+    history.push({ pathname: '/register-complete', state: { editInformations: true } })
+  }
+
   return (
     <DashboardLayout title='Mikhail Ugryumov'>
       <div className='x10-4-0-my-personals'>
@@ -44,7 +50,7 @@ function CommunityMembersProfile({ history }) {
               {user && <ContactInformation user={user} />}
               {user && <AdditionalInformation user={user} />}
             </div>
-            <EditInformation image='/img/profile-image.svg' follow='follow' />
+            <EditInformation clickHandler={editUserInformation} image='/img/profile-image.svg' follow='follow' />
           </div>
         </div>
       </div>
