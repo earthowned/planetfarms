@@ -189,6 +189,9 @@ function App () {
         <Route path='/mycoursepage/:id'>
           <LessonPage />
         </Route>
+        <Route path='/coursepage'>
+          <MyCoursePage unpaid="unpaid" />
+        </Route>
         <Route path='/myProfile'>
           <MyProfile />
         </Route>

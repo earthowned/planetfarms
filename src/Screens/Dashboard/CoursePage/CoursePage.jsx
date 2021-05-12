@@ -5,26 +5,26 @@ import CourseDescription from '../../../Components/MyCoursesCard/CourseDescripti
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './course-page.css'
 
-function App () {
+function App ({unpaid}) {
   const [feedbackModal, setFeedbackModal] = useState(false)
 
   return (
     <>
       {feedbackModal && <FeedbackModal setFeedbackModal={setFeedbackModal} />}
       <DashboardLayout title='Course Page'>
-        <CoursePage setFeedbackModal={setFeedbackModal} />
+        <CoursePage setFeedbackModal={setFeedbackModal} unpaid={unpaid}/>
       </DashboardLayout>
     </>
   )
 }
 export default App
 
-function CoursePage ({ setFeedbackModal }) {
+function CoursePage ({ setFeedbackModal, unpaid }) {
   return (
     <div className='course-page'>
       <div className='course-page-flex-col-4'>
         <BackButton location='/mycourse' />
-        <CourseDescription setFeedbackModal={setFeedbackModal} />
+        <CourseDescription setFeedbackModal={setFeedbackModal} unpaid={unpaid}/>
       </div>
     </div>
   )

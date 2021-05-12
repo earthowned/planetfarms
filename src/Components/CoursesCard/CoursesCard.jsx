@@ -130,10 +130,9 @@ function EnrollContainer ({item}) {
   return (
      <div className='enroll-container'>
         {
-          <button className='join-btn' onClick={() => history.push('/mycoursepage')}>{item.enroll
-          ? <span>You're subscriber</span>
-          : <span>Join Course</span>}
-          </button>
+          item.enroll 
+          ? <button className='join-btn' onClick={() => history.push('/mycoursepage')}><span>You're subscriber</span></button>
+          : <button className='join-btn' onClick={() => history.push('/coursepage')}><span>Join Course</span></button>
         }
         <h4>{item.cost === 'Free' ? item.cost : `$ ${item.cost}`}</h4>
     </div>

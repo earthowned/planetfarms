@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import useSizeFinder from '../../../utils/SizeFinder'
+import Button from '../../Button/Button'
 import Secondarybtn from '../../SecondaryBtn/Secondarybtn'
 import './course-description.css'
 
-const CourseDescription = ({ setFeedbackModal }) => {
+const CourseDescription = ({ setFeedbackModal, unpaid }) => {
   return (
     <>
       <div className='course-page-container border-1px-onyx'>
-        <CourseDetail setFeedbackModal={setFeedbackModal} />
-        <LessonCourse />
+        <CourseDetail setFeedbackModal={setFeedbackModal} unpaid={unpaid} />
+        <LessonCourse unpaid={unpaid} />
       </div>
       <MoreCourse />
     </>
@@ -68,7 +69,7 @@ const ProgressBar = () => {
   )
 }
 
-const CourseDetail = ({ setFeedbackModal }) => {
+const CourseDetail = ({ setFeedbackModal, unpaid }) => {
   return (
     <div className='description-course-page'>
       <div className='bg-image' />
@@ -83,11 +84,10 @@ const CourseDetail = ({ setFeedbackModal }) => {
             reprehenderit in voluptate velit esse cillum dolore eu fugiat
             nulla.
           </p>
-
           {/* lesson progress bar */}
           <ProgressBar />
         </div>
-        <DropDownCourse setFeedbackModal={setFeedbackModal} />
+        {unpaid ? <div className='dropdown-course-container'><Button name="Buy Course" /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
       </div>
     </div>
   )
@@ -154,9 +154,15 @@ const lessonData = [
   }
 ]
 
-const LessonCourse = () => {
+const LessonCourse = ({unpaid}) => {
   return (
     <div className='lessons-container'>
+      {unpaid && <div className="purchase-course-wrapper">
+          <div className="purchase-course">
+            <h4>Buy this course for <span>$59.99</span></h4>
+            <div><Button name="Buy Course" /></div>
+          </div>
+        </div>}
       <h3>Lessons</h3>
       {
         lessonData.map(data => {
