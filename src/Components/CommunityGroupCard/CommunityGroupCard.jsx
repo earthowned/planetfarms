@@ -16,22 +16,16 @@ const CommunityGroupCard = ({ data, location }) => {
     <>
       {data && data.map(item => {
         return (
-
           <div key={item.id} className='card-1 border-1px-onyx'>
             <div className='card-container' style={{ backgroundImage: 'url(/img/farmer.svg)' }} />
-
             <div className='community-group-card-inner-content'>
               <div onClick={() => history.push(`/community-group-view-page/${item.id}`)} className='card-text-container'>
-
                 <div className='farmers ibmplexsans-semi-bold-caribbean-green-14px'>
                   {item.category}
                 </div>
-
-                <Link to={location} style={{ textDecoration: 'none' }}>
-                  <div className='think-like-a-farmer ibmplexsans-semi-bold-quarter-spanish-white-24px'>
-                    {item.title}
-                  </div>
-                </Link>
+                <div className='think-like-a-farmer ibmplexsans-semi-bold-quarter-spanish-white-24px'>
+                  {item.title}
+                </div>
               </div>
 
               <div className='follower-container'>
@@ -62,10 +56,8 @@ const CommunityGroupCard = ({ data, location }) => {
               </div>
             </div>
           </div>
-
         )
       })}
-
     </>
   )
 }

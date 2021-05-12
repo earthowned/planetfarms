@@ -8,13 +8,10 @@ import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import './community-group.css'
 import { useSelector, useDispatch } from 'react-redux'
-
 import { searchGroups, listGroups } from '../../actions/communityGroupActions'
 
 const CommunityGroup = () => {
   const data = useSelector((state) => state.listGroups.groups)
-
-  console.log('data_group', data)
   const dispatch = useDispatch()
 
   const [active, setActive] = useState(false)
@@ -34,7 +31,6 @@ const CommunityGroup = () => {
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>
-
             <div className='community-group-main-header-container'>
               <div className='flex-row-5'>
                 <div id='community-group-link-header' style={{ justifyContent: 'space-between' }}>
@@ -58,7 +54,6 @@ const CommunityGroup = () => {
               <div className='button-filter-container'>
                 <div className='community-group-header-btn-container' onClick={() => setActive(true)}>
                   <Button name='Create group' clickHandler={handleClickCreate} />
-
                 </div>
                 {/* <FilterByCategory /> comes here */}
                 <Filter />
