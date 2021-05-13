@@ -17,7 +17,10 @@ import {
   USER_UPDATE_RESET,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
-  USER_UPDATE_FAIL
+  USER_UPDATE_FAIL,
+  USER_SEARCH_REQUEST,
+  USER_SEARCH_SUCCESS,
+  USER_SEARCH_FAIL
 } from '../constants/userConstants'
 
 export const userRegisterReducer = (state = {}, action) => {
@@ -75,6 +78,16 @@ export const userListReducer = (state = { users: [] }, action) => {
       return { loading: false, error: action.payload }
     case USER_LIST_RESET:
       return { users: [] }
+    case USER_SEARCH_REQUEST:
+      return { loading: true, users: [] }
+    case USER_SEARCH_SUCCESS:
+      return {
+        loading: false,
+        searchUsers: action.payload.users,
+        order: action.payload.order
+      }
+    case USER_SEARCH_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

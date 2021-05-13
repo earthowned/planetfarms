@@ -20,7 +20,7 @@ function CommunityMembersProfile() {
   const history = useHistory()
 
   const userDetails = useSelector((state) => state.userDetails)
-  const { loading, error, user } = userDetails
+  const { user } = userDetails
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -34,11 +34,11 @@ function CommunityMembersProfile() {
   }, [dispatch, history, id, userInfo])
 
   const editUserInformation = () => {
-    history.push({ pathname: '/register-complete', state: { editInformations: true } })
+    history.push({ pathname: '/register-complete', state: { editInformations: true, user } })
   }
 
   return (
-    <DashboardLayout title='Mikhail Ugryumov'>
+    <DashboardLayout title={user.name}>
       <div className='x10-4-0-my-personals'>
         <div className='flex-col-2'>
           <div className='frame-2923'>

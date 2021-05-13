@@ -16,7 +16,10 @@ import {
   USER_LIST_FAIL,
   USER_LIST_SUCCESS,
   USER_LIST_REQUEST,
-  USER_DETAILS_RESET
+  USER_DETAILS_RESET,
+  USER_SEARCH_REQUEST,
+  USER_SEARCH_SUCCESS,
+  USER_SEARCH_FAIL
 } from '../constants/userConstants'
 
 export const register = (name, password) => async (dispatch) => {
@@ -155,6 +158,26 @@ export const listUsers = () => async (dispatch, getState) => {
     dispatch({
       type: USER_LIST_FAIL,
       payload: message
+    })
+  }
+}
+export const searchUsers = (search) => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: USER_SEARCH_REQUEST })
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/search?name=${search}`)
+    dispatch({
+      type: USER_SEARCH_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_SEARCH_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }

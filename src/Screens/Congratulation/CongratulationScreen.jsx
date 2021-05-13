@@ -18,6 +18,7 @@ function CongratulationScreen() {
   const username = location?.state?.username
   const password = location?.state?.password
   const editInformations = location?.state?.editInformations
+  const user = location?.state?.user
 
   const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
@@ -50,7 +51,7 @@ function CongratulationScreen() {
   })
 
   const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
+  const { userInfo } = userLogin
 
   async function signUp() {
     try {
@@ -62,6 +63,7 @@ function CongratulationScreen() {
         }
       })
       setModalActive(true)
+      console.log(user)
     } catch (error) {
       console.log('error signing up:', error)
     }
@@ -97,8 +99,8 @@ function CongratulationScreen() {
     if (!email) setEmailError(true)
     if (firstName && lastName && phone && birthday && email) {
       if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-        dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: userInfo.id }))
-        history.goBack()
+        dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: user ? user.id : userInfo.id }))
+        user ? history.goBack():  history.push('/community-page-news')
         return
       }
       signUp()
@@ -107,9 +109,11 @@ function CongratulationScreen() {
 
   return (
     <form className='x02-2-0-sign-up-filed'>
-      <div className='icons'>
-        <Logo />
-      </div>
+      {!editInformations && (
+        <div className='icons'>
+          <Logo />
+        </div>
+      )}
 
       <div className='congratulation-header-wrapper'>
         <h1 className='congratulation-header'>{welcomeBack}</h1>

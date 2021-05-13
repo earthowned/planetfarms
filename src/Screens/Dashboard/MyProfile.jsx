@@ -8,28 +8,24 @@ import {
   PersonalInformation
 } from '../../Components/ProfileFormCard/ProfileFormCard'
 import EditInformation from '../../Components/EditInformation/EditInformation'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from '../../actions/userAction'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useSelector } from 'react-redux'
+import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 
 function MyProfile() {
-  const dispatch = useDispatch()
+  const location = useLocation()
   const history = useHistory()
-  const userDetails = useSelector((state) => state.userDetails)
-  const { loading, error, user } = userDetails
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+  const user = location?.state?.user
 
   useEffect(() => {
-    if (userInfo) {
-      dispatch(getUserDetails(userInfo.id))
-    } else {
+    if (!userInfo) {
       history.push('/login')
     }
-  }, [dispatch, history, userInfo])
+  }, [history, userInfo])
 
   const editUserInformation = () => {
-    history.push({ pathname: '/register-complete', state: { editInformations: true } })
+    history.push({ pathname: '/register-complete', state: { editInformations: true, user } })
   }
   return (
     <DashboardLayout title='My Profile'>
