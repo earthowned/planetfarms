@@ -10,7 +10,7 @@ const Radiobox = () => {
 
     return (
         <div className={active ? "outer-box-radio active" : "outer-box-radio"} onClick={() => changeCheckbox()}>
-            {active && <img src="/img/tick.svg" alt="checkbox-for-terms"/>}
+            {active && <img src="/img/radio-tick.svg" alt="checkbox-for-terms"/>}
         </div>
     )
 }

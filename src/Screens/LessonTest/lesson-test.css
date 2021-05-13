@@ -23,7 +23,7 @@
   padding: 0 40px 40px;
 }
 
-.question-wrapper img {
+.question-wrapper > img {
   margin-top: 12px;
 }
 
