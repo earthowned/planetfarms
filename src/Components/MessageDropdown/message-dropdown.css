@@ -59,7 +59,7 @@
   height: 0;
   z-index: 5000;
   padding: 0 2em;
-  bottom: 10%;
+  bottom: 0;
   right: 0;
   transition: all ease-in-out 0.2s;
 }
@@ -76,8 +76,13 @@
 .message-dropdown-mobile.slide .message-dropdown-mobile-inner-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
+  /* justify-content: space-around; */
+  height: 85%;
+}
+
+.message-dropdown-mobile-message-card-wrapper {
+  height: 500px;
+  overflow-y: auto;
 }
 
 .message-dropdown-mobile-header {
@@ -89,6 +94,7 @@
   font-size: 1.5em;
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   text-transform: capitalize;
+  margin: 40px 0;
 }
 
 /* mobile-btn styling */
@@ -102,20 +108,11 @@
   .message-dropdown-mobile {
     padding: 0 7em;
   }
-
-  .message-dropdown-mobile-header {
-    font-size: 1, 3em;
-    margin-bottom: 1em;
-  }
 }
 
 @media only screen and (max-width: 620px) {
   .message-dropdown-mobile {
     padding: 0 2em;
-  }
-
-  .message-dropdown-mobile-header {
-    font-size: 1em;
   }
 }
 
