@@ -32,7 +32,8 @@ const CommunityGroupCard = ({ data, location }) => {
                     2,564 followers
                   </div>
                   <p className='follower-number-item ibmplexsans-regular-normal-monsoon-16px'>
-                    Last publication: 2 days ago
+                    {/* {item.createdAt} */}
+                    {new Date(item.createdAt).toDateString()}
                   </p>
                 </div>
                 {follow ? (

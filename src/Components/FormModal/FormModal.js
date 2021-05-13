@@ -55,7 +55,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
       <div className='collection-modal-container'>
         <div className='collection-modal-inner-container'>
           <div className='collection-modal-header'>
-            <h4>{pathname === '/community-group' && 'Create Groups'}</h4>
+            <h4>{pathname === '/community-group' && 'Create Groups' || pathname=== '/enterprises' && 'Create Enterprises'}</h4>
             <img src='/img/close-outline.svg' onClick={() => setActive(false)} alt='close-icon' />
           </div>
           <div className='drag-drop' {...getRootProps()}>
