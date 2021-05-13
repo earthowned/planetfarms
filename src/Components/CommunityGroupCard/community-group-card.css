@@ -5,8 +5,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  flex: 0 1 32%;
-  margin: 8px;
 }
 
 .card-container {
@@ -23,7 +21,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 2em;
+  margin-bottom: 24px;
 }
 
 .farmers {
@@ -38,7 +36,6 @@
   line-height: 32px;
   margin-top: 8px;
   min-height: 32px;
-  white-space: nowrap;
 }
 
 .follower-container {
@@ -54,15 +51,12 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 48px;
-  width: 199px;
 }
 
 .follower-number-item {
   letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;
-  white-space: nowrap;
 }
 
 .follow-btn {
@@ -105,24 +99,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   margin-top: 1em;
 }
 
 .community-group-card-inner-content {
   width: 100%;
-  padding: 2em;
+  padding: 24px;
 }
 
 .card-secondary-btn-wrapper {
   width: 180px;
 }
 
-@media only screen and (max-width: 1750px) {
-  .card-1 {
-    flex-basis: 45%;
-  }
+.card-secondary-btn-wrapper:first-child {
+  margin-right: 18px;
+}
 
+@media only screen and (max-width: 1750px) {
   .card-secondary-btn-wrapper {
     width: 130px;
   }
@@ -133,24 +126,15 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .card-1 {
-    flex-basis: 45%;
-  }
-
   .community-group-container {
     justify-content: space-between;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .card-1 {
-    flex-basis: 100%;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .card-btn-container {
     flex-direction: column;
+    width: 100%;
   }
 
   .card-secondary-btn-wrapper {
@@ -159,5 +143,6 @@
 
   .card-secondary-btn-wrapper:first-child {
     margin-bottom: 1em;
+    margin-right: 0;
   }
 }

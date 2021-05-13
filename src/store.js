@@ -3,9 +3,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { newsListReducer, newsCreateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
+import { enterpriseListReducer } from './reducers/enterpriseReducers'
+import { groupListReducer, groupViewReducer } from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 
 const reducer = combineReducers({
+  groupView: groupViewReducer,
+  listGroups: groupListReducer,
+  listEnterprises: enterpriseListReducer,
   listResources: resourceListReducer,
   listNews: newsListReducer,
   userLogin: userLoginReducer,
