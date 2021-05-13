@@ -10,7 +10,7 @@ const getResources = (req, res) => {
   const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  Resource.findAndCountAll({ offset: (page-1) * pageSize, limit: pageSize, ordervalue })
+  Resource.findAndCountAll({ offset: (page - 1) * pageSize, limit: pageSize, ordervalue })
     .then(resources => {
       const totalPages = Math.ceil(resources.count / pageSize)
       res.json({ resources: resources.rows, totalItems: resources.count, totalPages, page, pageSize }).status(200)
@@ -25,10 +25,10 @@ const addResource = (req, res) => {
   const {
     title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
   } = req.body
-  //if (req.file) {
-    const filename = req.file.filename;
-  //}
-  console.log(filename)
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
   Resource.create({
     title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments, filename
   })

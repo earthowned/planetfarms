@@ -40,13 +40,13 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
     if (!title) setResourceTitleError(true)
     if (!description) setResourceDescriptionError(true)
     if (title && description) {
-      dispatch(createResource({title, description, file: files}))
+      dispatch(createResource({ title, description, file: files }))
       setActive(false)
     }
   }
 
   const fileChange = (e) => {
-    let selectedFile = e.target.files[0]
+    const selectedFile = e.target.files[0]
     Object.assign(selectedFile, {
       preview: URL.createObjectURL(selectedFile)
     })
