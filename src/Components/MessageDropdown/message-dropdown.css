@@ -76,7 +76,6 @@
 .message-dropdown-mobile.slide .message-dropdown-mobile-inner-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
   height: 85%;
 }
 
