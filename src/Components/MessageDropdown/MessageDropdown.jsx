@@ -46,7 +46,6 @@ const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileVie
                 </div>
                 {
                     contacts.map(contact => (
-
                         <MessageCard contact={contact}  />
                     ))
                 }
@@ -58,11 +57,13 @@ const MessageDropdown = ({clickHandler, message, btnName, handleClick, mobileVie
                     <h4>{message}</h4>
                     <div className="close-btn" onClick={() => clickHandler(false)}><img  src="/img/close-outline.svg" alt="close-outline" /></div>
                 </div>
+                <div className="message-dropdown-mobile-message-card-wrapper">
                 {
                     contacts.map(contact => (
                         <MessageCard contact={contact}  />
                     ))
                 }
+                </div>
                 <Link to="/messenger" onClick={() => clickHandler(false)} className="mobile-btn btn-container secondary-btn nav-link">{btnName}</Link>
                 </div>
               </div>
