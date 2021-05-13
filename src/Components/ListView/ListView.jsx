@@ -12,7 +12,7 @@ const ListView = ({data, title, setNewCollection, setModalActive, modalActive}) 
                     return (
                         <div key={item.id} className="listview-inner-container">
                             <div className="image-wrapper">
-                                <img src={item.img} alt="item.title" />
+                                <img src={process.env.REACT_APP_CDN_BASE_URL+'/resources/'+item.filename} alt="item.title" />
                             </div>
                             <div className="list-content">
                                 <h4>{item.title}</h4>

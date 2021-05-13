@@ -12,7 +12,7 @@ const getResources = (req, res) => {
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
   // const {offset, limit} = queryUtils.paginate({ page, pageSize })
-  Resource.findAll({ offset: page, limit: pageSize, ordervalue })
+  Resource.findAll({ offset: page, limit: pageSize, ordervalue, where: { title: { [Op.iLike]: '%test%' } } })
     .then(resources => {
       res.json({ resources, page, pageSize }).status(200)
     })
@@ -29,12 +29,12 @@ const addResource = (req, res) => {
   const {
     title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
   } = req.body
-  if (req.file) {
-    attachments =
-      process.env.API + '/public/' + req.body.files[0].filename;
-  }
+  //if (req.file) {
+    const filename = req.file.filename;
+  //}
+  console.log(filename)
   Resource.create({
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
+    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments, filename
   })
     .then(() => res.json({ message: 'Resource Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))

@@ -57,7 +57,11 @@ export const searchResources = (search) => async (
 }
 
 export const createResource = (newResource) => async (dispatch, getState) => {
-  console.log(newResource);
+  let formData = new FormData()
+  formData.append('title', newResource.title)
+  formData.append('description', newResource.description)
+  formData.append('file', newResource.file)
+    
   try {
     dispatch({
       type: RESOURCE_CREATE_REQUEST
@@ -67,7 +71,7 @@ export const createResource = (newResource) => async (dispatch, getState) => {
       //Authorization: `Bearer ${userInfo.token}`,
       "Content-Type": "multipart/form-data"
     } }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, newResource, config)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, formData, config)
     dispatch({
       type: RESOURCE_CREATE_SUCCESS,
       payload: data
