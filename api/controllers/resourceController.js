@@ -36,7 +36,6 @@ const addResource = (req, res) => {
 // @access  Public
 const getResourcesById = (req, res) => {
   const id = req.params.id
-
   Resource.findByPk(id)
     .then(resource => {
       if (resource) {
@@ -68,17 +67,11 @@ const deleteResources = (req, res) => {
 // @route   PUT /api/resource/:id
 // @access  Public
 const updateResources = (req, res) => {
-  const {
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
-  } = req.body
   const id = req.params.id
   Resource.findByPk(id).then(resource => {
     if (resource) {
       const { id } = resource
-      Resource.update({
-        title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
-      },
-      { where: { id } })
+      Resource.update(req.body, { where: { id } })
         .then(() => res.json({ message: 'Resource Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     }
