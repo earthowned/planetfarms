@@ -5,12 +5,12 @@ import Button from '../../Button/Button'
 import Secondarybtn from '../../SecondaryBtn/Secondarybtn'
 import './course-description.css'
 
-const CourseDescription = ({ setFeedbackModal, unpaid }) => {
+const CourseDescription = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
   return (
     <>
       <div className='course-page-container border-1px-onyx'>
-        <CourseDetail setFeedbackModal={setFeedbackModal} unpaid={unpaid} />
-        <LessonCourse unpaid={unpaid} />
+        <CourseDetail setFeedbackModal={setFeedbackModal} unpaid={unpaid} setPurchaseModal={setPurchaseModal} />
+        <LessonCourse unpaid={unpaid} setPurchaseModal={setPurchaseModal} />
       </div>
       <MoreCourse />
     </>
@@ -47,7 +47,6 @@ const ProgressBar = () => {
   const lessonIndicator = lessonLength * (115 / lessons.length)
   const accurateIndicator = lessonIndicator === 115 ? 92 : lessonIndicator
   const windowWidth = useSizeFinder()
-
   return (
     <div className='lesson-bar'>
       {windowWidth > 600
@@ -69,7 +68,7 @@ const ProgressBar = () => {
   )
 }
 
-const CourseDetail = ({ setFeedbackModal, unpaid }) => {
+const CourseDetail = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
   return (
     <div className='description-course-page'>
       <div className='bg-image' />
@@ -87,7 +86,7 @@ const CourseDetail = ({ setFeedbackModal, unpaid }) => {
           {/* lesson progress bar */}
           <ProgressBar />
         </div>
-        {unpaid ? <div className='dropdown-course-container'><Button name="Buy Course" /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
+        {unpaid ? <div className='dropdown-course-container'><Button name="Buy Course" clickHandler={() => setPurchaseModal(true)} /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
       </div>
     </div>
   )
@@ -154,13 +153,13 @@ const lessonData = [
   }
 ]
 
-const LessonCourse = ({unpaid}) => {
+const LessonCourse = ({unpaid, setPurchaseModal}) => {
   return (
     <div className='lessons-container'>
       {unpaid && <div className="purchase-course-wrapper">
           <div className="purchase-course">
             <h4>Buy this course for <span>$59.99</span></h4>
-            <div><Button name="Buy Course" /></div>
+            <div><Button name="Buy Course" clickHandler={() => setPurchaseModal(true)}/></div>
           </div>
         </div>}
       <h3>Lessons</h3>
@@ -178,11 +177,11 @@ const LessonCourseSingle = ({ data }) => {
   return (
     <div className='lesson-card-wrapper'>
       {data.finish && <div className='lock-lesson'>
-        <img src='/img/lesson-lock.svg' />
+        <img src='/img/lesson-lock.svg' alt="lock icon"/>
         <h4>{data.finish}</h4>
       </div>}
       <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
-        <img className='lesson-card-img' src={data.bgImage} />
+        <img className='lesson-card-img' src={data.bgImage} alt="background image" />
         <div className='lesson-card-content'>
           <h3>{data.name}</h3>
           <p>{data.description}</p>

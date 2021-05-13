@@ -2,29 +2,34 @@ import React, { useState } from 'react'
 import BackButton from '../../../Components/BackButton/BackButton'
 import Button from '../../../Components/Button/Button'
 import CourseDescription from '../../../Components/MyCoursesCard/CourseDescription/CourseDescription'
+import {PurchaseModal, PurchaseSuccessModal} from '../../../Components/PurchaseModal/PurchaseModal'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './course-page.css'
 
 function App ({unpaid}) {
   const [feedbackModal, setFeedbackModal] = useState(false)
+  const [purchaseModal, setPurchaseModal] = useState(false)
+  const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
 
   return (
     <>
       {feedbackModal && <FeedbackModal setFeedbackModal={setFeedbackModal} />}
+      {purchaseModal && <PurchaseModal clickHandler={setPurchaseModal} setPurchaseSuccessModal={setPurchaseSuccessModal} />}
+      {purchaseSuccessModal && <PurchaseSuccessModal clickHandler={setPurchaseSuccessModal} />}
       <DashboardLayout title='Course Page'>
-        <CoursePage setFeedbackModal={setFeedbackModal} unpaid={unpaid}/>
+        <CoursePage setFeedbackModal={setFeedbackModal} unpaid={unpaid} setPurchaseModal={setPurchaseModal} />
       </DashboardLayout>
     </>
   )
 }
 export default App
 
-function CoursePage ({ setFeedbackModal, unpaid }) {
+function CoursePage ({ setFeedbackModal, unpaid, setPurchaseModal }) {
   return (
     <div className='course-page'>
       <div className='course-page-flex-col-4'>
         <BackButton location='/mycourse' />
-        <CourseDescription setFeedbackModal={setFeedbackModal} unpaid={unpaid}/>
+        <CourseDescription setFeedbackModal={setFeedbackModal} unpaid={unpaid} setPurchaseModal={setPurchaseModal}/>
       </div>
     </div>
   )
