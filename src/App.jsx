@@ -33,6 +33,7 @@ import MobileMessage from './Components/MobileMessage/MobileMessage'
 import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import Amplify, { Auth } from 'aws-amplify'
+import LessonTest from './Screens/LessonTest/LessonTest'
 
 function amplifyConfig () {
   Amplify.configure({
@@ -187,6 +188,9 @@ function App () {
         </Route>
         <Route path='/mycoursepage/:id'>
           <LessonPage />
+        </Route>
+        <Route path='/test-lesson-1'>
+          <LessonTest />
         </Route>
         <Route path='/myProfile'>
           <MyProfile />
