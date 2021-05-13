@@ -5,7 +5,9 @@ const fs = require('fs')
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = path.join(path.dirname(__dirname), '/files', '/resources')
-    //   fs.mkdirSync(dir)
+    if (!fs.existsSync(dir)) {
+     fs.mkdirSync(dir)
+    }
     cb(null, dir)
   },
   filename: function (req, file, cb) {
@@ -18,7 +20,7 @@ function checkFileType (file, cb) {
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
 
-  if (path.extname(file.originalname) == '.pdf' || extname && mimetype) {
+  if ((path.extname(file.originalname) === '.pdf' || extname) && mimetype) {
     return cb(null, true)
   } else {
     throw new Error('Course not found')
@@ -30,7 +32,6 @@ const upload = multer({
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb)
   }
-
 })
 
 const multipleUpload = upload.fields([{ name: 'avatar' }, { name: 'attachment' }])
