@@ -25,6 +25,8 @@ function CongratulationScreen () {
   const history = useHistory()
   const username = location?.state?.username
   const password = location?.state?.password
+  const editInformations = location?.state?.editInformations
+  const user = location?.state?.user
 
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
@@ -62,18 +64,22 @@ function CongratulationScreen () {
     // if (firstname && lastname && phone && birthday && email) {
     //   signUp({ firstname, lastname, phone, birthday, email });
     // }
-    return dispatch(updateUser({ firstName, lastName, phone, birthday, email, id:userInfo.id }))
+    dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: user ? user.id : userInfo.id }))
+    user ? history.goBack():  history.push('/community-page-news')
+    return
   }
 
   return (
     <form className='congratulation'>
-      <div className='icons'>
-        <Logo />
-      </div>
+      {!editInformations && (
+        <div className='icons'>
+          <Logo />
+        </div>
+      )}
 
       <div className='header-wrapper'>
         <h1 className='header'>{welcomeBack}</h1>
-        <p className='subheader'>{welcomeBack2}</p>
+        <p className='subheader'>{!editInformations && welcomeBack2}</p>
       </div>
 
       {modalActive && <ConfirmModal username={username} password={password} />}
@@ -167,10 +173,11 @@ function CongratulationScreen () {
 
           <div className='button-wrapper'>
             <div className='btn'>
-              <Secondarybtn
-                name='Skip for now'
-                clickHandler={() => history.push('/community-page-news')}
-              />
+              {editInformations ? (
+                <Secondarybtn name='Cancel' clickHandler={() => history.goBack()} />
+              ) : (
+                <Secondarybtn name='Skip for now' clickHandler={() => history.push('/community-page-news')} />
+              )}
             </div>
             <div className='btn'>
               <Button name='Continue' onClick={handleSubmit(onSubmit)} />

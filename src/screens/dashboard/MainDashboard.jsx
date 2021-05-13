@@ -4,9 +4,26 @@ import { Link } from 'react-router-dom'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import useSizeFinder from '../../utils/sizeFinder'
 import useScroll from '../../utils/scrollFunc'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserDetails } from '../../actions/userAction'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 function DashboardComponent () {
   const windowWidth = useSizeFinder()
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const userDetails = useSelector((state) => state.userDetails)
+  const { user } = userDetails
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(getUserDetails(userInfo.id))
+    } else {
+      history.push('/login')
+    }
+  }, [dispatch, history, userInfo])
   return (
     <DashboardLayout title='My Dashboard'>
       <div className='x10-1-0-my-dashboard'>
@@ -16,10 +33,10 @@ function DashboardComponent () {
               <img className='dashboard-profile-pic' src='/img/DashboardProfilePic.png' alt='dashboard-profile' />
               <div className='flex-col-6'>
                 <div className='info-my-detail'>
-                  <div className='mikhail-ugryumov ibmplexsans-semi-bold-quarter-spanish-white-24px'>
-                    Mikhail Ugryumov
+                  <div className='ibmplexsans-semi-bold-quarter-spanish-white-24px'>
+                    {user?.name}
                   </div>
-                  <p className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Last visit: 5 hours ago</p>
+                  <p className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Last visit: {user?.lastLogin}</p>
                 </div>
                 <div className='info-my-community'>
                   <div className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Follow 8 communities</div>
@@ -30,7 +47,7 @@ function DashboardComponent () {
 
             <div className='dashboard-my-profile-side-header'>
               {/* my-profile  */}
-              <Link to='/myProfile' className='dasboard-my-profile-box'>
+              <Link to={{ pathname: '/myProfile', state: { user } }} className='dasboard-my-profile-box'>
                 <HeaderContent title='My Profile' image='/img/user.svg' />
               </Link>
               {/* achivements  */}

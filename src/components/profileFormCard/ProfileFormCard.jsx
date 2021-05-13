@@ -26,12 +26,12 @@ const ProfileFormCard = ({ data: { title, first_inputTitle, first_inputValue, se
 export const PersonalInformation = () => {
   const PersonalInformationdata = {
     title: 'Personal information',
-    first_inputTitle: 'First name',
-    first_inputValue: 'Mikhail',
+    first_inputTitle: 'First Name',
+    first_inputValue: user?.firstName,
     second_inputTitle: 'Last Name',
-    second_inputValue: 'Ugryum',
+    second_inputValue: user?.lastName,
     third_inputTitle: 'Date of birhday',
-    third_inputValue: '08/05/2021'
+    third_inputValue: user && new Date(user.dateOfBirth).toDateString()
   }
   return (
 
