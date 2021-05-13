@@ -26,16 +26,14 @@ function CommunityMembers({ history }) {
 
   return (
     <DashboardLayout title='Ragrarians members'>
-    <div className='community-members'>
-      <div className='community-members-flex-col'>
-        <div className='search-container'>
-          <SearchComponent search={search} setSearch={setSearch} className='search border-1px-onyx' />
-        </div>
-        <div className='community-members-grid-row'>
-        {users && <CardImage follow='Follow' users={users} /> }
+      <div className='community-members'>
+        <div className='community-members-flex-col'>
+          <div className='search-container'>
+            <SearchComponent search={search} setSearch={setSearch} className='search border-1px-onyx' />
+          </div>
+          <div className='community-members-grid-row'>{users && <CardImage follow='Follow' users={users} />}</div>
         </div>
       </div>
-    </div>
     </DashboardLayout>
   )
 }

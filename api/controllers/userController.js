@@ -3,7 +3,6 @@ const User = require('../models/userModel.js')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
-
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
@@ -108,7 +107,7 @@ const updateUser = async (req, res) => {
   })
 }
 
-// @desc    Search title
+// @desc    Search name
 // @route   POST /api/resource/search
 // @access  Private
 const searchUserName = (req, res) => {
