@@ -28,6 +28,28 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+### environment
+
+`.env` file for frontend
+```
+REACT_APP_API_BASE_URL=<URL for API server>
+REACT_APP_CDN_BASE_URL=<URL for File server>
+REACT_APP_AUTH_METHOD=<**local** or **cognito**>
+REACT_APP_COGNITO_REGION=<required only if using cognito auth method>
+REACT_APP_COGNITO_POOL_ID=<required only if using cognito auth method>
+REACT_APP_COGNITO_CLIENT_ID=<required only if using cognito auth method>
+REACT_APP_COGNITO_DOMAIN_NAME=<required only if using cognito auth method>
+```
+
+`.env` file for api
+```
+JWT_SECRET=<secret for token>
+DATABASE_NAME=<database name>
+DATABASE_USERNAME=<database username>
+DATABASE_PASSWORD=<database password>
+DATABASE_HOST=<database server>
+```
+
 ### `docker-compose up`
 
 [Docker](https://www.docker.com/) is a software platform for building applications based on containers — small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another.
