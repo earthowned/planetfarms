@@ -30,6 +30,8 @@ import EnterprisesViewPage from './Screens/Enterprises/EnterprisesViewPage/Enter
 import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage'
 import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup'
 import MobileMessage from './Components/MobileMessage/MobileMessage'
+import Courses from './Screens/Courses/Courses'
+import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 
 import Amplify, { Auth } from 'aws-amplify'
 
@@ -99,7 +101,7 @@ if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
   const currentConfig = Auth.configure()
 }
 
-function App() {
+function App () {
   return (
     <Router>
       <Switch>
@@ -154,6 +156,9 @@ function App() {
         <Route path='/community-group-view-page'>
           <CommunityGroupViewPage />
         </Route>
+        <Route path='/courses'>
+          <Courses />
+        </Route>
         <Route path='/enterprises'>
           <Enterprises />
         </Route>
@@ -178,8 +183,11 @@ function App() {
         <Route path='/mycourse'>
           <MyCourse />
         </Route>
-        <Route path='/mycoursePage'>
+        <Route exact path='/mycoursepage'>
           <MyCoursePage />
+        </Route>
+        <Route path='/mycoursepage/:id'>
+          <LessonPage />
         </Route>
         <Route path='/myProfile'>
           <MyProfile />
@@ -227,5 +235,4 @@ const X0100LoginEmptyData = {
   vector16: '',
   vector17: '',
   vector18: ''
-
 }
