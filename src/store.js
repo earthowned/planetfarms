@@ -10,8 +10,14 @@ import {
   userUpdateReducer,
   userRegisterReducer
 } from './reducers/userReducers'
+import { enterpriseListReducer } from './reducers/enterpriseReducers'
+import { groupListReducer, groupViewReducer } from './reducers/communityGroupReducers'
+
 
 const reducer = combineReducers({
+  groupView: groupViewReducer,
+  listGroups: groupListReducer,
+  listEnterprises: enterpriseListReducer,
   listResources: resourceListReducer,
   listNews: newsListReducer,
   userLogin: userLoginReducer,
