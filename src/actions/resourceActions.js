@@ -57,25 +57,26 @@ export const searchResources = (search) => async (
 }
 
 export const createResource = (newResource) => async (dispatch, getState) => {
+  const formData = new FormData()
+  formData.append('title', newResource.title)
+  formData.append('description', newResource.description)
+  formData.append('file', newResource.file)
   try {
-    dispatch({
-      type: RESOURCE_CREATE_REQUEST
-    })
+    dispatch({ type: RESOURCE_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, newResource, config)
-    dispatch({
-      type: RESOURCE_CREATE_SUCCESS,
-      payload: data
-    })
+    const config = {
+      headers: {
+      // Authorization: `Bearer ${userInfo.token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, formData, config)
+    dispatch({ type: RESOURCE_CREATE_SUCCESS, payload: data })
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
-    dispatch({
-      type: RESOURCE_CREATE_FAIL,
-      payload: message
-    })
+    dispatch({ type: RESOURCE_CREATE_FAIL, payload: message })
   }
 }
