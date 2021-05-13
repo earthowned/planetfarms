@@ -4,10 +4,10 @@ import Button from '../Button/Button'
 import Secondarybtn from '../SecondaryBtn/Secondarybtn';
 import "./purchase-modal.css"
 
-function ModalContainer ({children, name, clickHandler}) {
+function ModalContainer ({children, name, clickHandler, height}) {
   return (
-      <div className='purchase-modal-container'>
-        <div className='purchase-modal'>
+      <div className='purchase-modal-container' >
+        <div className='purchase-modal' id={height && 'add-height'}>
           <div className='purchase-modal-header'>
             <h3>{name}</h3>
             <button onClick={() => clickHandler(false)}><img src='/img/close-outline.svg' alt='close-outline' /></button>
@@ -74,7 +74,7 @@ export const PurchaseSuccessModal = ({ clickHandler }) => {
   }
 
   return (
-    <ModalContainer name="Congratulations" clickHandler={clickHandler}>
+    <ModalContainer name="Congratulations" clickHandler={clickHandler} height={312}>
         <h4 id="purchase-success-msg">You have successfully bought next course</h4>
        <PurchaseCourseContent />
         <div className="purchase-success-btn-container">
