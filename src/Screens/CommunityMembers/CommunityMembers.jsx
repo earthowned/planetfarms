@@ -21,7 +21,7 @@ function CommunityMembers () {
         <div className='search-container'>
           <SearchComponent className='search border-1px-onyx' />
         </div>
-        <div className='community-members-flex-row'>
+        <div className='community-members-grid-row'>
           <CardImage follow='Follow' />
         </div>
       </div>

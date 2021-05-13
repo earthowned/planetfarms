@@ -18,7 +18,7 @@ const mainnav = [
       },
       {
         name: 'Enterprises',
-        slug: '#'
+        slug: '/enterprises'
       }
     ]
   },
