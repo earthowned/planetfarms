@@ -22,16 +22,11 @@ const getResources = (req, res) => {
 // @route   POST /api/resources/add
 // @access  Public
 const addResource = (req, res) => {
-  const {
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
-  } = req.body
   let filename = ''
   if (req.file) {
     filename = req.file.filename
   }
-  Resource.create({
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments, filename
-  })
+  Resource.create({ ...req.body, filename })
     .then(() => res.json({ message: 'Resource Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
