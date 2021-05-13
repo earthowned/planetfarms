@@ -1,6 +1,6 @@
 .x10-2-0-my-achievements {
   align-items: flex-start;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: var(--background-color);
   display: flex;
   width: 100%;
 }
@@ -14,7 +14,7 @@
 
 .x10-2-0-my-achievements .achievements-hero {
   align-items: flex-start;
-  background-color: var(--licorice);
+  background-color: var(--cards);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
@@ -67,7 +67,7 @@
 
 .x10-2-0-my-achievements .your-achievements-level {
   align-items: center;
-  background-color: var(--shark-2);
+  background-color: var(--primary-black);
   border-radius: 4px;
   display: flex;
   height: 128px;
@@ -127,7 +127,7 @@
 }
 
 .x10-2-0-my-achievements .number-3 {
-  color: var(--shark);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 24px;
   font-weight: 600;
@@ -159,12 +159,12 @@
   font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-size: 16px;
-  color: #fff;
+  color: var(--primary-white);
 }
 
 .x10-2-0-my-achievements .frame-3054 {
   align-items: flex-start;
-  background-color: var(--licorice);
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   margin-top: 8px;
@@ -173,7 +173,7 @@
 
 .x10-2-0-my-achievements .overlap-group {
   align-items: center;
-  background: rgb(116, 231, 160);
+  background: var(--primary-color);
   background-size: 100% 100%;
   border-radius: 4px;
   display: flex;
@@ -183,7 +183,7 @@
 }
 
 .x10-2-0-my-achievements .text-13 {
-  color: var(--shark);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -196,7 +196,7 @@
 }
 
 .x10-2-0-my-achievements .text-14 {
-  color: var(--monsoon);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 12px;
   height: 32px;
@@ -209,7 +209,7 @@
 
 .x10-2-0-my-achievements .total-achievements {
   align-items: flex-start;
-  background-color: var(--shark-2);
+  background-color: var(--primary-black);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -232,7 +232,7 @@
 }
 
 .ibmplexsans-normal-quarter-spanish-white-16px {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -240,13 +240,13 @@
 }
 
 .x10-2-0-my-achievements .span0-1 {
-  color: rgba(248, 235, 223, 1);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
 }
 
 .x10-2-0-my-achievements .span1-1 {
-  color: rgba(248, 235, 223, 1);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -255,7 +255,7 @@
 .progress-bar-content {
   width: 90%;
   margin: 0 auto;
-  color: rgba(248, 235, 223, 1);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 12px;
   line-height: 1.5;
@@ -279,7 +279,7 @@
 .x10-2-0-my-achievements .frame-3052 {
   align-items: center;
   justify-content: center;
-  background-color: var(--licorice);
+  background-color: var(--background-color);
   border-radius: 4px;
   display: flex;
   height: 24px;
@@ -291,7 +291,7 @@
 }
 
 .x10-2-0-my-achievements .phone {
-  color: var(--quarter-spanish-white);
+  color: var(--primary-white);
   font-family: "IBM Plex Sans", Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -306,7 +306,7 @@
 }
 
 .x10-2-0-my-achievements .frame-3053 {
-  background: rgb(116, 231, 160);
+  background: var(--primary-color);
   background-size: 100% 100%;
   border-radius: 4px;
   box-shadow: 0 12px 24px rgba(35, 152, 171, 0.24);
@@ -330,7 +330,7 @@
   font-weight: 600;
   font-size: 24px;
   line-height: 1.5;
-  color: #fff;
+  color: var(--primary-white);
 }
 
 .x10-2-0-my-achievements .achievements-progress-table {

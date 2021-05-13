@@ -1,0 +1,16 @@
+.pagination button {
+  color: rgba(0, 0, 0, 1);
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid var(--gallery);
+}
+
+.pagination-wrapper {
+  width: 95%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+}

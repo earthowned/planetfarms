@@ -11,15 +11,15 @@ import {
   RESOURCE_CREATE_FAIL
 } from '../constants/resourceConstants'
 
-export const listResources = (sort = '', pageNumber = '') => async (
+export const listResources = ({ sort, pageNumber }) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: RESOURCE_LIST_REQUEST })
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/api/resources`
+      `${process.env.REACT_APP_API_BASE_URL}/api/resources?pageNumber=${pageNumber}`
     )
-    console.log("data",data)
+    console.log('data', data)
     dispatch({
       type: RESOURCE_LIST_SUCCESS,
       payload: data

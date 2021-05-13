@@ -2,7 +2,7 @@
   width: 100%;
   height: 80px;
   display: flex;
-  color: #fff;
+  color: var(--primary-white);
   justify-content: space-between;
   align-items: center;
 }
@@ -47,8 +47,8 @@
   position: absolute;
   top: -6px;
   right: -6px;
-  color: #00c688;
-  background: #fff;
+  color: var(--primary-color);
+  background: var(--primary-white);
   width: 16px;
   height: 16px;
   line-height: 16px;
@@ -59,7 +59,7 @@
 
 @media only screen and (max-width: 900px) {
   .header-container {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--cards);
     height: 48px;
     width: 320px;
   }
