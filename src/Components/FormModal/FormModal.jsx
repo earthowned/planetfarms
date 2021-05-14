@@ -4,14 +4,25 @@ import '../CollectionModal/collection-modal.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createGroup } from '../../actions/communityGroupActions'
+import { createEnterprise } from '../../actions/enterpriseAction'
 
 const GroupFromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState([])
-  const [title, setGroupTitle] = useState('')
-  const [description, setGroupDescription] = useState('')
-  const dispatch = useDispatch()
+  const [roleActive,setRoleActive]=useState(false)
+  const [groupTitle, setGroupTitle] = useState('')
+  const [groupDescription, setGroupDescription] = useState('')
   const [groupTitleError, setGroupTitleError] = useState(false)
   const [groupDescriptionError, setGroupDescriptionError] = useState(false)
+
+
+  const [enterpriseTitle, setEnterpriseTitle] = useState('')
+  const [enterpriseDescription, setEnterpriseDescription] = useState('')
+  const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
+  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(
+    false
+  )
+  const dispatch = useDispatch()
+
   const { pathname } = useLocation()
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -38,10 +49,32 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
 
   const handleAddGroup = async (e) => {
     e.preventDefault()
-    if (!title) setGroupTitleError(true)
-    if (!description) setGroupDescriptionError(true)
-    if (title && description) {
-      dispatch(createGroup({ title, description }))
+    if (!groupTitle) setGroupTitleError(true)
+    if (!groupDescription) setGroupDescriptionError(true)
+    if (groupTitle && groupDescription) {
+      dispatch(createGroup({ groupTitle, groupDescription }))
+      setActive(false)
+    }
+  }
+
+  const enterpriseTitleChange = (e) => {
+    setEnterpriseTitle(e.target.value)
+    setEnterpriseTitleError(false)
+  }
+
+  const enterpriseDescriptionChange = (e) => {
+    setEnterpriseDescription(e.target.value)
+    setEnterpriseDescriptionError(false)
+  }
+
+  const handleAddEnterprise = async (e) => {
+    e.preventDefault()
+    setRoleActive(true)
+    if (!enterpriseTitle) setEnterpriseTitleError(true)
+    if (!enterpriseDescription) setEnterpriseDescriptionError(true)
+    console.log(enterpriseTitle,enterpriseDescription)
+    if (enterpriseTitle && enterpriseDescription) {
+      dispatch(createEnterprise({ enterpriseTitle, enterpriseDescription }))
       setActive(false)
     }
   }
@@ -67,7 +100,9 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
               </h6>}
           </div>
 
-          <div className='collection-input-container'>
+         {pathname === '/community-group' && 
+         <>
+           <div className='collection-input-container'>
             <input className='default-input-variation' error={groupTitleError} onChange={(e) => groupTitleChange(e)} placeholder='Group title' /><br />
             <input className='default-input-variation text-area-variation' error={groupDescriptionError} onChange={(e) => groupDescriptionChange(e)} placeholder='Group description' /><br />
             <select className='default-input-variation'>
@@ -78,11 +113,49 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
             </select>
           </div>
           <button className='default-btn btn-size' onClick={handleAddGroup}>Submit</button>
+         </>
+         }
 
+         {pathname === '/enterprises' && 
+         <>
+            <div className='collection-input-container'>
+            <input
+              className='default-input-variation'
+              placeholder='Enterprise Title'
+              error={enterpriseTitleError}
+              onChange={(e) => enterpriseTitleChange(e)}
+            />
+            <br />
+            <textarea
+              className='default-input-variation text-area-variation'
+              placeholder='Enterprise description'
+              required='true'
+              cols='3'
+              rows='3'
+              error={enterpriseDescriptionError}
+              onChange={(e) => enterpriseDescriptionChange(e)}
+            />
+            <select className='default-input-variation'>
+              <option>Select category</option>
+              <option>Farmers</option>
+            </select>
+          </div>
+
+          <div style={{display:"flex"}}>
+          <button className='default-btn btn-size' onClick={handleAddEnterprise}>
+            Create Enterprise
+          </button>
+          </div>
+         </>
+         }
+      
         </div>
       </div>
+
     </>
   )
 }
 
 export default GroupFromModal
+
+
