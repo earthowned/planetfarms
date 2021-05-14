@@ -34,6 +34,8 @@ import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import Amplify, { Auth } from 'aws-amplify'
 import LessonTest from './Screens/LessonTest/LessonTest'
+import CourseCollection from './Screens/Courses/CourseCollection/CourseCollection'
+import EditCollection from './Screens/Courses/EditCollection/EditCollection'
 
 function amplifyConfig () {
   Amplify.configure({
@@ -156,8 +158,14 @@ function App () {
         <Route path='/community-group-view-page/:id'>
           <CommunityGroupViewPage />
         </Route>
-        <Route path='/courses'>
+        <Route exact path='/courses'>
           <Courses />
+        </Route>
+        <Route exact path='/courses/my-courses'>
+          <CourseCollection />
+        </Route>
+        <Route path='/courses/my-courses/:id'>
+          <EditCollection />
         </Route>
         <Route path='/enterprises'>
           <Enterprises />

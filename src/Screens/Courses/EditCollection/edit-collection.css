@@ -1,0 +1,41 @@
+.edit-collection-container {
+  
+}
+
+.edit-collection-container > div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 120px;
+  width: 100%;
+  color: #fff;
+  background: #141414;
+  border: 1px solid #3A3939;
+  border-radius: 4px;
+}
+
+.edit-course-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-course-image-container {
+  width: 120px;
+  height: 120px;
+}
+
+.edit-course-image-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.edit-course-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.edit-course-btn-container {
+  display: flex;
+}
