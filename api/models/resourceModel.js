@@ -1,94 +1,94 @@
-const Sequelize = require("sequelize");
-const db = require("../config/database.js");
+const Sequelize = require('sequelize')
+const db = require('../config/database.js')
 
-const Resources = db.define("resources",
+const Resources = db.define('resources',
   {
     title: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
     resourceFor: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
     publisher: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     linkToLicense: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     uploadDate: {
-      type: Sequelize.DATE,
+      type: Sequelize.DATE
     },
     addedBy: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     openWith: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     subject: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
     articleDate: {
-      type: Sequelize.DATE,
+      type: Sequelize.DATE
     },
     kind: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     language: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     author: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     sum: {
-      type: Sequelize.DOUBLE,
+      type: Sequelize.DOUBLE
     },
     level: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
     languages: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
     timesRated: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     tag: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
     year: {
-      type: Sequelize.DATE,
+      type: Sequelize.DATE
     },
     averageRating: {
-      type: Sequelize.DOUBLE,
+      type: Sequelize.DOUBLE
     },
     filename: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     mediaType: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     description: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
     tags: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     medium: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     isDownloadable: {
-      type: Sequelize.BOOLEAN,
+      type: Sequelize.BOOLEAN
     },
     resourceType: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     openUrl: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     attachments: {
-      type: Sequelize.TEXT,
-    },
+      type: Sequelize.TEXT
+    }
   },
   { timestamps: false }
-);
+)
 
-module.exports = Resources;
+module.exports = Resources
