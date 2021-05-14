@@ -5,7 +5,7 @@
 
 .courses-users-main-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, .3fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 0.3fr));
   grid-gap: 40px;
   color: var(--primary-white);
   margin-bottom: 40px;
@@ -35,13 +35,13 @@
 
 @media only screen and (max-width: 1350px) {
   .courses-users-main-container {
-    grid-template-columns: repeat(auto-fit, minmax(230px, .4fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 0.4fr));
   }
 }
 
 @media only screen and (max-width: 900px) {
   .courses-users-main-container {
-    grid-template-columns: repeat(auto-fit, minmax(230px, .5fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 0.5fr));
   }
 }
 
