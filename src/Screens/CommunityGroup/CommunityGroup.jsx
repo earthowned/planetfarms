@@ -43,7 +43,7 @@ const CommunityGroup = () => {
                     <div className='your-groups-1 border-class-1'>
                       <div className='your-groups ibmplexsans-semi-bold-quarter-spanish-white-16px'>
                         Your Groups
-                    </div>
+                      </div>
                     </div>
                   </Link>
                 </div>
