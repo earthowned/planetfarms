@@ -14,13 +14,12 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
   const [groupTitleError, setGroupTitleError] = useState(false)
   const [groupDescriptionError, setGroupDescriptionError] = useState(false)
 
-
   const [enterpriseTitle, setEnterpriseTitle] = useState('')
   const [enterpriseDescription, setEnterpriseDescription] = useState('')
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
-  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(
-    false
-  )
+  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
+   
+  
   const dispatch = useDispatch()
 
   const { pathname } = useLocation()
@@ -52,7 +51,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
     if (!groupTitle) setGroupTitleError(true)
     if (!groupDescription) setGroupDescriptionError(true)
     if (groupTitle && groupDescription) {
-      dispatch(createGroup({ groupTitle, groupDescription }))
+      dispatch(createGroup({ title:groupTitle, description:groupDescription }))
       setActive(false)
     }
   }
@@ -69,12 +68,12 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
 
   const handleAddEnterprise = async (e) => {
     e.preventDefault()
-    setRoleActive(true)
     if (!enterpriseTitle) setEnterpriseTitleError(true)
     if (!enterpriseDescription) setEnterpriseDescriptionError(true)
     console.log(enterpriseTitle,enterpriseDescription)
+    // const newEnterprise = {title:enterpriseTitle,description:enterpriseD}
     if (enterpriseTitle && enterpriseDescription) {
-      dispatch(createEnterprise({ enterpriseTitle, enterpriseDescription }))
+      dispatch(createEnterprise({ title:enterpriseTitle, description: enterpriseDescription }))
       setActive(false)
     }
   }
@@ -103,12 +102,12 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
          {pathname === '/community-group' && 
          <>
            <div className='collection-input-container'>
-            <input className='default-input-variation' value={groupTitle} error={groupTitleError} onChange={(e) => groupTitleChange(e)} placeholder='Group title' />
+            <input className='default-input-variation'  error={groupTitleError} onChange={(e) => groupTitleChange(e)} placeholder='Group title' />
             <p className='error-message'>{groupTitleError ? 'Please enter Group Title' : ' '} </p>
             <br />
            
             
-            <input className='default-input-variation text-area-variation' value={groupDescription} error={groupDescriptionError} onChange={(e) => groupDescriptionChange(e)} placeholder='Group description' />
+            <input className='default-input-variation text-area-variation' error={groupDescriptionError} onChange={(e) => groupDescriptionChange(e)} placeholder='Group description' />
             <p className='error-message'>{groupDescriptionError ? 'Please enter Group Description' : ' '} </p>
             <br />
             <select className='default-input-variation'>
@@ -120,7 +119,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
           </div>
           <button className='default-btn btn-size' onClick={handleAddGroup}>Submit</button>
          </>
-         }
+         } 
 
          {pathname === '/enterprises' && 
          <>
