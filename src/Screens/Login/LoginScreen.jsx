@@ -10,6 +10,7 @@ import { Auth, Hub } from 'aws-amplify'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userAction'
 import OauthBtn from "../../Components/OauthBtn/OauthBtn"
+import { USER_LOGIN_SUCCESS } from '../../constants/userConstants'
 
 function LoginScreen(props) {
   const {
@@ -70,7 +71,14 @@ function LoginScreen(props) {
   async function signIn(username, password) {
     try {
         const user = await Auth.signIn(username, password)
-        if (user) history.push('/community-page-news')
+        if (user) {
+          localStorage.setItem('userInfo', JSON.stringify(user))
+          dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: user
+          })
+          history.push('/community-page-news')
+        }
     } catch (error) {
         const code = error.code
         switch (code) {
