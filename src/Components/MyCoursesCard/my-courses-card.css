@@ -136,9 +136,9 @@
 
 .my-course-card {
   background: black;
-  height: 288px;
   border-radius: 4px;
   position: relative;
+  color: #fff;
 }
 
 .my-course-card > img {
