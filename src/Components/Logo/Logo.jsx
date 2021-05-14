@@ -1,12 +1,12 @@
 import React from 'react'
-import "./logo.css";
+import './logo.css'
 
 const Logo = () => {
-    return (
-        <>
-          <img className="logo-img" src="/img/logo.svg" alt="logo"  />
-        </>
-    )
+  return (
+    <>
+      <img className='logo-img' src='/img/logo.svg' alt='logo' />
+    </>
+  )
 }
 
 export default Logo

@@ -10,7 +10,7 @@ const Background = ({ children, image }) => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      { children }
+      {children}
     </div>
   )
 }

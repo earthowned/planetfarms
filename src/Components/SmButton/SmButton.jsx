@@ -1,12 +1,12 @@
 import React from 'react'
-import './sm-button.css';
+import './sm-button.css'
 
 const SmButton = () => {
-    return (
-        <>
-            
-        </>
-    )
+  return (
+    <>
+
+    </>
+  )
 }
 
 export default SmButton
