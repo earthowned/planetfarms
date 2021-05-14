@@ -102,14 +102,14 @@
 }
 
 .nav-icon {
-  width: 50px;
-  height: 50px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   position: absolute;
   background: transparent;
   outline: none;
   border: none;
-  left: 12%;
+  left: 12.5%;
   top: 204px;
   cursor: pointer;
   transition: all 0.5s ease-in-out;

@@ -4,7 +4,6 @@ import SearchComponent from '../SearchComponent/SearchComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import './courses-header.css'
-import { searchResources, listResources } from '../../actions/resourceActions'
 
 const data = [
   {
@@ -40,8 +39,6 @@ const CoursesHeader = ({ setActive }) => {
     // if (!userInfo) {
     //     history.push('/login')
     // }
-    if (search) dispatch(searchResources(search))
-    if (!search) dispatch(listResources())
 
     window.addEventListener('resize', function () {
       setWindowWidth(window.innerWidth)

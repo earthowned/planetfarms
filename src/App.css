@@ -18,6 +18,7 @@
 
 .sidebar-container {
   width: 15%;
+  min-height: 100vh;
   background-color: #141414;
   transition: all 0.5s ease-in-out;
   border: 1px solid #3a3939;
@@ -70,7 +71,7 @@
 
 .sidebar-container.active .nav-icon {
   transition: all 0.5s ease-in-out;
-  left: 3%;
+  left: 3.4%;
   transform: rotate(180deg);
 }
 
@@ -104,10 +105,10 @@ input[type="checkbox"] {
   }
 
   .nav-icon {
-    left: 15%;
+    left: 15.5%;
   }
 
   .sidebar-container.active .nav-icon {
-    left: 4%;
+    left: 4.5%;
   }
 }
