@@ -103,8 +103,14 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
          {pathname === '/community-group' && 
          <>
            <div className='collection-input-container'>
-            <input className='default-input-variation' error={groupTitleError} onChange={(e) => groupTitleChange(e)} placeholder='Group title' /><br />
-            <input className='default-input-variation text-area-variation' error={groupDescriptionError} onChange={(e) => groupDescriptionChange(e)} placeholder='Group description' /><br />
+            <input className='default-input-variation' value={groupTitle} error={groupTitleError} onChange={(e) => groupTitleChange(e)} placeholder='Group title' />
+            <p className='error-message'>{groupTitleError ? 'Please enter Group Title' : ' '} </p>
+            <br />
+           
+            
+            <input className='default-input-variation text-area-variation' value={groupDescription} error={groupDescriptionError} onChange={(e) => groupDescriptionChange(e)} placeholder='Group description' />
+            <p className='error-message'>{groupDescriptionError ? 'Please enter Group Description' : ' '} </p>
+            <br />
             <select className='default-input-variation'>
               <option>Select category</option>
               <option>Farmer</option>
@@ -125,6 +131,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
               error={enterpriseTitleError}
               onChange={(e) => enterpriseTitleChange(e)}
             />
+            <p className='error-message'>{enterpriseTitleError ? 'Please enter Enterprise Title' : ' '} </p>
             <br />
             <textarea
               className='default-input-variation text-area-variation'
@@ -135,6 +142,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
               error={enterpriseDescriptionError}
               onChange={(e) => enterpriseDescriptionChange(e)}
             />
+              <p className='error-message'>{enterpriseDescriptionError ? 'Please enter Enterprise Description' : ' '} </p>
             <select className='default-input-variation'>
               <option>Select category</option>
               <option>Farmers</option>
