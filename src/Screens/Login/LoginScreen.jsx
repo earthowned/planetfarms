@@ -70,6 +70,7 @@ function LoginScreen(props) {
   async function signIn(username, password) {
     try {
         const user = await Auth.signIn(username, password)
+        localStorage.setItem('userInfo', JSON.stringify(user))
         if (user) history.push('/community-page-news')
     } catch (error) {
         const code = error.code
