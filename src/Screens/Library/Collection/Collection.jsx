@@ -12,17 +12,17 @@ import './collection.css'
 const library = [
   {
     category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
+    title: "How to farm in 2020",
     img: '/img/man-cap.svg'
   },
   {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
+    category: 'business',
+    title: "How to farm in 2020 and don't lose your mind",
     img: '/img/man-cap.svg'
   },
   {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
+    category: 'Nursing',
+    title: "How to calm your mind",
     img: '/img/man-cap.svg'
   }
 ]

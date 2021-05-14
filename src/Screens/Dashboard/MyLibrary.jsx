@@ -7,23 +7,23 @@ const articles = [
   {
     id: 1,
     img: 'https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png',
-    title: 'How to farm in 2020 and don’t lose you business',
+    title: 'How to be expert',
     category: 'FARMING',
-    time: '5 min read'
+    time: '25 min read'
   },
   {
     id: 2,
     img: 'https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-2@2x.png',
-    title: 'How to farm in 2020 and don’t lose you business',
+    title: 'How to code in 2020',
     category: 'NEWS',
-    time: '5 min read'
+    time: '13 min read'
   },
   {
     id: 3,
     img: 'https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png',
-    title: 'How to farm in 2020 and don’t lose you business',
-    category: 'FARMING',
-    time: '5 min read'
+    title: 'How to perform art',
+    category: 'NEWS',
+    time: '15 min read'
   }
 ]
 
@@ -31,21 +31,21 @@ const videos = [
   {
     id: 1,
     img: 'https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png',
-    title: 'How to farm in 2020 and don’t lose you business',
+    title: 'How to farm in 2020 and don’t lose you mind',
     category: 'FARMING',
-    time: '5 min read'
+    time: '11 min read'
   },
   {
     id: 2,
     img: 'https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-2@2x.png',
-    title: 'How to farm in 2020 and don’t lose you business',
+    title: 'How to farm in 2020',
     category: 'NEWS',
-    time: '5 min read'
+    time: '10 min read'
   },
   {
     id: 3,
     img: 'https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/606aaa31b1a8ab69d61ae593/img/article-1@2x.png',
-    title: 'How to farm in 2020 and don’t lose you business',
+    title: 'How to farm in 2020 year and don’t lose you business',
     category: 'FARMING',
     time: '5 min read'
   }

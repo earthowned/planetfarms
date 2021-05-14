@@ -7,7 +7,21 @@ const FilterSearch = () => {
         <div className='search-filters ibmplexsans-semi-bold-quarter-spanish-white-16px'>
           Search filters
         </div>
-        <div className='filter-field border-1px-onyx }'>
+        <FilterField />
+        <FilterField />
+        <div className='search-btn-group'>
+          <div className='group-search ibmplexsans-semi-bold-shark-16px'>
+            Search
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function FilterField () {
+  return (
+    <div className='filter-field border-1px-onyx }'>
           <div className='by-date ibmplexsans-semi-bold-monsoon-16px'>
             By Date
           </div>
@@ -16,24 +30,7 @@ const FilterSearch = () => {
               <img className='vector-19' src='vector.png' />
             </div>
           </div>
-        </div>
-        <div className='filter-field border-1px-onyx }'>
-          <div className='by-date ibmplexsans-semi-bold-monsoon-16px'>
-            Popular
-          </div>
-          <div className='chevron-right-outline-1-1 }'>
-            <div className='overlap-group-5'>
-              <img className='vector-19' src='vector.png' />
-            </div>
-          </div>
-        </div>
-        <div className='search-btn-group'>
-          <div className='group-search ibmplexsans-semi-bold-shark-16px'>
-            Search
-          </div>
-        </div>
-      </div>
-    </div>
+     </div>
   )
 }
 

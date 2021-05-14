@@ -20,15 +20,15 @@ function Achievements () {
                     <div className='overlap-group-3'>
                       <div className='group'>
                         <div className='overlap-group1'>
-                         <img
-                          className='vector-11'
-                          src='https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/vector-7@2x.png'
-                        />
-                         <img
-                          className='group-1'
-                          src='https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/group@2x.png'
-                        />
-                       </div>
+                          <img
+                            className='vector-11'
+                            src='https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/vector-7@2x.png'
+                          />
+                          <img
+                            className='group-1'
+                            src='https://anima-uploads.s3.amazonaws.com/projects/6062d6e20bde0e437064350b/releases/6066cc208808fdc0d78f8168/img/group@2x.png'
+                          />
+                        </div>
                       </div>
                       <div className='number-3 valign-text-middle'>4</div>
                     </div>
