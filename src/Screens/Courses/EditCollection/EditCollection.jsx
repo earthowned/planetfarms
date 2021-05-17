@@ -47,7 +47,7 @@ const travelling = [
 const EditCollection = () => {
     return (
         <DashboardLayout title="Travelling courses for Students ">
-            <BackButton />
+            <BackButton location="/courses/my-courses" />
             <div className="edit-collection-container">
                 {
                     travelling.map(item => {
@@ -77,8 +77,12 @@ const EditCollectionCard = ({item}) => {
                 </div>
             </div>
             <div className="edit-course-btn-container">
+                <div>
                 <Secondarybtn name="Add to my collection" />
+                </div>
+                <div>
                 <Button name="Go to course" />
+                </div>
             </div>
         </div>
     )

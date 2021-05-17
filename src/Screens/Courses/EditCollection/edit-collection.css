@@ -2,7 +2,7 @@
   
 }
 
-.edit-collection-container > div{
+.edit-collection-container > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,12 +12,14 @@
   background: #141414;
   border: 1px solid #3A3939;
   border-radius: 4px;
+  margin: 24px 0;
 }
 
 .edit-course-left {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
 .edit-course-image-container {
@@ -28,14 +30,100 @@
 .edit-course-image-container img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .edit-course-text-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 16px;
+  height: 100%;
+  padding: 12px 0;
 }
+
+.edit-course-text-container div h6 {
+    font-weight: 400;
+    color: var(--primary-grey);
+  }
 
 .edit-course-btn-container {
   display: flex;
+  margin-right: 24px;
+}
+
+.edit-course-btn-container div {
+  width: 188px;
+  height: 48px;
+}
+
+.edit-course-btn-container div:first-child {
+  margin-right: 16px;
+}
+
+@media only screen and (max-width: 900px) {
+  .edit-course-btn-container div {
+    width: 100px;
+  }
+
+  .edit-course-text-container {
+    width: 100%;
+  }
+
+  .edit-course-text-container div h4, h5, h6{
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .edit-collection-container > div {
+    flex-direction: column;
+    height: 552px;
+    justify-content: flex-start;
+  }
+
+  .edit-course-left {
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 408px;
+  }
+
+  .edit-course-image-container {
+    width: 100%;
+    height: 256px;
+  }
+
+  .edit-course-text-container {
+    height: 136px;
+  }
+
+  .edit-course-text-container div {
+    padding: 16px;
+  }
+
+  .edit-course-text-container div h4, h6 {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .edit-course-text-container h5 {
+    font-size: 24px;
+    line-height: 24px;
+    padding-left: 16px;
+  }
+
+  .edit-course-btn-container {
+    height: 112px;
+    flex-direction: column;
+    width: 100%;
+    margin-right: 0;
+    padding: 16px;
+  }
+
+  .edit-course-btn-container div {
+    width: 100%;
+    margin-bottom: 16px;
+  }
 }

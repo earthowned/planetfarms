@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Background from '../../../Components/Background/Background';
 import CoursesHeader from '../../../Components/CoursesHeader/CoursesHeader';
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './course-collection.css';
 
 const farming = [
@@ -28,6 +28,7 @@ const mycollection = [
 
 const CourseCollection = () => {
     const [active, setActive] = useState(false);
+    
     return (
         <DashboardLayout title='All courses'>
         <div className='courses-main-container'>
@@ -57,25 +58,33 @@ const CourseUserCard = ({name, data, btnName, subName}) => {
 }
 
 export const BackgroundUserCard = ({item, btnName, subName}) => {
-    const [savedActive, setSavedActive] = useState(false);
-    const history = useHistory();
     return (
         <Background image={item.img}>
             <button className="subs">
                 <span>{item.subscribers} {subName}</span>
             </button>
-            <div className="courses-users-content">
-              <h3>{item.title}</h3>                           
-              {/* <button onClick={() => history.push('/dashboard')} className="trasnsparent-btn fixed-width courses-users-btn" onClick={() => setSavedActive(!savedActive)}> */}
-                <Link to="/courses/my-courses/edit-course">
-               {btnName}
-               </Link>
-              {/* </button> */}
-            </div>
+           <CourseUserContent item={item} btnName={btnName} />
         </Background>
     )
 }
 
+function CourseUserContent ({item, btnName}) {
+    const [savedActive, setSavedActive] = useState(false);
+    return (
+         <div className="courses-users-content">
+              <h3>{item.title}</h3>
+              {btnName === "Edit Collection" 
+              ? <Link className="nav-link" to="/courses/my-courses/edit-course">                 
+              <button className="trasnsparent-btn fixed-width courses-users-btn" onClick={() => setSavedActive(!savedActive)}>
+               {btnName}
+              </button>
+              </Link>
+              :  <button className="trasnsparent-btn fixed-width courses-users-btn" onClick={() => setSavedActive(!savedActive)}>
+               {btnName}
+              </button>
+            }
+        </div>
+    )
+}
+
 export default CourseCollection
-
-

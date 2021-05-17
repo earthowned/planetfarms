@@ -8,12 +8,12 @@ const Button = ({name, clickHandler}) => {
   }
     return (
             <button type="submit" className="btn-default" onClick={(e) => submitForm(e)}>
-                <div
+                {/* <div
                   type="submit"
                   className="btn-text"
-                >
+                > */}
                   {name}
-                </div>
+                {/* </div> */}
               </button> 
     )
 }
