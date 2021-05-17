@@ -99,7 +99,6 @@ const authUser = async (req, res) => {
       name: user.dataValues.name, */
       error: 'Invalid email or password'
     })
-    //throw new Error('Invalid email or password')
   }
 }
 
@@ -109,12 +108,16 @@ const authUser = async (req, res) => {
 const registerUser = async (req, res) => {
   try {
     const { name, password } = req.body
+    let user;
+    if (process.env.AUTH_METHOD === 'cognito') {
+      user = await Auth.signUp({
+        username: name,
+        password,
+      })
+    } else {
     const userExists = await User.findOne({ where: { name } })
-    if (userExists) {
-      res.status(400)
-      throw new Error('User already exists')
-    }
-    const user = await User.create({ name, password })
+    if (userExists) res.json({ message: 'Users already Exists !!!' }).status(400)
+    user = await User.create({ name, password })
     if (user) {
       res.status(201).json({
         id: user.dataValues.id,
@@ -125,9 +128,40 @@ const registerUser = async (req, res) => {
       res.status(400)
       throw new Error('Invalid user data')
     }
+  }
   } catch (err) {
+    console.log(err)
     throw new Error(`Error ${err}`)
   }
 }
 
-module.exports = { registerUser, authUser }
+const changePassword = async (req, res) => {
+  try {
+    const { user , oldPassword, newPassword } = req.body
+    let userWithNewPassword;
+    if(process.env.AUTH_METHOD === 'cognito') {
+      const authUser = await Auth.currentAuthenticatedUser()
+      userWithNewPassword = await Auth.changePassword(authUser, oldPassword, newPassword)
+      console.log(userWithNewPassword)
+    } else {
+      const oldUser = await User.findByPk(user.id)
+      if (oldUser) {
+        userWithNewPassword = await User.update({ password: newPassword }, { where: { id: user.id } })
+      }
+    }
+    if (userWithNewPassword) {
+      res.json({message: 'Password Updated !!!'}).status(200)
+    } else {
+      res.status(401)
+      throw new Error('Invalid email or password')
+    }
+  } catch (e) {
+    console.log(e)
+    res.status(401)
+    res.json({
+      error: e
+    })
+  }
+}
+
+module.exports = { registerUser, authUser, changePassword }
