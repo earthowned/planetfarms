@@ -1,7 +1,3 @@
-.edit-collection-container {
-  
-}
-
 .edit-collection-container > div {
   display: flex;
   align-items: center;
@@ -10,7 +6,7 @@
   width: 100%;
   color: #fff;
   background: #141414;
-  border: 1px solid #3A3939;
+  border: 1px solid #3a3939;
   border-radius: 4px;
   margin: 24px 0;
 }
@@ -44,9 +40,9 @@
 }
 
 .edit-course-text-container div h6 {
-    font-weight: 400;
-    color: var(--primary-grey);
-  }
+  font-weight: 400;
+  color: var(--primary-grey);
+}
 
 .edit-course-btn-container {
   display: flex;
@@ -71,7 +67,9 @@
     width: 100%;
   }
 
-  .edit-course-text-container div h4, h5, h6{
+  .edit-course-text-container div h4, 
+  h5, 
+  h6 {
     font-size: 14px;
     line-height: 20px;
   }
@@ -103,7 +101,8 @@
     padding: 16px;
   }
 
-  .edit-course-text-container div h4, h6 {
+  .edit-course-text-container div h4, 
+  h6 {
     font-size: 16px;
     line-height: 24px;
   }
