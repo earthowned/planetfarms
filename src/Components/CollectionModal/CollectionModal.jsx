@@ -4,7 +4,19 @@ import './collection-modal.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createResource } from '../../actions/resourceActions'
+import SimpleFilter from '../SimpleFilter/SimpleFilter'
 
+const data = [
+  {
+    label: "Travelling"
+  },
+  {
+    label: "Sports"
+  },
+  {
+    label: "Food"
+  },
+]
 const CollectionModal = ({ setActive, openAddCollection, name }) => {
   const [files, setFiles] = useState()
   const [title, setResourceTitle] = useState('')
@@ -56,7 +68,7 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
   return (
     <>
       <div className='collection-modal-container'>
-        <div className='collection-modal-inner-container'>
+        <div className='collection-modal-inner-course-container'>
           <div className='collection-modal-header'>
             <h4>{pathname === '/library' ? 'Create Resources' : 'Create Collection'}</h4>
             <img src='/img/close-outline.svg' onClick={() => setActive(false)} alt='close-icon' />
@@ -80,10 +92,7 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
             : <>
               <div className='collection-input-container'>
                 <input className='default-input-variation' placeholder='Collection title' /> <br />
-                <select className='default-input-variation' placeholder='Collection title'>
-                  <option>Select category</option>
-                  <option>Travelling</option>
-                </select>
+                <SimpleFilter data={data} />
               </div>
               <div className='add-collection' onClick={() => openAddCollection()}><img src='/img/plus.svg' alt='Add Files' /><button>{name ? name : "Add files"}</button></div>
               <button className='default-btn btn-size' onClick={() => openAddCollection()}>Create new collection</button>
