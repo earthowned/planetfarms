@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createResource } from '../../actions/resourceActions'
 
-const CollectionModal = ({ setActive, openAddCollection }) => {
+const CollectionModal = ({ setActive, openAddCollection, name }) => {
   const [files, setFiles] = useState()
   const [title, setResourceTitle] = useState('')
   const [description, setResourceDescription] = useState('')
@@ -85,7 +85,7 @@ const CollectionModal = ({ setActive, openAddCollection }) => {
                   <option>Travelling</option>
                 </select>
               </div>
-              <div className='add-collection' onClick={() => openAddCollection()}><img src='/img/plus.svg' alt='Add Files' /><button>Add files</button></div>
+              <div className='add-collection' onClick={() => openAddCollection()}><img src='/img/plus.svg' alt='Add Files' /><button>{name ? name : "Add files"}</button></div>
               <button className='default-btn btn-size' onClick={() => openAddCollection()}>Create new collection</button>
             </>}
         </div>

@@ -24,7 +24,7 @@ const data = [
   }
 ]
 
-const CoursesHeader = ({ setActive }) => {
+const CoursesHeader = ({ setActive, setCreateCollection }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -50,6 +50,11 @@ const CoursesHeader = ({ setActive }) => {
       })
     }
   }, [windowWidth, search, dispatch, history, userInfo])
+  
+  function createCollection () {
+    setActive(true);
+    setCreateCollection(true);
+  }
 
   return (
     <div className='courses-main-header-container'>
@@ -80,7 +85,7 @@ const CoursesHeader = ({ setActive }) => {
       </div>
       <div className='courses-sub-header'>
         <div className='courses-sub-header-1'>
-          <div className='courses-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Add Courses</button></div>
+          <div className='courses-btn-container'><button className='default-btn' onClick={createCollection}>Add Courses</button></div>
         </div>
 
         <div className='courses-sub-header-2'>
