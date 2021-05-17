@@ -1,26 +1,53 @@
 .simple-modal-container {
   position: fixed;
   width: 100%;
-  background: var(--cards);
+  background: var(--background-color-modal);
   height: 100%;
   z-index: 2000;
-  color: var(--primary-color);
+  color: var(--primary-white);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .simple-modal-inner-container {
-  width: 30%;
-  height: 30%;
+  width: 600px;
+  height: 240px;
   background: var(--cards);
-  padding: 2em 1.6em;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
 }
 
-.simple-modal-inner-container > h4 {
+.simple-modal-inner-container > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.simple-modal-inner-container div > h4 {
   font-size: 1.8em;
+  line-height: 24px;
+}
+
+.simple-modal-inner-container div > button {
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .simple-modal-inner-container {
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+  }
+
+  .simple-modal-inner-container p {
+    margin: 40px 0;
+  }
 }
