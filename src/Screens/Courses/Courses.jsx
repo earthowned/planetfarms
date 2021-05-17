@@ -19,7 +19,7 @@ const Courses = () => {
   return (
     <>
       {modalactive && <GroupModal clickHandler={setModalActive} setNewCollection={setNewCollectionActive} name='Add to collection' btnName='Add to collection' />}
-      {newCollectionactive && <SimpleModal setNewCollection={setNewCollectionActive} name='Courses' />}
+      {newCollectionactive && <SimpleModal setNewCollection={setNewCollectionActive} name='Courses' clickHandler={setNewCollectionActive} />}
       {createCollection && <CollectionModal setActive={setCreateCollection} name="Add courses" openAddCollection={createNewCollection} />}
       <DashboardLayout title='All courses'>
         <div className='courses-main-container'>

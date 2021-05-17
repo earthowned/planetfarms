@@ -3,7 +3,7 @@
   width: 100%;
   background: var(--background-color-modal);
   height: 100%;
-  z-index: 2000;
+  z-index: 5005;
   color: var(--primary-white);
   display: flex;
   justify-content: center;
