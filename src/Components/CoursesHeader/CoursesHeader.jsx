@@ -85,7 +85,7 @@ const CoursesHeader = ({ setActive, setCreateCollection }) => {
       </div>
       <div className='courses-sub-header'>
         <div className='courses-sub-header-1'>
-          <div className='courses-btn-container'><button className='default-btn' onClick={createCollection}>Add Courses</button></div>
+          <div className='courses-btn-container'><button className='default-btn' onClick={createCollection}>Add Collection</button></div>
         </div>
 
         <div className='courses-sub-header-2'>

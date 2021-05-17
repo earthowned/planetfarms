@@ -1,4 +1,5 @@
 import React from 'react'
+import Radiobox from '../Radiobox/Radiobox';
 import './group-users.css'
 
 const groupUsers = [
@@ -22,6 +23,16 @@ const groupUsers = [
         name: "Cody Fisher",
         active: false,
     },
+     {
+        image: "/img/avatar-img.svg",
+        name: "Janny Wilson",
+        active: true,
+    },
+    {
+        image: "/img/avatar-msg.svg",
+        name: "Cody Fisher",
+        active: false,
+    },
 ]
 const GroupUsers = () => {
     
@@ -30,11 +41,13 @@ const GroupUsers = () => {
         {
            groupUsers.map(user => (
             <div className="group-user-container">
+                <div>
                 <div className="img-wrapper">
                     <img src={user.image} alt="users" />
                 </div>
                 <h4>{user.name}</h4>
-                <input type="radio" checked={user.active} className="radio-default" />
+                </div>
+                <Radiobox />
             </div>
            )) 
             }
