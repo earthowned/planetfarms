@@ -19,8 +19,8 @@ const data = [
     slug: '/courses/users'
   },
   {
-    name: 'My collections',
-    slug: '/courses/my-collection'
+    name: 'Saved collections',
+    slug: '/courses/saved-collection'
   }
 ]
 
