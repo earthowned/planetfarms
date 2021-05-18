@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import CalenderEvent from '../../Components/NewsCreateModal/CalenderEvent'
 
 export default function CalenderHeader ({ value, setValue }) {
   function currMonthName () {
@@ -20,32 +21,34 @@ export default function CalenderHeader ({ value, setValue }) {
     return value.isSame(new Date(), 'month')
   }
 
-  const [eventActive, setEventActive] = useState(true)
+  const [eventActive, setEventActive] = useState(false)
 
   return (
+    <>
+      {eventActive && <CalenderEvent setActive={setEventActive} />}
+      <div className='header'>
+        <div className='calender-header-container'>
+          <div className='calender-month-wrapper'>
+            <div className='current'>
+              {currMonthName()} {currYear()}
+            </div>
+            <div
+              className='previous'
+              onClick={() => !thisMonth() && setValue(prevMonth())}
+            >
+              {!thisMonth() ? String.fromCharCode(171) : null}
+            </div>
 
-    <div className='header'>
-      <div className='calender-header-container'>
-        <div className='calender-month-wrapper'>
-          <div className='current'>
-            {currMonthName()} {currYear()}
+            <div className='next' onClick={() => setValue(nextMonth())}>
+              {String.fromCharCode(187)}
+            </div>
+            <button className='calender-today-btn'>Today</button>
           </div>
-          <div
-            className='previous'
-            onClick={() => !thisMonth() && setValue(prevMonth())}
-          >
-            {!thisMonth() ? String.fromCharCode(171) : null}
+          <div className='calender-events'>
+            <button className='add-events' onClick={() => setEventActive(true)}>Add new Events</button>
           </div>
-
-          <div className='next' onClick={() => setValue(nextMonth())}>
-            {String.fromCharCode(187)}
-          </div>
-          <button className='calender-today-btn'>Today</button>
-        </div>
-        <div className='calender-events'>
-          <button className='add-events'>Add new Events</button>
         </div>
       </div>
-    </div>
+    </>
   )
 }

@@ -1,30 +1,42 @@
 import { useState } from 'react'
-import './news-create-modal.css'
-import Button from '../Button/Button'
+import { useLocation } from 'react-router-dom'
+import './calender-event.css'
 
-const CalenderEvent = ({ eventActive, setEventActive }) => {
+const CalenderEvent = ({ setActive, openAddCollection }) => {
+  const { pathname } = useLocation()
+
   return (
     <>
-      {eventActive && (
-        <div className='collection-modal-container'>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add text' setEventActive={setEventActive} />
-            <div className='photo-input-container'>
-              <input
-                className='default-input-variation'
-                placeholder='Collection title'
-              />
-
-              <br />
-              <textarea
-                className='default-input-variation text-area-variation-2'
-                placeholder='Type text here '
-              />
-            </div>
-            <Button name='Add block' />
+      <div className='collection-modal-container'>
+        <div className='collection-modal-inner-container'>
+          <div className='collection-modal-header'>
+            <h4>{pathname === '/calender' && 'Add New Event'}</h4>
+            <img
+              src='/img/close-outline.svg'
+              onClick={() => setActive(false)}
+              alt='close-icon'
+            />
           </div>
+
+          <div className='collection-input-container'>
+            <input
+              className='default-input-variation'
+              placeholder='Enterprise Title'
+
+            />
+            <br />
+            <div style={{ display: 'flex' }}>
+              <input className='default-input-variation' type='date' placeholder='Choose Date' />
+              <br />
+              <input className='default-input-variation' type='time' placeholder='Choose Date' style={{ marginLeft: '25px' }} />
+            </div>
+
+          </div>
+          <button className='default-btn btn-size'>
+            Create Events
+          </button>
         </div>
-      )}
+      </div>
     </>
   )
 }
