@@ -8,6 +8,7 @@ import CreateImage from './NewsCreateImage'
 import CreateText from './NewsTextModel'
 import CollectionModalHeader from './CollectionModalHeader'
 import DragDrop from './DragDrop'
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch'
 
 const NewsCreateModal = ({
   type,
@@ -230,21 +231,6 @@ function PhotoInput () {
           className='default-input-variation'
           placeholder='Photo description'
         />
-      </div>
-    </>
-  )
-}
-
-function ToggleSwitch () {
-  const [active, setActive] = useState(false)
-  return (
-    <>
-      <div className='toggle-main-container'>
-        <div
-          onClick={() => setActive(!active)}
-          className={`${active ? 'toggle-item active' : 'toggle-item'}`}
-        />
-        <div className='toggle-container' />
       </div>
     </>
   )

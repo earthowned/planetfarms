@@ -1,6 +1,5 @@
 import React from 'react'
 import Background from '../Background/Background';
-import SearchComponent from '../SearchComponent/SearchComponent';
 import "./course-create-modal.css";
 
 const CourseCreateModal = ({clickHandler, collectionAdded}) => {
