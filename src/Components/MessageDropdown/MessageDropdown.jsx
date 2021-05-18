@@ -82,7 +82,6 @@ const MessageDropdown = ({
               <MessageCard
                 contact={setting}
                 clickProfileHandler={clickProfileHandler}
-                onClick={clickProfileHandler(setting.id)}
                 profileSettings={profileSettings}
                 key={setting.id}
               />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router'
 import useSizeFinder from '../../utils/SizeFinder'
 import './message-card.css'
@@ -10,7 +10,7 @@ const MessageCard = ({ contact, clickHandler, profileSettings, setModalActive, c
   return (
     <>
       {profileSettings ? (
-        <button className='contact-card'>
+        <button className='contact-card' onClick={() => clickProfileHandler(contact)}>
           <div className='contact-text'>
             <h4>{contact?.name}</h4>
             <p>{contact?.message}</p>

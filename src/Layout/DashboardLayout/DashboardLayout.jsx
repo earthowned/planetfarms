@@ -9,7 +9,6 @@ import { TABLET_SIZE } from '../../constants/sizeConstants'
 
 // importing custom hooks sizefinder to calculate window width from utils
 import useSizeFinder from '../../utils/SizeFinder'
-import SignOutModel from '../../Components/SignOut/SignOut'
 
 const DashboardLayout = ({ title, children }) => {
   const [toggle, setToggle] = useState(true)

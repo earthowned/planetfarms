@@ -1,9 +1,14 @@
 import { Auth } from 'aws-amplify'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../actions/userAction'
+import InputComponent from '../Input/InputComponent'
+import './SettingsActionModel.css'
 
-const SignOutModel = ({ setModalActive, setting }) => {
+const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
   const dispatch = useDispatch()
+  const [input, setInput] = useState('')
+  const [inputErr, setInputErr] = useState(false)
 
   async function signOut() {
     setModalActive(false)
@@ -39,6 +44,11 @@ const SignOutModel = ({ setModalActive, setting }) => {
       .catch((err) => console.log(err))
   }
 
+  const changeInput = (e) => {
+    setInput(e.target.value)
+    setInputErr(false)
+  }
+
   function settingsOptions(setting) {
     switch (setting) {
       case 'logout':
@@ -60,13 +70,32 @@ const SignOutModel = ({ setModalActive, setting }) => {
 
   return (
     <>
-      <div className='confirm-modal-container'>
-        <button className='secondary-btn' onClick={() => settingsOptions(setting)}>
-          {setting.message}
-        </button>
+      <div className='settings-modal-container'>
+        <div className='settings-modal-inner-container'>
+          <h2>{settingAction.name}</h2>
+          {settingAction.id !== 'logout' && (
+            <InputComponent
+              text={settingAction.name}
+              error={settingAction.name}
+              image='/img/user-green-outline.svg'
+              changeHandler={changeInput}
+              name='Code'
+              autoFocus='autoFocus'
+            />
+          )}
+          <p>{settingAction.message}</p>
+          <div className='popup-btn-wrapper'>
+            <button onClick={() => setModalActive(false)} className='secondary-btn'>
+              Cancel
+            </button>
+            <button onClick={() => settingsOptions(settingAction.id)} className='default-btn'>
+              Save
+            </button>
+          </div>
+        </div>
       </div>
     </>
   )
 }
 
-export default SignOutModel
+export default SettingsActionModel
