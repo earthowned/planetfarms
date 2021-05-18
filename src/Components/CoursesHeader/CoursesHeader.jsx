@@ -39,10 +39,12 @@ const CoursesHeader = ({ setActive }) => {
     // if (!userInfo) {
     //     history.push('/login')
     // }
+    // if (search) dispatch(searchResources(search))
+    // if (!search) dispatch(listResources())
 
-    window.addEventListener('resize', function () {
-      setWindowWidth(window.innerWidth)
-    })
+    // window.addEventListener('resize', function () {
+    //   setWindowWidth(window.innerWidth)
+    // })
 
     return () => {
       window.removeEventListener('resize', function () {
