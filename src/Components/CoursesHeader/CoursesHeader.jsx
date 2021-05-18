@@ -50,10 +50,10 @@ const CoursesHeader = ({ setActive, setCreateCollection }) => {
       })
     }
   }, [windowWidth, search, dispatch, history, userInfo])
-  
+
   function createCollection () {
-    setActive(true);
-    setCreateCollection(true);
+    setActive(true)
+    setCreateCollection(true)
   }
 
   return (
@@ -71,17 +71,16 @@ const CoursesHeader = ({ setActive, setCreateCollection }) => {
               })
             }
           </ul>
-          <div className='courses-search-container'>
-            <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
-          </div>
+            <div className='courses-search-container'>
+              <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
+            </div>
           </>
           : <>
             <Filter data={data} newFilter='new' />
             <div className='courses-search-container'>
               <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
             </div>
-          </>
-        }
+          </>}
       </div>
       <div className='courses-sub-header'>
         <div className='courses-sub-header-1'>
