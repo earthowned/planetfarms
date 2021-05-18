@@ -8,7 +8,7 @@ import { createEnterprise } from '../../actions/enterpriseAction'
 
 const GroupFromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState([])
-  const [roleActive,setRoleActive]=useState(false)
+  const [roleActive, setRoleActive] = useState(false)
   const [groupTitle, setGroupTitle] = useState('')
   const [groupDescription, setGroupDescription] = useState('')
   const [groupTitleError, setGroupTitleError] = useState(false)
@@ -18,8 +18,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
   const [enterpriseDescription, setEnterpriseDescription] = useState('')
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
   const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
-   
-  
+
   const dispatch = useDispatch()
 
   const { pathname } = useLocation()
@@ -51,7 +50,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
     if (!groupTitle) setGroupTitleError(true)
     if (!groupDescription) setGroupDescriptionError(true)
     if (groupTitle && groupDescription) {
-      dispatch(createGroup({ title:groupTitle, description:groupDescription }))
+      dispatch(createGroup({ title: groupTitle, description: groupDescription }))
       setActive(false)
     }
   }
@@ -70,10 +69,9 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
     e.preventDefault()
     if (!enterpriseTitle) setEnterpriseTitleError(true)
     if (!enterpriseDescription) setEnterpriseDescriptionError(true)
-    console.log(enterpriseTitle,enterpriseDescription)
-    // const newEnterprise = {title:enterpriseTitle,description:enterpriseD}
+    console.log(enterpriseTitle, enterpriseDescription)
     if (enterpriseTitle && enterpriseDescription) {
-      dispatch(createEnterprise({ title:enterpriseTitle, description: enterpriseDescription }))
+      dispatch(createEnterprise({ title: enterpriseTitle, description: enterpriseDescription }))
       setActive(false)
     }
   }
@@ -87,7 +85,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
       <div className='collection-modal-container'>
         <div className='collection-modal-inner-container'>
           <div className='collection-modal-header'>
-            <h4>{pathname === '/community-group' && 'Create Groups' || pathname=== '/enterprises' && 'Create Enterprises'}</h4>
+            <h4>{pathname === '/community-group' && 'Create Groups' || pathname === '/enterprises' && 'Create Enterprises'}</h4>
             <img src='/img/close-outline.svg' onClick={() => setActive(false)} alt='close-icon' />
           </div>
           <div className='drag-drop' {...getRootProps()}>
@@ -99,63 +97,60 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
               </h6>}
           </div>
 
-         {pathname === '/community-group' && 
-         <>
-           <div className='collection-input-container'>
-            <input className='default-input-variation'  error={groupTitleError} onChange={(e) => groupTitleChange(e)} placeholder='Group title' />
-            <p className='error-message'>{groupTitleError ? 'Please enter Group Title' : ' '} </p>
-            <br />
-           
-            
-            <input className='default-input-variation text-area-variation' error={groupDescriptionError} onChange={(e) => groupDescriptionChange(e)} placeholder='Group description' />
-            <p className='error-message'>{groupDescriptionError ? 'Please enter Group Description' : ' '} </p>
-            <br />
-            <select className='default-input-variation'>
-              <option>Select category</option>
-              <option>Farmer</option>
-              <option>Mentor</option>
-              <option>Business</option>
-            </select>
-          </div>
-          <button className='default-btn btn-size' onClick={handleAddGroup}>Submit</button>
-         </>
-         } 
+          {pathname === '/community-group' &&
+            <>
+              <div className='collection-input-container'>
+                <input className='default-input-variation' error={groupTitleError} onChange={(e) => groupTitleChange(e)} placeholder='Group title' />
+                <p className='error-message'>{groupTitleError ? 'Please enter Group Title' : ' '} </p>
+                <br />
 
-         {pathname === '/enterprises' && 
-         <>
-            <div className='collection-input-container'>
-            <input
-              className='default-input-variation'
-              placeholder='Enterprise Title'
-              error={enterpriseTitleError}
-              onChange={(e) => enterpriseTitleChange(e)}
-            />
-            <p className='error-message'>{enterpriseTitleError ? 'Please enter Enterprise Title' : ' '} </p>
-            <br />
-            <textarea
-              className='default-input-variation text-area-variation'
-              placeholder='Enterprise description'
-              required='true'
-              cols='3'
-              rows='3'
-              error={enterpriseDescriptionError}
-              onChange={(e) => enterpriseDescriptionChange(e)}
-            />
-              <p className='error-message'>{enterpriseDescriptionError ? 'Please enter Enterprise Description' : ' '} </p>
-            <select className='default-input-variation'>
-              <option>Select category</option>
-              <option>Farmers</option>
-            </select>
-          </div>
+                <input className='default-input-variation text-area-variation' error={groupDescriptionError} onChange={(e) => groupDescriptionChange(e)} placeholder='Group description' />
+                <p className='error-message'>{groupDescriptionError ? 'Please enter Group Description' : ' '} </p>
+                <br />
+                <select className='default-input-variation'>
+                  <option>Select category</option>
+                  <option>Farmer</option>
+                  <option>Mentor</option>
+                  <option>Business</option>
+                </select>
+              </div>
+              <button className='default-btn btn-size' onClick={handleAddGroup}>Submit</button>
+            </>}
 
-          <div style={{display:"flex"}}>
-          <button className='default-btn btn-size' onClick={handleAddEnterprise}>
-            Create Enterprise
-          </button>
-          </div>
-         </>
-         }
-      
+          {pathname === '/enterprises' &&
+            <>
+              <div className='collection-input-container'>
+                <input
+                  className='default-input-variation'
+                  placeholder='Enterprise Title'
+                  error={enterpriseTitleError}
+                  onChange={(e) => enterpriseTitleChange(e)}
+                />
+                <p className='error-message'>{enterpriseTitleError ? 'Please enter Enterprise Title' : ' '} </p>
+                <br />
+                <textarea
+                  className='default-input-variation text-area-variation'
+                  placeholder='Enterprise description'
+                  required='true'
+                  cols='3'
+                  rows='3'
+                  error={enterpriseDescriptionError}
+                  onChange={(e) => enterpriseDescriptionChange(e)}
+                />
+                <p className='error-message'>{enterpriseDescriptionError ? 'Please enter Enterprise Description' : ' '} </p>
+                <select className='default-input-variation'>
+                  <option>Select category</option>
+                  <option>Farmers</option>
+                </select>
+              </div>
+
+              <div style={{ display: 'flex' }}>
+                <button className='default-btn btn-size' onClick={handleAddEnterprise}>
+                  Create Enterprise
+                </button>
+              </div>
+            </>}
+
         </div>
       </div>
 
@@ -164,5 +159,3 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
 }
 
 export default GroupFromModal
-
-

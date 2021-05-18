@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { listEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
 import FormModal from '../../Components/FormModal/FormModal'
 
-
 const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
   const [search, setSearch] = useState(null)
