@@ -2,13 +2,14 @@ import { useState } from 'react'
 import MessageDropdown from '../MessageDropdown/MessageDropdown'
 import './header-component.css'
 import { useHistory } from 'react-router-dom'
-import SignOutModel from '../SignOut/SignOut'
+import SettingsActionModel from '../SettingsActionModel/SettingsActionModel'
 
 const HeaderComponent = ({ title }) => {
   const [active, setActive] = useState(false)
   const [profileSettings, setProfileSettings] = useState(false)
   const [notification, setNotification] = useState(false)
   const [modalActive, setModalActive] = useState(false)
+  const [settingAction, setSettingAction] = useState(null)
 
   function messageNoti() {
     setActive(!active)
@@ -30,13 +31,14 @@ const HeaderComponent = ({ title }) => {
     setActive(false)
   }
 
-  function clickProfileHandler(sett) {
-    console.log(sett)
+  function clickProfileHandler(settings) {
+    setSettingAction(settings)
+    setModalActive(true)
   }
 
   return (
     <>
-      <div>{modalActive && <SignOutModel setModalActive={setModalActive} />} </div>
+      <div>{modalActive && <SettingsActionModel setModalActive={setModalActive} settingAction={settingAction} />} </div>
       <header className='header-container'>
         <h3>{title}</h3>
         <ul>
