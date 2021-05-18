@@ -4,7 +4,6 @@ import SearchComponent from '../SearchComponent/SearchComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import './courses-header.css'
-import { searchResources, listResources } from '../../actions/resourceActions'
 
 const data = [
   {
