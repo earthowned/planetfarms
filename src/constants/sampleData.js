@@ -32,13 +32,13 @@ export const groupUsersData = [
 ]
 
 export const collectionFilterData = [
-    {
-      label: 'Travelling'
-    },
-    {
-      label: 'Sports'
-    },
-    {
-      label: 'Food'
-    }
-  ]
+  {
+    label: 'Travelling'
+  },
+  {
+    label: 'Sports'
+  },
+  {
+    label: 'Food'
+  }
+]
