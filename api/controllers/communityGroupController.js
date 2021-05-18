@@ -33,12 +33,16 @@ const getGroups = (req, res) => {
 // @route POST /api/groups/add
 // @access Public
 const addGroups = (req, res) => {
-  const {
-    title, description, category, attachments
-  } = req.body
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
+  // const {
+  //   title, description, category, attachments
+  // } = req.body
 
   Groups.create({
-    title, description, category, attachments
+    ...req.body, filename
   })
     .then(() => res.json({ message: 'Community Group Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))

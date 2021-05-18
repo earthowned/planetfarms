@@ -14,9 +14,10 @@ const CommunityGroupCard = ({ data, location }) => {
   return (
     <>
       {data && data.map(item => {
+        console.log('item', item)
         return (
           <div key={item.id} className='card-1 border-1px-onyx'>
-            <div className='card-container' style={{ backgroundImage: 'url(/img/farmer.svg)' }} />
+            <div className='card-container' style={{ backgroundImage: `url(${process.env.REACT_APP_CDN_BASE_URL + '/files' + item.filename})` }} />
             <div className='community-group-card-inner-content'>
               <div onClick={() => history.push(`/community-group-view-page/${item.id}`)} className='card-text-container'>
                 <div className='farmers ibmplexsans-semi-bold-caribbean-green-14px'>

@@ -6,14 +6,13 @@ import { useDispatch } from 'react-redux'
 import { createEnterprise } from '../../actions/enterpriseAction'
 
 const EnterprisesCollection = ({ setActive, openAddCollection }) => {
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState()
   const [title, setEnterpriseTitle] = useState('')
   const [description, setEnterpriseDescription] = useState('')
   const dispatch = useDispatch()
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
-  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(
-    false
-  )
+  const [enterpriseDescriptionError, setEnterpriseDescriptionError] =
+    useState(false)
   const { pathname } = useLocation()
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -25,6 +24,7 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
           })
         )
       )
+      setFiles(acceptedFiles[0])
     }
   })
 
@@ -43,13 +43,17 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
     if (!title) setEnterpriseTitleError(true)
     if (!description) setEnterpriseDescriptionError(true)
     if (title && description) {
-      dispatch(createEnterprise({ title, description }))
+      dispatch(createEnterprise({ title, description, file: files }))
       setActive(false)
     }
   }
 
   const fileChange = (e) => {
-    setFiles(e.target.files[0])
+    const selectedFile = e.target.files[0]
+    Object.assign(selectedFile, {
+      preview: URL.createObjectURL(selectedFile)
+    })
+    setFiles(selectedFile)
   }
 
   return (
@@ -66,11 +70,11 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
           </div>
           <div className='drag-drop' {...getRootProps()}>
             <input {...getInputProps()} onChange={(e) => fileChange(e)} />
-            {files.length > 0 ? (
+            {files != null ? (
               <img
                 className='avatar'
                 name='avatar'
-                src={files[0].preview}
+                src={files.preview}
                 alt='files[0].preview'
               />
             ) : (
@@ -101,7 +105,10 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
               <option>Farmers</option>
             </select>
           </div>
-          <button className='default-btn btn-size' onClick={handleAddEnterprise}>
+          <button
+            className='default-btn btn-size'
+            onClick={handleAddEnterprise}
+          >
             Create Enterprises
           </button>
         </div>

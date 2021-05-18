@@ -33,12 +33,13 @@ const getEnterprises = (req, res) => {
 // @route   POST /api/enterprises/add
 // @access  Public
 const addEnterprises = (req, res) => {
-  const {
-    title, description, roles, attachments
-  } = req.body
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
 
   Enterprises.create({
-    title, description, roles, attachments
+    ...req.body, filename
   })
     .then(() => res.json({ message: 'Enterprises Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))

@@ -60,11 +60,16 @@ export const searchGroups = (search) => async (
 }
 
 export const createGroup = (newGroup) => async (dispatch, getState) => {
+  const formData = new FormData()
+  formData.append('title', newGroup.title)
+  formData.append('description', newGroup.description)
+  formData.append('file', newGroup.file)
+  formData.append('category', newGroup.category)
   try {
     dispatch({
       type: GROUP_CREATE_REQUEST
     })
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups/add`, newGroup)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups/add`, formData)
     dispatch({
       type: GROUP_CREATE_SUCCESS,
       payload: data
