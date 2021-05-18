@@ -50,12 +50,12 @@ const CourseUserCard = ({ name }) => {
       <h4 className='courses-users-collection-header'>{name}</h4>
       <div className='courses-users-main-container'>
         {
-                farming.map(item => {
-                  return (
-                    <BackgroundUserCard item={item} />
-                  )
-                })
-            }
+          farming.map(item => {
+            return (
+              <BackgroundUserCard item={item} />
+            )
+          })
+        }
       </div>
     </>
   )
