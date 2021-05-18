@@ -159,6 +159,9 @@ function App () {
         <Route path='/courses'>
           <Courses />
         </Route>
+        <Route path='/courses-manager'>
+          <Courses />
+        </Route>
         <Route path='/enterprises'>
           <Enterprises />
         </Route>
