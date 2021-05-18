@@ -1,9 +1,9 @@
-.filter-container {
-  width: 200px;
+.simple-filter-container {
+  width: 100%;
   position: relative;
 }
 
-.filter-title {
+.simple-filter-title {
   color: var(--primary-white);
   display: flex;
   justify-content: space-between;
@@ -14,9 +14,13 @@
   cursor: pointer;
   padding: 11px;
   width: 100%;
+  background: #212225;
+  border: 1px solid #191b1d;
+  color: var(--primary-grey);
+  padding: 1em 1em;
 }
 
-.filter-dropdown {
+.simple-filter-dropdown {
   color: var(--primary-white);
   position: absolute;
   top: 4em;
@@ -29,13 +33,13 @@
   list-style: none;
 }
 
-.filter-dropdown li {
+.simple-filter-dropdown li {
   padding: 1em 2em;
   width: 100%;
   cursor: pointer;
   background: var(--background-color);
 }
 
-.filter-dropdown li:hover {
+.simple-filter-dropdown li:hover {
   background: var(--primary-color);
 }
