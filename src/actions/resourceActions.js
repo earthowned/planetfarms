@@ -17,7 +17,7 @@ export const listResources = ({ sort, pageNumber }) => async (
   try {
     dispatch({ type: RESOURCE_LIST_REQUEST })
     const { data } = await axios.get(
-      `/api/resources?pageNumber=${pageNumber}`
+      `${process.env.REACT_APP_API_BASE_URL}/api/resources?pageNumber=${pageNumber}`
     )
     dispatch({
       type: RESOURCE_LIST_SUCCESS,

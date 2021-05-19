@@ -32,7 +32,7 @@
 .pagination span {
   margin-right: 14px;
   color: var(--primary-white);
-  background: var(--dropdowns);
+  background: var(--primary-color);
   padding: 4.5px 16px;
   border: none;
   border-radius: 4px;
@@ -40,8 +40,9 @@
 }
 
 .pagination span.active {
-  background: var(--primary-color);
+  background: var(--dropdowns);
   border: none;
+  cursor: not-allowed;
 }
 
 .pagination button:last-child {
