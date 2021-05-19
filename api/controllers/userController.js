@@ -3,7 +3,7 @@ const User = require('../models/userModel.js')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
 
-function amplifyConfig() {
+function amplifyConfig () {
   Amplify.configure({
     Auth: {
       // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
@@ -62,7 +62,7 @@ function amplifyConfig() {
   })
 }
 
-if (process.env.AUTH_METHOD == 'cognito') {
+if (process.env.AUTH_METHOD === 'cognito') {
   amplifyConfig()
 }
 
@@ -73,7 +73,7 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     let user, username
-    if (process.env.AUTH_METHOD == 'cognito') {
+    if (process.env.AUTH_METHOD === 'cognito') {
       user = await Auth.signIn(name, password)
       if (user) {
         username = name
@@ -176,9 +176,9 @@ const forgotPassword = async (req, res) => {
 
 const forgotPasswordSubmit = async (req, res) => {
   // Send confirmation code to user's email
-  const { username, code, new_password } = req.body
+  const { username, code, newPassword } = req.body
 
-  Auth.forgotPasswordSubmit(username, code, new_password)
+  Auth.forgotPasswordSubmit(username, code, newPassword)
     .then((data) => console.log(data))
     .catch((err) => console.log(err))
 }
