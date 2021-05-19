@@ -1,4 +1,4 @@
-function isSelected (day, value) {
+export function isSelected (day, value) {
   return value.isSame(day, 'day')
 }
 
@@ -6,7 +6,7 @@ export function beforeToday (day) {
   return day.isBefore(new Date(), 'day')
 }
 
-function isToday (day) {
+export function isToday (day) {
   return day.isSame(new Date(), 'day')
 }
 

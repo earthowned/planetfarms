@@ -32,7 +32,7 @@ export const listCalenderEvents = (sort = '', pageNumber = '') => async (
   }
 }
 
-export const createCalenderEvent = (newCalenderEvent) => async (disoatch, getState) => {
+export const createCalenderEvent = (newCalenderEvent) => async (dispatch, getState) => {
   try {
     dispatch({
       type: CALENDER_EVENT_CREATE_REQUEST
@@ -47,7 +47,7 @@ export const createCalenderEvent = (newCalenderEvent) => async (disoatch, getSta
            error.response && error.response.data.message
              ? error.response.data.message
              : error.message
-    disoatch({
+    dispatch({
       type: CALENDER_EVENT_CREATE_FAIL,
       payload: message
     })
