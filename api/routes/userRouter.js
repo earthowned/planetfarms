@@ -6,7 +6,8 @@ const {
   changePassword,
   forgotPassword,
   forgotPasswordSubmit,
-  resendCode
+  resendCode,
+  confirmSignUpWithCode
 } = require('../controllers/userController.js')
 
 router.route('/').post(registerUser)
@@ -15,5 +16,6 @@ router.post('/changePassword', changePassword)
 router.post('/forgotPassword', forgotPassword)
 router.post('/forgotPasswordSubmit', forgotPasswordSubmit)
 router.post('/resendCode', resendCode)
+router.post('/confirmSignUp', confirmSignUpWithCode)
 
 module.exports = router
