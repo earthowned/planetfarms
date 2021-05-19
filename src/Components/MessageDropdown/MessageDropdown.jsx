@@ -38,21 +38,31 @@ const settings = [
     name: 'Logout',
     message: 'Do you want to logout?',
     id: 'logout',
+    inputText: ''
   },
   {
-    name: 'Conform PIN',
-    message: 'Do you want to Conform PIN?',
+    name: 'New PIN',
+    message: 'Do you want to ask for new PIN?',
     id: 'pin',
+    inputText: 'Please enter your User Name'
   },
   {
     name: 'Change Password',
     message: 'Do you want to Change Password?',
     id: 'changePassword',
+    inputText: 'Please enter your User Old Password'
   },
   {
     name: 'Forgot Password',
     message: 'Did you forgot your password?',
     id: 'forgotPassword',
+    inputText: 'Please enter your User Name'
+  },
+  {
+    name: 'Confirm sign up',
+    message: 'Do you want to confirm sign up by entering PIN?',
+    id: 'conformSignup',
+    inputText: 'Please enter your PIN'
   },
 ]
 

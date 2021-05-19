@@ -1,8 +1,7 @@
 import { Auth } from 'aws-amplify'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { logout } from '../../actions/userAction'
-import InputComponent from '../Input/InputComponent'
+import { conformPin, logout } from '../../actions/userAction'
 import './SettingsActionModel.css'
 
 const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
@@ -21,21 +20,11 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
   }
 
   async function changePassword() {
-    Auth.currentAuthenticatedUser()
-      .then((user) => {
-        return Auth.changePassword(user, 'oldPassword', 'newPassword')
-      })
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err))
+    dispatch(changePassword(input))
   }
 
-  async function conformPin() {
-    try {
-      await Auth.signOut()
-      dispatch(logout())
-    } catch (error) {
-      console.log('error signing out: ', error)
-    }
+  function handelConformPin() {
+    dispatch(conformPin(input))
   }
 
   async function forgotPassword(username) {
@@ -55,7 +44,7 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
         signOut()
         break
       case 'pin':
-        conformPin()
+        handelConformPin()
         break
       case 'changePassword':
         changePassword()
@@ -73,15 +62,59 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
       <div className='settings-modal-container'>
         <div className='settings-modal-inner-container'>
           <h2>{settingAction.name}</h2>
-          {settingAction.id !== 'logout' && (
-            <InputComponent
-              text={settingAction.name}
-              error={settingAction.name}
-              image='/img/user-green-outline.svg'
-              changeHandler={changeInput}
-              name='Code'
-              autoFocus='autoFocus'
-            />
+          <p>{settingAction.inputText}</p>
+          {settingAction.id === 'logout' ? (
+            <></>
+          ) : settingAction.id === 'changePassword' ? (
+            <div className='input-container'>
+              <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+                <div className='input-content'>
+                  <input
+                    placeholder={settingAction.inputText}
+                    className='username ibmplexsans-regular-normal-monsoon-16px'
+                    onChange={(e) => changeInput(e)}
+                    name='Code'
+                    autoFocus='autoFocus'
+                  />
+                </div>
+              </div>
+              <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+                <div className='input-content'>
+                  <input
+                    placeholder={settingAction.inputText}
+                    className='username ibmplexsans-regular-normal-monsoon-16px'
+                    onChange={(e) => changeInput(e)}
+                    name='Code'
+                    autoFocus='autoFocus'
+                  />
+                </div>
+              </div>
+              <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+                <div className='input-content'>
+                  <input
+                    placeholder={settingAction.inputText}
+                    className='username ibmplexsans-regular-normal-monsoon-16px'
+                    onChange={(e) => changeInput(e)}
+                    name='Code'
+                    autoFocus='autoFocus'
+                  />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className='input-container'>
+              <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+                <div className='input-content'>
+                  <input
+                    placeholder={settingAction.inputText}
+                    className='username ibmplexsans-regular-normal-monsoon-16px'
+                    onChange={(e) => changeInput(e)}
+                    name='Code'
+                    autoFocus='autoFocus'
+                  />
+                </div>
+              </div>
+            </div>
           )}
           <p>{settingAction.message}</p>
           <div className='popup-btn-wrapper'>
@@ -89,7 +122,7 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
               Cancel
             </button>
             <button onClick={() => settingsOptions(settingAction.id)} className='default-btn'>
-              Save
+              Yes
             </button>
           </div>
         </div>

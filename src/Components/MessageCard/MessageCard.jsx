@@ -10,7 +10,7 @@ const MessageCard = ({ contact, clickHandler, profileSettings, setModalActive, c
   return (
     <>
       {profileSettings ? (
-        <button className='contact-card' onClick={() => clickProfileHandler(contact)}>
+        <button className='last-contact-card' onClick={() => clickProfileHandler(contact)}>
           <div className='contact-text'>
             <h4>{contact?.name}</h4>
             <p>{contact?.message}</p>

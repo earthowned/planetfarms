@@ -194,4 +194,13 @@ const resendCode = async (req, res) => {
   }
 }
 
-module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode }
+const  confirmSignUpWithCode =  async (req, res) => { 
+  const { username, code } = req.body
+  try {
+    await Auth.confirmSignUp(username, code);
+  } catch (error) {
+      console.log('error confirming sign up', error);
+  }
+}
+
+module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode }
