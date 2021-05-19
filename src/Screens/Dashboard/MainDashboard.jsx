@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useState, useRef, useEffect} from "react";
 import "./main-dashboard.css";
 import {  Link } from "react-router-dom";
@@ -144,25 +145,123 @@ function SeeAllButton({ children }) {
 
 function MainContainer () {
   const [libraryScrollActive, setLibraryScrollActive] = useState(true);
+  const [libraryScrollLeftActive, setLibraryScrollLeftActive] = useState(false);
   const [coursesScrollActive, setCoursesScrollActive] = useState(true);
+  const [coursesScrollLeftActive, setCoursesScrollLeftActive] = useState(false);
   const [groupScrollActive, setGroupScrollActive] = useState(true);
-  
+  const [groupScrollLeftActive, setGroupScrollLeftActive] = useState(false);
+  const [scrollValue, setScrollValue] = useState();
   const scrollLibraryRef = useRef();
   const scrollCoursesRef = useRef();
   const scrollGroupRef = useRef();
-  
+
+  // creating the state for the width
+  const [scrolledLibWidth, setScrolledLibWidth] = useState();
+  const [widthlib, setWidthlib] = useState();
+  const [scrolledCourseWidth, setScrolledCourseWidth] = useState();
+  const [widthcourse, setWidthcourse] = useState();
+  const [scrolledGroupWidth, setScrolledGroupWidth] = useState();
+  const [widthgroup, setWidthgroup] = useState();
+ 
   const scrollRight = (scrollParam) => {
-    scrollParam.current.scrollLeft += 500;
+   
+    if(scrollParam.current.className === "mylibrary-container--tiles") {
+      // scrolledLibWidth = scrollParam.current.scrollLeft += 500;
+      setWidthlib(scrollParam.current.scrollWidth);
+      setScrolledLibWidth(scrollParam.current.scrollLeft += 500);
+      console.log("scroll-library-width :", scrolledLibWidth);
+      setLibraryScrollLeftActive(true);
+    }
+
+    if(scrollParam.current.className === "mycourse-container--tiles") {
+      setScrolledCourseWidth(scrollParam.current.scrollLeft += 500);
+      console.log("scroll-Course-width :", scrolledCourseWidth);
+      setCoursesScrollLeftActive(true);
+    }
+
+    if(scrollParam.current.className === "mygroup-container--tiles") {
+      setScrolledGroupWidth(scrollParam.current.scrollLeft += 500);
+      console.log("scroll-group-width :", scrolledGroupWidth);
+      setGroupScrollLeftActive(true);
+    }
+  }
+
+  const scrollLeft = (scrollParam) => {
+      if(scrollParam.current.className === "mylibrary-container--tiles") {
+    scrollParam.current.scrollLeft = widthcourse - (widthcourse + 500);
+    scrollParam.current.scrollLeft = null;
+    setScrolledLibWidth(null);
+    console.log("scroll left :", scrollParam.current.scrollLeft);
+    console.log("widthlib :", widthlib);
+    }
+
+    if(scrollParam.current.className === "mycourse-container--tiles") {
+      setWidthcourse(scrollParam.current.scrollWidth);
+    scrollParam.current.scrollLeft = widthcourse - scrolledCourseWidth;
+    scrollParam.current.scrollLeft = null;
+    setScrolledCourseWidth(null);
+    console.log("scroll left :", scrollParam.current.scrollLeft);
+    console.log("widthcourse :", widthcourse);
+    }
+
+    if(scrollParam.current.className === "mygroup-container--tiles") {
+       setWidthgroup(scrollParam.current.scrollWidth);
+    scrollParam.current.scrollLeft = widthgroup - scrolledGroupWidth;
+    scrollParam.current.scrollLeft = null;
+    setScrolledGroupWidth(null);
+    console.log("scroll left :", scrollParam.current.scrollLeft);
+    console.log("widthcourse :", widthgroup);
+    }
   }
 
   const windowWidth = useSizeFinder();
 
   useEffect(() => {
-    if(document.querySelector('.mylibrary-container--tiles').offsetWidth >= scrollLibraryRef.current.scrollWidth) setLibraryScrollActive(false);
+    if(document.querySelector('.mylibrary-container--tiles').offsetWidth >= scrollLibraryRef.current.scrollWidth) {
+      setLibraryScrollActive(false)
+      console.log(document.querySelector('.mylibrary-container--tiles').offsetWidth);
+    };
     if(document.querySelector('.mycourse-container--tiles').offsetWidth >= scrollCoursesRef.current.scrollWidth) setCoursesScrollActive(false);
     if(document.querySelector('.mygroup-container--tiles').offsetWidth >= scrollGroupRef.current.scrollWidth) setGroupScrollActive(false);
+
   }, [windowWidth])
   
+  useEffect(() => {
+     //disabling the right arrow 
+    if((widthlib - scrolledLibWidth) < 339) {
+      setLibraryScrollActive(false)
+    } else {
+      setLibraryScrollActive(true);
+    }
+    if((widthlib - scrolledLibWidth) === widthlib) {
+      setLibraryScrollLeftActive(false);
+    }
+    console.log(widthlib, scrolledLibWidth);
+  }, [setScrolledLibWidth, setWidthlib, scrollRight])
+
+   useEffect(() => {
+     //disabling the right arrow 
+    if((widthcourse - scrolledCourseWidth) < 339) {
+      setCoursesScrollActive(false)
+    } else {
+      setCoursesScrollActive(true);
+    }
+    if((widthcourse - scrolledCourseWidth) === widthcourse) {
+      setCoursesScrollLeftActive(false);
+    }
+  }, [setScrolledCourseWidth, setWidthcourse, scrollRight])
+
+   useEffect(() => {
+     //disabling the right arrow 
+    if((widthgroup - scrolledGroupWidth) < 339) {
+      setGroupScrollActive(false)
+    } else {
+      setGroupScrollActive(true);
+    }
+    if((widthgroup - scrolledGroupWidth) === widthgroup) {
+      setGroupScrollLeftActive(false);
+    }
+  }, [setScrolledGroupWidth, setWidthgroup, scrollRight])
   return (
         <div className="dashboard-main-container border-1px-onyx">
           <div className="dashboard-inner-container">
@@ -179,6 +278,11 @@ function MainContainer () {
                 <Tiles data={DashboardData} title="Add Library"/>
               </div>
                {libraryScrollActive && <img className="scroll-icon" onClick={() => scrollRight(scrollLibraryRef)} src="/img/scroll-icon.svg" alt="scroll-icon"/>}
+                {
+                libraryScrollLeftActive && 
+                <img className="scroll-left-icon" src="/img/scroll-icon.svg" 
+              onClick={() => scrollLeft(scrollLibraryRef)} alt="scroll-icon"/>
+              }
             </div>
 
             {/* my course container */}
@@ -193,7 +297,15 @@ function MainContainer () {
               <div className="mycourse-container--tiles" ref={scrollCoursesRef}>
                   <Tiles data={MyCourseData} title="Add Course"/>
               </div>
-              {coursesScrollActive && <img className="scroll-icon" src="/img/scroll-icon.svg" onClick={() => scrollRight(scrollCoursesRef)} alt="scroll-icon"/>}
+              {coursesScrollActive && 
+              <img className="scroll-icon" src="/img/scroll-icon.svg" 
+              onClick={() => scrollRight(scrollCoursesRef)} alt="scroll-icon"/>
+              }
+              {
+                coursesScrollLeftActive && 
+                <img className="scroll-left-icon" src="/img/scroll-icon.svg" 
+              onClick={() => scrollLeft(scrollCoursesRef)} alt="scroll-icon"/>
+              }
             </div>
 
             {/* my group container */}
@@ -208,7 +320,14 @@ function MainContainer () {
               <div ref={scrollGroupRef} className="mygroup-container--tiles">
                 <Tiles data={DashboardData} title="Add Groups"/>
               </div>
-             {groupScrollActive && <img className="scroll-icon" src="/img/scroll-icon.svg" onClick={() => scrollRight(scrollGroupRef)} alt="scroll-icon"/>}
+             {groupScrollActive && 
+             <img className="scroll-icon" src="/img/scroll-icon.svg" 
+             onClick={() => scrollRight(scrollGroupRef)} alt="scroll-icon"/>}
+             {
+                groupScrollLeftActive && 
+                <img className="scroll-left-icon" src="/img/scroll-icon.svg" 
+              onClick={() => scrollLeft(scrollGroupRef)} alt="scroll-icon"/>
+              }
             </div>
             </div>
         </div>
@@ -232,8 +351,8 @@ function Tiles({data, title}) {
     })
     }
     <div className="add-container">
-                    <img src="/img/plus-icon.svg" alt="add-icon" />
-                    <h4>{title}</h4>
+        <img src="/img/plus-icon.svg" alt="add-icon" />
+        <h4>{title}</h4>
     </div>    
     </>
   )
