@@ -168,7 +168,7 @@ function App () {
         <Route path='/courses/my-courses/:id'>
           <EditCollection />
         </Route>
-         <Route path='/courses/users'>
+        <Route path='/courses/users'>
           <CourseUsers />
         </Route>
         <Route path='/enterprises'>
@@ -202,7 +202,7 @@ function App () {
           <LessonPage />
         </Route>
         <Route path='/coursepage'>
-          <MyCoursePage unpaid="unpaid" />
+          <MyCoursePage unpaid='unpaid' />
         </Route>
         <Route path='/test-lesson-1'>
           <LessonTest />
