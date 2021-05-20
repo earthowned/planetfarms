@@ -28,61 +28,61 @@ const DashboardLayout = ({ title, children }) => {
   }, [setMessageActive, setUserActive])
 
   // using custom function
-  let windowWidth = useSizeFinder()
+  const windowWidth = useSizeFinder()
 
-  //mobile button functionality
-  function activeBurger() {
+  // mobile button functionality
+  function activeBurger () {
     setSidebar(!sidebar)
     setBurgerActive(!burgerActive)
 
-    //making the notification off
+    // making the notification off
     setNotificationActive(false)
 
-    //making the user off
+    // making the user off
     setUserActive(false)
 
-    //making the message off
+    // making the message off
     setMessageActive(false)
   }
 
-  function activeNotification() {
+  function activeNotification () {
     setNotificationActive(!notificationActive)
 
-    //making the sidebar off
+    // making the sidebar off
     setSidebar(false)
     setBurgerActive(false)
-    //making the user off
+    // making the user off
     setUserActive(false)
 
-    //making the message off
+    // making the message off
     setMessageActive(false)
   }
 
-  function activeMessage() {
+  function activeMessage () {
     setMessageActive(!messageActive)
 
-    //making the sidebar off
+    // making the sidebar off
     setSidebar(false)
     setBurgerActive(false)
-    //making the notification off
+    // making the notification off
     setNotificationActive(false)
-    //making the user off
+    // making the user off
     setUserActive(false)
   }
-  function SignOutModal(e) {
+  function SignOutModal (e) {
     setModalActive(true)
   }
 
-  function activeUser() {
+  function activeUser () {
     setUserActive(!userActive)
 
-    //making the sidebar off
+    // making the sidebar off
     setSidebar(false)
     setBurgerActive(false)
-    //making the notification off
+    // making the notification off
     setNotificationActive(false)
 
-    //making the message off
+    // making the message off
     setMessageActive(false)
   }
 
@@ -121,7 +121,7 @@ const DashboardLayout = ({ title, children }) => {
             </div>
             <h1>{title}</h1>
             <div>{children}</div>
-            <div className='space-taker'></div>
+            <div className='space-taker' />
           </div>
 
           <div className='footer-nav'>
@@ -155,7 +155,7 @@ const DashboardLayout = ({ title, children }) => {
   )
 }
 
-function Hamburger() {
+function Hamburger () {
   return (
     <svg className='ham-tab' width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path d='M3 12H21' stroke='#00C688' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
@@ -165,7 +165,7 @@ function Hamburger() {
   )
 }
 
-function NotificationMenu() {
+function NotificationMenu () {
   return (
     <svg
       className='mobile-tab'
@@ -183,7 +183,7 @@ function NotificationMenu() {
   )
 }
 
-function MessageMenu() {
+function MessageMenu () {
   return (
     <svg
       className='mobile-tab'
@@ -201,7 +201,7 @@ function MessageMenu() {
   )
 }
 
-function UserMenu({ activeUser }) {
+function UserMenu ({ activeUser }) {
   return (
     <svg
       className='mobile-tab'

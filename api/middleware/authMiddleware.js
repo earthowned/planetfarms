@@ -13,8 +13,7 @@ const protect = async (req, res, next) => {
       /*
       * TODO: Maintain session and check again local session
       */
-      if (process.env.AUTH_METHOD != 'cognito')
-      req.user = await User.findByPk(decoded.id)
+      if (process.env.AUTH_METHOD !== 'cognito') { req.user = await User.findByPk(decoded.id) }
       next()
     } catch (error) {
       console.error(error)

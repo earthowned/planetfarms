@@ -11,27 +11,27 @@ const HeaderComponent = ({ title }) => {
   const [modalActive, setModalActive] = useState(false)
   const [settingAction, setSettingAction] = useState(null)
 
-  function messageNoti() {
+  function messageNoti () {
     setActive(!active)
     setNotification(false)
   }
 
-  function notificationNoti() {
+  function notificationNoti () {
     setNotification(!notification)
     setActive(false)
   }
-  let history = useHistory()
+  const history = useHistory()
 
-  function handleClick() {
+  function handleClick () {
     history.push('/messenger')
   }
 
-  function profileSettingNoti() {
+  function profileSettingNoti () {
     setProfileSettings(!profileSettings)
     setActive(false)
   }
 
-  function clickProfileHandler(settings) {
+  function clickProfileHandler (settings) {
     setSettingAction(settings)
     setModalActive(true)
   }

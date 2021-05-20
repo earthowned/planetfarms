@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { conformPin, logout } from '../../actions/userAction'
+import { confirmPin, logout } from '../../actions/userAction'
 import './SettingsActionModel.css'
 
 const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
@@ -9,7 +9,7 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
   const [input, setInput] = useState('')
   const [inputErr, setInputErr] = useState(false)
 
-  async function signOut() {
+  async function signOut () {
     setModalActive(false)
     try {
       await Auth.signOut()
@@ -19,15 +19,15 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
     }
   }
 
-  async function changePassword() {
+  async function changePassword () {
     dispatch(changePassword(input))
   }
 
-  function handelConformPin() {
-    dispatch(conformPin(input))
+  function handelConfirmPin () {
+    dispatch(confirmPin(input))
   }
 
-  async function forgotPassword(username) {
+  async function forgotPassword (username) {
     Auth.forgotPassword(username)
       .then((data) => console.log(data))
       .catch((err) => console.log(err))
@@ -38,13 +38,13 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
     setInputErr(false)
   }
 
-  function settingsOptions(setting) {
+  function settingsOptions (setting) {
     switch (setting) {
       case 'logout':
         signOut()
         break
       case 'pin':
-        handelConformPin()
+        handelConfirmPin()
         break
       case 'changePassword':
         changePassword()

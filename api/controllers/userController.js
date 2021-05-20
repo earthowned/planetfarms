@@ -194,12 +194,12 @@ const resendCode = async (req, res) => {
   }
 }
 
-const  confirmSignUpWithCode =  async (req, res) => { 
+const confirmSignUpWithCode = async (req, res) => {
   const { username, code } = req.body
   try {
-    await Auth.confirmSignUp(username, code);
+    await Auth.confirmSignUp(username, code)
   } catch (error) {
-      console.log('error confirming sign up', error);
+    console.log('error confirming sign up', error)
   }
 }
 
