@@ -78,6 +78,7 @@
   margin-left: 10px;
   margin-top: 5px;
   font-size: 12px;
+}
 
 .add-collection {
   display: flex;
@@ -97,3 +98,4 @@
   .collection-modal-inner-course-container .drag-drop {
     width: 100%;
   }
+}

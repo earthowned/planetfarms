@@ -19,8 +19,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
   const [enterpriseTitle, setEnterpriseTitle] = useState('')
   const [enterpriseDescription, setEnterpriseDescription] = useState('')
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
-  const [enterpriseDescriptionError, setEnterpriseDescriptionError] =
-    useState(false)
+  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -74,7 +73,6 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
     e.preventDefault()
     if (!enterpriseTitle) setEnterpriseTitleError(true)
     if (!enterpriseDescription) setEnterpriseDescriptionError(true)
-    console.log(enterpriseTitle, enterpriseDescription)
     // const newEnterprise = {title:enterpriseTitle,description:enterpriseD}
     if (enterpriseTitle && enterpriseDescription) {
       dispatch(
