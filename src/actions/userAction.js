@@ -7,9 +7,9 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
-  USER_CONFORM_CODE_REQUEST,
-  USER_CONFORM_CODE_SUCCESS,
-  USER_CONFORM_CODE_FAIL,
+  USER_CONFIRM_CODE_REQUEST,
+  USER_CONFIRM_CODE_SUCCESS,
+  USER_CONFIRM_CODE_FAIL,
   USER_PASSWORD_CHANGE_REQUEST,
   USER_PASSWORD_CHANGE_SUCCESS,
   USER_PASSWORD_CHANGE_FAIL
@@ -73,20 +73,20 @@ export const logout = () => (dispatch) => {
   document.location.href = '/login'
 }
 
-export const conformPin = (username) => async (dispatch) => {
+export const confirmPin = (username) => async (dispatch) => {
   try {
-    dispatch({ type: USER_CONFORM_CODE_REQUEST })
+    dispatch({ type: USER_CONFIRM_CODE_REQUEST })
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/users/resendCode`,
       { username }
     )
     dispatch({
-      type: USER_CONFORM_CODE_SUCCESS,
+      type: USER_CONFIRM_CODE_SUCCESS,
       payload: data
     })
   } catch (error) {
     dispatch({
-      type: USER_CONFORM_CODE_FAIL,
+      type: USER_CONFIRM_CODE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

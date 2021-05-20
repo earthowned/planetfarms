@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react"
-import "./signup-screen.css"
-import { useHistory, Link } from "react-router-dom"
-import Logo from "../../Components/Logo/Logo"
-import Banner from "../../Components/Banner/Banner"
-import InputComponent from "../../Components/Input/InputComponent"
-import Button from "../../Components/Button/Button"
-import Checkbox from "../../Components/Checkbox/Checkbox"
+import React, { useState, useEffect } from 'react'
+import './signup-screen.css'
+import { useHistory, Link } from 'react-router-dom'
+import Logo from '../../Components/Logo/Logo'
+import Banner from '../../Components/Banner/Banner'
+import InputComponent from '../../Components/Input/InputComponent'
+import Button from '../../Components/Button/Button'
+import Checkbox from '../../Components/Checkbox/Checkbox'
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from "../../actions/userAction"
-import OauthBtn from "../../Components/OauthBtn/OauthBtn"
+import { register } from '../../actions/userAction'
+import OauthBtn from '../../Components/OauthBtn/OauthBtn'
 
-function App() {
+function App () {
   return <SignupScreen {...X0200SignUpemptyData} />
 }
 
-function SignupScreen(props) {
+function SignupScreen (props) {
   const {
     welcomeBack,
     spanText,
@@ -25,14 +25,14 @@ function SignupScreen(props) {
     facebook
   } = props
 
-  const history = useHistory();
+  const history = useHistory()
 
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [terms, setTerms] = useState(false)
   const [active, setActive] = useState(false)
 
-  const [userError, setUserError] = useState("")
+  const [userError, setUserError] = useState('')
   const [termsError, setTermsError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [passwordLengthError, setPasswordLengthError] = useState(false)
@@ -43,7 +43,7 @@ function SignupScreen(props) {
 
   useEffect(() => {
     if (userInfo) {
-      history.push("/register-complete")
+      history.push('/register-complete')
     }
   }, [history, userInfo])
 
@@ -54,7 +54,7 @@ function SignupScreen(props) {
     if (!terms) setTermsError(true)
 
     if (username && password && terms) {
-        return dispatch(register(username, password))
+      return dispatch(register(username, password))
     }
   }
 
@@ -62,7 +62,7 @@ function SignupScreen(props) {
     setUsername(e.target.value)
     setUserError(false)
     setActive(true)
-  };
+  }
 
   const passwordChange = (e) => {
     setPassword(e.target.value)
@@ -70,77 +70,77 @@ function SignupScreen(props) {
   }
 
   return (
-    <div className="x02-0-0-sign-up-empty">
+    <div className='x02-0-0-sign-up-empty'>
 
       {/* content wrapper */}
-      <div className="content-wrapper">
+      <div className='content-wrapper'>
 
         {/* sign in form */}
-        <form className="sign-up">
-          <div className="icons">
+        <form className='sign-up'>
+          <div className='icons'>
             <Logo />
           </div>
 
-          <h1 className="welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px">
+          <h1 className='welcome-back ibmplexsans-semi-bold-quarter-spanish-white-40px'>
             {welcomeBack}
           </h1>
 
           {/* form */}
-          <div className="form-container">
+          <div className='form-container'>
             <InputComponent
               text={username}
               error={userError}
-              image="/img/user-green-outline.svg"
+              image='/img/user-green-outline.svg'
               changeHandler={userChange}
-              name={userError === 'UsernameExistsException' ? 'Username already exists' : "Username"}
-              autoFocus="autoFocus"
+              name={userError === 'UsernameExistsException' ? 'Username already exists' : 'Username'}
+              autoFocus='autoFocus'
             />
 
             <InputComponent
               text={password}
-              error={passwordLengthError ? passwordLengthError : passwordError}
-              image="/img/lock-outline.svg"
+              error={passwordLengthError || passwordError}
+              image='/img/lock-outline.svg'
               changeHandler={passwordChange}
-              password="password"
-              name={passwordLengthError ? "Password must be greater than length 6" : "Password"}
+              password='password'
+              name={passwordLengthError ? 'Password must be greater than length 6' : 'Password'}
             />
 
-            <div className="button-group">
-              <div className="button-group-container-1">
-                <div className="terms">
+            <div className='button-group'>
+              <div className='button-group-container-1'>
+                <div className='terms'>
                   <Checkbox termsError={termsError} setTermsError={setTermsError} terms={terms} setTerms={setTerms} />
-                  <p className="checkbox-text">
-                    <span className="span0-lQtl1i">{spanText}</span>
-                    <span className="span1-lQtl1i">{spanText2}</span>
-                    <span className="span2-lQtl1i">{spanText3}</span>
+                  <p className='checkbox-text'>
+                    <span className='span0-lQtl1i'>{spanText}</span>
+                    <span className='span1-lQtl1i'>{spanText2}</span>
+                    <span className='span2-lQtl1i'>{spanText3}</span>
                   </p>
                 </div>
-                <p className="error-message">{termsError ? "Please read the terms of service" : " "}</p>
+                <p className='error-message'>{termsError ? 'Please read the terms of service' : ' '}</p>
               </div>
-              <div className="sign-up-btn-container">
-              <Button clickHandler={registerUser} name="Sign Up" />
+              <div className='sign-up-btn-container'>
+                <Button clickHandler={registerUser} name='Sign Up' />
               </div>
             </div>
-            <div className="o-auth-container">
+            <div className='o-auth-container'>
               <OauthBtn
-              google={google}
-              facebook={facebook}
-              name={text2}
+                google={google}
+                facebook={facebook}
+                name={text2}
               />
             </div>
-            <div className="signup-option">
-              <p className="">
+            <div className='signup-option'>
+              <p className=''>
                 Already have an Account?
               </p>
-              <Link className="span2-hsNx6X" to="/">
+              <Link className='span2-hsNx6X' to='/'>
                 Sign In
               </Link>
             </div>
           </div>
         </form>
-        <div className="banner-container">
-          <div className="banner-images">
-            <div className="overlap-group-3">
+        <div className='banner-container'>
+          <div className='banner-images'>
+            <div className='overlap-group-3'>
               <Banner />
             </div>
           </div>
@@ -152,15 +152,15 @@ function SignupScreen(props) {
 }
 
 const X0200SignUpemptyData = {
-  welcomeBack: "Become a member",
-  spanText: "I agree with",
-  spanText2: " ",
-  spanText3: "Terms of Service ",
-  text2: "Sign In with services",
-  google: "Google",
-  subtract: "",
-  facebook: "Facebook",
-  spanText4: "Already have an account?"
+  welcomeBack: 'Become a member',
+  spanText: 'I agree with',
+  spanText2: ' ',
+  spanText3: 'Terms of Service ',
+  text2: 'Sign In with services',
+  google: 'Google',
+  subtract: '',
+  facebook: 'Facebook',
+  spanText4: 'Already have an account?'
 }
 
 export default App

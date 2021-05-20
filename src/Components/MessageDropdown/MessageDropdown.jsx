@@ -10,28 +10,28 @@ const contacts = [
     img: '/img/avatar-img.svg',
     message: 'Hi there! Can you help with co..',
     date: '08/12/2020',
-    notfication: 2,
+    notfication: 2
   },
   {
     name: 'Bessie Cooper',
     img: '/img/avatar-msg.svg',
     message: 'Hi there! Can you help with co..',
     date: '18/1/2020',
-    notfication: 12,
+    notfication: 12
   },
   {
     name: 'Bessie Cooper',
     img: '/img/avatar-img.svg',
     message: 'Hi there! Can you help with co..',
     date: '08/8/2019',
-    notfication: 5,
+    notfication: 5
   },
   {
     name: 'Bessie Cooper',
     img: '/img/avatar-msg.svg',
     message: 'Hi there! Can you help with co..',
-    date: '08/4/2020',
-  },
+    date: '08/4/2020'
+  }
 ]
 const settings = [
   {
@@ -61,9 +61,9 @@ const settings = [
   {
     name: 'Confirm sign up',
     message: 'Do you want to confirm sign up by entering PIN?',
-    id: 'conformSignup',
+    id: 'confirmSignup',
     inputText: 'Please enter your PIN'
-  },
+  }
 ]
 
 const MessageDropdown = ({
@@ -75,7 +75,7 @@ const MessageDropdown = ({
   messageActive,
   notificationActive,
   profileSettings,
-  clickProfileHandler,
+  clickProfileHandler
 }) => {
   return (
     <>
