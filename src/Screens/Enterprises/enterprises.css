@@ -112,7 +112,7 @@
 
 .enterprise-btn-second {
   align-items: center;
-  background-color:  var(--primary-color);
+  background-color: var(--primary-color);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -224,7 +224,7 @@
 
 .all-enterprises {
   align-items: flex-start;
-  background-color:  var(--black);
+  background-color: var(--black);
   display: flex;
   overflow: hidden;
   width: 1440px;
