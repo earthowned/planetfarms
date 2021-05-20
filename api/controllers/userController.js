@@ -72,22 +72,9 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    let user, username
-    if (process.env.AUTH_METHOD === 'cognito') {
-      user = await Auth.signIn(name, password)
-      if (user) {
-        username = name
-      }
-    } else {
-      user = await User.findOne({ where: { name, password } })
-      if (user) {
-        username = user.dataValues.id
-      }
-    }
+    username = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)  
     if (username) {
       res.json({
-        /* id: user.dataValues.id,
-        name: user.dataValues.name, */
         token: generateToken(username)
       })
     } else {
@@ -98,11 +85,19 @@ const authUser = async (req, res) => {
   } catch (e) {
     console.log(e)
     res.status(401).json({
-      /* id: user.dataValues.id,
-      name: user.dataValues.name, */
       error: 'Invalid email or password'
     })
   }
+}
+
+localAuth = async (name, password) => {
+  user = await User.findOne({ where: { name, password } })
+  return (user) ? user.dataValues.id : ''
+}
+
+cognitoAuth = async (name, password) => {
+  user = await Auth.signIn(name, password)
+  return (user) ? name : ''
 }
 
 // @desc    Register a new user
