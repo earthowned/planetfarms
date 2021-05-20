@@ -173,17 +173,19 @@
 .mobile-view-dropdown-container {
   position: fixed;
   width: 100%;
-  height: 0;
+  height: auto;
   background: var(--background-color);
   z-index: 5000;
-  bottom: 5%;
+  bottom: 0;
   right: 0;
-  padding: 0 7em;
+  padding: 0 5em;
+  margin-bottom: 80px;
+  transform: translateY(100%);
   transition: all ease-in-out 0.2s;
 }
 
 .mobile-view-dropdown-container.slide {
-  height: 60%;
+  transform: translateY(0);
   transition: all ease-in-out 0.2s;
 }
 

@@ -44,7 +44,7 @@
 }
 
 .btn-container {
-  margin-top: 10px;
+  margin: 24px 0;
 }
 
 .close-btn {
@@ -56,28 +56,23 @@
   background: var(--background-color);
   position: fixed;
   width: 100%;
-  height: 0;
+  height: auto;
   z-index: 5000;
-  padding: 0 2em;
-  bottom: 10%;
+  margin-bottom: 80px;
+  bottom: 0;
   right: 0;
+  transform: translateY(100%);
   transition: all ease-in-out 0.2s;
 }
 
 .message-dropdown-mobile.slide {
-  height: 75%;
+  transform: translateY(0);
   transition: all ease-in-out 0.2s;
-}
-
-.message-dropdown-mobile .message-dropdown-mobile-inner-container {
-  height: 0;
 }
 
 .message-dropdown-mobile.slide .message-dropdown-mobile-inner-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
 }
 
 .message-dropdown-mobile-header {
@@ -100,7 +95,7 @@
 
 @media only screen and (max-width: 1024px) {
   .message-dropdown-mobile {
-    padding: 0 7em;
+    padding: 2em 5em;
   }
 
   .message-dropdown-mobile-header {
@@ -111,7 +106,7 @@
 
 @media only screen and (max-width: 620px) {
   .message-dropdown-mobile {
-    padding: 0 2em;
+    padding: 1.5em 3em;
   }
 
   .message-dropdown-mobile-header {
@@ -121,6 +116,6 @@
 
 @media only screen and (max-width: 400px) {
   .message-dropdown-mobile {
-    padding: 0 1em;
+    padding: 1.5em 1em;
   }
 }

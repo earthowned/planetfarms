@@ -123,16 +123,16 @@ const DashboardLayout = ({title, children}) => {
         </div>
 
         <div className="footer-nav">
-          <div onClick={() => activeUser()} className={`mobile-tab-wrapper ${userActive && "active"} `}>
+          <div onClick={() => activeUser()} className={`mobile-tab-wrapper ${userActive && "bgactive"} `}>
             <Link to="/dashboard"><UserMenu activeUser={activeUser} /></Link>
           </div>
-          <div onClick={() => activeMessage()} className={`mobile-tab-wrapper ${messageActive && "active"}`}>
+          <div onClick={() => activeMessage()} className={`mobile-tab-wrapper ${messageActive && "bgactive"}`}>
             <MessageMenu activeMessage={activeMessage}/>
           </div>
-          <div onClick={() => activeNotification()} className={`mobile-tab-wrapper ${notificationActive && "active"}`}> 
+          <div onClick={() => activeNotification()} className={`mobile-tab-wrapper ${notificationActive && "bgactive"}`}> 
             <NotificationMenu activeNotification={activeNotification} />
           </div>
-          <div onClick={(e) => { activeBurger(); SignOutModal(e) } } className={`mobile-tab-wrapper ${burgerActive && "active"}`}>
+          <div onClick={(e) => { activeBurger(); SignOutModal(e) } } className={`mobile-tab-wrapper ${burgerActive && "bgactive"}`}>
             <Hamburger activeBurger={activeBurger} />
           </div>
         </div>
