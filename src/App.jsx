@@ -36,6 +36,7 @@ import Amplify, { Auth } from 'aws-amplify'
 import LessonTest from './Screens/LessonTest/LessonTest'
 import CourseCollection from './Screens/Courses/CourseCollection/CourseCollection'
 import EditCollection from './Screens/Courses/EditCollection/EditCollection'
+import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
 
 function amplifyConfig () {
   Amplify.configure({
@@ -167,6 +168,9 @@ function App () {
         <Route path='/courses/my-courses/:id'>
           <EditCollection />
         </Route>
+         <Route path='/courses/users'>
+          <CourseUsers />
+        </Route>
         <Route path='/enterprises'>
           <Enterprises />
         </Route>
@@ -196,6 +200,9 @@ function App () {
         </Route>
         <Route path='/mycoursepage/:id'>
           <LessonPage />
+        </Route>
+        <Route path='/coursepage'>
+          <MyCoursePage unpaid="unpaid" />
         </Route>
         <Route path='/test-lesson-1'>
           <LessonTest />
