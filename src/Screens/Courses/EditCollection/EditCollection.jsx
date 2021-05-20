@@ -50,12 +50,12 @@ const EditCollection = () => {
       <BackButton location='/courses/my-courses' />
       <div className='edit-collection-container'>
         {
-                    travelling.map(item => {
-                      return (
-                        <EditCollectionCard item={item} />
-                      )
-                    })
-                }
+          travelling.map(item => {
+            return (
+              <EditCollectionCard item={item} />
+            )
+          })
+        }
       </div>
     </DashboardLayout>
   )

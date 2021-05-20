@@ -46,12 +46,12 @@ const CourseUserCard = ({ name, data, btnName, subName }) => {
       <h4 className='courses-users-collection-header'>{name}</h4>
       <div className={data.length === 1 ? 'courses-collection-main-container single' : 'courses-collection-main-container'}>
         {
-                data.map(item => {
-                  return (
-                    <BackgroundUserCard item={item} btnName={btnName} subName={subName} />
-                  )
-                })
-            }
+          data.map(item => {
+            return (
+              <BackgroundUserCard item={item} btnName={btnName} subName={subName} />
+            )
+          })
+        }
       </div>
     </>
   )
