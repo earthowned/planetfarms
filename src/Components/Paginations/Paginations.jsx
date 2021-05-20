@@ -3,14 +3,43 @@ import './pagination.css'
 
 const Pagination = ({ pageNumber = 1, resourceList, setPageNumber }) => {
  const [newPages, setNewPages] = useState([]);  
+ const [newUpdatedPages, setNewUpdatedPages] = useState([]);  
   useEffect(() => {
-  //   if(pageNumber < (resourceList.totalPages - 2)) {
-  //  setNewPages(pages.slice((pageNumber - 1), pageNumber + 3));
-  //   }
   let addedPages = [...Array(resourceList.totalPages).keys()];
   let newAddedPages = addedPages.map(num => num + 1);
   setNewPages(newAddedPages);
-  }, [resourceList])
+  
+  if(pageNumber === 1) {
+     return setNewUpdatedPages(newPages.slice(pageNumber, pageNumber + 2));
+  }
+  if(pageNumber === 2) {
+    return setNewUpdatedPages(newPages.slice(pageNumber -1, pageNumber + 2));
+  }
+
+  if(pageNumber === 3) {
+    return setNewUpdatedPages(newPages.slice(pageNumber -2, pageNumber + 2));
+  }
+
+  //for third last number
+  if(pageNumber === (resourceList.totalPages - 2)) {
+     return setNewUpdatedPages(newPages.slice((pageNumber - 3), pageNumber + 1));
+  }
+
+  //for second last number
+  if(pageNumber === (resourceList.totalPages - 1)) {
+     return setNewUpdatedPages(newPages.slice((pageNumber - 3), pageNumber));
+  }
+
+  // for last number
+  if(pageNumber === resourceList.totalPages) {
+    return setNewUpdatedPages(newPages.slice((pageNumber - 4), pageNumber - 1));
+  }
+
+  // for other number
+  if(pageNumber < (resourceList.totalPages - 1)) {
+   setNewUpdatedPages(newPages.slice((pageNumber - 3), pageNumber + 2));
+    }
+  }, [resourceList, handlePagination])
  
    function handlePagination (num, multiplier) {
     setPageNumber((pageNumber += num * multiplier))
@@ -22,10 +51,12 @@ const Pagination = ({ pageNumber = 1, resourceList, setPageNumber }) => {
         <button type='button' disabled={pageNumber == 1} onClick={() => handlePagination(1, -1)}>
           Prev
         </button>
+        <span onClick={() => setPageNumber(1)} className={pageNumber === 1 && "active"}>1</span>
         {
           //Pages can be replaced with resourceList.totalPages
-          newPages && newPages.map(num => <PageNumber num={num} pageNumber={pageNumber} setPageNumber={setPageNumber} />)
+          newUpdatedPages && newUpdatedPages.map(num => <PageNumber num={num} pageNumber={pageNumber} setPageNumber={setPageNumber} />)
         }
+        <span onClick={() => setPageNumber(resourceList.totalPages)} className={resourceList.totalPages === pageNumber && "active"}>{resourceList.totalPages}</span>
         <button type='button' disabled={pageNumber >= resourceList.totalPages} onClick={() => handlePagination(1, +1)}>
           Next
         </button>
