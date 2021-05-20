@@ -12,7 +12,16 @@ import {
   USER_CONFIRM_CODE_FAIL,
   USER_PASSWORD_CHANGE_REQUEST,
   USER_PASSWORD_CHANGE_SUCCESS,
-  USER_PASSWORD_CHANGE_FAIL
+  USER_PASSWORD_CHANGE_FAIL,
+  CONFORM_SIGNUP_REQUEST,
+  CONFORM_SIGNUP_SUCCESS,
+  CONFORM_SIGNUP_FAIL,
+  FORGET_PASSWORD_REQUEST,
+  FORGET_PASSWORD_SUCCESS,
+  FORGET_PASSWORD_FAIL,
+  FORGET_PASSWORD_CONFORM_REQUEST,
+  FORGET_PASSWORD_CONFORM_SUCCESS,
+  FORGET_PASSWORD_CONFORM_FAIL
 } from '../constants/userConstants'
 
 export const register = (name, password) => async (dispatch) => {
@@ -109,6 +118,72 @@ export const changePassword = (username, oldPassword, newPassword) => async (dis
   } catch (error) {
     dispatch({
       type: USER_PASSWORD_CHANGE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+export const confirmSignupWithCode = (username, code) => async (dispatch) => {
+  try {
+    dispatch({ type: CONFORM_SIGNUP_REQUEST })
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/confirmSignUp`,
+      { username, code }
+    )
+    dispatch({
+      type: CONFORM_SIGNUP_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: CONFORM_SIGNUP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+export const forgotPasswordRequest = (username) => async (dispatch) => {
+  try {
+    dispatch({ type: FORGET_PASSWORD_REQUEST })
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/forgotPassword`,
+      { username }
+    )
+    dispatch({
+      type: FORGET_PASSWORD_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: FORGET_PASSWORD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+export const forgotPasswordConform = (username, code, newPassword) => async (dispatch) => {
+  try {
+    dispatch({ type: FORGET_PASSWORD_CONFORM_REQUEST })
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/forgotPasswordSubmit`,
+      { username, code, newPassword }
+    )
+    dispatch({
+      type: FORGET_PASSWORD_CONFORM_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: FORGET_PASSWORD_CONFORM_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

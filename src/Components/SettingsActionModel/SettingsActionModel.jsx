@@ -1,15 +1,22 @@
 import { Auth } from 'aws-amplify'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { confirmPin, logout } from '../../actions/userAction'
+import {
+  confirmPin,
+  logout,
+  confirmSignupWithCode,
+  forgotPasswordRequest,
+  forgotPasswordConform,
+} from '../../actions/userAction'
 import './SettingsActionModel.css'
 
 const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
   const dispatch = useDispatch()
   const [input, setInput] = useState('')
   const [inputErr, setInputErr] = useState(false)
+  const [forgotPasswordConformModal, setForgotPasswordConformModal] = useState(false)
 
-  async function signOut () {
+  async function signOut() {
     setModalActive(false)
     try {
       await Auth.signOut()
@@ -19,26 +26,38 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
     }
   }
 
-  async function changePassword () {
+  async function changePassword() {
     dispatch(changePassword(input))
   }
 
-  function handelConfirmPin () {
+  function handelConfirmPin() {
     dispatch(confirmPin(input))
   }
 
-  async function forgotPassword (username) {
-    Auth.forgotPassword(username)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err))
+  async function forgotPassword() {
+    dispatch(forgotPasswordRequest(input))
+    setForgotPasswordConformModal(true)
+  }
+
+  async function confirmSignup() {
+    dispatch(confirmSignupWithCode(input))
+  }
+
+  async function forgotPasswordConformSubmit() {
+    dispatch(forgotPasswordConform(input))
   }
 
   const changeInput = (e) => {
+    console.log(e)
     setInput(e.target.value)
     setInputErr(false)
   }
 
-  function settingsOptions (setting) {
+  const passwordChange = (e) => {
+    console.log(e.target.value)
+  }
+
+  function settingsOptions(setting) {
     switch (setting) {
       case 'logout':
         signOut()
@@ -51,6 +70,9 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
         break
       case 'forgotPassword':
         forgotPassword()
+        break
+      case 'confirmSignup':
+        confirmSignup()
         break
       default:
         console.log('no default')
@@ -67,19 +89,9 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
             <></>
           ) : settingAction.id === 'changePassword' ? (
             <div className='input-container'>
-              {[...Array(3)].map(() =>
-                <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
-                  <div className='input-content'>
-                    <input
-                      placeholder={settingAction.inputText}
-                      className='username ibmplexsans-regular-normal-monsoon-16px'
-                      onChange={(e) => changeInput(e)}
-                      name='Code'
-                      autoFocus='autoFocus'
-                    />
-                  </div>
-                </div>
-              )}
+              {settingAction.form.map((form) => (
+                  <InputFormNow form= {form} key={form.name} changeHandler={passwordChange} />
+              ))}
             </div>
           ) : (
             <div className='input-container'>
@@ -110,5 +122,20 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
     </>
   )
 }
-
 export default SettingsActionModel
+
+function InputFormNow({form, inputErr, changeHandler}) {
+  return(<>
+  <p className='ibmplexsans-regular-normal-monsoon-16px'>{form.inputText}</p>
+  <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+    <div className='input-content'>
+      <input
+        placeholder={form.name}
+        className='username ibmplexsans-regular-normal-monsoon-16px'
+        onChange={(e) => changeHandler(e)}
+        autoFocus='autoFocus'
+      />
+    </div>
+  </div>
+</>)
+}

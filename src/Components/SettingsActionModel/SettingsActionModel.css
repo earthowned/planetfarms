@@ -21,3 +21,7 @@
   align-items: flex-start;
   justify-content: space-around;
 }
+
+.input-gap {
+  padding-top: 1em;
+}

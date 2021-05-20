@@ -50,7 +50,20 @@ const settings = [
     name: 'Change Password',
     message: 'Do you want to Change Password?',
     id: 'changePassword',
-    inputText: 'Please enter your User Old Password'
+    form: [
+      {
+        inputText: 'Please enter your User Name',
+        name: 'User Name'
+      },
+      {
+        inputText: 'Please enter your User New Password',
+        name: 'New Password'
+      },
+      {
+        inputText: 'Please enter your User Old Password',
+        name: 'Old Password'
+      }
+    ],
   },
   {
     name: 'Forgot Password',
