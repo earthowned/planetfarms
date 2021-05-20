@@ -6,7 +6,7 @@ const Op = Sequelize.Op
 // @route   GET /api/resources
 // @access  Public
 const getResources = (req, res) => {
-  const pageSize = 1
+  const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
