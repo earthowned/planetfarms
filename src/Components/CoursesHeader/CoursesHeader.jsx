@@ -4,7 +4,6 @@ import SearchComponent from '../SearchComponent/SearchComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import './courses-header.css'
-import { searchResources, listResources } from '../../actions/resourceActions'
 
 const data = [
   {
@@ -25,7 +24,7 @@ const data = [
   }
 ]
 
-const CoursesHeader = ({ setActive }) => {
+const CoursesHeader = ({ setActive, setCreateCollection }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -40,12 +39,12 @@ const CoursesHeader = ({ setActive }) => {
     // if (!userInfo) {
     //     history.push('/login')
     // }
-    if (search) dispatch(searchResources(search))
-    if (!search) dispatch(listResources())
+    // if (search) dispatch(searchResources(search))
+    // if (!search) dispatch(listResources())
 
-    window.addEventListener('resize', function () {
-      setWindowWidth(window.innerWidth)
-    })
+    // window.addEventListener('resize', function () {
+    //   setWindowWidth(window.innerWidth)
+    // })
 
     return () => {
       window.removeEventListener('resize', function () {
@@ -53,6 +52,11 @@ const CoursesHeader = ({ setActive }) => {
       })
     }
   }, [windowWidth, search, dispatch, history, userInfo])
+
+  function createCollection () {
+    setActive(true)
+    setCreateCollection(true)
+  }
 
   return (
     <div className='courses-main-header-container'>
@@ -69,21 +73,20 @@ const CoursesHeader = ({ setActive }) => {
               })
             }
           </ul>
-          <div className='courses-search-container'>
-            <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
-          </div>
+            <div className='courses-search-container'>
+              <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
+            </div>
           </>
           : <>
             <Filter data={data} newFilter='new' />
             <div className='courses-search-container'>
               <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
             </div>
-          </>
-        }
+          </>}
       </div>
       <div className='courses-sub-header'>
         <div className='courses-sub-header-1'>
-          <div className='courses-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Add Courses</button></div>
+          <div className='courses-btn-container'><button className='default-btn' onClick={createCollection}>Add Collection</button></div>
         </div>
 
         <div className='courses-sub-header-2'>

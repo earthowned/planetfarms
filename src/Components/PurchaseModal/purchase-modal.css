@@ -1,0 +1,168 @@
+.purchase-modal-container {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  z-index: 5001;
+}
+
+.purchase-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 999;
+  background: #191b1d;
+  width: 488px;
+  height: 648px;
+  color: #f8ebdf;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #3a3939;
+  border-radius: 4px;
+}
+
+.purchase-modal-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.purchase-modal-header button {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.purchase-success-btn-container button {
+  width: 45%;
+}
+
+.payment-option-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-option-container button {
+  width: 45%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+
+.payment-option-container button:active {
+  outline: none;
+}
+
+.purchase-modal-header button:hover {
+  transform: scale(1.1);
+}
+
+.purchase-modal > h4 {
+  margin: 40px 0;
+}
+
+.purchase-course-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.purchase-course-content > div {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+}
+
+.purchase-course-content > div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+}
+
+.purchase-course-content div:last-child {
+  width: 70%;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.purchase-course-content div:last-child h4 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 16px;
+}
+
+.purchase-card-content .card-num {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+  background: #212225;
+  border-radius: 4px;
+  padding: 0 24px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.purchase-card-content .card-num div {
+  display: flex;
+}
+
+.purchase-card-content .card-num div img {
+  margin-right: 17px;
+}
+
+.card-add-btn {
+  width: 100%;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 0.5px solid #f8ebdf;
+  border-radius: 4px;
+  color: #f8ebdf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.or-icon {
+  width: 50%;
+  margin: 40px auto;
+}
+
+.purchase-success {
+  height: 312px;
+}
+
+#purchase-success-msg {
+  margin-bottom: 24px;
+}
+
+.purchase-success-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+#add-height {
+  height: 312px;
+}

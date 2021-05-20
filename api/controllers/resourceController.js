@@ -10,7 +10,7 @@ const getResources = (req, res) => {
   const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  Resource.findAndCountAll({ offset: (page-1) * pageSize, limit: pageSize, ordervalue })
+  Resource.findAndCountAll({ offset: (page - 1) * pageSize, limit: pageSize, ordervalue })
     .then(resources => {
       const totalPages = Math.ceil(resources.count / pageSize)
       res.json({ resources: resources.rows, totalItems: resources.count, totalPages, page, pageSize }).status(200)
@@ -22,16 +22,11 @@ const getResources = (req, res) => {
 // @route   POST /api/resources/add
 // @access  Public
 const addResource = (req, res) => {
-  const {
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
-  } = req.body
-  /* if (req.file) {
-    categoryObj.categoryImage =
-      process.env.API + '/public/' + req.file.filename;
-  } */
-  Resource.create({
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
-  })
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
+  Resource.create({ ...req.body, filename })
     .then(() => res.json({ message: 'Resource Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
@@ -41,7 +36,6 @@ const addResource = (req, res) => {
 // @access  Public
 const getResourcesById = (req, res) => {
   const id = req.params.id
-
   Resource.findByPk(id)
     .then(resource => {
       if (resource) {
@@ -73,17 +67,11 @@ const deleteResources = (req, res) => {
 // @route   PUT /api/resource/:id
 // @access  Public
 const updateResources = (req, res) => {
-  const {
-    title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
-  } = req.body
   const id = req.params.id
   Resource.findByPk(id).then(resource => {
     if (resource) {
       const { id } = resource
-      Resource.update({
-        title, author, year, description, tag, language, publisher, linkToLicense, subject, level, mediaType, resourceFor, openWith, resourceType, isDownloadable, attachments
-      },
-      { where: { id } })
+      Resource.update(req.body, { where: { id } })
         .then(() => res.json({ message: 'Resource Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     }
