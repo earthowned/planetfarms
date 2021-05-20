@@ -3,6 +3,15 @@ import { useHistory } from 'react-router'
 import useSizeFinder from '../../utils/SizeFinder'
 import './message-card.css'
 
+function TextBlock({contact}) {
+  return (
+    <div className='contact-text'>
+      <h4>{contact?.name}</h4>
+      <p>{contact?.message}</p>
+    </div>
+  )
+}
+
 const MessageCard = ({ contact, clickHandler, profileSettings, setModalActive, clickProfileHandler }) => {
   const history = useHistory()
   const windowWidth = useSizeFinder()
@@ -11,10 +20,7 @@ const MessageCard = ({ contact, clickHandler, profileSettings, setModalActive, c
     <>
       {profileSettings ? (
         <button className='last-contact-card' onClick={() => clickProfileHandler(contact)}>
-          <div className='contact-text'>
-            <h4>{contact?.name}</h4>
-            <p>{contact?.message}</p>
-          </div>
+          <TextBlock contact={contact} />
         </button>
       ) : (
         <button
@@ -25,10 +31,7 @@ const MessageCard = ({ contact, clickHandler, profileSettings, setModalActive, c
           <div className='img-wrapper'>
             <img src={contact?.img} alt='contact' />
           </div>
-          <div className='contact-text'>
-            <h4>{contact?.name}</h4>
-            <p>{contact?.message}</p>
-          </div>
+          <TextBlock contact={contact} />
           <div className='contact-noti'>
             <span>{contact?.date}</span>
             <div className='noti'>2</div>
