@@ -1,14 +1,14 @@
 .courses-users-collection-header {
   color: var(--primary-white);
-  margin: 16px 0;
+  margin-bottom: 16px;
+  margin-top: 40px;
 }
 
 .courses-collection-main-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 0.3fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 0.5fr));
   grid-gap: 40px;
   color: var(--primary-white);
-  margin-bottom: 40px;
 }
 
 .courses-collection-main-container > div {
@@ -17,6 +17,10 @@
   justify-content: space-between;
   padding: 16px;
   border: 1px solid #4f5155;
+}
+
+.single > div {
+  margin-right: 20px;
 }
 
 .subs {
@@ -44,20 +48,12 @@
   margin-top: 16px;
 }
 
-@media only screen and (max-width: 1350px) {
-  .courses-collection-main-container {
-    grid-template-columns: repeat(auto-fit, minmax(230px, 0.4fr));
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .courses-collection-main-container {
-    grid-template-columns: repeat(auto-fit, minmax(230px, 0.5fr));
-  }
-}
-
 @media only screen and (max-width: 600px) {
   .courses-collection-main-container {
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+
+  .single > div {
+    margin-right: 0;
   }
 }
