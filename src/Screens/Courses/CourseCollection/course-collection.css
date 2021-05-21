@@ -23,6 +23,15 @@
   margin-right: 52px;
 }
 
+.double > div:first-child {
+  margin-right: 40px;
+}
+
+.double > div:last-child {
+  margin-left: -40px;
+  margin-right: 80px;
+}
+
 .subs {
   width: 126px;
   height: 34px;
@@ -55,6 +64,15 @@
 
   .single > div {
     margin-right: 25px;
+  }
+
+  .double > div:first-child {
+    margin-right: 0;
+  }
+
+  .double > div:last-child {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 

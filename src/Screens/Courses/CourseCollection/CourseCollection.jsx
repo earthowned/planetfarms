@@ -12,23 +12,13 @@ const farming = [
         subscribers: 65
     },
     {
-        title: "Farm animals collection in 2020 USA",
+        title: "Farm 2020 courses collection",
         img: "/img/farmer.svg",
-        subscribers: 655
-    },
-    {
-        title: "Farm animals collection in 2020 USA",
-        img: "/img/farmer.svg",
-        subscribers: 655
+        subscribers: 65
     }
 ]
 
 const mycollection = [
-    {
-        title: "Farm 2020 courses collection",
-        img: "/img/farmer.svg",
-        subscribers: 365
-    },
     {
         title: "Farm 2020 courses collection",
         img: "/img/farmer.svg",
@@ -54,7 +44,11 @@ const CourseUserCard = ({name, data, btnName, subName}) => {
     return (
         <>
          <h4 className="courses-users-collection-header">{name}</h4>
-            <div className={data.length === 1 ? "courses-collection-main-container single" : "courses-collection-main-container"}>
+            <div className={data.length === 1 
+            ? "courses-collection-main-container single" 
+            : data.length === 2 
+            ? "courses-collection-main-container double"
+            : "courses-collection-main-container"}>
             {
                 data.map(item => {
                     return (
