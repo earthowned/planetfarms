@@ -24,7 +24,7 @@ const NewsCreateModal = ({
   enterpriseActive,
   setEnterpriseActive
 }) => {
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState()
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -36,6 +36,7 @@ const NewsCreateModal = ({
           })
         )
       )
+      setFiles(acceptedFiles[0])
     }
   })
 
@@ -74,6 +75,7 @@ const NewsCreateModal = ({
           getRootProps={getRootProps}
           getInputProps={getInputProps}
           files={files}
+          setFiles={setFiles}
           imageActive={imageActive}
           setImageActive={setImageActive}
         />

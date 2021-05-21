@@ -4,6 +4,7 @@ import './enterprises-collection.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createEnterprise } from '../../actions/enterpriseAction'
+import DragDrop from '../NewsCreateModal/DragDrop'
 
 const EnterprisesCollection = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()
@@ -11,6 +12,7 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
   const [description, setEnterpriseDescription] = useState('')
   const dispatch = useDispatch()
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
+  const [categoryId, setCategoryId] = useState('')
   const [enterpriseDescriptionError, setEnterpriseDescriptionError] =
     useState(false)
   const { pathname } = useLocation()
@@ -43,7 +45,7 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
     if (!title) setEnterpriseTitleError(true)
     if (!description) setEnterpriseDescriptionError(true)
     if (title && description) {
-      dispatch(createEnterprise({ title, description, file: files }))
+      dispatch(createEnterprise({ title, description, category: categoryId, file: files }))
       setActive(false)
     }
   }
@@ -68,21 +70,7 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
               alt='close-icon'
             />
           </div>
-          <div className='drag-drop' {...getRootProps()}>
-            <input {...getInputProps()} onChange={(e) => fileChange(e)} />
-            {files != null ? (
-              <img
-                className='avatar'
-                name='avatar'
-                src={files.preview}
-                alt='files[0].preview'
-              />
-            ) : (
-              <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                Drag and Drop files in this area or Click Here to attach
-              </h6>
-            )}
-          </div>
+          <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} onChange={(e) => fileChange(e)} />
           <div className='collection-input-container'>
             <input
               className='default-input-variation'
@@ -100,9 +88,11 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
               error={enterpriseDescriptionError}
               onChange={(e) => enterpriseDescriptionChange(e)}
             />
-            <select className='default-input-variation'>
+            <select className='default-input-variation' onChange={(e) => setCategoryId(e.target.value)}>
               <option>Select category</option>
               <option>Farmers</option>
+              <option>Business</option>
+              <option>Mentor</option>
             </select>
           </div>
           <button

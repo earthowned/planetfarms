@@ -4,11 +4,14 @@ import '../CollectionModal/collection-modal.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createGroup } from '../../actions/communityGroupActions'
+import DragDrop from '../NewsCreateModal/DragDrop'
 
 const GroupFromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()
   const [title, setGroupTitle] = useState('')
   const [description, setGroupDescription] = useState('')
+  const [categoryId, setCategoryId] = useState('')
+
   const dispatch = useDispatch()
   const [groupTitleError, setGroupTitleError] = useState(false)
   const [groupDescriptionError, setGroupDescriptionError] = useState(false)
@@ -42,7 +45,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
     if (!title) setGroupTitleError(true)
     if (!description) setGroupDescriptionError(true)
     if (title && description) {
-      dispatch(createGroup({ title, description, file: files }))
+      dispatch(createGroup({ title, description, category: categoryId, file: files }))
       setActive(false)
     }
   }
@@ -63,19 +66,11 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
             <h4>{pathname === '/community-group' && 'Create Groups'}</h4>
             <img src='/img/close-outline.svg' onClick={() => setActive(false)} alt='close-icon' />
           </div>
-          <div className='drag-drop' {...getRootProps()}>
-            <input {...getInputProps()} onChange={(e) => fileChange(e)} />
-            {(files != null)
-              ? <img className='avatar' name='avatar' src={files.preview} alt='files[0].preview' />
-              : <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                Drag and Drop files in this area or Click Here to attach
-              </h6>}
-          </div>
-
+          <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} onChange={(e) => fileChange(e)} />
           <div className='collection-input-container'>
             <input className='default-input-variation' error={groupTitleError} onChange={(e) => groupTitleChange(e)} placeholder='Group title' /><br />
             <input className='default-input-variation text-area-variation' error={groupDescriptionError} onChange={(e) => groupDescriptionChange(e)} placeholder='Group description' /><br />
-            <select className='default-input-variation'>
+            <select className='default-input-variation' onChange={(e) => setCategoryId(e.target.value)}>
               <option>Select category</option>
               <option>Farmer</option>
               <option>Mentor</option>

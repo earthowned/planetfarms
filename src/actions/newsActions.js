@@ -65,6 +65,11 @@ export const searchNews = (search) => async (
 }
 
 export const createNews = (newNews) => async (dispatch, getState) => {
+  const formData = new FormData()
+  formData.append('file', newNews.file)
+  formData.append('title', newNews.title)
+  formData.append('category', newNews.category)
+  // formData.append('imageDetail',newNews.imageDetail)
   try {
     dispatch({
       type: NEWS_CREATE_REQUEST
@@ -72,7 +77,7 @@ export const createNews = (newNews) => async (dispatch, getState) => {
 
     const { userLogin: { userInfo } } = getState()
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add`, newNews, config)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add`, formData, config)
     dispatch({
       type: NEWS_CREATE_SUCCESS,
       payload: data
@@ -129,6 +134,7 @@ export const savetextDetail = (data) => (dispatch) => {
 }
 
 export const saveimageDetail = (data) => (dispatch) => {
+  console.log('payload', data)
   dispatch({
     type: NESW_SAVE_IMAGE_DETAIL,
     payload: data
