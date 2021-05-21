@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import '../CollectionModal/collection-modal.css'
+import '../EnterprisesCollection/enterprises-collection.css';
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createGroup } from '../../actions/communityGroupActions'
