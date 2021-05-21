@@ -3,9 +3,9 @@ import './enterprises.css'
 import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import CommunityGroupCard from '../../Components/CommunityGroupCard/CommunityGroupCard'
-import EnterprisesCollection from '../../Components/EnterprisesCollection/EnterprisesCollection'
 import { useSelector, useDispatch } from 'react-redux'
 import { listEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
+import FormModal from '../../Components/FormModal/FormModal'
 
 const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
@@ -20,7 +20,7 @@ const Enterprise = () => {
 
   return (
     <>
-      {active && <EnterprisesCollection setActive={setActive} />}
+      {active && <FormModal setActive={setActive} />}
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises screen'>
           <div className='enterprises-col'>

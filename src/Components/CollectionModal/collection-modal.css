@@ -1,7 +1,7 @@
 .collection-modal-container {
   position: fixed;
   width: 100%;
-  background: var(--background-color-light);
+  background: var(--background-color-modal);
   height: 100%;
   z-index: 5005;
   color: var(--primary-white);
@@ -72,6 +72,12 @@
 
 .btn-size {
   width: 200px;
+}
+
+.step-form {
+  margin-left: 10px;
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 .add-collection {
