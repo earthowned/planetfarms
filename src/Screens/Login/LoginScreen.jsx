@@ -69,28 +69,27 @@ function LoginScreen(props) {
 
 
   async function signIn(username, password) {
-    // try {
-    //     const user = await Auth.signIn(username, password)
-    //     if (user) {
-    //       localStorage.setItem('userInfo', JSON.stringify(user))
-    //       dispatch({
-    //         type: USER_LOGIN_SUCCESS,
-    //         payload: user
-    //       })
-    //       history.push('/community-page-news')
-    //     }
-    // } catch (error) {
-    //     const code = error.code
-    //     switch (code) {
-    //         case 'NotAuthorizedException':
-    //           setUserError('NotAuthorizedException')
-    //           setPasswordError('NotAuthorizedException')
-    //           return 
-    //         default:
-    //             return false
-    //     }
-    // }
-    dispatch(login(username, password));
+    try {
+        const user = await Auth.signIn(username, password)
+        if (user) {
+          localStorage.setItem('userInfo', JSON.stringify(user))
+          dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: user
+          })
+          history.push('/community-page-news')
+        }
+    } catch (error) {
+        const code = error.code
+        switch (code) {
+            case 'NotAuthorizedException':
+              setUserError('NotAuthorizedException')
+              setPasswordError('NotAuthorizedException')
+              return 
+            default:
+                return false
+        }
+    }
   }
   
   const userChange = (e) => {
