@@ -32,7 +32,6 @@ import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup'
 import MobileMessage from './Components/MobileMessage/MobileMessage'
 import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
-import Amplify, { Auth } from 'aws-amplify'
 import LessonTest from './Screens/LessonTest/LessonTest'
 import CourseCollection from './Screens/Courses/CourseCollection/CourseCollection'
 import EditCollection from './Screens/Courses/EditCollection/EditCollection'
@@ -102,6 +101,8 @@ if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
   // You can get the current config object
   const currentConfig = Auth.configure()
 }
+import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
+
 
 function App () {
   return (
@@ -167,6 +168,9 @@ function App () {
         <Route path='/courses/my-courses/:id'>
           <EditCollection />
         </Route>
+         <Route path='/courses/users'>
+          <CourseUsers />
+        </Route>
         <Route path='/enterprises'>
           <Enterprises />
         </Route>
@@ -196,6 +200,9 @@ function App () {
         </Route>
         <Route path='/mycoursepage/:id'>
           <LessonPage />
+        </Route>
+        <Route path='/coursepage'>
+          <MyCoursePage unpaid="unpaid" />
         </Route>
         <Route path='/test-lesson-1'>
           <LessonTest />
