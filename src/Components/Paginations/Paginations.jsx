@@ -2,53 +2,52 @@ import {useEffect, useState} from 'react';
 import './pagination.css'
 
 const Pagination = ({ pageNumber = 1, resourceList, setPageNumber }) => {
- const [newPages, setNewPages] = useState([]);  
- const [newUpdatedPages, setNewUpdatedPages] = useState([]);  
+  const [newPages, setNewPages] = useState([]);  
+  const [newUpdatedPages, setNewUpdatedPages] = useState([]);  
   useEffect(() => {
-  let addedPages = [...Array(resourceList.totalPages).keys()];
-  let newAddedPages = addedPages.map(num => num + 1);
-  setNewPages(newAddedPages);
-  setNewUpdatedPages(newAddedPages);
-  if(newPages.length > 4) {
-          if(pageNumber === 1) {
-          return setNewUpdatedPages(newPages.slice(pageNumber, pageNumber + 2));
-        }
-        if(pageNumber === 2) {
-          return setNewUpdatedPages(newPages.slice(pageNumber -1, pageNumber + 2));
-        }
+    let addedPages = [...Array(resourceList.totalPages).keys()];
+    let newAddedPages = addedPages.map(num => num + 1);
+    setNewPages(newAddedPages);
+    setNewUpdatedPages(newAddedPages);
+    if(newPages.length > 4) {
+      if(pageNumber === 1) {
+        return setNewUpdatedPages(newPages.slice(pageNumber, pageNumber + 2));
+      }
+      if(pageNumber === 2) {
+        return setNewUpdatedPages(newPages.slice(pageNumber -1, pageNumber + 2));
+      }
 
-        if(pageNumber === 3) {
-          return setNewUpdatedPages(newPages.slice(pageNumber -2, pageNumber + 2));
-        }
+      if(pageNumber === 3) {
+        return setNewUpdatedPages(newPages.slice(pageNumber -2, pageNumber + 2));
+      }
 
-        //for third last number
-        if(pageNumber === (resourceList.totalPages - 2)) {
-          return setNewUpdatedPages(newPages.slice((pageNumber - 3), pageNumber + 1));
-        }
+      //for third last number
+      if(pageNumber === (resourceList.totalPages - 2)) {
+        return setNewUpdatedPages(newPages.slice((pageNumber - 3), pageNumber + 1));
+      }
 
-        //for second last number
-        if(pageNumber === (resourceList.totalPages - 1)) {
-          return setNewUpdatedPages(newPages.slice((pageNumber - 3), pageNumber));
-        }
+      //for second last number
+      if(pageNumber === (resourceList.totalPages - 1)) {
+        return setNewUpdatedPages(newPages.slice((pageNumber - 3), pageNumber));
+      }
 
-        // for last number
-        if(pageNumber === resourceList.totalPages) {
-          return setNewUpdatedPages(newPages.slice((pageNumber - 4), pageNumber - 1));
-        }
+      // for last number
+      if(pageNumber === resourceList.totalPages) {
+        return setNewUpdatedPages(newPages.slice((pageNumber - 4), pageNumber - 1));
+      }
 
-        // for other number
-        if(pageNumber < (resourceList.totalPages - 1)) {
+      // for other number
+      if(pageNumber < (resourceList.totalPages - 1)) {
         setNewUpdatedPages(newPages.slice((pageNumber - 3), pageNumber + 2));
+      } 
     }
-    
-  }
-  
+
   }, [resourceList, handlePagination])
- 
-   function handlePagination (num, multiplier) {
+
+  function handlePagination (num, multiplier) {
     setPageNumber((pageNumber += num * multiplier))
   }
-  
+
   return (
     <div className='pagination-wrapper'>
       <div className='pagination'>
