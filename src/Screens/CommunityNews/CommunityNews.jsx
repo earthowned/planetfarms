@@ -77,10 +77,14 @@ function CommunityPagenews (props) {
           </div>
           <button className='default-btn default-btn-variation' onClick={() => setAddModal(true)}>{addNews}</button>
         </div>
-        <div className='community-news-cards'>
-          <NewsCard news={news} />
+        <div className="community-page-news-section">
+          <div className='community-news-cards'>
+            <NewsCard news={news} />
+          </div>
+          {(windowWidth < 1200) 
+          ? <Filter /> 
+          : <CommunityRight text={text22} farming={farming} people={people} nature={nature} carsIndustry={carsIndustry} mediaNews={mediaNews} seeAllTopics={seeAllTopics} />}
         </div>
-        {(windowWidth < 1200) ? <Filter /> : <CommunityRight text={text22} farming={farming} people={people} nature={nature} carsIndustry={carsIndustry} mediaNews={mediaNews} seeAllTopics={seeAllTopics} />}
       </div>
     </>
   )
@@ -97,3 +101,42 @@ const CommunityPageNewsData = {
   mediaNews: 'Media news',
   seeAllTopics: 'See all topics'
 }
+
+// const newscard = [
+//   {
+//     id: 1,
+//     readTime: "10min",
+//     category: "farming",
+//     title: "how to be rich",
+//     createdAt: 2020-11-5,
+//   },
+  
+//   {
+//     id: 2,
+//     readTime: "10min",
+//     category: "farming",
+//     title: "how to be rich",
+//     createdAt: 2020-11-5,
+//   },
+//   {
+//     id: 3,
+//     readTime: "10min",
+//     category: "farming",
+//     title: "how to be rich",
+//     createdAt: 2020-11-5,
+//   },
+//   {
+//     id: 4,
+//     readTime: "10min",
+//     category: "farming",
+//     title: "how to be rich",
+//     createdAt: 2020-11-5,
+//   },
+//   {
+//     id: 5,
+//     readTime: "10min",
+//     category: "farming",
+//     title: "how to be rich",
+//     createdAt: 2020-11-5,
+//   },
+// ]

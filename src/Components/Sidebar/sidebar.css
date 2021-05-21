@@ -180,7 +180,7 @@
   right: 0;
   padding: 0 5em;
   margin-bottom: 80px;
-  transform: translateY(100%);
+  transform: translateY(120%);
   transition: all ease-in-out 0.2s;
 }
 
