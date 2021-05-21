@@ -178,8 +178,8 @@
   z-index: 5000;
   bottom: 0;
   right: 0;
-  padding: 0 5em;
-  margin-bottom: 80px;
+  padding: 1em 5em;
+  margin-bottom: 75px;
   transform: translateY(100%);
   transition: all ease-in-out 0.2s;
 }
@@ -201,6 +201,6 @@
 
 @media only screen and (max-width: 500px) {
   .mobile-view-dropdown-container {
-    padding: 0 3em;
+    padding: 1em 3em;
   }
 }
