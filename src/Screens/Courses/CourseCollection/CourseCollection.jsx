@@ -15,10 +15,20 @@ const farming = [
         title: "Farm animals collection in 2020 USA",
         img: "/img/farmer.svg",
         subscribers: 655
+    },
+    {
+        title: "Farm animals collection in 2020 USA",
+        img: "/img/farmer.svg",
+        subscribers: 655
     }
 ]
 
 const mycollection = [
+    {
+        title: "Farm 2020 courses collection",
+        img: "/img/farmer.svg",
+        subscribers: 365
+    },
     {
         title: "Farm 2020 courses collection",
         img: "/img/farmer.svg",
