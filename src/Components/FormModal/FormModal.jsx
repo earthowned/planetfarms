@@ -183,7 +183,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
                   <option>Farmers</option>
                 </select>
               </div>
-              <div style={{ display: 'flex' }}>
+              <div style={{ display: 'flex', marginTop: '18px' }}>
                 <SubmitButton className='default-btn btn-size' onClick={handleAddEnterprise} title='Submit' />
               </div>
             </>
