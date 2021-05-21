@@ -49,7 +49,7 @@
 }
 
 @media only screen and (max-width: 1500px) {
-   .courses-collection-main-container {
+  .courses-collection-main-container {
     grid-template-columns: repeat(auto-fit, minmax(380px, 0.5fr));
   }
 
@@ -59,7 +59,7 @@
 }
 
 @media only screen and (max-width: 1060px) {
-   .courses-collection-main-container {
+  .courses-collection-main-container {
     grid-template-columns: repeat(auto-fit, minmax(350px, 0.5fr));
   }
 
@@ -69,7 +69,7 @@
 }
 
 @media only screen and (max-width: 850px) {
-   .courses-collection-main-container {
+  .courses-collection-main-container {
     grid-template-columns: repeat(auto-fit, minmax(250px, 0.5fr));
   }
 }
