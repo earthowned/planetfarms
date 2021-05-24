@@ -24,8 +24,7 @@
   position: fixed;
   z-index: 5000;
   bottom: 0;
-  background: rgba(20, 20, 20, 0.7);
-  backdrop-filter: blur(24px);
+  background: rgba(20, 20, 20);
   height: 70px;
   width: 100%;
   display: flex;
