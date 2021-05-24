@@ -74,7 +74,10 @@ const CourseDetail = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
       <div className='bg-image' />
       <div className='course-details-wrapper'>
         <div className='course-description'>
-          <h1 className='course-title'>Jimmy Beam personal course</h1>
+          <div className="course-description-header">
+            <h1 className='course-title'>Jimmy Beam personal course</h1>
+            {unpaid ? <div className='dropdown-course-container'><Button name="Buy Course" clickHandler={() => setPurchaseModal(true)} /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
+          </div>
           <p className='course-desc'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -86,7 +89,6 @@ const CourseDetail = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
           {/* lesson progress bar */}
           <ProgressBar />
         </div>
-        {unpaid ? <div className='dropdown-course-container'><Button name="Buy Course" clickHandler={() => setPurchaseModal(true)} /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
       </div>
     </div>
   )
