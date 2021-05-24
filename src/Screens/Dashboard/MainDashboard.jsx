@@ -4,50 +4,7 @@ import "./main-dashboard.css";
 import {  Link } from "react-router-dom";
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
 import useSizeFinder from '../../utils/SizeFinder';
-
-const DashboardData = [
-    {
-        category: "farming",
-        title: "How to farm in 2020 and don't lose you business",
-        img: "/img/man-cap.svg"
-    },
-    {
-        category: "farming",
-        title: "Be happy and find your self! Motivation 2020",
-        img: "/img/man-cap.svg",
-        type: "video"
-    },
-    {
-        category: "farming",
-        title: "How to farm in 2020 and don't lose you business",
-        img: "/img/man-cap.svg"
-    },
-    {
-        category: "farming",
-        title: "Be happy and find your self! Motivation 2020",
-        img: "/img/man-cap.svg",
-        type: "video"
-    },
-    {
-        category: "farming",
-        title: "How to farm in 2020 and don't lose you business",
-        img: "/img/man-cap.svg"
-    },
-
-]
-
-const MyCourseData = [
-   {
-        category: "farming",
-        title: "How to farm in 2020 and don't lose you business",
-        img: "/img/man-cap.svg"
-    },
-    {
-        category: "farming",
-        title: "Be happy and find your self! Motivation 2020",
-        img: "/img/man-cap.svg"
-    }
-]
+import useScroll from "../../utils/scrollFunc";
 
 function DashboardComponent() {
   const windowWidth = useSizeFinder();
@@ -143,194 +100,115 @@ function SeeAllButton({ children }) {
   );
 }
 
+const DashboardData = [
+    {
+        category: "farming",
+        title: "How to farm in 2020 and don't lose you business",
+        img: "/img/man-cap.svg"
+    },
+    {
+        category: "farming",
+        title: "Be happy and find your self! Motivation 2020",
+        img: "/img/man-cap.svg",
+        type: "video"
+    },
+    {
+        category: "farming",
+        title: "How to farm in 2020 and don't lose you business",
+        img: "/img/man-cap.svg"
+    },
+    {
+        category: "farming",
+        title: "Be happy and find your self! Motivation 2020",
+        img: "/img/man-cap.svg",
+        type: "video"
+    },
+    {
+        category: "farming",
+        title: "How to farm in 2020 and don't lose you business",
+        img: "/img/man-cap.svg"
+    },
+
+]
+
+const MyCourseData = [
+   {
+        category: "farming",
+        title: "How to farm in 2020 and don't lose you business",
+        img: "/img/man-cap.svg"
+    },
+    {
+        category: "farming",
+        title: "Be happy and find your self! Motivation 2020",
+        img: "/img/man-cap.svg"
+    }
+]
+
+const headers = [
+  {
+    name: "My library",
+    image: "/img/book-outlined.svg",
+    slug: "/mylibrary",
+    data: DashboardData,
+    btnName: "Add Library"
+  },
+    {
+    name: "My courses",
+    image: "/img/book-open-1.svg",
+    slug: "/mycourse",
+    data: MyCourseData,
+    btnName: "Add Course"
+  },
+  {
+    name: "My groups",
+    image: "/img/my-group.svg",
+    slug: "/mygroups",
+    data: DashboardData,
+    btnName: "Add Groups"
+  }
+]
+
+
 function MainContainer () {
-  const [libraryScrollActive, setLibraryScrollActive] = useState(true);
-  const [libraryScrollLeftActive, setLibraryScrollLeftActive] = useState(false);
-  const [coursesScrollActive, setCoursesScrollActive] = useState(true);
-  const [coursesScrollLeftActive, setCoursesScrollLeftActive] = useState(false);
-  const [groupScrollActive, setGroupScrollActive] = useState(true);
-  const [groupScrollLeftActive, setGroupScrollLeftActive] = useState(false);
-  const [scrollValue, setScrollValue] = useState();
-  const scrollLibraryRef = useRef();
-  const scrollCoursesRef = useRef();
-  const scrollGroupRef = useRef();
-
-  // creating the state for the width
-  const [scrolledLibWidth, setScrolledLibWidth] = useState();
-  const [widthlib, setWidthlib] = useState();
-  const [scrolledCourseWidth, setScrolledCourseWidth] = useState();
-  const [widthcourse, setWidthcourse] = useState();
-  const [scrolledGroupWidth, setScrolledGroupWidth] = useState();
-  const [widthgroup, setWidthgroup] = useState();
- 
-  const scrollRight = (scrollParam) => {
-   
-    if(scrollParam.current.className === "mylibrary-container--tiles") {
-      // scrolledLibWidth = scrollParam.current.scrollLeft += 500;
-      setWidthlib(scrollParam.current.scrollWidth);
-      setScrolledLibWidth(scrollParam.current.scrollLeft += 500);
-      console.log("scroll-library-width :", scrolledLibWidth);
-      setLibraryScrollLeftActive(true);
-    }
-
-    if(scrollParam.current.className === "mycourse-container--tiles") {
-      setScrolledCourseWidth(scrollParam.current.scrollLeft += 500);
-      console.log("scroll-Course-width :", scrolledCourseWidth);
-      setCoursesScrollLeftActive(true);
-    }
-
-    if(scrollParam.current.className === "mygroup-container--tiles") {
-      setScrolledGroupWidth(scrollParam.current.scrollLeft += 500);
-      console.log("scroll-group-width :", scrolledGroupWidth);
-      setGroupScrollLeftActive(true);
-    }
-  }
-
-  const scrollLeft = (scrollParam) => {
-      if(scrollParam.current.className === "mylibrary-container--tiles") {
-    scrollParam.current.scrollLeft = widthcourse - (widthcourse + 500);
-    scrollParam.current.scrollLeft = null;
-    setScrolledLibWidth(null);
-    console.log("scroll left :", scrollParam.current.scrollLeft);
-    console.log("widthlib :", widthlib);
-    }
-
-    if(scrollParam.current.className === "mycourse-container--tiles") {
-      setWidthcourse(scrollParam.current.scrollWidth);
-    scrollParam.current.scrollLeft = widthcourse - scrolledCourseWidth;
-    scrollParam.current.scrollLeft = null;
-    setScrolledCourseWidth(null);
-    console.log("scroll left :", scrollParam.current.scrollLeft);
-    console.log("widthcourse :", widthcourse);
-    }
-
-    if(scrollParam.current.className === "mygroup-container--tiles") {
-       setWidthgroup(scrollParam.current.scrollWidth);
-    scrollParam.current.scrollLeft = widthgroup - scrolledGroupWidth;
-    scrollParam.current.scrollLeft = null;
-    setScrolledGroupWidth(null);
-    console.log("scroll left :", scrollParam.current.scrollLeft);
-    console.log("widthcourse :", widthgroup);
-    }
-  }
-
-  const windowWidth = useSizeFinder();
-
-  useEffect(() => {
-    if(document.querySelector('.mylibrary-container--tiles').offsetWidth >= scrollLibraryRef.current.scrollWidth) {
-      setLibraryScrollActive(false)
-      console.log(document.querySelector('.mylibrary-container--tiles').offsetWidth);
-    };
-    if(document.querySelector('.mycourse-container--tiles').offsetWidth >= scrollCoursesRef.current.scrollWidth) setCoursesScrollActive(false);
-    if(document.querySelector('.mygroup-container--tiles').offsetWidth >= scrollGroupRef.current.scrollWidth) setGroupScrollActive(false);
-
-  }, [windowWidth])
-  
-  useEffect(() => {
-     //disabling the right arrow 
-    if((widthlib - scrolledLibWidth) < 339) {
-      setLibraryScrollActive(false)
-    } else {
-      setLibraryScrollActive(true);
-    }
-    if((widthlib - scrolledLibWidth) === widthlib) {
-      setLibraryScrollLeftActive(false);
-    }
-    console.log(widthlib, scrolledLibWidth);
-  }, [setScrolledLibWidth, setWidthlib, scrollRight])
-
-   useEffect(() => {
-     //disabling the right arrow 
-    if((widthcourse - scrolledCourseWidth) < 339) {
-      setCoursesScrollActive(false)
-    } else {
-      setCoursesScrollActive(true);
-    }
-    if((widthcourse - scrolledCourseWidth) === widthcourse) {
-      setCoursesScrollLeftActive(false);
-    }
-  }, [setScrolledCourseWidth, setWidthcourse, scrollRight])
-
-   useEffect(() => {
-     //disabling the right arrow 
-    if((widthgroup - scrolledGroupWidth) < 339) {
-      setGroupScrollActive(false)
-    } else {
-      setGroupScrollActive(true);
-    }
-    if((widthgroup - scrolledGroupWidth) === widthgroup) {
-      setGroupScrollLeftActive(false);
-    }
-  }, [setScrolledGroupWidth, setWidthgroup, scrollRight])
   return (
         <div className="dashboard-main-container border-1px-onyx">
           <div className="dashboard-inner-container">
-            <div className="mylibrary-container">
-              {/* my library container */}
-              <div className="mylibrary-container--header">
-                <img src="/img/book-outlined.svg" alt="book-icon" />
-                <h4>My library</h4>
-                 <Link to="/mylibrary" className="link-decoration">
-                    <SeeAllButton>See all items</SeeAllButton>
-                  </Link>
-              </div>
-              <div className="mylibrary-container--tiles" ref={scrollLibraryRef}>
-                <Tiles data={DashboardData} title="Add Library"/>
-              </div>
-               {libraryScrollActive && <img className="scroll-icon" onClick={() => scrollRight(scrollLibraryRef)} src="/img/scroll-icon.svg" alt="scroll-icon"/>}
-                {
-                libraryScrollLeftActive && 
-                <img className="scroll-left-icon" src="/img/scroll-icon.svg" 
-              onClick={() => scrollLeft(scrollLibraryRef)} alt="scroll-icon"/>
-              }
-            </div>
-
-            {/* my course container */}
-            <div className="mycourse-container">
-              <div className="mycourse-container--header">
-                <img src="/img/book-open-1.svg" alt="book-open-icon" />
-                <h4>My courses</h4>
-                 <Link to="/mycourse" className="link-decoration">
-                    <SeeAllButton>See all items</SeeAllButton>
-                  </Link>
-              </div>
-              <div className="mycourse-container--tiles" ref={scrollCoursesRef}>
-                  <Tiles data={MyCourseData} title="Add Course"/>
-              </div>
-              {coursesScrollActive && 
-              <img className="scroll-icon" src="/img/scroll-icon.svg" 
-              onClick={() => scrollRight(scrollCoursesRef)} alt="scroll-icon"/>
-              }
               {
-                coursesScrollLeftActive && 
-                <img className="scroll-left-icon" src="/img/scroll-icon.svg" 
-              onClick={() => scrollLeft(scrollCoursesRef)} alt="scroll-icon"/>
-              }
-            </div>
-
-            {/* my group container */}
-            <div className="mygroup-container">
-              <div className="mygroup-container--header">
-                <img src="/img/my-group.svg" alt="user" />
-                <h4>My groups</h4>
-                 <Link to="/mygroups" className="link-decoration">
+                headers.map(head => {
+                  return (
+                    <div className="mylibrary-container" key={head.name}>
+                    <div className="mylibrary-container--header">
+                <img src={head.image} alt={head.name} />
+                <h4>{head.name}</h4>
+                 <Link to={head.slug} className="link-decoration">
                     <SeeAllButton>See all items</SeeAllButton>
                   </Link>
-              </div>
-              <div ref={scrollGroupRef} className="mygroup-container--tiles">
-                <Tiles data={DashboardData} title="Add Groups"/>
-              </div>
-             {groupScrollActive && 
-             <img className="scroll-icon" src="/img/scroll-icon.svg" 
-             onClick={() => scrollRight(scrollGroupRef)} alt="scroll-icon"/>}
-             {
-                groupScrollLeftActive && 
-                <img className="scroll-left-icon" src="/img/scroll-icon.svg" 
-              onClick={() => scrollLeft(scrollGroupRef)} alt="scroll-icon"/>
+                      </div>
+                      <ScrollItems head={head} />
+                    </div>
+                    )
+                })
               }
-            </div>
-            </div>
+              </div>
         </div>
+  )
+}
+
+function ScrollItems ({head}) {
+  const scrollRef = useRef();
+  const {scrollLeftActive, scrollActive, scrollRight, scrollLeft} = useScroll(scrollRef)
+  return (
+    <>
+      <div className="mylibrary-container--tiles" ref={scrollRef}>
+          <Tiles data={head.data} title={head.btnName}/>
+      </div>
+      {scrollActive && <img className="scroll-icon" onClick={() => scrollRight(scrollRef)} src="/img/scroll-icon.svg" alt="scroll-icon"/>}
+          {
+              scrollLeftActive && 
+            <img className="scroll-left-icon" src="/img/scroll-icon.svg" 
+            onClick={() => scrollLeft(scrollRef)} alt="scroll-icon"/>
+          }
+    </>
   )
 }
 
