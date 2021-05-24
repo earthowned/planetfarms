@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useDropzone } from 'react-dropzone'
+import { useHistory } from 'react-router';
 import ToggleSwitch from '../../ToggleSwitch/ToggleSwitch'
 
 import "./new-course-create-modal.css";
@@ -25,6 +26,13 @@ const NewCourseCreateModal = ({collectionAdded, clickHandler}) => {
       preview: URL.createObjectURL(selectedFile)
     })
     setFiles(selectedFile)
+  }
+
+  const history = useHistory();
+
+  const createFunc = () => {
+    history.push('/admin/coursepage')
+    clickHandler(false)
   }
 
     return (
@@ -55,7 +63,7 @@ const NewCourseCreateModal = ({collectionAdded, clickHandler}) => {
                 </div>
                 <input className='default-input-variation' placeholder='Course price' />
               </div>
-              <button className='default-btn btn-size' onClick={() => clickHandler(false)}>Create course</button>
+              <button className='default-btn btn-size' onClick={() => createFunc()}>Create course</button>
         </div>
       </div>
     )

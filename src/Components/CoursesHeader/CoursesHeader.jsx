@@ -24,12 +24,12 @@ const data = [
   }
 ]
 
-const CoursesHeader = ({ setActive, setCreateCourse }) => {
+const CoursesHeader = ({ setActive, setCreateCourse, location }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { pathname } = useLocation()
-
+  console.log(pathname);
   const history = useHistory()
 
   const dispatch = useDispatch()
@@ -86,7 +86,7 @@ const CoursesHeader = ({ setActive, setCreateCourse }) => {
         <div className='courses-sub-header-1'>
           <div className='courses-btn-container'>
             {
-              pathname === "/courses-manager" 
+              pathname === "/admin/courses" 
               ? <button className='default-btn' onClick={() => setCreateCourse(true)}>Add new Courses</button>
               : <button className='default-btn' onClick={() => setActive(true)}>Add Courses</button>
             }
