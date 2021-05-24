@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from 'react'
 import './main-dashboard.css'
 import { Link } from 'react-router-dom'
