@@ -26,6 +26,7 @@
   border-radius: 4px;
   z-index: 2000;
   width: 100%;
+  list-style: none;
 }
 
 .filter-dropdown li {
