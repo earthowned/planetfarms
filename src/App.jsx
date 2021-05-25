@@ -35,6 +35,7 @@ import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import Amplify, { Auth } from 'aws-amplify'
 import LessonTest from './Screens/LessonTest/LessonTest'
 import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCoursePage'
+import AddLesson from './Screens/CourseManager/AddLesson/AddLesson'
 
 function amplifyConfig () {
   Amplify.configure({
@@ -165,6 +166,9 @@ function App () {
         </Route>
         <Route path='/admin/coursepage'>
           <AdminCoursePage />
+        </Route>
+        <Route path='/admin/lesson-page'>
+          <AddLesson />
         </Route>
         <Route path='/enterprises'>
           <Enterprises />

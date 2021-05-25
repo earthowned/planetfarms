@@ -2,10 +2,11 @@ import React from 'react'
 import BackButton from '../../../Components/BackButton/BackButton'
 import Filter from '../../../Components/Filter/Filter'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-
+import {useHistory} from 'react-router-dom';
 import './admin-course-page.css'
 
 const AdminCoursePage = () => {
+  const history = useHistory();
   return (
     <DashboardLayout title='Course page'>
       <BackButton location='/admin/courses' />
@@ -51,7 +52,7 @@ const AdminCoursePage = () => {
             </div>
             <button className='secondary-btn lesson-btn'><img src='/img/more-horizontal.svg' alt='horizontal icon' /></button>
           </div>
-          <div className='add-lesson-btn secondary-btn'>
+          <div className='add-lesson-btn secondary-btn' onClick={() => history.push('/admin/lesson-page')} >
             <img src='/img/plus.svg' alt='lesson add' />
             <span>Add new lesson for users</span>
           </div>

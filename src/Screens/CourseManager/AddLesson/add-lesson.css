@@ -1,0 +1,101 @@
+.admin-lesson-create-container {
+    margin-top: 40px;
+    padding: 40px;
+    background: var(--cards);
+    border: 1px solid var(--dropdowns);
+    border-radius: 4px;
+    color: var(--primary-white);
+}
+
+.admin-lesson-create-container input {
+    background: none;
+    outline: none;
+    border: none;
+    height: 48px;
+    width: 280px;
+    font-size: 40px;
+    margin-bottom: 40px;
+    color: var(--primary-white);
+}
+
+.admin-lesson-create-container .drag-drop {
+    width: 100%;
+    height: 456px;
+    border: 2px dashed #F8EBDF;
+    border-radius: 4px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #212225;
+}
+
+.admin-lesson-create-container .drag-drop h6 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.admin-lesson-create-btn-wrapper {
+    margin-top: 80px;
+    background: #212225;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    height: 136px;
+}
+
+.admin-lesson-create-btn-wrapper button {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-lesson-create-btn-wrapper button img {
+    margin-bottom: 8px;
+}
+
+.admin-lesson-create-btn-wrapper button:not(:last-child) {
+    margin-right: 40px;
+}
+
+.admin-lesson-materials-container {
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+    background: var(--cards);
+    border: 1px solid var(--dropdowns);
+    border-radius: 4px;
+    color: var(--primary-white);
+    margin-top: 40px;
+}
+
+.admin-lesson-materials-container p {
+    color: var(--primary-grey);
+    width: 270px;
+    line-height: 24px;
+}
+
+.save-lesson-modal {
+    background: #191B1D;
+    margin-top: 120px;
+    display: flex;
+    height: 88px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-radius: 4px;
+    color: var(--primary-white);
+}
+
+.primary-btn {
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: #000;
+    margin-left: 20px;
+}
