@@ -4,6 +4,7 @@ import Button from '../Button/Button'
 import { useDispatch } from 'react-redux'
 import { savetextDetail } from '../../actions/newsActions'
 import CollectionModalHeader from './CollectionModalHeader'
+import { InputFields, ErrorText, TextArea } from '../FormUI/FormUI'
 
 const CreateText = ({ textActive, setTextActive }) => {
   const [collectionTitle, setCollectionTitle] = useState()
@@ -37,22 +38,25 @@ const CreateText = ({ textActive, setTextActive }) => {
           <div className='collection-modal-inner-container'>
             <CollectionModalHeader title='Add text' setTextActive={setTextActive} />
             <div className='photo-input-container'>
-              <input
-                className='default-input-variation'
+              <InputFields
+                type='text'
                 placeholder='Collection title'
-                value={collectionTitle}
                 onChange={(e) => collectionTitleChange(e)}
+                className='default-input-variation'
               />
-              <p className='error-message'>{collectionTitleError ? 'Please enter Video Description' : ' '} </p>
-
+              <ErrorText
+                className='error-message'
+                Error={collectionTitleError}
+                message='Video Description'
+              />
               <br />
-              <textarea
-                className='default-input-variation text-area-variation-2'
-                placeholder='Type text here '
-                value={collectionDescription}
-                onChange={(e) => collectionDescriptionChange(e)}
+              <TextArea className='default-input-variation text-area-variation-2' placeholder='Type text here' value={collectionDescription} onChange={(e) => collectionDescriptionChange(e)} />
+
+              <ErrorText
+                className='error-message'
+                Error={collectionDescriptionError}
+                message='Video Description'
               />
-              <p className='error-message'>{collectionDescriptionError ? 'Please enter Video Description' : ' '} </p>
             </div>
             <Button name='Add block' clickHandler={addText} />
           </div>

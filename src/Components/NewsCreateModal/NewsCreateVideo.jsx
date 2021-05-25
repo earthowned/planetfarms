@@ -5,6 +5,7 @@ import { savevideoDetail } from '../../actions/newsActions'
 import { useDispatch } from 'react-redux'
 import DragDrop from './DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
+import { InputFields, ErrorText, TextArea } from '../FormUI/FormUI'
 
 const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideoActive }) => {
   const [videoTitle, setVideoTitle] = useState()
@@ -39,23 +40,24 @@ const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideo
             <CollectionModalHeader title='Add video' setVideoActive={setVideoActive} />
             <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
             <div className='video-input-container'>
-              <input
+              <InputFields
                 className='default-input-variation'
                 placeholder='Video title'
-                value={videoTitle}
                 onChange={(e) => videoTitleChange(e)}
+                value={videoTitle}
               />
-              <p className='error-message'>{videoTitleError ? 'Please enter Video Title' : ' '} </p>
+              <ErrorText
+                className='error-message'
+                Error={videoTitleError}
+                message='Video Title'
+              />
               <br />
-              <textarea
-                className='default-input-variation text-area-variation'
-                placeholder='Video description'
-                cols='3'
-                rows='3'
-                value={videoDescription}
-                onChange={(e) => videoDescriptionChange(e)}
+              <TextArea className='default-input-variation text-area-variation' placeholder='Video description' value={videoDescription} onChange={(e) => videoDescriptionChange(e)} />
+              <ErrorText
+                className='error-message'
+                Error={videoDescriptionError}
+                message='Video Description'
               />
-              <p className='error-message'>{videoDescriptionError ? 'Please enter Video Description' : ' '} </p>
 
               <div className='video-row-3'>
                 <input className='default-input-variation last-input-variation' placeholder='Video link' />{' '}

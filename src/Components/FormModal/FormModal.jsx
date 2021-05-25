@@ -1,26 +1,28 @@
-import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import './form-modal.css';
-import { useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { createGroup } from '../../actions/communityGroupActions'
-import { createEnterprise } from '../../actions/enterpriseAction'
-import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
-import DragDrop from '../NewsCreateModal/DragDrop'
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createGroup } from '../../actions/communityGroupActions';
+import { createEnterprise } from '../../actions/enterpriseAction';
+import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader';
+import DragDrop from '../NewsCreateModal/DragDrop';
+import { InputFields, SelectFields, ErrorText, SubmitButton, File } from '../FormUI/FormUI'
 
 const FromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()
   const [roleActive, setRoleActive] = useState(false)
-  const [groupTitle, setGroupTitle] = useState('')
-  const [groupDescription, setGroupDescription] = useState('')
-  const [categoryId, setCategoryId] = useState('')
+  const [groupTitle, setGroupTitle] = useState('');
+  const [groupDescription, setGroupDescription] = useState('');
+  const [categoryId, setCategoryId] = useState('');
   const [groupTitleError, setGroupTitleError] = useState(false)
   const [groupDescriptionError, setGroupDescriptionError] = useState(false)
 
-  const [enterpriseTitle, setEnterpriseTitle] = useState('')
-  const [enterpriseDescription, setEnterpriseDescription] = useState('')
+  const [enterpriseTitle, setEnterpriseTitle] = useState('');
+  const [enterpriseDescription, setEnterpriseDescription] = useState('');
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
-  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
+  const [enterpriseDescriptionError, setEnterpriseDescriptionError] =
+    useState(false)
 
   const dispatch = useDispatch()
 
@@ -30,68 +32,50 @@ const FromModal = ({ setActive, openAddCollection }) => {
     onDrop: (acceptedFiles) => {
       setFiles(
         acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
+          <File selectedFile={file} />
         )
       )
       setFiles(acceptedFiles[0])
-    }
+    },
   })
 
   const groupTitleChange = (e) => {
     setGroupTitle(e.target.value)
     setGroupTitleError(false)
-  }
+  };
 
   const groupDescriptionChange = (e) => {
     setGroupDescription(e.target.value)
     setGroupDescriptionError(false)
-  }
+  };
 
   const handleAddGroup = async (e) => {
     e.preventDefault()
-      if(pathname === '/community-group') {
-        if (!groupTitle) setGroupTitleError(true)
+
+    if (!groupTitle) setGroupTitleError(true)
     if (!groupDescription) setGroupDescriptionError(true)
     if (groupTitle && groupDescription) {
       dispatch(
-        createGroup({ title: groupTitle, category: categoryId, description: groupDescription,file: files })
+        createGroup({
+          title: groupTitle,
+          category: categoryId,
+          description: groupDescription,
+          file: files
+        })
       )
       setActive(false)
     }
-
-      } 
-      if(pathname === '/enterprise') {
-        if (!enterpriseTitle) setEnterpriseTitleError(true)
-        if (!enterpriseDescription) setEnterpriseDescriptionError(true)
-        // const newEnterprise = {title:enterpriseTitle,description:enterpriseD}
-        if (enterpriseTitle && enterpriseDescription) {
-          dispatch(
-            createEnterprise({
-              title: enterpriseTitle,
-              description: enterpriseDescription,
-              file: files,
-              category: categoryId
-            })
-          )
-          setActive(false)
-        }
-
-      }
-
-    
   }
 
   const enterpriseTitleChange = (e) => {
     setEnterpriseTitle(e.target.value)
     setEnterpriseTitleError(false)
-  }
+  };
 
   const enterpriseDescriptionChange = (e) => {
     setEnterpriseDescription(e.target.value)
     setEnterpriseDescriptionError(false)
-  }
+  };
 
   const handleAddEnterprise = async (e) => {
     e.preventDefault()
@@ -112,12 +96,10 @@ const FromModal = ({ setActive, openAddCollection }) => {
   }
 
   const fileChange = (e) => {
-    const selectedFile = e.target.files[0]
-    Object.assign(selectedFile, {
-      preview: URL.createObjectURL(selectedFile)
-    })
-    setFiles(selectedFile)
-  }
+    const selectedFile = e.target.files[0];
+   <File selectedFile={selectedFile} />
+   setFiles(selectedFile)
+  };
 
   return (
     <>
@@ -160,9 +142,18 @@ const FromModal = ({ setActive, openAddCollection }) => {
                   message='Group Description'
                 />
                 <br />
-                <SelectFields className='default-input-variation' option1='Farmers' option2='Business' onClick={(e) => setCategoryId(e.target.value)} />
+                <SelectFields
+                  className='default-input-variation'
+                  option1='Farmers'
+                  option2='Business'
+                  onClick={(e) => setCategoryId(e.target.value)}
+                />
               </div>
-              <SubmitButton className='default-btn btn-size' onClick={handleAddGroup} title='Submit' />
+              <SubmitButton
+                className='default-btn btn-size'
+                onClick={handleAddGroup}
+                title='Submit'
+              />
             </>
           )}
 
@@ -202,10 +193,19 @@ const FromModal = ({ setActive, openAddCollection }) => {
                   Error={enterpriseDescriptionError}
                   message='Enterprise Description'
                 />
-                <SelectFields className='default-input-variation' option1='Farmers' option2='Business' onClick={(e) => setCategoryId(e.target.value)} />
+                <SelectFields
+                  className='default-input-variation'
+                  option1='Farmers'
+                  option2='Business'
+                  onClick={(e) => setCategoryId(e.target.value)}
+                />
               </div>
               <div style={{ display: 'flex', marginTop: '18px' }}>
-                <SubmitButton className='default-btn btn-size' onClick={handleAddEnterprise} title='Submit' />
+                <SubmitButton
+                  className='default-btn btn-size'
+                  onClick={handleAddEnterprise}
+                  title='Submit'
+                />
               </div>
             </>
           )}
@@ -213,52 +213,6 @@ const FromModal = ({ setActive, openAddCollection }) => {
       </div>
     </>
   )
-}
+};
 
 export default FromModal
-
-const InputFields = (props) => {
-  return (
-    <>
-      <input
-        type={props.type}
-        placeholder={props.placeholder}
-        onChange={props.onChange}
-        className={props.className}
-        error={props.error}
-      />
-    </>
-  )
-}
-
-const SelectFields = (props) => {
-  return (
-    <>
-    <select className={props.className} onChange={props.onChange}>
-      <option>Select category</option>
-      <option>{props.option1}</option>
-      <option>{props.option2}</option>
-    </select>
-    </>
-  )
-}
-
-const ErrorText = (props) => {
-  return (
-    <>
-      <p className={props.className}>
-        {props.Error ? `Please enter ${props.message}` : ''}
-      </p>
-    </>
-  )
-}
-
-const SubmitButton = (props) => {
-  return (
-    <>
-      <button className={props.className} onClick={props.onClick}>
-        {props.title}
-      </button>
-    </>
-  )
-}

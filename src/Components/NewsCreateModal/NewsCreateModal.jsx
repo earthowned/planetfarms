@@ -142,47 +142,47 @@ const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGro
   )
 }
 
-function TextInputContainer () {
-  return (
-    <div className='photo-input-container'>
-      <input
-        className='default-input-variation'
-        placeholder='Collection title'
-      />
-      <br />
-      <textarea
-        className='default-input-variation text-area-variation-2'
-        placeholder='Type text here '
-      />
-    </div>
-  )
-}
+// function TextInputContainer () {
+//   return (
+//     <div className='photo-input-container'>
+//       <input
+//         className='default-input-variation'
+//         placeholder='Collection title'
+//       />
+//       <br />
+//       <textarea
+//         className='default-input-variation text-area-variation-2'
+//         placeholder='Type text here '
+//       />
+//     </div>
+//   )
+// }
 
-const VideoInputContainer = () => {
-  return (
-    <div className='video-input-container'>
-      <input
-        className='default-input-variation'
-        placeholder='Video title'
-      />
-      <br />
-      <textarea
-        className='default-input-variation text-area-variation'
-        placeholder='Video description'
-        cols='3'
-        rows='3'
-      />
+// const VideoInputContainer = () => {
+//   return (
+//     <div className='video-input-container'>
+//       <input
+//         className='default-input-variation'
+//         placeholder='Video title'
+//       />
+//       <br />
+//       <textarea
+//         className='default-input-variation text-area-variation'
+//         placeholder='Video description'
+//         cols='3'
+//         rows='3'
+//       />
 
-      <div className='video-row-3'>
-        <input
-          className='default-input-variation last-input-variation'
-          placeholder='Video link'
-        />{' '}
-        <span>OR</span> <button className='secondary-btn'>Choose video</button>
-      </div>
-    </div>
-  )
-}
+//       <div className='video-row-3'>
+//         <input
+//           className='default-input-variation last-input-variation'
+//           placeholder='Video link'
+//         />{' '}
+//         <span>OR</span> <button className='secondary-btn'>Choose video</button>
+//       </div>
+//     </div>
+//   )
+// }
 
 const GroupInputContainer = () => {
   return (
@@ -221,21 +221,21 @@ const GroupEditContainer = () => {
   )
 }
 
-function PhotoInput () {
-  return (
-    <>
-      <div className='description'>
-        <label>Add photo description</label> <ToggleSwitch />
-      </div>
-      <div className='photo-input-container'>
-        <input
-          className='default-input-variation'
-          placeholder='Photo description'
-        />
-      </div>
-    </>
-  )
-}
+// function PhotoInput () {
+//   return (
+//     <>
+//       <div className='description'>
+//         <label>Add photo description</label> <ToggleSwitch />
+//       </div>
+//       <div className='photo-input-container'>
+//         <input
+//           className='default-input-variation'
+//           placeholder='Photo description'
+//         />
+//       </div>
+//     </>
+//   )
+// }
 
 function ToggleSwitch () {
   const [active, setActive] = useState(false)

@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux'
 import { createResource } from '../../actions/resourceActions'
 import SimpleFilter from '../SimpleFilter/SimpleFilter'
 import { collectionFilterData } from '../../constants/sampleData'
+import { File } from '../FormUI/FormUI'
+import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
+import DragDrop from '../NewsCreateModal/DragDrop'
 
 const CollectionModal = ({ setActive, openAddCollection, name }) => {
   const [files, setFiles] = useState()
@@ -51,10 +54,8 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
   }
 
   const fileChange = (e) => {
-    const selectedFile = e.target.files[0]
-    Object.assign(selectedFile, {
-      preview: URL.createObjectURL(selectedFile)
-    })
+    const selectedFile = e.target.files[0];
+    <File selectedFile={selectedFile} />
     setFiles(selectedFile)
   }
 
@@ -62,18 +63,16 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
     <>
       <div className='collection-modal-container'>
         <div className='collection-modal-inner-course-container'>
-          <div className='collection-modal-header'>
-            <h4>{pathname === '/library' ? 'Create Resources' : 'Create Collection'}</h4>
-            <img src='/img/close-outline.svg' onClick={() => setActive(false)} alt='close-icon' />
-          </div>
-          <div className='drag-drop' {...getRootProps()}>
-            <input {...getInputProps()} onChange={(e) => fileChange(e)} />
-            {(files != null)
-              ? <img className='avatar' name='avatar' src={files.preview} alt='files[0].preview' />
-              : <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                Drag and Drop files in this area or Click Here to attach
-              </h6>}
-          </div>
+          <CollectionModalHeader
+              title='Create Resource'
+              setResourceActive={setActive}
+            />
+          <DragDrop
+              getInputProps={getInputProps}
+              getRootProps={getRootProps}
+              files={files}
+              onChange={(e) => fileChange(e)}
+            />
           {pathname === '/library'
             ? <>
               <div className='collection-input-container'>
@@ -81,7 +80,7 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
                 <input className='default-input-variation text-area-variation' error={resourceDescriptionError} onChange={(e) => resourceDescriptionChange(e)} placeholder='Resource description' /><br />
               </div>
               <button className='default-btn btn-size' onClick={handleAddResource}>Submit</button>
-            </>
+              </>
             : <>
               <div className='collection-input-container'>
                 <input className='default-input-variation' placeholder='Collection title' /> <br />
@@ -89,7 +88,7 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
               </div>
               <div className='add-collection' onClick={() => openAddCollection()}><img src='/img/plus.svg' alt='Add Files' /><button>{name || 'Add files'}</button></div>
               <button className='default-btn btn-size' onClick={() => openAddCollection()}>Create new collection</button>
-            </>}
+              </>}
         </div>
       </div>
     </>

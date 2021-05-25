@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { saveimageDetail } from '../../actions/newsActions'
 import DragDrop from './DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
+import { InputFields } from '../FormUI/FormUI'
 
 const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive, setFiles }) => {
   const [imageDescription, setImageDescription] = useState()
@@ -45,11 +46,10 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
             </div>
             {addDesctiption
               ? <div className='photo-input-container'>
-                <input
-                  className='default-input-variation'
+                <InputFields
                   placeholder='Photo description'
-                  value={imageDescription}
                   onChange={(e) => imageDescriptionChange(e)}
+                  className='default-input-variation'
                 />
                 <p className='error-message'>{imageDescriptionError ? 'Please enter Video Description' : ' '} </p>
                 </div>
