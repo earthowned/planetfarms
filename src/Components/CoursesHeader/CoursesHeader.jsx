@@ -24,13 +24,12 @@ const data = [
   }
 ]
 
-
 const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCourse }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { pathname } = useLocation()
-  console.log(pathname);
+  console.log(pathname)
   const history = useHistory()
 
   const dispatch = useDispatch()
@@ -68,9 +67,11 @@ const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCour
               data.map(item => {
                 return (
                   <li>
-                    <Link className={`nav-link ${(pathname === `${item.slug}`) 
-                    ? 'courses-list-item active' 
-                    : 'library-list-item'}`} to={`${item.slug}`}>
+                    <Link
+                      className={`nav-link ${(pathname === `${item.slug}`)
+                    ? 'courses-list-item active'
+                    : 'library-list-item'}`} to={`${item.slug}`}
+                    >
                       {item.name}
                     </Link>
                   </li>
@@ -94,9 +95,9 @@ const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCour
 
           <div className='courses-btn-container'>
             {
-              pathname === "/admin/courses" 
-              ? <button className='default-btn' onClick={() => setCreateCourse(true)}>Add new Courses</button>
-              : <button className='default-btn' onClick={() => setActive(true)}>Add Courses</button>
+              pathname === '/admin/courses'
+                ? <button className='default-btn' onClick={() => setCreateCourse(true)}>Add new Courses</button>
+                : <button className='default-btn' onClick={() => setActive(true)}>Add Courses</button>
             }
           </div>
 

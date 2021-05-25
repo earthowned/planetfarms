@@ -1,7 +1,7 @@
 import './news-card.css'
 import { Link } from 'react-router-dom'
 
-function NewsCard({ news }) {
+function NewsCard ({ news }) {
   return (
     <>
       {news && news.map((news) => {
