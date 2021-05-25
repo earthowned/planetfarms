@@ -5,25 +5,7 @@ import Secondarybtn from '../../../Components/SecondaryBtn/Secondarybtn'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './edit-collection.css'
 
-const travelling = [
-  {
-    title: 'Jimmy Bean personal business course',
-    subscribers: 563,
-    cost: 40,
-    img: '/img/farmer.svg'
-  },
-  {
-    title: 'Hourses farming and business',
-    subscribers: 163,
-    cost: 40,
-    img: '/img/farmer.svg'
-  },
-  {
-    title: 'Farming in 2020 with COVID',
-    subscribers: 1563,
-    cost: 40,
-    img: '/img/farmer.svg'
-  },
+const travelling = Array(2).fill([
   {
     title: 'Jimmy Bean personal business course',
     subscribers: 563,
@@ -42,20 +24,14 @@ const travelling = [
     cost: 40,
     img: '/img/farmer.svg'
   }
-]
+]).flat()
 
 const EditCollection = () => {
   return (
     <DashboardLayout title='Travelling courses for Students '>
       <BackButton location='/courses/my-courses' />
       <div className='edit-collection-container'>
-        {
-          travelling.map(item => {
-            return (
-              <EditCollectionCard item={item} />
-            )
-          })
-        }
+        {travelling.map(item => <EditCollectionCard item={item} />)}
       </div>
     </DashboardLayout>
   )

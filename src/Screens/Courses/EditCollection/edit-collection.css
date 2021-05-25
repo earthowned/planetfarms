@@ -67,7 +67,9 @@
     width: 100%;
   }
 
-  .edit-course-text-container div h4, h5, h6 {
+  .edit-course-text-container div h4,
+  h5,
+  h6 {
     font-size: 14px;
     line-height: 20px;
   }
