@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../../Components/Button/Button'
-import GroupFromModal from '../../Components/GroupFromModal/GroupFromModal'
+import FormModal from '../../Components/FormModal/FormModal'
 import CommunityGroupCard from '../../Components/CommunityGroupCard/CommunityGroupCard'
 import Filter from '../../Components/Filter/Filter'
 import SearchComponent from '../../Components/SearchComponent/SearchComponent'
@@ -27,7 +27,7 @@ const CommunityGroup = () => {
 
   return (
     <>
-      {active && <GroupFromModal setActive={setActive} />}
+      {active && <FormModal setActive={setActive} />}
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>
@@ -43,7 +43,7 @@ const CommunityGroup = () => {
                     <div className='your-groups-1 border-class-1'>
                       <div className='your-groups ibmplexsans-semi-bold-quarter-spanish-white-16px'>
                         Your Groups
-                    </div>
+                      </div>
                     </div>
                   </Link>
                 </div>

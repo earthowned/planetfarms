@@ -5,8 +5,11 @@ import CoursesHeader from '../../Components/CoursesHeader/CoursesHeader'
 import CoursesCard from '../../Components/CoursesCard/CoursesCard'
 import GroupModal from '../../Components/GroupModal/GroupModal'
 import SimpleModal from '../../Components/SimpleModal/SimpleModal'
+
 import CourseCreateModal from '../../Components/CourseCreateModal/CourseCreateModal'
 import NewCourseCreateModal from '../../Components/CourseCreateModal/NewCourseCreateModal/NewCourseCreateModal'
+import CollectionModal from '../../Components/CollectionModal/CollectionModal'
+
 
 const Courses = () => {
   const [active, setActive] = useState(false)
@@ -32,6 +35,7 @@ const Courses = () => {
       <DashboardLayout title='All courses'>
         <div className='courses-main-container'>
           <CoursesHeader setActive={setActive} setCreateCourse={setCreateCourse} />
+
         </div>
         <CoursesCard category='Business Courses' setModalActive={setModalActive} />
         <CoursesCard category='Farming Courses' setModalActive={setModalActive} />

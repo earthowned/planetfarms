@@ -32,7 +32,6 @@ import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup'
 import MobileMessage from './Components/MobileMessage/MobileMessage'
 import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
-import Amplify, { Auth } from 'aws-amplify'
 import LessonTest from './Screens/LessonTest/LessonTest'
 import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCoursePage'
 import AddLesson from './Screens/CourseManager/AddLesson/AddLesson'
@@ -103,6 +102,9 @@ if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
   const currentConfig = Auth.configure()
 }
 
+import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
+
+
 function App () {
   return (
     <Router>
@@ -161,6 +163,7 @@ function App () {
         <Route exact path='/courses'>
           <Courses />
         </Route>
+
         <Route path='/admin/courses'>
           <Courses />
         </Route>
@@ -169,6 +172,9 @@ function App () {
         </Route>
         <Route path='/admin/lesson-page'>
           <AddLesson />
+        </Route>
+         <Route path='/courses/users'>
+          <CourseUsers />
         </Route>
         <Route path='/enterprises'>
           <Enterprises />
@@ -199,6 +205,9 @@ function App () {
         </Route>
         <Route path='/mycoursepage/:id'>
           <LessonPage />
+        </Route>
+        <Route path='/coursepage'>
+          <MyCoursePage unpaid="unpaid" />
         </Route>
         <Route path='/test-lesson-1'>
           <LessonTest />

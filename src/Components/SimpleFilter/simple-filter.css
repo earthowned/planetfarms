@@ -1,0 +1,45 @@
+.simple-filter-container {
+  width: 100%;
+  position: relative;
+}
+
+.simple-filter-title {
+  color: var(--primary-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 10px;
+  z-index: 999;
+  border: 1px solid var(--dropdowns);
+  cursor: pointer;
+  padding: 11px;
+  width: 100%;
+  background: #212225;
+  border: 1px solid #191b1d;
+  color: var(--primary-grey);
+  padding: 1em 1em;
+}
+
+.simple-filter-dropdown {
+  color: var(--primary-white);
+  position: absolute;
+  top: 4em;
+  background: var(--background-color-light);
+  margin-top: 0.5em;
+  border: 1px solid var(--dropdowns);
+  border-radius: 4px;
+  z-index: 2000;
+  width: 100%;
+  list-style: none;
+}
+
+.simple-filter-dropdown li {
+  padding: 1em 2em;
+  width: 100%;
+  cursor: pointer;
+  background: var(--background-color);
+}
+
+.simple-filter-dropdown li:hover {
+  background: var(--primary-color);
+}

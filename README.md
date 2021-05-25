@@ -48,6 +48,11 @@ DATABASE_NAME=<database name>
 DATABASE_USERNAME=<database username>
 DATABASE_PASSWORD=<database password>
 DATABASE_HOST=<database server>
+AUTH_METHOD=<**local** or **cognito**>
+COGNITO_REGION=<required only if using cognito auth method>
+COGNITO_POOL_ID=<required only if using cognito auth method>
+COGNITO_CLIENT_ID=<required only if using cognito auth method>
+COGNITO_DOMAIN_NAME=<required only if using cognito auth method>
 ```
 
 ### `docker-compose up`
