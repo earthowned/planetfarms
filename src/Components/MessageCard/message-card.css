@@ -1,3 +1,14 @@
+.last-contact-card {
+  padding: 5px 5px;
+  background: inherit;
+  border: none;
+  color: var(--primary-white);
+  text-align: left;
+  line-height: 1.5;
+  border-bottom: 1px solid var(--dropdowns);
+  cursor: pointer;
+}
+
 .contact-card {
   display: flex;
   padding: 10px 20px;

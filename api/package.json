@@ -19,7 +19,8 @@
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "aws-amplify": "^3.3.27"
   },
   "devDependencies": {
     "faker": "^5.5.2",

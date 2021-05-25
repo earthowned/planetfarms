@@ -24,7 +24,8 @@ const data = [
   }
 ]
 
-const CoursesHeader = ({ setActive, setCreateCourse, location }) => {
+
+const CoursesHeader = ({ setActive, setCreateCollection, location }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -39,10 +40,12 @@ const CoursesHeader = ({ setActive, setCreateCourse, location }) => {
     // if (!userInfo) {
     //     history.push('/login')
     // }
+    // if (search) dispatch(searchResources(search))
+    // if (!search) dispatch(listResources())
 
-    window.addEventListener('resize', function () {
-      setWindowWidth(window.innerWidth)
-    })
+    // window.addEventListener('resize', function () {
+    //   setWindowWidth(window.innerWidth)
+    // })
 
     return () => {
       window.removeEventListener('resize', function () {
@@ -50,6 +53,11 @@ const CoursesHeader = ({ setActive, setCreateCourse, location }) => {
       })
     }
   }, [windowWidth, search, dispatch, history, userInfo])
+
+  function createCollection () {
+    setActive(true)
+    setCreateCollection(true)
+  }
 
   return (
     <div className='courses-main-header-container'>
@@ -70,20 +78,20 @@ const CoursesHeader = ({ setActive, setCreateCourse, location }) => {
               })
             }
           </ul>
-          <div className='courses-search-container'>
-            <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
-          </div>
+            <div className='courses-search-container'>
+              <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
+            </div>
           </>
           : <>
             <Filter data={data} newFilter='new' />
             <div className='courses-search-container'>
               <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
             </div>
-          </>
-        }
+          </>}
       </div>
       <div className='courses-sub-header'>
         <div className='courses-sub-header-1'>
+
           <div className='courses-btn-container'>
             {
               pathname === "/admin/courses" 
@@ -91,6 +99,7 @@ const CoursesHeader = ({ setActive, setCreateCourse, location }) => {
               : <button className='default-btn' onClick={() => setActive(true)}>Add Courses</button>
             }
           </div>
+
         </div>
 
         <div className='courses-sub-header-2'>

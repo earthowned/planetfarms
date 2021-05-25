@@ -7,6 +7,7 @@
   width: 100%;
   height: 48px;
   text-align: center;
+  cursor: pointer;
 }
 
 .secondary-btn-variant img {
