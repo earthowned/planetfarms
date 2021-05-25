@@ -25,7 +25,7 @@ const data = [
 ]
 
 
-const CoursesHeader = ({ setActive, setCreateCollection, location }) => {
+const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCourse }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin

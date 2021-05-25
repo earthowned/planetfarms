@@ -35,6 +35,8 @@ import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import LessonTest from './Screens/LessonTest/LessonTest'
 import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCoursePage'
 import AddLesson from './Screens/CourseManager/AddLesson/AddLesson'
+import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
+import Amplify, {Auth} from 'aws-amplify';
 
 function amplifyConfig () {
   Amplify.configure({
@@ -102,7 +104,7 @@ if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
   const currentConfig = Auth.configure()
 }
 
-import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
+
 
 
 function App () {
