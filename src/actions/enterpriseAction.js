@@ -63,7 +63,7 @@ export const createEnterprise = (newEnterprise) => async (
   const formData = new FormData()
   formData.append('title', newEnterprise.title)
   formData.append('description', newEnterprise.description)
-  formData.append('file', newEnterprise.file)
+  formData.append('enterprise', newEnterprise.file)
   formData.append('category', newEnterprise.category)
   formData.append('roles', newEnterprise.roles)
   try {

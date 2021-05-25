@@ -37,6 +37,8 @@ const addGroups = (req, res) => {
   if (req.file) {
     filename = req.file.filename
   }
+  
+  
   // const {
   //   title, description, category, attachments
   // } = req.body

@@ -107,13 +107,7 @@ function LoginScreen(props) {
     if (!username) setUserError(true)
     if (password.length <6) setPasswordError(true)
     if (!terms) setTermsError(true)
-
-    if(username && password.length > 6) {
-      if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-        return dispatch(login(username, password))
-      }
-      signIn(username, password)
-    }
+    return dispatch(login(username, password))
   }
 
   const loginWithFacebook = (e) => {

@@ -7,7 +7,7 @@ const { upload } = require('../helpers/filehelpers')
 
 router.route('/').get(getNews)
 // router.route('/add').post(multipleUpload, protect, addNews)
-router.route('/add').post(upload.single('file'), addNews)
+router.route('/add').post(upload.single('news'), addNews)
 router.route('/search').get(searchNewsTitle)
 router
   .route('/:id')

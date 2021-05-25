@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
-import useSizeFinder from '../../../utils/SizeFinder'
-import Secondarybtn from '../../SecondaryBtn/Secondarybtn'
+import Button from '../../Button/Button'
 import './course-description.css'
+import MoreCourse from './MoreCourse'
+import useSizeFinder from '../../../utils/SizeFinder'
 
-const CourseDescription = ({ setFeedbackModal }) => {
+const CourseDescription = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
   return (
     <>
       <div className='course-page-container border-1px-onyx'>
-        <CourseDetail setFeedbackModal={setFeedbackModal} />
-        <LessonCourse />
+        <CourseDetail setFeedbackModal={setFeedbackModal} unpaid={unpaid} setPurchaseModal={setPurchaseModal} />
+        <LessonCourse unpaid={unpaid} setPurchaseModal={setPurchaseModal} />
       </div>
       <MoreCourse />
     </>
@@ -46,7 +47,6 @@ const ProgressBar = () => {
   const lessonIndicator = lessonLength * (115 / lessons.length)
   const accurateIndicator = lessonIndicator === 115 ? 92 : lessonIndicator
   const windowWidth = useSizeFinder()
-
   return (
     <div className='lesson-bar'>
       {windowWidth > 600
@@ -68,13 +68,16 @@ const ProgressBar = () => {
   )
 }
 
-const CourseDetail = ({ setFeedbackModal }) => {
+const CourseDetail = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
   return (
     <div className='description-course-page'>
       <div className='bg-image' />
       <div className='course-details-wrapper'>
         <div className='course-description'>
-          <h1 className='course-title'>Jimmy Beam personal course</h1>
+          <div className="course-description-header">
+            <h1 className='course-title'>Jimmy Beam personal course</h1>
+            {unpaid ? <div className='dropdown-course-container'><Button name="Buy Course" clickHandler={() => setPurchaseModal(true)} /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
+          </div>
           <p className='course-desc'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -83,11 +86,9 @@ const CourseDetail = ({ setFeedbackModal }) => {
             reprehenderit in voluptate velit esse cillum dolore eu fugiat
             nulla.
           </p>
-
           {/* lesson progress bar */}
           <ProgressBar />
         </div>
-        <DropDownCourse setFeedbackModal={setFeedbackModal} />
       </div>
     </div>
   )
@@ -154,9 +155,15 @@ const lessonData = [
   }
 ]
 
-const LessonCourse = () => {
+const LessonCourse = ({unpaid, setPurchaseModal}) => {
   return (
     <div className='lessons-container'>
+      {unpaid && <div className="purchase-course-wrapper">
+          <div className="purchase-course">
+            <h4>Buy this course for <span>$59.99</span></h4>
+            <div><Button name="Buy Course" clickHandler={() => setPurchaseModal(true)}/></div>
+          </div>
+        </div>}
       <h3>Lessons</h3>
       {
         lessonData.map(data => {
@@ -172,11 +179,11 @@ const LessonCourseSingle = ({ data }) => {
   return (
     <div className='lesson-card-wrapper'>
       {data.finish && <div className='lock-lesson'>
-        <img src='/img/lesson-lock.svg' />
+        <img src='/img/lesson-lock.svg' alt="lock icon"/>
         <h4>{data.finish}</h4>
       </div>}
       <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
-        <img className='lesson-card-img' src={data.bgImage} />
+        <img className='lesson-card-img' src={data.bgImage} alt="background image" />
         <div className='lesson-card-content'>
           <h3>{data.name}</h3>
           <p>{data.description}</p>
@@ -184,86 +191,5 @@ const LessonCourseSingle = ({ data }) => {
         </div>
       </div>
     </div>
-  )
-}
-
-const MoreCourse = () => {
-  const moreCourseData = [
-    {
-      _id: 1,
-      name: 'Dianne Russell',
-      message: 'Write message',
-      bgImage: '/img/profile-image-2.svg'
-    },
-
-    {
-      _id: 2,
-      name: 'Kristin Watson',
-      message: 'Write message',
-      bgImage: '/img/profile-image-3.svg'
-    },
-    {
-      _id: 3,
-      name: 'Leslie Alexander',
-      message: 'Write message',
-      bgImage: '/img/profile-image-4.svg'
-    },
-    {
-      _id: 4,
-      name: 'Ralph Edwards',
-      message: 'Write message',
-      bgImage: '/img/profile-image-5.svg'
-    },
-    {
-      _id: 5,
-      name: 'Guy Hawkins',
-      message: 'Write message',
-      bgImage: '/img/profile-image-6.svg'
-    }
-  ]
-
-  const screenSize = useSizeFinder()
-
-  return (
-    <>
-      <div className='more-course-feature-container'>
-        <div className='more-course-feature-title'>
-          <div className='more-course-title ibmplexsans-semi-bold-quarter-spanish-white-24px'>
-            Also study this course
-          </div>
-          <div className='see-all-users ibmplexsans-semi-bold-caribbean-green-16px'>
-            See all users
-          </div>
-        </div>
-        <div className='more-course-container'>
-          {moreCourseData.map((data) => {
-            return (
-              <>
-                <div className='more-course'>
-                  <div className='more-course-wrapper'>
-                    <div
-                      className='more-course-image '
-                      style={{ backgroundImage: `url(${data.bgImage})` }}
-                    />
-                    <div className='more-course-text'>
-                      <div className='more-course-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                        {data.name}
-                      </div>
-                      <div className='more-course-write-message ibmplexsans-semi-bold-caribbean-green-16px'>
-                        {data.message}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )
-          })}
-        </div>
-
-        {
-          screenSize < 650 && <div className='secondary-btn-container margin-left-1'><Secondarybtn name='See all users' /></div>
-        }
-      </div>
-    </>
   )
 }
