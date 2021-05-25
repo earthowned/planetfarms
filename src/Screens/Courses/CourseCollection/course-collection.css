@@ -6,7 +6,7 @@
 
 .courses-collection-main-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 0.5fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 0.35fr));
   grid-gap: 40px;
   color: var(--primary-white);
 }
@@ -20,7 +20,16 @@
 }
 
 .single > div {
-  margin-right: 20px;
+  margin-right: 52px;
+}
+
+.double > div:first-child {
+  margin-right: 40px;
+}
+
+.double > div:last-child {
+  margin-left: -40px;
+  margin-right: 80px;
 }
 
 .subs {
@@ -48,12 +57,53 @@
   margin-top: 16px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1500px) {
   .courses-collection-main-container {
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 0.5fr));
+  }
+
+  .single > div {
+    margin-right: 25px;
+  }
+
+  .double > div:first-child {
+    margin-right: 0;
+  }
+
+  .double > div:last-child {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 1060px) {
+  .courses-collection-main-container {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 0.5fr));
+  }
+
+  .single > div {
+    margin-right: 25px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .courses-collection-main-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 0.5fr));
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .courses-collection-main-container {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 
   .single > div {
     margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .courses-collection-main-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }

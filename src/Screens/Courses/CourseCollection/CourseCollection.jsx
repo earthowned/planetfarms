@@ -40,21 +40,25 @@ const CourseCollection = () => {
   )
 }
 
-const CourseUserCard = ({ name, data, btnName, subName }) => {
-  return (
-    <>
-      <h4 className='courses-users-collection-header'>{name}</h4>
-      <div className={data.length === 1 ? 'courses-collection-main-container single' : 'courses-collection-main-container'}>
-        {
-          data.map(item => {
-            return (
-              <BackgroundUserCard item={item} btnName={btnName} subName={subName} />
-            )
-          })
-        }
-      </div>
-    </>
-  )
+const CourseUserCard = ({name, data, btnName, subName}) => {
+    return (
+        <>
+         <h4 className="courses-users-collection-header">{name}</h4>
+            <div className={data.length === 1 
+            ? "courses-collection-main-container single" 
+            : data.length === 2 
+            ? "courses-collection-main-container double"
+            : "courses-collection-main-container"}>
+            {
+                data.map(item => {
+                    return (
+                        <BackgroundUserCard item={item} btnName={btnName} subName={subName} />
+                    )
+                })
+            }
+            </div>
+        </>
+    )
 }
 
 export const BackgroundUserCard = ({ item, btnName, subName }) => {
