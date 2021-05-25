@@ -172,21 +172,21 @@ function MainContainer () {
     <div className='dashboard-main-container border-1px-onyx'>
       <div className='dashboard-inner-container'>
         {
-                headers.map(head => {
-                  return (
-                    <div className='mylibrary-container' key={head.name}>
-                      <div className='mylibrary-container--header'>
-                        <img src={head.image} alt={head.name} />
-                        <h4>{head.name}</h4>
-                        <Link to={head.slug} className='link-decoration'>
-                          <SeeAllButton>See all items</SeeAllButton>
-                        </Link>
-                      </div>
-                      <ScrollItems head={head} />
-                    </div>
-                  )
-                })
-              }
+          headers.map(head => {
+            return (
+              <div className='mylibrary-container' key={head.name}>
+                <div className='mylibrary-container--header'>
+                  <img src={head.image} alt={head.name} />
+                  <h4>{head.name}</h4>
+                  <Link to={head.slug} className='link-decoration'>
+                    <SeeAllButton>See all items</SeeAllButton>
+                  </Link>
+                </div>
+                <ScrollItems head={head} />
+              </div>
+            )
+          })
+        }
       </div>
     </div>
   )
@@ -202,12 +202,12 @@ function ScrollItems ({ head }) {
       </div>
       {scrollActive && <img className='scroll-icon' onClick={() => scrollRight(scrollRef)} src='/img/scroll-icon.svg' alt='scroll-icon' />}
       {
-              scrollLeftActive &&
-                <img
-                  className='scroll-left-icon' src='/img/scroll-icon.svg'
-                  onClick={() => scrollLeft(scrollRef)} alt='scroll-icon'
-                />
-          }
+        scrollLeftActive &&
+          <img
+            className='scroll-left-icon' src='/img/scroll-icon.svg'
+            onClick={() => scrollLeft(scrollRef)} alt='scroll-icon'
+          />
+      }
     </>
   )
 }
@@ -216,18 +216,18 @@ function Tiles ({ data, title }) {
   return (
     <>
       {
-    data.map(item => {
-      return (
-        <div className='tiles-container' key={item.title}>
-          <div className='tiles-container-img-wrapper'>
-            <img src={item.img} alt={item.title} />
-          </div>
-          <h4>{item.title}</h4>
-          {item.type && <img className='video-icon' src='/img/video-icon.svg' alt={item.type} />}
-        </div>
-      )
-    })
-    }
+        data.map(item => {
+          return (
+            <div className='tiles-container' key={item.title}>
+              <div className='tiles-container-img-wrapper'>
+                <img src={item.img} alt={item.title} />
+              </div>
+              <h4>{item.title}</h4>
+              {item.type && <img className='video-icon' src='/img/video-icon.svg' alt={item.type} />}
+            </div>
+          )
+        })
+      }
       <div className='add-container'>
         <img src='/img/plus-icon.svg' alt='add-icon' />
         <h4>{title}</h4>
