@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createEnterprise } from '../../actions/enterpriseAction'
 import DragDrop from '../NewsCreateModal/DragDrop'
+import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
 
 const EnterprisesCollection = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()
@@ -62,14 +63,8 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
     <>
       <div className='collection-modal-container'>
         <div className='collection-modal-inner-container'>
-          <div className='collection-modal-header'>
-            <h4>{pathname === '/enterprises' && 'Create Enterprises'}</h4>
-            <img
-              src='/img/close-outline.svg'
-              onClick={() => setActive(false)}
-              alt='close-icon'
-            />
-          </div>
+         
+          <CollectionModalHeader title='Add Enterprise' setEnterpriseActive={setActive} />
           <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} onChange={(e) => fileChange(e)} />
           <div className='collection-input-container'>
             <input

@@ -7,6 +7,7 @@ const CollectionModalHeader = ({
   setTextActive,
   setGroupActive,
   setGroupEditActive,
+  setEnterpriseActive,
 }) => {
   return (
     <>
@@ -36,6 +37,15 @@ const CollectionModalHeader = ({
             alt="close-icon"
             onClick={() => setGroupEditActive(false)}
           />
+        </div>
+      ) : title === 'Add Enterprise' ? (
+        <div className='collection-modal-header'>
+          <h4>{title}</h4>
+          <img
+            src='/img/close-outline.svg'
+            alt='close-icon'
+            onClick={() => setEnterpriseActive(false)}
+            />
         </div>
       ) : title === "Add photo" ? (
         <div className="collection-modal-header">
