@@ -29,17 +29,6 @@
   align-items: center;
 }
 
-.course-create-modal-header button {
-  background: none;
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
-
-.course-create-modal-header button:hover {
-  transform: scale(1.1);
-}
-
 .course-type {
   display: flex;
   align-items: center;
@@ -71,10 +60,21 @@
 .course-type button > div div {
   width: 80%;
   text-align: left;
-} 
+}
 
 .course-type h4 {
   margin-bottom: 8px;
+}
+
+.course-create-modal-header button {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.course-create-modal-header button:hover {
+  transform: scale(1.1);
 }
 
 .course-create-modal-btn {
