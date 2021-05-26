@@ -54,8 +54,9 @@
   width: 100%;
 }
 
-.text-area-variation-2 {
+#text-area-variation-2 {
   height: 300px;
+  resize: none;
 }
 
 .preview-image {

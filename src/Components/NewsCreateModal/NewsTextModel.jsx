@@ -34,6 +34,7 @@ const CreateText = ({ textActive, setTextActive }) => {
     <>
       {textActive && (
         <div className='collection-modal-container'>
+          <div>
           <div className='collection-modal-inner-container'>
             <CollectionModalHeader title='Add text' setTextActive={setTextActive} />
             <div className='photo-input-container'>
@@ -47,7 +48,8 @@ const CreateText = ({ textActive, setTextActive }) => {
 
               <br />
               <textarea
-                className='default-input-variation text-area-variation-2'
+                className='default-input-variation'
+                id="text-area-variation-2"
                 placeholder='Type text here '
                 value={collectionDescription}
                 onChange={(e) => collectionDescriptionChange(e)}
@@ -55,6 +57,7 @@ const CreateText = ({ textActive, setTextActive }) => {
               <p className='error-message'>{collectionDescriptionError ? 'Please enter Video Description' : ' '} </p>
             </div>
             <Button name='Add block' clickHandler={addText} />
+          </div>
           </div>
         </div>
       )}

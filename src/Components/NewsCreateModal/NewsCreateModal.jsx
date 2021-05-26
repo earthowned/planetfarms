@@ -47,6 +47,7 @@ const NewsCreateModal = ({
           getRootProps={getRootProps}
           getInputProps={getInputProps}
           files={files}
+          setFiles={setFiles}
           videoActive={videoActive}
           setVideoActive={setVideoActive}
         />
@@ -57,6 +58,7 @@ const NewsCreateModal = ({
           getRootProps={getRootProps}
           getInputProps={getInputProps}
           files={files}
+          setFiles={setFiles}
           groupActive={groupActive}
           setGroupActive={setGroupActive}
         />
@@ -75,6 +77,7 @@ const NewsCreateModal = ({
           getRootProps={getRootProps}
           getInputProps={getInputProps}
           files={files}
+          setFiles={setFiles}
           imageActive={imageActive}
           setImageActive={setImageActive}
         />
