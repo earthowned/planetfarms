@@ -33,7 +33,10 @@ import MobileMessage from './Components/MobileMessage/MobileMessage'
 import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import LessonTest from './Screens/LessonTest/LessonTest'
+import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCoursePage'
+import AddLesson from './Screens/CourseManager/AddLesson/AddLesson'
 import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
+import Amplify, { Auth } from 'aws-amplify'
 
 function App () {
   return (
@@ -93,7 +96,17 @@ function App () {
         <Route exact path='/courses'>
           <Courses />
         </Route>
-         <Route path='/courses/users'>
+
+        <Route path='/admin/courses'>
+          <Courses />
+        </Route>
+        <Route path='/admin/coursepage'>
+          <AdminCoursePage />
+        </Route>
+        <Route path='/admin/lesson-page'>
+          <AddLesson />
+        </Route>
+        <Route path='/courses/users'>
           <CourseUsers />
         </Route>
         <Route path='/enterprises'>
@@ -127,7 +140,7 @@ function App () {
           <LessonPage />
         </Route>
         <Route path='/coursepage'>
-          <MyCoursePage unpaid="unpaid" />
+          <MyCoursePage unpaid='unpaid' />
         </Route>
         <Route path='/test-lesson-1'>
           <LessonTest />

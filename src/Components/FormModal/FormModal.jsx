@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
 import '../EnterprisesCollection/enterprises-collection.css';
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createGroup } from '../../actions/communityGroupActions'
 import { createEnterprise } from '../../actions/enterpriseAction'
 import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
-import DragDrop from '../NewsCreateModal/DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
 
 const GroupFromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()
@@ -24,18 +23,6 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
   const dispatch = useDispatch()
 
   const { pathname } = useLocation()
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      )
-    }
-  })
 
   const groupTitleChange = (e) => {
     setGroupTitle(e.target.value)
@@ -85,10 +72,6 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
     }
   }
 
-  const fileChange = (e) => {
-    setFiles(e.target.files[0])
-  }
-
   return (
     <>
       <div className='collection-modal-container'>
@@ -99,11 +82,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
                 title='Create Group'
                 setGroupActive={setActive}
               />
-              <DragDrop
-                getInputProps={getInputProps}
-                getRootProps={getRootProps}
-                files={files}
-              />
+              <DragDrop files={files}  onChange={setFiles} />
               <div className='collection-input-container'>
                 <InputFields
                   className='default-input-variation'
@@ -146,11 +125,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
                 title='Create Enterprises'
                 setEnterpriseActive={setActive}
               />
-              <DragDrop
-                getInputProps={getInputProps}
-                getRootProps={getRootProps}
-                files={files}
-              />
+              <DragDrop files={files} onChange={setFiles}/>
               <div className='collection-input-container'>
                 <InputFields
                   type='text'

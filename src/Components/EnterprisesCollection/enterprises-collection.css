@@ -1,18 +1,29 @@
 .collection-modal-container {
   position: fixed;
   width: 100%;
+  height: auto;
   background: var(--background-color-modal);
   height: 100%;
   color: #fff;
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.collection-modal-container > div {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-y: scroll;  
 }
 
 .collection-modal-inner-container {
-  width: 35%;
-  height: 80%;
+  width: 600px;
+  height: auto;
+  position: absolute;
+  top: 40px;
+  margin-bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-y: scroll;
   background: var(--cards);
   padding: 2em 1.6em;
   display: flex;
@@ -41,12 +52,58 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1em;
+  position: relative;
+}
+
+.drag-drop-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.drag-drop {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .collection-modal-inner-container .drag-drop h6 {
   width: 50%;
   text-align: center;
   line-height: 1.5;
+}
+
+.drag-drop-icon-container {
+  position: absolute;
+  width: 100%;
+  height: 72px;
+  background: rgba(0,0,0,.8);
+  z-index: 50;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.drag-drop-close {
+  position: absolute;
+  background: #2B2B2C66;
+  border-radius: 4px;
+  top: 8px;
+  right: 8px;
+  z-index: 50;
+  cursor: pointer;
 }
 
 .collection-input-container {
