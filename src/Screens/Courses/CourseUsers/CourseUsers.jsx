@@ -38,7 +38,7 @@ const CourseUsers = () => {
       <div className='courses-main-container'>
         <CoursesHeader setActive={setActive} />
         <CourseUserCard name='Farming Collections' />
-        <CourseUserCard name='Brandig Collections' />
+        <CourseUserCard name='Branding Collections' />
       </div>
     </DashboardLayout>
   )
