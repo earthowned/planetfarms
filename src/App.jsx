@@ -32,76 +32,10 @@ import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup'
 import MobileMessage from './Components/MobileMessage/MobileMessage'
 import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
-import Amplify, { Auth } from 'aws-amplify'
 import LessonTest from './Screens/LessonTest/LessonTest'
 import CourseCollection from './Screens/Courses/CourseCollection/CourseCollection'
 import EditCollection from './Screens/Courses/EditCollection/EditCollection'
-
-function amplifyConfig () {
-  Amplify.configure({
-    Auth: {
-
-      // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-      // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
-
-      // REQUIRED - Amazon Cognito Region
-      region: process.env.REACT_APP_COGNITO_REGION,
-
-      // OPTIONAL - Amazon Cognito Federated Identity Pool Region
-      // Required only if it's different from Amazon Cognito Region
-      // identityPoolRegion: 'XX-XXXX-X',
-
-      // OPTIONAL - Amazon Cognito User Pool ID
-      userPoolId: process.env.REACT_APP_COGNITO_POOL_ID,
-
-      // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-      userPoolWebClientId: process.env.REACT_APP_COGNITO_CLIENT_ID,
-
-      // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
-      mandatorySignIn: false,
-
-      // OPTIONAL - Configuration for cookie storage
-      // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
-      /* cookieStorage: {
-        // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-            domain: '.yourdomain.com',
-        // OPTIONAL - Cookie path
-            path: '/',
-        // OPTIONAL - Cookie expiration in days
-            expires: 365,
-        // OPTIONAL - See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
-            sameSite: "strict" | "lax",
-        // OPTIONAL - Cookie secure flag
-        // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-            secure: true
-        }, */
-
-      // OPTIONAL - customized storage object
-      // storage: MyStorage,
-
-      // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
-      authenticationFlowType: 'USER_PASSWORD_AUTH',
-
-      // OPTIONAL - Manually set key value pairs that can be passed to Cognito Lambda Triggers
-      // clientMetadata: { myCustomKey: 'myCustomValue' },
-
-      // OPTIONAL - Hosted UI configuration
-      oauth: {
-        domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
-        scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-        redirectSignIn: 'http://localhost:3000/',
-        redirectSignOut: 'http://localhost:3000/',
-        responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
-      }
-    }
-  })
-}
-
-if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-  amplifyConfig()
-  // You can get the current config object
-  const currentConfig = Auth.configure()
-}
+import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
 
 function App () {
   return (
@@ -167,6 +101,9 @@ function App () {
         <Route path='/courses/my-courses/:id'>
           <EditCollection />
         </Route>
+        <Route path='/courses/users'>
+          <CourseUsers />
+        </Route>
         <Route path='/enterprises'>
           <Enterprises />
         </Route>
@@ -196,6 +133,9 @@ function App () {
         </Route>
         <Route path='/mycoursepage/:id'>
           <LessonPage />
+        </Route>
+        <Route path='/coursepage'>
+          <MyCoursePage unpaid='unpaid' />
         </Route>
         <Route path='/test-lesson-1'>
           <LessonTest />

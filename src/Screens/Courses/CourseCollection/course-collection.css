@@ -15,8 +15,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 1px solid var(--dropdowns);
+  border-radius: 4px;
   padding: 16px;
-  border: 1px solid #4f5155;
+  height: 344px;
 }
 
 .single > div {

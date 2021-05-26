@@ -22,16 +22,6 @@
   background: var(--primary-color);
 }
 
-/* .btn-text {
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 .border-active {
   border: 1px solid var(--primary-color);
 }

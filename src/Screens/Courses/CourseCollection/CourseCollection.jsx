@@ -5,50 +5,15 @@ import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import { Link } from 'react-router-dom'
 import './course-collection.css'
 
-const farming = [
+const farming = Array(6).fill(
   {
     title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
-    subscribers: 65
-  },
-  {
-    title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
-    subscribers: 65
-  },
-  {
-    title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
-    subscribers: 65
-  },
-  {
-    title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
-    subscribers: 65
-  },
-  {
-    title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
-    subscribers: 65
-  },
-  {
-    title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
-    subscribers: 65
-  },
-  {
-    title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
+    img: '/img/mountain.svg',
     subscribers: 65
   }
-]
+)
 
 const mycollection = [
-  {
-    title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
-    subscribers: 365
-  },
   {
     title: 'Farm 2020 courses collection',
     img: '/img/farmer.svg',

@@ -23,7 +23,7 @@ function checkFileType (file, cb) {
   if ((path.extname(file.originalname) === '.pdf' || extname) && mimetype) {
     return cb(null, true)
   } else {
-    throw new Error('Course not found')
+    throw new Error('Format not valid')
   }
 }
 
