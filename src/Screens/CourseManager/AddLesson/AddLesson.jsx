@@ -56,22 +56,34 @@ const AddLesson = () => {
             <button className='secondary-btn'><img src='/img/test-outline.svg' alt='test icon' /> <span>Add test</span></button>
           </div>
         </div>
-        <div className='admin-lesson-materials-container'>
-          <h1>Materials</h1>
-          <p>You dont have any materials in lesson
-            Add it for your users.
-          </p>
-          <button className='secondary-btn'>Add materials</button>
-        </div>
-        <div className='save-lesson-modal'>
-          <h4>Do you want to save lesson?</h4>
-          <div>
-            <button className='secondary-btn'>Cancel</button>
-            <button className='primary-btn secondary-btn'>Save lesson</button>
-          </div>
-        </div>
+        <LessonMaterial></LessonMaterial>
+        <LessonSaveModal></LessonSaveModal>
       </DashboardLayout>
     </>
+  )
+}
+
+const LessonMaterial = () => {
+  return (
+    <div className='admin-lesson-materials-container'>
+      <h1>Materials</h1>
+      <p>You dont have any materials in lesson
+        Add it for your users.
+      </p>
+      <button className='secondary-btn'>Add materials</button>
+    </div>
+  )
+}
+
+const LessonSaveModal = () => {
+  return (
+    <div className='save-lesson-modal'>
+      <h4>Do you want to save lesson?</h4>
+      <div>
+        <button className='secondary-btn'>Cancel</button>
+        <button className='primary-btn secondary-btn'>Save lesson</button>
+      </div>
+    </div>
   )
 }
 

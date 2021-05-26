@@ -17,12 +17,10 @@ const Courses = () => {
   const [newCollectionactive, setNewCollectionActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
   const [createNewCourse, setCreateNewCourse] = useState(false)
-
   function createNewCourseFunc () {
     setCreateNewCourse(true);
     setCreateCourse(false);
   }
-
   return (
     <>
       {modalactive && <GroupModal clickHandler={setModalActive} setNewCollection={setNewCollectionActive} name='Add to collection' btnName='Add to collection' />}
@@ -35,7 +33,6 @@ const Courses = () => {
       <DashboardLayout title='All courses'>
         <div className='courses-main-container'>
           <CoursesHeader setActive={setActive} setCreateCourse={setCreateCourse} />
-
         </div>
         <CoursesCard category='Business Courses' setModalActive={setModalActive} />
         <CoursesCard category='Farming Courses' setModalActive={setModalActive} />
