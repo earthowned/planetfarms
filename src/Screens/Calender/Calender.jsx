@@ -24,8 +24,6 @@ const Calender = () => {
     dispatch(listCalenderEvents())
   }, [dispatch])
 
-  console.log('evet', eventtrue)
-
   const handleEventChange = () => {
     setEventTrue(true)
   }
