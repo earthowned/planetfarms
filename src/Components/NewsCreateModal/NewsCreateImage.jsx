@@ -3,7 +3,7 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { useDispatch } from 'react-redux'
 import { saveimageDetail } from '../../actions/newsActions'
-import DragDrop from './DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 
 const CreateImage = ({ getRootProps, getInputProps, files, setFiles, imageActive, setImageActive }) => {

@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
 import BackButton from '../../../Components/BackButton/BackButton'
-import DragDrop from '../../../Components/NewsCreateModal/DragDrop'
+import DragDrop from '../../../Components/DragDrop/DragDrop'
 import NewsCreateModal from '../../../Components/NewsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './add-lesson.css'
@@ -10,6 +9,7 @@ const AddLesson = () => {
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
+ 
   return (
     <>
       {videoModal && <NewsCreateModal type='video' videoActive={videoModal} setVideoActive={setVideoModal} />}
@@ -19,7 +19,7 @@ const AddLesson = () => {
         <BackButton location='/admin/coursepage' />
         <div className='admin-lesson-create-container'>
           <input type='text' placeholder='Write title here' />
-          <DropZone></DropZone>
+          <DragDrop onChange='{onChange}' />
           <div className='admin-lesson-create-btn-wrapper'>
             <button className='secondary-btn' onClick={() => setVideoModal(true)}><img src='/img/video-outline.svg' alt='video icon' /> <span>Add video</span></button>
             <button className='secondary-btn' onClick={() => setImageModal(true)}><img src='/img/image-outline.svg' alt='image icon' /> <span>Add image</span></button>
@@ -27,33 +27,10 @@ const AddLesson = () => {
             <button className='secondary-btn'><img src='/img/test-outline.svg' alt='test icon' /> <span>Add test</span></button>
           </div>
         </div>
-        <LessonMaterial></LessonMaterial>
-        <LessonSaveModal></LessonSaveModal>
+        <LessonMaterial />
+        <LessonSaveModal />
       </DashboardLayout>
     </>
-  )
-}
-
-const DropZone = () => {
-  const [files, setFiles] = useState([])
-
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      )
-    }
-  })
-  
-  return (
-    <div className="add-lesson-drag">
-    <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} setFiles={setFiles} />
-    </div>
   )
 }
 

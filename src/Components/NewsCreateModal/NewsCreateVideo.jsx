@@ -3,7 +3,7 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { savevideoDetail } from '../../actions/newsActions'
 import { useDispatch } from 'react-redux'
-import DragDrop from './DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 
 const CreateVideo = ({ getRootProps, getInputProps, files, setFiles,  videoActive, setVideoActive }) => {
