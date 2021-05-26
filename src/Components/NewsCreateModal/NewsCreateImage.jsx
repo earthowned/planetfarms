@@ -3,7 +3,7 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { useDispatch } from 'react-redux'
 import { saveimageDetail } from '../../actions/newsActions'
-import DragDrop from './DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 
 const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive }) => {
@@ -31,7 +31,7 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
             <CollectionModalHeader title='Add photo' setImageActive={setImageActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
+            <DragDrop files={files} />
             <div className='description'>
               <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
             </div>

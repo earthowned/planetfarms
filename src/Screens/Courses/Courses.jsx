@@ -10,7 +10,6 @@ import CourseCreateModal from '../../Components/CourseCreateModal/CourseCreateMo
 import NewCourseCreateModal from '../../Components/CourseCreateModal/NewCourseCreateModal/NewCourseCreateModal'
 import CollectionModal from '../../Components/CollectionModal/CollectionModal'
 
-
 const Courses = () => {
   const [active, setActive] = useState(false)
   const [modalactive, setModalActive] = useState(false)
@@ -18,17 +17,14 @@ const Courses = () => {
   const [createCourse, setCreateCourse] = useState(false)
   const [createNewCourse, setCreateNewCourse] = useState(false)
   function createNewCourseFunc () {
-    setCreateNewCourse(true);
-    setCreateCourse(false);
+    setCreateNewCourse(true)
+    setCreateCourse(false)
   }
   return (
     <>
       {modalactive && <GroupModal clickHandler={setModalActive} setNewCollection={setNewCollectionActive} name='Add to collection' btnName='Add to collection' />}
       {newCollectionactive && <SimpleModal setNewCollection={setNewCollectionActive} name='Courses' />}
-      {createCourse && <CourseCreateModal setNewCollection={setNewCollectionActive} 
-      clickHandler={setCreateCourse} 
-      collectionAdded={createNewCourseFunc}
-      />}
+      {createCourse && <CourseCreateModal setNewCollection={setNewCollectionActive} clickHandler={setCreateCourse} collectionAdded={createNewCourseFunc} />}
       {createNewCourse && <NewCourseCreateModal clickHandler={setCreateNewCourse} />}
       <DashboardLayout title='All courses'>
         <div className='courses-main-container'>

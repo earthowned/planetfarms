@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
 import './collection-modal.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createResource } from '../../actions/resourceActions'
 import SimpleFilter from '../SimpleFilter/SimpleFilter'
 import { collectionFilterData } from '../../constants/sampleData'
+import DragDrop from '../DragDrop/DragDrop'
 
 const CollectionModal = ({ setActive, openAddCollection, name }) => {
   const [files, setFiles] = useState()
@@ -15,17 +15,6 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
   const [resourceTitleError, setResourceTitleError] = useState(false)
   const [resourceDescriptionError, setResourceDescriptionError] = useState(false)
   const { pathname } = useLocation()
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      acceptedFiles.map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file)
-        })
-      )
-      setFiles(acceptedFiles[0])
-    }
-  })
 
   const resourceTitleChange = (e) => {
     setResourceTitle(e.target.value)
@@ -47,14 +36,6 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
     }
   }
 
-  const fileChange = (e) => {
-    const selectedFile = e.target.files[0]
-    Object.assign(selectedFile, {
-      preview: URL.createObjectURL(selectedFile)
-    })
-    setFiles(selectedFile)
-  }
-
   return (
     <>
       <div className='collection-modal-container'>
@@ -63,14 +44,7 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
             <h4>{pathname === '/library' ? 'Create Resources' : 'Create Collection'}</h4>
             <img src='/img/close-outline.svg' onClick={() => setActive(false)} alt='close-icon' />
           </div>
-          <div className='drag-drop' {...getRootProps()}>
-            <input {...getInputProps()} onChange={(e) => fileChange(e)} />
-            {(files != null)
-              ? <img className='avatar' name='avatar' src={files.preview} alt='files[0].preview' />
-              : <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                Drag and Drop files in this area or Click Here to attach
-              </h6>}
-          </div>
+          <DragDrop onChange={setFiles} />
           {pathname === '/library'
             ? <>
               <div className='collection-input-container'>

@@ -3,7 +3,7 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { savevideoDetail } from '../../actions/newsActions'
 import { useDispatch } from 'react-redux'
-import DragDrop from './DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 
 const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideoActive }) => {
@@ -37,7 +37,7 @@ const CreateVideo = ({ getRootProps, getInputProps, files, videoActive, setVideo
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
             <CollectionModalHeader title='Add video' setVideoActive={setVideoActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
+            <DragDrop files={files} />
             <div className='video-input-container'>
               <input
                 className='default-input-variation'

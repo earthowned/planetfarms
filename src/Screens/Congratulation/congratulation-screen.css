@@ -194,7 +194,7 @@
     margin-right: 1em;
   }
 
-  .congratulation-col-3 {
+  .congratulation-container .drag-drop {
     margin: 0 auto;
     margin-bottom: 2em;
     order: -1;
