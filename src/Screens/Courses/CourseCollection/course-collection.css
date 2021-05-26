@@ -6,7 +6,7 @@
 
 .courses-collection-main-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 0.35fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 0.35fr));
   grid-gap: 40px;
   color: var(--primary-white);
 }
@@ -20,16 +20,16 @@
 }
 
 .single > div {
-  margin-right: 52px;
+  margin-right: 60px;
 }
 
 .double > div:first-child {
-  margin-right: 40px;
+  margin-right: 50px;
 }
 
 .double > div:last-child {
-  margin-left: -40px;
-  margin-right: 80px;
+  margin-left: -50px;
+  margin-right: 95px;
 }
 
 .subs {
@@ -55,6 +55,36 @@
   align-items: center;
   justify-content: center;
   margin-top: 16px;
+}
+
+@media only screen and (max-width: 2500px) {
+  .double > div:first-child {
+    margin-right: 40px;
+  }
+
+  .double > div:last-child {
+    margin-left: -40px;
+    margin-right: 85px;
+  }
+}
+
+@media only screen and (max-width: 2000px) {
+  .courses-collection-main-container {
+    grid-template-columns: repeat(auto-fit, minmax(375px, 0.35fr));
+  }
+
+  .single > div {
+    margin-right: 50px;
+  }
+
+  .double > div:first-child {
+    margin-right: 30px;
+  }
+
+  .double > div:last-child {
+    margin-left: -30px;
+    margin-right: 70px;
+  }
 }
 
 @media only screen and (max-width: 1500px) {

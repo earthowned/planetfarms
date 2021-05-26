@@ -15,7 +15,32 @@ const farming = [
         title: "Farm 2020 courses collection",
         img: "/img/farmer.svg",
         subscribers: 65
-    }
+    },
+    {
+        title: "Farm 2020 courses collection",
+        img: "/img/farmer.svg",
+        subscribers: 65
+    },
+    {
+        title: "Farm 2020 courses collection",
+        img: "/img/farmer.svg",
+        subscribers: 65
+    },
+    {
+        title: "Farm 2020 courses collection",
+        img: "/img/farmer.svg",
+        subscribers: 65
+    },
+    {
+        title: "Farm 2020 courses collection",
+        img: "/img/farmer.svg",
+        subscribers: 65
+    },
+    {
+        title: "Farm 2020 courses collection",
+        img: "/img/farmer.svg",
+        subscribers: 65
+    },
 ]
 
 const mycollection = [
@@ -23,7 +48,12 @@ const mycollection = [
         title: "Farm 2020 courses collection",
         img: "/img/farmer.svg",
         subscribers: 365
-    }
+    },
+    {
+        title: "Farm 2020 courses collection",
+        img: "/img/farmer.svg",
+        subscribers: 365
+    },
 ]
 
 const CourseCollection = () => {
