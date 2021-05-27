@@ -6,6 +6,7 @@ import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './add-lesson.css'
 
 const AddLesson = () => {
+  const [files, setFiles] = useState([]);
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
@@ -19,7 +20,7 @@ const AddLesson = () => {
         <BackButton location='/admin/coursepage' />
         <div className='admin-lesson-create-container'>
           <input type='text' placeholder='Write title here' />
-          <DragDrop onChange='{onChange}' />
+          <DragDrop onChange={setFiles} />
           <div className='admin-lesson-create-btn-wrapper'>
             <button className='secondary-btn' onClick={() => setVideoModal(true)}><img src='/img/video-outline.svg' alt='video icon' /> <span>Add video</span></button>
             <button className='secondary-btn' onClick={() => setImageModal(true)}><img src='/img/image-outline.svg' alt='image icon' /> <span>Add image</span></button>
