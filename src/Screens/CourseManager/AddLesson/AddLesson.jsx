@@ -6,11 +6,11 @@ import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './add-lesson.css'
 
 const AddLesson = () => {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([])
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
- 
+
   return (
     <>
       {videoModal && <NewsCreateModal type='video' videoActive={videoModal} setVideoActive={setVideoModal} />}

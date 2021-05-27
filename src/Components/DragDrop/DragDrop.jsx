@@ -17,7 +17,7 @@ const DragDrop = ({ onChange }) => {
     const selectedFile = e.target.files[0]
     Object.assign(selectedFile, { preview: URL.createObjectURL(selectedFile) })
     setFiles(selectedFile)
-    console.log(files.preview);
+    console.log(files.preview)
     // onChange(selectedFile)
   }
   return (
