@@ -9,7 +9,7 @@ const AddLesson = () => {
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
- 
+
   return (
     <>
       {videoModal && <NewsCreateModal type='video' videoActive={videoModal} setVideoActive={setVideoModal} />}
@@ -51,8 +51,8 @@ const LessonSaveModal = () => {
     <div className='save-lesson-modal'>
       <h4>Do you want to save lesson?</h4>
       <div>
-        <button className='secondary-btn' id="lesson-save-btn">Cancel</button>
-        <button className='primary-btn secondary-btn' id="lesson-save-btn">Save lesson</button>
+        <button className='secondary-btn' id='lesson-save-btn'>Cancel</button>
+        <button className='primary-btn secondary-btn' id='lesson-save-btn'>Save lesson</button>
       </div>
     </div>
   )
