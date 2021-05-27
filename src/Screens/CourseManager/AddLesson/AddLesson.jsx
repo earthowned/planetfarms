@@ -51,8 +51,8 @@ const LessonSaveModal = () => {
     <div className='save-lesson-modal'>
       <h4>Do you want to save lesson?</h4>
       <div>
-        <button className='secondary-btn'>Cancel</button>
-        <button className='primary-btn secondary-btn'>Save lesson</button>
+        <button className='secondary-btn' id="lesson-save-btn">Cancel</button>
+        <button className='primary-btn secondary-btn' id="lesson-save-btn">Save lesson</button>
       </div>
     </div>
   )
