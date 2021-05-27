@@ -43,7 +43,9 @@ const MessengerMain = () => {
         <>
            <div className="messenger-wrapper">
                <div className="col-1">
-                   <SearchComponent className="search-btn" />
+                   <div className="search-wrapper">
+                   <SearchComponent className="search-btn" showEditIcon={true} />
+                    </div>
 
                     {/* contact-component */}
                    <div className="contact-container">
