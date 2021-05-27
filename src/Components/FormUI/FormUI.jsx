@@ -17,9 +17,9 @@ export const SelectFields = (props) => {
   return (
     <>
       <select className={props.className} onChange={props.onChange}>
-        <option>Select category</option>
-        <option>{props.option1}</option>
-        <option>{props.option2}</option>
+        {props.option.map((x) => (
+          <option>{x}</option>
+        ))}
       </select>
     </>
   )

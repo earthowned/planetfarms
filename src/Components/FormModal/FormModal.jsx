@@ -1,25 +1,25 @@
-import { useState } from 'react';
-import { useDropzone } from 'react-dropzone';
-import './form-modal.css';
-import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { createGroup } from '../../actions/communityGroupActions';
-import { createEnterprise } from '../../actions/enterpriseAction';
-import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader';
-import DragDrop from '../NewsCreateModal/DragDrop';
+import { useState } from 'react'
+import { useDropzone } from 'react-dropzone'
+import './form-modal.css'
+import { useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { createGroup } from '../../actions/communityGroupActions'
+import { createEnterprise } from '../../actions/enterpriseAction'
+import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
+import DragDrop from '../NewsCreateModal/DragDrop'
 import { InputFields, SelectFields, ErrorText, SubmitButton, File } from '../FormUI/FormUI'
 
 const FromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()
   const [roleActive, setRoleActive] = useState(false)
-  const [groupTitle, setGroupTitle] = useState('');
-  const [groupDescription, setGroupDescription] = useState('');
-  const [categoryId, setCategoryId] = useState('');
+  const [groupTitle, setGroupTitle] = useState('')
+  const [groupDescription, setGroupDescription] = useState('')
+  const [categoryId, setCategoryId] = useState('')
   const [groupTitleError, setGroupTitleError] = useState(false)
   const [groupDescriptionError, setGroupDescriptionError] = useState(false)
 
-  const [enterpriseTitle, setEnterpriseTitle] = useState('');
-  const [enterpriseDescription, setEnterpriseDescription] = useState('');
+  const [enterpriseTitle, setEnterpriseTitle] = useState('')
+  const [enterpriseDescription, setEnterpriseDescription] = useState('')
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
   const [enterpriseDescriptionError, setEnterpriseDescriptionError] =
     useState(false)
@@ -36,18 +36,18 @@ const FromModal = ({ setActive, openAddCollection }) => {
         )
       )
       setFiles(acceptedFiles[0])
-    },
+    }
   })
 
   const groupTitleChange = (e) => {
     setGroupTitle(e.target.value)
     setGroupTitleError(false)
-  };
+  }
 
   const groupDescriptionChange = (e) => {
     setGroupDescription(e.target.value)
     setGroupDescriptionError(false)
-  };
+  }
 
   const handleAddGroup = async (e) => {
     e.preventDefault()
@@ -70,12 +70,12 @@ const FromModal = ({ setActive, openAddCollection }) => {
   const enterpriseTitleChange = (e) => {
     setEnterpriseTitle(e.target.value)
     setEnterpriseTitleError(false)
-  };
+  }
 
   const enterpriseDescriptionChange = (e) => {
     setEnterpriseDescription(e.target.value)
     setEnterpriseDescriptionError(false)
-  };
+  }
 
   const handleAddEnterprise = async (e) => {
     e.preventDefault()
@@ -99,7 +99,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
     const selectedFile = e.target.files[0];
    <File selectedFile={selectedFile} />
    setFiles(selectedFile)
-  };
+  }
 
   return (
     <>
@@ -144,8 +144,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
                 <br />
                 <SelectFields
                   className='default-input-variation'
-                  option1='Farmers'
-                  option2='Business'
+                  option={['Select Category', 'Farmers', 'Business', 'Accounting']}
                   onClick={(e) => setCategoryId(e.target.value)}
                 />
               </div>
@@ -195,8 +194,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
                 />
                 <SelectFields
                   className='default-input-variation'
-                  option1='Farmers'
-                  option2='Business'
+                  option={['Select Category', 'Farmers', 'Business']}
                   onClick={(e) => setCategoryId(e.target.value)}
                 />
               </div>
@@ -213,6 +211,6 @@ const FromModal = ({ setActive, openAddCollection }) => {
       </div>
     </>
   )
-};
+}
 
 export default FromModal

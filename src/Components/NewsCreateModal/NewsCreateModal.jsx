@@ -40,9 +40,9 @@ const NewsCreateModal = ({
     }
   })
 
-  return (
-    <>
-      {type === 'video' && (
+  switch (type) {
+    case 'video':
+      return (
         <CreateVideo
           getRootProps={getRootProps}
           getInputProps={getInputProps}
@@ -50,9 +50,10 @@ const NewsCreateModal = ({
           videoActive={videoActive}
           setVideoActive={setVideoActive}
         />
-      )}
-
-      {type === 'group' && (
+      )
+      break
+    case 'group':
+      return (
         <CreateGroup
           getRootProps={getRootProps}
           getInputProps={getInputProps}
@@ -60,8 +61,10 @@ const NewsCreateModal = ({
           groupActive={groupActive}
           setGroupActive={setGroupActive}
         />
-      )}
-      {type === 'edit-group' && (
+      )
+      break
+    case 'edit-group':
+      return (
         <EditGroup
           getRootProps={getRootProps}
           getInputProps={getInputProps}
@@ -69,8 +72,10 @@ const NewsCreateModal = ({
           groupEditActive={groupEditActive}
           setGroupEditActive={setGroupEditActive}
         />
-      )}
-      {type === 'image' && (
+      )
+      break
+    case 'image':
+      return (
         <CreateImage
           getRootProps={getRootProps}
           getInputProps={getInputProps}
@@ -79,8 +84,11 @@ const NewsCreateModal = ({
           imageActive={imageActive}
           setImageActive={setImageActive}
         />
-      )}
-      {type === 'text' && (
+      )
+      break
+
+    case 'text':
+      return (
         <CreateText
           getRootProps={getRootProps}
           getInputProps={getInputProps}
@@ -88,21 +96,36 @@ const NewsCreateModal = ({
           textActive={textActive}
           setTextActive={setTextActive}
         />
-      )}
-    </>
-  )
+      )
+      break
+
+    default:
+      return null
+      break
+  }
 }
 
-const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroupActive }) => {
+const CreateGroup = ({
+  getRootProps,
+  getInputProps,
+  files,
+  groupActive,
+  setGroupActive
+}) => {
   return (
     <>
       {groupActive && (
-
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-
-            <CollectionModalHeader title='Create Group' setGroupActive={setGroupActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
+            <CollectionModalHeader
+              title='Create Group'
+              setGroupActive={setGroupActive}
+            />
+            <DragDrop
+              getInputProps={getInputProps}
+              getRootProps={getRootProps}
+              files={files}
+            />
 
             <GroupInputContainer />
             <Link to='/my-group-view-page'>
@@ -115,23 +138,44 @@ const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroup
   )
 }
 
-const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGroupEditActive }) => {
+const EditGroup = ({
+  getRootProps,
+  getInputProps,
+  files,
+  groupEditActive,
+  setGroupEditActive
+}) => {
   return (
     <>
       {groupEditActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Edit Group' setGroupEditActive={setGroupEditActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
+            <CollectionModalHeader
+              title='Edit Group'
+              setGroupEditActive={setGroupEditActive}
+            />
+            <DragDrop
+              getInputProps={getInputProps}
+              getRootProps={getRootProps}
+              files={files}
+            />
             <GroupEditContainer />
             <button className='button-delete'>
-              <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' /> Delete Groups
+              <img
+                className='trash-icon'
+                src='/img/trash-icon.svg'
+                alt='delete'
+              />
+              Delete Groups
             </button>
             <div>
               <Link to='/my-group-view-page'>
                 <Button name='Edit Group' />
               </Link>
-              <button className='button-cancel' onClick={() => setGroupEditActive(false)}>
+              <button
+                className='button-cancel'
+                onClick={() => setGroupEditActive(false)}
+              >
                 Cancel
               </button>
             </div>
@@ -207,7 +251,12 @@ const GroupInputContainer = () => {
 const GroupEditContainer = () => {
   return (
     <div className='video-input-container'>
-      <input className='default-input-variation' placeholder='Edit Title' required='true' value='Think like a farmer' />
+      <input
+        className='default-input-variation'
+        placeholder='Edit Title'
+        required='true'
+        value='Think like a farmer'
+      />
       <br />
       <textarea
         className='default-input-variation text-area-variation'
