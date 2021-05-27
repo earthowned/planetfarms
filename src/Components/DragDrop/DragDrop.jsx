@@ -22,7 +22,7 @@ const DragDrop = ({ onChange }) => {
   )
 }
 
-function DragDropComponent ({getInputProps, getRootProps, fileChange, files, setFiles}) {
+function DragDropComponent ({ getInputProps, getRootProps, fileChange, files, setFiles }) {
   return (
     <div className='drag-drop-container'>
       <div className='drag-drop' {...getRootProps()} onChange={(e) => fileChange(e)}>
