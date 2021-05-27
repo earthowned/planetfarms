@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-const DragDrop = ({ onChange }) => {
+const DragDrop = () => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
