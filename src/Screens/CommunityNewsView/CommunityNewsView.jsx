@@ -56,8 +56,8 @@ const NewsSingleView = ({ news }) => {
           {news?.readTime}
         </div>
       </div>
-      <div className='frame-1969' style={{ backgroundImage: 'url("img/newsbg-image.png")' }}>
-        <img className='ellipse-15' src='/img/newsbg-image.png' alt='community-single-article' />
+      <div className="news-add-img-wrapper">
+        <img src='/img/newsbg-image.png' alt='community-single-article' />
       </div>
       <div className='text-container'>
         <p>{news?.textDetail?.collectionTitle}</p>

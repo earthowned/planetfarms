@@ -50,19 +50,16 @@
 }
 
 .x03-1-0-news-page .frame-1969 {
-  background-image: url("");
-  background-position: 50% 50%;
-  background-size: cover;
-  border-radius: 4px;
-  height: 100%;
   margin-top: 24px;
   width: 100%;
+  height: 496px;
 }
 
-.x03-1-0-news-page .ellipse-15 {
+.news-add-img-wrapper img {
   height: 100%;
-  margin-left: 9px;
   width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .x03-1-0-news-page .button-row-3 {

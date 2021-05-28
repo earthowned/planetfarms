@@ -120,6 +120,7 @@
   color: #fff;
   outline: none;
   padding: 1em 1em;
+  border-radius: 4px;
 }
 
 .btn-size {
