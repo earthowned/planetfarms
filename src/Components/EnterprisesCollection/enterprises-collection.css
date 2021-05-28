@@ -1,6 +1,7 @@
 .collection-modal-container {
   position: fixed;
   width: 100%;
+  z-index: 4099;
   height: auto;
   background: var(--background-color-modal);
   height: 100%;
@@ -13,6 +14,7 @@
   height: 100%;
   position: relative;
   overflow-y: scroll;  
+  margin-bottom: 100px;
 }
 
 .collection-modal-inner-container {
@@ -20,7 +22,6 @@
   height: auto;
   position: absolute;
   top: 40px;
-  margin-bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   overflow-y: scroll;
@@ -119,8 +120,21 @@
   color: #fff;
   outline: none;
   padding: 1em 1em;
+  border-radius: 4px;
 }
 
 .btn-size {
   width: 200px;
+}
+
+@media only screen and (max-width: 750px) {
+  .collection-modal-inner-container {
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .collection-modal-inner-container {
+    width: 100%;
+  }
 }
