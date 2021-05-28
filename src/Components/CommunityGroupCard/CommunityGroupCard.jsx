@@ -13,7 +13,7 @@ const CommunityGroupCard = ({ data, location }) => {
 
   return (
     <>
-      {data && data.map(item => {
+      {data.length > 0 && data.map(item => {
         console.log('item', item)
         return (
           <div key={item.id} className='card-1 border-1px-onyx'>

@@ -84,6 +84,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
   return (
     <>
       <div className='collection-modal-container'>
+        <div>
         <div className='collection-modal-inner-container'>
           {pathname === '/community-group' && (
             <>
@@ -175,6 +176,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
               </div>
             </>
           )}
+        </div>
         </div>
       </div>
     </>

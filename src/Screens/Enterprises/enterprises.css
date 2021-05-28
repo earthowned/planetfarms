@@ -160,14 +160,13 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
-  min-height: 1368px;
   position: relative;
-  width: 1112px;
+  width: 100%;
 }
 
 .enterprises-header {
   align-items: flex-start;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   min-height: 136px;
@@ -175,12 +174,21 @@
 }
 
 .create-enterprises-wrapper {
-  align-items: flex-start;
+  align-items: flex-end;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   margin-left: 40px;
   min-height: 136px;
   width: 248px;
+}
+
+.enterprise-filter {
+  width: 100%;
+}
+
+.enterprise-filter .filter-container {
+  width: 100%;
 }
 
 .enterprises-card-row {
@@ -193,11 +201,12 @@
 }
 
 .enterprises-row {
+  width: 100%;
+  justify-content: space-between;
   align-items: flex-start;
   display: flex;
   height: 136px;
   margin-top: 16px;
-  min-width: 1112px;
 }
 
 .enterprises-option-first {
@@ -226,8 +235,7 @@
   align-items: flex-start;
   background-color: var(--black);
   display: flex;
-  overflow: hidden;
-  width: 1440px;
+  width: 100%;
 }
 
 .your-enterprises {
@@ -244,4 +252,28 @@
   grid-template-columns: repeat(auto-fit, minmax(536px, 1fr));
   margin-top: 40px;
   grid-gap: 40px;
+}
+
+@media only screen and (max-width: 720px) {
+  .enterprises-row {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .enterprises-header {
+    width: 100%;
+  }
+
+  .create-enterprises-wrapper {
+    margin-left: 0;
+    margin-top: 24px;
+    min-height: 120px;
+    width: 100%; 
+  }
+
+  .add-enterprises {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 }
