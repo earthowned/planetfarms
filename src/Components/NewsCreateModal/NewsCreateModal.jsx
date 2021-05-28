@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './news-create-modal.css'
-import { useDropzone } from 'react-dropzone'
 import { Link } from 'react-router-dom'
 import Button from '../Button/Button'
 import CreateVideo from './NewsCreateVideo'
 import CreateImage from './NewsCreateImage'
 import CreateText from './NewsTextModel'
 import CollectionModalHeader from './CollectionModalHeader'
-import DragDrop from './DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch'
 
 const NewsCreateModal = ({
   type,
@@ -26,26 +26,12 @@ const NewsCreateModal = ({
 }) => {
   const [files, setFiles] = useState([])
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      )
-    }
-  })
-
   return (
     <>
       {type === 'video' && (
         <CreateVideo
-          getRootProps={getRootProps}
-          getInputProps={getInputProps}
           files={files}
+          setFiles={setFiles}
           videoActive={videoActive}
           setVideoActive={setVideoActive}
         />
@@ -53,17 +39,14 @@ const NewsCreateModal = ({
 
       {type === 'group' && (
         <CreateGroup
-          getRootProps={getRootProps}
-          getInputProps={getInputProps}
           files={files}
+          setFiles={setFiles}
           groupActive={groupActive}
           setGroupActive={setGroupActive}
         />
       )}
       {type === 'edit-group' && (
         <EditGroup
-          getRootProps={getRootProps}
-          getInputProps={getInputProps}
           files={files}
           groupEditActive={groupEditActive}
           setGroupEditActive={setGroupEditActive}
@@ -71,17 +54,14 @@ const NewsCreateModal = ({
       )}
       {type === 'image' && (
         <CreateImage
-          getRootProps={getRootProps}
-          getInputProps={getInputProps}
           files={files}
+          setFiles={setFiles}
           imageActive={imageActive}
           setImageActive={setImageActive}
         />
       )}
       {type === 'text' && (
         <CreateText
-          getRootProps={getRootProps}
-          getInputProps={getInputProps}
           files={files}
           textActive={textActive}
           setTextActive={setTextActive}
@@ -100,7 +80,7 @@ const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroup
           <div className='collection-modal-inner-container'>
 
             <CollectionModalHeader title='Create Group' setGroupActive={setGroupActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
+            <DragDrop files={files} />
 
             <GroupInputContainer />
             <Link to='/my-group-view-page'>
@@ -120,7 +100,7 @@ const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGro
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
             <CollectionModalHeader title='Edit Group' setGroupEditActive={setGroupEditActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
+            <DragDrop files={files} />
             <GroupEditContainer />
             <button className='button-delete'>
               <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' /> Delete Groups
@@ -230,21 +210,6 @@ function PhotoInput () {
           className='default-input-variation'
           placeholder='Photo description'
         />
-      </div>
-    </>
-  )
-}
-
-function ToggleSwitch () {
-  const [active, setActive] = useState(false)
-  return (
-    <>
-      <div className='toggle-main-container'>
-        <div
-          onClick={() => setActive(!active)}
-          className={`${active ? 'toggle-item active' : 'toggle-item'}`}
-        />
-        <div className='toggle-container' />
       </div>
     </>
   )

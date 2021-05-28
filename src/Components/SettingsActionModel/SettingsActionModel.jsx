@@ -16,7 +16,7 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
   const [inputErr, setInputErr] = useState(false)
   const [forgotPasswordConformModal, setForgotPasswordConformModal] = useState(false)
 
-  async function signOut() {
+  async function signOut () {
     setModalActive(false)
     try {
       await Auth.signOut()
@@ -26,17 +26,18 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
     }
   }
 
-  async function changePassword() {
+  async function changePassword () {
     dispatch(changePassword(input))
   }
 
-  function handelConfirmPin() {
+  function handelConfirmPin () {
     dispatch(confirmPin(input))
   }
 
-  async function forgotPassword() {
-    dispatch(forgotPasswordRequest(input))
-    setForgotPasswordConformModal(true)
+  async function forgotPassword (username) {
+    Auth.forgotPassword(username)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err))
   }
 
   async function confirmSignup() {
@@ -46,9 +47,7 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
   async function forgotPasswordConformSubmit() {
     dispatch(forgotPasswordConform(input))
   }
-
   const changeInput = (e) => {
-    console.log(e)
     setInput(e.target.value)
     setInputErr(false)
   }
@@ -57,7 +56,7 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
     console.log(e.target.value)
   }
 
-  function settingsOptions(setting) {
+  function settingsOptions (setting) {
     switch (setting) {
       case 'logout':
         signOut()
