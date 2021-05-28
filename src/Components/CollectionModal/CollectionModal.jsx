@@ -1,14 +1,12 @@
 import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
 import './collection-modal.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createResource } from '../../actions/resourceActions'
 import SimpleFilter from '../SimpleFilter/SimpleFilter'
 import { collectionFilterData } from '../../constants/sampleData'
-import { File } from '../FormUI/FormUI'
 import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
-import DragDrop from '../NewsCreateModal/DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
 
 const CollectionModal = ({ setActive, openAddCollection, name }) => {
   const [files, setFiles] = useState()
@@ -18,20 +16,6 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
   const [resourceTitleError, setResourceTitleError] = useState(false)
   const [resourceDescriptionError, setResourceDescriptionError] = useState(false)
   const { pathname } = useLocation()
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      )
-
-      setFiles(acceptedFiles[0])
-    }
-  })
 
   const resourceTitleChange = (e) => {
     setResourceTitle(e.target.value)
@@ -53,26 +37,12 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
     }
   }
 
-  const fileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    <File selectedFile={selectedFile} />
-    setFiles(selectedFile)
-  }
-
   return (
     <>
       <div className='collection-modal-container'>
         <div className='collection-modal-inner-course-container'>
-          <CollectionModalHeader
-              title='Create Resource'
-              setResourceActive={setActive}
-            />
-          <DragDrop
-              getInputProps={getInputProps}
-              getRootProps={getRootProps}
-              files={files}
-              onChange={(e) => fileChange(e)}
-            />
+          <CollectionModalHeader title='Create Resource' setResourceActive={setActive} />
+          <DragDrop files={files} onChange={setFiles} />
           {pathname === '/library'
             ? <>
               <div className='collection-input-container'>

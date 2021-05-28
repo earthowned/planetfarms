@@ -69,6 +69,7 @@ const ProgressBar = () => {
 }
 
 const CourseDetail = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
+
   return (
     <div className='description-course-page'>
       <div className='bg-image' />

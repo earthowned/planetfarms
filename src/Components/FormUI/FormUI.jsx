@@ -29,7 +29,7 @@ export const ErrorText = (props) => {
   return (
     <>
       <p className={props.className}>
-        {props.Error ? `Please enter ${props.message}` : ''}
+        {props.error ? `Please enter ${props.message}` : ''}
       </p>
     </>
   )
@@ -58,10 +58,4 @@ export const TextArea = (props) => {
       />
     </>
   )
-}
-
-export const File = (e) => (props) => {
-  Object.assign(props.selectedFile, {
-    preview: URL.createObjectURL(props.selectedFile)
-  })
 }

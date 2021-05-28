@@ -9,8 +9,15 @@
 
 .col-1 {
   width: 40%;
-  height: 100%;
   border-right: 1px solid var(--dropdowns);
+}
+
+.col-1 .search-wrapper {
+  padding: 16px;
+}
+
+.col-1 .search-wrapper .search-btn {
+  height: 48px;
 }
 
 .col-2 {
@@ -56,14 +63,13 @@
     width: 100%;
     position: fixed;
     z-index: 5000;
+    display: none;
   }
 
   .col-2 {
     display: none;
   }
-}
 
-@media only screen and (max-width: 850px) {
   .contact-card {
     padding: 4px 8px;
   }

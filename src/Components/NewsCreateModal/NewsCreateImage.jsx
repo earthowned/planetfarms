@@ -3,11 +3,11 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { useDispatch } from 'react-redux'
 import { saveimageDetail } from '../../actions/newsActions'
-import DragDrop from './DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 import { InputFields } from '../FormUI/FormUI'
 
-const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive, setFiles }) => {
+const CreateImage = ({ getRootProps, getInputProps, files, setFiles, imageActive, setImageActive }) => {
   const [imageDescription, setImageDescription] = useState()
   const [addDesctiption, setAddDesctiption] = useState(false)
 
@@ -17,7 +17,6 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
     setImageDescription(e.target.value)
     setImageDescriptionError(false)
   }
-  console.log('file', files)
   const dispatch = useDispatch()
   const addImage = () => {
     if (addDesctiption && !imageDescription) setImageDescriptionError(true)
@@ -27,20 +26,14 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
     }
   }
 
-  const fileChange = (e) => {
-    const selectedFile = e.target.files[0]
-    Object.assign(selectedFile, {
-      preview: URL.createObjectURL(selectedFile)
-    })
-    setFiles(selectedFile)
-  }
   return (
     <>
       {imageActive && (
         <div className='collection-modal-container'>
+          <div>
           <div className='collection-modal-inner-container'>
             <CollectionModalHeader title='Add photo' setImageActive={setImageActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} onChange={(e) => fileChange(e)} />
+            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} onChange={setFiles} />
             <div className='description'>
               <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
             </div>
@@ -55,6 +48,7 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
                 </div>
               : <div />}
             <Button name='Add block' clickHandler={addImage} />
+          </div>
           </div>
         </div>
       )}

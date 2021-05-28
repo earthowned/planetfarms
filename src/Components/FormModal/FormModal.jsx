@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
 import './form-modal.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createGroup } from '../../actions/communityGroupActions'
 import { createEnterprise } from '../../actions/enterpriseAction'
 import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
-import DragDrop from '../NewsCreateModal/DragDrop'
-import { InputFields, SelectFields, ErrorText, SubmitButton, File } from '../FormUI/FormUI'
+import { InputFields, SelectFields, ErrorText, SubmitButton } from '../FormUI/FormUI'
+import DragDrop from '../DragDrop/DragDrop'
 
 const FromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()
@@ -21,24 +20,10 @@ const FromModal = ({ setActive, openAddCollection }) => {
   const [enterpriseTitle, setEnterpriseTitle] = useState('')
   const [enterpriseDescription, setEnterpriseDescription] = useState('')
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
-  const [enterpriseDescriptionError, setEnterpriseDescriptionError] =
-    useState(false)
+  const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
 
   const dispatch = useDispatch()
-
   const { pathname } = useLocation()
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          <File selectedFile={file} />
-        )
-      )
-      setFiles(acceptedFiles[0])
-    }
-  })
-
   const groupTitleChange = (e) => {
     setGroupTitle(e.target.value)
     setGroupTitleError(false)
@@ -95,28 +80,14 @@ const FromModal = ({ setActive, openAddCollection }) => {
     }
   }
 
-  const fileChange = (e) => {
-    const selectedFile = e.target.files[0];
-   <File selectedFile={selectedFile} />
-   setFiles(selectedFile)
-  }
-
   return (
     <>
       <div className='collection-modal-container'>
         <div className='collection-modal-inner-container'>
           {pathname === '/community-group' && (
             <>
-              <CollectionModalHeader
-                title='Create Group'
-                setGroupActive={setActive}
-              />
-              <DragDrop
-                getInputProps={getInputProps}
-                getRootProps={getRootProps}
-                files={files}
-                onChange={(e) => fileChange(e)}
-              />
+              <CollectionModalHeader title='Create Group' setGroupActive={setActive} />
+              <DragDrop files={files}  onChange={setFiles} />
               <div className='collection-input-container'>
                 <InputFields
                   className='default-input-variation'
@@ -162,11 +133,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
                 title='Create Enterprises'
                 setEnterpriseActive={setActive}
               />
-              <DragDrop
-                getInputProps={getInputProps}
-                getRootProps={getRootProps}
-                files={files}
-              />
+              <DragDrop files={files} onChange={setFiles}/>
               <div className='collection-input-container'>
                 <InputFields
                   type='text'
