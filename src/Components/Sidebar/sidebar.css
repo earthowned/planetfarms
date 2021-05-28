@@ -178,9 +178,9 @@
   z-index: 5000;
   bottom: 0;
   right: 0;
-  padding: 1em 5em;
-  margin-bottom: 70px;
-  transform: translateY(100%);
+  padding: 0 5em;
+  margin-bottom: 80px;
+  transform: translateY(120%);
   transition: all ease-in-out 0.2s;
 }
 

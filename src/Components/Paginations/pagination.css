@@ -9,6 +9,8 @@
 .pagination {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   color: var(--background-color);
 }
 
@@ -17,6 +19,7 @@
   background: var(--primary-color);
   float: left;
   padding: 8px 16px;
+  margin-top: 10px;
   text-decoration: none;
   transition: background-color 0.01s;
   border: 1px solid var(--gallery);
@@ -40,6 +43,7 @@
   font-weight: 600;
   font-size: 16px;
   border-radius: 4px;
+  margin-top: 10px;
   cursor: pointer;
 }
 

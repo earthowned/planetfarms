@@ -307,6 +307,14 @@ div[class$="-container--header"] h4 {
   transform: translateY(-50%);
 }
 
+.scroll-left-icon {
+  position: absolute;
+  left: 18em;
+  top: 45%;
+  cursor: pointer;
+  transform: translateY(-50%) rotate(180deg);
+}
+
 .add-container {
   background: var(--primary-black);
   border-radius: 4px;

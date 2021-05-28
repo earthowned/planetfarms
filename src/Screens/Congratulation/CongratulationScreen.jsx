@@ -2,12 +2,12 @@ import React,{useState} from "react"
 import "./congratulation-screen.css"
 import Logo from "../../Components/Logo/Logo"
 import {useHistory, useLocation} from 'react-router-dom'
-import {useDropzone} from 'react-dropzone'
 import InputComponent from '../../Components/Input/InputComponent'
 import Button from '../../Components/Button/Button'
 import { Auth } from 'aws-amplify'
 import ConfirmModal from '../../Components/SimpleModal/ConfirmModal'
 import Secondarybtn from "../../Components/SecondaryBtn/Secondarybtn"
+import DragDrop from '../../Components/DragDrop/DragDrop'
 
 function CongratulationScreen() {
   const welcomeBack= "Congratulations!"
@@ -26,19 +26,6 @@ const [birthdayError, setBirthdayError] = useState('')
 const [phoneError, setPhoneError] = useState('')
 const [files, setFiles] = useState([])
 const [modalActive, setModalActive] = useState(false)
-
-const { getRootProps, getInputProps } = useDropzone({
-  accept: "image/*",
-  onDrop: (acceptedFiles) => {
-    setFiles(
-      acceptedFiles.map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file)
-        })
-      )
-    )
-  }
-})
 
 let location = useLocation()
 let history = useHistory()
@@ -172,12 +159,7 @@ const submitForm = (e) => {
          </div>
 
           </div>
-        <div className="congratulation-col-3">
-          <div className="file-drop-container border-1px-quarter-spanish-white" {...getRootProps()}>
-            <input {...getInputProps()} />
-          {files.length > 0 ? <img className="avatar" src={files[0].preview} /> : <p className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">Drag &amp; Drop files in this area or <span className="file-upload">Click Here to attach</span></p>}
-          </div>
-        </div>
+          <DragDrop />
        
        </div>
 

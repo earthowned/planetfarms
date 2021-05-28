@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
 import './enterprises-collection.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createEnterprise } from '../../actions/enterpriseAction'
+import DragDrop from '../DragDrop/DragDrop'
 
 const EnterprisesCollection = ({ setActive, openAddCollection }) => {
-  const [files, setFiles] = useState([])
   const [title, setEnterpriseTitle] = useState('')
   const [description, setEnterpriseDescription] = useState('')
   const dispatch = useDispatch()
@@ -15,18 +14,6 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
     false
   )
   const { pathname } = useLocation()
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      )
-    }
-  })
 
   const enterpriseTitleChange = (e) => {
     setEnterpriseTitle(e.target.value)
@@ -48,10 +35,6 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
     }
   }
 
-  const fileChange = (e) => {
-    setFiles(e.target.files[0])
-  }
-
   return (
     <>
       <div className='collection-modal-container'>
@@ -64,21 +47,7 @@ const EnterprisesCollection = ({ setActive, openAddCollection }) => {
               alt='close-icon'
             />
           </div>
-          <div className='drag-drop' {...getRootProps()}>
-            <input {...getInputProps()} onChange={(e) => fileChange(e)} />
-            {files.length > 0 ? (
-              <img
-                className='avatar'
-                name='avatar'
-                src={files[0].preview}
-                alt='files[0].preview'
-              />
-            ) : (
-              <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                Drag and Drop files in this area or Click Here to attach
-              </h6>
-            )}
-          </div>
+          <DragDrop />
           <div className='collection-input-container'>
             <input
               className='default-input-variation'
