@@ -4,7 +4,7 @@ import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import BackButton from '../../Components/BackButton/BackButton'
 import { useLocation } from 'react-router-dom'
 
-function CommunityNewsViewPage({ newNews }) {
+function CommunityNewsViewPage ({ newNews }) {
   const [news, setNews] = useState({})
   const val = useLocation()?.state?.news
   useEffect(() => {
@@ -50,13 +50,13 @@ const NewsSingleView = ({ news }) => {
 
       <div className='title-time'>
         <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-          { news?.createdAt && new Date(news?.createdAt).toDateString()}
+          {news?.createdAt && new Date(news?.createdAt).toDateString()}
         </div>
         <div className='due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
           {news?.readTime}
         </div>
       </div>
-      <div className="news-add-img-wrapper">
+      <div className='news-add-img-wrapper'>
         <img src='/img/newsbg-image.png' alt='community-single-article' />
       </div>
       <div className='text-container'>
