@@ -70,12 +70,7 @@ export const createEnterprise = (newEnterprise) => async (
     dispatch({
       type: ENTERPRISE_CREATE_REQUEST
     })
-
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add`,
-      formData
-
-    )
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add`, formData)
     dispatch({
       type: ENTERPRISE_CREATE_SUCCESS,
       payload: data

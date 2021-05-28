@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { multipleUpload, upload } = require('../helpers/filehelpers')
+const { upload } = require('../helpers/filehelpers')
 
 const { getGroups, addGroups, getGroupsById, deleteGroups, updateGroups, searchGroupsTitle } = require('../controllers/communityGroupController')
 

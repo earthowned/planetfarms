@@ -36,22 +36,22 @@ const CreateText = ({ textActive, setTextActive }) => {
       {textActive && (
         <div className='collection-modal-container'>
           <div>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add text' setTextActive={setTextActive} />
-            <div className='photo-input-container'>
-              <InputFields
-                type='text'
-                placeholder='Collection title'
-                onChange={(e) => collectionTitleChange(e)}
-                className='default-input-variation'
-              />
-              <ErrorText className='error-message' error={collectionTitleError} message='Video Description' />
-              <br />
-              <TextArea className='default-input-variation text-area-variation-2' placeholder='Type text here' value={collectionDescription} onChange={(e) => collectionDescriptionChange(e)} />
-              <ErrorText className='error-message' error={collectionDescriptionError} message='Video Description' />
+            <div className='collection-modal-inner-container'>
+              <CollectionModalHeader title='Add text' setTextActive={setTextActive} />
+              <div className='photo-input-container'>
+                <InputFields
+                  type='text'
+                  placeholder='Collection title'
+                  onChange={(e) => collectionTitleChange(e)}
+                  className='default-input-variation'
+                />
+                <ErrorText className='error-message' error={collectionTitleError} message='Video Description' />
+                <br />
+                <TextArea className='default-input-variation text-area-variation-2' placeholder='Type text here' value={collectionDescription} onChange={(e) => collectionDescriptionChange(e)} />
+                <ErrorText className='error-message' error={collectionDescriptionError} message='Video Description' />
+              </div>
+              <Button name='Add block' clickHandler={addText} />
             </div>
-            <Button name='Add block' clickHandler={addText} />
-          </div>
           </div>
         </div>
       )}

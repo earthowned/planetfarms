@@ -19,7 +19,6 @@ const NewsAdd = () => {
   useSelector((state) => console.log(state))
 
   const { title, category } = useParams()
-  
 
   return (
     <>
@@ -38,8 +37,7 @@ const NewsAdd = () => {
           setTextActive={setTextActive}
           setImageActive={setImageActive}
           setVideoActive={setVideoActive}
-          
-         
+
         />
       </DashboardLayout>
     </>
@@ -55,9 +53,8 @@ function NewsAddMainContainer ({
   setTextActive,
   news,
   title,
-  category,
-  
-  
+  category
+
 }) {
   function createVideo () {
     setCreateVideoModal(true)
@@ -89,7 +86,7 @@ function NewsAddMainContainer ({
         createImage={createImage}
         createText={createText}
       />
-      <div>{Object.entries(news).length !== 0 && <PopUp news={news} title={title} category={category}   />}</div>
+      <div>{Object.entries(news).length !== 0 && <PopUp news={news} title={title} category={category} />}</div>
     </div>
   )
 }
@@ -126,7 +123,7 @@ function NewContent ({ title, news }) {
 }
 
 function PopUp ({ news, title, category }) {
-  const {file} = news.imageDetail.file && news.imageDetail
+  const { file } = news.imageDetail.file && news.imageDetail
 
   console.log('news', file)
   const newNews = { ...news, title, category }
@@ -135,16 +132,15 @@ function PopUp ({ news, title, category }) {
   const dispatch = useDispatch()
   const history = useHistory()
   const handleOnSaveClick = (e) => {
-    if(file) {
-     dispatch(createNews(newNews,file))
+    if (file) {
+      dispatch(createNews(newNews, file))
       setActivePopup(false)
-     history.push('/community-page-news')
-    }else{
-       dispatch(createNews(newNews))
-       setActivePopup(false)
-       history.push('/community-page-news')
+      history.push('/community-page-news')
+    } else {
+      dispatch(createNews(newNews))
+      setActivePopup(false)
+      history.push('/community-page-news')
     }
-   
   }
 
   const handleOnCancelClick = (e) => {

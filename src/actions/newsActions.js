@@ -74,7 +74,6 @@ export const createNews = (newNews) => async (dispatch, getState) => {
     dispatch({
       type: NEWS_CREATE_REQUEST
     })
-
     const { userLogin: { userInfo } } = getState()
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add`, formData, config)
@@ -103,11 +102,9 @@ export const deleteNews = (id) => async (dispatch, getState) => {
     dispatch({
       type: NEWS_DELETE_REQUEST
     })
-
     const { userLogin: { userInfo } } = getState()
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
     await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}`, config)
-
     dispatch({
       type: NEWS_DELETE_SUCCESS
     })
@@ -134,7 +131,6 @@ export const savetextDetail = (data) => (dispatch) => {
 }
 
 export const saveimageDetail = (data) => (dispatch) => {
-  console.log('payload', data)
   dispatch({
     type: NESW_SAVE_IMAGE_DETAIL,
     payload: data

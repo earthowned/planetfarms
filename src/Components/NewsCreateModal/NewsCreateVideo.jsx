@@ -7,7 +7,7 @@ import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 import { InputFields, ErrorText, TextArea } from '../FormUI/FormUI'
 
-const CreateVideo = ({ getRootProps, getInputProps, files, setFiles,  videoActive, setVideoActive }) => {
+const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive, setVideoActive }) => {
   const [videoTitle, setVideoTitle] = useState()
   const [videoDescription, setVideoDescription] = useState()
 

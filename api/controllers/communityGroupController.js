@@ -8,11 +8,7 @@ const Op = Sequelize.Op
 const paginate = ({ page, pageSize }) => {
   const offset = page * pageSize
   const limit = offset + pageSize
-
-  return {
-    offset,
-    limit
-  }
+  return { offset, limit }
 }
 
 const getGroups = (req, res) => {
@@ -37,15 +33,7 @@ const addGroups = (req, res) => {
   if (req.file) {
     filename = req.file.filename
   }
-  
-  
-  // const {
-  //   title, description, category, attachments
-  // } = req.body
-
-  Groups.create({
-    ...req.body, filename
-  })
+  Groups.create({ ...req.body, filename })
     .then(() => res.json({ message: 'Community Group Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }

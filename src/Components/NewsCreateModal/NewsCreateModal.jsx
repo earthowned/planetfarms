@@ -59,7 +59,7 @@ const NewsCreateModal = ({
 }
 
 const CreateGroup = ({ files, groupActive, setGroupActive }) => {
-  return ( 
+  return (
     <>
       {groupActive && (
         <div className='collection-modal-container'>
