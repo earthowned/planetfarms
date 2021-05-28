@@ -45,28 +45,24 @@ const MessengerMain = () => {
           <div className='search-wrapper'>
             <SearchComponent className='search-btn' showEditIcon />
           </div>
-
-          {/* contact-component */}
           <div className='contact-container'>
             {
-                           contacts.map(contact => {
-                             return (
-                               <MessageCard contact={contact} clickHandler={setActive} />
-                             )
-                           })
-                       }
+              contacts.map(contact => {
+                return (
+                  <MessageCard contact={contact} clickHandler={setActive} />
+                )
+              })
+            }
           </div>
-
-          {/* contact-component */}
           <h3 className='contact-header'>Group chats</h3>
           <div className='contact-container'>
             {
-                           contacts.map(contact => {
-                             return (
-                               <MessageCard contact={contact} clickHandler={setActive} />
-                             )
-                           })
-                       }
+              contacts.map(contact => {
+                return (
+                  <MessageCard contact={contact} clickHandler={setActive} />
+                )
+              })
+            }
           </div>
         </div>
 
@@ -78,7 +74,6 @@ const MessengerMain = () => {
           <h4>Select chat to start messaging</h4>
         </div>
         )}
-
       </div>
     </>
   )
