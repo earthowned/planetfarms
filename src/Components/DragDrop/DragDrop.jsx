@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-const DragDrop = () => {
+const DragDrop = ({ onChange = () => {} }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -10,12 +10,14 @@ const DragDrop = () => {
         Object.assign(file, { preview: URL.createObjectURL(file) })
       )
       setFiles(acceptedFiles[0])
+      onChange(acceptedFiles[0])
     }
   })
   const fileChange = (e) => {
     const selectedFile = e.target.files[0]
     Object.assign(selectedFile, { preview: URL.createObjectURL(selectedFile) })
     setFiles(selectedFile)
+    onChange(selectedFile)
   }
   return (
     <DragDropComponent getInputProps={getInputProps} getRootProps={getRootProps} fileChange={fileChange} files={files} setFiles={setFiles} />
