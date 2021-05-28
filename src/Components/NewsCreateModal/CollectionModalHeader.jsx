@@ -6,14 +6,14 @@ const CollectionModalHeader = ({
 }) => {
   return (
     <>
-    <div className='collection-modal-header'>
-            <h4>{title}</h4>
-            <img
-              src='/img/close-outline.svg'
-              alt='close-icon'
-              onClick={() => clickHandler(false)}
-            />
-        </div>
+      <div className='collection-modal-header'>
+        <h4>{title}</h4>
+        <img
+          src='/img/close-outline.svg'
+          alt='close-icon'
+          onClick={() => clickHandler(false)}
+        />
+      </div>
     </>
   )
 }

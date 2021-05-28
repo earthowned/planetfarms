@@ -30,24 +30,24 @@ const CreateImage = ({ getRootProps, getInputProps, files, setFiles, imageActive
       {imageActive && (
         <div className='collection-modal-container'>
           <div>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add photo' clickHandler={setImageActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} setFiles={setFiles} />
-            <div className='description'>
-              <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
+            <div className='collection-modal-inner-container'>
+              <CollectionModalHeader title='Add photo' clickHandler={setImageActive} />
+              <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} setFiles={setFiles} />
+              <div className='description'>
+                <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
+              </div>
+              {addDesctiption
+                ? <div className='photo-input-container'>
+                  <input
+                    className='default-input-variation'
+                    placeholder='Photo description'
+                    value={imageDescription}
+                    onChange={(e) => imageDescriptionChange(e)}
+                  />
+                  <p className='error-message'>{imageDescriptionError ? 'Please enter Video Description' : ' '} </p>
+                  </div> : <div />}
+              <Button name='Add block' clickHandler={addImage} />
             </div>
-            {addDesctiption
-              ? <div className='photo-input-container'>
-                <input
-                  className='default-input-variation'
-                  placeholder='Photo description'
-                  value={imageDescription}
-                  onChange={(e) => imageDescriptionChange(e)}
-                />
-                <p className='error-message'>{imageDescriptionError ? 'Please enter Video Description' : ' '} </p>
-              </div> : <div />}
-            <Button name='Add block' clickHandler={addImage} />
-          </div>
           </div>
         </div>
       )}
