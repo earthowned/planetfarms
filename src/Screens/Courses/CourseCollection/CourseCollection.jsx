@@ -46,12 +46,12 @@ const CourseUserCard = ({ name, data, btnName, subName }) => {
           : 'courses-collection-main-container'}
       >
         {
-                data.map(item => {
-                  return (
-                    <BackgroundUserCard item={item} btnName={btnName} subName={subName} />
-                  )
-                })
-            }
+          data.map(item => {
+            return (
+              <BackgroundUserCard item={item} btnName={btnName} subName={subName} />
+            )
+          })
+        }
       </div>
     </>
   )
