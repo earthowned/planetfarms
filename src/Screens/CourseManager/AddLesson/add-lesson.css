@@ -1,4 +1,6 @@
 .admin-lesson-create-container {
+  width: 100%;
+  height: auto;
   margin-top: 40px;
   padding: 40px;
   background: var(--cards);
@@ -12,10 +14,23 @@
   outline: none;
   border: none;
   height: 48px;
-  width: 280px;
+  width: 100%;
   font-size: 40px;
   margin-bottom: 40px;
   color: var(--primary-white);
+}
+
+.admin-lesson-create-container .drag-drop-container {
+  width: 100%;
+  height: 456px;
+  border: 2px dashed #F8EBDF;
+  border-radius: 4px;
+}
+
+.admin-lesson-create-container .drag-drop-container .drag-drop h6 {
+  width: 50%;
+  text-align: center;
+  line-height: 25px;
 }
 
 .add-lesson-drag {
@@ -97,4 +112,75 @@
   border: 1px solid var(--primary-color);
   color: #000;
   margin-left: 20px;
+}
+
+@media only screen and (max-width: 900px) {
+  .admin-lesson-create-btn-wrapper {
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 24px;
+  }
+
+  .admin-lesson-create-btn-wrapper button:not(:last-child) {
+    margin-right: 14px;
+  }
+
+  .admin-lesson-create-btn-wrapper button {
+    margin-bottom: 14px;
+  }
+
+   #lesson-save-btn {
+    width: 110px;
+  }
+}
+
+@media only screen and (max-width: 635px) {
+  .admin-lesson-create-btn-wrapper {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .admin-lesson-materials-container p {
+    width: 100%;
+  }
+
+  .admin-lesson-create-btn-wrapper button {
+    width: 100%;
+  }
+
+  .admin-lesson-create-btn-wrapper button:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .save-lesson-modal {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 0;
+    width: 100%;
+  }
+
+  .save-lesson-modal > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 16px;
+  }
+
+  #lesson-save-btn {
+    margin-top: 14px;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .admin-lesson-create-container {
+    padding: 20px;
+  }
+
+  .admin-lesson-create-container input {
+    font-size: 26px;
+  }
 }
