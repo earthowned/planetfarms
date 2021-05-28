@@ -85,98 +85,98 @@ const FromModal = ({ setActive, openAddCollection }) => {
     <>
       <div className='collection-modal-container'>
         <div>
-        <div className='collection-modal-inner-container'>
-          {pathname === '/community-group' && (
-            <>
-              <CollectionModalHeader title='Create Group' setGroupActive={setActive} />
-              <DragDrop files={files} onChange={setFiles} />
-              <div className='collection-input-container'>
-                <InputFields
-                  className='default-input-variation'
-                  error={groupTitleError}
-                  onChange={(e) => groupTitleChange(e)}
-                  placeholder='Group title'
-                />
-                <ErrorText
-                  className='error-message'
-                  Error={groupTitleError}
-                  message='Group Title'
-                />
-                <br />
-                <InputFields
-                  className='default-input-variation text-area-variation'
-                  error={groupDescriptionError}
-                  onChange={(e) => groupDescriptionChange(e)}
-                  placeholder='Group description'
-                />
-                <ErrorText
-                  className='error-message'
-                  Error={groupDescriptionError}
-                  message='Group Description'
-                />
-                <br />
-                <SelectFields
-                  className='default-input-variation'
-                  option={['Select Category', 'Farmers', 'Business', 'Accounting']}
-                  onClick={(e) => setCategoryId(e.target.value)}
-                />
-              </div>
-              <SubmitButton
-                className='default-btn btn-size'
-                onClick={handleAddGroup}
-                title='Submit'
-              />
-            </>
-          )}
-
-          {pathname === '/enterprises' && (
-            <>
-              <CollectionModalHeader
-                title='Create Enterprises'
-                setEnterpriseActive={setActive}
-              />
-              <DragDrop files={files} onChange={setFiles} />
-              <div className='collection-input-container'>
-                <InputFields
-                  type='text'
-                  placeholder='Enterprise Title'
-                  onChange={(e) => enterpriseTitleChange(e)}
-                  className='default-input-variation'
-                  error={enterpriseTitleError}
-                />
-                <ErrorText
-                  className='error-message'
-                  Error={enterpriseTitleError}
-                  message='Enterprise Title'
-                />
-                <br />
-                <InputFields
-                  className='default-input-variation text-area-variation'
-                  placeholder='Enterprise description'
-                  error={enterpriseDescriptionError}
-                  onChange={(e) => enterpriseDescriptionChange(e)}
-                />
-                <ErrorText
-                  className='error-message'
-                  Error={enterpriseDescriptionError}
-                  message='Enterprise Description'
-                />
-                <SelectFields
-                  className='default-input-variation'
-                  option={['Select Category', 'Farmers', 'Business']}
-                  onClick={(e) => setCategoryId(e.target.value)}
-                />
-              </div>
-              <div style={{ display: 'flex', marginTop: '18px' }}>
+          <div className='collection-modal-inner-container'>
+            {pathname === '/community-group' && (
+              <>
+                <CollectionModalHeader title='Create Group' setGroupActive={setActive} />
+                <DragDrop files={files} onChange={setFiles} />
+                <div className='collection-input-container'>
+                  <InputFields
+                    className='default-input-variation'
+                    error={groupTitleError}
+                    onChange={(e) => groupTitleChange(e)}
+                    placeholder='Group title'
+                  />
+                  <ErrorText
+                    className='error-message'
+                    Error={groupTitleError}
+                    message='Group Title'
+                  />
+                  <br />
+                  <InputFields
+                    className='default-input-variation text-area-variation'
+                    error={groupDescriptionError}
+                    onChange={(e) => groupDescriptionChange(e)}
+                    placeholder='Group description'
+                  />
+                  <ErrorText
+                    className='error-message'
+                    Error={groupDescriptionError}
+                    message='Group Description'
+                  />
+                  <br />
+                  <SelectFields
+                    className='default-input-variation'
+                    option={['Select Category', 'Farmers', 'Business', 'Accounting']}
+                    onClick={(e) => setCategoryId(e.target.value)}
+                  />
+                </div>
                 <SubmitButton
                   className='default-btn btn-size'
-                  onClick={handleAddEnterprise}
+                  onClick={handleAddGroup}
                   title='Submit'
                 />
-              </div>
-            </>
-          )}
-        </div>
+              </>
+            )}
+
+            {pathname === '/enterprises' && (
+              <>
+                <CollectionModalHeader
+                  title='Create Enterprises'
+                  setEnterpriseActive={setActive}
+                />
+                <DragDrop files={files} onChange={setFiles} />
+                <div className='collection-input-container'>
+                  <InputFields
+                    type='text'
+                    placeholder='Enterprise Title'
+                    onChange={(e) => enterpriseTitleChange(e)}
+                    className='default-input-variation'
+                    error={enterpriseTitleError}
+                  />
+                  <ErrorText
+                    className='error-message'
+                    Error={enterpriseTitleError}
+                    message='Enterprise Title'
+                  />
+                  <br />
+                  <InputFields
+                    className='default-input-variation text-area-variation'
+                    placeholder='Enterprise description'
+                    error={enterpriseDescriptionError}
+                    onChange={(e) => enterpriseDescriptionChange(e)}
+                  />
+                  <ErrorText
+                    className='error-message'
+                    Error={enterpriseDescriptionError}
+                    message='Enterprise Description'
+                  />
+                  <SelectFields
+                    className='default-input-variation'
+                    option={['Select Category', 'Farmers', 'Business']}
+                    onClick={(e) => setCategoryId(e.target.value)}
+                  />
+                </div>
+                <div style={{ display: 'flex', marginTop: '18px' }}>
+                  <SubmitButton
+                    className='default-btn btn-size'
+                    onClick={handleAddEnterprise}
+                    title='Submit'
+                  />
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>
