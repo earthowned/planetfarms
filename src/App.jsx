@@ -35,7 +35,10 @@ import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import LessonTest from './Screens/LessonTest/LessonTest'
 import CourseCollection from './Screens/Courses/CourseCollection/CourseCollection'
 import EditCollection from './Screens/Courses/EditCollection/EditCollection'
+import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCoursePage'
+import AddLesson from './Screens/CourseManager/AddLesson/AddLesson'
 import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
+import Amplify, { Auth } from 'aws-amplify'
 
 function App () {
   return (
@@ -100,6 +103,15 @@ function App () {
         </Route>
         <Route path='/courses/my-courses/:id'>
           <EditCollection />
+        </Route>
+        <Route path='/admin/courses'>
+          <Courses />
+        </Route>
+        <Route path='/admin/coursepage'>
+          <AdminCoursePage />
+        </Route>
+        <Route path='/admin/lesson-page'>
+          <AddLesson />
         </Route>
         <Route path='/courses/users'>
           <CourseUsers />

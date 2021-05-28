@@ -180,7 +180,7 @@
   right: 0;
   padding: 0 5em;
   margin-bottom: 80px;
-  transform: translateY(100%);
+  transform: translateY(120%);
   transition: all ease-in-out 0.2s;
 }
 
@@ -201,6 +201,6 @@
 
 @media only screen and (max-width: 500px) {
   .mobile-view-dropdown-container {
-    padding: 0 3em;
+    padding: 1em 3em;
   }
 }

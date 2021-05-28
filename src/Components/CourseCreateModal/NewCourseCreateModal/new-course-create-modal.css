@@ -1,101 +1,94 @@
-.collection-modal-container {
+.new-course-modal-container {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   background: var(--background-color-modal);
-  height: 100%;
+  height: 100vh;
   z-index: 5005;
   color: var(--primary-white);
   font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
 
-.collection-modal-inner-course-container {
+.new-course-modal-inner-container {
   width: 600px;
-  height: 600px;
+  height: 1000px;
   background: var(--cards);
   padding: 24px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow-y: auto;
 }
 
-.collection-modal-header {
+.new-course-modal-header {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2em;
+  margin-bottom: 40px;
 }
 
-.collection-modal-header img {
+.new-course-modal-header img {
   cursor: pointer;
 }
 
-.collection-modal-inner-course-container .drag-drop {
-  width: 560px;
+.new-course-modal-inner-container .drag-drop {
+  width: 100%;
   height: 216px;
   border: 2px dashed var(--primary-white);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1em;
 }
 
-.collection-modal-inner-course-container .drag-drop h6 {
+.new-course-modal-inner-container .drag-drop h6 {
   width: 50%;
   text-align: center;
   line-height: 1.5;
 }
 
-.collection-modal-inner-course-container .drag-drop img {
+.new-course-input-container {
   width: 100%;
-  height: 100%;
-  object-position: center;
-  object-fit: cover;
-}
-
-.collection-input-container {
-  width: 100%;
-  margin-top: 24px;
 }
 
 .default-input-variation {
   width: 100%;
   height: 80px;
   display: block;
+  margin-bottom: 1em;
   background: var(--cards);
   border: 1px solid var(--dropdowns);
   color: var(--primary-white);
   outline: none;
-  padding: 1em 1em;
+  padding: 1em;
+}
+
+.new-course-input-container textarea {
+  width: 100%;
+  height: 160px;
+  resize: none;
+  background: var(--cards);
+  border: 1px solid var(--dropdowns);
+  outline: none;
+  color: var(--primary-white);
+  padding: 1em;
+}
+
+.new-course-toggle {
+  display: flex;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.new-course-toggle h4 {
+  margin-right: 16px;
 }
 
 .btn-size {
   width: 200px;
-}
-
-.step-form {
-  margin-left: 10px;
-  margin-top: 5px;
-  font-size: 12px;
-}
-
-.add-collection {
-  display: flex;
-  align-items: center;
-}
-
-.add-collection img {
-  margin-right: 14px;
-}
-
-@media screen and (max-width: 600px) {
-  .collection-modal-inner-course-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  .collection-modal-inner-course-container .drag-drop {
-    width: 100%;
-  }
 }

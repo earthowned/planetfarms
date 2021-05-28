@@ -48,6 +48,10 @@
   justify-content: space-between;
 }
 
+.library-container .search-btn {
+  margin-top: 24px;
+}
+
 .library-sub-header {
   display: flex;
   flex-direction: column;
@@ -102,6 +106,10 @@
 }
 
 @media only screen and (max-width: 840px) {
+  .library-sub-header {
+    margin-top: 24px;
+  }
+
   .library-sub-header-1 {
     width: 100%;
   }
@@ -117,7 +125,7 @@
 
   .library-main-header-container {
     flex-direction: column;
-    height: 200px;
+    height: auto;
   }
 
   .library-container .filter-container {
@@ -126,5 +134,6 @@
 
   .library-sub-header-2 .filter-container {
     width: 100%;
+    margin-top: 14px;
   }
 }
