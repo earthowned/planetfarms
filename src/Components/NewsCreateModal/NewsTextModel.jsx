@@ -36,7 +36,7 @@ const CreateText = ({ textActive, setTextActive }) => {
         <div className='collection-modal-container'>
           <div>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add text' setTextActive={setTextActive} />
+            <CollectionModalHeader title='Add text' clickHandler={setTextActive} />
             <div className='photo-input-container'>
               <input
                 className='default-input-variation'

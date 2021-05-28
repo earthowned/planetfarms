@@ -31,7 +31,7 @@ const CreateImage = ({ getRootProps, getInputProps, files, setFiles, imageActive
         <div className='collection-modal-container'>
           <div>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add photo' setImageActive={setImageActive} />
+            <CollectionModalHeader title='Add photo' clickHandler={setImageActive} />
             <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} setFiles={setFiles} />
             <div className='description'>
               <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />

@@ -37,7 +37,7 @@ const CreateVideo = ({ getRootProps, getInputProps, files, setFiles,  videoActiv
         <div className='collection-modal-container'>
           <div>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add video' setVideoActive={setVideoActive} />
+            <CollectionModalHeader title='Add video' clickHandler={setVideoActive} />
             <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} setFiles={setFiles} />
             <div className='video-input-container'>
               <input
