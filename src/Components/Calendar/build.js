@@ -11,5 +11,12 @@ export default function buildCalendar(value) {
             )
         }
 
+        if(calendar.length === 5) {
+            calendar.push(
+                Array(7)
+                .fill(0)
+                .map(() => startDay.add(1, "day").clone())
+            )
+        }
         return calendar;
 }
