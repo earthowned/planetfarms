@@ -1,22 +1,22 @@
-export default function buildCalendar(value) {
-    const startDay = value.clone().startOf("month").startOf("week");
-    const endDay = value.clone().endOf("month").endOf("week");
-    
-     const calendar = [];
-        while(startDay.isBefore(endDay, "day")) {
-            calendar.push(
-                Array(7)
-                .fill(0)
-                .map(() => startDay.add(1, "day").clone())
-            )
-        }
+export default function buildCalendar (value) {
+  const startDay = value.clone().startOf('month').startOf('week')
+  const endDay = value.clone().endOf('month').endOf('week')
 
-        if(calendar.length === 5) {
-            calendar.push(
-                Array(7)
-                .fill(0)
-                .map(() => startDay.add(1, "day").clone())
-            )
-        }
-        return calendar;
+  const calendar = []
+  while (startDay.isBefore(endDay, 'day')) {
+    calendar.push(
+      Array(7)
+        .fill(0)
+        .map(() => startDay.add(1, 'day').clone())
+    )
+  }
+
+  if (calendar.length === 5) {
+    calendar.push(
+      Array(7)
+        .fill(0)
+        .map(() => startDay.add(1, 'day').clone())
+    )
+  }
+  return calendar
 }

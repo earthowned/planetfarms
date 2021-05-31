@@ -56,17 +56,17 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
         ? <><button className='nav-icon' onClick={() => handleToggle()}>
           <img src='/img/sidebar-arrow-icon.svg' alt='toggle icon with arrow sign' />
             </button>
-            <div className="sidebar-main-container">
-              <div className="list-nav-with-logo">
-                <div className='logo-container'>
-                  {toggle
-                    ? <img className='logo' src='/img/logo.svg' alt='full logo' />
-                    : <img className='logo-2' src='/img/p-icon.svg' alt='p-icon logo' />}
-                </div>
-                <MainNav dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />          
+          <div className='sidebar-main-container'>
+            <div className='list-nav-with-logo'>
+              <div className='logo-container'>
+                {toggle
+                  ? <img className='logo' src='/img/logo.svg' alt='full logo' />
+                  : <img className='logo-2' src='/img/p-icon.svg' alt='p-icon logo' />}
               </div>
-                <div className="bg-calendar"><Calendar /></div>
-                <div className="sm-calendar"><img src="/img/calendar-icon.svg" alt="calendar-icon"/></div>
+              <MainNav dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
+            </div>
+            <div className='bg-calendar'><Calendar /></div>
+            <div className='sm-calendar'><img src='/img/calendar-icon.svg' alt='calendar-icon' /></div>
           </div>
           </>
         : <div className={`mobile-view-dropdown-container ${burgerActive && 'slide'}`}>
