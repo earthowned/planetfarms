@@ -20,6 +20,12 @@ const Collection = db.define(
     },
     linkId: {
       type: Sequelize.INTEGER
+    },
+    filename: {
+      type: Sequelize.STRING
+    },
+    description: {
+      type: Sequelize.STRING
     }
   },
   { timestamps: true }

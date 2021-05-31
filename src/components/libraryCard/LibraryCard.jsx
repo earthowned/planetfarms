@@ -5,41 +5,30 @@ import './LibraryCard.css'
 const LibraryCard = ({ data }) => {
   return (
     <>
-      <CardLayout data={data}>
+      <div className='libraryCard-main-container'>
         {
-             data.map(item => {
-               return (
-                 <div>
-                   <LibraryBackgroundCard item={item} />
-                 </div>
-               )
-             })
-         }
-      </CardLayout>
-    </>
-  )
-}
+            data && data.map(item => {
+              return (
+                <div
+                  key={item.title} className='libraryCard-inner-container' style={{
+                    backgroundImage: 'url(/img/man-cap.svg)',
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                >
 
-const LibraryBackgroundCard = ({ item }) => {
-  return (
-    <div
-      key={item.title} className='libraryCard-inner-container' style={{
-        backgroundImage: `url(${item.img})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      <div>
-        <div className='my-library-btn-container'>
-          <button className='trasnsparent-btn'><img src='/img/trash-outline.svg' alt='trash-icon' /> <span>Remove from library</span></button>
-        </div>
-        <div className='libraryCard-content'>
-          <h6>{item.category}</h6>
-          <h5>{item.title}</h5>
-        </div>
+                  <button className='trasnsparent-btn positioning'><img src='/img/trash-outline.svg' alt='trash-icon' /> <span>Remove from library</span></button>
+                  <div className='libraryCard-content'>
+                    <h6>{item.category}</h6>
+                    <h4>{item.name}</h4>
+                  </div>
+                </div>
+              )
+            })
+         }
       </div>
-    </div>
+    </>
   )
 }
 

@@ -53,12 +53,18 @@ const getCollectionById = (req, res) => {
 // @todo we have to work on  relation mapping betweenn collection and resources
 
 const addcollection = (req, res) => {
-  const { name, docType, resourceType, linkId } = req.body
+  const { name, docType, resourceType, linkId, description } = req.body
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
   Collection.create({
     name,
     docType,
     resourceType,
-    linkId
+    linkId,
+    description,
+    filename
   })
     .then(() => res.json({ message: 'Collection Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
