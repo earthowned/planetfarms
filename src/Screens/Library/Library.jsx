@@ -46,7 +46,7 @@ const Library = () => {
 
       <DashboardLayout title='library'>
         <div className='library-main-container'>
-          <LibraryHeader setActive={setActive} />
+          <LibraryHeader setActive={setActive} btnName='Add Files' />
           {['Articles', 'Videos'].map(type => (
             <div className='list-container'>
               <ListView

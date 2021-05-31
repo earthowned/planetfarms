@@ -20,7 +20,7 @@ const data = [{
   link: '/library/collection/saved'
 }]
 
-const LibraryHeader = ({ setActive }) => {
+const LibraryHeader = ({ setActive, btnName }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -70,7 +70,7 @@ const LibraryHeader = ({ setActive }) => {
       </div>
       <div className='library-sub-header'>
         <div className='library-sub-header-1'>
-          <div className='library-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Add files</button></div>
+          <div className='library-btn-container'><button className='default-btn' onClick={() => setActive(true)}>{btnName}</button></div>
         </div>
 
         <div className='library-sub-header-2'>
