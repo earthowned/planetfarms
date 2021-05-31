@@ -6,8 +6,10 @@ import { resourceListReducer } from './reducers/resourceReducers'
 import { enterpriseListReducer } from './reducers/enterpriseReducers'
 import { groupListReducer, groupViewReducer } from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
+import { collectionListReducer } from './reducers/collectionReducres'
 
 const reducer = combineReducers({
+  listCollection: collectionListReducer,
   groupView: groupViewReducer,
   listGroups: groupListReducer,
   listEnterprises: enterpriseListReducer,
