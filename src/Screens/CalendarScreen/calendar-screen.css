@@ -1,0 +1,27 @@
+.calendar-top-header {
+  width: 100%;
+}
+
+.calendar-top-header ul {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+
+.calendar-nav-item {
+  background: var(--background-color);
+  color: var(--primary-white);
+  padding: 12px 24px;
+  border: 0.5px solid #efefef;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.calendar-nav-item:not(:last-child) {
+  margin-right: 16px;
+}
+
+.calendar-nav-item.active {
+  background: var(--primary-white);
+  color: var(--background-color);
+}
