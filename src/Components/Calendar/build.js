@@ -4,19 +4,19 @@ export default function buildCalendar (value) {
 
   const calendar = []
   while (startDay.isBefore(endDay, 'day')) {
-    calendar.push(
-      Array(7)
-        .fill(0)
-        .map(() => startDay.add(1, 'day').clone())
-    )
+    buildDates(calendar, startDay)
   }
 
   if (calendar.length === 5) {
-    calendar.push(
-      Array(7)
-        .fill(0)
-        .map(() => startDay.add(1, 'day').clone())
-    )
+    buildDates(calendar, startDay);
   }
   return calendar
+}
+
+function buildDates(calendar, startDay) {
+  calendar.push(
+     Array(7)
+    .fill(0)
+    .map(() => startDay.add(1, 'day').clone())
+  )
 }
