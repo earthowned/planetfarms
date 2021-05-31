@@ -39,7 +39,7 @@ const mainnav = [
 
 const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
   const [dropdownActive, setDropdownActive] = useState(true)
-  const history = useHistory();
+  const history = useHistory()
   const handleToggle = () => {
     setToggle(!toggle)
     if (toggle === true) {
@@ -66,9 +66,12 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
               <MainNav dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
             </div>
             <div className='bg-calendar'><Calendar /></div>
-            <div className='sm-calendar'><img src='/img/calendar-icon.svg' 
-            alt='calendar-icon' 
-            onClick={() => history.push('/calendar/my-events')}/></div>
+            <div className='sm-calendar'><img
+              src='/img/calendar-icon.svg'
+              alt='calendar-icon'
+              onClick={() => history.push('/calendar/my-events')}
+                                         />
+            </div>
           </div>
           </>
         : <div className={`mobile-view-dropdown-container ${burgerActive && 'slide'}`}>
