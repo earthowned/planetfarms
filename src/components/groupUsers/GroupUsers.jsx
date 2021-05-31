@@ -3,17 +3,17 @@ import Radiobox from '../radioBox/Radiobox'
 import './GroupUsers.scss'
 import { groupUsersData } from '../../constants/sampleData'
 
-const GroupUsers = () => {
+const GroupUsers = ({ data }) => {
   return (
     <>
       {
-        groupUsersData.map(user => (
+        data.map(d => (
           <div className='group-user-container'>
             <div>
               <div className='img-wrapper'>
-                <img src={user.image} alt='users' />
+                <img src='/img/avatar-msg.svg' alt='users' />
               </div>
-              <h4>{user.name}</h4>
+              <h4>{d.name}</h4>
             </div>
             <Radiobox />
           </div>

@@ -37,6 +37,7 @@ const Library = () => {
         clickHandler={setModalActive}
         data={groupCollection} btnName='add to collections'
         setNewCollection={setNewCollection}
+        title='Collections'
                       />}
 
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
