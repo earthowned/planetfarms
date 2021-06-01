@@ -25,3 +25,40 @@
   background: var(--primary-white);
   color: var(--background-color);
 }
+
+.calendar-second-header {
+  width: 100%;
+  height: 48px;
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+.main-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.main-calendar-header .row-1 {
+  display: flex;
+  align-items: center;
+}
+
+.main-calendar-header .row-1 .date-indicator {
+  color: var(--primary-color);
+  margin-left: 16px;
+  margin-right: 40px;
+}
+
+.main-calendar-header .row-1 .date-indicator span {
+  cursor: pointer;
+}
+
+.main-calendar-header .row-1 .date-indicator span:last-child {
+  margin-left: 16px;
+}
+
+.main-cal-btn {
+  width: 120px;
+}

@@ -17,7 +17,6 @@ const CommunityGroup = () => {
   const [active, setActive] = useState(false)
   const [search, setSearch] = useState(null)
   const handleClickCreate = () => {
-
   }
 
   useEffect(() => {

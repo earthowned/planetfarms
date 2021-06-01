@@ -70,7 +70,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
               src='/img/calendar-icon.svg'
               alt='calendar-icon'
               onClick={() => history.push('/calendar/my-events')}
-                                         />
+              />
             </div>
           </div>
           </>
@@ -116,7 +116,7 @@ function MainNav ({ dropdownActive, setDropdownActive }) {
                           {
                             navitem.dropdown.map(item => {
                               return (
-                                <div key={item.name} className={`${pathname === `${item.slug}` ? '  text-active' : ''}`}>
+                                <div key={item.name} className={`${pathname === `${item.slug}` ? 'text-active' : ''}`}>
                                   <li onClick={() => history.push(`${item.slug}`)} className='dropdown-item'>
                                     <strong>{item.name}</strong>
                                   </li>

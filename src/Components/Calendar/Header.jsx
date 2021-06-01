@@ -1,28 +1,16 @@
 import React from 'react'
-
+import {prevMonth, currMonthName, currYearName, nextMonth} from './dateFunctions';
 const CalendarHeader = ({value, setValue}) => {
-     function currMonthName () {
-        return value.format("MMMM");
-    }
-
-    function prevMonth () {
-        return value.clone().subtract(1, "month");
-    }
-
-    function nextMonth () {
-        return value.clone().add(1, "month");
-    }
-
     return (
         <div className="header">
             <div className="previous"
-                onClick={() => setValue(prevMonth())}
+                onClick={() => setValue(prevMonth(value))}
             >{String.fromCharCode(60)}</div>
             <div className="current">
-                {currMonthName()}
+                {currMonthName(value)} , {currYearName(value)}
             </div>
             <div 
-                onClick={() => setValue(nextMonth())}
+                onClick={() => setValue(nextMonth(value))}
                 className="next">{String.fromCharCode(62)}</div>
         </div>
     )
