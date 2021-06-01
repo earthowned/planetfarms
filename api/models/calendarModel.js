@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../config/database.js')
 
-const Calender = db.define(
-  'calenders',
+const Calendar = db.define(
+  'calendars',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -31,4 +31,4 @@ const Calender = db.define(
   { timestamps: true }
 )
 
-module.exports = Calender
+module.exports = Calendar
