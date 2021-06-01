@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import CalendarEvent from '../../Components/NewsCreateModal/CalendarEvent'
+import CalendarEvent from '../NewsCreateModal/CalendarEvent'
 
 export default function CalendarHeader ({ value, setValue }) {
   function currMonthName () {

@@ -1,13 +1,18 @@
-.calendar-side {
+.mobile-view-dropdown-container .calendar {
+  display: none;
+}
+
+.sidebar-container .calendar {
   box-sizing: border-box;
   font-size: 1rem;
   max-width: 400px;
   position: fixed;
+  width: 15%;
   left: 0;
   bottom: 0;
 }
 
-.header-side {
+.sidebar-container .header {
   background-color: #2b2b2c;
   text-align: center;
   line-height: 29px;
@@ -15,18 +20,18 @@
   font-weight: 300;
   height: 30px;
   font-size: 17px;
+  margin-bottom: 0px;
 }
 
-.day-names-side {
+.sidebar-container .day-names {
   display: flex;
   flex-wrap: wrap;
-  width: 195px;
   margin: 0 auto;
   align-items: center;
   color: white;
 }
 
-.week-side {
+.sidebar-container .week {
   background-color: #141414;
   width: calc(100% / 7);
   height: 44px;
@@ -34,13 +39,14 @@
   text-align: center;
   color: rgb((172), 167, 167);
   font-weight: 300;
+  text-transform: normal;
 }
 
-.week-side div {
+.sidebar-container .week div {
   width: 100%;
 }
 
-.day-side {
+.sidebar-container .day {
   position: relative;
   width: calc(100% / 7);
   height: 44px;
@@ -57,17 +63,17 @@
   font-size: 14px;
 }
 
-.calendar-month-wrapper-side {
+.sidebar-container .calendar-month-wrapper {
   display: flex;
 }
 
-.calendar-header-container-side {
+.sidebar-container .calendar-header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.today-side {
+.sidebar-container .today {
   background-color: rgb(64, 95, 80);
   height: 27px;
   width: 27px;
@@ -75,7 +81,7 @@
   margin-top: 5px;
 }
 
-.before-side {
+.sidebar-container .before {
   color: white;
   background-color: rgb(12, 11, 11);
   height: 27px;
@@ -84,7 +90,7 @@
   margin-top: 5px;
 }
 
-.previous-side {
+.sidebar-container .previous {
   text-align: left;
   margin-left: 1rem;
   margin-right: 25px;
@@ -92,13 +98,13 @@
   cursor: pointer;
 }
 
-.next-side {
+.sidebar-container .next {
   margin-left: 36px;
   color: rgba(0, 198, 136, 1);
   cursor: pointer;
 }
 
-.button-sidebar {
+.sidebar-container .button-sidebar {
   background-color: #00c688;
   border: none;
   color: white;
@@ -110,10 +116,14 @@
   width: 100%;
 }
 
-.selected-side {
+.sidebar-container .selected {
   background-color: rgba(0, 198, 136, 1);
   color: white;
   font-weight: bold;
   height: 27px;
   width: 30px;
+}
+
+.sidebar-container .calendar-today-btn, .sidebar-container .calendar-events {
+  display: none;
 }

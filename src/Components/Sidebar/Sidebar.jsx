@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import './sidebar.css'
-import SideCalendar from './SideCalendar'
+import CalendarBlock from '../Calendar/CalendarBlock'
 
 const mainnav = [
   {
@@ -124,8 +124,7 @@ function MainNav ({ dropdownActive, setDropdownActive }) {
         })
       }
       </ul>
-      {/* <Calendar /> */}
-      <SideCalendar />
+      { dropdownActive && <CalendarBlock position="sidebar" /> }
     </>
   )
 }
