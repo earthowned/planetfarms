@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 
-const CreateVideo = ({ getRootProps, getInputProps, files, setFiles,  videoActive, setVideoActive }) => {
+const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive, setVideoActive }) => {
   const [videoTitle, setVideoTitle] = useState()
   const [videoDescription, setVideoDescription] = useState()
 
@@ -36,35 +36,35 @@ const CreateVideo = ({ getRootProps, getInputProps, files, setFiles,  videoActiv
       {videoActive && (
         <div className='collection-modal-container'>
           <div>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add video' setVideoActive={setVideoActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} setFiles={setFiles} />
-            <div className='video-input-container'>
-              <input
-                className='default-input-variation'
-                placeholder='Video title'
-                value={videoTitle}
-                onChange={(e) => videoTitleChange(e)}
-              />
-              <p className='error-message'>{videoTitleError ? 'Please enter Video Title' : ' '} </p>
-              <br />
-              <textarea
-                className='default-input-variation text-area-variation'
-                placeholder='Video description'
-                cols='3'
-                rows='3'
-                value={videoDescription}
-                onChange={(e) => videoDescriptionChange(e)}
-              />
-              <p className='error-message'>{videoDescriptionError ? 'Please enter Video Description' : ' '} </p>
+            <div className='collection-modal-inner-container'>
+              <CollectionModalHeader title='Add video' clickHandler={setVideoActive} />
+              <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} setFiles={setFiles} />
+              <div className='video-input-container'>
+                <input
+                  className='default-input-variation'
+                  placeholder='Video title'
+                  value={videoTitle}
+                  onChange={(e) => videoTitleChange(e)}
+                />
+                <p className='error-message'>{videoTitleError ? 'Please enter Video Title' : ' '} </p>
+                <br />
+                <textarea
+                  className='default-input-variation text-area-variation'
+                  placeholder='Video description'
+                  cols='3'
+                  rows='3'
+                  value={videoDescription}
+                  onChange={(e) => videoDescriptionChange(e)}
+                />
+                <p className='error-message'>{videoDescriptionError ? 'Please enter Video Description' : ' '} </p>
 
-              <div className='video-row-3'>
-                <input className='default-input-variation last-input-variation' placeholder='Video link' />{' '}
-                <span>OR</span> <button className='secondary-btn'>Choose video</button>
+                <div className='video-row-3'>
+                  <input className='default-input-variation last-input-variation' placeholder='Video link' />{' '}
+                  <span>OR</span> <button className='secondary-btn'>Choose video</button>
+                </div>
               </div>
+              <Button name='Add Video block' clickHandler={addVideo} />
             </div>
-            <Button name='Add Video block' clickHandler={addVideo} />
-          </div>
           </div>
         </div>
       )}
