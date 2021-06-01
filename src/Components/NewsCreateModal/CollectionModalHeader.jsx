@@ -8,7 +8,8 @@ const CollectionModalHeader = ({
   setGroupActive,
   setEnterpriseActive,
   setGroupEditActive,
-  setResourceActive
+  setResourceActive,
+  clickHandler
 }) => {
   switch (title) {
     case 'Add video':
@@ -108,7 +109,12 @@ export default CollectionModalHeader
 const Image = (props) => {
   return (
     <>
-      <img src={props.src} alt={props.alt} onClick={props.onClick} />
+      <div className='collection-modal-header'>
+        <h4>{title}</h4>
+        <img
+          src={props.src} alt={props.alt} onClick={() => clickHandler(false)}
+        />
+      </div>
     </>
   )
 }

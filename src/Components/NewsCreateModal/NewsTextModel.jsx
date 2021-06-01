@@ -37,18 +37,25 @@ const CreateText = ({ textActive, setTextActive }) => {
         <div className='collection-modal-container'>
           <div>
             <div className='collection-modal-inner-container'>
-              <CollectionModalHeader title='Add text' setTextActive={setTextActive} />
+              <CollectionModalHeader title='Add text' clickHandler={setTextActive} />
               <div className='photo-input-container'>
                 <InputFields
                   type='text'
-                  placeholder='Collection title'
-                  onChange={(e) => collectionTitleChange(e)}
                   className='default-input-variation'
+                  placeholder='Collection title'
+                  value={collectionTitle}
+                  onChange={(e) => collectionTitleChange(e)}
                 />
-                <ErrorText className='error-message' error={collectionTitleError} message='Video Description' />
+                <ErrorText className='error-message' error={collectionTitleError} message='Please enter Video Title' />
                 <br />
-                <TextArea className='default-input-variation text-area-variation-2' placeholder='Type text here' value={collectionDescription} onChange={(e) => collectionDescriptionChange(e)} />
-                <ErrorText className='error-message' error={collectionDescriptionError} message='Video Description' />
+                <TextArea
+                  className='default-input-variation'
+                  id='text-area-variation-2'
+                  placeholder='Type text here '
+                  value={collectionDescription}
+                  onChange={(e) => collectionDescriptionChange(e)}
+                />
+                <ErrorText className='error-message' error={collectionDescriptionError} message='Please enter Video Description' />
               </div>
               <Button name='Add block' clickHandler={addText} />
             </div>
