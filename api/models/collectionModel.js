@@ -26,6 +26,12 @@ const Collection = db.define(
     },
     description: {
       type: Sequelize.STRING
+    },
+    category: {
+      type: Sequelize.STRING
+    },
+    status: {
+      type: Sequelize.BOOLEAN
     }
   },
   { timestamps: true }

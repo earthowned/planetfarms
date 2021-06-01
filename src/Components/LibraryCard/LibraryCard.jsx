@@ -6,7 +6,7 @@ const LibraryCard = ({ data }) => {
     <>
       <div className='libraryCard-main-container'>
         {
-            data && data.map(item => {
+            data && data.filter(data => data.status === true).map(item => {
               return (
                 <div
                   key={item.title} className='libraryCard-inner-container' style={{

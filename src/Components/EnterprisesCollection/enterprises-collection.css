@@ -9,8 +9,8 @@
 }
 
 .collection-modal-container > div {
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  height: 80%;
   position: relative;
   overflow-y: scroll;  
 }
@@ -57,7 +57,7 @@
 
 .drag-drop-container {
   width: 100%;
-  height: 100%;
+  height: 30%;
   position: relative;
   margin-bottom: 40px;
 }

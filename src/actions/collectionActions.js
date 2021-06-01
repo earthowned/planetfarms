@@ -8,7 +8,10 @@ import {
   COLLECTION_SEARCH_FAIL,
   COLLECTION_CREATE_REQUEST,
   COLLECTION_CREATE_SUCCESS,
-  COLLECTION_CREATE_FAIL
+  COLLECTION_CREATE_FAIL,
+  COLLECTION_UPDATE_REQUEST,
+  COLLECTION_UPDATE_SUCCESS,
+  COLLECTION_UPDATE_FAIL
 } from '../constants/collectionConstants'
 
 export const listCollections = (sort = '', pageNumber = '') => async (
@@ -79,5 +82,30 @@ export const createCollection = (newCollection) => async (dispatch, getState) =>
           ? error.response.data.message
           : error.message
     dispatch({ type: COLLECTION_CREATE_FAIL, payload: message })
+  }
+}
+
+export const updateCollection = (updateCollection, id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: COLLECTION_UPDATE_REQUEST
+    })
+
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_API_BASE_URL}/api/collection/${id}`, updateCollection
+    )
+    dispatch({
+      type: COLLECTION_UPDATE_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    dispatch({
+      type: COLLECTION_UPDATE_FAIL,
+      payload: message
+    })
   }
 }
