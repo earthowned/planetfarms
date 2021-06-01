@@ -112,7 +112,7 @@
 
 .enterprise-btn-second {
   align-items: center;
-  background-color:  var(--primary-color);
+  background-color: var(--primary-color);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -202,7 +202,7 @@
 
 .enterprises-option-first {
   align-items: center;
-  background-color:  var(--primary-white);
+  border: 1px solid white;
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -224,7 +224,7 @@
 
 .all-enterprises {
   align-items: flex-start;
-  background-color:  var(--primary-black);
+  background-color: var(--black);
   display: flex;
   overflow: hidden;
   width: 1440px;
@@ -239,6 +239,9 @@
 }
 
 .enterpriseCard {
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(536px, 1fr));
+  margin-top: 40px;
+  grid-gap: 40px;
 }

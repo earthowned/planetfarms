@@ -3,10 +3,10 @@ import './news-create-modal.css'
 import Button from '../Button/Button'
 import { useDispatch } from 'react-redux'
 import { saveimageDetail } from '../../actions/newsActions'
-import DragDrop from './DragDrop'
+import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 
-const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImageActive }) => {
+const CreateImage = ({ getRootProps, getInputProps, files, setFiles, imageActive, setImageActive }) => {
   const [imageDescription, setImageDescription] = useState()
   const [addDesctiption, setAddDesctiption] = useState(false)
 
@@ -29,23 +29,25 @@ const CreateImage = ({ getRootProps, getInputProps, files, imageActive, setImage
     <>
       {imageActive && (
         <div className='collection-modal-container'>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add photo' setImageActive={setImageActive} />
-            <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} />
-            <div className='description'>
-              <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
+          <div>
+            <div className='collection-modal-inner-container'>
+              <CollectionModalHeader title='Add photo' clickHandler={setImageActive} />
+              <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} setFiles={setFiles} />
+              <div className='description'>
+                <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
+              </div>
+              {addDesctiption
+                ? <div className='photo-input-container'>
+                  <input
+                    className='default-input-variation'
+                    placeholder='Photo description'
+                    value={imageDescription}
+                    onChange={(e) => imageDescriptionChange(e)}
+                  />
+                  <p className='error-message'>{imageDescriptionError ? 'Please enter Video Description' : ' '} </p>
+                  </div> : <div />}
+              <Button name='Add block' clickHandler={addImage} />
             </div>
-            {addDesctiption
-              ? <div className='photo-input-container'>
-                <input
-                  className='default-input-variation'
-                  placeholder='Photo description'
-                  value={imageDescription}
-                  onChange={(e) => imageDescriptionChange(e)}
-                />
-                <p className='error-message'>{imageDescriptionError ? 'Please enter Video Description' : ' '} </p>
-              </div> : <div />}
-            <Button name='Add block' clickHandler={addImage} />
           </div>
         </div>
       )}

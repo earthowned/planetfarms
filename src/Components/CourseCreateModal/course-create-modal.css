@@ -1,0 +1,104 @@
+.course-create-container {
+  width: 100vw;
+  height: 100vh;
+  background: var(--background-color-modal);
+  position: fixed;
+  z-index: 5005;
+}
+
+.course-create-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 999;
+  background: var(--cards);
+  width: 600px;
+  height: 500px;
+  color: var(--primary-white);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.course-create-modal-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.course-type button {
+  color: var(--primary-white);
+  width: 268px;
+  height: 268px;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.course-type button:focus {
+  border: 1px solid var(--primary-white);
+}
+
+.course-type button > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.course-type button > div div {
+  width: 80%;
+  text-align: left;
+}
+
+.course-type h4 {
+  margin-bottom: 8px;
+}
+
+.course-create-modal-header button {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.course-create-modal-header button:hover {
+  transform: scale(1.1);
+}
+
+.course-create-modal-btn {
+  width: 200px;
+}
+
+@media only screen and (max-width: 600px) {
+  .course-create-modal {
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+  }
+
+  .course-create-modal-header {
+    margin-bottom: 40px;
+  }
+
+  .course-type {
+    margin-top: 34px;
+    flex-direction: column;
+  }
+
+  .course-type button {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+}

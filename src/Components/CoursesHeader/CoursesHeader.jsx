@@ -24,12 +24,12 @@ const data = [
   }
 ]
 
-const CoursesHeader = ({ setActive }) => {
+const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCourse }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-
   const { pathname } = useLocation()
+  console.log(pathname)
   const history = useHistory()
 
   const dispatch = useDispatch()
@@ -39,10 +39,12 @@ const CoursesHeader = ({ setActive }) => {
     // if (!userInfo) {
     //     history.push('/login')
     // }
+    // if (search) dispatch(searchResources(search))
+    // if (!search) dispatch(listResources())
 
-    window.addEventListener('resize', function () {
-      setWindowWidth(window.innerWidth)
-    })
+    // window.addEventListener('resize', function () {
+    //   setWindowWidth(window.innerWidth)
+    // })
 
     return () => {
       window.removeEventListener('resize', function () {
@@ -50,6 +52,11 @@ const CoursesHeader = ({ setActive }) => {
       })
     }
   }, [windowWidth, search, dispatch, history, userInfo])
+
+  function createCollection () {
+    setActive(true)
+    setCreateCollection(true)
+  }
 
   return (
     <div className='courses-main-header-container'>
@@ -60,27 +67,40 @@ const CoursesHeader = ({ setActive }) => {
               data.map(item => {
                 return (
                   <li>
-                    <Link className={`nav-link ${(pathname === `${item.slug}`) ? 'courses-list-item active' : 'library-list-item'}`} to={`${item.slug}`}>{item.name}</Link>
+                    <Link
+                      className={`nav-link ${(pathname === `${item.slug}`)
+                    ? 'courses-list-item active'
+                    : 'library-list-item'}`} to={`${item.slug}`}
+                    >
+                      {item.name}
+                    </Link>
                   </li>
                 )
               })
             }
           </ul>
-          <div className='courses-search-container'>
-            <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
-          </div>
+            <div className='courses-search-container'>
+              <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
+            </div>
           </>
           : <>
             <Filter data={data} newFilter='new' />
             <div className='courses-search-container'>
               <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
             </div>
-          </>
-        }
+          </>}
       </div>
       <div className='courses-sub-header'>
         <div className='courses-sub-header-1'>
-          <div className='courses-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Add Courses</button></div>
+
+          <div className='courses-btn-container'>
+            {
+              pathname === '/admin/courses'
+                ? <button className='default-btn' onClick={() => setCreateCourse(true)}>Add new Courses</button>
+                : <button className='default-btn' onClick={() => setActive(true)}>Add Courses</button>
+            }
+          </div>
+
         </div>
 
         <div className='courses-sub-header-2'>
