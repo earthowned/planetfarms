@@ -1,4 +1,3 @@
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     queryInterface.removeColumn('enterprises', 'attachments', Sequelize.BLOB('long'))

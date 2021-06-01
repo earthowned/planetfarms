@@ -37,7 +37,6 @@ const FromModal = ({ setActive, openAddCollection }) => {
 
   const handleAddGroup = async (e) => {
     e.preventDefault()
-
     if (!groupTitle) setGroupTitleError(true)
     if (!groupDescription) setGroupDescriptionError(true)
     if (groupTitle && groupDescription) {
