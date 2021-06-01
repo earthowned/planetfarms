@@ -34,7 +34,7 @@ const Calendar = () => {
   useEffect(() => {
     setCalendar(buildCalendar(value))
   }, [value])
-  
+
   // checking for the events
   function checkEvents (day) {
     let event
