@@ -48,7 +48,7 @@ function App () {
           <CongratulationScreen />
         </Route>
         <Route path='/:path(|login)' exact>
-          <LoginScreen {...X0100LoginEmptyData} />
+          <LoginScreen {...LoginEmptyData} />
         </Route>
         <Route exact path='/library'>
           <Library />
@@ -157,37 +157,12 @@ function App () {
 
 export default App
 
-const X0100LoginEmptyData = {
-  vector: '/img/vector.svg',
-  vector2: '/img/vector@2x.svg',
-  vector3: '/img/vector-994@2x.png',
-  vector4: 'img/vector-4.svg',
-  vector5: 'img/vector-5.svg',
-  vector6: '/img/vector-1246@2x.png',
+const LoginEmptyData = {
   welcomeBack: 'Sign In',
-  vector7: 'img/vector-7.png',
-  vector8: 'img/vector-8.png',
-  vector9: 'img/vector-9.png',
   username: 'Username',
   password: 'Password',
-  vector10: '',
-  subtract: '',
   rememberMe: 'Remember Me',
-  signIn: 'Sign in',
-  forgotPassword: 'Forgot Password?',
   text1: 'Sign In with services',
-  vector11: '/img/vector.svg',
-  vector12: '',
-  vector13: '',
-  vector14: '',
   google: 'Google',
-  subtract2: '',
-  facebook: 'Facebook',
-  spanText: "Don't have an account yet?",
-  spanText2: '  ',
-  spanText3: 'Become a member!',
-  vector15: '',
-  vector16: '',
-  vector17: '',
-  vector18: ''
+  facebook: 'Facebook'
 }
