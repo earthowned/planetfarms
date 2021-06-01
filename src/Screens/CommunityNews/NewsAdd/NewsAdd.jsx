@@ -126,14 +126,14 @@ function PopUp ({ news, title, category }) {
   const { file } = news.imageDetail.file && news.imageDetail
 
   console.log('news', file)
-  const newNews = { ...news, title, category }
+  const newNews = { ...news, title, category, file }
 
   const [activePopup, setActivePopup] = useState(true)
   const dispatch = useDispatch()
   const history = useHistory()
   const handleOnSaveClick = (e) => {
     if (file) {
-      dispatch(createNews(newNews, file))
+      dispatch(createNews(newNews))
       setActivePopup(false)
       history.push('/community-page-news')
     } else {
