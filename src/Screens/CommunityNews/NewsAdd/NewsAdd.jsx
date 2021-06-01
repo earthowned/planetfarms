@@ -125,7 +125,6 @@ function NewContent ({ title, news }) {
 function PopUp ({ news, title, category }) {
   const { file } = news.imageDetail ? news.imageDetail.file && news.imageDetail : {}
   const newNews = { ...news, title, category, file }
-
   const [activePopup, setActivePopup] = useState(true)
   const dispatch = useDispatch()
   const history = useHistory()

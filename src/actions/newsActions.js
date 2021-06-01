@@ -60,7 +60,7 @@ export const searchNews = (search) => async (
 
 export const createNews = (newNews) => async (dispatch, getState) => {
   const formData = new FormData()
-  formData.append('file', newNews.file)
+  formData.append('news', newNews.file)
   formData.append('title', newNews.title)
   formData.append('category', newNews.category)
   // formData.append('imageDetail',newNews.imageDetail)
