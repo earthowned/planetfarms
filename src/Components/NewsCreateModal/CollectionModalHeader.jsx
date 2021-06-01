@@ -5,17 +5,26 @@ const CollectionModalHeader = ({
   clickHandler
 }) => {
   return (
+    <Image
+      title={title}
+      src='/img/close-outline.svg'
+      alt='close-icon'
+      clickHandler={() => clickHandler(false)}
+    />
+  )
+}
+
+export default CollectionModalHeader
+
+const Image = (props) => {
+  return (
     <>
       <div className='collection-modal-header'>
-        <h4>{title}</h4>
+        <h4>{props.title}</h4>
         <img
-          src='/img/close-outline.svg'
-          alt='close-icon'
-          onClick={() => clickHandler(false)}
+          src={props.src} alt={props.alt} onClick={props.clickHandler}
         />
       </div>
     </>
   )
 }
-
-export default CollectionModalHeader

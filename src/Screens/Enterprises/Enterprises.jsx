@@ -6,6 +6,8 @@ import CommunityGroupCard from '../../Components/CommunityGroupCard/CommunityGro
 import { useSelector, useDispatch } from 'react-redux'
 import { listEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
 import FormModal from '../../Components/FormModal/FormModal'
+import Filter from '../../Components/Filter/Filter'
+import useSizeFinder from '../../utils/SizeFinder'
 
 const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
@@ -22,38 +24,60 @@ const Enterprise = () => {
     <>
       {active && <FormModal setActive={setActive} />}
       <DashboardLayout title='Enterprises'>
-        <div className='all-enterprises screen'>
+        <div className='all-enterprises'>
           <div className='enterprises-col'>
-            <div className='enterprises-row'>
-              <div className='enterprises-header'>
-                <div className='enterprises-option'>
-                  <div className='enterprises-option-first'>
-                    <div className='all-enterprises-text ibmplexsans-semi-bold-shark-16px'>
-                      All Enterprises
-                    </div>
-                  </div>
-                  <div className='enterprises-option-second border-0-5px-white'>
-                    <div className='your-enterprises ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                      Your Enterprises
-                    </div>
-                  </div>
-                </div>
-                <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
-              </div>
-              <div className='create-enterprises-wrapper'>
-                <div className='add-enterprises'>
-                  <div className='create-enterprise-text ibmplexsans-semi-bold-shark-16px' onClick={() => setActive(true)}>
-                    Create Enterprise
-                  </div>
-                </div>
-              </div>
-            </div>
+            <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              <CommunityGroupCard data={data} />
+              <CommunityGroupCard data={data} type="enterpise" />
             </div>
           </div>
         </div>
       </DashboardLayout>
+    </>
+  )
+}
+
+function EnterpriseHeader ({ search, setSearch, setActive }) {
+  return (
+    <div className='enterprises-row'>
+      <div className='enterprises-header'>
+        <FirstHeader />
+        <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
+      </div>
+      <div className='create-enterprises-wrapper'>
+        <div className='add-enterprises'>
+          <div className='create-enterprise-text ibmplexsans-semi-bold-shark-16px' onClick={() => setActive(true)}>
+            Create Enterprise
+          </div>
+        </div>
+        <div className='enterprise-filter'>
+          <Filter />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function FirstHeader () {
+  const windowWidth = useSizeFinder()
+  return (
+    <>
+      {
+      windowWidth > 720
+        ? <div className='enterprises-option'>
+          <div className='enterprises-option-first'>
+            <div className='all-enterprises-text ibmplexsans-semi-bold-shark-16px'>
+              All Enterprises
+            </div>
+          </div>
+          <div className='enterprises-option-second border-0-5px-white'>
+            <div className='your-enterprises ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+              Your Enterprises
+            </div>
+          </div>
+          </div>
+        : <Filter name='All Enterprises' noImage />
+    }
     </>
   )
 }

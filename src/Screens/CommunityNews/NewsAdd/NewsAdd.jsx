@@ -16,9 +16,10 @@ const NewsAdd = () => {
   const [imageActive, setImageActive] = useState(true)
   const [textActive, setTextActive] = useState(true)
   const news = useSelector((state) => (state.addNewNews !== {} ? state.addNewNews : ''))
-  useSelector((state) =>   console.log(state))
+  useSelector((state) => console.log(state))
 
   const { title, category } = useParams()
+
   return (
     <>
       {createVideoModal && <NewsCreateModal type='video' videoActive={videoActive} setVideoActive={setVideoActive} />}
@@ -36,13 +37,14 @@ const NewsAdd = () => {
           setTextActive={setTextActive}
           setImageActive={setImageActive}
           setVideoActive={setVideoActive}
+
         />
       </DashboardLayout>
     </>
   )
 }
 
-function NewsAddMainContainer({
+function NewsAddMainContainer ({
   setCreateVideoModal,
   setCreateImageModal,
   setCreateTextModal,
@@ -51,23 +53,24 @@ function NewsAddMainContainer({
   setTextActive,
   news,
   title,
-  category,
+  category
+
 }) {
-  function createVideo() {
+  function createVideo () {
     setCreateVideoModal(true)
     setCreateImageModal(false)
     setCreateTextModal(false)
     setVideoActive(true)
   }
 
-  function createImage() {
+  function createImage () {
     setCreateVideoModal(false)
     setCreateImageModal(true)
     setCreateTextModal(false)
     setImageActive(true)
   }
 
-  function createText() {
+  function createText () {
     setCreateVideoModal(false)
     setCreateImageModal(false)
     setCreateTextModal(true)
@@ -88,7 +91,7 @@ function NewsAddMainContainer({
   )
 }
 
-function NewsAddContainer({ createVideo, createImage, createText, title, news }) {
+function NewsAddContainer ({ createVideo, createImage, createText, title, news }) {
   return (
     <div className='news-add-container'>
       <NewContent title={title} news={news} />
@@ -108,7 +111,7 @@ function NewsAddContainer({ createVideo, createImage, createText, title, news })
   )
 }
 
-function NewContent({ title, news }) {
+function NewContent ({ title, news }) {
   return (
     <>
       <div className='new-title-container'>
@@ -119,15 +122,22 @@ function NewContent({ title, news }) {
   )
 }
 
-function PopUp({ news, title, category }) {
-  const newNews = { ...news, title, category }
+function PopUp ({ news, title, category }) {
+  const { file } = news.imageDetail ? news.imageDetail.file && news.imageDetail : {}
+  const newNews = { ...news, title, category, file }
   const [activePopup, setActivePopup] = useState(true)
   const dispatch = useDispatch()
   const history = useHistory()
   const handleOnSaveClick = (e) => {
-    dispatch(createNews(newNews))
-    setActivePopup(false)
-    history.push('/community-page-news')
+    if (file) {
+      dispatch(createNews(newNews))
+      setActivePopup(false)
+      history.push('/community-page-news')
+    } else {
+      dispatch(createNews(newNews))
+      setActivePopup(false)
+      history.push('/community-page-news')
+    }
   }
 
   const handleOnCancelClick = (e) => {

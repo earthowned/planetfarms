@@ -24,64 +24,48 @@ const NewsCreateModal = ({
   enterpriseActive,
   setEnterpriseActive
 }) => {
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState()
 
-  return (
-    <>
-      {type === 'video' && (
-        <CreateVideo
-          files={files}
-          setFiles={setFiles}
-          videoActive={videoActive}
-          setVideoActive={setVideoActive}
-        />
-      )}
-
-      {type === 'group' && (
-        <CreateGroup
-          files={files}
-          setFiles={setFiles}
-          groupActive={groupActive}
-          setGroupActive={setGroupActive}
-        />
-      )}
-      {type === 'edit-group' && (
-        <EditGroup
-          files={files}
-          groupEditActive={groupEditActive}
-          setGroupEditActive={setGroupEditActive}
-        />
-      )}
-      {type === 'image' && (
-        <CreateImage
-          files={files}
-          setFiles={setFiles}
-          imageActive={imageActive}
-          setImageActive={setImageActive}
-        />
-      )}
-      {type === 'text' && (
-        <CreateText
-          files={files}
-          textActive={textActive}
-          setTextActive={setTextActive}
-        />
-      )}
-    </>
-  )
+  switch (type) {
+    case 'video':
+      return (
+        <CreateVideo files={files} setFiles={setFiles} videoActive={videoActive} setVideoActive={setVideoActive} />
+      )
+      break
+    case 'group':
+      return (
+        <CreateGroup files={files} setFiles={setFiles} groupActive={groupActive} setGroupActive={setGroupActive} />
+      )
+      break
+    case 'edit-group':
+      return (
+        <EditGroup files={files} groupEditActive={groupEditActive} setGroupEditActive={setGroupEditActive} />
+      )
+      break
+    case 'image':
+      return (
+        <CreateImage files={files} setFiles={setFiles} imageActive={imageActive} setImageActive={setImageActive} />
+      )
+      break
+    case 'text':
+      return (
+        <CreateText files={files} textActive={textActive} setTextActive={setTextActive} />
+      )
+      break
+    default:
+      return null
+      break
+  }
 }
 
-const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroupActive }) => {
+const CreateGroup = ({ files, groupActive, setGroupActive }) => {
   return (
     <>
       {groupActive && (
-
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-
             <CollectionModalHeader title='Create Group' setGroupActive={setGroupActive} />
             <DragDrop files={files} />
-
             <GroupInputContainer />
             <Link to='/my-group-view-page'>
               <Button name='Create Group' />
@@ -93,7 +77,7 @@ const CreateGroup = ({ getRootProps, getInputProps, files, groupActive, setGroup
   )
 }
 
-const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGroupEditActive }) => {
+const EditGroup = ({ files, groupEditActive, setGroupEditActive }) => {
   return (
     <>
       {groupEditActive && (
@@ -103,62 +87,19 @@ const EditGroup = ({ getRootProps, getInputProps, files, groupEditActive, setGro
             <DragDrop files={files} />
             <GroupEditContainer />
             <button className='button-delete'>
-              <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' /> Delete Groups
+              <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' />
+              Delete Groups
             </button>
             <div>
               <Link to='/my-group-view-page'>
                 <Button name='Edit Group' />
               </Link>
-              <button className='button-cancel' onClick={() => setGroupEditActive(false)}>
-                Cancel
-              </button>
+              <button className='button-cancel' onClick={() => setGroupEditActive(false)}> Cancel </button>
             </div>
           </div>
         </div>
       )}
     </>
-  )
-}
-
-function TextInputContainer () {
-  return (
-    <div className='photo-input-container'>
-      <input
-        className='default-input-variation'
-        placeholder='Collection title'
-      />
-      <br />
-      <textarea
-        className='default-input-variation text-area-variation-2'
-        placeholder='Type text here '
-      />
-    </div>
-  )
-}
-
-const VideoInputContainer = () => {
-  return (
-    <div className='video-input-container'>
-      <input
-        className='default-input-variation'
-        placeholder='Video title'
-      />
-      <br />
-      <textarea
-        className='default-input-variation text-area-variation'
-        placeholder='Video description'
-        cols='3'
-        rows='3'
-      />
-
-      <div className='video-row-3'>
-        <input
-          className='default-input-variation last-input-variation'
-          placeholder='Video link'
-        />{' '}
-        <span>OR</span> <button className='secondary-btn'>Choose video</button>
-      </div>
-    </div>
   )
 }
 
@@ -185,7 +126,12 @@ const GroupInputContainer = () => {
 const GroupEditContainer = () => {
   return (
     <div className='video-input-container'>
-      <input className='default-input-variation' placeholder='Edit Title' required='true' value='Think like a farmer' />
+      <input
+        className='default-input-variation'
+        placeholder='Edit Title'
+        required='true'
+        value='Think like a farmer'
+      />
       <br />
       <textarea
         className='default-input-variation text-area-variation'
@@ -196,22 +142,6 @@ const GroupEditContainer = () => {
         value='Hi there! We’re a most kind and friendly society for everyone! We post here some news about farming, nature and etc… We hope you gonna like it! Be a part of our still small, but amazing community!'
       />
     </div>
-  )
-}
-
-function PhotoInput () {
-  return (
-    <>
-      <div className='description'>
-        <label>Add photo description</label> <ToggleSwitch />
-      </div>
-      <div className='photo-input-container'>
-        <input
-          className='default-input-variation'
-          placeholder='Photo description'
-        />
-      </div>
-    </>
   )
 }
 
