@@ -2,15 +2,15 @@
 
 ## React Codebase
 
-## FileName
-
+| FileName ||
+| --- | --- |
 | **Folder** | lowerCamelCase |
 | **JS File** | UpperCamelCase |
 | **CSS File** | UpperCamelCase |
 | **Public File** | hypen-case |
 
-### Naming
-
+| Naming ||
+| --- | --- |
 | **Class/Component** | UpperCamelCase |
 | **Function** | lowerCamelCase |
 | **Variable** | lowerCamelCase |
@@ -21,15 +21,14 @@
 
 ## Node Codebase
 
-### FileName
-
+| FileName ||
+| --- | --- |
 | **Folder** | lowerCamelCase |
 | **FILE** | lowerCamelCase |
 
-### Naming
-
+| Naming ||
+| --- | --- |
 | **Class/Component** | UpperCamelCase |
 | **Function** | lowerCamelCase |
-| **Variable** | lowerCamelCase |
-| **URL** | hypen-case |
+| **Variable** | lowerCamelCase || **URL** | hypen-case |
 | **ENV** | SCREAMING_SNAKE_CASE |
