@@ -8,7 +8,7 @@ import SimpleModal from '../../../Components/SimpleModal/SimpleModal'
 import { farming, groupCollection } from '../CollectionData'
 import GroupModal from '../../../Components/GroupModal/GroupModal'
 import { useSelector, useDispatch } from 'react-redux'
-import { listCollections } from '../../../actions/collectionActions'
+import { listCollections, updateCollection } from '../../../actions/collectionActions'
 
 const UserCollection = () => {
   const [active, setActive] = useState(false)
@@ -32,6 +32,13 @@ const UserCollection = () => {
     setModalActive(false)
   }
 
+  function handleClick (id) {
+    if (active == false) {
+      dispatch(updateCollection(id, ({ status: 'true' })))
+      setActive(true)
+    }
+  }
+
   return (
     <>
       {groupModal && <GroupModal
@@ -53,24 +60,24 @@ const UserCollection = () => {
         <div className='farming-main-container'>
 
           {
-               data && data.map(item => {
-                 return (
-                   <div className='farming-inner-container' style={{ backgroundImage: 'url(/img/farming.svg)' }}>
-                     <button className='trasnsparent-btn btn-positioning'>
-                       <b>{item.users}</b>  <span>users saved</span>
-                     </button>
+              data && data.map(item => {
+                return (
+                  <div key={item.id} className='farming-inner-container' style={{ backgroundImage: 'url(/img/farming.svg)' }}>
+                    <button className='trasnsparent-btn btn-positioning'>
+                      <b>{item.users}</b>  <span>users saved</span>
+                    </button>
 
-                     <div className='libraryCard-content'>
-                       <h6>{item.category}</h6>
-                       <h4>{item.name}</h4>
+                    <div className='libraryCard-content'>
+                      <h6>{item.category}</h6>
+                      <h4>{item.name}</h4>
 
-                       <button className='trasnsparent-btn fixed-width' onClick={() => setActive(!active)}>
-                         {active ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
-                       </button>
-                     </div>
-                   </div>
-                 )
-               })
+                      <button className='trasnsparent-btn fixed-width' value={active} onClick={(id) => handleClick(item.id)}>
+                        {active && item.status === false ? 'Save Collection' : <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></>}
+                      </button>
+                    </div>
+                  </div>
+                )
+              })
             }
         </div>
       </DashboardLayout>
