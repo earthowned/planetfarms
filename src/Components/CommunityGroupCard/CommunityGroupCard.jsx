@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 import Secondarybtn from '../SecondaryBtn/Secondarybtn'
 import './community-group-card.css'
 
-const CommunityGroupCard = ({ data = [], location }) => {
+const CommunityGroupCard = ({ data = [], location, type = 'group' }) => {
   const [follow, setFollow] = useState(false)
   const followClick = () => {
     setFollow(!follow)
@@ -17,7 +17,7 @@ const CommunityGroupCard = ({ data = [], location }) => {
         console.log('item', item)
         return (
           <div key={item.id} className='card-1 border-1px-onyx'>
-            <div className='card-container' style={{ backgroundImage: `url(${process.env.REACT_APP_CDN_BASE_URL + '/files' + item.filename})` }} />
+            <div className='card-container' style={{ backgroundImage: `url(${process.env.REACT_APP_CDN_BASE_URL + '/' + type + '/' + item.filename})` }} />
             <div className='community-group-card-inner-content'>
               <div onClick={() => history.push(`/community-group-view-page/${item.id}`)} className='card-text-container'>
                 <div className='farmers ibmplexsans-semi-bold-caribbean-green-14px'>

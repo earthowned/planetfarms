@@ -28,7 +28,7 @@ const Enterprise = () => {
           <div className='enterprises-col'>
             <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              <CommunityGroupCard data={data} />
+              <CommunityGroupCard data={data} type="enterpise" />
             </div>
           </div>
         </div>
