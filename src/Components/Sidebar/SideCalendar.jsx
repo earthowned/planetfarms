@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
-import buildCalender from '../../Screens/Calender/build'
-import Header from '../Sidebar/SideCalenderHeader'
-import dayStyles from '../../Screens/Calender/calender-day'
-import './side-calender.css'
+import buildCalendar from '../../Screens/Calendar/build'
+import Header from './SideCalendarHeader'
+import dayStyles from '../../Screens/Calendar/calendar-day'
+import './side-calendar.css'
 
 const SideCalendar = () => {
-  const [calender, setCalender] = useState([])
+  const [calendar, setCalendar] = useState([])
   const [value, setValue] = useState(moment())
   const [eventtrue, setEventTrue] = useState(false)
 
   useEffect(() => {
-    setCalender(buildCalender(value))
+    setCalendar(buildCalendar(value))
   }, [value])
 
   const handleEventChange = () => {
@@ -29,7 +29,7 @@ const SideCalendar = () => {
               <div className='week-side'>{d}</div>
             ))}
           </div>
-          {calender.map((week) => (
+          {calendar.map((week) => (
             <div>
               {week.map((day) => (
                 <div
@@ -44,7 +44,7 @@ const SideCalendar = () => {
             </div>
           ))}
         </div>
-        <button className='button-sidebar'>View Calender</button>
+        <button className='button-sidebar'>View Calendar</button>
       </div>
 
     </>

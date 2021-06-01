@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import './calender-event.css'
+import './calendar-event.css'
 import { useDispatch } from 'react-redux'
-import { createCalenderEvent } from '../../actions/calenderActions'
+import { createCalendarEvent } from '../../actions/calendarActions'
 
-const CalenderEvent = ({ setActive, openAddCollection }) => {
+const CalendarEvent = ({ setActive, openAddCollection }) => {
   const { pathname } = useLocation()
   const [title, setEventTitle] = useState('')
   const [description, setEventDescription] = useState('')
@@ -40,7 +40,7 @@ const CalenderEvent = ({ setActive, openAddCollection }) => {
     if (!startTime) setEventStartTimeError(true)
 
     if (title && startDate && startTime) {
-      dispatch(createCalenderEvent({ title, startDate, startTime }))
+      dispatch(createCalendarEvent({ title, startDate, startTime }))
       setActive(false)
     }
   }
@@ -50,7 +50,7 @@ const CalenderEvent = ({ setActive, openAddCollection }) => {
       <div className='collection-modal-container'>
         <div className='collection-modal-inner-container'>
           <div className='collection-modal-header'>
-            <h4>{pathname === '/calender' && 'Add New Event'}</h4>
+            <h4>{pathname === '/calendar' && 'Add New Event'}</h4>
             <img
               src='/img/close-outline.svg'
               onClick={() => setActive(false)}
@@ -83,4 +83,4 @@ const CalenderEvent = ({ setActive, openAddCollection }) => {
   )
 }
 
-export default CalenderEvent
+export default CalendarEvent

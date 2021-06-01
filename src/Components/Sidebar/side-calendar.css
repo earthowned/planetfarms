@@ -57,11 +57,11 @@
   font-size: 14px;
 }
 
-.calender-month-wrapper-side {
+.calendar-month-wrapper-side {
   display: flex;
 }
 
-.calender-header-container-side {
+.calendar-header-container-side {
   display: flex;
   align-items: center;
   justify-content: space-between;

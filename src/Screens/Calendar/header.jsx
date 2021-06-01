@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import CalenderEvent from '../../Components/NewsCreateModal/CalenderEvent'
+import CalendarEvent from '../../Components/NewsCreateModal/CalendarEvent'
 
-export default function CalenderHeader ({ value, setValue }) {
+export default function CalendarHeader ({ value, setValue }) {
   function currMonthName () {
     return value.format('MMMM')
   }
@@ -25,10 +25,10 @@ export default function CalenderHeader ({ value, setValue }) {
 
   return (
     <>
-      {eventActive && <CalenderEvent setActive={setEventActive} />}
+      {eventActive && <CalendarEvent setActive={setEventActive} />}
       <div className='header'>
-        <div className='calender-header-container'>
-          <div className='calender-month-wrapper'>
+        <div className='calendar-header-container'>
+          <div className='calendar-month-wrapper'>
             <div className='current'>
               {currMonthName()} {currYear()}
             </div>
@@ -42,9 +42,9 @@ export default function CalenderHeader ({ value, setValue }) {
             <div className='next' onClick={() => setValue(nextMonth())}>
               {String.fromCharCode(187)}
             </div>
-            <button className='calender-today-btn'>Today</button>
+            <button className='calendar-today-btn'>Today</button>
           </div>
-          <div className='calender-events'>
+          <div className='calendar-events'>
             <button className='add-events' onClick={() => setEventActive(true)}>Add new Events</button>
           </div>
         </div>

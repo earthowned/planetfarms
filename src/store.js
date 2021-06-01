@@ -6,7 +6,7 @@ import { resourceListReducer } from './reducers/resourceReducers'
 import { enterpriseListReducer } from './reducers/enterpriseReducers'
 import { groupListReducer, groupViewReducer } from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
-import { eventListReducer } from './reducers/calenderEventReducer'
+import { eventListReducer } from './reducers/calendarEventReducer'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,

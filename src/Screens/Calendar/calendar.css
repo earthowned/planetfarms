@@ -1,4 +1,4 @@
-.calender {
+.calendar {
   box-sizing: border-box;
   font-size: 1rem;
 }
@@ -103,11 +103,11 @@
   margin-top: 5px;
 }
 
-.calender-month-wrapper {
+.calendar-month-wrapper {
   display: flex;
 }
 
-.calender-header-container {
+.calendar-header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,7 +126,7 @@
   cursor: pointer;
 }
 
-.calender-today-btn {
+.calendar-today-btn {
   background-color: rgb(47, 44, 44);
   border: 1px solid white;
   color: white;

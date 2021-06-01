@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import moment from 'moment'
-import './calender.css'
-import buildCalender from './build'
-import dayStyles, { beforeToday, isToday, isSelected } from './calender-day'
+import './calendar.css'
+import buildCalendar from './build'
+import dayStyles, { beforeToday, isToday, isSelected } from './calendar-day'
 import Header from './header'
 import { useSelector, useDispatch } from 'react-redux'
-import { listCalenderEvents } from '../../actions/calenderActions'
+import { listCalendarEvents } from '../../actions/calendarActions'
 
-const Calender = () => {
+const Calendar = () => {
   const data = useSelector((state) => state)
-  const [calender, setCalender] = useState([])
+  const [calendar, setCalendar] = useState([])
   const [value, setValue] = useState(moment())
   const [eventtrue, setEventTrue] = useState(false)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setCalender(buildCalender(value))
+    setCalendar(buildCalendar(value))
   }, [value])
 
   useEffect(() => {
-    dispatch(listCalenderEvents())
+    dispatch(listCalendarEvents())
   }, [dispatch])
 
   const handleEventChange = () => {
@@ -29,8 +29,8 @@ const Calender = () => {
   }
 
   return (
-    <DashboardLayout title='Calender'>
-      <div className='calender'>
+    <DashboardLayout title='Calendar'>
+      <div className='calendar'>
         <Header value={value} setValue={setValue} />
 
         <div className='body'>
@@ -39,7 +39,7 @@ const Calender = () => {
               <div className='week'>{d}</div>
             ))}
           </div>
-          {calender.map((week) => (
+          {calendar.map((week) => (
             <div>
               {week.map((day) => (
                 <div
@@ -64,4 +64,4 @@ const Calender = () => {
   )
 }
 
-export default Calender
+export default Calendar

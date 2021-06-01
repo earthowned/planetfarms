@@ -23,8 +23,8 @@ export default function CalendarHeader ({ value, setValue }) {
 
   return (
     <div className='header-side'>
-      <div className='calender-header-container-side'>
-        <div className='calender-month-wrapper-side'>
+      <div className='calendar-header-container-side'>
+        <div className='calendar-month-wrapper-side'>
 
           <div
             className='previous-side'
