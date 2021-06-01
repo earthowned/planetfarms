@@ -30,5 +30,6 @@
 | --- | --- |
 | **Class/Component** | UpperCamelCase |
 | **Function** | lowerCamelCase |
-| **Variable** | lowerCamelCase || **URL** | hypen-case |
+| **Variable** | lowerCamelCase |
+| **URL** | hypen-case |
 | **ENV** | SCREAMING_SNAKE_CASE |
