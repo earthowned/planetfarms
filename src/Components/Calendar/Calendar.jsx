@@ -34,7 +34,7 @@ const Calendar = () => {
   useEffect(() => {
     setCalendar(buildCalendar(value))
   }, [value])
-
+  
   // checking for the events
   function checkEvents (day) {
     let event
@@ -66,7 +66,7 @@ const CalendarBody = ({ calendar, value, checkEvents, setValue }) => {
           }
       </div>
       {
-            calendar.map(week => <div key={week} className={week}>
+            calendar.map(week => <div key={week}>
               {
                     week.map(day => <div key={day} className='day' onClick={() => setValue(day)}>
                       <div className={`${dayStyles(day, value)} ${checkEvents(day)}`}>
@@ -75,7 +75,7 @@ const CalendarBody = ({ calendar, value, checkEvents, setValue }) => {
                     </div>)
                 }
             </div>)
-            }
+      }
     </div>
   )
 }
