@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './collection-modal.css'
+import '../FormModal/form-modal.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createResource } from '../../actions/resourceActions'
@@ -40,25 +40,27 @@ const CollectionModal = ({ setActive, openAddCollection, name }) => {
   return (
     <>
       <div className='collection-modal-container'>
-        <div className='collection-modal-inner-course-container'>
-          <CollectionModalHeader title='Create Resource' setResourceActive={setActive} />
-          <DragDrop files={files} onChange={setFiles} />
-          {pathname === '/library'
-            ? <>
-              <div className='collection-input-container'>
-                <input className='default-input-variation' error={resourceTitleError} onChange={(e) => resourceTitleChange(e)} placeholder='Resource title' /><br />
-                <input className='default-input-variation text-area-variation' error={resourceDescriptionError} onChange={(e) => resourceDescriptionChange(e)} placeholder='Resource description' /><br />
-              </div>
-              <button className='default-btn btn-size' onClick={handleAddResource}>Submit</button>
-              </>
-            : <>
-              <div className='collection-input-container'>
-                <input className='default-input-variation' placeholder='Collection title' /> <br />
-                <SimpleFilter data={collectionFilterData} />
-              </div>
-              <div className='add-collection' onClick={() => openAddCollection()}><img src='/img/plus.svg' alt='Add Files' /><button>{name || 'Add files'}</button></div>
-              <button className='default-btn btn-size' onClick={() => openAddCollection()}>Create new collection</button>
-              </>}
+        <div>
+          <div className='collection-modal-inner-container'>
+            <CollectionModalHeader title='Create Resource' clickHandler={setActive} />
+            <DragDrop files={files} onChange={setFiles} />
+            {pathname === '/library'
+              ? <>
+                <div className='collection-input-container'>
+                  <input className='default-input-variation' error={resourceTitleError} onChange={(e) => resourceTitleChange(e)} placeholder='Resource title' /><br />
+                  <input className='default-input-variation text-area-variation' error={resourceDescriptionError} onChange={(e) => resourceDescriptionChange(e)} placeholder='Resource description' /><br />
+                </div>
+                <button className='default-btn btn-size' onClick={handleAddResource}>Submit</button>
+                </>
+              : <>
+                <div className='collection-input-container'>
+                  <input className='default-input-variation' placeholder='Collection title' /> <br />
+                  <SimpleFilter data={collectionFilterData} />
+                </div>
+                <div className='add-collection' onClick={() => openAddCollection()}><img src='/img/plus.svg' alt='Add Files' /><button>{name || 'Add files'}</button></div>
+                <button className='default-btn btn-size' onClick={() => openAddCollection()}>Create new collection</button>
+                </>}
+          </div>
         </div>
       </div>
     </>

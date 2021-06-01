@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 import Secondarybtn from '../SecondaryBtn/Secondarybtn'
 import './community-group-card.css'
 
-const CommunityGroupCard = ({ data, location }) => {
+const CommunityGroupCard = ({ data = [], location }) => {
   const [follow, setFollow] = useState(false)
   const followClick = () => {
     setFollow(!follow)

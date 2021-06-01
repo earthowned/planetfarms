@@ -87,7 +87,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
           <div className='collection-modal-inner-container'>
             {pathname === '/community-group' && (
               <>
-                <CollectionModalHeader title='Create Group' setGroupActive={setActive} />
+                <CollectionModalHeader title='Create Group' clickHandler={setActive} />
                 <DragDrop files={files} onChange={setFiles} />
                 <div className='collection-input-container'>
                   <InputFields
@@ -132,7 +132,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
               <>
                 <CollectionModalHeader
                   title='Create Enterprises'
-                  setEnterpriseActive={setActive}
+                  clickHandler={setActive}
                 />
                 <DragDrop files={files} onChange={setFiles} />
                 <div className='collection-input-container'>
