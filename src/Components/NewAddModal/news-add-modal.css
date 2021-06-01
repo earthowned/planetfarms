@@ -15,8 +15,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 50%;
-  height: 50%;
+  width: 600px;
   padding: 4em;
   top: 50%;
   left: 50%;
@@ -80,7 +79,6 @@
 @media only screen and (max-width: 750px) {
   .news-modal-inner-container {
     width: 75%;
-    height: 55%;
   }
 
   .news-modal-content {

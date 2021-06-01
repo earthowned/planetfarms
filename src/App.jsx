@@ -34,6 +34,8 @@ import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import LessonTest from './Screens/LessonTest/LessonTest'
 import SavedCourseCollection from './Screens/Courses/SavedCourseCollection/SavedCourseCollection'
+import CourseCollection from './Screens/Courses/CourseCollection/CourseCollection'
+import EditCollection from './Screens/Courses/EditCollection/EditCollection'
 import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCoursePage'
 import AddLesson from './Screens/CourseManager/AddLesson/AddLesson'
 import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
@@ -99,6 +101,12 @@ function App () {
         </Route>
         <Route exact path='/courses/saved-collection'>
           <SavedCourseCollection />
+        </Route>
+        <Route exact path='/courses/my-courses'>
+          <CourseCollection />
+        </Route>
+        <Route path='/courses/my-courses/:id'>
+          <EditCollection />
         </Route>
         <Route path='/admin/courses'>
           <Courses />
