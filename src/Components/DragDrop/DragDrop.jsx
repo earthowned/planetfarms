@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 const DragDrop = ({ onChange = () => {} }) => {
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
@@ -20,12 +20,18 @@ const DragDrop = ({ onChange = () => {} }) => {
     onChange(selectedFile)
   }
   return (
+    <DragDropComponent getInputProps={getInputProps} getRootProps={getRootProps} fileChange={fileChange} files={files} setFiles={setFiles} />
+  )
+}
+
+function DragDropComponent ({ getInputProps, getRootProps, fileChange, files, setFiles }) {
+  return (
     <div className='drag-drop-container'>
       <div className='drag-drop' {...getRootProps()} onChange={(e) => fileChange(e)}>
         <input {...getInputProps()} />
-        {files.length > 0
+        {files
           ? (<>
-            <img className='avatar' src={files[0].preview} alt='files[0].preview' />
+            <img className='avatar' src={files.preview} alt='files[0].preview' />
             <div className='drag-drop-icon-container'><img src='/img/camera-outline.svg' alt='camera icon' /></div>
              </>
             )
@@ -35,7 +41,7 @@ const DragDrop = ({ onChange = () => {} }) => {
             </h6>
             )}
       </div>
-      {files.length > 0 && <img src='/img/close-outline.svg' className='drag-drop-close' onClick={() => setFiles([])} />}
+      {files && <img src='/img/close-outline.svg' className='drag-drop-close' onClick={() => setFiles(null)} />}
     </div>
   )
 }

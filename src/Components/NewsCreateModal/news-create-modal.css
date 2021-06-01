@@ -38,6 +38,14 @@
   justify-content: space-between;
 }
 
+.video-row-3 > input {
+  width: 320px;
+}
+
+.video-row-3 > button {
+  width: 168px;
+}
+
 .last-input-variation {
   width: 45%;
 }
