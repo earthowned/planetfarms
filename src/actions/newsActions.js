@@ -28,10 +28,7 @@ export const listNews = (sort = '', pageNumber = '') => async (
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/news`
     )
-    dispatch({
-      type: NEWS_LIST_SUCCESS,
-      payload: data
-    })
+    dispatch({ type: NEWS_LIST_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: NEWS_LIST_FAIL,
@@ -49,10 +46,7 @@ export const searchNews = (search) => async (
   try {
     dispatch({ type: NEWS_SEARCH_REQUEST })
     const { news } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/search?title=${search}`)
-    dispatch({
-      type: NEWS_SEARCH_SUCCESS,
-      payload: news
-    })
+    dispatch({ type: NEWS_SEARCH_SUCCESS, payload: news })
   } catch (error) {
     dispatch({
       type: NEWS_SEARCH_FAIL,
@@ -71,43 +65,28 @@ export const createNews = (newNews) => async (dispatch, getState) => {
   formData.append('category', newNews.category)
   // formData.append('imageDetail',newNews.imageDetail)
   try {
-    dispatch({
-      type: NEWS_CREATE_REQUEST
-    })
+    dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add`, formData, config)
-    dispatch({
-      type: NEWS_CREATE_SUCCESS,
-      payload: data
-    })
-    dispatch({
-      type: NEWS_CLEAR,
-      payload: data
-    })
+    dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
+    dispatch({ type: NEWS_CLEAR, payload: data })
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
-    dispatch({
-      type: NEWS_CREATE_FAIL,
-      payload: message
-    })
+    dispatch({ type: NEWS_CREATE_FAIL, payload: message })
   }
 }
 
 export const deleteNews = (id) => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: NEWS_DELETE_REQUEST
-    })
+    dispatch({ type: NEWS_DELETE_REQUEST })
     const { userLogin: { userInfo } } = getState()
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
     await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}`, config)
-    dispatch({
-      type: NEWS_DELETE_SUCCESS
-    })
+    dispatch({ type: NEWS_DELETE_SUCCESS })
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -116,10 +95,7 @@ export const deleteNews = (id) => async (dispatch, getState) => {
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
     }
-    dispatch({
-      type: NEWS_DELETE_FAIL,
-      payload: message
-    })
+    dispatch({ type: NEWS_DELETE_FAIL, payload: message })
   }
 }
 
