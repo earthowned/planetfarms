@@ -16,7 +16,9 @@ function MyProfile() {
   const history = useHistory()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  const user = location?.state?.user
+  console.log(userInfo)
+  const user = location?.state?.user ?? userLogin.userInfo
+  console.log(user)
 
   useEffect(() => {
     if (!userInfo) {

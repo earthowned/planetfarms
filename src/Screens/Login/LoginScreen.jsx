@@ -6,7 +6,6 @@ import Checkbox from "../../Components/Checkbox/Checkbox"
 import InputComponent from "../../Components/Input/InputComponent"
 import Logo from "../../Components/Logo/Logo"
 import "./login-screen.css"
-import { Auth, Hub } from 'aws-amplify'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userAction'
 import OauthBtn from "../../Components/OauthBtn/OauthBtn"
@@ -27,37 +26,10 @@ function LoginScreen(props) {
   const {  loading, error, userInfo } = userLogin
 
   useEffect(() => {
-    Hub.listen('auth', ({ payload: { event, data } }) => {
-      console.log(event)
-      switch (event) {
-        case 'signIn':
-        case 'cognitoHostedUI':
-          getUser().then(userData => setUser(userData))
-          break
-        case 'signOut':
-          setUser(null)
-          break
-        case 'signIn_failure':
-        case 'cognitoHostedUI_failure':
-          console.log('Sign in failure', data)
-          break
-        default:
-          console.log('Sign in failure')
-      }
-    })
-
     if (userInfo) {
       history.push('/community-page-news')
     }
-
-    getUser().then(userData => setUser(userData))
   }, [history, userInfo])
-
-  function getUser() {
-    return Auth.currentAuthenticatedUser()
-      .then(userData => userData)
-      .catch(() => console.log('Not signed in'));
-  }
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')  
@@ -66,24 +38,6 @@ function LoginScreen(props) {
   const [userError, setUserError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
 
-
-  async function signIn(username, password) {
-    try {
-        const user = await Auth.signIn(username, password)
-        if (user) history.push('/community-page-news')
-    } catch (error) {
-        const code = error.code
-        switch (code) {
-            case 'NotAuthorizedException':
-              setUserError('NotAuthorizedException')
-              setPasswordError('NotAuthorizedException')
-              return 
-            default:
-                return false
-        }
-    }
-  }
-  
   const userChange = (e) => {
     setUsername(e.target.value)
     setUserError(false)
@@ -96,26 +50,25 @@ function LoginScreen(props) {
   }
 
   const handleOnClick = (e) => {
+    //e.preventDefault()
     if (!username) setUserError(true)
     if (password.length <6) setPasswordError(true)
     if (!terms) setTermsError(true)
 
     if(username && password.length > 6) {
-      if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-        return dispatch(login(username, password))
-      }
-      signIn(username, password)
+      dispatch(login(username, password))
+      //history.push('/community-page-news')
     }
   }
 
   const loginWithFacebook = (e) => {
     e.preventDefault()
-    Auth.federatedSignIn({provider: 'Facebook'})
+    // Auth.federatedSignIn({provider: 'Facebook'})
   }
 
   const loginWithGoogle = (e) => {
     e.preventDefault()
-    Auth.federatedSignIn({provider: 'Google'})
+    // Auth.federatedSignIn({provider: 'Google'})
   }
 
   return (

@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './congratulation-screen.css'
 import Logo from '../../Components/Logo/Logo'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDropzone } from 'react-dropzone'
 import InputComponent from '../../Components/Input/InputComponent'
 import Button from '../../Components/Button/Button'
-import { Auth } from 'aws-amplify'
 import ConfirmModal from '../../Components/SimpleModal/ConfirmModal'
 import Secondarybtn from '../../Components/SecondaryBtn/Secondarybtn'
 import { useDispatch, useSelector } from 'react-redux'
@@ -50,24 +49,16 @@ function CongratulationScreen() {
     }
   })
 
+  useEffect(() => {
+    setFirstName(user.firstName)
+    setEmail(user.email)
+    setLastName(user.lastName)
+    setBirthday(user.dateOfBirth)
+    setPhone(user.phone)
+  }, [user])
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-
-  async function signUp() {
-    try {
-      const user = await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email
-        }
-      })
-      setModalActive(true)
-      console.log(user)
-    } catch (error) {
-      console.log('error signing up:', error)
-    }
-  }
 
   const changeFirstName = (e) => {
     setFirstName(e.target.value)
@@ -98,12 +89,8 @@ function CongratulationScreen() {
     if (!birthday) setBirthdayError(true)
     if (!email) setEmailError(true)
     if (firstName && lastName && phone && birthday && email) {
-      if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-        dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: user ? user.id : userInfo.id }))
-        user ? history.goBack():  history.push('/community-page-news')
-        return
-      }
-      signUp()
+      dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: user ? user.id : userInfo.id }))
+      user ? history.push('/myProfile') :  history.push('/community-page-news')
     }
   }
 

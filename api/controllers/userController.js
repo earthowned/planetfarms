@@ -11,9 +11,9 @@ const authUser = async (req, res) => {
     const { name, password } = req.body
     const user = await User.findOne({ where: { name, password } })
     if (user) {
+      const { pass, ...data } = user.dataValues
       res.json({
-        id: user.dataValues.id,
-        name: user.dataValues.name,
+        ...data, 
         token: generateToken(user.dataValues.id)
       })
     } else {
@@ -48,7 +48,7 @@ const registerUser = async (req, res) => {
       throw new Error('Invalid user data')
     }
   } catch (err) {
-    throw new Error(`Error ${err}`)
+    res.json({ error: err.message })
   }
 }
 
@@ -84,27 +84,31 @@ const getUserById = (req, res) => {
 // @desc    Update user
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
-  const { email, firstName, lastName, phone, birthday, name } = req.body
-  const id = req.params.id
-  User.findByPk(id).then(user => {
-    if (user) {
-      User.update(
-        {
-          email,
-          firstName,
-          lastName,
-          phone,
-          dateOfBirth: birthday,
-          name
-        },
-        { where: { id: user.dataValues.id } }
-      )
-        .then(() => res.json({ message: 'User Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
-    }
-    res.status(404)
-    throw new Error('User not found')
-  })
+  try {
+    const { email, firstName, lastName, phone, birthday, name } = req.body
+    const id = req.params.id
+    User.findByPk(id).then(user => {
+      if (user) {
+        User.update(
+          {
+            email,
+            firstName,
+            lastName,
+            phone,
+            dateOfBirth: birthday,
+            name
+          },
+          { where: { id: user.dataValues.id } }
+        )
+          .then(() => res.json({ message: 'User Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      }
+      res.status(404)
+      throw new Error('User not found')
+    })
+  } catch(err) {
+    res.json({ error: err.message })
+  }
 }
 
 // @desc    Search name
