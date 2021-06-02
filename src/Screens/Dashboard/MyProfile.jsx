@@ -11,7 +11,7 @@ import EditInformation from '../../Components/EditInformation/EditInformation'
 import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 
-function MyProfile() {
+function MyProfile () {
   const location = useLocation()
   const history = useHistory()
   const userLogin = useSelector((state) => state.userLogin)

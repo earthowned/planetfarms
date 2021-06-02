@@ -158,7 +158,7 @@ function App () {
         <Route path='/userInfo'>
           <UserInfo />
         </Route>
-        <Route path="/calendar">
+        <Route path='/calendar'>
           <Calendar />
         </Route>
       </Switch>

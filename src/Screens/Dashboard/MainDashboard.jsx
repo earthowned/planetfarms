@@ -76,7 +76,7 @@ const headers = [
   }
 ]
 
-function DashboardComponent() {
+function DashboardComponent () {
   const windowWidth = useSizeFinder()
   const dispatch = useDispatch()
   const history = useHistory()
@@ -92,7 +92,7 @@ function DashboardComponent() {
       history.push('/login')
     }
   }, [dispatch, history, userInfo])
-  
+
   return (
     <DashboardLayout title='My Dashboard'>
       <div className='x10-1-0-my-dashboard'>
@@ -103,7 +103,7 @@ function DashboardComponent() {
               <div className='flex-col-6'>
                 <div className='info-my-detail'>
                   <div className='mikhail-ugryumov ibmplexsans-semi-bold-quarter-spanish-white-24px'>
-                  {user?.name}
+                    {user?.name}
                   </div>
                   <p className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Last visit: {user?.lastLogin}</p>
                 </div>
@@ -184,7 +184,7 @@ function SeeAllButton ({ children }) {
   )
 }
 
-function MainContainer() {
+function MainContainer () {
   const [libraryScrollActive, setLibraryScrollActive] = useState(true)
   const [coursesScrollActive, setCoursesScrollActive] = useState(true)
   const [groupScrollActive, setGroupScrollActive] = useState(true)
@@ -200,12 +200,9 @@ function MainContainer() {
   const windowWidth = useSizeFinder()
 
   useEffect(() => {
-    if (document.querySelector('.mylibrary-container--tiles').offsetWidth >= scrollLibraryRef.current.scrollWidth)
-      setLibraryScrollActive(false)
-    if (document.querySelector('.mycourse-container--tiles').offsetWidth >= scrollCoursesRef.current.scrollWidth)
-      setCoursesScrollActive(false)
-    if (document.querySelector('.mygroup-container--tiles').offsetWidth >= scrollGroupRef.current.scrollWidth)
-      setGroupScrollActive(false)
+    if (document.querySelector('.mylibrary-container--tiles').offsetWidth >= scrollLibraryRef.current.scrollWidth) { setLibraryScrollActive(false) }
+    if (document.querySelector('.mycourse-container--tiles').offsetWidth >= scrollCoursesRef.current.scrollWidth) { setCoursesScrollActive(false) }
+    if (document.querySelector('.mygroup-container--tiles').offsetWidth >= scrollGroupRef.current.scrollWidth) { setGroupScrollActive(false) }
   }, [windowWidth])
 
   return (

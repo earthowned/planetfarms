@@ -74,7 +74,7 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    user = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)  
+    user = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)
     if (user) {
       res.json({
         ...user
@@ -118,7 +118,7 @@ const registerUser = async (req, res) => {
         }
       })
     } else {
-      registerLocal(name, password, email, res)      
+      registerLocal(name, password, email, res)
     }
   } catch (err) {
     res.json({ error: err.message })
@@ -178,7 +178,7 @@ const updateUser = async (req, res) => {
       res.status(404)
       throw new Error('User not found')
     })
-  } catch(err) {
+  } catch (err) {
     res.json({ error: err.message })
   }
 }

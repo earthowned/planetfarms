@@ -32,7 +32,7 @@ const Follow = () => {
   )
 }
 
-function CardImage({ users }) {
+function CardImage ({ users }) {
   const history = useHistory()
   return (
     <>
