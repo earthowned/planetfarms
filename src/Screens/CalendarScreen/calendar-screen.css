@@ -53,6 +53,17 @@
   margin-left: 10px;
 }
 
+.calendar-modal-btn button {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  background: var(--primary-color);
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .calendar-modal-inner-container .calendar-modal-header > button {
   outline: none;
   border: none;
@@ -79,16 +90,6 @@
   height: 48px;
 }
 
-.calendar-modal-btn button {
-  width: 100%;
-  height: 100%;
-  outline: none;
-  border: none;
-  border-radius: 4px;
-  background: var(--primary-color);
-  font-size: 16px;
-  font-weight: 600;
-}
 .calendar-top-header {
   width: 100%;
 }
@@ -122,6 +123,39 @@
   height: 48px;
   margin-top: 40px;
   margin-bottom: 16px;
+}
+
+.activities {
+  width: 90%;
+  height: calc(100% - 40px);
+  position: absolute;
+  top: 40px;
+  left: 20px;
+}
+
+.activities ul {
+  width: 90%;
+  text-align: justify;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0 auto;
+  color: var(--primary-color);
+}
+
+.activities ul li {
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.activities ul li span:last-child {
+  width: calc(100% - 20px);
+  display: block;
+  color: var(--primary-white);
+  text-decoration: underline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .main-calendar-header {
@@ -242,39 +276,6 @@
 .main-calendar-wrapper .week .day .before {
   color: var(--primary-grey);
   background-color: rgb(12, 12, 12);
-}
-
-.activities {
-  width: 90%;
-  height: calc(100% - 40px);
-  position: absolute;
-  top: 40px;
-  left: 20px;
-}
-
-.activities ul {
-  width: 90%;
-  text-align: justify;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  margin: 0 auto;
-  color: var(--primary-color);
-}
-
-.activities ul li {
-  padding: 0;
-  margin-bottom: 8px;
-}
-
-.activities ul li span:last-child {
-  width: calc(100% - 20px);
-  display: block;
-  color: var(--primary-white);
-  text-decoration: underline;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .task-time {
