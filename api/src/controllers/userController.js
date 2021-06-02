@@ -92,12 +92,12 @@ const authUser = async (req, res) => {
   }
 }
 
-localAuth = async (name, password) => {
+const localAuth = async (name, password) => {
   user = await User.findOne({ where: { name, password } })
   return (user) ? user.dataValues.id : ''
 }
 
-cognitoAuth = async (name, password) => {
+const cognitoAuth = async (name, password) => {
   user = await Auth.signIn(name, password)
   return (user) ? name : ''
 }
@@ -125,7 +125,7 @@ const registerUser = async (req, res) => {
   }
 }
 
-registerLocal = async (name, password, email, res) => {
+const registerLocal = async (name, password, email, res) => {
   const userExists = await User.findOne({ where: { name } })
   if (userExists) res.json({ message: 'Users already Exists !!!' }).status(400)
   user = await User.create({ name, password })
