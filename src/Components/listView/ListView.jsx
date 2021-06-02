@@ -1,12 +1,24 @@
 import { useState } from 'react'
 import './listview.css'
 import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { createResourceUser } from '../../actions/resourceUserAction'
 
 const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }) => {
   const [active, setActive] = useState(false)
 
+  const dispatch = useDispatch()
+  const userInfo = useSelector((state) => state.userLogin.userInfo.id)
+
   function clickHandle (id) {
-    setActive(!active)
+    if (active === false) {
+      dispatch(
+        createResourceUser({ userId: userInfo, resourceId: id })
+      )
+    }
+    if (id) {
+      setActive(true)
+    }
   }
 
   return (
@@ -26,7 +38,7 @@ const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }
               <div className='list-btn-wrapper'>
                 <span>Add to</span>
                 <button className='secondary-btn-border btn-img-wrapper' onClick={(id) => clickHandle(item.id)}>
-                  {active && item.id ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
+                  {active ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
                 </button>
                 <button className='secondary-btn-border' onClick={() => setModalActive(!modalActive)}>Collections</button>
               </div>
