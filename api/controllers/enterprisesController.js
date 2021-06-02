@@ -8,11 +8,7 @@ const Op = Sequelize.Op
 const paginate = ({ page, pageSize }) => {
   const offset = page * pageSize
   const limit = offset + pageSize
-
-  return {
-    offset,
-    limit
-  }
+  return { offset, limit }
 }
 
 const getEnterprises = (req, res) => {
@@ -25,7 +21,6 @@ const getEnterprises = (req, res) => {
       paginate({ page, pageSize })
       res.json({ enterprises, page, pageSize }).status(200)
     })
-
     .catch((err) => res.json({ err }).status(400))
 }
 
@@ -33,13 +28,11 @@ const getEnterprises = (req, res) => {
 // @route   POST /api/enterprises/add
 // @access  Public
 const addEnterprises = (req, res) => {
-  const {
-    title, description, roles, attachments
-  } = req.body
-
-  Enterprises.create({
-    title, description, roles, attachments
-  })
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
+  Enterprises.create({ ...req.body, filename })
     .then(() => res.json({ message: 'Enterprises Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }

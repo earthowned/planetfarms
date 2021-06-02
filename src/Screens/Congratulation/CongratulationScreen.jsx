@@ -7,6 +7,7 @@ import InputComponent from '../../Components/Input/InputComponent'
 import Button from '../../Components/Button/Button'
 import ConfirmModal from '../../Components/SimpleModal/ConfirmModal'
 import Secondarybtn from '../../Components/SecondaryBtn/Secondarybtn'
+import DragDrop from '../../Components/DragDrop/DragDrop'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../actions/userAction'
 
@@ -35,6 +36,12 @@ function CongratulationScreen() {
   const [phoneError, setPhoneError] = useState('')
   const [files, setFiles] = useState([])
   const [modalActive, setModalActive] = useState(false)
+
+  
+  let location = useLocation()
+  let history = useHistory()
+  const username = location?.state?.username
+  const password = location?.state?.password
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -157,20 +164,8 @@ function CongratulationScreen() {
               </div>
             </div>
           </div>
-        </div>
-        <div className='congratulation-col-3'>
-          <div className='file-drop-container border-1px-quarter-spanish-white' {...getRootProps()}>
-            <input {...getInputProps()} />
-            {files.length > 0 ? (
-              <img className='avatar' src={files[0].preview} alt='files[0].preview' />
-            ) : (
-              <p className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                Drag &amp; Drop files in this area or <span className='file-upload'>Click Here to attach</span>
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
+          <DragDrop />       
+       </div>
     </form>
   )
 }

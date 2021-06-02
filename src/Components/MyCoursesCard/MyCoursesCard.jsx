@@ -75,7 +75,7 @@ const CourseCard = ({ data }) => {
                   item.lesson && <div className='lesson-progress'>
                     <div className='lesson-completed' />
                     <span>{item.lesson}</span>
-                                 </div>
+                  </div>
                 }
             </div>
           </Background>

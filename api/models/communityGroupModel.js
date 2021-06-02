@@ -12,8 +12,8 @@ const Groups = db.define('groups',
     category: {
       type: Sequelize.STRING
     },
-    attachments: {
-      type: Sequelize.BLOB('long')
+    filename: {
+      type: Sequelize.STRING
     }
   },
   { timestamps: true }

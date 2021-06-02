@@ -3,7 +3,7 @@
   height: 100vh;
   background: var(--background-color-modal);
   position: fixed;
-  z-index: 999;
+  z-index: 5005;
 }
 
 .group-modal {
@@ -13,20 +13,17 @@
   transform: translateX(-50%) translateY(-50%);
   z-index: 999;
   background: var(--cards);
-  width: 40%;
-  height: 85%;
+  width: 600px;
+  height: 660px;
   color: var(--primary-white);
-  padding: 20px 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  padding: 24px;
   flex-direction: column;
 }
 
 .group-modal-header {
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -51,25 +48,25 @@
 }
 
 .modal-btn {
-  width: 65%;
-  margin-top: 20px;
+  width: 200px;
+  margin-top: 40px;
 }
 
 .modal-users {
   margin-top: 20px;
-  width: 65%;
-  height: 500px;
-  overflow-y: scroll;
+  width: 100%;
+  height: 400px;
+  overflow-y: auto;
 }
 
 .search-bar {
-  width: 70%;
-  margin-top: 20px;
+  width: 100%;
+  margin-top: 40px;
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0;
 }
 
 /* Track */
@@ -107,5 +104,12 @@
 @media only screen and (max-width: 850px) {
   .group-modal {
     width: 85%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .group-modal {
+    width: 100%;
+    height: 100%;
   }
 }

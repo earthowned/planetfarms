@@ -3,6 +3,7 @@ import './main-dashboard.css'
 import { Link } from 'react-router-dom'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import useSizeFinder from '../../utils/SizeFinder'
+import useScroll from '../../utils/scrollFunc'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails } from '../../actions/userAction'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
@@ -11,43 +12,68 @@ const DashboardData = [
   {
     category: 'farming',
     title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg',
+    img: '/img/man-cap.svg'
   },
   {
     category: 'farming',
     title: 'Be happy and find your self! Motivation 2020',
     img: '/img/man-cap.svg',
-    type: 'video',
+    type: 'video'
   },
   {
     category: 'farming',
     title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg',
+    img: '/img/man-cap.svg'
   },
   {
     category: 'farming',
     title: 'Be happy and find your self! Motivation 2020',
     img: '/img/man-cap.svg',
-    type: 'video',
+    type: 'video'
   },
   {
     category: 'farming',
     title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg',
-  },
+    img: '/img/man-cap.svg'
+  }
+
 ]
 
 const MyCourseData = [
   {
     category: 'farming',
     title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg',
+    img: '/img/man-cap.svg'
   },
   {
     category: 'farming',
     title: 'Be happy and find your self! Motivation 2020',
-    img: '/img/man-cap.svg',
+    img: '/img/man-cap.svg'
+  }
+]
+
+const headers = [
+  {
+    name: 'My library',
+    image: '/img/book-outlined.svg',
+    slug: '/mylibrary',
+    data: DashboardData,
+    btnName: 'Add Library'
   },
+  {
+    name: 'My courses',
+    image: '/img/book-open-1.svg',
+    slug: '/mycourse',
+    data: MyCourseData,
+    btnName: 'Add Course'
+  },
+  {
+    name: 'My groups',
+    image: '/img/my-group.svg',
+    slug: '/mygroups',
+    data: DashboardData,
+    btnName: 'Add Groups'
+  }
 ]
 
 function DashboardComponent() {
@@ -66,6 +92,7 @@ function DashboardComponent() {
       history.push('/login')
     }
   }, [dispatch, history, userInfo])
+  
   return (
     <DashboardLayout title='My Dashboard'>
       <div className='x10-1-0-my-dashboard'>
@@ -125,7 +152,7 @@ function DashboardComponent() {
 
 export default DashboardComponent
 
-function HeaderContent({ title, image }) {
+function HeaderContent ({ title, image }) {
   const windowWidth = useSizeFinder()
   return (
     <>
@@ -138,7 +165,7 @@ function HeaderContent({ title, image }) {
   )
 }
 
-function MobileViewHeaderContent({ title, image }) {
+function MobileViewHeaderContent ({ title, image }) {
   return (
     <>
       <div>
@@ -149,7 +176,7 @@ function MobileViewHeaderContent({ title, image }) {
     </>
   )
 }
-function SeeAllButton({ children }) {
+function SeeAllButton ({ children }) {
   return (
     <div className='frame-4 border-0-5px-quarter-spanish-white'>
       <div className='default-i905517 ibmplexsans-semi-bold-quarter-spanish-white-16px'>{children}</div>
@@ -184,90 +211,63 @@ function MainContainer() {
   return (
     <div className='dashboard-main-container border-1px-onyx'>
       <div className='dashboard-inner-container'>
-        <div className='mylibrary-container'>
-          {/* my library container */}
-          <div className='mylibrary-container--header'>
-            <img src='/img/book-outlined.svg' alt='book-icon' />
-            <h4>My library</h4>
-            <Link to='/mylibrary' className='link-decoration'>
-              <SeeAllButton>See all items</SeeAllButton>
-            </Link>
-          </div>
-          <div className='mylibrary-container--tiles' ref={scrollLibraryRef}>
-            <Tiles data={DashboardData} title='Add Library' />
-          </div>
-          {libraryScrollActive && (
-            <img
-              className='scroll-icon'
-              onClick={() => scrollRight(scrollLibraryRef)}
-              src='/img/scroll-icon.svg'
-              alt='scroll-icon'
-            />
-          )}
-        </div>
-
-        {/* my course container */}
-        <div className='mycourse-container'>
-          <div className='mycourse-container--header'>
-            <img src='/img/book-open-1.svg' alt='book-open-icon' />
-            <h4>My courses</h4>
-            <Link to='/mycourse' className='link-decoration'>
-              <SeeAllButton>See all items</SeeAllButton>
-            </Link>
-          </div>
-          <div className='mycourse-container--tiles' ref={scrollCoursesRef}>
-            <Tiles data={MyCourseData} title='Add Course' />
-          </div>
-          {coursesScrollActive && (
-            <img
-              className='scroll-icon'
-              src='/img/scroll-icon.svg'
-              onClick={() => scrollRight(scrollCoursesRef)}
-              alt='scroll-icon'
-            />
-          )}
-        </div>
-
-        {/* my group container */}
-        <div className='mygroup-container'>
-          <div className='mygroup-container--header'>
-            <img src='/img/my-group.svg' alt='user' />
-            <h4>My groups</h4>
-            <Link to='/mygroups' className='link-decoration'>
-              <SeeAllButton>See all items</SeeAllButton>
-            </Link>
-          </div>
-          <div ref={scrollGroupRef} className='mygroup-container--tiles'>
-            <Tiles data={DashboardData} title='Add Groups' />
-          </div>
-          {groupScrollActive && (
-            <img
-              className='scroll-icon'
-              src='/img/scroll-icon.svg'
-              onClick={() => scrollRight(scrollGroupRef)}
-              alt='scroll-icon'
-            />
-          )}
-        </div>
+        {
+          headers.map(head => {
+            return (
+              <div className='mylibrary-container' key={head.name}>
+                <div className='mylibrary-container--header'>
+                  <img src={head.image} alt={head.name} />
+                  <h4>{head.name}</h4>
+                  <Link to={head.slug} className='link-decoration'>
+                    <SeeAllButton>See all items</SeeAllButton>
+                  </Link>
+                </div>
+                <ScrollItems head={head} />
+              </div>
+            )
+          })
+        }
       </div>
     </div>
   )
 }
 
-function Tiles({ data, title }) {
+function ScrollItems ({ head }) {
+  const scrollRef = useRef()
+  const { scrollLeftActive, scrollActive, scrollRight, scrollLeft } = useScroll(scrollRef)
   return (
     <>
-      {data.map((item) => {
-        return (
-          <div className='tiles-container' key={item.title}>
-            <div className='tiles-container-img-wrapper'>
-              <img src={item.img} alt={item.title}></img>
+      <div className='mylibrary-container--tiles' ref={scrollRef}>
+        <Tiles data={head.data} title={head.btnName} />
+      </div>
+      {scrollActive && <img className='scroll-icon' onClick={() => scrollRight(scrollRef)} src='/img/scroll-icon.svg' alt='scroll-icon' />}
+      {
+        scrollLeftActive &&
+          <img
+            className='scroll-left-icon' src='/img/scroll-icon.svg'
+            onClick={() => scrollLeft(scrollRef)} alt='scroll-icon'
+          />
+      }
+    </>
+  )
+}
+
+function Tiles ({ data, title }) {
+  return (
+    <>
+      {
+        data.map(item => {
+          return (
+            <div className='tiles-container' key={item.title}>
+              <div className='tiles-container-img-wrapper'>
+                <img src={item.img} alt={item.title} />
+              </div>
+              <h4>{item.title}</h4>
+              {item.type && <img className='video-icon' src='/img/video-icon.svg' alt={item.type} />}
             </div>
-            <h4>{item.title}</h4>
-            {item.type && <img className='video-icon' src='/img/video-icon.svg' alt={item.type} />}
-          </div>
-        )
-      })}
+          )
+        })
+      }
       <div className='add-container'>
         <img src='/img/plus-icon.svg' alt='add-icon' />
         <h4>{title}</h4>

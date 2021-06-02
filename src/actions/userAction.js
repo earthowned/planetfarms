@@ -19,7 +19,13 @@ import {
   USER_DETAILS_RESET,
   USER_SEARCH_REQUEST,
   USER_SEARCH_SUCCESS,
-  USER_SEARCH_FAIL
+  USER_SEARCH_FAIL,
+  USER_CONFIRM_CODE_REQUEST,
+  USER_CONFIRM_CODE_SUCCESS,
+  USER_CONFIRM_CODE_FAIL,
+  USER_PASSWORD_CHANGE_REQUEST,
+  USER_PASSWORD_CHANGE_SUCCESS,
+  USER_PASSWORD_CHANGE_FAIL
 } from '../constants/userConstants'
 
 export const register = (name, password) => async (dispatch) => {
@@ -187,4 +193,48 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
   dispatch({ type: USER_LOGOUT })
   document.location.href = '/login'
+}
+
+export const confirmPin = (username) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_CONFIRM_CODE_REQUEST })
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/resendCode`,
+      { username }
+    )
+    dispatch({
+      type: USER_CONFIRM_CODE_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_CONFIRM_CODE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+export const changePassword = (username, oldPassword, newPassword) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
+      { username, oldPassword, newPassword }
+    )
+    dispatch({
+      type: USER_PASSWORD_CHANGE_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_PASSWORD_CHANGE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
 }

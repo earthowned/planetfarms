@@ -1,7 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const { registerUser, authUser, updateUser, getUsers, getUserById, searchUserName } = require('../controllers/userController.js')
 const { protect } = require('../middleware/authMiddleware')
+const {
+  registerUser,
+  authUser,
+  updateUser,
+  getUsers,
+  getUserById,
+  searchUserName,
+  changePassword,
+  forgotPassword,
+  forgotPasswordSubmit,
+  resendCode,
+  confirmSignUpWithCode
+} = require('../controllers/userController.js')
 
 router.route('/')
   .post(registerUser)
@@ -12,5 +24,10 @@ router
   .route('/:id')
   .get(protect, getUserById)
   .put(protect, updateUser)
+router.post('/changePassword', changePassword)
+router.post('/forgotPassword', forgotPassword)
+router.post('/forgotPasswordSubmit', forgotPasswordSubmit)
+router.post('/resendCode', resendCode)
+router.post('/confirmSignUp', confirmSignUpWithCode)
 
 module.exports = router

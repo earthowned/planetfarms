@@ -24,9 +24,8 @@
   position: fixed;
   z-index: 5000;
   bottom: 0;
-  background: rgba(20, 20, 20, 0.7);
-  backdrop-filter: blur(24px);
-  height: 10%;
+  background: rgba(20, 20, 20);
+  height: 70px;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -43,11 +42,11 @@
   cursor: pointer;
 }
 
-.mobile-tab-wrapper.active .mobile-tab path {
+.mobile-tab-wrapper.bgactive .mobile-tab path {
   fill: #2b2b2c;
 }
 
-.mobile-tab-wrapper.active .ham-tab path {
+.mobile-tab-wrapper.bgactive .ham-tab path {
   stroke: #2b2b2c;
 }
 
@@ -60,7 +59,7 @@
   cursor: pointer;
 }
 
-.mobile-tab-wrapper.active {
+.mobile-tab-wrapper.bgactive {
   background-color: #00c688;
 }
 

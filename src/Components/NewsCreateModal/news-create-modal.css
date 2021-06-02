@@ -38,35 +38,16 @@
   justify-content: space-between;
 }
 
+.video-row-3 > input {
+  width: 320px;
+}
+
+.video-row-3 > button {
+  width: 168px;
+}
+
 .last-input-variation {
   width: 45%;
-}
-
-.toggle-main-container {
-  position: relative;
-  width: 38px;
-  height: 20px;
-  border-radius: 10px;
-}
-
-.toggle-container {
-  width: 38px;
-  height: 20px;
-  background: var(--primary-black);
-  border-radius: 10px;
-}
-
-.toggle-item {
-  background: var(--primary-white);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateX(0);
-  transition: all 0.2s ease-in-out;
 }
 
 .description {
@@ -77,24 +58,13 @@
   justify-content: space-between;
 }
 
-.toggle-item.active {
-  transform: translateX(100%);
-  transition: all 0.2s ease-in-out;
-}
-
-.toggle-item.active + .toggle-container {
-  width: 38px;
-  height: 20px;
-  background: var(--primary-color);
-  transition: all 0.2s ease-in-out;
-}
-
 .photo-input-container {
   width: 100%;
 }
 
-.text-area-variation-2 {
+#text-area-variation-2 {
   height: 300px;
+  resize: none;
 }
 
 .preview-image {
@@ -105,7 +75,7 @@
 .enterprise-step {
   margin-left: 19px;
   margin-top: 18px;
-  color:whitesmoke;
+  color: whitesmoke;
   font-size: 11px;
   width: 50%;
 }

@@ -1,10 +1,10 @@
 import './news-card.css'
 import { Link } from 'react-router-dom'
 
-function NewsCard({ news }) {
+function NewsCard ({ news }) {
   return (
     <>
-      {news.map((news) => {
+      {news && news.map((news) => {
         return (
           <Link to={{ pathname: '/community-page-news-view', state: { news } }}>
             <div key={news.id} className='news-card border-1px-onyx'>

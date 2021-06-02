@@ -15,8 +15,11 @@ const Enterprises = db.define(
     description: {
       type: Sequelize.TEXT
     },
-    attachments: {
-      type: Sequelize.BLOB('long')
+    filename: {
+      type: Sequelize.STRING
+    },
+    category: {
+      type: Sequelize.STRING
     }
   },
   { timestamps: true }

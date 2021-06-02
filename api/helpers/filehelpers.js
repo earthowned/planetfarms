@@ -4,7 +4,7 @@ const path = require('path')
 const fs = require('fs')
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const dir = path.join(path.dirname(__dirname), '/files', '/resources')
+    const dir = path.join(path.dirname(__dirname), `/files/${file.fieldname}`)
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir)
     }
@@ -23,7 +23,7 @@ function checkFileType (file, cb) {
   if ((path.extname(file.originalname) === '.pdf' || extname) && mimetype) {
     return cb(null, true)
   } else {
-    throw new Error('Course not found')
+    throw new Error('Format not valid')
   }
 }
 

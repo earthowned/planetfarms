@@ -9,6 +9,7 @@ import "./login-screen.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userAction'
 import OauthBtn from "../../Components/OauthBtn/OauthBtn"
+import { USER_LOGIN_SUCCESS } from '../../constants/userConstants'
 
 function LoginScreen(props) {
   const {
@@ -54,11 +55,7 @@ function LoginScreen(props) {
     if (!username) setUserError(true)
     if (password.length <6) setPasswordError(true)
     if (!terms) setTermsError(true)
-
-    if(username && password.length > 6) {
-      dispatch(login(username, password))
-      //history.push('/community-page-news')
-    }
+    return dispatch(login(username, password))
   }
 
   const loginWithFacebook = (e) => {
