@@ -7,7 +7,7 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityMembers.css'
 
-function CommunityMembers({ history }) {
+function CommunityMembers ({ history }) {
   const dispatch = useDispatch()
   const [search, setSearch] = useState(null)
   const userLogin = useSelector((state) => state.userLogin)

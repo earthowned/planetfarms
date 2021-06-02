@@ -8,6 +8,73 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails } from '../../actions/userAction'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
+const DashboardData = [
+  {
+    category: 'farming',
+    title: "How to farm in 2020 and don't lose you business",
+    img: '/img/man-cap.svg'
+  },
+  {
+    category: 'farming',
+    title: 'Be happy and find your self! Motivation 2020',
+    img: '/img/man-cap.svg',
+    type: 'video'
+  },
+  {
+    category: 'farming',
+    title: "How to farm in 2020 and don't lose you business",
+    img: '/img/man-cap.svg'
+  },
+  {
+    category: 'farming',
+    title: 'Be happy and find your self! Motivation 2020',
+    img: '/img/man-cap.svg',
+    type: 'video'
+  },
+  {
+    category: 'farming',
+    title: "How to farm in 2020 and don't lose you business",
+    img: '/img/man-cap.svg'
+  }
+]
+
+const MyCourseData = [
+  {
+    category: 'farming',
+    title: "How to farm in 2020 and don't lose you business",
+    img: '/img/man-cap.svg'
+  },
+  {
+    category: 'farming',
+    title: 'Be happy and find your self! Motivation 2020',
+    img: '/img/man-cap.svg'
+  }
+]
+
+const headers = [
+  {
+    name: 'My library',
+    image: '/img/book-outlined.svg',
+    slug: '/mylibrary',
+    data: DashboardData,
+    btnName: 'Add Library'
+  },
+  {
+    name: 'My courses',
+    image: '/img/book-open-1.svg',
+    slug: '/mycourse',
+    data: MyCourseData,
+    btnName: 'Add Course'
+  },
+  {
+    name: 'My groups',
+    image: '/img/my-group.svg',
+    slug: '/mygroups',
+    data: DashboardData,
+    btnName: 'Add Groups'
+  }
+]
+
 function DashboardComponent () {
   const windowWidth = useSizeFinder()
   const dispatch = useDispatch()
@@ -24,6 +91,7 @@ function DashboardComponent () {
       history.push('/login')
     }
   }, [dispatch, history, userInfo])
+
   return (
     <DashboardLayout title='My Dashboard'>
       <div className='x10-1-0-my-dashboard'>
@@ -116,74 +184,6 @@ function SeeAllButton ({ children }) {
     </div>
   )
 }
-
-const DashboardData = [
-  {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg'
-  },
-  {
-    category: 'farming',
-    title: 'Be happy and find your self! Motivation 2020',
-    img: '/img/man-cap.svg',
-    type: 'video'
-  },
-  {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg'
-  },
-  {
-    category: 'farming',
-    title: 'Be happy and find your self! Motivation 2020',
-    img: '/img/man-cap.svg',
-    type: 'video'
-  },
-  {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg'
-  }
-
-]
-
-const MyCourseData = [
-  {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg'
-  },
-  {
-    category: 'farming',
-    title: 'Be happy and find your self! Motivation 2020',
-    img: '/img/man-cap.svg'
-  }
-]
-
-const headers = [
-  {
-    name: 'My library',
-    image: '/img/book-outlined.svg',
-    slug: '/mylibrary',
-    data: DashboardData,
-    btnName: 'Add Library'
-  },
-  {
-    name: 'My courses',
-    image: '/img/book-open-1.svg',
-    slug: '/mycourse',
-    data: MyCourseData,
-    btnName: 'Add Course'
-  },
-  {
-    name: 'My groups',
-    image: '/img/my-group.svg',
-    slug: '/mygroups',
-    data: DashboardData,
-    btnName: 'Add Groups'
-  }
-]
 
 function MainContainer () {
   return (

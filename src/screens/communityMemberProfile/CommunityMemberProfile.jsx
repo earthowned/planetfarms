@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails } from '../../actions/userAction'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-function CommunityMembersProfile() {
+function CommunityMembersProfile () {
   const { id } = useParams()
 
   const dispatch = useDispatch()
