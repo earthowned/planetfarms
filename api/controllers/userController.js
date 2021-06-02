@@ -91,13 +91,13 @@ const authUser = async (req, res) => {
   }
 }
 
-localAuth = async (name, password) => {
+const localAuth = async (name, password) => {
   user = await User.findOne({ where: { name, password } })
   const { pass, ...data } = user.dataValues
   return ({ ...data, token: generateToken(data.id) })
 }
 
-cognitoAuth = async (name, password) => {
+const cognitoAuth = async (name, password) => {
   user = await Auth.signIn(name, password)
   return ({ ...user, token: generateToken(name) })
 }
@@ -195,7 +195,7 @@ const searchUserName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-registerLocal = async (name, password, email, res) => {
+const registerLocal = async (name, password, email, res) => {
   const userExists = await User.findOne({ where: { name } })
   if (userExists) res.json({ message: 'Users already Exists !!!' }).status(400)
   user = await User.create({ name, password })
@@ -274,4 +274,4 @@ const confirmSignUpWithCode = async (req, res) => {
   }
 }
 
-module.exports = { registerUser, authUser, getUsers, getUserById, updateUser, searchUserNam, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode }
+module.exports = { registerUser, authUser, getUsers, getUserById, updateUser, searchUserName, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode }

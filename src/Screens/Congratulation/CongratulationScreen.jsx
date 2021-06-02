@@ -37,25 +37,6 @@ function CongratulationScreen() {
   const [files, setFiles] = useState([])
   const [modalActive, setModalActive] = useState(false)
 
-  
-  let location = useLocation()
-  let history = useHistory()
-  const username = location?.state?.username
-  const password = location?.state?.password
-
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      )
-    }
-  })
-
   useEffect(() => {
     setFirstName(user.firstName)
     setEmail(user.email)
@@ -164,8 +145,9 @@ function CongratulationScreen() {
               </div>
             </div>
           </div>
-          <DragDrop />       
-       </div>
+        </div>
+        <DragDrop onChange={setFiles} />
+      </div>
     </form>
   )
 }

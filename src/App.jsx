@@ -33,7 +33,6 @@ import MobileMessage from './Components/MobileMessage/MobileMessage'
 import Courses from './Screens/Courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import LessonTest from './Screens/LessonTest/LessonTest'
-import Calendar from './Screens/Calendar/Calendar'
 import CourseCollection from './Screens/Courses/CourseCollection/CourseCollection'
 import EditCollection from './Screens/Courses/EditCollection/EditCollection'
 import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCoursePage'
@@ -157,9 +156,6 @@ function App () {
         </Route>
         <Route path='/userInfo'>
           <UserInfo />
-        </Route>
-        <Route path='/calendar'>
-          <Calendar />
         </Route>
       </Switch>
     </Router>
