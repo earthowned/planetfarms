@@ -1,6 +1,5 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.addColumn('users', 'id', { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true })
     queryInterface.addColumn('users', 'firstName', Sequelize.STRING)
     queryInterface.addColumn('users', 'lastName', Sequelize.STRING)
     queryInterface.addColumn('users', 'phone', Sequelize.STRING)
@@ -11,7 +10,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.removeColumn('users', 'id', Sequelize.INTEGER)
     queryInterface.removeColumn('users', 'firstName', Sequelize.STRING)
     queryInterface.removeColumn('users', 'lastName', Sequelize.STRING)
     queryInterface.removeColumn('users', 'phone', Sequelize.STRING)

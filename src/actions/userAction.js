@@ -46,6 +46,7 @@ export const register = (name, password) => async (dispatch) => {
 }
 
 export const login = (name, password) => async (dispatch) => {
+  console.log(name, password)
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
     const config = {
@@ -58,11 +59,11 @@ export const login = (name, password) => async (dispatch) => {
       { name, password },
       config
     )
+    localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data
     })
-    localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,

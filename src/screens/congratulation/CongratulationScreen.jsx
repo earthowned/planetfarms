@@ -14,9 +14,6 @@ import { updateUser } from '../../actions/userAction'
 import './Congratulation.scss'
 
 function CongratulationScreen () {
-  const welcomeBack = 'Congratulations!'
-  const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
-
   const [modalActive, setModalActive] = useState(false)
 
   const { register, errors, handleSubmit } = useForm()
@@ -27,6 +24,9 @@ function CongratulationScreen () {
   const password = location?.state?.password
   const editInformations = location?.state?.editInformations
   const user = location?.state?.user
+
+  const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
+  const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
 
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
@@ -65,7 +65,7 @@ function CongratulationScreen () {
     //   signUp({ firstname, lastname, phone, birthday, email });
     // }
     dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: user ? user.id : userInfo.id }))
-    user ? history.goBack():  history.push('/community-page-news')
+    user ? history.push('/myProfile') :  history.push('/community-page-news')
     return
   }
 
