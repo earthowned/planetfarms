@@ -6,7 +6,7 @@ import './filter.css'
 const Filter = ({ data, newFilter, name }) => {
   const [active, setActive] = useState(false)
   const { pathname } = useLocation()
-
+  console.log(data);
   return (
     <>
       {
@@ -29,7 +29,7 @@ const Filter = ({ data, newFilter, name }) => {
           </div>
           {active && <ul className='filter-dropdown'>
             {
-              data.length && data.map(item => (
+              data.length > 0 && data.map(item => (
                 <Link className='nav-link' to={`${item.link}`}>
                   <li onClick={() => setActive(false)}>{item.label}</li>
                 </Link>

@@ -3,7 +3,7 @@
   width: 100%;
   background: var(--background-color-modal);
   height: 100%;
-  z-index: 5005;
+  z-index: 4000;
   color: var(--primary-white);
   display: flex;
   justify-content: center;
@@ -125,6 +125,11 @@
   align-items: center;
 }
 
+.main-calendar-header .row-1 > div {
+  display: flex;
+  align-items: center;
+}
+
 .main-calendar-header .row-1 .date-indicator {
   color: var(--primary-color);
   margin-left: 16px;
@@ -143,122 +148,129 @@
   width: 120px;
 }
 
+/* calendar design starts here */
+
 .main-calendar-wrapper {
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   width: 100%;
+  margin-top: 16px;
 }
 
 .main-calendar-wrapper .day-names {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
   width: 100%;
   margin: 0 auto;
   align-items: center;
 }
 
+.main-calendar-wrapper .day-names .week-header {
+  width: 100%;
+  height: 56px;
+  color: var(--primary-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .main-calendar-wrapper .week-container {
-  position: relative;
-  z-index: 100;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
 }
 
 .main-calendar-wrapper .week {
-  width: calc(100% / 7);
-  height: 56px;
-  line-height: 56px;
-  text-align: center;
-  color: var(--primary-grey);
-}
-
-.main-calendar-wrapper .week div {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.main-calendar-wrapper .day {
-  position: relative;
-  width: calc(100% / 7);
-  height: 158px;
-  margin: 0;
-  display: inline-block;
+.main-calendar-wrapper .week .day {
+  width: 100%;
+  height: 200px;
   background-color: #141414;
   color: var(--primary-white);
-  padding: 0;
-  box-sizing: border-box;
-  z-index: 0;
-  text-align: center;
   cursor: pointer;
   border-right: 0.1px solid var(--strokes);
   border-bottom: 0.1px solid var(--strokes);
 }
 
-.main-calendar-wrapper .day > div {
+.main-calendar-wrapper .week .day > div {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
   width: 100%;
   height: 100%;
-  z-index: -1100;
-  line-height: 35px;
   position: relative;
 }
 
-.main-calendar-wrapper .day > div.before {
-  color: var(--primary-grey);
-  background-color: rgb(12, 12, 12);
-  position: relative;
-  z-index: -1000;
-}
-
-.main-calendar-wrapper .day > div.selected {
-  background-color: var(--primary-color);
-  color: #000;
-  font-weight: 700;
-}
-
-.main-calendar-wrapper .day > div.today {
+.main-calendar-wrapper .week .day .today {
   border-radius: 4px;
   width: 70px;
   height: 32px;
+  padding-top: 0;
+  line-height: 32px;
   margin: 0 auto;
+  margin-top: 8px;
   color: #000;
   background-color: var(--primary-color);
 }
 
-.activities {
+.main-calendar-wrapper .week .day .selected {
+  padding: 8px;
+  background-color: var(--primary-color);
+  color: #000;
+  font-weight: 700;
   width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 100;
+  display: flex;
+  justify-content: center;
+}
+
+.main-calendar-wrapper .week .day .before {
+  color: var(--primary-grey);
+  background-color: rgb(12, 12, 12);
+}
+
+.activities {
+  width: 90%;
+  height: calc(100% - 40px);
+  position: absolute;
+  top: 40px;
+  left: 20px;
 }
 
 .activities ul {
-  position: absolute;
-  left: 35px;
-  list-style: none;
-  width: 100%;
+  width: 90%;
   text-align: justify;
-  text-decoration: underline;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  z-index: 100;
+  margin: 0 auto;
+  color: var(--primary-color);
 }
 
 .activities ul li {
-  margin: 0;
   padding: 0;
+  margin-bottom: 8px;
 }
 
-.activities ul li::before {
-  content: "\2022";
-  color: var(--primary-color);
-  font-weight: bold;
-  display: inline-block; /* Needed to add space between the bullet and the text */
-  width: 1em; /* Also needed for space (tweak if needed) */
-  margin-left: -1.6em; /* Also needed for space (tweak if needed) */
+.activities ul li span {
+  width: calc(100% - 20px);
+  display: block;
+  color: var(--primary-white);
+  text-decoration: underline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .remaining-act {
   color: var(--primary-color);
   text-decoration: underline;
+  list-style: none;
+  width: 70%;
 }
 
 .tooltip {
@@ -267,10 +279,9 @@
   height: auto;
   background: var(--popups);
   position: absolute;
-  top: -200px;
+  bottom: -80px;
   left: -200px;
   color: var(--primary-white);
-  /* display: flex; */
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -288,6 +299,7 @@
 
 .tooltip p {
   margin-top: 20px;
+  margin-bottom: 8px;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -314,4 +326,58 @@
 
 .day:hover .tooltip {
   display: flex;
+}
+
+@media screen and (max-width: 650px) {
+  .calendar-modal-inner-container {
+    width: 100%;
+    height: calc(100% - 80px);
+    margin-bottom: 70px;
+    justify-content: flex-start;
+  }
+
+  .calendar-top-header .simple-filter-title {
+    border: 1px solid var(--strokes);
+    background: var(--background-color);
+    color: var(--primary-white);
+  }
+
+  .calendar-top-header .simple-filter-dropdown {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .calendar-second-header {
+    height: auto;
+  }
+
+  .main-calendar-header {
+    flex-direction: column;
+    height: 116px;
+    align-items: flex-start;
+  }
+
+  .calendar-date-header {
+    width: 100px;
+    font-size: 20px;
+  }
+
+  .main-calendar-header .row-1 {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .main-calendar-wrapper {
+    font-size: 14px;
+  }
+
+  .main-calendar-wrapper .week .day .today {
+    width: 30px;
+    padding: none;
+  }
+
+  .remaining-act {
+    font-size: 10px;
+    margin-left: -16px;
+  }
 }

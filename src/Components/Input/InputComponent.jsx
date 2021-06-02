@@ -15,7 +15,7 @@ const InputComponent = ({text, error, image, changeHandler, name, autoFocus}) =>
                 <div className="input-content">
                 {text ? <div className="overhead-text">{name && name}</div> : <div>&nbsp;</div>}
                 <input ref={userInput}
-                  type={name === "Password" ? 'password' : name==="birthday" ? 'date' : name==="email" ? "email" : 'text'}
+                  type={name === "Password" ? 'password' : (name==="birthday" || name === "Choose date") ? 'date' : name==="email" ? "email" : name==="Start time" ? 'time' : 'text'}
                   className="username ibmplexsans-regular-normal-monsoon-16px"
                   placeholder={name && name}
                   value={text}
