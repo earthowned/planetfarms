@@ -11,7 +11,7 @@
 }
 
 .calendar-modal-inner-container {
-  width: 600px;
+  width: 680px;
   height: auto;
   background: var(--cards);
   padding: 24px;
@@ -48,9 +48,9 @@
   justify-content: space-between;
 }
 
-.calendar-input-container > div div:last-child {
+.date-time-container .input-container:last-child {
   width: 200px;
-  margin-left: 24px;
+  margin-left: 10px;
 }
 
 .calendar-modal-inner-container .calendar-modal-header > button {
@@ -76,8 +76,19 @@
 
 .calendar-modal-btn {
   width: 200px;
+  height: 48px;
 }
 
+.calendar-modal-btn button {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  background: var(--primary-color);
+  font-size: 16px;
+  font-weight: 600;
+}
 .calendar-top-header {
   width: 100%;
 }
@@ -256,7 +267,7 @@
   margin-bottom: 8px;
 }
 
-.activities ul li span {
+.activities ul li span:last-child {
   width: calc(100% - 20px);
   display: block;
   color: var(--primary-white);
@@ -264,6 +275,15 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.task-time {
+  width: calc(100% - 20px);
+  display: block;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: clip;
+  color: var(--primary-white);
 }
 
 .remaining-act {
@@ -328,6 +348,12 @@
   display: flex;
 }
 
+@media screen and (max-width: 700px) {
+  .calendar-modal-inner-container {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 650px) {
   .calendar-modal-inner-container {
     width: 100%;
@@ -379,5 +405,24 @@
   .remaining-act {
     font-size: 10px;
     margin-left: -16px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .calendar-input-container {
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  .calendar-input-container > div {
+    flex-direction: column;
+  }
+
+  .date-time-container .input-container:last-child {
+    width: 100%;
+  }
+
+  .calendar-modal-btn {
+    width: 100%;
   }
 }

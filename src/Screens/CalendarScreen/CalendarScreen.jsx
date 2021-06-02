@@ -95,12 +95,11 @@ const CalendarScreen = () => {
   }, [value])
 
   function addNewEvent (e) {
-    // e.preventDefault();
-    // titleArray.push(title);    
-    // setEvents([...events, {activities: titleArray, date, time}]);
-    // setAddEvent(false);
+    e.preventDefault();
+    titleArray.push({task: title, time});    
+    setEvents([...events, {activities: titleArray, date}]);
+    setAddEvent(false);
   }
-console.log(events);
 
   return (
     <>
@@ -112,7 +111,7 @@ console.log(events);
           </div>
           <div className='calendar-input-container'>
             <Input name='Title' text={title} changeHandler={(e) => setTitle(e.target.value)} />
-            <div>
+            <div className="date-time-container">
               <Input name='Choose date' text={date} changeHandler={(e) => setDate(e.target.value)} />
               <Input name='Start time' text={time} changeHandler={(e) => setTime(e.target.value)} />
             </div>
@@ -213,7 +212,9 @@ const Calendar = ({ calendar, value, setValue, events }) => {
                                 {checkEvents(day).length > 0 && <div className='activities-container'><div className='activities'>
                                   <ul>
                                     {
-                                        checkEvents(day).slice(0, 2).map(item => <li key={item.task}><span>{item.time} {item.task}</span></li>)
+                                        checkEvents(day).slice(0, 2).map(item => <li key={item.task}>
+                                          <span className="task-time">{windowWidth < 950 && (item.time || item.task)}</span>
+                                          <span>{windowWidth > 950 && item.time} {windowWidth > 950 && item.task}</span></li>)
                                         }
                                     {checkEvents(day).length > 2 && <li className='remaining-act'>{(checkEvents(day).length - 2)}+ events </li>}
                                   </ul>
