@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import './sidebar.css'
+import CalendarBlock from '../Calendar/CalendarBlock'
 
 const mainnav = [
   {
@@ -80,8 +81,9 @@ function MainNav ({ dropdownActive, setDropdownActive }) {
   }
 
   return (
-    <ul className='list-container'>
-      {
+    <>
+      <ul className='list-container'>
+        {
         mainnav.map(navitem => {
           return (
             <li className={navitem.dropdown.length > 0 ? 'list-items' : 'list-items-menu'} key={navitem.name}>
@@ -121,6 +123,8 @@ function MainNav ({ dropdownActive, setDropdownActive }) {
           )
         })
       }
-    </ul>
+      </ul>
+      { dropdownActive && <CalendarBlock position="sidebar" /> }
+    </>
   )
 }

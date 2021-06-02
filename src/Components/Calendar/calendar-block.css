@@ -1,0 +1,129 @@
+.mobile-view-dropdown-container .calendar {
+  display: none;
+}
+
+.sidebar-container .calendar {
+  box-sizing: border-box;
+  font-size: 1rem;
+  max-width: 400px;
+  position: fixed;
+  width: 15%;
+  left: 0;
+  bottom: 0;
+}
+
+.sidebar-container .header {
+  background-color: #2b2b2c;
+  text-align: center;
+  line-height: 29px;
+  color: white;
+  font-weight: 300;
+  height: 30px;
+  font-size: 17px;
+  margin-bottom: 0px;
+}
+
+.sidebar-container .day-names {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-items: center;
+  color: white;
+}
+
+.sidebar-container .week {
+  background-color: #141414;
+  width: calc(100% / 7);
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  color: rgb((172), 167, 167);
+  font-weight: 300;
+  text-transform: normal;
+}
+
+.sidebar-container .week div {
+  width: 100%;
+}
+
+.sidebar-container .day {
+  position: relative;
+  width: calc(100% / 7);
+  height: 44px;
+  display: inline-block;
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  border: 1px solid rgb(22, 21, 21);
+  line-height: 2;
+  font-size: 14px;
+}
+
+.sidebar-container .calendar-month-wrapper {
+  display: flex;
+}
+
+.sidebar-container .calendar-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-container .today {
+  background-color: rgb(64, 95, 80);
+  height: 27px;
+  width: 27px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.sidebar-container .before {
+  color: white;
+  background-color: rgb(12, 11, 11);
+  height: 27px;
+  width: 27px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.sidebar-container .previous {
+  text-align: left;
+  margin-left: 1rem;
+  margin-right: 25px;
+  color: rgba(0, 198, 136, 1);
+  cursor: pointer;
+}
+
+.sidebar-container .next {
+  margin-left: 36px;
+  color: rgba(0, 198, 136, 1);
+  cursor: pointer;
+}
+
+.sidebar-container .button-sidebar {
+  background-color: #00c688;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100%;
+}
+
+.sidebar-container .selected {
+  background-color: rgba(0, 198, 136, 1);
+  color: white;
+  font-weight: bold;
+  height: 27px;
+  width: 30px;
+}
+
+.sidebar-container .calendar-today-btn, .sidebar-container .calendar-events {
+  display: none;
+}

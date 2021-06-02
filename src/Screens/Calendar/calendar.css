@@ -1,0 +1,152 @@
+.calendar {
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.header {
+  background-color: black;
+  text-align: center;
+  line-height: 2rem;
+  color: white;
+  font-weight: 700;
+  height: 54px;
+  font-size: 27px;
+  margin-bottom: 25px;
+}
+
+.previous {
+  text-align: left;
+  margin-left: 1rem;
+  margin-right: 25px;
+  color: rgba(0, 198, 136, 1);
+  cursor: pointer;
+}
+
+.next {
+  text-align: right;
+  margin-right: 1rem;
+  color: rgba(0, 198, 136, 1);
+  cursor: pointer;
+}
+
+.day {
+  position: relative;
+  width: calc(100% / 7);
+  height: 120px;
+  display: inline-block;
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  border: 1px solid rgb(22, 21, 21);
+  line-height: 2;
+  font-size: 14px;
+}
+
+.day:hover {
+  background-color: rgb(32, 30, 30);
+  transition: 1s all;
+}
+
+.day-names {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.week {
+  background-color: black;
+  width: calc(100% / 7);
+  height: 62px;
+  line-height: 53px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(172, 167, 167);
+  font-weight: 800;
+}
+
+.week div {
+  width: 100%;
+}
+
+.selected {
+  background-color: rgba(0, 198, 136, 1);
+  color: white;
+  font-weight: bold;
+  height: 27px;
+  width: 50px;
+  margin-left: 50px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.before {
+  color: rgb(87, 76, 76);
+  background-color: rgb(12, 11, 11);
+  height: 27px;
+  width: 50px;
+  margin-left: 50px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.today {
+  background-color: rgb(64, 95, 80);
+  height: 27px;
+  width: 50px;
+  margin-left: 50px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.calendar-month-wrapper {
+  display: flex;
+}
+
+.calendar-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-events {
+  background-color: rgba(0, 198, 136, 1);
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.calendar-today-btn {
+  background-color: rgb(47, 44, 44);
+  border: 1px solid white;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.event-text {
+  min-width: 80px;
+  text-decoration: underline;
+}
+
+.event-container {
+  width: 40px;
+  height: 45px;
+  background-color: brown;
+}
