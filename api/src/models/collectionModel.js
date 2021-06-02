@@ -37,4 +37,11 @@ const Collection = db.define(
   { timestamps: true }
 )
 
+Collection.associate = function (models) {
+  Collection.hasMany(models.CollectionUser, {
+    as: 'collection_user',
+    foreignKey: 'collection'
+  })
+}
+
 module.exports = Collection

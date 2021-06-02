@@ -36,6 +36,8 @@ const Collection = () => {
   const data = useSelector(
     (state) => state.listCollection.collections.collection
   )
+  const userInfo = useSelector((state) => state.userLogin)
+  console.log('userinfo', userInfo)
 
   console.log('another', data)
 
