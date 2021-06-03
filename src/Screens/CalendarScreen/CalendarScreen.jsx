@@ -11,6 +11,7 @@ import buildCalendar from '../../Components/Calendar/build'
 import dayStyles from '../../Components/Calendar/styles'
 import useSizeFinder from '../../utils/SizeFinder'
 import SimpleFilter from '../../Components/SimpleFilter/SimpleFilter'
+import data from './eventsData';
 const nav = [
   {
     label: 'My events',
@@ -24,60 +25,6 @@ const nav = [
     label: 'Groups events',
     link: '/calendar/groups-events'
   }
-]
-
-const data = [
-  {
-    activities: [
-      {
-        task: 'take a new course',
-        time: '04:00 pm'
-      }, 
-      {
-        task: 'Perform an art',
-        time: '01:00 am'
-      },
-      {
-        task: 'Perform an art',
-        time: ''
-      },
-      {
-        task: 'Perform an art',
-        time: ''
-      },
-    ],
-    date: '2021-6-16',
-  },
-  {
-    activities: [
-      {
-        task: 'take a new course',
-        time: '04:00 pm'
-      }, 
-      {
-        task: 'Perform an art',
-        time: '01:00 am'
-      },
-      {
-        task: 'Perform an art',
-        time: ''
-      }
-    ],
-    date: '2021-6-17',
-  },
-  {
-    activities: [
-      {
-        task: 'Perform an art',
-        time: ''
-      },
-      {
-        task: 'Perform an art',
-        time: ''
-      },
-    ],
-    date: '2021-6-18',
-  },
 ]
 
 const CalendarScreen = () => {
@@ -189,7 +136,23 @@ const CalendarHeader = ({ value, setValue, setAddEvent }) => {
 }
 
 const Calendar = ({ calendar, value, setValue, events }) => {
+  return (
+    <div className="week-container">
+      {
+                calendar.map(week => <div key={week} className='week'>
+                  {
+                            week.map(day => <DayComponent day={day} events={events} value={value} setValue={setValue} />)
+                        }
+                </div>)
+                }
+    </div>
+  )
+}
+
+const DayComponent = ({day, events, value, setValue}) => {
   const windowWidth = useSizeFinder();
+  const [detailActive, setDetailActive] = useState(false);
+
   // checking for the events and gathering activiites
   function checkEvents (day) {
     let event = []
@@ -200,32 +163,29 @@ const Calendar = ({ calendar, value, setValue, events }) => {
     })
     return event
   }
-  return (
-    <div className="week-container">
-      {
-                calendar.map(week => <div key={week} className='week'>
-                  {
-                            week.map(day => <div key={day} className='day' onClick={() => setValue(day)}>
 
-                              <div className={dayStyles(day, value)}>
-                                <span>{windowWidth > 650 && day.format('MMM').toString()} {day.format('D').toString()}</span>
-                                {checkEvents(day).length > 0 && <div className='activities-container'><div className='activities'>
-                                  <ul>
-                                    {
-                                        checkEvents(day).slice(0, 2).map(item => <li key={item.task}>
-                                          <span className="task-time">{windowWidth < 950 && (item.time || item.task)}</span>
-                                          <span>{windowWidth > 950 && item.time} {windowWidth > 950 && item.task}</span></li>)
-                                        }
-                                    {checkEvents(day).length > 2 && <li className='remaining-act'>{(checkEvents(day).length - 2)}+ events </li>}
-                                  </ul>
-                                </div>
-                                  <ToolTip checkEvents={checkEvents} day={day} />
-                                </div>}
-                              </div>
-                            </div>)
+  function changeDate () {
+    setDetailActive(!detailActive);
+  }
+
+  return (
+    <div key={day} className='day' onClick={() => setValue(day)}>
+        <div className={dayStyles(day, value)}>
+          <span>{windowWidth > 650 && day.format('MMM').toString()} {day.format('D').toString()}</span>
+              {checkEvents(day).length > 0 
+              && <div className='activities-container' onClick={changeDate}><div className='activities'>
+                    <ul>
+                        {
+                            checkEvents(day).slice(0, 2).map(item => <li key={item.task}>
+                            <span className="task-time">{windowWidth < 950 && (item.time || item.task)}</span>
+                            <span>{windowWidth > 950 && item.time} {windowWidth > 950 && item.task}</span></li>)
                         }
-                </div>)
-                }
+                        {checkEvents(day).length > 2 && <li className='remaining-act'>{(checkEvents(day).length - 2)}+ events </li>}
+                    </ul>
+                </div>
+                {detailActive && <ToolTip checkEvents={checkEvents} day={day} />}
+            </div>}
+        </div>
     </div>
   )
 }
@@ -239,11 +199,29 @@ const ToolTip = ({ checkEvents, day }) => {
       <ul>
         {
                 checkEvents(day).map(item => {
-                  return <li key={item.task}>{item.time} {item.task}</li>
+                  return (<>
+                  <ToolTipLink item={item} />
+                  </>
+                  )
                 })
             }
       </ul>
     </div>
+  )
+}
+
+const ToolTipLink = ({item}) => {
+  return (
+    <>
+    <li key={item.task}><span>{item.time} {item.task}</span></li>
+      <div className="task-edit-option">
+        <ul>
+            <li><img src="/img/follow-icon.svg" alt="add members" /> <p>Add members</p></li>
+            <li><img src="/img/edit-icon.svg" alt="edit events"/> <p>Edit event</p></li>
+            <li><img src="/img/trash-icon.svg" alt="delete events"/> <p>Delete event</p></li>
+        </ul>
+      </div>
+  </>
   )
 }
 

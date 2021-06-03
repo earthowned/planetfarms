@@ -307,8 +307,8 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 12px 24px;
-  z-index: 50000;
-  display: none;
+  display: flex;
+  z-index: 5000;
 }
 
 .tooltip h2 {
@@ -330,23 +330,75 @@
   list-style-type: none;
   width: 100%;
   text-align: justify;
-  margin-left: 24px;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
+  position: relative;
 }
 
-.tooltip ul li::before {
+.tooltip ul li:hover span {
+  background: var(--cards);
+  border-radius: 4px;
+  width: 100%;
+  display: block;
+  height: 100%;
+}
+
+.tooltip ul li {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip ul li span {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+}
+
+.tooltip ul li:hover + .task-edit-option {
+  display: flex;
+}
+
+.tooltip ul li span:before {
   content: "\2022";
   color: var(--primary-color);
   font-weight: bold;
   display: inline-block;
   width: 1em;
-  margin-left: -1.6em;
 }
 
-.day:hover .tooltip {
+.tooltip .task-edit-option {
+  display: none;
+  background: var(--dropdowns);
+  padding: 16px;
+  position: absolute;
+  right: -280px;
+  bottom: -30px;
+  width: auto;
+}
+
+.tooltip .task-edit-option ul {
+  width: 280px;
+  height: 168px;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.tooltip .task-edit-option ul li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 56px;
+  width: 100%;
+  height: 100px;
+}
+
+.tooltip .task-edit-option ul li p {
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 700px) {

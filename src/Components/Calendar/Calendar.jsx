@@ -1,5 +1,5 @@
 import moment from 'moment'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router'
 
 import buildCalendar from './build'
@@ -7,25 +7,7 @@ import buildCalendar from './build'
 import './calendar.css'
 import CalendarHeader from './Header'
 import dayStyles from './styles'
-
-const events = [
-  {
-    event: 'take a new course',
-    year: '2021-5-16'
-  },
-  {
-    event: 'Perform an art',
-    year: '2021-5-15'
-  },
-  {
-    event: 'Create new app',
-    year: '2021-6-31'
-  },
-  {
-    event: 'Go to gym',
-    year: '2021-4-10'
-  }
-]
+import events from "../../Screens/CalendarScreen/eventsData";
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState([])
@@ -39,7 +21,7 @@ const Calendar = () => {
   function checkEvents (day) {
     let event
     events.forEach(item => {
-      if (day.isSame(item.year, 'day')) {
+      if (day.isSame(item.date, 'day')) {
         event = 'events'
       }
     })
@@ -58,6 +40,15 @@ const Calendar = () => {
 }
 
 const CalendarBody = ({ calendar, value, checkEvents, setValue }) => {
+  const history = useHistory();
+  const eventNode = useRef()
+  function goCalendar (day) {
+    events.forEach(item => {
+      if (day.isSame(item.date, 'day')) {
+        history.push('/calendar/my-events')
+      }
+    })
+  }
   return (
     <div className='body'>
       <div className='day-names'>
@@ -68,8 +59,8 @@ const CalendarBody = ({ calendar, value, checkEvents, setValue }) => {
       {
             calendar.map(week => <div key={week}>
               {
-                    week.map(day => <div key={day} className='day' onClick={() => setValue(day)}>
-                      <div className={`${dayStyles(day, value)} ${checkEvents(day)}`}>
+                    week.map(day => <div key={day} className='day' ref={eventNode} onClick={() => setValue(day)}>
+                      <div className={`${dayStyles(day, value)} ${checkEvents(day)}`} onClick={() => goCalendar(day)}>
                         {day.format('D').toString()}
                       </div>
                     </div>)
