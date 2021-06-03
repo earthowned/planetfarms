@@ -8,15 +8,18 @@ const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }
     <>
       <div className='listview-container'>
         <h4>{title}</h4>
+        <div>
         {data && data.map(item => {
           return (
             <div key={item.id} className='listview-inner-container'>
-              <div className='image-wrapper'>
-                <img src={process.env.REACT_APP_CDN_BASE_URL + '/file/' + item.filename} alt='item.title' />
-              </div>
-              <div className='list-content'>
-                <h4>{item.title}</h4>
-                <p>{item.category}</p>
+              <div className="listview-col-1">
+                <div className='image-wrapper'>
+                  <img src={process.env.REACT_APP_CDN_BASE_URL + '/file/' + item.filename} alt='item.title' />
+                </div>
+                <div className='list-content'>
+                  <h4>{item.title}</h4>
+                  <p>{item.category}</p>
+                </div>
               </div>
               <div className='list-btn-wrapper'>
                 <span>Add to</span>
@@ -28,6 +31,7 @@ const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }
             </div>
           )
         })}
+        </div>
       </div>
     </>
   )

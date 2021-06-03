@@ -16,6 +16,10 @@
   color: var(--primary-white);
 }
 
+.listview-inner-container .listview-col-1 {
+  display: flex;
+}
+
 .listview-inner-container .image-wrapper {
   height: 100%;
 }
@@ -31,7 +35,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 80px;
-  margin-left: 2em;
+  margin-left: 16px;
 }
 
 .listview-inner-container .list-content h4 {
@@ -40,7 +44,7 @@
 
 .listview-inner-container .list-btn-wrapper {
   display: flex;
-  flex: 0.7;
+  width: 374px;
   margin-left: 2em;
   justify-content: space-around;
   align-items: center;
@@ -54,36 +58,27 @@
   background: var(--background-color-light);
   color: var(--primary-white);
   cursor: pointer;
+  width: 131px;
+  height: 48px;
 }
 
 .btn-img-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 157px;
 }
 
-@media only screen and (max-width: 1350px) {
-  .secondary-btn-border {
-    padding: 0.6em 0.7em;
-  }
-}
-
-@media only screen and (max-width: 1150px) {
-  .secondary-btn-border {
-    padding: 0.4em 0.6em;
-    font-size: 10px;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .listview-box-container {
-    display: flex;
-    flex-wrap: wrap;
+@media only screen and (max-width: 850px) {
+  .listview-container > div {
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: repeat(auto, minmax(200px, 0.2fr));
   }
 
   .listview-inner-container {
-    width: 45%;
-    height: 500px;
+    min-height: 500px;
+    height: auto;
     margin-top: 1em;
     display: flex;
     flex-direction: column;
@@ -93,6 +88,10 @@
 
   .listview-inner-container:not(:last-child) {
     margin-right: 5%;
+  }
+
+  .listview-inner-container .listview-col-1 {
+    flex-direction: column;
   }
 
   .listview-inner-container .image-wrapper {
