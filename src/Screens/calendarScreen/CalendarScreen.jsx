@@ -32,19 +32,13 @@ const CalendarScreen = () => {
   const [value, setValue] = useState(moment())
   const [events, setEvents] = useState(data)
   const [addEvent, setAddEvent] = useState(false)
-  const [titleArray, setTitleArray] = useState([])
-
   useEffect(() => {
-    console.log(buildCalendar(value))
     setCalendar(buildCalendar(value))
   }, [value])
-
-  function addNewEvent (title, time, date) {
-    titleArray.push({ task: title, time })
-    setEvents([...events, { activities: titleArray, date }])
+  function addNewEvent (title, date, time) {
+    setEvents([...events, { activities: { task: title, time }, date }])
     setAddEvent(false)
   }
-
   return (
     <>
       {addEvent && <AddModal addHandler={addNewEvent} showModal={setAddEvent} />}
@@ -52,9 +46,7 @@ const CalendarScreen = () => {
         <CalendarHeader value={value} changeValue={setValue} showModal={setAddEvent} />
         <div className='main-calendar-wrapper'>
           <div className='day-names'>
-            {
-              ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => <div key={d} className='week-header'>{d}</div>)
-            }
+            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => <div key={d} className='week-header'>{d}</div>)}
           </div>
           <Calendar calendar={calendar} value={value} changeValue={setValue} events={events} />
         </div>
@@ -63,7 +55,7 @@ const CalendarScreen = () => {
   )
 }
 
-const AddModal = ({addHandler, showModal}) => {
+const AddModal = ({ addHandler, showModal }) => {
   const [title, setTitle] = useState('')
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
@@ -110,13 +102,13 @@ const CalendarHeader = ({ value, changeValue, showModal }) => {
     <>
       <div className='calendar-top-header'>
         {
-        windowWidth > 650 ?
-          <ul>
+        windowWidth > 650
+          ? <ul>
             {
               nav.map(item => <NavItem item={item} />)
             }
-          </ul>
-        : <SimpleFilter data={nav} />
+            </ul>
+          : <SimpleFilter data={nav} />
         }
       </div>
       <div className='calendar-second-header'>
@@ -189,8 +181,8 @@ const DayComponent = ({ day, events, value, setValue }) => {
               {checkEvents(day).length > 2 && <li className='remaining-act'>{(checkEvents(day).length - 2)}+ events </li>}
             </ul>
           </div>
-          {detailActive && <ToolTip checkEvents={checkEvents} day={day} />}
-        </div>}
+            {detailActive && <ToolTip checkEvents={checkEvents} day={day} />}
+          </div>}
       </div>
     </div>
   )
