@@ -165,8 +165,8 @@ function EnterpriseDetails(props) {
             />
             <Events event="New event for everyone" date="11/24/2020" />
             <Events event="New event for everyone" date="11/24/2020" />
-            <div className="calenderButton">
-              <div className="calenderButton-text ibmplexsans-semi-bold-shark-16px">
+            <div className="calendarButton">
+              <div className="calendarButton-text ibmplexsans-semi-bold-shark-16px">
                 {openInCalendar}
               </div>
             </div>

@@ -4,6 +4,7 @@ import Button from '../Button/Button'
 import { useDispatch } from 'react-redux'
 import { savetextDetail } from '../../actions/newsActions'
 import CollectionModalHeader from './CollectionModalHeader'
+import { InputFields, ErrorText, TextArea } from '../FormUI/FormUI'
 
 const CreateText = ({ textActive, setTextActive }) => {
   const [collectionTitle, setCollectionTitle] = useState()
@@ -35,29 +36,29 @@ const CreateText = ({ textActive, setTextActive }) => {
       {textActive && (
         <div className='collection-modal-container'>
           <div>
-          <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add text' setTextActive={setTextActive} />
-            <div className='photo-input-container'>
-              <input
-                className='default-input-variation'
-                placeholder='Collection title'
-                value={collectionTitle}
-                onChange={(e) => collectionTitleChange(e)}
-              />
-              <p className='error-message'>{collectionTitleError ? 'Please enter Video Description' : ' '} </p>
-
-              <br />
-              <textarea
-                className='default-input-variation'
-                id="text-area-variation-2"
-                placeholder='Type text here '
-                value={collectionDescription}
-                onChange={(e) => collectionDescriptionChange(e)}
-              />
-              <p className='error-message'>{collectionDescriptionError ? 'Please enter Video Description' : ' '} </p>
+            <div className='collection-modal-inner-container'>
+              <CollectionModalHeader title='Add text' clickHandler={setTextActive} />
+              <div className='photo-input-container'>
+                <InputFields
+                  type='text'
+                  className='default-input-variation'
+                  placeholder='Collection title'
+                  value={collectionTitle}
+                  onChange={(e) => collectionTitleChange(e)}
+                />
+                <ErrorText className='error-message' error={collectionTitleError} message='Please enter Video Title' />
+                <br />
+                <TextArea
+                  className='default-input-variation'
+                  id='text-area-variation-2'
+                  placeholder='Type text here '
+                  value={collectionDescription}
+                  onChange={(e) => collectionDescriptionChange(e)}
+                />
+                <ErrorText className='error-message' error={collectionDescriptionError} message='Please enter Video Description' />
+              </div>
+              <Button name='Add block' clickHandler={addText} />
             </div>
-            <Button name='Add block' clickHandler={addText} />
-          </div>
           </div>
         </div>
       )}

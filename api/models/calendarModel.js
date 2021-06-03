@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../config/database.js')
 
-const Enterprises = db.define(
-  'enterprises',
+const Calendar = db.define(
+  'calendars',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -15,14 +15,20 @@ const Enterprises = db.define(
     description: {
       type: Sequelize.TEXT
     },
-    filename: {
-      type: Sequelize.STRING
+    startDate: {
+      type: Sequelize.DATE
     },
-    category: {
-      type: Sequelize.STRING
+    startTime: {
+      type: Sequelize.TIME
+    },
+    endDate: {
+      type: Sequelize.DATE
+    },
+    endTime: {
+      type: Sequelize.TIME
     }
   },
   { timestamps: true }
 )
 
-module.exports = Enterprises
+module.exports = Calendar

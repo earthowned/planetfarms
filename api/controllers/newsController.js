@@ -19,11 +19,16 @@ const getNews = (req, res) => {
 // @route   POST /api/News/add
 // @access  Public
 const addNews = (req, res) => {
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
   const {
     title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category
   } = req.body
   News.create({
     // _attachments: 'uploads/' + req.file.filename,
+    _attachments: filename,
     title,
     message,
     docType,

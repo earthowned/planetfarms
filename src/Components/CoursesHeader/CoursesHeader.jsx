@@ -97,7 +97,7 @@ const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCour
             {
               pathname === '/admin/courses'
                 ? <button className='default-btn' onClick={() => setCreateCourse(true)}>Add new Courses</button>
-                : <button className='default-btn' onClick={() => setActive(true)}>Add Courses</button>
+                : <button className='default-btn' onClick={() => setCreateCourse(true)}>Add Courses</button>
             }
           </div>
 

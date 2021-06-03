@@ -92,8 +92,9 @@ function MainNav ({ dropdownActive, setDropdownActive }) {
   }
 
   return (
-    <ul className='list-container'>
-      {
+    <>
+      <ul className='list-container'>
+        {
         mainnav.map(navitem => {
           return (
             <li className={navitem.dropdown.length > 0 ? 'list-items' : 'list-items-menu'} key={navitem.name}>
@@ -133,6 +134,7 @@ function MainNav ({ dropdownActive, setDropdownActive }) {
           )
         })
       }
-    </ul>
+      </ul>
+    </>
   )
 }

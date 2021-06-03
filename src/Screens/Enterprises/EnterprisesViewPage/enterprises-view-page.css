@@ -145,7 +145,7 @@
   width: 376px;
 }
 
-.calenderButton {
+.calendarButton {
   align-items: center;
   align-self: flex-start;
   background-color: var(--primary-color);
@@ -187,7 +187,7 @@
   width: 376px;
 }
 
-.calenderButton-text {
+.calendarButton-text {
   letter-spacing: 0;
   line-height: 24px;
   min-height: 24px;

@@ -1,17 +1,20 @@
 import { useState } from 'react'
-import '../EnterprisesCollection/enterprises-collection.css';
+import './form-modal.css'
+import '../EnterprisesCollection/enterprises-collection.css'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createGroup } from '../../actions/communityGroupActions'
 import { createEnterprise } from '../../actions/enterpriseAction'
 import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
+import { InputFields, SelectFields, ErrorText, SubmitButton } from '../FormUI/FormUI'
 import DragDrop from '../DragDrop/DragDrop'
 
-const GroupFromModal = ({ setActive, openAddCollection }) => {
+const FromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()
   const [roleActive, setRoleActive] = useState(false)
   const [groupTitle, setGroupTitle] = useState('')
   const [groupDescription, setGroupDescription] = useState('')
+  const [categoryId, setCategoryId] = useState('')
   const [groupTitleError, setGroupTitleError] = useState(false)
   const [groupDescriptionError, setGroupDescriptionError] = useState(false)
 
@@ -21,9 +24,7 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
   const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
 
   const dispatch = useDispatch()
-
   const { pathname } = useLocation()
-
   const groupTitleChange = (e) => {
     setGroupTitle(e.target.value)
     setGroupTitleError(false)
@@ -40,7 +41,12 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
     if (!groupDescription) setGroupDescriptionError(true)
     if (groupTitle && groupDescription) {
       dispatch(
-        createGroup({ title: groupTitle, description: groupDescription })
+        createGroup({
+          title: groupTitle,
+          category: categoryId,
+          description: groupDescription,
+          file: files
+        })
       )
       setActive(false)
     }
@@ -65,7 +71,9 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
       dispatch(
         createEnterprise({
           title: enterpriseTitle,
-          description: enterpriseDescription
+          description: enterpriseDescription,
+          file: files,
+          category: categoryId
         })
       )
       setActive(false)
@@ -75,132 +83,103 @@ const GroupFromModal = ({ setActive, openAddCollection }) => {
   return (
     <>
       <div className='collection-modal-container'>
-        <div className='collection-modal-inner-container'>
-          {pathname === '/community-group' && (
-            <>
-              <CollectionModalHeader
-                title='Create Group'
-                setGroupActive={setActive}
-              />
-              <DragDrop files={files}  onChange={setFiles} />
-              <div className='collection-input-container'>
-                <InputFields
-                  className='default-input-variation'
-                  error={groupTitleError}
-                  onChange={(e) => groupTitleChange(e)}
-                  placeholder='Group title'
+        <div>
+          <div className='collection-modal-inner-container'>
+            {pathname === '/community-group' && (
+              <>
+                <CollectionModalHeader title='Create Group' clickHandler={setActive} />
+                <DragDrop files={files} onChange={setFiles} />
+                <div className='collection-input-container'>
+                  <InputFields
+                    className='default-input-variation'
+                    error={groupTitleError}
+                    onChange={(e) => groupTitleChange(e)}
+                    placeholder='Group title'
+                  />
+                  <ErrorText
+                    className='error-message'
+                    Error={groupTitleError}
+                    message='Group Title'
+                  />
+                  <br />
+                  <InputFields
+                    className='default-input-variation text-area-variation'
+                    error={groupDescriptionError}
+                    onChange={(e) => groupDescriptionChange(e)}
+                    placeholder='Group description'
+                  />
+                  <ErrorText
+                    className='error-message'
+                    Error={groupDescriptionError}
+                    message='Group Description'
+                  />
+                  <br />
+                  <SelectFields
+                    className='default-input-variation'
+                    option={['Select Category', 'Farmers', 'Business', 'Accounting']}
+                    onClick={(e) => setCategoryId(e.target.value)}
+                  />
+                </div>
+                <SubmitButton
+                  className='default-btn btn-size'
+                  onClick={handleAddGroup}
+                  title='Submit'
                 />
-                <ErrorText
-                  className='error-message'
-                  Error={groupTitleError}
-                  message='Group Title'
-                />
-                <br />
-                <InputFields
-                  className='default-input-variation text-area-variation'
-                  error={groupDescriptionError}
-                  onChange={(e) => groupDescriptionChange(e)}
-                  placeholder='Group description'
-                />
-                <ErrorText
-                  className='error-message'
-                  Error={groupDescriptionError}
-                  message='Group Description'
-                />
-                <br />
-                <select className='default-input-variation'>
-                  <option>Select category</option>
-                  <option>Farmer</option>
-                  <option>Mentor</option>
-                  <option>Business</option>
-                </select>
-              </div>
-              <SubmitButton className='default-btn btn-size' onClick={handleAddGroup} title='Submit' />
-            </>
-          )}
+              </>
+            )}
 
-          {pathname === '/enterprises' && (
-            <>
-              <CollectionModalHeader
-                title='Create Enterprises'
-                setEnterpriseActive={setActive}
-              />
-              <DragDrop files={files} onChange={setFiles}/>
-              <div className='collection-input-container'>
-                <InputFields
-                  type='text'
-                  placeholder='Enterprise Title'
-                  onChange={(e) => enterpriseTitleChange(e)}
-                  className='default-input-variation'
-                  error={enterpriseTitleError}
+            {pathname === '/enterprises' && (
+              <>
+                <CollectionModalHeader
+                  title='Create Enterprises'
+                  clickHandler={setActive}
                 />
-
-                <ErrorText
-                  className='error-message'
-                  Error={enterpriseTitleError}
-                  message='Enterprise Title'
-                />
-
-                <br />
-                <InputFields
-                  className='default-input-variation text-area-variation'
-                  placeholder='Enterprise description'
-                  error={enterpriseDescriptionError}
-                  onChange={(e) => enterpriseDescriptionChange(e)}
-                />
-                <ErrorText
-                  className='error-message'
-                  Error={enterpriseDescriptionError}
-                  message='Enterprise Description'
-                />
-                <select className='default-input-variation'>
-                  <option>Select category</option>
-                  <option>Farmers</option>
-                </select>
-              </div>
-              <div style={{ display: 'flex', marginTop: '18px' }}>
-                <SubmitButton className='default-btn btn-size' onClick={handleAddEnterprise} title='Submit' />
-              </div>
-            </>
-          )}
+                <DragDrop files={files} onChange={setFiles} />
+                <div className='collection-input-container'>
+                  <InputFields
+                    type='text'
+                    placeholder='Enterprise Title'
+                    onChange={(e) => enterpriseTitleChange(e)}
+                    className='default-input-variation'
+                    error={enterpriseTitleError}
+                  />
+                  <ErrorText
+                    className='error-message'
+                    Error={enterpriseTitleError}
+                    message='Enterprise Title'
+                  />
+                  <br />
+                  <InputFields
+                    className='default-input-variation text-area-variation'
+                    placeholder='Enterprise description'
+                    error={enterpriseDescriptionError}
+                    onChange={(e) => enterpriseDescriptionChange(e)}
+                  />
+                  <ErrorText
+                    className='error-message'
+                    Error={enterpriseDescriptionError}
+                    message='Enterprise Description'
+                  />
+                  <SelectFields
+                    className='default-input-variation'
+                    option={['Select Category', 'Farmers', 'Business']}
+                    onClick={(e) => setCategoryId(e.target.value)}
+                  />
+                </div>
+                <div style={{ display: 'flex', marginTop: '18px' }}>
+                  <SubmitButton
+                    className='default-btn btn-size'
+                    onClick={handleAddEnterprise}
+                    title='Submit'
+                  />
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>
   )
 }
 
-export default GroupFromModal
-
-const InputFields = (props) => {
-  return (
-    <>
-      <input
-        type={props.type}
-        placeholder={props.placeholder}
-        onChange={props.onChange}
-        className={props.className}
-        error={props.error}
-      />
-    </>
-  )
-}
-
-const ErrorText = (props) => {
-  return (
-    <>
-      <p className={props.className}>
-        {props.Error ? `Please enter ${props.message}` : ''}
-      </p>
-    </>
-  )
-}
-
-const SubmitButton = (props) => {
-  return (
-    <>
-      <button className={props.className} onClick={props.onClick}>
-        {props.title}
-      </button>
-    </>
-  )
-}
+export default FromModal
