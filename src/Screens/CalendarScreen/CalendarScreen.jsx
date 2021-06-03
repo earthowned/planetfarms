@@ -11,7 +11,7 @@ import buildCalendar from '../../Components/Calendar/build'
 import dayStyles from '../../Components/Calendar/styles'
 import useSizeFinder from '../../utils/SizeFinder'
 import SimpleFilter from '../../Components/SimpleFilter/SimpleFilter'
-import data from './eventsData';
+import data from './eventsData'
 const nav = [
   {
     label: 'My events',
@@ -31,21 +31,21 @@ const CalendarScreen = () => {
   const [calendar, setCalendar] = useState([])
   const [value, setValue] = useState(moment())
   const [addEvent, setAddEvent] = useState(false)
-  const [events, setEvents] = useState(data);
-  const [title, setTitle] = useState('');
-  const [titleArray, setTitleArray] = useState([]);
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const [events, setEvents] = useState(data)
+  const [title, setTitle] = useState('')
+  const [titleArray, setTitleArray] = useState([])
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
 
   useEffect(() => {
     setCalendar(buildCalendar(value))
   }, [value])
 
   function addNewEvent (e) {
-    e.preventDefault();
-    titleArray.push({task: title, time});    
-    setEvents([...events, {activities: titleArray, date}]);
-    setAddEvent(false);
+    e.preventDefault()
+    titleArray.push({ task: title, time })
+    setEvents([...events, { activities: titleArray, date }])
+    setAddEvent(false)
   }
 
   return (
@@ -58,14 +58,14 @@ const CalendarScreen = () => {
           </div>
           <div className='calendar-input-container'>
             <Input name='Title' text={title} changeHandler={(e) => setTitle(e.target.value)} />
-            <div className="date-time-container">
+            <div className='date-time-container'>
               <Input name='Choose date' text={date} changeHandler={(e) => setDate(e.target.value)} />
               <Input name='Start time' text={time} changeHandler={(e) => setTime(e.target.value)} />
             </div>
           </div>
           <button className='calendar-member-add'><img src='/img/plus.svg' alt='add icon' /><span>Add member</span></button>
           <div className='calendar-modal-btn'>
-            <button name='Add event' onClick={(e) => addNewEvent(e)} >Add event</button>
+            <button name='Add event' onClick={(e) => addNewEvent(e)}>Add event</button>
           </div>
 
         </div>
@@ -100,29 +100,29 @@ const NavItem = ({ item }) => {
 }
 
 const CalendarHeader = ({ value, setValue, setAddEvent }) => {
-  const windowWidth = useSizeFinder();
+  const windowWidth = useSizeFinder()
   return (
     <>
       <div className='calendar-top-header'>
         {
-        windowWidth > 650 
-        ? <ul>
-          {
+        windowWidth > 650
+          ? <ul>
+            {
               nav.map(item => <NavItem item={item} />)
           }
-        </ul>
-        : <SimpleFilter data={nav} />
+            </ul>
+          : <SimpleFilter data={nav} />
         }
       </div>
       <div className='calendar-second-header'>
         <div className='main-calendar-header'>
           <div className='row-1'>
             <div>
-            <h3 className="calendar-date-header">{currMonthName(value)} {currYearName(value)}</h3>
-            <div className='date-indicator'>
-              <span onClick={() => setValue(prevMonth(value))}>{String.fromCharCode(60)}</span>
-              <span onClick={() => setValue(nextMonth(value))}>{String.fromCharCode(62)}</span>
-            </div>
+              <h3 className='calendar-date-header'>{currMonthName(value)} {currYearName(value)}</h3>
+              <div className='date-indicator'>
+                <span onClick={() => setValue(prevMonth(value))}>{String.fromCharCode(60)}</span>
+                <span onClick={() => setValue(nextMonth(value))}>{String.fromCharCode(62)}</span>
+              </div>
             </div>
             <button className='secondary-btn main-cal-btn' onClick={() => setValue(moment())}>Today</button>
           </div>
@@ -137,7 +137,7 @@ const CalendarHeader = ({ value, setValue, setAddEvent }) => {
 
 const Calendar = ({ calendar, value, setValue, events }) => {
   return (
-    <div className="week-container">
+    <div className='week-container'>
       {
                 calendar.map(week => <div key={week} className='week'>
                   {
@@ -149,9 +149,9 @@ const Calendar = ({ calendar, value, setValue, events }) => {
   )
 }
 
-const DayComponent = ({day, events, value, setValue}) => {
-  const windowWidth = useSizeFinder();
-  const [detailActive, setDetailActive] = useState(false);
+const DayComponent = ({ day, events, value, setValue }) => {
+  const windowWidth = useSizeFinder()
+  const [detailActive, setDetailActive] = useState(false)
 
   // checking for the events and gathering activiites
   function checkEvents (day) {
@@ -165,27 +165,28 @@ const DayComponent = ({day, events, value, setValue}) => {
   }
 
   function changeDate () {
-    setDetailActive(!detailActive);
+    setDetailActive(!detailActive)
   }
 
   return (
     <div key={day} className='day' onClick={() => setValue(day)}>
-        <div className={dayStyles(day, value)}>
-          <span>{windowWidth > 650 && day.format('MMM').toString()} {day.format('D').toString()}</span>
-              {checkEvents(day).length > 0 
-              && <div className='activities-container' onClick={changeDate}><div className='activities'>
-                    <ul>
-                        {
+      <div className={dayStyles(day, value)}>
+        <span>{windowWidth > 650 && day.format('MMM').toString()} {day.format('D').toString()}</span>
+        {checkEvents(day).length > 0 &&
+          <div className='activities-container' onClick={changeDate}><div className='activities'>
+            <ul>
+              {
                             checkEvents(day).slice(0, 2).map(item => <li key={item.task}>
-                            <span className="task-time">{windowWidth < 950 && (item.time || item.task)}</span>
-                            <span>{windowWidth > 950 && item.time} {windowWidth > 950 && item.task}</span></li>)
+                              <span className='task-time'>{windowWidth < 950 && (item.time || item.task)}</span>
+                              <span>{windowWidth > 950 && item.time} {windowWidth > 950 && item.task}</span>
+                            </li>)
                         }
-                        {checkEvents(day).length > 2 && <li className='remaining-act'>{(checkEvents(day).length - 2)}+ events </li>}
-                    </ul>
-                </div>
-                {detailActive && <ToolTip checkEvents={checkEvents} day={day} />}
-            </div>}
-        </div>
+              {checkEvents(day).length > 2 && <li className='remaining-act'>{(checkEvents(day).length - 2)}+ events </li>}
+            </ul>
+                                                                     </div>
+            {detailActive && <ToolTip checkEvents={checkEvents} day={day} />}
+          </div>}
+      </div>
     </div>
   )
 }
@@ -199,9 +200,10 @@ const ToolTip = ({ checkEvents, day }) => {
       <ul>
         {
                 checkEvents(day).map(item => {
-                  return (<>
-                  <ToolTipLink item={item} />
-                  </>
+                  return (
+                    <>
+                      <ToolTipLink item={item} />
+                    </>
                   )
                 })
             }
@@ -210,18 +212,18 @@ const ToolTip = ({ checkEvents, day }) => {
   )
 }
 
-const ToolTipLink = ({item}) => {
+const ToolTipLink = ({ item }) => {
   return (
     <>
-    <li key={item.task}><span>{item.time} {item.task}</span></li>
-      <div className="task-edit-option">
+      <li key={item.task}><span>{item.time} {item.task}</span></li>
+      <div className='task-edit-option'>
         <ul>
-            <li><img src="/img/follow-icon.svg" alt="add members" /> <p>Add members</p></li>
-            <li><img src="/img/edit-icon.svg" alt="edit events"/> <p>Edit event</p></li>
-            <li><img src="/img/trash-icon.svg" alt="delete events"/> <p>Delete event</p></li>
+          <li><img src='/img/follow-icon.svg' alt='add members' /> <p>Add members</p></li>
+          <li><img src='/img/edit-icon.svg' alt='edit events' /> <p>Edit event</p></li>
+          <li><img src='/img/trash-icon.svg' alt='delete events' /> <p>Delete event</p></li>
         </ul>
       </div>
-  </>
+    </>
   )
 }
 

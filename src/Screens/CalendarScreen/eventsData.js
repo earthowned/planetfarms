@@ -4,7 +4,7 @@ const data = [
       {
         task: 'take a new course',
         time: '04:00 pm'
-      }, 
+      },
       {
         task: 'Perform an art',
         time: '01:00 am'
@@ -16,16 +16,16 @@ const data = [
       {
         task: 'Perform an art',
         time: ''
-      },
+      }
     ],
-    date: '2021-6-16',
+    date: '2021-6-16'
   },
   {
     activities: [
       {
         task: 'take a new course',
         time: '04:00 pm'
-      }, 
+      },
       {
         task: 'Perform an art',
         time: '01:00 am'
@@ -35,7 +35,7 @@ const data = [
         time: ''
       }
     ],
-    date: '2021-6-17',
+    date: '2021-6-17'
   },
   {
     activities: [
@@ -46,10 +46,10 @@ const data = [
       {
         task: 'Perform an art',
         time: ''
-      },
+      }
     ],
-    date: '2021-6-18',
-  },
+    date: '2021-6-18'
+  }
 ]
 
-export default data;
+export default data

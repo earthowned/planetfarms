@@ -7,7 +7,7 @@ import buildCalendar from './build'
 import './calendar.css'
 import CalendarHeader from './Header'
 import dayStyles from './styles'
-import events from "../../Screens/CalendarScreen/eventsData";
+import events from '../../Screens/CalendarScreen/eventsData'
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState([])
@@ -40,7 +40,7 @@ const Calendar = () => {
 }
 
 const CalendarBody = ({ calendar, value, checkEvents, setValue }) => {
-  const history = useHistory();
+  const history = useHistory()
   const eventNode = useRef()
   function goCalendar (day) {
     events.forEach(item => {
