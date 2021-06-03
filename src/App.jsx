@@ -39,7 +39,7 @@ import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCourse
 import AddLesson from './Screens/CourseManager/AddLesson/AddLesson'
 import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
 import Amplify, { Auth } from 'aws-amplify'
-import CalendarScreen from './Screens/CalendarScreen/CalendarScreen'
+import CalendarScreen from './Screens/calendarScreen/CalendarScreen'
 
 function App () {
   return (
