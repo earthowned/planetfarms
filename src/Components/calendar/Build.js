@@ -6,15 +6,15 @@ export default function buildCalendar (value) {
     buildDates(calendar, startDay)
   }
   if (calendar.length === 5) {
-    buildDates(calendar, startDay);
+    buildDates(calendar, startDay)
   }
   return calendar
 }
 
-function buildDates(calendar, startDay) {
+function buildDates (calendar, startDay) {
   calendar.push(
-     Array(7)
-    .fill(0)
-    .map(() => startDay.add(1, 'day').clone())
+    Array(7)
+      .fill(0)
+      .map(() => startDay.add(1, 'day').clone())
   )
 }

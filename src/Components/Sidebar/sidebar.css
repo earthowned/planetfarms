@@ -107,6 +107,58 @@
   margin-bottom: 24px;
 }
 
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: absolute;
+  background: transparent;
+  outline: none;
+  border: none;
+  left: 235px;
+  top: 204px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav-icon:hover {
+  transform: scale(1.2);
+}
+
+.nav-icon img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.list-container .text-passive {
+  background: var(--primary-black);
+  width: 100%;
+  border-radius: 4px;
+  height: 50px;
+  padding: 1.2rem;
+}
+
+.list-container .text-active {
+  background: var(--primary-color);
+  fill: var(--background-color);
+  margin-top: 0.8em;
+}
+
+.list-container .text-menu {
+  width: 100%;
+  border-radius: 4px;
+  height: 50px;
+  padding: 1.2rem;
+  margin-top: 0.8em;
+  cursor: pointer;
+}
+
+.list-container.active .text-passive {
+  background: none;
+}
+
 .sidebar-container.active .logo-container {
   align-items: center;
   justify-content: center;
@@ -157,31 +209,6 @@
   margin-left: 42px;
 }
 
-.nav-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  position: absolute;
-  background: transparent;
-  outline: none;
-  border: none;
-  left: 235px;
-  top: 204px;
-  cursor: pointer;
-  transition: all 0.5s ease-in-out;
-}
-
-.nav-icon:hover {
-  transform: scale(1.2);
-}
-
-.nav-icon img {
-  object-fit: contain;
-  object-position: center;
-  width: 100%;
-  height: 100%;
-}
-
 .nav-link {
   text-decoration: none;
   color: var(--primary-white);
@@ -189,33 +216,6 @@
 
 .align-content {
   display: flex;
-}
-
-.list-container .text-passive {
-  background: var(--primary-black);
-  width: 100%;
-  border-radius: 4px;
-  height: 50px;
-  padding: 1.2rem;
-}
-
-.list-container .text-active {
-  background: var(--primary-color);
-  fill: var(--background-color);
-  margin-top: 0.8em;
-}
-
-.list-container .text-menu {
-  width: 100%;
-  border-radius: 4px;
-  height: 50px;
-  padding: 1.2rem;
-  margin-top: 0.8em;
-  cursor: pointer;
-}
-
-.list-container.active .text-passive {
-  background: none;
 }
 
 .icon {
