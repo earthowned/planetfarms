@@ -1,0 +1,17 @@
+.banner {
+  @media only screen and (max-width: 1024px) {
+    display: none;
+  }
+  &__image {
+    align-items: flex-start;
+    display: flex;
+    overflow: hidden;
+    width: 481px;
+  }
+  &__overlap {
+    height: 541px;
+    margin-top: -0.25px;
+    position: relative;
+    width: 481px;
+  }
+}
