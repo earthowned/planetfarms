@@ -34,6 +34,12 @@ const mainnav = [
     slug: '/courses',
     image: '/img/graduation-cap-1.svg',
     dropdown: []
+  },
+  {
+    name: 'Calendar',
+    slug: '/calendar/my-events',
+    image: '/img/calendar-icon.svg',
+    dropdown: []
   }
 ]
 
@@ -42,11 +48,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
   const history = useHistory()
   const handleToggle = () => {
     setToggle(!toggle)
-    if (toggle === true) {
-      setDropdownActive(false)
-    } else {
-      setDropdownActive(true)
-    }
+    setDropdownActive(!toggle)
   }
 
   return (
@@ -63,7 +65,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
                   ? <img className='logo' src='/img/logo.svg' alt='full logo' />
                   : <img className='logo-2' src='/img/p-icon.svg' alt='p-icon logo' />}
               </div>
-              <MainNav dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
+              <MainNav navMenu={mainnav.slice(0, -1)} dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
             </div>
             <div className='bg-calendar'><Calendar /></div>
             <div className='sm-calendar'><img
@@ -75,7 +77,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
           </div>
           </>
         : <div className={`mobile-view-dropdown-container ${burgerActive && 'slide'}`}>
-          <MainNav dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
+          <MainNav navMenu={mainnav} dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
           </div>
     }
     </>
@@ -84,7 +86,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
 
 export default Sidebar
 
-function MainNav ({ dropdownActive, setDropdownActive }) {
+function MainNav ({ dropdownActive, setDropdownActive, navMenu}) {
   const history = useHistory()
   const { pathname } = useLocation()
   const handleOnClick = () => {
@@ -95,7 +97,7 @@ function MainNav ({ dropdownActive, setDropdownActive }) {
     <>
       <ul className='list-container'>
         {
-        mainnav.map(navitem => {
+        navMenu.map(navitem => {
           return (
             <li className={navitem.dropdown.length > 0 ? 'list-items' : 'list-items-menu'} key={navitem.name}>
               <div

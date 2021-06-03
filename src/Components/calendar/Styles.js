@@ -15,9 +15,11 @@ function isToday (day) {
 }
 
 export default function dayStyles (day, value) {
-  if (beforeMonth(day, value)) return 'before'
-  if (afterMonth(day, value)) return 'before'
-  if (isSelected(day, value)) return 'selected'
-  if (isToday(day)) return 'today'
-  return ''
+  return beforeMonth(day, value) ? 'before' : (
+    afterMonth(day, value) ? 'after' : (
+      isSelected(day, value) ? 'selected' : (
+        isToday(day) ? 'today' : ''
+      )
+    )
+  )
 }

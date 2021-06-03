@@ -189,46 +189,12 @@
   height: 100%;
 }
 
-.tooltip ul li:hover + .task-edit-option {
-  display: flex;
-}
-
-.tooltip ul li span:before {
+.tooltip ul li span::before {
   content: "\2022";
   color: var(--primary-color);
   font-weight: bold;
   display: inline-block;
   width: 1em;
-}
-
-.tooltip .task-edit-option {
-  display: none;
-  background: var(--dropdowns);
-  padding: 16px;
-  position: absolute;
-  right: -280px;
-  bottom: -30px;
-  width: auto;
-}
-
-.tooltip .task-edit-option ul {
-  width: 280px;
-  height: 168px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.tooltip .task-edit-option ul li {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100px;
-}
-
-.tooltip .task-edit-option ul li p {
-  margin-left: 10px;
 }
 
 .activities {
@@ -252,6 +218,40 @@
 .activities ul li {
   padding: 0;
   margin-bottom: 8px;
+}
+
+.tooltip .task-edit-option {
+  display: none;
+  background: var(--dropdowns);
+  padding: 16px;
+  position: absolute;
+  right: -280px;
+  bottom: -30px;
+  width: auto;
+}
+
+.tooltip ul li:hover + .task-edit-option {
+  display: flex;
+}
+
+.tooltip .task-edit-option ul {
+  width: 280px;
+  height: 168px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.tooltip .task-edit-option ul li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100px;
+}
+
+.tooltip .task-edit-option ul li p {
+  margin-left: 10px;
 }
 
 .activities ul li span:last-child {

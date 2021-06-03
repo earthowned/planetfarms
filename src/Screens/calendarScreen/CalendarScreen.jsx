@@ -30,19 +30,16 @@ const nav = [
 const CalendarScreen = () => {
   const [calendar, setCalendar] = useState([])
   const [value, setValue] = useState(moment())
-  const [addEvent, setAddEvent] = useState(false)
   const [events, setEvents] = useState(data)
-  const [title, setTitle] = useState('')
+  const [addEvent, setAddEvent] = useState(false)
   const [titleArray, setTitleArray] = useState([])
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
 
   useEffect(() => {
+    console.log(buildCalendar(value))
     setCalendar(buildCalendar(value))
   }, [value])
 
-  function addNewEvent (e) {
-    e.preventDefault()
+  function addNewEvent (title, time, date) {
     titleArray.push({ task: title, time })
     setEvents([...events, { activities: titleArray, date }])
     setAddEvent(false)
@@ -50,38 +47,46 @@ const CalendarScreen = () => {
 
   return (
     <>
-      {addEvent && <div className='calendar-modal-container'>
-        <div className='calendar-modal-inner-container'>
-          <div className='calendar-modal-header'>
-            <h4>Add new event</h4>
-            <button onClick={() => setAddEvent(false)}><img src='/img/close-outline.svg' alt='close-outline' /></button>
-          </div>
-          <div className='calendar-input-container'>
-            <Input name='Title' text={title} changeHandler={(e) => setTitle(e.target.value)} />
-            <div className='date-time-container'>
-              <Input name='Choose date' text={date} changeHandler={(e) => setDate(e.target.value)} />
-              <Input name='Start time' text={time} changeHandler={(e) => setTime(e.target.value)} />
-            </div>
-          </div>
-          <button className='calendar-member-add'><img src='/img/plus.svg' alt='add icon' /><span>Add member</span></button>
-          <div className='calendar-modal-btn'>
-            <button name='Add event' onClick={(e) => addNewEvent(e)}>Add event</button>
-          </div>
-
-        </div>
-                   </div>}
+      {addEvent && <AddModal addHandler={addNewEvent} showModal={setAddEvent} />}
       <DashboardLayout title='Calendar'>
-        <CalendarHeader value={value} setValue={setValue} setAddEvent={setAddEvent} />
+        <CalendarHeader value={value} changeValue={setValue} showModal={setAddEvent} />
         <div className='main-calendar-wrapper'>
           <div className='day-names'>
             {
               ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => <div key={d} className='week-header'>{d}</div>)
             }
           </div>
-          <Calendar calendar={calendar} value={value} setValue={setValue} events={events} />
+          <Calendar calendar={calendar} value={value} changeValue={setValue} events={events} />
         </div>
       </DashboardLayout>
     </>
+  )
+}
+
+const AddModal = ({addHandler, showModal}) => {
+  const [title, setTitle] = useState('')
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+  return (
+    <div className='calendar-modal-container'>
+      <div className='calendar-modal-inner-container'>
+        <div className='calendar-modal-header'>
+          <h4>Add new event</h4>
+          <button onClick={() => showModal(false)}><img src='/img/close-outline.svg' alt='close-outline' /></button>
+        </div>
+        <div className='calendar-input-container'>
+          <Input name='Title' text={title} changeHandler={(e) => setTitle(e.target.value)} />
+          <div className='date-time-container'>
+            <Input name='Choose date' text={date} changeHandler={(e) => setDate(e.target.value)} />
+            <Input name='Start time' text={time} changeHandler={(e) => setTime(e.target.value)} />
+          </div>
+        </div>
+        <button className='calendar-member-add'><img src='/img/plus.svg' alt='add icon' /><span>Add member</span></button>
+        <div className='calendar-modal-btn'>
+          <button name='Add event' onClick={(e) => addHandler(title, date, time)}>Add event</button>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -99,19 +104,19 @@ const NavItem = ({ item }) => {
   )
 }
 
-const CalendarHeader = ({ value, setValue, setAddEvent }) => {
+const CalendarHeader = ({ value, changeValue, showModal }) => {
   const windowWidth = useSizeFinder()
   return (
     <>
       <div className='calendar-top-header'>
         {
-        windowWidth > 650
-          ? <ul>
+        windowWidth > 650 ?
+          <ul>
             {
               nav.map(item => <NavItem item={item} />)
-          }
-            </ul>
-          : <SimpleFilter data={nav} />
+            }
+          </ul>
+        : <SimpleFilter data={nav} />
         }
       </div>
       <div className='calendar-second-header'>
@@ -120,14 +125,14 @@ const CalendarHeader = ({ value, setValue, setAddEvent }) => {
             <div>
               <h3 className='calendar-date-header'>{currMonthName(value)} {currYearName(value)}</h3>
               <div className='date-indicator'>
-                <span onClick={() => setValue(prevMonth(value))}>{String.fromCharCode(60)}</span>
-                <span onClick={() => setValue(nextMonth(value))}>{String.fromCharCode(62)}</span>
+                <span onClick={() => changeValue(prevMonth(value))}>{String.fromCharCode(60)}</span>
+                <span onClick={() => changeValue(nextMonth(value))}>{String.fromCharCode(62)}</span>
               </div>
             </div>
-            <button className='secondary-btn main-cal-btn' onClick={() => setValue(moment())}>Today</button>
+            <button className='secondary-btn main-cal-btn' onClick={() => changeValue(moment())}>Today</button>
           </div>
           <div className='row-2'>
-            <Button name='Add new event' clickHandler={() => setAddEvent(true)} />
+            <Button name='Add new event' clickHandler={() => showModal(true)} />
           </div>
         </div>
       </div>
@@ -135,16 +140,16 @@ const CalendarHeader = ({ value, setValue, setAddEvent }) => {
   )
 }
 
-const Calendar = ({ calendar, value, setValue, events }) => {
+const Calendar = ({ calendar, value, changeValue, events }) => {
   return (
     <div className='week-container'>
       {
-                calendar.map(week => <div key={week} className='week'>
-                  {
-                            week.map(day => <DayComponent day={day} events={events} value={value} setValue={setValue} />)
-                        }
-                </div>)
-                }
+        calendar.map(week => <div key={week} className='week'>
+          {
+            week.map(day => <DayComponent day={day} events={events} value={value} setValue={changeValue} />)
+          }
+        </div>)
+      }
     </div>
   )
 }
@@ -176,16 +181,16 @@ const DayComponent = ({ day, events, value, setValue }) => {
           <div className='activities-container' onClick={changeDate}><div className='activities'>
             <ul>
               {
-                            checkEvents(day).slice(0, 2).map(item => <li key={item.task}>
-                              <span className='task-time'>{windowWidth < 950 && (item.time || item.task)}</span>
-                              <span>{windowWidth > 950 && item.time} {windowWidth > 950 && item.task}</span>
-                            </li>)
-                        }
+                checkEvents(day).slice(0, 2).map(item => <li key={item.taskId}>
+                  <span className='task-time'>{windowWidth < 950 && (item.time || item.task)}</span>
+                  <span>{windowWidth > 950 && item.time} {windowWidth > 950 && item.task}</span>
+                </li>)
+              }
               {checkEvents(day).length > 2 && <li className='remaining-act'>{(checkEvents(day).length - 2)}+ events </li>}
             </ul>
-                                                                     </div>
-            {detailActive && <ToolTip checkEvents={checkEvents} day={day} />}
-          </div>}
+          </div>
+          {detailActive && <ToolTip checkEvents={checkEvents} day={day} />}
+        </div>}
       </div>
     </div>
   )
@@ -199,14 +204,8 @@ const ToolTip = ({ checkEvents, day }) => {
       <p>My events:</p>
       <ul>
         {
-                checkEvents(day).map(item => {
-                  return (
-                    <>
-                      <ToolTipLink item={item} />
-                    </>
-                  )
-                })
-            }
+          checkEvents(day).map(item => <ToolTipLink item={item} />)
+        }
       </ul>
     </div>
   )

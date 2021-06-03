@@ -3,19 +3,23 @@ const data = [
     activities: [
       {
         task: 'take a new course',
-        time: '04:00 pm'
+        time: '04:00 pm',
+        id: 1
       },
       {
         task: 'Perform an art',
-        time: '01:00 am'
+        time: '01:00 am',
+        id: 2
       },
       {
         task: 'Perform an art',
-        time: ''
+        time: '',
+        id: 3
       },
       {
         task: 'Perform an art',
-        time: ''
+        time: '',
+        id: 4
       }
     ],
     date: '2021-6-16'
@@ -24,15 +28,18 @@ const data = [
     activities: [
       {
         task: 'take a new course',
-        time: '04:00 pm'
+        time: '04:00 pm',
+        id: 5
       },
       {
         task: 'Perform an art',
-        time: '01:00 am'
+        time: '01:00 am',
+        id: 6
       },
       {
         task: 'Perform an art',
-        time: ''
+        time: '',
+        id: 7
       }
     ],
     date: '2021-6-17'
@@ -41,11 +48,13 @@ const data = [
     activities: [
       {
         task: 'Perform an art',
-        time: ''
+        time: '',
+        id: 8
       },
       {
         task: 'Perform an art',
-        time: ''
+        time: '',
+        id: 9
       }
     ],
     date: '2021-6-18'
