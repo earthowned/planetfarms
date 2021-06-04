@@ -58,6 +58,7 @@
 .list-items .dropdown-container {
   transition: all 0.5s 1s ease-in-out;
   display: block;
+  overflow: hidden;
 }
 
 .list-container {
@@ -92,6 +93,7 @@
 
 .dropdown-item:hover {
   background: var(--primary-color);
+  color: var(--background-color);
 }
 
 .bg-calendar {
@@ -141,18 +143,45 @@
 }
 
 .list-container .text-active {
+  color: var(--background-color);
   background: var(--primary-color);
   fill: var(--background-color);
   margin-top: 0.8em;
+}
+
+.list-container .text-active .svg-icon path {
+  stroke: var(--background-color);
+}
+
+.list-container .text-active .svg-icon-courses path {
+  fill: var(--background-color);
 }
 
 .list-container .text-menu {
   width: 100%;
   border-radius: 4px;
   height: 50px;
-  padding: 1.2rem;
-  margin-top: 0.8em;
+  padding-left: 24px;
   cursor: pointer;
+  display: flex;
+  font-weight: 600;
+}
+
+.svg-icon {
+  margin-right: 8px;
+}
+
+.svg-icon path {
+  stroke: var(--primary-color);
+  fill: none;
+}
+
+.svg-icon-courses {
+  margin-right: 8px;
+}
+
+.svg-icon-courses path {
+  fill: (--primary-color);
 }
 
 .list-container.active .text-passive {
@@ -173,8 +202,10 @@
   background: none;
 }
 
-.sidebar-container.active .dropdown-item {
-  display: none;
+.sidebar-container.active .dropdown-item strong {
+  margin-left: -6px;
+  font-size: 11px;
+  text-align: center;
 }
 
 .sidebar-container.active .list-items-menu span {
@@ -216,6 +247,7 @@
 
 .align-content {
   display: flex;
+  align-items: center;
 }
 
 .icon {
