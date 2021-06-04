@@ -21,8 +21,9 @@
 }
 
 .community-news-second-header button {
-  width: 20%;
+  width: 248px;
   height: 48px;
+  margin-left: 40px;
 }
 
 .community-page-news-section {
@@ -61,7 +62,9 @@
   margin-top: 1em;
 }
 
-.community-news-right-bar-inner-container .community-news-filter-container h6:not(:last-child) {
+.community-news-right-bar-inner-container
+  .community-news-filter-container
+  h6:not(:last-child) {
   margin-right: 1em;
 }
 
@@ -85,10 +88,6 @@
 
   .community-news-second-header {
     margin-bottom: 24px;
-  }
-
-  .community-news-second-header button {
-    width: 20%;
   }
 
   .community-page-news-section {
@@ -115,6 +114,7 @@
   .community-news-second-header button {
     width: 100%;
     margin-top: 24px;
+    margin-left: 0;
   }
 
   .search-container-news {

@@ -44,7 +44,7 @@
   text-transform: capitalize;
 }
 
-.btn-container {
+.messenger-btn-container {
   margin: 24px 0;
 }
 
@@ -90,6 +90,7 @@
 /* mobile-btn styling */
 .mobile-btn {
   width: 100px;
+  margin-top: 24px;
   margin-bottom: 0.6em;
   padding: 0.6em 0;
 }

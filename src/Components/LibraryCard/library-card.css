@@ -2,7 +2,6 @@
   width: clamp(90%, 80%, 90%);
   display: flex;
   flex-wrap: wrap;
-  margin: 2em 0;
 }
 
 .libraryCard-inner-container {

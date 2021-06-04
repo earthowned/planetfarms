@@ -22,7 +22,6 @@
   background-color: #141414;
   transition: all 0.5s ease-in-out;
   border: 1px solid #3a3939;
-  padding-top: 2.6em;
 }
 
 /* when sidebar is active */
@@ -30,7 +29,6 @@
   width: 4%;
   overflow: hidden;
   padding: 0;
-  padding-top: 20px;
 }
 
 .sidebar-container.active .logo-container .img-container {
@@ -77,7 +75,7 @@
 
 /* default btn styling */
 .default-btn {
-  background: #029c6b;
+  background: var(--primary-color);
   outline: none;
   border: none;
   border-radius: 4px;
@@ -85,6 +83,9 @@
   font-weight: bolder;
   cursor: pointer;
   width: 100%;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .default-btn:hover {

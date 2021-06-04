@@ -1,8 +1,8 @@
 .library-collection {
-  margin-top: 1.5em;
+  margin-top: 24px;
 }
 
 .library-collection h4 {
   color: var(--primary-white);
-  margin: 0;
+  margin: 16px 0;
 }

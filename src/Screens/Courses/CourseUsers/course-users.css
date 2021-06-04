@@ -1,6 +1,7 @@
 .courses-users-collection-header {
   color: var(--primary-white);
-  margin: 16px 0;
+  margin-top: 40px;
+  margin-bottom: 16px;
 }
 
 .courses-users-main-container {
@@ -17,6 +18,7 @@
   justify-content: flex-end;
   padding: 16px;
   border: 1px solid #4f5155;
+  height: 344px;
 }
 
 .courses-users-content h3 {
