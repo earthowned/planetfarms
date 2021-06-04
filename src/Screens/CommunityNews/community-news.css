@@ -63,8 +63,8 @@
 }
 
 .community-news-right-bar-inner-container
-  .community-news-filter-container
-  h6:not(:last-child) {
+.community-news-filter-container
+h6:not(:last-child) {
   margin-right: 1em;
 }
 
