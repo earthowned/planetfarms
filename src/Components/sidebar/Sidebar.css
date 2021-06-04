@@ -1,3 +1,16 @@
+.sidebar-main-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.list-nav-with-logo {
+  width: 100%;
+}
+
 .logo-container {
   width: 100%;
   display: flex;
@@ -81,24 +94,17 @@
   background: var(--primary-color);
 }
 
-.sidebar-container.active .list-items-menu:hover {
-  background: none;
+.bg-calendar {
+  opacity: 1;
+  margin-bottom: 24px;
+  width: 100%;
+  height: 300px;
+  transition: opacity 0.5s 0.2s ease-in;
 }
 
-.sidebar-container.active .list-items:hover {
-  background: none;
-}
-
-.sidebar-container.active .dropdown-item {
+.sm-calendar {
   display: none;
-}
-
-.sidebar-container.active .list-items-menu span {
-  display: none;
-}
-
-.dropdown-item strong {
-  margin-left: 42px;
+  margin-bottom: 24px;
 }
 
 .nav-icon {
@@ -109,7 +115,7 @@
   background: transparent;
   outline: none;
   border: none;
-  left: 12.5%;
+  left: 235px;
   top: 204px;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
@@ -124,15 +130,6 @@
   object-position: center;
   width: 100%;
   height: 100%;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: var(--primary-white);
-}
-
-.align-content {
-  display: flex;
 }
 
 .list-container .text-passive {
@@ -160,6 +157,65 @@
 
 .list-container.active .text-passive {
   background: none;
+}
+
+.sidebar-container.active .logo-container {
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar-container.active .list-items-menu:hover {
+  background: none;
+}
+
+.sidebar-container.active .list-items:hover {
+  background: none;
+}
+
+.sidebar-container.active .dropdown-item {
+  display: none;
+}
+
+.sidebar-container.active .list-items-menu span {
+  display: none;
+}
+
+.sidebar-container.active .list-container img {
+  margin-right: 0;
+}
+
+.sidebar-container.active .list-container .text-menu {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-container.active .list-container .text-menu .align-content span {
+  display: none;
+}
+
+.sidebar-container.active .bg-calendar {
+  opacity: 0;
+  transition: opacity 0s ease-in;
+}
+
+.sidebar-container.active .sm-calendar {
+  display: block;
+}
+
+.dropdown-item strong {
+  margin-left: 42px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--primary-white);
+}
+
+.align-content {
+  display: flex;
 }
 
 .icon {

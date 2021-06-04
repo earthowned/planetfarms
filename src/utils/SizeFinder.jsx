@@ -1,22 +1,21 @@
- import {useState, useEffect} from 'react';
- 
- const useSizeFinder = () => {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+import { useState, useEffect } from 'react'
 
-        useEffect(() => {
-            window.addEventListener("resize", function () {
-            setWindowWidth(window.innerWidth);
-        });
+const useSizeFinder = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
-            return () => {
-            window.removeEventListener("resize",function () {
-            setWindowWidth(window.innerWidth);
-        });
-            }
-        },[windowWidth])
+  useEffect(() => {
+    window.addEventListener('resize', function () {
+      setWindowWidth(window.innerWidth)
+    })
 
-    return windowWidth;
- }
+    return () => {
+      window.removeEventListener('resize', function () {
+        setWindowWidth(window.innerWidth)
+      })
+    }
+  }, [windowWidth])
 
- export default useSizeFinder;
- 
+  return windowWidth
+}
+
+export default useSizeFinder

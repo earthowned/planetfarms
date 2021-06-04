@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import HeaderComponent from '../../Components/Header/HeaderComponent'
-import Sidebar from '../../Components/Sidebar/Sidebar'
+import Sidebar from '../../Components/sidebar/Sidebar'
 import './dashboard.css'
 
 import { Link, useLocation } from 'react-router-dom'
