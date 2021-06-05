@@ -108,11 +108,11 @@
   border: 1px solid var(--primary-color);
 }
 
-input[type=date] {
+input[type="date"] {
   color: var(--primary-grey);
 }
 
-input[type=date]::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator {
   background: transparent;
   width: 68%;
   height: 100%;
