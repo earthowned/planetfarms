@@ -12,6 +12,7 @@ import Button from '../Button/Button'
 import Checkbox from '../Checkbox/Checkbox'
 import Input from '../Input/Input'
 import OauthBtn from '../OauthBtn/OauthBtn'
+import useToggleOnFocus from '../../utils/useToggleOnFocus'
 import './SignInSignUp.scss'
 
 const SignIn = () => {
@@ -98,12 +99,13 @@ const SignIn = () => {
     return dispatch(login(username, password))
   }
 
+  const { show, eventHandlers } = useToggleOnFocus()
+
   return (
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>
       <div className='container'>
         <Input
-          text='username'
           placeholder='Username'
           type='text'
           image='/img/user-green-outline.svg'
@@ -117,10 +119,11 @@ const SignIn = () => {
             }
           })}
           errors={errors}
+          show={show}
+          eventHandlers={eventHandlers}
         />
 
         <Input
-          text='password'
           type='password'
           placeholder='Password'
           image='/img/lock-outline.svg'
@@ -133,6 +136,8 @@ const SignIn = () => {
             }
           })}
           errors={errors}
+          show={show}
+          eventHandlers={eventHandlers}
         />
 
         <div className='remember'>

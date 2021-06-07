@@ -3,7 +3,21 @@ import './input-component.css'
 import { ErrorMessage } from '@hookform/error-message'
 
 const Input = React.forwardRef(
-  ({ image, text, name, value, autoFocus, id, type, errors }, ref) => {
+  (
+    {
+      image,
+      name,
+      value,
+      placeholder,
+      autoFocus,
+      id,
+      type,
+      errors,
+      show,
+      eventHandlers
+    },
+    ref
+  ) => {
     return (
       <>
         <div className='input-container'>
@@ -14,21 +28,17 @@ const Input = React.forwardRef(
               </div>
             )}
             <div className='input-content'>
-              {text ? (
-                <div className='overhead-text'>{name && name}</div>
-              ) : (
-                <div>&nbsp;</div>
-              )}
-
+              {show && <div className='overhead-text'>{placeholder}</div>}
               <input
                 className='username ibmplexsans-regular-normal-monsoon-16px'
-                placeholder={name && name}
+                placeholder={placeholder}
                 value={value}
                 autoFocus={autoFocus === 'autoFocus' && true}
                 name={name}
                 id={id}
                 ref={ref}
                 type={type}
+                {...eventHandlers}
               />
             </div>
           </div>

@@ -10,8 +10,9 @@ import { SignInSignUpData } from './SignInSignUpData'
 
 import Button from '../Button/Button'
 import Checkbox from '../Checkbox/Checkbox'
-import InputComponent from '../Input/InputComponent'
 import OauthBtn from '../OauthBtn/OauthBtn'
+import Input from '../Input/Input'
+import useToggleOnFocus from '../../utils/useToggleOnFocus'
 import './SignInSignUp.scss'
 
 const SignIn = () => {
@@ -21,15 +22,9 @@ const SignIn = () => {
   const history = useHistory()
   const { register, handleSubmit, errors } = useForm()
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [terms, setTerms] = useState(false)
-  const [active, setActive] = useState(false)
 
-  const [userError, setUserError] = useState('')
   const [termsError, setTermsError] = useState(false)
-  const [passwordError, setPasswordError] = useState(false)
-  const [passwordLengthError, setPasswordLengthError] = useState(false)
   const dispatch = useDispatch()
 
   const userRegister = useSelector((state) => state.userRegister)
@@ -41,56 +36,53 @@ const SignIn = () => {
     }
   }, [history, userInfo])
 
-  const registerUser = () => {
-    if (!username) setUserError('empty')
-    if (!password) setPasswordError(true)
-    if (password.length < 6) setPasswordLengthError(true)
-    if (!terms) setTermsError(true)
-
-    if (username && password && terms) {
-      return dispatch(register(username, password))
-    }
+  const onSubmit = ({ username, password }) => {
+    return dispatch(register(username, password))
   }
 
-  const userChange = (e) => {
-    setUsername(e.target.value)
-    setUserError(false)
-    setActive(true)
-  }
-
-  const passwordChange = (e) => {
-    setPassword(e.target.value)
-    setPasswordError(false)
-  }
+  const { show, eventHandlers } = useToggleOnFocus()
 
   return (
-    <form className='sign'>
+    <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>
       <div className='container'>
-        <InputComponent
-          text={username}
-          error={userError}
+        <Input
+          placeholder='Username'
+          type='text'
           image='/img/user-green-outline.svg'
-          changeHandler={userChange}
-          name={
-            userError === 'UsernameExistsException'
-              ? 'Username already exists'
-              : 'Username'
-          }
+          name='username'
+          id='username'
           autoFocus='autoFocus'
+          ref={register({
+            required: {
+              value: true,
+              message: 'You must enter username'
+            }
+          })}
+          errors={errors}
+          show={show}
+          eventHandlers={eventHandlers}
         />
 
-        <InputComponent
-          text={password}
-          error={passwordLengthError || passwordError}
+        <Input
+          type='password'
+          placeholder='Password'
           image='/img/lock-outline.svg'
-          changeHandler={passwordChange}
-          password='password'
-          name={
-            passwordLengthError
-              ? 'Password must be greater than length 6'
-              : 'Password'
-          }
+          name='password'
+          id='password'
+          ref={register({
+            required: {
+              value: true,
+              message: 'You must enter password'
+            },
+            minLength: {
+              value: 6,
+              message: 'Password must be at least 6 characters'
+            }
+          })}
+          errors={errors}
+          show={show}
+          eventHandlers={eventHandlers}
         />
 
         <div className='remember remember-signup'>
@@ -112,7 +104,7 @@ const SignIn = () => {
               </p>
             </div>
             <div className='btnSignUp'>
-              <Button clickHandler={registerUser} name='Sign Up' />
+              <Button name='Sign Up' />
             </div>
           </div>
         </div>
