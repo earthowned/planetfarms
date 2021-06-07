@@ -1,10 +1,9 @@
-import { Auth } from 'aws-amplify'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { confirmPin, logout } from '../../actions/userAction'
-import './SettingsActionModel.css'
+import './SettingsActionModal.css'
 
-const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
+const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
   const dispatch = useDispatch()
   const [input, setInput] = useState('')
   const [inputErr, setInputErr] = useState(false)
@@ -12,7 +11,6 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
   async function signOut () {
     setModalActive(false)
     try {
-      await Auth.signOut()
       dispatch(logout())
     } catch (error) {
       console.log('error signing out: ', error)
@@ -27,11 +25,7 @@ const SettingsActionModel = ({ setModalActive, setting, settingAction }) => {
     dispatch(confirmPin(input))
   }
 
-  async function forgotPassword (username) {
-    Auth.forgotPassword(username)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err))
-  }
+  async function forgotPassword (username) { }
 
   const changeInput = (e) => {
     setInput(e.target.value)

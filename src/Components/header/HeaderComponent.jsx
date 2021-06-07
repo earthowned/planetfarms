@@ -2,7 +2,7 @@ import { useState } from 'react'
 import MessageDropdown from '../messageDropdown/MessageDropdown'
 import './HeaderComponent.css'
 import { useHistory } from 'react-router-dom'
-import SettingsActionModel from '../SettingsActionModel/SettingsActionModel'
+import SettingsActionModal from '../settingsActionModal/SettingsActionModal'
 
 const HeaderComponent = ({ title }) => {
   const [active, setActive] = useState(false)

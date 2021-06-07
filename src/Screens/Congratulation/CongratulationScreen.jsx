@@ -4,7 +4,6 @@ import Logo from "../../Components/Logo/Logo"
 import {useHistory, useLocation} from 'react-router-dom'
 import InputComponent from '../../Components/Input/InputComponent'
 import Button from '../../Components/Button/Button'
-import { Auth } from 'aws-amplify'
 import ConfirmModal from '../../Components/SimpleModal/ConfirmModal'
 import Secondarybtn from "../../Components/SecondaryBtn/Secondarybtn"
 import DragDrop from '../../Components/DragDrop/DragDrop'
@@ -34,19 +33,7 @@ const password = location?.state?.password
 
 
 async function signUp() {
-  console.log(username, password,email, phone)
-  try {
-    const user = await Auth.signUp({
-      username,
-      password,
-        attributes: {
-          email,
-      }
-    })
-    setModalActive(true)
-  } catch (error) {
-    console.log('error signing up:', error)
-  }
+  setModalActive(true)
 }
 
 const changeFirstname = (e) => {
