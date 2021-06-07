@@ -6,8 +6,6 @@ import './SettingsActionModal.css'
 const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
   const dispatch = useDispatch()
   const [input, setInput] = useState('')
-  const [inputErr, setInputErr] = useState(false)
-
   async function signOut () {
     setModalActive(false)
     try {
@@ -21,16 +19,11 @@ const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
     dispatch(changePassword(input))
   }
 
-  function handelConfirmPin () {
+  function handleConfirmPin () {
     dispatch(confirmPin(input))
   }
 
   async function forgotPassword (username) { }
-
-  const changeInput = (e) => {
-    setInput(e.target.value)
-    setInputErr(false)
-  }
 
   function settingsOptions (setting) {
     switch (setting) {
@@ -38,7 +31,7 @@ const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
         signOut()
         break
       case 'pin':
-        handelConfirmPin()
+        handleConfirmPin()
         break
       case 'changePassword':
         changePassword()
@@ -57,39 +50,7 @@ const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
         <div className='settings-modal-inner-container'>
           <h2>{settingAction.name}</h2>
           <p>{settingAction.inputText}</p>
-          {settingAction.id === 'logout' ? (
-            <></>
-          ) : settingAction.id === 'changePassword' ? (
-            <div className='input-container'>
-              {[...Array(3)].map(() =>
-                <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
-                  <div className='input-content'>
-                    <input
-                      placeholder={settingAction.inputText}
-                      className='username ibmplexsans-regular-normal-monsoon-16px'
-                      onChange={(e) => changeInput(e)}
-                      name='Code'
-                      autoFocus='autoFocus'
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className='input-container'>
-              <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
-                <div className='input-content'>
-                  <input
-                    placeholder={settingAction.inputText}
-                    className='username ibmplexsans-regular-normal-monsoon-16px'
-                    onChange={(e) => changeInput(e)}
-                    name='Code'
-                    autoFocus='autoFocus'
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+          <SettingInput settingAction={settingAction} setInput={setInput} />
           <p>{settingAction.message}</p>
           <div className='popup-btn-wrapper'>
             <button onClick={() => setModalActive(false)} className='secondary-btn'>
@@ -105,4 +66,49 @@ const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
   )
 }
 
-export default SettingsActionModel
+const SettingInput = ({settingAction, setInput}) => {
+  const [inputErr, setInputErr] = useState(false)
+  const changeInput = (e) => {
+    setInput(e.target.value)
+    setInputErr(false)
+  }
+  return (
+    <>
+    {settingAction.id === 'logout' ? (
+      <></>
+    ) : settingAction.id === 'changePassword' ? (
+      <div className='input-container'>
+        {[...Array(3)].map(() =>
+          <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+            <div className='input-content'>
+              <input
+                placeholder={settingAction.inputText}
+                className='username ibmplexsans-regular-normal-monsoon-16px'
+                onChange={(e) => changeInput(e)}
+                name='Code'
+                autoFocus='autoFocus'
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    ) : (
+      <div className='input-container'>
+        <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+          <div className='input-content'>
+            <input
+              placeholder={settingAction.inputText}
+              className='username ibmplexsans-regular-normal-monsoon-16px'
+              onChange={(e) => changeInput(e)}
+              name='Code'
+              autoFocus='autoFocus'
+            />
+          </div>
+        </div>
+      </div>
+    )}
+    </>
+  )
+}
+
+export default SettingsActionModal
