@@ -3,7 +3,7 @@ import Background from '../../../Components/Background/Background'
 import CoursesHeader from '../../../Components/CoursesHeader/CoursesHeader'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import { Link } from 'react-router-dom'
-import './course-collection.css'
+import './CourseCollection.css'
 
 const farming = Array(6).fill(
   {

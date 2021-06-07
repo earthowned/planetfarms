@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './courses.css'
+import './Courses.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import CoursesHeader from '../../Components/CoursesHeader/CoursesHeader'
 import CoursesCard from '../../Components/CoursesCard/CoursesCard'

@@ -30,14 +30,14 @@ import EnterprisesViewPage from './Screens/Enterprises/EnterprisesViewPage/Enter
 import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage'
 import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup'
 import MobileMessage from './Components/MobileMessage/MobileMessage'
-import Courses from './Screens/Courses/Courses'
+import Courses from './Screens/courses/Courses'
 import LessonPage from './Screens/Dashboard/LessonPage/LessonPage'
 import LessonTest from './Screens/LessonTest/LessonTest'
-import CourseCollection from './Screens/Courses/CourseCollection/CourseCollection'
-import EditCollection from './Screens/Courses/EditCollection/EditCollection'
+import CourseCollection from './Screens/courses/courseCollection/CourseCollection'
+import EditCollection from './Screens/courses/editCollection/EditCollection'
 import AdminCoursePage from './Screens/CourseManager/AdminCoursePage/AdminCoursePage'
 import AddLesson from './Screens/CourseManager/AddLesson/AddLesson'
-import CourseUsers from './Screens/Courses/CourseUsers/CourseUsers'
+import CourseUsers from './Screens/courses/courseUsers/CourseUsers'
 import Amplify, { Auth } from 'aws-amplify'
 
 function App () {
