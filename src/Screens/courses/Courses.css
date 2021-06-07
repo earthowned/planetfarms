@@ -1,0 +1,14 @@
+.courses-main-container {
+  width: 100%;
+}
+
+.course-card-wrapper {
+  width: 100%;
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 1024px) {
+  .courses-main-container {
+    margin-bottom: 40px;
+  }
+}

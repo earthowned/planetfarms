@@ -56,8 +56,8 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
       {
       !mobileView
         ? <><button className='nav-icon' onClick={() => handleToggle()}>
-            <img src='/img/sidebar-arrow-icon.svg' alt='toggle icon with arrow sign' />
-          </button>
+          <img src='/img/sidebar-arrow-icon.svg' alt='toggle icon with arrow sign' />
+        </button>
           <div className='sidebar-main-container'>
             <div className='list-nav-with-logo'>
               <div className='logo-container'>
@@ -72,8 +72,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
               src='/img/calendar-icon.svg'
               alt='calendar-icon'
               onClick={() => history.push('/calendar/my-events')}
-              />
-            </div>
+            /></div>
           </div>
           </>
         : <div className={`mobile-view-dropdown-container ${burgerActive && 'slide'}`}>
@@ -86,7 +85,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
 
 export default Sidebar
 
-function MainNav ({ dropdownActive, setDropdownActive, navMenu}) {
+function MainNav ({ dropdownActive, setDropdownActive, navMenu }) {
   const history = useHistory()
   const { pathname } = useLocation()
   const handleOnClick = () => {

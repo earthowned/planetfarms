@@ -11,14 +11,12 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 1368px;
   position: relative;
   width: 100%;
 }
 
 .community-group-main-header-container {
   width: 100%;
-  height: 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,11 +27,13 @@
   justify-content: space-between;
   flex-direction: column;
   display: flex;
+  width: 75%;
   height: 100%;
 }
 
 #community-group-link-header {
   display: flex;
+  margin-bottom: 40px;
 }
 
 .all-groups-1 {
@@ -99,7 +99,7 @@
 }
 
 .community-group-search-container {
-  width: 250%;
+  width: 100%;
 }
 
 .button-filter-container {
@@ -108,6 +108,17 @@
   flex-direction: column;
   display: flex;
   height: 100%;
+  width: 248px;
+  margin-left: 40px;
+}
+
+.community-group-header-btn-container {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.button-filter-container .filter-container {
+  width: 100%;
 }
 
 .community-group-container {
@@ -124,21 +135,9 @@
   }
 }
 
-@media only screen and (max-width: 1250px) {
-  .community-group-search-container {
-    width: 180%;
-  }
-}
-
 @media only screen and (max-width: 880px) {
   .community-group-container {
     grid-template-columns: repeat(auto-fit, minmax(308px, 1fr));
-  }
-}
-
-@media only screen and (max-width: 850px) {
-  .community-group-search-container {
-    width: 120%;
   }
 }
 
@@ -167,11 +166,6 @@
   }
 
   .filter-container {
-    width: 100%;
-    margin-top: 1em;
-  }
-
-  .community-group-search-container {
     width: 100%;
   }
 }
