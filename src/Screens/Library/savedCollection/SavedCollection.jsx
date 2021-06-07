@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import CollectionModal from '../../../Components/CollectionModal/CollectionModal'
 import GroupModal from '../../../Components/GroupModal/GroupModal'
-import LibraryCard from '../../../Components/LibraryCard/LibraryCard'
+import LibraryCard from '../../../Components/libraryCard/LibraryCard'
 import LibraryHeader from '../../../Components/libraryHeader/LibraryHeader'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './SavedCollection.css'
