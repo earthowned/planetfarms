@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CardImage from '../../Components/CardImage/CardImage'
 import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import './community-members.css'
+import './CommunityMembers.css'
 
 function App () {
   return (
