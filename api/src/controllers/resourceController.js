@@ -7,6 +7,7 @@ const { changeFormat } = require('../helpers/filehelpers')
 // @route   GET /api/resources
 // @access  Public
 const getResources = (req, res) => {
+  console.log(Resource);
   const pageSize = 5
   const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'ASC'
