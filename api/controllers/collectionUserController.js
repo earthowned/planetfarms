@@ -1,30 +1,29 @@
 const CollectionUser = require('../models/collectionUserModel')
+const Collection = require('../models/collectionModel')
 const Sequelize = require('sequelize')
+const User = require('../models/userModel')
 const Op = Sequelize.Op
 
 // @desc Fetch all collection_user
 // @route Get/api/collection_user
 // @access Private
-
-const paginate = ({ page, pageSize }) => {
-  const offset = page * pageSize
-  const limit = offset + pageSize
-
-  return {
-    offset,
-    limit
-  }
+const getControllerUser = (res, req) => {
+  CollectionUser.findAll({ include: [{ model: Collection, as: 'collection' }, { model: User, as: 'user' }] })
+    .then(items => {
+      res.json({ items })
+    })
+    .catch((err) => res.json({ err }).status(400))
 }
 
 const addCollectionUser = (req, res) => {
-  const { userid, collection } = req.body
+  const { userId, collectionId } = req.body
   CollectionUser.create({
-    userid,
-    collection
+    userId,
+    collectionId
 
   })
     .then(() => res.json({ message: 'Collection User Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
-module.exports = { addCollectionUser }
+module.exports = { addCollectionUser, getControllerUser }

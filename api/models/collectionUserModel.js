@@ -8,10 +8,10 @@ const CollectionUser = db.define('collection_user',
       primaryKey: true,
       autoIncrement: true
     },
-    userid: {
+    userId: {
       type: Sequelize.INTEGER
     },
-    collection: {
+    collectionId: {
       type: Sequelize.INTEGER
     }
 
@@ -21,12 +21,12 @@ const CollectionUser = db.define('collection_user',
 
 CollectionUser.associate = (models) => {
   CollectionUser.belongsTo(models.User, {
-    as: 'users',
-    foreignKey: 'userid'
+    as: 'user',
+    foreignKey: 'userId'
   })
   CollectionUser.belongsTo(models.Collection, {
-    as: 'collections',
-    foreignKey: 'collection'
+    as: 'collection',
+    foreignKey: 'collectionId'
   })
 }
 
