@@ -20,27 +20,19 @@ const SavedCollection = () => {
 
   return (
     <>
-      {modalActive && <GroupModal
-        clickHandler={setModalActive}
-        data={groupCollection} btnName='add to collections'
-        openAddCollection={openAddCollection}
-        setNewCollection={setNewCollection}
-                      />}
+      {modalActive && <GroupModal clickHandler={setModalActive} data={groupCollection} btnName='add to collections' openAddCollection={openAddCollection} setNewCollection={setNewCollection} />}
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
-
       {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
       <DashboardLayout title='library'>
         <div className='library-main-container'>
           <LibraryHeader setActive={setActive} />
         </div>
-        <div className='library-collection'>
-          <h4>Farming Collections</h4>
-          <LibraryCard data={library} />
-        </div>
-        <div className='library-collection'>
-          <h4>Branding Collections</h4>
-          <LibraryCard data={collections} />
-        </div>
+        {['Farming', 'Branding'].map((category) =>
+          <div className='library-collection'>
+            <h4>{category} Collections</h4>
+            <LibraryCard data={library} />
+          </div>
+        )}
       </DashboardLayout>
     </>
   )

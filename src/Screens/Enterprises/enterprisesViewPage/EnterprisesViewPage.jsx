@@ -25,27 +25,17 @@ function EnterprisesPage () {
           <EnterpriseDetails {...enterpriseDetailsData} />
           <AdditionalInformation />
           <EnterprisesProduct />
-
           <EnterprisesPhoto />
         </div>
         <div className='group-flex-row-7'>
           <div>
-            <CommunityGroupPost
+            {[...Array(3)].map(() => <CommunityGroupPost
               title='Think like a farmer'
               timestamps='November 18 at 05:45 AM'
               content='Over the last ten years, the emphasis on reducing fuel emissions has been an agenda for many governments. In a bid to reduce their collective carbon footprint, many people have started looking for a way to control their impact on the environment. '
               postImage='/img/bg-image1.svg'
-            />
-            <CommunityGroupPost
-              title='Be like a farmer'
-              timestamps='November 30 at 09:40 PM'
-              content={` Hi there! What do you think about new COVID 19? How will you
-            protect your family and business? It’s just a real big problem
-            right now with my business!!! `}
-            />
+                                     />)}
           </div>
-          {/** * filter */}
-          {/* {filter()} */}
           <FilterSearch />
         </div>
       </div>
@@ -60,7 +50,6 @@ function EnterprisesProduct () {
         <div className='enterprise-photos valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px'>
           Enterprises Products
         </div>
-
         <div className='chevron-right-outline-1-2 chevron-right-outline-1-1'>
           <div className='enterprises-overlap'>
             <img src='/img/chevron-right-outline.svg' />
@@ -89,11 +78,10 @@ function AdditionalInformation () {
       </div>
       {isActive && <div className='accordin-content'>
         <div className='accordin-button'>
-          <button className='btn-accordin tasks-button'> <img src='/img/checkmark-square.svg' />Tasks</button>
+          <button className='btn-accordin tasks-button'> <img src='/img/checkmark-square.svg' /> Tasks</button>
           <button className='btn-accordin'> <img src='/img/dollar-sign.svg' /> Finances</button>
-          <button className='btn-accordin'> <img src='/img/pie-chart-outline.svg' />  Reports</button>
+          <button className='btn-accordin'> <img src='/img/pie-chart-outline.svg' /> Reports</button>
           <button className='btn-accordin'> <img src='/img/file-text-outline.svg' /> Materials</button>
-
         </div>
       </div>}
       <div className='hr-lines' />
@@ -109,63 +97,44 @@ function EnterprisesPhoto () {
         <div className='enterprise-photos valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-24px'>
           Enterprises Photo
         </div>
-
         <div className='chevron-right-outline-1-2 chevron-right-outline-1-1'>
           <div className='enterprises-overlap'>
-
             <img src='/img/chevron-right-outline.svg' />
           </div>
         </div>
-
       </div>
       {isActive && <div className='flex-row-6'>
         {/** picture slider component  component comes  here */}
-
-                   </div>}
+      </div>}
       <div className='hr-lines' />
-
     </>
   )
 }
 function EnterpriseDetails (props) {
-  const {
-    text6,
-    openInCalendar,
-    text3,
-    text4,
-    joinMessenger,
-    text5
-  } = props
-
   return (
     <div className='enterprise-details'>
       <FarmsDetailsCard
         image='https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/60616bb4ad09ea041add624b/img/frame-1969@1x.png'
         title='Farmer Enterprise'
         description='Hi there! We’re a most kind and friendly society for everyone! We post here some news about farming, nature and etc… We hope you gonna like it! Be a part of our still small, but amazing community!'
-        followerNumber='2,564 followers'
+        followerNumber={props.dueToTheAdvantage}
       />
       <div className='event-messenger-container'>
         <div className='event-container'>
           <div className='event-container-wrapper'>
             <p className='event-text-title valign-text-middle ibmplexsans-normal-quarter-spanish-white-16px'>
-              {text6}
+              {props.text6}
             </p>
-            <Events
-              event='New event for everyone New event for everyone New event for everyone New event for everyone New event for everyone '
-              date='11/24/2020'
-            />
-            <Events event='New event for everyone' date='11/24/2020' />
-            <Events event='New event for everyone' date='11/24/2020' />
+            <Events event={props.text7} date={props.phone} />
+            <Events event={props.text8} date={props.phone2} />
             <div className='calendarButton'>
               <div className='calendarButton-text ibmplexsans-semi-bold-shark-16px'>
-                {openInCalendar}
+                {props.openInCalendar}
               </div>
             </div>
           </div>
         </div>
         <JoinMessenger />
-
       </div>
       <div className='rectangle-875-1' />
     </div>
@@ -216,7 +185,6 @@ const JoinMessenger = () => {
         </div>
       </div>
     </div>
-
   )
 }
 
@@ -240,7 +208,6 @@ const enterpriseDetailsData = {
   text4: 'Join our free messenger!',
   joinMessenger: 'Join messenger',
   text5: 'Bessy, Misha and 175 more users already follow us! '
-
 }
 
 const Events = ({ event, date }) => {

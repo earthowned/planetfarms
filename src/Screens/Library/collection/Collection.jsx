@@ -31,21 +31,14 @@ const Collection = () => {
   const [newCollection, setNewCollection] = useState(false)
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
-
   function openAddCollection () {
     setModalActive(true)
     setActive(false)
   }
   return (
     <>
-      {modalActive && <GroupModal
-        clickHandler={setModalActive}
-        data={groupCollection} btnName='add to collections'
-        openAddCollection={openAddCollection}
-        setNewCollection={setNewCollection}
-                      />}
+      {modalActive && <GroupModal clickHandler={setModalActive} data={groupCollection} btnName='add to collections' openAddCollection={openAddCollection} setNewCollection={setNewCollection} />}
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
-
       {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
       <DashboardLayout title='library'>
         <div className='library-main-container'>
