@@ -74,10 +74,10 @@ const CoursesCard = ({ category, setModalActive }) => {
           {
             data.map(item => {
               return (
-                  <Background image={item.image}>
-                    <div className="courses-card">
-                  <AddCollection item={item} setModalActive={setModalActive}/>
-                  <CardContent item={item} />
+                <Background image={item.image}>
+                  <div className='courses-card'>
+                    <AddCollection item={item} setModalActive={setModalActive} />
+                    <CardContent item={item} />
                   </div>
                 </Background>
               )
@@ -111,39 +111,39 @@ function Star ({ num }) {
   )
 }
 
-function CardContent ({item}) {
+function CardContent ({ item }) {
   return (
     <div className='card-content'>
       <h3>{item.title}</h3>
       <h3>{item.author}</h3>
-          <div className='course-stars'>
-              <Star num={item.stars} />
-              <p>({item.total} total)</p>
-           </div>
-      <EnrollContainer item={item}/>
+      <div className='course-stars'>
+        <Star num={item.stars} />
+        <p>({item.total} total)</p>
+      </div>
+      <EnrollContainer item={item} />
     </div>
   )
 }
 
-function EnrollContainer ({item}) {
+function EnrollContainer ({ item }) {
   const history = useHistory()
   return (
-     <div className='enroll-container'>
-        {
-          item.enroll 
-          ? <button className='join-btn' onClick={() => history.push('/mycoursepage')}><span>You're subscriber</span></button>
-          : <button className='join-btn' onClick={() => history.push('/coursepage')}><span>Join Course</span></button>
+    <div className='enroll-container'>
+      {
+          item.enroll
+            ? <button className='join-btn' onClick={() => history.push('/mycoursepage')}><span>You're subscriber</span></button>
+            : <button className='join-btn' onClick={() => history.push('/coursepage')}><span>Join Course</span></button>
         }
-        <h4>{item.cost === 'Free' ? item.cost : `$ ${item.cost}`}</h4>
+      <h4>{item.cost === 'Free' ? item.cost : `$ ${item.cost}`}</h4>
     </div>
   )
 }
 
-function AddCollection ({item, setModalActive}) {
+function AddCollection ({ item, setModalActive }) {
   return (
-      <button className='collection-btn' onClick={() => setModalActive(true)}>{item.added
-        ? <><img src='/img/close-outline.svg' alt='close icon' /><span>Remove from collection</span></>
-        : <><img src='/img/plus.svg' alt='add icon' /><span>Add to collection</span></>}
-      </button>
+    <button className='collection-btn' onClick={() => setModalActive(true)}>{item.added
+      ? <><img src='/img/close-outline.svg' alt='close icon' /><span>Remove from collection</span></>
+      : <><img src='/img/plus.svg' alt='add icon' /><span>Add to collection</span></>}
+    </button>
   )
 }
