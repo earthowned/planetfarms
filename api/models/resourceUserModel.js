@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const User = require('./userModel')
 const db = require('../config/database.js')
 
 const ResourceUser = db.define('resource_users',
@@ -19,13 +20,13 @@ const ResourceUser = db.define('resource_users',
 )
 
 ResourceUser.associate = (models) => {
-  ResourceUser.belongsTo(models.User, {
-    as: 'users',
-    foreignKey: 'userId'
+  ResourceUser.belongsToMany(models.User, {
+    foreignKey: 'userId',
+    as: 'user'
   })
-  ResourceUser.belongsTo(models.Resource, {
-    as: 'resources',
-    foreignKey: 'resourceId'
+  ResourceUser.belongsToMany(models.Resource, {
+    foreignKey: 'resourceId',
+    as: 'resource'
   })
 }
 
