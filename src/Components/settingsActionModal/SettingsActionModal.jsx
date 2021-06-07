@@ -66,7 +66,7 @@ const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
   )
 }
 
-const SettingInput = ({settingAction, setInput}) => {
+const SettingInput = ({ settingAction, setInput }) => {
   const [inputErr, setInputErr] = useState(false)
   const changeInput = (e) => {
     setInput(e.target.value)
@@ -74,39 +74,41 @@ const SettingInput = ({settingAction, setInput}) => {
   }
   return (
     <>
-    {settingAction.id === 'logout' ? (
-      <></>
-    ) : settingAction.id === 'changePassword' ? (
-      <div className='input-container'>
-        {[...Array(3)].map(() =>
-          <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
-            <div className='input-content'>
-              <input
-                placeholder={settingAction.inputText}
-                className='username ibmplexsans-regular-normal-monsoon-16px'
-                onChange={(e) => changeInput(e)}
-                name='Code'
-                autoFocus='autoFocus'
-              />
-            </div>
-          </div>
-        )}
-      </div>
-    ) : (
-      <div className='input-container'>
-        <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
-          <div className='input-content'>
-            <input
-              placeholder={settingAction.inputText}
-              className='username ibmplexsans-regular-normal-monsoon-16px'
-              onChange={(e) => changeInput(e)}
-              name='Code'
-              autoFocus='autoFocus'
-            />
-          </div>
+      {
+      {
+        logout: <></>,
+        changePassword:
+  <div className='input-container'>
+    {['Old Password', 'New Password', 'Confirm Password'].map((title) =>
+      <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+        <div className='input-content'>
+          <input
+            placeholder={title}
+            className='username ibmplexsans-regular-normal-monsoon-16px'
+            onChange={(e) => changeInput(e)}
+            name='Code'
+            autoFocus='autoFocus'
+          />
         </div>
       </div>
     )}
+  </div>,
+        default:
+  <div className='input-container'>
+    <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+      <div className='input-content'>
+        <input
+          placeholder={settingAction.inputText}
+          className='username ibmplexsans-regular-normal-monsoon-16px'
+          onChange={(e) => changeInput(e)}
+          name='Code'
+          autoFocus='autoFocus'
+        />
+      </div>
+    </div>
+  </div>
+      }[settingAction.id]
+    }
     </>
   )
 }
