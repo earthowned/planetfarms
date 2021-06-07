@@ -17,6 +17,14 @@ module.exports = {
       attachment: {
         type: Sequelize.STRING
       },
+      creatorId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id',
+          as: 'creatorId'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

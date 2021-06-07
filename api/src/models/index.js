@@ -6,6 +6,8 @@ Community.belongsToMany(User, {
     foreignKey: 'communityId'
 })
 
+Community.belongsTo(User, {as: 'creator', foreignKey: 'creatorId'});
+
 User.belongsToMany(Community, {
     through: 'communities_users',
     foreignKey: 'userId'

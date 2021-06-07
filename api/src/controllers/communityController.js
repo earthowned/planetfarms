@@ -16,7 +16,10 @@ const getCommunities = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['name', order]]
-  Community.findAll({ offset: page, limit: pageSize, ordervalue, include: User })
+  Community.findAll({ offset: page, limit: pageSize, ordervalue, include: [User, {
+    model: User,
+    as: 'creator'
+  }] })
     .then(communities => {
       paginate({ page, pageSize })
       
@@ -27,24 +30,32 @@ const getCommunities = (req, res) => {
 
 // @desc Add individual groups
 // @route POST /api/groups/add
-// @access Public
+// @access Private
 const createCommunity = (req, res) => {
   let filename = ''
   if (req.file) {
     filename = req.file.filename
   }
+
+  if (!req.user.id) {
+    return res.json({message: 'Not authorized to create.'})
+  }
+
   Community.create({ ...req.body, filename })
     .then(() => res.json({ message: 'Community is Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc Fetch single groups
-// @route GET /api/groups/:id
+// @route GET /api/communities/:id
 // @access Public
 const getCommunityById = (req, res) => {
   const id = req.params.id
 
-  Community.findByPk(id)
+  Community.findByPk(id, {include: [User, {
+    model: User,
+    as: 'creator'
+  }]})
     .then(communities => {
       if (communities) {
         res.json(communities)
@@ -64,7 +75,7 @@ const deleteCommunity = (req, res) => {
   Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
-      Groups.destroy({ where: { id } })
+      Community.destroy({ where: { id } })
         .then(() => res.json({ message: 'Community Deleted!!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -79,15 +90,15 @@ const deleteCommunity = (req, res) => {
 // @access Public
 const updateCommunity = (req, res) => {
   const {
-    name, description
+    name, description, creatorId
   } = req.body
-
+  
   const id = req.params.id
   Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
       Community.update({
-        name, description,
+        name, description, creatorId: creatorId,
         attachment: 'uploads/' + req.file.filename,
       },
       { where: { id } })

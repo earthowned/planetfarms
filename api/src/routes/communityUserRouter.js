@@ -1,4 +1,3 @@
-const { User, Community } = require('../models');
 const CommunityUser = require('../models/communityUserModal');
 
 const router = require('express').Router();
@@ -14,9 +13,17 @@ router.post('/', async (req, res) => {
     const {userId, communityId} = req.body;
     await CommunityUser.create({userId, communityId});
     res.json({
-        message: 'User is followed.'
+        message: 'Association is created.'
     })
 })
+
+// router.delete('/:id', async (req, res) => {
+//     const {userId, communityId} = req.body;
+//     await CommunityUser.destroy({userId, communityId});
+//     res.json({
+//         message: 'Association is created.'
+//     })
+// })
 
 
 module.exports = router;
