@@ -5,13 +5,13 @@
   justify-content: center;
   align-items: center;
 
-  &-wrapper {
+  .wrapper {
     width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  &-form {
+  .form {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -19,7 +19,7 @@
     margin: 0 2em;
   }
 
-  &-icons {
+  .icons {
     height: 40px;
     width: 256px;
     margin-bottom: 3em;
