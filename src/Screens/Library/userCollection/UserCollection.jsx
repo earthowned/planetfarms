@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './UserCollection.css'
 
-import LibraryHeader from '../../../Components/LibraryHeader/LibraryHeader'
+import LibraryHeader from '../../../Components/libraryHeader/LibraryHeader'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import CollectionModal from '../../../Components/CollectionModal/CollectionModal'
 import SimpleModal from '../../../Components/SimpleModal/SimpleModal'
