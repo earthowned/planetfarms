@@ -1,5 +1,5 @@
 import React from 'react'
-import './message-dropdown.css'
+import './MessageDropdown.css'
 import { Link } from 'react-router-dom'
 
 import MessageCard from '../MessageCard/MessageCard'
