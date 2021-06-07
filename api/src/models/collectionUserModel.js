@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../config/database.js')
 
-const ResourceUser = db.define('resource_users',
+const CollectionUser = db.define('collection_user',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -11,22 +11,23 @@ const ResourceUser = db.define('resource_users',
     userId: {
       type: Sequelize.INTEGER
     },
-    resourceId: {
+    collectionId: {
       type: Sequelize.INTEGER
     }
+
   },
   { timestamps: true }
 )
 
-ResourceUser.associate = (models) => {
-  ResourceUser.belongsTo(models.User, {
-    as: 'users',
+CollectionUser.associate = (models) => {
+  CollectionUser.belongsTo(models.User, {
+    as: 'user',
     foreignKey: 'userId'
   })
-  ResourceUser.belongsTo(models.Resource, {
-    as: 'resources',
-    foreignKey: 'resourceId'
+  CollectionUser.belongsTo(models.Collection, {
+    as: 'collection',
+    foreignKey: 'collectionId'
   })
 }
 
-module.exports = ResourceUser
+module.exports = CollectionUser

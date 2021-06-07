@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../config/database.js')
+const ResourceUser = require('./resourceUserModel.js')
 
 const Resources = db.define('resources',
   {
@@ -90,5 +91,12 @@ const Resources = db.define('resources',
   },
   { timestamps: false }
 )
+
+Resources.associate = function (models) {
+  Resources.belongsToMany(ResourceUser, {
+    as: 'resource',
+    foreignKey: 'id'
+  })
+}
 
 module.exports = Resources
