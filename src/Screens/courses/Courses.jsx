@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Courses.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import CoursesHeader from '../../Components/coursesHeader/CoursesHeader'
-import CoursesCard from '../../Components/CoursesCard/CoursesCard'
+import CoursesCard from '../../Components/coursesCard/CoursesCard'
 import GroupModal from '../../Components/GroupModal/GroupModal'
 import SimpleModal from '../../Components/SimpleModal/SimpleModal'
 
