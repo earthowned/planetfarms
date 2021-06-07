@@ -1,4 +1,4 @@
-const {Community, User} = require('../models');
+const { Community, User } = require('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
@@ -16,13 +16,18 @@ const getCommunities = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['name', order]]
-  Community.findAll({ offset: page, limit: pageSize, ordervalue, include: [User, {
-    model: User,
-    as: 'creator'
-  }] })
+  Community.findAll({
+    offset: page,
+    limit: pageSize,
+    ordervalue,
+    include: [User, {
+      model: User,
+      as: 'creator'
+    }]
+  })
     .then(communities => {
       paginate({ page, pageSize })
-      
+
       res.json({ communities, page, pageSize }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
@@ -38,7 +43,7 @@ const createCommunity = (req, res) => {
   }
 
   if (!req.user.id) {
-    return res.json({message: 'Not authorized to create.'})
+    return res.json({ message: 'Not authorized to create.' })
   }
 
   Community.create({ ...req.body, filename })
@@ -52,10 +57,12 @@ const createCommunity = (req, res) => {
 const getCommunityById = (req, res) => {
   const id = req.params.id
 
-  Community.findByPk(id, {include: [User, {
-    model: User,
-    as: 'creator'
-  }]})
+  Community.findByPk(id, {
+    include: [User, {
+      model: User,
+      as: 'creator'
+    }]
+  })
     .then(communities => {
       if (communities) {
         res.json(communities)
@@ -92,14 +99,16 @@ const updateCommunity = (req, res) => {
   const {
     name, description, creatorId
   } = req.body
-  
+
   const id = req.params.id
   Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
       Community.update({
-        name, description, creatorId: creatorId,
-        attachment: 'uploads/' + req.file.filename,
+        name,
+        description,
+        creatorId: creatorId,
+        attachment: 'uploads/' + req.file.filename
       },
       { where: { id } })
         .then(() => res.json({ message: 'Community Updated !!!' }).status(200))
