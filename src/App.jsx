@@ -26,7 +26,7 @@ import CommunityMembersProfile from './Screens/CommunityMemberProfile/CommunityM
 import UserInfo from './Screens/CabinetUserInfo/CabinetUserInfo'
 import CommunityGroup from './Screens/CommunityGroup/CommunityGroup'
 import Enterprises from './Screens/Enterprises/Enterprises'
-import EnterprisesViewPage from './Screens/Enterprises/EnterprisesViewPage/EnterprisesViewPage'
+import EnterprisesViewPage from './Screens/Enterprises/enterprisesViewPage/EnterprisesViewPage'
 import CommunityGroupViewPage from './Screens/CommunityGroup/GroupViewPage/GroupViewPage'
 import MyGroupViewPage from './Screens/CommunityGroup/MyGroupPage/MyGroup'
 import MobileMessage from './Components/MobileMessage/MobileMessage'

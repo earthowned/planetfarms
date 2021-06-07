@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './enterprises.css'
+import './Enterprises.css'
 import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import CommunityGroupCard from '../../Components/CommunityGroupCard/CommunityGroupCard'
