@@ -17,7 +17,7 @@
 }
 
 .sidebar-container {
-  width: 15%;
+  width: 250px;
   min-height: 100vh;
   background-color: #141414;
   transition: all 0.5s ease-in-out;
@@ -26,7 +26,7 @@
 
 /* when sidebar is active */
 .sidebar-container.active {
-  width: 4%;
+  width: 80px;
   overflow: hidden;
   padding: 0;
 }
@@ -69,7 +69,7 @@
 
 .sidebar-container.active .nav-icon {
   transition: all 0.5s ease-in-out;
-  left: 3.4%;
+  left: 65px;
   transform: rotate(180deg);
 }
 
@@ -93,22 +93,4 @@
 
 input[type="checkbox"] {
   background: #900;
-}
-
-@media only screen and (max-width: 1300px) {
-  .sidebar-container {
-    width: 20%;
-  }
-
-  .sidebar-container.active {
-    width: 6%;
-  }
-
-  .nav-icon {
-    left: 15.5%;
-  }
-
-  .sidebar-container.active .nav-icon {
-    left: 4.5%;
-  }
 }
