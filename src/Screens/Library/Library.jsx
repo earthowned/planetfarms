@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import LibraryHeader from '../../Components/LibraryHeader/LibraryHeader'
-import './library.css'
+import './Library.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import ListView from '../../Components/ListView/ListView'
 import SimpleModal from '../../Components/SimpleModal/SimpleModal'

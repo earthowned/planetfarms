@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import './user-collection.css'
+import './UserCollection.css'
 
 import LibraryHeader from '../../../Components/LibraryHeader/LibraryHeader'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
