@@ -2,7 +2,6 @@ name: Docker Builder
 
 on:
   push:
-    - main
   release:
     types: [created]
 
