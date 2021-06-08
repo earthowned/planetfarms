@@ -33,4 +33,3 @@ jobs:
           repo="earthowned/planetfarms"
           build_image "treehouses/nginx" amd64 "$repo"
           deploy_image "$repo" amd64
-        
