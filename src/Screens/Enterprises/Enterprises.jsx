@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './enterprises.css'
+import './Enterprises.css'
 import SearchComponent from '../../Components/SearchComponent/SearchComponent'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
 import CommunityGroupCard from '../../Components/CommunityGroupCard/CommunityGroupCard'
@@ -15,10 +15,10 @@ const Enterprise = () => {
   const [active, setActive] = useState(false)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (search) dispatch(searchEnterprises(search))
-    if (!search) dispatch(listEnterprises())
-  }, [search, dispatch])
+  // useEffect(() => {
+  //   if (search) dispatch(searchEnterprises(search))
+  //   if (!search) dispatch(listEnterprises())
+  // }, [search, dispatch])
 
   return (
     <>
@@ -28,7 +28,7 @@ const Enterprise = () => {
           <div className='enterprises-col'>
             <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              <CommunityGroupCard data={data} type="enterpise" />
+              {/* <CommunityGroupCard data={data} type="enterpise" /> */}
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@ function EnterpriseHeader ({ search, setSearch, setActive }) {
       </div>
       <div className='create-enterprises-wrapper'>
         <div className='add-enterprises'>
-          <div className='create-enterprise-text ibmplexsans-semi-bold-shark-16px' onClick={() => setActive(true)}>
+          <div className='create-enterprise-text' onClick={() => setActive(true)}>
             Create Enterprise
           </div>
         </div>
@@ -66,11 +66,11 @@ function FirstHeader () {
       windowWidth > 720
         ? <div className='enterprises-option'>
           <div className='enterprises-option-first'>
-            <div className='all-enterprises-text ibmplexsans-semi-bold-shark-16px'>
+            <div className='all-enterprises-text'>
               All Enterprises
             </div>
           </div>
-          <div className='enterprises-option-second border-0-5px-white'>
+          <div className='enterprises-option-second'>
             <div className='your-enterprises ibmplexsans-semi-bold-quarter-spanish-white-16px'>
               Your Enterprises
             </div>
