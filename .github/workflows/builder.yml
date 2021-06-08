@@ -32,5 +32,5 @@ jobs:
           repo="earthowned/planetfarms"
           build_image "treehouses/nginx" amd64 "$repo"
           deploy_image "$repo" amd64
-          echo "https://hub.docker.com/r/earthowned/planetfarms/tags"
-          treehouses feedback "new earthowned/planetfarms check https://hub.docker.com/r/earthowned/planetfarms/tags"
+          echo "https://hub.docker.com/r/earthowned/planetfarms-tags/tags"
+          treehouses feedback "new earthowned/planetfarms check https://hub.docker.com/r/earthowned/planetfarms-tags/tags"
