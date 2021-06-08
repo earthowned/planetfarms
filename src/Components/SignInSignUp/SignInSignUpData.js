@@ -12,5 +12,6 @@ export const SignInSignUpData = {
   subtract: '',
   facebook: 'Facebook',
   spanText4: 'Already have an account?',
-  subtract2: ''
+  subtract2: '',
+  failMessage: ' Please enter correct username or password.'
 }

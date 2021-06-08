@@ -12,17 +12,20 @@ import Button from '../Button/Button'
 import Checkbox from '../Checkbox/Checkbox'
 import Input from '../Input/Input'
 import OauthBtn from '../OauthBtn/OauthBtn'
-import useToggleOnFocus from '../../utils/useToggleOnFocus'
+import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
+import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 import './SignInSignUp.scss'
 
 const SignIn = () => {
-  const { welcomeBack, rememberMe, text1, google, facebook } = SignInSignUpData
+  const { welcomeBack, rememberMe, text1, google, facebook, failMessage } =
+    SignInSignUpData
 
   const [user, setUser] = useState(null)
   const history = useHistory()
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
+  const { register: regi, errors, handleSubmit } = useForm()
 
   const [terms, setTerms] = useState(false)
   const [termsError, setTermsError] = useState(false)
@@ -94,34 +97,31 @@ const SignIn = () => {
     Auth.federatedSignIn({ provider: 'Google' })
   }
 
-  const { register, errors, handleSubmit } = useForm()
   const onSubmit = ({ username, password }) => {
     return dispatch(login(username, password))
   }
-
-  const { show, eventHandlers } = useToggleOnFocus()
 
   return (
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>
       <div className='container'>
+        {error && <div className='error'>{failMessage}</div>}
+
         <Input
           placeholder='Username'
           type='text'
-          image='/img/user-green-outline.svg'
           name='username'
           id='username'
-          autoFocus='autoFocus'
-          ref={register({
+          ref={regi({
             required: {
               value: true,
               message: 'You must enter username'
             }
           })}
           errors={errors}
-          show={show}
-          eventHandlers={eventHandlers}
-        />
+        >
+          <UserAvatar />
+        </Input>
 
         <Input
           type='password'
@@ -129,16 +129,16 @@ const SignIn = () => {
           image='/img/lock-outline.svg'
           name='password'
           id='password'
-          ref={register({
+          ref={regi({
             required: {
               value: true,
               message: 'You must enter password'
             }
           })}
           errors={errors}
-          show={show}
-          eventHandlers={eventHandlers}
-        />
+        >
+          <Lock className='error-icon' />
+        </Input>
 
         <div className='remember'>
           <Checkbox

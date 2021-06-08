@@ -1,13 +1,13 @@
-import Logo from "../../Components/Logo/Logo";
-import Banner from "../../Components/SignInSignUp/Banner";
-import "./SignLayout.scss";
+import Logo from '../../Components/Logo/Logo'
+import Banner from '../../Components/SignInSignUp/Banner'
+import './SignLayout.scss'
 
 const SignLayout = ({ children }) => {
   return (
-    <div className=" SignLayout">
-      <div className=" wrapper">
-        <div className="form">
-          <div className="icons">
+    <div className=' SignLayout'>
+      <div className=' wrapper'>
+        <div className='form'>
+          <div className='icons'>
             <Logo />
           </div>
           {children}
@@ -15,7 +15,7 @@ const SignLayout = ({ children }) => {
         <Banner />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignLayout;
+export default SignLayout

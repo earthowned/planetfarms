@@ -1,52 +1,47 @@
-import React from 'react'
-import './input-component.css'
+import React, { useState } from 'react'
+import './input.scss'
 import { ErrorMessage } from '@hookform/error-message'
 
 const Input = React.forwardRef(
-  (
-    {
-      image,
-      name,
-      value,
-      placeholder,
-      autoFocus,
-      id,
-      type,
-      errors,
-      show,
-      eventHandlers
-    },
-    ref
-  ) => {
+  ({ image, name, value, placeholder, id, type, errors, children }, ref) => {
+    const [showLabel, setShowLabel] = useState('')
+
     return (
       <>
         <div className='input-container'>
-          <div className='default-input'>
-            {image && (
-              <div className='person-outline'>
-                <img className='user-icon' src={image} alt='person-outline' />
+          <div
+            className={
+              errors?.[`${name}`]?.message ? 'block block-error' : 'block'
+            }
+          >
+            {showLabel && <p className='label'>{placeholder}</p>}
+            <div className='field'>
+              <div
+                className={
+                  errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon '
+                }
+              >
+                {children}
               </div>
-            )}
-            <div className='input-content'>
-              {show && <div className='overhead-text'>{placeholder}</div>}
               <input
-                className='username ibmplexsans-regular-normal-monsoon-16px'
+                className='inputField'
                 placeholder={placeholder}
                 value={value}
-                autoFocus={autoFocus === 'autoFocus' && true}
                 name={name}
                 id={id}
                 ref={ref}
                 type={type}
-                {...eventHandlers}
+                onChange={(e) => setShowLabel(e.target.value)}
               />
             </div>
           </div>
-          <ErrorMessage
-            errors={errors}
-            name={name}
-            render={({ message }) => <p className='error-message'>{message}</p>}
-          />
+          <p className='error-message'>
+            <ErrorMessage
+              errors={errors}
+              name={name}
+              render={({ message }) => <span>{message}</span>}
+            />
+          </p>
         </div>
       </>
     )
