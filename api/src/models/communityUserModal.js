@@ -14,6 +14,10 @@ const CommunityUser = db.define('communities_users',
       },
       communityId: {
         type: Sequelize.INTEGER,
+      },
+      active: {
+        type: Sequelize.INTEGER,
+        defaultValue: true,
       }
   },
   { timestamps: true }

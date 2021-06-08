@@ -2,7 +2,8 @@ const { Community, User } = require('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
-// @desc Fetch all groups
+
+// @desc Fetch all communities
 // @route GET/api/communities
 // @access Public
 const paginate = ({ page, pageSize }) => {
@@ -16,19 +17,19 @@ const getCommunities = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['name', order]]
+
   Community.findAll({
     offset: page,
     limit: pageSize,
     ordervalue,
-    include: [User, {
+    include: [{
       model: User,
-      as: 'creator'
+      as: 'creator' && 'followers'
     }]
   })
     .then(communities => {
       paginate({ page, pageSize })
-
-      res.json({ communities, page, pageSize }).status(200)
+      res.json({ communities, page, pageSize}).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }

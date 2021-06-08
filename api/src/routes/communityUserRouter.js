@@ -1,28 +1,9 @@
-const CommunityUser = require('../models/communityUserModal')
+const { getCommunityUsers, followCommunity } = require('../controllers/communityUserController')
 
 const router = require('express').Router()
 
-router.get('/', async (req, res) => {
-  const data = await CommunityUser.findAll()
-  res.json({
-    data
-  })
-})
-
-router.post('/', async (req, res) => {
-  const { userId, communityId } = req.body
-  await CommunityUser.create({ userId, communityId })
-  res.json({
-    message: 'Association is created.'
-  })
-})
-
-// router.delete('/:id', async (req, res) => {
-//     const {userId, communityId} = req.body;
-//     await CommunityUser.destroy({userId, communityId});
-//     res.json({
-//         message: 'Association is created.'
-//     })
-// })
+router.get('/', getCommunityUsers);
+router.post('/follow', followCommunity);
+// router.put('/:id', updateCommunityUsers);
 
 module.exports = router
