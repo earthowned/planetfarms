@@ -14,7 +14,6 @@ const CommunityGroupCard = ({ data = [], location, type = 'group' }) => {
   return (
     <>
       {data.length > 0 && data.map(item => {
-        console.log('item', item)
         return (
           <div key={item.id} className='card-1 border-1px-onyx'>
             <div className='card-container' style={{ backgroundImage: `url(${process.env.REACT_APP_CDN_BASE_URL + '/' + type + '/' + item.filename})` }} />
