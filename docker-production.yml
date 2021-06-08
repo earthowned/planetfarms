@@ -18,3 +18,21 @@ services:
       - 8080:80
     volumes:
       - ./api/files:/usr/share/nginx/html
+  proxy:
+    image: nginx:alpine
+    ports:
+      - 8090:80
+  frontend:
+    #build: .
+    image: earthowned:farms
+    ports:
+      - 8091:80
+  api:
+    #build: ./api
+    image: earthowned:api
+    ports:
+      - 8092:80
+    depends_on:
+      - db
+    environment:
+      - port=80
