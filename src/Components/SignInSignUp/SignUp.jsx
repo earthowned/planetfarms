@@ -35,6 +35,11 @@ const SignIn = () => {
 
   const [termsError, setTermsError] = useState(false)
   const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
 
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
@@ -72,7 +77,7 @@ const SignIn = () => {
         </Input>
 
         <Input
-          type='password'
+          type={showPassword ? 'text' : 'password'}
           placeholder='Password'
           name='password'
           id='password'
@@ -87,6 +92,8 @@ const SignIn = () => {
             }
           })}
           errors={errors}
+          togglePasswordVisibility={togglePasswordVisibility}
+          showPassword={showPassword}
         >
           <Lock className='error-icon' />
         </Input>

@@ -29,6 +29,11 @@ const SignIn = () => {
 
   const [terms, setTerms] = useState(false)
   const [termsError, setTermsError] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
 
   useEffect(() => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -124,9 +129,8 @@ const SignIn = () => {
         </Input>
 
         <Input
-          type='password'
+          type={showPassword ? 'text' : 'password'}
           placeholder='Password'
-          image='/img/lock-outline.svg'
           name='password'
           id='password'
           ref={regi({
@@ -136,6 +140,8 @@ const SignIn = () => {
             }
           })}
           errors={errors}
+          togglePasswordVisibility={togglePasswordVisibility}
+          showPassword={showPassword}
         >
           <Lock className='error-icon' />
         </Input>

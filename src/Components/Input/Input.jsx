@@ -1,9 +1,24 @@
 import React, { useState } from 'react'
 import './input.scss'
 import { ErrorMessage } from '@hookform/error-message'
-
+import { ReactComponent as EyeCloseIcon } from '../../assets/images/eye-close-icon.svg'
+import { ReactComponent as EyeOpenIcon } from '../../assets/images/eye-open-icon.svg'
 const Input = React.forwardRef(
-  ({ image, name, value, placeholder, id, type, errors, children }, ref) => {
+  (
+    {
+      image,
+      name,
+      value,
+      placeholder,
+      id,
+      type,
+      errors,
+      togglePasswordVisibility,
+      showPassword,
+      children
+    },
+    ref
+  ) => {
     const [showLabel, setShowLabel] = useState('')
 
     return (
@@ -33,6 +48,19 @@ const Input = React.forwardRef(
                 type={type}
                 onChange={(e) => setShowLabel(e.target.value)}
               />
+              {placeholder === 'Password' && (
+                <div className='pwShowHide' onClick={togglePasswordVisibility}>
+                  {showLabel && (
+                    <span>
+                      {showPassword ? (
+                        <EyeOpenIcon className=' pwShowHide-show' />
+                      ) : (
+                        <EyeCloseIcon className=' pwShowHide-hide' />
+                      )}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <p className='error-message'>
