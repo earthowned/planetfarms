@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
 // @desc Fetch all groups
-// @route GET/api/groups
+// @route GET/api/communities
 // @access Public
 const paginate = ({ page, pageSize }) => {
   const offset = page * pageSize
@@ -33,8 +33,8 @@ const getCommunities = (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 
-// @desc Add individual groups
-// @route POST /api/groups/add
+// @desc Add individual communities
+// @route POST /api/communities/add
 // @access Private
 const createCommunity = (req, res) => {
   let filename = ''
@@ -42,16 +42,16 @@ const createCommunity = (req, res) => {
     filename = req.file.filename
   }
 
-  if (!req.user.id) {
+  if (!req.body.creatorId) {
     return res.json({ message: 'Not authorized to create.' })
   }
 
-  Community.create({ ...req.body, filename })
+  Community.create({ ...req.body, attachment: 'uploads/' + filename })
     .then(() => res.json({ message: 'Community is Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
-// @desc Fetch single groups
+// @desc Fetch single communities
 // @route GET /api/communities/:id
 // @access Public
 const getCommunityById = (req, res) => {
@@ -75,13 +75,21 @@ const getCommunityById = (req, res) => {
 }
 
 // @desc Delete single groups
-// @route GET /api/groups/:id
-// @access Public
+// @route GET /api/communities/:id
+// @access Private
 const deleteCommunity = (req, res) => {
   const id = req.params.id
+
+  if (!req.body.creatorId) {
+    return res.json({ message: 'Not authorized to delete.' })
+  }
+
   Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
+      if(communities.creatorId !== req.body.creatorId) {
+        return res.json({ message: 'Not authorized to delete.' })
+      }
       Community.destroy({ where: { id } })
         .then(() => res.json({ message: 'Community Deleted!!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
@@ -90,33 +98,47 @@ const deleteCommunity = (req, res) => {
       throw new Error('Community not found')
     }
   })
+  .catch((err) => res.json({ error: err.message }).status(400))
 }
 
-// @desc Update a groups
-// @route PUT /api/groups/:id
-// @access Public
+// @desc Update a communities
+// @route PUT /api/communities/:id
+// @access Private
 const updateCommunity = (req, res) => {
   const {
     name, description, creatorId
   } = req.body
 
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
+
+  if (!creatorId) {
+    return res.json({ message: 'Not authorized to update.' })
+  }
   const id = req.params.id
   Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
+      if(communities.creatorId !== creatorId) {
+        return res.json({ message: 'Not authorized to update.' })
+      }
       Community.update({
         name,
         description,
         creatorId: creatorId,
-        attachment: 'uploads/' + req.file.filename
+        attachment: 'uploads/' + filename
       },
       { where: { id } })
         .then(() => res.json({ message: 'Community Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
+    } else {
+      res.status(404)
+      throw new Error('Community not found')
     }
-    res.status(404)
-    throw new Error('Communities not found')
   })
+  .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc Search title
