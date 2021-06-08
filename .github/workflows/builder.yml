@@ -1,0 +1,39 @@
+name: Docker Builder
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Planetfarm Docker build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
+
+      - name: Docker build
+        run:  |
+          export CI=false
+          sudo npm install -g @treehouses/cli
+          export gitter_channel="${{ secrets.CHANNEL }}"
+          npm install
+          npm run build
+          ls -la build
+          export DOCKER_CLI_EXPERIMENTAL=enabled
+          source .github/workflows/utils.sh
+          repo="earthowned/planetfarms"
+          build_image "treehouses/nginx" amd64 "$repo"
+          deploy_image "$repo" amd64
+          echo "https://hub.docker.com/r/earthowned/planetfarms-tags/tags"
+          treehouses feedback "new earthowned/planetfarms check https://hub.docker.com/r/earthowned/planetfarms-tags/tags"

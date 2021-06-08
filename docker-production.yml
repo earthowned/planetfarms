@@ -1,0 +1,38 @@
+version: "3"
+services:
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: planetfarms
+    ports:
+      - 5432:5432
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8080
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./api/files:/usr/share/nginx/html
+  proxy:
+    image: nginx:alpine
+    ports:
+      - 8090:80
+  frontend:
+    #build: .
+    image: earthowned:farms
+    ports:
+      - 8091:80
+  api:
+    #build: ./api
+    image: earthowned:api
+    ports:
+      - 8092:80
+    depends_on:
+      - db
+    environment:
+      - port=80
