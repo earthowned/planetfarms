@@ -6,7 +6,6 @@ import Checkbox from "../../Components/Checkbox/Checkbox"
 import InputComponent from "../../Components/Input/InputComponent"
 import Logo from "../../Components/Logo/Logo"
 import "./login-screen.css"
-import { Auth, Hub } from 'aws-amplify'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userAction'
 import OauthBtn from "../../Components/OauthBtn/OauthBtn"
@@ -28,37 +27,10 @@ function LoginScreen(props) {
   const {  loading, error, userInfo } = userLogin
 
   useEffect(() => {
-    Hub.listen('auth', ({ payload: { event, data } }) => {
-      console.log(event)
-      switch (event) {
-        case 'signIn':
-        case 'cognitoHostedUI':
-          getUser().then(userData => setUser(userData))
-          break
-        case 'signOut':
-          setUser(null)
-          break
-        case 'signIn_failure':
-        case 'cognitoHostedUI_failure':
-          console.log('Sign in failure', data)
-          break
-        default:
-          console.log('Sign in failure')
-      }
-    })
-
     if (userInfo) {
       history.push('/community-page-news')
     }
-
-    getUser().then(userData => setUser(userData))
   }, [history, userInfo])
-
-  function getUser() {
-    return Auth.currentAuthenticatedUser()
-      .then(userData => userData)
-      .catch(() => console.log('Not signed in'));
-  }
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')  
@@ -66,31 +38,6 @@ function LoginScreen(props) {
   const [termsError, setTermsError] = useState(false)
   const [userError, setUserError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
-
-
-  async function signIn(username, password) {
-    try {
-        const user = await Auth.signIn(username, password)
-        if (user) {
-          localStorage.setItem('userInfo', JSON.stringify(user))
-          dispatch({
-            type: USER_LOGIN_SUCCESS,
-            payload: user
-          })
-          history.push('/community-page-news')
-        }
-    } catch (error) {
-        const code = error.code
-        switch (code) {
-            case 'NotAuthorizedException':
-              setUserError('NotAuthorizedException')
-              setPasswordError('NotAuthorizedException')
-              return 
-            default:
-                return false
-        }
-    }
-  }
   
   const userChange = (e) => {
     setUsername(e.target.value)
@@ -112,12 +59,10 @@ function LoginScreen(props) {
 
   const loginWithFacebook = (e) => {
     e.preventDefault()
-    Auth.federatedSignIn({provider: 'Facebook'})
   }
 
   const loginWithGoogle = (e) => {
     e.preventDefault()
-    Auth.federatedSignIn({provider: 'Google'})
   }
 
   return (
