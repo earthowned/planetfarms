@@ -42,6 +42,7 @@ const HeaderComponent = ({ title }) => {
       <header className='header-container'>
         <h3>{title}</h3>
         <ul>
+          <li className="community-switch-btn" onClick={() => history.push('/community-switching')}><button>Switch Community</button></li>
           <li style={{ cursor: 'pointer' }} onClick={() => history.push('/dashboard')}>
             <img src='/img/user-green-outline.svg' alt='user-green-outline' />
             <span>My dashboard</span>

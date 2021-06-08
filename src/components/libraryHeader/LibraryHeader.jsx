@@ -6,21 +6,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom'
 import './LibraryHeader.css'
 import { searchResources, listResources } from '../../actions/resourceActions'
 
-const data = [{
-  label: 'All files',
-  link: '/library'
-}, {
-  label: 'My library & collections',
-  link: '/library/collection'
-}, {
-  label: 'Users collection',
-  link: '/library/collection/users'
-}, {
-  label: 'Saved collection',
-  link: '/library/collection/saved'
-}]
-
-const LibraryHeader = ({ setActive }) => {
+const LibraryHeader = ({ setActive, data }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin

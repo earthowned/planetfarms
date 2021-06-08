@@ -12,12 +12,12 @@ const paginate = ({ page, pageSize }) => {
   return { offset, limit }
 }
 
-const getCommunities = (req, res) => {
+const getCommunities = async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['name', order]]
-
+  
   Community.findAll({
     offset: page,
     limit: pageSize,
@@ -142,14 +142,14 @@ const updateCommunity = (req, res) => {
   .catch((err) => res.json({ error: err.message }).status(400))
 }
 
-// @desc Search title
-// @route POST /api/groups/search
+// @desc Search name
+// @route POST /api/communities/search
 // @access Private
 const searchCommunityName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
 
-  Community.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
+  Community.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['name', order]] })
     .then(communities => res.json({ communities }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }

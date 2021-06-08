@@ -22,7 +22,7 @@
 }
 
 .card-1-text {
-  align-items: flex-start;
+  justify-content: flex-end;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -38,6 +38,11 @@
 .text-1-card {
   letter-spacing: 0;
   line-height: 40px;
+}
+
+.text-1-description {
+  color: var(--primary-white);
+  font-size: 18px;
 }
 
 .valign-text-middle {

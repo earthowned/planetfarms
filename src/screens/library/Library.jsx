@@ -11,6 +11,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import { listResources } from '../../actions/resourceActions'
 import Pagination from '../../components/pagination/Pagination'
 
+const nav = [{
+  label: 'All files',
+  link: '/library'
+}, {
+  label: 'My library & collections',
+  link: '/library/collection'
+}, {
+  label: 'Users collection',
+  link: '/library/collection/users'
+}, {
+  label: 'Saved collection',
+  link: '/library/collection/saved'
+}]
 const Library = () => {
   const resourceList = useSelector((state) => state.listResources)
   const data = useSelector((state) => state.listResources)
@@ -45,7 +58,7 @@ const Library = () => {
 
       <DashboardLayout title='library'>
         <div className='library-main-container'>
-          <LibraryHeader setActive={setActive} />
+          <LibraryHeader setActive={setActive} data={nav}/>
           {['Articles', 'Videos'].map(type => (
             <div className='list-container'>
               <ListView
