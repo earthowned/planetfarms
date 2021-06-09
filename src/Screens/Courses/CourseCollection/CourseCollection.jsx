@@ -4,6 +4,7 @@ import CoursesHeader from '../../../Components/CoursesHeader/CoursesHeader'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import { Link } from 'react-router-dom'
 import './course-collection.css'
+import CardLayout from '../../../Layout/cardLayout/CardLayout'
 
 const farming = Array(6).fill(
   {
@@ -18,7 +19,12 @@ const mycollection = [
     title: 'Farm 2020 courses collection',
     img: '/img/farmer.svg',
     subscribers: 365
-  }
+  },
+  {
+    title: 'Farm 2020 courses collection',
+    img: '/img/farmer.svg',
+    subscribers: 365
+  },
 ]
 
 const CourseCollection = () => {
@@ -39,12 +45,7 @@ const CourseUserCard = ({ name, data, btnName, subName }) => {
   return (
     <>
       <h4 className='courses-users-collection-header'>{name}</h4>
-      <div className={data.length === 1
-        ? 'courses-collection-main-container single'
-        : data.length === 2
-          ? 'courses-collection-main-container double'
-          : 'courses-collection-main-container'}
-      >
+      <CardLayout data={data}>
         {
           data.map(item => {
             return (
@@ -52,7 +53,7 @@ const CourseUserCard = ({ name, data, btnName, subName }) => {
             )
           })
         }
-      </div>
+      </CardLayout>
     </>
   )
 }
@@ -60,9 +61,11 @@ const CourseUserCard = ({ name, data, btnName, subName }) => {
 export const BackgroundUserCard = ({ item, btnName, subName }) => {
   return (
     <Background image={item.img}>
+      <div className="course-collection-inner-card">
       <button className='subs'>
         <span>{item.subscribers} {subName}</span>
       </button>
+      </div>
       <CourseUserContent item={item} btnName={btnName} />
     </Background>
   )
