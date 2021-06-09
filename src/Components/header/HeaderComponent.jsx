@@ -38,7 +38,7 @@ const HeaderComponent = ({ title }) => {
 
   return (
     <>
-      {modalActive && <SettingsActionModal setModalActive={setModalActive} settingAction={settingAction} />}
+      <div>{modalActive && <SettingsActionModal setModalActive={setModalActive} settingAction={settingAction} />} </div>
       <header className='header-container'>
         <h3>{title}</h3>
         <ul>
