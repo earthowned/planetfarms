@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './listview.css'
 
 const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(false)
 
   return (
     <>

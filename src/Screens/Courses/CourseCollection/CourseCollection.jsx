@@ -24,7 +24,7 @@ const mycollection = [
     title: 'Farm 2020 courses collection',
     img: '/img/farmer.svg',
     subscribers: 365
-  },
+  }
 ]
 
 const CourseCollection = () => {
@@ -61,10 +61,10 @@ const CourseUserCard = ({ name, data, btnName, subName }) => {
 export const BackgroundUserCard = ({ item, btnName, subName }) => {
   return (
     <Background image={item.img}>
-      <div className="course-collection-inner-card">
-      <button className='subs'>
-        <span>{item.subscribers} {subName}</span>
-      </button>
+      <div className='course-collection-inner-card'>
+        <button className='subs'>
+          <span>{item.subscribers} {subName}</span>
+        </button>
       </div>
       <CourseUserContent item={item} btnName={btnName} />
     </Background>
