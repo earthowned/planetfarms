@@ -8,9 +8,11 @@ import { groupListReducer, groupViewReducer } from './reducers/communityGroupRed
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import { collectionListReducer } from './reducers/collectionReducres'
+import { resourceUserListReducer } from './reducers/resourceUserReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
+  listResourceUser: resourceUserListReducer,
   listCollection: collectionListReducer,
   groupView: groupViewReducer,
   listGroups: groupListReducer,

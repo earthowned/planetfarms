@@ -20,13 +20,11 @@ const ResourceUser = db.define('resource_users',
 )
 
 ResourceUser.associate = (models) => {
-  ResourceUser.belongsToMany(models.User, {
-    foreignKey: 'userId',
-    as: 'user'
-  })
-  ResourceUser.belongsToMany(models.Resource, {
-    foreignKey: 'resourceId',
-    as: 'resource'
+  ResourceUser.belongsTo(User)
+
+  ResourceUser.belongsTo(models.Resource, {
+    foreignKey: 'resourceId'
+
   })
 }
 
