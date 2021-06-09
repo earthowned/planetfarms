@@ -8,7 +8,7 @@ import {
   RESOURCE_USER_CREATE_FAIL
 } from '../constants/resourceuserConstants'
 
-export const listCollectionUser = (sort = '', pageNumber = '') => async (
+export const listResourceUser = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {

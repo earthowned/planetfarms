@@ -7,20 +7,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createResourceUser } from '../../actions/resourceUserAction'
 
 const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }) => {
-  const [active, setActive] = useState(false)
-  const [isAdded, setIsAdded] = useState()
+  const [active, setActive] = useState('')
 
   const dispatch = useDispatch()
   const userInfo = useSelector((state) => state.userLogin.userInfo.id)
-
+  const [isAdded, setIsAdded] = useState()
   function clickHandle (id) {
-    if (active === false) {
-      dispatch(
-        createResourceUser({ userId: userInfo, resourceId: id })
-      )
-    }
-
-    setActive(true)
+    dispatch(
+      createResourceUser({ userId: userInfo, resourceId: id })
+    )
+    setIsAdded(isAdded => ({ [id]: !isAdded[id] }))
   }
 
   return (
@@ -39,8 +35,8 @@ const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }
               </div>
               <div className='list-btn-wrapper'>
                 <span>Add to</span>
-                <button className='secondary-btn-border btn-img-wrapper' value={active} onClick={(id) => clickHandle(item.id)}>
-                  {active ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
+                <button className='secondary-btn-border btn-img-wrapper' onClick={(id) => clickHandle(item.id)}>
+                  {isAdded[item.id] ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
                 </button>
                 <button className='secondary-btn-border' onClick={() => setModalActive(!modalActive)}>Collections</button>
               </div>

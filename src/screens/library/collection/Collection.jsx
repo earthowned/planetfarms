@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CollectionModal from '../../../components/collectionModal/CollectionModal'
 import GroupModal from '../../../components/groupModal/GroupModal'
 import LibraryCard from '../../../components/libraryCard/LibraryCard'
@@ -7,39 +7,39 @@ import SimpleModal from '../../../components/simpleModal/SimpleModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { groupCollection, collections } from '../CollectionData'
 import { useSelector, useDispatch } from 'react-redux'
+import { listResourceUser } from '../../../actions/resourceUserAction'
+import Pagination from '../../../Components/Paginations/Paginations'
+import { listResources } from '../../../actions/resourceActions'
 
 import './collection.css'
-
-const library = [
-  {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg'
-  },
-  {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg'
-  },
-  {
-    category: 'farming',
-    title: "How to farm in 2020 and don't lose you business",
-    img: '/img/man-cap.svg'
-  }
-]
 
 const Collection = () => {
   const [newCollection, setNewCollection] = useState(false)
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
+  // const [pageNumber, setPageNumber] = useState(1)
+  const dispatch = useDispatch()
+  // const collectiondata = useSelector(
+  //   (state) => state.listCollection.collections.collection
+  // )
+  // const resourceList = useSelector((state) => state.listResources)
+  // const data = useSelector((state) => state.listResources)
+  // let resources = resourceList.searchResources ? resourceList.searchResources : resourceList.resources
+  // if (data) resources = data.resources
 
-  const data = useSelector(
-    (state) => state.listCollection.collections.collection
-  )
-  const userInfo = useSelector((state) => state.userLogin)
-  console.log('userinfo', userInfo)
+  // const userInfo = useSelector((state) => state.userLogin)
 
-  console.log('another', data)
+  // const resourceUser = useSelector((state)=>state)
+  // console.log("uuuu",resourceUser)
+  //  useEffect(() =>{
+  //    dispatch(listResourceUser())
+  //  },[dispatch])
+
+  // useEffect(() => {
+  //   dispatch(listResources({ pageNumber }))
+  // }, [pageNumber, dispatch])
+
+  // console.log('userinfo', userInfo)
 
   function openAddCollection () {
     setModalActive(true)
@@ -62,11 +62,14 @@ const Collection = () => {
         </div>
         <div className='library-collection'>
           <h4>My library (files)</h4>
-          <LibraryCard data={library} />
+
+          <LibraryCard />
+
+          {/* <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} /> */}
         </div>
         <div className='library-collection'>
           <h4>My Collections</h4>
-          <LibraryCard data={data} />
+          <LibraryCard />
         </div>
       </DashboardLayout>
     </>

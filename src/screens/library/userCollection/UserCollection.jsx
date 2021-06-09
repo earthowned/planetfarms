@@ -10,9 +10,10 @@ import { farming, groupCollection } from '../CollectionData'
 import GroupModal from '../../../components/groupModal/GroupModal'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
 import { listCollections, updateCollection } from '../../../actions/collectionActions'
+import { createCollectionUser } from '../../../actions/collectionUserActions'
 
 const UserCollection = () => {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(true)
   const [modalActive, setModalActive] = useState(false)
 
   const [groupModal, setGroupModal] = useState(false)
@@ -21,6 +22,8 @@ const UserCollection = () => {
   const data = useSelector(
     (state) => state.listCollection.collections.collection
   )
+  const userInfo = useSelector((state) => state.userLogin.userInfo.id)
+
   console.log('collection', data)
   const dispatch = useDispatch()
 
@@ -34,10 +37,9 @@ const UserCollection = () => {
   }
 
   function handleClick (id) {
-    if (active == false) {
-      dispatch(updateCollection(id, ({ status: 'true' })))
-      setActive(true)
-    }
+    dispatch(
+      createCollectionUser({ userId: userInfo, collectionId: id })
+    )
   }
 
   return (
@@ -73,7 +75,7 @@ const UserCollection = () => {
                       <h4>{item.name}</h4>
 
                       <button className='trasnsparent-btn fixed-width' value={active} onClick={(id) => handleClick(item.id)}>
-                        {active && item.status === false ? 'Save Collection' : <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></>}
+                        {active ? 'Save Collection' : <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></>}
                       </button>
                     </div>
                   </div>

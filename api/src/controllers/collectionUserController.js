@@ -7,14 +7,14 @@ const Op = Sequelize.Op
 // @desc Fetch all collection_user
 // @route Get/api/collection_user
 // @access Private
-const getControllerUser = (res, req) => {
-  CollectionUser.findAll({ include: [{ model: Collection, as: 'collection' }, { model: User, as: 'user' }] })
+const getControllerUser = (req, res) => {
+  CollectionUser.findAll({ include: [{ model: Collection, as: 'collectionInfo' }, { model: User, as: 'user' }] })
     .then(items => {
-      res.json({ items })
+      res.json({ items }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
-
+// @desc Add individual collection user
 const addCollectionUser = (req, res) => {
   const { userId, collectionId } = req.body
   CollectionUser.create({
@@ -26,4 +26,37 @@ const addCollectionUser = (req, res) => {
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
-module.exports = { addCollectionUser, getControllerUser }
+// @desc Update a collection user
+
+const updateCollectionUser = (req, res) => {
+  CollectionUser.findByPk(id).then(collectionUser => {
+    if (collectionUser) {
+      const { id } = collectionUser
+      CollectionUser.update(
+        req.body,
+        { where: { id } })
+        .then(() => res.json({ message: 'Collection user updated !!!' }))
+        .catch((err) => res.json({ error: err.message }).status(400))
+    }
+    res.status(400)
+    throw new Error('Collection User not found')
+  })
+}
+
+// @desc Delete a collectionUser
+const deleteController = (req, res) => {
+  const id = req.params.id
+  CollectionUser.findByPk(id).then(controllerUser => {
+    if (controllerUser) {
+      const { id } = controllerUser
+      CollectionUser.destroy({ where: { id } })
+        .then(() => res.json({ message: 'Controller User Delete!!!' }))
+        .catch((err) => res.json({ err: err.message }).status(400))
+    } else {
+      res.status(404)
+      throw new Error('Controller User not found')
+    }
+  })
+}
+
+module.exports = { addCollectionUser, getControllerUser, updateCollectionUser, deleteController }
