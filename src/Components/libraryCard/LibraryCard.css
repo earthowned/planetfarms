@@ -1,0 +1,71 @@
+.libraryCard-main-container {
+  width: clamp(90%, 80%, 90%);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.libraryCard-inner-container {
+  width: 30%;
+  height: 300px;
+  border-radius: 4px;
+  position: relative;
+  margin-top: 1em;
+}
+
+.libraryCard-inner-container:not(:last-child) {
+  margin-right: 3%;
+}
+
+.trasnsparent-btn {
+  outline: none;
+  border: 0.5px solid var(--primary-white);
+  background: var(--background-color-light);
+  font-weight: 400;
+  color: var(--primary-white);
+  padding: 0.4em 0.6em;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.positioning {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+
+.trasnsparent-btn span {
+  margin-left: 6px;
+}
+
+.libraryCard-inner-container .libraryCard-content {
+  position: absolute;
+  left: 1em;
+  bottom: 1em;
+}
+
+.libraryCard-content h6 {
+  color: var(--primary-color);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.libraryCard-content h4 {
+  font-size: 1.8em;
+  margin-top: 0.6em;
+  color: var(--primary-white);
+}
+
+@media only screen and (max-width: 900px) {
+  .libraryCard-inner-container {
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .libraryCard-inner-container {
+    width: 100%;
+    margin-right: 0;
+  }
+}

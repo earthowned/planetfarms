@@ -75,8 +75,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
               src='/img/calendar-icon.svg'
               alt='calendar-icon'
               onClick={() => history.push('/calendar/my-events')}
-                                         />
-            </div>
+            /></div>
           </div>
           </>
         : <div className={`mobile-view-dropdown-container ${burgerActive ? 'slide' : ''}`}>

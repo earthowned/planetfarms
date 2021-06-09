@@ -1,0 +1,15 @@
+node_modules/
+api/
+.git/
+coverage/
+workflow/
+
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-production.yml
+
+.gitignore
+.env
+.eslintrc
+.editorconfig

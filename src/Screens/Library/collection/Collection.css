@@ -1,0 +1,8 @@
+.library-collection {
+  margin-top: 24px;
+}
+
+.library-collection h4 {
+  color: var(--primary-white);
+  margin: 16px 0;
+}
