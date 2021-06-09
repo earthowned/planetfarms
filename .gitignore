@@ -23,5 +23,5 @@ Thumbs.db
 
 .history/
 
-/api/src/files/*
-!/api/src/files/empty
+/api/files/*
+!/api/files/empty

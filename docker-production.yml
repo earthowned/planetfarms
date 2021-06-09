@@ -40,3 +40,5 @@ services:
       - db
     environment:
       - port=80
+    volumes:
+      - ./api/files:/files
