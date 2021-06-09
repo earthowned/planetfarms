@@ -1,12 +1,11 @@
 FROM keymetrics/pm2:latest-alpine
 
 # Bundle APP files
-COPY . src/
-RUN mv src/package.json src/pm2.json src/.sequelizerc src/.env .
-#COPY package.json .
-#COPY pm2.json .
-#COPY .sequelizerc .
-#COPY .env .
+COPY src .
+COPY package.json .
+COPY pm2.json .
+COPY .sequelizerc .
+COPY .env.example .env
 
 
 # Install app dependencies

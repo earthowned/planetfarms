@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: planetfarms
     ports:
       - 5432:5432
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
   adminer:
     image: adminer
     ports:
@@ -22,6 +24,8 @@ services:
     image: nginx:alpine
     ports:
       - 8090:80
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
   frontend:
     #build: .
     image: earthowned:farms
@@ -36,3 +40,5 @@ services:
       - db
     environment:
       - port=80
+    volumes:
+      - ./api/files:/files
