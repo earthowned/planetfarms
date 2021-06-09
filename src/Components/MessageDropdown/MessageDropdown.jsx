@@ -108,7 +108,7 @@ const MessageDropdown = ({
           )}
         </div>
       ) : (
-        <div className={`message-dropdown-mobile ${messageActive && 'slide'} ${notificationActive && 'slide'}`}>
+        <div className={`message-dropdown-mobile ${messageActive ? 'slide' : ''} ${notificationActive ? 'slide' : ''}`}>
           <div className='message-dropdown-mobile-inner-container'>
             <div className='message-dropdown-mobile-header'>
               <h4>{message}</h4>

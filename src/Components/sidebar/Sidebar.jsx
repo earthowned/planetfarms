@@ -54,7 +54,6 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
     setToggle(!toggle)
     setDropdownActive(!toggle)
   }
-
   return (
     <>
       {
@@ -80,8 +79,8 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
             </div>
           </div>
           </>
-        : <div className={`mobile-view-dropdown-container ${burgerActive && 'slide'}`}>
-          <MainNav navMenu={mainnav} dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} />
+        : <div className={`mobile-view-dropdown-container ${burgerActive ? 'slide' : ''}`}>
+          <MainNav navMenu={mainnav} dropdownActive={dropdownActive} setDropdownActive={setDropdownActive} toggle />
           </div>
     }
     </>
