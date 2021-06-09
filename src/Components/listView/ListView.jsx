@@ -31,15 +31,15 @@ const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }
 
 export default ListView
 
-const ListViewButton = ({setModalActive, modalActive}) => {
+const ListViewButton = ({ setModalActive, modalActive }) => {
   const [active, setActive] = useState(false)
   return (
     <div className='list-btn-wrapper'>
-          <span>Add to</span>
-              <button className='secondary-btn-border btn-img-wrapper' onClick={() => setActive(!active)}>
-                  {active ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
-              </button>
-          <button className='secondary-btn-border' onClick={() => setModalActive(!modalActive)}>Collections</button>
+      <span>Add to</span>
+      <button className='secondary-btn-border btn-img-wrapper' onClick={() => setActive(!active)}>
+        {active ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
+      </button>
+      <button className='secondary-btn-border' onClick={() => setModalActive(!modalActive)}>Collections</button>
     </div>
   )
 }
