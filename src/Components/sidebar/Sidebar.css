@@ -149,11 +149,11 @@
   margin-top: 0.8em;
 }
 
-.list-container .text-active .svg-icon path {
+.list-container .text-active .svg-icon-stroke path {
   stroke: var(--background-color);
 }
 
-.list-container .text-active .svg-icon-courses path {
+.list-container .text-active .svg-icon-fill path {
   fill: var(--background-color);
 }
 
@@ -165,22 +165,23 @@
   cursor: pointer;
   display: flex;
   font-weight: 600;
+  margin-top: 0.8em;
 }
 
-.svg-icon {
+.svg-icon-stroke {
   margin-right: 8px;
 }
 
-.svg-icon path {
+.svg-icon-stroke path {
   stroke: var(--primary-color);
   fill: none;
 }
 
-.svg-icon-courses {
+.svg-icon-fill {
   margin-right: 8px;
 }
 
-.svg-icon-courses path {
+.svg-icon-fill path {
   fill: (--primary-color);
 }
 
@@ -203,9 +204,7 @@
 }
 
 .sidebar-container.active .dropdown-item strong {
-  margin-left: -6px;
-  font-size: 11px;
-  text-align: center;
+  margin-left: 10px;
 }
 
 .sidebar-container.active .list-items-menu span {
@@ -266,8 +265,8 @@
   z-index: 5000;
   bottom: 0;
   right: 0;
-  padding: 0 5em;
-  margin-bottom: 80px;
+  padding: 0 5em 0.8em;
+  margin-bottom: 70px;
   transform: translateY(120%);
   transition: all ease-in-out 0.2s;
 }

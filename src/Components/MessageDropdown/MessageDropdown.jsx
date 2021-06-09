@@ -101,7 +101,7 @@ const MessageDropdown = ({
               {contacts.map((contact) => (
                 <MessageCard contact={contact} />
               ))}
-              <button onClick={() => handleClick()} className='btn-container secondary-btn'>
+              <button onClick={() => handleClick()} className='message-drop-btn-container secondary-btn'>
                 {btnName}
               </button>{' '}
             </>
@@ -122,7 +122,7 @@ const MessageDropdown = ({
             <Link
               to='/messenger'
               onClick={() => clickHandler(false)}
-              className='mobile-btn btn-container secondary-btn nav-link'
+              className='mobile-btn message-drop-btn-container secondary-btn nav-link'
             >
               {btnName}
             </Link>
