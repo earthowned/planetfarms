@@ -89,40 +89,40 @@ export const videos = [
 ]
 
 export const farming = [
-  {
-    category: 'farming',
-    title: 'Business collection',
-    users: 365,
-    img: '/img/farming.svg'
-  },
-  {
-    category: 'farming',
-    title: 'Business collection',
-    users: 365,
-    img: '/img/farming.svg'
-  },
-  {
-    category: 'farming',
-    title: 'Business collection',
-    users: 365,
-    img: '/img/farming.svg'
-  },
-  {
-    category: 'farming',
-    title: 'Business collection',
-    users: 365,
-    img: '/img/farming.svg'
-  },
-  {
-    category: 'farming',
-    title: 'Business collection',
-    users: 365,
-    img: '/img/farming.svg'
-  },
-  {
-    category: 'farming',
-    title: 'Business collection',
-    users: 365,
-    img: '/img/farming.svg'
-  }
+    {
+        category: "farming",
+        title: "Business collection",
+        users: 365,
+        img: "/img/bg-image1.svg"
+    },
+    {
+        category: "farming",
+        title: "Business collection",
+        users: 365,
+        img: "/img/bg-image2.svg"
+    },
+    {
+        category: "farming",
+        title: "Business collection",
+        users: 365,
+        img: "/img/bg-image1.svg"
+    },
+    {
+        category: "farming",
+        title: "Business collection",
+        users: 365,
+        img: "/img/bg-image2.svg"
+    },
+    {
+        category: "farming",
+        title: "Business collection",
+        users: 365,
+        img: "/img/bg-image1.svg"
+    },
+    {
+        category: "farming",
+        title: "Business collection",
+        users: 365,
+        img: "/img/bg-image2.svg"
+    },
 ]

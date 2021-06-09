@@ -4,6 +4,12 @@
   padding: none;
 }
 
+.librarycard-outer-container {
+  width: 100%;
+  height: 100%;
+  padding: none;
+}
+
 .libraryCard-inner-container {
   width: 100%;
   height: 100%;
@@ -12,7 +18,7 @@
 
 .libraryCard-inner-container > div {
   display: flex;
-  height: 344px;
+  height: 100%;
   flex-direction: column;
   justify-content: space-between;
 }
