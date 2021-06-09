@@ -20,15 +20,15 @@ const SavedCollection = () => {
     setActive(false)
   }
 
-  const data = useSelector(
-    (state) => state.listCollection.collections.collection
-  )
+  // const data = useSelector(
+  //   (state) => state.listCollection.collections.collection
+  // )
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(listCollections())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(listCollections())
+  // }, [dispatch])
 
   return (
     <>
@@ -47,11 +47,11 @@ const SavedCollection = () => {
         </div>
         <div className='library-collection'>
           <h4>Farming Collections</h4>
-          <LibraryCard data={data} />
+          <LibraryCard />
         </div>
         <div className='library-collection'>
           <h4>Branding Collections</h4>
-          <LibraryCard data={collections} />
+          <LibraryCard />
         </div>
       </DashboardLayout>
     </>

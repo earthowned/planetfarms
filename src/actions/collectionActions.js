@@ -74,7 +74,7 @@ export const createCollection = (newCollection) => async (dispatch, getState) =>
         'Content-Type': 'multipart/form-data'
       }
     }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/collection/add`, formData, config)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/collection/add`, formData)
     dispatch({ type: COLLECTION_CREATE_SUCCESS, payload: data })
   } catch (error) {
     const message =
