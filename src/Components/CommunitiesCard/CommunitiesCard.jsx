@@ -45,7 +45,7 @@ const communityData = [
 const CommunitiesCard = () => {
   return (
     <>
-    <div className="card-container" >
+    <div className="communities-card-container" >
       {communityData.map((community) => {
         return (
           <div key={community._id} className="card-row-1">
@@ -62,11 +62,10 @@ const CommunitiesCard = () => {
                     {community.followers}
                   </div>
                 </div>
-                <Button>Join community</Button>
+                <button className="secondary-btn join-community-btn">Join community</button>
               </div>
             </div>
           </div>
-          
         );
       })}
       </div>
