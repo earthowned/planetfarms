@@ -150,10 +150,10 @@ function PopUp ({ news, title, category }) {
         <div className='popup-box'>
           <h4>Do you want to save?</h4>
           <div className='popup-btn-wrapper'>
-            <button onClick={handleOnCancelClick} className='secondary-btn'>
+            <button onClick={handleOnCancelClick} className='secondary-btn popup-btn'>
               Cancel
             </button>
-            <button onClick={handleOnSaveClick} className='default-btn'>
+            <button onClick={handleOnSaveClick} className='default-btn popup-btn'>
               Save
             </button>
           </div>

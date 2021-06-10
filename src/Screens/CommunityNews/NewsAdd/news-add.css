@@ -1,7 +1,6 @@
 .news-add-main-container {
   display: flex;
   flex-direction: column;
-  height: 90vh;
   justify-content: space-between;
 }
 
@@ -69,7 +68,11 @@
 .popup-btn-wrapper {
   display: flex;
   justify-content: space-between;
-  width: 35%;
+  width: 384px;
+}
+
+.popup-btn {
+  width: 180px;
 }
 
 .new-content-container {
@@ -96,4 +99,55 @@
 
 .new-content-container h4 {
   margin: 1em 0;
+}
+
+@media only screen and (max-width: 900px) {
+  .popup-btn-wrapper {
+    width: 240px;
+    margin-left: 20px;
+  }
+  .popup-btn {
+    width: 110px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .news-add-container {
+    padding: 16px;
+  }
+
+  .news-add-inner-container {
+    flex-direction: column;
+    background: none;
+    padding: 0;
+  }
+
+  .news-add-inner-container .add-btn {
+    width: 100%;
+  }
+
+  .news-add-inner-container .add-btn:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 24px;
+  }
+
+  .popup-box {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .popup-btn-wrapper {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 24px;
+  }
+
+  .popup-btn {
+    width: 100%;
+    height: 48px;
+  }
+
+  .popup-btn:first-child {
+    margin-bottom: 16px;
+  }
 }
