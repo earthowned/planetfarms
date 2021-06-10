@@ -13,8 +13,7 @@ import './Congratulation.scss'
 
 function CongratulationScreen () {
   const welcomeBack = 'Congratulations!'
-  const welcomeBack2 =
-    'Please fill these fields to communicate with other people easier:'
+  const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
 
   const [modalActive, setModalActive] = useState(false)
 
@@ -188,8 +187,7 @@ const frame4Data = {
 
 const X0220SignUpfiledData = {
   welcomeBack: 'Congratulations!',
-  welcomeBack2:
-    'Please fill these fields to communicate with other people easier:',
+  welcomeBack2: 'Please fill these fields to communicate with other people easier:',
   firstName: 'First Name',
   mikhail: 'Mikhail',
   email: 'Email',

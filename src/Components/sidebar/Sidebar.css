@@ -59,6 +59,7 @@
 .list-items .dropdown-container {
   transition: all 0.5s 1s ease-in-out;
   display: block;
+  overflow: hidden;
 }
 
 .list-container {
@@ -92,6 +93,7 @@
 
 .dropdown-item:hover {
   background: var(--primary-color);
+  color: var(--background-color);
 }
 
 .bg-calendar {
@@ -141,7 +143,16 @@
 }
 
 .list-container .text-active {
+  color: var(--background-color);
   background: var(--primary-color);
+  fill: var(--background-color);
+}
+
+.list-container .text-active .svg-icon-stroke path {
+  stroke: var(--background-color);
+}
+
+.list-container .text-active .svg-icon-fill path {
   fill: var(--background-color);
 }
 
@@ -150,7 +161,28 @@
   border-radius: 4px;
   height: 50px;
   padding: 1.2rem;
+  padding-left: 24px;
   cursor: pointer;
+  display: flex;
+  font-weight: 600;
+  margin-top: 0.8em;
+}
+
+.svg-icon-stroke {
+  margin-right: 8px;
+}
+
+.svg-icon-stroke path {
+  stroke: var(--primary-color);
+  fill: none;
+}
+
+.svg-icon-fill {
+  margin-right: 8px;
+}
+
+.svg-icon-fill path {
+  fill: (--primary-color);
 }
 
 .list-container.active .text-passive {
@@ -171,8 +203,8 @@
   background: none;
 }
 
-.sidebar-container.active .dropdown-item {
-  display: none;
+.sidebar-container.active .dropdown-item strong {
+  margin-left: 10px;
 }
 
 .sidebar-container.active .list-items-menu span {
@@ -214,6 +246,7 @@
 
 .align-content {
   display: flex;
+  align-items: center;
 }
 
 .icon {
@@ -232,8 +265,8 @@
   z-index: 5000;
   bottom: 0;
   right: 0;
-  padding: 0 5em;
-  margin-bottom: 80px;
+  padding: 0 5em 0.8em;
+  margin-bottom: 70px;
   transform: translateY(120%);
   transition: all ease-in-out 0.2s;
 }
