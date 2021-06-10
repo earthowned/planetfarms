@@ -70,11 +70,11 @@ const CourseCard = ({ data }) => {
             <h3>{item.name}</h3>
             <p>{item.activity || item.status}</p>
             {
-                  item.lesson && <div className='lesson-progress'>
-                    <div className='lesson-completed' />
-                    <span>{item.lesson}</span>
-                  </div>
-                }
+              item.lesson && <div className='lesson-progress'>
+                <div className='lesson-completed' />
+                <span>{item.lesson}</span>
+              </div>
+            }
           </div>
         </Background>
       )
