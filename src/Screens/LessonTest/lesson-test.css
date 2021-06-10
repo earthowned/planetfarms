@@ -62,3 +62,23 @@
   height: 48px;
   padding-left: 40px;
 }
+
+@media screen and (max-width: 450px) {
+  .test-wrapper {
+    background: var(--background);
+    border: none;
+  }
+
+  .test-wrapper h1 {
+    padding: 0 0;
+  }
+
+  .question-wrapper {
+    padding: 0 0 40px;
+  }
+
+  .test-btn-container {
+    width: 100%;
+    padding-left: 0;
+  }
+}

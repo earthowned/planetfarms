@@ -103,6 +103,11 @@
 @media only screen and (max-width: 370px) {
   .survey-card-subtext {
     height: 65%;
+    width: 100%;
+  }
+
+  .survey-card-subtext > div {
+    width: 100%;
   }
 
   .subtext-option {
