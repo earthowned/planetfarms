@@ -45,8 +45,7 @@ function DashboardComponent () {
 
           </div>
           {windowWidth < 721
-            ? 
-              <div className='mobile-container-dasboard-my-profile-box'>
+            ? <div className='mobile-container-dasboard-my-profile-box'>
               <Link to='/mylibrary' className='dasboard-my-profile-box'>
                 <MobileViewHeaderContent title='My library' image='/img/book-outlined.svg' />
               </Link>
