@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import Background from '../Background/Background'
-import './courses-card.css'
+import './CoursesCard.css'
 
 const data = [
   {

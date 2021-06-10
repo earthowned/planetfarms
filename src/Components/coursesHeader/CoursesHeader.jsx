@@ -3,7 +3,7 @@ import Filter from '../Filter/Filter'
 import SearchComponent from '../SearchComponent/SearchComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import './courses-header.css'
+import './CoursesHeader.css'
 
 const data = [
   {

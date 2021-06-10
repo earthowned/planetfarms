@@ -3,7 +3,7 @@ import BackButton from '../../../Components/BackButton/BackButton'
 import Button from '../../../Components/Button/Button'
 import Secondarybtn from '../../../Components/SecondaryBtn/Secondarybtn'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-import './edit-collection.css'
+import './EditCollection.css'
 
 const travelling = Array(2).fill([
   {

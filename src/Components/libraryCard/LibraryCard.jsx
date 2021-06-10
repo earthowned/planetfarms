@@ -1,6 +1,6 @@
 import React from 'react'
 import CardLayout from '../../Layout/cardLayout/CardLayout'
-import './library-card.css'
+import './LibraryCard.css'
 
 const LibraryCard = ({ data }) => {
   return (

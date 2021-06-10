@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import MessageDropdown from '../messageDropdown/MessageDropdown'
-import './header-component.css'
+import './HeaderComponent.css'
 import { useHistory } from 'react-router-dom'
 import SettingsActionModel from '../SettingsActionModel/SettingsActionModel'
 
