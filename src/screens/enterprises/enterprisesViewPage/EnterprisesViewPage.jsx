@@ -213,12 +213,12 @@ const enterpriseDetailsData = {
 const Events = ({ event, date }) => {
   return (
     <>
-      <div className='event-text-container'>
-        <div className='green-dot' />
-        <div className='event-text-1 ibmplexsans-normal-quarter-spanish-white-16px'>
+      <div className="event-text-container">
+        <div className="green-dot"></div>
+        <div className="event-text-1 ibmplexsans-normal-quarter-spanish-white-16px">
           {event}
         </div>
-        <div className='event-date-1 ibmplexsans-normal-quarter-spanish-white-16px'>
+        <div className="event-date-1 ibmplexsans-normal-quarter-spanish-white-16px">
           {date}
         </div>
       </div>
