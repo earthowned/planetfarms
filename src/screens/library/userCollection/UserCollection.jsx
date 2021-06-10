@@ -39,7 +39,6 @@ const UserCollection = () => {
         </div>
 
         <h4 className='farming-collection-header'>Farming Collections</h4>
-
         <CardLayout data={farming}>
           {
                 farming.map(item => {
