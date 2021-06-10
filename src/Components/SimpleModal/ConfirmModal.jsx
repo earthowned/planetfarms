@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import InputComponent from '../Input/InputComponent'
 import './confirm-modal.css'
-import { Auth } from 'aws-amplify'
 import { useHistory } from 'react-router-dom'
 
 const ConfirmModal = ({ username, password }) => {
@@ -15,18 +14,7 @@ const ConfirmModal = ({ username, password }) => {
   }
   
   async function confirmSignUp() {
-    try {
-      await Auth.confirmSignUp(username, code)
-    } catch (error) {
-        console.log('error confirming sign up', error)
-    }
-    try {
-      const user = await Auth.signIn(username, password)
-      console.log(user)
-      history.push('/community-page-news')
-    } catch (error) {
-      console.log('error signing in', error)
-    }
+    history.push('/community-page-news')
   }
   return (
     <>

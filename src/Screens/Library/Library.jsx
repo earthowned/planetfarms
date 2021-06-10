@@ -9,7 +9,7 @@ import GroupModal from '../../Components/GroupModal/GroupModal'
 import { groupCollection } from './CollectionData'
 import { useSelector, useDispatch } from 'react-redux'
 import { listResources } from '../../actions/resourceActions'
-import Pagination from '../../Components/Paginations/Paginations'
+import Pagination from '../../Components/pagination/Pagination'
 
 const Library = () => {
   const resourceList = useSelector((state) => state.listResources)

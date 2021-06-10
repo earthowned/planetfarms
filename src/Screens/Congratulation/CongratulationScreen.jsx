@@ -13,8 +13,7 @@ import './Congratulation.scss'
 
 function CongratulationScreen () {
   const welcomeBack = 'Congratulations!'
-  const welcomeBack2 =
-    'Please fill these fields to communicate with other people easier:'
+  const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
 
   const [modalActive, setModalActive] = useState(false)
 
