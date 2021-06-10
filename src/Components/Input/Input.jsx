@@ -6,7 +6,6 @@ import { ReactComponent as EyeOpenIcon } from '../../assets/images/eye-open-icon
 const Input = React.forwardRef(
   (
     {
-      image,
       name,
       value,
       placeholder,
@@ -15,7 +14,8 @@ const Input = React.forwardRef(
       errors,
       togglePasswordVisibility,
       showPassword,
-      children
+      children,
+      noIcon
     },
     ref
   ) => {
@@ -29,15 +29,23 @@ const Input = React.forwardRef(
               errors?.[`${name}`]?.message ? 'block block-error' : 'block'
             }
           >
-            {showLabel && <p className='label'>{placeholder}</p>}
+            {showLabel && (
+              <p className={!noIcon ? 'label' : 'label label-left'}>
+                {placeholder}
+              </p>
+            )}
             <div className='field'>
-              <div
-                className={
-                  errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon '
-                }
-              >
-                {children}
-              </div>
+              {!noIcon && (
+                <div
+                  div
+                  className={
+                    errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon '
+                  }
+                >
+                  {children}
+                </div>
+              )}
+
               <input
                 className='inputField'
                 placeholder={placeholder}

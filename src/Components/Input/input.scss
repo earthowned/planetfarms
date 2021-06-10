@@ -38,6 +38,10 @@
     margin-left: 2.6em;
     position: absolute;
     top: 0.5em;
+
+    &-left {
+      margin-left: 0em;
+    }
   }
 
   .field {
@@ -53,6 +57,7 @@
       height: 24px;
       padding: 3px 0;
       width: 24px;
+      margin-right: 0.5em;
 
       img {
         width: 100%;
@@ -72,8 +77,6 @@
       font-size: 1.05em;
       background-color: transparent;
       color: var(--primary-grey);
-      text-transform: capitalize;
-      margin-left: 0.5em;
       padding: 1em 0;
       min-width: 76px;
       width: 100%;
@@ -94,15 +97,26 @@
       }
     }
   }
-
+  #password {
+    text-transform: inherit;
+  }
+  input[type="text"] {
+    text-transform: capitalize;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
   input[type="date"] {
     color: var(--primary-grey);
   }
 
   input[type="date"]::-webkit-calendar-picker-indicator {
-    background: transparent;
-    width: 68%;
-    height: 100%;
+    display: none;
   }
 
   .error-message {
