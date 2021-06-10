@@ -8,7 +8,6 @@
   justify-content: flex-start;
 
   .block {
-    align-items: center;
     background-color: var(--cards);
     border-radius: 4px;
     display: flex;
@@ -25,6 +24,7 @@
     &:focus-within {
       border: 1px solid var(--primary-color);
     }
+
     &-error {
       border-color: var(--secondary-red) !important;
     }
@@ -40,7 +40,7 @@
     top: 0.5em;
 
     &-left {
-      margin-left: 0em;
+      margin-left: 0;
     }
   }
 
@@ -70,6 +70,7 @@
         }
       }
     }
+
     .inputField {
       border: none;
       outline: none;
@@ -81,6 +82,7 @@
       min-width: 76px;
       width: 100%;
     }
+
     .pwShowHide {
       align-items: center;
       display: flex;
@@ -97,20 +99,25 @@
       }
     }
   }
+
   #password {
     text-transform: inherit;
   }
+
   input[type="text"] {
     text-transform: capitalize;
   }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
+
   input[type="date"] {
     color: var(--primary-grey);
   }

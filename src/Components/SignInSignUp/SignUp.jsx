@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Auth, Hub } from "aws-amplify";
 import { useForm } from "react-hook-form";
 
 import { register } from "../../actions/userAction";
@@ -31,9 +30,6 @@ const SignIn = () => {
   const history = useHistory();
   const { register: regi, handleSubmit, errors } = useForm();
 
-  const [terms, setTerms] = useState(false);
-
-  const [termsError, setTermsError] = useState(false);
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -98,29 +94,7 @@ const SignIn = () => {
           <Lock className="error-icon" />
         </Input>
 
-        <div className="remember remember-signup">
-          <div className="signupCheckBtn">
-            <div className="checkboxAndError">
-              <div className="terms">
-                <Checkbox
-                  termsError={termsError}
-                  setTermsError={setTermsError}
-                  terms={terms}
-                  setTerms={setTerms}
-                />
-                <div className="me white16px">
-                  {spanText} {spanText3}
-                </div>
-              </div>
-              <p className="me-errorMsg">
-                {termsError ? "Please read the terms of service" : " "}
-              </p>
-            </div>
-            <div className="btnSignUp">
-              <Button name="Sign Up" />
-            </div>
-          </div>
-        </div>
+        <TermsBlock spanText={spanText} spanText3={spanText3} />
 
         <div className="oauth">
           <OauthBtn google={google} facebook={facebook} name={text2} />
@@ -135,5 +109,35 @@ const SignIn = () => {
     </form>
   );
 };
+
+const TermsBlock = ({ spanText, spanText3 }) => {
+  const [terms, setTerms] = useState(false);
+  const [termsError, setTermsError] = useState(false);
+  return (
+    <div className="remember remember-signup">
+      <div className="signupCheckBtn">
+        <div className="checkboxAndError">
+          <div className="terms">
+            <Checkbox
+              termsError={termsError}
+              setTermsError={setTermsError}
+              terms={terms}
+              setTerms={setTerms}
+            />
+            <div className="me white16px">
+              {spanText} {spanText3}
+            </div>
+          </div>
+          <p className="me-errorMsg">
+            {termsError ? "Please read the terms of service" : " "}
+          </p>
+        </div>
+        <div className="btnSignUp">
+          <Button name="Sign Up" />
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default SignIn;

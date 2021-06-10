@@ -24,11 +24,7 @@ const Input = React.forwardRef(
     return (
       <>
         <div className='input-container'>
-          <div
-            className={
-              errors?.[`${name}`]?.message ? 'block block-error' : 'block'
-            }
-          >
+          <div className={ errors?.[`${name}`]?.message ? 'block block-error' : 'block' }>
             {showLabel && (
               <p className={!noIcon ? 'label' : 'label label-left'}>
                 {placeholder}
@@ -36,12 +32,7 @@ const Input = React.forwardRef(
             )}
             <div className='field'>
               {!noIcon && (
-                <div
-                  div
-                  className={
-                    errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon '
-                  }
-                >
+                <div className={ errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon ' }>
                   {children}
                 </div>
               )}
@@ -56,17 +47,15 @@ const Input = React.forwardRef(
                 type={type}
                 onChange={(e) => setShowLabel(e.target.value)}
               />
-              {placeholder === 'Password' && (
+              {togglePasswordVisibility && (
                 <div className='pwShowHide' onClick={togglePasswordVisibility}>
-                  {showLabel && (
-                    <span>
-                      {showPassword ? (
-                        <EyeOpenIcon className=' pwShowHide-show' />
-                      ) : (
-                        <EyeCloseIcon className=' pwShowHide-hide' />
-                      )}
-                    </span>
-                  )}
+                  <span>
+                    {showPassword ? (
+                      <EyeOpenIcon className=' pwShowHide-show' />
+                    ) : (
+                      <EyeCloseIcon className=' pwShowHide-hide' />
+                    )}
+                  </span>
                 </div>
               )}
             </div>

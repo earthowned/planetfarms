@@ -25,7 +25,7 @@ function CongratulationScreen () {
   const username = location?.state?.username
   const password = location?.state?.password
 
-  async function signUp (firstname, lastname, phone, birthday, email) {
+  async function signUp ({ firstname, lastname, phone, birthday, email }) {
     console.log(username, password, email, phone)
     try {
       const user = await Auth.signUp({
@@ -56,7 +56,7 @@ function CongratulationScreen () {
   const onSubmit = ({ firstname, lastname, phone, birthday, email }) => {
     console.log(firstname, lastname, phone, birthday, email)
     // if (firstname && lastname && phone && birthday && email) {
-    //   signUp(firstname, lastname, phone, birthday, email);
+    //   signUp({ firstname, lastname, phone, birthday, email });
     // }
   }
 
@@ -181,26 +181,3 @@ function CongratulationScreen () {
 }
 
 export default CongratulationScreen
-
-const frame4Data = {
-  children: 'Skip for now'
-}
-
-const X0220SignUpfiledData = {
-  welcomeBack: 'Congratulations!',
-  welcomeBack2:
-    'Please fill these fields to communicate with other people easier:',
-  firstName: 'First Name',
-  mikhail: 'Mikhail',
-  email: 'Email',
-  text1: 'misha_ugryumov123@gmail.com',
-  birthday: 'Birthday',
-  phone: '08/23/1995',
-  xcontinue: 'Continue',
-  lastName: 'Last Name',
-  ugrymov: 'Ugrymov',
-  text2: 'Phone Number (optional)',
-  text3: '+1 (987) 123-55-12',
-  text4: 'Drag & Drop files in this area or Click Here to attach',
-  frame4Props: frame4Data
-}
