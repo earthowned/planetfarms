@@ -15,15 +15,25 @@ const getControllerUser = (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 // @desc Add individual collection user
-const addCollectionUser = (req, res) => {
+const addCollectionUser = async (req, res) => {
   const { userId, collectionId } = req.body
-  CollectionUser.create({
-    userId,
-    collectionId
+  const userExists = await User.findOne({ where: { id: userId } })
+  const collectionExits = await Collection.findOne({ where: { id: collectionId } })
+  const collectionUserExists = await CollectionUser.findOne({ where: { collectionId, userId } })
+  if (collectionUserExists) {
+    res.status(400).json({ error: 'User Already added collection' })
+  }
+  if (userExists && collectionExits) {
+    CollectionUser.create({
+      userId,
+      collectionId
 
-  })
-    .then(() => res.json({ message: 'Collection User Created !!!' }).status(200))
-    .catch((err) => res.json({ error: err.message }).status(400))
+    })
+      .then(() => res.json({ message: 'Collection User Created !!!' }).status(200))
+      .catch((err) => res.json({ error: err.message }).status(400))
+  } else {
+    res.status(400).json({ error: 'User Not Found' })
+  }
 }
 
 // @desc Update a collection user
