@@ -61,6 +61,10 @@
   margin: 0;
 }
 
+.courses-sub-header-2 {
+  width: 100%;
+}
+
 .courses-list-item.active {
   background: #fff;
   color: #000;
