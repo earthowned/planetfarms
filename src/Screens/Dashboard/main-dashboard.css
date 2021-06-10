@@ -54,14 +54,12 @@
   display: flex;
   flex-direction: column;
   min-height: 56px;
-  width: 200px;
 }
 
 .x10-1-0-my-dashboard .mikhail-ugryumov {
   letter-spacing: 0;
   line-height: 32px;
   min-height: 32px;
-  white-space: nowrap;
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-24px {
@@ -84,7 +82,6 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
   min-height: 48px;
   width: 158px;
 }
@@ -353,7 +350,13 @@ div[class$="-container--header"] h4 {
 @media only screen and (max-width: 900px) {
   .x10-1-0-my-dashboard .dashboard-info {
     flex-direction: column;
+    align-items: flex-start;
     height: auto;
+    width: 50%;
+  }
+
+  .x10-1-0-my-dashboard .flex-col-6 {
+    width: 100%;
   }
 
   .x10-1-0-my-dashboard .info-my-community {
@@ -368,7 +371,12 @@ div[class$="-container--header"] h4 {
 @media only screen and (max-width: 720px) {
   .x10-1-0-my-dashboard .dashboard-hero {
     flex-direction: column;
-    padding: 2.5em 1em 3em;
+    padding: 0;
+    margin-bottom: 40px;
+  }
+
+  .x10-1-0-my-dashboard .border-1px-onyx {
+    border: none;
   }
 
   .x10-1-0-my-dashboard .dashboard-info {
@@ -385,7 +393,6 @@ div[class$="-container--header"] h4 {
 
   .x10-1-0-my-dashboard .flex-col-6 {
     margin: 20px 0;
-    margin-left: 20px;
   }
 
   .dashboard-my-profile-side-header {
@@ -400,6 +407,7 @@ div[class$="-container--header"] h4 {
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
+    border-radius: 4px;
   }
 
   .dasboard-my-profile-box:not(:last-child) {
@@ -419,9 +427,9 @@ div[class$="-container--header"] h4 {
 
   .mobile-container-dasboard-my-profile-box {
     width: 100%;
-    padding: 3em 1em;
     background-color: var(--background-color);
     border-radius: 4px;
-    border: 1px solid var(--strokes);
+    padding-top: 40px;
+    border-top: 1px solid var(--primary-grey);
   }
 }
