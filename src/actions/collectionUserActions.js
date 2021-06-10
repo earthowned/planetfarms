@@ -14,7 +14,7 @@ export const createCollectionUser = (newCollectionUser) => async (dispatch) => {
       type: COLLECTION_USER_CREATE_REQUEST
     })
 
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resourceUser/add`, newCollectionUser)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/collectionUser/add`, newCollectionUser)
     dispatch({
       type: COLLECTION_USER_CREATE_SUCCESS,
       payload: data

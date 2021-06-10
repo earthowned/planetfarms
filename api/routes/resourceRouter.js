@@ -5,7 +5,7 @@ const multer = require('multer')
 const shortid = require('shortid')
 const path = require('path')
 const { protect } = require('../middleware/authMiddleware')
-const { uploadArray, upload } = require('../helpers/filehelpers')
+const { uploadArray, multipleUpload, upload } = require('../helpers/filehelpers')
 
 const { getResources, addResource, getResourcesById, deleteResources, updateResources, searchResourcesTitle } = require('../controllers/resourceController.js')
 
