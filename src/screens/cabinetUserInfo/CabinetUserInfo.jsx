@@ -1,8 +1,18 @@
 import React from 'react'
 import './CabinetUserInfo.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
-import { Link } from 'react-router-dom'
+import { Link, userLocation } from 'react-router-dom'
 import BackButton from '../../components/backButton/BackButton'
+import useSizeFinder from '../../utils/sizeFinder';
+import Filter from '../../components/filter/Filter';
+
+const data = [{
+  label: 'Payment Information',
+  link: '/userinfo'
+}, {
+  label: 'Course reports',
+  link: '/userinfo/reports'
+}]
 
 function App () {
   return (
@@ -14,6 +24,8 @@ function App () {
 export default App
 
 function CabinetUserInfo () {
+  const {pathname} = useLocation();
+  const windowWidth = useSizeFinder();
   return (
     <div className='payment-container'>
       <div className='payment-flex-col-4'>
@@ -21,12 +33,16 @@ function CabinetUserInfo () {
         {/* user details form comes here */}
         <div className='payment-card-container border-1px-onyx'>
           <div className='payment-info'>
-            <div className='payment-info-card border-0-5px-white'>
-              <div className='payment-information ibmplexsans-semi-bold-shark-16px'>Payment information</div>
-            </div>
-            <div className='payment-info-card-2 border-0-5px-white'>
-              <div className='course-reports'>Course reports</div>
-            </div>
+          {windowWidth > 600 
+            ? <ul className='library-list-container'>
+              {data.map((menu) => (
+                <li>
+                  <Link className={`nav-link ${(pathname === menu.link) ? 'library-list-item active' : 'library-list-item'}`} to={menu.link}>{menu.label}</Link>
+                </li>
+              ))}
+            </ul>
+            : <div className="payment-filter-container"> <Filter data={data} noImage="noImage" newFilter={true} />  </div>
+          }
           </div>
           <p className='payment-text ibmplexsans-regular-normal-quarter-spanish-white-16px'>
             You can connect these payment services:

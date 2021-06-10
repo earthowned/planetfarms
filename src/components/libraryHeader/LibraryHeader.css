@@ -18,7 +18,7 @@
 }
 
 .library-list-item {
-  background: var(--background-color);
+  background: var(inherit);
   border: 0.5px solid var(--primary-white);
   border-radius: 4px;
   color: var(--primary-white);
