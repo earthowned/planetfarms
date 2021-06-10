@@ -11,10 +11,13 @@ import GroupModal from '../../../components/groupModal/GroupModal'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
 import { listCollections, updateCollection } from '../../../actions/collectionActions'
 import { createCollectionUser } from '../../../actions/collectionUserActions'
+import Pagination from '../../../Components/Paginations/Paginations'
 
 const UserCollection = () => {
   const [active, setActive] = useState(true)
   const [modalActive, setModalActive] = useState(false)
+  const [isAdded, setIsAdded] = useState()
+  const [pageNumber, setPageNumber] = useState(1)
 
   const [groupModal, setGroupModal] = useState(false)
   const [newCollection, setNewCollection] = useState(false)
@@ -22,14 +25,17 @@ const UserCollection = () => {
   const data = useSelector(
     (state) => state.listCollection.collections.collection
   )
+
+  const dataCollection = useSelector(
+    (state) => state.listCollection
+  )
   const userInfo = useSelector((state) => state.userLogin.userInfo.id)
 
-  console.log('collection', data)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(listCollections())
-  }, [dispatch])
+    dispatch(listCollections({ pageNumber }))
+  }, [pageNumber, dispatch])
 
   function openAddCollection () {
     setGroupModal(true)
@@ -40,6 +46,7 @@ const UserCollection = () => {
     dispatch(
       createCollectionUser({ userId: userInfo, collectionId: id })
     )
+    setIsAdded(id)
   }
 
   return (
@@ -75,7 +82,7 @@ const UserCollection = () => {
                       <h4>{item.name}</h4>
 
                       <button className='trasnsparent-btn fixed-width' value={active} onClick={(id) => handleClick(item.id)}>
-                        {active ? 'Save Collection' : <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></>}
+                        {isAdded === item.id ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
                       </button>
                     </div>
                   </div>
@@ -83,6 +90,8 @@ const UserCollection = () => {
               })
             }
         </div>
+        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={dataCollection} />
+
       </DashboardLayout>
     </>
   )

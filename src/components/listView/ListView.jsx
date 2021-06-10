@@ -16,7 +16,7 @@ const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }
     dispatch(
       createResourceUser({ userId: userInfo, resourceId: id })
     )
-    setIsAdded(isAdded => ({ [id]: !isAdded[id] }))
+    setIsAdded(id)
   }
 
   return (
@@ -36,7 +36,7 @@ const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }
               <div className='list-btn-wrapper'>
                 <span>Add to</span>
                 <button className='secondary-btn-border btn-img-wrapper' onClick={(id) => clickHandle(item.id)}>
-                  {isAdded[item.id] ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
+                  {isAdded === item.id ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
                 </button>
                 <button className='secondary-btn-border' onClick={() => setModalActive(!modalActive)}>Collections</button>
               </div>

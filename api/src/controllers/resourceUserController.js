@@ -23,15 +23,25 @@ const getResourceUser = (req, res) => {
 // @route POST /api/resourceUser/add
 // @access Private
 
-const addResourceUser = (req, res) => {
+const addResourceUser = async (req, res) => {
   // const user = User.findOne({ where: { id: req.body.id } })
 
   const { userId, resourceId } = req.body
-  ResourceUser.create({
-    userId, resourceId
-  })
-    .then(() => res.json({ message: 'Resource User Created !!!' }).this.status(200))
-    .catch((err) => res.json({ error: err.message }).status(400))
+  const userExists = await User.findOne({ where: { id: userId } })
+  const resourceExists = await Resource.findOne({ where: { id: resourceId } })
+  const resourceUserExists = await ResourceUser.findOne({ where: { resourceId, userId } })
+  if (resourceUserExists) {
+    res.status(400).json({ error: 'User Already added resource' })
+  }
+  if (userExists && resourceExists) {
+    ResourceUser.create({
+      userId, resourceId
+    })
+      .then(() => res.json({ message: 'Resource User Created !!!' }).this.status(200))
+      .catch((err) => res.json({ error: err.message }).status(400))
+  } else {
+    res.status(400).json({ error: 'User Not Found' })
+  }
 }
 
 // @desc    Update a ResourceUser
@@ -39,6 +49,7 @@ const addResourceUser = (req, res) => {
 // @access  Public
 
 const updateResourceUser = (req, res) => {
+  const id = req.params.id
   ResourceUser.findByPk(id).then(resourceUser => {
     if (resourceUser) {
       const { id } = resourceUser
