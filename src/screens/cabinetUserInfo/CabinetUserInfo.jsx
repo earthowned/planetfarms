@@ -41,7 +41,7 @@ function CabinetUserInfo () {
                 </li>
               ))}
             </ul>
-            : <div className="payment-filter-container"> <Filter data={data} noImage="noImage" newFilter={true} />  </div>
+            : <div className="payment-filter-container"> <Filter data={data} noImage="noImage" newFilter />  </div>
           }
           </div>
           <p className='payment-text ibmplexsans-regular-normal-quarter-spanish-white-16px'>
