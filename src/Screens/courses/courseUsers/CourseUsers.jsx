@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Background from '../../../Components/Background/Background'
-import CoursesHeader from '../../../Components/CoursesHeader/CoursesHeader'
+import CoursesHeader from '../../../Components/coursesHeader/CoursesHeader'
 import CardLayout from '../../../Layout/cardLayout/CardLayout'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './course-users.css'

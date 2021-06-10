@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import CollectionModal from '../../../Components/CollectionModal/CollectionModal';
 import GroupModal from '../../../Components/GroupModal/GroupModal';
-import LibraryCard from '../../../Components/LibraryCard/LibraryCard';
-import LibraryHeader from '../../../Components/LibraryHeader/LibraryHeader'
+import LibraryCard from '../../../Components/libraryCard/LibraryCard';
+import LibraryHeader from '../../../Components/libraryHeader/LibraryHeader'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './saved-collection.css'
 import {groupCollection, collections, library} from '../CollectionData'

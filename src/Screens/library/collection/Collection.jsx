@@ -1,13 +1,13 @@
 import {useState} from 'react'
 import CollectionModal from '../../../Components/CollectionModal/CollectionModal';
 import GroupModal from '../../../Components/GroupModal/GroupModal';
-import LibraryCard from '../../../Components/LibraryCard/LibraryCard';
-import LibraryHeader from '../../../Components/LibraryHeader/LibraryHeader';
+import LibraryCard from '../../../Components/libraryCard/LibraryCard';
+import LibraryHeader from '../../../Components/libraryHeader/LibraryHeader';
 import SimpleModal from '../../../Components/SimpleModal/SimpleModal';
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout';
 import {groupCollection, collections} from '../CollectionData'
 
-import './collection.css';
+import './Collection.css';
 
 const library = [
     {

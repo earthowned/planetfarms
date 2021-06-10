@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import './courses.css'
+import './Courses.css'
 import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import CoursesHeader from '../../Components/CoursesHeader/CoursesHeader'
-import CoursesCard from '../../Components/CoursesCard/CoursesCard'
+import CoursesHeader from '../../Components/coursesHeader/CoursesHeader'
+import CoursesCard from '../../Components/coursesCard/CoursesCard'
 import GroupModal from '../../Components/GroupModal/GroupModal'
 import SimpleModal from '../../Components/SimpleModal/SimpleModal'
 

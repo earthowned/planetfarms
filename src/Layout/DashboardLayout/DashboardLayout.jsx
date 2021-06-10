@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import HeaderComponent from '../../Components/Header/HeaderComponent'
+import HeaderComponent from '../../Components/header/HeaderComponent'
 import Sidebar from '../../Components/sidebar/Sidebar'
-import './dashboard.css'
+import './Dashboard.css'
 
 import { Link, useLocation } from 'react-router-dom'
-import MessageDropdown from '../../Components/MessageDropdown/MessageDropdown'
+import MessageDropdown from '../../Components/messageDropdown/MessageDropdown'
 import { TABLET_SIZE } from '../../constants/sizeConstants'
 
 // importing custom hooks sizefinder to calculate window width from utils
