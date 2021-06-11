@@ -1,19 +1,26 @@
-.libraryCard-main-container {
-  width: clamp(90%, 80%, 90%);
-  display: flex;
-  flex-wrap: wrap;
+.librarycard-outer-container {
+  width: 100%;
+  height: 100%;
+  padding: none;
 }
 
 .libraryCard-inner-container {
-  width: 30%;
-  height: 300px;
-  border-radius: 4px;
-  position: relative;
-  margin-top: 1em;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
 }
 
-.libraryCard-inner-container:not(:last-child) {
-  margin-right: 3%;
+.libraryCard-inner-container > div {
+  display: flex;
+  height: 344px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.my-library-btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .trasnsparent-btn {
@@ -29,20 +36,12 @@
   cursor: pointer;
 }
 
-.positioning {
-  position: absolute;
-  right: 1em;
-  top: 1em;
-}
-
 .trasnsparent-btn span {
   margin-left: 6px;
 }
 
 .libraryCard-inner-container .libraryCard-content {
-  position: absolute;
-  left: 1em;
-  bottom: 1em;
+  width: 80%;
 }
 
 .libraryCard-content h6 {
@@ -51,21 +50,9 @@
   text-transform: uppercase;
 }
 
-.libraryCard-content h4 {
+.libraryCard-content h5 {
   font-size: 1.8em;
   margin-top: 0.6em;
   color: var(--primary-white);
-}
-
-@media only screen and (max-width: 900px) {
-  .libraryCard-inner-container {
-    width: 45%;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .libraryCard-inner-container {
-    width: 100%;
-    margin-right: 0;
-  }
+  line-height: 1.3em;
 }

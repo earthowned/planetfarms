@@ -1,24 +1,13 @@
 .courses-users-collection-header {
   color: var(--primary-white);
-  margin-top: 40px;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
-.courses-users-main-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 0.3fr));
-  grid-gap: 40px;
-  color: var(--primary-white);
-  margin-bottom: 40px;
-}
-
-.courses-users-main-container > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 16px;
-  border: 1px solid #4f5155;
+.courses-users-inner-container {
   height: 344px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
 }
 
 .courses-users-content h3 {

@@ -4,28 +4,28 @@ import SearchComponent from '../SearchComponent/SearchComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import './CoursesHeader.css'
+import useSizeFinder from '../../utils/SizeFinder'
 
 const data = [
   {
-    name: 'All courses',
-    slug: '/courses'
+    label: 'All courses',
+    link: '/courses'
   },
   {
-    name: 'My courses & collections',
-    slug: '/courses/my-courses'
+    label: 'My courses & collections',
+    link: '/courses/my-courses'
   },
   {
-    name: 'Users collections',
-    slug: '/courses/users'
+    label: 'Users collections',
+    link: '/courses/users'
   },
   {
-    name: 'My collections',
-    slug: '/courses/my-collection'
+    label: 'My collections',
+    link: '/courses/my-collection'
   }
 ]
 
 const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCourse }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { pathname } = useLocation()
@@ -42,21 +42,14 @@ const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCour
     // if (search) dispatch(searchResources(search))
     // if (!search) dispatch(listResources())
 
-    // window.addEventListener('resize', function () {
-    //   setWindowWidth(window.innerWidth)
-    // })
-
-    return () => {
-      window.removeEventListener('resize', function () {
-        setWindowWidth(window.innerWidth)
-      })
-    }
-  }, [windowWidth, search, dispatch, history, userInfo])
+  }, [search, dispatch, history, userInfo])
 
   function createCollection () {
     setActive(true)
     setCreateCollection(true)
   }
+
+  const windowWidth = useSizeFinder()
 
   return (
     <div className='courses-main-header-container'>
@@ -68,11 +61,11 @@ const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCour
                 return (
                   <li>
                     <Link
-                      className={`nav-link ${(pathname === `${item.slug}`)
+                      className={`nav-link ${(pathname === `${item.link}`)
                     ? 'courses-list-item active'
-                    : 'library-list-item'}`} to={`${item.slug}`}
+                    : 'library-list-item'}`} to={`${item.link}`}
                     >
-                      {item.name}
+                      {item.label}
                     </Link>
                   </li>
                 )

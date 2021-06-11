@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  height: 120px;
+  margin-top: 2em;
+  margin-bottom: 40px;
 }
 
 .courses-list-container {
@@ -9,6 +12,7 @@
   list-style: none;
   display: flex;
   margin: 0;
+  margin-bottom: 40px;
 }
 
 .courses-list-container li {
@@ -40,38 +44,25 @@
   background: #fff;
 }
 
-.courses-search-container {
-  margin-top: 40px;
-  width: 100%;
-}
-
 .courses-container {
-  width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .courses-sub-header {
-  width: 248px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin-left: 40px;
 }
 
 .courses-sub-header-1 {
-  width: 100%;
+  width: 70%;
   margin: 0;
 }
 
 .courses-sub-header-2 {
-  width: 100%;
-  margin-top: 40px;
-}
-
-.courses-sub-header-2 .filter-container {
   width: 100%;
 }
 
@@ -81,7 +72,7 @@
 }
 
 .courses-btn-container {
-  width: 100%;
+  width: 200px;
 }
 
 @media only screen and (max-width: 1350px) {
@@ -113,27 +104,17 @@
 }
 
 @media only screen and (max-width: 840px) {
-  .courses-container {
-    width: 100%;
-  }
-
-  .courses-sub-header {
-    width: 100%;
-    margin-left: 0;
-  }
-
   .courses-sub-header-1 {
     width: 100%;
   }
 
   .courses-sub-header-2 {
-    margin-top: 0;
     width: 100%;
   }
 
   .courses-btn-container {
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
   }
 
   .courses-main-header-container {
@@ -143,7 +124,6 @@
 
   .courses-container .filter-container {
     width: 100%;
-    margin-top: 0;
   }
 
   .courses-sub-header-2 .filter-container {
@@ -151,6 +131,12 @@
   }
 
   .courses-search-container {
-    margin: 24px 0;
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .courses-sub-header-2 .filter-container {
+    margin-top: 0;
   }
 }

@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
 }
 
 .card-container {
@@ -131,7 +132,7 @@
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 760px) {
   .card-btn-container {
     flex-direction: column;
     width: 100%;

@@ -254,10 +254,7 @@
 
 .enterpriseCard {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(536px, 1fr));
   margin-top: 40px;
-  grid-gap: 40px;
 }
 
 @media only screen and (max-width: 720px) {

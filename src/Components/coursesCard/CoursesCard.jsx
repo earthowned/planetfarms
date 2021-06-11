@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router'
+import CardLayout from '../../Layout/cardLayout/CardLayout'
 import Background from '../Background/Background'
 import './CoursesCard.css'
 
@@ -17,52 +18,12 @@ const data = [
   {
     title: 'Find your inner power',
     author: 'J.McBell course',
-    image: '/img/bg-image2.svg',
-    stars: 4.5,
-    total: 5,
-    added: false,
-    enroll: true,
-    cost: 'Free'
-  },
-  {
-    title: 'Find your inner power',
-    author: 'J.McBell course',
     image: '/img/bg-image1.svg',
-    stars: 4,
+    stars: 3,
     total: 13,
     added: false,
     enroll: false,
     cost: 25.99
-  },
-  {
-    title: 'Find your inner power',
-    author: 'J.McBell course',
-    image: '/img/bg-image2.svg',
-    stars: 1,
-    total: 5,
-    added: false,
-    enroll: true,
-    cost: 55
-  },
-  {
-    title: 'Find your inner power',
-    author: 'J.McBell course',
-    image: '/img/bg-image1.svg',
-    stars: 3,
-    total: 13,
-    added: false,
-    enroll: false,
-    cost: 'Free'
-  },
-  {
-    title: 'Find your inner power',
-    author: 'J.McBell course',
-    image: '/img/bg-image1.svg',
-    stars: 3,
-    total: 13,
-    added: false,
-    enroll: false,
-    cost: 'Free'
   }
 ]
 const CoursesCard = ({ category, setModalActive }) => {
@@ -70,7 +31,7 @@ const CoursesCard = ({ category, setModalActive }) => {
     <div className='course-card-wrapper'>
       <div className='courses-card-container'>
         <h4>{category}</h4>
-        <div>
+        <CardLayout data={data}>
           {
             data.map(item => {
               return (
@@ -83,7 +44,7 @@ const CoursesCard = ({ category, setModalActive }) => {
               )
             })
           }
-        </div>
+        </CardLayout>
       </div>
     </div>
   )
