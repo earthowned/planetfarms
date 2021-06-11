@@ -14,7 +14,6 @@ import FilterSearch from '../../../Components/FilterSearch/FilterSearch'
 
 const CommunityGroupViewPage = () => {
   const { id } = useParams()
-  console.log('id', id)
   const [followers, setFollowers] = useState(false)
   const groupSingle = useSelector((state) => state.groupView.group)
   const dispatch = useDispatch()

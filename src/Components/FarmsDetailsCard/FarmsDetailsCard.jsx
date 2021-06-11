@@ -8,7 +8,7 @@ const BackgroundImage = ({image,title,description,followerNumber}) => {
   return(
     <>
     <div className="group-bg-image" style={{backgroundImage:`url(${image})`}}></div>
-    <div className="flex-row-6">
+    <div className="group-view-inner-content">
               <div className="post-title-group">
                 <h1 className="post-title-text valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-40px">
                 {title}
@@ -24,13 +24,12 @@ const BackgroundImage = ({image,title,description,followerNumber}) => {
                 </div>
               </div>
               <div>
-                <div className="community-group-follow-btn border-0-5px-quarter-spanish-white">
-                  <div
-                    className="youre-follower ibmplexsans-semi-bold-quarter-spanish-white-16px"
-                     onClick={handleFollowClick}
+                <div className="community-group-view-filter-container">
+                <div className="secondary-btn community-group-view-btn" onClick={handleFollowClick}>
+                  <span
                   >
                     You’re follower
-                  </div>
+                  </span>
 
                   <img src="/img/chevron-right-outline.svg" alt="arrow-icon" />
                 </div>
@@ -46,7 +45,8 @@ const BackgroundImage = ({image,title,description,followerNumber}) => {
                       Report group
                     </div>
                   </div>
-                )} 
+                )}
+                </div>
               </div>
             </div>
     </>
