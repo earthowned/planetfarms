@@ -65,21 +65,18 @@ const CourseCard = ({ data }) => {
   return (
     data && data.map(item => {
       return (
-        <>
-          <Background image={item.bgImage}>
-            {/* <img src={item.bgImage} alt={item.name} /> */}
-            <div className='my-course-content'>
-              <h3>{item.name}</h3>
-              <p>{item.activity || item.status}</p>
-              {
-                  item.lesson && <div className='lesson-progress'>
-                    <div className='lesson-completed' />
-                    <span>{item.lesson}</span>
-                  </div>
-                }
-            </div>
-          </Background>
-        </>
+        <Background image={item.bgImage}>
+          <div className='my-course-content'>
+            <h3>{item.name}</h3>
+            <p>{item.activity || item.status}</p>
+            {
+              item.lesson && <div className='lesson-progress'>
+                <div className='lesson-completed' />
+                <span>{item.lesson}</span>
+              </div>
+            }
+          </div>
+        </Background>
       )
     })
   )

@@ -202,6 +202,7 @@
   border-radius: 4px;
   border: 0.5px solid #fff;
   padding: 14px;
+  margin-left: 24px;
 }
 
 .lesson-test-panel-right > h4 {
@@ -314,4 +315,58 @@
 
 .document-download-toggle div:hover {
   background-color: rgba(255, 255, 255, 0.16);
+}
+
+@media only screen and (max-width: 750px) {
+  .lesson-description-wrapper {
+    padding: 10px;
+  }
+
+  .lesson-description--video-desription {
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .lesson-test-panel {
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
+  .lesson-test-panel-left {
+    width: 100%;
+  }
+
+  .lesson-test-panel-right {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 40px;
+  }
+
+  .material-wrapper {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .lesson-test-btn-wrapper {
+    width: 100%;
+  }
+
+  .material-header > h4 {
+    font-size: 20px;
+  }
+
+  .document-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .download-all h4 {
+    font-size: 12px;
+    width: 70px;
+    line-height: 16px;
+  }
+
+  .document-wrapper .document h4 {
+    font-size: 12px;
+  }
 }
