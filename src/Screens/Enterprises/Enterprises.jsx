@@ -8,6 +8,18 @@ import { listEnterprises, searchEnterprises } from '../../actions/enterpriseActi
 import FormModal from '../../Components/FormModal/FormModal'
 import Filter from '../../Components/Filter/Filter'
 import useSizeFinder from '../../utils/SizeFinder'
+import { Link, useLocation } from 'react-router-dom'
+
+const nav = [
+  {
+    label: 'All enterprises',
+    link: '/enterprises'
+  },
+  {
+    label: 'Your Enterprises',
+    link: '/your-enterprises'
+  }
+]
 
 const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
@@ -15,10 +27,10 @@ const Enterprise = () => {
   const [active, setActive] = useState(false)
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   if (search) dispatch(searchEnterprises(search))
-  //   if (!search) dispatch(listEnterprises())
-  // }, [search, dispatch])
+  useEffect(() => {
+    if (search) dispatch(searchEnterprises(search))
+    if (!search) dispatch(listEnterprises())
+  }, [search, dispatch])
 
   return (
     <>
@@ -28,7 +40,7 @@ const Enterprise = () => {
           <div className='enterprises-col'>
             <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              {/* <CommunityGroupCard data={data} type="enterpise" /> */}
+              <CommunityGroupCard data={data} type='enterpise' />
             </div>
           </div>
         </div>
@@ -46,7 +58,7 @@ function EnterpriseHeader ({ search, setSearch, setActive }) {
       </div>
       <div className='create-enterprises-wrapper'>
         <div className='add-enterprises'>
-          <div className='create-enterprise-text' onClick={() => setActive(true)}>
+          <div className='create-enterprise-text ibmplexsans-semi-bold-shark-16px' onClick={() => setActive(true)}>
             Create Enterprise
           </div>
         </div>
@@ -60,22 +72,28 @@ function EnterpriseHeader ({ search, setSearch, setActive }) {
 
 function FirstHeader () {
   const windowWidth = useSizeFinder()
+  const { pathname } = useLocation()
   return (
     <>
       {
       windowWidth > 720
-        ? <div className='enterprises-option'>
-          <div className='enterprises-option-first'>
-            <div className='all-enterprises-text'>
-              All Enterprises
-            </div>
-          </div>
-          <div className='enterprises-option-second'>
-            <div className='your-enterprises ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-              Your Enterprises
-            </div>
-          </div>
-          </div>
+        ? <ul className='courses-list-container'>
+          {
+              nav.map(item => {
+                return (
+                  <li>
+                    <Link
+                      className={`nav-link ${(pathname === `${item.link}`)
+                    ? 'courses-list-item active'
+                    : 'library-list-item'}`} to={`${item.link}`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                )
+              })
+            }
+          </ul>
         : <Filter name='All Enterprises' noImage />
     }
     </>

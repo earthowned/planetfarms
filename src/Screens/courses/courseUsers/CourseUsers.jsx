@@ -1,32 +1,13 @@
 import React, { useState } from 'react'
 import Background from '../../../Components/Background/Background'
 import CoursesHeader from '../../../Components/coursesHeader/CoursesHeader'
+import CardLayout from '../../../Layout/cardLayout/CardLayout'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './CourseUsers.css'
 
 export const farming = [
   {
     title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg'
-  },
-  {
-    title: 'Farm animals collection in 2020 USA',
-    img: '/img/farmer.svg'
-  },
-  {
-    title: 'Business courses collection for begginers',
-    img: '/img/farmer.svg'
-  },
-  {
-    title: 'Farm animals collection in 2020 USA',
-    img: '/img/farmer.svg'
-  },
-  {
-    title: 'Business courses collection for begginers',
-    img: '/img/farmer.svg'
-  },
-  {
-    title: 'Business courses collection for begginers',
     img: '/img/farmer.svg'
   }
 ]
@@ -48,7 +29,7 @@ const CourseUserCard = ({ name }) => {
   return (
     <>
       <h4 className='courses-users-collection-header'>{name}</h4>
-      <div className='courses-users-main-container'>
+      <CardLayout data={farming}>
         {
           farming.map(item => {
             return (
@@ -56,7 +37,7 @@ const CourseUserCard = ({ name }) => {
             )
           })
         }
-      </div>
+      </CardLayout>
     </>
   )
 }
@@ -65,11 +46,13 @@ export const BackgroundUserCard = ({ item }) => {
   const [savedActive, setSavedActive] = useState(false)
   return (
     <Background image={item.img}>
-      <div className='courses-users-content'>
-        <h3>{item.title}</h3>
-        <button className='trasnsparent-btn fixed-width courses-users-btn' onClick={() => setSavedActive(!savedActive)}>
-          {savedActive ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
-        </button>
+      <div className='courses-users-inner-container'>
+        <div className='courses-users-content'>
+          <h3>{item.title}</h3>
+          <button className='trasnsparent-btn fixed-width courses-users-btn' onClick={() => setSavedActive(!savedActive)}>
+            {savedActive ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
+          </button>
+        </div>
       </div>
     </Background>
   )
