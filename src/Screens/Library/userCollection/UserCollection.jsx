@@ -7,6 +7,7 @@ import CollectionModal from '../../../Components/CollectionModal/CollectionModal
 import SimpleModal from '../../../Components/SimpleModal/SimpleModal'
 import { farming, groupCollection } from '../CollectionData'
 import GroupModal from '../../../Components/GroupModal/GroupModal'
+import CardLayout from '../../../Layout/cardLayout/CardLayout'
 
 const UserCollection = () => {
   const [active, setActive] = useState(false)
@@ -38,12 +39,20 @@ const UserCollection = () => {
         </div>
 
         <h4 className='farming-collection-header'>Farming Collections</h4>
-        <div className='farming-main-container'>
 
+        <CardLayout data={farming}>
           {
                 farming.map(item => {
                   return (
-                    <div className='farming-inner-container' style={{ backgroundImage: `url(${item.img})` }}>
+                    <div
+                      className='farming-inner-container'
+                      style={{
+                        background: `linear-gradient(359.99deg, #000000 0.01%, rgba(25, 28, 33, 0.4) 99.99%), url(${item.img})`,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat'
+                      }}
+                    >
                       <button className='trasnsparent-btn btn-positioning'>
                         <b>{item.users}</b>  <span>users saved</span>
                       </button>
@@ -60,7 +69,7 @@ const UserCollection = () => {
                   )
                 })
             }
-        </div>
+        </CardLayout>
       </DashboardLayout>
     </>
   )

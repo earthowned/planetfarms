@@ -12,6 +12,7 @@
   list-style: none;
   display: flex;
   margin: 0;
+  margin-bottom: 40px;
 }
 
 .courses-list-container li {
