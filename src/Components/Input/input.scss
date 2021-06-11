@@ -1,0 +1,135 @@
+.input-container {
+  margin-bottom: 2em;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .block {
+    background-color: var(--cards);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 80px;
+    overflow: hidden;
+    padding: 0 1em;
+    width: inherit;
+    position: relative;
+    border: 1px solid var(--dropdowns);
+
+    &:focus-within {
+      border: 1px solid var(--primary-color);
+    }
+
+    &-error {
+      border-color: var(--secondary-red) !important;
+    }
+  }
+
+  .label {
+    color: var(--primary-grey);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    margin-left: 2.6em;
+    position: absolute;
+    top: 0.5em;
+
+    &-left {
+      margin-left: 0;
+    }
+  }
+
+  .field {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+
+    .icon {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      height: 24px;
+      padding: 3px 0;
+      width: 24px;
+      margin-right: 0.5em;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      &-error {
+        path {
+          fill: var(--secondary-red);
+        }
+      }
+    }
+
+    .inputField {
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 1.05em;
+      background-color: transparent;
+      color: var(--primary-grey);
+      padding: 1em 0;
+      min-width: 76px;
+      width: 100%;
+    }
+
+    .pwShowHide {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      height: 24px;
+      padding: 3px 0;
+      width: 24px;
+      cursor: pointer;
+      margin-left: auto;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  #password {
+    text-transform: inherit;
+  }
+
+  input[type="text"] {
+    text-transform: capitalize;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="date"] {
+    color: var(--primary-grey);
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+
+  .error-message {
+    color: var(--secondary-red);
+    margin: 6px 0;
+    line-height: 20px;
+    height: 12px;
+  }
+}

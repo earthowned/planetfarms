@@ -1,13 +1,13 @@
 import React from 'react'
 import './button.css'
 
-const Button = ({ name, clickHandler }) => {
-  function submitForm (e) {
-    e.preventDefault()
-    clickHandler()
-  }
+const Button = ({ name, clickHandler, onClick }) => {
+  // function submitForm(e) {
+  //   e.preventDefault();
+  //   clickHandler();
+  // }
   return (
-    <button type='submit' className='btn-default' onClick={(e) => submitForm(e)}>
+    <button type='submit' className='btn-default' onClick={onClick}>
       {name}
     </button>
   )

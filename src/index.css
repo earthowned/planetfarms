@@ -2,7 +2,7 @@
 
 body {
   background: black;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 * {
@@ -24,6 +24,7 @@ body {
 } */
 
 :root {
+  --font-family: "IBM Plex Sans-SemiBold", helvetica, sans-serif;
   --primary-color: rgba(0, 198, 136, 1);
   --primary-black: #2b2b2c;
   --primary-grey: #8a8a8a;

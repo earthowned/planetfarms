@@ -95,24 +95,25 @@ export const confirmPin = (username) => async (dispatch) => {
   }
 }
 
-export const changePassword = (username, oldPassword, newPassword) => async (dispatch) => {
-  try {
-    dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
-      { username, oldPassword, newPassword }
-    )
-    dispatch({
-      type: USER_PASSWORD_CHANGE_SUCCESS,
-      payload: data
-    })
-  } catch (error) {
-    dispatch({
-      type: USER_PASSWORD_CHANGE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
+export const changePassword =
+  (username, oldPassword, newPassword) => async (dispatch) => {
+    try {
+      dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
+        { username, oldPassword, newPassword }
+      )
+      dispatch({
+        type: USER_PASSWORD_CHANGE_SUCCESS,
+        payload: data
+      })
+    } catch (error) {
+      dispatch({
+        type: USER_PASSWORD_CHANGE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
   }
-}

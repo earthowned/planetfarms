@@ -20,28 +20,55 @@ const DragDrop = ({ onChange = () => {} }) => {
     onChange(selectedFile)
   }
   return (
-    <DragDropComponent getInputProps={getInputProps} getRootProps={getRootProps} fileChange={fileChange} files={files} setFiles={setFiles} />
+    <DragDropComponent
+      getInputProps={getInputProps}
+      getRootProps={getRootProps}
+      fileChange={fileChange}
+      files={files}
+      setFiles={setFiles}
+    />
   )
 }
 
-function DragDropComponent ({ getInputProps, getRootProps, fileChange, files, setFiles }) {
+function DragDropComponent ({
+  getInputProps,
+  getRootProps,
+  fileChange,
+  files,
+  setFiles
+}) {
   return (
     <div className='drag-drop-container'>
-      <div className='drag-drop' {...getRootProps()} onChange={(e) => fileChange(e)}>
+      <div
+        className='drag-drop'
+        {...getRootProps()}
+        onChange={(e) => fileChange(e)}
+      >
         <input {...getInputProps()} />
-        {files
-          ? (<>
-            <img className='avatar' src={files.preview} alt='files[0].preview' />
-            <div className='drag-drop-icon-container'><img src='/img/camera-outline.svg' alt='camera icon' /></div>
-             </>
-            )
-          : (
-            <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-              Drag & Drop files in this area or Click Here to attach video cover
-            </h6>
-            )}
+        {files ? (
+          <>
+            <img
+              className='avatar'
+              src={files.preview}
+              alt='files[0].preview'
+            />
+            <div className='drag-drop-icon-container'>
+              <img src='/img/camera-outline.svg' alt='camera icon' />
+            </div>
+          </>
+        ) : (
+          <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+            Drag & Drop files in this area or Click Here to attach video cover
+          </h6>
+        )}
       </div>
-      {files && <img src='/img/close-outline.svg' className='drag-drop-close' onClick={() => setFiles(null)} />}
+      {files && (
+        <img
+          src='/img/close-outline.svg'
+          className='drag-drop-close'
+          onClick={() => setFiles(null)}
+        />
+      )}
     </div>
   )
 }
