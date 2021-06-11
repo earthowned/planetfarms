@@ -74,28 +74,24 @@ function FirstHeader () {
   const windowWidth = useSizeFinder()
   const { pathname } = useLocation()
   return (
-    <>
-      {
-      windowWidth > 720
+    <> 
+      { windowWidth > 720
         ? <ul className='courses-list-container'>
-          {
-              nav.map(item => {
-                return (
-                  <li>
-                    <Link
-                      className={`nav-link ${(pathname === `${item.link}`)
-                    ? 'courses-list-item active'
-                    : 'library-list-item'}`} to={`${item.link}`}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                )
-              })
-            }
-          </ul>
-        : <Filter name='All Enterprises' noImage />
-    }
+        {
+          nav.map(item => {
+            return (
+              <li>
+                <Link className={`nav-link ${(pathname === `${item.link}`)
+                  ? 'courses-list-item active'
+                  : 'library-list-item'}`} to={`${item.link}`} >
+                  {item.label}
+                </Link>
+              </li>
+            )
+          })
+        }
+        </ul>
+      : <Filter name='All Enterprises' noImage />}
     </>
   )
 }
