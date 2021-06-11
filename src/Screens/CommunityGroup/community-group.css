@@ -163,8 +163,12 @@
 
   .button-filter-container {
     width: 100%;
-    margin-top: 1em;
+    margin-top: 24px;
     margin-left: 0;
+  }
+
+  .community-group-header-btn-container {
+    margin-bottom: 16px;
   }
 
   .community-group-header-btn-container {
