@@ -24,7 +24,7 @@ const Input = React.forwardRef(
     return (
       <>
         <div className='input-container'>
-          <div className={ errors?.[`${name}`]?.message ? 'block block-error' : 'block' }>
+          <div className={errors?.[`${name}`]?.message ? 'block block-error' : 'block'}>
             {showLabel && (
               <p className={!noIcon ? 'label' : 'label label-left'}>
                 {placeholder}
@@ -32,11 +32,10 @@ const Input = React.forwardRef(
             )}
             <div className='field'>
               {!noIcon && (
-                <div className={ errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon ' }>
+                <div className={errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon '}>
                   {children}
                 </div>
               )}
-
               <input
                 className='inputField'
                 placeholder={placeholder}
@@ -50,23 +49,22 @@ const Input = React.forwardRef(
               {togglePasswordVisibility && (
                 <div className='pwShowHide' onClick={togglePasswordVisibility}>
                   <span>
-                    {showPassword ? (
-                      <EyeOpenIcon className=' pwShowHide-show' />
-                    ) : (
-                      <EyeCloseIcon className=' pwShowHide-hide' />
-                    )}
+                    {showPassword
+                      ? <EyeOpenIcon className=' pwShowHide-show' />
+                      : <EyeCloseIcon className=' pwShowHide-hide' />}
                   </span>
                 </div>
               )}
             </div>
           </div>
-          <p className='error-message'>
-            <ErrorMessage
-              errors={errors}
-              name={name}
-              render={({ message }) => <span>{message}</span>}
-            />
-          </p>
+          {errors?.[`${name}`] &&
+            <p className='error-message'>
+              <ErrorMessage
+                errors={errors}
+                name={name}
+                render={({ message }) => <span>{message}</span>}
+              />
+            </p>}
         </div>
       </>
     )

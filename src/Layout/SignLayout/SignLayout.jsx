@@ -4,8 +4,8 @@ import './SignLayout.scss'
 
 const SignLayout = ({ children }) => {
   return (
-    <div className=' SignLayout'>
-      <div className=' wrapper'>
+    <div className='sign-layout'>
+      <div className='wrapper'>
         <div className='form'>
           <div className='icons'>
             <Logo />
