@@ -5,13 +5,13 @@ import LibraryCard from '../../../components/libraryCard/LibraryCard'
 import LibraryHeader from '../../../components/libraryHeader/LibraryHeader'
 import SimpleModal from '../../../components/simpleModal/SimpleModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
-import { groupCollection, collections } from '../CollectionData'
+import { groupCollection, collections, library } from '../CollectionData'
 import { useSelector, useDispatch } from 'react-redux'
 import { listResourceUser } from '../../../actions/resourceUserAction'
-import Pagination from '../../../Components/Paginations/Paginations'
+import Pagination from '../../../Components/pagination/Pagination'
 import { listResources } from '../../../actions/resourceActions'
 
-import './collection.css'
+import './Collection.css'
 
 const Collection = () => {
   const [newCollection, setNewCollection] = useState(false)
@@ -63,13 +63,13 @@ const Collection = () => {
         <div className='library-collection'>
           <h4>My library (files)</h4>
 
-          <LibraryCard />
+          <LibraryCard data={library} />
 
           {/* <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} /> */}
         </div>
         <div className='library-collection'>
           <h4>My Collections</h4>
-          <LibraryCard />
+          <LibraryCard data={collections}/>
         </div>
       </DashboardLayout>
     </>

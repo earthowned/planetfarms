@@ -39,7 +39,6 @@ const Collection = db.define(
 
 Collection.associate = function (models) {
   Collection.hasMany(models.CollectionUser, {
-    as: 'collectionInfo',
     foreignKey: 'collectionId'
   })
 }

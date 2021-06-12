@@ -15,13 +15,11 @@ const User = db.define('users', {
 
 User.associate = function (models) {
   User.hasMany(models.CollectionUser, {
-    as: 'userfollower',
     foreignKey: 'userId'
   })
 }
 User.associate = function (models) {
   User.hasMany(models.ResourceUser, {
-    as: 'userfollower',
     foreignKey: 'userId'
   })
 }

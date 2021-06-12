@@ -13,13 +13,12 @@ const LibraryCard = ({ data }) => {
               return (
                 <div
                   key={item.id} className='libraryCard-inner-container' style={{
-                    backgroundImage: 'url(/img/man-cap.svg)',
+                    backgroundImage: `url(${item.img})`,
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat'
                   }}
                 >
-
                   <button className='trasnsparent-btn positioning'><img src='/img/trash-outline.svg' alt='trash-icon' /> <span>Remove from library</span></button>
                   <div className='libraryCard-content'>
                     <h6>{item.category}</h6>

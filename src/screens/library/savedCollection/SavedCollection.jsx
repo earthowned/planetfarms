@@ -47,11 +47,11 @@ const SavedCollection = () => {
         </div>
         <div className='library-collection'>
           <h4>Farming Collections</h4>
-          <LibraryCard />
+          <LibraryCard data={library} />
         </div>
         <div className='library-collection'>
           <h4>Branding Collections</h4>
-          <LibraryCard />
+          <LibraryCard data={collections} />
         </div>
       </DashboardLayout>
     </>

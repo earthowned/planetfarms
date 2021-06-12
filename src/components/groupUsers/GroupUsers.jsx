@@ -8,13 +8,13 @@ const GroupUsers = ({ data }) => {
     <>
       {
 
-       data && data.map(d => (
+       data && data.map(user => (
          <div className='group-user-container'>
            <div>
              <div className='img-wrapper'>
-               <img src='/img/avatar-msg.svg' alt='users' />
+               <img src={user.image} alt='users' />
              </div>
-             <h4>{d.name && d.name}</h4>
+             <h4>{user.name && user.name}</h4>
            </div>
            <Radiobox />
          </div>

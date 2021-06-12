@@ -11,7 +11,7 @@ import GroupModal from '../../../components/groupModal/GroupModal'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
 import { listCollections, updateCollection } from '../../../actions/collectionActions'
 import { createCollectionUser } from '../../../actions/collectionUserActions'
-import Pagination from '../../../Components/Paginations/Paginations'
+import Pagination from '../../../Components/pagination/Pagination'
 
 const UserCollection = () => {
   const [active, setActive] = useState(true)
@@ -72,7 +72,7 @@ const UserCollection = () => {
           {
               data && data.map(item => {
                 return (
-                  <div key={item.id} className='farming-inner-container' style={{ backgroundImage: 'url(/img/farming.svg)' }}>
+                  <div key={item.id} className='farming-inner-container' style={{ backgroundImage: `url(${item.img})` }}>
                     <button className='trasnsparent-btn btn-positioning'>
                       <b>{item.users}</b>  <span>users saved</span>
                     </button>
