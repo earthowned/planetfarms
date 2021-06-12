@@ -108,12 +108,27 @@
       display: flex;
       height: 56px;
       width: 100%;
+      flex-direction: row;
+
+      @media only screen and (min-width: 1024px) {
+        flex-direction: row;
+      }
+      
+      @media only screen and (max-width: 1023px) and (min-width: 767px) {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
 
       @media only screen and (max-width: 520px) {
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
         margin-bottom: 4em;
+      }
+
+      .checkboxAndError {
+        margin-bottom: 1em;
       }
     }
 

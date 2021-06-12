@@ -170,7 +170,6 @@
   .news-text::after {
     content: '...';
     position: absolute;
-    bottom: 0;
     right: 0;
     background: inherit;
     color: var(--primary-white);

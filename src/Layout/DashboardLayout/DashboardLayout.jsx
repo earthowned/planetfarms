@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import HeaderComponent from '../../Components/header/HeaderComponent'
 import Sidebar from '../../Components/sidebar/Sidebar'
 import './Dashboard.css'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../actions/userAction'
 
 import { Link, useLocation } from 'react-router-dom'
 import MessageDropdown from '../../Components/messageDropdown/MessageDropdown'
@@ -11,6 +13,7 @@ import { TABLET_SIZE } from '../../constants/sizeConstants'
 import useSizeFinder from '../../utils/SizeFinder'
 
 const DashboardLayout = ({ title, children }) => {
+  const dispatch = useDispatch()
   const [toggle, setToggle] = useState(true)
   const [sidebar, setSidebar] = useState(false)
 
@@ -19,6 +22,7 @@ const DashboardLayout = ({ title, children }) => {
   const [messageActive, setMessageActive] = useState(false)
   const [userActive, setUserActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
+  const [profileSettings, setProfileSettings] = useState(false)
 
   const { pathname } = useLocation()
 
@@ -79,6 +83,14 @@ const DashboardLayout = ({ title, children }) => {
     setMessageActive(false)
   }
 
+  async function signOut () {
+    try {
+      dispatch(logout())
+    } catch (error) {
+      console.log('error signing out: ', error)
+    }
+  }
+
   return (
     <div>
       {windowWidth > TABLET_SIZE ? (
@@ -111,6 +123,7 @@ const DashboardLayout = ({ title, children }) => {
           <div className='layout-container'>
             <div className='dashboard-header'>
               <img className='mobile-logo' src='/img/logo.svg' alt='text logo of planet farm' />
+              <img src='/img/avatar-img.svg' alt='avatar-img' onClick={signOut} />
             </div>
             <h1>{title}</h1>
             <div>{children}</div>
