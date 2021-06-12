@@ -1,7 +1,7 @@
 FROM keymetrics/pm2:latest-alpine
 
 # Bundle APP files
-COPY src .
+COPY src src
 COPY package.json .
 COPY pm2.json .
 COPY .sequelizerc .
