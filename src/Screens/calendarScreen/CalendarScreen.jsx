@@ -181,7 +181,7 @@ const DayComponent = ({ day, events, value, setValue }) => {
               {checkEvents(day).length > 2 && <li className='remaining-act'>{(checkEvents(day).length - 2)}+ events </li>}
             </ul>
           </div>
-            {detailActive && <ToolTip checkEvents={checkEvents} day={day} />}
+            {/*detailActive && <ToolTip checkEvents={checkEvents} day={day} />*/}
           </div>}
       </div>
     </div>
