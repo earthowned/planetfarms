@@ -14,6 +14,12 @@
 
 .dashboard-header {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-header img {
+  height: 36px;
 }
 
 .mobile-logo {

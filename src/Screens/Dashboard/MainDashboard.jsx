@@ -52,7 +52,7 @@ function DashboardComponent () {
               <Link to='/mycourse' className='dasboard-my-profile-box'>
                 <MobileViewHeaderContent title='My courses' image='/img/book-open-1.svg' />
               </Link>
-              <Link to='/mygroups' className='dasboard-my-profile-box'>
+              <Link to='#/mygroups' className='dasboard-my-profile-box'>
                 <MobileViewHeaderContent title='My groups' image='/img/my-group.svg' />
               </Link>
             </div>

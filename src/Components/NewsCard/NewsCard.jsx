@@ -1,4 +1,5 @@
 import './news-card.css'
+import moment from 'moment'
 import { Link } from 'react-router-dom'
 
 function NewsCard ({ news }) {
@@ -12,7 +13,7 @@ function NewsCard ({ news }) {
                 <div className='frame-time' style={{ backgroundImage: 'url("img/newsbg-image.png")' }}>
                   <div className='newsCard-group1'>
                     <div className='frame-3470 border-0-5px-quarter-spanish-white'>
-                      <div className='address ibmplexsans-normal-quarter-spanish-white-14px'>{news.readTime}</div>
+                      <div className='address ibmplexsans-normal-quarter-spanish-white-14px'>{moment(news.createdAt).fromNow()}</div>
                     </div>
                   </div>
                 </div>

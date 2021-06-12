@@ -400,6 +400,13 @@
   width: 70%;
 }
 
+@media screen and (max-width: 850px) {
+  .main-calendar-wrapper .week .day {
+    height: 100px;
+    overflow: hidden;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .calendar-modal-inner-container {
     width: 100%;
@@ -476,5 +483,12 @@
 
   .calendar-modal-btn {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .main-calendar-wrapper .week .day {
+    height: 75px;
+    overflow: hidden;
   }
 }
