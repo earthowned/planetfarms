@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import './user-collection.css'
+import './UserCollection.css'
 
-import LibraryHeader from '../../../Components/LibraryHeader/LibraryHeader'
+import LibraryHeader from '../../../Components/libraryHeader/LibraryHeader'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import CollectionModal from '../../../Components/CollectionModal/CollectionModal'
 import SimpleModal from '../../../Components/SimpleModal/SimpleModal'
@@ -10,7 +10,7 @@ import GroupModal from '../../../Components/GroupModal/GroupModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { listCollections, updateCollection } from '../../../actions/collectionActions'
 import { createCollectionUser } from '../../../actions/collectionUserActions'
-import Pagination from '../../../Components/Paginations/Paginations'
+import Pagination from '../../../Components/pagination/Pagination'
 
 const UserCollection = () => {
   const [active, setActive] = useState(true)
@@ -71,7 +71,7 @@ const UserCollection = () => {
           {
               data && data.map(item => {
                 return (
-                  <div key={item.id} className='farming-inner-container' style={{ backgroundImage: 'url(/img/farming.svg)' }}>
+                  <div key={item.id} className='farming-inner-container' style={{ backgroundImage: `url(${item.img})` }}>
                     <button className='trasnsparent-btn btn-positioning'>
                       <b>{item.users}</b>  <span>users saved</span>
                     </button>

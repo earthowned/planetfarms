@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './listview.css'
+import './ListView.css'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createResourceUser } from '../../actions/resourceUserAction'

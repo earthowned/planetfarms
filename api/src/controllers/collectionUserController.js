@@ -14,6 +14,7 @@ const getControllerUser = (req, res) => {
     })
     .catch((err) => res.json({ err }).status(400))
 }
+
 // @desc Add individual collection user
 const addCollectionUser = async (req, res) => {
   const { userId, collectionId } = req.body

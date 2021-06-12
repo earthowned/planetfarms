@@ -34,7 +34,7 @@ const upload = multer({
   }
 })
 
-const multipleUpload = upload.fields([{ name: 'file' }, { name: 'attachment' }])
+const multipleUpload = upload.fields([{ name: 'file' }, { name: 'attachment' }, { name: 'avatar' }])
 
 const uploadArray = multer({ storage }).array('files')
 

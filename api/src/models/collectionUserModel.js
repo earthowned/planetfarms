@@ -21,11 +21,9 @@ const CollectionUser = db.define('collection_user',
 
 CollectionUser.associate = (models) => {
   CollectionUser.belongsTo(models.User, {
-    as: 'userfollower',
     foreignKey: 'userId'
   })
   CollectionUser.belongsTo(models.Collection, {
-    as: 'collectionInfo',
     foreignKey: 'collectionId'
   })
 }

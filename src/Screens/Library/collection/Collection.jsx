@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
 import CollectionModal from '../../../Components/CollectionModal/CollectionModal'
 import GroupModal from '../../../Components/GroupModal/GroupModal'
-import LibraryCard from '../../../Components/LibraryCard/LibraryCard'
-import LibraryHeader from '../../../Components/LibraryHeader/LibraryHeader'
+import LibraryCard from '../../../Components/libraryCard/LibraryCard'
+import LibraryHeader from '../../../Components/libraryHeader/LibraryHeader'
 import SimpleModal from '../../../Components/SimpleModal/SimpleModal'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-import { groupCollection, collections } from '../CollectionData'
+import { groupCollection, collections, library } from '../CollectionData'
 import { useSelector, useDispatch } from 'react-redux'
 import { listResourceUser } from '../../../actions/resourceUserAction'
-import Pagination from '../../../Components/Paginations/Paginations'
+import Pagination from '../../../Components/pagination/Pagination'
 import { listResources } from '../../../actions/resourceActions'
 
-import './collection.css'
+import './Collection.css'
 
 const Collection = () => {
   const [newCollection, setNewCollection] = useState(false)
@@ -63,13 +63,13 @@ const Collection = () => {
         <div className='library-collection'>
           <h4>My library (files)</h4>
 
-          <LibraryCard />
+          <LibraryCard data={library} />
 
           {/* <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} /> */}
         </div>
         <div className='library-collection'>
           <h4>My Collections</h4>
-          <LibraryCard />
+          <LibraryCard data={collections}/>
         </div>
       </DashboardLayout>
     </>

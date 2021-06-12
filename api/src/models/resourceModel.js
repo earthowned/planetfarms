@@ -95,9 +95,7 @@ const Resources = db.define('resources',
 
 Resources.associate = function (models) {
   Resources.hasMany(models.ResourceUser, {
-    as: 'resourceInfo',
     foreignKey: 'resourceId'
-
   })
 }
 
