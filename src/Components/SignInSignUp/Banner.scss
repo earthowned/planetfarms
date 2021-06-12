@@ -1,5 +1,6 @@
 .banner {
   margin: 0 2em;
+  flex: 50%;
 
   @media only screen and (max-width: 768px) {
     display: none;
@@ -7,20 +8,19 @@
 
   &__image {
     overflow: hidden;
-    width: 481px;
+    /*width: 481px;*/
     height: 600px;
     align-items: center;
     justify-content: center;
     display: flex;
 
-    @media only screen and (max-width: 1024px) {
+    /*@media only screen and (max-width: 1024px) {
       width: 300px;
-    }
+    }*/
   }
 
   &__overlap {
     position: relative;
-    width: 100%;
     align-items: center;
     justify-content: center;
     display: flex;

@@ -72,3 +72,8 @@ h6 {
   font-size: 14px;
   line-height: 24px;
 }
+
+#app {
+  max-width: 2560px;
+  margin: 0 auto;
+}
