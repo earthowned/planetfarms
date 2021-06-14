@@ -1,0 +1,39 @@
+.flex-3 {
+  flex: 3;
+}
+
+.filter-search-container {
+  width: 100%;
+  height: auto;
+  background-color: var(--cards);
+  border: 1px solid var(--dropdowns);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.filter-search-container > h4 {
+  color: var(--primary-white);
+  margin-bottom: 24px;
+}
+
+.filter-search-innercontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-search-innercontainer .filter-container {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.filter-search-innercontainer .filter-container .filter-title {
+  border-radius: 4px;
+}
+
+.filter-search-innercontainer .btn-default {
+  height: 48px;
+}
+
+.margin-vertical {
+  margin: 16px 0;
+}

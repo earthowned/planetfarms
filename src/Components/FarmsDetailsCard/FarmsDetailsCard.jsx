@@ -41,7 +41,7 @@ const BackgroundImage = ({image,title,description,followerNumber}) => {
                     <div className="follow-option-item ibmplexsans-semi-bold-quarter-spanish-white-16px">
                       Unfollow
                     </div>
-                    <div className="follow-option-item ibmplexsans-semi-bold-rusty-red-16px">
+                    <div className="follow-option-item color-red">
                       Report group
                     </div>
                   </div>

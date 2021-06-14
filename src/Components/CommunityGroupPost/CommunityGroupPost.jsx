@@ -27,31 +27,29 @@ const CommunityGroupPost = ({ title, timestamps, content, postImage }) => {
 
         <div className="group-flex-row-5">
           <div className="comment-container">
-            <div className={`message-square-outline-1-1 }`}>
-              <div className="overlap-group-7">
+            
                 <img
                   className="message-outline-icon"
                   src="/img/message-square-outline.svg"
+                  alt="message-icon"
                 />
-              </div>
-            </div>
+              
+            
             <div className="comment-number valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
               17 replies
             </div>
           </div>
           <div className="frame-2805">
-            <div className={`eye-outline-1 }`}>
-              <div className="overlap-group-8">
-                <img className="eye-outlined-icon" src="/img/eye-outline.svg" />
-              </div>
-            </div>
+                <img className="eye-outlined-icon" src="/img/eye-outline.svg" alt="view-icon" />
             <div className="comment-number valign-text-middle ibmplexsans-regular-normal-monsoon-16px">
               387 views
             </div>
           </div>
         </div>
-        <div className="comment-boderline"></div>
       </div>
+      <div className="comment-boderline"></div>
+      
+      <div className="comment-inner-container">
       <div className="frame-2813">
         <div className="most-newest valign-text-middle ibmplexsans-semi-bold-caribbean-green-16px">
           Most newest
@@ -116,6 +114,7 @@ const CommunityGroupPost = ({ title, timestamps, content, postImage }) => {
             <img className="vector-32" src="/img/send-msg-icon.svg" />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
