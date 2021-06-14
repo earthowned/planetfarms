@@ -41,7 +41,7 @@ const CommunityGroupViewPage = () => {
             <CommunityGroupPhotos />
           </div>
           <div className='group-flex-row-7'>
-            <div className="community-group-post-container">
+            <div className='community-group-post-container'>
               <CommunityGroupPost
                 title='Think like a farmer'
                 timestamps='November 18 at 05:45 AM'
@@ -55,11 +55,11 @@ const CommunityGroupViewPage = () => {
             protect your family and business? It’s just a real big problem
             right now with my business!!! `}
               />
-              </div>
-            <FilterSearch />
             </div>
+            <FilterSearch />
           </div>
         </div>
+      </div>
     </DashboardLayout>
   )
 }
