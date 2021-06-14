@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './farms-details-card.css'
+import './FarmsDetailsCard.css'
 const BackgroundImage = ({ image, title, description, followerNumber }) => {
   const [followers, setFollowers] = useState(false)
   const handleFollowClick = () => {

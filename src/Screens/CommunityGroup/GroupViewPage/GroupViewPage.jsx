@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import BackButton from '../../../Components/BackButton/BackButton'
-import FarmsDetailsCard from '../../../Components/FarmsDetailsCard/FarmsDetailsCard'
-import CommunityGroupPhotos from '../../../Components/CommunityGroupPhotos/CommunityGroupPhotos'
-import CommunityGroupPost from '../../../Components/CommunityGroupPost/CommunityGroupPost'
+import FarmsDetailsCard from '../../../Components/farmsDetailsCard/FarmsDetailsCard'
+import CommunityGroupPhotos from '../../../Components/communityGroupPhotos/CommunityGroupPhotos'
+import CommunityGroupPost from '../../../Components/communityGroupPost/CommunityGroupPost'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import { listGroupById } from '../../../actions/communityGroupActions'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { useParams } from 'react-router-dom'
 
-import './group-view-page.css'
+import './GroupViewPage.css'
 import FilterSearch from '../../../Components/filterSearch/FilterSearch'
 
 const CommunityGroupViewPage = () => {
