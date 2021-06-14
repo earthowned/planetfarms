@@ -47,18 +47,15 @@ function CabinetUserInfo () {
           <p className='payment-text ibmplexsans-regular-normal-quarter-spanish-white-16px'>
             You can connect these payment services:
           </p>
-          <div className='payment-card-container-item'>
-            <img src='/img/stripe-card.svg' />
-            <img src='/img/paypal-card.svg' />
-            <img src='/img/coinbase-card.svg' />
+          <div className='payment-option-container user-payment'>
+            <button><img src='/img/stripe.svg' alt='stripe payment' /></button>
+            <button><img src='/img/paypal.svg' alt='paypal payment' /></button>
+            <button><img src='/img/coinbase.svg' alt='coinbase payment' /></button>
           </div>
-          <div className='payment-card-container-item'>
-            <div className='payment-overlap-group'>
-              <div className='boderline' />
-              <div className='or-container'>
-                <div className='or'>OR</div>
-              </div>
-            </div>
+          <div className='or-icon-container'>
+            <div className='or-icon-line' />
+            <span>OR</span>
+            <div className='or-icon-line' />
           </div>
           <div className='add-card border-0-5px-quarter-spanish-white'>
             {/* <div className="frame-1933"></div> */}

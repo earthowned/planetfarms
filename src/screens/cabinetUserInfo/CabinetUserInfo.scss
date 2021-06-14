@@ -89,12 +89,12 @@
 }
 
 .user-payment {
-  width: 500px;
+  width: 80%;
   margin-top: 24px;
 }
 
 .or-icon-container {
-  width: 500px;
+  width: 80%;
   color: var(--strokes);
   display: flex;
   align-items: center;
@@ -161,7 +161,7 @@ background-color: var(--strokes);
   margin-top: 24px;
   overflow: hidden;
   padding: 0 24px;
-  width: 512px;
+  width: 80%;
 }
 
 .add-card-container {
@@ -223,6 +223,7 @@ background-color: var(--strokes);
 
   .user-payment button {
     margin-bottom: 24px;
+    width: 100%;
   }
 
   .add-card {
@@ -235,10 +236,6 @@ background-color: var(--strokes);
 }
 
 @media screen and (max-width: 600px) {
-  .user-payment button {
-    width: 100%;
-  }
-
   .payment-info {
     width: 100%;
   }
