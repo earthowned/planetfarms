@@ -1,14 +1,9 @@
 import React from 'react'
 import './CardLayout.css'
 
-const CardLayout = ({ children, data }) => {
+const CardLayout = ({ children}) => {
   return (
-    <div className={data.length === 1
-      ? 'card-layout-container single'
-      : data.length === 2
-        ? 'card-layout-container double'
-        : 'card-layout-container'}
-    >
+    <div className="grid-layout">
       {children}
     </div>
   )
