@@ -1,0 +1,137 @@
+$breakpoint-tablet: 840px;
+$breakpoint-desktop: 1024px;
+$breakpoint-larg-desktop: 1350px;
+
+@mixin for-tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @media (max-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+.courseHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @include for-tablet {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .container {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include for-tablet {
+      width: 100%;
+    }
+  }
+
+  .lists {
+    color: #fff;
+    list-style: none;
+    display: flex;
+    margin: 0;
+
+    li {
+      margin-right: 0.5em;
+      margin-left: 0;
+    }
+    .list {
+      background: #000;
+      border: 0.5px solid #fff;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 12.5em;
+      height: 3.125em;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: #000;
+        background: #fff;
+      }
+
+      &:focus {
+        color: #000;
+        background: #fff;
+      }
+
+      &-active {
+        background: #fff !important;
+        color: #000 !important;
+      }
+    }
+  }
+  .searchBox {
+    margin-top: 40px;
+    width: 100%;
+
+    @include for-tablet {
+      margin: 24px 0;
+    }
+  }
+}
+
+.coursesSubHeader {
+  width: 248px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 40px;
+
+  @include for-desktop {
+    width: 50%;
+    margin-left: 40px;
+  }
+
+  @include for-tablet {
+    width: 100%;
+    margin: 0;
+  }
+
+  .subcontainer {
+    width: 100%;
+    margin: 0;
+
+    @include for-tablet {
+      width: 100%;
+    }
+  }
+
+  .btnContainer {
+    width: 90%;
+    margin-left: auto;
+
+    @include for-tablet {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+  }
+
+  .subHeader2 {
+    width: 100%;
+
+    .filter-container {
+      width: 90%;
+      margin-left: auto;
+
+      @include for-tablet {
+        width: 100%;
+      }
+    }
+  }
+}
