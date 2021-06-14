@@ -93,9 +93,29 @@
   margin-top: 24px;
 }
 
-.user-info-or-icon {
+.or-icon-container {
   width: 500px;
-  margin: 24px 0;
+  color: var(--strokes);
+  display: flex;
+  align-items: center;
+}
+
+.or-icon-container span {
+  font-size: 16px;
+  font-weight: 800;
+  width: 29px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: var(--primary-grey);
+}
+
+.or-icon-line {
+width: 50%;
+height: 1px;
+background-color: var(--strokes);
 }
 
 .boderline {
@@ -195,7 +215,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-  
+  }
+
+  .or-icon-container {
+    width: 100%;
   }
 
   .user-payment button {
