@@ -32,9 +32,11 @@ jobs:
           sudo treehouses tor notice now
           sudo treehouses sshkey github adduser dogi
           docker-compose up -d
+          cp .env.example .env
           echo "cat .env"
           cat .env
           cd api
+          cp .env.example .env
           echo "cat api/.env"
           cat .env
           echo "api: npm i"
