@@ -41,8 +41,8 @@ jobs:
           cat .env
           echo "api: npm i"
           npm i
-          echo "api: npx sequelize-cli db:migrate"
-          npx sequelize-cli db:migrate
+          #echo "api: npx sequelize-cli db:migrate"
+          #npx sequelize-cli db:migrate
           cd ..
           echo "farm: npm i"
           npm i
