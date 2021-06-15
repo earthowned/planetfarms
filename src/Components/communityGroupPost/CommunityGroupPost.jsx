@@ -27,13 +27,11 @@ const CommunityGroupPost = ({ title, timestamps, content, postImage }) => {
 
         <div className='group-flex-row-5'>
           <div className='comment-container'>
-
             <img
               className='message-outline-icon'
               src='/img/message-square-outline.svg'
               alt='message-icon'
             />
-
             <div className='comment-number valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
               17 replies
             </div>
@@ -63,7 +61,7 @@ const CommunityGroupPost = ({ title, timestamps, content, postImage }) => {
             </div>
           </div>
         </div>
-        <div className='user-post-cmnt-1'>
+        {[...Array(3)].map(() => <div className='user-post-cmnt-1'>
           <div className='comment-details-container'>
             <div className='user-cmnt-avatar' />
             <div className='cmnt-details'>
@@ -82,25 +80,7 @@ const CommunityGroupPost = ({ title, timestamps, content, postImage }) => {
           </div>
           <div className='user-cmnt-boderline' />
         </div>
-        <div className='user-post-cmnt-1'>
-          <div className='comment-details-container'>
-            <div className='user-cmnt-avatar' />
-            <div className='cmnt-details'>
-              <div className='cmnt-user-name valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                John Billboy
-              </div>
-              <p className='cmnt-user-text valign-text-middle ibmplexsans-regular-normal-quarter-spanish-white-16px'>
-                Yeah, man! I really got you! We live in Texas for right now and
-                could make a call with and help maybe!
-              </p>
-              <p className='cmnt-user-timestamps valign-text-middle ibmplexsans-regular-normal-monsoon-16px'>
-                November 1 at 05:55 PM
-              </p>
-            </div>
-          </div>
-          <div className='user-cmnt-boderline' />
-        </div>
-
+        )}
         <div className='cmt'>
           <div className='frame-2815' />
           <div className='comment-box-container  border-1px-onyx'>
