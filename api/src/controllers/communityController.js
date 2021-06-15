@@ -1,4 +1,5 @@
-const { Community, User } = require('../models')
+const {models} = require('../models')
+const db = require('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
@@ -17,13 +18,13 @@ const getCommunities = async (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['name', order]]
-  
-  Community.findAll({
+  console.log(db.User.findAll());
+  db.Community.findAll({
     offset: page,
     limit: pageSize,
     ordervalue,
     include: [{
-      model: User,
+      model: db.User,
       as: 'creator' && 'followers'
     }]
   })
@@ -47,7 +48,7 @@ const createCommunity = (req, res) => {
     return res.json({ message: 'Not authorized to create.' })
   }
 
-  Community.create({ ...req.body, attachment: 'uploads/' + filename })
+  models.Community.create({ ...req.body, attachment: 'uploads/' + filename })
     .then(() => res.json({ message: 'Community is Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
@@ -58,9 +59,9 @@ const createCommunity = (req, res) => {
 const getCommunityById = (req, res) => {
   const id = req.params.id
 
-  Community.findByPk(id, {
-    include: [User, {
-      model: User,
+  models.Community.findByPk(id, {
+    include: [models.User, {
+      model: models.User,
       as: 'creator'
     }]
   })
@@ -85,13 +86,13 @@ const deleteCommunity = (req, res) => {
     return res.json({ message: 'Not authorized to delete.' })
   }
 
-  Community.findByPk(id).then(communities => {
+  models.Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
       if(communities.creatorId !== req.body.creatorId) {
         return res.json({ message: 'Not authorized to delete.' })
       }
-      Community.destroy({ where: { id } })
+      models.Community.destroy({ where: { id } })
         .then(() => res.json({ message: 'Community Deleted!!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -119,13 +120,13 @@ const updateCommunity = (req, res) => {
     return res.json({ message: 'Not authorized to update.' })
   }
   const id = req.params.id
-  Community.findByPk(id).then(communities => {
+  models.Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
       if(communities.creatorId !== creatorId) {
         return res.json({ message: 'Not authorized to update.' })
       }
-      Community.update({
+      models.Community.update({
         name,
         description,
         creatorId: creatorId,
@@ -149,7 +150,7 @@ const searchCommunityName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
 
-  Community.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['name', order]] })
+  models.Community.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['name', order]] })
     .then(communities => res.json({ communities }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }

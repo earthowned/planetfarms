@@ -1,16 +1,41 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
+// const Sequelize = require('sequelize')
+// const {sequelize} = require('../config/database.js')
 
-const User = db.define('users', {
-  password: {
-    type: Sequelize.STRING
+// const User = sequelize.define('users', {
+//   password: {
+//     type: Sequelize.STRING
+//   },
+//   email: {
+//     type: Sequelize.STRING
+//   },
+//   name: {
+//     type: Sequelize.STRING
+//   }
+// }, { timestamps: false })
+
+// module.exports = User
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('users', {
+      password: {
+    type: DataTypes.STRING
   },
   email: {
-    type: Sequelize.STRING
+    type: DataTypes.STRING
   },
   name: {
-    type: Sequelize.STRING
+    type: DataTypes.STRING
   }
-}, { timestamps: false })
+  },
+    { timestamps: true }
+  )
+  User.associate = (models) => {
+    User.belongsToMany(models.Community, {
+      through: 'communities_users',
+      foreignKey: 'userId',
+      as: 'followers'
+    })
 
-module.exports = User
+    User.hasMany(models.Community, { as: 'creator', foreignKey: 'creatorId' })
+  };
+  return User;
+}
