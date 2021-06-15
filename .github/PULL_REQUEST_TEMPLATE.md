@@ -1,4 +1,4 @@
-<!-- This is a new pull request template for treehouses.github.io.
+<!-- This is a new pull request template for planetfarms.
 
 Please make sure to:
 - add (fixes #issue_number) to the end of pull request title when applicable
