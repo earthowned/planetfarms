@@ -1,7 +1,4 @@
 .communities-card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 0.5fr));
-  grid-gap: 40px;
   margin-top: 40px;
 }
 
@@ -18,7 +15,7 @@
   background-size: cover;
   border-radius: 4px;
   display: flex;
-  height: 528px;
+  height: 400px;
   overflow: hidden;
   padding: 24px;
   width: 100%;    
@@ -39,10 +36,8 @@
 }
 
 .text-1-card {
-  height: 80px;
   letter-spacing: 0px;
   line-height: 40px;
-  min-height: 80px;
 }
 
 .valign-text-middle {
@@ -78,12 +73,6 @@
   font-weight: 600;
   font-size: 16px;
   margin-top: 40px;
-}
-
-@media screen and (max-width: 800px) {
-  .communities-card-container {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
 }
 
 @media screen and (max-width: 500px) {

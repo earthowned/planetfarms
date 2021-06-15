@@ -1,9 +1,10 @@
 import React from 'react'
 import './SurveyCard.scss'
+import CardLayout from '../../layout/cardLayout/CardLayout'
 
 const SurveyCard = ({ data }) => {
   return (
-    <>
+    <CardLayout>
       {data.map((data) => {
         return (
           <>
@@ -48,7 +49,7 @@ const SurveyCard = ({ data }) => {
           </>
         )
       })}
-    </>
+    </CardLayout>
   )
 }
 
