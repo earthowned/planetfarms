@@ -2,6 +2,8 @@
 name: Manual Screenshot Bot
 
 on:
+  push:
+    branches: [screenshots]
   workflow_dispatch:
     inputs:
 
