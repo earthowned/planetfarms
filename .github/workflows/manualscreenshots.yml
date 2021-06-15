@@ -19,40 +19,40 @@ jobs:
           fetch-depth: 0
       - name: Planet Farms
         run: |
-          sudo cat /etc/hosts
-          sudo echo "127.0.1.1       db" >> /etc/hosts
-          sudo cat /etc/hosts
           sudo apt install tor
           sudo npm install -g @treehouses/cli
           #export gitter_channel="${{ secrets.CHANNEL }}"
           sudo treehouses tor add 22
           sudo treehouses tor add 3000
-          sudo treehouses tor add 5000
-          #sudo treehouses tor add 5432
-          sudo treehouses tor add 8080
-          sudo treehouses tor add 8081
+          #sudo treehouses tor add 5000
+          ##sudo treehouses tor add 5432
+          #sudo treehouses tor add 8080
+          #sudo treehouses tor add 8081
           sudo treehouses tor
           sudo treehouses tor notice now
           sudo treehouses sshkey github adduser dogi
-          docker-compose up -d
-          cp .env.example .env
+          #docker-compose up -d
+          #cp .env.example .env
+          echo "REACT_APP_API_BASE_URL=https://api.planetfarms.io" > .env
+          echo "REACT_APP_CDN_BASE_URL=https://cdn.planetfarms.io" >> .env
           echo "cat .env"
           cat .env
-          cd api
-          cp .env.example .env
+          #cd api
+          #cp .env.example .env
           #sed -i -e 's#db$#localhost#' .env
-          echo "cat api/.env"
-          cat .env
-          echo "api: npm i"
-          npm i
-          echo "api: npx sequelize-cli db:migrate"
-          npx sequelize-cli db:migrate
-          npx sequelize-cli db:seed
-          cd ..
+          #echo "cat api/.env"
+          #cat .env
+          #echo "api: npm i"
+          #npm i
+          #echo "api: npx sequelize-cli db:migrate"
+          #npx sequelize-cli db:migrate
+          #npx sequelize-cli db:seed
+          #cd ..
           echo "farm: npm i"
           npm i
           echo "starting planetfarms"
-          npm run dev &
+          #npm run dev &
+          npm start &
           echo "5min countdown"
           sleep 60
           echo "4min countdown"
