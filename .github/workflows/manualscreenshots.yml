@@ -19,7 +19,10 @@ jobs:
           fetch-depth: 0
       - name: Planet Farms
         run: |
-          sudo apt install tor #openssh-server
+          sudo cat /etc/hosts
+          sudo echo "127.0.1.1       db"
+          sudo cat /etc/hosts
+          sudo apt install tor
           sudo npm install -g @treehouses/cli
           #export gitter_channel="${{ secrets.CHANNEL }}"
           sudo treehouses tor add 22
@@ -37,7 +40,7 @@ jobs:
           cat .env
           cd api
           cp .env.example .env
-          sed -i -e 's#db$#localhost#' .env
+          #sed -i -e 's#db$#localhost#' .env
           echo "cat api/.env"
           cat .env
           echo "api: npm i"
