@@ -26,6 +26,10 @@
   padding: 40px;
 }
 
+.payment-info {
+  width: 100%;
+}
+
 .payment-info-card-2 {
   align-items: center;
   border-radius: 4px;
@@ -91,6 +95,15 @@
 .user-payment {
   width: 80%;
   margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.user-payment button {
+  margin-bottom: 0;
+}
+
+.user-payment button:nth-child(2) {
+  margin: 0 24px;
 }
 
 .or-icon-container {
@@ -194,6 +207,12 @@ background-color: var(--strokes);
   width: 16px;
 }
 
+@media screen and (max-width: 1350px) {
+  .payment-info .library-list-container .library-list-item {
+    width: 200px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .payment-card-container-item {
     min-width: 0;
@@ -224,6 +243,11 @@ background-color: var(--strokes);
   .user-payment button {
     margin-bottom: 24px;
     width: 100%;
+  }
+
+  .user-payment button:nth-child(2) {
+    margin: 0;
+    margin-bottom: 24px;
   }
 
   .add-card {
