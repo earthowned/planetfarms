@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import BackButton from '../../../Components/BackButton/BackButton'
-import CommunityGroupPost from '../../../Components/CommunityGroupPost/CommunityGroupPost'
-import FarmsDetailsCard from '../../../Components/FarmsDetailsCard/FarmsDetailsCard'
-import FilterSearch from '../../../Components/FilterSearch/FilterSearch'
+import CommunityGroupPost from '../../../Components/communityGroupPost/CommunityGroupPost'
+import FarmsDetailsCard from '../../../Components/farmsDetailsCard/FarmsDetailsCard'
+import FilterSearch from '../../../Components/filterSearch/FilterSearch'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
 import './EnterprisesViewPage.css'
 

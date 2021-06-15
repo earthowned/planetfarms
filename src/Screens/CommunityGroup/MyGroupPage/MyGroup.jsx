@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import BackButton from "../../../Components/BackButton/BackButton";
-import CommunityGroupPost from "../../../Components/CommunityGroupPost/CommunityGroupPost";
-import CommunityGroupPhotos from "../../../Components/CommunityGroupPhotos/CommunityGroupPhotos";
+import CommunityGroupPost from "../../../Components/communityGroupPost/CommunityGroupPost";
+import CommunityGroupPhotos from "../../../Components/communityGroupPhotos/CommunityGroupPhotos";
 import NewsCreateModal from "../../../Components/NewsCreateModal/NewsCreateModal";
 import DashboardLayout from "../../../Layout/DashboardLayout/DashboardLayout";
 

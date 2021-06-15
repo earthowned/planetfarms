@@ -89,6 +89,7 @@ function MobileViewHeaderContent ({ title, image }) {
     </>
   )
 }
+
 function SeeAllButton ({ children }) {
   return (
     <div className='frame-4 border-0-5px-quarter-spanish-white'>
@@ -200,11 +201,11 @@ function ScrollItems ({ head }) {
       <div className='mylibrary-container--tiles' ref={scrollRef}>
         <Tiles data={head.data} title={head.btnName} />
       </div>
-      {scrollActive && <img className='scroll-icon' onClick={() => scrollRight(scrollRef)} src='/img/scroll-icon.svg' alt='scroll-icon' />}
+      {scrollActive && <img className='scroll-dashboard-icon' onClick={() => scrollRight(scrollRef)} src='/img/scroll-icon.svg' alt='scroll-icon' />}
       {
         scrollLeftActive &&
           <img
-            className='scroll-left-icon' src='/img/scroll-icon.svg'
+            className='scroll-dashboard-left-icon' src='/img/scroll-icon.svg'
             onClick={() => scrollLeft(scrollRef)} alt='scroll-icon'
           />
       }
