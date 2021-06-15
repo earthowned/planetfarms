@@ -44,6 +44,7 @@ jobs:
           npm i
           echo "api: npx sequelize-cli db:migrate"
           npx sequelize-cli db:migrate
+          npx sequelize-cli db:seed
           cd ..
           echo "farm: npm i"
           npm i
