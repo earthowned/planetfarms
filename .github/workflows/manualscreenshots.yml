@@ -57,21 +57,21 @@ jobs:
       - name: Screenshot
         uses: swinton/screenshot-website@v1.x
         with:
-          source: https://github.com/earthowned/planetfarms
-          destination: planetfarms-github.png
+          source: http://localhost:3000/login
+          destination: planetfarms-login.png
           full-page: true
-      - name: Sleep 5min
+      - name: Sleep
         run: |
-          echo "5min countdown"
-          sleep 60
-          echo "4min countdown"
-          sleep 60
-          echo "5min countdown"
-          sleep 60
-          echo "3min countdown"
-          sleep 60
-          echo "2min countdown"
-          sleep 60
+          #echo "5min countdown"
+          #sleep 60
+          #echo "4min countdown"
+          #sleep 60
+          #echo "5min countdown"
+          #sleep 60
+          #echo "3min countdown"
+          #sleep 60
+          #echo "2min countdown"
+          #sleep 60
           echo "1min countdown"
           sleep 60
           echo "stop"
