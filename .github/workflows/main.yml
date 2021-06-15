@@ -19,15 +19,15 @@ jobs:
           fetch-depth: 0
       - name: Planet Farms
         run: |
-          sudo apt install tor openssh-server
+          sudo apt install tor #openssh-server
           sudo npm install -g @treehouses/cli
           #export gitter_channel="${{ secrets.CHANNEL }}"
           sudo treehouses tor add 22
-          sudo treehouses tor add 3000
-          sudo treehouses tor add 5000
-          sudo treehouses tor add 5432
-          sudo treehouses tor add 8080
-          sudo treehouses tor add 8081
+          #sudo treehouses tor add 3000
+          #sudo treehouses tor add 5000
+          #sudo treehouses tor add 5432
+          #sudo treehouses tor add 8080
+          #sudo treehouses tor add 8081
           sudo treehouses tor
           sudo treehouses tor notice now
           sudo treehouses sshkey github adduser dogi
