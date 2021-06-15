@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'followers'
     })
 
-    User.hasMany(models.Community, { as: 'creator', foreignKey: 'creatorId' })
+    User.hasMany(models.Community, { foreignKey: 'creatorId', as: 'creator' })
   };
   return User;
 }

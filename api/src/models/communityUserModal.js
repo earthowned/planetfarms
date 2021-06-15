@@ -1,26 +1,25 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database')
-
-const CommunityUser = db.define('communities_users',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const CommunityUser = sequelize.define('communities_users',  {
      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
       },
       communityId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
       },
       active: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         defaultValue: true,
       }
   },
   { timestamps: true }
-)
+  )
+  CommunityUser.associate = (models) => {};
 
-module.exports = CommunityUser
+  return CommunityUser;
+}

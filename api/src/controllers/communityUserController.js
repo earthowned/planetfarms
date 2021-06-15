@@ -1,4 +1,4 @@
-const CommunityUser = require('../models/communityUserModal');
+const db = require('../models')
 
 // @desc Get the community-users
 // @route GET /api/community-users
@@ -6,7 +6,7 @@ const CommunityUser = require('../models/communityUserModal');
 
 const getCommunityUsers = async (req, res) => {
   try {
-    const data = await CommunityUser.findAll()
+    const data = await db.CommunityUser.findAll()
     res.json({
       data
     })
@@ -24,14 +24,14 @@ const followCommunity = async (req, res) => {
     const { userId, communityId, active } = req.body
 
     // checking the relationship between userid and communityid
-    const communityUser = await CommunityUser.findOne({where: {
+    const communityUser = await db.CommunityUser.findOne({where: {
         userId, 
         communityId
     }})
 
     if(communityUser) {
         // checking the followed user
-        const followedUser = await  await CommunityUser.findOne({where: {
+        const followedUser = await db.CommunityUser.findOne({where: {
         userId, 
         communityId,
         active: true
@@ -39,7 +39,7 @@ const followCommunity = async (req, res) => {
 
         if(followedUser) {
             //unfollow the user
-            await CommunityUser.update({active: false}, {where: {
+            await db.CommunityUser.update({active: false}, {where: {
             userId, 
             communityId
             }})
@@ -49,7 +49,7 @@ const followCommunity = async (req, res) => {
         }
 
         //follow the community
-            await CommunityUser.update({active: true}, {where: {
+            await db.CommunityUser.update({active: true}, {where: {
             userId, 
             communityId
             }})
@@ -59,7 +59,7 @@ const followCommunity = async (req, res) => {
         
     }
     
-    await CommunityUser.create({ userId, communityId, active })
+    await db.CommunityUser.create({ userId, communityId, active })
     res.json({
         message: 'Congratulation for following the community.'
     })
