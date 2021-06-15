@@ -27,7 +27,7 @@ const UserCollection = () => {
         clickHandler={setGroupModal}
         data={groupCollection} btnName='add to collections'
         setNewCollection={setNewCollection}
-        />}
+                     />}
 
       {modalActive && <CollectionModal setActive={setModalActive} openAddCollection={openAddCollection} />}
 
@@ -54,24 +54,25 @@ const UserCollection = () => {
   )
 }
 
-function UserCollectionCard ({item}) {
+function UserCollectionCard ({ item }) {
   const [active, setActive] = useState(false)
   return (
     <Background image={item.img}>
-        <div
-          className='farming-inner-container'>
-         <button className='trasnsparent-btn btn-positioning'>
+      <div
+        className='farming-inner-container'
+      >
+        <button className='trasnsparent-btn btn-positioning'>
           <b>{item.users}</b>  <span>users saved</span>
-         </button>
+        </button>
 
         <div className='libraryCard-content'>
           <h6>{item.category}</h6>
           <h4>{item.title}</h4>
-        <button className='trasnsparent-btn fixed-width' onClick={() => setActive(!active)}>
-           {active ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
-        </button>
+          <button className='trasnsparent-btn fixed-width' onClick={() => setActive(!active)}>
+            {active ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
+          </button>
         </div>
-        </div>
+      </div>
     </Background>
   )
 }
