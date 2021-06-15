@@ -1,0 +1,20 @@
+
+name: Manual Screenshot Bot
+
+on:
+  workflow_dispatch:
+    inputs:
+
+jobs:
+  screenshots:
+    name: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Planet Farms
+        run: |
+         docker-compose -v
