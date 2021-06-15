@@ -20,7 +20,7 @@ jobs:
       - name: Planet Farms
         run: |
           sudo cat /etc/hosts
-          sudo echo "127.0.1.1       db"
+          sudo echo "127.0.1.1       db" >> /etc/hosts
           sudo cat /etc/hosts
           sudo apt install tor
           sudo npm install -g @treehouses/cli
