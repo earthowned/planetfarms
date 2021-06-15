@@ -26,7 +26,7 @@ jobs:
           sudo treehouses tor add 3000
           sudo treehouses tor add 5000
           #sudo treehouses tor add 5432
-          #sudo treehouses tor add 8080
+          sudo treehouses tor add 8080
           sudo treehouses tor add 8081
           sudo treehouses tor
           sudo treehouses tor notice now
