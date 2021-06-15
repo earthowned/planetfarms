@@ -37,7 +37,7 @@ jobs:
           cat .env
           cd api
           cp .env.example .env
-          sed -i -e 's#db$#localhost$#' .env
+          sed -i -e 's#db$#localhost#' .env
           echo "cat api/.env"
           cat .env
           echo "api: npm i"
