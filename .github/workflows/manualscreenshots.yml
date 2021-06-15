@@ -53,6 +53,15 @@ jobs:
           echo "starting planetfarms"
           #npm run dev &
           npm start &
+          sleep 20
+      - name: Screenshot
+        uses: swinton/screenshot-website@v1.x
+        with:
+          source: https://github.com/earthowned/planetfarms
+          destination: planetfarms-github.png
+          full-page: true
+      - name: Sleep 5min
+        run: |
           echo "5min countdown"
           sleep 60
           echo "4min countdown"
