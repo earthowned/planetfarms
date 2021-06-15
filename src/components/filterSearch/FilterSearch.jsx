@@ -1,23 +1,47 @@
+<<<<<<< HEAD:src/components/filterSearch/FilterSearch.jsx
 import React from 'react'
 import Filter from '../filter/Filter'
 import Button from '../button/Button'
 import './FilterSearch.css'
+=======
+import React from "react";
+>>>>>>> bcf7f8e... rename:src/Components/filterSearch/FilterSearch.jsx
 
 const FilterSearch = () => {
   return (
-    <div className='flex-3'>
-      <div className='filter-search-container'>
-        <h4>Search filters</h4>
-        <div className='filter-search-innercontainer'>
-          <Filter newFilter />
-          <div className='margin-vertical'>
-            <Filter newFilter />
+    <div>
+      <div className="filter border-1px-onyx">
+        <div className="search-filters ibmplexsans-semi-bold-quarter-spanish-white-16px">
+          Search filters
+        </div>
+        <div className={`filter-field border-1px-onyx }`}>
+          <div className="by-date ibmplexsans-semi-bold-monsoon-16px">
+            By Date
           </div>
-          <Button name='Search' />
+          <div className={`chevron-right-outline-1-1 }`}>
+            <div className="overlap-group-5">
+              <img className="vector-19" src="vector.png" />
+            </div>
+          </div>
+        </div>
+        <div className={`filter-field border-1px-onyx }`}>
+          <div className="by-date ibmplexsans-semi-bold-monsoon-16px">
+            Popular
+          </div>
+          <div className={`chevron-right-outline-1-1 }`}>
+            <div className="overlap-group-5">
+              <img className="vector-19" src="vector.png" />
+            </div>
+          </div>
+        </div>
+        <div className="search-btn-group">
+          <div className="group-search ibmplexsans-semi-bold-shark-16px">
+            Search
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FilterSearch
+export default FilterSearch;
