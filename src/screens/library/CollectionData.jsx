@@ -93,36 +93,36 @@ export const farming = [
     category: 'farming',
     title: 'Business collection',
     users: 365,
-    img: '/img/farming.svg'
+    img: '/img/mountain.svg'
   },
   {
     category: 'farming',
     title: 'Business collection',
     users: 365,
-    img: '/img/farming.svg'
+    img: '/img/man.svg'
   },
   {
     category: 'farming',
     title: 'Business collection',
     users: 365,
-    img: '/img/farming.svg'
+    img: '/img/mountain.svg'
   },
   {
     category: 'farming',
     title: 'Business collection',
     users: 365,
-    img: '/img/farming.svg'
+    img: '/img/man.svg'
   },
   {
     category: 'farming',
     title: 'Business collection',
     users: 365,
-    img: '/img/farming.svg'
+    img: '/img/mountain.svg'
   },
   {
     category: 'farming',
     title: 'Business collection',
     users: 365,
-    img: '/img/farming.svg'
+    img: '/img/man.svg'
   }
 ]

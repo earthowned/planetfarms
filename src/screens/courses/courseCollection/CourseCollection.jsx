@@ -6,21 +6,13 @@ import { Link } from 'react-router-dom'
 import './CourseCollection.css'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
 
-// const farming = Array(6).fill(
-//   {
-//     title: 'Farm 2020 courses collection',
-//     img: '/img/mountain.svg',
-//     subscribers: 65
-//   }
-// )
-
-const farming = [
+const farming = Array(6).fill(
   {
     title: 'Farm 2020 courses collection',
-    img: '/img/farmer.svg',
-    subscribers: 365
+    img: '/img/mountain.svg',
+    subscribers: 65
   }
-]
+)
 
 const mycollection = [
   {

@@ -8,32 +8,26 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   height: 344px;
-}
-
-.farming-inner-container .libraryCard-content {
-  position: absolute;
-  bottom: 1em;
-  left: 2em;
+  border-radius: 4px;
+  border: 1px solid var(--dropdowns);
 }
 
 .farming-inner-container .libraryCard-content h4 {
   margin-top: 0;
+  color: var(--primary-white);
 }
 
 .farming-inner-container .libraryCard-content button {
   margin-top: 1.5em;
-}
-
-.btn-positioning {
-  position: absolute;
-  top: 1em;
-  left: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fixed-width {

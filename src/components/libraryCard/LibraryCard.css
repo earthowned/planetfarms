@@ -8,6 +8,8 @@
   width: 100%;
   height: 100%;
   padding: 16px;
+  border: 1px solid var(--dropdowns);
+  border-radius: 4px;
 }
 
 .libraryCard-inner-container > div {
