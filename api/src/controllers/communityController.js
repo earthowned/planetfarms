@@ -1,7 +1,7 @@
 const db = require('../models')
 const Sequelize = require('sequelize')
+const { sequelize } = require('../models')
 const Op = Sequelize.Op
-
 
 // @desc Fetch all communities
 // @route GET/api/communities
@@ -21,19 +21,17 @@ const getCommunities = async (req, res) => {
     offset: page,
     limit: pageSize,
     ordervalue,
-    include: [{
-      model: db.User,
-      as: 'creator' 
-    },
-    {
-      model: db.User,
-      as: 'followers' 
-    }
-  ]
+    include: [
+      {
+        model: db.User,
+        as: 'creator' && 'followers',
+        attributes: []
+      }
+    ]
   })
     .then(communities => {
       paginate({ page, pageSize })
-      res.json({ communities, page, pageSize}).status(200)
+      res.json({ communities, page, pageSize }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
@@ -64,14 +62,14 @@ const getCommunityById = (req, res) => {
 
   db.Community.findByPk(id, {
     include: [{
-      model:  db.User,
-      as: 'creator',
+      model: db.User,
+      as: 'creator'
     },
     {
-      model:  db.User,
-      as: 'followers',
-    },
-  ]
+      model: db.User,
+      as: 'followers'
+    }
+    ]
   })
     .then(communities => {
       if (communities) {
@@ -97,7 +95,7 @@ const deleteCommunity = (req, res) => {
   db.Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
-      if(communities.creatorId !== req.body.creatorId) {
+      if (communities.creatorId !== req.body.creatorId) {
         return res.json({ message: 'Not authorized to delete.' })
       }
       db.Community.destroy({ where: { id } })
@@ -108,7 +106,7 @@ const deleteCommunity = (req, res) => {
       throw new Error('Community not found')
     }
   })
-  .catch((err) => res.json({ error: err.message }).status(400))
+    .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc Update a communities
@@ -131,7 +129,7 @@ const updateCommunity = (req, res) => {
   db.Community.findByPk(id).then(communities => {
     if (communities) {
       const { id } = communities
-      if(communities.creatorId !== creatorId) {
+      if (communities.creatorId !== creatorId) {
         return res.json({ message: 'Not authorized to update.' })
       }
       db.Community.update({
@@ -148,7 +146,7 @@ const updateCommunity = (req, res) => {
       throw new Error('Community not found')
     }
   })
-  .catch((err) => res.json({ error: err.message }).status(400))
+    .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc Search name
