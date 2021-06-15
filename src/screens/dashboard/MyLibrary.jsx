@@ -61,7 +61,7 @@ function MyLibrary () {
           {/* </div> */}
           <div className='my-library border-1px-onyx'>
             <h4 className='article-header'>Articles</h4>
-            <div className='articles'>
+            <CardLayout>
               {
              articles && articles.map(item => {
                return (
@@ -77,9 +77,9 @@ function MyLibrary () {
                )
              })
             }
-            </div>
+            </CardLayout>
             <h4 className='article-header'>Videos</h4>
-            <div className='articles'>
+            <CardLayout>
               {
              videos && videos.map(item => {
                return (
@@ -91,7 +91,7 @@ function MyLibrary () {
                )
              })
             }
-            </div>
+            </CardLayout>
           </div>
         </div>
       </div>
