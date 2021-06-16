@@ -32,15 +32,15 @@ const CourseDescription = () => {
         <div className='admin-course-details'>
           <div className='admin-course-details--header'>
             <h1>Business course 2020</h1>
-            <div className="admin-filter-container">
-            <Filter name='Course settings' />
+            <div className='admin-filter-container'>
+              <Filter name='Course settings' />
             </div>
           </div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
         </div>
         <div className='admin-lesson-progress-container'>
           <div>
-            <div className='admin-lesson-indicator'><div className="inner-circle"></div></div>
+            <div className='admin-lesson-indicator'><div className='inner-circle' /></div>
             <span>Lesson 1</span>
           </div>
         </div>

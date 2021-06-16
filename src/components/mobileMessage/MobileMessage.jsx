@@ -38,9 +38,9 @@ const MobileMessage = () => {
           <div className='horizontal-mobile-burger' onClick={() => setOptionState(!optionState)}><img src='/img/more-horizontal-outline-1.svg' /></div>
           {
             optionState && <div className='mobile-message-dropdown'>
-            <div className='mobile-message-dropdown--item' onClick={() => makeCall()}><img src='/img/person-add-outline.svg' /> <span>Add member</span></div>
-            <div className='mobile-message-dropdown--item' onClick={() => makePhoneCall()}><img src='/img/phone-call-outline.svg' /> <span>Make call</span></div>
-            <div className='mobile-message-dropdown--item' onClick={() => makePhoneCall()}><img src='/img/video-outline.svg' /> <span>Video call</span></div>
+              <div className='mobile-message-dropdown--item' onClick={() => makeCall()}><img src='/img/person-add-outline.svg' /> <span>Add member</span></div>
+              <div className='mobile-message-dropdown--item' onClick={() => makePhoneCall()}><img src='/img/phone-call-outline.svg' /> <span>Make call</span></div>
+              <div className='mobile-message-dropdown--item' onClick={() => makePhoneCall()}><img src='/img/video-outline.svg' /> <span>Video call</span></div>
             </div>
           }
         </div>

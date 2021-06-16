@@ -3,7 +3,7 @@ import { useHistory } from 'react-router'
 import useSizeFinder from '../../utils/sizeFinder'
 import './MessageCard.scss'
 
-function TextBlock({contact}) {
+function TextBlock ({ contact }) {
   return (
     <div className='contact-text'>
       <h4>{contact?.name}</h4>

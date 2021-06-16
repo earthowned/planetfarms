@@ -21,12 +21,12 @@ module.exports = {
         },
         updatedAt: {
           type: Sequelize.DATE
-        },
+        }
       }
-    );
+    )
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable('users', {});
+    queryInterface.dropTable('users', {})
   }
-};
+}

@@ -69,15 +69,14 @@ const ProgressBar = () => {
 }
 
 const CourseDetail = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
-
   return (
     <div className='description-course-page'>
       <div className='bg-image' />
       <div className='course-details-wrapper'>
         <div className='course-description'>
-          <div className="course-description-header">
+          <div className='course-description-header'>
             <h1 className='course-title'>Jimmy Beam personal course</h1>
-            {unpaid ? <div className='dropdown-course-container'><Button name="Buy Course" clickHandler={() => setPurchaseModal(true)} /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
+            {unpaid ? <div className='dropdown-course-container'><Button name='Buy Course' clickHandler={() => setPurchaseModal(true)} /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
           </div>
           <p className='course-desc'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -156,15 +155,15 @@ const lessonData = [
   }
 ]
 
-const LessonCourse = ({unpaid, setPurchaseModal}) => {
+const LessonCourse = ({ unpaid, setPurchaseModal }) => {
   return (
     <div className='lessons-container'>
-      {unpaid && <div className="purchase-course-wrapper">
-          <div className="purchase-course">
-            <h4>Buy this course for <span>$59.99</span></h4>
-            <div><Button name="Buy Course" clickHandler={() => setPurchaseModal(true)}/></div>
-          </div>
-        </div>}
+      {unpaid && <div className='purchase-course-wrapper'>
+        <div className='purchase-course'>
+          <h4>Buy this course for <span>$59.99</span></h4>
+          <div><Button name='Buy Course' clickHandler={() => setPurchaseModal(true)} /></div>
+        </div>
+      </div>}
       <h3>Lessons</h3>
       {
         lessonData.map(data => {
@@ -180,11 +179,11 @@ const LessonCourseSingle = ({ data }) => {
   return (
     <div className='lesson-card-wrapper'>
       {data.finish && <div className='lock-lesson'>
-        <img src='/img/lesson-lock.svg' alt="lock icon"/>
+        <img src='/img/lesson-lock.svg' alt='lock icon' />
         <h4>{data.finish}</h4>
       </div>}
       <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
-        <img className='lesson-card-img' src={data.bgImage} alt="background image" />
+        <img className='lesson-card-img' src={data.bgImage} alt='background image' />
         <div className='lesson-card-content'>
           <h3>{data.name}</h3>
           <p>{data.description}</p>

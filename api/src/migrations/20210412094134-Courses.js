@@ -42,13 +42,13 @@ module.exports = {
           type: Sequelize.JSON
         },
         _attachments: {
-          type: Sequelize.BLOB("long")
+          type: Sequelize.BLOB('long')
         }
       }
-    );
+    )
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable('courses', {});
+    queryInterface.dropTable('courses', {})
   }
-};
+}

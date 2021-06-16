@@ -14,21 +14,21 @@ const groupPhoto = [
   },
   {
     img: '/img/group-photo-1.svg'
-  },
+  }
 ]
 
 const CommunityGroupPhotos = () => {
-    return (
-        <div className="group-photo">
-        <div className="group-photo-filter">
-          <h4>Group photos</h4>
-          <img src="/img/chevron-right-outline.svg" alt="/img/chevron-right-outline.svg" />
-        </div>
-        <div className="scroll-container">
-        <ScrollItems photo={groupPhoto} />
-        </div>
+  return (
+    <div className='group-photo'>
+      <div className='group-photo-filter'>
+        <h4>Group photos</h4>
+        <img src='/img/chevron-right-outline.svg' alt='/img/chevron-right-outline.svg' />
       </div>
-    )
+      <div className='scroll-container'>
+        <ScrollItems photo={groupPhoto} />
+      </div>
+    </div>
+  )
 }
 
 function ScrollItems ({ photo }) {
@@ -51,7 +51,7 @@ function ScrollItems ({ photo }) {
   )
 }
 
-function Tiles ({ data}) {
+function Tiles ({ data }) {
   return (
     <>
       {

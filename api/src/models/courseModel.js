@@ -1,7 +1,7 @@
-const Sequelize = require("sequelize");
-const db = require("../config/database.js");
+const Sequelize = require('sequelize')
+const db = require('../config/database.js')
 
-const Courses = db.define("courses",
+const Courses = db.define('courses',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -36,10 +36,10 @@ const Courses = db.define("courses",
       type: Sequelize.JSON
     },
     _attachments: {
-      type: Sequelize.BLOB("long")
+      type: Sequelize.BLOB('long')
     }
   },
   { timestamps: true }
-);
+)
 
-module.exports = Courses;
+module.exports = Courses

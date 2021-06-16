@@ -77,13 +77,13 @@ function CommunityPagenews (props) {
           </div>
           <button className='default-btn default-btn-variation' onClick={() => setAddModal(true)}>{addNews}</button>
         </div>
-        <div className="community-page-news-section">
+        <div className='community-page-news-section'>
           <div className='community-news-cards'>
             <NewsCard news={news} />
           </div>
-          {(windowWidth < 1200) 
-          ? <Filter /> 
-          : <CommunityRight text={text22} farming={farming} people={people} nature={nature} carsIndustry={carsIndustry} mediaNews={mediaNews} seeAllTopics={seeAllTopics} />}
+          {(windowWidth < 1200)
+            ? <Filter />
+            : <CommunityRight text={text22} farming={farming} people={people} nature={nature} carsIndustry={carsIndustry} mediaNews={mediaNews} seeAllTopics={seeAllTopics} />}
         </div>
       </div>
     </>
