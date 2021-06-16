@@ -24,41 +24,29 @@ jobs:
           #export gitter_channel="${{ secrets.CHANNEL }}"
           sudo treehouses tor add 22
           sudo treehouses tor add 3000
-          #sudo treehouses tor add 5000
-          ##sudo treehouses tor add 5432
-          #sudo treehouses tor add 8080
-          #sudo treehouses tor add 8081
           sudo treehouses tor
           sudo treehouses tor notice now
           sudo treehouses sshkey github adduser dogi
-          #docker-compose up -d
-          #cp .env.example .env
           echo "REACT_APP_API_BASE_URL=https://api.planetfarms.io" > .env
           echo "REACT_APP_CDN_BASE_URL=https://cdn.planetfarms.io" >> .env
           echo "cat .env"
           cat .env
-          #cd api
-          #cp .env.example .env
-          #sed -i -e 's#db$#localhost#' .env
-          #echo "cat api/.env"
-          #cat .env
-          #echo "api: npm i"
-          #npm i
-          #echo "api: npx sequelize-cli db:migrate"
-          #npx sequelize-cli db:migrate
-          #npx sequelize-cli db:seed
-          #cd ..
           echo "farm: npm i"
           npm i
           echo "starting planetfarms"
-          #npm run dev &
           npm start &
           sleep 20
-      - name: Screenshot
+      - name: Screenshot Login
         uses: swinton/screenshot-website@v1.x
         with:
           source: http://localhost:3000/login
           destination: planetfarms-login.png
+          full-page: true
+      - name: Screenshot Register
+        uses: swinton/screenshot-website@v1.x
+        with:
+          source: http://localhost:3000/register
+          destination: planetfarms-register.png
           full-page: true
       - name: Sleep
         run: |
