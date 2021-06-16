@@ -68,6 +68,13 @@
           line-height: 5em;
           -webkit-appearance: menulist-button;
           -moz-appearance: none;
+          box-sizing: border-box;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
         }
       }
       .errorBox {
@@ -114,4 +121,7 @@
   @media (max-width: 480px) {
     width: 100%;
   }
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }

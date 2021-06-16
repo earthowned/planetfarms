@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router'
 import { useForm } from 'react-hook-form'
+import { useQueries, useQuery } from 'react-query'
+
+import { Axios, CATEGORY } from '../../../utils/urlConstants'
 
 import DragDrop from '../../DragDrop/DragDrop'
 import ToggleSwitch from '../../ToggleSwitch/ToggleSwitch'
@@ -9,16 +12,31 @@ import './newCourseCreateModal.scss'
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const history = useHistory()
   const [active, setActive] = useState(false)
+  const [courseImage, setCourseImage] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
 
-  // const createFunc = () => {
+  const {
+    isLoading,
+    data: res,
+    error
+  } = useQuery('category', async () => {
+    const { data } = await Axios.get(CATEGORY)
+    return data
+  })
+
+  // TODO: remove this comment after page not found component is created
+  // error && history.push("/pagenotfound")
+
+  // const createFunc = () => {-
   //   history.push("/admin/coursepage");
   //   clickHandler(false);
   // };
 
   const submitForm = (data) => {
+    const courseImg = courseImage?.preview
     console.log(data)
+    console.log(courseImg)
   }
 
   return (
@@ -32,7 +50,7 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
             alt='close-icon'
           />
         </div>
-        <DragDrop />
+        <DragDrop onChange={(img) => setCourseImage(img)} />
         <div className='inputContainer'>
           <input
             className={errors.title ? 'input errorBox' : 'input'}
@@ -61,9 +79,11 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
             <option selected value='' disabled>
               Select Category
             </option>
-            <option value='Farming'>Farming</option>
-            <option value='Farming'>Farming</option>
-            <option value='Travelling'>Travelling</option>
+            {res?.results.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
           </select>
           <p className='error'>{errors.category && errors.category.message}</p>
 

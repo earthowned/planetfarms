@@ -19,6 +19,7 @@ const DragDrop = ({ onChange = () => {} }) => {
     setFiles(selectedFile)
     onChange(selectedFile)
   }
+
   return (
     <DragDropComponent
       getInputProps={getInputProps}
