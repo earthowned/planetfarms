@@ -48,13 +48,18 @@ jobs:
           source: http://localhost:3000/register
           destination: planetfarms-register.png
           full-page: true
+      - name: Get Token
+        run: |
+          token=$(curl -s -X POST https://api.planetfarms.io/api/users/login -d '{"username": "'${{ secrets.LOGIN }}'", "password": "'${{ secrets.PASSWORD }}'"}' -H 'Content-Type: application/json' | sed -e 's/{"token":"//' | sed -e 's/"}//')
+          echo $token
+          echo "TOKEN=$token" >> $GITHUB_ENV
       - name: Screenshot News
         uses: swinton/screenshot-website@v1.x
         with:
           source: http://localhost:3000/community-page-news
           destination: planetfarms-community-page-news.png
           full-page: true
-          headers: "{Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6e30sImlhdCI6MTYyMzgyMjI2MCwiZXhwIjoxNjI2NDE0MjYwfQ.izqIKFfdH76ZoBRAC7khBT2Q57eMSyllvHEQcV-xxa4'}"
+          headers: '{Authorization: "Bearer ${{ env.TOKEN }}"}'
       - name: Sleep
         run: |
           #echo "5min countdown"
