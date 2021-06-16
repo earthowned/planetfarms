@@ -9,6 +9,7 @@ const newsRoutes = require('./routes/newsRouter')
 const enterprisesRoutes = require('./routes/enterprisesRouter')
 const communityGroupsRoutes = require('./routes/communityGroupRouter')
 const calendarRoutes = require('./routes/calendarEventsRouter')
+const categoriesRoutes = require('./routes/categoriesRouter')
 const resizerRoutes = require('./routes/resizerRouter')
 const sequelize = require('./config/database.js')
 const cors = require('cors')
@@ -30,6 +31,7 @@ app.use('/api/groups', communityGroupsRoutes)
 app.use('/api/calendar', calendarRoutes)
 app.use('/api/courses', courseRoutes)
 app.use('/api/news', newsRoutes)
+app.use('/api/categories', categoriesRoutes)
 app.use('/api/resizer', resizerRoutes)
 
 // home page response
@@ -44,6 +46,7 @@ app.listen(PORT, () => {
 })
 
 // database connection
-sequelize.authenticate()
+sequelize
+  .authenticate()
   .then(() => console.log('Connection has been established successfully.'))
-  .catch(err => console.log(`Error: ${err}`))
+  .catch((err) => console.log(`Error: ${err}`))
