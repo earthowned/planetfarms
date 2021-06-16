@@ -1,5 +1,6 @@
 import React from 'react'
 import './CommunitiesCard.scss'
+import Background from '../background/Background'
 import CardLayout from '../../layout/cardLayout/CardLayout'
 
 const CommunitiesCard = ({data=[]}) => {
@@ -10,10 +11,7 @@ const CommunitiesCard = ({data=[]}) => {
           {data.length > 0 && data.map(community => {
             return (
               <div key={community.id} className='card-row-1'>
-                <div
-                  className='card-1-allCommunities border-1px-onyx'
-                  style={{ backgroundImage: `url(${community.attachment})` }}
-                >
+                <Background image={community.attachment}>
                   <div className='card-1-text'>
                     <div className='card-1-title'>
                       <h3 className='text-1-card valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-32px'>
@@ -26,7 +24,7 @@ const CommunitiesCard = ({data=[]}) => {
                     </div>
                     <button className='secondary-btn join-community-btn'>Join community</button>
                   </div>
-                </div>
+                </Background>
               </div>
             )
           })}

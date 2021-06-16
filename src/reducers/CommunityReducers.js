@@ -43,7 +43,7 @@ export const communityCreateReducer = (state = {}, action) => {
     case COMMUNITY_CREATE_REQUEST:
       return { loading: true }
     case COMMUNITY_CREATE_SUCCESS:
-      return { loading: false, success: true, community: action.payload }
+      return { loading: false, success: true}
     case COMMUNITY_CREATE_FAIL:
       return { loading: false, error: action.payload }
     case COMMUNITY_CREATE_RESET:

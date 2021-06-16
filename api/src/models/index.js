@@ -23,7 +23,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 const db = {
   User: User(sequelize, Sequelize.DataTypes),
   Community: Community(sequelize, Sequelize.DataTypes),
-  CommunityUser: CommunityUser(sequelize, Sequelize)
+  CommunityUser: CommunityUser(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach(modelName => {

@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
   },
   { timestamps: true }
   )
-  CommunityUser.associate = (models) => {};
+  CommunityUser.associate = (models) => {
+    CommunityUser.belongsTo(models.User, {foreignKey: 'userId'})
+    CommunityUser.belongsTo(models.Community, {foreignKey: 'communityId'})
+  };
 
   return CommunityUser;
 }

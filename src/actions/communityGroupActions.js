@@ -65,6 +65,7 @@ export const createGroup = (newGroup) => async (dispatch, getState) => {
   formData.append('description', newGroup.description)
   formData.append('group', newGroup.file)
   formData.append('category', newGroup.category)
+  
   try {
     dispatch({
       type: GROUP_CREATE_REQUEST
