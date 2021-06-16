@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS } from "../constants/CommunityConstants"
+import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from "../constants/CommunityConstants"
 
 export const listCommunities = (sort = '', pageNumber = '') => async (
   dispatch
@@ -37,6 +37,50 @@ export const searchCommunities = (search) => async (
   } catch (error) {
     dispatch({
       type: COMMUNITY_SEARCH_FAIL,
+      payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    })
+  }
+}
+
+export const listUserCommunities = (userId, sort = '', pageNumber = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: USER_COMMUNITY_LIST_REQUEST })
+    const { data } = await axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user/${userId}`
+    )
+    dispatch({
+      type: USER_COMMUNITY_LIST_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_COMMUNITY_LIST_FAIL,
+      payload:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+    })
+  }
+}
+
+export const searchUserCommunities = (userId,search) => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: USER_COMMUNITY_SEARCH_REQUEST })
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities/user/${userId}/search?name=${search}`)
+    dispatch({
+      type: USER_COMMUNITY_SEARCH_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_COMMUNITY_SEARCH_FAIL,
       payload:
           error.response && error.response.data.message
             ? error.response.data.message

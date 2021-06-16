@@ -10,7 +10,13 @@ import { COMMUNITY_LIST_FAIL,
     COMMUNITY_CREATE_RESET,
     COMMUNITY_JOIN_REQUEST,
     COMMUNITY_JOIN_SUCCESS,
-    COMMUNITY_JOIN_FAIL
+    COMMUNITY_JOIN_FAIL,
+    USER_COMMUNITY_LIST_REQUEST,
+    USER_COMMUNITY_LIST_SUCCESS,
+    USER_COMMUNITY_LIST_FAIL,
+    USER_COMMUNITY_SEARCH_REQUEST,
+    USER_COMMUNITY_SEARCH_SUCCESS,
+    USER_COMMUNITY_SEARCH_FAIL
 } from "../constants/CommunityConstants"
 
 export const communityListReducer = (state = { communities: [] }, action) => {
@@ -35,6 +41,34 @@ export const communityListReducer = (state = { communities: [] }, action) => {
         order: action.payload.order
       }
     case COMMUNITY_SEARCH_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userCommunityListReducer = (state = { userCommunities: [] }, action) => {
+  switch (action.type) {
+    case USER_COMMUNITY_LIST_REQUEST:
+      return { loading: true, userCommunities: [] }
+    case USER_COMMUNITY_LIST_SUCCESS:
+      return {
+        loading: false,
+        userCommunities: action.payload.communities,
+        pages: action.payload.pages,
+        page: action.payload.page
+      }
+    case USER_COMMUNITY_LIST_FAIL:
+      return { loading: false, error: action.payload }
+    case USER_COMMUNITY_SEARCH_REQUEST:
+      return { loading: true, userCommunities: [] }
+    case USER_COMMUNITY_SEARCH_SUCCESS:
+      return {
+        loading: false,
+        userCommunities: action.payload.communities,
+        order: action.payload.order
+      }
+    case USER_COMMUNITY_SEARCH_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

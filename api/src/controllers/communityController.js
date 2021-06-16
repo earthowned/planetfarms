@@ -16,6 +16,61 @@ const getCommunities = async (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   // const order = req.query.order || 'DESC'
   // const ordervalue = order && [['name', order]]
+  try {
+    const communities = await db.Community.findAll({
+                offset: page,
+                limit: pageSize,
+                // ordervalue,
+                order: [['createdAt', 'DESC']],
+                include: [{
+                  model: db.User,
+                  as: 'followers',
+                  attributes: ['id'],
+                  through: {
+                    attributes: ['active'],
+                    as: 'followStatus',
+                  }
+                }],
+              })
+
+  await paginate({page, pageSize});
+  res.json({ communities, page, pageSize }).status(200)
+
+  } catch (error) {
+    res.json(error);
+  }
+  // db.Community.findAll({
+  //   offset: page,
+  //   limit: pageSize,
+  //   // ordervalue,
+  //   order: [['createdAt', 'DESC']],
+  //   include: [{
+  //     model: db.User,
+  //     as: 'followers',
+  //     attributes: ['id'],
+  //     through: {
+  //       attributes: ['active'],
+  //       as: 'followStatus'
+  //     }
+  //   }],
+  // })
+  //   .then(communities => {
+  //     paginate({ page, pageSize })
+  //     res.json({ communities, page, pageSize }).status(200)
+  //   })
+  //   .catch((err) => res.json({ err }).status(400))
+}
+
+// @desc Fetch all user communities
+// @route GET/api/communities/user
+// @access Public
+
+const getUserCommunities = async (req, res) => {
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 0
+  // const order = req.query.order || 'DESC'
+  // const ordervalue = order && [['name', order]]
+  
   db.Community.findAll({
     offset: page,
     limit: pageSize,
@@ -23,13 +78,14 @@ const getCommunities = async (req, res) => {
     order: [['createdAt', 'DESC']],
     include: [{
       model: db.User,
-      as: 'followers',
+      as: 'creator' && 'followers',
       attributes: ['id'],
+      where: {id: req.params.id },
       through: {
-        attributes: ['active'],
-        as: 'followStatus'
-      }
-    }],
+         attributes: ['active'],
+         as: 'followStatus',
+        }
+    }]
   })
     .then(communities => {
       paginate({ page, pageSize })
@@ -59,7 +115,7 @@ const createCommunity = (req, res) => {
 // @desc Fetch single communities
 // @route GET /api/communities/:id
 // @access Public
-const getCommunityById = (req, res) => {
+const getCommunityById = async (req, res) => {
   const id = req.params.id
 
   db.Community.findByPk(id, {
@@ -163,4 +219,26 @@ const searchCommunityName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getCommunities, createCommunity, getCommunityById, deleteCommunity, updateCommunity, searchCommunityName }
+// @desc Search usercommunity name
+// @route POST /api/communities/user/:id/search
+// @access Private
+const searchUserCommunityName = (req, res) => {
+  const { name } = req.query
+  const order = req.query.order || 'ASC'
+
+  db.Community.findAll({include: [{
+      model: db.User,
+      as: 'creator' && 'followers',
+      attributes: ['id'],
+      where: {id: req.params.id },
+      through: {
+         attributes: ['active'],
+         as: 'followStatus',
+        }
+    }],
+     where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['name', order]] })
+    .then(communities => res.json({ communities }).status(200))
+    .catch(err => res.json({ error: err }).status(400))
+}
+
+module.exports = { getCommunities, getUserCommunities, searchUserCommunityName, createCommunity, getCommunityById, deleteCommunity, updateCommunity, searchCommunityName }

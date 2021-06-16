@@ -21,10 +21,16 @@
   width: 100%;
 }
 
+.community-card > div {
+  height: 528px;
+  padding: 24px;
+}
+
 .card-1-text {
   justify-content: flex-end;
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 100%;
 }
 
@@ -78,6 +84,16 @@
   font-weight: 600;
   font-size: 16px;
   margin-top: 40px;
+}
+
+.community-switch-btn-group {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.community-switch-btn-group button {
+  width: 150px;
 }
 
 @media screen and (max-width: 500px) {

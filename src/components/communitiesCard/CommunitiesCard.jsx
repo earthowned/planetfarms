@@ -47,6 +47,10 @@ const CommunityCard = ({community}) => {
     dispatch(joinCommunity(currentUserId, community.id));
       setFollower(!follower);
   }
+
+  const visitCommunity = () => {
+    
+  }
   return (
      <div ckey={community.id} lassName="community-card">
                   <Background image={community.attachment}>
@@ -63,7 +67,10 @@ const CommunityCard = ({community}) => {
                       </div>
                       {follower 
                       ? <button className="secondary-btn join-community-btn" onClick={followCommunity}>Join community</button>
-                      : <button className="secondary-btn join-community-btn" onClick={followCommunity}>Leave community</button>
+                      : <div className="community-switch-btn-group">
+                      <button className="secondary-btn unfollow-community-btn" onClick={followCommunity}>Unfollow community</button>
+                      <button className="secondary-btn join-community-btn" onClick={visitCommunity}>Visit community</button>
+                      </div>
                     }
                   </div>
                 </Background>
