@@ -3,12 +3,12 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import { useForm } from 'react-hook-form'
 
-import Logo from '../../Components/Logo/Logo'
-import Input from '../../Components/Input/Input'
-import Button from '../../Components/Button/Button'
-import ConfirmModal from '../../Components/SimpleModal/ConfirmModal'
-import Secondarybtn from '../../Components/SecondaryBtn/Secondarybtn'
-import DragDrop from '../../Components/DragDrop/DragDrop'
+import Logo from '../../components/logo/Logo'
+import Input from '../../components/input/Input'
+import Button from '../../components/button/Button'
+import ConfirmModal from '../../components/simpleModal/ConfirmModal'
+import Secondarybtn from '../../components/secondaryBtn/Secondarybtn'
+import DragDrop from '../../components/dragDrop/DragDrop'
 import './Congratulation.scss'
 
 function CongratulationScreen () {

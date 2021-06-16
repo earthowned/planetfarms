@@ -1,6 +1,6 @@
 import React from 'react'
-import Radiobox from '../Radiobox/Radiobox'
-import './group-users.css'
+import Radiobox from '../radioBox/Radiobox'
+import './GroupUsers.scss'
 import { groupUsersData } from '../../constants/sampleData'
 
 const GroupUsers = () => {

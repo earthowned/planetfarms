@@ -5,7 +5,7 @@ import buildCalendar from './Build'
 import './Calendar.css'
 import CalendarHeader from './Header'
 import dayStyles from './Styles'
-import events from '../../Screens/calendarScreen/EventsData'
+import events from '../../screens/calendarScreen/EventsData'
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState([])

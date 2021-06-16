@@ -1,5 +1,5 @@
 import React from 'react'
-import './simple-modal.css'
+import './SimpleModal.scss'
 
 const SimpleModal = ({ setNewCollection, name, clickHandler }) => {
   return (

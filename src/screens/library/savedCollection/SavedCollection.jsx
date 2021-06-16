@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import CollectionModal from '../../../Components/CollectionModal/CollectionModal'
-import GroupModal from '../../../Components/GroupModal/GroupModal'
-import LibraryCard from '../../../Components/libraryCard/LibraryCard'
-import LibraryHeader from '../../../Components/libraryHeader/LibraryHeader'
-import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
+import CollectionModal from '../../../components/collectionModal/CollectionModal'
+import GroupModal from '../../../components/groupModal/GroupModal'
+import LibraryCard from '../../../components/libraryCard/LibraryCard'
+import LibraryHeader from '../../../components/libraryHeader/LibraryHeader'
+import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './SavedCollection.css'
 import { groupCollection, collections, library } from '../CollectionData'
-import SimpleModal from '../../../Components/SimpleModal/SimpleModal'
+import SimpleModal from '../../../components/simpleModal/SimpleModal'
 
 const SavedCollection = () => {
   const [newCollection, setNewCollection] = useState(false)

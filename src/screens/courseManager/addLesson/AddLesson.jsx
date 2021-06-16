@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import AddTestModal from '../../../Components/AddTestModal/AddTestModal'
-import BackButton from '../../../Components/BackButton/BackButton'
-import DragDrop from '../../../Components/DragDrop/DragDrop'
-import NewsCreateModal from '../../../Components/NewsCreateModal/NewsCreateModal'
-import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-import './add-lesson.css'
+import AddTestModal from '../../../components/addTestModal/AddTestModal'
+import BackButton from '../../../components/backButton/BackButton'
+import DragDrop from '../../../components/dragDrop/DragDrop'
+import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
+import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
+import './AddLesson.scss'
 
 const AddLesson = () => {
   const [videoModal, setVideoModal] = useState(false)

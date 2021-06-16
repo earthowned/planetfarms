@@ -1,5 +1,5 @@
 import React from 'react'
-import './profile-form-card.css'
+import './ProfileFormCard.scss'
 
 
 

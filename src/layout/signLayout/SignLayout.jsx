@@ -1,5 +1,5 @@
-import Logo from '../../Components/Logo/Logo'
-import Banner from '../../Components/SignInSignUp/Banner'
+import Logo from '../../components/logo/Logo'
+import Banner from '../../components/signInSignUp/Banner'
 import './SignLayout.scss'
 
 const SignLayout = ({ children }) => {

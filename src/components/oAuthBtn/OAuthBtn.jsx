@@ -1,5 +1,5 @@
 import React from 'react'
-import './o-auth-btn.css'
+import './OAuthBtn.scss'
 
 function OauthBtn ({loginWithGoogle, loginWithFacebook, google, facebook, name}) {
   return (

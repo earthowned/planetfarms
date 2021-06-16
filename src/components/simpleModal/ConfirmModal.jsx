@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import InputComponent from '../Input/InputComponent'
-import './confirm-modal.css'
+import InputComponent from '../input/InputComponent'
+import './ConfirmModal.scss'
 import { useHistory } from 'react-router-dom'
 
 const ConfirmModal = ({ username, password }) => {

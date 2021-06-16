@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import CardImage from '../../Components/CardImage/CardImage'
-import SearchComponent from '../../Components/SearchComponent/SearchComponent'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
+import CardImage from '../../components/cardImage/CardImage'
+import SearchComponent from '../../components/searchComponent/SearchComponent'
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityMembers.css'
 
 function App () {

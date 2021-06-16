@@ -1,5 +1,5 @@
 import React from 'react'
-import './survey-card.css'
+import './SurveyCard.scss'
 
 
 const SurveyCard = ({data}) => {

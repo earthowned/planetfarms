@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import BackButton from '../../../Components/BackButton/BackButton'
-import Button from '../../../Components/Button/Button'
-import CourseDescription from '../../../Components/MyCoursesCard/CourseDescription/CourseDescription'
-import {PurchaseModal, PurchaseSuccessModal} from '../../../Components/PurchaseModal/PurchaseModal'
-import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-import './course-page.css'
+import BackButton from '../../../components/backButton/BackButton'
+import Button from '../../../components/button/Button'
+import CourseDescription from '../../../components/myCoursesCard/courseDescription/CourseDescription'
+import {PurchaseModal, PurchaseSuccessModal} from '../../../components/purchaseModal/PurchaseModal'
+import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
+import './CoursePage.scss'
 
 function App ({unpaid}) {
   const [feedbackModal, setFeedbackModal] = useState(false)

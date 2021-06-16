@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
-import Button from '../../Button/Button'
-import './course-description.css'
+import Button from '../../button/Button'
+import './CourseDescription.scss'
 import MoreCourse from './MoreCourse'
-import useSizeFinder from '../../../utils/SizeFinder'
+import useSizeFinder from '../../../utils/sizeFinder'
 
 const CourseDescription = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
   return (

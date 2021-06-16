@@ -1,6 +1,6 @@
 import React from 'react'
-import Background from '../Background/Background'
-import './course-create-modal.css'
+import Background from '../background/Background'
+import './CourseCreateModal.scss'
 
 const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
   return (

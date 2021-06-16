@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
-import './main-dashboard.css'
+import './MainDashboard.scss'
 import { Link } from 'react-router-dom'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import useSizeFinder from '../../utils/SizeFinder'
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import useSizeFinder from '../../utils/sizeFinder'
 import useScroll from '../../utils/scrollFunc'
 
 function DashboardComponent () {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './toggle-switch.css'
+import './ToggleSwitch.scss'
 
 function ToggleSwitch () {
   const [active, setActive] = useState(false)

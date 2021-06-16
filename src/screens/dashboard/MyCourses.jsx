@@ -1,8 +1,8 @@
 import React from "react";
-import BackButton from "../../Components/BackButton/BackButton";
-import MyCoursesCard from "../../Components/MyCoursesCard/MyCoursesCard";
-import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
-import "./my-courses.css";
+import BackButton from "../../components/backButton/BackButton";
+import MyCoursesCard from "../../components/myCoursesCard/MyCoursesCard";
+import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+import "./MyCourses.scss";
 
 function App() {
   return (

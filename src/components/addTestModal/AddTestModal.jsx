@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
+import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
 
-import './add-test-modal.css'
+import './AddTestModal.scss'
 
 const AddTestModal = ({ setTestModal }) => {
   const [questions, setQuestions] = useState([

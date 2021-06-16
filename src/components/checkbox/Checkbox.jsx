@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './checkbox.css'
+import './Checkbox.scss'
 import { ErrorMessage } from '@hookform/error-message'
 
 const Checkbox = React.forwardRef(({ label, name, value, errors, onChange }, ref) => {

@@ -1,8 +1,8 @@
 import React from 'react'
-import BackButton from '../../../Components/BackButton/BackButton'
-import Button from '../../../Components/Button/Button'
-import Secondarybtn from '../../../Components/SecondaryBtn/Secondarybtn'
-import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
+import BackButton from '../../../components/backButton/BackButton'
+import Button from '../../../components/button/Button'
+import Secondarybtn from '../../../components/secondaryBtn/Secondarybtn'
+import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './EditCollection.css'
 
 const travelling = Array(2).fill([

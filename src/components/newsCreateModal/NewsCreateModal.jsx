@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import './news-create-modal.css'
+import './NewsCreateModal.scss'
 import { Link } from 'react-router-dom'
-import Button from '../Button/Button'
+import Button from '../button/Button'
 import CreateVideo from './NewsCreateVideo'
 import CreateImage from './NewsCreateImage'
 import CreateText from './NewsTextModel'
 import CollectionModalHeader from './CollectionModalHeader'
-import DragDrop from '../DragDrop/DragDrop'
-import ToggleSwitch from '../ToggleSwitch/ToggleSwitch'
+import DragDrop from '../dragDrop/DragDrop'
+import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
 
 const NewsCreateModal = ({
   type,

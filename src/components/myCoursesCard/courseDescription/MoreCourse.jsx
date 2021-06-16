@@ -1,5 +1,5 @@
-import useSizeFinder from '../../../utils/SizeFinder'
-import Secondarybtn from '../../SecondaryBtn/Secondarybtn'
+import useSizeFinder from '../../../utils/sizeFinder'
+import Secondarybtn from '../../secondaryBtn/Secondarybtn'
 
 const moreCourseData = [
     {

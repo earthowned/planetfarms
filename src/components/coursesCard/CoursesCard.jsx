@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router'
-import CardLayout from '../../Layout/cardLayout/CardLayout'
-import Background from '../Background/Background'
+import CardLayout from '../../layout/cardLayout/CardLayout'
+import Background from '../background/Background'
 import './CoursesCard.css'
 
 const data = [

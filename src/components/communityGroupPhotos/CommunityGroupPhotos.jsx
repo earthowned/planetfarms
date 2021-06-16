@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import useScroll from '../../utils/scrollFunc'
-import Filter from '../Filter/Filter'
+import Filter from '../filter/Filter'
 
 const groupPhoto = [
   {

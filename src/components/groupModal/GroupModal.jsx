@@ -1,7 +1,7 @@
 
-import GroupUsers from '../GroupUsers/GroupUsers'
-import SearchComponent from '../SearchComponent/SearchComponent'
-import './group-modal.css'
+import GroupUsers from '../groupUsers/GroupUsers'
+import SearchComponent from '../searchComponent/SearchComponent'
+import './GroupModal.scss'
 
 const GroupModal = ({ clickHandler, setNewCollection, data, btnName, name }) => {
   function collectionAdded () {

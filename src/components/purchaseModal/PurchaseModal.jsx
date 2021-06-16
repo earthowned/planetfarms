@@ -1,8 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router';
-import Button from '../Button/Button'
-import Secondarybtn from '../SecondaryBtn/Secondarybtn';
-import "./purchase-modal.css"
+import Button from '../button/Button'
+import Secondarybtn from '../secondaryBtn/Secondarybtn';
+import "./PurchaseModal.scss"
 
 function ModalContainer ({children, name, clickHandler, height}) {
   return (

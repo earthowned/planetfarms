@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
-import LibraryHeader from '../../Components/libraryHeader/LibraryHeader'
+import LibraryHeader from '../../components/libraryHeader/LibraryHeader'
 import './Library.css'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import ListView from '../../Components/listView/ListView'
-import SimpleModal from '../../Components/SimpleModal/SimpleModal'
-import CollectionModal from '../../Components/CollectionModal/CollectionModal'
-import GroupModal from '../../Components/GroupModal/GroupModal'
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import ListView from '../../components/listView/ListView'
+import SimpleModal from '../../components/simpleModal/SimpleModal'
+import CollectionModal from '../../components/collectionModal/CollectionModal'
+import GroupModal from '../../components/groupModal/GroupModal'
 import { groupCollection } from './CollectionData'
 import { useSelector, useDispatch } from 'react-redux'
 import { listResources } from '../../actions/resourceActions'
-import Pagination from '../../Components/pagination/Pagination'
+import Pagination from '../../components/pagination/Pagination'
 
 const Library = () => {
   const resourceList = useSelector((state) => state.listResources)

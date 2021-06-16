@@ -1,4 +1,4 @@
-import './news-card.css'
+import './NewsCard.scss'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 

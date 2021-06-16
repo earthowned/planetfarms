@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import './news-create-modal.css'
-import Button from '../Button/Button'
+import './NewsCreateModal.scss'
+import Button from '../button/Button'
 import { savevideoDetail } from '../../actions/newsActions'
 import { useDispatch } from 'react-redux'
-import DragDrop from '../DragDrop/DragDrop'
+import DragDrop from '../dragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
-import { InputFields, ErrorText, TextArea } from '../FormUI/FormUI'
+import { InputFields, ErrorText, TextArea } from '../formUI/FormUI'
 
 const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive, setVideoActive }) => {
   const [videoTitle, setVideoTitle] = useState()

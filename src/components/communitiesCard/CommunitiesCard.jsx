@@ -1,5 +1,5 @@
 import React from 'react'
-import './communities-card.css'
+import './CommunitiesCard.scss'
 
 const communityData = [
   {

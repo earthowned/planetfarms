@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import BackButton from '../BackButton/BackButton'
-import MessageSlot from '../MessageSlot/MessageSlot'
+import BackButton from '../backButton/BackButton'
+import MessageSlot from '../messageSlot/MessageSlot'
 import { Link, useHistory } from 'react-router-dom'
-import GroupModal from '../GroupModal/GroupModal'
-import CallModal from '../CallModal/CallModal'
+import GroupModal from '../groupModal/GroupModal'
+import CallModal from '../callModal/CallModal'
 import { groupUsersData } from '../../constants/sampleData'
-import './mobile-message.css'
+import './MobileMessage.scss'
 
 const MobileMessage = () => {
   const [optionState, setOptionState] = useState(false)

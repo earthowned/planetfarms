@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import './form-modal.css'
-import '../EnterprisesCollection/enterprises-collection.css'
+import './FormModal.scss'
+import '../enterprisesCollection/EnterprisesCollection.scss'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createGroup } from '../../actions/communityGroupActions'
 import { createEnterprise } from '../../actions/enterpriseAction'
-import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
-import { InputFields, SelectFields, ErrorText, SubmitButton } from '../FormUI/FormUI'
-import DragDrop from '../DragDrop/DragDrop'
+import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
+import { InputFields, SelectFields, ErrorText, SubmitButton } from '../formUI/FormUI'
+import DragDrop from '../dragDrop/DragDrop'
 
 const FromModal = ({ setActive, openAddCollection }) => {
   const [files, setFiles] = useState()

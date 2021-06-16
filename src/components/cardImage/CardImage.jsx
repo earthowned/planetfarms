@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import './card-image.css'
+import './CardImage.scss'
 
 const profileData = [
   {

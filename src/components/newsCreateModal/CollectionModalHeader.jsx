@@ -1,4 +1,4 @@
-import './news-create-modal.css'
+import './NewsCreateModal.scss'
 
 const CollectionModalHeader = ({
   title,

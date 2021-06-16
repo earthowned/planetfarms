@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
-import DragDrop from '../../DragDrop/DragDrop'
-import ToggleSwitch from '../../ToggleSwitch/ToggleSwitch'
-import './new-course-create-modal.css'
+import DragDrop from '../../dragDrop/DragDrop'
+import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
+import './NewCourseCreateModal.scss'
 
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const history = useHistory()

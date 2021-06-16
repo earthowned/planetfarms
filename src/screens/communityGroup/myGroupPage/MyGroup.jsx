@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import BackButton from "../../../Components/BackButton/BackButton";
-import CommunityGroupPost from "../../../Components/communityGroupPost/CommunityGroupPost";
-import CommunityGroupPhotos from "../../../Components/communityGroupPhotos/CommunityGroupPhotos";
-import NewsCreateModal from "../../../Components/NewsCreateModal/NewsCreateModal";
-import DashboardLayout from "../../../Layout/DashboardLayout/DashboardLayout";
+import BackButton from "../../../components/backButton/BackButton";
+import CommunityGroupPost from "../../../components/communityGroupPost/CommunityGroupPost";
+import CommunityGroupPhotos from "../../../components/communityGroupPhotos/CommunityGroupPhotos";
+import NewsCreateModal from "../../../components/newsCreateModal/NewsCreateModal";
+import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 
 function App() {
   const [editGroupModal, setEditGroupModal] = useState(false);

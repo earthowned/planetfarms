@@ -1,5 +1,5 @@
 import React from 'react'
-import './search-component.css'
+import './SearchComponent.scss'
 
 const SearchComponent = ({ className, search, setSearch, showEditIcon }) => {
   return (

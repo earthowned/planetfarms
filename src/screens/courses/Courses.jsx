@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import './Courses.css'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import CoursesHeader from '../../Components/coursesHeader/CoursesHeader'
-import CoursesCard from '../../Components/coursesCard/CoursesCard'
-import GroupModal from '../../Components/GroupModal/GroupModal'
-import SimpleModal from '../../Components/SimpleModal/SimpleModal'
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import CoursesHeader from '../../components/coursesHeader/CoursesHeader'
+import CoursesCard from '../../components/coursesCard/CoursesCard'
+import GroupModal from '../../components/groupModal/GroupModal'
+import SimpleModal from '../../components/simpleModal/SimpleModal'
 
-import CourseCreateModal from '../../Components/CourseCreateModal/CourseCreateModal'
-import NewCourseCreateModal from '../../Components/CourseCreateModal/NewCourseCreateModal/NewCourseCreateModal'
-import CollectionModal from '../../Components/CollectionModal/CollectionModal'
+import CourseCreateModal from '../../components/courseCreateModal/CourseCreateModal'
+import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
+import CollectionModal from '../../components/collectionModal/CollectionModal'
 
 const Courses = () => {
   const [active, setActive] = useState(false)

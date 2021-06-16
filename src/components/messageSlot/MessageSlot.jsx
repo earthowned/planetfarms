@@ -1,5 +1,5 @@
 import React from 'react'
-import './message-slot.css';
+import './MessageSlot.scss';
 
 const messages = [
     {

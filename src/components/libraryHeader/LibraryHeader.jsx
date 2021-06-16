@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Filter from '../Filter/Filter'
-import SearchComponent from '../SearchComponent/SearchComponent'
+import Filter from '../filter/Filter'
+import SearchComponent from '../searchComponent/SearchComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import './LibraryHeader.css'

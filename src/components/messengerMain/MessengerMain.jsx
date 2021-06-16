@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import SearchComponent from '../SearchComponent/SearchComponent'
-import MessageCard from '../MessageCard/MessageCard'
-import MessageRightComponent from '../MessageRightComponent/MessageRightComponent'
+import SearchComponent from '../searchComponent/SearchComponent'
+import MessageCard from '../messageCard/MessageCard'
+import MessageRightComponent from '../messageRightComponent/MessageRightComponent'
 
-import './messenger-main.css'
+import './MessengerMain.scss'
 
 const contacts = [
   {

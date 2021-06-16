@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import './input-component.css'
+import './InputComponent.scss'
 
 const InputComponent = ({ text, error, image, changeHandler, name, autoFocus }) => {
   const userInput = useRef()

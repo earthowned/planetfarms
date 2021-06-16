@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import CardLayout from '../../Layout/cardLayout/CardLayout'
-import Button from '../Button/Button'
-import Secondarybtn from '../SecondaryBtn/Secondarybtn'
-import './community-group-card.css'
+import CardLayout from '../../layout/cardLayout/CardLayout'
+import Button from '../button/Button'
+import Secondarybtn from '../secondaryBtn/Secondarybtn'
+import './CommunityGroupCard.scss'
 
 const CommunityGroupCard = ({ data = [], location, type = 'group' }) => {
   return (

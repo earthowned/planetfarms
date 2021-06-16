@@ -1,7 +1,7 @@
 import React from 'react'
-import Button from '../Button/Button'
-import Secondarybtn from '../SecondaryBtn/Secondarybtn'
-import './edit-information.css'
+import Button from '../button/Button'
+import Secondarybtn from '../secondaryBtn/Secondarybtn'
+import './EditInformation.scss'
 
 function EditInformation ({ image, follow }) {
   return (

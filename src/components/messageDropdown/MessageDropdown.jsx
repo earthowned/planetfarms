@@ -2,7 +2,7 @@ import React from 'react'
 import './MessageDropdown.css'
 import { Link } from 'react-router-dom'
 
-import MessageCard from '../MessageCard/MessageCard'
+import MessageCard from '../messageCard/MessageCard'
 
 const contacts = [
   {

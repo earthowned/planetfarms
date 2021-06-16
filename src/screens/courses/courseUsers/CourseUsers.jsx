@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Background from '../../../Components/Background/Background'
-import CoursesHeader from '../../../Components/coursesHeader/CoursesHeader'
-import CardLayout from '../../../Layout/cardLayout/CardLayout'
-import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
+import Background from '../../../components/background/Background'
+import CoursesHeader from '../../../components/coursesHeader/CoursesHeader'
+import CardLayout from '../../../layout/cardLayout/CardLayout'
+import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './CourseUsers.css'
 
 export const farming = [

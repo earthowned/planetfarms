@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './radio-box.css'
+import './RadioBox.scss'
 
 const Radiobox = () => {
   const [active, setActive] = useState(false)

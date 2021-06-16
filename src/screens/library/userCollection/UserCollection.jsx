@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './UserCollection.css'
 
-import LibraryHeader from '../../../Components/libraryHeader/LibraryHeader'
-import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-import CollectionModal from '../../../Components/CollectionModal/CollectionModal'
-import SimpleModal from '../../../Components/SimpleModal/SimpleModal'
+import LibraryHeader from '../../../components/libraryHeader/LibraryHeader'
+import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
+import CollectionModal from '../../../components/collectionModal/CollectionModal'
+import SimpleModal from '../../../components/simpleModal/SimpleModal'
 import { farming, groupCollection } from '../CollectionData'
-import GroupModal from '../../../Components/GroupModal/GroupModal'
-import CardLayout from '../../../Layout/cardLayout/CardLayout'
+import GroupModal from '../../../components/groupModal/GroupModal'
+import CardLayout from '../../../layout/cardLayout/CardLayout'
 
 const UserCollection = () => {
   const [active, setActive] = useState(false)

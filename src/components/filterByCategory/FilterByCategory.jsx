@@ -1,5 +1,5 @@
 import React from 'react'
-import './filter-by-category.css'
+import './FilterByCategory.scss'
 
 const FilterByCategory = () => {
     return (

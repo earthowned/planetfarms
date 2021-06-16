@@ -1,5 +1,5 @@
-import SignIn from '../../Components/SignInSignUp/SignIn'
-import SignLayout from '../../Layout/SignLayout/SignLayout'
+import SignIn from '../../components/signInSignUp/SignIn'
+import SignLayout from '../../layout/signLayout/SignLayout'
 
 const LoginScreen = () => {
   return (

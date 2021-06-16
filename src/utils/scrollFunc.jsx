@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import useSizeFinder from './SizeFinder'
+import useSizeFinder from './sizeFinder'
 
 const useScroll = (scrollRef) => {
   const [scrollActive, setScrollActive] = useState(true)

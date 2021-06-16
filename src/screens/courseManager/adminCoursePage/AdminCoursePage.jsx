@@ -1,9 +1,9 @@
 import React from 'react'
-import BackButton from '../../../Components/BackButton/BackButton'
-import Filter from '../../../Components/Filter/Filter'
-import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
+import BackButton from '../../../components/backButton/BackButton'
+import Filter from '../../../components/filter/Filter'
+import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { useHistory } from 'react-router-dom'
-import './admin-course-page.css'
+import './AdminCoursePage.scss'
 
 const AdminCoursePage = () => {
   return (

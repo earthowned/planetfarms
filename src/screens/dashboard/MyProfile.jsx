@@ -1,13 +1,13 @@
 import React from 'react'
-import './my-profile.css'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import BackButton from '../../Components/BackButton/BackButton'
+import './MyProfile.scss'
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import BackButton from '../../components/backButton/BackButton'
 import {
   AdditionalInformation,
   ContactInformation,
   PersonalInformation
-} from '../../Components/ProfileFormCard/ProfileFormCard'
-import EditInformation from '../../Components/EditInformation/EditInformation'
+} from '../../components/profileFormCard/ProfileFormCard'
+import EditInformation from '../../components/editInformation/EditInformation'
 
 function MyProfile () {
   return (

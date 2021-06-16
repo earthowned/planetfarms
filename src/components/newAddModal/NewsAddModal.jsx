@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './news-add-modal.css'
+import './NewsAddModal.scss'
 import { Link } from 'react-router-dom'
 
 const NewsAddModal = ({ setAddModal }) => {

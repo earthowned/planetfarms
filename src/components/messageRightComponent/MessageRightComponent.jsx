@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import MessageSlot from '../MessageSlot/MessageSlot'
-import GroupModal from '../GroupModal/GroupModal'
-import CallModal from '../CallModal/CallModal'
+import MessageSlot from '../messageSlot/MessageSlot'
+import GroupModal from '../groupModal/GroupModal'
+import CallModal from '../callModal/CallModal'
 import { groupUsersData } from '../../constants/sampleData'
-import './message-right-component.css'
+import './MessageRightComponent.scss'
 
 const MessageRightComponent = ({ setActive }) => {
   const [addGroup, setAddGroup] = useState(false)

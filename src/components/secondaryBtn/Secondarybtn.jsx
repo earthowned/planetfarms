@@ -1,5 +1,5 @@
 import React from 'react'
-import './secondary-btn.css'
+import './SecondaryBtn.scss'
 
 const Secondarybtn = ({name, image, clickHandler = () => {}}) => {
     return (

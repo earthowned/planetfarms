@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import './news-create-modal.css'
-import Button from '../Button/Button'
+import './NewsCreateModal.scss'
+import Button from '../button/Button'
 import { useDispatch } from 'react-redux'
 import { saveimageDetail } from '../../actions/newsActions'
-import DragDrop from '../DragDrop/DragDrop'
+import DragDrop from '../dragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
-import { InputFields } from '../FormUI/FormUI'
+import { InputFields } from '../formUI/FormUI'
 
 const CreateImage = ({ getRootProps, getInputProps, files, setFiles, imageActive, setImageActive }) => {
   const [imageDescription, setImageDescription] = useState()

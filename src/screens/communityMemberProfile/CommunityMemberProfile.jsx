@@ -1,14 +1,13 @@
 import React from 'react'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-// import DataField from '../../Components/ProfileFormCard/ProfileFormCard'
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import {
   PersonalInformation,
   ContactInformation,
   AdditionalInformation
-} from '../../Components/ProfileFormCard/ProfileFormCard'
-import './community-member-profile.css'
-import BackButton from '../../Components/BackButton/BackButton'
-import EditInformation from '../../Components/EditInformation/EditInformation'
+} from '../../components/profileFormCard/ProfileFormCard'
+import './CommunityMemberProfile.scss'
+import BackButton from '../../components/backButton/BackButton'
+import EditInformation from '../../components/editInformation/EditInformation'
 
 function App () {
   return (

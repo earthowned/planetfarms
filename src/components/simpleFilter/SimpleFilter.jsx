@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import './simple-filter.css'
+import './SimpleFilter.scss'
 
 const SimpleFilter = ({ data }) => {
   const [active, setActive] = useState(false)

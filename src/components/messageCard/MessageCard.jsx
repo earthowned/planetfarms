@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router'
-import useSizeFinder from '../../utils/SizeFinder'
-import './message-card.css'
+import useSizeFinder from '../../utils/sizeFinder'
+import './MessageCard.scss'
 
 function TextBlock({contact}) {
   return (

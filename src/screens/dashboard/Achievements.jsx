@@ -1,8 +1,8 @@
 import React from "react";
-import "./achievements.css";
-import ProgressBar from "./ProgressBar/ProgressBar";
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout';
-import BackButton from "../../Components/BackButton/BackButton";
+import "./Achievements.css";
+import ProgressBar from "./progressBar/ProgressBar";
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout';
+import BackButton from "../../components/backButton/BackButton";
 
 function Achievements() {
   return(

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import CardLayout from '../../Layout/cardLayout/CardLayout'
-import useSizeFinder from '../../utils/SizeFinder'
+import CardLayout from '../../layout/cardLayout/CardLayout'
+import useSizeFinder from '../../utils/sizeFinder'
 import './ListView.css'
 
 const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }) => {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import BackButton from '../../../Components/BackButton/BackButton'
-import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
-import Button from '../../../Components/Button/Button'
+import BackButton from '../../../components/backButton/BackButton'
+import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
+import Button from '../../../components/button/Button'
 
-import './lesson-page.css'
+import './LessonPage.scss'
 
 const LessonPage = () => {
   return (

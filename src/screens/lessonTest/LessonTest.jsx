@@ -1,9 +1,9 @@
 import React from 'react'
-import BackButton from '../../Components/BackButton/BackButton'
-import Button from '../../Components/Button/Button'
-import Radiobox from '../../Components/Radiobox/Radiobox'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import './lesson-test.css'
+import BackButton from '../../components/backButton/BackButton'
+import Button from '../../components/button/Button'
+import Radiobox from '../../components/radioBox/Radiobox'
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import './LessonTest.scss'
 
 const tests = [
   {

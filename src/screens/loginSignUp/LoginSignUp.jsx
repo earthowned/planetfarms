@@ -1,6 +1,6 @@
-import Logo from '../../Components/Logo/Logo'
-import Banner from '../../Components/SignInSignUp/Banner'
-import SignIn from '../../Components/SignInSignUp/SignIn'
+import Logo from '../../components/logo/Logo'
+import Banner from '../../components/signInSignUp/Banner'
+import SignIn from '../../components/signInSignUp/SignIn'
 
 const LoginSignUp = () => {
   return (

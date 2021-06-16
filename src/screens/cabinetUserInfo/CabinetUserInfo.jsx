@@ -1,8 +1,8 @@
 import React from 'react';
-import './cabinet-user-info.css'
-import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
+import './CabinetUserInfo.scss'
+import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import { Link } from 'react-router-dom';
-import BackButton from '../../Components/BackButton/BackButton';
+import BackButton from '../../components/backButton/BackButton';
 
 
 function App() {

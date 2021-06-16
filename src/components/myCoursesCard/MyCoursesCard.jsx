@@ -1,6 +1,6 @@
 import React from 'react'
-import Background from '../Background/Background'
-import './my-courses-card.css'
+import Background from '../background/Background'
+import './MyCoursesCard.scss'
 
 const courseData = [
   {

@@ -1,5 +1,5 @@
 import React from 'react'
-import CardLayout from '../../Layout/cardLayout/CardLayout'
+import CardLayout from '../../layout/cardLayout/CardLayout'
 import './LibraryCard.css'
 
 const LibraryCard = ({ data }) => {

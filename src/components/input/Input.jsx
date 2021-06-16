@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './input.scss'
+import './Input.scss'
 import { ErrorMessage } from '@hookform/error-message'
 import { ReactComponent as EyeCloseIcon } from '../../assets/images/eye-close-icon.svg'
 import { ReactComponent as EyeOpenIcon } from '../../assets/images/eye-open-icon.svg'

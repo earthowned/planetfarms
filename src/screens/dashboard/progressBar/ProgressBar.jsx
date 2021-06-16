@@ -1,5 +1,5 @@
-import useSizeFinder from "../../../utils/SizeFinder";
-import "./progress-bar.css";
+import useSizeFinder from "../../../utils/sizeFinder";
+import "./ProgressBar.scss";
 
 const ProgressBar = (props) => {
   const { percent, text } = props;

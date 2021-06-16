@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import '../FormModal/form-modal.css'
+import '../formModal/FormModal.scss'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createResource } from '../../actions/resourceActions'
-import SimpleFilter from '../SimpleFilter/SimpleFilter'
+import SimpleFilter from '../simpleFilter/SimpleFilter'
 import { collectionFilterData } from '../../constants/sampleData'
-import CollectionModalHeader from '../NewsCreateModal/CollectionModalHeader'
-import DragDrop from '../DragDrop/DragDrop'
+import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
+import DragDrop from '../dragDrop/DragDrop'
 
 const CollectionModal = ({ setActive, openAddCollection, name }) => {
   const [files, setFiles] = useState()

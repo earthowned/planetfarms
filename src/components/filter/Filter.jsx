@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import './filter.css'
+import './Filter.scss'
 
 const Filter = ({ data = [], newFilter, name, noImage }) => {
   const [active, setActive] = useState(false)

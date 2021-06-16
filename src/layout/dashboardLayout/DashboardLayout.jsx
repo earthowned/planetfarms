@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
-import HeaderComponent from '../../Components/header/HeaderComponent'
-import Sidebar from '../../Components/sidebar/Sidebar'
+import HeaderComponent from '../../components/header/HeaderComponent'
+import Sidebar from '../../components/sidebar/Sidebar'
 import './Dashboard.css'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../actions/userAction'
 
 import { Link, useLocation } from 'react-router-dom'
-import MessageDropdown from '../../Components/messageDropdown/MessageDropdown'
+import MessageDropdown from '../../components/messageDropdown/MessageDropdown'
 import { TABLET_SIZE } from '../../constants/sizeConstants'
 
 // importing custom hooks sizefinder to calculate window width from utils
-import useSizeFinder from '../../utils/SizeFinder'
+import useSizeFinder from '../../utils/sizeFinder'
 
 const DashboardLayout = ({ title, children }) => {
   const dispatch = useDispatch()

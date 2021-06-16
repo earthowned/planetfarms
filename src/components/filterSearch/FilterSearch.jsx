@@ -1,6 +1,6 @@
 import React from 'react'
-import Filter from '../Filter/Filter'
-import Button from '../Button/Button'
+import Filter from '../filter/Filter'
+import Button from '../button/Button'
 import './FilterSearch.css'
 
 const FilterSearch = () => {

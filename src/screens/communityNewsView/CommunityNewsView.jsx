@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import './community-news-view.css'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import BackButton from '../../Components/BackButton/BackButton'
+import './CommunityNewsView.scss'
+import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import BackButton from '../../components/backButton/BackButton'
 import { useLocation } from 'react-router-dom'
 
 function CommunityNewsViewPage ({ newNews }) {

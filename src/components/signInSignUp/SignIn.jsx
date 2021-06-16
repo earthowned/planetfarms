@@ -7,10 +7,10 @@ import { login } from '../../actions/userAction'
 import { USER_LOGIN_SUCCESS } from '../../constants/userConstants'
 import { SignInSignUpData } from './SignInSignUpData'
 
-import Button from '../Button/Button'
-import Checkbox from '../Checkbox/Checkbox'
-import Input from '../Input/Input'
-import OauthBtn from '../OauthBtn/OauthBtn'
+import Button from '../button/Button'
+import Checkbox from '../checkbox/Checkbox'
+import Input from '../input/Input'
+import OAuthBtn from '../oAuthBtn/OAuthBtn'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 import './SignInSignUp.scss'
@@ -159,7 +159,7 @@ const SignIn = () => {
         </div>
 
         <div className='oauth'>
-          <OauthBtn
+          <OAuthBtn
             loginWithFacebook={loginWithFacebook}
             loginWithGoogle={loginWithGoogle}
             google={google}
