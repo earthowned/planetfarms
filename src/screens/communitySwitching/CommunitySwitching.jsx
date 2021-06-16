@@ -95,6 +95,7 @@ const CommunityModal = ({setActive}) => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [userId, setUserId] = useState(0);
+  const [follow, setFollow] = useState(false);
   const dispatch = useDispatch()
   
   function addCommunity () {
@@ -111,7 +112,7 @@ const CommunityModal = ({setActive}) => {
             <InputComponent name="Community Name" text={name} changeHandler={setName} />
             <InputComponent name="Description" text={desc} changeHandler={setDesc} />
             <InputComponent name="User Id" text={userId} changeHandler={setUserId} />
-            <Button name="Create Community" clickHandler={addCommunity} />
+             <Button name="Create Community" clickHandler={addCommunity} />
           </div>
         </div>
       </div>

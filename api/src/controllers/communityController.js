@@ -24,8 +24,10 @@ const getCommunities = async (req, res) => {
     include: [{
       model: db.User,
       as: 'followers',
+      attributes: ['id'],
       through: {
-        attributes: []
+        attributes: ['active'],
+        as: 'followStatus'
       }
     }],
   })

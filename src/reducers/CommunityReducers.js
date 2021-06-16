@@ -7,7 +7,10 @@ import { COMMUNITY_LIST_FAIL,
     COMMUNITY_CREATE_REQUEST,
     COMMUNITY_CREATE_SUCCESS,
     COMMUNITY_CREATE_FAIL,
-    COMMUNITY_CREATE_RESET
+    COMMUNITY_CREATE_RESET,
+    COMMUNITY_JOIN_REQUEST,
+    COMMUNITY_JOIN_SUCCESS,
+    COMMUNITY_JOIN_FAIL
 } from "../constants/CommunityConstants"
 
 export const communityListReducer = (state = { communities: [] }, action) => {
@@ -48,6 +51,19 @@ export const communityCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case COMMUNITY_CREATE_RESET:
       return {}
+    default:
+      return state
+  }
+}
+
+export const communityJoinReducer = (state = {}, action) => {
+  switch (action.type) {
+    case COMMUNITY_JOIN_REQUEST:
+      return { loading: true }
+    case COMMUNITY_JOIN_SUCCESS:
+      return { loading: false, success: true}
+    case COMMUNITY_JOIN_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }
