@@ -54,8 +54,7 @@ jobs:
           source: http://localhost:3000/community-page-news
           destination: planetfarms-community-page-news.png
           full-page: true
-          headers: 
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6e30sImlhdCI6MTYyMzgyMjI2MCwiZXhwIjoxNjI2NDE0MjYwfQ.izqIKFfdH76ZoBRAC7khBT2Q57eMSyllvHEQcV-xxa4'
+          headers: "{Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6e30sImlhdCI6MTYyMzgyMjI2MCwiZXhwIjoxNjI2NDE0MjYwfQ.izqIKFfdH76ZoBRAC7khBT2Q57eMSyllvHEQcV-xxa4'}"
       - name: Sleep
         run: |
           #echo "5min countdown"
