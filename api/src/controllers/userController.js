@@ -72,7 +72,7 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    username = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)  
+    username = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)
     if (username) {
       res.json({
         token: generateToken(username)
@@ -116,7 +116,7 @@ const registerUser = async (req, res) => {
         }
       })
     } else {
-      registerLocal(name, password, email, res)      
+      registerLocal(name, password, email, res)
     }
   } catch (err) {
     console.log(err)

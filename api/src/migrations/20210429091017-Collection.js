@@ -27,10 +27,10 @@ module.exports = {
           type: Sequelize.DATE
         }
       }
-    );
+    )
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable('collections', {});
+    queryInterface.dropTable('collections', {})
   }
-};
+}

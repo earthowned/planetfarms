@@ -1,5 +1,5 @@
-const Collection = require("../models/collectionModel")
-const Sequelize = require("sequelize")
+const Collection = require('../models/collectionModel')
+const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
 // @desc    Fetch all collection
@@ -20,13 +20,12 @@ const getCollection = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
-  const ordervalue = order && [['title',  order]] 
-  Collection.findAll({ offset: page, limit: pageSize,ordervalue})
+  const ordervalue = order && [['title', order]]
+  Collection.findAll({ offset: page, limit: pageSize, ordervalue })
     .then((collection) => {
       paginate({ page, pageSize })
       res.json({ collection }).status(200)
     })
-
     .catch((err) => res.json({ err }).status(400))
 }
 
@@ -51,7 +50,7 @@ const getCollectionById = (req, res) => {
 // @desc    Add individual collection
 // @route   POST /api/collection/add
 // @access  Public
-//@todo we have to work on  relation mapping betweenn collection and resources
+// @todo we have to work on  relation mapping betweenn collection and resources
 
 const addcollection = (req, res) => {
   const { name, docType, resourceType, linkId } = req.body
@@ -59,9 +58,9 @@ const addcollection = (req, res) => {
     name,
     docType,
     resourceType,
-    linkId,
+    linkId
   })
-    .then(() => res.json({ message: "Collection Created !!!" }).status(200))
+    .then(() => res.json({ message: 'Collection Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
@@ -78,10 +77,10 @@ const updateCollection = (req, res) => {
     if (collection) {
       const { id } = collection
       Collection.update({
-       name,
+        name,
         docType,
         resourceType,
-        linkId,
+        linkId
       },
       { where: { id } })
         .then(() => res.json({ message: 'Collection Updated !!!' }).status(200))
@@ -123,5 +122,4 @@ const searchCollectionTitle = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-
-module.exports = { addcollection, getCollection,updateCollection,deleteCollection,searchCollectionTitle,getCollectionById }
+module.exports = { addcollection, getCollection, updateCollection, deleteCollection, searchCollectionTitle, getCollectionById }
