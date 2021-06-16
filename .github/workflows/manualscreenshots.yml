@@ -50,7 +50,7 @@ jobs:
           full-page: true
       - name: Get Token
         run: |
-          token=$(curl -s -X POST https://api.planetfarms.io/api/users/login -d '{"username": "'${{ secrets.LOGIN }}'", "password": "'${{ secrets.PASSWORD }}'"}' -H 'Content-Type: application/json' | sed -e 's/{"token":"//' | sed -e 's/"}//')
+          token=$(curl -s -X POST https://api.planetfarms.io/api/users/login -d '{"username": "${{ secrets.LOGIN }}", "password": "${{ secrets.PASSWORD }}"}' -H 'Content-Type: application/json' | sed -e 's/{"token":"//' | sed -e 's/"}//')
           echo $token
           echo "TOKEN=$token" >> $GITHUB_ENV
       - name: Screenshot News
