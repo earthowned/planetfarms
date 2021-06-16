@@ -24,7 +24,6 @@ jobs:
           #export gitter_channel="${{ secrets.CHANNEL }}"
           sudo treehouses tor add 22
           sudo treehouses tor add 3000
-          sudo treehouses tor add 5432
           sudo treehouses tor
           sudo treehouses tor notice now
           sudo treehouses sshkey github adduser dogi
