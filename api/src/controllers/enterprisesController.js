@@ -56,7 +56,7 @@ const addEnterprises = (req, res) => {
   if (req.file) {
     filename = req.file.filename
   }
-  db.Enterprise.create({ ...req.body, filename })
+  db.Enterprise.create({ ...req.body, slug: "", filename })
     .then(() => res.json({ message: 'Enterprises Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }

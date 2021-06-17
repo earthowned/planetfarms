@@ -68,8 +68,8 @@ const CommunityCard = ({community}) => {
                       {follower 
                       ? <button className="secondary-btn join-community-btn" onClick={followCommunity}>Join community</button>
                       : <div className="community-switch-btn-group">
-                      <button className="secondary-btn unfollow-community-btn" onClick={followCommunity}>Unfollow community</button>
-                      <button className="secondary-btn join-community-btn" onClick={visitCurrentCommunity}>Visit community</button>
+                      <button className="secondary-btn unfollow-community-btn" onClick={followCommunity}>Unfollow</button>
+                      <button className="secondary-btn join-community-btn" onClick={visitCurrentCommunity}>Visit</button>
                       </div>
                     }
                   </div>

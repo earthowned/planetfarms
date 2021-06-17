@@ -81,7 +81,7 @@ function App () {
           <Route path='/messenger/:id'>
             <MobileMessage />
           </Route>
-          <Route exact path='/community-page-news'>
+          <Route exact path='/community-page-news/:id'>
             <CommunityPagenews />
           </Route>
           <Route path='/community-page-news/:title/:category'>

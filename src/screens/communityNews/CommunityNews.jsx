@@ -59,9 +59,9 @@ function CommunityPagenews (props) {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    if (!userInfo) {
-      history.push('/login')
-    }
+    // if (!userInfo) {
+    //   history.push('/login')
+    // }
     if (search) dispatch(searchNews(search))
     if (!search) dispatch(listNews())
   }, [search, dispatch, history, userInfo])

@@ -110,7 +110,7 @@ const createCommunity = (req, res) => {
     return res.json({ message: 'Not authorized to create.' })
   }
 
-  db.Community.create({ ...req.body, attachment: 'uploads/' + filename })
+  db.Community.create({ ...req.body, slug: "", attachment: 'uploads/' + filename })
     .then(() => res.json({ message: 'Community is Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }

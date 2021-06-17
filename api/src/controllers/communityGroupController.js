@@ -58,7 +58,7 @@ const addGroups = (req, res) => {
   if (req.file) {
     filename = req.file.filename
   }
-  db.Group.create({ ...req.body, filename })
+  db.Group.create({ ...req.body, filename, slug : "" })
     .then(() => res.json({ message: 'Community Group Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }

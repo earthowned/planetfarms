@@ -19,11 +19,22 @@ module.exports = (sequelize, DataTypes) => {
       category: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      slug: {
+        type: DataTypes.STRING,
+        allowNull: false
       }
     },
     { timestamps: true }
   )
+  //hooks
+  Community.addHook('beforeSave', (community, optionsObject) => {
+    let newslug = community.name.split(' ').slice(0, 3).join('_');
 
+    community.slug = sequelize.fn('lower', newslug);
+  })
+
+  //association is here
   Community.associate = (models) => {
     //M:N community and user through communities_users
     Community.belongsToMany(models.User, {

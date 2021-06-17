@@ -8,12 +8,15 @@ module.exports = {
         model: 'communities',
         key: 'id'
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
     });
+    await queryInterface.addColumn('groups', 'slug', {
+        type: Sequelize.STRING,
+        allowNull: false,
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-   await queryInterface.addColumn('groups', 'communityId');
+   await queryInterface.removeColumn('groups', 'communityId');
+   await queryInterface.removeColumn('groups', 'slug');
   }
 };

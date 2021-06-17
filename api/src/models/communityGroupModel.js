@@ -15,10 +15,23 @@ module.exports = (sequelize, DataTypes) => {
     communityId: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    slug: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   { timestamps: true }
   )
+
+   //hooks
+  Group.addHook('beforeSave', (group, optionsObject) => {
+    let newslug = group.name.split(' ').slice(0, 3).join('_');
+    group.slug = sequelize.fn('lower', newslug);
+  })
+
+
+  // association
   Group.associate = (models) => {
     Group.belongsTo(models.Community, {foreignKey: 'communityId'})
   };

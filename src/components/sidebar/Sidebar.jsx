@@ -17,7 +17,8 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
 
   const mainnav = [
     {
-      name: 'Ragarians',
+      name: currentCommunity ? currentCommunity.name : 'PlanetFarms',
+      slug: `/community-page-news/${currentCommunity && currentCommunity.id}`,
       slug: '/community-page-news',
       image: <RagIcon />,
       dropdown: [
@@ -63,7 +64,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
     ? JSON.parse(localStorage.getItem('currentCommunity'))
     : null
   
-    if(!currentCommunity) dispatch(visitCommunity(25));
+    if(!currentCommunity) dispatch(visitCommunity(3));
   }, [])
   return (
     <>
