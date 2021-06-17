@@ -35,7 +35,7 @@ jobs:
           npm i
           echo "starting planetfarms"
           npm start &
-          sleep 10
+          sleep 5
           url="http://localhost:3000"
           token=$(curl -s -X POST https://api.planetfarms.io/api/users/login -d '{"username": "${{ secrets.LOGIN }}", "password": "${{ secrets.PASSWORD }}"}' -H 'Content-Type: application/json' | sed -e 's/{"token":"//' | sed -e 's/"}//')
           header="{Authorization: \"Bearer $token\"}"
@@ -43,7 +43,7 @@ jobs:
           cd screenshots
           capture-website $url/login --output=login.png
           capture-website $url/register --output=register.png
-          capture-webiste $url/community-page-news --header=$header --output=community-page-news.png
+          capture-website $url/community-page-news --header=$header --output=community-page-news.png
           cd ..
           sync
       - name: Upload
