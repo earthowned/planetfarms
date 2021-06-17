@@ -8,7 +8,7 @@ import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { groupCollection, collections, library } from '../CollectionData'
 import { useSelector, useDispatch } from 'react-redux'
 import { listResourceUser } from '../../../actions/resourceUserAction'
-import Pagination from '../../../Components/pagination/Pagination'
+import Pagination from '../../../components/pagination/Pagination'
 import { listResources } from '../../../actions/resourceActions'
 
 import './Collection.css'

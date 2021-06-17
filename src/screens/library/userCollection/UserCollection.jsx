@@ -11,7 +11,7 @@ import GroupModal from '../../../components/groupModal/GroupModal'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
 import { listCollections, updateCollection } from '../../../actions/collectionActions'
 import { createCollectionUser } from '../../../actions/collectionUserActions'
-import Pagination from '../../../Components/pagination/Pagination'
+import Pagination from '../../../components/pagination/Pagination'
 
 const UserCollection = () => {
   const [active, setActive] = useState(true)
