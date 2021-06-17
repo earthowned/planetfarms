@@ -43,7 +43,7 @@ jobs:
           cd screenshots
           capture-website $url/login --output=login.png
           capture-website $url/register --output=register.png
-          capture-website $url/community-page-news --header=$header --output=community-page-news.png
+          #capture-website $url/community-page-news --header=$header --output=community-page-news.png
           cd ..
           sync
       - name: Upload
