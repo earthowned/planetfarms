@@ -13,4 +13,15 @@ const User = db.define('users', {
   }
 }, { timestamps: false })
 
+User.associate = function (models) {
+  User.hasMany(models.CollectionUser, {
+    foreignKey: 'userId'
+  })
+}
+User.associate = function (models) {
+  User.hasMany(models.ResourceUser, {
+    foreignKey: 'userId'
+  })
+}
+
 module.exports = User

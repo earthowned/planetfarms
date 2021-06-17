@@ -53,12 +53,20 @@ const getCollectionById = (req, res) => {
 // @todo we have to work on  relation mapping betweenn collection and resources
 
 const addcollection = (req, res) => {
-  const { name, docType, resourceType, linkId } = req.body
+  const { name, docType, resourceType, linkId, description, category, status } = req.body
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
   Collection.create({
     name,
     docType,
     resourceType,
-    linkId
+    linkId,
+    description,
+    filename,
+    category,
+    status
   })
     .then(() => res.json({ message: 'Collection Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
@@ -69,20 +77,17 @@ const addcollection = (req, res) => {
 // @access  Public
 
 const updateCollection = (req, res) => {
-  const {
-    name, docType, resourceType, linkId
-  } = req.body
+  // const {
+  //   name, docType, resourceType, linkId,description,category,status
+  // } = req.body
   const id = req.params.id
   Collection.findByPk(id).then(collection => {
     if (collection) {
       const { id } = collection
-      Collection.update({
-        name,
-        docType,
-        resourceType,
-        linkId
-      },
-      { where: { id } })
+      Collection.update(
+        req.body
+        ,
+        { where: { id } })
         .then(() => res.json({ message: 'Collection Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     }

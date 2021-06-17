@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import './UserCollection.css'
 
 import LibraryHeader from '../../../components/libraryHeader/LibraryHeader'
@@ -8,17 +9,44 @@ import SimpleModal from '../../../components/simpleModal/SimpleModal'
 import { farming, groupCollection } from '../CollectionData'
 import GroupModal from '../../../components/groupModal/GroupModal'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
+import { listCollections, updateCollection } from '../../../actions/collectionActions'
+import { createCollectionUser } from '../../../actions/collectionUserActions'
+import Pagination from '../../../components/pagination/Pagination'
 
 const UserCollection = () => {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(true)
   const [modalActive, setModalActive] = useState(false)
+  const [isAdded, setIsAdded] = useState()
+  const [pageNumber, setPageNumber] = useState(1)
 
   const [groupModal, setGroupModal] = useState(false)
   const [newCollection, setNewCollection] = useState(false)
 
+  const data = useSelector(
+    (state) => state.listCollection.collections.collection
+  )
+
+  const dataCollection = useSelector(
+    (state) => state.listCollection
+  )
+  const userInfo = useSelector((state) => state.userLogin.userInfo.id)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(listCollections({ pageNumber }))
+  }, [pageNumber, dispatch])
+
   function openAddCollection () {
     setGroupModal(true)
     setModalActive(false)
+  }
+
+  function handleClick (id) {
+    dispatch(
+      createCollectionUser({ userId: userInfo, collectionId: id })
+    )
+    setIsAdded(id)
   }
 
   return (
@@ -39,37 +67,31 @@ const UserCollection = () => {
         </div>
 
         <h4 className='farming-collection-header'>Farming Collections</h4>
+        <div className='farming-main-container'>
 
-        <CardLayout data={farming}>
           {
-                farming.map(item => {
-                  return (
-                    <div
-                      className='farming-inner-container'
-                      style={{
-                        background: `linear-gradient(359.99deg, #000000 0.01%, rgba(25, 28, 33, 0.4) 99.99%), url(${item.img})`,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat'
-                      }}
-                    >
-                      <button className='trasnsparent-btn btn-positioning'>
-                        <b>{item.users}</b>  <span>users saved</span>
+              data && data.map(item => {
+                return (
+                  <div key={item.id} className='farming-inner-container' style={{ backgroundImage: `url(${item.img})` }}>
+                    <button className='trasnsparent-btn btn-positioning'>
+                      <b>{item.users}</b>  <span>users saved</span>
+                    </button>
+
+                    <div className='libraryCard-content'>
+                      <h6>{item.category}</h6>
+                      <h4>{item.name}</h4>
+
+                      <button className='trasnsparent-btn fixed-width' value={active} onClick={(id) => handleClick(item.id)}>
+                        {isAdded === item.id ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
                       </button>
-
-                      <div className='libraryCard-content'>
-                        <h6>{item.category}</h6>
-                        <h4>{item.title}</h4>
-
-                        <button className='trasnsparent-btn fixed-width' onClick={() => setActive(!active)}>
-                          {active ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
-                        </button>
-                      </div>
                     </div>
-                  )
-                })
+                  </div>
+                )
+              })
             }
-        </CardLayout>
+        </div>
+        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={dataCollection} />
+
       </DashboardLayout>
     </>
   )

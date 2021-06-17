@@ -20,9 +20,27 @@ const Collection = db.define(
     },
     linkId: {
       type: Sequelize.INTEGER
+    },
+    filename: {
+      type: Sequelize.STRING
+    },
+    description: {
+      type: Sequelize.STRING
+    },
+    category: {
+      type: Sequelize.STRING
+    },
+    status: {
+      type: Sequelize.BOOLEAN
     }
   },
   { timestamps: true }
 )
+
+Collection.associate = function (models) {
+  Collection.hasMany(models.CollectionUser, {
+    foreignKey: 'collectionId'
+  })
+}
 
 module.exports = Collection
