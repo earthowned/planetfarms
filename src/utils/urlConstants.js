@@ -6,5 +6,8 @@ export const Axios = axios.create({
   baseURL: BASE_URL,
 });
 
-//get categories
+// categories
 export const CATEGORY = "categories";
+
+//course
+export const ADD_COURSE = "courses/add";

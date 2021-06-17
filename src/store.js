@@ -4,9 +4,13 @@ import thunk from 'redux-thunk'
 import { newsListReducer, newsCreateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
 import { enterpriseListReducer } from './reducers/enterpriseReducers'
-import { groupListReducer, groupViewReducer } from './reducers/communityGroupReducers'
+import {
+  groupListReducer,
+  groupViewReducer
+} from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
+import { courseCreateReducer } from './reducers/courseReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -17,7 +21,8 @@ const reducer = combineReducers({
   listNews: newsListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  addNewNews: newsCreateReducer
+  addNewNews: newsCreateReducer,
+  addCourse: courseCreateReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

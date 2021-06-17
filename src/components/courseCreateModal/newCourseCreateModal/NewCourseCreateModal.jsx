@@ -1,27 +1,29 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router'
 import { useForm } from 'react-hook-form'
-import { useQueries, useQuery } from 'react-query'
-import { Axios, CATEGORY } from '../../../utils/urlConstants'
+import { useMutation, useQuery } from 'react-query'
+import { Axios, CATEGORY, ADD_COURSE } from '../../../utils/urlConstants'
 import DragDrop from '../../dragDrop/DragDrop'
 import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
 import './NewCourseCreateModal.scss'
 
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
-  const history = useHistory()
+  // const history = useHistory();
   const [active, setActive] = useState(false)
   const [courseImage, setCourseImage] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
 
   const {
-    isLoading,
-    data: res,
-    error
+    // isLoading,
+    data: res
+    // error,
   } = useQuery('category', async () => {
     const { data } = await Axios.get(CATEGORY)
     return data
   })
+
+  const { mutate } = useMutation((data) => Axios.post(ADD_COURSE, data))
 
   // TODO: remove this comment after page not found component is created
   // error && history.push("/pagenotfound")
@@ -33,8 +35,7 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
 
   const submitForm = (data) => {
     const courseImg = courseImage?.preview
-    console.log(data)
-    console.log(courseImg)
+    mutate(data)
   }
 
   return (
