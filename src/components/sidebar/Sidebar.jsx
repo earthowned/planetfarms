@@ -18,23 +18,23 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
   const mainnav = [
     {
       name: currentCommunity ? currentCommunity.name : 'PlanetFarms',
-      slug: `/community-page-news/${currentCommunity && currentCommunity.id}`,
+      slug: `/${currentCommunity && currentCommunity.slug}/community-page-news`,
       slug: '/community-page-news',
       image: <RagIcon />,
       dropdown: [
         {
           name: 'Members',
-          slug: '/community-members',
+          slug: `/${currentCommunity && currentCommunity.slug}/community-members`,
           initial: 'Me'
         },
         {
           name: 'Groups',
-          slug: '/community-group',
+          slug: `/${currentCommunity && currentCommunity.slug}/community-group`,
           initial: 'Gr'
         },
         {
           name: 'Enterprises',
-          slug: '/enterprises',
+          slug: `/${currentCommunity && currentCommunity.slug}/enterprises`,
           initial: 'En'
         }
       ]

@@ -18,9 +18,14 @@ export const listGroups = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
+    //fetching current community
+    const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
     dispatch({ type: GROUP_LIST_REQUEST })
     const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/groups`
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}`
     )
     console.log('groups', data)
     dispatch({
@@ -42,8 +47,13 @@ export const searchGroups = (search) => async (
   dispatch
 ) => {
   try {
+    //fetching current community
+    const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
     dispatch({ type: GROUP_SEARCH_REQUEST })
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/search?title=${search}`)
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}/search?title=${search}`)
     dispatch({
       type: GROUP_SEARCH_SUCCESS,
       payload: data

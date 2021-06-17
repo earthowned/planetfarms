@@ -44,14 +44,14 @@ function AllCommunities ({setModalActive}) {
   const createCommunity = useSelector((state) => state.addCommunity);
   const {success:createSuccess} = createCommunity
   const dispatch = useDispatch()
-  let userId = 24;
+  
   useEffect(() => {
         if(!search) dispatch(listCommunities());
         if(search) dispatch(searchCommunities(search));
 
         if(pathname==='/community-switching/my-communities') {
-          if(!search) dispatch(listUserCommunities(userId))
-          if(search) dispatch(searchUserCommunities(userId, search));
+          if(!search) dispatch(listUserCommunities(1))
+          if(search) dispatch(searchUserCommunities(1, search));
         }
   }, [search, dispatch, createSuccess, pathname]);
 
@@ -111,11 +111,12 @@ const CommunityModal = ({setActive}) => {
   const [files, setFiles] = useState();
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
+  const [category, setCategory] = useState('');
   const [userId, setUserId] = useState(0);
   const dispatch = useDispatch()
   
   function addCommunity () {
-    dispatch(createCommunity({files, name, desc, userId}))
+    dispatch(createCommunity({files, name, desc, userId, category}))
     setActive(false);
   }
   
@@ -127,6 +128,7 @@ const CommunityModal = ({setActive}) => {
             <DragDrop files={files} onChange={setFiles} />
             <InputComponent name="Community Name" text={name} changeHandler={setName} />
             <InputComponent name="Description" text={desc} changeHandler={setDesc} />
+            <InputComponent name="Category" text={category} changeHandler={setCategory} />
             <InputComponent name="User Id" text={userId} changeHandler={setUserId} />
              <Button name="Create Community" clickHandler={addCommunity} />
           </div>

@@ -15,9 +15,14 @@ export const listEnterprises = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
+        //fetching current community
+    const currentCommunity = localStorage.getItem('currentCommunity')
+      ? JSON.parse(localStorage.getItem('currentCommunity'))
+      : null
+
     dispatch({ type: ENTERPRISE_LIST_REQUEST })
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises`
+      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${currentCommunity.id}`
     )
     console.log('enterprisedsgfgfhnbvxdfgh', data)
     dispatch({

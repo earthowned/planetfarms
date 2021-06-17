@@ -40,9 +40,9 @@ const getCommunityEnterprises = (req, res) => {
       where: {id: req.params.id },
     }]
    })
-    .then(groups => {
+    .then(enterprises => {
       paginate({ page, pageSize })
-      res.json({ groups, page, pageSize }).status(200)
+      res.json({ enterprises, page, pageSize }).status(200)
     })
 
     .catch((err) => res.json({ err }).status(400))

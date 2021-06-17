@@ -14,6 +14,7 @@ const CommunityGroup = () => {
   const data = useSelector((state) => state.listGroups.groups)
   const dispatch = useDispatch()
 
+
   const [active, setActive] = useState(false)
   const [search, setSearch] = useState(null)
   const handleClickCreate = () => {

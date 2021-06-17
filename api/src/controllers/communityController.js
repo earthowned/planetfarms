@@ -78,16 +78,16 @@ const getUserCommunities = async (req, res) => {
     order: [['createdAt', 'DESC']],
     include: [{
       model: db.User,
-      as: 'creator' && 'followers',
+      as: 'creator' || 'followers',
       attributes: ['id'],
       where: {id: req.params.id },
-      through: {
-         attributes: ['active'],
-         as: 'followStatus',
-         where: {
-           active: true
-         }
-        }
+      // through: {
+      //    attributes: ['active'],
+      //    as: 'followStatus',
+      //    where: {
+      //      active: true
+      //    }
+      //   }
     }]
   })
     .then(communities => {

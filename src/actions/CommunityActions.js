@@ -96,6 +96,7 @@ export const createCommunity = (newCommunity) => async (dispatch, getState) => {
   formData.append('description', newCommunity.desc)
   formData.append('community', newCommunity.files)
   formData.append('creatorId', newCommunity.userId)
+  formData.append('category', newCommunity.category)
   
   try {
     dispatch({

@@ -26,21 +26,28 @@ export default CommunitiesCard
 
 const CommunityCard = ({community}) => {
   const [follower, setFollower] = useState(true);
+  const [creator, setCreator] = useState(false);
 
    const {success} = useSelector(state => state.joinCommunity);
    const dispatch = useDispatch();
 
   //choose userid according to the user data in your database
-  let currentUserId = 24;
+  let currentUserId = 1;
    useEffect(() => {
      if(community.followers && community.followers.length > 0) {
-       if(checkArray(community.followers, currentUserId)) setFollower(false);
+       if(checkFollow(community.followers, currentUserId)) setFollower(false);
      }
+
+     if(checkCreator(currentUserId)) setCreator(true);
   }, [])
 
- function checkArray(arr, userId) { 
+ function checkFollow(arr, userId) { 
     const found = arr.some(el => (el.id === userId && el.followStatus.active === true))
     if(found) return true
+  }
+
+  function checkCreator(id) {
+    if(id === community.creatorId) return true
   }
  
   const followCommunity = () => {
@@ -65,12 +72,14 @@ const CommunityCard = ({community}) => {
                           {community.followers && community.followers.length} followers
                         </div>
                       </div>
-                      {follower 
+                      {creator 
+                      ? <button className="secondary-btn join-community-btn" onClick={visitCurrentCommunity}>Visit</button>
+                      : (follower 
                       ? <button className="secondary-btn join-community-btn" onClick={followCommunity}>Join community</button>
                       : <div className="community-switch-btn-group">
                       <button className="secondary-btn unfollow-community-btn" onClick={followCommunity}>Unfollow</button>
                       <button className="secondary-btn join-community-btn" onClick={visitCurrentCommunity}>Visit</button>
-                      </div>
+                      </div>)
                     }
                   </div>
                 </Background>
