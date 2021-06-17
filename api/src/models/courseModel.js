@@ -1,43 +1,53 @@
 const Sequelize = require("sequelize");
 const db = require("../config/database.js");
 
-const Courses = db.define("courses",
+const Courses = db.define(
+  "courses",
   {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     title: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT,
     },
     description: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT,
     },
     languageOfInstruction: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     memberLimit: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     method: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     gradeLevel: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     subjectLevel: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     creator: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+    },
+    thumbnail: {
+      type: Sequelize.STRING,
     },
     steps: {
-      type: Sequelize.JSON
+      type: Sequelize.JSON,
     },
     _attachments: {
-      type: Sequelize.BLOB("long")
-    }
+      type: Sequelize.BLOB("long"),
+    },
+    price: {
+      type: Sequelize.DOUBLE,
+    },
+    category: {
+      type: Sequelize.STRING,
+    },
   },
   { timestamps: true }
 );

@@ -1,9 +1,11 @@
 import { useState } from "react";
 // import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
-import { useQuery, useMutation } from "react-query";
+import { useQuery } from "react-query";
+import { useDispatch } from "react-redux";
 
-import { Axios, CATEGORY, ADD_COURSE } from "../../../utils/urlConstants";
+import { Axios, CATEGORY } from "../../../utils/urlConstants";
+import { createResource } from "../../../actions/courseActions";
 
 import DragDrop from "../../DragDrop/DragDrop";
 import ToggleSwitch from "../../ToggleSwitch/ToggleSwitch";
@@ -11,7 +13,7 @@ import "./newCourseCreateModal.scss";
 
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   // const history = useHistory();
-
+  const dispatch = useDispatch();
   const [active, setActive] = useState(false);
   const [courseImage, setCourseImage] = useState("");
 
@@ -26,20 +28,16 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
     return data;
   });
 
-  const { mutate } = useMutation(
-    ({ title, description, thumbnail }, courseImg) =>
-      Axios.post(ADD_COURSE, { title, description, thumbnail })
-  );
-
   // TODO: remove this comment after page not found component is created
   // error && history.push("/pagenotfound")
 
   //   history.push("/admin/coursepage");
 
-  const submitForm = ({ title, description }) => {
-    const thumbnail = courseImage?.preview;
-    console.log(thumbnail);
-    mutate({ title, description, thumbnail });
+  const submitForm = ({ title, category, description, price }) => {
+    const thumbnail = courseImage;
+    return dispatch(
+      createResource({ title, category, description, price, thumbnail })
+    );
   };
 
   return (
