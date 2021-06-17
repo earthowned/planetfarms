@@ -13,6 +13,7 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import useSizeFinder from "../../utils/sizeFinder";
 import './CommunitySwitching.scss'
+import Pagination from "../../components/pagination/Pagination";
 
 function App () {
   const[modalActive, setModalActive] = useState(false);
@@ -59,10 +60,14 @@ function AllCommunities ({setModalActive}) {
         <CommunityHeader setActive={setModalActive} search={search} setSearch={setSearch} />
         {
           pathname==='/community-switching/my-communities' 
-          ? <CommunitiesCard data={userCommunities} />
-          : <CommunitiesCard data={communities} />
+          ? <><CommunitiesCard data={userCommunities} /> 
+          {/* <Pagination pageNumber={userCommunities.pageNumber} /> */}
+          </>
+          : <><CommunitiesCard data={communities} /> 
+          {/* <Pagination /> */}
+          </>
         }
-         
+        
     </>)  
 }
 

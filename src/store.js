@@ -7,7 +7,7 @@ import { enterpriseListReducer } from './reducers/enterpriseReducers'
 import { groupListReducer, groupViewReducer } from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
-import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer } from './reducers/CommunityReducers'
+import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, communityVisitReducer } from './reducers/CommunityReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -20,6 +20,7 @@ const reducer = combineReducers({
   joinCommunity: communityJoinReducer,
   listCommunities: communityListReducer,
   listUserCommunities: userCommunityListReducer,
+  activeCommunity: communityVisitReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   addNewNews: newsCreateReducer
@@ -29,9 +30,15 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null
 
+const currentCommunityFromStorage = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
 const initialState = {
-  userLogin: { userInfo: userInfoFromStorage }
+  userLogin: { userInfo: userInfoFromStorage },
+  activeCommunity: {currentCommunity: currentCommunityFromStorage}
 }
+
 const middleware = [thunk]
 const store = createStore(
   reducer,

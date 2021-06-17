@@ -73,6 +73,8 @@
 }
 
 .list-container span {
+  font-weight: 600;
+  font-size: 16px;
   transition: all 0.5s 0.2s ease-in-out;
 }
 

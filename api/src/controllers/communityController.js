@@ -84,6 +84,9 @@ const getUserCommunities = async (req, res) => {
       through: {
          attributes: ['active'],
          as: 'followStatus',
+         where: {
+           active: true
+         }
         }
     }]
   })

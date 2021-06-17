@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { joinCommunity } from "../../actions/communityActions";
+import { joinCommunity, visitCommunity } from "../../actions/communityActions";
 import './CommunitiesCard.scss'
 import Background from '../background/Background'
 import CardLayout from '../../layout/cardLayout/CardLayout'
@@ -48,8 +48,8 @@ const CommunityCard = ({community}) => {
       setFollower(!follower);
   }
 
-  const visitCommunity = () => {
-    
+  const visitCurrentCommunity = () => {
+    dispatch(visitCommunity(community.id));
   }
   return (
      <div ckey={community.id} lassName="community-card">
@@ -69,7 +69,7 @@ const CommunityCard = ({community}) => {
                       ? <button className="secondary-btn join-community-btn" onClick={followCommunity}>Join community</button>
                       : <div className="community-switch-btn-group">
                       <button className="secondary-btn unfollow-community-btn" onClick={followCommunity}>Unfollow community</button>
-                      <button className="secondary-btn join-community-btn" onClick={visitCommunity}>Visit community</button>
+                      <button className="secondary-btn join-community-btn" onClick={visitCurrentCommunity}>Visit community</button>
                       </div>
                     }
                   </div>

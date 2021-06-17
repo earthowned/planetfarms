@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from "../constants/CommunityConstants"
+import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, COMMUNITY_VISIT_FAIL, COMMUNITY_VISIT_REQUEST, COMMUNITY_VISIT_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from "../constants/CommunityConstants"
 
 export const listCommunities = (sort = '', pageNumber = '') => async (
   dispatch
@@ -133,6 +133,29 @@ export const joinCommunity = (userId, communityId) => async (dispatch, getState)
           : error.message
     dispatch({
       type: COMMUNITY_JOIN_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const visitCommunity = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY_VISIT_REQUEST })
+
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`)
+    
+    dispatch({
+      type: COMMUNITY_VISIT_SUCCESS,
+      payload: data
+    })
+    localStorage.setItem('currentCommunity', JSON.stringify(data))
+  } catch (error) {
+    const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    dispatch({
+      type: COMMUNITY_VISIT_FAIL,
       payload: message
     })
   }

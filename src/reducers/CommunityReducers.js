@@ -16,7 +16,10 @@ import { COMMUNITY_LIST_FAIL,
     USER_COMMUNITY_LIST_FAIL,
     USER_COMMUNITY_SEARCH_REQUEST,
     USER_COMMUNITY_SEARCH_SUCCESS,
-    USER_COMMUNITY_SEARCH_FAIL
+    USER_COMMUNITY_SEARCH_FAIL,
+    COMMUNITY_VISIT_REQUEST,
+    COMMUNITY_VISIT_SUCCESS,
+    COMMUNITY_VISIT_FAIL
 } from "../constants/CommunityConstants"
 
 export const communityListReducer = (state = { communities: [] }, action) => {
@@ -97,6 +100,19 @@ export const communityJoinReducer = (state = {}, action) => {
     case COMMUNITY_JOIN_SUCCESS:
       return { loading: false, success: true}
     case COMMUNITY_JOIN_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const communityVisitReducer = (state = {currentCommunity: {}}, action) => {
+  switch (action.type) {
+    case COMMUNITY_VISIT_REQUEST:
+      return { loading: true }
+    case COMMUNITY_VISIT_SUCCESS:
+      return { loading: false, currentCommunity: action.payload}
+    case COMMUNITY_VISIT_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
