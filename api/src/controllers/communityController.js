@@ -61,7 +61,7 @@ const getCommunities = async (req, res) => {
   //   .catch((err) => res.json({ err }).status(400))
 }
 
-// @desc Fetch all user communities
+// @desc Fetch all communities by users
 // @route GET/api/communities/user
 // @access Public
 
@@ -237,6 +237,9 @@ const searchUserCommunityName = (req, res) => {
       through: {
          attributes: ['active'],
          as: 'followStatus',
+         where: {
+           active: true
+         }
         }
     }],
      where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['name', order]] })

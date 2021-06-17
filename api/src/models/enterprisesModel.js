@@ -1,28 +1,31 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Enterprises = db.define(
-  'enterprises',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Enterprise = sequelize.define('enterprises', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     title: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     description: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     filename: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     category: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
+    },
+    communityId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   },
   { timestamps: true }
-)
-
-module.exports = Enterprises
+  )
+  Enterprise.associate = (models) => {
+    Enterprise.belongsTo(models.Community, {foreignKey: 'communityId'})
+  };
+  return Enterprise;
+}

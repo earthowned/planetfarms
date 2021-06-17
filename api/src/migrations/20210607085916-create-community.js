@@ -9,10 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false,
       },
       description: {
         type: Sequelize.STRING
+      },
+      category: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       attachment: {
         type: Sequelize.STRING

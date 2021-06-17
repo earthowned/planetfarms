@@ -1,6 +1,6 @@
-const Enterprises = require('../models/enterprisesModel')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const db = require('../models');
 
 // @desc    Fetch all enterprises
 // @route   GET /api/enterprises
@@ -16,11 +16,35 @@ const getEnterprises = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['title', order]]
-  Enterprises.findAll({ offset: page, limit: pageSize, ordervalue })
+  db.Enterprise.findAll({ offset: page, limit: pageSize, ordervalue })
     .then(enterprises => {
       paginate({ page, pageSize })
       res.json({ enterprises, page, pageSize }).status(200)
     })
+    .catch((err) => res.json({ err }).status(400))
+}
+
+// @desc Fetch all enterprises by a community
+// @route GET/api/enterprises/community/:id
+// @access Pirvate
+
+const getCommunityEnterprises = (req, res) => {
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 0
+  const order = req.query.order || 'DESC'
+  const ordervalue = order && [['title', order]]
+  db.Enterprise.findAll({ offset: page, limit: pageSize, ordervalue,
+    include: [{
+      model: db.Community,
+      attributes: ['id'],
+      where: {id: req.params.id },
+    }]
+   })
+    .then(groups => {
+      paginate({ page, pageSize })
+      res.json({ groups, page, pageSize }).status(200)
+    })
+
     .catch((err) => res.json({ err }).status(400))
 }
 
@@ -32,7 +56,7 @@ const addEnterprises = (req, res) => {
   if (req.file) {
     filename = req.file.filename
   }
-  Enterprises.create({ ...req.body, filename })
+  db.Enterprise.create({ ...req.body, filename })
     .then(() => res.json({ message: 'Enterprises Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
@@ -43,7 +67,7 @@ const addEnterprises = (req, res) => {
 const getEnterprisesById = (req, res) => {
   const id = req.params.id
 
-  Enterprises.findByPk(id)
+  db.Enterprise.findByPk(id)
     .then(enterprises => {
       if (enterprises) {
         res.json(enterprises)
@@ -57,10 +81,10 @@ const getEnterprisesById = (req, res) => {
 
 const deleteEnterprises = (req, res) => {
   const id = req.params.id
-  Enterprises.findByPk(id).then(enterprises => {
+  db.Enterprise.findByPk(id).then(enterprises => {
     if (enterprises) {
       const { id } = enterprises
-      Enterprises.destroy({ where: { id } })
+      db.Enterprise.destroy({ where: { id } })
         .then(() => res.json({ message: 'Enterprises Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -78,10 +102,10 @@ const updateEnterprises = (req, res) => {
     title, description, roles, attachments
   } = req.body
   const id = req.params.id
-  Enterprises.findByPk(id).then(enterprises => {
+  db.Enterprise.findByPk(id).then(enterprises => {
     if (enterprises) {
       const { id } = enterprises
-      Enterprises.update({
+      db.Enterprise.update({
         title, description, roles, attachments
       },
       { where: { id } })
@@ -100,9 +124,9 @@ const searchEnterprisesTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  Enterprises.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
+  db.Enterprise.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
     .then(enterprises => res.json({ enterprises }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises, updateEnterprises, searchEnterprisesTitle }
+module.exports = { getEnterprises, getCommunityEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises, updateEnterprises, searchEnterprisesTitle }

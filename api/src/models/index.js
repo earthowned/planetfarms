@@ -1,14 +1,17 @@
 const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
+const sequelize = require('../config/database');
 const basename = path.basename(__filename)
 const env = process.env.NODE_ENV || 'development'
 const config = require(path.join(__dirname, '/../config/config.js'))[env]
 const User = require('./userModel')
 const Community = require('./communityModel')
 const CommunityUser = require('./communityUserModal')
+const Group = require('./communityGroupModel')
+const Enterprise = require('./enterprisesModel')
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config)
+
 // const db = {};
 
 // fs.readdirSync(__dirname)
@@ -23,7 +26,9 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 const db = {
   User: User(sequelize, Sequelize.DataTypes),
   Community: Community(sequelize, Sequelize.DataTypes),
-  CommunityUser: CommunityUser(sequelize, Sequelize.DataTypes)
+  CommunityUser: CommunityUser(sequelize, Sequelize.DataTypes),
+  Group: Group(sequelize, Sequelize.DataTypes),
+  Enterprise: Enterprise(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach(modelName => {

@@ -11,8 +11,12 @@ const communityGroupsRoutes = require('./routes/communityGroupRouter')
 const calendarRoutes = require('./routes/calendarEventsRouter')
 const communityRoutes = require('./routes/communityRouter')
 const communityUsersRoutes = require('./routes/communityUserRouter');
+<<<<<<< HEAD:api/src/server.js
 const resizerRoutes = require('./routes/resizerRouter')
 const sequelize = require('./config/database.js')
+=======
+const sequelize = require('./config/database');
+>>>>>>> a7ae4a8... community association with group and enterprises:api/server.js
 const cors = require('cors')
 const dotenv = require('dotenv')
 

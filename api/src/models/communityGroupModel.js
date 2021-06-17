@@ -1,22 +1,26 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database')
-
-const Groups = db.define('groups',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Group = sequelize.define('groups', {
     title: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     description: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     category: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     filename: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
+    },
+    communityId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   },
   { timestamps: true }
-)
-
-module.exports = Groups
+  )
+  Group.associate = (models) => {
+    Group.belongsTo(models.Community, {foreignKey: 'communityId'})
+  };
+  return Group;
+}

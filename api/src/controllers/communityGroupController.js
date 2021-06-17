@@ -1,6 +1,6 @@
-const Groups = require('../models/communityGroupModel')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const db = require('../models');
 
 // @desc Fetch all groups
 // @route GET/api/groups
@@ -16,7 +16,32 @@ const getGroups = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['title', order]]
-  Groups.findAll({ offset: page, limit: pageSize, ordervalue })
+  db.Group.findAll({ offset: page, limit: pageSize, ordervalue
+   })
+    .then(groups => {
+      paginate({ page, pageSize })
+      res.json({ groups, page, pageSize }).status(200)
+    })
+
+    .catch((err) => res.json({ err }).status(400))
+}
+
+// @desc Fetch all groups by a community
+// @route GET/api/groups/community/:id
+// @access Pirvate
+
+const getCommunityGroups = (req, res) => {
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 0
+  const order = req.query.order || 'DESC'
+  const ordervalue = order && [['title', order]]
+  db.Group.findAll({ offset: page, limit: pageSize, ordervalue,
+    include: [{
+      model: db.Community,
+      attributes: ['id'],
+      where: {id: req.params.id },
+    }]
+   })
     .then(groups => {
       paginate({ page, pageSize })
       res.json({ groups, page, pageSize }).status(200)
@@ -33,7 +58,7 @@ const addGroups = (req, res) => {
   if (req.file) {
     filename = req.file.filename
   }
-  Groups.create({ ...req.body, filename })
+  db.Group.create({ ...req.body, filename })
     .then(() => res.json({ message: 'Community Group Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
@@ -44,7 +69,7 @@ const addGroups = (req, res) => {
 const getGroupsById = (req, res) => {
   const id = req.params.id
 
-  Groups.findByPk(id)
+  db.Group.findByPk(id)
     .then(groups => {
       if (groups) {
         res.json(groups)
@@ -61,10 +86,10 @@ const getGroupsById = (req, res) => {
 // @access Public
 const deleteGroups = (req, res) => {
   const id = req.params.id
-  Groups.findByPk(id).then(groups => {
+  db.Group.findByPk(id).then(groups => {
     if (groups) {
       const { id } = groups
-      Groups.destroy({ where: { id } })
+      db.Group.destroy({ where: { id } })
         .then(() => res.json({ message: 'Groups Deleted!!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -83,10 +108,10 @@ const updateGroups = (req, res) => {
   } = req.body
 
   const id = req.params.id
-  Groups.findByPk(id).then(groups => {
+  db.Group.findByPk(id).then(groups => {
     if (groups) {
       const { id } = groups
-      Groups.update({
+      db.Group.update({
         title, description, category, attachments
       },
       { where: { id } })
@@ -105,9 +130,9 @@ const searchGroupsTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  Groups.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
+  db.Group.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
     .then(groups => res.json({ groups }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getGroups, addGroups, getGroupsById, deleteGroups, updateGroups, searchGroupsTitle }
+module.exports = { getGroups, getCommunityGroups, addGroups, getGroupsById, deleteGroups, updateGroups, searchGroupsTitle }
