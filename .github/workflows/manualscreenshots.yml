@@ -20,7 +20,7 @@ jobs:
       - name: Planet Farms
         run: |
           sudo apt install tor
-          sudo npm install -g @treehouses/cli
+          sudo npm install -g @treehouses/cli capture-website-cli --unsafe-perm=true
           #export gitter_channel="${{ secrets.CHANNEL }}"
           sudo treehouses tor add 22
           sudo treehouses tor add 3000
@@ -35,32 +35,21 @@ jobs:
           npm i
           echo "starting planetfarms"
           npm start &
-          sleep 20
-      - name: Screenshot Login
-        uses: swinton/screenshot-website@v1.x
-        with:
-          source: http://localhost:3000/login
-          destination: planetfarms-login.png
-          full-page: true
-      - name: Screenshot Register
-        uses: swinton/screenshot-website@v1.x
-        with:
-          source: http://localhost:3000/register
-          destination: planetfarms-register.png
-          full-page: true
-      - name: Get Token
-        run: |
+          sleep 10
+          url="http://localhost:3000"
           token=$(curl -s -X POST https://api.planetfarms.io/api/users/login -d '{"username": "${{ secrets.LOGIN }}", "password": "${{ secrets.PASSWORD }}"}' -H 'Content-Type: application/json' | sed -e 's/{"token":"//' | sed -e 's/"}//')
-          echo $token
-          echo $token > look
-          echo "TOKEN=$token" >> $GITHUB_ENV
-      - name: Screenshot News
-        uses: swinton/screenshot-website@v1.x
+          header="{Authorization: \"Bearer $token\"}"
+          mkdir -p screenshots
+          cd screenshots
+          capture-website $url/login --output=login.png
+          capture-website $url/register --output=register.png
+          cd ..
+          sync
+      - name: Upload
+        uses: actions/upload-artifact@v2
         with:
-          source: http://localhost:3000/community-page-news
-          destination: planetfarms-community-page-news.png
-          full-page: true
-          headers: '{Authorization: "Bearer ${{ env.TOKEN }}"}'
+          name: screenshots
+          path: screenshots
       - name: Sleep
         run: |
           #echo "5min countdown"
@@ -73,6 +62,6 @@ jobs:
           #sleep 60
           #echo "2min countdown"
           #sleep 60
-          echo "1min countdown"
-          sleep 60
+          #echo "1min countdown"
+          #sleep 60
           echo "stop"
