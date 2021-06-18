@@ -1,7 +1,7 @@
 import React from 'react'
 import Background from '../background/Background'
 import './MyCoursesCard.scss'
-import CardLayout from '../../Layout/cardLayout/CardLayout'
+import CardLayout from '../../layout/cardLayout/CardLayout'
 
 const courseData = [
   {

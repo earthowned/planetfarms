@@ -1,6 +1,6 @@
 import React from 'react'
 import './CommunitiesCard.scss'
-import CardLayout from '../../Layout/cardLayout/CardLayout'
+import CardLayout from '../../layout/cardLayout/CardLayout'
 const communityData = [
   {
     _id: 1,

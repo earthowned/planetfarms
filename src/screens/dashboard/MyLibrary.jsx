@@ -1,6 +1,7 @@
 import React from 'react'
 import './MyLibrary.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import CardLayout from '../../layout/cardLayout/CardLayout'
 import BackButton from '../../components/backButton/BackButton'
 
 const articles = [
