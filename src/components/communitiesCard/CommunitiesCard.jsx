@@ -5,6 +5,7 @@ import { joinCommunity, visitCommunity } from "../../actions/communityActions";
 import './CommunitiesCard.scss'
 import Background from '../background/Background'
 import CardLayout from '../../layout/cardLayout/CardLayout'
+import { useHistory } from "react-router-dom";
 
 const CommunitiesCard = ({data=[]}) => {
   return (
@@ -29,8 +30,9 @@ const CommunityCard = ({community}) => {
   const [creator, setCreator] = useState(false);
 
    const {success} = useSelector(state => state.joinCommunity);
+   const {currentCommunity} = useSelector(state => state.activeCommunity);
    const dispatch = useDispatch();
-
+  const history = useHistory();
   //choose userid according to the user data in your database
   let currentUserId = 1;
    useEffect(() => {

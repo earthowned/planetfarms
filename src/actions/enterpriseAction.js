@@ -11,14 +11,16 @@ import {
   ENTERPRISE_SEARCH_FAIL
 } from '../constants/enterpriseConstants'
 
+//fetching current community
+    const currentCommunity = localStorage.getItem('currentCommunity')
+      ? JSON.parse(localStorage.getItem('currentCommunity'))
+      : null
+
 export const listEnterprises = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
-        //fetching current community
-    const currentCommunity = localStorage.getItem('currentCommunity')
-      ? JSON.parse(localStorage.getItem('currentCommunity'))
-      : null
+        
 
     dispatch({ type: ENTERPRISE_LIST_REQUEST })
     const { data } = await axios.get(
@@ -45,7 +47,7 @@ export const searchEnterprises = (search) => async (
 ) => {
   try {
     dispatch({ type: ENTERPRISE_SEARCH_REQUEST })
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/search?title=${search}`)
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${currentCommunity.id}/search?title=${search}`)
     dispatch({
       type: ENTERPRISE_SEARCH_SUCCESS,
       payload: data
@@ -75,7 +77,7 @@ export const createEnterprise = (newEnterprise) => async (
     dispatch({
       type: ENTERPRISE_CREATE_REQUEST
     })
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add`, formData)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`, formData)
     dispatch({
       type: ENTERPRISE_CREATE_SUCCESS,
       payload: data

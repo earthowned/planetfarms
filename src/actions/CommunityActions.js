@@ -150,6 +150,7 @@ export const visitCommunity = (id) => async (dispatch) => {
       payload: data
     })
     localStorage.setItem('currentCommunity', JSON.stringify(data))
+    document.location.href = `/community_page_news/${data.slug}`
   } catch (error) {
     const message =
           error.response && error.response.data.message

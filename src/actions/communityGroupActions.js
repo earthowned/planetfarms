@@ -14,14 +14,15 @@ import {
   GROUP_LIST_BYID_FAIL
 } from '../constants/communityGroupConstants'
 
+//fetching current community
+    const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
 export const listGroups = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
-    //fetching current community
-    const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
 
     dispatch({ type: GROUP_LIST_REQUEST })
     const { data } = await axios.get(
@@ -47,11 +48,6 @@ export const searchGroups = (search) => async (
   dispatch
 ) => {
   try {
-    //fetching current community
-    const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
-
     dispatch({ type: GROUP_SEARCH_REQUEST })
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}/search?title=${search}`)
     dispatch({
@@ -80,7 +76,7 @@ export const createGroup = (newGroup) => async (dispatch, getState) => {
     dispatch({
       type: GROUP_CREATE_REQUEST
     })
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups/add`, formData)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups/add/community/${currentCommunity.id}`, formData)
     dispatch({
       type: GROUP_CREATE_SUCCESS,
       payload: data

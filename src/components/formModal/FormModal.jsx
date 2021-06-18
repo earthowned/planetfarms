@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './FormModal.scss'
 import '../enterprisesCollection/EnterprisesCollection.scss'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createGroup } from '../../actions/communityGroupActions'
 import { createEnterprise } from '../../actions/enterpriseAction'
@@ -23,6 +23,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
   const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
 
+  const {id} = useParams();
   const dispatch = useDispatch()
   const { pathname } = useLocation()
   const groupTitleChange = (e) => {
@@ -66,7 +67,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
     e.preventDefault()
     if (!enterpriseTitle) setEnterpriseTitleError(true)
     if (!enterpriseDescription) setEnterpriseDescriptionError(true)
-    // const newEnterprise = {title:enterpriseTitle,description:enterpriseD}
+    
     if (enterpriseTitle && enterpriseDescription) {
       dispatch(
         createEnterprise({
@@ -85,7 +86,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
       <div className='collection-modal-container'>
         <div>
           <div className='collection-modal-inner-container'>
-            {pathname === '/community-group' && (
+            {pathname === `/community_group/${id}` && (
               <>
                 <CollectionModalHeader title='Create Group' clickHandler={setActive} />
                 <DragDrop files={files} onChange={setFiles} />
@@ -128,7 +129,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
               </>
             )}
 
-            {pathname === '/enterprises' && (
+            {pathname === `/enterprises/${id}` && (
               <>
                 <CollectionModalHeader
                   title='Create Enterprises'
