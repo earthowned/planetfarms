@@ -32,16 +32,16 @@ const SurveyCard = ({ data }) => {
 
                   <div className='subtext-option'>
                     <div className='option-btn border-0-5px-quarter-spanish-white'>
-                        <div className='btn-first valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                            {data.dismiss}
-                          </div>
+                      <div className='btn-first valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+                        {data.dismiss}
                       </div>
+                    </div>
 
                     <div className='option-btn-second border-0-5px-quarter-spanish-white'>
-                        <div className='btn-second valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                            {data.answer}
-                          </div>
+                      <div className='btn-second valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+                        {data.answer}
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
