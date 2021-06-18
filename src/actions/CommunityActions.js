@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, COMMUNITY_VISIT_FAIL, COMMUNITY_VISIT_REQUEST, COMMUNITY_VISIT_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from "../constants/CommunityConstants"
+import axios from 'axios'
+import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, COMMUNITY_VISIT_FAIL, COMMUNITY_VISIT_REQUEST, COMMUNITY_VISIT_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from '../constants/CommunityConstants'
 
 export const listCommunities = (sort = '', pageNumber = '') => async (
   dispatch
@@ -68,7 +68,7 @@ export const listUserCommunities = (userId, sort = '', pageNumber = '') => async
   }
 }
 
-export const searchUserCommunities = (userId,search) => async (
+export const searchUserCommunities = (userId, search) => async (
   dispatch
 ) => {
   try {
@@ -90,14 +90,14 @@ export const searchUserCommunities = (userId,search) => async (
 }
 
 export const createCommunity = (newCommunity) => async (dispatch, getState) => {
-  console.log(newCommunity);
+  console.log(newCommunity)
   const formData = new FormData()
   formData.append('name', newCommunity.name)
   formData.append('description', newCommunity.desc)
   formData.append('community', newCommunity.files)
   formData.append('creatorId', newCommunity.userId)
   formData.append('category', newCommunity.category)
-  
+
   try {
     dispatch({
       type: COMMUNITY_CREATE_REQUEST
@@ -123,7 +123,7 @@ export const joinCommunity = (userId, communityId) => async (dispatch, getState)
     dispatch({
       type: COMMUNITY_JOIN_REQUEST
     })
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/follow`, {userId, communityId})
+    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/follow`, { userId, communityId })
     dispatch({
       type: COMMUNITY_JOIN_SUCCESS
     })
@@ -144,7 +144,7 @@ export const visitCommunity = (id) => async (dispatch) => {
     dispatch({ type: COMMUNITY_VISIT_REQUEST })
 
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`)
-    
+
     dispatch({
       type: COMMUNITY_VISIT_SUCCESS,
       payload: data

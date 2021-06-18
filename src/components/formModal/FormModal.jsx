@@ -23,7 +23,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
   const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
 
-  const {id} = useParams();
+  const { id } = useParams()
   const dispatch = useDispatch()
   const { pathname } = useLocation()
   const groupTitleChange = (e) => {
@@ -67,7 +67,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
     e.preventDefault()
     if (!enterpriseTitle) setEnterpriseTitleError(true)
     if (!enterpriseDescription) setEnterpriseDescriptionError(true)
-    
+
     if (enterpriseTitle && enterpriseDescription) {
       dispatch(
         createEnterprise({

@@ -11,17 +11,15 @@ import {
   ENTERPRISE_SEARCH_FAIL
 } from '../constants/enterpriseConstants'
 
-//fetching current community
-    const currentCommunity = localStorage.getItem('currentCommunity')
-      ? JSON.parse(localStorage.getItem('currentCommunity'))
-      : null
+// fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
 
 export const listEnterprises = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
-        
-
     dispatch({ type: ENTERPRISE_LIST_REQUEST })
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${currentCommunity.id}`

@@ -14,8 +14,8 @@ import {
   GROUP_LIST_BYID_FAIL
 } from '../constants/communityGroupConstants'
 
-//fetching current community
-    const currentCommunity = localStorage.getItem('currentCommunity')
+// fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
@@ -23,7 +23,6 @@ export const listGroups = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
-
     dispatch({ type: GROUP_LIST_REQUEST })
     const { data } = await axios.get(
             `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}`
@@ -71,7 +70,7 @@ export const createGroup = (newGroup) => async (dispatch, getState) => {
   formData.append('description', newGroup.description)
   formData.append('group', newGroup.file)
   formData.append('category', newGroup.category)
-  
+
   try {
     dispatch({
       type: GROUP_CREATE_REQUEST
