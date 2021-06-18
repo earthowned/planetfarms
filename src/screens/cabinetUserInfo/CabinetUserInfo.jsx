@@ -1,7 +1,7 @@
 import React from 'react'
 import './CabinetUserInfo.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
-import { Link, userLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import BackButton from '../../components/backButton/BackButton'
 import useSizeFinder from '../../utils/sizeFinder';
 import Filter from '../../components/filter/Filter';
