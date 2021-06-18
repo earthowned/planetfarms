@@ -1,19 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const { upload } = require('../helpers/filehelpers')
+const checkCommunity = require('../middleware/checkCommunity');
 
 const { getGroups, addGroups, getGroupsById, 
   deleteGroups, updateGroups, searchGroupsTitle, 
-  getCommunityGroups } = require('../controllers/communityGroupController')
+ } = require('../controllers/communityGroupController')
 
-router.route('/').get(getGroups)
-router.route('/community/:id').get(getCommunityGroups)
-router.route('/add').post(upload.single('group'), addGroups)
-router.route('/search').get(searchGroupsTitle)
+router.route('/community/:id').get(checkCommunity, getGroups)
+router.route('/add/community/:id').post(checkCommunity, upload.single('group'), addGroups)
+router.route('/community/:id/search').get(checkCommunity, searchGroupsTitle)
 router
-  .route('/:id')
-  .get(getGroupsById)
-  .delete(deleteGroups)
-  .put(updateGroups)
+  .route('/:groupId/community/:id')
+  .get(checkCommunity, getGroupsById)
+  .delete(checkCommunity, deleteGroups)
+  .put(checkCommunity, updateGroups)
 
 module.exports = router

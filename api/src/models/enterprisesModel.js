@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 
     //hooks
   Enterprise.addHook('beforeSave', (enterprise, optionsObject) => {
-    let newslug = enterprise.name.split(' ').slice(0, 3).join('_');
+    let newslug = enterprise.title.split(' ').slice(0, 3).join('_');
     enterprise.slug = sequelize.fn('lower', newslug);
   })
 

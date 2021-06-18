@@ -1,17 +1,18 @@
 const express = require('express')
 const router = express.Router()
+const checkCommunity = require('../middleware/checkCommunity');
 const { upload } = require('../helpers/filehelpers')
 
-const { getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises, updateEnterprises, searchEnterprisesTitle, getCommunityEnterprises } = require('../controllers/enterprisesController')
+const { getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises, 
+  updateEnterprises, searchEnterprisesTitle } = require('../controllers/enterprisesController')
 
-router.route('/').get(getEnterprises)
-router.route('/community/:id').get(getCommunityEnterprises)
-router.route('/add').post(upload.single('enterprise'), addEnterprises)
-router.route('/search').get(searchEnterprisesTitle)
+router.route('/community/:id').get(checkCommunity, getEnterprises)
+router.route('/add/community/:id').post(checkCommunity, upload.single('enterprise'), addEnterprises)
+router.route('/community/:id/search').get(checkCommunity, searchEnterprisesTitle)
 router
-  .route('/:id')
-  .get(getEnterprisesById)
-  .delete(deleteEnterprises)
-  .put(updateEnterprises)
+  .route('/:enterpriseId/community/:id')
+  .get(checkCommunity, getEnterprisesById)
+  .delete(checkCommunity, deleteEnterprises)
+  .put(checkCommunity, updateEnterprises)
 
 module.exports = router

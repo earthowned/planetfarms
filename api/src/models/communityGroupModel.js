@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
    //hooks
   Group.addHook('beforeSave', (group, optionsObject) => {
-    let newslug = group.name.split(' ').slice(0, 3).join('_');
+    let newslug = group.title.split(' ').slice(0, 3).join('_');
     group.slug = sequelize.fn('lower', newslug);
   })
 
