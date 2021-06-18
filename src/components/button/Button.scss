@@ -16,6 +16,12 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
+
+  &:disabled {
+    cursor: default;
+    background-color: var(--primary-grey);
+    color: var(--primary-white);
+  }
 }
 
 .default-btn:hover {

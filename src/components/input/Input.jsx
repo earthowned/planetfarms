@@ -15,7 +15,8 @@ const Input = React.forwardRef(
       togglePasswordVisibility,
       showPassword,
       children,
-      noIcon
+      noIcon,
+      disabled
     },
     ref
   ) => {
@@ -45,6 +46,8 @@ const Input = React.forwardRef(
                 ref={ref}
                 type={type}
                 onChange={(e) => setShowLabel(e.target.value)}
+                disabled={disabled}
+                autocomplete="off"
               />
               {togglePasswordVisibility && (
                 <div className='pwShowHide' onClick={togglePasswordVisibility}>
