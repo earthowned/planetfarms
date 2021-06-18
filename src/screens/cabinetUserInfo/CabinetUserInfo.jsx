@@ -3,8 +3,8 @@ import './CabinetUserInfo.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import { Link, useLocation } from 'react-router-dom'
 import BackButton from '../../components/backButton/BackButton'
-import useSizeFinder from '../../utils/sizeFinder';
-import Filter from '../../components/filter/Filter';
+import useSizeFinder from '../../utils/sizeFinder'
+import Filter from '../../components/filter/Filter'
 
 const data = [{
   label: 'Payment Information',
@@ -24,8 +24,8 @@ function App () {
 export default App
 
 function CabinetUserInfo () {
-  const {pathname} = useLocation();
-  const windowWidth = useSizeFinder();
+  const { pathname } = useLocation()
+  const windowWidth = useSizeFinder()
   return (
     <div className='payment-container'>
       <div className='payment-flex-col-4'>
@@ -33,16 +33,15 @@ function CabinetUserInfo () {
         {/* user details form comes here */}
         <div className='payment-card-container border-1px-onyx'>
           <div className='payment-info'>
-          {windowWidth > 600 
-            ? <ul className='library-list-container'>
-              {data.map((menu) => (
-                <li>
-                  <Link className={`nav-link ${(pathname === menu.link) ? 'library-list-item active' : 'library-list-item'}`} to={menu.link}>{menu.label}</Link>
-                </li>
-              ))}
-            </ul>
-            : <div className="payment-filter-container"> <Filter data={data} noImage="noImage" newFilter />  </div>
-          }
+            {windowWidth > 600
+              ? <ul className='library-list-container'>
+                {data.map((menu) => (
+                  <li>
+                    <Link className={`nav-link ${(pathname === menu.link) ? 'library-list-item active' : 'library-list-item'}`} to={menu.link}>{menu.label}</Link>
+                  </li>
+                ))}
+              </ul>
+              : <div className='payment-filter-container'> <Filter data={data} noImage='noImage' newFilter />  </div>}
           </div>
           <p className='payment-text ibmplexsans-regular-normal-quarter-spanish-white-16px'>
             You can connect these payment services:

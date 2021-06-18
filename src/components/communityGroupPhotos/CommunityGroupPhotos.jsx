@@ -69,4 +69,3 @@ function Tiles ({ data }) {
   )
 }
 export default CommunityGroupPhotos
-

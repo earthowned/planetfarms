@@ -115,7 +115,7 @@
   background: var(--cards);
   width: 100%;
   margin-bottom: 2em;
-  padding: 2em;
+  padding: 40px;
 }
 
 .my-course-inner-container h4 {
@@ -128,30 +128,13 @@
   text-decoration: none;
 }
 
-.my-course-card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(328px, 0.2fr));
-  grid-gap: 24px;
-}
-
-.my-course-card-container > div{
+.my-course-content {
   height: 288px;
   padding: 16px;
-  display: flex;
-  width: 100%;
-  align-items: flex-end;
-}
-
-.my-course-card {
-  background: black;
   border-radius: 4px;
-}
-
-.my-course-card > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .my-course-content h3 {
@@ -191,20 +174,9 @@
   position: relative;
 }
 
-@media only screen and (max-width: 1370px) {
-  .my-course-card-container {
-    grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
-  }
-}
-
-@media only screen and (max-width: 840px) {
-  .my-course-card-container {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-}
-
 @media only screen and (max-width: 440px) {
-  .my-course-card-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  .my-course-inner-container {
+    background: none;
+    padding: 0;
   }
 }

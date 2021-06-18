@@ -1,6 +1,7 @@
 import React from 'react'
 import './MyLibrary.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import CardLayout from '../../layout/cardLayout/CardLayout'
 import BackButton from '../../components/backButton/BackButton'
 
 const articles = [
@@ -61,7 +62,7 @@ function MyLibrary () {
           {/* </div> */}
           <div className='my-library border-1px-onyx'>
             <h4 className='article-header'>Articles</h4>
-            <div className='articles'>
+            <CardLayout>
               {
              articles && articles.map(item => {
                return (
@@ -77,9 +78,9 @@ function MyLibrary () {
                )
              })
             }
-            </div>
+            </CardLayout>
             <h4 className='article-header'>Videos</h4>
-            <div className='articles'>
+            <CardLayout>
               {
              videos && videos.map(item => {
                return (
@@ -91,7 +92,7 @@ function MyLibrary () {
                )
              })
             }
-            </div>
+            </CardLayout>
           </div>
         </div>
       </div>
