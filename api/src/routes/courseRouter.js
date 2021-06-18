@@ -12,41 +12,7 @@ const {
   deleteCourse,
   searchCoursesTitle,
 } = require("../controllers/courseController.js");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const dir = path.join(
-      path.dirname(__dirname),
-      "/files",
-      "/uploads",
-      file.originalname
-    );
-    fs.mkdirSync(dir);
-    cb(null, dir);
-  },
-  filename: function (req, file, cb) {
-    cb(null, shortid.generate() + "-" + file.originalname);
-  },
-});
-
-function checkFileType(file, cb) {
-  const filetypes = /jpg|jpeg|png/;
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = filetypes.test(file.mimetype);
-
-  if (extname && mimetype) {
-    return cb(null, true);
-  } else {
-    throw new Error("Course not found");
-  }
-}
-
-const upload = multer({
-  storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  },
-});
+const { upload } = require("../helpers/filehelpers");
 
 router.route("/").get(getCourses);
 
