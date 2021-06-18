@@ -5,11 +5,6 @@ const sequelize = require('../config/database');
 const basename = path.basename(__filename)
 const env = process.env.NODE_ENV || 'development'
 const config = require(path.join(__dirname, '/../config/config.js'))[env]
-const User = require('./userModel')
-const Community = require('./communityModel')
-const CommunityUser = require('./communityUserModal')
-const Group = require('./communityGroupModel')
-const Enterprise = require('./enterprisesModel')
 
 
 // const db = {};
@@ -19,16 +14,16 @@ const Enterprise = require('./enterprisesModel')
 //     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
 //   })
 //   .forEach(file => {
-//     const model = require(path.join(__dirname, file))
+//     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes)
 //     db[model.name] = sequelize.model
 //   })
 
 const db = {
-  User: User(sequelize, Sequelize.DataTypes),
-  Community: Community(sequelize, Sequelize.DataTypes),
-  CommunityUser: CommunityUser(sequelize, Sequelize.DataTypes),
-  Group: Group(sequelize, Sequelize.DataTypes),
-  Enterprise: Enterprise(sequelize, Sequelize.DataTypes)
+  User: require('./userModel')(sequelize, Sequelize.DataTypes),
+  Community: require('./communityModel')(sequelize, Sequelize.DataTypes),
+  CommunityUser: require('./communityUserModal')(sequelize, Sequelize.DataTypes),
+  Group: require('./communityGroupModel')(sequelize, Sequelize.DataTypes),
+  Enterprise: require('./enterprisesModel')(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach(modelName => {
@@ -41,25 +36,3 @@ db.sequelize = sequelize
 db.Sequelize = Sequelize
 
 module.exports = db
-
-
-// const User = require('./userModel')
-// const Community = require('./community')
-
-// // many to many relationship between user and community through communities_users
-// Community.belongsToMany(User, {
-//   through: 'communities_users',
-//   foreignKey: 'communityId',
-//   as: 'followers'
-// })
-// User.belongsToMany(Community, {
-//   through: 'communities_users',
-//   foreignKey: 'userId',
-//   as: 'followers'
-// })
-
-// // one to many relationshipt between user and community
-// Community.belongsTo(User, { as: 'creator', foreignKey: 'creatorId' })
-// User.hasMany(Community, { as: 'creator', foreignKey: 'creatorId' })
-
-// module.exports = { User, Community }
