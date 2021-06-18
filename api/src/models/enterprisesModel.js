@@ -29,15 +29,15 @@ module.exports = (sequelize, DataTypes) => {
   { timestamps: true }
   )
 
-    //hooks
+  // hooks
   Enterprise.addHook('beforeSave', (enterprise, optionsObject) => {
-    let newslug = enterprise.title.split(' ').slice(0, 3).join('_');
-    enterprise.slug = sequelize.fn('lower', newslug);
+    const newslug = enterprise.title.split(' ').slice(0, 3).join('_')
+    enterprise.slug = sequelize.fn('lower', newslug)
   })
 
-  //association
+  // association
   Enterprise.associate = (models) => {
-    Enterprise.belongsTo(models.Community, {foreignKey: 'communityId'})
-  };
-  return Enterprise;
+    Enterprise.belongsTo(models.Community, { foreignKey: 'communityId' })
+  }
+  return Enterprise
 }

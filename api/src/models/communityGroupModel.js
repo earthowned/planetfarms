@@ -24,16 +24,15 @@ module.exports = (sequelize, DataTypes) => {
   { timestamps: true }
   )
 
-   //hooks
+  // hooks
   Group.addHook('beforeSave', (group, optionsObject) => {
-    let newslug = group.title.split(' ').slice(0, 3).join('_');
-    group.slug = sequelize.fn('lower', newslug);
+    const newslug = group.title.split(' ').slice(0, 3).join('_')
+    group.slug = sequelize.fn('lower', newslug)
   })
-
 
   // association
   Group.associate = (models) => {
-    Group.belongsTo(models.Community, {foreignKey: 'communityId'})
-  };
-  return Group;
+    Group.belongsTo(models.Community, { foreignKey: 'communityId' })
+  }
+  return Group
 }

@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const checkCommunity = require('../middleware/checkCommunity');
+const checkCommunity = require('../middleware/checkCommunity')
 const { upload } = require('../helpers/filehelpers')
 
-const { getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises, 
-  updateEnterprises, searchEnterprisesTitle } = require('../controllers/enterprisesController')
+const {
+  getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises,
+  updateEnterprises, searchEnterprisesTitle
+} = require('../controllers/enterprisesController')
 
 router.route('/community/:id').get(checkCommunity, getEnterprises)
 router.route('/add/community/:id').post(checkCommunity, upload.single('enterprise'), addEnterprises)

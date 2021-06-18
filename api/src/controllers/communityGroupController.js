@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-const db = require('../models');
-
+const db = require('../models')
 
 const paginate = ({ page, pageSize }) => {
   const offset = page * pageSize
@@ -19,13 +18,16 @@ const getGroups = (req, res) => {
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['title', order]]
 
-  db.Group.findAll({ offset: page, limit: pageSize, ordervalue,
+  db.Group.findAll({
+    offset: page,
+    limit: pageSize,
+    ordervalue,
     include: [{
       model: db.Community,
       attributes: ['id'],
-      where: {id: req.params.id },
+      where: { id: req.params.id }
     }]
-   })
+  })
     .then(groups => {
       paginate({ page, pageSize })
       res.json({ groups, page, pageSize }).status(200)
@@ -43,7 +45,7 @@ const addGroups = (req, res) => {
     filename = req.file.filename
   }
 
-  db.Group.create({ ...req.body, communityId: req.params.id, filename, slug : "" })
+  db.Group.create({ ...req.body, communityId: req.params.id, filename, slug: '' })
     .then(() => res.json({ message: 'Community Group Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
@@ -52,15 +54,15 @@ const addGroups = (req, res) => {
 // @route GET /api/groups/:groupId/community/:id
 // @access Public
 const getGroupsById = (req, res) => {
-
   db.Group.findByPk(req.params.groupId, {
-      include: [
-      {model:  db.Community,
+    include: [
+      {
+        model: db.Community,
         attributes: [],
-        where: {id: req.params.id}
+        where: { id: req.params.id }
       }
-      ]
-    })
+    ]
+  })
     .then(groups => {
       if (groups) {
         res.json(groups)
@@ -70,7 +72,6 @@ const getGroupsById = (req, res) => {
       }
     })
     .catch((err) => res.json({ error: err.message }).status(400))
-    
 }
 
 // @desc Delete single groups
@@ -78,24 +79,25 @@ const getGroupsById = (req, res) => {
 // @access Private
 const deleteGroups = (req, res) => {
   const id = req.params.groupId
-  
-  db.Group.findByPk(id, {include: [{
-          model: db.Community,
-          attributes: [],
-          where: {id: req.params.id}
-        }]})
-        .then(groups => {
-          
-          if (groups) {
-          const { id } = groups
-          db.Group.destroy({ where: { id }})
 
-        .then(() => res.json({ message: 'Groups Deleted!!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
-    } else {
-     return res.status(404).json({message: 'Groups not found'});
-    }
+  db.Group.findByPk(id, {
+    include: [{
+      model: db.Community,
+      attributes: [],
+      where: { id: req.params.id }
+    }]
   })
+    .then(groups => {
+      if (groups) {
+        const { id } = groups
+        db.Group.destroy({ where: { id } })
+
+          .then(() => res.json({ message: 'Groups Deleted!!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      } else {
+        return res.status(404).json({ message: 'Groups not found' })
+      }
+    })
 }
 
 // @desc Update a groups
@@ -109,12 +111,14 @@ const updateGroups = (req, res) => {
   const id = req.params.groupId
 
   db.Group.findByPk(id,
-     {include: [{
-          model: db.Community,
-          attributes: [],
-          where: {id: req.params.id}
-        }]}
-    ).then(groups => {
+    {
+      include: [{
+        model: db.Community,
+        attributes: [],
+        where: { id: req.params.id }
+      }]
+    }
+  ).then(groups => {
     if (groups) {
       const { id } = groups
       db.Group.update({
@@ -124,7 +128,7 @@ const updateGroups = (req, res) => {
         .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
-      return res.status(404).json({message: 'Groups not found'});
+      return res.status(404).json({ message: 'Groups not found' })
     }
   })
 }
@@ -136,19 +140,17 @@ const searchGroupsTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  db.Group.findAll({ 
-  where: { title: { [Op.iLike]: '%' + title + '%' } }, 
-  order: [['title', order]],
-  include: [{
-          model: db.Community,
-          attributes: [],
-          where: {id: req.params.id}
-        }]
-})
+  db.Group.findAll({
+    where: { title: { [Op.iLike]: '%' + title + '%' } },
+    order: [['title', order]],
+    include: [{
+      model: db.Community,
+      attributes: [],
+      where: { id: req.params.id }
+    }]
+  })
     .then(groups => res.json({ groups }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
-
-
 
 module.exports = { getGroups, addGroups, getGroupsById, deleteGroups, updateGroups, searchGroupsTitle }
