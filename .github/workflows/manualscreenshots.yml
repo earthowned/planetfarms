@@ -41,6 +41,9 @@ jobs:
           echo "starting planetfarms"
           npm start &
           sleep 5
+          #
+          cd ..
+          #
           url="http://localhost:3000"
           token=$(curl -s -X POST https://api.planetfarms.io/api/users/login -d '{"username": "${{ secrets.LOGIN }}", "password": "${{ secrets.PASSWORD }}"}' -H 'Content-Type: application/json' | sed -e 's/{"token":"//' | sed -e 's/"}//')
           header="Authorization: \"Bearer $token\""
