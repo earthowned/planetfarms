@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 
-import { Axios, CATEGORY } from "../../../utils/urlConstants";
+import { CATEGORY } from "../../../utils/urlConstants";
 import { createResource } from "../../../actions/courseActions";
+import useGetFetchData from "../../../utils/useGetFetchData";
 
 import DragDrop from "../../DragDrop/DragDrop";
 import ToggleSwitch from "../../ToggleSwitch/ToggleSwitch";
@@ -19,14 +20,7 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
 
   const { register, errors, handleSubmit } = useForm();
 
-  const {
-    // isLoading,
-    data: res,
-    // error,
-  } = useQuery("category", async () => {
-    const { data } = await Axios.get(CATEGORY);
-    return data;
-  });
+  const { data: res } = useGetFetchData("category", CATEGORY);
 
   // TODO: remove this comment after page not found component is created
   // error && history.push("/pagenotfound")
@@ -35,6 +29,9 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
 
   const submitForm = ({ title, category, description, price }) => {
     const thumbnail = courseImage;
+    if (!active) {
+      price = "0";
+    }
     return dispatch(
       createResource({ title, category, description, price, thumbnail })
     );
