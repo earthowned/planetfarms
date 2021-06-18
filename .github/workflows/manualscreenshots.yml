@@ -27,6 +27,11 @@ jobs:
           sudo treehouses tor
           sudo treehouses tor notice now
           sudo treehouses sshkey github adduser dogi
+          #
+          git clone https://github.com/planetfarms
+          cd planetfarms
+          git checkout localstorage
+          #
           echo "REACT_APP_API_BASE_URL=https://api.planetfarms.io" > .env
           echo "REACT_APP_CDN_BASE_URL=https://cdn.planetfarms.io" >> .env
           echo "cat .env"
