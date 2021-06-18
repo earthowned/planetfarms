@@ -28,7 +28,7 @@ jobs:
           sudo treehouses tor notice now
           sudo treehouses sshkey github adduser dogi
           #
-          git clone https://github.com/planetfarms
+          git clone https://github.com/earthowned/planetfarms
           cd planetfarms
           git checkout localstorage
           #
