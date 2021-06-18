@@ -22,9 +22,12 @@ const getCourses = (req, res) => {
 // @desc    Add individual course
 // @route   POST /api/courses/add
 // @access  Public
-
 const addCourse = async (req, res) => {
-  const course = await Courses.create(req.body);
+  let thumbnail = "";
+  if (req.file) {
+    thumbnail = req.file.filename;
+  }
+  const course = await Courses.create({ ...req.body, thumbnail });
   res.status(201).json({
     status: true,
     message: " new course added successfully",

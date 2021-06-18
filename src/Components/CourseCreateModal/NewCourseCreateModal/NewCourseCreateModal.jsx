@@ -1,7 +1,6 @@
 import { useState } from "react";
 // import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
-import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 
 import { CATEGORY } from "../../../utils/urlConstants";

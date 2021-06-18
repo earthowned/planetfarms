@@ -10,4 +10,5 @@ export const Axios = axios.create({
 export const CATEGORY = "categories";
 
 //course
+export const GET_COURSE = "courses";
 export const ADD_COURSE = "courses/add";
