@@ -20,4 +20,4 @@ const FilterSearch = () => {
   )
 }
 
-export default FilterSearch;
+export default FilterSearch
