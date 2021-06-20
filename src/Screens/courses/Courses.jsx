@@ -1,40 +1,73 @@
-import React, { useState } from 'react'
-import './Courses.css'
-import DashboardLayout from '../../Layout/DashboardLayout/DashboardLayout'
-import CoursesHeader from '../../Components/coursesHeader/CoursesHeader'
-import CoursesCard from '../../Components/coursesCard/CoursesCard'
-import GroupModal from '../../Components/GroupModal/GroupModal'
-import SimpleModal from '../../Components/SimpleModal/SimpleModal'
+import React, { useState } from "react";
 
-import CourseCreateModal from '../../Components/CourseCreateModal/CourseCreateModal'
-import NewCourseCreateModal from '../../Components/CourseCreateModal/NewCourseCreateModal/NewCourseCreateModal'
-import CollectionModal from '../../Components/CollectionModal/CollectionModal'
+import useGetFetchData from "../../utils/useGetFetchData";
+import { GET_COURSE, CATEGORY } from "../../utils/urlConstants";
+
+import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
+import CoursesHeader from "../../Components/coursesHeader/CoursesHeader";
+import CoursesCard from "../../Components/coursesCard/CoursesCard";
+import GroupModal from "../../Components/GroupModal/GroupModal";
+import SimpleModal from "../../Components/SimpleModal/SimpleModal";
+import CourseCreateModal from "../../Components/CourseCreateModal/CourseCreateModal";
+import NewCourseCreateModal from "../../Components/CourseCreateModal/NewCourseCreateModal/NewCourseCreateModal";
+// import CollectionModal from "../../Components/CollectionModal/CollectionModal";
+import "./Courses.css";
 
 const Courses = () => {
-  const [active, setActive] = useState(false)
-  const [modalactive, setModalActive] = useState(false)
-  const [newCollectionactive, setNewCollectionActive] = useState(false)
-  const [createCourse, setCreateCourse] = useState(false)
-  const [createNewCourse, setCreateNewCourse] = useState(false)
-  function createNewCourseFunc () {
-    setCreateNewCourse(true)
-    setCreateCourse(false)
+  const [active, setActive] = useState(false);
+  const [modalactive, setModalActive] = useState(false);
+  const [newCollectionactive, setNewCollectionActive] = useState(false);
+  const [createCourse, setCreateCourse] = useState(false);
+  const [createNewCourse, setCreateNewCourse] = useState(false);
+
+  const { data } = useGetFetchData("courseCategory", CATEGORY);
+
+  function createNewCourseFunc() {
+    setCreateNewCourse(true);
+    setCreateCourse(false);
   }
   return (
     <>
-      {modalactive && <GroupModal clickHandler={setModalActive} setNewCollection={setNewCollectionActive} name='Add to collection' btnName='Add to collection' />}
-      {newCollectionactive && <SimpleModal setNewCollection={setNewCollectionActive} name='Courses' />}
-      {createCourse && <CourseCreateModal setNewCollection={setNewCollectionActive} clickHandler={setCreateCourse} collectionAdded={createNewCourseFunc} />}
-      {createNewCourse && <NewCourseCreateModal clickHandler={setCreateNewCourse} />}
-      <DashboardLayout title='All courses'>
-        <div className='courses-main-container'>
-          <CoursesHeader setActive={setActive} setCreateCourse={setCreateCourse} />
+      {modalactive && (
+        <GroupModal
+          clickHandler={setModalActive}
+          setNewCollection={setNewCollectionActive}
+          name="Add to collection"
+          btnName="Add to collection"
+        />
+      )}
+      {newCollectionactive && (
+        <SimpleModal setNewCollection={setNewCollectionActive} name="Courses" />
+      )}
+      {createCourse && (
+        <CourseCreateModal
+          setNewCollection={setNewCollectionActive}
+          clickHandler={setCreateCourse}
+          collectionAdded={createNewCourseFunc}
+        />
+      )}
+      {createNewCourse && (
+        <NewCourseCreateModal clickHandler={setCreateNewCourse} />
+      )}
+      <DashboardLayout title="All courses">
+        <div className="courses-main-container">
+          <CoursesHeader
+            setActive={setActive}
+            setCreateCourse={setCreateCourse}
+          />
         </div>
-        <CoursesCard category='Business Courses' setModalActive={setModalActive} />
-        <CoursesCard category='Farming Courses' setModalActive={setModalActive} />
+        {data?.results.map((category) => {
+          return (
+            <CoursesCard
+              category={category.name}
+              setModalActive={setModalActive}
+              key={category.id}
+            />
+          );
+        })}
       </DashboardLayout>
     </>
-  )
-}
+  );
+};
 
-export default Courses
+export default Courses;
