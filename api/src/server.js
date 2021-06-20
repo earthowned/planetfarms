@@ -1,4 +1,5 @@
 require('dotenv').config()
+const path = require('path');
 const express = require('express')
 const app = express()
 const userRoutes = require('./routes/userRouter.js')
@@ -15,12 +16,12 @@ const sequelize = require('./config/database.js')
 const cors = require('cors')
 const dotenv = require('dotenv')
 
-const PORT = process.env.port || 5000
+const PORT = process.env.port || 5000;
 
 // middleware
-app.use(express.json())
-app.use(cors())
-dotenv.config()
+app.use(express.json());
+app.use(cors());
+dotenv.config();
 
 // routes
 app.use('/api/users', userRoutes)
@@ -35,18 +36,22 @@ app.use('/api/categories', categoriesRoutes)
 app.use('/api/resizer', resizerRoutes)
 
 // home page response
-app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API on planetfarms' })
-})
+app.get("/", (request, response) => {
+  response.json({ info: "Node.js, Express, and Postgres API on planetfarms" });
+});
+
+// Set static folder
+app.use(express.static(path.join(__dirname, "../files")));
+console.log(path.join(__dirname, "../files"));
 
 // port connection
 app.listen(PORT, () => {
-  console.log(`PlanetFarms is running on PORT ${PORT}.`)
-  console.log(`${process.env.DATABASE_HOST}`)
-})
+  console.log(`PlanetFarms is running on PORT ${PORT}.`);
+  console.log(`${process.env.DATABASE_HOST}`);
+});
 
 // database connection
 sequelize
   .authenticate()
-  .then(() => console.log('Connection has been established successfully.'))
-  .catch((err) => console.log(`Error: ${err}`))
+  .then(() => console.log("Connection has been established successfully."))
+  .catch((err) => console.log(`Error: ${err}`));
