@@ -6,6 +6,7 @@
 .courses-card-container > h4 {
   color: #fff;
   margin-bottom: 16px;
+  text-transform: capitalize;
 }
 
 .courses-card {

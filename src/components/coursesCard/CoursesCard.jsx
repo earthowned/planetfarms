@@ -7,82 +7,31 @@ import CardLayout from '../../layout/cardLayout/CardLayout'
 import Background from '../background/Background'
 import './CoursesCard.css'
 
-const data = [
-  {
-    title: "Find your inner power",
-    author: "J.McBell course",
-    image: "/img/bg-image1.svg",
-    stars: 3,
-    total: 13,
-    added: false,
-    enroll: false,
-    cost: 25.99,
-  },
-  {
-    title: 'Find your inner power',
-    author: 'J.McBell course',
-    image: '/img/bg-image1.svg',
-    stars: 4.5,
-    total: 5,
-    added: false,
-    enroll: true,
-    cost: "Free",
-  },
-  {
-    title: "Find your inner power",
-    author: "J.McBell course",
-    image: "/img/bg-image1.svg",
-    stars: 4,
-    total: 13,
-    added: false,
-    enroll: false,
-    cost: 25.99,
-  },
-  {
-    title: "Find your inner power",
-    author: "J.McBell course",
-    image: "/img/bg-image2.svg",
-    stars: 1,
-    total: 5,
-    added: false,
-    enroll: true,
-    cost: 55,
-  },
-  {
-    title: "Find your inner power",
-    author: "J.McBell course",
-    image: "/img/bg-image1.svg",
-    stars: 3,
-    total: 13,
-    added: false,
-    enroll: false,
-    cost: "Free",
-  },
-  {
-    title: "Find your inner power",
-    author: "J.McBell course",
-    image: "/img/bg-image1.svg",
-    stars: 3,
-    total: 13,
-    added: false,
-    enroll: false,
-    cost: 25.99
-  }
-]
 const CoursesCard = ({ category, setModalActive }) => {
   const { data: courseData } = useGetFetchData("course", GET_COURSE);
-  console.log(courseData);
+
   return (
     <div className="course-card-wrapper">
       <div className="courses-card-container">
-        <h4>{category}</h4>
-      <CardLayout data={data}>
-          {data.map((item, index) => {
+        {courseData?.courses
+          .filter((cat) =>
+            cat.category.toLowerCase().includes(category.toLowerCase())
+          )
+          .slice(0, 1)
+          .map((catge) => (
+            <h4>{catge.category}</h4>
+          ))}
+        <CardLayout data={courseData}>
+          {courseData?.courses
+              .filter((cat) =>
+                cat.category.toLowerCase().includes(category.toLowerCase())
+              )
+              .map((course) => {
             return (
-              <Background image={item.image} key={index}>
+              <Background image={course.thumbnail} key={course.id}>
                 <div className='courses-card'>
-                  <AddCollection item={item} setModalActive={setModalActive} />
-                  <CardContent item={item} />
+                  <AddCollection item={course} setModalActive={setModalActive} />
+                  <CardContent item={course} />
                 </div>
               </Background>
             )
@@ -157,7 +106,7 @@ function EnrollContainer({ item }) {
           <span>Join Course</span>
         </button>
       )}
-      <h4>{item.cost === "Free" ? item.cost : `$ ${item.cost}`}</h4>
+      <h4>{item.price === null || NaN ? "Free" : `$ ${item.price}`}</h4>
     </div>
   );
 }
