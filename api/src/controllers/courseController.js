@@ -8,7 +8,7 @@ const Op = Sequelize.Op;
 // @access  Public
 const getCourses = (req, res) => {
   const pageSize = 10;
-  const page = Number(req.query.pageNumber) || 1;
+  const page = Number(req.query.pageNumber) || 0;
   const order = req.query.order || "ASC";
 
   Courses.findAll({ offset: page, limit: pageSize, order: [["title", order]] })
