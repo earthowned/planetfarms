@@ -36,6 +36,10 @@
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 16px;
+
+  h1 {
+    text-transform: capitalize;
+  }
 }
 
 .admin-course-details p {
@@ -74,7 +78,7 @@
 }
 
 .admin-lesson-lists-container {
-  padding: 24px 40px 40px; 
+  padding: 24px 40px 40px;
 }
 
 .admin-lesson-lists-container h3 {
@@ -188,7 +192,7 @@
     margin-top: 16px;
   }
 
-  .admin-lesson p{
+  .admin-lesson p {
     margin: 16px 0;
   }
 
