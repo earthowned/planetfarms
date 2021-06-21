@@ -23,7 +23,8 @@ const db = {
   Community: require('./communityModel')(sequelize, Sequelize.DataTypes),
   CommunityUser: require('./communityUserModal')(sequelize, Sequelize.DataTypes),
   Group: require('./communityGroupModel')(sequelize, Sequelize.DataTypes),
-  Enterprise: require('./enterprisesModel')(sequelize, Sequelize.DataTypes)
+  Enterprise: require('./enterprisesModel')(sequelize, Sequelize.DataTypes),
+  News: require('./newsModel')(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach(modelName => {

@@ -34,7 +34,7 @@ const getCommunities = async (req, res) => {
               })
 
   await paginate({page, pageSize});
-  res.json({ communities, page, pageSize }).status(200)
+  res.json({ communities, page, pageSize }).status(200);
 
   } catch (error) {
     res.json(error);

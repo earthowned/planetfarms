@@ -1,48 +1,55 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const News = db.define('news',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const News = sequelize.define('news', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     title: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     message: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     docType: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     readTime: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     language: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     creator: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     textDetail: {
-      type: Sequelize.JSON
+      type: DataTypes.JSON
     },
     imageDetail: {
-      type: Sequelize.JSON
+      type: DataTypes.JSON
     },
     videoDetail: {
-      type: Sequelize.JSON
+      type: DataTypes.JSON
     },
     category: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     _attachments: {
-      type: Sequelize.STRING
-    }
+      type: DataTypes.STRING
+    },
+    communityId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   },
   { timestamps: true }
-)
+  )
 
-module.exports = News
+  // association
+  News.associate = (models) => {
+    News.belongsTo(models.Community, { foreignKey: 'communityId' })
+  }
+  return News
+}
+

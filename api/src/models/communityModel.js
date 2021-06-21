@@ -55,6 +55,11 @@ module.exports = (sequelize, DataTypes) => {
     Community.hasMany(models.Enterprise, {
       foreignKey: 'communityId'
     })
+    
+    //1:M community and group
+    Community.hasMany(models.News, {
+      foreignKey: 'communityId'
+    })
   }
   return Community
 }
