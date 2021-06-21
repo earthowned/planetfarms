@@ -5,7 +5,7 @@ import { GET_COURSE } from "../../utils/urlConstants";
 
 import CardLayout from '../../layout/cardLayout/CardLayout'
 import Background from '../background/Background'
-import './CoursesCard.css'
+import './CoursesCard.scss'
 
 const CoursesCard = ({ category, setModalActive }) => {
   const { data: courseData } = useGetFetchData("course", GET_COURSE);
@@ -101,7 +101,7 @@ function EnrollContainer({ item }) {
       ) : (
         <button
           className="join-btn"
-          onClick={() => history.push("/coursepage")}
+          onClick={() => history.push(`/course/${item.id}`)}
         >
           <span>Join Course</span>
         </button>

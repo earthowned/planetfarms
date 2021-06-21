@@ -237,10 +237,10 @@
 }
 
 .bg-image {
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/607fbf4f636b54e6f9b34253/img/bg-image@1x.png);
   background-size: cover;
-  height: 336px;
+  /* height: 336px; */
   width: 100%;
+  display: block;
 }
 
 .more-course-container {
@@ -320,7 +320,7 @@
 }
 
 .lessons-container > h3 {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -470,7 +470,7 @@
 
 .lesson-desc {
   color: var(--primary-white);
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -555,7 +555,7 @@
 
 .lesson-card {
   padding: 1em 0;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   color: var(--primary-white);
@@ -580,7 +580,7 @@
 .lock-lesson h4 {
   color: var(--primary-white);
   margin-top: 10px;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -904,4 +904,5 @@
   }
 }
 
-@media screen and (max-width: 375px) { }
+@media screen and (max-width: 375px) {
+}
