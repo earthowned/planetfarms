@@ -92,7 +92,7 @@ const ForgotPassword = () => {
                 })}
                 errors={errors}
               >
-                <UserAvatar />
+                <Lock className='error-icon' />
               </Input>
 
               <Input
