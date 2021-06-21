@@ -68,5 +68,29 @@ const followCommunity = async (req, res) => {
   }
 }
 
+// @desc Get the community-users
+// @route GET /api/community-users/community/:id
+// @access Public
 
-module.exports = { getCommunityUsers, followCommunity};
+const getAllMembers = async (req, res) => {
+  try {
+    const data = await db.CommunityUser.findAll(
+    {
+      where: {communityId: req.params.id},
+      attributes: ['id'],
+      include: [{
+        model: db.User,
+        attributes: ["email", "name"]
+      }],
+      required: true
+    },
+    )
+    res.json({
+      data
+    })
+  } catch (error) {
+    res.status(400).json({error})
+  }
+}
+
+module.exports = { getCommunityUsers, followCommunity, getAllMembers};
