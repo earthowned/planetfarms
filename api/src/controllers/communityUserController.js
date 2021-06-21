@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const db = require('../models')
 
 // @desc Get the community-users
@@ -93,4 +94,25 @@ const getAllMembers = async (req, res) => {
   }
 }
 
-module.exports = { getCommunityUsers, followCommunity, getAllMembers};
+// @desc    Search Name
+// @route   POST /api/news/community/:id/search
+// @access  Private
+const searchMemberName = (req, res) => {
+  const { name } = req.query
+  const order = req.query.order || 'ASC'
+
+  db.CommunityUser.findAll({ 
+    where: { communityId: req.params.id}, 
+    attributes: ['id'],
+      include: [{
+        model: db.User,
+        attributes: ["email", "name"],
+        where: {name: { [Op.iLike]: '%' + name + '%' }}
+      }],
+      required: true
+   })
+    .then(member => res.json({ member }).status(200))
+    .catch(err => res.json({ error: err }).status(400))
+}
+
+module.exports = { getCommunityUsers, followCommunity, getAllMembers, searchMemberName};

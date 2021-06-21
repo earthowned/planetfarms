@@ -20,13 +20,18 @@ import {
 
 import { logout } from './userAction'
 
+// fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
 export const listNews = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
     dispatch({ type: NEWS_LIST_REQUEST })
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/api/news`
+      `${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}`
     )
     dispatch({ type: NEWS_LIST_SUCCESS, payload: data })
   } catch (error) {
@@ -45,8 +50,8 @@ export const searchNews = (search) => async (
 ) => {
   try {
     dispatch({ type: NEWS_SEARCH_REQUEST })
-    const { news } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/search?title=${search}`)
-    dispatch({ type: NEWS_SEARCH_SUCCESS, payload: news })
+    const {data} = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}/search?title=${search}`)
+    dispatch({ type: NEWS_SEARCH_SUCCESS, payload: data.title })
   } catch (error) {
     dispatch({
       type: NEWS_SEARCH_FAIL,
@@ -60,15 +65,17 @@ export const searchNews = (search) => async (
 
 export const createNews = (newNews) => async (dispatch, getState) => {
   const formData = new FormData()
-  formData.append('news', newNews.file)
-  formData.append('title', newNews.title)
-  formData.append('category', newNews.category)
+  // formData.append('news', newNews.file)
+  // formData.append('title', newNews.title)
+  // formData.append('category', newNews.category)
   // formData.append('imageDetail',newNews.imageDetail)
+  console.log(newNews);
   try {
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add`, formData, config)
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, {title: newNews.title});
+    console.log(data);
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     dispatch({ type: NEWS_CLEAR, payload: data })
   } catch (error) {

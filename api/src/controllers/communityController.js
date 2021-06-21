@@ -1,5 +1,6 @@
 const db = require('../models')
 const Sequelize = require('sequelize')
+const { sequelize } = require('../models')
 const Op = Sequelize.Op
 
 // @desc Fetch all communities
@@ -25,10 +26,10 @@ const getCommunities = async (req, res) => {
                 include: [{
                   model: db.User,
                   as: 'followers',
-                  attributes: ['id'],
                   through: {
                     attributes: ['active'],
                     as: 'followStatus',
+                    raw: true,
                   }
                 }],
               })
@@ -60,22 +61,9 @@ const getUserCommunities = async (req, res) => {
       creatorId: req.params.id,
     },
     include: [{
-        model: db.User,
-        as: 'followers',
-        where: {id: req.params.id}
+      model: db.User,
+      as: 'followers',
     }]
-    // include: [
-    //   {
-    //   model: db.User,
-    //   as: 'followers',
-    //   attributes: ['id'],
-    //   where: {id: req.params.id},
-    //   through: {
-    //         attributes: ['active'],
-    //         as: 'followStatus',
-    //    }
-    // },
-    //   ],
   })
     .then(communities => {
       paginate({ page, pageSize })
@@ -84,41 +72,6 @@ const getUserCommunities = async (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 
-// @desc Fetch members of a community
-// @route GET/api/communities/:id/members
-// @access Public
-
-const getCommunityMembers = async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
-  // const order = req.query.order || 'DESC'
-  // const ordervalue = order && [['name', order]]
-  
-  const id = req.params.id
-
-  db.Community.findByPk(id, {
-    include: [
-    {
-      model: db.User,
-      as: 'followers',
-      through: {
-        attributes: ['active', 'userId'],
-        as: 'member'
-        // where: {userId: 1}
-      }, required: true
-    }
-    ]
-  })
-    .then(communities => {
-      if (communities) {
-        res.json(communities)
-      } else {
-        res.status(404)
-        throw new Error('Community not found')
-      }
-    })
-    .catch((err) => res.json({ error: err.message }).status(400));
-}
 
 // @desc Add individual communities
 // @route POST /api/communities/add
@@ -270,4 +223,4 @@ const searchUserCommunityName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getCommunities, getUserCommunities, getCommunityMembers, searchUserCommunityName, createCommunity, getCommunityById, deleteCommunity, updateCommunity, searchCommunityName }
+module.exports = { getCommunities, getUserCommunities, searchUserCommunityName, createCommunity, getCommunityById, deleteCommunity, updateCommunity, searchCommunityName }

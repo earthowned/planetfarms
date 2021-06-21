@@ -1,12 +1,11 @@
 const express = require('express')
 const { getCommunities, createCommunity, searchCommunityName, getCommunityById, deleteCommunity, 
-  updateCommunity, getUserCommunities, searchUserCommunityName, getCommunityMembers } = require('../controllers/communityController')
+  updateCommunity, getUserCommunities, searchUserCommunityName } = require('../controllers/communityController')
 const router = express.Router()
 const { upload } = require('../helpers/filehelpers')
 const { protect } = require('../middleware/authMiddleware')
 
 router.route('/').get(getCommunities)
-router.route('/:id/members').get(getCommunityMembers)
 router.route('/add').post(upload.single('community'), createCommunity)
 router.route('/search').get(searchCommunityName)
 router.route('/user/:id').get(getUserCommunities)

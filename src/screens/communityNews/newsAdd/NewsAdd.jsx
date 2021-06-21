@@ -16,8 +16,7 @@ const NewsAdd = () => {
   const [imageActive, setImageActive] = useState(true)
   const [textActive, setTextActive] = useState(true)
   const news = useSelector((state) => (state.addNewNews !== {} ? state.addNewNews : ''))
-  useSelector((state) => console.log(state))
-
+  
   const { title, category } = useParams()
 
   return (
@@ -126,17 +125,18 @@ function PopUp ({ news, title, category }) {
   const { file } = news.imageDetail ? news.imageDetail.file && news.imageDetail : {}
   const newNews = { ...news, title, category, file }
   const [activePopup, setActivePopup] = useState(true)
+  const {currentCommunity} = useSelector(state => state.activeCommunity);
   const dispatch = useDispatch()
   const history = useHistory()
   const handleOnSaveClick = (e) => {
     if (file) {
       dispatch(createNews(newNews))
-      setActivePopup(false)
-      history.push('/community-page-news')
+      // setActivePopup(false)
+      // history.push(`/community_page_news/${currentCommunity.slug}`)
     } else {
       dispatch(createNews(newNews))
-      setActivePopup(false)
-      history.push('/community-page-news')
+      // setActivePopup(false)
+      // history.push(`/community_page_news/${currentCommunity.slug}`)
     }
   }
 

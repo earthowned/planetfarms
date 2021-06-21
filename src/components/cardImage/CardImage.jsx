@@ -121,21 +121,20 @@ const Follow = () => {
   )
 }
 
-function CardImage (props) {
-  const { className } = props
+function CardImage ({data = [], className}) {
   const history = useHistory()
   return (
     <>
-      {profileData.map((profile) => {
+      {data.length > 0 && data.map((profile) => {
         return (
-          <div onClick={() => history.push(`/community-members-profile/${profile._id}`)} key={profile._id} className='card-image-1'>
+          <div onClick={() => history.push(`/community-members-profile/${profile.id}`)} key={profile.id} className='card-image-1'>
 
             <div className='profile-card-image'>
-              <img src={profile.Image} alt='group-profile' />
+              <img src="/img/farmer.svg" alt='group-profile' />
             </div>
             <div className='profile-card-name'>
-              <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile.name} </div>
-              <div className='card-text ibmplexsans-normal-monsoon-14px '>{profile.text2}</div>
+              <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile.user.name} </div>
+              <div className='card-text ibmplexsans-normal-monsoon-14px '>{profile.user.email}</div>
             </div>
             {Follow()}
           </div>

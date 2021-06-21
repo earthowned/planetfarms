@@ -8,6 +8,7 @@ import { groupListReducer, groupViewReducer } from './reducers/communityGroupRed
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, communityVisitReducer } from './reducers/CommunityReducers'
+import { memberListReducer } from './reducers/memberReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -23,7 +24,8 @@ const reducer = combineReducers({
   activeCommunity: communityVisitReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  addNewNews: newsCreateReducer
+  addNewNews: newsCreateReducer,
+  listMember: memberListReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

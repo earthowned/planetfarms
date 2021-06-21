@@ -33,7 +33,7 @@ export const newsListReducer = (state = { news: [] }, action) => {
     case NEWS_SEARCH_SUCCESS:
       return {
         loading: false,
-        searchNews: action.payload.news,
+        searchNews: action.payload,
         order: action.payload.order
       }
     case NEWS_SEARCH_FAIL:
