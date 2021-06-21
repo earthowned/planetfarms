@@ -19,7 +19,7 @@ const CoursesCard = ({ category, setModalActive }) => {
           )
           .slice(0, 1)
           .map((catge) => (
-            <h4>{catge.category}</h4>
+            <h4 key={catge.id}>{catge.category}</h4>
           ))}
         <CardLayout data={courseData}>
           {courseData?.courses
@@ -101,7 +101,7 @@ function EnrollContainer({ item }) {
       ) : (
         <button
           className="join-btn"
-          onClick={() => history.push(`/course/${item.id}`)}
+          onClick={() => history.push(`/course/${item.courseId}`)}
         >
           <span>Join Course</span>
         </button>

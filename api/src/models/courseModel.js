@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../config/database.js')
+const uuid = require("uuid/v4");
 
 const Courses = db.define('courses',
   {
@@ -45,6 +46,13 @@ const Courses = db.define('courses',
       type: Sequelize.DOUBLE,
     },
     category: {
+      type: Sequelize.STRING,
+    },
+    isFree: {
+      type: Sequelize.BOOLEAN,
+      default: false,
+    },
+    courseId: {
       type: Sequelize.STRING,
     },
   },

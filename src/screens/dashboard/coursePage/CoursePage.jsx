@@ -15,8 +15,8 @@ function MyCoursePage({ unpaid }) {
   const [purchaseModal, setPurchaseModal] = useState(false);
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false);
 
-  let { id } = useParams();
-  const { data } = useGetFetchData("singleCourse", GET_COURSE + "/" + id);
+  let { courseId } = useParams();
+  const { data } = useGetFetchData("singleCourse", GET_COURSE + "/" + courseId);
 
   return (
     <>

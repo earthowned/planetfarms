@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Courses.css'
 import useGetFetchData from "../../utils/useGetFetchData";
-import { GET_COURSE, CATEGORY } from "../../utils/urlConstants";
+import { CATEGORY } from "../../utils/urlConstants";
 
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import CoursesHeader from '../../components/coursesHeader/CoursesHeader'

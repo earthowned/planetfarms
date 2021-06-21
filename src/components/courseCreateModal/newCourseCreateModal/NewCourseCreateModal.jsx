@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 import { useQuery } from 'react-query'
 import { useDispatch } from "react-redux";
 import { CATEGORY } from '../../../utils/urlConstants'
+import uuid from "react-uuid";
+
 import { createResource } from "../../../actions/courseActions";
 import useGetFetchData from "../../../utils/useGetFetchData";
 import DragDrop from '../../dragDrop/DragDrop'
@@ -11,9 +13,9 @@ import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
 import './NewCourseCreateModal.scss'
 
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
-  // const history = useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
-  const [active, setActive] = useState(false);
+  const [isFree, setIsFree] = useState(false);
   const [courseImage, setCourseImage] = useState("");
 
   const { register, errors, handleSubmit } = useForm();
@@ -23,16 +25,22 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   // TODO: remove this comment after page not found component is created
   // error && history.push("/pagenotfound")
 
-  //   history.push("/admin/coursepage");
-
   const submitForm = ({ title, category, description, price }) => {
     const thumbnail = courseImage;
-    if (!active) {
-      price = "0";
-    }
-    return dispatch(
-      createResource({ title, category, description, price, thumbnail })
+    const courseId = uuid();
+    dispatch(
+      createResource({
+        title,
+        category,
+        description,
+        price,
+        thumbnail,
+        isFree,
+        courseId,
+      })
     );
+
+    history.push(`/admin/course/${courseId}`);
   };
 
   return (
@@ -71,8 +79,9 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
             ref={register({
               required: "You must select Category",
             })}
+            defaultValue="Select Category"
           >
-            <option selected value="" disabled>
+            <option defaultValue="" disabled>
               Select Category
             </option>
             {res?.results.map((category) => (
@@ -84,7 +93,7 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
           <p className="error">{errors.category && errors.category.message}</p>
 
           <textarea
-            className={errors.desc ? "errorBox" : ""}
+            className={errors.description ? "errorBox" : ""}
             placeholder="Course description"
             name="description"
             ref={register({
@@ -94,12 +103,14 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
               },
             })}
           />
-          <p className="error">{errors.desc && errors.desc.message}</p>
+          <p className="error">
+            {errors.description && errors.description.message}
+          </p>
           <div className="new-course-toggle">
             <h4>Free course</h4>
-            <ToggleSwitch onClick={() => setActive(!active)} active={active} />
+            <ToggleSwitch onClick={() => setIsFree(!isFree)} isFree={isFree} />
           </div>
-          {!active && (
+          {!isFree && (
             <input
               type="number"
               name="price"
