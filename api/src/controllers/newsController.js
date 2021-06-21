@@ -7,17 +7,28 @@ const Op = Sequelize.Op
 // @access  Public
 const getNews = (req, res) => {
   const pageSize = 3
-  const page = Number(req.query.pageNumber) || 0
+  const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  db.News.findAll({ offset: page, limit: pageSize, order: ordervalue,
+  db.News.findAndCountAll({ 
+    offset: (page - 1), 
+    limit: pageSize, 
+    order: ordervalue,
   include:  [{
     model: db.Community,
     attributes: ['id'],
     where: {id: req.params.id}
   }]
   })
-    .then(news => res.json({ news, page, pageSize }).status(200))
+    .then(news => {
+      const totalPages = Math.ceil(news.count / pageSize)
+      res.json({ 
+        news: news.rows,
+        totalItems: news.count,
+        totalPages,
+        page, 
+        pageSize }).status(200)
+    })
     .catch((err) => res.json({ err }).status(400))
 }
 

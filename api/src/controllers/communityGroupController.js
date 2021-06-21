@@ -14,12 +14,12 @@ const paginate = ({ page, pageSize }) => {
 
 const getGroups = (req, res) => {
   const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
+  const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['title', order]]
 
-  db.Group.findAll({
-    offset: page,
+  db.Group.findAndCountAll({
+    offset: (page - 1),
     limit: pageSize,
     ordervalue,
     include: [{
@@ -29,8 +29,14 @@ const getGroups = (req, res) => {
     }]
   })
     .then(groups => {
-      paginate({ page, pageSize })
-      res.json({ groups, page, pageSize }).status(200)
+      const totalPages = Math.ceil(groups.count / pageSize)
+      res.json({ 
+        groups: groups.rows,
+        totalItems: groups.count,
+        totalPages,
+        page, 
+        pageSize 
+       }).status(200)
     })
 
     .catch((err) => res.json({ err }).status(400))

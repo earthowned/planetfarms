@@ -17,12 +17,12 @@ const paginate = ({ page, pageSize }) => {
 
 const getEnterprises = (req, res) => {
   const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
+  const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['title', order]]
 
-  db.Enterprise.findAll({
-    offset: page,
+  db.Enterprise.findAndCountAll({
+    offset: (page - 1),
     limit: pageSize,
     ordervalue,
     include: [{
@@ -32,9 +32,15 @@ const getEnterprises = (req, res) => {
     }]
   })
     .then(enterprises => {
-      paginate({ page, pageSize })
+      const totalPages = Math.ceil(enterprises.count / pageSize)
       if (!enterprises) return res.json({ message: 'Enterprises donesn\'t exists.' })
-      res.json({ enterprises, page, pageSize }).status(200)
+      res.json({ 
+        enterprises: enterprises.rows,
+        totalItems: enterprises.count,
+        totalPages,
+        page, 
+        pageSize
+       }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
