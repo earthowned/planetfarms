@@ -5,7 +5,7 @@ import Button from '../button/Button'
 import Secondarybtn from '../secondaryBtn/Secondarybtn'
 import './CommunityGroupCard.scss'
 
-const CommunityGroupCard = ({ data = [], location, type = 'group' }) => {
+const CommunityGroupCard = ({ data = [], location, type = 'group', editCard }) => {
   return (
     <>
       <CardLayout data={data}>

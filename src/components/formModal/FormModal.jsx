@@ -8,13 +8,14 @@ import { createEnterprise } from '../../actions/enterpriseAction'
 import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
 import { InputFields, SelectFields, ErrorText, SubmitButton } from '../formUI/FormUI'
 import DragDrop from '../dragDrop/DragDrop'
+import axios from 'axios'
 
-const FromModal = ({ setActive, openAddCollection }) => {
+const FromModal = ({ setActive, openAddCollection, data }) => {
   const [files, setFiles] = useState()
   const [roleActive, setRoleActive] = useState(false)
-  const [groupTitle, setGroupTitle] = useState('')
-  const [groupDescription, setGroupDescription] = useState('')
-  const [categoryId, setCategoryId] = useState('')
+  const [groupTitle, setGroupTitle] = useState(data.title || '')
+  const [groupDescription, setGroupDescription] = useState(data.description || '')
+  const [categoryId, setCategoryId] = useState(data.category || '')
   const [groupTitleError, setGroupTitleError] = useState(false)
   const [groupDescriptionError, setGroupDescriptionError] = useState(false)
 
@@ -51,6 +52,24 @@ const FromModal = ({ setActive, openAddCollection }) => {
       )
       setActive(false)
     }
+  }
+
+  // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
+  const handleEditGroup = async (e) => {
+    e.preventDefault();
+    await axios.put(
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/${data.id}/community/${currentCommunity.id}`,
+            {
+          title: groupTitle,
+          category: categoryId,
+          description: groupDescription,
+          file: files
+        }
+    );
   }
 
   const enterpriseTitleChange = (e) => {
@@ -96,6 +115,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
                     error={groupTitleError}
                     onChange={(e) => groupTitleChange(e)}
                     placeholder='Group title'
+                    value={groupTitle}
                   />
                   <ErrorText
                     className='error-message'
@@ -108,6 +128,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
                     error={groupDescriptionError}
                     onChange={(e) => groupDescriptionChange(e)}
                     placeholder='Group description'
+                    value={groupDescription}
                   />
                   <ErrorText
                     className='error-message'
@@ -123,7 +144,7 @@ const FromModal = ({ setActive, openAddCollection }) => {
                 </div>
                 <SubmitButton
                   className='default-btn btn-size'
-                  onClick={handleAddGroup}
+                  onClick={data ? handleEditGroup : handleAddGroup}
                   title='Submit'
                 />
               </>

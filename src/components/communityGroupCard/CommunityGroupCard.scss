@@ -116,6 +116,15 @@
   margin-right: 18px;
 }
 
+.card-edit {
+  padding-right: 2em;
+  padding-top: 2em;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
 @media only screen and (max-width: 1750px) {
   .card-secondary-btn-wrapper {
     width: 130px;

@@ -9,16 +9,16 @@ import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityGroup.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { searchGroups, listGroups } from '../../actions/communityGroupActions'
+import axios from 'axios'
 
 const CommunityGroup = () => {
+  const [editData, setEditData] = useState(null);
   const data = useSelector((state) => state.listGroups.groups)
   const dispatch = useDispatch()
-
 
   const [active, setActive] = useState(false)
   const [search, setSearch] = useState(null)
   const handleClickCreate = () => {
-
   }
 
   useEffect(() => {
@@ -26,9 +26,24 @@ const CommunityGroup = () => {
     if (!search) dispatch(listGroups())
   }, [search, dispatch])
 
+  // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+  
+  const editCard = async (id) => {
+   const {data} = await axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`
+    );
+    setEditData(data);
+    console.log(data);
+    
+    setActive(true);
+  }
+
   return (
     <>
-      {active && <FormModal setActive={setActive} />}
+      {active && <FormModal setActive={setActive} data={editData} />}
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>
@@ -61,7 +76,7 @@ const CommunityGroup = () => {
               </div>
             </div>
             <div className='community-group-container'>
-              <CommunityGroupCard location='/community-group-view-page/:id' data={data} />
+              <CommunityGroupCard location='/community-group-view-page/:id' data={data} editCard={editCard} />
             </div>
           </div>
         </div>

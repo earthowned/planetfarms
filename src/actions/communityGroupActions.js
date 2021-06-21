@@ -27,7 +27,6 @@ export const listGroups = (sort = '', pageNumber = '') => async (
     const { data } = await axios.get(
             `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}`
     )
-    console.log('groups', data)
     dispatch({
       type: GROUP_LIST_SUCCESS,
       payload: data
