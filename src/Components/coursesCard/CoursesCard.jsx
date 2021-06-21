@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import useGetFetchData from "../../utils/useGetFetchData";
 import { GET_COURSE } from "../../utils/urlConstants";
 import Background from "../Background/Background";
-import "./CoursesCard.css";
+import "./CoursesCard.scss";
 
 const CoursesCard = ({ category, setModalActive }) => {
   const { data: courseData } = useGetFetchData("course", GET_COURSE);
@@ -103,7 +103,7 @@ function EnrollContainer({ item }) {
       ) : (
         <button
           className="join-btn"
-          onClick={() => history.push("/coursepage")}
+          onClick={() => history.push(`/course/${item.id}`)}
         >
           <span>Join Course</span>
         </button>
