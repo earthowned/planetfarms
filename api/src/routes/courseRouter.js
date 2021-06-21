@@ -19,6 +19,10 @@ router.route("/").get(getCourses);
 // for upload we have just worked with images jpg|jpeg|png for other types of file we need to work.
 router.route("/add").post(upload.single("thumbnail"), addCourse);
 router.route("/search").get(searchCoursesTitle);
-router.route("/:id").get(getCourseById).delete(deleteCourse).put(updateCourse);
+router
+  .route("/:courseId")
+  .get(getCourseById)
+  .delete(deleteCourse)
+  .put(updateCourse);
 
 module.exports = router;

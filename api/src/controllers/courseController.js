@@ -81,9 +81,13 @@ const updateCourse = (req, res) => {
 // @route   GET /api/courses/:id
 // @access  Public
 const getCourseById = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.courseId;
 
-  Courses.findByPk(id)
+  Courses.findOne({
+    where: {
+      courseId: id,
+    },
+  })
     .then((course) => {
       if (course) {
         res.json(course);

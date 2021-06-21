@@ -1,10 +1,10 @@
 import './toggle.scss'
 
-function ToggleSwitch ({ onClick, active }) {
+function ToggleSwitch ({ onClick, isFree }) {
   return (
     <>
       <div className='toggle' onClick={onClick}>
-        <div className={`${active ? 'toggle-item active' : 'toggle-item'}`} />
+        <div className={`${isFree ? 'toggle-item active' : 'toggle-item'}`} />
         <div className='toggle-container' />
       </div>
     </>
