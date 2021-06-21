@@ -103,12 +103,18 @@ const getCourseById = (req, res) => {
 // @route   delete /api/courses/:id
 // @access  Public
 const deleteCourse = (req, res) => {
-  const id = req.params.id;
-  Courses.findByPk(id).then((resource) => {
+  const id = req.params.courseId;
+  Courses.findOne({
+    where: {
+      courseId: id,
+    },
+  }).then((resource) => {
     if (resource) {
       const { id } = resource;
       Courses.destroy({ where: { id } })
-        .then(() => res.json({ message: "Course Deleted !!!" }).status(200))
+        .then(() =>
+          res.json({ message: "Course Deleted Successfully" }).status(200)
+        )
         .catch((err) => res.json({ error: err.message }).status(400));
     } else {
       res.status(404);

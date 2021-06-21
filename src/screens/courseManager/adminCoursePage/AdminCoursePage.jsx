@@ -7,14 +7,20 @@ import { useHistory, useParams } from "react-router-dom";
 import { GET_COURSE } from "../../../utils/urlConstants";
 import useGetFetchData from "../../../utils/useGetFetchData";
 
-const AdminCoursePage = ({ match }) => {
+import BackButton from "../../../Components/BackButton/BackButton";
+import DashboardLayout from "../../../Layout/DashboardLayout/DashboardLayout";
+import CourseDescription from "./CourseDescription";
+import LessonBlock from "./LessonBlock";
+import "./admin-course-page.scss";
+
+const AdminCoursePage = () => {
   let { courseId } = useParams();
   const { data } = useGetFetchData("recentCourse", GET_COURSE + "/" + courseId);
-  console.log(data);
+
   return (
     <DashboardLayout title="Course page">
       <BackButton location="/admin/courses" />
-      <CourseDescription />
+      <CourseDescription data={data} />
       <LessonBlock />
       <div className="study-course-wrapper">
         <h3>Also study this course</h3>
