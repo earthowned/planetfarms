@@ -69,7 +69,7 @@ const resizeImage = (req, res, next) => {
       .catch(err => { console.error(err); });
     }
   } catch (error) {
-      console.error(error);
+    console.error(error);
   }
 }
 

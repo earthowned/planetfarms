@@ -7,7 +7,7 @@ const {
   renderImage
 } = require('../controllers/resizerController.js')
 
-router.route('/').post(upload.single('image'), resizeImage)
-router.route('/').post(renderImage)
+router.route('/').post(upload.single('image'), resize)
+router.route('/').post(render)
 
 module.exports = router

@@ -1,35 +1,23 @@
 const path = require('path');
 const sharp = require('sharp');
-const resizeImage = (req, res, next) => {
+const { resizeImage } = require('../helpers/filehelpers')
+
+const resize = (req, res, next) => {
   try {
-    const filename = path.basename(req.file.path).split('.').slice(0, -1).join('.')
-    const dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
-    let newImage = sharp(req.file.path)
-    if(req.body.save) {
-      newImage = newImage.resize(parseInt(req.body.width), parseInt(req.body.height))
-      const savePath = dir + '-' + req.body.width + 'x' + req.body.height + '.' + req.body.format
-      newImage = newImage.toFile(savePath, (err, resizeImage) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(resizeImage);
-        }
-      })
-      res.status(201).json({
+    resizeImage(req, res, () => {
+      return res.status(201).json({
         message: 'File uploded successfully',
-        image: savePath
+        image: req.file.filename
       })
-    } else {
-      return renderImage({ ...req, image: req.file.path }, res, next)
-    }
+    })
   } catch (error) {
     console.error(error);
   }
 }
 
-const renderImage = (req, res, next) => {
+const render = (req, res, next) => {
   try {
-    let newImage = sharp(req.image)
+    let newImage = sharp(req.body.image)
     newImage = newImage.resize(parseInt(req.body.width), parseInt(req.body.height))
     newImage = newImage.toBuffer()
     .then((data) => {
@@ -46,4 +34,4 @@ const renderImage = (req, res, next) => {
   }
 }
 
-module.exports = { resizeImage, renderImage }
+module.exports = { resize, render }
