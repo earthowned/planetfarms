@@ -81,10 +81,10 @@ export const createEnterprise = (newEnterprise) => async (
     dispatch({
       type: ENTERPRISE_CREATE_REQUEST
     })
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`, formData)
+    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`, formData)
     dispatch({
       type: ENTERPRISE_CREATE_SUCCESS,
-      payload: data
+      payload: true
     })
   } catch (error) {
     const message =

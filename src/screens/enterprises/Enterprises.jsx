@@ -26,17 +26,18 @@ const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
   const {success: enterpriseUpdateSuccess} = useSelector((state) => state.enterpriseUpdate)
   const {success: enterpriseDeleteSuccess} = useSelector((state) => state.enterpriseDelete)
+  const {success: enterpriseCreateSuccess} = useSelector((state) => state.enterpriseCreate)
   const [editData, setEditData] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   const [search, setSearch] = useState(null)
   const [active, setActive] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch()
-
+console.log(enterpriseCreateSuccess);
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
     if (!search) dispatch(listEnterprises())
-  }, [search, dispatch, enterpriseUpdateSuccess, enterpriseDeleteSuccess])
+  }, [search, dispatch, enterpriseUpdateSuccess, enterpriseDeleteSuccess, enterpriseCreateSuccess])
 
    // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')

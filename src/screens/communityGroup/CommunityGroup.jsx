@@ -16,6 +16,7 @@ const CommunityGroup = () => {
   const data = useSelector((state) => state.listGroups.groups)
   const {success:groupUpdateSuccess} = useSelector((state) => state.groupUpdate)
   const {success:groupDeleteSuccess} = useSelector((state) => state.groupDelete)
+  const {success:groupCreateSuccess} = useSelector((state) => state.groupCreate)
   const dispatch = useDispatch()
 
   const [active, setActive] = useState(false)
@@ -28,7 +29,7 @@ const CommunityGroup = () => {
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
     if (!search) dispatch(listGroups())
-  }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess])
+  }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess, groupCreateSuccess])
 
   // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -48,7 +49,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
 
   const confirmDelete = () => {
     dispatch(groupDelete(deleteId))
-    setActive(true);
+    setDeleteModal(false);
   }
 
 

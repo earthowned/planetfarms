@@ -101,11 +101,11 @@ export const listGroupById = (id) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_LIST_BYID_REQUEST })
 
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
+    await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
     
     dispatch({
       type: GROUP_LIST_BYID_SUCCESS,
-      payload: data
+      payload: true
     })
   } catch (error) {
     const message =

@@ -52,7 +52,7 @@ export const enterpriseCreateReducer = (state = {}, action) => {
     case ENTERPRISE_CREATE_REQUEST:
       return { loading: true }
     case ENTERPRISE_CREATE_SUCCESS:
-      return { loading: false, sucess: true, resource: action.payload }
+      return { loading: false, success: action.payload }
     case ENTERPRISE_CREATE_FAIL:
       return { loading: false, error: action.payload }
     case ENTERPRISE_CREATE_RESET:

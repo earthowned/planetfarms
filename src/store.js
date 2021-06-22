@@ -3,12 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { newsListReducer, newsCreateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
-import { enterpriseDeleteReducer, enterpriseListReducer, enterpriseUpdateReducer } from './reducers/EnterpriseReducers'
-import { groupDeleteReducer, groupListReducer, groupUpdateReducer, groupViewReducer } from './reducers/CommunityGroupReducers'
+import { enterpriseCreateReducer, enterpriseDeleteReducer, enterpriseListReducer, enterpriseUpdateReducer } from './reducers/EnterpriseReducers'
+import { groupCreateReducer, groupDeleteReducer, groupListReducer, groupUpdateReducer, groupViewReducer } from './reducers/CommunityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, communityVisitReducer } from './reducers/CommunityReducers'
-import { memberListReducer } from './reducers/memberReducers'
+import { memberListReducer } from './reducers/MemberReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -16,9 +16,11 @@ const reducer = combineReducers({
   listGroups: groupListReducer,
   groupUpdate: groupUpdateReducer,
   groupDelete: groupDeleteReducer,
+  groupCreate: groupCreateReducer,
   listEnterprises: enterpriseListReducer,
   enterpriseUpdate: enterpriseUpdateReducer,
   enterpriseDelete: enterpriseDeleteReducer,
+  enterpriseCreate: enterpriseCreateReducer,
   listResources: resourceListReducer,
   listNews: newsListReducer,
   addCommunity: communityCreateReducer,

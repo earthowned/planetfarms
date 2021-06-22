@@ -67,7 +67,7 @@ export const groupCreateReducer = (state = {}, action) => {
     case GROUP_CREATE_REQUEST:
       return { loading: true }
     case GROUP_CREATE_SUCCESS:
-      return { loading: false, success: true, group: action.payload }
+      return { loading: false, success: action.payload}
     case GROUP_CREATE_FAIL:
       return { loading: false, error: action.payload }
     case GROUP_CREATE_RESET:
