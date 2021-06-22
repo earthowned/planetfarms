@@ -8,24 +8,27 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityGroup.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { searchGroups, listGroups, listGroupById } from '../../actions/CommunityGroupActions'
+import { searchGroups, listGroups, listGroupById, groupDelete } from '../../actions/CommunityGroupActions'
 import axios from 'axios'
 
 const CommunityGroup = () => {
   const [editData, setEditData] = useState(null);
   const data = useSelector((state) => state.listGroups.groups)
   const {success:groupUpdateSuccess} = useSelector((state) => state.groupUpdate)
+  const {success:groupDeleteSuccess} = useSelector((state) => state.groupDelete)
   const dispatch = useDispatch()
 
   const [active, setActive] = useState(false)
   const [search, setSearch] = useState(null)
+  const [deleteId, setDeleteId] = useState(null);
+  const [deleteModal, setDeleteModal] = useState(false);
   const handleClickCreate = () => {
   }
 
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
     if (!search) dispatch(listGroups())
-  }, [search, dispatch, groupUpdateSuccess])
+  }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess])
 
   // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -37,11 +40,33 @@ const currentCommunity = localStorage.getItem('currentCommunity')
     setEditData(data)
     setActive(true);
   }
+  
+ const deleteCard = (id) => {
+    setDeleteModal(true);
+    setDeleteId(id);
+  }
+
+  const confirmDelete = () => {
+    dispatch(groupDelete(deleteId))
+    setActive(true);
+  }
 
 
   return (
     <>
       {active && <FormModal setActive={setActive} data={editData} />}
+      {deleteModal &&  <div className='simple-modal-container'>
+        <div className='simple-modal-inner-container'>
+          <div>
+          <h4>Are you sure you want to delete?</h4>
+          {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
+          </div>
+          <div>
+            <button className="secondary-btn" onClick={confirmDelete}>Confirm</button>
+            <button className="secondary-btn" onClick={() => setDeleteModal(false)}>Cancel</button>
+          </div>
+        </div>
+      </div>}
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>
@@ -77,7 +102,9 @@ const currentCommunity = localStorage.getItem('currentCommunity')
               <CommunityGroupCard location='/community-group-view-page/:id' 
               data={data} 
               editCard={editCard} 
-              setActive={setActive} />
+              setActive={setActive} 
+              deleteCard={deleteCard}
+              />
             </div>
           </div>
         </div>

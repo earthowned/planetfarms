@@ -27,9 +27,17 @@ const CommunityGroupSingleCard = ({ item, type }) => {
   }
   return (
     <div key={item.id} className='card-1 border-1px-onyx'>
+      <div className="card-edit">
+        <button className="edit-btn" onClick={() => editCard(item.id)}>
+          <img src="/img/more-horizontal.svg" alt="burger icon" />
+        </button>
+        <button className="edit-btn" onClick={() => deleteCard(item.id)}>
+          <img src="/img/trash-icon.svg" alt="burger icon" />
+        </button>
+      </div>
       <div className='card-container' style={{ backgroundImage: `url(${process.env.REACT_APP_CDN_BASE_URL + '/' + type + '/' + item.filename})` }} />
       <div className='community-group-card-inner-content'>
-        <div className='card-text-container'>
+        <div onClick={() => history.push(`/community-group-view-page/${item.id}`)} className='card-text-container'>
           <div className='farmers ibmplexsans-semi-bold-caribbean-green-14px'>
             {item.category}
           </div>

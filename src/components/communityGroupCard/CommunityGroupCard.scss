@@ -125,6 +125,10 @@
   justify-content: flex-end;
 }
 
+.card-edit button:first-child {
+  margin-right: 24px;
+}
+
 @media only screen and (max-width: 1750px) {
   .card-secondary-btn-wrapper {
     width: 130px;

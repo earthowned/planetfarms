@@ -14,7 +14,10 @@ import {
   GROUP_LIST_BYID_FAIL,
   GROUP_UPDATE_REQUEST,
   GROUP_UPDATE_SUCCESS,
-  GROUP_UPDATE_FAIL
+  GROUP_UPDATE_FAIL,
+  GROUP_DELETE_REQUEST,
+  GROUP_DELETE_SUCCESS,
+  GROUP_DELETE_FAIL
 } from '../constants/CommunityGroupConstants'
 
 // fetching current community
@@ -136,6 +139,30 @@ export const groupUpdate = (newGroup) => async (dispatch) => {
             : error.message
     dispatch({
       type: GROUP_UPDATE_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const groupDelete = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GROUP_DELETE_REQUEST })
+    
+    await axios.delete(
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`
+    );
+    
+    dispatch({
+      type: GROUP_DELETE_SUCCESS,
+      payload: true
+    })
+  } catch (error) {
+    const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    dispatch({
+      type: GROUP_DELETE_FAIL,
       payload: message
     })
   }

@@ -4,7 +4,7 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import CommunityGroupCard from '../../components/communityGroupCard/CommunityGroupCard'
 import { useSelector, useDispatch } from 'react-redux'
-import { listEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
+import { enterpriseDelete, listEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
 import FormModal from '../../components/formModal/FormModal'
 import Filter from '../../components/filter/Filter'
 import useSizeFinder from '../../utils/sizeFinder'
@@ -25,15 +25,18 @@ const nav = [
 const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
   const {success: enterpriseUpdateSuccess} = useSelector((state) => state.enterpriseUpdate)
+  const {success: enterpriseDeleteSuccess} = useSelector((state) => state.enterpriseDelete)
   const [editData, setEditData] = useState(null);
+  const [deleteId, setDeleteId] = useState(null);
   const [search, setSearch] = useState(null)
   const [active, setActive] = useState(false)
+  const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
     if (!search) dispatch(listEnterprises())
-  }, [search, dispatch, enterpriseUpdateSuccess])
+  }, [search, dispatch, enterpriseUpdateSuccess, enterpriseDeleteSuccess])
 
    // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -46,15 +49,37 @@ const currentCommunity = localStorage.getItem('currentCommunity')
     setActive(true);
   }
 
+  const deleteCard = (id) => {
+    setDeleteModal(true);
+    setDeleteId(id);
+  }
+
+  const confirmDelete = () => {
+    dispatch(enterpriseDelete(deleteId))
+    setDeleteModal(false);
+  }
+
   return (
     <>
       {active && <FormModal setActive={setActive} data={editData} />}
+      {deleteModal &&  <div className='simple-modal-container'>
+        <div className='simple-modal-inner-container'>
+          <div>
+          <h4>Are you sure you want to delete?</h4>
+          {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
+          </div>
+          <div>
+            <button className="secondary-btn" onClick={confirmDelete}>Confirm</button>
+            <button className="secondary-btn" onClick={() => setDeleteModal(false)}>Cancel</button>
+          </div>
+        </div>
+      </div>}
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>
             <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              <CommunityGroupCard data={data} type="enterpise" editCard={editCard} />
+              <CommunityGroupCard data={data} type="enterpise" editCard={editCard} deleteCard={deleteCard} />
             </div>
           </div>
         </div>

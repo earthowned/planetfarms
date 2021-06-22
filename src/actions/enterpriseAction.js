@@ -11,7 +11,10 @@ import {
   ENTERPRISE_SEARCH_FAIL,
   ENTERPRISE_UPDATE_REQUEST,
   ENTERPRISE_UPDATE_SUCCESS,
-  ENTERPRISE_UPDATE_FAIL
+  ENTERPRISE_UPDATE_FAIL,
+  ENTERPRISE_DELETE_REQUEST,
+  ENTERPRISE_DELETE_SUCCESS,
+  ENTERPRISE_DELETE_FAIL
 } from '../constants/EnterpriseConstants'
 
 // fetching current community
@@ -115,6 +118,30 @@ export const enterpriseUpdate = (newEnterprise) => async (dispatch) => {
             : error.message
     dispatch({
       type: ENTERPRISE_UPDATE_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const enterpriseDelete = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: ENTERPRISE_DELETE_REQUEST })
+    
+    await axios.delete(
+            `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`
+    );
+    
+    dispatch({
+      type: ENTERPRISE_DELETE_SUCCESS,
+      payload: true
+    })
+  } catch (error) {
+    const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    dispatch({
+      type: ENTERPRISE_DELETE_FAIL,
       payload: message
     })
   }
