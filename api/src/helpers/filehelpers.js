@@ -2,7 +2,7 @@ const multer = require('multer')
 const shortid = require('shortid')
 const path = require('path')
 const fs = require('fs')
-const sharp = require('sharp');
+const sharp = require('sharp')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -46,30 +46,23 @@ const resizeImage = (req, res, next) => {
     const dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
     let newImage = sharp(req.file.path)
     newImage = newImage.resize(parseInt(req.body.width))
-    if(req.body.save) {
+    if (req.body.save) {
       const savePath = dir + '-' + req.body.width + 'x' + req.body.height + '.' + req.body.format
-      newImage = newImage.toFile(savePath, (err, resizeImage) => {
-          if (err) {
-              console.log(err);
-          } else {
-              console.log(resizeImage);
-          }
-      })
+      newImage = newImage.toFile(savePath)
       return next(null, true)
     } else {
       newImage = newImage.toBuffer()
-      .then((data) => {
-        //To display the image
-        res.writeHead(200, {
+        .then((data) => {
+        // To display the image
+          res.writeHead(200, {
             'Content-Type': 'image/png',
             'Content-Length': data.length
-        });
-        return (res.end(data));
-      })
-      .catch(err => { console.error(err); });
+          })
+          return (res.end(data))
+        })
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 }
 

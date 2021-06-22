@@ -1,5 +1,5 @@
-const path = require('path');
-const sharp = require('sharp');
+const path = require('path')
+const sharp = require('sharp')
 const { resizeImage } = require('../helpers/filehelpers')
 
 const resize = (req, res, next) => {
@@ -11,7 +11,7 @@ const resize = (req, res, next) => {
       })
     })
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 }
 
@@ -20,17 +20,16 @@ const render = (req, res, next) => {
     let newImage = sharp(req.body.image)
     newImage = newImage.resize(parseInt(req.body.width), parseInt(req.body.height))
     newImage = newImage.toBuffer()
-    .then((data) => {
-      res.writeHead(200, {
-        'Content-Type': 'image/png',
-        'Content-Length': data.length
-      });
-      return (res.end(data));
-    })
-    .catch(err => { console.error(err); });
-  }
-  catch (error) {
-    console.error(error);
+      .then((data) => {
+        res.writeHead(200, {
+          'Content-Type': 'image/png',
+          'Content-Length': data.length
+        })
+        return (res.end(data))
+      })
+      .catch(err => { console.error(err) })
+  } catch (error) {
+    console.error(error)
   }
 }
 
