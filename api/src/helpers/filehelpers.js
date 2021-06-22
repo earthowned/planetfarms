@@ -51,7 +51,7 @@ const resizeImage = (req, res, next) => {
       newImage = newImage.toFile(savePath)
       return next(null, true)
     } else {
-      newImage = newImage.toBuffer()
+      newImage.toBuffer()
         .then((data) => {
         // To display the image
           res.writeHead(200, {

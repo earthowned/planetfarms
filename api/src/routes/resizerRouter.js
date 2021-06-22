@@ -3,8 +3,8 @@ const router = express.Router()
 const { upload } = require('../helpers/filehelpers')
 
 const {
-  resizeImage,
-  renderImage
+  resize,
+  render
 } = require('../controllers/resizerController.js')
 
 router.route('/').post(upload.single('image'), resize)

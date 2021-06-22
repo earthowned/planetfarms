@@ -1,4 +1,3 @@
-const path = require('path')
 const sharp = require('sharp')
 const { resizeImage } = require('../helpers/filehelpers')
 
@@ -19,7 +18,7 @@ const render = (req, res, next) => {
   try {
     let newImage = sharp(req.body.image)
     newImage = newImage.resize(parseInt(req.body.width), parseInt(req.body.height))
-    newImage = newImage.toBuffer()
+    newImage.toBuffer()
       .then((data) => {
         res.writeHead(200, {
           'Content-Type': 'image/png',
