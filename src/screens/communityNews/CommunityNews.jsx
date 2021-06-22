@@ -54,6 +54,7 @@ function CommunityPagenews (props) {
   const windowWidth = useSizeFinder()
 
   const userLogin = useSelector((state) => state.userLogin)
+  const {success:newsCreateSuccess} = useSelector((state) => state.addNewNews)
   const { userInfo } = userLogin
   const history = useHistory()
   const [search, setSearch] = useState(null)
@@ -65,8 +66,8 @@ function CommunityPagenews (props) {
     //   history.push('/login')
     // }
     if (search) dispatch(searchNews(search))
-    if (!search) dispatch(listNews({pageNumber}))
-  }, [search, dispatch, history, userInfo])
+    if (!search) dispatch(listNews({sort: "", pageNumber}))
+  }, [search, dispatch, history, userInfo, pageNumber, newsCreateSuccess])
 
   const newsList = useSelector((state) => state.listNews)
   

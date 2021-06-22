@@ -131,12 +131,12 @@ function PopUp ({ news, title, category }) {
   const handleOnSaveClick = (e) => {
     if (file) {
       dispatch(createNews(newNews))
-      // setActivePopup(false)
-      // history.push(`/community_page_news/${currentCommunity.slug}`)
+      setActivePopup(false)
+      history.push(`/community_page_news/${currentCommunity.slug}`)
     } else {
       dispatch(createNews(newNews))
-      // setActivePopup(false)
-      // history.push(`/community_page_news/${currentCommunity.slug}`)
+      setActivePopup(false)
+      history.push(`/community_page_news/${currentCommunity.slug}`)
     }
   }
 

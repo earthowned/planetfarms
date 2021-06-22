@@ -25,13 +25,14 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listNews = (sort = '', pageNumber = '') => async (
+export const listNews = ({sort = '', pageNumber = ''}) => async (
   dispatch
 ) => {
   try {
+    console.log(pageNumber);
     dispatch({ type: NEWS_LIST_REQUEST })
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}`
+      `${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}?pageNumber=${pageNumber}`
     )
     dispatch({ type: NEWS_LIST_SUCCESS, payload: data })
   } catch (error) {
@@ -65,17 +66,17 @@ export const searchNews = (search) => async (
 
 export const createNews = (newNews) => async (dispatch, getState) => {
   const formData = new FormData()
-  // formData.append('news', newNews.file)
-  // formData.append('title', newNews.title)
-  // formData.append('category', newNews.category)
-  // formData.append('imageDetail',newNews.imageDetail)
-  console.log(newNews);
+  formData.append('news', newNews.file)
+  formData.append('title', newNews.title)
+  formData.append('category', newNews.category)
+  formData.append('imageDetail',newNews.imageDetail)
+  
   try {
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, {title: newNews.title});
-    console.log(data);
+    // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData);
+    
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     dispatch({ type: NEWS_CLEAR, payload: data })
   } catch (error) {
