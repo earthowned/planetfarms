@@ -8,13 +8,13 @@ const Op = Sequelize.Op
 const getNews = (req, res) => {
   const pageSize = 3
   const page = Number(req.query.pageNumber) || 1
-  const order = req.query.order || 'ASC'
-  const ordervalue = order && [['title', order]]
+  const order = req.query.order || 'DESC'
+  const ordervalue = order && [['createdAt', order]]
   db.News.findAndCountAll({ 
-    offset: (page - 1), 
-    limit: pageSize, 
+   offset: (page - 1) * pageSize, 
+   limit: pageSize,
     order: ordervalue,
-  include:  [{
+    include:  [{
     model: db.Community,
     attributes: ['id'],
     where: {id: req.params.id}
