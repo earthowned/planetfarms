@@ -31,7 +31,8 @@ export const communityListReducer = (state = { communities: [] }, action) => {
         loading: false,
         communities: action.payload.communities,
         pages: action.payload.pages,
-        page: action.payload.page
+        page: action.payload.page,
+        totalPages: action.payload.totalPages
       }
     case COMMUNITY_LIST_FAIL:
       return { loading: false, error: action.payload }
@@ -59,7 +60,8 @@ export const userCommunityListReducer = (state = { userCommunities: [] }, action
         loading: false,
         userCommunities: action.payload.communities,
         pages: action.payload.pages,
-        page: action.payload.page
+        page: action.payload.page,
+        totalPages: action.totalPages
       }
     case USER_COMMUNITY_LIST_FAIL:
       return { loading: false, error: action.payload }

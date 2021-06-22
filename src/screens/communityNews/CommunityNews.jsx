@@ -9,6 +9,7 @@ import Filter from '../../components/filter/Filter'
 import useSizeFinder from '../../utils/sizeFinder'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchNews, listNews } from '../../actions/newsActions'
+import Pagination from '../../Components/Paginations/Paginations'
 
 function CommunityNews () {
   const [addModal, setAddModal] = useState(false)
@@ -56,6 +57,7 @@ function CommunityPagenews (props) {
   const { userInfo } = userLogin
   const history = useHistory()
   const [search, setSearch] = useState(null)
+  const [pageNumber, setPageNumber] = useState(1)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -63,10 +65,11 @@ function CommunityPagenews (props) {
     //   history.push('/login')
     // }
     if (search) dispatch(searchNews(search))
-    if (!search) dispatch(listNews())
+    if (!search) dispatch(listNews({pageNumber}))
   }, [search, dispatch, history, userInfo])
 
   const newsList = useSelector((state) => state.listNews)
+  
   const news = newsList.searchNews ? newsList.searchNews : newsList.news
   return (
     <>
@@ -80,6 +83,7 @@ function CommunityPagenews (props) {
         <div className='community-page-news-section'>
           <div className='community-news-cards'>
             <NewsCard news={news} />
+          <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={newsList} />
           </div>
           {(windowWidth < 1200)
             ? <Filter />

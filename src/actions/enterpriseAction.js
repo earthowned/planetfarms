@@ -30,7 +30,6 @@ export const listEnterprises = (sort = '', pageNumber = '') => async (
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${currentCommunity.id}`
     )
-    console.log('enterprisedsgfgfhnbvxdfgh', data)
     dispatch({
       type: ENTERPRISE_LIST_SUCCESS,
       payload: data

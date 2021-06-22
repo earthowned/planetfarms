@@ -30,7 +30,8 @@ export const groupListReducer = (state = { groups: [] }, action) => {
         loading: false,
         groups: action.payload.groups,
         pages: action.payload.pages,
-        page: action.payload.page
+        page: action.payload.page,
+        totalPages: action.payload.totalPages
       }
     case GROUP_LIST_FAIL:
       return { loading: false, error: action.payload }

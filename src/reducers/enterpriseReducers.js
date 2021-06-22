@@ -25,9 +25,10 @@ export const enterpriseListReducer = (state = { enterprises: [] }, action) => {
     case ENTERPRISE_LIST_SUCCESS:
       return {
         loading: false,
-        enterprises: action.payload,
+        enterprises: action.payload.enterprises,
         pages: action.payload.pages,
-        page: action.payload.page
+        page: action.payload.page,
+        totalPages: action.payload.totalPages
       }
 
     case ENTERPRISE_LIST_FAIL:

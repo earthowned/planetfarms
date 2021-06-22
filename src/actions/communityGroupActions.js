@@ -31,7 +31,7 @@ export const listGroups = (sort = '', pageNumber = '') => async (
   try {
     dispatch({ type: GROUP_LIST_REQUEST })
     const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}?pageNumber=${pageNumber}`
     )
     dispatch({
       type: GROUP_LIST_SUCCESS,

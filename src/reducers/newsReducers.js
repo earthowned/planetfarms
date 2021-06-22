@@ -24,7 +24,8 @@ export const newsListReducer = (state = { news: [] }, action) => {
         loading: false,
         news: action.payload.news,
         pages: action.payload.pages,
-        page: action.payload.page
+        page: action.payload.page,
+        totalPages: action.payload.totalPages,
       }
     case NEWS_LIST_FAIL:
       return { loading: false, error: action.payload }

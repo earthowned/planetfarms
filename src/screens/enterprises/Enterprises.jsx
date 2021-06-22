@@ -10,6 +10,7 @@ import Filter from '../../components/filter/Filter'
 import useSizeFinder from '../../utils/sizeFinder'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
+import Pagination from '../../Components/Paginations/Paginations'
 
 const nav = [
   {
@@ -23,7 +24,10 @@ const nav = [
 ]
 
 const Enterprise = () => {
-  const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
+  const data = useSelector((state) => state.listEnterprises);
+  // const {enterprises} = data;
+  // console.log(enterprises);
+  const enterprises = data.enterprises.enterprises ? data.enterprises.enterprises : data.enterprises
   const {success: enterpriseUpdateSuccess} = useSelector((state) => state.enterpriseUpdate)
   const {success: enterpriseDeleteSuccess} = useSelector((state) => state.enterpriseDelete)
   const {success: enterpriseCreateSuccess} = useSelector((state) => state.enterpriseCreate)
@@ -32,11 +36,12 @@ const Enterprise = () => {
   const [search, setSearch] = useState(null)
   const [active, setActive] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1)
   const dispatch = useDispatch()
-console.log(enterpriseCreateSuccess);
+
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
-    if (!search) dispatch(listEnterprises())
+    if (!search) dispatch(listEnterprises({pageNumber}))
   }, [search, dispatch, enterpriseUpdateSuccess, enterpriseDeleteSuccess, enterpriseCreateSuccess])
 
    // fetching current community
@@ -80,8 +85,9 @@ const currentCommunity = localStorage.getItem('currentCommunity')
           <div className='enterprises-col'>
             <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              <CommunityGroupCard data={data} type="enterpise" editCard={editCard} deleteCard={deleteCard} />
+              <CommunityGroupCard data={enterprises} type="enterpise" editCard={editCard} deleteCard={deleteCard} />
             </div>
+            <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
           </div>
         </div>
       </DashboardLayout>

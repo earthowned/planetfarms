@@ -14,18 +14,19 @@ const paginate = ({ page, pageSize }) => {
 
 const getCommunities = async (req, res) => {
   const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
+  const page = Number(req.query.pageNumber) || 1
   // const order = req.query.order || 'DESC'
   // const ordervalue = order && [['name', order]]
   try {
-    const communities = await db.Community.findAll({
-                offset: page,
+    const communities = await db.Community.findAndCountAll({
+                offset: (page - 1),
                 limit: pageSize,
                 // ordervalue,
                 order: [['createdAt', 'DESC']],
                 include: [{
                   model: db.User,
                   as: 'followers',
+                  attributes: ['id'],
                   through: {
                     attributes: ['active'],
                     as: 'followStatus',
@@ -34,8 +35,14 @@ const getCommunities = async (req, res) => {
                 }],
               })
 
-  await paginate({page, pageSize});
-  res.json({ communities, page, pageSize }).status(200);
+  const totalPages = Math.ceil(communities.count / pageSize)
+  res.json({
+        communities: communities.rows,
+        totalItems: communities.count,
+        totalPages,
+        page, 
+        pageSize 
+   }).status(200);
 
   } catch (error) {
     res.json(error);

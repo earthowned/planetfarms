@@ -32,12 +32,13 @@ export default App
 function AllCommunities ({setModalActive}) {
   const {pathname} = useLocation();
   const [search, setSearch] = useState(null)
+  const [pageNumber, setPageNumber] = useState(1)
 
    const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const communitiesState = useSelector((state) => state.listCommunities);
   const {error, loading, communities} = communitiesState
-  
+    
   const userCommunitiesState = useSelector((state) => state.listUserCommunities);
   const {error:user_com_error, loading:user_com_loading, userCommunities} = userCommunitiesState
   //create community
@@ -58,6 +59,7 @@ function AllCommunities ({setModalActive}) {
   return (
     <>
         <CommunityHeader setActive={setModalActive} search={search} setSearch={setSearch} />
+        <div style={{width: '100%', minHeight: '130%'}}>
         {
           pathname==='/community-switching/my-communities' 
           ? <><CommunitiesCard data={userCommunities} /> 
@@ -67,7 +69,8 @@ function AllCommunities ({setModalActive}) {
           {/* <Pagination /> */}
           </>
         }
-        
+        </div>
+        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={communitiesState} />
     </>)  
 }
 

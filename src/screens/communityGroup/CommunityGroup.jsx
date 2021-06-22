@@ -8,12 +8,15 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityGroup.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { searchGroups, listGroups, listGroupById, groupDelete } from '../../actions/CommunityGroupActions'
+import { searchGroups, listGroups, groupDelete } from '../../actions/CommunityGroupActions'
 import axios from 'axios'
+import Pagination from '../../Components/Paginations/Paginations'
 
 const CommunityGroup = () => {
   const [editData, setEditData] = useState(null);
-  const data = useSelector((state) => state.listGroups.groups)
+  const data = useSelector((state) => state.listGroups)
+  const {groups} = data;
+  
   const {success:groupUpdateSuccess} = useSelector((state) => state.groupUpdate)
   const {success:groupDeleteSuccess} = useSelector((state) => state.groupDelete)
   const {success:groupCreateSuccess} = useSelector((state) => state.groupCreate)
@@ -23,12 +26,13 @@ const CommunityGroup = () => {
   const [search, setSearch] = useState(null)
   const [deleteId, setDeleteId] = useState(null);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1)
   const handleClickCreate = () => {
   }
 
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
-    if (!search) dispatch(listGroups())
+    if (!search) dispatch(listGroups({pageNumber}))
   }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess, groupCreateSuccess])
 
   // fetching current community
@@ -101,12 +105,13 @@ const currentCommunity = localStorage.getItem('currentCommunity')
             </div>
             <div className='community-group-container'>
               <CommunityGroupCard location='/community-group-view-page/:id' 
-              data={data} 
+              data={groups} 
               editCard={editCard} 
               setActive={setActive} 
               deleteCard={deleteCard}
               />
             </div>
+            <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
           </div>
         </div>
       </DashboardLayout>
