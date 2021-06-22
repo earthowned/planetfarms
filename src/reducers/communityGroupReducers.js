@@ -11,9 +11,12 @@ import {
   GROUP_LIST_BYID_REQUEST,
   GROUP_LIST_BYID_SUCCESS,
   GROUP_LIST_BYID_FAIL,
-  GROUP_CREATE_RESET
+  GROUP_CREATE_RESET,
+  GROUP_UPDATE_REQUEST,
+  GROUP_UPDATE_SUCCESS,
+  GROUP_UPDATE_FAIL
 
-} from '../constants/communityGroupConstants'
+} from '../constants/CommunityGroupConstants'
 
 export const groupListReducer = (state = { groups: [] }, action) => {
   switch (action.type) {
@@ -66,6 +69,19 @@ export const groupCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case GROUP_CREATE_RESET:
       return {}
+    default:
+      return state
+  }
+}
+
+export const groupUpdateReducer = (state = {success: false}, action) => {
+  switch (action.type) {
+    case GROUP_UPDATE_REQUEST:
+      return { ...state, loading: true }
+    case GROUP_UPDATE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case GROUP_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

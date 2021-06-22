@@ -8,9 +8,12 @@ import {
   ENTERPRISE_CREATE_REQUEST,
   ENTERPRISE_CREATE_SUCCESS,
   ENTERPRISE_CREATE_FAIL,
-  ENTERPRISE_CREATE_RESET
+  ENTERPRISE_CREATE_RESET,
+  ENTERPRISE_UPDATE_REQUEST,
+  ENTERPRISE_UPDATE_SUCCESS,
+  ENTERPRISE_UPDATE_FAIL
 
-} from '../constants/enterpriseConstants'
+} from '../constants/EnterpriseConstants'
 
 export const enterpriseListReducer = (state = { enterprises: [] }, action) => {
   switch (action.type) {
@@ -51,6 +54,19 @@ export const enterpriseCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case ENTERPRISE_CREATE_RESET:
       return {}
+    default:
+      return state
+  }
+}
+
+export const enterpriseUpdateReducer = (state = {success: false}, action) => {
+  switch (action.type) {
+    case ENTERPRISE_UPDATE_REQUEST:
+      return { ...state, loading: true }
+    case ENTERPRISE_UPDATE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case ENTERPRISE_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

@@ -8,8 +8,11 @@ import {
   ENTERPRISE_CREATE_FAIL,
   ENTERPRISE_SEARCH_REQUEST,
   ENTERPRISE_SEARCH_SUCCESS,
-  ENTERPRISE_SEARCH_FAIL
-} from '../constants/enterpriseConstants'
+  ENTERPRISE_SEARCH_FAIL,
+  ENTERPRISE_UPDATE_REQUEST,
+  ENTERPRISE_UPDATE_SUCCESS,
+  ENTERPRISE_UPDATE_FAIL
+} from '../constants/EnterpriseConstants'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -87,6 +90,31 @@ export const createEnterprise = (newEnterprise) => async (
         : error.message
     dispatch({
       type: ENTERPRISE_CREATE_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const enterpriseUpdate = (newEnterprise) => async (dispatch) => {
+  try {
+    dispatch({ type: ENTERPRISE_UPDATE_REQUEST })
+    const {id, title, description, file} = newEnterprise;
+    await axios.put(
+            `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`,
+            {title, description, file}
+    );
+    
+    dispatch({
+      type: ENTERPRISE_UPDATE_SUCCESS,
+      payload: true
+    })
+  } catch (error) {
+    const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    dispatch({
+      type: ENTERPRISE_UPDATE_FAIL,
       payload: message
     })
   }

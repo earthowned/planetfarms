@@ -9,6 +9,7 @@ import FormModal from '../../components/formModal/FormModal'
 import Filter from '../../components/filter/Filter'
 import useSizeFinder from '../../utils/sizeFinder'
 import { Link, useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 const nav = [
   {
@@ -23,6 +24,8 @@ const nav = [
 
 const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises.enterprises.enterprises)
+  const {success: enterpriseUpdateSuccess} = useSelector((state) => state.enterpriseUpdate)
+  const [editData, setEditData] = useState(null);
   const [search, setSearch] = useState(null)
   const [active, setActive] = useState(false)
   const dispatch = useDispatch()
@@ -30,17 +33,28 @@ const Enterprise = () => {
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
     if (!search) dispatch(listEnterprises())
-  }, [search, dispatch])
+  }, [search, dispatch, enterpriseUpdateSuccess])
+
+   // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
+  const editCard = async (id) => {
+     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`)
+    setEditData(data)
+    setActive(true);
+  }
 
   return (
     <>
-      {active && <FormModal setActive={setActive} />}
+      {active && <FormModal setActive={setActive} data={editData} />}
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>
             <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              <CommunityGroupCard data={data} type='enterpise' />
+              <CommunityGroupCard data={data} type="enterpise" editCard={editCard} />
             </div>
           </div>
         </div>

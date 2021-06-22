@@ -11,8 +11,11 @@ import {
   GROUP_CREATE_FAIL,
   GROUP_LIST_BYID_REQUEST,
   GROUP_LIST_BYID_SUCCESS,
-  GROUP_LIST_BYID_FAIL
-} from '../constants/communityGroupConstants'
+  GROUP_LIST_BYID_FAIL,
+  GROUP_UPDATE_REQUEST,
+  GROUP_UPDATE_SUCCESS,
+  GROUP_UPDATE_FAIL
+} from '../constants/CommunityGroupConstants'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -95,8 +98,8 @@ export const listGroupById = (id) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_LIST_BYID_REQUEST })
 
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}`)
-    console.log('groupid', data)
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
+    
     dispatch({
       type: GROUP_LIST_BYID_SUCCESS,
       payload: data
@@ -108,6 +111,31 @@ export const listGroupById = (id) => async (dispatch) => {
             : error.message
     dispatch({
       type: GROUP_LIST_BYID_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const groupUpdate = (newGroup) => async (dispatch) => {
+  try {
+    dispatch({ type: GROUP_UPDATE_REQUEST })
+    const {id, title, category, description, file} = newGroup;
+    await axios.put(
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`,
+            {title, category, description, file}
+    );
+    
+    dispatch({
+      type: GROUP_UPDATE_SUCCESS,
+      payload: true
+    })
+  } catch (error) {
+    const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    dispatch({
+      type: GROUP_UPDATE_FAIL,
       payload: message
     })
   }

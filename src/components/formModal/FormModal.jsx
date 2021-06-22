@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './FormModal.scss'
 import '../enterprisesCollection/EnterprisesCollection.scss'
 import { useLocation, useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { createGroup } from '../../actions/communityGroupActions'
-import { createEnterprise } from '../../actions/enterpriseAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { createGroup, groupUpdate } from '../../actions/communityGroupActions'
+import { createEnterprise, enterpriseUpdate } from '../../actions/enterpriseAction'
 import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
 import { InputFields, SelectFields, ErrorText, SubmitButton } from '../formUI/FormUI'
 import DragDrop from '../dragDrop/DragDrop'
@@ -12,21 +12,23 @@ import axios from 'axios'
 
 const FromModal = ({ setActive, openAddCollection, data }) => {
   const [files, setFiles] = useState()
+
   const [roleActive, setRoleActive] = useState(false)
-  const [groupTitle, setGroupTitle] = useState(data.title || '')
-  const [groupDescription, setGroupDescription] = useState(data.description || '')
-  const [categoryId, setCategoryId] = useState(data.category || '')
+  const [groupTitle, setGroupTitle] = useState(data ? data.title : '')
+  const [groupDescription, setGroupDescription] = useState(data ? data.description : '')
+  const [categoryId, setCategoryId] = useState(data ? data.category : '')
   const [groupTitleError, setGroupTitleError] = useState(false)
   const [groupDescriptionError, setGroupDescriptionError] = useState(false)
 
-  const [enterpriseTitle, setEnterpriseTitle] = useState('')
-  const [enterpriseDescription, setEnterpriseDescription] = useState('')
+  const [enterpriseTitle, setEnterpriseTitle] = useState(data ? data.title : '')
+  const [enterpriseDescription, setEnterpriseDescription] = useState(data ? data.description : '')
   const [enterpriseTitleError, setEnterpriseTitleError] = useState(false)
   const [enterpriseDescriptionError, setEnterpriseDescriptionError] = useState(false)
 
   const { id } = useParams()
   const dispatch = useDispatch()
   const { pathname } = useLocation()
+
   const groupTitleChange = (e) => {
     setGroupTitle(e.target.value)
     setGroupTitleError(false)
@@ -54,22 +56,16 @@ const FromModal = ({ setActive, openAddCollection, data }) => {
     }
   }
 
-  // fetching current community
-const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
-
   const handleEditGroup = async (e) => {
     e.preventDefault();
-    await axios.put(
-            `${process.env.REACT_APP_API_BASE_URL}/api/groups/${data.id}/community/${currentCommunity.id}`,
-            {
+    dispatch(groupUpdate({
+          id: data.id,
           title: groupTitle,
           category: categoryId,
           description: groupDescription,
           file: files
-        }
-    );
+        }))
+    setActive(false);
   }
 
   const enterpriseTitleChange = (e) => {
@@ -98,6 +94,17 @@ const currentCommunity = localStorage.getItem('currentCommunity')
       )
       setActive(false)
     }
+  }
+
+  const handleEditEnterprise = (e) => {
+    e.preventDefault();
+     dispatch(enterpriseUpdate({
+          id: data.id,
+          title: enterpriseTitle,
+          description: enterpriseDescription,
+          file: files
+        }))
+    setActive(false);
   }
 
   return (
@@ -145,7 +152,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
                 <SubmitButton
                   className='default-btn btn-size'
                   onClick={data ? handleEditGroup : handleAddGroup}
-                  title='Submit'
+                  title={data ? 'Edit Group' : 'Submit'}
                 />
               </>
             )}
@@ -164,6 +171,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
                     onChange={(e) => enterpriseTitleChange(e)}
                     className='default-input-variation'
                     error={enterpriseTitleError}
+                    value={enterpriseTitle}
                   />
                   <ErrorText
                     className='error-message'
@@ -174,6 +182,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
                   <InputFields
                     className='default-input-variation text-area-variation'
                     placeholder='Enterprise description'
+                    value={enterpriseDescription}
                     error={enterpriseDescriptionError}
                     onChange={(e) => enterpriseDescriptionChange(e)}
                   />
@@ -191,8 +200,8 @@ const currentCommunity = localStorage.getItem('currentCommunity')
                 <div style={{ display: 'flex', marginTop: '18px' }}>
                   <SubmitButton
                     className='default-btn btn-size'
-                    onClick={handleAddEnterprise}
-                    title='Submit'
+                    onClick={data ? handleEditEnterprise : handleAddEnterprise}
+                    title={data ? 'Edit Enterprise' : 'Submit'}
                   />
                 </div>
               </>

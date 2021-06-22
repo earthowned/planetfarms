@@ -8,12 +8,13 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityGroup.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { searchGroups, listGroups } from '../../actions/communityGroupActions'
+import { searchGroups, listGroups, listGroupById } from '../../actions/CommunityGroupActions'
 import axios from 'axios'
 
 const CommunityGroup = () => {
   const [editData, setEditData] = useState(null);
   const data = useSelector((state) => state.listGroups.groups)
+  const {success:groupUpdateSuccess} = useSelector((state) => state.groupUpdate)
   const dispatch = useDispatch()
 
   const [active, setActive] = useState(false)
@@ -24,22 +25,19 @@ const CommunityGroup = () => {
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
     if (!search) dispatch(listGroups())
-  }, [search, dispatch])
+  }, [search, dispatch, groupUpdateSuccess])
 
   // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
-  
+
   const editCard = async (id) => {
-   const {data} = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`
-    );
-    setEditData(data);
-    console.log(data);
-    
+     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
+    setEditData(data)
     setActive(true);
   }
+
 
   return (
     <>
@@ -76,7 +74,10 @@ const currentCommunity = localStorage.getItem('currentCommunity')
               </div>
             </div>
             <div className='community-group-container'>
-              <CommunityGroupCard location='/community-group-view-page/:id' data={data} editCard={editCard} />
+              <CommunityGroupCard location='/community-group-view-page/:id' 
+              data={data} 
+              editCard={editCard} 
+              setActive={setActive} />
             </div>
           </div>
         </div>
