@@ -22,7 +22,7 @@ function CommunityMembersProfile () {
   const userDetails = useSelector((state) => state.userDetails)
   const { user } = userDetails
 
-  console.log(id)
+  console.log(user)
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -40,7 +40,7 @@ function CommunityMembersProfile () {
   }
 
   return (
-    <DashboardLayout title={user?.name}>
+    <DashboardLayout title={user?.firstName + ' ' + user?.lastName}>
       <div className='x10-4-0-my-personals'>
         <div className='flex-col-2'>
           <div className='frame-2923'>
@@ -52,7 +52,7 @@ function CommunityMembersProfile () {
               {user && <ContactInformation user={user} />}
               {user && <AdditionalInformation user={user} />}
             </div>
-            <EditInformation clickHandler={editUserInformation} image='/img/profile-image.svg' follow='follow' />
+            <EditInformation clickHandler={editUserInformation} image={user?.attachments} follow='follow' />
           </div>
         </div>
       </div>

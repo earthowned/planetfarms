@@ -66,8 +66,7 @@ function CongratulationScreen () {
     //   signUp({ firstname, lastname, phone, birthday, email });
     // }
     dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: user ? user.id : userInfo.id }))
-    user ? history.push('/myProfile') :  history.push('/community-page-news')
-    return
+    user ? history.push('/myProfile') : history.push('/community-page-news')
   }
 
   return (

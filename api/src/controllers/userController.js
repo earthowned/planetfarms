@@ -75,14 +75,14 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    console.log(name, password)
-    const username = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)
+    const username = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
+    console.log('username', username)
     if (username) {
-      res.json({
+      await res.json({
         token: generateToken(username)
       })
     } else {
-      res.status(401).json({
+      await res.status(401).json({
         error: 'Invalid email or password'
       })
     }
@@ -95,9 +95,8 @@ const authUser = async (req, res) => {
 }
 
 const localAuth = async (name, password) => {
-  const user = await User.findOne({ where: { name, password } })
-  console.log(user)
-  return (user) ? user.dataValues.id : ''
+  const user = await User.findOne({ where: { email: name, password: password } })
+  return user?.id || ''
 }
 
 const cognitoAuth = async (name, password) => {
@@ -240,12 +239,12 @@ const getUserById = (req, res) => {
 const getUserProfileByUserID = (req, res) => {
   const id = req.params.userID
   UserProfile.findOne({ where: { userID: id } })
-    .then((user) => {
-      if (user) {
-        res.json(user)
+    .then((profile) => {
+      if (profile) {
+        res.json(profile)
       } else {
         res.status(404)
-        throw new Error('User not found')
+        throw new Error('Profile not found')
       }
     })
     .catch((err) => res.json({ error: err.message }).status(400))

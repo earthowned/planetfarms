@@ -60,6 +60,7 @@ export const login = (name, password) => async (dispatch) => {
       config
     )
     localStorage.setItem('userInfo', JSON.stringify(data))
+    console.log(JSON.stringify(data))
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data
@@ -87,7 +88,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/${id}`, config)
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile/${id}`, config)
     console.log(data)
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -119,7 +120,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/${user.id}`, user, config)
+    const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile/${user.id}`, user, config)
 
     dispatch({ type: USER_UPDATE_SUCCESS })
 
