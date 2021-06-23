@@ -25,6 +25,8 @@ const getEnterprises = (req, res) => {
     offset: (page - 1),
     limit: pageSize,
     ordervalue,
+    attributes: {exclude: ['deleted']},
+    where: {deleted: false},
     include: [{
       model: db.Community,
       attributes: ['id'],
@@ -99,7 +101,7 @@ const deleteEnterprises = (req, res) => {
   ).then(enterprises => {
     if (enterprises) {
       const { id } = enterprises
-      db.Enterprise.destroy({ where: { id } })
+      db.Enterprise.update({deleted: true},{ where: { id } })
         .then(() => res.json({ message: 'Enterprises Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {

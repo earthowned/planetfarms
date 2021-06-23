@@ -22,6 +22,8 @@ const getGroups = (req, res) => {
     offset: (page - 1),
     limit: pageSize,
     ordervalue,
+    attributes: {exclude: ['deleted']},
+    where: {deleted: false},
     include: [{
       model: db.Community,
       attributes: ['id'],
@@ -96,7 +98,7 @@ const deleteGroups = (req, res) => {
     .then(groups => {
       if (groups) {
         const { id } = groups
-        db.Group.destroy({ where: { id } })
+        db.Group.update({deleted: true}, { where: { id } })
 
           .then(() => res.json({ message: 'Groups Deleted!!!' }).status(200))
           .catch((err) => res.json({ error: err.message }).status(400))

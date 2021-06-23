@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     slug: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     }
   },
   { timestamps: true }

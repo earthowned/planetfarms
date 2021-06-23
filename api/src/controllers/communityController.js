@@ -23,6 +23,8 @@ const getCommunities = async (req, res) => {
                 limit: pageSize,
                 // ordervalue,
                 order: [['createdAt', 'DESC']],
+                where: {deleted: false},
+                attributes: {exclude: ['deleted']},
                 include: [{
                   model: db.User,
                   as: 'followers',
@@ -83,19 +85,45 @@ const getUserCommunities = async (req, res) => {
 // @desc Add individual communities
 // @route POST /api/communities/add
 // @access Private
-const createCommunity = (req, res) => {
-  let filename = ''
-  if (req.file) {
-    filename = req.file.filename
-  }
+const createCommunity = async (req, res) => {
+  try {
+      let filename = ''
+    if (req.file) {
+      filename = req.file.filename
+    }
 
-  if (!req.body.creatorId) {
-    return res.json({ message: 'Not authorized to create.' })
-  }
+    if (!req.body.creatorId) {
+      return res.json({ message: 'Not authorized to create.' })
+    }
 
-  db.Community.create({ ...req.body, slug: "", attachment: 'uploads/' + filename })
-    .then(() => res.json({ message: 'Community is Created !!!' }).status(200))
-    .catch((err) => res.json({ error: err.message }).status(400))
+    // auto follow through transactions
+    if(req.body.auto_follow) {
+       const result = await sequelize.transaction(async (t) => {
+         const community = await db.Community.create({ ...req.body, slug: "", attachment: 'uploads/' + filename }, {transaction: t});
+           const idArrays = await db.User.findAll({attributes: ['id']}, {transaction: t});
+           const allFollow = [];
+
+          for (let i = 0; i < idArrays.length; i++) {
+            const followObj = {
+              userId: parseInt(idArrays[i].id),
+              communityId: community.id
+            };
+            allFollow.push(followObj);
+          }
+
+           await db.CommunityUser.bulkCreate(allFollow, {transaction: t});
+          return 'Community is created with autoFollow'
+        })
+
+        return res.json({message: result});
+    }
+
+    await db.Community.create({ ...req.body, slug: "", attachment: 'uploads/' + filename });
+    res.json({ message: 'Community is Created !!!' }).status(200);
+
+  } catch (error) {
+    res.json({ error: error.message }).status(400)
+  }
 }
 
 // @desc Fetch single communities
@@ -129,70 +157,123 @@ const getCommunityById = async (req, res) => {
 // @desc Delete single groups
 // @route GET /api/communities/:id
 // @access Private
-const deleteCommunity = (req, res) => {
-  const id = req.params.id
+const deleteCommunity = async (req, res) => {
+  try {
+          const id = req.params.id
 
-  console.log(req.body.creatorId);
+        if (!req.body.creatorId) {
+          return res.json({ message: 'Not authorized to delete.' })
+        }
+        const community = await db.Community.findByPk(id);
 
-  if (!req.body.creatorId) {
-    return res.json({ message: 'Not authorized to delete.' })
-  }
-
-  db.Community.findByPk(id).then(communities => {
-    if (communities) {
-      const { id } = communities
-      if (communities.creatorId !== req.body.creatorId) {
+   if (community) {
+      const { id } = community
+      if (community.creatorId !== req.body.creatorId) {
         return res.json({ message: 'Not authorized to delete.' })
       }
-      db.Community.destroy({ where: { id } })
-        .then(() => res.json({ message: 'Community Deleted!!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
+
+      const result = await sequelize.transaction(async (t) => {
+        const communityUserIds = await db.CommunityUser.findAll({where: {communityId: id}}, {transaction: t});
+
+        communityUserIds.forEach(async function (communityId) { 
+          const {id} = communityId
+          await db.CommunityUser.update({active: false}, {where: {id}}, {transaction: t});
+        })
+
+        await db.Community.update({deleted: true}, { where: { id } }, {transaction: t});
+
+        return 'Community Deleted with links.'
+      })
+      
+      return res.json({ message: result }).status(200);
     } else {
       res.status(404)
       throw new Error('Community not found')
     }
-  })
-    .catch((err) => res.json({ error: err.message }).status(400))
+  } catch (error) {
+    res.json(error);
+  }
 }
 
 // @desc Update a communities
 // @route PUT /api/communities/:id
 // @access Private
-const updateCommunity = (req, res) => {
-  const {
-    name, description, creatorId
-  } = req.body
+const updateCommunity = async (req, res) => {
+  try {
+          const {
+          name, description, creatorId
+        } = req.body
 
-  let filename = ''
-  if (req.file) {
-    filename = req.file.filename
-  }
+        let filename = ''
+        if (req.file) {
+          filename = req.file.filename
+        }
 
-  if (!creatorId) {
-    return res.json({ message: 'Not authorized to update.' })
-  }
-  const id = req.params.id
-  db.Community.findByPk(id).then(communities => {
-    if (communities) {
-      const { id } = communities
-      if (communities.creatorId !== creatorId) {
+        if (!creatorId) {
+          return res.json({ message: 'Not authorized to update.' })
+        }
+        const id = req.params.id
+
+  const community = await db.Community.findByPk(id);
+  if (community) {
+      const { id } = community
+      if (community.creatorId !== creatorId) {
         return res.json({ message: 'Not authorized to update.' })
       }
-      db.Community.update({
-        name,
-        description,
-        creatorId: creatorId,
-        attachment: 'uploads/' + filename
-      },
-      { where: { id } })
-        .then(() => res.json({ message: 'Community Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
+
+       // auto follow through transactions
+          if(req.body.auto_follow) {
+            const result = await sequelize.transaction(async (t) => {
+              
+                const userIdArrays = await db.User.findAll({attributes: ['id']});
+             
+                const followIdArrays = await db.CommunityUser.findAll({attributes: ['userId'], 
+                where: {communityId: community.id}});
+                const newFollowIds = followIdArrays.map(item => item.userId);
+                const newUserIds = userIdArrays.map(item => item.id);
+                const idArrays = newUserIds.filter(item => {
+                  return newFollowIds.indexOf(item) === -1;
+                });
+
+                const allFollow = [];
+
+                for (let i = 0; i < idArrays.length; i++) {
+                  const followObj = {
+                    userId: parseInt(idArrays[i]),
+                    communityId: community.id
+                  };
+                  allFollow.push(followObj);
+                }
+
+                await db.CommunityUser.bulkCreate(allFollow, {transaction: t});
+                await db.Community.update({ ...req.body, slug: "", attachment: 'uploads/' + filename }, 
+                { where: { id }}, 
+                {transaction: t});
+
+                return 'Community is updated with autoFollow'
+              })
+
+              return res.json({message: result});
+          }
+          else {
+              await db.Community.update({
+                  name,
+                  description,
+                  creatorId: creatorId,
+                  attachment: 'uploads/' + filename
+                },
+                { where: { id }, returning: true, attributes: ['id'] })
+                return res.json({ message: 'Community Updated !!!'}).status(200);
+          }
+     
     } else {
       res.status(404)
       throw new Error('Community not found')
     }
-  })
-    .catch((err) => res.json({ error: err.message }).status(400))
+
+  } catch (error) {
+    res.json(error);
+  }
 }
 
 // @desc Search name

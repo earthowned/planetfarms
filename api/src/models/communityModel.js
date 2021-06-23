@@ -23,6 +23,14 @@ module.exports = (sequelize, DataTypes) => {
       slug: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      },
+      auto_follow: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     },
     { timestamps: true }
@@ -30,7 +38,6 @@ module.exports = (sequelize, DataTypes) => {
   //hooks
   Community.addHook('beforeSave', (community, optionsObject) => {
     let newslug = community.name.split(' ').slice(0, 3).join('_');
-
     community.slug = sequelize.fn('lower', newslug);
   })
 
