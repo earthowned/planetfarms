@@ -39,7 +39,7 @@ const ListViewCardComponent = ({ item, modalActive, setModalActive }) => {
         </div>
         <div className='list-content'>
           <h4>{item.title}</h4>
-          <p>{item.category}jelroro</p>
+          <p>{item.category}</p>
         </div>
       </div>
       <div className='list-btn-wrapper'>

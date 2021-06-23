@@ -2,6 +2,8 @@ const multer = require('multer')
 const shortid = require('shortid')
 const path = require('path')
 const fs = require('fs')
+const sharp = require('sharp')
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = path.join(path.dirname(__dirname), '..', 'files', `${file.fieldname}`)
@@ -38,4 +40,35 @@ const multipleUpload = upload.fields([{ name: 'avatar' }, { name: 'attachment' }
 
 const uploadArray = multer({ storage }).array('files')
 
-module.exports = { multipleUpload, uploadArray, upload }
+const resizeImage = (req, res, next) => {
+  const { format, height, width } = { format: 'webp', ...req.body }
+  try {
+    const filename = path.basename(req.file.path).split('.').slice(0, -1).join('.')
+    let dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
+    let newImage = sharp(req.file.path)
+    if (width) {
+      newImage = newImage.resize(parseInt(width))
+      dir = dir + '-' + width + 'x' + height
+    }
+    if (req.body.render) {
+      newImage.toBuffer().then((data) => {
+      // To display the image
+        res.writeHead(200, {
+          'Content-Type': 'image/webp',
+          'Content-Length': data.length
+        })
+        return (res.end(data))
+      })
+    } else {
+      const savePath = dir + '.' + format
+      newImage = newImage.toFile(savePath)
+      return next(null, true)
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const changeFormat = (filename) => path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
+
+module.exports = { multipleUpload, uploadArray, upload, resizeImage, changeFormat }

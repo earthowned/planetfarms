@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-amplify": "^3.3.27",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -19,8 +20,8 @@
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
-    "shortid": "^2.2.16",
-    "aws-amplify": "^3.3.27"
+    "sharp": "^0.28.3",
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "faker": "^5.5.2",
