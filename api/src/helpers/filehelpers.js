@@ -44,7 +44,7 @@ const resizeImage = (req, res, next) => {
   const { format, height, width } = { format: 'webp', ...req.body }
   try {
     const filename = path.basename(req.file.path).split('.').slice(0, -1).join('.')
-    const dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
+    let dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
     let newImage = sharp(req.file.path)
     if (width) {
       newImage = newImage.resize(parseInt(width))
