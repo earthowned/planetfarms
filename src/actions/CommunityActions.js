@@ -193,7 +193,12 @@ export const communityDelete = (id, creatorId) => async (dispatch) => {
     dispatch({ type: COMMUNITY_DELETE_REQUEST })
     
    const data =  await axios.delete(
-            `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`, creatorId
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`, 
+            {
+              data: {
+                creatorId
+            }
+          }
     );
 
     console.log(data)
