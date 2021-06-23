@@ -3,6 +3,7 @@ const User = require('../models/userModel.js')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
 const Sequelize = require('sequelize')
+const UserProfile = require('../models/userProfileModel.js')
 const Op = Sequelize.Op
 
 function amplifyConfig () {
@@ -74,7 +75,8 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    username = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)
+    console.log(name, password)
+    const username = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)
     if (username) {
       res.json({
         token: generateToken(username)
@@ -93,12 +95,13 @@ const authUser = async (req, res) => {
 }
 
 const localAuth = async (name, password) => {
-  user = await User.findOne({ where: { name, password } })
+  const user = await User.findOne({ where: { name, password } })
+  console.log(user)
   return (user) ? user.dataValues.id : ''
 }
 
 const cognitoAuth = async (name, password) => {
-  user = await Auth.signIn(name, password)
+  const user = await Auth.signIn(name, password)
   return (user) ? name : ''
 }
 
@@ -108,9 +111,8 @@ const cognitoAuth = async (name, password) => {
 const registerUser = async (req, res) => {
   try {
     const { name, password, email } = req.body
-    let user
     if (process.env.AUTH_METHOD === 'cognito') {
-      user = await Auth.signUp({
+      await Auth.signUp({
         username: name,
         password,
         attributes: {
@@ -128,7 +130,7 @@ const registerUser = async (req, res) => {
 const registerLocal = async (name, password, email, res) => {
   const userExists = await User.findOne({ where: { name } })
   if (userExists) res.json({ message: 'Users already Exists !!!' }).status(400)
-  user = await User.create({ name, password })
+  const user = await User.create({ name, password })
   if (user) {
     res.status(201).json({
       id: user.dataValues.id,
@@ -232,6 +234,23 @@ const getUserById = (req, res) => {
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
+// @desc    Fetch single user
+// @route   GET /api/user/profile/:userID
+// @access  Public
+const getUserProfileByUserID = (req, res) => {
+  const id = req.params.userID
+  UserProfile.findOne({ where: { userID: id } })
+    .then((user) => {
+      if (user) {
+        res.json(user)
+      } else {
+        res.status(404)
+        throw new Error('User not found')
+      }
+    })
+    .catch((err) => res.json({ error: err.message }).status(400))
+}
+
 // @desc    Update user
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
@@ -274,4 +293,4 @@ const searchUserName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUsers, updateUser, searchUserName }
+module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getUsers, updateUser, searchUserName }
