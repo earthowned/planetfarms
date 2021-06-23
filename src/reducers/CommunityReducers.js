@@ -19,7 +19,13 @@ import { COMMUNITY_LIST_FAIL,
     USER_COMMUNITY_SEARCH_FAIL,
     COMMUNITY_VISIT_REQUEST,
     COMMUNITY_VISIT_SUCCESS,
-    COMMUNITY_VISIT_FAIL
+    COMMUNITY_VISIT_FAIL,
+    COMMUNITY_UPDATE_REQUEST,
+    COMMUNITY_UPDATE_SUCCESS,
+    COMMUNITY_UPDATE_FAIL,
+    COMMUNITY_DELETE_REQUEST,
+    COMMUNITY_DELETE_SUCCESS,
+    COMMUNITY_DELETE_FAIL
 } from "../constants/CommunityConstants"
 
 export const communityListReducer = (state = { communities: [] }, action) => {
@@ -115,6 +121,32 @@ export const communityVisitReducer = (state = {currentCommunity: {}}, action) =>
     case COMMUNITY_VISIT_SUCCESS:
       return { loading: false, currentCommunity: action.payload}
     case COMMUNITY_VISIT_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const communityUpdateReducer = (state = {success: false}, action) => {
+  switch (action.type) {
+    case COMMUNITY_UPDATE_REQUEST:
+      return { ...state, loading: true }
+    case COMMUNITY_UPDATE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case COMMUNITY_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const communityDeleteReducer = (state = {success: false}, action) => {
+  switch (action.type) {
+    case COMMUNITY_DELETE_REQUEST:
+      return { ...state, loading: true }
+    case COMMUNITY_DELETE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case COMMUNITY_DELETE_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

@@ -132,6 +132,8 @@ const getCommunityById = async (req, res) => {
 const deleteCommunity = (req, res) => {
   const id = req.params.id
 
+  console.log(req.body.creatorId);
+
   if (!req.body.creatorId) {
     return res.json({ message: 'Not authorized to delete.' })
   }

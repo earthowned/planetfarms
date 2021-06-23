@@ -6,14 +6,14 @@ import './CommunitiesCard.scss'
 import Background from '../background/Background'
 import CardLayout from '../../layout/cardLayout/CardLayout'
 
-const CommunitiesCard = ({ data = [] }) => {
+const CommunitiesCard = ({ data = [], editCard, deleteCard }) => {
   return (
     <>
       <div className='communities-card-container'>
         <CardLayout>
           {data.length > 0 && data.map(community => {
             return (
-              <CommunityCard community={community} />
+              <CommunityCard community={community} editCard={editCard} deleteCard={deleteCard} />
             )
           })}
         </CardLayout>
@@ -24,7 +24,7 @@ const CommunitiesCard = ({ data = [] }) => {
 
 export default CommunitiesCard
 
-const CommunityCard = ({ community }) => {
+const CommunityCard = ({ community, editCard, deleteCard }) => {
   const [follower, setFollower] = useState(true)
   const [creator, setCreator] = useState(false)
 
@@ -33,7 +33,7 @@ const CommunityCard = ({ community }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   // choose userid according to the user data in your database
-  const currentUserId = 1
+  const currentUserId = 2
   useEffect(() => {
     if (community.followers && community.followers.length > 0) {
       if (checkFollow(community.followers, currentUserId)) setFollower(false)
@@ -62,6 +62,16 @@ const CommunityCard = ({ community }) => {
   return (
      <div ckey={community.id} lassName="community-card">
       <Background image={community.attachment}>
+        {
+        creator && <div className="card-edit">
+            <button className="edit-btn" onClick={() => editCard(community.id)}>
+              <img src="/img/more-horizontal.svg" alt="burger icon" />
+            </button>
+            <button className="edit-btn" onClick={() => deleteCard(community.id)}>
+              <img src="/img/trash-icon.svg" alt="burger icon" />
+            </button>
+            </div>
+        }
         <div className='card-1-text'>
           <div className='card-1-title'>
             <h3 className='text-1-card valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-32px'>

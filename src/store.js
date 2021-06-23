@@ -7,7 +7,7 @@ import { enterpriseCreateReducer, enterpriseDeleteReducer, enterpriseListReducer
 import { groupCreateReducer, groupDeleteReducer, groupListReducer, groupUpdateReducer, groupViewReducer } from './reducers/CommunityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
-import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, communityVisitReducer } from './reducers/CommunityReducers'
+import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, communityVisitReducer, communityDeleteReducer, communityUpdateReducer } from './reducers/CommunityReducers'
 import { memberListReducer } from './reducers/MemberReducers'
 
 const reducer = combineReducers({
@@ -26,6 +26,8 @@ const reducer = combineReducers({
   addCommunity: communityCreateReducer,
   joinCommunity: communityJoinReducer,
   listCommunities: communityListReducer,
+  communityDelete: communityDeleteReducer,
+  communityUpdate: communityUpdateReducer,
   listUserCommunities: userCommunityListReducer,
   activeCommunity: communityVisitReducer,
   userLogin: userLoginReducer,

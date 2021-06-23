@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import Button from "../../components/button/Button";
-import { listCommunities, searchCommunities, createCommunity, listUserCommunities, searchUserCommunities } from "../../actions/communityActions";
+import { listCommunities, searchCommunities, createCommunity, listUserCommunities, searchUserCommunities, communityDelete, communityUpdate } from "../../actions/communityActions";
 import CommunitiesCard from '../../components/communitiesCard/CommunitiesCard'
 import DragDrop from "../../components/dragDrop/dragDrop";
 import Filter from '../../components/filter/Filter'
@@ -14,26 +14,72 @@ import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import useSizeFinder from "../../utils/sizeFinder";
 import './CommunitySwitching.scss'
 import Pagination from "../../components/pagination/Pagination";
+import axios from "axios";
 
 function App () {
   const[modalActive, setModalActive] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [deleteId, setDeleteId] = useState(null);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [editData, setEditData] = useState(null);
+  const communitiesState = useSelector((state) => state.listCommunities);
+
+  const dispatch = useDispatch();
+    // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
+  const editCard = async (id) => {
+     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`)
+    setEditData(data)
+    setModalActive(true);
+  }
+  
+ const deleteCard = (id) => {
+    setDeleteModal(true);
+    setDeleteId(id);
+  }
+
+  const creatorId = 2;
+
+  const confirmDelete = () => {
+    dispatch(communityDelete(deleteId, creatorId))
+    setDeleteModal(false);
+  }
+
   return (
     <>
-      {modalActive && <CommunityModal setActive={setModalActive} />}
-      <DashboardLayout title="All Communities">
-        <AllCommunities setModalActive={setModalActive} />
-      </DashboardLayout>
+    {modalActive && <CommunityModal setActive={setModalActive} data={editData} />}
+    {deleteModal &&  <div className='simple-modal-container'>
+        <div className='simple-modal-inner-container'>
+          <div>
+          <h4>Are you sure you want to delete?</h4>
+          {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
+          </div>
+          <div>
+            <button className="secondary-btn" onClick={confirmDelete}>Confirm</button>
+            <button className="secondary-btn" onClick={() => setDeleteModal(false)}>Cancel</button>
+          </div>
+        </div>
+      </div>}
+    <DashboardLayout title="All Communities">
+      <AllCommunities setModalActive={setModalActive} editCard={editCard} deleteCard={deleteCard} />
+      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={communitiesState} />
+    </DashboardLayout>
     </>
   )
 }
 
 export default App
 
-function AllCommunities ({setModalActive}) {
+function AllCommunities ({setModalActive, editCard, deleteCard}) {
   const {pathname} = useLocation();
   const [search, setSearch] = useState(null)
-  const [pageNumber, setPageNumber] = useState(1)
-
+  
+const {success:communityDeleteSuccess} = useSelector((state) => state.communityDelete)
+const {success:communityUpdateSuccess} = useSelector((state) => state.communityUpdate)
+  
    const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const communitiesState = useSelector((state) => state.listCommunities);
@@ -54,23 +100,23 @@ function AllCommunities ({setModalActive}) {
           if(!search) dispatch(listUserCommunities(1))
           if(search) dispatch(searchUserCommunities(1, search));
         }
-  }, [search, dispatch, createSuccess, pathname]);
+  }, [search, dispatch, createSuccess, pathname, communityDeleteSuccess]);
 
+  
   return (
     <>
         <CommunityHeader setActive={setModalActive} search={search} setSearch={setSearch} />
         <div style={{width: '100%', minHeight: '130%'}}>
         {
           pathname==='/community-switching/my-communities' 
-          ? <><CommunitiesCard data={userCommunities} /> 
+          ? <><CommunitiesCard data={userCommunities} editCard={editCard} deleteCard={deleteCard} /> 
           {/* <Pagination pageNumber={userCommunities.pageNumber} /> */}
           </>
-          : <><CommunitiesCard data={communities} /> 
+          : <><CommunitiesCard data={communities} editCard={editCard} deleteCard={deleteCard} /> 
           {/* <Pagination /> */}
           </>
         }
         </div>
-        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={communitiesState} />
     </>)  
 }
 
@@ -110,16 +156,28 @@ const CommunityHeader = ({setActive, search, setSearch}) => {
   )
 }
 
-const CommunityModal = ({setActive}) => {
+const CommunityModal = ({setActive, data}) => {
   const [files, setFiles] = useState();
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-  const [category, setCategory] = useState('');
-  const [userId, setUserId] = useState(0);
+  const [name, setName] = useState(data ? data.name : '');
+  const [desc, setDesc] = useState(data ? data.description : '');
+  const [category, setCategory] = useState(data ? data.category : '');
+  // const [userId, setUserId] = useState(0);
+  const userId = 2;
   const dispatch = useDispatch()
   
   function addCommunity () {
     dispatch(createCommunity({files, name, desc, userId, category}))
+    setActive(false);
+  }
+
+  function updateCommunity () {
+     dispatch(communityUpdate({
+          id: data.id,
+          name: name,
+          description: desc,
+          file: files,
+          creatorId: userId
+        }))
     setActive(false);
   }
   
@@ -132,8 +190,11 @@ const CommunityModal = ({setActive}) => {
             <InputComponent name="Community Name" text={name} changeHandler={setName} />
             <InputComponent name="Description" text={desc} changeHandler={setDesc} />
             <InputComponent name="Category" text={category} changeHandler={setCategory} />
-            <InputComponent name="User Id" text={userId} changeHandler={setUserId} />
-             <Button name="Create Community" clickHandler={addCommunity} />
+            {/* <InputComponent name="User Id" text={userId} changeHandler={setUserId} /> */}
+             {data 
+             ? <Button name="Update Community" clickHandler={updateCommunity} />
+             : <Button name="Create Community" clickHandler={addCommunity} />
+              }
           </div>
         </div>
       </div>

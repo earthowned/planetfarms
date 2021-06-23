@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, COMMUNITY_VISIT_FAIL, COMMUNITY_VISIT_REQUEST, COMMUNITY_VISIT_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from '../constants/CommunityConstants'
+import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_DELETE_FAIL, COMMUNITY_DELETE_REQUEST, COMMUNITY_DELETE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, COMMUNITY_UPDATE_FAIL, COMMUNITY_UPDATE_REQUEST, COMMUNITY_UPDATE_SUCCESS, COMMUNITY_VISIT_FAIL, COMMUNITY_VISIT_REQUEST, COMMUNITY_VISIT_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from '../constants/CommunityConstants'
 
 export const listCommunities = (sort = '', pageNumber = '') => async (
   dispatch
@@ -158,6 +158,57 @@ export const visitCommunity = (id) => async (dispatch) => {
             : error.message
     dispatch({
       type: COMMUNITY_VISIT_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const communityUpdate = (newCommunity) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY_UPDATE_REQUEST })
+    const {id, name, category, description, file, creatorId} = newCommunity;
+    await axios.put(
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`,
+            {name, category, description, file, creatorId}
+    );
+    
+    dispatch({
+      type: COMMUNITY_UPDATE_SUCCESS,
+      payload: true
+    })
+  } catch (error) {
+    const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    dispatch({
+      type: COMMUNITY_UPDATE_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const communityDelete = (id, creatorId) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY_DELETE_REQUEST })
+    
+   const data =  await axios.delete(
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`, creatorId
+    );
+
+    console.log(data)
+    
+    dispatch({
+      type: COMMUNITY_DELETE_SUCCESS,
+      payload: true
+    })
+  } catch (error) {
+    const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    dispatch({
+      type: COMMUNITY_DELETE_FAIL,
       payload: message
     })
   }
