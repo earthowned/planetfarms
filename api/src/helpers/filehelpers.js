@@ -41,29 +41,35 @@ const multipleUpload = upload.fields([{ name: 'avatar' }, { name: 'attachment' }
 const uploadArray = multer({ storage }).array('files')
 
 const resizeImage = (req, res, next) => {
+  const { format, height, width } = {format: 'webp', ...req.body};
   try {
     const filename = path.basename(req.file.path).split('.').slice(0, -1).join('.')
     const dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
     let newImage = sharp(req.file.path)
-    newImage = newImage.resize(parseInt(req.body.width))
-    if (req.body.save) {
-      const savePath = dir + '-' + req.body.width + 'x' + req.body.height + '.' + req.body.format
-      newImage = newImage.toFile(savePath)
-      return next(null, true)
-    } else {
+    if (width) {
+      newImage = newImage.resize(parseInt(width))
+      dir = dir + '-' + width + 'x' + height
+    }
+    if (req.body.render) {
       newImage.toBuffer()
         .then((data) => {
         // To display the image
           res.writeHead(200, {
-            'Content-Type': 'image/png',
+            'Content-Type': 'image/webp',
             'Content-Length': data.length
           })
           return (res.end(data))
         })
+    } else {
+      const savePath = dir + '.' + format
+      newImage = newImage.toFile(savePath)
+      return next(null, true)
     }
   } catch (error) {
     console.error(error)
   }
 }
 
-module.exports = { multipleUpload, uploadArray, upload, resizeImage }
+const changeFormat = (filename)  => path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
+
+module.exports = { multipleUpload, uploadArray, upload, resizeImage, changeFormat }

@@ -21,7 +21,7 @@ const render = (req, res, next) => {
     newImage.toBuffer()
       .then((data) => {
         res.writeHead(200, {
-          'Content-Type': 'image/png',
+          'Content-Type': 'image/webp',
           'Content-Length': data.length
         })
         return (res.end(data))

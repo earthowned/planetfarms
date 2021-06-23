@@ -1,6 +1,7 @@
 const Resource = require('../models/resourceModel.js')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc    Fetch all resources
 // @route   GET /api/resources
@@ -13,7 +14,10 @@ const getResources = (req, res) => {
   Resource.findAndCountAll({ offset: (page - 1) * pageSize, limit: pageSize, ordervalue })
     .then(resources => {
       const totalPages = Math.ceil(resources.count / pageSize)
-      res.json({ resources: resources.rows, totalItems: resources.count, totalPages, page, pageSize }).status(200)
+      res.json({
+        resources: resources.rows.map(rec => ({...rec, filename: changeFormat(rec.filename)})),
+        totalItems: resources.count, totalPages, page, pageSize
+      }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
@@ -39,7 +43,7 @@ const getResourcesById = (req, res) => {
   Resource.findByPk(id)
     .then(resource => {
       if (resource) {
-        res.json(resource)
+        res.json({ ...resource, filename: changeFormat(resource.filename)})
       } else {
         res.status(404)
         throw new Error('Resource not found')
@@ -86,9 +90,9 @@ const updateResources = (req, res) => {
 const searchResourcesTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
-
   Resource.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
-    .then(resources => res.json({ resources }).status(200))
+    .then(resources => res.json(resources.map(rec => ({...rec, filename: changeFormat(rec.filename)})))
+    .status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 
