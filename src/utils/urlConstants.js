@@ -13,5 +13,9 @@ export const CATEGORY = "categories";
 export const GET_COURSE = "courses";
 export const ADD_COURSE = "courses/add";
 
+//lesson
+export const GET_LESSONS = "lessons";
+export const ADD_LESSONS = "lessons/add";
+
 //get files
 export const GET_THUMBNAIL = BASE_URL + "../thumbnail/";
