@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import uuid from 'react-uuid'
 
 import AddTestModal from '../../../Components/AddTestModal/AddTestModal'
 import BackButton from '../../../Components/BackButton/BackButton'
@@ -16,9 +17,16 @@ const AddLesson = () => {
   const [textModal, setTextModal] = useState(false)
   const [testModal, setTestModal] = useState(false)
 
+  const [useStep, setUseStep] = useState(0)
+  const [lessonCover, setLessonCover] = useState(null)
+
   const { register, errors, handleSubmit } = useForm()
 
   const submitLessonForm = (data) => {
+    const lessonId = uuid()
+    const coverImg = lessonCover
+    console.log(lessonId)
+    console.log(coverImg)
     console.log(data)
   }
 
@@ -54,6 +62,8 @@ const AddLesson = () => {
           setTextModal={setTextModal}
           setTestModal={setTestModal}
           register={register}
+          setLessonCover={setLessonCover}
+          lessonCover={lessonCover}
         />
         <LessonMaterial />
         <LessonSaveModal onClick={handleSubmit(submitLessonForm)} />
@@ -67,7 +77,8 @@ const AddContent = ({
   setImageModal,
   setTextModal,
   setTestModal,
-  register
+  register,
+  setLessonCover
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -82,7 +93,7 @@ const AddContent = ({
           }
         })}
       />
-      <DragDrop />
+      <DragDrop onChange={(img) => setLessonCover(img)} />
       <div className='admin-lesson-create-btn-wrapper'>
         <button className='secondary-btn' onClick={() => setVideoModal(true)}>
           <img src='/img/video-outline.svg' alt='video icon' />{' '}

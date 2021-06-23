@@ -7,12 +7,22 @@ import DragDrop from '../DragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 import { InputFields, ErrorText, TextArea } from '../FormUI/FormUI'
 
-const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive, setVideoActive }) => {
+const CreateVideo = ({
+  getRootProps,
+  getInputProps,
+  files,
+  setFiles,
+  videoActive,
+  setVideoActive
+}) => {
   const [videoTitle, setVideoTitle] = useState()
   const [videoDescription, setVideoDescription] = useState()
 
   const [videoTitleError, setVideoTitleError] = useState()
   const [videoDescriptionError, setVideoDescriptionError] = useState()
+
+  const [users, setUsers] = useState([])
+  const [videoCover, setVideoCover] = useState(null)
 
   const videoTitleChange = (e) => {
     setVideoTitle(e.target.value)
@@ -24,13 +34,28 @@ const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive
   }
 
   const dispatch = useDispatch()
-  const addVideo = () => {
+
+  const addVideo = ({
+    videoTitle,
+    videoDescription,
+    videoCover,
+    videoLink
+  }) => {
     if (!videoTitle) setVideoTitleError(true)
     if (!videoDescription) setVideoDescriptionError(true)
     if (videoTitle && videoDescription) {
       dispatch(savevideoDetail({ videoTitle, videoDescription }))
-      setVideoActive(false)
+      // setVideoActive(false);
     }
+    const updateUsers = [
+      {
+        videoTitle: videoTitle,
+        videoDescription: videoDescription,
+        videoCover: videoCover,
+        videoLink: videoLink
+      }
+    ]
+    setUsers(updateUsers)
   }
   return (
     <>
@@ -38,8 +63,22 @@ const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive
         <div className='collection-modal-container'>
           <div>
             <div className='collection-modal-inner-container'>
-              <CollectionModalHeader title='Add video' clickHandler={setVideoActive} />
-              <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} onChange={setFiles} />
+              <CollectionModalHeader
+                title='Add video'
+                clickHandler={setVideoActive}
+              />
+              <DragDrop
+                getInputProps={getInputProps}
+                getRootProps={getRootProps}
+                files={files}
+                onChange={(img) => setVideoCover(img)}
+              />
+              {users.map((user, index) => (
+                <div>
+                  <p>{user.videoTitle}</p>
+                  <p>{user.videoDescription}</p>
+                </div>
+              ))}
               <div className='video-input-container'>
                 <InputFields
                   className='default-input-variation'
@@ -47,7 +86,11 @@ const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive
                   value={videoTitle}
                   onChange={(e) => videoTitleChange(e)}
                 />
-                <ErrorText className='error-message' error={videoTitleError} message='Please enter Video Title' />
+                <ErrorText
+                  className='error-message'
+                  error={videoTitleError}
+                  message='Please enter Video Title'
+                />
                 <br />
                 <TextArea
                   className='default-input-variation text-area-variation'
@@ -57,13 +100,21 @@ const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive
                   value={videoDescription}
                   onChange={(e) => videoDescriptionChange(e)}
                 />
-                <ErrorText className='error-message' error={videoDescriptionError} message='Please enter Video Description' />
+                <ErrorText
+                  className='error-message'
+                  error={videoDescriptionError}
+                  message='Please enter Video Description'
+                />
                 <div className='video-row-3'>
-                  <input className='default-input-variation last-input-variation' placeholder='Video link' />{' '}
-                  <span>OR</span> <button className='secondary-btn'>Choose video</button>
+                  <input
+                    className='default-input-variation last-input-variation'
+                    placeholder='Video link'
+                  />{' '}
+                  <span>OR</span>{' '}
+                  <button className='secondary-btn'>Choose video</button>
                 </div>
               </div>
-              <Button name='Add Video block' clickHandler={addVideo} />
+              <Button name='Add Video block' onClick={addVideo} />
             </div>
           </div>
         </div>

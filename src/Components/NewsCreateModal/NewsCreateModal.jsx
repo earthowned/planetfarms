@@ -22,34 +22,59 @@ const NewsCreateModal = ({
   groupEditActive,
   setGroupEditActive,
   enterpriseActive,
-  setEnterpriseActive
+  setEnterpriseActive,
+  addVideoData
 }) => {
-  const [files, setFiles] = useState()
+  const [files, setFiles] = useState(null)
 
   switch (type) {
     case 'video':
       return (
-        <CreateVideo files={files} setFiles={setFiles} videoActive={videoActive} setVideoActive={setVideoActive} />
+        <CreateVideo
+          files={files}
+          addVideoData={addVideoData}
+          setFiles={setFiles}
+          videoActive={videoActive}
+          setVideoActive={setVideoActive}
+        />
       )
       break
     case 'group':
       return (
-        <CreateGroup files={files} setFiles={setFiles} groupActive={groupActive} setGroupActive={setGroupActive} />
+        <CreateGroup
+          files={files}
+          setFiles={setFiles}
+          groupActive={groupActive}
+          setGroupActive={setGroupActive}
+        />
       )
       break
     case 'edit-group':
       return (
-        <EditGroup files={files} groupEditActive={groupEditActive} setGroupEditActive={setGroupEditActive} />
+        <EditGroup
+          files={files}
+          groupEditActive={groupEditActive}
+          setGroupEditActive={setGroupEditActive}
+        />
       )
       break
     case 'image':
       return (
-        <CreateImage files={files} setFiles={setFiles} imageActive={imageActive} setImageActive={setImageActive} />
+        <CreateImage
+          files={files}
+          setFiles={setFiles}
+          imageActive={imageActive}
+          setImageActive={setImageActive}
+        />
       )
       break
     case 'text':
       return (
-        <CreateText files={files} textActive={textActive} setTextActive={setTextActive} />
+        <CreateText
+          files={files}
+          textActive={textActive}
+          setTextActive={setTextActive}
+        />
       )
       break
     default:
@@ -64,7 +89,10 @@ const CreateGroup = ({ files, groupActive, setGroupActive }) => {
       {groupActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Create Group' setGroupActive={setGroupActive} />
+            <CollectionModalHeader
+              title='Create Group'
+              setGroupActive={setGroupActive}
+            />
             <DragDrop files={files} />
             <GroupInputContainer />
             <Link to='/my-group-view-page'>
@@ -83,18 +111,31 @@ const EditGroup = ({ files, groupEditActive, setGroupEditActive }) => {
       {groupEditActive && (
         <div className='collection-modal-container'>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Edit Group' setGroupEditActive={setGroupEditActive} />
+            <CollectionModalHeader
+              title='Edit Group'
+              setGroupEditActive={setGroupEditActive}
+            />
             <DragDrop files={files} />
             <GroupEditContainer />
             <button className='button-delete'>
-              <img className='trash-icon' src='/img/trash-icon.svg' alt='delete' />
+              <img
+                className='trash-icon'
+                src='/img/trash-icon.svg'
+                alt='delete'
+              />
               Delete Groups
             </button>
             <div>
               <Link to='/my-group-view-page'>
                 <Button name='Edit Group' />
               </Link>
-              <button className='button-cancel' onClick={() => setGroupEditActive(false)}> Cancel </button>
+              <button
+                className='button-cancel'
+                onClick={() => setGroupEditActive(false)}
+              >
+                {' '}
+                Cancel{' '}
+              </button>
             </div>
           </div>
         </div>
