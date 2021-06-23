@@ -14,6 +14,7 @@ import { updateUser } from '../../actions/userAction'
 import './Congratulation.scss'
 
 function CongratulationScreen () {
+  const dispatch = useDispatch()
   const [modalActive, setModalActive] = useState(false)
 
   const { register, errors, handleSubmit } = useForm()
@@ -59,8 +60,8 @@ function CongratulationScreen () {
   //   }
   // };
 
-  const onSubmit = ({ firstname, lastname, phone, birthday, email }) => {
-    console.log(firstname, lastname, phone, birthday, email)
+  const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
+    console.log(firstName, lastName, phone, birthday, email)
     // if (firstname && lastname && phone && birthday && email) {
     //   signUp({ firstname, lastname, phone, birthday, email });
     // }

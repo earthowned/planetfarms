@@ -7,12 +7,12 @@ const ProfileFormCard = ({ data: { title, first_inputTitle, first_inputValue, se
       <h2 className='myProfile-container-row-title'>{title}</h2>
       <div className='myProfile-container-row'>
         <div className='form-group'>
-          <label>{firstInputTitle}</label>
-          <input value={firstInputValue} />
+          <label>{first_inputTitle}</label>
+          <input value={first_inputValue} />
         </div>
         <div className='form-group'>
-          <label>{secondInputTitle}</label>
-          <input value={secondInputValue} />
+          <label>{second_inputTitle}</label>
+          <input value={second_inputValue} />
         </div>
         {third_inputTitle && <div className='form-group'>
           <label>{third_inputTitle}</label>
@@ -23,7 +23,7 @@ const ProfileFormCard = ({ data: { title, first_inputTitle, first_inputValue, se
   )
 }
 
-export const PersonalInformation = () => {
+export const PersonalInformation = ({user}) => {
   const PersonalInformationdata = {
     title: 'Personal information',
     firstInputTitle: 'First Name',
@@ -41,7 +41,7 @@ export const PersonalInformation = () => {
   )
 }
 
-export const ContactInformation = () => {
+export const ContactInformation = ({user}) => {
   const ContactInformationdatadata = {
     title: 'Contact information',
     firstInputTitle: 'Email',
@@ -54,7 +54,7 @@ export const ContactInformation = () => {
   )
 }
 
-export const AdditionalInformation = () => {
+export const AdditionalInformation = ({user}) => {
   const AdditionalInformationdata = {
     title: 'Additional information',
     firstInputTitle: 'Last login',

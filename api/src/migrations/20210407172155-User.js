@@ -24,9 +24,24 @@ module.exports = {
         }
       }
     )
+    queryInterface.createTable('userProfiles',
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
+        },
+        userID: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
+        }
+      }
+    )
   },
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.dropTable('users', {})
+    queryInterface.dropTable('userProfiles', {})
   }
 }

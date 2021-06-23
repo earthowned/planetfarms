@@ -22,6 +22,8 @@ function CommunityMembersProfile () {
   const userDetails = useSelector((state) => state.userDetails)
   const { user } = userDetails
 
+  console.log(id)
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -38,7 +40,7 @@ function CommunityMembersProfile () {
   }
 
   return (
-    <DashboardLayout title={user.name}>
+    <DashboardLayout title={user?.name}>
       <div className='x10-4-0-my-personals'>
         <div className='flex-col-2'>
           <div className='frame-2923'>
