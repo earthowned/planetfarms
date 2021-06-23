@@ -15,8 +15,11 @@ const getResources = (req, res) => {
     .then(resources => {
       const totalPages = Math.ceil(resources.count / pageSize)
       res.json({
-        resources: resources.rows.map(rec => ({...rec, filename: changeFormat(rec.filename)})),
-        totalItems: resources.count, totalPages, page, pageSize
+        resources: resources.rows.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.filename) })),
+        totalItems: resources.count,
+        totalPages,
+        page,
+        pageSize
       }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
@@ -43,7 +46,7 @@ const getResourcesById = (req, res) => {
   Resource.findByPk(id)
     .then(resource => {
       if (resource) {
-        res.json({ ...resource, filename: changeFormat(resource.filename)})
+        res.json({ ...resource, filename: changeFormat(resource.filename) })
       } else {
         res.status(404)
         throw new Error('Resource not found')
@@ -91,8 +94,8 @@ const searchResourcesTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
   Resource.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
-    .then(resources => res.json(resources.map(rec => ({...rec, filename: changeFormat(rec.filename)})))
-    .status(200))
+    .then(resources => res.json(resources.map(rec => ({ ...rec, filename: changeFormat(rec.filename) })))
+      .status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 

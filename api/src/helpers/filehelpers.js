@@ -41,7 +41,7 @@ const multipleUpload = upload.fields([{ name: 'avatar' }, { name: 'attachment' }
 const uploadArray = multer({ storage }).array('files')
 
 const resizeImage = (req, res, next) => {
-  const { format, height, width } = {format: 'webp', ...req.body};
+  const { format, height, width } = { format: 'webp', ...req.body }
   try {
     const filename = path.basename(req.file.path).split('.').slice(0, -1).join('.')
     const dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
@@ -51,15 +51,14 @@ const resizeImage = (req, res, next) => {
       dir = dir + '-' + width + 'x' + height
     }
     if (req.body.render) {
-      newImage.toBuffer()
-        .then((data) => {
-        // To display the image
-          res.writeHead(200, {
-            'Content-Type': 'image/webp',
-            'Content-Length': data.length
-          })
-          return (res.end(data))
+      newImage.toBuffer().then((data) => {
+      // To display the image
+        res.writeHead(200, {
+          'Content-Type': 'image/webp',
+          'Content-Length': data.length
         })
+        return (res.end(data))
+      })
     } else {
       const savePath = dir + '.' + format
       newImage = newImage.toFile(savePath)
@@ -70,6 +69,6 @@ const resizeImage = (req, res, next) => {
   }
 }
 
-const changeFormat = (filename)  => path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
+const changeFormat = (filename) => path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
 
 module.exports = { multipleUpload, uploadArray, upload, resizeImage, changeFormat }
