@@ -65,14 +65,22 @@ const getUserCommunities = async (req, res) => {
     offset: page,
     limit: pageSize,
     // ordervalue,
+    attributes: {exclude: ['deleted']},
     order: [['createdAt', 'DESC']],
      where: {
       creatorId: req.params.id,
+      deleted: false
     },
     include: [{
       model: db.User,
       as: 'followers',
-    }]
+      attributes: ['id'],
+      through: {
+        attributes: ['active'],
+        as: 'followStatus'
+      }
+    }
+  ]
   })
     .then(communities => {
       paginate({ page, pageSize })

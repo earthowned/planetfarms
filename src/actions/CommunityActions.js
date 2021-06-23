@@ -201,7 +201,7 @@ export const communityDelete = (id, creatorId) => async (dispatch) => {
           }
     );
 
-    console.log(data)
+    console.log(data) 
     
     dispatch({
       type: COMMUNITY_DELETE_SUCCESS,

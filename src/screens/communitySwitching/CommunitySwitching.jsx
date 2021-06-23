@@ -91,16 +91,16 @@ const {success:communityUpdateSuccess} = useSelector((state) => state.communityU
   const createCommunity = useSelector((state) => state.addCommunity);
   const {success:createSuccess} = createCommunity
   const dispatch = useDispatch()
-  
+  const userId = 2;
   useEffect(() => {
         if(!search) dispatch(listCommunities());
         if(search) dispatch(searchCommunities(search));
 
         if(pathname==='/community-switching/my-communities') {
-          if(!search) dispatch(listUserCommunities(1))
-          if(search) dispatch(searchUserCommunities(1, search));
+          if(!search) dispatch(listUserCommunities(userId))
+          if(search) dispatch(searchUserCommunities(userId, search));
         }
-  }, [search, dispatch, createSuccess, pathname, communityDeleteSuccess]);
+  }, [search, dispatch, createSuccess, pathname, communityDeleteSuccess, communityUpdateSuccess]);
 
   
   return (
