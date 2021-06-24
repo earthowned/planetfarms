@@ -68,6 +68,7 @@ function DragDropComponent ({
           src='/img/close-outline.svg'
           className='drag-drop-close'
           onClick={() => setFiles(null)}
+          alt='drag_drop_img_close'
         />
       )}
     </div>

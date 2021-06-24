@@ -16,6 +16,7 @@ const AddLesson = () => {
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
   const [testModal, setTestModal] = useState(false)
+  const [videoData, setVideoData] = useState([])
 
   const [useStep, setUseStep] = useState(0)
   const [lessonCover, setLessonCover] = useState(null)

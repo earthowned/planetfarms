@@ -1,11 +1,14 @@
-import { useState } from 'react'
-import './news-create-modal.css'
-import Button from '../Button/Button'
-import { savevideoDetail } from '../../actions/newsActions'
-import { useDispatch } from 'react-redux'
-import DragDrop from '../DragDrop/DragDrop'
-import CollectionModalHeader from './CollectionModalHeader'
-import { InputFields, ErrorText, TextArea } from '../FormUI/FormUI'
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { savevideoDetail } from "../../actions/newsActions";
+import Button from "../Button/Button";
+import DragDrop from "../DragDrop/DragDrop";
+import CollectionModalHeader from "./CollectionModalHeader";
+import { InputFields, ErrorText, TextArea } from "../FormUI/FormUI";
+
+import "./news-create-modal.css";
 
 const CreateVideo = ({
   getRootProps,
@@ -13,58 +16,43 @@ const CreateVideo = ({
   files,
   setFiles,
   videoActive,
-  setVideoActive
+  setVideoActive,
 }) => {
-  const [videoTitle, setVideoTitle] = useState()
-  const [videoDescription, setVideoDescription] = useState()
+  const { register, errors, handleSubmit } = useForm();
+  const [videoData, setVideoData] = useState([]);
+  const [videoCover, setVideoCover] = useState(null);
 
-  const [videoTitleError, setVideoTitleError] = useState()
-  const [videoDescriptionError, setVideoDescriptionError] = useState()
-
-  const [users, setUsers] = useState([])
-  const [videoCover, setVideoCover] = useState(null)
-
-  const videoTitleChange = (e) => {
-    setVideoTitle(e.target.value)
-    setVideoTitleError(false)
-  }
-  const videoDescriptionChange = (e) => {
-    setVideoDescription(e.target.value)
-    setVideoDescriptionError(false)
-  }
-
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch();
 
   const addVideo = ({
     videoTitle,
     videoDescription,
-    videoCover,
-    videoLink
+    videoLink,
+    videoResource,
   }) => {
-    if (!videoTitle) setVideoTitleError(true)
-    if (!videoDescription) setVideoDescriptionError(true)
-    if (videoTitle && videoDescription) {
-      dispatch(savevideoDetail({ videoTitle, videoDescription }))
-      // setVideoActive(false);
-    }
+    //   dispatch(savevideoDetail({ videoTitle, videoDescription }));
+    //   // setVideoActive(false);
+    console.log(videoTitle);
+    console.log(videoLink);
+    console.log(videoResource);
     const updateUsers = [
       {
         videoTitle: videoTitle,
         videoDescription: videoDescription,
         videoCover: videoCover,
-        videoLink: videoLink
-      }
-    ]
-    setUsers(updateUsers)
-  }
+        videoLink: videoLink,
+      },
+    ];
+    setVideoData(updateUsers);
+  };
   return (
     <>
       {videoActive && (
-        <div className='collection-modal-container'>
+        <div className="collection-modal-container">
           <div>
-            <div className='collection-modal-inner-container'>
+            <div className="collection-modal-inner-container">
               <CollectionModalHeader
-                title='Add video'
+                title="Add video"
                 clickHandler={setVideoActive}
               />
               <DragDrop
@@ -73,54 +61,68 @@ const CreateVideo = ({
                 files={files}
                 onChange={(img) => setVideoCover(img)}
               />
-              {users.map((user, index) => (
-                <div>
-                  <p>{user.videoTitle}</p>
-                  <p>{user.videoDescription}</p>
-                </div>
-              ))}
-              <div className='video-input-container'>
+              <div className="video-input-container">
                 <InputFields
-                  className='default-input-variation'
-                  placeholder='Video title'
-                  value={videoTitle}
-                  onChange={(e) => videoTitleChange(e)}
+                  className="default-input-variation"
+                  placeholder="Video title"
+                  name="videoTitle"
+                  ref={register({
+                    required: {
+                      value: true,
+                      message: "Please enter video title",
+                    },
+                  })}
+                  // onChange={(e) => videoTitleChange(e)}
                 />
                 <ErrorText
-                  className='error-message'
-                  error={videoTitleError}
-                  message='Please enter Video Title'
+                  className="errorMsg"
+                  message={errors.videoTitle && errors.videoTitle.message}
                 />
-                <br />
+
                 <TextArea
-                  className='default-input-variation text-area-variation'
-                  placeholder='Video description'
-                  cols='3'
-                  rows='3'
-                  value={videoDescription}
-                  onChange={(e) => videoDescriptionChange(e)}
+                  className="default-input-variation text-area-variation"
+                  placeholder="Video description"
+                  cols="3"
+                  rows="7"
+                  name="videoDescription"
+                  ref={register({
+                    required: {
+                      value: true,
+                      message: "Please enter a video description",
+                    },
+                  })}
                 />
                 <ErrorText
-                  className='error-message'
-                  error={videoDescriptionError}
-                  message='Please enter Video Description'
+                  className="errorMsg"
+                  message={
+                    errors.videoDescription && errors.videoDescription.message
+                  }
                 />
-                <div className='video-row-3'>
+                <div className="video-row-3">
                   <input
-                    className='default-input-variation last-input-variation'
-                    placeholder='Video link'
-                  />{' '}
-                  <span>OR</span>{' '}
-                  <button className='secondary-btn'>Choose video</button>
+                    type="url"
+                    className="default-input-variation last-input-variation"
+                    placeholder="Video link"
+                    name="videoLink"
+                    ref={register}
+                  />
+                  <span>OR</span>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    className="videoUploadBtn"
+                    name="videoResource"
+                    ref={register}
+                  />
                 </div>
               </div>
-              <Button name='Add Video block' onClick={addVideo} />
+              <Button name="Add Video block" onClick={handleSubmit(addVideo)} />
             </div>
           </div>
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default CreateVideo
+export default CreateVideo;
