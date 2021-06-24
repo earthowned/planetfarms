@@ -67,7 +67,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
 
   return (
     <>
-      {active && <FormModal setActive={setActive} data={editData} />}
+      {active && <FormModal setActive={setActive} data={editData} setData={setEditData} />}
       {deleteModal &&  <div className='simple-modal-container'>
         <div className='simple-modal-inner-container'>
           <div>

@@ -50,7 +50,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
 
   return (
     <>
-    {modalActive && <CommunityModal setActive={setModalActive} data={editData} />}
+    {modalActive && <CommunityModal setActive={setModalActive} data={editData} setEditData={setEditData} />}
     {deleteModal &&  <div className='simple-modal-container'>
         <div className='simple-modal-inner-container'>
           <div>
@@ -156,17 +156,18 @@ const CommunityHeader = ({setActive, search, setSearch}) => {
   )
 }
 
-const CommunityModal = ({setActive, data}) => {
+const CommunityModal = ({setActive, data, setEditData}) => {
   const [files, setFiles] = useState();
   const [name, setName] = useState(data ? data.name : '');
   const [desc, setDesc] = useState(data ? data.description : '');
   const [category, setCategory] = useState(data ? data.category : '');
+  const [toggleActive, setToggleActive] = useState(data ? data.auto_follow : false);
   // const [userId, setUserId] = useState(0);
   const userId = 2;
   const dispatch = useDispatch()
   
   function addCommunity () {
-    dispatch(createCommunity({files, name, desc, userId, category}))
+    dispatch(createCommunity({files, name, desc, userId, category, toggleActive}))
     setActive(false);
   }
 
@@ -176,8 +177,14 @@ const CommunityModal = ({setActive, data}) => {
           name: name,
           description: desc,
           file: files,
-          creatorId: userId
+          creatorId: userId,
+          auto_follow: toggleActive
         }))
+    setActive(false);
+  }
+
+  function clearInput () {
+    setEditData(null);
     setActive(false);
   }
   
@@ -185,11 +192,21 @@ const CommunityModal = ({setActive, data}) => {
     <div className='collection-modal-container'>
         <div>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Create Community' clickHandler={setActive} />
+            <CollectionModalHeader title={data ? 'Update Community' : 'Create Community'} clickHandler={clearInput} />
             <DragDrop files={files} onChange={setFiles} />
             <InputComponent name="Community Name" text={name} changeHandler={setName} />
             <InputComponent name="Description" text={desc} changeHandler={setDesc} />
             <InputComponent name="Category" text={category} changeHandler={setCategory} />
+            <div className="auto-follow-btn">
+              <h5>Auto follow</h5>
+            <div className='toggle-main-container'>
+              <div
+                onClick={() => setToggleActive(!toggleActive)}
+                className={`${toggleActive ? 'toggle-item active' : 'toggle-item'}`}
+              />
+              <div className='toggle-container' />
+            </div>
+            </div>
             {/* <InputComponent name="User Id" text={userId} changeHandler={setUserId} /> */}
              {data 
              ? <Button name="Update Community" clickHandler={updateCommunity} />

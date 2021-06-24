@@ -10,7 +10,7 @@ import { InputFields, SelectFields, ErrorText, SubmitButton } from '../formUI/Fo
 import DragDrop from '../dragDrop/DragDrop'
 import axios from 'axios'
 
-const FromModal = ({ setActive, openAddCollection, data }) => {
+const FromModal = ({ setActive, openAddCollection, data, setData }) => {
   const [files, setFiles] = useState()
 
   const [roleActive, setRoleActive] = useState(false)
@@ -107,6 +107,11 @@ const FromModal = ({ setActive, openAddCollection, data }) => {
     setActive(false);
   }
 
+  const clearData = () => {
+    setActive(false);
+    setData(null);
+  }
+
   return (
     <>
       <div className='collection-modal-container'>
@@ -114,7 +119,9 @@ const FromModal = ({ setActive, openAddCollection, data }) => {
           <div className='collection-modal-inner-container'>
             {pathname === `/community_group/${id}` && (
               <>
-                <CollectionModalHeader title='Create Group' clickHandler={setActive} />
+                <CollectionModalHeader 
+                title={data ? 'Edit Group' : 'Create Group'}
+                clickHandler={clearData} />
                 <DragDrop files={files} onChange={setFiles} />
                 <div className='collection-input-container'>
                   <InputFields
@@ -160,8 +167,8 @@ const FromModal = ({ setActive, openAddCollection, data }) => {
             {pathname === `/enterprises/${id}` && (
               <>
                 <CollectionModalHeader
-                  title='Create Enterprises'
-                  clickHandler={setActive}
+                  title={data ? 'Edit Enterprises' : 'Create Enterprises'}
+                  clickHandler={clearData}
                 />
                 <DragDrop files={files} onChange={setFiles} />
                 <div className='collection-input-container'>

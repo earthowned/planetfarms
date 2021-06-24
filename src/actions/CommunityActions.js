@@ -90,13 +90,13 @@ export const searchUserCommunities = (userId, search) => async (
 }
 
 export const createCommunity = (newCommunity) => async (dispatch, getState) => {
-  console.log(newCommunity)
   const formData = new FormData()
   formData.append('name', newCommunity.name)
   formData.append('description', newCommunity.desc)
   formData.append('community', newCommunity.files)
   formData.append('creatorId', newCommunity.userId)
   formData.append('category', newCommunity.category)
+  formData.append('auto_follow', newCommunity.toggleActive)
 
   try {
     dispatch({
@@ -166,10 +166,10 @@ export const visitCommunity = (id) => async (dispatch) => {
 export const communityUpdate = (newCommunity) => async (dispatch) => {
   try {
     dispatch({ type: COMMUNITY_UPDATE_REQUEST })
-    const {id, name, category, description, file, creatorId} = newCommunity;
+    const {id, name, category, description, file, creatorId, auto_follow} = newCommunity;
     await axios.put(
             `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`,
-            {name, category, description, file, creatorId}
+            {name, category, description, file, creatorId, auto_follow}
     );
     
     dispatch({
