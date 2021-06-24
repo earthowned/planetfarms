@@ -8,22 +8,23 @@ import {
   PersonalInformation
 } from '../../components/profileFormCard/ProfileFormCard'
 import EditInformation from '../../components/editInformation/EditInformation'
-import { getUserDetails } from '../../actions/userAction'
+import { getMyDetails } from '../../actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 function MyProfile () {
-  const location = useLocation()
   const history = useHistory()
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  console.log(userInfo)
-  const user = location?.state?.user ?? userLogin.userInfo
+
+  const userDetails = useSelector((state) => state.userDetails)
+  const { user } = userDetails
 
   useEffect(() => {
     if (userInfo) {
-      // dispatch(getUserDetails(id))
+      dispatch(getMyDetails())
+      console.log(user)
     } else {
       history.push('/login')
     }
@@ -45,7 +46,7 @@ function MyProfile () {
               <ContactInformation user={user} />
               <AdditionalInformation user={user} />
             </div>
-            <EditInformation clickHandler={editUserInformation} image='/img/DashboardProfilePic.png' />
+            <EditInformation clickHandler={editUserInformation} image={user?.attachments} />
           </div>
         </div>
       </div>

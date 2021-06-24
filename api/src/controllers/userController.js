@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const generateToken = require('../utils/generateToken.js')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
@@ -95,7 +96,8 @@ const authUser = async (req, res) => {
 }
 
 const localAuth = async (name, password) => {
-  const user = await LocalAuth.findOne({ where: { email: name, password: password } })
+  const user = await LocalAuth.findOne({ where: { username: name, password: password } })
+  console.log(user)
   return user?.id || ''
 }
 
@@ -216,7 +218,7 @@ const getUsers = (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 
-// @desc    Fetch single user
+// @desc    Fetch single user for auth
 // @route   GET /api/user/:id
 // @access  Public
 const getUserById = (req, res) => {
@@ -233,12 +235,31 @@ const getUserById = (req, res) => {
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
-// @desc    Fetch single user
+// @desc    Fetch single user profile details
 // @route   GET /api/user/profile/:userID
 // @access  Public
 const getUserProfileByUserID = (req, res) => {
   const id = req.params.userID
   User.findOne({ where: { userID: id } })
+    .then((profile) => {
+      if (profile) {
+        res.json(profile)
+      } else {
+        res.status(404)
+        throw new Error('Profile not found')
+      }
+    })
+    .catch((err) => res.json({ error: err.message }).status(400))
+}
+
+// @desc    Fetch logged user profile
+// @route   GET /api/user/profile
+// @access  Public
+const getMyProfile = (req, res) => {
+  const token = req.headers.authorization.split(' ')[1]
+  const decoded = jwt.verify(token, process.env.JWT_SECRET)
+  console.log(decoded)
+  User.findOne({ where: { userID: decoded.id } })
     .then((profile) => {
       if (profile) {
         res.json(profile)
@@ -292,4 +313,4 @@ const searchUserName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getUsers, updateUser, searchUserName }
+module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getMyProfile, getUsers, updateUser, searchUserName }
