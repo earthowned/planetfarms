@@ -40,7 +40,8 @@ module.exports = (sequelize, DataTypes) => {
     //M:N group and user through groups_users
     Group.belongsToMany(models.User, {
         through: 'groups_users',
-        foreignKey: 'groupId'
+        foreignKey: 'groupId',
+        as: 'group_followers'
       })
   }
   return Group

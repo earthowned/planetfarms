@@ -46,7 +46,8 @@ module.exports = (sequelize, DataTypes) => {
     //M:N community and user through enterprises_users
     Enterprise.belongsToMany(models.User, {
         through: 'enterprises_users',
-        foreignKey: 'enterpriseId'
+        foreignKey: 'enterpriseId',
+        as: 'enterprise_followers'
       })
   }
   return Enterprise

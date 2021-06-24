@@ -30,8 +30,18 @@ const getEnterprises = (req, res) => {
     include: [{
       model: db.Community,
       attributes: ['id'],
-      where: { id: req.params.id }
-    }]
+      where: { id: req.params.id },
+    },
+    {
+      model: db.User,
+      attributes: ['id'],
+      as: 'enterprise_followers',
+      through: {
+        attributes: ['active'],
+        as: 'followStatus'
+      }
+    }
+  ]
   })
     .then(enterprises => {
       const totalPages = Math.ceil(enterprises.count / pageSize)

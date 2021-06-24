@@ -28,7 +28,17 @@ const getGroups = (req, res) => {
       model: db.Community,
       attributes: ['id'],
       where: { id: req.params.id }
-    }]
+    },
+    {
+      model: db.User,
+      attributes: ['id'],
+      as: 'group_followers',
+      through: {
+        attributes: ['active'],
+        as: 'followStatus'
+      }
+    }
+  ]
   })
     .then(groups => {
       const totalPages = Math.ceil(groups.count / pageSize)
