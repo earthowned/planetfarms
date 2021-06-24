@@ -77,3 +77,8 @@ h6 {
   max-width: 2560px;
   margin: 0 auto;
 }
+
+input,
+textarea {
+  font-family: inherit;
+}
