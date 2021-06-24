@@ -13,7 +13,7 @@ module.exports = {
 
     while (amount--) {
       data.push({
-        email: faker.internet.email(),
+        username: faker.internet.email(),
         password: faker.internet.password(),
         createdAt: date,
         updatedAt: date
@@ -32,12 +32,12 @@ module.exports = {
         attachments: faker.image.avatar()
       })
     }
-    queryInterface.bulkInsert('users', data, {})
-    queryInterface.bulkInsert('userProfiles', profiledata, {})
+    queryInterface.bulkInsert('localauths', data, {})
+    queryInterface.bulkInsert('users', profiledata, {})
   },
 
   down: async (queryInterface, Sequelize) => {
+    queryInterface.bulkInsert('localauths', null, {})
     queryInterface.bulkInsert('users', null, {})
-    queryInterface.bulkInsert('userProfiles', null, {})
   }
 }

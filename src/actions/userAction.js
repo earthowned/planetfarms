@@ -36,7 +36,7 @@ export const register = (name, password) => async (dispatch) => {
       type: USER_REGISTER_SUCCESS,
       payload: data
     })
-    localStorage.setItem('userInfo', JSON.stringify(data))
+    window.localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -46,7 +46,6 @@ export const register = (name, password) => async (dispatch) => {
 }
 
 export const login = (name, password) => async (dispatch) => {
-  console.log(name, password)
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
     const config = {
@@ -59,7 +58,7 @@ export const login = (name, password) => async (dispatch) => {
       { name, password },
       config
     )
-    localStorage.setItem('userInfo', JSON.stringify(data))
+    window.localStorage.setItem('userInfo', JSON.stringify(data))
     console.log(JSON.stringify(data))
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -89,7 +88,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile/${id}`, config)
-    console.log(data)
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data
@@ -191,7 +189,7 @@ export const searchUsers = (search) => async (
 }
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('userInfo')
+  window.localStorage.removeItem('userInfo')
   dispatch({ type: USER_LOGOUT })
   document.location.href = '/login'
 }

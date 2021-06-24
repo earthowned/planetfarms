@@ -1,14 +1,14 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('users',
+    queryInterface.createTable('localauths',
       {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true
         },
-        email: {
+        username: {
           type: Sequelize.STRING,
           allowNull: false
         },
@@ -24,7 +24,7 @@ module.exports = {
         }
       }
     )
-    queryInterface.createTable('userProfiles',
+    queryInterface.createTable('users',
       {
         id: {
           type: Sequelize.INTEGER,
@@ -63,7 +63,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
+    queryInterface.dropTable('localauths', {})
     queryInterface.dropTable('users', {})
-    queryInterface.dropTable('userProfiles', {})
   }
 }

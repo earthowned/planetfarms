@@ -7,12 +7,33 @@ const User = db.define('users', {
     primaryKey: true,
     autoIncrement: true
   },
-  email: {
+  userID: {
+    type: Sequelize.INTEGER
+  },
+  firstName: {
     type: Sequelize.STRING
   },
-  password: {
+  lastName: {
     type: Sequelize.STRING
+  },
+  phone: {
+    type: Sequelize.TEXT
+  },
+  email: {
+    type: Sequelize.TEXT
+  },
+  dateOfBirth: {
+    type: Sequelize.DATE
+  },
+  lastLogin: {
+    type: Sequelize.DATE
+  },
+  numberOfVisit: {
+    type: Sequelize.INTEGER
+  },
+  attachments: {
+    type: Sequelize.TEXT
   }
-})
+}, { timestamps: false })
 
 module.exports = User

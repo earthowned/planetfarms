@@ -1,9 +1,9 @@
 const generateToken = require('../utils/generateToken.js')
-const User = require('../models/userModel.js')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
 const Sequelize = require('sequelize')
-const UserProfile = require('../models/userProfileModel.js')
+const User = require('../models/userModel.js')
+const LocalAuth = require('../models/localAuthModel.js')
 const Op = Sequelize.Op
 
 function amplifyConfig () {
@@ -95,7 +95,7 @@ const authUser = async (req, res) => {
 }
 
 const localAuth = async (name, password) => {
-  const user = await User.findOne({ where: { email: name, password: password } })
+  const user = await LocalAuth.findOne({ where: { email: name, password: password } })
   return user?.id || ''
 }
 
@@ -127,13 +127,13 @@ const registerUser = async (req, res) => {
 }
 
 const registerLocal = async (name, password, email, res) => {
-  const userExists = await User.findOne({ where: { name } })
+  const userExists = await LocalAuth.findOne({ where: { username: name } })
   if (userExists) res.json({ message: 'Users already Exists !!!' }).status(400)
-  const user = await User.create({ name, password })
+  const user = await LocalAuth.create({ username: name, password: password })
   if (user) {
     res.status(201).json({
       id: user.dataValues.id,
-      name: user.dataValues.name,
+      name: user.dataValues.username,
       token: generateToken(user.dataValues.id)
     })
   } else {
@@ -221,7 +221,7 @@ const getUsers = (req, res) => {
 // @access  Public
 const getUserById = (req, res) => {
   const id = req.params.id
-  User.findByPk(id)
+  LocalAuth.findByPk(id)
     .then((user) => {
       if (user) {
         res.json(user)
@@ -238,7 +238,7 @@ const getUserById = (req, res) => {
 // @access  Public
 const getUserProfileByUserID = (req, res) => {
   const id = req.params.userID
-  UserProfile.findOne({ where: { userID: id } })
+  User.findOne({ where: { userID: id } })
     .then((profile) => {
       if (profile) {
         res.json(profile)
