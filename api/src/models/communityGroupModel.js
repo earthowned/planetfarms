@@ -37,6 +37,11 @@ module.exports = (sequelize, DataTypes) => {
   // association
   Group.associate = (models) => {
     Group.belongsTo(models.Community, { foreignKey: 'communityId' })
+    //M:N group and user through groups_users
+    Group.belongsToMany(models.User, {
+        through: 'groups_users',
+        foreignKey: 'groupId'
+      })
   }
   return Group
 }

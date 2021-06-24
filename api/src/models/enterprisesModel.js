@@ -42,6 +42,12 @@ module.exports = (sequelize, DataTypes) => {
   // association
   Enterprise.associate = (models) => {
     Enterprise.belongsTo(models.Community, { foreignKey: 'communityId' })
+    
+    //M:N community and user through enterprises_users
+    Enterprise.belongsToMany(models.User, {
+        through: 'enterprises_users',
+        foreignKey: 'enterpriseId'
+      })
   }
   return Enterprise
 }

@@ -107,7 +107,12 @@ const searchMemberName = (req, res) => {
       include: [{
         model: db.User,
         attributes: ["email", "name"],
-        where: {name: { [Op.iLike]: '%' + name + '%' }}
+        where: {
+            [Op.or]: [
+                {name: { [Op.iLike]: '%' + name + '%' }},
+                {email: { [Op.iLike]: '%' + name + '%' }},
+            ]
+        }
       }],
       required: true
    })

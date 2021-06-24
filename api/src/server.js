@@ -11,12 +11,10 @@ const communityGroupsRoutes = require('./routes/communityGroupRouter')
 const calendarRoutes = require('./routes/calendarEventsRouter')
 const communityRoutes = require('./routes/communityRouter')
 const communityUsersRoutes = require('./routes/communityUserRouter');
-<<<<<<< HEAD:api/src/server.js
+const groupUsersRoutes = require('./routes/groupUserRouter');
+const enterpriseUsersRoutes = require('./routes/enterpriseUserRouter');
 const resizerRoutes = require('./routes/resizerRouter')
 const sequelize = require('./config/database.js')
-=======
-const sequelize = require('./config/database');
->>>>>>> a7ae4a8... community association with group and enterprises:api/server.js
 const cors = require('cors')
 const dotenv = require('dotenv')
 
@@ -38,6 +36,8 @@ app.use('/api/courses', courseRoutes)
 app.use('/api/news', newsRoutes)
 app.use('/api/communities', communityRoutes)
 app.use('/api/communities-users', communityUsersRoutes)
+app.use('/api/groups-users', groupUsersRoutes)
+app.use('/api/enterprises-users', enterpriseUsersRoutes)
 app.use('/api/resizer', resizerRoutes)
 
 // home page response
