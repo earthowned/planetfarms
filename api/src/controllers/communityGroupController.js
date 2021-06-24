@@ -30,7 +30,7 @@ const getGroups = (req, res) => {
       where: { id: req.params.id }
     },
     {
-      model: db.User,
+      model: db.CommunityUser,
       attributes: ['id'],
       as: 'group_followers',
       through: {

@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const GroupUser = sequelize.define('groups_users',  {
+  const GroupMember = sequelize.define('groups_members',  {
      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      userId: {
+      memberId: {
         type: DataTypes.INTEGER,
       },
       groupId: {
@@ -17,12 +17,12 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: true,
       }
   },
-  { timestamps: false }
+  { timestamps: true }
   )
-  GroupUser.associate = (models) => {
-    GroupUser.belongsTo(models.User, {foreignKey: 'userId'})
-    GroupUser.belongsTo(models.Group, {foreignKey: 'groupId'})
+  GroupMember.associate = (models) => {
+    GroupMember.belongsTo(models.CommunityUser, {foreignKey: 'memberId'})
+    GroupMember.belongsTo(models.Group, {foreignKey: 'groupId'})
   };
 
-  return GroupUser;
+  return GroupMember;
 }

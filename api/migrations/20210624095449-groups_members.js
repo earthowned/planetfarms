@@ -2,37 +2,44 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-   await queryInterface.createTable('enterprises_users', { 
+     await queryInterface.createTable('groups_members', { 
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      memberId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
+          model: 'communities_users',
           key: 'id'
         }
       },
-      enterpriseId: {
+      groupId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'enterprises',
+          model: 'groups',
           key: 'id'
         },
       },
       active: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
-      }},
-      {
-        timeStamps: true
-      })
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    },
+     )
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeTable('enterprises_users');
+  await queryInterface.dropTable('groups_members');
   }
 };
