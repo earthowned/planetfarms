@@ -6,14 +6,16 @@ const Op = Sequelize.Op
 // @route   GET/api/news/community/:id
 // @access  Public
 const getNews = (req, res) => {
-  const pageSize = 3
+  const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['createdAt', order]]
   db.News.findAndCountAll({ 
-   offset: (page - 1) * pageSize, 
-   limit: pageSize,
+    offset: (page - 1) * pageSize, 
+    limit: pageSize,
     order: ordervalue,
+    where: {deleted: false},
+    attributes: {exclude: ['deleted']},
     include:  [{
     model: db.Community,
     attributes: ['id'],
@@ -143,7 +145,7 @@ const deleteNews = (req, res) => {
   }).then(news => {
     if (news) {
       const { id } = news
-      db.News.destroy({ where: { id } })
+      db.News.update({deleted: true},{ where: { id } })
         .then(() => res.json({ message: 'News Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
