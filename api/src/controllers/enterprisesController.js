@@ -33,7 +33,7 @@ const getEnterprises = (req, res) => {
       where: { id: req.params.id },
     },
     {
-      model: db.CommunityUser,
+      model: db.User,
       attributes: ['id'],
       as: 'enterprise_followers',
       through: {

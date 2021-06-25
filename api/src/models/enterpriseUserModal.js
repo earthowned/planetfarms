@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const EnterpriseMember = sequelize.define('enterprises_members',  {
+  const EnterpriseUser = sequelize.define('enterprises_users',  {
      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      memberId: {
+      userId: {
         type: DataTypes.INTEGER,
       },
       enterpriseId: {
@@ -26,10 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       }
   }
   )
-  EnterpriseMember.associate = (models) => {
-    EnterpriseMember.belongsTo(models.CommunityUser, {foreignKey: 'memberId'})
-    EnterpriseMember.belongsTo(models.Enterprise, {foreignKey: 'enterpriseId'})
+  EnterpriseUser.associate = (models) => {
+    EnterpriseUser.belongsTo(models.User, {foreignKey: 'userId'})
+    EnterpriseUser.belongsTo(models.Enterprise, {foreignKey: 'enterpriseId'})
   };
 
-  return EnterpriseMember;
+  return EnterpriseUser;
 }

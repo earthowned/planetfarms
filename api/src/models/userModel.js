@@ -36,6 +36,19 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     User.hasMany(models.Community, { foreignKey: 'creatorId', as: 'creator' })
+
+    //n:m community_user and enterprise
+    User.belongsToMany(models.Enterprise, {
+      through: 'enterprises_users',
+      foreignKey: 'userId',
+      as: 'enterprise_followers'
+    })
+    //n:m community_user and group
+    User.belongsToMany(models.Group, {
+      through: 'groups_users',
+      foreignKey: 'userId',
+      as: 'group_followers'
+    })
   };
   return User;
 }

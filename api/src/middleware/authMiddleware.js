@@ -7,15 +7,8 @@ const protect = async (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
-    token = req.headers.authorization.split(' ')[1]
-  }
-  
-  if(!token) {
-    return res.status(401).json('Not authorize to access this route');
-}
-  
     try {
-      
+      token = req.headers.authorization.split(' ')[1]
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
       /*
       * TODO: Maintain session and check again local session
@@ -28,8 +21,10 @@ const protect = async (req, res, next) => {
         error: 'Not authorized, token failed'
       })
     }
-  
+  }
   // if (!token) {
+  res.status(401)
+  throw new Error('Not authorized, no token')
   // }
 }
 

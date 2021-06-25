@@ -77,7 +77,7 @@ const getAllMembers = async (req, res) => {
   try {
     const data = await db.CommunityUser.findAll(
     {
-      where: {communityId: req.params.id},
+      where: {communityId: req.params.id, active: true},
       attributes: ['id'],
       include: [{
         model: db.User,

@@ -13,8 +13,7 @@ const communityRoutes = require('./routes/communityRouter')
 const communityUsersRoutes = require('./routes/communityUserRouter')
 const groupUsersRoutes = require('./routes/groupUserRouter')
 const enterpriseUsersRoutes = require('./routes/enterpriseUserRouter')
-const groupMembersRoutes = require('./routes/groupMemberRouter')
-const enterpriseMembersRoutes = require('./routes/enterpriseMemberRouter');
+
 const resizerRoutes = require('./routes/resizerRouter')
 const sequelize = require('./config/database.js')
 const cors = require('cors')
@@ -40,8 +39,7 @@ app.use('/api/communities', communityRoutes)
 app.use('/api/communities-users', communityUsersRoutes)
 app.use('/api/groups-users', groupUsersRoutes)
 app.use('/api/enterprises-users', enterpriseUsersRoutes)
-app.use('/api/groups-members', groupMembersRoutes)
-app.use('/api/enterprises-members', enterpriseMembersRoutes)
+
 app.use('/api/resizer', resizerRoutes)
 
 // home page response
