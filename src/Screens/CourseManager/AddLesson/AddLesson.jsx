@@ -1,34 +1,46 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import uuid from 'react-uuid'
 
+import { createLesson } from '../../../actions/lessonActions'
 import AddTestModal from '../../../Components/AddTestModal/AddTestModal'
 import BackButton from '../../../Components/BackButton/BackButton'
 import DragDrop from '../../../Components/DragDrop/DragDrop'
 import NewsCreateModal from '../../../Components/NewsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../Layout/DashboardLayout/DashboardLayout'
+import { ErrorText } from '../../../Components/FormUI/FormUI'
 import './add-lesson.css'
 
 const AddLesson = () => {
-  const { courseId } = useParams()
+  const dispatch = useDispatch()
+  const { courseId: ID } = useParams()
+  console.log(ID)
+
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
   const [testModal, setTestModal] = useState(false)
   const [videoData, setVideoData] = useState([])
-
-  const [useStep, setUseStep] = useState(0)
+  // const [useStep, setUseStep] = useState(0);
   const [lessonCover, setLessonCover] = useState(null)
 
   const { register, errors, handleSubmit } = useForm()
 
-  const submitLessonForm = (data) => {
+  const submitLessonForm = ({ title }) => {
     const lessonId = uuid()
     const coverImg = lessonCover
+    const courseId = ID
+    const steps = {
+      videos: [videoData]
+    }
     console.log(lessonId)
     console.log(coverImg)
-    console.log(data)
+    console.log(courseId)
+    console.log(steps)
+    console.log(title)
+    dispatch(createLesson({ courseId, lessonId, title, coverImg, steps }))
   }
 
   return (
@@ -38,6 +50,8 @@ const AddLesson = () => {
           type='video'
           videoActive={videoModal}
           setVideoActive={setVideoModal}
+          setVideoData={setVideoData}
+          videoData={videoData}
         />
       )}
       {imageModal && (
@@ -56,18 +70,21 @@ const AddLesson = () => {
         />
       )}
       <DashboardLayout title='Add new lesson'>
-        <BackButton location={`/admin/course/${courseId}`} />
-        <AddContent
-          setVideoModal={setVideoModal}
-          setImageModal={setImageModal}
-          setTextModal={setTextModal}
-          setTestModal={setTestModal}
-          register={register}
-          setLessonCover={setLessonCover}
-          lessonCover={lessonCover}
-        />
-        <LessonMaterial />
-        <LessonSaveModal onClick={handleSubmit(submitLessonForm)} />
+        <BackButton location={`/admin/course/${ID}`} />
+        <form onSubmit={handleSubmit(submitLessonForm)}>
+          <AddContent
+            setVideoModal={setVideoModal}
+            setImageModal={setImageModal}
+            setTextModal={setTextModal}
+            setTestModal={setTestModal}
+            register={register}
+            errors={errors}
+            setLessonCover={setLessonCover}
+            lessonCover={lessonCover}
+          />
+          <LessonMaterial />
+          <LessonSaveModal />
+        </form>
       </DashboardLayout>
     </>
   )
@@ -79,6 +96,7 @@ const AddContent = ({
   setTextModal,
   setTestModal,
   register,
+  errors,
   setLessonCover
 }) => {
   return (
@@ -93,6 +111,10 @@ const AddContent = ({
             message: 'You must enter lesson title'
           }
         })}
+      />
+      <ErrorText
+        className='errorMsg'
+        message={errors.title && errors.title.message}
       />
       <DragDrop onChange={(img) => setLessonCover(img)} />
       <div className='admin-lesson-create-btn-wrapper'>
@@ -127,7 +149,7 @@ const LessonMaterial = () => {
   )
 }
 
-const LessonSaveModal = ({ onClick }) => {
+const LessonSaveModal = () => {
   return (
     <div className='save-lesson-modal'>
       <h4>Do you want to save lesson?</h4>
@@ -135,11 +157,7 @@ const LessonSaveModal = ({ onClick }) => {
         <button className='secondary-btn' id='lesson-save-btn'>
           Cancel
         </button>
-        <button
-          className='primary-btn secondary-btn'
-          id='lesson-save-btn'
-          onClick={onClick}
-        >
+        <button className='primary-btn secondary-btn' id='lesson-save-btn'>
           Save lesson
         </button>
       </div>

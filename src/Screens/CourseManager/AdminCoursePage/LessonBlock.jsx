@@ -8,7 +8,11 @@ const LessonBlock = ({ courseId }) => {
         <h3>Lessons</h3>
         <div className='admin-lesson'>
           <div>
-            <img src='/img/lesson-card2.svg' className='lesson image' />
+            <img
+              src='/img/lesson-card2.svg'
+              className='lesson image'
+              alt='lesson_card'
+            />
             <div>
               <h4>01.Introducing</h4>
               <p>

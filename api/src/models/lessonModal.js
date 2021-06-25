@@ -15,6 +15,12 @@ const Lessons = db.define(
     lessonId: {
       type: Sequelize.STRING
     },
+    title: {
+      type: Sequelize.STRING
+    },
+    coverImg: {
+      type: Sequelize.STRING
+    },
     steps: {
       type: Sequelize.JSON
     },

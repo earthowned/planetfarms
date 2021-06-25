@@ -16,7 +16,7 @@
   height: 48px;
   width: 100%;
   font-size: 40px;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
   color: var(--primary-white);
 }
 
@@ -184,4 +184,10 @@
   .admin-lesson-create-container input {
     font-size: 26px;
   }
+}
+.test {
+  color: #fff;
+}
+.errorMsg {
+  margin-bottom: 1.5em;
 }
