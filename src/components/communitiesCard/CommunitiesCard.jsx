@@ -38,7 +38,6 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
     if (community.followers && community.followers.length > 0) {
       if (checkFollow(community.followers, currentUserId)) setFollower(false)
     }
-
     if (checkCreator(currentUserId)) setCreator(true)
   }, [])
 

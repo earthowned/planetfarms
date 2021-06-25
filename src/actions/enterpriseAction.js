@@ -14,7 +14,10 @@ import {
   ENTERPRISE_UPDATE_FAIL,
   ENTERPRISE_DELETE_REQUEST,
   ENTERPRISE_DELETE_SUCCESS,
-  ENTERPRISE_DELETE_FAIL
+  ENTERPRISE_DELETE_FAIL,
+  ENTERPRISE_FOLLOW_REQUEST,
+  ENTERPRISE_FOLLOW_SUCCESS,
+  ENTERPRISE_FOLLOW_FAIL
 } from '../constants/enterpriseConstants'
 
 // fetching current community
@@ -141,6 +144,28 @@ export const enterpriseDelete = (id) => async (dispatch) => {
             : error.message
     dispatch({
       type: ENTERPRISE_DELETE_FAIL,
+      payload: message
+    })
+  }
+}
+
+
+export const followEnterprise = (userId, enterpriseId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ENTERPRISE_FOLLOW_REQUEST
+    })
+    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises-users/follow`, { userId, enterpriseId })
+    dispatch({
+      type: ENTERPRISE_FOLLOW_SUCCESS
+    })
+  } catch (error) {
+    const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    dispatch({
+      type: ENTERPRISE_FOLLOW_FAIL,
       payload: message
     })
   }

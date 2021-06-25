@@ -4,8 +4,9 @@ import thunk from 'redux-thunk'
 import { newsListReducer, newsCreateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
 import { enterpriseCreateReducer, enterpriseDeleteReducer, 
+  enterpriseFollowReducer, 
   enterpriseListReducer, enterpriseUpdateReducer } from './reducers/enterpriseReducers'
-import { groupCreateReducer, groupDeleteReducer, groupListReducer, 
+import { groupCreateReducer, groupDeleteReducer, groupFollowReducer, groupListReducer, 
   groupUpdateReducer, groupViewReducer } from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
@@ -20,10 +21,12 @@ const reducer = combineReducers({
   groupUpdate: groupUpdateReducer,
   groupDelete: groupDeleteReducer,
   groupCreate: groupCreateReducer,
+  groupFollow: groupFollowReducer,
   listEnterprises: enterpriseListReducer,
   enterpriseUpdate: enterpriseUpdateReducer,
   enterpriseDelete: enterpriseDeleteReducer,
   enterpriseCreate: enterpriseCreateReducer,
+  enterpriseFollow: enterpriseFollowReducer,
   listResources: resourceListReducer,
   listNews: newsListReducer,
   addCommunity: communityCreateReducer,

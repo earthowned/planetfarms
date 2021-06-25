@@ -17,7 +17,10 @@ import {
   GROUP_UPDATE_FAIL,
   GROUP_DELETE_REQUEST,
   GROUP_DELETE_SUCCESS,
-  GROUP_DELETE_FAIL
+  GROUP_DELETE_FAIL,
+  GROUP_FOLLOW_REQUEST,
+  GROUP_FOLLOW_SUCCESS,
+  GROUP_FOLLOW_FAIL
 } from '../constants/communityGroupConstants'
 
 // fetching current community
@@ -163,6 +166,27 @@ export const groupDelete = (id) => async (dispatch) => {
             : error.message
     dispatch({
       type: GROUP_DELETE_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const followGroup = (userId, groupId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GROUP_FOLLOW_REQUEST
+    })
+    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups-users/follow`, { userId, groupId })
+    dispatch({
+      type: GROUP_FOLLOW_SUCCESS
+    })
+  } catch (error) {
+    const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    dispatch({
+      type: GROUP_FOLLOW_FAIL,
       payload: message
     })
   }

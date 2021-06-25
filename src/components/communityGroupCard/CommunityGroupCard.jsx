@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
+import { followGroup } from '../../actions/communityGroupActions'
+import { followEnterprise } from '../../actions/enterpriseAction'
 import CardLayout from '../../layout/cardLayout/CardLayout'
 import Button from '../button/Button'
 import Secondarybtn from '../secondaryBtn/Secondarybtn'
@@ -20,11 +23,51 @@ const CommunityGroupCard = ({ data = [], location, type = 'group', editCard, del
 }
 
 const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
+  const [follower, setFollower] = useState(true)
+  const [creator, setCreator] = useState(false)
   const history = useHistory()
   const [follow, setFollow] = useState(false)
   const followClick = () => {
     setFollow(!follow)
   }
+
+  const currentUserId = 5
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(item.hasOwnProperty("group_followers")) {
+        if (item.group_followers && item.group_followers.length > 0) {
+        if (checkFollow(item.group_followers, currentUserId)) setFollower(false)
+    }
+    } else {
+
+        if (item.enterprise_followers && item.enterprise_followers.length > 0) {
+          if (checkFollow(item.enterprise_followers, currentUserId)) setFollower(false)
+        }
+    }
+
+
+    if (checkCreator(currentUserId)) setCreator(true)
+  }, [])
+
+  function checkFollow (arr, userId) {
+    const found = arr.some(el => (el.id === userId && el.followStatus.active === true))
+    if (found) return true
+  }
+
+  function checkCreator (id) {
+    if (id === item.creatorId) return true
+  }
+
+  const followHandle = () => {
+    if(item.hasOwnProperty("group_followers")) {
+      dispatch(followGroup(currentUserId, item.id))
+    } else {
+      dispatch(followEnterprise(currentUserId, item.id))
+    }
+    setFollower(!follower)
+  }
+  
   return (
     <div key={item.id} className='card-1 border-1px-onyx'>
       <div className="card-edit">
@@ -66,7 +109,12 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
                 <Secondarybtn name="Don't recommend" />
               </div>
               <div className='card-secondary-btn-wrapper'>
-                <Button name='Follow' clickHandler={followClick} />
+                { creator 
+                      ? <Button name="UnFollow" onClick={followHandle} disabled={true}/>
+                      : follower
+                      ? <Button name="Follow" onClick={followHandle} />
+                      :<Button name="UnFollow" onClick={followHandle} />
+                }
               </div>
             </div>
           )}

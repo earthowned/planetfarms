@@ -17,7 +17,10 @@ import {
   GROUP_UPDATE_FAIL,
   GROUP_DELETE_REQUEST,
   GROUP_DELETE_SUCCESS,
-  GROUP_DELETE_FAIL
+  GROUP_DELETE_FAIL,
+  GROUP_FOLLOW_REQUEST,
+  GROUP_FOLLOW_SUCCESS,
+  GROUP_FOLLOW_FAIL
 
 } from '../constants/communityGroupConstants'
 
@@ -98,6 +101,19 @@ export const groupDeleteReducer = (state = {success: false}, action) => {
     case GROUP_DELETE_SUCCESS:
       return { loading: false, success: action.payload }
     case GROUP_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const groupFollowReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GROUP_FOLLOW_REQUEST:
+      return { loading: true }
+    case GROUP_FOLLOW_SUCCESS:
+      return { loading: false, success: true}
+    case GROUP_FOLLOW_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

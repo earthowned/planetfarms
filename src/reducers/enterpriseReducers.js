@@ -14,7 +14,10 @@ import {
   ENTERPRISE_UPDATE_FAIL,
   ENTERPRISE_DELETE_REQUEST,
   ENTERPRISE_DELETE_SUCCESS,
-  ENTERPRISE_DELETE_FAIL
+  ENTERPRISE_DELETE_FAIL,
+  ENTERPRISE_FOLLOW_REQUEST,
+  ENTERPRISE_FOLLOW_SUCCESS,
+  ENTERPRISE_FOLLOW_FAIL
 
 } from '../constants/enterpriseConstants'
 
@@ -83,6 +86,19 @@ export const enterpriseDeleteReducer = (state = {success: false}, action) => {
     case ENTERPRISE_DELETE_SUCCESS:
       return { loading: false, success: action.payload }
     case ENTERPRISE_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const enterpriseFollowReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ENTERPRISE_FOLLOW_REQUEST:
+      return { loading: true }
+    case ENTERPRISE_FOLLOW_SUCCESS:
+      return { loading: false, success: true}
+    case ENTERPRISE_FOLLOW_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
