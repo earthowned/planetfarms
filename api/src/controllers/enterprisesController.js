@@ -57,6 +57,52 @@ const getEnterprises = (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 
+// @desc Fetch all enterprises by a community
+// @route GET/api/enterprises/community/:id
+// @access Pirvate
+
+const getUserEnterprises = (req, res) => {
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 1
+  const order = req.query.order || 'DESC'
+  const ordervalue = order && [['title', order]]
+
+  db.Enterprise.findAndCountAll({
+    offset: (page - 1),
+    limit: pageSize,
+    ordervalue,
+    attributes: {exclude: ['deleted']},
+    where: {deleted: false, creatorId: req.params.userId},
+    include: [{
+      model: db.Community,
+      attributes: ['id'],
+      where: { id: req.params.id },
+    },
+    {
+      model: db.User,
+      attributes: ['id'],
+      as: 'enterprise_followers',
+      through: {
+        attributes: ['active'],
+        as: 'followStatus'
+      }
+    }
+  ]
+  })
+    .then(enterprises => {
+      const totalPages = Math.ceil(enterprises.count / pageSize)
+      if (!enterprises) return res.json({ message: 'Enterprises donesn\'t exists.' })
+      res.json({ 
+        enterprises: enterprises.rows,
+        totalItems: enterprises.count,
+        totalPages,
+        page, 
+        pageSize
+       }).status(200)
+    })
+    .catch((err) => res.json({ err }).status(400))
+}
+
 // @desc    Add individual enterprises
 // @route   POST /api/enterprises/add/community/:id
 // @access  Public
@@ -126,11 +172,12 @@ const deleteEnterprises = (req, res) => {
 // @access  Private
 const updateEnterprises = (req, res) => {
   const {
-    title, description, roles, attachments
+    title, description, roles, attachments, creatorId
   } = req.body
   const id = req.params.enterpriseId
   db.Enterprise.findByPk(id,
     {
+      where: {creatorId},
       include: [{
         model: db.Community,
         attributes: ['id'],
@@ -173,4 +220,5 @@ const searchEnterprisesTitle = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises, updateEnterprises, searchEnterprisesTitle }
+module.exports = { getEnterprises, addEnterprises, getEnterprisesById, 
+  deleteEnterprises, updateEnterprises, searchEnterprisesTitle, getUserEnterprises }

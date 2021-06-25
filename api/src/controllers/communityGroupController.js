@@ -54,6 +54,51 @@ const getGroups = (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 
+// @desc Fetch all groups by a community
+// @route GET/api/groups/community/:id/user/:userId
+// @access Public
+
+const getUserGroups = (req, res) => {
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 1
+  const order = req.query.order || 'DESC'
+  const ordervalue = order && [['title', order]]
+
+  db.Group.findAndCountAll({
+    offset: (page - 1),
+    limit: pageSize,
+    ordervalue,
+    attributes: {exclude: ['deleted']},
+    where: {deleted: false, creatorId: req.params.userId},
+    include: [{
+      model: db.Community,
+      attributes: ['id'],
+      where: { id: req.params.id }
+    },
+    {
+      model: db.User,
+      attributes: ['id'],
+      as: 'group_followers',
+      through: {
+        attributes: ['active'],
+        as: 'followStatus'
+      }
+    }
+  ]
+  })
+    .then(groups => {
+      const totalPages = Math.ceil(groups.count / pageSize)
+      res.json({ 
+        groups: groups.rows,
+        totalItems: groups.count,
+        totalPages,
+        page, 
+        pageSize 
+       }).status(200)
+    })
+
+    .catch((err) => res.json({ err }).status(400))
+}
 // @desc Add individual groups
 // @route POST /api/groups/add/community/:id
 // @access Private
@@ -123,26 +168,32 @@ const deleteGroups = (req, res) => {
 // @access Public
 const updateGroups = (req, res) => {
   const {
-    title, description, category, attachments
+    title, description, category, attachments, creatorId
   } = req.body
 
   const id = req.params.groupId
 
+  // db.User.findByPk(creatorId)
+  //   .then(user => {
+  //     if(!user) return({message: 'Not authorized.'})
+  //   }).catch(error => (res.json(error)));
+
   db.Group.findByPk(id,
     {
+      where: {creatorId},
       include: [{
         model: db.Community,
         attributes: [],
-        where: { id: req.params.id }
+        where: { id: req.params.id}
       }]
     }
   ).then(groups => {
     if (groups) {
       const { id } = groups
       db.Group.update({
-        title, description, category, attachments
+        title, description, category, attachments, creatorId
       },
-      { where: { id } })
+      { where: { id} })
         .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -171,4 +222,4 @@ const searchGroupsTitle = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getGroups, addGroups, getGroupsById, deleteGroups, updateGroups, searchGroupsTitle }
+module.exports = { getGroups, addGroups, getGroupsById, deleteGroups, updateGroups, searchGroupsTitle, getUserGroups }

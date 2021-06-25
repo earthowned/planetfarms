@@ -49,6 +49,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'group_followers'
     })
+
+    //one to many relationship with enterprise
+     User.hasMany(models.Enterprise, {foreignKey: 'creatorId', as: 'enterprise_creator'})
+
+    //one to many relationship with group
+     User.hasMany(models.Group, {foreignKey: 'creatorId', as: 'group_creator'})
   };
   return User;
 }

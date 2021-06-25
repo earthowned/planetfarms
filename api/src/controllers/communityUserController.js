@@ -102,7 +102,7 @@ const searchMemberName = (req, res) => {
   const order = req.query.order || 'ASC'
 
   db.CommunityUser.findAll({ 
-    where: { communityId: req.params.id}, 
+    where: { communityId: req.params.id, active: true}, 
     attributes: ['id'],
       include: [{
         model: db.User,

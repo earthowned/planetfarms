@@ -5,10 +5,11 @@ const { upload } = require('../helpers/filehelpers')
 
 const {
   getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises,
-  updateEnterprises, searchEnterprisesTitle
+  updateEnterprises, searchEnterprisesTitle, getUserEnterprises
 } = require('../controllers/enterprisesController')
 
 router.route('/community/:id').get(checkCommunity, getEnterprises)
+router.route('/community/:id/user/userId').get(checkCommunity, getUserEnterprises)
 router.route('/add/community/:id').post(checkCommunity, upload.single('enterprise'), addEnterprises)
 router.route('/community/:id/search').get(checkCommunity, searchEnterprisesTitle)
 router

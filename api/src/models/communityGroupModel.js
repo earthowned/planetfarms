@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    creatorId: DataTypes.INTEGER,
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -43,6 +44,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'groupId',
         as: 'group_followers'
       })
+
+      //one to many relationship with User as creator
+      Group.belongsTo(models.User, {foreignKey: 'creatorId', as: 'group_creator'})
   }
   return Group
 }

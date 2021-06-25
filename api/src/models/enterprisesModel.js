@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    creatorId: DataTypes.INTEGER,
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -49,6 +50,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'enterpriseId',
         as: 'enterprise_followers'
       })
+
+    Enterprise.belongsTo(models.User, {foreignKey: 'creatorId', as: 'enterprise_creator'})
   }
   return Enterprise
 }
