@@ -60,7 +60,7 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
     dispatch(visitCommunity(community.id))
   }
   return (
-     <div ckey={community.id} lassName="community-card">
+     <div ckey={community.id} className="community-card">
       <Background image={community.attachment}>
         {
         creator && <div className="card-edit">

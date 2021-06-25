@@ -106,7 +106,7 @@ const {success:communityUpdateSuccess} = useSelector((state) => state.communityU
   return (
     <>
         <CommunityHeader setActive={setModalActive} search={search} setSearch={setSearch} />
-        <div style={{width: '100%', minHeight: '130%'}}>
+        <div>
         {
           pathname==='/community-switching/my-communities' 
           ? <><CommunitiesCard data={userCommunities} editCard={editCard} deleteCard={deleteCard} /> 
@@ -124,7 +124,16 @@ const CommunityHeader = ({setActive, search, setSearch}) => {
   const { pathname } = useLocation()
   const history = useHistory()
   const windowWidth = useSizeFinder();
-  const nav = [];
+  const nav = [
+    {
+      label: 'All communities',
+      link: '/community-switching/all-communities'
+    },
+    {
+      label: 'My communities',
+      link: '/community-switching/my-communities'
+    }
+  ];
   return (
     <div className='library-main-header-container'>
       <div className='library-container'>
