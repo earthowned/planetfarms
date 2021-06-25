@@ -17,7 +17,13 @@ import {
   ENTERPRISE_DELETE_FAIL,
   ENTERPRISE_FOLLOW_REQUEST,
   ENTERPRISE_FOLLOW_SUCCESS,
-  ENTERPRISE_FOLLOW_FAIL
+  ENTERPRISE_FOLLOW_FAIL,
+  USER_ENTERPRISE_LIST_REQUEST,
+  USER_ENTERPRISE_LIST_SUCCESS,
+  USER_ENTERPRISE_LIST_FAIL,
+  USER_ENTERPRISE_SEARCH_REQUEST,
+  USER_ENTERPRISE_SEARCH_SUCCESS,
+  USER_ENTERPRISE_SEARCH_FAIL
 
 } from '../constants/enterpriseConstants'
 
@@ -99,6 +105,35 @@ export const enterpriseFollowReducer = (state = {}, action) => {
     case ENTERPRISE_FOLLOW_SUCCESS:
       return { loading: false, success: true}
     case ENTERPRISE_FOLLOW_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userEnterpriseListReducer = (state = { userEnterprises: [] }, action) => {
+  switch (action.type) {
+    case USER_ENTERPRISE_LIST_REQUEST:
+      return { loading: true, userEnterprises: [] }
+    case USER_ENTERPRISE_LIST_SUCCESS:
+      return {
+        loading: false,
+        userEnterprises: action.payload.communities,
+        pages: action.payload.pages,
+        page: action.payload.page,
+        totalPages: action.totalPages
+      }
+    case USER_ENTERPRISE_LIST_FAIL:
+      return { loading: false, error: action.payload }
+    case USER_ENTERPRISE_SEARCH_REQUEST:
+      return { loading: true, userEnterprises: [] }
+    case USER_ENTERPRISE_SEARCH_SUCCESS:
+      return {
+        loading: false,
+        userEnterprises: action.payload.communities,
+        order: action.payload.order
+      }
+    case USER_ENTERPRISE_SEARCH_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

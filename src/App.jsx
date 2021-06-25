@@ -102,6 +102,9 @@ function App () {
           <Route path='/community-group/:id'>
             <CommunityGroup />
           </Route>
+          <Route path='/your-community-group/:id'>
+            <CommunityGroup />
+          </Route>
           <Route path='/community-group-view-page/:id'>
             <CommunityGroupViewPage />
           </Route>
@@ -127,6 +130,9 @@ function App () {
             <CourseUsers />
           </Route>
           <Route path='/enterprises/:id'>
+            <Enterprises />
+          </Route>
+          <Route path='/your-enterprises/:id'>
             <Enterprises />
           </Route>
           <Route path='/enterprises-view'>

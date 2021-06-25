@@ -5,9 +5,9 @@ import { newsListReducer, newsCreateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
 import { enterpriseCreateReducer, enterpriseDeleteReducer, 
   enterpriseFollowReducer, 
-  enterpriseListReducer, enterpriseUpdateReducer } from './reducers/enterpriseReducers'
+  enterpriseListReducer, enterpriseUpdateReducer, userEnterpriseListReducer } from './reducers/enterpriseReducers'
 import { groupCreateReducer, groupDeleteReducer, groupFollowReducer, groupListReducer, 
-  groupUpdateReducer, groupViewReducer } from './reducers/communityGroupReducers'
+  groupUpdateReducer, groupViewReducer, userGroupListReducer } from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, 
@@ -18,11 +18,13 @@ const reducer = combineReducers({
   listEvents: eventListReducer,
   groupView: groupViewReducer,
   listGroups: groupListReducer,
+  listUserGroups: userGroupListReducer,
   groupUpdate: groupUpdateReducer,
   groupDelete: groupDeleteReducer,
   groupCreate: groupCreateReducer,
   groupFollow: groupFollowReducer,
   listEnterprises: enterpriseListReducer,
+  listUserEnterprises: userEnterpriseListReducer,
   enterpriseUpdate: enterpriseUpdateReducer,
   enterpriseDelete: enterpriseDeleteReducer,
   enterpriseCreate: enterpriseCreateReducer,

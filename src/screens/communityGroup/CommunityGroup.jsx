@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Button from '../../components/button/Button'
 import FormModal from '../../components/formModal/FormModal'
 import CommunityGroupCard from '../../components/communityGroupCard/CommunityGroupCard'
@@ -8,13 +8,36 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityGroup.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { searchGroups, listGroups, groupDelete } from '../../actions/communityGroupActions'
+import { searchGroups, listGroups, groupDelete, listUserGroups } from '../../actions/communityGroupActions'
 import axios from 'axios'
 import Pagination from '../../components/pagination/Pagination';
+import useSizeFinder from '../../utils/sizeFinder'
 
 const CommunityGroup = () => {
+    // fetching current community
+  const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
+
+  //navigtion bar
+  const windowWidth = useSizeFinder();
+  const {pathname} = useLocation();
+
+  const nav = [
+  {
+    label: 'All Groups',
+    link: `/community-group/${currentCommunity.slug}`
+  },
+  {
+    label: 'Your Groups',
+    link: `/your-community-group/${currentCommunity.slug}`
+    }
+  ]
+
   const [editData, setEditData] = useState(null);
   const data = useSelector((state) => state.listGroups)
+  const {userGroups} = useSelector((state) => state.listUserGroups)
   const {groups} = data;
   
   const {success:groupUpdateSuccess} = useSelector((state) => state.groupUpdate)
@@ -30,15 +53,19 @@ const CommunityGroup = () => {
   const handleClickCreate = () => {
   }
 
+  const userId = 10;
+
+
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
     if (!search) dispatch(listGroups({pageNumber}))
-  }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess, groupCreateSuccess])
-
-  // fetching current community
-const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
+  
+        if(pathname=== `/your-community-group/${currentCommunity.slug}`) {
+            // if (search) dispatch(searchGroups(search))
+            if (!search) dispatch(listUserGroups({userId, communityId: currentCommunity.id}))
+          
+        }
+  }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess, groupCreateSuccess, pathname])
 
   const editCard = async (id) => {
      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
@@ -77,20 +104,25 @@ const currentCommunity = localStorage.getItem('currentCommunity')
           <div className='group-flex-col-4'>
             <div className='community-group-main-header-container'>
               <div className='flex-row-5'>
-                <div id='community-group-link-header' style={{ justifyContent: 'space-between' }}>
-                  <div className='all-groups-1 border-1px-quarter-spanish-white'>
-                    <div className='all-groups'>
-                      All Groups
-                    </div>
-                  </div>
-                  <Link to='/my-group-view-page'>
-                    <div className='your-groups-1 border-class-1'>
-                      <div className='your-groups ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                        Your Groups
-                      </div>
-                    </div>
-                  </Link>
-                </div>
+                {windowWidth > 720
+                ? <ul className='courses-list-container'>
+                  {
+                  nav.map(item => {
+                    return (
+                      <li>
+                        <Link
+                          className={`nav-link ${(pathname === `${item.link}`)
+                          ? 'courses-list-item active'
+                          : 'library-list-item'}`} to={`${item.link}`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    )
+                  })
+                }
+                </ul>
+                : <Filter name='All Enterprises' noImage />}
                 <div className='community-group-search-container'>
                   <SearchComponent className='search-bar' search={search} setSearch={setSearch} />
                 </div>
@@ -104,12 +136,21 @@ const currentCommunity = localStorage.getItem('currentCommunity')
               </div>
             </div>
             <div className='community-group-container'>
-              <CommunityGroupCard location='/community-group-view-page/:id' 
+               {
+          pathname=== `/community-group/${currentCommunity.slug}` 
+          ?  <CommunityGroupCard location='/community-group-view-page/:id' 
               data={groups} 
               editCard={editCard} 
               setActive={setActive} 
               deleteCard={deleteCard}
               />
+          :  <CommunityGroupCard location='/community-group-view-page/:id' 
+              data={userGroups} 
+              editCard={editCard} 
+              setActive={setActive} 
+              deleteCard={deleteCard}
+              />
+        }
             </div>
             <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
           </div>

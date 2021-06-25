@@ -4,7 +4,7 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import CommunityGroupCard from '../../components/communityGroupCard/CommunityGroupCard'
 import { useSelector, useDispatch } from 'react-redux'
-import { enterpriseDelete, listEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
+import { enterpriseDelete, listEnterprises, listUserEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
 import FormModal from '../../components/formModal/FormModal'
 import Filter from '../../components/filter/Filter'
 import useSizeFinder from '../../utils/sizeFinder'
@@ -12,19 +12,17 @@ import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import Pagination from '../../components/pagination/Pagination'
 
-const nav = [
-  {
-    label: 'All enterprises',
-    link: '/enterprises'
-  },
-  {
-    label: 'Your Enterprises',
-    link: '/your-enterprises'
-  }
-]
+
 
 const Enterprise = () => {
+  // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+  const {pathname} = useLocation();
+
   const data = useSelector((state) => state.listEnterprises);
+  const {userEnterprises} = useSelector((state) => state.listUserEnterprises);
   // const {enterprises} = data;
   // console.log(enterprises);
   const enterprises = data.enterprises.enterprises ? data.enterprises.enterprises : data.enterprises
@@ -39,15 +37,19 @@ const Enterprise = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const dispatch = useDispatch()
 
+  const userId = 10;
+
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
     if (!search) dispatch(listEnterprises({pageNumber}))
-  }, [search, dispatch, enterpriseUpdateSuccess, enterpriseDeleteSuccess, enterpriseCreateSuccess])
 
-   // fetching current community
-const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
+    if(pathname=== `/your-community-group/${currentCommunity.slug}`) {
+            // if (search) dispatch(searchGroups(search))
+            if (!search) dispatch(listUserEnterprises({userId, communityId: currentCommunity.id}))
+          
+        }
+  }, [search, dispatch, pathname,  enterpriseUpdateSuccess, enterpriseDeleteSuccess, enterpriseCreateSuccess])
+
 
   const editCard = async (id) => {
      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`)
@@ -85,7 +87,20 @@ const currentCommunity = localStorage.getItem('currentCommunity')
           <div className='enterprises-col'>
             <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              <CommunityGroupCard data={enterprises} type="enterpise" editCard={editCard} deleteCard={deleteCard} />
+              { pathname=== `/enterprises/${currentCommunity.slug}` 
+                ?  <CommunityGroupCard location='/community-group-view-page/:id' 
+                    data={enterprises} 
+                    editCard={editCard} 
+                    setActive={setActive} 
+                    deleteCard={deleteCard}
+                    />
+                :  <CommunityGroupCard location='/community-group-view-page/:id' 
+                    data={userEnterprises} 
+                    editCard={editCard} 
+                    setActive={setActive} 
+                    deleteCard={deleteCard}
+                    />
+              }
             </div>
             <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
           </div>
@@ -119,6 +134,22 @@ function EnterpriseHeader ({ search, setSearch, setActive }) {
 function FirstHeader () {
   const windowWidth = useSizeFinder()
   const { pathname } = useLocation()
+
+  // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
+  const nav = [
+  {
+    label: 'All enterprises',
+    link: `/enterprises/${currentCommunity.slug}`
+  },
+  {
+    label: 'Your Enterprises',
+    link: `/your-enterprises/${currentCommunity.slug}`
+  }
+]
   return (
     <>
       {windowWidth > 720

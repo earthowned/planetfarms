@@ -17,7 +17,10 @@ import {
   ENTERPRISE_DELETE_FAIL,
   ENTERPRISE_FOLLOW_REQUEST,
   ENTERPRISE_FOLLOW_SUCCESS,
-  ENTERPRISE_FOLLOW_FAIL
+  ENTERPRISE_FOLLOW_FAIL,
+  USER_ENTERPRISE_LIST_REQUEST,
+  USER_ENTERPRISE_LIST_SUCCESS,
+  USER_ENTERPRISE_LIST_FAIL
 } from '../constants/enterpriseConstants'
 
 // fetching current community
@@ -167,6 +170,29 @@ export const followEnterprise = (userId, enterpriseId) => async (dispatch, getSt
     dispatch({
       type: ENTERPRISE_FOLLOW_FAIL,
       payload: message
+    })
+  }
+}
+
+export const listUserEnterprises = ({userId, communityId, sort = '', pageNumber = ''}) => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: USER_ENTERPRISE_LIST_REQUEST })
+    const { data } = await axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${communityId}/user/${userId}`
+    )
+    dispatch({
+      type: USER_ENTERPRISE_LIST_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_ENTERPRISE_LIST_FAIL,
+      payload:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
     })
   }
 }

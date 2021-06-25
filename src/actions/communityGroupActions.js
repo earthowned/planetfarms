@@ -20,7 +20,10 @@ import {
   GROUP_DELETE_FAIL,
   GROUP_FOLLOW_REQUEST,
   GROUP_FOLLOW_SUCCESS,
-  GROUP_FOLLOW_FAIL
+  GROUP_FOLLOW_FAIL,
+  USER_GROUP_LIST_REQUEST,
+  USER_GROUP_LIST_SUCCESS,
+  USER_GROUP_LIST_FAIL
 } from '../constants/communityGroupConstants'
 
 // fetching current community
@@ -188,6 +191,29 @@ export const followGroup = (userId, groupId) => async (dispatch, getState) => {
     dispatch({
       type: GROUP_FOLLOW_FAIL,
       payload: message
+    })
+  }
+}
+
+export const listUserGroups = ({userId, communityId, sort = '', pageNumber = ''}) => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: USER_GROUP_LIST_REQUEST })
+    const { data } = await axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${communityId}/user/${userId}`
+    )
+    dispatch({
+      type: USER_GROUP_LIST_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_GROUP_LIST_FAIL,
+      payload:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
     })
   }
 }
