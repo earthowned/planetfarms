@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import './NewsCreateModal.scss'
 import Button from '../button/Button'
-import { savevideoDetail } from '../../actions/newsActions'
+// import { savevideoDetail } from '../../actions/newsActions'
 import DragDrop from '../dragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 import { InputFields, ErrorText, TextArea } from '../formUI/FormUI'
@@ -12,7 +12,7 @@ const CreateVideo = ({
   getRootProps,
   getInputProps,
   files,
-  setFiles,
+  // setFiles,
   videoActive,
   setVideoActive,
   setVideoData,
@@ -37,7 +37,8 @@ const CreateVideo = ({
         videoTitle: videoTitle,
         videoDescription: videoDescription,
         videoCover: videoCover,
-        videoLink: videoLink
+        videoLink: videoLink,
+        videoResource: videoResource
       }
     ]
     setVideoData(updateUsers)

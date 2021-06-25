@@ -9,13 +9,12 @@ import BackButton from '../../../components/backButton/BackButton'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
-import { ErrorText } from '../../../Components/FormUI/FormUI'
+import { ErrorText } from '../../../components/formUI/FormUI'
 import './AddLesson.scss'
 
 const AddLesson = () => {
   const dispatch = useDispatch()
-  const { courseId: ID } = useParams()
-  console.log(ID)
+  const { courseId } = useParams()
 
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
@@ -30,16 +29,18 @@ const AddLesson = () => {
   const submitLessonForm = ({ title }) => {
     const lessonId = uuid()
     const coverImg = lessonCover
-    const courseId = ID
     const steps = {
-      videos: [videoData]
+      videos: videoData
     }
-    console.log(lessonId)
-    console.log(coverImg)
-    console.log(courseId)
-    console.log(steps)
-    console.log(title)
-    dispatch(createLesson({ courseId, lessonId, title, coverImg, steps }))
+    dispatch(
+      createLesson({
+        title,
+        courseId,
+        lessonId,
+        coverImg,
+        steps
+      })
+    )
   }
 
   return (
@@ -69,21 +70,19 @@ const AddLesson = () => {
         />
       )}
       <DashboardLayout title='Add new lesson'>
-        <BackButton location={`/admin/course/${ID}`} />
-        <form onSubmit={handleSubmit(submitLessonForm)}>
-          <AddContent
-            setVideoModal={setVideoModal}
-            setImageModal={setImageModal}
-            setTextModal={setTextModal}
-            setTestModal={setTestModal}
-            register={register}
-            errors={errors}
-            setLessonCover={setLessonCover}
-            lessonCover={lessonCover}
-          />
-          <LessonMaterial />
-          <LessonSaveModal />
-        </form>
+        <BackButton location={`/admin/course/${courseId}`} />
+        <AddContent
+          setVideoModal={setVideoModal}
+          setImageModal={setImageModal}
+          setTextModal={setTextModal}
+          setTestModal={setTestModal}
+          register={register}
+          errors={errors}
+          setLessonCover={setLessonCover}
+          lessonCover={lessonCover}
+        />
+        <LessonMaterial />
+        <LessonSaveModal onClick={handleSubmit(submitLessonForm)} />
       </DashboardLayout>
     </>
   )
@@ -148,15 +147,19 @@ const LessonMaterial = () => {
   )
 }
 
-const LessonSaveModal = () => {
+const LessonSaveModal = ({ onClick }) => {
   return (
     <div className='save-lesson-modal'>
       <h4>Do you want to save lesson?</h4>
       <div>
-        <button className='secondary-btn' id='lesson-save-btn'>
+        <button className='secondary-btn' id='lesson-cancel-btn'>
           Cancel
         </button>
-        <button className='primary-btn secondary-btn' id='lesson-save-btn'>
+        <button
+          className='primary-btn secondary-btn'
+          id='lesson-save-btn'
+          onClick={onClick}
+        >
           Save lesson
         </button>
       </div>
