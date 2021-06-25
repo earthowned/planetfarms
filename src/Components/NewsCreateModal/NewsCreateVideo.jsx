@@ -39,7 +39,8 @@ const CreateVideo = ({
         videoTitle: videoTitle,
         videoDescription: videoDescription,
         videoCover: videoCover,
-        videoLink: videoLink
+        videoLink: videoLink,
+        videoResource: videoResource
       }
     ]
     setVideoData(updateUsers)

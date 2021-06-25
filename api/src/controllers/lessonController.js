@@ -20,6 +20,7 @@ const getLessonById = async (req, res) => {
 
 const addLesson = async (req, res) => {
   const lesson = await Lessons.create(req.body)
+  console.log(req.body)
   console.log(lesson)
   res.status(201).json({
     status: true,
