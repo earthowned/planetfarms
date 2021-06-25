@@ -1,49 +1,14 @@
 import React, { useEffect, useState } from 'react'
-<<<<<<< HEAD:src/components/coursesHeader/CoursesHeader.jsx
 import Filter from '../filter/Filter'
 import SearchComponent from '../searchComponent/SearchComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import './CoursesHeader.css'
-import useSizeFinder from '../../utils/sizeFinder'
-
-const data = [
-  {
-    label: 'All courses',
-    link: '/courses'
-  },
-  {
-    label: 'My courses & collections',
-    link: '/courses/my-courses'
-  },
-  {
-    label: 'Users collections',
-    link: '/courses/users'
-  },
-  {
-    label: 'My collections',
-    link: '/courses/my-collection'
-  }
-]
-
-const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCourse }) => {
-=======
-import { Link, useLocation, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-
-import Filter from '../Filter/Filter'
-import SearchComponent from '../SearchComponent/SearchComponent'
 import data from './headerData'
 import './CoursesHeader.scss'
+import useSizeFinder from '../../utils/sizeFinder'
 
-const CoursesHeader = ({
-  setActive,
-  setCreateCollection,
-  location,
-  setCreateCourse
-}) => {
+const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCourse }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
->>>>>>> ec31d22... course header course formated:src/Components/coursesHeader/CoursesHeader.jsx
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { pathname } = useLocation()
@@ -53,15 +18,6 @@ const CoursesHeader = ({
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-<<<<<<< HEAD:src/components/coursesHeader/CoursesHeader.jsx
-    // if (!userInfo) {
-    //     history.push('/login')
-    // }
-    // if (search) dispatch(searchResources(search))
-    // if (!search) dispatch(listResources())
-
-  }, [search, dispatch, history, userInfo])
-=======
     if (!userInfo) {
       history.push('/login')
     }
@@ -71,7 +27,6 @@ const CoursesHeader = ({
       })
     }
   }, [windowWidth, search, dispatch, history, userInfo])
->>>>>>> ec31d22... course header course formated:src/Components/coursesHeader/CoursesHeader.jsx
 
   function createCollection () {
     setActive(true)
@@ -90,13 +45,6 @@ const CoursesHeader = ({
                 return (
                   <li key={slug}>
                     <Link
-<<<<<<< HEAD:src/components/coursesHeader/CoursesHeader.jsx
-                      className={`nav-link ${(pathname === `${item.link}`)
-                    ? 'courses-list-item active'
-                    : 'library-list-item'}`} to={`${item.link}`}
-                    >
-                      {item.label}
-=======
                       className={`nav-link ${
                         pathname === `${slug}`
                           ? 'list list-active'
@@ -105,7 +53,6 @@ const CoursesHeader = ({
                       to={`${slug}`}
                     >
                       {name}
->>>>>>> ec31d22... course header course formated:src/Components/coursesHeader/CoursesHeader.jsx
                     </Link>
                   </li>
                 )
