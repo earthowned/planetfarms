@@ -6,9 +6,6 @@ import './AdminCoursePage.scss'
 import { useHistory, useParams } from "react-router-dom";
 import { GET_COURSE } from "../../../utils/urlConstants";
 import useGetFetchData from "../../../utils/useGetFetchData";
-
-import BackButton from "../../../Components/BackButton/BackButton";
-import DashboardLayout from "../../../Layout/DashboardLayout/DashboardLayout";
 import CourseDescription from "./CourseDescription";
 import LessonBlock from "./LessonBlock";
 import "./admin-course-page.scss";
