@@ -9,7 +9,7 @@ import Filter from '../../components/filter/Filter'
 import useSizeFinder from '../../utils/sizeFinder'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchNews, listNews } from '../../actions/newsActions'
-import Pagination from '../../Components/Paginations/Paginations'
+import Pagination from '../../components/pagination/Pagination'
 
 function CommunityNews () {
   const [addModal, setAddModal] = useState(false)

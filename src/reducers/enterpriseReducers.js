@@ -16,7 +16,7 @@ import {
   ENTERPRISE_DELETE_SUCCESS,
   ENTERPRISE_DELETE_FAIL
 
-} from '../constants/EnterpriseConstants'
+} from '../constants/enterpriseConstants'
 
 export const enterpriseListReducer = (state = { enterprises: [] }, action) => {
   switch (action.type) {

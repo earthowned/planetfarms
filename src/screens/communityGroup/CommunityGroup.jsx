@@ -8,9 +8,9 @@ import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityGroup.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { searchGroups, listGroups, groupDelete } from '../../actions/CommunityGroupActions'
+import { searchGroups, listGroups, groupDelete } from '../../actions/communityGroupActions'
 import axios from 'axios'
-import Pagination from '../../Components/Paginations/Paginations'
+import Pagination from '../../components/pagination/Pagination';
 
 const CommunityGroup = () => {
   const [editData, setEditData] = useState(null);

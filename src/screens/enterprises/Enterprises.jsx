@@ -10,7 +10,7 @@ import Filter from '../../components/filter/Filter'
 import useSizeFinder from '../../utils/sizeFinder'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
-import Pagination from '../../Components/Paginations/Paginations'
+import Pagination from '../../components/pagination/Pagination'
 
 const nav = [
   {

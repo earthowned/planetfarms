@@ -1,5 +1,6 @@
 import { MEMBER_LIST_FAIL, MEMBER_LIST_REQUEST, MEMBER_LIST_SUCCESS, 
-  MEMBER_SEARCH_FAIL, MEMBER_SEARCH_REQUEST, MEMBER_SEARCH_SUCCESS } from "../constants/MemberConstants"
+  MEMBER_SEARCH_FAIL, 
+  MEMBER_SEARCH_REQUEST, MEMBER_SEARCH_SUCCESS } from "../constants/memberConstants"
 
 export const memberListReducer = (state = { members: [] }, action) => {
   switch (action.type) {

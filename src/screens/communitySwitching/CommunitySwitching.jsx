@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/button/Button";
 import { listCommunities, searchCommunities, createCommunity, listUserCommunities, searchUserCommunities, communityDelete, communityUpdate } from "../../actions/communityActions";
 import CommunitiesCard from '../../components/communitiesCard/CommunitiesCard'
-import DragDrop from "../../components/dragDrop/dragDrop";
+import DragDrop from "../../components/dragDrop/DragDrop";
 import Filter from '../../components/filter/Filter'
 import InputComponent from "../../components/input/InputComponent";
 import CollectionModalHeader from "../../components/newsCreateModal/CollectionModalHeader";
@@ -124,7 +124,7 @@ const CommunityHeader = ({setActive, search, setSearch}) => {
   const { pathname } = useLocation()
   const history = useHistory()
   const windowWidth = useSizeFinder();
-  
+  const nav = [];
   return (
     <div className='library-main-header-container'>
       <div className='library-container'>

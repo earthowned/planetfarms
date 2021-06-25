@@ -5,13 +5,13 @@ import Button from '../button/Button'
 import Secondarybtn from '../secondaryBtn/Secondarybtn'
 import './CommunityGroupCard.scss'
 
-const CommunityGroupCard = ({ data = [], location, type = 'group', editCard }) => {
+const CommunityGroupCard = ({ data = [], location, type = 'group', editCard, deleteCard }) => {
   return (
     <>
       <CardLayout data={data}>
         {data.length > 0 && data.map(item => {
           return (
-            <CommunityGroupSingleCard item={item} type={type} />
+            <CommunityGroupSingleCard item={item} type={type} editCard={editCard} deleteCard={deleteCard} />
           )
         })}
       </CardLayout>
@@ -19,7 +19,7 @@ const CommunityGroupCard = ({ data = [], location, type = 'group', editCard }) =
   )
 }
 
-const CommunityGroupSingleCard = ({ item, type }) => {
+const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
   const history = useHistory()
   const [follow, setFollow] = useState(false)
   const followClick = () => {

@@ -18,7 +18,7 @@ import {
   GROUP_DELETE_REQUEST,
   GROUP_DELETE_SUCCESS,
   GROUP_DELETE_FAIL
-} from '../constants/CommunityGroupConstants'
+} from '../constants/communityGroupConstants'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')

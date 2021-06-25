@@ -26,7 +26,7 @@ import { COMMUNITY_LIST_FAIL,
     COMMUNITY_DELETE_REQUEST,
     COMMUNITY_DELETE_SUCCESS,
     COMMUNITY_DELETE_FAIL
-} from "../constants/CommunityConstants"
+} from "../constants/communityConstants"
 
 export const communityListReducer = (state = { communities: [] }, action) => {
   switch (action.type) {

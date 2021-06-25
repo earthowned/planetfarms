@@ -15,7 +15,7 @@ import {
   ENTERPRISE_DELETE_REQUEST,
   ENTERPRISE_DELETE_SUCCESS,
   ENTERPRISE_DELETE_FAIL
-} from '../constants/EnterpriseConstants'
+} from '../constants/enterpriseConstants'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')

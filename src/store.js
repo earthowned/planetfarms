@@ -3,12 +3,15 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { newsListReducer, newsCreateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
-import { enterpriseCreateReducer, enterpriseDeleteReducer, enterpriseListReducer, enterpriseUpdateReducer } from './reducers/EnterpriseReducers'
-import { groupCreateReducer, groupDeleteReducer, groupListReducer, groupUpdateReducer, groupViewReducer } from './reducers/CommunityGroupReducers'
+import { enterpriseCreateReducer, enterpriseDeleteReducer, 
+  enterpriseListReducer, enterpriseUpdateReducer } from './reducers/enterpriseReducers'
+import { groupCreateReducer, groupDeleteReducer, groupListReducer, 
+  groupUpdateReducer, groupViewReducer } from './reducers/communityGroupReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
-import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, communityVisitReducer, communityDeleteReducer, communityUpdateReducer } from './reducers/CommunityReducers'
-import { memberListReducer } from './reducers/MemberReducers'
+import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, 
+  communityVisitReducer, communityDeleteReducer, communityUpdateReducer } from './reducers/communityReducers'
+import { memberListReducer } from './reducers/memberReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
