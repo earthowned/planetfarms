@@ -74,10 +74,9 @@ const authUser = async (req, res) => {
     const { name, password } = req.body
     username = (process.env.AUTH_METHOD === 'cognito') 
     ? cognitoAuth(name, password) 
-    : await localAuth(name, password)
-    
+    : await localAuth(name, password, res);
+
     if (username) {
-      
      return res.json({
         token: generateToken(username)
       })
@@ -94,9 +93,51 @@ const authUser = async (req, res) => {
   }
 }
 
-localAuth = async (name, password) => {
+localAuth = async (name, password, res) => {
+  try {
+    
   user = await db.User.findOne({ where: { name, password } })
-  return user.dataValues.id;
+
+  //transaction for autofollow communitites
+  const result = await db.sequelize.transaction(async (t) => {
+  const autoFollowCommunitiesId = await db.Community.findAll({
+    where: {auto_follow: true},
+    attributes: ['id']
+  }, {transaction: t});
+
+  const followedCommunities = await db.CommunityUser.findAll({
+    where: {userId: user.dataValues.id},
+    attributes: ['communityId']
+  }, {transaction: t});
+
+  //coverting to the arrays for removing item from first array
+  const autoFollowCommunitiesArray = autoFollowCommunitiesId.map(item => item.id)
+  const followedCommunitiesArray = followedCommunities.map(item => item.communityId)
+  
+  const idArrays = autoFollowCommunitiesArray.filter(item => {
+                  return followedCommunitiesArray.indexOf(item) === -1;
+                });
+                
+      const allFollow = [];
+                 
+    for (let i = 0; i < idArrays.length; i++) {
+        const followObj = {
+          userId: user.dataValues.id,
+         communityId: parseInt(idArrays[i])
+                  };
+                  allFollow.push(followObj);
+            }
+
+  await db.CommunityUser.bulkCreate(allFollow, {transaction: t});
+  return true
+
+  })
+  if(result){
+    return user.dataValues.id;
+  }
+  } catch (error) {
+    return res.json(error)
+  }
 }
 
 cognitoAuth = async (name, password) => {
@@ -131,21 +172,47 @@ const registerUser = async (req, res) => {
 }
 
 registerLocal = async (name, password, email, res) => {
-  const userExists = await db.User.findOne({ where: { name } })
+  try {
+    const userExists = await db.User.findOne({ where: { name } })
   if (userExists) return res.json({ message: 'Users already Exists !!!' }).status(400)
   const user = await db.User.create({ name, password, email })
   if (user) {
-   return res.status(201).json({
-      id: user.dataValues.id,
-      name: user.dataValues.name,
-      token: generateToken(user.dataValues.id)
-    })
-  } 
+    //transaction to auto_follow communities
+     const result = await db.sequelize.transaction(async (t) => {
+         const communitiesArray = await db.Community.findAll({
+          attributes: ["id"],
+          where: {auto_follow: true}}, 
+           {transaction: t});
+           
+           const allFollow = [];
+
+          for (let i = 0; i < communitiesArray.length; i++) {
+            const followObj = {
+              userId: user.dataValues.id,
+              communityId: parseInt(communitiesArray[i].id)
+            };
+            allFollow.push(followObj);
+          }
+
+           await db.CommunityUser.bulkCreate(allFollow, {transaction: t});
+          return true
+        })
+
+        if(result) {
+          return res.status(201).json({
+                  id: user.dataValues.id,
+                  name: user.dataValues.name,
+                  token: generateToken(user.dataValues.id)
+                })
+              } 
+        }
    
-  return res.status(400).json({
-      error: 'Invalid user data'
-    })
-  
+          return res.status(400).json({
+              error: 'Invalid user data'
+            })
+  } catch (error) {
+    return res.json(error)
+  }
 }
 
 const changePassword = async (req, res) => {

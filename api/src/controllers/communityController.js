@@ -68,7 +68,7 @@ const getUserCommunities = async (req, res) => {
     attributes: {exclude: ['deleted']},
     order: [['createdAt', 'DESC']],
      where: {
-      creatorId: req.params.id,
+      creatorId: req.user.id,
       deleted: false
     },
     include: [{
@@ -237,8 +237,13 @@ const updateCommunity = async (req, res) => {
              
                 const followIdArrays = await db.CommunityUser.findAll({attributes: ['userId'], 
                 where: {communityId: community.id}});
+
+                //converting them to the array of ids not(object with ids)
+                //to check console.log(followIdArrays) and newFollowIds
                 const newFollowIds = followIdArrays.map(item => item.userId);
                 const newUserIds = userIdArrays.map(item => item.id);
+
+                //this is removing any duplicate items between newFollowIds and newUserIds
                 const idArrays = newUserIds.filter(item => {
                   return newFollowIds.indexOf(item) === -1;
                 });
