@@ -1,5 +1,5 @@
 const generateToken = require('../utils/generateToken.js')
-const User = require('../models/userModel.js')
+const db = require('../models')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
 
@@ -72,19 +72,22 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    username = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)
+    username = (process.env.AUTH_METHOD === 'cognito') 
+    ? cognitoAuth(name, password) 
+    : localAuth(name, password)
+    
     if (username) {
       res.json({
         token: generateToken(username)
       })
     } else {
-      res.status(401).json({
+      return res.status(401).json({
         error: 'Invalid email or password'
       })
     }
   } catch (e) {
     console.log(e)
-    res.status(401).json({
+   return res.status(401).json({
       error: 'Invalid email or password'
     })
   }
@@ -115,30 +118,33 @@ const registerUser = async (req, res) => {
           email
         }
       })
-    } else {
-      registerLocal(name, password, email, res)
-    }
+      return res.json({user});
+    } 
+    registerLocal(name, password, email, res)
+    
   } catch (err) {
     console.log(err)
-    throw new Error(`Error ${err}`)
+    return res.json({err})
+    // throw new Error(`Error ${err}`)
   }
 }
 
 registerLocal = async (name, password, email, res) => {
-  const userExists = await User.findOne({ where: { name } })
-  if (userExists) res.json({ message: 'Users already Exists !!!' }).status(400)
-  user = await User.create({ name, password })
+  const userExists = await db.User.findOne({ where: { name } })
+  if (userExists) return res.json({ message: 'Users already Exists !!!' }).status(400)
+  const user = await db.User.create({ name, password, email })
   if (user) {
-    res.status(201).json({
+   return res.status(201).json({
       id: user.dataValues.id,
       name: user.dataValues.name,
       token: generateToken(user.dataValues.id)
     })
-  } else {
-    res.status(400).json({
+  } 
+   
+  return res.status(400).json({
       error: 'Invalid user data'
     })
-  }
+  
 }
 
 const changePassword = async (req, res) => {
