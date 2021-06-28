@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken')
 const generateToken = require('../utils/generateToken.js')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
@@ -103,7 +102,7 @@ const localAuth = async (name, password) => {
 
 const cognitoAuth = async (name, password) => {
   const user = await Auth.signIn(name, password)
-  return (user) ? name : ''
+  return user?.attributes?.sub || ''
 }
 
 // @desc    Register a new user
@@ -113,13 +112,15 @@ const registerUser = async (req, res) => {
   try {
     const { name, password, email } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
-      await Auth.signUp({
+      const registeredUser = await Auth.signUp({
         username: name,
         password,
         attributes: {
           email
         }
       })
+      res.send({ token: generateToken(registeredUser.userSub) })
+      await User.create({ userID: registeredUser.userSub })
     } else {
       registerLocal(name, password, email, res)
     }
@@ -256,19 +257,18 @@ const getUserProfileByUserID = (req, res) => {
 // @route   GET /api/user/profile
 // @access  Public
 const getMyProfile = (req, res) => {
-  const token = req.headers.authorization.split(' ')[1]
-  const decoded = jwt.verify(token, process.env.JWT_SECRET)
-  console.log(decoded)
-  User.findOne({ where: { userID: decoded.id } })
-    .then((profile) => {
-      if (profile) {
-        res.json(profile)
-      } else {
-        res.status(404)
-        throw new Error('Profile not found')
-      }
-    })
-    .catch((err) => res.json({ error: err.message }).status(400))
+  const user = req.user.dataValues
+
+  res.json({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    phone: user.phone,
+    email: user.email,
+    dateOfBirth: user.dateOfBirth,
+    lastLogin: user.lastLogin,
+    numberOfVisit: user.numberOfVisit,
+    attachments: user.attachments
+  })
 }
 
 // @desc    Update user
@@ -276,8 +276,10 @@ const getMyProfile = (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { email, firstName, lastName, phone, birthday, name } = req.body
-    const id = req.params.id
-    User.findByPk(id).then(user => {
+    const id = req.user.dataValues.userID
+    console.log(id)
+    // const id = req.params.id
+    User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         User.update(
           {
@@ -288,7 +290,7 @@ const updateUser = async (req, res) => {
             dateOfBirth: birthday,
             name
           },
-          { where: { id: user.dataValues.id } }
+          { where: { userID: user.dataValues.id } }
         )
           .then(() => res.json({ message: 'User Updated !!!' }).status(200))
           .catch((err) => res.json({ error: err.message }).status(400))

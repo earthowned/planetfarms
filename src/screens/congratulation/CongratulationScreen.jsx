@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Auth } from 'aws-amplify'
 import { useForm } from 'react-hook-form'
 
 import Logo from '../../components/logo/Logo'
 import Input from '../../components/input/Input'
 import Button from '../../components/button/Button'
-import ConfirmModal from '../../components/simpleModal/ConfirmModal'
+// import ConfirmModal from '../../components/simpleModal/ConfirmModal'
 import Secondarybtn from '../../components/secondaryBtn/Secondarybtn'
 import DragDrop from '../../components/dragDrop/DragDrop'
 import { updateUser } from '../../actions/userAction'
@@ -15,58 +14,28 @@ import './Congratulation.scss'
 
 function CongratulationScreen () {
   const dispatch = useDispatch()
-  const [modalActive, setModalActive] = useState(false)
 
   const { register, errors, handleSubmit } = useForm()
 
   const location = useLocation()
   const history = useHistory()
-  const username = location?.state?.username
-  const password = location?.state?.password
   const editInformations = location?.state?.editInformations
-  const user = location?.state?.user
+  const userdetail = location?.state?.user
+  console.log('userdetail', userdetail)
 
   const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
 
   const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
-
-  async function signUp ({ firstname, lastname, phone, birthday, email }) {
-    console.log(username, password, email, phone)
-    try {
-      const user = await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email
-        }
-      })
-      setModalActive(true)
-    } catch (error) {
-      console.log('error signing up:', error)
-    }
-  }
-
-  // const submitForm = (e) => {
-  //   e.preventDefault();
-  //   if (!firstname) setFirstnameError(true);
-  //   if (!lastname) setLastnameError(true);
-  //   if (!phone) setPhoneError(true);
-  //   if (!birthday) setBirthdayError(true);
-  //   if (!email) setEmailError(true);
-  //   if (firstname && lastname && phone && birthday && email) {
-  //     signUp();
-  //   }
-  // };
+  const { userInfo } = userLogin
 
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     console.log(firstName, lastName, phone, birthday, email)
     // if (firstname && lastname && phone && birthday && email) {
     //   signUp({ firstname, lastname, phone, birthday, email });
     // }
-    dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: user ? user.id : userInfo.id }))
-    user ? history.push('/myProfile') : history.push('/community-page-news')
+    dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: userdetail ? userdetail.id : userInfo.id }))
+    userdetail ? history.push('/myProfile') : history.push('/community-page-news')
   }
 
   return (
@@ -82,7 +51,7 @@ function CongratulationScreen () {
         <p className='subheader'>{!editInformations && welcomeBack2}</p>
       </div>
 
-      {modalActive && <ConfirmModal username={username} password={password} />}
+      {/* {modalActive && <ConfirmModal username={username} password={password} />} */}
 
       <div className='congratulation-container'>
         <div className='form'>
@@ -99,6 +68,7 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
+                value={userdetail?.firstName}
                 noIcon='noIcon'
               />
             </div>
@@ -115,6 +85,7 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
+                value={userdetail?.lastName}
                 noIcon='noIcon'
               />
             </div>
@@ -133,6 +104,7 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
+                value={userdetail?.email}
                 noIcon='noIcon'
               />
             </div>
@@ -148,6 +120,7 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
+                value={userdetail?.phone}
                 noIcon='noIcon'
               />
             </div>
@@ -166,6 +139,7 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
+                value={userdetail?.dateOfBirth}
                 noIcon='noIcon'
               />
             </div>
@@ -173,11 +147,13 @@ function CongratulationScreen () {
 
           <div className='button-wrapper'>
             <div className='btn'>
-              {editInformations ? (
-                <Secondarybtn name='Cancel' clickHandler={() => history.goBack()} />
-              ) : (
-                <Secondarybtn name='Skip for now' clickHandler={() => history.push('/community-page-news')} />
-              )}
+              {editInformations
+                ? (
+                  <Secondarybtn name='Cancel' clickHandler={() => history.goBack()} />
+                  )
+                : (
+                  <Secondarybtn name='Skip for now' clickHandler={() => history.push('/community-page-news')} />
+                  )}
             </div>
             <div className='btn'>
               <Button name='Continue' onClick={handleSubmit(onSubmit)} />

@@ -1,33 +1,52 @@
 .edit-information-container {
   margin-top: 1.5em;
   width: 250px;
+
+  .no-picture {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #F8EBDF;
+    &-text{
+      color:#F8EBDF;
+      text-align: center;
+    }
+  }
+  
+  img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 14px;
+  }
+
+  .edit-btn {
+    width: 100%;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 0.5px solid #F8EBDF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+  }
+
+  & > div {
+      margin-bottom: 12px;
+  }
+
 }
 
-.edit-information-container img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  object-position: center;
-  margin-bottom: 14px;
-}
 
-.edit-information-container .edit-btn {
-  width: 100%;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 0.5px solid #F8EBDF;
-  box-sizing: border-box;
-  border-radius: 4px;
-  font-family: IBM Plex Sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  color: #fff;
-}
-
-.edit-information-container > div {
-    margin-bottom: 12px;
-}
 
 @media only screen and (max-width: 1310px) {
   .edit-information-container {

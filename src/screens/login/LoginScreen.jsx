@@ -10,7 +10,7 @@ const LoginScreen = () => {
     const userInfo = window.localStorage.getItem('userInfo')
     if (userInfo) {
       setLoggedIn(true)
-      history.push('/')
+      history.push('/community-page-news')
     } else {
       setLoggedIn(false)
     }

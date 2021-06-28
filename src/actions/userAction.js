@@ -59,7 +59,6 @@ export const login = (name, password) => async (dispatch) => {
       config
     )
     window.localStorage.setItem('userInfo', JSON.stringify(data))
-    console.log(JSON.stringify(data))
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data
@@ -75,12 +74,10 @@ export const login = (name, password) => async (dispatch) => {
   }
 }
 
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
-    const {
-      userLogin: { userInfo }
-    } = getState()
+    const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`
