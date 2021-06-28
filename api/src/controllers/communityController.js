@@ -52,7 +52,7 @@ const getCommunities = async (req, res) => {
 }
 
 // @desc Fetch all communities by users
-// @route GET/api/communities/user/:id
+// @route GET/api/communities/user/
 // @access Public
 
 const getUserCommunities = async (req, res) => {

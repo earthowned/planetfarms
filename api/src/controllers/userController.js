@@ -74,10 +74,11 @@ const authUser = async (req, res) => {
     const { name, password } = req.body
     username = (process.env.AUTH_METHOD === 'cognito') 
     ? cognitoAuth(name, password) 
-    : localAuth(name, password)
+    : await localAuth(name, password)
     
     if (username) {
-      res.json({
+      
+     return res.json({
         token: generateToken(username)
       })
     } else {
@@ -94,8 +95,8 @@ const authUser = async (req, res) => {
 }
 
 localAuth = async (name, password) => {
-  user = await User.findOne({ where: { name, password } })
-  return (user) ? user.dataValues.id : ''
+  user = await db.User.findOne({ where: { name, password } })
+  return user.dataValues.id;
 }
 
 cognitoAuth = async (name, password) => {
