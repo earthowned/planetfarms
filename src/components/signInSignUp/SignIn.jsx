@@ -26,7 +26,7 @@ const SignIn = () => {
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const {currentCommunity} = useSelector((state) => state.activeCommunity)
-  const {success:userCommunitiesSuccess , userCommunities} = useSelector((state) => state.listUserCommunities)
+
   const { loading, error, userInfo } = userLogin
   const { register: regi, errors, handleSubmit } = useForm()
 
@@ -61,27 +61,13 @@ const SignIn = () => {
     if (userInfo) {
       if(currentCommunity){
         return dispatch(visitCommunity(currentCommunity.id));
-      } 
+      }
     }
 
     // getUser().then((userData) => setUser(userData));
-  }, [history, userInfo, dispatch, userCommunitiesSuccess])
+  }, [history, userInfo, dispatch])
 
-  // const getCommunity = async () => {
-  //   const userdata = localStorage.getItem('userInfo');
-  //   const token = JSON.parse(userdata).token;
-  //    const config = {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${token}`
-  //     }
-  //   }
-  //   const { data } = await axios.get(
-  //           `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`, config
-  //   )      
-  //       localStorage.setItem('currentCommunity', JSON.stringify(data[0]))
-  //       history.push(`/community-page-news/${data[0].slug}`)
-  // }
+ 
   function getUser () {
     /* return Auth.currentAuthenticatedUser()
       .then((userData) => userData)

@@ -27,6 +27,8 @@ export const register = (name, password) => async (dispatch) => {
       payload: data
     })
     localStorage.setItem('userInfo', JSON.stringify(data))
+    routingCommunityNews();
+
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -41,17 +43,20 @@ export const register = (name, password) => async (dispatch) => {
 export const login = (name, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    const {data} = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users/login`, { name, password }, config)
+    // const config = {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // }
+    const {data} = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users/login`, { name, password })
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data
     })
     localStorage.setItem('userInfo', JSON.stringify(data))
+
+    routingCommunityNews();
+
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -113,3 +118,20 @@ export const changePassword =
       })
     }
   }
+
+  const routingCommunityNews = async () => {
+  // routing to the news page
+       const userdata = localStorage.getItem('userInfo');
+    const token = JSON.parse(userdata).token;
+     const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }
+    const communityData = await axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`, config
+    )
+    localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
+    document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
+}
