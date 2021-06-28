@@ -7,29 +7,20 @@ const Lessons = db.define(
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
-      autoIncrement: true
-    },
-    courseId: {
-      type: Sequelize.STRING
-    },
-    lessonId: {
-      type: Sequelize.STRING
+      autoIncrement: true,
     },
     title: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     coverImg: {
-      type: Sequelize.STRING
-    },
-    steps: {
-      type: Sequelize.JSON
+      type: Sequelize.STRING,
     },
     createdAt: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     updatedAt: {
-      type: Sequelize.DATE
-    }
+      type: Sequelize.DATE,
+    },
   },
   { timestamps: true }
 )

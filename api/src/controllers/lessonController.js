@@ -1,52 +1,59 @@
 const Lessons = require('../models/lessonModal')
+const Video = require('../models/videoModel')
 
 const getLessons = async (_req, res) => {
-  const lessons = await Lessons.findAll()
+  const lessons = await Lessons.findAll({
+    include: [Video],
+  })
   res.status(200).json({
     status: true,
     message: 'fetched all lessons successfully',
-    results: lessons
+    data: lessons,
   })
 }
 const getLessonById = async (req, res) => {
-  const lessonId = req.params.lessonId
-  const lesson = await Lessons.findOne({ where: { lessonId: lessonId } })
+  const { id } = req.params
+  const lesson = await Lessons.findOne({ where: { id }, include: [Video] })
   res.status(200).json({
     status: true,
     message: 'fetched lesson successfully',
-    results: lesson
+    data: lesson,
   })
 }
 
 const addLesson = async (req, res) => {
-  const lesson = await Lessons.create(req.body)
-  console.log(lesson)
+  let coverImg = ''
+  if (req.file) {
+    coverImg = req.file.filename
+  }
+
+  const lesson = await Lessons.create({ ...req.body, coverImg })
   res.status(201).json({
     status: true,
     message: 'added new lesson successfully',
-    results: lesson
+    data: lesson,
   })
 }
 
 const deleteLesson = async (req, res) => {
-  const lessonId = req.params.lessonId
-  const lesson = await Lessons.destroy({ where: { lessonId: lessonId } })
+  const { id } = req.params
+  const lesson = await Lessons.destroy({ where: { id } })
   res.status(202).json({
     status: true,
     message: 'deleted lesson successfully',
-    results: lesson
+    data: lesson,
   })
 }
 
 const updateLesson = async (req, res) => {
-  const lessonId = req.params.lessonId
+  const { id } = req.params
   const lesson = await Lessons.update(req.body, {
-    where: { lessonId: lessonId }
+    where: { id },
   })
   res.status(202).json({
     status: true,
     message: 'lesson updated successfully',
-    results: lesson
+    data: lesson,
   })
 }
 
@@ -55,5 +62,5 @@ module.exports = {
   getLessonById,
   addLesson,
   deleteLesson,
-  updateLesson
+  updateLesson,
 }

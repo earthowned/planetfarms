@@ -1,39 +1,44 @@
-const Courses = require("../models/courseModel.js");
-const Sequelize = require("sequelize");
-const queryUtils = require("../utils/query.js");
-const Op = Sequelize.Op;
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
+const Courses = require('../models/courseModel.js')
+const Lessons = require('../models/lessonModal')
 
 // @desc    Fetch all course
 // @route   GET /api/courses
 // @access  Public
 const getCourses = (req, res) => {
-  const pageSize = 10;
-  const page = Number(req.query.pageNumber) || 0;
-  const order = req.query.order || "ASC";
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 0
+  const order = req.query.order || 'ASC'
 
-  Courses.findAll({ offset: page, limit: pageSize, order: [["title", order]] })
+  Courses.findAll({
+    offset: page,
+    limit: pageSize,
+    order: [['title', order]],
+    include: [Lessons],
+  })
     .then((courses) => {
       // queryUtils.paginate({ page, pageSize })
-      res.json({ courses, page, pageSize }).status(200);
+      res.json({ courses, page, pageSize }).status(200)
     })
-    .catch((err) => res.json({ err }).status(400));
-};
+    .catch((err) => res.json({ err }).status(400))
+}
 
 // @desc    Add individual course
 // @route   POST /api/courses/add
 // @access  Public
 const addCourse = async (req, res) => {
-  let thumbnail = "";
+  let thumbnail = ''
   if (req.file) {
-    thumbnail = req.file.filename;
+    thumbnail = req.file.filename
   }
-  const course = await Courses.create({ ...req.body, thumbnail });
+  const course = await Courses.create({ ...req.body, thumbnail })
   res.status(201).json({
     status: true,
-    message: " new course added successfully",
+    message: ' new course added successfully',
     data: course,
-  });
-};
+  })
+}
 
 // @desc    Update a course
 // @route   PUT /api/courses/:id
@@ -49,14 +54,14 @@ const updateCourse = (req, res) => {
     subjectLevel,
     creator,
     steps,
-  } = req.body;
-  const id = req.params.id;
+  } = req.body
+  const id = req.params.id
   Courses.findByPk(id).then((product) => {
     if (product) {
-      const { id } = product;
+      const { id } = product
       Courses.update(
         {
-          _attachments: "uploads/" + req.file.filename,
+          _attachments: 'uploads/' + req.file.filename,
           title,
           description,
           languageOfInstruction,
@@ -67,76 +72,76 @@ const updateCourse = (req, res) => {
           creator,
           steps,
         },
-        { where: { id } }
+        { where: { id }, include: [Lessons] }
       )
-        .then(() => res.json({ message: "Course Updated !!!" }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400));
+        .then(() => res.json({ message: 'Course Updated !!!' }).status(200))
+        .catch((err) => res.json({ error: err.message }).status(400))
     }
-    res.status(404);
-    throw new Error("Course not found");
-  });
-};
+    res.status(404)
+    throw new Error('Course not found')
+  })
+}
 
 // @desc    Fetch single course
 // @route   GET /api/courses/:id
 // @access  Public
 const getCourseById = (req, res) => {
-  const id = req.params.courseId;
+  const id = req.params.id
 
   Courses.findOne({
     where: {
-      courseId: id,
+      id: id,
     },
   })
     .then((course) => {
       if (course) {
-        res.json(course);
+        res.json(course)
       } else {
-        res.status(404);
-        throw new Error("Course not found");
+        res.status(404)
+        throw new Error('Course not found')
       }
     })
-    .catch((err) => res.json({ error: err.message }).status(400));
-};
+    .catch((err) => res.json({ error: err.message }).status(400))
+}
 
 // @desc    Delete a course
 // @route   delete /api/courses/:id
 // @access  Public
 const deleteCourse = (req, res) => {
-  const id = req.params.courseId;
+  const id = req.params.id
   Courses.findOne({
     where: {
-      courseId: id,
+      id: id,
     },
   }).then((resource) => {
     if (resource) {
-      const { id } = resource;
+      const { id } = resource
       Courses.destroy({ where: { id } })
         .then(() =>
-          res.json({ message: "Course Deleted Successfully" }).status(200)
+          res.json({ message: 'Course Deleted Successfully' }).status(200)
         )
-        .catch((err) => res.json({ error: err.message }).status(400));
+        .catch((err) => res.json({ error: err.message }).status(400))
     } else {
-      res.status(404);
-      throw new Error("Course not found");
+      res.status(404)
+      throw new Error('Course not found')
     }
-  });
-};
+  })
+}
 
 // @desc    Search title
 // @route   POST /api/courses/search
 // @access  Private
 const searchCoursesTitle = (req, res) => {
-  const { title } = req.query;
-  const order = req.query.order || "ASC";
+  const { title } = req.query
+  const order = req.query.order || 'ASC'
 
   Courses.findAll({
-    where: { title: { [Op.iLike]: "%" + title + "%" } },
-    order: [["title", order]],
+    where: { title: { [Op.iLike]: '%' + title + '%' } },
+    order: [['title', order]],
   })
     .then((title) => res.json({ title }).status(200))
-    .catch((err) => res.json({ error: err }).status(400));
-};
+    .catch((err) => res.json({ error: err }).status(400))
+}
 
 module.exports = {
   addCourse,
@@ -145,4 +150,4 @@ module.exports = {
   getCourseById,
   deleteCourse,
   searchCoursesTitle,
-};
+}

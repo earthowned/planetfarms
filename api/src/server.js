@@ -12,10 +12,16 @@ const communityGroupsRoutes = require('./routes/communityGroupRouter')
 const calendarRoutes = require('./routes/calendarEventsRouter')
 const categoriesRoutes = require('./routes/categoriesRouter')
 const lessonsRoutes = require('./routes/lessonsRouter')
+const videoRouter = require('./routes/videoRouter')
 const resizerRoutes = require('./routes/resizerRouter')
 const sequelize = require('./config/database.js')
 const cors = require('cors')
 const dotenv = require('dotenv')
+const errorHandler = require('./middleware/errorHandler')
+const NotFoundError = require('./errors/notFoundError')
+const Lessons = require('./models/lessonModal')
+const Video = require('./models/videoModel')
+const Courses = require('./models/courseModel')
 
 const PORT = process.env.port || 5000
 
@@ -36,6 +42,7 @@ app.use('/api/news', newsRoutes)
 app.use('/api/categories', categoriesRoutes)
 app.use('/api/lessons', lessonsRoutes)
 app.use('/api/resizer', resizerRoutes)
+app.use('/api/videos', videoRouter)
 
 // home page response
 app.get('/', (request, response) => {
@@ -45,6 +52,19 @@ app.get('/', (request, response) => {
 // Set static folder
 app.use(express.static(path.join(__dirname, '../files')))
 console.log(path.join(__dirname, '../files'))
+
+//error handeling
+app.all('*', async (_req, _res) => {
+  throw new NotFoundError()
+})
+
+app.use(errorHandler)
+
+//linking course table with lesson table(association)
+Lessons.hasMany(Video)
+Video.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
+Lessons.belongsTo(Courses, { constraints: true, foreignKey: 'courseId' })
+Courses.hasMany(Lessons)
 
 // port connection
 app.listen(PORT, () => {

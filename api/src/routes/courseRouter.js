@@ -1,9 +1,9 @@
-const path = require("path");
-const express = require("express");
-const multer = require("multer");
-const router = express.Router();
-const shortid = require("shortid");
-const fs = require("fs");
+const path = require('path')
+const express = require('express')
+const multer = require('multer')
+const router = express.Router()
+const shortid = require('shortid')
+const fs = require('fs')
 const {
   getCourses,
   addCourse,
@@ -11,18 +11,14 @@ const {
   getCourseById,
   deleteCourse,
   searchCoursesTitle,
-} = require("../controllers/courseController.js");
-const { upload } = require("../helpers/filehelpers");
+} = require('../controllers/courseController.js')
+const { upload } = require('../helpers/filehelpers')
 
-router.route("/").get(getCourses);
+router.route('/').get(getCourses)
 
 // for upload we have just worked with images jpg|jpeg|png for other types of file we need to work.
-router.route("/add").post(upload.single("thumbnail"), addCourse);
-router.route("/search").get(searchCoursesTitle);
-router
-  .route("/:courseId")
-  .get(getCourseById)
-  .delete(deleteCourse)
-  .put(updateCourse);
+router.route('/add').post(upload.single('thumbnail'), addCourse)
+router.route('/search').get(searchCoursesTitle)
+router.route('/:id').get(getCourseById).delete(deleteCourse).put(updateCourse)
 
-module.exports = router;
+module.exports = router
