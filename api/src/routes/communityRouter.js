@@ -6,14 +6,14 @@ const { upload } = require('../helpers/filehelpers')
 const  protect  = require('../middleware/authMiddleware')
 
 router.route('/').get(getCommunities)
-router.route('/add').post(upload.single('community'), createCommunity)
+router.route('/add').post(protect, upload.single('community'), createCommunity)
 router.route('/search').get(searchCommunityName)
 router.route('/user').get(protect, getUserCommunities)
-router.route('/user/:id/search').get(searchUserCommunityName)
+router.route('/user/search').get(protect, searchUserCommunityName)
 router
   .route('/:id')
   .get(getCommunityById)
-  .delete(deleteCommunity)
-  .put(upload.single('community'), updateCommunity)
+  .delete(protect, deleteCommunity)
+  .put(protect, upload.single('community'), updateCommunity)
 
 module.exports = router

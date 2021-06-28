@@ -100,7 +100,7 @@ const createCommunity = async (req, res) => {
       filename = req.file.filename
     }
 
-    if (!req.body.creatorId) {
+    if (!req.user.id) {
       return res.json({ message: 'Not authorized to create.' })
     }
 
@@ -126,8 +126,13 @@ const createCommunity = async (req, res) => {
         return res.json({message: result});
     }
 
-    await db.Community.create({ ...req.body, slug: "", attachment: 'uploads/' + filename });
-    res.json({ message: 'Community is Created !!!' }).status(200);
+    const followCommunity = await sequelize.transaction(async(t) => {
+      const community = await db.Community.create({ ...req.body, creatorId: req.user.id,  slug: "", attachment: 'uploads/' + filename }, {transaction: t});
+      await db.CommunityUser.create({userId: req.user.id, communityId: community.id}, {transaction: t})
+      return true;
+    }) 
+    
+    if(followCommunity) return res.json({ message: 'Community is Created !!!' }).status(200);
 
   } catch (error) {
     res.json({ error: error.message }).status(400)
@@ -169,20 +174,20 @@ const deleteCommunity = async (req, res) => {
   try {
           const id = req.params.id
 
-        if (!req.body.creatorId) {
+        if (!req.user.id) {
           return res.json({ message: 'Not authorized to delete.' })
         }
         const community = await db.Community.findByPk(id);
 
    if (community) {
       const { id } = community
-      if (community.creatorId !== req.body.creatorId) {
+      if (community.creatorId !== req.user.id) {
         return res.json({ message: 'Not authorized to delete.' })
       }
 
       const result = await sequelize.transaction(async (t) => {
         const communityUserIds = await db.CommunityUser.findAll({where: {communityId: id}}, {transaction: t});
-
+        
         communityUserIds.forEach(async function (communityId) { 
           const {id} = communityId
           await db.CommunityUser.update({active: false}, {where: {id}}, {transaction: t});
@@ -209,7 +214,7 @@ const deleteCommunity = async (req, res) => {
 const updateCommunity = async (req, res) => {
   try {
           const {
-          name, description, creatorId
+          name, description
         } = req.body
 
         let filename = ''
@@ -217,7 +222,7 @@ const updateCommunity = async (req, res) => {
           filename = req.file.filename
         }
 
-        if (!creatorId) {
+        if (!req.user.id) {
           return res.json({ message: 'Not authorized to update.' })
         }
         const id = req.params.id
@@ -225,7 +230,7 @@ const updateCommunity = async (req, res) => {
   const community = await db.Community.findByPk(id);
   if (community) {
       const { id } = community
-      if (community.creatorId !== creatorId) {
+      if (community.creatorId !== req.user.id) {
         return res.json({ message: 'Not authorized to update.' })
       }
 
@@ -272,7 +277,6 @@ const updateCommunity = async (req, res) => {
               await db.Community.update({
                   name,
                   description,
-                  creatorId: creatorId,
                   attachment: 'uploads/' + filename
                 },
                 { where: { id }, returning: true, attributes: ['id'] })
@@ -302,7 +306,7 @@ const searchCommunityName = (req, res) => {
 }
 
 // @desc Search usercommunity name
-// @route POST /api/communities/user/:id/search
+// @route POST /api/communities/user/search
 // @access Private
 const searchUserCommunityName = (req, res) => {
   const { name } = req.query
@@ -312,7 +316,7 @@ const searchUserCommunityName = (req, res) => {
       model: db.User,
       as: 'creator' && 'followers',
       attributes: ['id'],
-      where: {id: req.params.id },
+      where: {id: req.user.id },
       through: {
          attributes: ['active'],
          as: 'followStatus',
