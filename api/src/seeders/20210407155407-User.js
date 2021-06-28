@@ -22,6 +22,7 @@ module.exports = {
       // for userProfiles table
       profiledata.push({
         userID: userIDs[amount],
+        isLocalAuth: true,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         dateOfBirth: date,

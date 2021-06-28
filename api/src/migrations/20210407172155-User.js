@@ -32,7 +32,10 @@ module.exports = {
           autoIncrement: true
         },
         userID: {
-          type: Sequelize.INTEGER
+          type: Sequelize.STRING
+        },
+        isLocalAuth: {
+          type: Sequelize.BOOLEAN
         },
         firstName: {
           type: Sequelize.STRING

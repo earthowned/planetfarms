@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const LocalAuth = require('../models/localAuthModel.js')
+const User = require('../models/userModel.js')
 
 const protect = async (req, res, next) => {
   let token
@@ -13,7 +14,11 @@ const protect = async (req, res, next) => {
       /*
       * TODO: Maintain session and check again local session
       */
-      if (process.env.AUTH_METHOD !== 'cognito') { req.user = await LocalAuth.findByPk(decoded.id) }
+      if (process.env.AUTH_METHOD !== 'cognito') {
+        req.user = await LocalAuth.findByPk(decoded.id)
+      } else {
+        req.user = await User.findOne({ where: { userID: decoded.id } })
+      }
       next()
     } catch (error) {
       console.error(error)
