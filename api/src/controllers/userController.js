@@ -77,6 +77,7 @@ const authUser = async (req, res) => {
     : await localAuth(name, password, res);
 
     if (username) {
+      console.log(username)
      return res.json({
         token: generateToken(username)
       })
@@ -117,7 +118,13 @@ localAuth = async (name, password, res) => {
   const idArrays = autoFollowCommunitiesArray.filter(item => {
                   return followedCommunitiesArray.indexOf(item) === -1;
                 });
-                
+
+        // going back if there is nothing to follow
+        if(idArrays.length === 0) {
+          return true
+        }
+           
+        // following new communities
       const allFollow = [];
                  
     for (let i = 0; i < idArrays.length; i++) {
@@ -132,9 +139,13 @@ localAuth = async (name, password, res) => {
   return true
 
   })
-  if(result){
-    return user.dataValues.id;
+
+  if(result) {
+     return user.dataValues.id;
   }
+
+   return res.json('User doesn\'t exist.')
+  
   } catch (error) {
     return res.json(error)
   }

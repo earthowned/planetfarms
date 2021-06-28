@@ -45,13 +45,22 @@ export const searchCommunities = (search) => async (
   }
 }
 
-export const listUserCommunities = (userId, sort = '', pageNumber = '') => async (
+export const listUserCommunities = (sort = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
     dispatch({ type: USER_COMMUNITY_LIST_REQUEST })
+    const userdata = localStorage.getItem('userInfo');
+    const token = JSON.parse(userdata).token;
+    
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }
     const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user/${userId}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`, config
     )
     dispatch({
       type: USER_COMMUNITY_LIST_SUCCESS,
@@ -150,7 +159,7 @@ export const visitCommunity = (id) => async (dispatch) => {
       payload: data
     })
     localStorage.setItem('currentCommunity', JSON.stringify(data))
-    document.location.href = `/community_page_news/${data.slug}`
+    document.location.href = `/community-page-news/${data.slug}`
   } catch (error) {
     const message =
           error.response && error.response.data.message

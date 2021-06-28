@@ -64,6 +64,7 @@ export const userCommunityListReducer = (state = { userCommunities: [] }, action
     case USER_COMMUNITY_LIST_SUCCESS:
       return {
         loading: false,
+        success: true,
         userCommunities: action.payload.communities,
         pages: action.payload.pages,
         page: action.payload.page,
