@@ -125,7 +125,7 @@ const registerUser = async (req, res) => {
       registerLocal(name, password, email, res)
     }
   } catch (err) {
-    res.json({ error: err.message })
+    res.status(409).json({ error: err.message })
   }
 }
 
