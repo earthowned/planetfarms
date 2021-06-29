@@ -19,25 +19,42 @@ const getCommunities = async (req, res) => {
   // const ordervalue = order && [['name', order]]
   try {
     const communities = await db.Community.findAndCountAll({
-                offset: (page - 1),
+                      offset: (page - 1) * pageSize,
                 limit: pageSize,
                 // ordervalue,
                 order: [['createdAt', 'DESC']],
                 where: {deleted: false},
-                attributes: {exclude: ['deleted']},
-                include: [{
-                  model: db.User,
-                  as: 'followers',
-                  attributes: ['id'],
-                  through: {
-                    attributes: ['active'],
-                    as: 'followStatus',
-                    raw: true,
-                  }
-                }],
-              })
+              attributes: {
+                include: [
+                  [
+                    sequelize.literal(`(
+                          SELECT COUNT("userId")
+                          FROM communities_users
+                          WHERE "communityId" = communities.id AND active = true
+                    )`),
+                    'followers'
+                  ],
+                  [
+                  sequelize.literal(`
+                      CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+                        ELSE 'false'
+                      END
+                    `),'isCreator'
+                  ],
+                  [
+                    sequelize.literal(`(
+                          SELECT COUNT("userId") 
+                          FROM communities_users
+                          WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
+                    )`),
+                    'isFollowed'
+                  ],
+                ],
+                exclude: ["deleted"]
+              },
+    });
 
-  const totalPages = Math.ceil(communities.count / pageSize)
+    const totalPages = Math.ceil(communities.count / pageSize)
   res.json({
         communities: communities.rows,
         totalItems: communities.count,
@@ -65,20 +82,43 @@ const getUserCommunities = async (req, res) => {
     offset: page,
     limit: pageSize,
     // ordervalue,
-    attributes: {exclude: ['deleted']},
-    order: [['createdAt', 'DESC']],
-     where: {
-      deleted: false
-    },
+    attributes: {
+                include: [
+                  [
+                    sequelize.literal(`(
+                          SELECT COUNT("userId")
+                          FROM communities_users
+                          WHERE "communityId" = communities.id AND active = true
+                    )`),
+                    'followers'
+                  ],
+                  [
+                  sequelize.literal(`
+                      CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+                        ELSE 'false'
+                      END
+                    `),'isCreator'
+                  ],
+                  [
+                    sequelize.literal(`(
+                          SELECT COUNT("userId") 
+                          FROM communities_users
+                          WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
+                    )`),
+                    'isFollowed'
+                  ],
+                ],
+                exclude: ["deleted"]
+              },
+      order: [['createdAt', 'DESC']],
+      where: {
+        deleted: false
+      },
     include: [{
       model: db.User,
       as: 'followers',
-      attributes: ['id'],
+      attributes: [],
       where: {id: req.user.id},
-      through: {
-        attributes: ['active'],
-        as: 'followStatus'
-      }
     }
   ]
   })

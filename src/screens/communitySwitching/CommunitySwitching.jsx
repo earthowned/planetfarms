@@ -171,12 +171,11 @@ const CommunityModal = ({setActive, data, setEditData}) => {
   const [desc, setDesc] = useState(data ? data.description : '');
   const [category, setCategory] = useState(data ? data.category : '');
   const [toggleActive, setToggleActive] = useState(data ? data.auto_follow : false);
-  // const [userId, setUserId] = useState(0);
-  const userId = 2;
+  
   const dispatch = useDispatch()
   
   function addCommunity () {
-    dispatch(createCommunity({files, name, desc, userId, category, toggleActive}))
+    dispatch(createCommunity({files, name, desc, category, toggleActive}))
     setActive(false);
   }
 
@@ -186,7 +185,6 @@ const CommunityModal = ({setActive, data, setEditData}) => {
           name: name,
           description: desc,
           file: files,
-          creatorId: userId,
           auto_follow: toggleActive
         }))
     setActive(false);
@@ -218,8 +216,8 @@ const CommunityModal = ({setActive, data, setEditData}) => {
             </div>
             {/* <InputComponent name="User Id" text={userId} changeHandler={setUserId} /> */}
              {data 
-             ? <Button name="Update Community" clickHandler={updateCommunity} />
-             : <Button name="Create Community" clickHandler={addCommunity} />
+             ? <Button name="Update Community" onClick={updateCommunity} />
+             : <Button name="Create Community" onClick={addCommunity} />
               }
           </div>
         </div>

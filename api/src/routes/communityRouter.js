@@ -5,7 +5,7 @@ const router = express.Router()
 const { upload } = require('../helpers/filehelpers')
 const  protect  = require('../middleware/authMiddleware')
 
-router.route('/').get(getCommunities)
+router.route('/').get(protect, getCommunities)
 router.route('/add').post(protect, upload.single('community'), createCommunity)
 router.route('/search').get(searchCommunityName)
 router.route('/user').get(protect, getUserCommunities)
