@@ -239,9 +239,9 @@ const getUserById = (req, res) => {
 // @desc    Fetch single user profile details
 // @route   GET /api/user/profile/:userID
 // @access  Public
-const getUserProfileByUserID = (req, res) => {
+const getUserProfileByUserID = async (req, res) => {
   const id = req.params.userID
-  User.findOne({ where: { userID: id } })
+  await User.findOne({ where: { userID: id } })
     .then((profile) => {
       if (profile) {
         res.json(profile)
@@ -257,6 +257,7 @@ const getUserProfileByUserID = (req, res) => {
 // @route   GET /api/user/profile
 // @access  Public
 const getMyProfile = (req, res) => {
+  
   const user = req.user.dataValues
 
   res.json({
@@ -269,6 +270,7 @@ const getMyProfile = (req, res) => {
     numberOfVisit: user.numberOfVisit,
     attachments: user.attachments
   })
+  
 }
 
 // @desc    Update user
