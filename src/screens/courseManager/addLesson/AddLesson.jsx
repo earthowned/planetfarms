@@ -22,19 +22,17 @@ const AddLesson = () => {
   const [textModal, setTextModal] = useState(false)
   const [testModal, setTestModal] = useState(false)
   const [videoData, setVideoData] = useState([])
-  // const [useStep, setUseStep] = useState(0);
   const [lessonCover, setLessonCover] = useState(null)
 
   const { register, errors, handleSubmit } = useForm()
+  console.log(videoData)
 
   const submitLessonForm = ({ title }) => {
-    const lessonId = uuid()
     const coverImg = lessonCover
     dispatch(
       createLesson({
         title,
         courseId,
-        lessonId,
         coverImg,
       })
     )
@@ -77,6 +75,7 @@ const AddLesson = () => {
           errors={errors}
           setLessonCover={setLessonCover}
           lessonCover={lessonCover}
+          videoData={videoData}
         />
         <LessonMaterial />
         <LessonSaveModal onClick={handleSubmit(submitLessonForm)} />
@@ -93,6 +92,7 @@ const AddContent = ({
   register,
   errors,
   setLessonCover,
+  videoData,
 }) => {
   return (
     <div className="admin-lesson-create-container">
@@ -112,7 +112,17 @@ const AddContent = ({
         message={errors.title && errors.title.message}
       />
       <DragDrop onChange={(img) => setLessonCover(img)} />
-      {/* <Video /> */}
+      {videoData
+        ? videoData.map((vid, index) => (
+            <Video
+              key={index}
+              title={vid.videoTitle}
+              description={vid.videoDescription}
+              url="https://www.youtube.com/watch?v=668nUCeBHyY"
+              thumbnail={vid.videoCover?.preview}
+            />
+          ))
+        : ''}
       <div className="admin-lesson-create-btn-wrapper">
         <button className="secondary-btn" onClick={() => setVideoModal(true)}>
           <img src="/img/video-outline.svg" alt="video icon" />{' '}

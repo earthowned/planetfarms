@@ -6,6 +6,7 @@
   align-items: center;
   position: relative;
   border-radius: 0.4em;
+  margin-bottom: 2em;
 
   .info {
     position: absolute;
@@ -16,6 +17,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    z-index: 1;
 
     @media (max-width: 778px) {
       width: 80%;
@@ -39,8 +41,18 @@
 
   svg.play {
     width: 3em;
+    z-index: 1;
   }
   .video {
     border-radius: 0.4em;
   }
+}
+.react-player__preview::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
 }

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-const DragDrop = ({ onChange = () => {} }) => {
+const DragDrop = ({ onChange = () => {}, type, className }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
+    accept: `${type ? `${type}/*` : 'image/*'}`,
     onDrop: (acceptedFiles) => {
       acceptedFiles.map((file) =>
         Object.assign(file, { preview: URL.createObjectURL(file) })
@@ -27,6 +27,8 @@ const DragDrop = ({ onChange = () => {} }) => {
       fileChange={fileChange}
       files={files}
       setFiles={setFiles}
+      className={className}
+      type={type}
     />
   )
 }
@@ -36,10 +38,12 @@ function DragDropComponent ({
   getRootProps,
   fileChange,
   files,
-  setFiles
+  setFiles,
+  className,
+  type
 }) {
   return (
-    <div className='drag-drop-container'>
+    <div className={className ? `${className}` : 'drag-drop-container'}>
       <div
         className='drag-drop'
         {...getRootProps()}
@@ -54,13 +58,24 @@ function DragDropComponent ({
               alt='files[0].preview'
             />
             <div className='drag-drop-icon-container'>
-              <img src='/img/camera-outline.svg' alt='camera icon' />
+              {type === 'video' ? (
+                <p className='videoName'>{files.name}</p>
+              ) : (
+                <img src='/img/camera-outline.svg' alt='camera icon' />
+              )}
             </div>
           </>
         ) : (
-          <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-            Drag & Drop files in this area or Click Here to attach video cover
-          </h6>
+          <>
+            {type === 'video' ? (
+              <p className='videoName'>Choose video</p>
+            ) : (
+              <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+                Drag & Drop files in this area or Click Here to attach video
+                cover
+              </h6>
+            )}
+          </>
         )}
       </div>
       {files && (

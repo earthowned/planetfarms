@@ -2,7 +2,6 @@ import { useState } from 'react'
 import ReactPlayer from 'react-player'
 import { ReactComponent as Play } from '../../assets/images/play.svg'
 import './Video.scss'
-import video from '../../assets/videoplayback.mp4'
 
 const Video = ({ title, description, url, thumbnail }) => {
   const [showInfo, setShowInfo] = useState(false)

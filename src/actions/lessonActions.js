@@ -7,12 +7,11 @@ import {
 } from '../constants/lessonConstants'
 
 export const createLesson =
-  ({ courseId, lessonId, title, coverImg }) =>
+  ({ courseId, title, coverImg }) =>
   async (dispatch) => {
     const lessonFormData = new FormData()
 
     lessonFormData.append('courseId', courseId)
-    lessonFormData.append('lessonId', lessonId)
     lessonFormData.append('title', title)
     lessonFormData.append('coverImg', coverImg)
 
@@ -20,7 +19,6 @@ export const createLesson =
       dispatch({ type: LESSON_CREATE_REQUEST })
       const config = {
         headers: {
-          // Authorization: `Bearer ${userInfo.token}`,
           'Content-Type': 'multipart/form-data',
         },
       }
