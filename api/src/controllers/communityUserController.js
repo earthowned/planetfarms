@@ -22,18 +22,18 @@ const getCommunityUsers = async (req, res) => {
 
 const followCommunity = async (req, res) => {
    try {
-    const { userId, communityId, active } = req.body
+    const { communityId, active } = req.body
 
     // checking the relationship between userid and communityid
     const communityUser = await db.CommunityUser.findOne({where: {
-        userId, 
+        userId: req.user.id, 
         communityId
     }})
 
     if(communityUser) {
         // checking the followed user
         const followedUser = await db.CommunityUser.findOne({where: {
-        userId, 
+        userId: req.user.id, 
         communityId,
         active: true
         }})
@@ -41,7 +41,7 @@ const followCommunity = async (req, res) => {
         if(followedUser) {
             //unfollow the user
             await db.CommunityUser.update({active: false}, {where: {
-            userId, 
+            userId: req.user.id,
             communityId
             }})
             return  res.json({
@@ -51,7 +51,7 @@ const followCommunity = async (req, res) => {
 
         //follow the community
             await db.CommunityUser.update({active: true}, {where: {
-            userId, 
+            userId: req.user.id,
             communityId
             }})
             return  res.json({
@@ -60,7 +60,7 @@ const followCommunity = async (req, res) => {
         
     }
     
-    await db.CommunityUser.create({ userId, communityId, active })
+    await db.CommunityUser.create({ userId: req.user.id, communityId, active })
     res.json({
         message: 'Congratulation for following the community.'
     })

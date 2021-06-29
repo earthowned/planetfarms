@@ -2,13 +2,14 @@ import axios from 'axios'
 import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_DELETE_FAIL, COMMUNITY_DELETE_REQUEST, COMMUNITY_DELETE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, COMMUNITY_UPDATE_FAIL, COMMUNITY_UPDATE_REQUEST, COMMUNITY_UPDATE_SUCCESS, COMMUNITY_VISIT_FAIL, COMMUNITY_VISIT_REQUEST, COMMUNITY_VISIT_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from '../constants/communityConstants'
 import configFunc from '../utils/ConfigFunc'
 
-export const listCommunities = (sort = '', pageNumber = '') => async (
+export const listCommunities = ({ pageNumber}) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: COMMUNITY_LIST_REQUEST })
+    const config = await configFunc();
     const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/communities`
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities?pageNumber=${pageNumber}`, config
     )
     dispatch({
       type: COMMUNITY_LIST_SUCCESS,
@@ -46,14 +47,14 @@ export const searchCommunities = (search) => async (
   }
 }
 
-export const listUserCommunities = (sort = '', pageNumber = '') => async (
+export const listUserCommunities = ({userPageNumber = ''}) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: USER_COMMUNITY_LIST_REQUEST })
     const config = await configFunc();
     const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`, config
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user?pageNumber=${userPageNumber}`, config
     )
     dispatch({
       type: USER_COMMUNITY_LIST_SUCCESS,
@@ -121,12 +122,13 @@ export const createCommunity = (newCommunity) => async (dispatch, getState) => {
   }
 }
 
-export const joinCommunity = (userId, communityId) => async (dispatch, getState) => {
+export const joinCommunity = (communityId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: COMMUNITY_JOIN_REQUEST
     })
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/follow`, { userId, communityId })
+    const config = await configFunc();
+    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/follow`, { communityId }, config)
     dispatch({
       type: COMMUNITY_JOIN_SUCCESS
     })
@@ -175,10 +177,9 @@ export const communityUpdate = (newCommunity) => async (dispatch) => {
             `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`,
             {name, category, description, file, auto_follow}, config
     );
-    console.log(data);
     dispatch({
       type: COMMUNITY_UPDATE_SUCCESS,
-      payload: true
+      payload: data
     })
   } catch (error) {
     const message =
@@ -192,22 +193,18 @@ export const communityUpdate = (newCommunity) => async (dispatch) => {
   }
 }
 
-export const communityDelete = (id, creatorId) => async (dispatch) => {
+export const communityDelete = (id) => async (dispatch) => {
   try {
     dispatch({ type: COMMUNITY_DELETE_REQUEST })
-    
-   const data =  await axios.delete(
+    const config = await configFunc();
+  const data =  await axios.delete(
             `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`, 
-            {
-              data: {
-                creatorId
-            }
-          }
-    );
+           config
+      );
 
     dispatch({
       type: COMMUNITY_DELETE_SUCCESS,
-      payload: true
+      payload: data
     })
   } catch (error) {
     const message =

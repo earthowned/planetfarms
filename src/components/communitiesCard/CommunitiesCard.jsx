@@ -27,32 +27,28 @@ export default CommunitiesCard
 const CommunityCard = ({ community, editCard, deleteCard }) => {
   const [follower, setFollower] = useState(true)
   const [creator, setCreator] = useState(false)
+  const [followCount, setFollowCount] = useState(0);
 
   const { success } = useSelector(state => state.joinCommunity)
   const { currentCommunity } = useSelector(state => state.activeCommunity)
   const dispatch = useDispatch()
   const history = useHistory()
   // choose userid according to the user data in your database
-  const currentUserId = 2
+  
   useEffect(() => {
-    if (community.followers && community.followers.length > 0) {
-      if (checkFollow(community.followers, currentUserId)) setFollower(false)
-    }
-    if (checkCreator(currentUserId)) setCreator(true)
+    if(community.isFollowed === "1") setFollower(false)
+    if(community.isCreator === "true") setCreator(true)
+    setFollowCount(parseInt(community.followers))
   }, [])
 
-  function checkFollow (arr, userId) {
-    const found = arr.some(el => (el.id === userId && el.followStatus.active === true))
-    if (found) return true
-  }
-
-  function checkCreator (id) {
-    if (id === community.creatorId) return true
-  }
-
   const followCommunity = () => {
-    dispatch(joinCommunity(currentUserId, community.id))
+    dispatch(joinCommunity(community.id))
     setFollower(!follower)
+    if(!follower) {
+      setFollowCount(existing => existing - 1)
+    } else {
+      setFollowCount(existing => existing + 1)
+    }
   }
 
   const visitCurrentCommunity = () => {
@@ -78,8 +74,7 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
             </h3>
             <p className='text-1-description'>{community.description}</p>
             <div className='address-1 valign-text-middle ibmplexsans-normal-quarter-spanish-white-16px'>
-              {/* {community.followers.length} followers */}
-              {community.followers && community.followers.length} followers
+              {followCount} followers
             </div>
           </div>
           {creator

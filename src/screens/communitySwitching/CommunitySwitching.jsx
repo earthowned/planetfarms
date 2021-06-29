@@ -17,19 +17,18 @@ import Pagination from "../../components/pagination/Pagination";
 import axios from "axios";
 
 function App () {
+   const communitiesState = useSelector((state) => state.listCommunities);
+  const userCommunitiesState = useSelector((state) => state.listUserCommunities);
+  const {pathname} = useLocation();
   const[modalActive, setModalActive] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
   const [deleteId, setDeleteId] = useState(null);
   const [deleteModal, setDeleteModal] = useState(false);
   const [editData, setEditData] = useState(null);
-  const communitiesState = useSelector((state) => state.listCommunities);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [userPageNumber, setUserPageNumber] = useState(1);
 
   const dispatch = useDispatch();
-    // fetching current community
-const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
-
+    
   const editCard = async (id) => {
      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`)
     setEditData(data)
@@ -41,10 +40,8 @@ const currentCommunity = localStorage.getItem('currentCommunity')
     setDeleteId(id);
   }
 
-  const creatorId = 2;
-
   const confirmDelete = () => {
-    dispatch(communityDelete(deleteId, creatorId))
+    dispatch(communityDelete(deleteId))
     setDeleteModal(false);
   }
 
@@ -64,8 +61,13 @@ const currentCommunity = localStorage.getItem('currentCommunity')
         </div>
       </div>}
     <DashboardLayout title="All Communities">
-      <AllCommunities setModalActive={setModalActive} editCard={editCard} deleteCard={deleteCard} />
-      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={communitiesState} />
+      <AllCommunities setModalActive={setModalActive} editCard={editCard} deleteCard={deleteCard} pageNumber={pageNumber} userPageNumber={userPageNumber} 
+      />
+        {
+          pathname==='/community-switching/my-communities' 
+          ? <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={userCommunitiesState} />
+          : <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={communitiesState} />
+        }
     </DashboardLayout>
     </>
   )
@@ -73,10 +75,9 @@ const currentCommunity = localStorage.getItem('currentCommunity')
 
 export default App
 
-function AllCommunities ({setModalActive, editCard, deleteCard}) {
+function AllCommunities ({setModalActive, editCard, deleteCard, pageNumber, userPageNumber}) {
   const {pathname} = useLocation();
-  const [search, setSearch] = useState(null)
-  
+  const [search, setSearch] = useState(null)  
 const {success:communityDeleteSuccess} = useSelector((state) => state.communityDelete)
 const {success:communityUpdateSuccess} = useSelector((state) => state.communityUpdate)
   
@@ -91,16 +92,15 @@ const {success:communityUpdateSuccess} = useSelector((state) => state.communityU
   const createCommunity = useSelector((state) => state.addCommunity);
   const {success:createSuccess} = createCommunity
   const dispatch = useDispatch()
-  const userId = 2;
+  // const userId = 2;
   useEffect(() => {
-        if(!search) dispatch(listCommunities());
+        if(!search) dispatch(listCommunities({pageNumber}));
         if(search) dispatch(searchCommunities(search));
-
         if(pathname==='/community-switching/my-communities') {
-          if(!search) dispatch(listUserCommunities(userId))
-          if(search) dispatch(searchUserCommunities(userId, search));
+          if(!search) dispatch(listUserCommunities({userPageNumber}))
+          if(search) dispatch(searchUserCommunities(search));
         }
-  }, [search, dispatch, createSuccess, pathname, communityDeleteSuccess, communityUpdateSuccess]);
+  }, [search, dispatch, createSuccess, pathname, communityDeleteSuccess, communityUpdateSuccess, pageNumber, userPageNumber]);
 
   
   return (
@@ -110,10 +110,8 @@ const {success:communityUpdateSuccess} = useSelector((state) => state.communityU
         {
           pathname==='/community-switching/my-communities' 
           ? <><CommunitiesCard data={userCommunities} editCard={editCard} deleteCard={deleteCard} /> 
-          {/* <Pagination pageNumber={userCommunities.pageNumber} /> */}
           </>
           : <><CommunitiesCard data={communities} editCard={editCard} deleteCard={deleteCard} /> 
-          {/* <Pagination /> */}
           </>
         }
         </div>
@@ -187,6 +185,7 @@ const CommunityModal = ({setActive, data, setEditData}) => {
           file: files,
           auto_follow: toggleActive
         }))
+    clearInput();
     setActive(false);
   }
 
@@ -214,7 +213,6 @@ const CommunityModal = ({setActive, data, setEditData}) => {
               <div className='toggle-container' />
             </div>
             </div>
-            {/* <InputComponent name="User Id" text={userId} changeHandler={setUserId} /> */}
              {data 
              ? <Button name="Update Community" onClick={updateCommunity} />
              : <Button name="Create Community" onClick={addCommunity} />

@@ -13,13 +13,13 @@ const paginate = ({ page, pageSize }) => {
 }
 
 const getCommunities = async (req, res) => {
-  const pageSize = 10
+  const pageSize = 3
   const page = Number(req.query.pageNumber) || 1
   // const order = req.query.order || 'DESC'
   // const ordervalue = order && [['name', order]]
   try {
     const communities = await db.Community.findAndCountAll({
-                      offset: (page - 1) * pageSize,
+                offset: (page - 1) * pageSize,
                 limit: pageSize,
                 // ordervalue,
                 order: [['createdAt', 'DESC']],
@@ -73,13 +73,13 @@ const getCommunities = async (req, res) => {
 // @access Public
 
 const getUserCommunities = async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
+  const pageSize = 1
+  const page = Number(req.query.pageNumber) || 1
   // const order = req.query.order || 'DESC'
   // const ordervalue = order && [['name', order]]
   
-  db.Community.findAll({
-    offset: page,
+  db.Community.findAndCountAll({
+    offset: (page - 1) * pageSize,
     limit: pageSize,
     // ordervalue,
     attributes: {
@@ -112,19 +112,30 @@ const getUserCommunities = async (req, res) => {
               },
       order: [['createdAt', 'DESC']],
       where: {
-        deleted: false
+        deleted: false,
+        creatorId: req.user.id
       },
-    include: [{
-      model: db.User,
-      as: 'followers',
-      attributes: [],
-      where: {id: req.user.id},
-    }
-  ]
+  //   include: [{
+  //     model: db.User,
+  //     as: 'followers',
+  //     attributes: ['id'],
+  //     // where: {id: req.user.id},
+  //     // through: {
+  //     //   attributes: ['active'],
+  //     //   as: 'followStatus'
+  //     // }
+  //   }
+  // ]
   })
     .then(communities => {
-      paginate({ page, pageSize })
-      res.json({ communities, page, pageSize }).status(200)
+      const totalPages = Math.ceil(communities.count / pageSize)
+      res.json({ 
+        communities: communities.rows,
+        totalItems: communities.count,
+        totalPages,
+        page, 
+        pageSize 
+      }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
@@ -143,11 +154,11 @@ const createCommunity = async (req, res) => {
     if (!req.user.id) {
       return res.json({ message: 'Not authorized to create.' })
     }
-
+    console.log(req.body.autofollow)
     // auto follow through transactions
-    if(req.body.auto_follow) {
+    if(req.body.auto_follow === "true") {
        const result = await sequelize.transaction(async (t) => {
-         const community = await db.Community.create({ ...req.body, slug: "", attachment: 'uploads/' + filename }, {transaction: t});
+         const community = await db.Community.create({ ...req.body, creatorId: req.user.id, slug: "", attachment: 'uploads/' + filename }, {transaction: t});
            const idArrays = await db.User.findAll({attributes: ['id']}, {transaction: t});
            const allFollow = [];
 
@@ -165,14 +176,15 @@ const createCommunity = async (req, res) => {
 
         return res.json({message: result});
     }
-
-    const followCommunity = await sequelize.transaction(async(t) => {
-      const community = await db.Community.create({ ...req.body, creatorId: req.user.id,  slug: "", attachment: 'uploads/' + filename }, {transaction: t});
-      await db.CommunityUser.create({userId: req.user.id, communityId: community.id}, {transaction: t})
-      return true;
-    }) 
+    else {
+      const followCommunity = await sequelize.transaction(async(t) => {
+        const community = await db.Community.create({ ...req.body, creatorId: req.user.id,  slug: "", attachment: 'uploads/' + filename }, {transaction: t});
+        await db.CommunityUser.create({userId: req.user.id, communityId: community.id}, {transaction: t})
+        return true;
+      }) 
+      if(followCommunity) return res.json({ message: 'Community is Created !!!' }).status(200);
+    }
     
-    if(followCommunity) return res.json({ message: 'Community is Created !!!' }).status(200);
 
   } catch (error) {
     res.json({ error: error.message }).status(400)

@@ -68,7 +68,7 @@ export const userCommunityListReducer = (state = { userCommunities: [] }, action
         userCommunities: action.payload.communities,
         pages: action.payload.pages,
         page: action.payload.page,
-        totalPages: action.totalPages
+        totalPages: action.payload.totalPages
       }
     case USER_COMMUNITY_LIST_FAIL:
       return { loading: false, error: action.payload }
@@ -87,7 +87,7 @@ export const userCommunityListReducer = (state = { userCommunities: [] }, action
   }
 }
 
-export const communityCreateReducer = (state = {}, action) => {
+export const communityCreateReducer = (state = {success: false}, action) => {
   switch (action.type) {
     case COMMUNITY_CREATE_REQUEST:
       return { loading: true }
@@ -141,7 +141,7 @@ export const communityUpdateReducer = (state = {success: false}, action) => {
   }
 }
 
-export const communityDeleteReducer = (state = {success: false}, action) => {
+export const communityDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case COMMUNITY_DELETE_REQUEST:
       return { ...state, loading: true }
