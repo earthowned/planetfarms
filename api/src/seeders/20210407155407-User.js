@@ -3,7 +3,6 @@ const faker = require('faker')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const data = []
     let amount = 20
     const date = new Date()
 
@@ -12,13 +11,6 @@ module.exports = {
     userIDs.sort(() => (Math.random() > 0.5) ? 1 : -1)
 
     while (amount--) {
-      data.push({
-        username: faker.internet.email(),
-        password: faker.internet.password(),
-        createdAt: date,
-        updatedAt: date
-      })
-
       // for userProfiles table
       profiledata.push({
         userID: userIDs[amount],
@@ -33,12 +25,10 @@ module.exports = {
         attachments: faker.image.avatar()
       })
     }
-    queryInterface.bulkInsert('localauths', data, {})
     queryInterface.bulkInsert('users', profiledata, {})
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.bulkInsert('localauths', null, {})
     queryInterface.bulkInsert('users', null, {})
   }
 }
