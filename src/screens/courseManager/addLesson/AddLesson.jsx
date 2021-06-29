@@ -30,16 +30,12 @@ const AddLesson = () => {
   const submitLessonForm = ({ title }) => {
     const lessonId = uuid()
     const coverImg = lessonCover
-    const steps = {
-      videos: videoData
-    }
     dispatch(
       createLesson({
         title,
         courseId,
         lessonId,
         coverImg,
-        steps
       })
     )
   }
@@ -48,7 +44,7 @@ const AddLesson = () => {
     <>
       {videoModal && (
         <NewsCreateModal
-          type='video'
+          type="video"
           videoActive={videoModal}
           setVideoActive={setVideoModal}
           setVideoData={setVideoData}
@@ -57,7 +53,7 @@ const AddLesson = () => {
       )}
       {imageModal && (
         <NewsCreateModal
-          type='image'
+          type="image"
           imageActive={imageModal}
           setImageActive={setImageModal}
         />
@@ -65,12 +61,12 @@ const AddLesson = () => {
       {testModal && <AddTestModal setTestModal={setTestModal} />}
       {textModal && (
         <NewsCreateModal
-          type='text'
+          type="text"
           textActive={textModal}
           setTextActive={setTextModal}
         />
       )}
-      <DashboardLayout title='Add new lesson'>
+      <DashboardLayout title="Add new lesson">
         <BackButton location={`/admin/course/${courseId}`} />
         <AddContent
           setVideoModal={setVideoModal}
@@ -96,42 +92,42 @@ const AddContent = ({
   setTestModal,
   register,
   errors,
-  setLessonCover
+  setLessonCover,
 }) => {
   return (
-    <div className='admin-lesson-create-container'>
+    <div className="admin-lesson-create-container">
       <input
-        type='text'
-        placeholder='Write title here'
-        name='title'
+        type="text"
+        placeholder="Write title here"
+        name="title"
         ref={register({
           required: {
             value: true,
-            message: 'You must enter lesson title'
-          }
+            message: 'You must enter lesson title',
+          },
         })}
       />
       <ErrorText
-        className='errorMsg'
+        className="errorMsg"
         message={errors.title && errors.title.message}
       />
       <DragDrop onChange={(img) => setLessonCover(img)} />
       {/* <Video /> */}
-      <div className='admin-lesson-create-btn-wrapper'>
-        <button className='secondary-btn' onClick={() => setVideoModal(true)}>
-          <img src='/img/video-outline.svg' alt='video icon' />{' '}
+      <div className="admin-lesson-create-btn-wrapper">
+        <button className="secondary-btn" onClick={() => setVideoModal(true)}>
+          <img src="/img/video-outline.svg" alt="video icon" />{' '}
           <span>Add video</span>
         </button>
-        <button className='secondary-btn' onClick={() => setImageModal(true)}>
-          <img src='/img/image-outline.svg' alt='image_icon' />
+        <button className="secondary-btn" onClick={() => setImageModal(true)}>
+          <img src="/img/image-outline.svg" alt="image_icon" />
           <span>Add image</span>
         </button>
-        <button className='secondary-btn' onClick={() => setTextModal(true)}>
-          <img src='/img/text-outline.svg' alt='text icon' />{' '}
+        <button className="secondary-btn" onClick={() => setTextModal(true)}>
+          <img src="/img/text-outline.svg" alt="text icon" />{' '}
           <span>Add text</span>
         </button>
-        <button className='secondary-btn' onClick={() => setTestModal(true)}>
-          <img src='/img/test-outline.svg' alt='test icon' />{' '}
+        <button className="secondary-btn" onClick={() => setTestModal(true)}>
+          <img src="/img/test-outline.svg" alt="test icon" />{' '}
           <span>Add test</span>
         </button>
       </div>
@@ -141,25 +137,25 @@ const AddContent = ({
 
 const LessonMaterial = () => {
   return (
-    <div className='admin-lesson-materials-container'>
+    <div className="admin-lesson-materials-container">
       <h1>Materials</h1>
       <p>You dont have any materials in lesson Add it for your users.</p>
-      <button className='secondary-btn'>Add materials</button>
+      <button className="secondary-btn">Add materials</button>
     </div>
   )
 }
 
 const LessonSaveModal = ({ onClick }) => {
   return (
-    <div className='save-lesson-modal'>
+    <div className="save-lesson-modal">
       <h4>Do you want to save lesson?</h4>
       <div>
-        <button className='secondary-btn' id='lesson-cancel-btn'>
+        <button className="secondary-btn" id="lesson-cancel-btn">
           Cancel
         </button>
         <button
-          className='primary-btn secondary-btn'
-          id='lesson-save-btn'
+          className="primary-btn secondary-btn"
+          id="lesson-save-btn"
           onClick={onClick}
         >
           Save lesson
