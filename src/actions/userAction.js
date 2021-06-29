@@ -40,7 +40,7 @@ export const register = (name, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload: error.response && error.response.data.message ? error.response.data.message : error.message
+      payload: error.response && error.response.data.error ? error.response.data.error : error.message
     })
   }
 }

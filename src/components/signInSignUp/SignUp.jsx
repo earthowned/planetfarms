@@ -53,7 +53,7 @@ const SignIn = () => {
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>
       <div className='container'>
-        {error && <div className='error'>{failMessage}</div>}
+        {error && <div className='error'>{error}</div>}
         <Input
           placeholder='Username'
           type='text'
