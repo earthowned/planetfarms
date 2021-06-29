@@ -50,6 +50,9 @@
 .last-input-variation {
   width: 45%;
 }
+.full {
+  width: 100% !important;
+}
 
 .description {
   display: flex;
@@ -91,12 +94,17 @@
   width: 12.5em !important;
   border-radius: 4px;
   outline: none;
-  padding: 1em;
+  padding: 1.4em 1em;
   border: 0.5px solid var(--primary-white);
   background: var(--background-color-light);
   outline: none;
   cursor: pointer;
   position: relative;
+
+  &-full {
+    width: 100% !important;
+    padding: 1.5em 0;
+  }
 
   img.avatar {
     display: none;
