@@ -1,0 +1,46 @@
+.player {
+  height: 27.5em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 0.4em;
+
+  .info {
+    position: absolute;
+    width: 50%;
+    left: 1em;
+    bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    @media (max-width: 778px) {
+      width: 80%;
+    }
+
+    h1.videoTitle {
+      font-size: 1.5em;
+      word-wrap: break-word;
+      line-height: 1.25em;
+      margin-bottom: 0.5em;
+    }
+    p.videoDesc {
+      font-size: 1em;
+      line-height: 1.5em;
+      width: 80%;
+    }
+  }
+  .hide {
+    display: none;
+  }
+
+  svg.play {
+    width: 3em;
+  }
+  .video {
+    border-radius: 0.4em;
+  }
+}
