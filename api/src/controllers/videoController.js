@@ -27,8 +27,14 @@ const getVideosById = async (req, res) => {
 }
 
 const addVideo = async (req, res) => {
-  const video = await Video.create(req.body)
-  console.log(video)
+  let videoCover = ''
+  let videoResource = ''
+  if (req.files) {
+    videoCover = req.files.videoCover[0].filename
+    videoResource = req.files.videoResource[0].filename
+  }
+  const video = await Video.create({ ...req.body, videoCover, videoResource })
+
   res.status(201).json({
     status: true,
     message: 'added new video successfully',

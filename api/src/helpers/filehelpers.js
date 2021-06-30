@@ -8,51 +8,61 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = path.join(
       path.dirname(__dirname),
-      "..",
-      "files",
+      '..',
+      'files',
       `${file.fieldname}`
-    );
+    )
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
+      fs.mkdirSync(dir)
     }
-    cb(null, dir);
+    cb(null, dir)
   },
   filename: function (req, file, cb) {
-    cb(null, shortid.generate() + "-" + file.originalname);
-  },
-});
+    cb(null, shortid.generate() + '-' + file.originalname)
+  }
+})
 
-function checkFileType(file, cb) {
-  const filetypes = /jpg|jpeg|png/;
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = filetypes.test(file.mimetype);
+function checkFileType (file, cb) {
+  const filetypes = /jpg|jpeg|png|mp4/
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
+  const mimetype = filetypes.test(file.mimetype)
 
-  if ((path.extname(file.originalname) === ".pdf" || extname) && mimetype) {
-    return cb(null, true);
+  if ((path.extname(file.originalname) === '.pdf' || extname) && mimetype) {
+    return cb(null, true)
   } else {
-    throw new Error("Format not valid");
+    throw new Error('Format not valid')
   }
 }
 
 const upload = multer({
   storage,
   fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  },
-});
+    checkFileType(file, cb)
+  }
+})
 
 const multipleUpload = upload.fields([
-  { name: "avatar" },
-  { name: "attachment" },
-]);
+  { name: 'avatar' },
+  { name: 'attachment' }
+])
 
-const uploadArray = multer({ storage }).array("files");
+const uploadArray = multer({ storage }).array('files')
 
 const resizeImage = (req, res, next) => {
   const { format, height, width } = { format: 'webp', ...req.body }
   try {
-    const filename = path.basename(req.file.path).split('.').slice(0, -1).join('.')
-    let dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
+    const filename = path
+      .basename(req.file.path)
+      .split('.')
+      .slice(0, -1)
+      .join('.')
+    let dir = path.join(
+      path.dirname(__dirname),
+      '..',
+      'files',
+      `${req.file.fieldname}`,
+      filename
+    )
     let newImage = sharp(req.file.path)
     if (width) {
       newImage = newImage.resize(parseInt(width))
@@ -60,12 +70,12 @@ const resizeImage = (req, res, next) => {
     }
     if (req.body.render) {
       newImage.toBuffer().then((data) => {
-      // To display the image
+        // To display the image
         res.writeHead(200, {
           'Content-Type': 'image/webp',
           'Content-Length': data.length
         })
-        return (res.end(data))
+        return res.end(data)
       })
     } else {
       const savePath = dir + '.' + format
@@ -77,6 +87,13 @@ const resizeImage = (req, res, next) => {
   }
 }
 
-const changeFormat = (filename) => path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
+const changeFormat = (filename) =>
+  path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
 
-module.exports = { multipleUpload, uploadArray, upload, resizeImage, changeFormat }
+module.exports = {
+  multipleUpload,
+  uploadArray,
+  upload,
+  resizeImage,
+  changeFormat
+}

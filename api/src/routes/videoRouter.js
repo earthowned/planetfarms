@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 require('express-async-errors')
-const { uploadArray } = require('../helpers/filehelpers')
+const { upload } = require('../helpers/filehelpers')
 
 const {
   getVideos,
@@ -12,7 +12,12 @@ const {
 } = require('../controllers/videoController')
 
 router.route('/').get(getVideos)
-router.route('/add').post(addVideo)
+router
+  .route('/add')
+  .post(
+    upload.fields([{ name: 'videoCover' }, { name: 'videoResource' }]),
+    addVideo
+  )
 router.route('/:id').get(getVideosById).delete(deleteVideo).put(updateVideo)
 
 module.exports = router

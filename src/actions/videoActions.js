@@ -9,22 +9,21 @@ import {
 export const createVideo =
   ({ videoCover, videoTitle, videoDescription, videoLink, videoResource }) =>
     async (dispatch) => {
-      const lessonFormData = {
-        videoCover,
-        videoTitle,
-        videoDescription,
-        videoLink,
-        videoResource
-      }
+      const videoData = new FormData()
+      videoData.append('videoCover', videoCover)
+      videoData.append('videoTitle', videoTitle)
+      videoData.append('videoDescription', videoDescription)
+      videoData.append('videoLink', videoLink)
+      videoData.append('videoResource', videoResource)
 
       try {
         dispatch({ type: VIDEO_CREATE_REQUEST })
         const config = {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'multipart/form-data'
           }
         }
-        const { data } = await Axios.post(ADD_VIDEOS, lessonFormData, config)
+        const { data } = await Axios.post(ADD_VIDEOS, videoData, config)
         dispatch({ type: VIDEO_CREATE_SUCCESS, payload: data })
       } catch (error) {
         dispatch({

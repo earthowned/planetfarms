@@ -118,7 +118,7 @@ const AddContent = ({
             key={index}
             title={vid.videoTitle}
             description={vid.videoDescription}
-            url={vid.videoResource?.preview}
+            url={vid.videoLink || vid.videoResource?.preview}
             thumbnail={vid.videoCover?.preview}
           />
           ))
