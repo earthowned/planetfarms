@@ -136,7 +136,7 @@ export const userGroupListReducer = (state = { userGroups: [] }, action) => {
         userGroups: action.payload.groups,
         pages: action.payload.pages,
         page: action.payload.page,
-        totalPages: action.totalPages
+        totalPages: action.payload.totalPages
       }
     case USER_GROUP_LIST_FAIL:
       return { loading: false, error: action.payload }

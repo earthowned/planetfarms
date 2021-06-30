@@ -24,6 +24,7 @@ const CommunityGroupCard = ({ data = [], location, type = 'group', editCard, del
 
 const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
   const [follower, setFollower] = useState(true)
+  const [followCount, setFollowCount] = useState(0);
   const [creator, setCreator] = useState(false)
   const history = useHistory()
   const [follow, setFollow] = useState(false)
@@ -35,37 +36,23 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(item.hasOwnProperty("group_followers")) {
-        if (item.group_followers && item.group_followers.length > 0) {
-        if (checkFollow(item.group_followers, currentUserId)) setFollower(false)
-    }
-    } else {
-
-        if (item.enterprise_followers && item.enterprise_followers.length > 0) {
-          if (checkFollow(item.enterprise_followers, currentUserId)) setFollower(false)
-        }
-    }
-
-
-    if (checkCreator(currentUserId)) setCreator(true)
+   if(item.isFollowed === "1") setFollower(false)
+    if(item.isCreator === "true") setCreator(true)
+    setFollowCount(parseInt(item.groupFollowersCount))
   }, [])
 
-  function checkFollow (arr, userId) {
-    const found = arr.some(el => (el.id === userId && el.followStatus.active === true))
-    if (found) return true
-  }
-
-  function checkCreator (id) {
-    if (id === item.creatorId) return true
-  }
-
   const followHandle = () => {
-    if(item.hasOwnProperty("group_followers")) {
-      dispatch(followGroup(currentUserId, item.id))
+    if(item.hasOwnProperty("groupFollowersCount")) {
+      dispatch(followGroup(item.id))
     } else {
       dispatch(followEnterprise(currentUserId, item.id))
     }
     setFollower(!follower)
+    if(!follower) {
+      setFollowCount(existing => existing - 1)
+    } else {
+      setFollowCount(existing => existing + 1)
+    }
   }
   
   return (
@@ -91,7 +78,7 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
         <div className='follower-container'>
           <div className='follower-number-container'>
             <div className='follower-number-item ibmplexsans-regular-normal-monsoon-16px'>
-              2,564 followers
+              {followCount} followers
             </div>
             <p className='follower-number-item ibmplexsans-regular-normal-monsoon-16px'>
               {new Date(item.createdAt).toDateString()}

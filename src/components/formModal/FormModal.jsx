@@ -65,6 +65,7 @@ const FromModal = ({ setActive, openAddCollection, data, setData }) => {
           description: groupDescription,
           file: files
         }))
+        clearData();
     setActive(false);
   }
 
@@ -104,6 +105,7 @@ const FromModal = ({ setActive, openAddCollection, data, setData }) => {
           description: enterpriseDescription,
           file: files
         }))
+        clearData();
     setActive(false);
   }
 
@@ -117,7 +119,8 @@ const FromModal = ({ setActive, openAddCollection, data, setData }) => {
       <div className='collection-modal-container'>
         <div>
           <div className='collection-modal-inner-container'>
-            {pathname === `/community_group/${id}` && (
+            {(pathname === `/community-group/${id}` 
+            || pathname === `/your-community-group/${id}`) && (
               <>
                 <CollectionModalHeader 
                 title={data ? 'Edit Group' : 'Create Group'}
@@ -164,7 +167,10 @@ const FromModal = ({ setActive, openAddCollection, data, setData }) => {
               </>
             )}
 
-            {pathname === `/enterprises/${id}` && (
+            {(
+            pathname === `/enterprises/${id}` ||
+            pathname === `/your-enterprises/${id}`
+            ) && (
               <>
                 <CollectionModalHeader
                   title={data ? 'Edit Enterprises' : 'Create Enterprises'}

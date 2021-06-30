@@ -22,18 +22,18 @@ const getGroupUsers = async (req, res) => {
 
 const followGroup = async (req, res) => {
    try {
-    const { userId, groupId, active } = req.body
+    const { groupId, active } = req.body
 
     // checking the relationship between userid and groupid
     const groupUser = await db.GroupUser.findOne({where: {
-        userId, 
+        userId: req.user.id, 
         groupId
     }})
 
     if(groupUser) {
         // checking the followed user
         const followedUser = await db.GroupUser.findOne({where: {
-        userId, 
+        userId: req.user.id, 
         groupId,
         active: true
         }})
@@ -41,7 +41,7 @@ const followGroup = async (req, res) => {
         if(followedUser) {
             //unfollow the user
             await db.GroupUser.update({active: false}, {where: {
-            userId, 
+            userId: req.user.id, 
             groupId
             }})
             return  res.json({
@@ -51,7 +51,7 @@ const followGroup = async (req, res) => {
 
         //follow the group
             await db.GroupUser.update({active: true}, {where: {
-            userId, 
+            userId: req.user.id, 
             groupId
             }})
             return  res.json({
@@ -60,7 +60,7 @@ const followGroup = async (req, res) => {
         
     }
     
-    await db.GroupUser.create({ userId, groupId, active })
+    await db.GroupUser.create({ userId: req.user.id, groupId, active })
     res.json({
         message: 'Congratulation for following the group.'
     })

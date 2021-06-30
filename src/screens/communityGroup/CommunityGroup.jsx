@@ -37,9 +37,10 @@ const CommunityGroup = () => {
 
   const [editData, setEditData] = useState(null);
   const data = useSelector((state) => state.listGroups)
-  const {userGroups} = useSelector((state) => state.listUserGroups)
+  const dataUser = useSelector((state) => state.listUserGroups)
   const {groups} = data;
-  
+  const {userGroups} = dataUser;
+
   const {success:groupUpdateSuccess} = useSelector((state) => state.groupUpdate)
   const {success:groupDeleteSuccess} = useSelector((state) => state.groupDelete)
   const {success:groupCreateSuccess} = useSelector((state) => state.groupCreate)
@@ -50,11 +51,9 @@ const CommunityGroup = () => {
   const [deleteId, setDeleteId] = useState(null);
   const [deleteModal, setDeleteModal] = useState(false);
   const [pageNumber, setPageNumber] = useState(1)
+  const [userPageNumber, setUserPageNumber] = useState(1)
   const handleClickCreate = () => {
   }
-
-  const userId = 10;
-
 
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
@@ -62,10 +61,10 @@ const CommunityGroup = () => {
   
         if(pathname=== `/your-community-group/${currentCommunity.slug}`) {
             // if (search) dispatch(searchGroups(search))
-            if (!search) dispatch(listUserGroups({userId, communityId: currentCommunity.id}))
+            if (!search) dispatch(listUserGroups({communityId: currentCommunity.id, pageNumber: userPageNumber}))
           
         }
-  }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess, groupCreateSuccess, pathname])
+  }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess, groupCreateSuccess, pathname, pageNumber, userPageNumber])
 
   const editCard = async (id) => {
      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
@@ -129,7 +128,7 @@ const CommunityGroup = () => {
               </div>
               <div className='button-filter-container'>
                 <div className='community-group-header-btn-container' onClick={() => setActive(true)}>
-                  <Button name='Create group' clickHandler={handleClickCreate} />
+                  <Button name='Create group' onClick={handleClickCreate} />
                 </div>
                 {/* <FilterByCategory /> comes here */}
                 <Filter />
@@ -152,7 +151,11 @@ const CommunityGroup = () => {
               />
         }
             </div>
-            <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
+            {
+             pathname=== `/community-group/${currentCommunity.slug}` 
+          ?  <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
+          :  <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
+            }
           </div>
         </div>
       </DashboardLayout>

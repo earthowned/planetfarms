@@ -25,19 +25,22 @@ import {
   USER_GROUP_LIST_SUCCESS,
   USER_GROUP_LIST_FAIL
 } from '../constants/communityGroupConstants'
+import configFunc from '../utils/ConfigFunc'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listGroups = (sort = '', pageNumber = '') => async (
+export const listGroups = ({pageNumber = ''}) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: GROUP_LIST_REQUEST })
+    const config = configFunc()
     const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}?pageNumber=${pageNumber}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${currentCommunity.id}?pageNumber=${pageNumber}`,
+            config
     )
     dispatch({
       type: GROUP_LIST_SUCCESS,
@@ -86,7 +89,10 @@ export const createGroup = (newGroup) => async (dispatch, getState) => {
     dispatch({
       type: GROUP_CREATE_REQUEST
     })
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups/add/community/${currentCommunity.id}`, formData)
+    const config = configFunc();
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups/add/community/${currentCommunity.id}`, formData,
+    config
+    )
     dispatch({
       type: GROUP_CREATE_SUCCESS,
       payload: data
@@ -129,14 +135,16 @@ export const groupUpdate = (newGroup) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_UPDATE_REQUEST })
     const {id, title, category, description, file} = newGroup;
-    await axios.put(
+    const config = configFunc();
+    const data = await axios.put(
             `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`,
-            {title, category, description, file}
+            {title, category, description, file},
+            config
     );
     
     dispatch({
       type: GROUP_UPDATE_SUCCESS,
-      payload: true
+      payload: data
     })
   } catch (error) {
     const message =
@@ -153,14 +161,15 @@ export const groupUpdate = (newGroup) => async (dispatch) => {
 export const groupDelete = (id) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_DELETE_REQUEST })
-    
-    await axios.delete(
-            `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`
+    const config = configFunc();
+    const data = await axios.delete(
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`,
+            config
     );
     
     dispatch({
       type: GROUP_DELETE_SUCCESS,
-      payload: true
+      payload: data
     })
   } catch (error) {
     const message =
@@ -174,12 +183,13 @@ export const groupDelete = (id) => async (dispatch) => {
   }
 }
 
-export const followGroup = (userId, groupId) => async (dispatch, getState) => {
+export const followGroup = (groupId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: GROUP_FOLLOW_REQUEST
     })
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups-users/follow`, { userId, groupId })
+    const config = configFunc()
+    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups-users/follow`, { groupId }, config)
     dispatch({
       type: GROUP_FOLLOW_SUCCESS
     })
@@ -195,13 +205,15 @@ export const followGroup = (userId, groupId) => async (dispatch, getState) => {
   }
 }
 
-export const listUserGroups = ({userId, communityId, sort = '', pageNumber = ''}) => async (
+export const listUserGroups = ({communityId, pageNumber = ''}) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: USER_GROUP_LIST_REQUEST })
+    const config = configFunc();
     const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${communityId}/user/${userId}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${communityId}/user?pageNumber=${pageNumber}`,
+            config
     )
     dispatch({
       type: USER_GROUP_LIST_SUCCESS,

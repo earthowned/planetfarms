@@ -32,7 +32,7 @@ const getGroups = async (req, res) => {
                           FROM groups_users
                           WHERE "groupId" = groups.id AND active = true
                     )`),
-                    'followersCount'
+                    'groupFollowersCount'
                   ],
                   [
                   db.sequelize.literal(`
@@ -92,7 +92,7 @@ const getUserGroups = async (req, res) => {
                           FROM groups_users
                           WHERE "groupId" = groups.id AND active = true
                     )`),
-                    'followersCount'
+                    'groupFollowersCount'
                   ],
                   [
                   db.sequelize.literal(`
@@ -119,6 +119,7 @@ const getUserGroups = async (req, res) => {
               where: {id: req.user.id},
               through: {
                 attributes: [],
+                where: {active: true}
               }
             }]
     });
@@ -184,28 +185,64 @@ const getGroupsById = (req, res) => {
 // @desc Delete single groups
 // @route GET /api/groups/:groupId/community/:id
 // @access Private
-const deleteGroups = (req, res) => {
-  const id = req.params.groupId
+const deleteGroups = async (req, res) => {
 
-  db.Group.findByPk(id, {
-    where: {creatorId: req.user.id},
-    include: [{
-      model: db.Community,
-      attributes: [],
-      where: { id: req.params.id }
-    }]
-  })
-    .then(groups => {
-      if (groups) {
-        const { id } = groups
-        db.Group.update({deleted: true}, { where: { id } })
+  try {
+          // const id = req.params.id
 
-          .then(() => res.json({ message: 'Groups Deleted!!!' }).status(200))
-          .catch((err) => res.json({ error: err.message }).status(400))
-      } else {
-        return res.status(404).json({ message: 'Groups not found' })
+        if (!req.user.id) {
+          return res.json({ message: 'Not authorized to delete.' })
+        }
+        const group = await db.Group.findByPk(req.params.groupId, {where: {communityId: req.params.id}});
+
+   if (group) {
+      const { id } = group
+      if (group.creatorId !== req.user.id) {
+        return res.json({ message: 'Not authorized to delete.' })
       }
-    })
+
+      const result = await db.sequelize.transaction(async (t) => {
+        const groupUserIds = await db.GroupUser.findAll({where: {groupId: id}}, {transaction: t});
+        
+        groupUserIds.forEach(async function (groupId) { 
+          const {id} = groupId
+          await db.GroupUser.update({active: false}, {where: {id}}, {transaction: t});
+        })
+
+        await db.Group.update({deleted: true}, { where: { id } }, {transaction: t});
+
+        return 'Group Deleted with links.'
+      })
+      
+      return res.json({ message: result }).status(200);
+    } else {
+      res.status(404)
+      throw new Error('Group not found')
+    }
+  } catch (error) {
+    res.json(error);
+  }
+  // const id = req.params.groupId
+
+  // db.Group.findByPk(id, {
+  //   where: {creatorId: req.user.id},
+  //   include: [{
+  //     model: db.Community,
+  //     attributes: [],
+  //     where: { id: req.params.id }
+  //   }]
+  // })
+  //   .then(groups => {
+  //     if (groups) {
+  //       const { id } = groups
+  //       db.Group.update({deleted: true}, { where: { id } })
+
+  //         .then(() => res.json({ message: 'Groups Deleted!!!' }).status(200))
+  //         .catch((err) => res.json({ error: err.message }).status(400))
+  //     } else {
+  //       return res.status(404).json({ message: 'Groups not found' })
+  //     }
+  //   })
 }
 
 // @desc Update a groups
