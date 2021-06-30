@@ -32,20 +32,24 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
     setFollow(!follow)
   }
 
-  const currentUserId = 5
   const dispatch = useDispatch();
-
+console.log(item);
   useEffect(() => {
-   if(item.isFollowed === "1") setFollower(false)
     if(item.isCreator === "true") setCreator(true)
-    setFollowCount(parseInt(item.groupFollowersCount))
+    
+   if(item.isFollowed === "1") setFollower(false)
+    if(item.hasOwnProperty("groupFollowersCount")) {
+      setFollowCount(parseInt(item.groupFollowersCount))
+    } else {
+      setFollowCount(parseInt(item.enterpriseFollowersCount))
+    }
   }, [])
 
   const followHandle = () => {
     if(item.hasOwnProperty("groupFollowersCount")) {
       dispatch(followGroup(item.id))
     } else {
-      dispatch(followEnterprise(currentUserId, item.id))
+      dispatch(followEnterprise(item.id))
     }
     setFollower(!follower)
     if(!follower) {
@@ -57,14 +61,14 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
   
   return (
     <div key={item.id} className='card-1 border-1px-onyx'>
-      <div className="card-edit">
+      {creator && <div className="card-edit">
         <button className="edit-btn" onClick={() => editCard(item.id)}>
           <img src="/img/more-horizontal.svg" alt="burger icon" />
         </button>
         <button className="edit-btn" onClick={() => deleteCard(item.id)}>
           <img src="/img/trash-icon.svg" alt="burger icon" />
         </button>
-      </div>
+      </div>}
       <div className='card-container' style={{ backgroundImage: `url(${process.env.REACT_APP_CDN_BASE_URL + '/' + type + '/' + item.filename})` }} />
       <div className='community-group-card-inner-content'>
         <div onClick={() => history.push(`/community-group-view-page/${item.id}`)} className='card-text-container'>

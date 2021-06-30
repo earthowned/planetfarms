@@ -249,6 +249,7 @@ const updateEnterprises = (req, res) => {
     }
   ).then(enterprises => {
     if (enterprises) {
+      if(enterprises.creatorId !== req.user.id) return res.json({message: 'Not authorized to update'})
       const { id } = enterprises
       db.Enterprise.update({
         title, description, roles, attachments

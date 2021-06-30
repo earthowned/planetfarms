@@ -242,6 +242,7 @@ const updateGroups = (req, res) => {
     }
   ).then(groups => {
     if (groups) {
+      if(groups.creatorId !== req.user.id) return res.json({message: 'Not authorized to update'})
       const { id } = groups
       db.Group.update({
         title, description, category, attachments

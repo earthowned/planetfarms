@@ -118,10 +118,10 @@ export const userEnterpriseListReducer = (state = { userEnterprises: [] }, actio
     case USER_ENTERPRISE_LIST_SUCCESS:
       return {
         loading: false,
-        userEnterprises: action.payload.communities,
+        userEnterprises: action.payload.enterprises,
         pages: action.payload.pages,
         page: action.payload.page,
-        totalPages: action.totalPages
+        totalPages: action.payload.totalPages
       }
     case USER_ENTERPRISE_LIST_FAIL:
       return { loading: false, error: action.payload }

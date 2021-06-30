@@ -22,7 +22,8 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   const {pathname} = useLocation();
 
   const data = useSelector((state) => state.listEnterprises);
-  const {userEnterprises} = useSelector((state) => state.listUserEnterprises);
+  const dataUser = useSelector((state) => state.listUserEnterprises);
+  const {userEnterprises} = dataUser;
   // const {enterprises} = data;
   // console.log(enterprises);
   const enterprises = data.enterprises.enterprises ? data.enterprises.enterprises : data.enterprises
@@ -35,20 +36,19 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   const [active, setActive] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false);
   const [pageNumber, setPageNumber] = useState(1)
+  const [userPageNumber, setUserPageNumber] = useState(1)
   const dispatch = useDispatch()
-
-  const userId = 10;
 
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
     if (!search) dispatch(listEnterprises({pageNumber}))
 
-    if(pathname=== `/your-community-group/${currentCommunity.slug}`) {
+    if(pathname=== `/your-enterprises/${currentCommunity.slug}`) {
             // if (search) dispatch(searchGroups(search))
-            if (!search) dispatch(listUserEnterprises({userId, communityId: currentCommunity.id}))
+            if (!search) dispatch(listUserEnterprises({communityId: currentCommunity.id, pageNumber: userPageNumber}))
           
         }
-  }, [search, dispatch, pathname,  enterpriseUpdateSuccess, enterpriseDeleteSuccess, enterpriseCreateSuccess])
+  }, [search, dispatch, pathname,  enterpriseUpdateSuccess, enterpriseDeleteSuccess, enterpriseCreateSuccess, pageNumber, userPageNumber])
 
 
   const editCard = async (id) => {
@@ -102,7 +102,12 @@ const currentCommunity = localStorage.getItem('currentCommunity')
                     />
               }
             </div>
-            <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
+            {
+               pathname=== `/enterprises/${currentCommunity.slug}` 
+                ?  <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
+                :  <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
+              }
+            
           </div>
         </div>
       </DashboardLayout>
