@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createNews } from '../../../actions/newsActions'
 
 const NewsAdd = () => {
+  const {currentCommunity} = useSelector(state => state.activeCommunity);
   const [createVideoModal, setCreateVideoModal] = useState(false)
   const [createImageModal, setCreateImageModal] = useState(false)
   const [createTextModal, setCreateTextModal] = useState(false)
@@ -25,7 +26,7 @@ const NewsAdd = () => {
       {createImageModal && <NewsCreateModal type='image' imageActive={imageActive} setImageActive={setImageActive} />}
       {createTextModal && <NewsCreateModal type='text' textActive={textActive} setTextActive={setTextActive} />}
       <DashboardLayout title='Add News'>
-        <BackButton location='/community-page-news' />
+        <BackButton location={`/community-page-news/${currentCommunity.slug}`} />
         <NewsAddMainContainer
           setCreateVideoModal={setCreateVideoModal}
           setCreateImageModal={setCreateImageModal}
@@ -132,17 +133,17 @@ function PopUp ({ news, title, category }) {
     if (file) {
       dispatch(createNews(newNews))
       setActivePopup(false)
-      history.push(`/community_page_news/${currentCommunity.slug}`)
+      history.push(`/community-page-news/${currentCommunity.slug}`)
     } else {
       dispatch(createNews(newNews))
       setActivePopup(false)
-      history.push(`/community_page_news/${currentCommunity.slug}`)
+      history.push(`/community-page-news/${currentCommunity.slug}`)
     }
   }
 
   const handleOnCancelClick = (e) => {
     setActivePopup(false)
-    history.push('/community-page-news')
+    history.push(`/community-page-news/${currentCommunity.slug}`)
   }
   return (
     <>
