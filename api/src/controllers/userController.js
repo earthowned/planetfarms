@@ -83,13 +83,13 @@ const authUser = async (req, res) => {
       })
     } else {
       await res.status(401).json({
-        error: 'Invalid email or password'
+        error: 'Please type correct email or password'
       })
     }
   } catch (e) {
     console.log(e)
     res.status(401).json({
-      error: 'Invalid email or password'
+      error: 'Please type correct email or password'
     })
   }
 }
@@ -120,7 +120,7 @@ const registerUser = async (req, res) => {
         }
       })
       res.send({ token: generateToken(registeredUser.userSub) })
-      await User.create({ userID: registeredUser.userSub })
+      await User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
     } else {
       registerLocal(name, password, email, res)
     }
@@ -257,7 +257,6 @@ const getUserProfileByUserID = async (req, res) => {
 // @route   GET /api/user/profile
 // @access  Public
 const getMyProfile = (req, res) => {
-  
   const user = req.user.dataValues
 
   res.json({
@@ -270,16 +269,15 @@ const getMyProfile = (req, res) => {
     numberOfVisit: user.numberOfVisit,
     attachments: user.attachments
   })
-  
 }
 
 // @desc    Update user
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
   try {
-    const { email, firstName, lastName, phone, birthday, name } = req.body
+    const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    console.log(id)
+    console.log(req.body)
     // const id = req.params.id
     User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
@@ -289,16 +287,16 @@ const updateUser = async (req, res) => {
             firstName,
             lastName,
             phone,
-            dateOfBirth: birthday,
-            name
+            dateOfBirth: birthday
           },
-          { where: { userID: user.dataValues.id } }
+          { where: { userID: id } }
         )
           .then(() => res.json({ message: 'User Updated !!!' }).status(200))
           .catch((err) => res.json({ error: err.message }).status(400))
+      } else {
+        res.status(404)
+        throw new Error('User not found')
       }
-      res.status(404)
-      throw new Error('User not found')
     })
   } catch (err) {
     res.json({ error: err.message })

@@ -32,7 +32,7 @@ export const PersonalInformation = ({ user }) => {
     secondTitle: 'Last Name',
     secondValue: user?.lastName || 'N/A',
     thirdTitle: 'Date of birhday',
-    thirdValue: user?.lastLogin ? new Date(user?.dateOfBirth).toDateString() : 'N/A'
+    thirdValue: user?.dateOfBirth ? new Date(user?.dateOfBirth).toDateString() : 'N/A'
   }
   return (
 

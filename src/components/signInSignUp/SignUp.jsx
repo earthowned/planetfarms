@@ -38,17 +38,17 @@ const SignIn = () => {
 
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
-
-  useEffect(() => {
-    if (userInfo) {
-      history.push('/register-complete')
-    }
-  }, [history, userInfo])
-
+  
+    useEffect(() => {
+      if (userInfo) {
+        history.push('/register-complete')
+      }
+    }, [history, userInfo])
+  
   const onSubmit = ({ username, password }) => {
     return dispatch(register(username, password))
   }
-
+  
   return (
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>

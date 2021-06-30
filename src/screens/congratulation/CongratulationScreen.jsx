@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
+import moment from 'moment'
 
 import Logo from '../../components/logo/Logo'
 import Input from '../../components/input/Input'
@@ -22,20 +23,26 @@ function CongratulationScreen () {
   const editInformations = location?.state?.editInformations
   const userdetail = location?.state?.user
   console.log('userdetail', userdetail)
-
+  
   const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
-
+  
   const userLogin = useSelector((state) => state.userLogin)
+  const userDetails = useSelector((state) => state.userDetails)
   const { userInfo } = userLogin
+  const { user } = userDetails
+
+  
 
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     console.log(firstName, lastName, phone, birthday, email)
     // if (firstname && lastname && phone && birthday && email) {
     //   signUp({ firstname, lastname, phone, birthday, email });
     // }
-    dispatch(updateUser({ firstName, lastName, phone, birthday, email, id: userdetail ? userdetail.id : userInfo.id }))
-    userdetail ? history.push('/myProfile') : history.push('/community-page-news')
+    dispatch(updateUser({ firstName, lastName, phone, birthday, email }))
+    user ? history.push('/myProfile') : history.push('/community-page-news')
+      
+  
   }
 
   return (
@@ -60,7 +67,7 @@ function CongratulationScreen () {
               <Input
                 placeholder='First Name'
                 type='text'
-                name='firstname'
+                name='firstName'
                 ref={register({
                   required: {
                     value: true,
@@ -75,7 +82,7 @@ function CongratulationScreen () {
 
             <div className='row-1-col'>
               <Input
-                name='lastname'
+                name='lastName'
                 placeholder='Last Name'
                 type='text'
                 ref={register({
@@ -139,7 +146,7 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.dateOfBirth}
+                value={userdetail?.dateOfBirth && moment(userdetail.dateOfBirth).format('YYYY-MM-DD')}
                 noIcon='noIcon'
               />
             </div>
