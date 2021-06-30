@@ -12,105 +12,149 @@ const paginate = ({ page, pageSize }) => {
 // @route GET/api/groups/community/:id
 // @access Public
 
-const getGroups = (req, res) => {
-  const pageSize = 10
+const getGroups = async (req, res) => {
+  const pageSize = 3
   const page = Number(req.query.pageNumber) || 1
-  const order = req.query.order || 'DESC'
-  const ordervalue = order && [['title', order]]
+  // const order = req.query.order || 'DESC'
+  // const ordervalue = order && [['name', order]]
+  try {
+    const groups = await db.Group.findAndCountAll({
+                offset: (page - 1) * pageSize,
+                limit: pageSize,
+                // ordervalue,
+                order: [['createdAt', 'DESC']],
+                where: {deleted: false, communityId: req.params.id},
+              attributes: {
+                include: [
+                  [
+                    db.sequelize.literal(`(
+                          SELECT COUNT("userId")
+                          FROM groups_users
+                          WHERE "groupId" = groups.id AND active = true
+                    )`),
+                    'followersCount'
+                  ],
+                  [
+                  db.sequelize.literal(`
+                      CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+                        ELSE 'false'
+                      END
+                    `),'isCreator'
+                  ],
+                  [
+                    db.sequelize.literal(`(
+                          SELECT COUNT("userId") 
+                          FROM groups_users
+                          WHERE "groupId" = groups.id AND active = true AND "userId" = ${req.user.id}
+                    )`),
+                    'isFollowed'
+                  ],
+                ],
+                exclude: ["deleted"]
+              },
+    });
 
-  db.Group.findAndCountAll({
-    offset: (page - 1),
-    limit: pageSize,
-    ordervalue,
-    attributes: {exclude: ['deleted']},
-    where: {deleted: false},
-    include: [{
-      model: db.Community,
-      attributes: ['id'],
-      where: { id: req.params.id }
-    },
-    {
-      model: db.User,
-      attributes: ['id'],
-      as: 'group_followers',
-      through: {
-        attributes: ['active'],
-        as: 'followStatus'
-      }
-    }
-  ]
-  })
-    .then(groups => {
-      const totalPages = Math.ceil(groups.count / pageSize)
-      res.json({ 
+    const totalPages = Math.ceil(groups.count / pageSize)
+  res.json({
         groups: groups.rows,
         totalItems: groups.count,
         totalPages,
         page, 
         pageSize 
-       }).status(200)
-    })
+   }).status(200);
 
-    .catch((err) => res.json({ err }).status(400))
+  } catch (error) {
+    res.json(error);
+  }
 }
 
 // @desc Fetch all groups by a community
 // @route GET/api/groups/community/:id/user/:userId
 // @access Public
 
-const getUserGroups = (req, res) => {
-  const pageSize = 10
+const getUserGroups = async (req, res) => {
+  const pageSize = 3
   const page = Number(req.query.pageNumber) || 1
-  const order = req.query.order || 'DESC'
-  const ordervalue = order && [['title', order]]
+  // const order = req.query.order || 'DESC'
+  // const ordervalue = order && [['name', order]]
+  try {
+    const groups = await db.Group.findAndCountAll({
+                offset: (page - 1) * pageSize,
+                limit: pageSize,
+                // ordervalue,
+                order: [['createdAt', 'DESC']],
+                where: {deleted: false, communityId: req.params.id},
+              attributes: {
+                include: [
+                  [
+                    db.sequelize.literal(`(
+                          SELECT COUNT("userId")
+                          FROM groups_users
+                          WHERE "groupId" = groups.id AND active = true
+                    )`),
+                    'followersCount'
+                  ],
+                  [
+                  db.sequelize.literal(`
+                      CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+                        ELSE 'false'
+                      END
+                    `),'isCreator'
+                  ],
+                  [
+                    db.sequelize.literal(`(
+                          SELECT COUNT("userId") 
+                          FROM groups_users
+                          WHERE "groupId" = groups.id AND active = true AND "userId" = ${req.user.id}
+                    )`),
+                    'isFollowed'
+                  ],
+                ],
+                exclude: ["deleted"]
+              },
+              include: [{
+              model: db.User,
+              as: 'group_followers',
+              attributes: [],
+              where: {id: req.user.id},
+              through: {
+                attributes: [],
+              }
+            }]
+    });
 
-  db.Group.findAndCountAll({
-    offset: (page - 1),
-    limit: pageSize,
-    ordervalue,
-    attributes: {exclude: ['deleted']},
-    where: {deleted: false, creatorId: req.params.userId},
-    include: [{
-      model: db.Community,
-      attributes: ['id'],
-      where: { id: req.params.id }
-    },
-    {
-      model: db.User,
-      attributes: ['id'],
-      as: 'group_followers',
-      through: {
-        attributes: ['active'],
-        as: 'followStatus'
-      }
-    }
-  ]
-  })
-    .then(groups => {
-      const totalPages = Math.ceil(groups.count / pageSize)
-      res.json({ 
+    const totalPages = Math.ceil(groups.count / pageSize)
+  res.json({
         groups: groups.rows,
         totalItems: groups.count,
         totalPages,
         page, 
         pageSize 
-       }).status(200)
-    })
+   }).status(200);
 
-    .catch((err) => res.json({ err }).status(400))
+  } catch (error) {
+    res.json(error);
+  }
 }
 // @desc Add individual groups
 // @route POST /api/groups/add/community/:id
 // @access Private
-const addGroups = (req, res) => {
+const addGroups = async (req, res) => {
+  try {
   let filename = ''
   if (req.file) {
     filename = req.file.filename
   }
 
-  db.Group.create({ ...req.body, communityId: req.params.id, filename, slug: '' })
-    .then(() => res.json({ message: 'Community Group Created !!!' }).status(200))
-    .catch((err) => res.json({ error: err.message }).status(400))
+  const followGroup = await db.sequelize.transaction(async(t) => {
+        const group = await db.Group.create({ ...req.body, communityId: req.params.id, creatorId: req.user.id,  slug: "", attachment: 'uploads/' + filename }, {transaction: t});
+        await db.GroupUser.create({userId: req.user.id, groupId: group.id}, {transaction: t})
+        return true;
+      }) 
+      if(followGroup) return res.json({ message: 'Group is Created !!!' }).status(200);
+  } catch (error) {
+    res.json(error);
+  }
 }
 
 // @desc Fetch single groups
@@ -144,6 +188,7 @@ const deleteGroups = (req, res) => {
   const id = req.params.groupId
 
   db.Group.findByPk(id, {
+    where: {creatorId: req.user.id},
     include: [{
       model: db.Community,
       attributes: [],
@@ -168,7 +213,7 @@ const deleteGroups = (req, res) => {
 // @access Public
 const updateGroups = (req, res) => {
   const {
-    title, description, category, attachments, creatorId
+    title, description, category, attachments
   } = req.body
 
   const id = req.params.groupId
@@ -180,7 +225,7 @@ const updateGroups = (req, res) => {
 
   db.Group.findByPk(id,
     {
-      where: {creatorId},
+      where: {creatorId: req.user.id},
       include: [{
         model: db.Community,
         attributes: [],
@@ -191,7 +236,7 @@ const updateGroups = (req, res) => {
     if (groups) {
       const { id } = groups
       db.Group.update({
-        title, description, category, attachments, creatorId
+        title, description, category, attachments
       },
       { where: { id} })
         .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
