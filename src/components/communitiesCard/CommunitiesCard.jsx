@@ -38,7 +38,7 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
   useEffect(() => {
     if(community.isFollowed === "1") setFollower(false)
     if(community.isCreator === "true") setCreator(true)
-    setFollowCount(parseInt(community.followers))
+    setFollowCount(parseInt(community.followersCount))
   }, [])
 
   const followCommunity = () => {

@@ -32,7 +32,7 @@ const getCommunities = async (req, res) => {
                           FROM communities_users
                           WHERE "communityId" = communities.id AND active = true
                     )`),
-                    'followers'
+                    'followersCount'
                   ],
                   [
                   sequelize.literal(`
@@ -73,7 +73,7 @@ const getCommunities = async (req, res) => {
 // @access Public
 
 const getUserCommunities = async (req, res) => {
-  const pageSize = 1
+  const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
   // const order = req.query.order || 'DESC'
   // const ordervalue = order && [['name', order]]
@@ -90,7 +90,7 @@ const getUserCommunities = async (req, res) => {
                           FROM communities_users
                           WHERE "communityId" = communities.id AND active = true
                     )`),
-                    'followers'
+                    'followersCount'
                   ],
                   [
                   sequelize.literal(`
@@ -112,20 +112,18 @@ const getUserCommunities = async (req, res) => {
               },
       order: [['createdAt', 'DESC']],
       where: {
-        deleted: false,
-        creatorId: req.user.id
+        deleted: false
       },
-  //   include: [{
-  //     model: db.User,
-  //     as: 'followers',
-  //     attributes: ['id'],
-  //     // where: {id: req.user.id},
-  //     // through: {
-  //     //   attributes: ['active'],
-  //     //   as: 'followStatus'
-  //     // }
-  //   }
-  // ]
+    include: [{
+      model: db.User,
+      as: 'followers',
+      attributes: [],
+      where: {id: req.user.id},
+      through: {
+        attributes: [],
+      }
+    }
+  ]
   })
     .then(communities => {
       const totalPages = Math.ceil(communities.count / pageSize)
