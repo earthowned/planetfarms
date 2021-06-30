@@ -2,10 +2,10 @@ import {
   VIDEO_CREATE_REQUEST,
   VIDEO_CREATE_SUCCESS,
   VIDEO_CREATE_FAIL,
-  VIDEO_CREATE_RESET,
+  VIDEO_CREATE_RESET
 } from '../constants/videoConstants'
 
-export const VIDEOCreateReducer = (state = {}, action) => {
+export const videoCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case VIDEO_CREATE_REQUEST:
       return { loading: true }

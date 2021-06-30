@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
 require('express-async-errors')
+const { uploadArray } = require('../helpers/filehelpers')
 
 const {
   getVideos,
   getVideosById,
   addVideo,
   deleteVideo,
-  updateVideo,
+  updateVideo
 } = require('../controllers/videoController')
 
 router.route('/').get(getVideos)
