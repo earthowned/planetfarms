@@ -18,22 +18,22 @@ const getEnterpriseUsers = async (req, res) => {
 
 // @desc follow enterprise
 // @route POST /api/enterprises-users/follow
-// @access Public
+// @access Private
 
 const followEnterprise = async (req, res) => {
    try {
-    const { userId, enterpriseId, active } = req.body
+    const { enterpriseId, active } = req.body
 
     // checking the relationship between userid and enterpriseid
     const enterpriseUser = await db.EnterpriseUser.findOne({where: {
-        userId, 
+        userId: req.user.id, 
         enterpriseId
     }})
 
     if(enterpriseUser) {
         // checking the followed user
         const followedUser = await db.EnterpriseUser.findOne({where: {
-        userId, 
+        userId: req.user.id, 
         enterpriseId,
         active: true
         }})
@@ -41,7 +41,7 @@ const followEnterprise = async (req, res) => {
         if(followedUser) {
             //unfollow the user
             await db.EnterpriseUser.update({active: false}, {where: {
-            userId, 
+            userId: req.user.id, 
             enterpriseId
             }})
             return  res.json({
@@ -51,7 +51,7 @@ const followEnterprise = async (req, res) => {
 
         //follow the enterprise
             await db.EnterpriseUser.update({active: true}, {where: {
-            userId, 
+            userId: req.user.id, 
             enterpriseId
             }})
             return  res.json({
@@ -60,7 +60,7 @@ const followEnterprise = async (req, res) => {
         
     }
     
-    await db.EnterpriseUser.create({ userId, enterpriseId, active })
+    await db.EnterpriseUser.create({ userId: req.user.id, enterpriseId, active })
     res.json({
         message: 'Congratulation for following the enterprise.'
     })

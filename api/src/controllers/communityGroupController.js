@@ -186,10 +186,7 @@ const getGroupsById = (req, res) => {
 // @route GET /api/groups/:groupId/community/:id
 // @access Private
 const deleteGroups = async (req, res) => {
-
   try {
-          // const id = req.params.id
-
         if (!req.user.id) {
           return res.json({ message: 'Not authorized to delete.' })
         }
@@ -222,27 +219,6 @@ const deleteGroups = async (req, res) => {
   } catch (error) {
     res.json(error);
   }
-  // const id = req.params.groupId
-
-  // db.Group.findByPk(id, {
-  //   where: {creatorId: req.user.id},
-  //   include: [{
-  //     model: db.Community,
-  //     attributes: [],
-  //     where: { id: req.params.id }
-  //   }]
-  // })
-  //   .then(groups => {
-  //     if (groups) {
-  //       const { id } = groups
-  //       db.Group.update({deleted: true}, { where: { id } })
-
-  //         .then(() => res.json({ message: 'Groups Deleted!!!' }).status(200))
-  //         .catch((err) => res.json({ error: err.message }).status(400))
-  //     } else {
-  //       return res.status(404).json({ message: 'Groups not found' })
-  //     }
-  //   })
 }
 
 // @desc Update a groups
@@ -254,11 +230,6 @@ const updateGroups = (req, res) => {
   } = req.body
 
   const id = req.params.groupId
-
-  // db.User.findByPk(creatorId)
-  //   .then(user => {
-  //     if(!user) return({message: 'Not authorized.'})
-  //   }).catch(error => (res.json(error)));
 
   db.Group.findByPk(id,
     {
