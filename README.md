@@ -9,7 +9,7 @@ After you clone the repository. You can create or edit `.env` file and add `REAC
 
 ### `npm install`
 
-Make sure you have **NodeJS 14.x**
+Make sure you have **NodeJS 14.x** or higher
 
 You can install dependencies by `npm install` in your Frontend and after that you can go to Backend by `cd api` and `npm install` to install dependencies in your Backend.
 
