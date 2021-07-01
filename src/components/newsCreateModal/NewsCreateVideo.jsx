@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 
-import { createVideo } from '../../actions/videoActions'
 import Button from '../button/Button'
 // import { savevideoDetail } from '../../actions/newsActions'
 import DragDrop from '../dragDrop/DragDrop'
@@ -18,13 +16,13 @@ const CreateVideo = ({
   videoActive,
   setVideoActive,
   setVideoData,
-  videoData
+  videoData,
+  setVideoDataToPost
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const [videoCover, setVideoCover] = useState(null)
   const [video, setVideo] = useState()
   const [videoLink, setVideoLink] = useState('')
-  const dispatch = useDispatch()
 
   const addVideo = ({ videoTitle, videoDescription, videoLink }) => {
     const videoResource = video
@@ -38,17 +36,15 @@ const CreateVideo = ({
         videoResource
       }
     ]
-
+    setVideoDataToPost({
+      videoCover,
+      videoTitle,
+      videoDescription,
+      videoLink,
+      videoResource
+    })
     setVideoData(vData)
-    dispatch(
-      createVideo({
-        videoCover,
-        videoTitle,
-        videoDescription,
-        videoLink,
-        videoResource
-      })
-    )
+
     setVideoActive(false)
   }
   return (

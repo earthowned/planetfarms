@@ -51,16 +51,15 @@ app.get('/', (request, response) => {
 
 // Set static folder
 app.use(express.static(path.join(__dirname, '../files')))
-console.log(path.join(__dirname, '../files'))
 
-//error handeling
+// error handeling
 app.all('*', async (_req, _res) => {
   throw new NotFoundError()
 })
 
 app.use(errorHandler)
 
-//linking course table with lesson table(association)
+// linking course table with lesson table(association)
 Lessons.hasMany(Video)
 Video.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
 Lessons.belongsTo(Courses, { constraints: true, foreignKey: 'courseId' })

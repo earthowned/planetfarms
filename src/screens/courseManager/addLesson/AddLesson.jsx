@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import uuid from 'react-uuid'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { createLesson } from '../../../actions/lessonActions'
+import { createVideo } from '../../../actions/videoActions'
+
 import AddTestModal from '../../../components/addTestModal/AddTestModal'
 import BackButton from '../../../components/backButton/BackButton'
 import DragDrop from '../../../components/dragDrop/DragDrop'
@@ -16,6 +18,7 @@ import './AddLesson.scss'
 const AddLesson = () => {
   const dispatch = useDispatch()
   const { courseId } = useParams()
+  const postLessonData = useSelector((state) => state.addLesson)
 
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
@@ -23,9 +26,9 @@ const AddLesson = () => {
   const [testModal, setTestModal] = useState(false)
   const [videoData, setVideoData] = useState([])
   const [lessonCover, setLessonCover] = useState(null)
+  const [videoDataToPost, setVideoDataToPost] = useState()
 
   const { register, errors, handleSubmit } = useForm()
-  console.log(videoData)
 
   const submitLessonForm = ({ title }) => {
     const coverImg = lessonCover
@@ -37,6 +40,20 @@ const AddLesson = () => {
       })
     )
   }
+  useEffect(() => {
+    if (
+      Object.keys(postLessonData).length !== 0 &&
+      postLessonData.loading === false
+    ) {
+      const id = postLessonData.course.data.id
+      const lessonId = id
+      if (id) {
+        dispatch(createVideo(videoDataToPost, lessonId))
+      }
+    }
+  }, [postLessonData])
+
+  console.log(postLessonData)
 
   return (
     <>
@@ -47,6 +64,7 @@ const AddLesson = () => {
           setVideoActive={setVideoModal}
           setVideoData={setVideoData}
           videoData={videoData}
+          setVideoDataToPost={setVideoDataToPost}
         />
       )}
       {imageModal && (
