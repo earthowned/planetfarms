@@ -14,6 +14,7 @@ import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { ErrorText } from '../../../components/formUI/FormUI'
 import Video from '../../../components/videoPlayer/Video'
+import Image from '../../../components/lessonImage/Image'
 import './AddLesson.scss'
 
 const AddLesson = () => {
@@ -25,13 +26,13 @@ const AddLesson = () => {
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
   const [testModal, setTestModal] = useState(false)
-  const [videoData, setVideoData] = useState([])
+  const [lessonData, setLessonData] = useState([])
   const [lessonCover, setLessonCover] = useState(null)
   const [videoDataToPost, setVideoDataToPost] = useState(null)
-  const [lessonImgData, setLessonImgData] = useState([])
   const [lessonImgDataToPost, setLessonImgDataToPost] = useState(null)
+  const [lessonText, setLessonText] = useState(null)
 
-  console.log(lessonImgDataToPost)
+  console.log(lessonData)
   const { register, errors, handleSubmit } = useForm()
 
   const submitLessonForm = ({ title }) => {
@@ -69,8 +70,8 @@ const AddLesson = () => {
           type='video'
           videoActive={videoModal}
           setVideoActive={setVideoModal}
-          setVideoData={setVideoData}
-          videoData={videoData}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
           setVideoDataToPost={setVideoDataToPost}
         />
       )}
@@ -79,8 +80,8 @@ const AddLesson = () => {
           type='image'
           imageActive={imageModal}
           setImageActive={setImageModal}
-          lessonImgData={lessonImgData}
-          setLessonImgData={setLessonImgData}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
           setLessonImgDataToPost={setLessonImgDataToPost}
         />
       )}
@@ -90,6 +91,10 @@ const AddLesson = () => {
           type='text'
           textActive={textModal}
           setTextActive={setTextModal}
+          placeholder='Text Heading'
+          lessonData={lessonData}
+          setLessonData={setLessonData}
+          setLessonText={setLessonText}
         />
       )}
       <DashboardLayout title='Add new lesson'>
@@ -103,7 +108,7 @@ const AddLesson = () => {
           errors={errors}
           setLessonCover={setLessonCover}
           lessonCover={lessonCover}
-          videoData={videoData}
+          lessonData={lessonData}
         />
         <LessonMaterial />
         <LessonSaveModal onClick={handleSubmit(submitLessonForm)} />
@@ -120,7 +125,7 @@ const AddContent = ({
   register,
   errors,
   setLessonCover,
-  videoData
+  lessonData
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -140,17 +145,29 @@ const AddContent = ({
         message={errors.title && errors.title.message}
       />
       <DragDrop onChange={(img) => setLessonCover(img)} />
-      {videoData
-        ? videoData.map((vid, index) => (
-          <Video
-            key={index}
-            title={vid.videoTitle}
-            description={vid.videoDescription}
-            url={vid.videoLink || vid.videoResource?.preview}
-            thumbnail={vid.videoCover?.preview}
-          />
+      {lessonData
+        ? lessonData.map((vid, index) => (
+          <>
+            {console.log(vid)}
+            {(vid.videoCover === vid.videoCover && (
+              <Video
+                key={index}
+                title={vid.videoTitle}
+                description={vid.videoDescription}
+                url={vid.videoLink || vid.videoResource?.preview}
+                thumbnail={vid.videoCover?.preview}
+              />
+            )) ||
+                (vid.lessonImg === vid.lessonImg && (
+                  <Image
+                    src={vid.lessonImg?.preview}
+                    desc={vid.photoDescription}
+                  />
+                ))}
+          </>
           ))
         : ''}
+
       <div className='admin-lesson-create-btn-wrapper'>
         <button className='secondary-btn' onClick={() => setVideoModal(true)}>
           <img src='/img/video-outline.svg' alt='video icon' />{' '}

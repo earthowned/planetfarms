@@ -16,6 +16,7 @@ const NewsCreateModal = ({
   imageActive,
   setImageActive,
   textActive,
+  placeholder,
   setTextActive,
   groupActive,
   setGroupActive,
@@ -24,12 +25,11 @@ const NewsCreateModal = ({
   enterpriseActive,
   setEnterpriseActive,
   addVideoData,
-  setVideoData,
-  videoData,
   setVideoDataToPost,
-  lessonImgData,
-  setLessonImgData,
-  setLessonImgDataToPost
+  lessonData,
+  setLessonData,
+  setLessonImgDataToPost,
+  setLessonText
 }) => {
   const [files, setFiles] = useState(null)
 
@@ -42,8 +42,8 @@ const NewsCreateModal = ({
           setFiles={setFiles}
           videoActive={videoActive}
           setVideoActive={setVideoActive}
-          setVideoData={setVideoData}
-          videoData={videoData}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
           setVideoDataToPost={setVideoDataToPost}
         />
       )
@@ -74,8 +74,8 @@ const NewsCreateModal = ({
           setFiles={setFiles}
           imageActive={imageActive}
           setImageActive={setImageActive}
-          lessonImgData={lessonImgData}
-          setLessonImgData={setLessonImgData}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
           setLessonImgDataToPost={setLessonImgDataToPost}
         />
       )
@@ -86,6 +86,10 @@ const NewsCreateModal = ({
           files={files}
           textActive={textActive}
           setTextActive={setTextActive}
+          placeholder={placeholder}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
+          setLessonText={setLessonText}
         />
       )
       break

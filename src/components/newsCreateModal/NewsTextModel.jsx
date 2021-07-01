@@ -1,35 +1,25 @@
 import { useState } from 'react'
-import './NewsCreateModal.scss'
+import { useForm } from 'react-hook-form'
+// import { useDispatch } from 'react-redux'
+// import { savetextDetail } from '../../actions/newsActions'
+
 import Button from '../button/Button'
-import { useDispatch } from 'react-redux'
-import { savetextDetail } from '../../actions/newsActions'
 import CollectionModalHeader from './CollectionModalHeader'
 import { InputFields, ErrorText, TextArea } from '../formUI/FormUI'
+import './NewsCreateModal.scss'
 
-const CreateText = ({ textActive, setTextActive }) => {
-  const [collectionTitle, setCollectionTitle] = useState()
-  const [collectionDescription, setCollectionDescription] = useState()
+const CreateText = ({
+  textActive,
+  setTextActive,
+  placeholder,
+  lessonData,
+  setLessonData,
+  setLessonText
+}) => {
+  const { register, errors, handleSubmit } = useForm()
 
-  const [collectionTitleError, setCollectionTitleError] = useState()
-  const [collectionDescriptionError, setCollectionDescriptionError] = useState()
-
-  const collectionTitleChange = (e) => {
-    setCollectionTitle(e.target.value)
-    setCollectionTitleError(false)
-  }
-  const collectionDescriptionChange = (e) => {
-    setCollectionDescription(e.target.value)
-    setCollectionDescriptionError(false)
-  }
-
-  const dispatch = useDispatch()
-  const addText = () => {
-    if (!collectionTitle) setCollectionTitleError(true)
-    if (!collectionDescription) setCollectionDescriptionError(true)
-    if (collectionTitle && collectionDescription) {
-      dispatch(savetextDetail({ collectionTitle, collectionDescription }))
-      setTextActive(false)
-    }
+  const addText = ({ textHeading, textDescription }) => {
+    console.log(textHeading, textDescription)
   }
   return (
     <>
@@ -37,27 +27,49 @@ const CreateText = ({ textActive, setTextActive }) => {
         <div className='collection-modal-container'>
           <div>
             <div className='collection-modal-inner-container'>
-              <CollectionModalHeader title='Add text' clickHandler={setTextActive} />
+              <CollectionModalHeader
+                title='Add text'
+                clickHandler={setTextActive}
+              />
               <div className='photo-input-container'>
                 <InputFields
                   type='text'
                   className='default-input-variation'
-                  placeholder='Collection title'
-                  value={collectionTitle}
-                  onChange={(e) => collectionTitleChange(e)}
+                  placeholder={placeholder}
+                  name='textHeading'
+                  ref={register({
+                    required: {
+                      value: true,
+                      message: 'Please enter Heading'
+                    }
+                  })}
                 />
-                <ErrorText className='error-message' error={collectionTitleError} message='Please enter Video Title' />
-                <br />
+                <ErrorText
+                  className='errorMsg'
+                  message={errors.textHeading && errors.textHeading.message}
+                />
                 <TextArea
-                  className='default-input-variation'
-                  id='text-area-variation-2'
+                  className='default-input-variation text-area-variation'
+                  placeholder='Text description'
+                  cols='3'
+                  rows='7'
                   placeholder='Type text here '
-                  value={collectionDescription}
-                  onChange={(e) => collectionDescriptionChange(e)}
+                  name='textDescription'
+                  ref={register({
+                    required: {
+                      value: true,
+                      message: 'Please enter a text description'
+                    }
+                  })}
                 />
-                <ErrorText className='error-message' error={collectionDescriptionError} message='Please enter Video Description' />
+                <ErrorText
+                  className='errorMsg'
+                  message={
+                    errors.textDescription && errors.textDescription.message
+                  }
+                />
               </div>
-              <Button name='Add block' clickHandler={addText} />
+              <Button name='Add block' onClick={handleSubmit(addText)} />
             </div>
           </div>
         </div>

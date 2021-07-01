@@ -15,9 +15,9 @@ const CreateVideo = ({
   // setFiles,
   videoActive,
   setVideoActive,
-  setVideoData,
-  videoData,
-  setVideoDataToPost,
+  lessonData,
+  setLessonData,
+  setVideoDataToPost
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const [videoCover, setVideoCover] = useState(null)
@@ -27,33 +27,33 @@ const CreateVideo = ({
   const addVideo = ({ videoTitle, videoDescription, videoLink }) => {
     const videoResource = video
     const vData = [
-      ...videoData,
+      ...lessonData,
       {
         videoCover,
         videoTitle,
         videoDescription,
         videoLink,
-        videoResource,
-      },
+        videoResource
+      }
     ]
     setVideoDataToPost({
       videoCover,
       videoTitle,
       videoDescription,
       videoLink,
-      videoResource,
+      videoResource
     })
-    setVideoData(vData)
+    setLessonData(vData)
     setVideoActive(false)
   }
   return (
     <>
       {videoActive && (
-        <div className="collection-modal-container">
+        <div className='collection-modal-container'>
           <div>
-            <div className="collection-modal-inner-container">
+            <div className='collection-modal-inner-container'>
               <CollectionModalHeader
-                title="Add video"
+                title='Add video'
                 clickHandler={setVideoActive}
               />
               <DragDrop
@@ -62,59 +62,59 @@ const CreateVideo = ({
                 files={files}
                 onChange={(img) => setVideoCover(img)}
               />
-              <div className="video-input-container">
+              <div className='video-input-container'>
                 <InputFields
-                  className="default-input-variation"
-                  placeholder="Video title"
-                  name="videoTitle"
+                  className='default-input-variation'
+                  placeholder='Video title'
+                  name='videoTitle'
                   ref={register({
                     required: {
                       value: true,
-                      message: 'Please enter video title',
-                    },
+                      message: 'Please enter video title'
+                    }
                   })}
                 />
                 <ErrorText
-                  className="errorMsg"
+                  className='errorMsg'
                   message={errors.videoTitle && errors.videoTitle.message}
                 />
 
                 <TextArea
-                  className="default-input-variation text-area-variation"
-                  placeholder="Video description"
-                  cols="3"
-                  rows="7"
-                  name="videoDescription"
+                  className='default-input-variation text-area-variation'
+                  placeholder='Video description'
+                  cols='3'
+                  rows='7'
+                  name='videoDescription'
                   ref={register({
                     required: {
                       value: true,
-                      message: 'Please enter a video description',
-                    },
+                      message: 'Please enter a video description'
+                    }
                   })}
                 />
                 <ErrorText
-                  className="errorMsg"
+                  className='errorMsg'
                   message={
                     errors.videoDescription && errors.videoDescription.message
                   }
                 />
-                <div className="video-row-3">
+                <div className='video-row-3'>
                   {!video && (
                     <>
                       <input
-                        type="url"
+                        type='url'
                         className={
                           videoLink
                             ? 'default-input-variation last-input-variation full'
                             : 'default-input-variation last-input-variation'
                         }
-                        placeholder="Video link"
-                        name="videoLink"
+                        placeholder='Video link'
+                        name='videoLink'
                         ref={register({
                           required: {
                             value: true,
-                            message: 'Please enter a video Link',
-                          },
+                            message: 'Please enter a video Link'
+                          }
                         })}
                         onChange={(e) => setVideoLink(e.target.value)}
                       />
@@ -124,7 +124,7 @@ const CreateVideo = ({
 
                   {!videoLink && (
                     <DragDrop
-                      type="video"
+                      type='video'
                       className={
                         video
                           ? 'videoUploadBtn videoUploadBtn-full'
@@ -136,11 +136,11 @@ const CreateVideo = ({
                   )}
                 </div>
                 <ErrorText
-                  className="errorMsg"
+                  className='errorMsg'
                   message={errors.videoLink && errors.videoLink.message}
                 />
               </div>
-              <Button name="Add Video block" onClick={handleSubmit(addVideo)} />
+              <Button name='Add Video block' onClick={handleSubmit(addVideo)} />
             </div>
           </div>
         </div>

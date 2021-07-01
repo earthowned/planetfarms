@@ -12,8 +12,8 @@ import './NewsCreateModal.scss'
 const CreateImage = ({
   imageActive,
   setImageActive,
-  lessonImgData,
-  setLessonImgData,
+  lessonData,
+  setLessonData,
   setLessonImgDataToPost
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(false)
@@ -23,14 +23,14 @@ const CreateImage = ({
 
   const submitLessonImg = ({ photoDescription }) => {
     const imgData = [
-      ...lessonImgData,
+      ...lessonData,
       {
         lessonImg,
         photoDescription,
         isImgDesc
       }
     ]
-    setLessonImgData(imgData)
+    setLessonData(imgData)
     setLessonImgDataToPost({ lessonImg, photoDescription, isImgDesc })
     setImageActive(false)
   }
