@@ -15,8 +15,12 @@ import {
   NESW_SAVE_TEXT_DETAIL,
   NESW_SAVE_IMAGE_DETAIL,
   NESW_SAVE_VIDEO_DETAIL,
-  NEWS_CLEAR
+  NEWS_CLEAR,
+  NEWS_UPDATE_REQUEST,
+  NEWS_UPDATE_SUCCESS,
+  NEWS_UPDATE_FAIL
 } from '../constants/newsConstants'
+import configFunc from '../utils/ConfigFunc'
 
 import { logout } from './userAction'
 
@@ -29,7 +33,6 @@ export const listNews = ({sort = '', pageNumber = ''}) => async (
   dispatch
 ) => {
   try {
-    console.log(pageNumber);
     dispatch({ type: NEWS_LIST_REQUEST })
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}?pageNumber=${pageNumber}`
@@ -91,10 +94,13 @@ export const createNews = (newNews) => async (dispatch, getState) => {
 export const deleteNews = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: NEWS_DELETE_REQUEST })
-    const { userLogin: { userInfo } } = getState()
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}`, config)
-    dispatch({ type: NEWS_DELETE_SUCCESS })
+    
+    const config = configFunc()
+   const data = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`, config)
+    dispatch({ 
+      type: NEWS_DELETE_SUCCESS,
+      payload: data
+    })
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -126,4 +132,31 @@ export const savevideoDetail = (data) => (dispatch) => {
     type: NESW_SAVE_VIDEO_DETAIL,
     payload: data
   })
+}
+
+export const newsUpdate = (newNews) => async (dispatch) => {
+  try {
+    dispatch({ type: NEWS_UPDATE_REQUEST })
+    const {id, title, description, category, file} = newNews;
+    console.log(category);
+    const config = configFunc();
+    const data = await axios.put(
+            `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`,
+            {title, description, file, category}, config
+    );
+    
+    dispatch({
+      type: NEWS_UPDATE_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    dispatch({
+      type: NEWS_UPDATE_FAIL,
+      payload: message
+    })
+  }
 }

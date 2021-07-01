@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import './NewsAddModal.scss'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { newsUpdate } from '../../actions/newsActions'
 
-const NewsAddModal = ({ setAddModal }) => {
-  const [title, setTitle] = useState()
+
+const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
+  const [title, setTitle] = useState(editData ? editData.title : '')
   const [category, setCategory] = useState()
 
   const [titleError, setTitleError] = useState()
   const [categoryError, setCategoryError] = useState()
 
+  const dispatch = useDispatch();
   const titleChange = (e) => {
     setTitle(e.target.value)
     setTitleError(false)
@@ -19,6 +23,16 @@ const NewsAddModal = ({ setAddModal }) => {
     setCategoryError(false)
   }
 
+  const editNewsTitle = () => {
+    dispatch(newsUpdate({id: editData.id, title, category}))
+    clearInput();
+  }
+
+   function clearInput () {
+    setEditData(null);
+    setAddModal(false);
+  }
+
   return (
     <div className='news-modal-container'>
       <div className='news-modal-inner-container'>
@@ -26,7 +40,7 @@ const NewsAddModal = ({ setAddModal }) => {
           <h4>Add news</h4>
           <img
             src='/img/close-outline.svg' alt='close-icon'
-            onClick={() => setAddModal(false)}
+            onClick={clearInput}
           />
         </div>
         <div className='news-modal-content'>
@@ -37,7 +51,10 @@ const NewsAddModal = ({ setAddModal }) => {
             <option>Business</option>
           </select>
         </div>
-        <Link className='nav-link' to={`/community-page-news/${title}/${category}`}><button className='default-btn-btn btn-variation'>Continue</button></Link>
+        {editData 
+          ? <button className="default-btn-btn btn-variation" onClick={editNewsTitle}>Update</button>
+          : <Link className='nav-link' to={`/community-page-news/${title}/${category}`}>
+            <button className='default-btn-btn btn-variation'>Continue</button></Link>}
       </div>
     </div>
   )

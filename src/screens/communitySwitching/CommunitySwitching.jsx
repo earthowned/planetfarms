@@ -207,9 +207,9 @@ const CommunityModal = ({setActive, data, setEditData}) => {
           <div className='collection-modal-inner-container'>
             <CollectionModalHeader title={data ? 'Update Community' : 'Create Community'} clickHandler={clearInput} />
             <form onSubmit={data ? handleSubmit(updateCommunity) : handleSubmit(addCommunity)}>
-              <div className="error-header">
-              {error && <div className='error'>{error}</div>}
-              </div>
+              {error && <div className="error-header">
+              <div className='error'>{error}</div>
+              </div>}
             <DragDrop files={files} onChange={setFiles} />
             <InputFields
               type='text'

@@ -12,7 +12,13 @@ import {
   NESW_SAVE_TEXT_DETAIL,
   NESW_SAVE_IMAGE_DETAIL,
   NESW_SAVE_VIDEO_DETAIL,
-  NEWS_CLEAR
+  NEWS_CLEAR,
+  NEWS_DELETE_REQUEST,
+  NEWS_DELETE_SUCCESS,
+  NEWS_DELETE_FAIL,
+  NEWS_UPDATE_REQUEST,
+  NEWS_UPDATE_SUCCESS,
+  NEWS_UPDATE_FAIL
 } from '../constants/newsConstants'
 
 export const newsListReducer = (state = { news: [] }, action) => {
@@ -71,6 +77,32 @@ export const newsCreateReducer = (state = {}, action) => {
       }
     case NEWS_CLEAR:
       return { }
+    default:
+      return state
+  }
+}
+
+export const newsDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case NEWS_DELETE_REQUEST:
+      return { ...state, loading: true }
+    case NEWS_DELETE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case NEWS_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const newsUpdateReducer = (state = {success: false}, action) => {
+  switch (action.type) {
+    case NEWS_UPDATE_REQUEST:
+      return { ...state, loading: true }
+    case NEWS_UPDATE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case NEWS_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

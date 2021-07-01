@@ -73,7 +73,7 @@ const updateNews = (req, res) => {
     filename = req.file.filename
   }
   const {
-    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail
+    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category
   } = req.body
   const id = req.params.newsId
 
@@ -98,7 +98,8 @@ const updateNews = (req, res) => {
         creator,
         textDetail,
         imageDetail,
-        videoDetail
+        videoDetail,
+        category
       },
       { where: { id } })
         .then(() => res.json({ message: 'News Updated !!!' }).status(200))
