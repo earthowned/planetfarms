@@ -275,9 +275,13 @@ const getMyProfile = (req, res) => {
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
   try {
+    let attachment = ''
+    if (req.file) {
+      attachment = req.file.filename
+    }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    console.log(req.body)
+
     // const id = req.params.id
     User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
@@ -287,7 +291,9 @@ const updateUser = async (req, res) => {
             firstName,
             lastName,
             phone,
-            dateOfBirth: birthday
+            dateOfBirth: birthday,
+            attachments: attachment
+
           },
           { where: { userID: id } }
         )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
@@ -14,6 +14,7 @@ import { updateUser } from '../../actions/userAction'
 import './Congratulation.scss'
 
 function CongratulationScreen () {
+  const [profileImage, setProfileImage] = useState(null)
   const dispatch = useDispatch()
 
   const { register, errors, handleSubmit } = useForm()
@@ -22,7 +23,6 @@ function CongratulationScreen () {
   const history = useHistory()
   const editInformations = location?.state?.editInformations
   const userdetail = location?.state?.user
-  console.log('userdetail', userdetail)
   
   const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
@@ -35,15 +35,11 @@ function CongratulationScreen () {
   
 
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
-    console.log(firstName, lastName, phone, birthday, email)
-    // if (firstname && lastname && phone && birthday && email) {
-    //   signUp({ firstname, lastname, phone, birthday, email });
-    // }
-    dispatch(updateUser({ firstName, lastName, phone, birthday, email }))
+    const attachments = profileImage
+    dispatch(updateUser({ firstName, lastName, phone, birthday, email, attachments }))
     user ? history.push('/myProfile') : history.push('/community-page-news')
-      
-  
   }
+
 
   return (
     <form className='congratulation'>
@@ -142,7 +138,7 @@ function CongratulationScreen () {
                 ref={register({
                   required: {
                     value: true,
-                    message: 'You must date of birth'
+                    message: 'You must enter date of birth'
                   }
                 })}
                 errors={errors}
@@ -168,7 +164,7 @@ function CongratulationScreen () {
           </div>
         </div>
         <div className='dragAndDrop'>
-          <DragDrop />
+          <DragDrop onChange={(img)=> setProfileImage(img)}/>
         </div>
       </div>
     </form>

@@ -143,18 +143,25 @@ export const updateUser = (user) => async (dispatch, getState) => {
       userLogin: { userInfo }
     } = getState()
 
+    const userProfileFormData = new FormData()
+
+    userProfileFormData.append('firstName', user.firstName)
+    userProfileFormData.append('lastName', user.lastName)
+    userProfileFormData.append('phone', user.phone)
+    userProfileFormData.append('birthday', user.birthday)
+    userProfileFormData.append('email', user.email)
+    userProfileFormData.append('attachments', user.attachments)
+
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${userInfo.token}`
       }
     }
 
-    const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, user, config)
+    const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
 
-    console.log('data from userAction updateUser: ', data)
-
-    // dispatch({ type: USER_UPDATE_SUCCESS })
+    dispatch({ type: USER_UPDATE_SUCCESS })
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
 

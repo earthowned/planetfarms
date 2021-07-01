@@ -46,7 +46,7 @@ function MyProfile () {
               <ContactInformation user={user} />
               <AdditionalInformation user={user} />
             </div>
-            <EditInformation clickHandler={editUserInformation} image={user?.attachments} />
+            <EditInformation clickHandler={editUserInformation} image={user.attachments && 'http://localhost:5000/attachments/'+user.attachments} />
           </div>
         </div>
       </div>
