@@ -109,28 +109,22 @@ const cognitoAuth = async (name, password) => {
 // @access  Public
 const registerUser = async (req, res) => {
   try {
-    const { name, password, email } = req.body
+    const { name, password } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
-      const registeredUser = await Auth.signUp({
-        username: name,
-        password,
-        attributes: {
-          email
-        }
-      })
+      const registeredUser = await Auth.signUp({ username: name, password })
       const user = await User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       if (user && subscribeCommunity(user)) {
         res.send({ token: generateToken(registeredUser.userSub) })
       }
     } else {
-      registerLocal(name, password, email, res)
+      registerLocal(name, password, res)
     }
   } catch (err) {
     res.status(409).json({ error: err.message })
   }
 }
 
-const registerLocal = async (name, password, email, res) => {
+const registerLocal = async (name, password, res) => {
   const userExists = await LocalAuth.findOne({ where: { username: name } })
   if (userExists) res.json({ message: 'Users already Exists !!!' }).status(400)
   const user = await LocalAuth.create({ username: name, password: password })
