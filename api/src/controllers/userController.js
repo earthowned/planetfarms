@@ -78,7 +78,8 @@ const authUser = async (req, res) => {
     const username = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
     if (username) {
       await res.json({
-        token: generateToken(username)
+        token: generateToken(username),
+        id: username
       })
     } else {
       await res.status(401).json({
