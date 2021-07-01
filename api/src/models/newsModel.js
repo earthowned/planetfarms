@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
-    },
+    }
   },
   { timestamps: true }
   )
@@ -56,4 +56,3 @@ module.exports = (sequelize, DataTypes) => {
   }
   return News
 }
-

@@ -10,26 +10,27 @@ const getNews = (req, res) => {
   const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'DESC'
   const ordervalue = order && [['createdAt', order]]
-  db.News.findAndCountAll({ 
-    offset: (page - 1) * pageSize, 
+  db.News.findAndCountAll({
+    offset: (page - 1) * pageSize,
     limit: pageSize,
     order: ordervalue,
-    where: {deleted: false},
-    attributes: {exclude: ['deleted']},
-    include:  [{
-    model: db.Community,
-    attributes: ['id'],
-    where: {id: req.params.id}
-  }]
+    where: { deleted: false },
+    attributes: { exclude: ['deleted'] },
+    include: [{
+      model: db.Community,
+      attributes: ['id'],
+      where: { id: req.params.id }
+    }]
   })
     .then(news => {
       const totalPages = Math.ceil(news.count / pageSize)
-      res.json({ 
+      res.json({
         news: news.rows,
         totalItems: news.count,
         totalPages,
-        page, 
-        pageSize }).status(200)
+        page,
+        pageSize
+      }).status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
@@ -118,7 +119,7 @@ const getNewsById = (req, res) => {
     include: [{
       model: db.Community,
       attributes: [],
-      where: {id: req.params.id}
+      where: { id: req.params.id }
     }]
   })
     .then(news => {
@@ -138,7 +139,7 @@ const getNewsById = (req, res) => {
 const deleteNews = (req, res) => {
   const id = req.params.newsId
   db.News.findByPk(id, {
-     include: [{
+    include: [{
       model: db.Community,
       attributes: [],
       where: { id: req.params.id }
@@ -146,7 +147,7 @@ const deleteNews = (req, res) => {
   }).then(news => {
     if (news) {
       const { id } = news
-      db.News.update({deleted: true},{ where: { id } })
+      db.News.update({ deleted: true }, { where: { id } })
         .then(() => res.json({ message: 'News Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -162,15 +163,15 @@ const searchNewsTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  db.News.findAll({ 
-    where: { title: { [Op.iLike]: '%' + title + '%' } }, 
+  db.News.findAll({
+    where: { title: { [Op.iLike]: '%' + title + '%' } },
     order: [['title', order]],
     include: [{
       model: db.Community,
       attributes: [],
-      where: {id: req.params.id}
+      where: { id: req.params.id }
     }]
-   })
+  })
     .then(title => res.json({ title }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }

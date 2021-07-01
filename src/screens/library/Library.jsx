@@ -58,7 +58,7 @@ const Library = () => {
 
       <DashboardLayout title='library'>
         <div className='library-main-container'>
-          <LibraryHeader setActive={setActive} data={nav}/>
+          <LibraryHeader setActive={setActive} data={nav} />
           {['Articles', 'Videos'].map(type => (
             <div className='list-container'>
               <ListView

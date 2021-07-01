@@ -32,7 +32,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listGroups = ({pageNumber = ''}) => async (
+export const listGroups = ({ pageNumber = '' }) => async (
   dispatch
 ) => {
   try {
@@ -89,9 +89,9 @@ export const createGroup = (newGroup) => async (dispatch, getState) => {
     dispatch({
       type: GROUP_CREATE_REQUEST
     })
-    const config = configFunc();
+    const config = configFunc()
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups/add/community/${currentCommunity.id}`, formData,
-    config
+      config
     )
     dispatch({
       type: GROUP_CREATE_SUCCESS,
@@ -114,7 +114,7 @@ export const listGroupById = (id) => async (dispatch) => {
     dispatch({ type: GROUP_LIST_BYID_REQUEST })
 
     await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
-    
+
     dispatch({
       type: GROUP_LIST_BYID_SUCCESS,
       payload: true
@@ -134,14 +134,14 @@ export const listGroupById = (id) => async (dispatch) => {
 export const groupUpdate = (newGroup) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_UPDATE_REQUEST })
-    const {id, title, category, description, file} = newGroup;
-    const config = configFunc();
+    const { id, title, category, description, file } = newGroup
+    const config = configFunc()
     const data = await axios.put(
             `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`,
-            {title, category, description, file},
+            { title, category, description, file },
             config
-    );
-    
+    )
+
     dispatch({
       type: GROUP_UPDATE_SUCCESS,
       payload: data
@@ -161,12 +161,12 @@ export const groupUpdate = (newGroup) => async (dispatch) => {
 export const groupDelete = (id) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_DELETE_REQUEST })
-    const config = configFunc();
+    const config = configFunc()
     const data = await axios.delete(
             `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`,
             config
-    );
-    
+    )
+
     dispatch({
       type: GROUP_DELETE_SUCCESS,
       payload: data
@@ -205,12 +205,12 @@ export const followGroup = (groupId) => async (dispatch, getState) => {
   }
 }
 
-export const listUserGroups = ({communityId, pageNumber = ''}) => async (
+export const listUserGroups = ({ communityId, pageNumber = '' }) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: USER_GROUP_LIST_REQUEST })
-    const config = configFunc();
+    const config = configFunc()
     const { data } = await axios.get(
             `${process.env.REACT_APP_API_BASE_URL}/api/groups/community/${communityId}/user?pageNumber=${pageNumber}`,
             config

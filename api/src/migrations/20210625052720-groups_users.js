@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     await queryInterface.createTable('groups_users', { 
+    await queryInterface.createTable('groups_users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,7 +21,7 @@ module.exports = {
         references: {
           model: 'groups',
           key: 'id'
-        },
+        }
       },
       active: {
         type: Sequelize.BOOLEAN,
@@ -35,11 +35,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    },
-     )
+    }
+    )
   },
 
   down: async (queryInterface, Sequelize) => {
-  await queryInterface.dropTable('groups_users');
+    await queryInterface.dropTable('groups_users')
   }
-};
+}

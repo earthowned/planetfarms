@@ -29,7 +29,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listNews = ({sort = '', pageNumber = ''}) => async (
+export const listNews = ({ sort = '', pageNumber = '' }) => async (
   dispatch
 ) => {
   try {
@@ -54,7 +54,7 @@ export const searchNews = (search) => async (
 ) => {
   try {
     dispatch({ type: NEWS_SEARCH_REQUEST })
-    const {data} = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}/search?title=${search}`)
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}/search?title=${search}`)
     dispatch({ type: NEWS_SEARCH_SUCCESS, payload: data.title })
   } catch (error) {
     dispatch({
@@ -72,14 +72,14 @@ export const createNews = (newNews) => async (dispatch, getState) => {
   formData.append('news', newNews.file)
   formData.append('title', newNews.title)
   formData.append('category', newNews.category)
-  formData.append('imageDetail',newNews.imageDetail)
-  
+  formData.append('imageDetail', newNews.imageDetail)
+
   try {
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
     // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData);
-    
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData)
+
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     dispatch({ type: NEWS_CLEAR, payload: data })
   } catch (error) {
@@ -94,10 +94,10 @@ export const createNews = (newNews) => async (dispatch, getState) => {
 export const deleteNews = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: NEWS_DELETE_REQUEST })
-    
+
     const config = configFunc()
-   const data = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`, config)
-    dispatch({ 
+    const data = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`, config)
+    dispatch({
       type: NEWS_DELETE_SUCCESS,
       payload: data
     })
@@ -137,14 +137,14 @@ export const savevideoDetail = (data) => (dispatch) => {
 export const newsUpdate = (newNews) => async (dispatch) => {
   try {
     dispatch({ type: NEWS_UPDATE_REQUEST })
-    const {id, title, description, category, file} = newNews;
-    console.log(category);
-    const config = configFunc();
+    const { id, title, description, category, file } = newNews
+    console.log(category)
+    const config = configFunc()
     const data = await axios.put(
             `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`,
-            {title, description, file, category}, config
-    );
-    
+            { title, description, file, category }, config
+    )
+
     dispatch({
       type: NEWS_UPDATE_SUCCESS,
       payload: data

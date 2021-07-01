@@ -3,11 +3,15 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { newsListReducer, newsCreateReducer, newsDeleteReducer, newsUpdateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
-import { enterpriseCreateReducer, enterpriseDeleteReducer, 
-  enterpriseFollowReducer, 
-  enterpriseListReducer, enterpriseUpdateReducer, userEnterpriseListReducer } from './reducers/enterpriseReducers'
-import { groupCreateReducer, groupDeleteReducer, groupFollowReducer, groupListReducer, 
-  groupUpdateReducer, groupViewReducer, userGroupListReducer } from './reducers/communityGroupReducers'
+import {
+  enterpriseCreateReducer, enterpriseDeleteReducer,
+  enterpriseFollowReducer,
+  enterpriseListReducer, enterpriseUpdateReducer, userEnterpriseListReducer
+} from './reducers/enterpriseReducers'
+import {
+  groupCreateReducer, groupDeleteReducer, groupFollowReducer, groupListReducer,
+  groupUpdateReducer, groupViewReducer, userGroupListReducer
+} from './reducers/communityGroupReducers'
 import {
   userDetailsReducer,
   userListReducer,
@@ -16,8 +20,10 @@ import {
   userRegisterReducer
 } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
-import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, 
-  communityVisitReducer, communityDeleteReducer, communityUpdateReducer } from './reducers/communityReducers'
+import {
+  communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer,
+  communityVisitReducer, communityDeleteReducer, communityUpdateReducer
+} from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
 
 const reducer = combineReducers({
@@ -49,7 +55,7 @@ const reducer = combineReducers({
   addNewNews: newsCreateReducer,
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
-  listMember: memberListReducer
+  listMember: memberListReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer
@@ -63,7 +69,7 @@ const currentCommunityFromStorage = localStorage.getItem('currentCommunity')
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
-  activeCommunity: {currentCommunity: currentCommunityFromStorage}
+  activeCommunity: { currentCommunity: currentCommunityFromStorage }
 }
 
 const middleware = [thunk]

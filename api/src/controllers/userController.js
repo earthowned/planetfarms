@@ -151,9 +151,9 @@ const subscribeCommunity = async (user) => {
   try {
     return await db.sequelize.transaction(async (t) => {
       const communitiesArray = await db.Community.findAll({
-          attributes: ['id'], where: {auto_follow: true}
-        }, 
-        {transaction: t});
+        attributes: ['id'], where: { auto_follow: true }
+      },
+      { transaction: t })
 
       const allFollow = []
 
@@ -164,7 +164,7 @@ const subscribeCommunity = async (user) => {
         }
         allFollow.push(followObj)
       }
-      await db.CommunityUser.bulkCreate(allFollow, {transaction: t});
+      await db.CommunityUser.bulkCreate(allFollow, { transaction: t })
       return true
     })
   } catch (error) {

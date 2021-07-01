@@ -1,24 +1,24 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     await queryInterface.addColumn('enterprises', 'communityId', {
+    await queryInterface.addColumn('enterprises', 'communityId', {
       type: Sequelize.INTEGER,
       references: {
         model: 'communities',
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
-    });
+      onDelete: 'SET NULL'
+    })
     await queryInterface.addColumn('enterprises', 'slug', {
-        type: Sequelize.STRING,
-        allowNull: false,
+      type: Sequelize.STRING,
+      allowNull: false
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn('enterprises', 'communityId');
-    await queryInterface.removeColumn('enterprises', 'slug');
+    await queryInterface.removeColumn('enterprises', 'communityId')
+    await queryInterface.removeColumn('enterprises', 'slug')
   }
-};
+}

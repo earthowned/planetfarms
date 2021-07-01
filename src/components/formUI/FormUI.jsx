@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react'
 import { ErrorMessage } from '@hookform/error-message'
 
 export const InputFields = React.forwardRef(({
@@ -8,62 +8,61 @@ export const InputFields = React.forwardRef(({
   id,
   type,
   errors,
-  defaultValue,
+  defaultValue
 },
-  ref
+ref
 ) => {
   const [showLabel, setShowLabel] = useState('')
   return (
-    <div className="input-container">
-        <div className={errors?.[`${name}`]?.message ? 'block block-error' : 'block'}>
-            {showLabel && (
-              <p className="label label-left">
-                {placeholder}
-              </p>
-            )}
-        <div className="field">
-      <input
-        className="inputField"
-        name={name}
-        type={type}
-        id={id}
-        ref={ref}
-        onChange={(e) => setShowLabel(e.target.value)}
-        placeholder={placeholder}
-        value={value}
-        defaultValue={defaultValue}
-      />
+    <div className='input-container'>
+      <div className={errors?.[`${name}`]?.message ? 'block block-error' : 'block'}>
+        {showLabel && (
+          <p className='label label-left'>
+            {placeholder}
+          </p>
+        )}
+        <div className='field'>
+          <input
+            className='inputField'
+            name={name}
+            type={type}
+            id={id}
+            ref={ref}
+            onChange={(e) => setShowLabel(e.target.value)}
+            placeholder={placeholder}
+            value={value}
+            defaultValue={defaultValue}
+          />
+        </div>
       </div>
-      </div>
-       {errors?.[`${name}`] &&
-            <p className='error-message'>
-              <ErrorMessage
-                errors={errors}
-                name={name}
-                render={({ message }) => <span>{message}</span>}
-              />
-            </p>}
+      {errors?.[`${name}`] &&
+        <p className='error-message'>
+          <ErrorMessage
+            errors={errors}
+            name={name}
+            render={({ message }) => <span>{message}</span>}
+          />
+        </p>}
     </div>
   )
-}) 
+})
 
-export const SelectFields =  React.forwardRef(({
+export const SelectFields = React.forwardRef(({
   name,
   errors,
   onChange,
-  option,
+  option
 },
-  ref
+ref
 ) => {
-   return (
-    <div className="input-container">
-      <select name={name} ref={ref} className="default-input-variation" onChange={onChange}>
+  return (
+    <div className='input-container'>
+      <select name={name} ref={ref} className='default-input-variation' onChange={onChange}>
         {option.map((x) => (
           <>
-          {(x ==="Select Category") 
-          ? <option value="" disabled selected hidden>Select Category</option>
-          : <option value={x}>{x}</option>
-          }
+            {(x === 'Select Category')
+              ? <option value='' disabled selected hidden>Select Category</option>
+              : <option value={x}>{x}</option>}
           </>
         ))}
       </select>

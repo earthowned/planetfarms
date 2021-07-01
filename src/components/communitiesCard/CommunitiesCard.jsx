@@ -27,24 +27,24 @@ export default CommunitiesCard
 const CommunityCard = ({ community, editCard, deleteCard }) => {
   const [follower, setFollower] = useState(true)
   const [creator, setCreator] = useState(false)
-  const [followCount, setFollowCount] = useState(0);
+  const [followCount, setFollowCount] = useState(0)
 
   const { success } = useSelector(state => state.joinCommunity)
   const { currentCommunity } = useSelector(state => state.activeCommunity)
   const dispatch = useDispatch()
   const history = useHistory()
   // choose userid according to the user data in your database
-  
+
   useEffect(() => {
-    if(community.isFollowed === "1") setFollower(false)
-    if(community.isCreator === "true") setCreator(true)
+    if (community.isFollowed === '1') setFollower(false)
+    if (community.isCreator === 'true') setCreator(true)
     setFollowCount(parseInt(community.followersCount))
   }, [])
 
   const followCommunity = () => {
     dispatch(joinCommunity(community.id))
     setFollower(!follower)
-    if(!follower) {
+    if (!follower) {
       setFollowCount(existing => existing - 1)
     } else {
       setFollowCount(existing => existing + 1)
@@ -55,17 +55,17 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
     dispatch(visitCommunity(community.id))
   }
   return (
-     <div ckey={community.id} className="community-card">
+    <div ckey={community.id} className='community-card'>
       <Background image={community.attachment}>
         {
-        creator && <div className="card-edit">
-            <button className="edit-btn" onClick={() => editCard(community.id)}>
-              <img src="/img/more-horizontal.svg" alt="burger icon" />
-            </button>
-            <button className="edit-btn" onClick={() => deleteCard(community.id)}>
-              <img src="/img/trash-icon.svg" alt="burger icon" />
-            </button>
-            </div>
+        creator && <div className='card-edit'>
+          <button className='edit-btn' onClick={() => editCard(community.id)}>
+            <img src='/img/more-horizontal.svg' alt='burger icon' />
+          </button>
+          <button className='edit-btn' onClick={() => deleteCard(community.id)}>
+            <img src='/img/trash-icon.svg' alt='burger icon' />
+          </button>
+        </div>
         }
         <div className='card-1-text'>
           <div className='card-1-title'>

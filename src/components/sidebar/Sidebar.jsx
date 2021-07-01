@@ -7,13 +7,13 @@ import './Sidebar.css'
 
 const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
   const [dropdownActive, setDropdownActive] = useState(true)
-  const {currentCommunity} = useSelector(state => state.activeCommunity);
+  const { currentCommunity } = useSelector(state => state.activeCommunity)
   const history = useHistory()
   const handleToggle = () => {
     setToggle(!toggle)
     setDropdownActive(!toggle)
   }
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const mainnav = [
     {
@@ -60,10 +60,10 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
 
   useEffect(() => {
     const currentCommunity = localStorage.getItem('currentCommunity')
-    ? JSON.parse(localStorage.getItem('currentCommunity'))
-    : null
-  
-    if(!currentCommunity) dispatch(visitCommunity(3));
+      ? JSON.parse(localStorage.getItem('currentCommunity'))
+      : null
+
+    if (!currentCommunity) dispatch(visitCommunity(3))
   }, [])
   return (
     <>

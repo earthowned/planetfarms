@@ -11,7 +11,7 @@ import './CommunityMembers.css'
 function CommunityMembers ({ history }) {
   const dispatch = useDispatch()
   const [search, setSearch] = useState(null)
-  const {members} = useSelector(state => state.listMember);
+  const { members } = useSelector(state => state.listMember)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 

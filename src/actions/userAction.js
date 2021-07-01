@@ -36,7 +36,7 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data })
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     window.localStorage.setItem('userInfo', JSON.stringify(data))
-    routingCommunityNews();
+    routingCommunityNews()
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -56,7 +56,7 @@ export const login = (name, password) => async (dispatch) => {
     )
     window.localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
-    routingCommunityNews();
+    routingCommunityNews()
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -204,20 +204,18 @@ export const changePassword = (username, oldPassword, newPassword) => async (dis
           : error.message
     })
   }
+}
 
-  const routingCommunityNews = async () => {
-  // routing to the news page
-       const userdata = localStorage.getItem('userInfo');
-    const token = JSON.parse(userdata).token;
-     const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+const routingCommunityNews = async () => {
+  const userdata = localStorage.getItem('userInfo')
+  const token = JSON.parse(userdata).token
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
     }
-    const communityData = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`, config
-    )
-    localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
-    document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
+  }
+  const communityData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities/user`, config)
+  localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
+  document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
 }

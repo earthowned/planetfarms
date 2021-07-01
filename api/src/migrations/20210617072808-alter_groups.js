@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -7,16 +7,16 @@ module.exports = {
       references: {
         model: 'communities',
         key: 'id'
-      },
-    });
+      }
+    })
     await queryInterface.addColumn('groups', 'slug', {
-        type: Sequelize.STRING,
-        allowNull: false,
+      type: Sequelize.STRING,
+      allowNull: false
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-   await queryInterface.removeColumn('groups', 'communityId');
-   await queryInterface.removeColumn('groups', 'slug');
+    await queryInterface.removeColumn('groups', 'communityId')
+    await queryInterface.removeColumn('groups', 'slug')
   }
-};
+}

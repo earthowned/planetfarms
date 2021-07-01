@@ -5,42 +5,42 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('users', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     userID: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     isLocalAuth: {
-      type: Sequelize.BOOLEAN
+      type: DataTypes.BOOLEAN
     },
     firstName: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     lastName: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     phone: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     email: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     dateOfBirth: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     lastLogin: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     numberOfVisit: {
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     attachments: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     }
   },
-    { timestamps: true }
+  { timestamps: true }
   )
   User.associate = (models) => {
     User.belongsToMany(models.Community, {
@@ -51,24 +51,24 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hasMany(models.Community, { foreignKey: 'creatorId', as: 'creator' })
 
-    //n:m community_user and enterprise
+    // n:m community_user and enterprise
     User.belongsToMany(models.Enterprise, {
       through: 'enterprises_users',
       foreignKey: 'userId',
       as: 'enterprise_followers'
     })
-    //n:m community_user and group
+    // n:m community_user and group
     User.belongsToMany(models.Group, {
       through: 'groups_users',
       foreignKey: 'userId',
       as: 'group_followers'
     })
 
-    //one to many relationship with enterprise
-     User.hasMany(models.Enterprise, {foreignKey: 'creatorId', as: 'enterprise_creator'})
+    // one to many relationship with enterprise
+    User.hasMany(models.Enterprise, { foreignKey: 'creatorId', as: 'enterprise_creator' })
 
-    //one to many relationship with group
-     User.hasMany(models.Group, {foreignKey: 'creatorId', as: 'group_creator'})
-  };
-  return User;
+    // one to many relationship with group
+    User.hasMany(models.Group, { foreignKey: 'creatorId', as: 'group_creator' })
+  }
+  return User
 }

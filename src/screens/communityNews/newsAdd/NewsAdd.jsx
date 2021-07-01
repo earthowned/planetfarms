@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createNews } from '../../../actions/newsActions'
 
 const NewsAdd = () => {
-  const {currentCommunity} = useSelector(state => state.activeCommunity);
+  const { currentCommunity } = useSelector(state => state.activeCommunity)
   const [createVideoModal, setCreateVideoModal] = useState(false)
   const [createImageModal, setCreateImageModal] = useState(false)
   const [createTextModal, setCreateTextModal] = useState(false)
@@ -17,7 +17,7 @@ const NewsAdd = () => {
   const [imageActive, setImageActive] = useState(true)
   const [textActive, setTextActive] = useState(true)
   const news = useSelector((state) => (state.addNewNews !== {} ? state.addNewNews : ''))
-  
+
   const { title, category } = useParams()
 
   return (
@@ -126,7 +126,7 @@ function PopUp ({ news, title, category }) {
   const { file } = news.imageDetail ? news.imageDetail.file && news.imageDetail : {}
   const newNews = { ...news, title, category, file }
   const [activePopup, setActivePopup] = useState(true)
-  const {currentCommunity} = useSelector(state => state.activeCommunity);
+  const { currentCommunity } = useSelector(state => state.activeCommunity)
   const dispatch = useDispatch()
   const history = useHistory()
   const handleOnSaveClick = (e) => {

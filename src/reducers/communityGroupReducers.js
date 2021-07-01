@@ -77,7 +77,7 @@ export const groupCreateReducer = (state = {}, action) => {
     case GROUP_CREATE_REQUEST:
       return { loading: true }
     case GROUP_CREATE_SUCCESS:
-      return { loading: false, success: action.payload}
+      return { loading: false, success: action.payload }
     case GROUP_CREATE_FAIL:
       return { loading: false, error: action.payload }
     case GROUP_CREATE_RESET:
@@ -87,7 +87,7 @@ export const groupCreateReducer = (state = {}, action) => {
   }
 }
 
-export const groupUpdateReducer = (state = {success: false}, action) => {
+export const groupUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case GROUP_UPDATE_REQUEST:
       return { ...state, loading: true }
@@ -100,7 +100,7 @@ export const groupUpdateReducer = (state = {success: false}, action) => {
   }
 }
 
-export const groupDeleteReducer = (state = {success: false}, action) => {
+export const groupDeleteReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case GROUP_DELETE_REQUEST:
       return { ...state, loading: true }
@@ -118,7 +118,7 @@ export const groupFollowReducer = (state = {}, action) => {
     case GROUP_FOLLOW_REQUEST:
       return { loading: true }
     case GROUP_FOLLOW_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case GROUP_FOLLOW_FAIL:
       return { loading: false, error: action.payload }
     default:

@@ -12,7 +12,7 @@ const getEnterpriseUsers = async (req, res) => {
       data
     })
   } catch (error) {
-    res.status(400).json({error})
+    res.status(400).json({ error })
   }
 }
 
@@ -21,51 +21,58 @@ const getEnterpriseUsers = async (req, res) => {
 // @access Private
 
 const followEnterprise = async (req, res) => {
-   try {
+  try {
     const { enterpriseId, active } = req.body
 
     // checking the relationship between userid and enterpriseid
-    const enterpriseUser = await db.EnterpriseUser.findOne({where: {
-        userId: req.user.id, 
+    const enterpriseUser = await db.EnterpriseUser.findOne({
+      where: {
+        userId: req.user.id,
         enterpriseId
-    }})
+      }
+    })
 
-    if(enterpriseUser) {
-        // checking the followed user
-        const followedUser = await db.EnterpriseUser.findOne({where: {
-        userId: req.user.id, 
-        enterpriseId,
-        active: true
-        }})
-
-        if(followedUser) {
-            //unfollow the user
-            await db.EnterpriseUser.update({active: false}, {where: {
-            userId: req.user.id, 
-            enterpriseId
-            }})
-            return  res.json({
-                message: 'You have unfollowed the enterprise.'
-            })
+    if (enterpriseUser) {
+      // checking the followed user
+      const followedUser = await db.EnterpriseUser.findOne({
+        where: {
+          userId: req.user.id,
+          enterpriseId,
+          active: true
         }
+      })
 
-        //follow the enterprise
-            await db.EnterpriseUser.update({active: true}, {where: {
-            userId: req.user.id, 
+      if (followedUser) {
+        // unfollow the user
+        await db.EnterpriseUser.update({ active: false }, {
+          where: {
+            userId: req.user.id,
             enterpriseId
-            }})
-            return  res.json({
-                message: 'Congratulation for following the enterprise.'
-            })
-        
+          }
+        })
+        return res.json({
+          message: 'You have unfollowed the enterprise.'
+        })
+      }
+
+      // follow the enterprise
+      await db.EnterpriseUser.update({ active: true }, {
+        where: {
+          userId: req.user.id,
+          enterpriseId
+        }
+      })
+      return res.json({
+        message: 'Congratulation for following the enterprise.'
+      })
     }
-    
+
     await db.EnterpriseUser.create({ userId: req.user.id, enterpriseId, active })
     res.json({
-        message: 'Congratulation for following the enterprise.'
+      message: 'Congratulation for following the enterprise.'
     })
   } catch (error) {
-    res.status(400).json({error})
+    res.status(400).json({ error })
   }
 }
 
@@ -76,21 +83,21 @@ const followEnterprise = async (req, res) => {
 const getAllEnterpriseUsers = async (req, res) => {
   try {
     const data = await db.EnterpriseUser.findAll(
-    {
-      where: {enterpriseId: req.params.id, active: true},
-      attributes: ['id'],
-      include: [{
-        model: db.User,
-        attributes: ["email", "name"]
-      }],
-      required: true
-    },
+      {
+        where: { enterpriseId: req.params.id, active: true },
+        attributes: ['id'],
+        include: [{
+          model: db.User,
+          attributes: ['email', 'name']
+        }],
+        required: true
+      }
     )
     res.json({
       data
     })
   } catch (error) {
-    res.status(400).json({error})
+    res.status(400).json({ error })
   }
 }
 
@@ -101,23 +108,23 @@ const searchEnterpriseUserName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
 
-  db.EnterpriseUser.findAll({ 
-    where: { enterpriseId: req.params.id, active: true}, 
+  db.EnterpriseUser.findAll({
+    where: { enterpriseId: req.params.id, active: true },
     attributes: ['id'],
-      include: [{
-        model: db.User,
-        attributes: ["email", "name"],
-        where: {
-            [Op.or]: [
-                {name: { [Op.iLike]: '%' + name + '%' }},
-                {email: { [Op.iLike]: '%' + name + '%' }},
-            ]
-        }
-      }],
-      required: true
-   })
+    include: [{
+      model: db.User,
+      attributes: ['email', 'name'],
+      where: {
+        [Op.or]: [
+          { name: { [Op.iLike]: '%' + name + '%' } },
+          { email: { [Op.iLike]: '%' + name + '%' } }
+        ]
+      }
+    }],
+    required: true
+  })
     .then(member => res.json({ member }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getEnterpriseUsers, followEnterprise, getAllEnterpriseUsers, searchEnterpriseUserName};
+module.exports = { getEnterpriseUsers, followEnterprise, getAllEnterpriseUsers, searchEnterpriseUserName }

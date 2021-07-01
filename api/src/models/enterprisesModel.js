@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     creatorId: DataTypes.INTEGER,
     deleted: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     }
   },
   { timestamps: true }
@@ -43,15 +43,15 @@ module.exports = (sequelize, DataTypes) => {
   // association
   Enterprise.associate = (models) => {
     Enterprise.belongsTo(models.Community, { foreignKey: 'communityId' })
-    
-    //M:N community and user through enterprises_users
-    Enterprise.belongsToMany(models.User, {
-        through: 'enterprises_users',
-        foreignKey: 'enterpriseId',
-        as: 'enterprise_followers'
-      })
 
-    Enterprise.belongsTo(models.User, {foreignKey: 'creatorId', as: 'enterprise_creator'})
+    // M:N community and user through enterprises_users
+    Enterprise.belongsToMany(models.User, {
+      through: 'enterprises_users',
+      foreignKey: 'enterpriseId',
+      as: 'enterprise_followers'
+    })
+
+    Enterprise.belongsTo(models.User, { foreignKey: 'creatorId', as: 'enterprise_creator' })
   }
   return Enterprise
 }

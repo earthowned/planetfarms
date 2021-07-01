@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { newsUpdate } from '../../actions/newsActions'
 
-
 const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
   const [title, setTitle] = useState(editData ? editData.title : '')
   const [category, setCategory] = useState()
@@ -12,7 +11,7 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
   const [titleError, setTitleError] = useState()
   const [categoryError, setCategoryError] = useState()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const titleChange = (e) => {
     setTitle(e.target.value)
     setTitleError(false)
@@ -24,13 +23,13 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
   }
 
   const editNewsTitle = () => {
-    dispatch(newsUpdate({id: editData.id, title, category}))
-    clearInput();
+    dispatch(newsUpdate({ id: editData.id, title, category }))
+    clearInput()
   }
 
-   function clearInput () {
-    setEditData(null);
-    setAddModal(false);
+  function clearInput () {
+    setEditData(null)
+    setAddModal(false)
   }
 
   return (
@@ -51,10 +50,11 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
             <option>Business</option>
           </select>
         </div>
-        {editData 
-          ? <button className="default-btn-btn btn-variation" onClick={editNewsTitle}>Update</button>
+        {editData
+          ? <button className='default-btn-btn btn-variation' onClick={editNewsTitle}>Update</button>
           : <Link className='nav-link' to={`/community-page-news/${title}/${category}`}>
-            <button className='default-btn-btn btn-variation'>Continue</button></Link>}
+            <button className='default-btn-btn btn-variation'>Continue</button>
+          </Link>}
       </div>
     </div>
   )

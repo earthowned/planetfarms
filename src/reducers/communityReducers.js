@@ -1,32 +1,33 @@
-import { COMMUNITY_LIST_FAIL, 
-    COMMUNITY_LIST_REQUEST, 
-    COMMUNITY_LIST_SUCCESS,
-    COMMUNITY_SEARCH_REQUEST,
-    COMMUNITY_SEARCH_SUCCESS,
-    COMMUNITY_SEARCH_FAIL,
-    COMMUNITY_CREATE_REQUEST,
-    COMMUNITY_CREATE_SUCCESS,
-    COMMUNITY_CREATE_FAIL,
-    COMMUNITY_CREATE_RESET,
-    COMMUNITY_JOIN_REQUEST,
-    COMMUNITY_JOIN_SUCCESS,
-    COMMUNITY_JOIN_FAIL,
-    USER_COMMUNITY_LIST_REQUEST,
-    USER_COMMUNITY_LIST_SUCCESS,
-    USER_COMMUNITY_LIST_FAIL,
-    USER_COMMUNITY_SEARCH_REQUEST,
-    USER_COMMUNITY_SEARCH_SUCCESS,
-    USER_COMMUNITY_SEARCH_FAIL,
-    COMMUNITY_VISIT_REQUEST,
-    COMMUNITY_VISIT_SUCCESS,
-    COMMUNITY_VISIT_FAIL,
-    COMMUNITY_UPDATE_REQUEST,
-    COMMUNITY_UPDATE_SUCCESS,
-    COMMUNITY_UPDATE_FAIL,
-    COMMUNITY_DELETE_REQUEST,
-    COMMUNITY_DELETE_SUCCESS,
-    COMMUNITY_DELETE_FAIL
-} from "../constants/communityConstants"
+import {
+  COMMUNITY_LIST_FAIL,
+  COMMUNITY_LIST_REQUEST,
+  COMMUNITY_LIST_SUCCESS,
+  COMMUNITY_SEARCH_REQUEST,
+  COMMUNITY_SEARCH_SUCCESS,
+  COMMUNITY_SEARCH_FAIL,
+  COMMUNITY_CREATE_REQUEST,
+  COMMUNITY_CREATE_SUCCESS,
+  COMMUNITY_CREATE_FAIL,
+  COMMUNITY_CREATE_RESET,
+  COMMUNITY_JOIN_REQUEST,
+  COMMUNITY_JOIN_SUCCESS,
+  COMMUNITY_JOIN_FAIL,
+  USER_COMMUNITY_LIST_REQUEST,
+  USER_COMMUNITY_LIST_SUCCESS,
+  USER_COMMUNITY_LIST_FAIL,
+  USER_COMMUNITY_SEARCH_REQUEST,
+  USER_COMMUNITY_SEARCH_SUCCESS,
+  USER_COMMUNITY_SEARCH_FAIL,
+  COMMUNITY_VISIT_REQUEST,
+  COMMUNITY_VISIT_SUCCESS,
+  COMMUNITY_VISIT_FAIL,
+  COMMUNITY_UPDATE_REQUEST,
+  COMMUNITY_UPDATE_SUCCESS,
+  COMMUNITY_UPDATE_FAIL,
+  COMMUNITY_DELETE_REQUEST,
+  COMMUNITY_DELETE_SUCCESS,
+  COMMUNITY_DELETE_FAIL
+} from '../constants/communityConstants'
 
 export const communityListReducer = (state = { communities: [] }, action) => {
   switch (action.type) {
@@ -87,12 +88,12 @@ export const userCommunityListReducer = (state = { userCommunities: [] }, action
   }
 }
 
-export const communityCreateReducer = (state = {success: false}, action) => {
+export const communityCreateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case COMMUNITY_CREATE_REQUEST:
       return { loading: true }
     case COMMUNITY_CREATE_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case COMMUNITY_CREATE_FAIL:
       return { loading: false, error: action.payload }
     case COMMUNITY_CREATE_RESET:
@@ -107,7 +108,7 @@ export const communityJoinReducer = (state = {}, action) => {
     case COMMUNITY_JOIN_REQUEST:
       return { loading: true }
     case COMMUNITY_JOIN_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case COMMUNITY_JOIN_FAIL:
       return { loading: false, error: action.payload }
     default:
@@ -115,12 +116,12 @@ export const communityJoinReducer = (state = {}, action) => {
   }
 }
 
-export const communityVisitReducer = (state = {currentCommunity: {}}, action) => {
+export const communityVisitReducer = (state = { currentCommunity: {} }, action) => {
   switch (action.type) {
     case COMMUNITY_VISIT_REQUEST:
       return { loading: true }
     case COMMUNITY_VISIT_SUCCESS:
-      return { loading: false, currentCommunity: action.payload}
+      return { loading: false, currentCommunity: action.payload }
     case COMMUNITY_VISIT_FAIL:
       return { loading: false, error: action.payload }
     default:
@@ -128,7 +129,7 @@ export const communityVisitReducer = (state = {currentCommunity: {}}, action) =>
   }
 }
 
-export const communityUpdateReducer = (state = {success: false}, action) => {
+export const communityUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case COMMUNITY_UPDATE_REQUEST:
       return { ...state, loading: true }

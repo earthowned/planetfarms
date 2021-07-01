@@ -72,7 +72,7 @@ export const enterpriseCreateReducer = (state = {}, action) => {
   }
 }
 
-export const enterpriseUpdateReducer = (state = {success: false}, action) => {
+export const enterpriseUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case ENTERPRISE_UPDATE_REQUEST:
       return { ...state, loading: true }
@@ -85,7 +85,7 @@ export const enterpriseUpdateReducer = (state = {success: false}, action) => {
   }
 }
 
-export const enterpriseDeleteReducer = (state = {success: false}, action) => {
+export const enterpriseDeleteReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case ENTERPRISE_DELETE_REQUEST:
       return { ...state, loading: true }
@@ -103,7 +103,7 @@ export const enterpriseFollowReducer = (state = {}, action) => {
     case ENTERPRISE_FOLLOW_REQUEST:
       return { loading: true }
     case ENTERPRISE_FOLLOW_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case ENTERPRISE_FOLLOW_FAIL:
       return { loading: false, error: action.payload }
     default:

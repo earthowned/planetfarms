@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const checkCommunity = require('../middleware/checkCommunity')
 const { upload } = require('../helpers/filehelpers')
-const protect = require('../middleware/authMiddleware');
+const protect = require('../middleware/authMiddleware')
 const {
   getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises,
   updateEnterprises, searchEnterprisesTitle, getUserEnterprises

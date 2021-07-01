@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     creatorId: DataTypes.INTEGER,
     deleted: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     }
   },
   { timestamps: true }
@@ -38,15 +38,15 @@ module.exports = (sequelize, DataTypes) => {
   // association
   Group.associate = (models) => {
     Group.belongsTo(models.Community, { foreignKey: 'communityId' })
-    //M:N group and user through groups_users
+    // M:N group and user through groups_users
     Group.belongsToMany(models.User, {
-        through: 'groups_users',
-        foreignKey: 'groupId',
-        as: 'group_followers'
-      })
+      through: 'groups_users',
+      foreignKey: 'groupId',
+      as: 'group_followers'
+    })
 
-      //one to many relationship with User as creator
-      Group.belongsTo(models.User, {foreignKey: 'creatorId', as: 'group_creator'})
+    // one to many relationship with User as creator
+    Group.belongsTo(models.User, { foreignKey: 'creatorId', as: 'group_creator' })
   }
   return Group
 }

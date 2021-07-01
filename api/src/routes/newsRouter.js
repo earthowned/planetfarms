@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const  protect = require('../middleware/authMiddleware')
+const protect = require('../middleware/authMiddleware')
 const checkCommunity = require('../middleware/checkCommunity')
 
 const { addNews, getNews, updateNews, getNewsById, deleteNews, searchNewsTitle } = require('../controllers/newsController')

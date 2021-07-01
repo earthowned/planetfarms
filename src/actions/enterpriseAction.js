@@ -29,7 +29,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listEnterprises = ({pageNumber = ''}) => async (
+export const listEnterprises = ({ pageNumber = '' }) => async (
   dispatch
 ) => {
   try {
@@ -89,9 +89,9 @@ export const createEnterprise = (newEnterprise) => async (
     dispatch({
       type: ENTERPRISE_CREATE_REQUEST
     })
-    const config = configFunc();
+    const config = configFunc()
     await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`, formData,
-    config
+      config
     )
     dispatch({
       type: ENTERPRISE_CREATE_SUCCESS,
@@ -112,13 +112,13 @@ export const createEnterprise = (newEnterprise) => async (
 export const enterpriseUpdate = (newEnterprise) => async (dispatch) => {
   try {
     dispatch({ type: ENTERPRISE_UPDATE_REQUEST })
-    const {id, title, description, file} = newEnterprise;
-    const config = configFunc();
+    const { id, title, description, file } = newEnterprise
+    const config = configFunc()
     const data = await axios.put(
             `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`,
-            {title, description, file}, config
-    );
-    
+            { title, description, file }, config
+    )
+
     dispatch({
       type: ENTERPRISE_UPDATE_SUCCESS,
       payload: data
@@ -138,12 +138,12 @@ export const enterpriseUpdate = (newEnterprise) => async (dispatch) => {
 export const enterpriseDelete = (id) => async (dispatch) => {
   try {
     dispatch({ type: ENTERPRISE_DELETE_REQUEST })
-    const config = configFunc();
+    const config = configFunc()
     const data = await axios.delete(
             `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`,
             config
-    );
-    
+    )
+
     dispatch({
       type: ENTERPRISE_DELETE_SUCCESS,
       payload: data
@@ -160,13 +160,12 @@ export const enterpriseDelete = (id) => async (dispatch) => {
   }
 }
 
-
 export const followEnterprise = (enterpriseId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: ENTERPRISE_FOLLOW_REQUEST
     })
-    const config = configFunc();
+    const config = configFunc()
     await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises-users/follow`, { enterpriseId }, config)
     dispatch({
       type: ENTERPRISE_FOLLOW_SUCCESS
@@ -183,18 +182,18 @@ export const followEnterprise = (enterpriseId) => async (dispatch, getState) => 
   }
 }
 
-export const listUserEnterprises = ({communityId, pageNumber = ''}) => async (
+export const listUserEnterprises = ({ communityId, pageNumber = '' }) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: USER_ENTERPRISE_LIST_REQUEST })
-    
-    const config = configFunc();
+
+    const config = configFunc()
     const { data } = await axios.get(
             `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${communityId}/user?pageNumber=${pageNumber}`,
             config
     )
-    
+
     dispatch({
       type: USER_ENTERPRISE_LIST_SUCCESS,
       payload: data

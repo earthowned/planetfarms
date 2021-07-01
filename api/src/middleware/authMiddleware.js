@@ -2,17 +2,17 @@ const jwt = require('jsonwebtoken')
 const LocalAuth = require('../models/localAuthModel.js')
 const User = require('../models/userModel.js')
 
-//Protect routes
+// Protect routes
 module.exports = async (req, res, next) => {
-  let token;
-  if(
+  let token
+  if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer') 
+    req.headers.authorization.startsWith('Bearer')
   ) {
-    token = req.headers.authorization.split(' ')[1];
+    token = req.headers.authorization.split(' ')[1]
   }
-  if(!token) {
-    return next(res.status(401).json('Not authorize to access this route'));
+  if (!token) {
+    return next(res.status(401).json('Not authorize to access this route'))
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)

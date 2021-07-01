@@ -31,7 +31,7 @@ export const newsListReducer = (state = { news: [] }, action) => {
         news: action.payload.news,
         pages: action.payload.pages,
         page: action.payload.page,
-        totalPages: action.payload.totalPages,
+        totalPages: action.payload.totalPages
       }
     case NEWS_LIST_FAIL:
       return { loading: false, error: action.payload }
@@ -95,7 +95,7 @@ export const newsDeleteReducer = (state = {}, action) => {
   }
 }
 
-export const newsUpdateReducer = (state = {success: false}, action) => {
+export const newsUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case NEWS_UPDATE_REQUEST:
       return { ...state, loading: true }

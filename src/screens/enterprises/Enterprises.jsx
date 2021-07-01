@@ -12,102 +12,99 @@ import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import Pagination from '../../components/pagination/Pagination'
 
-
-
 const Enterprise = () => {
   // fetching current community
-const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
-  const {pathname} = useLocation();
+  const currentCommunity = localStorage.getItem('currentCommunity')
+    ? JSON.parse(localStorage.getItem('currentCommunity'))
+    : null
+  const { pathname } = useLocation()
 
-  const data = useSelector((state) => state.listEnterprises);
-  const dataUser = useSelector((state) => state.listUserEnterprises);
-  const {userEnterprises} = dataUser;
+  const data = useSelector((state) => state.listEnterprises)
+  const dataUser = useSelector((state) => state.listUserEnterprises)
+  const { userEnterprises } = dataUser
   // const {enterprises} = data;
   // console.log(enterprises);
   const enterprises = data.enterprises.enterprises ? data.enterprises.enterprises : data.enterprises
-  const {success: enterpriseUpdateSuccess} = useSelector((state) => state.enterpriseUpdate)
-  const {success: enterpriseDeleteSuccess} = useSelector((state) => state.enterpriseDelete)
-  const {success: enterpriseCreateSuccess} = useSelector((state) => state.enterpriseCreate)
-  const [editData, setEditData] = useState(null);
-  const [deleteId, setDeleteId] = useState(null);
+  const { success: enterpriseUpdateSuccess } = useSelector((state) => state.enterpriseUpdate)
+  const { success: enterpriseDeleteSuccess } = useSelector((state) => state.enterpriseDelete)
+  const { success: enterpriseCreateSuccess } = useSelector((state) => state.enterpriseCreate)
+  const [editData, setEditData] = useState(null)
+  const [deleteId, setDeleteId] = useState(null)
   const [search, setSearch] = useState(null)
   const [active, setActive] = useState(false)
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false)
   const [pageNumber, setPageNumber] = useState(1)
   const [userPageNumber, setUserPageNumber] = useState(1)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
-    if (!search) dispatch(listEnterprises({pageNumber}))
+    if (!search) dispatch(listEnterprises({ pageNumber }))
 
-    if(pathname=== `/your-enterprises/${currentCommunity.slug}`) {
-            // if (search) dispatch(searchGroups(search))
-            if (!search) dispatch(listUserEnterprises({communityId: currentCommunity.id, pageNumber: userPageNumber}))
-          
-        }
-  }, [search, dispatch, pathname,  enterpriseUpdateSuccess, enterpriseDeleteSuccess, enterpriseCreateSuccess, pageNumber, userPageNumber])
-
+    if (pathname === `/your-enterprises/${currentCommunity.slug}`) {
+      // if (search) dispatch(searchGroups(search))
+      if (!search) dispatch(listUserEnterprises({ communityId: currentCommunity.id, pageNumber: userPageNumber }))
+    }
+  }, [search, dispatch, pathname, enterpriseUpdateSuccess, enterpriseDeleteSuccess, enterpriseCreateSuccess, pageNumber, userPageNumber])
 
   const editCard = async (id) => {
-     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`)
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`)
     setEditData(data)
-    setActive(true);
+    setActive(true)
   }
 
   const deleteCard = (id) => {
-    setDeleteModal(true);
-    setDeleteId(id);
+    setDeleteModal(true)
+    setDeleteId(id)
   }
 
   const confirmDelete = () => {
     dispatch(enterpriseDelete(deleteId))
-    setDeleteModal(false);
+    setDeleteModal(false)
   }
 
   return (
     <>
       {active && <FormModal setActive={setActive} data={editData} setData={setEditData} />}
-      {deleteModal &&  <div className='simple-modal-container'>
+      {deleteModal && <div className='simple-modal-container'>
         <div className='simple-modal-inner-container'>
           <div>
-          <h4>Are you sure you want to delete?</h4>
-          {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
+            <h4>Are you sure you want to delete?</h4>
+            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
           </div>
           <div>
-            <button className="secondary-btn" onClick={confirmDelete}>Confirm</button>
-            <button className="secondary-btn" onClick={() => setDeleteModal(false)}>Cancel</button>
+            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
+            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
           </div>
         </div>
-      </div>}
+                      </div>}
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>
             <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
             <div className='enterpriseCard'>
-              { pathname=== `/enterprises/${currentCommunity.slug}` 
-                ?  <CommunityGroupCard location='/community-group-view-page/:id' 
-                    data={enterprises} 
-                    editCard={editCard} 
-                    setActive={setActive} 
+              {pathname === `/enterprises/${currentCommunity.slug}`
+                ? <CommunityGroupCard
+                    location='/community-group-view-page/:id'
+                    data={enterprises}
+                    editCard={editCard}
+                    setActive={setActive}
                     deleteCard={deleteCard}
-                    />
-                :  <CommunityGroupCard location='/community-group-view-page/:id' 
-                    data={userEnterprises} 
-                    editCard={editCard} 
-                    setActive={setActive} 
+                  />
+                : <CommunityGroupCard
+                    location='/community-group-view-page/:id'
+                    data={userEnterprises}
+                    editCard={editCard}
+                    setActive={setActive}
                     deleteCard={deleteCard}
-                    />
-              }
+                  />}
             </div>
             {
-               pathname=== `/enterprises/${currentCommunity.slug}` 
-                ?  <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
-                :  <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
+               pathname === `/enterprises/${currentCommunity.slug}`
+                 ? <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
+                 : <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
               }
-            
+
           </div>
         </div>
       </DashboardLayout>
@@ -141,20 +138,20 @@ function FirstHeader () {
   const { pathname } = useLocation()
 
   // fetching current community
-const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
+  const currentCommunity = localStorage.getItem('currentCommunity')
+    ? JSON.parse(localStorage.getItem('currentCommunity'))
+    : null
 
   const nav = [
-  {
-    label: 'All enterprises',
-    link: `/enterprises/${currentCommunity.slug}`
-  },
-  {
-    label: 'Your Enterprises',
-    link: `/your-enterprises/${currentCommunity.slug}`
-  }
-]
+    {
+      label: 'All enterprises',
+      link: `/enterprises/${currentCommunity.slug}`
+    },
+    {
+      label: 'Your Enterprises',
+      link: `/your-enterprises/${currentCommunity.slug}`
+    }
+  ]
   return (
     <>
       {windowWidth > 720

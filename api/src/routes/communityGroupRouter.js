@@ -5,8 +5,8 @@ const checkCommunity = require('../middleware/checkCommunity')
 const {
   getGroups, addGroups, getGroupsById,
   deleteGroups, updateGroups, searchGroupsTitle, getUserGroups
-} = require('../controllers/communityGroupController');
-const protect = require('../middleware/authMiddleware');
+} = require('../controllers/communityGroupController')
+const protect = require('../middleware/authMiddleware')
 
 router.route('/community/:id').get(protect, checkCommunity, getGroups)
 router.route('/community/:id/user').get(protect, checkCommunity, getUserGroups)

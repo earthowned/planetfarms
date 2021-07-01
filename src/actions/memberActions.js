@@ -1,7 +1,9 @@
-import axios from "axios"
-import { MEMBER_LIST_FAIL, MEMBER_LIST_REQUEST, MEMBER_LIST_SUCCESS, 
+import axios from 'axios'
+import {
+  MEMBER_LIST_FAIL, MEMBER_LIST_REQUEST, MEMBER_LIST_SUCCESS,
   MEMBER_SEARCH_FAIL, MEMBER_SEARCH_REQUEST,
-   MEMBER_SEARCH_SUCCESS } from "../constants/memberConstants"
+  MEMBER_SEARCH_SUCCESS
+} from '../constants/memberConstants'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -16,7 +18,7 @@ export const listMembers = () => async (
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}`
     )
-    
+
     dispatch({
       type: MEMBER_LIST_SUCCESS,
       payload: data
@@ -38,7 +40,7 @@ export const searchMembers = (search) => async (
   try {
     dispatch({ type: MEMBER_SEARCH_REQUEST })
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}/search?name=${search}`)
-    
+
     dispatch({
       type: MEMBER_SEARCH_SUCCESS,
       payload: data.member

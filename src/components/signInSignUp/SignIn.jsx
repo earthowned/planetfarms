@@ -25,7 +25,7 @@ const SignIn = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
-  const {currentCommunity} = useSelector((state) => state.activeCommunity)
+  const { currentCommunity } = useSelector((state) => state.activeCommunity)
 
   const { loading, error, userInfo } = userLogin
   const { register: regi, errors, handleSubmit } = useForm()
@@ -57,17 +57,16 @@ const SignIn = () => {
           console.log("Sign in failure");
       }
     }); */
-    
+
     if (userInfo) {
-      if(currentCommunity){
-        return dispatch(visitCommunity(currentCommunity.id));
+      if (currentCommunity) {
+        return dispatch(visitCommunity(currentCommunity.id))
       }
     }
 
     // getUser().then((userData) => setUser(userData));
   }, [history, userInfo, dispatch])
 
- 
   function getUser () {
     /* return Auth.currentAuthenticatedUser()
       .then((userData) => userData)

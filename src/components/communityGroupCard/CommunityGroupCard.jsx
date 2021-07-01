@@ -24,7 +24,7 @@ const CommunityGroupCard = ({ data = [], location, type = 'group', editCard, del
 
 const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
   const [follower, setFollower] = useState(true)
-  const [followCount, setFollowCount] = useState(0);
+  const [followCount, setFollowCount] = useState(0)
   const [creator, setCreator] = useState(false)
   const history = useHistory()
   const [follow, setFollow] = useState(false)
@@ -32,13 +32,13 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
     setFollow(!follow)
   }
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if(item.isCreator === "true") setCreator(true)
-    
-   if(item.isFollowed === "1") setFollower(false)
-    if(item.hasOwnProperty("groupFollowersCount")) {
+    if (item.isCreator === 'true') setCreator(true)
+
+    if (item.isFollowed === '1') setFollower(false)
+    if (item.hasOwnProperty('groupFollowersCount')) {
       setFollowCount(parseInt(item.groupFollowersCount))
     } else {
       setFollowCount(parseInt(item.enterpriseFollowersCount))
@@ -46,27 +46,27 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
   }, [])
 
   const followHandle = () => {
-    if(item.hasOwnProperty("groupFollowersCount")) {
+    if (item.hasOwnProperty('groupFollowersCount')) {
       dispatch(followGroup(item.id))
     } else {
       dispatch(followEnterprise(item.id))
     }
     setFollower(!follower)
-    if(!follower) {
+    if (!follower) {
       setFollowCount(existing => existing - 1)
     } else {
       setFollowCount(existing => existing + 1)
     }
   }
-  
+
   return (
     <div key={item.id} className='card-1 border-1px-onyx'>
-      {creator && <div className="card-edit">
-        <button className="edit-btn" onClick={() => editCard(item.id)}>
-          <img src="/img/more-horizontal.svg" alt="burger icon" />
+      {creator && <div className='card-edit'>
+        <button className='edit-btn' onClick={() => editCard(item.id)}>
+          <img src='/img/more-horizontal.svg' alt='burger icon' />
         </button>
-        <button className="edit-btn" onClick={() => deleteCard(item.id)}>
-          <img src="/img/trash-icon.svg" alt="burger icon" />
+        <button className='edit-btn' onClick={() => deleteCard(item.id)}>
+          <img src='/img/trash-icon.svg' alt='burger icon' />
         </button>
       </div>}
       <div className='card-container' style={{ backgroundImage: `url(${process.env.REACT_APP_CDN_BASE_URL + '/' + type + '/' + item.filename})` }} />
@@ -100,12 +100,11 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
                 <Secondarybtn name="Don't recommend" />
               </div>
               <div className='card-secondary-btn-wrapper'>
-                { creator 
-                      ? <Button name="UnFollow" onClick={followHandle} disabled={true}/>
-                      : follower
-                      ? <Button name="Follow" onClick={followHandle} />
-                      :<Button name="UnFollow" onClick={followHandle} />
-                }
+                {creator
+                  ? <Button name='UnFollow' onClick={followHandle} disabled />
+                  : follower
+                    ? <Button name='Follow' onClick={followHandle} />
+                    : <Button name='UnFollow' onClick={followHandle} />}
               </div>
             </div>
           )}
