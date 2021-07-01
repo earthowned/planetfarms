@@ -15,7 +15,7 @@ const getCourses = (req, res) => {
     offset: page,
     limit: pageSize,
     order: [['title', order]],
-    include: [Lessons],
+    include: [Lessons]
   })
     .then((courses) => {
       // queryUtils.paginate({ page, pageSize })
@@ -36,7 +36,7 @@ const addCourse = async (req, res) => {
   res.status(201).json({
     status: true,
     message: ' new course added successfully',
-    data: course,
+    data: course
   })
 }
 
@@ -53,7 +53,7 @@ const updateCourse = (req, res) => {
     gradeLevel,
     subjectLevel,
     creator,
-    steps,
+    steps
   } = req.body
   const id = req.params.id
   Courses.findByPk(id).then((product) => {
@@ -70,7 +70,7 @@ const updateCourse = (req, res) => {
           gradeLevel,
           subjectLevel,
           creator,
-          steps,
+          steps
         },
         { where: { id }, include: [Lessons] }
       )
@@ -90,8 +90,8 @@ const getCourseById = (req, res) => {
 
   Courses.findOne({
     where: {
-      id: id,
-    },
+      id: id
+    }
   })
     .then((course) => {
       if (course) {
@@ -111,8 +111,8 @@ const deleteCourse = (req, res) => {
   const id = req.params.id
   Courses.findOne({
     where: {
-      id: id,
-    },
+      id: id
+    }
   }).then((resource) => {
     if (resource) {
       const { id } = resource
@@ -137,7 +137,7 @@ const searchCoursesTitle = (req, res) => {
 
   Courses.findAll({
     where: { title: { [Op.iLike]: '%' + title + '%' } },
-    order: [['title', order]],
+    order: [['title', order]]
   })
     .then((title) => res.json({ title }).status(200))
     .catch((err) => res.json({ error: err }).status(400))
@@ -149,5 +149,5 @@ module.exports = {
   updateCourse,
   getCourseById,
   deleteCourse,
-  searchCoursesTitle,
+  searchCoursesTitle
 }
