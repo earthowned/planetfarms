@@ -15,6 +15,9 @@ const LessonPhoto = db.define(
     lessonImg: {
       type: Sequelize.STRING,
     },
+    isImgDesc: {
+      type: Sequelize.BOOLEAN,
+    },
     createdAt: {
       type: Sequelize.DATE,
     },
