@@ -33,7 +33,6 @@ const AddLesson = () => {
   const [lessonImgDataToPost, setLessonImgDataToPost] = useState(null)
   const [lessonText, setLessonText] = useState(null)
 
-  console.log(lessonData)
   const { register, errors, handleSubmit } = useForm()
 
   const submitLessonForm = ({ title }) => {
@@ -61,7 +60,7 @@ const AddLesson = () => {
           dispatch(createLessonImg(lessonImgDataToPost, lessonId))
         }
         if (lessonText !== null) {
-          dispatch(createLessonText({ lessonText, lessonId }))
+          dispatch(createLessonText(lessonText, lessonId))
         }
       }
     }
@@ -149,7 +148,7 @@ const AddContent = ({
         message={errors.title && errors.title.message}
       />
       <DragDrop onChange={(img) => setLessonCover(img)} />
-      //TODO: nned to sort item according to user added data
+      {/* //TODO: nned to sort item according to user added data */}
       {/* {lessonData
         ? lessonData.map((vid, index) => (
             <>

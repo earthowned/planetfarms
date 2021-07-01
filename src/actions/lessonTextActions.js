@@ -6,7 +6,11 @@ import {
   LESSSON_TEXT_CREATE_FAIL
 } from '../constants/lessonTextConstants'
 
-export const createLessonText = (lessonTextDataToPost) => async (dispatch) => {
+export const createLessonText = (lessonText, lessonId) => async (dispatch) => {
+  const textHeading = lessonText.textHeading
+  const textDescription = lessonText.textDescription
+  const textData = { textHeading, textDescription, lessonId }
+
   try {
     dispatch({ type: LESSSON_TEXT_CREATE_REQUEST })
     const config = {
@@ -14,11 +18,7 @@ export const createLessonText = (lessonTextDataToPost) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     }
-    const { data } = await Axios.post(
-      ADD_LESSON_TEXT,
-      lessonTextDataToPost,
-      config
-    )
+    const { data } = await Axios.post(ADD_LESSON_TEXT, textData, config)
     dispatch({ type: LESSSON_TEXT_CREATE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
