@@ -1,72 +1,82 @@
 import { useState } from 'react'
-import './NewsCreateModal.scss'
+import { useForm } from 'react-hook-form'
+
 import Button from '../button/Button'
-import { useDispatch } from 'react-redux'
-import { saveimageDetail } from '../../actions/newsActions'
 import DragDrop from '../dragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
-import { InputFields } from '../formUI/FormUI'
+import { TextArea, ErrorText } from '../formUI/FormUI'
+import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
 
-const CreateImage = ({ getRootProps, getInputProps, files, setFiles, imageActive, setImageActive }) => {
-  const [imageDescription, setImageDescription] = useState()
-  const [addDesctiption, setAddDesctiption] = useState(false)
+import './NewsCreateModal.scss'
 
-  const [imageDescriptionError, setImageDescriptionError] = useState()
+const CreateImage = ({
+  getRootProps,
+  getInputProps,
+  files,
+  setFiles,
+  imageActive,
+  setImageActive,
+}) => {
+  const [isImgDesc, setIsImgDesc] = useState(false)
+  const [lessonImg, setLessonImg] = useState(null)
 
-  const imageDescriptionChange = (e) => {
-    setImageDescription(e.target.value)
-    setImageDescriptionError(false)
-  }
-  const dispatch = useDispatch()
-  const addImage = () => {
-    if (addDesctiption && !imageDescription) setImageDescriptionError(true)
-    if (!imageDescriptionError) {
-      dispatch(saveimageDetail({ addDesctiption, imageDescription, file: files }))
-      setImageActive(false)
-    }
+  const { register, errors, handleSubmit } = useForm()
+
+  const submitLessonImg = (data) => {
+    console.log(data)
   }
 
   return (
     <>
       {imageActive && (
-        <div className='collection-modal-container'>
+        <div className="collection-modal-container">
           <div>
-            <div className='collection-modal-inner-container'>
-              <CollectionModalHeader title='Add photo' clickHandler={setImageActive} />
-              <DragDrop getInputProps={getInputProps} getRootProps={getRootProps} files={files} onChange={setFiles} />
-              <div className='description'>
-                <label>Add photo description</label> <ToggleSwitch setAddDesctiption={setAddDesctiption} addDesctiption={addDesctiption} />
+            <div className="collection-modal-inner-container">
+              <CollectionModalHeader
+                title="Add photo"
+                clickHandler={setImageActive}
+              />
+              <DragDrop onChange={(img) => setLessonImg(img)} />
+              <div className="description">
+                <label>Add photo description ?</label>{' '}
+                <ToggleSwitch
+                  onClick={() => setIsImgDesc(!isImgDesc)}
+                  isFree={isImgDesc}
+                />
               </div>
-              {addDesctiption
-                ? <div className='photo-input-container'>
-                  <InputFields
-                    placeholder='Photo description'
-                    onChange={(e) => imageDescriptionChange(e)}
-                    value={imageDescription}
-                    className='default-input-variation'
+              {isImgDesc ? (
+                <div className="photo-input-container">
+                  <TextArea
+                    placeholder="Enter image description"
+                    className="default-input-variation text-area-variation textarea"
+                    cols="3"
+                    rows="7"
+                    name="photoDescription"
+                    ref={register({
+                      required: {
+                        value: true,
+                        message: 'Please enter a photo description',
+                      },
+                    })}
                   />
-                  <p className='error-message'>{imageDescriptionError ? 'Please enter Video Description' : ' '} </p>
-                  </div>
-                : <div />}
-              <Button name='Add block' clickHandler={addImage} />
+                  <ErrorText
+                    className="errorMsg"
+                    message={
+                      errors.photoDescription && errors.photoDescription.message
+                    }
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+              <Button
+                name="Add block"
+                onClick={handleSubmit(submitLessonImg)}
+              />
             </div>
           </div>
         </div>
       )}
-    </>
-  )
-}
-
-function ToggleSwitch ({ setAddDesctiption, addDesctiption }) {
-  return (
-    <>
-      <div className='toggle-main-container'>
-        <div
-          onClick={() => setAddDesctiption(!addDesctiption)}
-          className={`${addDesctiption ? 'toggle-item active' : 'toggle-item'}`}
-        />
-        <div className='toggle-container' />
-      </div>
     </>
   )
 }

@@ -53,8 +53,6 @@ const AddLesson = () => {
     }
   }, [postLessonData])
 
-  console.log(postLessonData)
-
   return (
     <>
       {videoModal && (
