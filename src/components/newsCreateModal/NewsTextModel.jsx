@@ -1,7 +1,4 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-// import { useDispatch } from 'react-redux'
-// import { savetextDetail } from '../../actions/newsActions'
 
 import Button from '../button/Button'
 import CollectionModalHeader from './CollectionModalHeader'
@@ -19,7 +16,16 @@ const CreateText = ({
   const { register, errors, handleSubmit } = useForm()
 
   const addText = ({ textHeading, textDescription }) => {
-    console.log(textHeading, textDescription)
+    const textData = [
+      ...lessonData,
+      {
+        textHeading,
+        textDescription
+      }
+    ]
+    setLessonData(textData)
+    setLessonText({ textHeading, textDescription })
+    setTextActive(false)
   }
   return (
     <>
@@ -53,7 +59,6 @@ const CreateText = ({
                   placeholder='Text description'
                   cols='3'
                   rows='7'
-                  placeholder='Type text here '
                   name='textDescription'
                   ref={register({
                     required: {

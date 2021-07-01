@@ -14,6 +14,7 @@ import { courseCreateReducer } from './reducers/courseReducers'
 import { lessonCreateReducer } from './reducers/lessonReducers'
 import { videoCreateReducer } from './reducers/videoReducers'
 import { lessonPhotoCreateReducer } from './reducers/lessonPhotoReducer'
+import { lessonTextCreateReducer } from './reducers/lessonTextReducer'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -28,7 +29,8 @@ const reducer = combineReducers({
   addCourse: courseCreateReducer,
   addLesson: lessonCreateReducer,
   addVideo: videoCreateReducer,
-  addLessonPhoto: lessonPhotoCreateReducer
+  addLessonPhoto: lessonPhotoCreateReducer,
+  addLessonText: lessonTextCreateReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

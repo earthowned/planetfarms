@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createLesson } from '../../../actions/lessonActions'
 import { createVideo } from '../../../actions/videoActions'
 import { createLessonImg } from '../../../actions/lessonPhotoActions'
+import { createLessonText } from '../../../actions/lessonTextActions'
 
 import AddTestModal from '../../../components/addTestModal/AddTestModal'
 import BackButton from '../../../components/backButton/BackButton'
@@ -58,6 +59,9 @@ const AddLesson = () => {
         }
         if (lessonImgDataToPost !== null) {
           dispatch(createLessonImg(lessonImgDataToPost, lessonId))
+        }
+        if (lessonText !== null) {
+          dispatch(createLessonText({ lessonText, lessonId }))
         }
       }
     }
@@ -145,29 +149,28 @@ const AddContent = ({
         message={errors.title && errors.title.message}
       />
       <DragDrop onChange={(img) => setLessonCover(img)} />
-      {lessonData
+      //TODO: nned to sort item according to user added data
+      {/* {lessonData
         ? lessonData.map((vid, index) => (
-          <>
-            {console.log(vid)}
-            {(vid.videoCover === vid.videoCover && (
-              <Video
-                key={index}
-                title={vid.videoTitle}
-                description={vid.videoDescription}
-                url={vid.videoLink || vid.videoResource?.preview}
-                thumbnail={vid.videoCover?.preview}
-              />
-            )) ||
+            <>
+              {(vid.videoCover === vid.videoCover && (
+                <Video
+                  key={index}
+                  title={vid.videoTitle}
+                  description={vid.videoDescription}
+                  url={vid.videoLink || vid.videoResource?.preview}
+                  thumbnail={vid.videoCover?.preview}
+                />
+              )) ||
                 (vid.lessonImg === vid.lessonImg && (
                   <Image
                     src={vid.lessonImg?.preview}
                     desc={vid.photoDescription}
                   />
                 ))}
-          </>
+            </>
           ))
-        : ''}
-
+        : ''} */}
       <div className='admin-lesson-create-btn-wrapper'>
         <button className='secondary-btn' onClick={() => setVideoModal(true)}>
           <img src='/img/video-outline.svg' alt='video icon' />{' '}
