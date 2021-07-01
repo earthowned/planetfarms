@@ -8,7 +8,13 @@ import { enterpriseCreateReducer, enterpriseDeleteReducer,
   enterpriseListReducer, enterpriseUpdateReducer, userEnterpriseListReducer } from './reducers/enterpriseReducers'
 import { groupCreateReducer, groupDeleteReducer, groupFollowReducer, groupListReducer, 
   groupUpdateReducer, groupViewReducer, userGroupListReducer } from './reducers/communityGroupReducers'
-import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
+import {
+  userDetailsReducer,
+  userListReducer,
+  userLoginReducer,
+  userUpdateReducer,
+  userRegisterReducer
+} from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import { communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer, 
   communityVisitReducer, communityDeleteReducer, communityUpdateReducer } from './reducers/communityReducers'
@@ -44,11 +50,12 @@ const reducer = combineReducers({
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
   listMember: memberListReducer
+  userDetails: userDetailsReducer,
+  userList: userListReducer,
+  userUpdate: userUpdateReducer
 })
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
-  : null
+const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
 
 const currentCommunityFromStorage = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
@@ -60,10 +67,6 @@ const initialState = {
 }
 
 const middleware = [thunk]
-const store = createStore(
-  reducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-)
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
 
 export default store

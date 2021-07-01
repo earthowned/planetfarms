@@ -1,30 +1,44 @@
 // const Sequelize = require('sequelize')
 // const {sequelize} = require('../config/database.js')
 
-// const User = sequelize.define('users', {
-//   password: {
-//     type: Sequelize.STRING
-//   },
-//   email: {
-//     type: Sequelize.STRING
-//   },
-//   name: {
-//     type: Sequelize.STRING
-//   }
-// }, { timestamps: false })
-
 // module.exports = User
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('users', {
-      password: {
-    type: DataTypes.STRING
-  },
-  email: {
-    type: DataTypes.STRING
-  },
-  name: {
-    type: DataTypes.STRING
-  }
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    userID: {
+      type: Sequelize.STRING
+    },
+    isLocalAuth: {
+      type: Sequelize.BOOLEAN
+    },
+    firstName: {
+      type: Sequelize.STRING
+    },
+    lastName: {
+      type: Sequelize.STRING
+    },
+    phone: {
+      type: Sequelize.TEXT
+    },
+    email: {
+      type: Sequelize.TEXT
+    },
+    dateOfBirth: {
+      type: Sequelize.DATE
+    },
+    lastLogin: {
+      type: Sequelize.DATE
+    },
+    numberOfVisit: {
+      type: Sequelize.INTEGER
+    },
+    attachments: {
+      type: Sequelize.TEXT
+    }
   },
     { timestamps: true }
   )

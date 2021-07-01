@@ -7,18 +7,29 @@ module.exports = {
     let amount = 10
     const date = new Date()
 
+    const profiledata = [] // for userProfiles table
+    const userIDs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    userIDs.sort(() => (Math.random() > 0.5) ? 1 : -1)
+
     while (amount--) {
-      data.push({
+      // for userProfiles table
+      profiledata.push({
+        userID: userIDs[amount],
+        isLocalAuth: true,
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        dateOfBirth: date,
+        phone: faker.phone.phoneNumber(),
         email: faker.internet.email(),
-        password: faker.internet.password(),
-        createdAt: date,
-        updatedAt: date
+        lastLogin: date,
+        numberOfVisit: Math.floor(Math.random() * 10),
+        attachments: faker.image.avatar()
       })
     }
-    return queryInterface.bulkInsert('users', data, {})
+    queryInterface.bulkInsert('users', profiledata, {})
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('users', null, {})
+    queryInterface.bulkInsert('users', null, {})
   }
 }

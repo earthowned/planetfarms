@@ -1,31 +1,29 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { listMembers, searchMembers } from '../../actions/memberActions'
+import { listUsers, searchUsers } from '../../actions/userAction'
 import CardImage from '../../components/cardImage/CardImage'
 import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityMembers.css'
 
-function App () {
-  return (
-    <DashboardLayout title='Ragrarians members'>
-      <CommunityMembers />
-    </DashboardLayout>
-  )
-}
-export default App
-
-function CommunityMembers () {
+function CommunityMembers ({ history }) {
+  const dispatch = useDispatch()
   const [search, setSearch] = useState(null)
   const {members} = useSelector(state => state.listMember);
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
-  const dispatch = useDispatch();
   useEffect(() => {
-    if (search) dispatch(searchMembers(search))
-    if (!search) dispatch(listMembers())
-  }, [search, dispatch])
+    if (userInfo) {
+      if (search) dispatch(searchMembers(search))
+      if (!search) dispatch(listMembers())
+    } else {
+      history.push('/login')
+    }
+  }, [search, dispatch, history, userInfo])
+
   return (
     <div className='community-members'>
       <div className='community-members-flex-col'>
@@ -33,9 +31,10 @@ function CommunityMembers () {
           <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
         </div>
         <div className='community-members-grid-row'>
-          <CardImage follow='Follow' data={members.data || members} />
+          {members && <CardImage follow='Follow' data={members.data || members} />}
         </div>
       </div>
     </div>
   )
 }
+export default CommunityMembers

@@ -20,7 +20,7 @@ const Input = React.forwardRef(
     },
     ref
   ) => {
-    const [showLabel, setShowLabel] = useState('')
+    const [showLabel, setShowLabel] = useState(value)
 
     return (
       <>
@@ -40,7 +40,7 @@ const Input = React.forwardRef(
               <input
                 className='inputField'
                 placeholder={placeholder}
-                value={value}
+                value={showLabel}
                 name={name}
                 id={id}
                 ref={ref}
