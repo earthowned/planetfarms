@@ -57,8 +57,8 @@ function amplifyConfig () {
       oauth: {
         domain: process.env.COGNITO_DOMAIN_NAME, // domain_name
         scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-        redirectSignIn: 'http://localhost:3000/',
-        redirectSignOut: 'http://localhost:3000/',
+        redirectSignIn: process.env.FRONTEND_URL,
+        redirectSignOut: process.env.FRONTEND_URL,
         responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
       }
     }
