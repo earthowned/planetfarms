@@ -1,7 +1,10 @@
 const generateToken = require('../utils/generateToken.js')
-const User = require('../models/userModel.js')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
+const Sequelize = require('sequelize')
+const User = require('../models/userModel.js')
+const LocalAuth = require('../models/localAuthModel.js')
+const Op = Sequelize.Op
 
 function amplifyConfig () {
   Amplify.configure({
@@ -54,8 +57,8 @@ function amplifyConfig () {
       oauth: {
         domain: process.env.COGNITO_DOMAIN_NAME, // domain_name
         scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-        redirectSignIn: 'http://localhost:3000/',
-        redirectSignOut: 'http://localhost:3000/',
+        redirectSignIn: process.env.FRONTEND_URL,
+        redirectSignOut: process.env.FRONTEND_URL,
         responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
       }
     }
@@ -72,32 +75,32 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    username = (process.env.AUTH_METHOD === 'cognito') ? cognitoAuth(name, password) : localAuth(name, password)
+    const username = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
     if (username) {
-      res.json({
-        token: generateToken(username)
+      await res.json({
+        token: generateToken(username),
+        id: username
       })
     } else {
-      res.status(401).json({
-        error: 'Invalid email or password'
+      await res.status(401).json({
+        error: 'Please type correct email or password'
       })
     }
   } catch (e) {
-    console.log(e)
     res.status(401).json({
-      error: 'Invalid email or password'
+      error: 'Please type correct email or password'
     })
   }
 }
 
-localAuth = async (name, password) => {
-  user = await User.findOne({ where: { name, password } })
-  return (user) ? user.dataValues.id : ''
+const localAuth = async (name, password) => {
+  const user = await LocalAuth.findOne({ where: { username: name, password: password } })
+  return user?.id || ''
 }
 
-cognitoAuth = async (name, password) => {
-  user = await Auth.signIn(name, password)
-  return (user) ? name : ''
+const cognitoAuth = async (name, password) => {
+  const user = await Auth.signIn(name, password)
+  return user?.attributes?.sub || ''
 }
 
 // @desc    Register a new user
@@ -106,32 +109,32 @@ cognitoAuth = async (name, password) => {
 const registerUser = async (req, res) => {
   try {
     const { name, password, email } = req.body
-    let user
     if (process.env.AUTH_METHOD === 'cognito') {
-      user = await Auth.signUp({
+      const registeredUser = await Auth.signUp({
         username: name,
         password,
         attributes: {
           email
         }
       })
+      res.send({ token: generateToken(registeredUser.userSub) })
+      await User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
     } else {
       registerLocal(name, password, email, res)
     }
   } catch (err) {
-    console.log(err)
-    throw new Error(`Error ${err}`)
+    res.status(409).json({ error: err.message })
   }
 }
 
-registerLocal = async (name, password, email, res) => {
-  const userExists = await User.findOne({ where: { name } })
+const registerLocal = async (name, password, email, res) => {
+  const userExists = await LocalAuth.findOne({ where: { username: name } })
   if (userExists) res.json({ message: 'Users already Exists !!!' }).status(400)
-  user = await User.create({ name, password })
+  const user = await LocalAuth.create({ username: name, password: password })
   if (user) {
     res.status(201).json({
       id: user.dataValues.id,
-      name: user.dataValues.name,
+      name: user.dataValues.username,
       token: generateToken(user.dataValues.id)
     })
   } else {
@@ -203,4 +206,107 @@ const confirmSignUpWithCode = async (req, res) => {
   }
 }
 
-module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode }
+// @desc    Fetch all users
+// @route   GET /api/users
+// @access  Public
+const getUsers = (req, res) => {
+  User.findAll({})
+    .then((users) => {
+      res.json({ users }).status(200)
+    })
+    .catch((err) => res.json({ err }).status(400))
+}
+
+// @desc    Fetch single user for auth
+// @route   GET /api/user/:id
+// @access  Public
+const getUserById = (req, res) => {
+  const id = req.params.id
+  LocalAuth.findByPk(id)
+    .then((user) => {
+      if (user) {
+        res.json(user)
+      } else {
+        res.status(404)
+        throw new Error('User not found')
+      }
+    })
+    .catch((err) => res.json({ error: err.message }).status(400))
+}
+
+// @desc    Fetch single user profile details
+// @route   GET /api/user/profile/:userID
+// @access  Public
+const getUserProfileByUserID = async (req, res) => {
+  const id = req.params.userID
+  await User.findOne({ where: { userID: id } })
+    .then((profile) => {
+      if (profile) {
+        res.json(profile)
+      } else {
+        res.status(404)
+        throw new Error('Profile not found')
+      }
+    })
+    .catch((err) => res.json({ error: err.message }).status(400))
+}
+
+// @desc    Fetch logged user profile
+// @route   GET /api/user/profile
+// @access  Public
+const getMyProfile = (req, res) => {
+  const user = req.user.dataValues
+
+  res.json({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    phone: user.phone,
+    email: user.email,
+    dateOfBirth: user.dateOfBirth,
+    lastLogin: user.lastLogin,
+    numberOfVisit: user.numberOfVisit,
+    attachments: user.attachments
+  })
+}
+
+// @desc    Update user
+// @route   PUT /api/users/:id
+const updateUser = async (req, res) => {
+  try {
+    let attachment = ''
+    if (req.file) {
+      attachment = req.file.filename
+    }
+    const { email, firstName, lastName, phone, birthday } = req.body
+    const id = req.user.dataValues.userID
+    // const id = req.params.id
+    User.findOne({ where: { userID: id } }).then(user => {
+      if (user) {
+        User.update(
+          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
+          { where: { userID: id } }
+        )
+          .then(() => res.json({ message: 'User Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      } else {
+        res.status(404)
+        throw new Error('User not found')
+      }
+    })
+  } catch (err) {
+    res.json({ error: err.message })
+  }
+}
+
+// @desc    Search title
+// @route   POST /api/resource/search
+// @access  Private
+const searchUserName = (req, res) => {
+  const { name } = req.query
+  const order = req.query.order || 'ASC'
+  User.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
+    .then(users => res.json({ users }).status(200))
+    .catch(err => res.json({ error: err }).status(400))
+}
+
+module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getMyProfile, getUsers, updateUser, searchUserName }

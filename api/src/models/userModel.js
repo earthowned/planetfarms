@@ -2,14 +2,40 @@ const Sequelize = require('sequelize')
 const db = require('../config/database.js')
 
 const User = db.define('users', {
-  password: {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  userID: {
     type: Sequelize.STRING
+  },
+  isLocalAuth: {
+    type: Sequelize.BOOLEAN
+  },
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  },
+  phone: {
+    type: Sequelize.TEXT
   },
   email: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
-  name: {
-    type: Sequelize.STRING
+  dateOfBirth: {
+    type: Sequelize.DATE
+  },
+  lastLogin: {
+    type: Sequelize.DATE
+  },
+  numberOfVisit: {
+    type: Sequelize.INTEGER
+  },
+  attachments: {
+    type: Sequelize.TEXT
   }
 }, { timestamps: false })
 

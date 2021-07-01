@@ -13,6 +13,7 @@ const resizerRoutes = require('./routes/resizerRouter')
 const sequelize = require('./config/database.js')
 const cors = require('cors')
 const dotenv = require('dotenv')
+const path = require('path')
 
 const PORT = process.env.port || 5000
 
@@ -36,6 +37,9 @@ app.use('/api/resizer', resizerRoutes)
 app.get('/', (request, response) => {
   response.json({ info: 'Node.js, Express, and Postgres API on planetfarms' })
 })
+
+// Set static folder
+app.use(express.static(path.join(__dirname, '../files')))
 
 // port connection
 app.listen(PORT, () => {
