@@ -1,8 +1,5 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-
-import { createLessonImg } from '../../actions/lessonPhotoActions'
 
 import Button from '../button/Button'
 import DragDrop from '../dragDrop/DragDrop'
@@ -13,25 +10,29 @@ import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
 import './NewsCreateModal.scss'
 
 const CreateImage = ({
-  getRootProps,
-  getInputProps,
-  files,
-  setFiles,
   imageActive,
-  setImageActive
+  setImageActive,
+  lessonImgData,
+  setLessonImgData,
+  setLessonImgDataToPost
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(false)
   const [lessonImg, setLessonImg] = useState(null)
 
-  const dispatch = useDispatch()
   const { register, errors, handleSubmit } = useForm()
 
-  console.log(isImgDesc)
   const submitLessonImg = ({ photoDescription }) => {
-    const lessonId = 88
-    dispatch(
-      createLessonImg({ lessonImg, photoDescription, isImgDesc, lessonId })
-    )
+    const imgData = [
+      ...lessonImgData,
+      {
+        lessonImg,
+        photoDescription,
+        isImgDesc
+      }
+    ]
+    setLessonImgData(imgData)
+    setLessonImgDataToPost({ lessonImg, photoDescription, isImgDesc })
+    setImageActive(false)
   }
 
   return (

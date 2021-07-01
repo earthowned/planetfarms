@@ -26,7 +26,10 @@ const NewsCreateModal = ({
   addVideoData,
   setVideoData,
   videoData,
-  setVideoDataToPost
+  setVideoDataToPost,
+  lessonImgData,
+  setLessonImgData,
+  setLessonImgDataToPost
 }) => {
   const [files, setFiles] = useState(null)
 
@@ -71,6 +74,9 @@ const NewsCreateModal = ({
           setFiles={setFiles}
           imageActive={imageActive}
           setImageActive={setImageActive}
+          lessonImgData={lessonImgData}
+          setLessonImgData={setLessonImgData}
+          setLessonImgDataToPost={setLessonImgDataToPost}
         />
       )
       break

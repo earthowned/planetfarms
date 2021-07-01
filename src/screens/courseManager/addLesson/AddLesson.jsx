@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { createLesson } from '../../../actions/lessonActions'
 import { createVideo } from '../../../actions/videoActions'
+import { createLessonImg } from '../../../actions/lessonPhotoActions'
 
 import AddTestModal from '../../../components/addTestModal/AddTestModal'
 import BackButton from '../../../components/backButton/BackButton'
@@ -26,8 +27,11 @@ const AddLesson = () => {
   const [testModal, setTestModal] = useState(false)
   const [videoData, setVideoData] = useState([])
   const [lessonCover, setLessonCover] = useState(null)
-  const [videoDataToPost, setVideoDataToPost] = useState()
+  const [videoDataToPost, setVideoDataToPost] = useState(null)
+  const [lessonImgData, setLessonImgData] = useState([])
+  const [lessonImgDataToPost, setLessonImgDataToPost] = useState(null)
 
+  console.log(lessonImgDataToPost)
   const { register, errors, handleSubmit } = useForm()
 
   const submitLessonForm = ({ title }) => {
@@ -48,7 +52,12 @@ const AddLesson = () => {
       const id = postLessonData.course.data.id
       const lessonId = id
       if (id) {
-        dispatch(createVideo(videoDataToPost, lessonId))
+        if (videoDataToPost !== null) {
+          dispatch(createVideo(videoDataToPost, lessonId))
+        }
+        if (lessonImgDataToPost !== null) {
+          dispatch(createLessonImg(lessonImgDataToPost, lessonId))
+        }
       }
     }
   }, [postLessonData])
@@ -70,6 +79,9 @@ const AddLesson = () => {
           type='image'
           imageActive={imageModal}
           setImageActive={setImageModal}
+          lessonImgData={lessonImgData}
+          setLessonImgData={setLessonImgData}
+          setLessonImgDataToPost={setLessonImgDataToPost}
         />
       )}
       {testModal && <AddTestModal setTestModal={setTestModal} />}
