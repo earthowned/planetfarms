@@ -96,7 +96,7 @@ export const searchUserCommunities = (userId, search) => async (
 export const createCommunity = (newCommunity) => async (dispatch, getState) => {
   const formData = new FormData()
   formData.append('name', newCommunity.name)
-  formData.append('description', newCommunity.desc)
+  formData.append('description', newCommunity.description)
   formData.append('community', newCommunity.files)
   formData.append('category', newCommunity.category)
   formData.append('auto_follow', newCommunity.toggleActive)

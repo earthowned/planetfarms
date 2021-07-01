@@ -33,7 +33,7 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
   }
 
   const dispatch = useDispatch();
-console.log(item);
+
   useEffect(() => {
     if(item.isCreator === "true") setCreator(true)
     

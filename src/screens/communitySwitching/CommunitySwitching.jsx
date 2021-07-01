@@ -7,7 +7,6 @@ import { listCommunities, searchCommunities, createCommunity, listUserCommunitie
 import CommunitiesCard from '../../components/communitiesCard/CommunitiesCard'
 import DragDrop from "../../components/dragDrop/DragDrop";
 import Filter from '../../components/filter/Filter'
-import InputComponent from "../../components/input/InputComponent";
 import CollectionModalHeader from "../../components/newsCreateModal/CollectionModalHeader";
 import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
@@ -15,6 +14,8 @@ import useSizeFinder from "../../utils/sizeFinder";
 import './CommunitySwitching.scss'
 import Pagination from "../../components/pagination/Pagination";
 import axios from "axios";
+import { useForm } from 'react-hook-form';
+import {InputFields, SelectFields} from '../../components/formUI/FormUI'
 
 function App () {
    const communitiesState = useSelector((state) => state.listCommunities);
@@ -165,28 +166,34 @@ const CommunityHeader = ({setActive, search, setSearch}) => {
 
 const CommunityModal = ({setActive, data, setEditData}) => {
   const [files, setFiles] = useState();
-  const [name, setName] = useState(data ? data.name : '');
-  const [desc, setDesc] = useState(data ? data.description : '');
-  const [category, setCategory] = useState(data ? data.category : '');
   const [toggleActive, setToggleActive] = useState(data ? data.auto_follow : false);
   
+  const {error} = useSelector(state => state.addCommunity);
+  const { register: regi, errors, handleSubmit } = useForm()
   const dispatch = useDispatch()
   
-  function addCommunity () {
-    dispatch(createCommunity({files, name, desc, category, toggleActive}))
-    setActive(false);
+  function addCommunity ({communityName, description, category}) {
+    if(communityName && description) {
+      dispatch(createCommunity({files, name: communityName, description, category, toggleActive}))
+      if(!error) {
+        setActive(false)
+      };
+    }
   }
 
-  function updateCommunity () {
-     dispatch(communityUpdate({
-          id: data.id,
-          name: name,
-          description: desc,
-          file: files,
-          auto_follow: toggleActive
-        }))
-    clearInput();
-    setActive(false);
+  function updateCommunity ({description, communityName, category}) {
+    if(description && communityName) {
+      dispatch(communityUpdate({
+           id: data.id,
+           name: communityName,
+           category,
+           description,
+           file: files,
+           auto_follow: toggleActive
+         }))
+     clearInput();
+     setActive(false);
+    }
   }
 
   function clearInput () {
@@ -199,10 +206,47 @@ const CommunityModal = ({setActive, data, setEditData}) => {
         <div>
           <div className='collection-modal-inner-container'>
             <CollectionModalHeader title={data ? 'Update Community' : 'Create Community'} clickHandler={clearInput} />
+            <form onSubmit={data ? handleSubmit(updateCommunity) : handleSubmit(addCommunity)}>
+              <div className="error-header">
+              {error && <div className='error'>{error}</div>}
+              </div>
             <DragDrop files={files} onChange={setFiles} />
-            <InputComponent name="Community Name" text={name} changeHandler={setName} />
-            <InputComponent name="Description" text={desc} changeHandler={setDesc} />
-            <InputComponent name="Category" text={category} changeHandler={setCategory} />
+            <InputFields
+              type='text'
+              placeholder='Community Name'
+              name='communityName'
+              id='name'
+              defaultValue={data && data.name}
+              ref={regi({
+                required: {
+                  value: true,
+                  message: 'You must enter the name.'
+                }
+              })}
+              errors={errors}
+            >          
+          </InputFields>
+           <InputFields
+              type='text'
+              placeholder='Description'
+              name='description'
+              id='description'
+              defaultValue={data && data.description}
+              ref={regi({
+                required: {
+                  value: true,
+                  message: 'You must enter the description.'
+                }
+              })}
+              errors={errors}
+            >          
+          </InputFields>
+            <SelectFields
+               option={['Select Category', 'Farmers', 'Business', 'Accounting']}
+               name="category"
+              ref={regi()} 
+              errors={errors}
+                  />
             <div className="auto-follow-btn">
               <h5>Auto follow</h5>
             <div className='toggle-main-container'>
@@ -217,6 +261,7 @@ const CommunityModal = ({setActive, data, setEditData}) => {
              ? <Button name="Update Community" onClick={updateCommunity} />
              : <Button name="Create Community" onClick={addCommunity} />
               }
+              </form>
           </div>
         </div>
       </div>
