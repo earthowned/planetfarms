@@ -76,7 +76,6 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     const username = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
-    console.log('username', username)
     if (username) {
       await res.json({
         token: generateToken(username)
@@ -87,7 +86,6 @@ const authUser = async (req, res) => {
       })
     }
   } catch (e) {
-    console.log(e)
     res.status(401).json({
       error: 'Please type correct email or password'
     })
@@ -96,7 +94,6 @@ const authUser = async (req, res) => {
 
 const localAuth = async (name, password) => {
   const user = await LocalAuth.findOne({ where: { username: name, password: password } })
-  console.log(user)
   return user?.id || ''
 }
 
@@ -281,20 +278,11 @@ const updateUser = async (req, res) => {
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-
     // const id = req.params.id
     User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         User.update(
-          {
-            email,
-            firstName,
-            lastName,
-            phone,
-            dateOfBirth: birthday,
-            attachments: attachment
-
-          },
+          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
           { where: { userID: id } }
         )
           .then(() => res.json({ message: 'User Updated !!!' }).status(200))
@@ -315,7 +303,6 @@ const updateUser = async (req, res) => {
 const searchUserName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
-
   User.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
     .then(users => res.json({ users }).status(200))
     .catch(err => res.json({ error: err }).status(400))

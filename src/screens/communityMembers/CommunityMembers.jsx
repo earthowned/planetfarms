@@ -32,7 +32,7 @@ function CommunityMembers ({ history }) {
           <SearchComponent className='search border-1px-onyx' />
         </div>
         <div className='community-members-grid-row'>
-          {users && <CardImage follow='Follow' users={users}/>}
+          {users && <CardImage follow='Follow' users={users} />}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
@@ -23,23 +23,20 @@ function CongratulationScreen () {
   const history = useHistory()
   const editInformations = location?.state?.editInformations
   const userdetail = location?.state?.user
-  
+
   const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
-  
+
   const userLogin = useSelector((state) => state.userLogin)
   const userDetails = useSelector((state) => state.userDetails)
   const { userInfo } = userLogin
   const { user } = userDetails
-
-  
 
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     const attachments = profileImage
     dispatch(updateUser({ firstName, lastName, phone, birthday, email, attachments }))
     user ? history.push('/myProfile') : history.push('/community-page-news')
   }
-
 
   return (
     <form className='congratulation'>
@@ -164,7 +161,7 @@ function CongratulationScreen () {
           </div>
         </div>
         <div className='dragAndDrop'>
-          <DragDrop onChange={(img)=> setProfileImage(img)}/>
+          <DragDrop onChange={(img) => setProfileImage(img)} />
         </div>
       </div>
     </form>

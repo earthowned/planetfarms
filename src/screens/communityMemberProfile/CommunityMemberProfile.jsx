@@ -15,15 +15,10 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 function CommunityMembersProfile () {
   const { id } = useParams()
-
   const dispatch = useDispatch()
   const history = useHistory()
-
   const userDetails = useSelector((state) => state.userDetails)
   const { user } = userDetails
-
-  console.log(user)
-
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -48,9 +43,11 @@ function CommunityMembersProfile () {
           </div>
           <div className='profile border-1px-onyx'>
             <div className='profile-info'>
-              {user && <PersonalInformation user={user} />}
-              {user && <ContactInformation user={user} />}
-              {user && <AdditionalInformation user={user} />}
+              {user && <>
+                <PersonalInformation user={user} />
+                <ContactInformation user={user} />
+                <AdditionalInformation user={user} />
+              </>}
             </div>
             <EditInformation clickHandler={editUserInformation} image={user?.attachments} follow='follow' />
           </div>
