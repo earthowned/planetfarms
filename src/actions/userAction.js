@@ -167,6 +167,7 @@ export const logout = () => (dispatch) => {
 
 export const confirmPin = (username) => async (dispatch) => {
   try {
+    console.log(username)
     dispatch({ type: USER_CONFIRM_CODE_REQUEST })
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/users/resendCode`,

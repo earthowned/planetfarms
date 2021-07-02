@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Input.scss'
 import { ErrorMessage } from '@hookform/error-message'
 import { ReactComponent as EyeCloseIcon } from '../../assets/images/eye-close-icon.svg'
@@ -16,11 +16,18 @@ const Input = React.forwardRef(
       showPassword,
       children,
       noIcon,
-      disabled
+      disabled,
+      setValue
     },
     ref
   ) => {
     const [showLabel, setShowLabel] = useState(value)
+
+    useEffect(() => {
+      if (setValue) {
+        setValue(showLabel)
+      }
+    }, [showLabel])
 
     return (
       <>
@@ -47,7 +54,7 @@ const Input = React.forwardRef(
                 type={type}
                 onChange={(e) => setShowLabel(e.target.value)}
                 disabled={disabled}
-                autocomplete="off"
+                autocomplete='off'
               />
               {togglePasswordVisibility && (
                 <div className='pwShowHide' onClick={togglePasswordVisibility}>

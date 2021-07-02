@@ -73,8 +73,8 @@ if (process.env.AUTH_METHOD === 'cognito') {
 // @route   POST /api/users/login
 // @access  Public
 const authUser = async (req, res) => {
+  const { name, password } = req.body
   try {
-    const { name, password } = req.body
     const username = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
     if (username) {
       await res.json({
@@ -107,8 +107,8 @@ const cognitoAuth = async (name, password) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = async (req, res) => {
+  const { name, password, email } = req.body
   try {
-    const { name, password, email } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
       const registeredUser = await Auth.signUp({
         username: name,
@@ -145,8 +145,8 @@ const registerLocal = async (name, password, email, res) => {
 }
 
 const changePassword = async (req, res) => {
+  const { user, oldPassword, newPassword } = req.body
   try {
-    const { user, oldPassword, newPassword } = req.body
     let userWithNewPassword
     if (process.env.AUTH_METHOD === 'cognito') {
       const authUser = await Auth.currentAuthenticatedUser()
@@ -272,6 +272,7 @@ const getMyProfile = (req, res) => {
 // @desc    Update user
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
+  const currentAuthMember = await Auth.currentAuthenticatedUser()
   try {
     let attachment = ''
     if (req.file) {
@@ -280,6 +281,12 @@ const updateUser = async (req, res) => {
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
     // const id = req.params.id
+
+    Auth.updateUserAttributes(currentAuthMember, {
+      email,
+      name: firstName + ' ' + lastName
+    }).catch((err) => console.log(err.message))
+
     User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         User.update(
