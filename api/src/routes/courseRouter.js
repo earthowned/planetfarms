@@ -4,6 +4,7 @@ const multer = require('multer')
 const router = express.Router()
 const shortid = require('shortid')
 const fs = require('fs')
+require('express-async-errors')
 const {
   getCourses,
   addCourse,

@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const Courses = require('../models/courseModel.js')
 const Lessons = require('../models/lessonModal')
+const NotFoundError = require('../errors/notFoundError')
 
 // @desc    Fetch all course
 // @route   GET /api/courses
@@ -15,7 +16,7 @@ const getCourses = (req, res) => {
     offset: page,
     limit: pageSize,
     order: [['title', order]],
-    include: [Lessons]
+    include: [Lessons],
   })
     .then((courses) => {
       // queryUtils.paginate({ page, pageSize })
@@ -36,7 +37,7 @@ const addCourse = async (req, res) => {
   res.status(201).json({
     status: true,
     message: ' new course added successfully',
-    data: course
+    data: course,
   })
 }
 
@@ -53,7 +54,7 @@ const updateCourse = (req, res) => {
     gradeLevel,
     subjectLevel,
     creator,
-    steps
+    steps,
   } = req.body
   const id = req.params.id
   Courses.findByPk(id).then((product) => {
@@ -70,7 +71,7 @@ const updateCourse = (req, res) => {
           gradeLevel,
           subjectLevel,
           creator,
-          steps
+          steps,
         },
         { where: { id }, include: [Lessons] }
       )
@@ -85,23 +86,20 @@ const updateCourse = (req, res) => {
 // @desc    Fetch single course
 // @route   GET /api/courses/:id
 // @access  Public
-const getCourseById = (req, res) => {
-  const id = req.params.id
-
-  Courses.findOne({
-    where: {
-      id: id
-    }
+const getCourseById = async (req, res) => {
+  const { id } = req.params
+  const course = await Courses.findOne({
+    where: { id },
+    include: [Lessons],
   })
-    .then((course) => {
-      if (course) {
-        res.json(course)
-      } else {
-        res.status(404)
-        throw new Error('Course not found')
-      }
-    })
-    .catch((err) => res.json({ error: err.message }).status(400))
+  if (!course) {
+    throw new NotFoundError()
+  }
+  res.status(200).json({
+    status: true,
+    message: 'fetched course successfully',
+    data: course,
+  })
 }
 
 // @desc    Delete a course
@@ -111,8 +109,8 @@ const deleteCourse = (req, res) => {
   const id = req.params.id
   Courses.findOne({
     where: {
-      id: id
-    }
+      id: id,
+    },
   }).then((resource) => {
     if (resource) {
       const { id } = resource
@@ -137,7 +135,7 @@ const searchCoursesTitle = (req, res) => {
 
   Courses.findAll({
     where: { title: { [Op.iLike]: '%' + title + '%' } },
-    order: [['title', order]]
+    order: [['title', order]],
   })
     .then((title) => res.json({ title }).status(200))
     .catch((err) => res.json({ error: err }).status(400))
@@ -149,5 +147,5 @@ module.exports = {
   updateCourse,
   getCourseById,
   deleteCourse,
-  searchCoursesTitle
+  searchCoursesTitle,
 }
