@@ -82,7 +82,7 @@ const authUser = async (req, res) => {
       await res.json({
         token: generateToken(user.dataValues.userID),
         id: user.dataValues.id,
-        userId: user.dataValues.userID
+        userID: user.dataValues.userID
       })
     } else {
       await res.status(401).json({
@@ -120,7 +120,7 @@ const registerUser = async (req, res) => {
       if (user && subscribeCommunity(user)) {
         res.status(201).json({
           id: user.dataValues.id,
-          userId: user.dataValues.userID,
+          userID: user.dataValues.userID,
           token: generateToken(user.dataValues.id)
         })
       }
@@ -145,7 +145,7 @@ const registerLocal = async (name, password, res) => {
   if (newUser && subscribeCommunity(newUser)) {
     res.status(201).json({
       id: newUser.dataValues.id,
-      userId: newUser.dataValues.userID,
+      userID: newUser.dataValues.userID,
       token: generateToken(newUser.dataValues.id)
     })
   } else {
@@ -293,7 +293,7 @@ const getUserProfileByUserID = async (req, res) => {
 // @route   GET /api/user/profile
 // @access  Public
 const getMyProfile = (req, res) => {
-  const user = req.user.dataValues
+  const user = req.user
   console.log(user)
   res.json({
     firstName: user.firstName,

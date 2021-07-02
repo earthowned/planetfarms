@@ -20,8 +20,8 @@ module.exports = async (req, res, next) => {
     /*
     * TODO: Maintain session and check again local session
     */
-   console.log(decoded)
-    req.user = await db.User.findOne({where: {userID: decoded.userId}})
+    req.user = await db.User.findOne({where: {userID: decoded.id}})
+    console.log(req.user)
     next()
   } catch (error) {
     res.status(401).json({
