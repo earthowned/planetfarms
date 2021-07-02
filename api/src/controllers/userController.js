@@ -171,8 +171,8 @@ const subscribeCommunity = async (user) => {
 }
 
 const changePassword = async (req, res) => {
+  const { user, oldPassword, newPassword } = req.body
   try {
-    const { user, oldPassword, newPassword } = req.body
     let userWithNewPassword
     if (process.env.AUTH_METHOD === 'cognito') {
       const authUser = await Auth.currentAuthenticatedUser()
@@ -295,6 +295,7 @@ const getMyProfile = (req, res) => {
 // @desc    Update user
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
+  
   try {
     let attachment = ''
     if (req.file) {
@@ -302,7 +303,14 @@ const updateUser = async (req, res) => {
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    db.User.findOne({ where: { userID: id } }).then((user) => {
+    if(process.env.AUTH_METHOD === 'cognito') {
+      const currentAuthMember = await Auth.currentAuthenticatedUser()
+      Auth.updateUserAttributes(currentAuthMember, {
+        email,
+        name: firstName + ' ' + lastName
+      }).catch((err) => console.log(err.message))
+    }
+    User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
           { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },

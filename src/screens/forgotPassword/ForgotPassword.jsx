@@ -1,16 +1,17 @@
 import React, { useState, useRef } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Input from '../../components/input/Input'
 import SignLayout from '../../layout/signLayout/SignLayout'
 import Button from '../../components/button/Button'
-import { login } from '../../actions/userAction'
+import { confirmPin } from '../../actions/userAction'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 
 const ForgotPassword = () => {
   const [code, setCode] = useState(null)
+  const [usernameState, setUsernameState] = useState('')
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)
@@ -24,10 +25,12 @@ const ForgotPassword = () => {
   }
   const verifyUsername = ({ username }) => {
     username && setIsVerifiedUser(true)
+    setUsernameState(username)
   }
   const resendCode = (e) => {
     e.preventDefault()
     handleSubmit(verifyUsername)()
+    dispatch(confirmPin(usernameState))
     isVerifiedUser && console.log('code sent')
   }
   const alreadyHaveCode = (e) => {
@@ -38,6 +41,7 @@ const ForgotPassword = () => {
   const sendCode = (e) => {
     e.preventDefault()
     handleSubmit(verifyUsername)()
+    dispatch(confirmPin(usernameState))
     isVerifiedUser && console.log('code sent')
   }
   const changePassword = (e) => {
@@ -67,6 +71,7 @@ const ForgotPassword = () => {
                 message: 'You must enter username'
               }
             })}
+            setValue={setUsernameState}
             disabled={isVerifiedUser}
             errors={errors}
           >
@@ -125,10 +130,10 @@ const ForgotPassword = () => {
               >
                 <Lock className='error-icon' />
               </Input>
-              <div className='btnWrapper'>
-                <Button name='Change Password' onClick={changePassword} />
-                <Button name='Resend Code' onClick={resendCode} />
-              </div>
+                <div className='btnWrapper'>
+                  <Button name='Change Password' onClick={changePassword} />
+                  <Button name='Resend Code' onClick={resendCode} />
+                </div>
               </>
             : <div className='btnWrapper'>
               <Button name='I already have code' onClick={alreadyHaveCode} />
