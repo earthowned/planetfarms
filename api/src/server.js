@@ -25,7 +25,9 @@ const Lessons = require('./models/lessonModal')
 const Video = require('./models/videoModel')
 const LessonPhoto = require('./models/lessonPhotoModel')
 const LessonText = require('./models/lessonTextModel')
+const Material = require('./models/materialModel')
 const Courses = require('./models/courseModel')
+const materialRouter = require('./routes/materialRouter')
 
 const PORT = process.env.port || 5000
 
@@ -49,6 +51,7 @@ app.use('/api/resizer', resizerRoutes)
 app.use('/api/videos', videoRouter)
 app.use('/api/lesson-photos', lessonPhotoRouter)
 app.use('/api/lesson-text', lessonTextRouter)
+app.use('/api/materials', materialRouter)
 
 // home page response
 app.get('/', (request, response) => {
@@ -69,9 +72,11 @@ app.use(errorHandler)
 Lessons.hasMany(Video)
 Lessons.hasMany(LessonPhoto)
 Lessons.hasMany(LessonText)
+Lessons.hasMany(Material)
 Video.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
 LessonPhoto.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
 LessonText.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
+Material.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
 Lessons.belongsTo(Courses, { constraints: true, foreignKey: 'courseId' })
 Courses.hasMany(Lessons)
 

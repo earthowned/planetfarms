@@ -2,10 +2,11 @@ const Lessons = require('../models/lessonModal')
 const Video = require('../models/videoModel')
 const LessonPhoto = require('../models/lessonPhotoModel')
 const LessonText = require('../models/lessonTextModel')
+const Material = require('../models/materialModel')
 
 const getLessons = async (_req, res) => {
   const lessons = await Lessons.findAll({
-    include: [Video, LessonPhoto, LessonText]
+    include: [Video, LessonPhoto, LessonText, Material]
   })
   res.status(200).json({
     status: true,
@@ -17,7 +18,7 @@ const getLessonById = async (req, res) => {
   const { id } = req.params
   const lesson = await Lessons.findOne({
     where: { id },
-    include: [Video, LessonPhoto, LessonText]
+    include: [Video, LessonPhoto, LessonText, Material]
   })
   res.status(200).json({
     status: true,
