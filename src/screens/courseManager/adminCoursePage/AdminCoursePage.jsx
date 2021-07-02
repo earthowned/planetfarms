@@ -10,12 +10,15 @@ import LessonBlock from './LessonBlock'
 
 const AdminCoursePage = () => {
   const { courseId } = useParams()
-  const { data } = useGetFetchData('recentCourse', GET_COURSE + '/' + courseId)
+  const { data, isLoading } = useGetFetchData(
+    'recentCourse',
+    GET_COURSE + '/' + courseId
+  )
 
   return (
     <DashboardLayout title='Course page'>
       <BackButton location='/admin/courses' />
-      <CourseDescription data={data} />
+      <CourseDescription data={data} isLoading={isLoading} />
       <LessonBlock courseId={courseId} />
       <div className='study-course-wrapper'>
         <h3>Also study this course</h3>

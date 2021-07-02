@@ -3,7 +3,7 @@ import axios from 'axios'
 const BASE_URL = process.env.REACT_APP_API_BASE_URL + '/api/'
 
 export const Axios = axios.create({
-  baseURL: BASE_URL
+  baseURL: BASE_URL,
 })
 
 // categories
@@ -28,3 +28,4 @@ export const ADD_LESSON_TEXT = 'lesson-text/add'
 
 // get files
 export const GET_THUMBNAIL = BASE_URL + '../thumbnail/'
+export const GET_COVERIMG = BASE_URL + '../coverImg/'
