@@ -76,12 +76,13 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    const username = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
+    const user = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
     
-    if (username) {
+    if (user) {
       await res.json({
-        token: generateToken(username),
-        id: username
+        token: generateToken(user.dataValues.userID),
+        id: user.dataValues.id,
+        userId: user.dataValues.userID
       })
     } else {
       await res.status(401).json({
@@ -97,13 +98,14 @@ const authUser = async (req, res) => {
 
 const localAuth = async (name, password) => {
   const user = await db.LocalAuth.findOne({ where: { username: name, password: password } })
-  const newUser = await db.User.findOne({where: {userID: user.id}});
-  return newUser?.id || ''
+  const newUser = await db.User.findOne({where: {userID: user.dataValues.id}})
+  return newUser
 }
 
 const cognitoAuth = async (name, password) => {
   const user = await Auth.signIn(name, password)
-  return user?.attributes?.sub || ''
+  const newUser = await db.User.findOne({where: {userID: user?.attributes?.sub}})
+  return newUser
 }
 
 // @desc    Register a new user
@@ -116,7 +118,11 @@ const registerUser = async (req, res) => {
       const registeredUser = await Auth.signUp({ username: name, password })
       const user = await db.User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       if (user && subscribeCommunity(user)) {
-        res.send({ token: generateToken(registeredUser.userSub) })
+        res.status(201).json({
+          id: user.dataValues.id,
+          userId: user.dataValues.userID,
+          token: generateToken(user.dataValues.id)
+        })
       }
     } else {
       registerLocal(name, password, res)
@@ -133,13 +139,13 @@ const registerLocal = async (name, password, res) => {
 
   const newUser = await db.sequelize.transaction(async (t) => {
     const user = await db.LocalAuth.create({ username: name, password: password }, {transaction: t});
-    const newUser = await db.User.create({userID: user.id}, {transaction: t})
-    return newUser
+    return await db.User.create({userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, {transaction: t})
   })
 
   if (newUser && subscribeCommunity(newUser)) {
     res.status(201).json({
       id: newUser.dataValues.id,
+      userId: newUser.dataValues.userID,
       token: generateToken(newUser.dataValues.id)
     })
   } else {
@@ -160,9 +166,7 @@ const subscribeCommunity = async (user) => {
         attributes: ['id'], where: { auto_follow: true }
       },
       { transaction: t })
-
       const allFollow = []
-
       for (let i = 0; i < communitiesArray.length; i++) {
         const followObj = {
           userId: user.dataValues.id,
@@ -290,7 +294,7 @@ const getUserProfileByUserID = async (req, res) => {
 // @access  Public
 const getMyProfile = (req, res) => {
   const user = req.user.dataValues
-
+  console.log(user)
   res.json({
     firstName: user.firstName,
     lastName: user.lastName,

@@ -86,7 +86,7 @@ function DashboardComponent () {
 
   useEffect(() => {
     if (userInfo) {
-      dispatch(getUserDetails(userInfo.id))
+      dispatch(getUserDetails(userInfo.userId))
     } else {
       history.push('/login')
     }

@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   },
   { timestamps: true }
   )
+
+  LocalAuth.associate = (models) => {
+    LocalAuth.hasOne(models.User, {
+       foreignKey: 'userID'
+     })
+   }
   return LocalAuth
 }
 
