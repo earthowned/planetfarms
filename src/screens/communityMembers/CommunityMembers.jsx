@@ -26,16 +26,18 @@ function CommunityMembers ({ history }) {
   const users = userList.searchUsers ? userList.searchUsers : userList.users
 
   return (
-    <div className='community-members'>
-      <div className='community-members-flex-col'>
-        <div className='search-container'>
-          <SearchComponent className='search border-1px-onyx' />
-        </div>
-        <div className='community-members-grid-row'>
-          {users && <CardImage follow='Follow' users={users} />}
+    <DashboardLayout title='Ragrarians News'>
+      <div className='community-members'>
+        <div className='community-members-flex-col'>
+          <div className='search-container'>
+            <SearchComponent className='search border-1px-onyx' />
+          </div>
+          <div className='community-members-grid-row'>
+            {users && <CardImage follow='Follow' users={users} />}
+          </div>
         </div>
       </div>
-    </div>
+    </DashboardLayout>
   )
 }
 export default CommunityMembers
