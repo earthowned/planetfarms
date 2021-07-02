@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
-const LocalAuth = require('../models/localAuthModel.js')
-const User = require('../models/userModel.js')
+const db = require('../models');
+// const LocalAuth = require('../models/localAuthModel.js')
+// const User = require('../models/userModel.js')
 
 // Protect routes
 module.exports = async (req, res, next) => {
@@ -19,10 +20,12 @@ module.exports = async (req, res, next) => {
     /*
     * TODO: Maintain session and check again local session
     */
+   console.log(decoded.id);
     if (process.env.AUTH_METHOD !== 'cognito') {
-      req.user = await LocalAuth.findByPk(decoded.id)
+      req.user = await db.LocalAuth.findByPk(decoded.id)
     } else {
-      req.user = await User.findOne({ where: { userID: decoded.id } })
+      req.user = await db.User.findOne({where: {id: decoded.id}})
+      console.log(req.user);
     }
     next()
   } catch (error) {

@@ -14,7 +14,8 @@ const {
   updateUser,
   searchUserName
 } = require('../controllers/userController.js')
-const { protect } = require('../middleware/authMiddleware')
+
+const protect = require('../middleware/authMiddleware')
 const { upload } = require('../helpers/filehelpers')
 
 router.route('/').post(registerUser).get(protect, getUsers)
