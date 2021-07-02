@@ -88,7 +88,7 @@ const getAllMembers = async (req, res) => {
         attributes: ['id'],
         include: [{
           model: db.User,
-          attributes: ['email', 'name']
+          attributes: ['email', 'firstName']
         }],
         required: true
       }
@@ -108,21 +108,23 @@ const searchMemberName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
 
-  db.CommunityUser.findAll({
+  db.CommunityUser.findAll(
+    {
     where: { communityId: req.params.id, active: true },
     attributes: ['id'],
     include: [{
       model: db.User,
-      attributes: ['email', 'name'],
+      attributes: ['email', 'firstName'],
       where: {
         [Op.or]: [
-          { name: { [Op.iLike]: '%' + name + '%' } },
+          { firstName: { [Op.iLike]: '%' + name + '%' } },
           { email: { [Op.iLike]: '%' + name + '%' } }
         ]
       }
     }],
     required: true
-  })
+  }
+  )
     .then(member => res.json({ member }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
