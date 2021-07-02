@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../models')
 const Op = Sequelize.Op
+const { changeFormat } = require('../helpers/filehelpers');
 
 // @desc    Fetch all News
 // @route   GET/api/news/community/:id
@@ -25,7 +26,7 @@ const getNews = (req, res) => {
     .then(news => {
       const totalPages = Math.ceil(news.count / pageSize)
       res.json({
-        news: news.rows,
+        news: news.rows.map(rec => ({ ...rec.dataValues, _attachments: changeFormat(rec._attachments) })),
         totalItems: news.count,
         totalPages,
         page,
@@ -124,7 +125,7 @@ const getNewsById = (req, res) => {
   })
     .then(news => {
       if (news) {
-        res.json(news)
+        res.json({...news.dataValues, _attachments: changeFormat(news.dataValues._attachments)})
       } else {
         res.status(404)
         throw new Error('News not found')
@@ -172,7 +173,7 @@ const searchNewsTitle = (req, res) => {
       where: { id: req.params.id }
     }]
   })
-    .then(title => res.json({ title }).status(200))
+    .then(news => res.json({news: news.map(rec => ({ ...rec.dataValues, _attachments: changeFormat(rec._attachments) }))}).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 

@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
+const { changeFormat } = require('../helpers/filehelpers');
 
 const paginate = ({ page, pageSize }) => {
   const offset = page * pageSize
@@ -56,7 +57,7 @@ const getGroups = async (req, res) => {
 
     const totalPages = Math.ceil(groups.count / pageSize)
     res.json({
-      groups: groups.rows,
+      groups: groups.rows.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) })),
       totalItems: groups.count,
       totalPages,
       page,
@@ -125,7 +126,7 @@ const getUserGroups = async (req, res) => {
 
     const totalPages = Math.ceil(groups.count / pageSize)
     res.json({
-      groups: groups.rows,
+      groups: groups.rows.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) })),
       totalItems: groups.count,
       totalPages,
       page,
@@ -146,7 +147,7 @@ const addGroups = async (req, res) => {
     }
 
     const followGroup = await db.sequelize.transaction(async (t) => {
-      const group = await db.Group.create({ ...req.body, communityId: req.params.id, creatorId: req.user.id, slug: '', attachment: 'uploads/' + filename }, { transaction: t })
+      const group = await db.Group.create({ ...req.body, communityId: req.params.id, creatorId: req.user.id, slug: '', filename: 'uploads/' + filename }, { transaction: t })
       await db.GroupUser.create({ userId: req.user.id, groupId: group.id }, { transaction: t })
       return true
     })
@@ -171,7 +172,7 @@ const getGroupsById = (req, res) => {
   })
     .then(groups => {
       if (groups) {
-        res.json(groups)
+        res.json({...groups.dataValues, filename: changeFormat(groups.dataValues.filename)})
       } else {
         res.status(404)
         throw new Error('Community Groups not found')
@@ -224,7 +225,7 @@ const deleteGroups = async (req, res) => {
 // @access Public
 const updateGroups = (req, res) => {
   const {
-    title, description, category, attachments
+    title, description, category, filename
   } = req.body
 
   const id = req.params.groupId
@@ -243,7 +244,7 @@ const updateGroups = (req, res) => {
       if (groups.creatorId !== req.user.id) return res.json({ message: 'Not authorized to update' })
       const { id } = groups
       db.Group.update({
-        title, description, category, attachments
+        title, description, category, filename
       },
       { where: { id } })
         .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
@@ -270,7 +271,9 @@ const searchGroupsTitle = (req, res) => {
       where: { id: req.params.id }
     }]
   })
-    .then(groups => res.json({ groups }).status(200))
+    .then(groups => res.json({ 
+     groups: groups.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.filename) }))
+     }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 

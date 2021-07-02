@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { upload } = require('../helpers/filehelpers')
+const { upload, resizeImage } = require('../helpers/filehelpers')
 const checkCommunity = require('../middleware/checkCommunity')
 const {
   getGroups, addGroups, getGroupsById,
@@ -10,7 +10,7 @@ const protect = require('../middleware/authMiddleware')
 
 router.route('/community/:id').get(protect, checkCommunity, getGroups)
 router.route('/community/:id/user').get(protect, checkCommunity, getUserGroups)
-router.route('/add/community/:id').post(protect, checkCommunity, upload.single('group'), addGroups)
+router.route('/add/community/:id').post(protect, checkCommunity, upload.single('group'), resizeImage, addGroups)
 router.route('/community/:id/search').get(checkCommunity, searchGroupsTitle)
 router
   .route('/:groupId/community/:id')

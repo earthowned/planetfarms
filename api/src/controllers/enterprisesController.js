@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
-
+const { changeFormat } = require('../helpers/filehelpers');
 // @desc    Fetch all enterprises
 // @route   GET /api/enterprises
 // @access  Public
@@ -59,7 +59,7 @@ const getEnterprises = async (req, res) => {
 
     const totalPages = Math.ceil(enterprises.count / pageSize)
     res.json({
-      enterprises: enterprises.rows,
+      enterprises: enterprises.rows.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) })),
       totalItems: enterprises.count,
       totalPages,
       page,
@@ -128,7 +128,7 @@ const getUserEnterprises = async (req, res) => {
 
     const totalPages = Math.ceil(enterprises.count / pageSize)
     res.json({
-      enterprises: enterprises.rows,
+      enterprises: enterprises.rows.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) })),
       totalItems: enterprises.count,
       totalPages,
       page,
@@ -150,7 +150,7 @@ const addEnterprises = async (req, res) => {
     }
 
     const followEnterprise = await db.sequelize.transaction(async (t) => {
-      const enterprise = await db.Enterprise.create({ ...req.body, communityId: req.params.id, creatorId: req.user.id, slug: '', attachment: 'uploads/' + filename }, { transaction: t })
+      const enterprise = await db.Enterprise.create({ ...req.body, communityId: req.params.id, creatorId: req.user.id, slug: '', filename: 'uploads/' + filename }, { transaction: t })
       await db.EnterpriseUser.create({ userId: req.user.id, enterpriseId: enterprise.id }, { transaction: t })
       return true
     })
@@ -177,7 +177,7 @@ const getEnterprisesById = (req, res) => {
   )
     .then(enterprises => {
       if (enterprises) {
-        res.json(enterprises)
+        res.json({...enterprises.dataValues, filename: changeFormat(enterprises.dataValues.filename)})
       } else {
         res.status(404)
         throw new Error('Enterprises not found')
@@ -232,7 +232,7 @@ const deleteEnterprises = async (req, res) => {
 // @access  Private
 const updateEnterprises = (req, res) => {
   const {
-    title, description, roles, attachments
+    title, description, roles, filename
   } = req.body
   const id = req.params.enterpriseId
   db.Enterprise.findByPk(id,
@@ -249,7 +249,7 @@ const updateEnterprises = (req, res) => {
       if (enterprises.creatorId !== req.user.id) return res.json({ message: 'Not authorized to update' })
       const { id } = enterprises
       db.Enterprise.update({
-        title, description, roles, attachments
+        title, description, roles, filename
       },
       { where: { id } })
         .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))
@@ -277,7 +277,9 @@ const searchEnterprisesTitle = (req, res) => {
       where: { id: req.params.id }
     }]
   })
-    .then(enterprises => res.json({ enterprises }).status(200))
+    .then(enterprises => res.json({
+   enterprises: enterprises.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) }))
+    }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 

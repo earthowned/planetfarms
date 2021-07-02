@@ -4,10 +4,10 @@ const protect = require('../middleware/authMiddleware')
 const checkCommunity = require('../middleware/checkCommunity')
 
 const { addNews, getNews, updateNews, getNewsById, deleteNews, searchNewsTitle } = require('../controllers/newsController')
-const { upload } = require('../helpers/filehelpers')
+const { upload, resizeImage } = require('../helpers/filehelpers')
 
 router.route('/community/:id').get(checkCommunity, getNews)
-router.route('/add/community/:id').post(upload.single('news'), checkCommunity, addNews)
+router.route('/add/community/:id').post(upload.single('news'), checkCommunity, resizeImage, addNews)
 router.route('/community/:id/search').get(checkCommunity, searchNewsTitle)
 router
   .route('/:newsId/community/:id')
