@@ -47,7 +47,7 @@ const NewsCreateModal = ({
           setVideoDataToPost={setVideoDataToPost}
         />
       )
-      break
+
     case 'group':
       return (
         <CreateGroup
@@ -57,7 +57,7 @@ const NewsCreateModal = ({
           setGroupActive={setGroupActive}
         />
       )
-      break
+
     case 'edit-group':
       return (
         <EditGroup
@@ -66,7 +66,7 @@ const NewsCreateModal = ({
           setGroupEditActive={setGroupEditActive}
         />
       )
-      break
+
     case 'image':
       return (
         <CreateImage
@@ -79,7 +79,7 @@ const NewsCreateModal = ({
           setLessonImgDataToPost={setLessonImgDataToPost}
         />
       )
-      break
+
     case 'text':
       return (
         <CreateText
@@ -92,10 +92,9 @@ const NewsCreateModal = ({
           setLessonText={setLessonText}
         />
       )
-      break
+
     default:
       return null
-      break
   }
 }
 

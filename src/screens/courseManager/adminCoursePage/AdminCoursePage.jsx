@@ -10,6 +10,7 @@ import LessonBlock from './LessonBlock'
 
 const AdminCoursePage = () => {
   const { courseId } = useParams()
+
   const { data, isLoading } = useGetFetchData(
     'recentCourse',
     GET_COURSE + '/' + courseId

@@ -26,6 +26,9 @@ export const ADD_LESSON_PHOTO = 'lesson-photos/add'
 // lesson Text
 export const ADD_LESSON_TEXT = 'lesson-text/add'
 
+//lesson material
+export const ADD_MATERIAL = 'materials/add'
+
 // get files
 export const GET_THUMBNAIL = BASE_URL + '../thumbnail/'
 export const GET_COVERIMG = BASE_URL + '../coverImg/'

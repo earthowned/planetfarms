@@ -31,7 +31,6 @@ const addMaterial = async (req, res) => {
     material = req.file.filename
     name = req.file.originalname
   }
-  console.log(name)
   const data = await Material.create({ ...req.body, material, name })
   res.status(201).json({
     status: true,

@@ -7,6 +7,7 @@ import { createLesson } from '../../../actions/lessonActions'
 import { createVideo } from '../../../actions/videoActions'
 import { createLessonImg } from '../../../actions/lessonPhotoActions'
 import { createLessonText } from '../../../actions/lessonTextActions'
+import { createMaterial } from '../../../actions/materialActions'
 
 import AddTestModal from '../../../components/addTestModal/AddTestModal'
 import BackButton from '../../../components/backButton/BackButton'
@@ -32,6 +33,7 @@ const AddLesson = () => {
   const [videoDataToPost, setVideoDataToPost] = useState(null)
   const [lessonImgDataToPost, setLessonImgDataToPost] = useState(null)
   const [lessonText, setLessonText] = useState(null)
+  const [material, setMaterial] = useState(null)
 
   const { register, errors, handleSubmit } = useForm()
 
@@ -61,6 +63,9 @@ const AddLesson = () => {
         }
         if (lessonText !== null) {
           dispatch(createLessonText(lessonText, lessonId))
+        }
+        if (material !== null) {
+          dispatch(createMaterial(material, lessonId))
         }
       }
     }
@@ -113,7 +118,7 @@ const AddLesson = () => {
           lessonCover={lessonCover}
           lessonData={lessonData}
         />
-        <LessonMaterial />
+        <LessonMaterial material={material} setMaterial={setMaterial} />
         <LessonSaveModal onClick={handleSubmit(submitLessonForm)} />
       </DashboardLayout>
     </>
@@ -192,12 +197,30 @@ const AddContent = ({
   )
 }
 
-const LessonMaterial = () => {
+const LessonMaterial = ({ material, setMaterial }) => {
+  // const [lessonMaterial, setLessonMaterial] = useState([])
+  // material && setLessonMaterial(material)
+  // const materi = [
+  //   ...lessonMaterial,
+  //   {
+  //     material,
+  //   },
+  // ]
+  console.log(material)
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
-      <p>You dont have any materials in lesson Add it for your users.</p>
-      <button className='secondary-btn'>Add materials</button>
+      {material ? (
+        <p>{material.name}</p>
+      ) : (
+        <p>You dont have any materials in lesson Add it for your users.</p>
+      )}
+      <DragDrop
+        fileType='application/pdf'
+        className='secondary-btn addMaterial'
+        text='Add Materials'
+        onChange={(mat) => setMaterial(mat)}
+      />
     </div>
   )
 }

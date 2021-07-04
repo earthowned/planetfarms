@@ -1,17 +1,24 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-const DragDrop = ({ onChange = () => {}, type, className, setVideo }) => {
+const DragDrop = ({
+  onChange = () => {},
+  type,
+  fileType,
+  className,
+  setVideo,
+  text
+}) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
-    accept: `${type ? `${type}/*` : 'image/*'}`,
+    accept: `${type ? `${type}/*` : fileType ? `${fileType}` : 'image/*'}`,
     onDrop: (acceptedFiles) => {
       acceptedFiles.map((file) =>
         Object.assign(file, { preview: URL.createObjectURL(file) })
       )
       setFiles(acceptedFiles[0])
       onChange(acceptedFiles[0])
-    },
+    }
   })
   const fileChange = (e) => {
     const selectedFile = e.target.files[0]
@@ -30,11 +37,12 @@ const DragDrop = ({ onChange = () => {}, type, className, setVideo }) => {
       className={className}
       type={type}
       setVideo={setVideo}
+      text={text}
     />
   )
 }
 
-function DragDropComponent({
+function DragDropComponent ({
   getInputProps,
   getRootProps,
   fileChange,
@@ -43,11 +51,12 @@ function DragDropComponent({
   className,
   type,
   setVideo,
+  text
 }) {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
       <div
-        className="drag-drop"
+        className='drag-drop'
         {...getRootProps()}
         onChange={(e) => fileChange(e)}
       >
@@ -55,24 +64,28 @@ function DragDropComponent({
         {files ? (
           <>
             <img
-              className="avatar"
+              className='avatar'
               src={files.preview}
-              alt="files[0].preview"
+              alt='files[0].preview'
             />
-            <div className="drag-drop-icon-container">
+            <div className='drag-drop-icon-container'>
               {type === 'video' ? (
-                <p className="videoName">{files.name}</p>
+                <p className='videoName'>{files.name}</p>
+              ) : text === text ? (
+                <p>{text}</p>
               ) : (
-                <img src="/img/camera-outline.svg" alt="camera icon" />
+                <img src='/img/camera-outline.svg' alt='camera icon' />
               )}
             </div>
           </>
         ) : (
           <>
             {type === 'video' ? (
-              <p className="videoName">Choose video</p>
+              <p className='videoName'>Choose video</p>
+            ) : text === text ? (
+              <p>{text}</p>
             ) : (
-              <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+              <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
                 Drag & Drop files in this area or Click Here to attach video
                 cover
               </h6>
@@ -82,13 +95,10 @@ function DragDropComponent({
       </div>
       {files && (
         <img
-          src="/img/close-outline.svg"
-          className="drag-drop-close"
-          onClick={() => {
-            setFiles(!files)
-            setVideo(null)
-          }}
-          alt="drag_drop_img_close"
+          src='/img/close-outline.svg'
+          className='drag-drop-close'
+          onClick={() => setFiles(!files)}
+          alt='drag_drop_img_close'
         />
       )}
     </div>
