@@ -20,7 +20,3 @@ services:
       - 8080:80
     volumes:
       - ./api/files:/usr/share/nginx/html
-  api:
-    image: earthowned/planet-api
-    ports:
-      - 5000:5000
