@@ -26,3 +26,35 @@ const Lessons = db.define(
 )
 
 module.exports = Lessons
+
+// module.exports = (sequelize, DataTypes) => {
+//   const Lesson = sequelize.define('tests', {
+//     id: {
+//         autoIncrement: true,
+//         primaryKey: true,
+//         type: DataTypes.INTEGER,
+//       },
+//       title: {
+//       type: DataTypes.STRING,
+//     },
+//     coverImg: {
+//       type: DataTypes.STRING,
+//     },
+//     createdAt: {
+//         allowNull: false,
+//         type: DataTypes.DATE
+//       },
+//     updatedAt: {
+//             allowNull: false,
+//             type: DataTypes.DATE
+//         }
+//   });
+
+//   Lesson.associate = (models) => {
+//     Lesson.hssMany(models.Test, {
+//       foreignKey: 'lessonId'
+//     })
+//   };
+
+//   return Lesson;
+// };

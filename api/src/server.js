@@ -28,6 +28,8 @@ const LessonText = require('./models/lessonTextModel')
 const Material = require('./models/materialModel')
 const Courses = require('./models/courseModel')
 const materialRouter = require('./routes/materialRouter')
+const testRouter = require('./routes/testRouter')
+const Test = require('./models/testModel')
 
 const PORT = process.env.port || 5000
 
@@ -52,6 +54,7 @@ app.use('/api/videos', videoRouter)
 app.use('/api/lesson-photos', lessonPhotoRouter)
 app.use('/api/lesson-text', lessonTextRouter)
 app.use('/api/materials', materialRouter)
+app.use('/api/tests', testRouter)
 
 // home page response
 app.get('/', (request, response) => {
@@ -79,6 +82,11 @@ LessonText.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
 Material.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
 Lessons.belongsTo(Courses, { constraints: true, foreignKey: 'courseId' })
 Courses.hasMany(Lessons)
+
+// association between lesson and test
+Lessons.hasMany(Test, {foreignKey: 'lessonId'});
+Test.belongsTo(Lessons, {foreignKey: 'lessonId'});
+
 
 // port connection
 app.listen(PORT, () => {

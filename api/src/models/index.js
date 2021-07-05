@@ -17,6 +17,11 @@ fs.readdirSync(__dirname)
     db[model.name] = model
   })
 
+// const db = {
+//   Test: require('./testModel')(sequelize, Sequelize.DataTypes),
+//   Lesson: require('./lessonModal')(sequelize, Sequelize.DataTypes),
+// }
+
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db)
