@@ -32,3 +32,6 @@ export const ADD_MATERIAL = 'materials/add'
 // get files
 export const GET_THUMBNAIL = BASE_URL + '../thumbnail/'
 export const GET_COVERIMG = BASE_URL + '../coverImg/'
+export const GET_VIDEO = BASE_URL + '../videoResource/'
+export const VIDEO_COVER = BASE_URL + '../videoCover/'
+export const LESSON_IMG = BASE_URL + '../lessonImg/'
