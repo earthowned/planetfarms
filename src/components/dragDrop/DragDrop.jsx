@@ -82,7 +82,7 @@ function DragDropComponent ({
           <>
             {type === 'video' ? (
               <p className='videoName'>Choose video</p>
-            ) : text === text ? (
+            ) : text ? (
               <p>{text}</p>
             ) : (
               <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>

@@ -17,6 +17,7 @@ import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { ErrorText } from '../../../components/formUI/FormUI'
 import Video from '../../../components/videoPlayer/Video'
 import Image from '../../../components/lessonImage/Image'
+import Text from './Text'
 import './AddLesson.scss'
 
 const AddLesson = () => {
@@ -34,6 +35,8 @@ const AddLesson = () => {
   const [lessonImgDataToPost, setLessonImgDataToPost] = useState(null)
   const [lessonText, setLessonText] = useState(null)
   const [material, setMaterial] = useState(null)
+
+  console.log(lessonData)
 
   const { register, errors, handleSubmit } = useForm()
 
@@ -153,28 +156,24 @@ const AddContent = ({
         message={errors.title && errors.title.message}
       />
       <DragDrop onChange={(img) => setLessonCover(img)} />
-      {/* //TODO: nned to sort item according to user added data */}
-      {/* {lessonData
-        ? lessonData.map((vid, index) => (
-            <>
-              {(vid.videoCover === vid.videoCover && (
-                <Video
-                  key={index}
-                  title={vid.videoTitle}
-                  description={vid.videoDescription}
-                  url={vid.videoLink || vid.videoResource?.preview}
-                  thumbnail={vid.videoCover?.preview}
-                />
-              )) ||
-                (vid.lessonImg === vid.lessonImg && (
-                  <Image
-                    src={vid.lessonImg?.preview}
-                    desc={vid.photoDescription}
-                  />
-                ))}
-            </>
-          ))
-        : ''} */}
+      {lessonData &&
+        lessonData.map((vid, index) => (
+          <>
+            <Video
+              key={vid.videoTitle}
+              title={vid.videoTitle}
+              description={vid.videoDescription}
+              url={vid.videoLink || vid.videoResource?.preview}
+              thumbnail={vid.videoCover?.preview}
+            />
+            <Image
+              key={vid.lessonImg?.name}
+              src={vid.lessonImg?.preview}
+              desc={vid.photoDescription}
+            />
+            <Text heading={vid.textHeading} desc={vid.textDescription} />
+          </>
+        ))}
       <div className='admin-lesson-create-btn-wrapper'>
         <button className='secondary-btn' onClick={() => setVideoModal(true)}>
           <img src='/img/video-outline.svg' alt='video icon' />{' '}
@@ -198,15 +197,8 @@ const AddContent = ({
 }
 
 const LessonMaterial = ({ material, setMaterial }) => {
-  // const [lessonMaterial, setLessonMaterial] = useState([])
-  // material && setLessonMaterial(material)
-  // const materi = [
-  //   ...lessonMaterial,
-  //   {
-  //     material,
-  //   },
-  // ]
-  console.log(material)
+  const [lessonMaterial, setLessonMaterial] = useState([])
+
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
