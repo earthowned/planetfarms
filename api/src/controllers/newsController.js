@@ -49,7 +49,7 @@ const addNews = (req, res) => {
   } = req.body
   db.News.create({
     // _attachments: 'uploads/' + req.file.filename,
-    _attachments: filename,
+    _attachments: 'news/' + filename,
     title,
     message,
     docType,
@@ -90,22 +90,41 @@ const updateNews = (req, res) => {
   ).then(news => {
     if (news) {
       const { id } = news
-      db.News.update({
-        _attachments: 'uploads/' + filename,
-        title,
-        message,
-        docType,
-        readTime,
-        language,
-        creator,
-        textDetail,
-        imageDetail,
-        videoDetail,
-        category
-      },
-      { where: { id } })
-        .then(() => res.json({ message: 'News Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
+
+      if(filename) {
+        db.News.update({
+          _attachments: 'news/' + filename,
+          title,
+          message,
+          docType,
+          readTime,
+          language,
+          creator,
+          textDetail,
+          imageDetail,
+          videoDetail,
+          category
+        },
+        { where: { id } })
+          .then(() => res.json({ message: 'News Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      } else {
+        db.News.update({
+          title,
+          message,
+          docType,
+          readTime,
+          language,
+          creator,
+          textDetail,
+          imageDetail,
+          videoDetail,
+          category
+        },
+        { where: { id } })
+          .then(() => res.json({ message: 'News Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      }
     } else {
       return res.status(404).json({ message: 'News not found' })
     }

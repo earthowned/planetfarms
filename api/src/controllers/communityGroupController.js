@@ -225,8 +225,13 @@ const deleteGroups = async (req, res) => {
 // @access Public
 const updateGroups = (req, res) => {
   const {
-    title, description, category, filename
+    title, description, category
   } = req.body
+
+   let filename = ''
+    if (req.file) {
+      filename = req.file.filename
+    }
 
   const id = req.params.groupId
 
@@ -243,12 +248,23 @@ const updateGroups = (req, res) => {
     if (groups) {
       if (groups.creatorId !== req.user.id) return res.json({ message: 'Not authorized to update' })
       const { id } = groups
-      db.Group.update({
-        title, description, category, filename
-      },
-      { where: { id } })
-        .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
+
+      if(filename) {
+        db.Group.update({
+          title, description, category, filename: 'group/' + filename
+        },
+        { where: { id } })
+          .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      } else {
+        db.Group.update({
+            title, description, category
+          },
+          { where: { id } })
+            .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
+            .catch((err) => res.json({ error: err.message }).status(400))
+      }
+
     } else {
       return res.status(404).json({ message: 'Groups not found' })
     }

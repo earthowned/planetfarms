@@ -112,11 +112,18 @@ export const createEnterprise = (newEnterprise) => async (
 export const enterpriseUpdate = (newEnterprise) => async (dispatch) => {
   try {
     dispatch({ type: ENTERPRISE_UPDATE_REQUEST })
-    const { id, title, description, file } = newEnterprise
+    const formData = new FormData()
+    formData.append('title', newEnterprise.title)
+    formData.append('description', newEnterprise.description)
+    formData.append('enterprise', newEnterprise.file)
+    formData.append('category', newEnterprise.category)
+    formData.append('roles', newEnterprise.roles)
+
+    const { id } = newEnterprise
     const config = configFunc()
     const data = await axios.put(
             `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`,
-            { title, description, file }, config
+            formData, config
     )
 
     dispatch({

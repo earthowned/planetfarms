@@ -16,6 +16,6 @@ router
   .route('/:enterpriseId/community/:id')
   .get(checkCommunity, getEnterprisesById)
   .delete(protect, checkCommunity, deleteEnterprises)
-  .put(protect, checkCommunity, updateEnterprises)
+  .put(protect, checkCommunity, upload.single('enterprise'), resizeImage, updateEnterprises)
 
 module.exports = router

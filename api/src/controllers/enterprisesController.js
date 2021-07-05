@@ -232,8 +232,14 @@ const deleteEnterprises = async (req, res) => {
 // @access  Private
 const updateEnterprises = (req, res) => {
   const {
-    title, description, roles, filename
+    title, description, roles
   } = req.body
+
+     let filename = ''
+    if (req.file) {
+      filename = req.file.filename
+    }
+
   const id = req.params.enterpriseId
   db.Enterprise.findByPk(id,
     {
@@ -248,12 +254,23 @@ const updateEnterprises = (req, res) => {
     if (enterprises) {
       if (enterprises.creatorId !== req.user.id) return res.json({ message: 'Not authorized to update' })
       const { id } = enterprises
-      db.Enterprise.update({
-        title, description, roles, filename
-      },
-      { where: { id } })
-        .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
+
+      if(filename) {
+        db.Enterprise.update({
+          title, description, roles, filename: 'enterprise/' + filename
+        },
+        { where: { id } })
+          .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      } else {
+        db.Enterprise.update({
+          title, description, roles
+        },
+        { where: { id } })
+          .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      }
+
     } else {
       res.status(404)
       throw new Error('Enterprises not found')

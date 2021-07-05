@@ -3,27 +3,56 @@ import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { deleteNews } from '../../actions/newsActions'
+import Background from '../background/Background'
+import { useState } from 'react'
 
 function NewsCard ({ news, editCard }) {
-  const dispatch = useDispatch()
-  const deleteNewsCard = (id) => {
-    dispatch(deleteNews(id))
-  }
+  
   return (
     <>
       {news && news.map((news) => {
         return (
-          <div className='news-card border-1px-onyx'>
+          <NewsSingleCard news={news} editCard={editCard} />
+        )
+      })}
+    </>
+  )
+}
+
+const NewsSingleCard = ({news, editCard}) => {
+  const [dropDown, setDropDown] = useState(false);
+  const dispatch = useDispatch()
+  
+  const deleteNewsCard = (id) => {
+    dispatch(deleteNews(id))
+    setDropDown(false);
+  }
+  const editNewsCard = (id) => {
+    editCard(id);
+    setDropDown(false);
+  }
+  return (
+    <Background tag="/news/" image={news._attachments}>
+            <div className="news-card">
             <div className='news-card-header'>
               <div className='news-show-date'>{moment(news.createdAt).fromNow()}</div>
               <div className='card-edit'>
-                <button className='edit-btn' onClick={() => editCard(news.id)}>
-                  <img src='/img/more-horizontal.svg' alt='burger icon' />
-                </button>
-                <button className='edit-btn' onClick={() => deleteNewsCard(news.id)}>
-                  <img src='/img/trash-icon.svg' alt='burger icon' />
-                </button>
+               <div>
+                    <div onClick={() => setDropDown(!dropDown)} className="card-edit-button">
+                      <img src='/img/more-horizontal.svg' alt='burger icon' />
+                    </div>
+                    {dropDown && <div className='dropdown-card-items'>
+                      <ul>
+                        <li onClick={() => editNewsCard(news.id)}>
+                          <img src='/img/edit-icon.svg' alt='burger icon' /> <span>Edit</span>
+                          </li>
+                        <li onClick={() => deleteNewsCard(news.id)}>
+                          <img src='/img/trash-icon.svg' alt='burger icon' /> <span>Delete</span>
+                          </li>
+                      </ul>
+                    </div>}
               </div>
+            </div>
             </div>
             <Link to={{ pathname: '/community-page-news-view', state: { news } }}>
               <div key={news.id}>
@@ -45,11 +74,8 @@ function NewsCard ({ news, editCard }) {
                 </div>
               </div>
             </Link>
-          </div>
-        )
-      })}
-    </>
+            </div>
+          </Background>
   )
 }
-
 export default NewsCard

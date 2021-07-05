@@ -43,6 +43,10 @@ const uploadArray = multer({ storage }).array('files')
 const resizeImage = (req, res, next) => {
   const { format, height, width } = { format: 'webp', ...req.body }
   try {
+
+    // user might not send image sometimes
+    if(!req.file) next();
+
     const filename = path.basename(req.file.path).split('.').slice(0, -1).join('.')
     let dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
     let newImage = sharp(req.file.path)

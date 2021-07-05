@@ -28,6 +28,7 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
   const [follower, setFollower] = useState(true)
   const [creator, setCreator] = useState(false)
   const [followCount, setFollowCount] = useState(0)
+  const [dropDown, setDropDown] = useState(false)
 
   const { success } = useSelector(state => state.joinCommunity)
   const { currentCommunity } = useSelector(state => state.activeCommunity)
@@ -54,19 +55,36 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
   const visitCurrentCommunity = () => {
     dispatch(visitCommunity(community.id))
   }
+
+  const communityEditCard = (id) => {
+    editCard(id);
+    setDropDown(false)
+  }
+
+  const communityDeleteCard = (id) => {
+    deleteCard(id);
+    setDropDown(false)
+  }
   return (
-    <div ckey={community.id} className='community-card'>
-      <Background image={community.attachment}>
-        {
-        creator && <div className='card-edit'>
-          <button className='edit-btn' onClick={() => editCard(community.id)}>
-            <img src='/img/more-horizontal.svg' alt='burger icon' />
-          </button>
-          <button className='edit-btn' onClick={() => deleteCard(community.id)}>
-            <img src='/img/trash-icon.svg' alt='burger icon' />
-          </button>
-        </div>
-        }
+      <Background image={community.attachment} tag="/community/">
+        <div ckey={community.id} className='community-card'>
+        {creator && <div className='card-edit card-edit-alternate'>
+        <div>
+      <div onClick={() => setDropDown(!dropDown)} className="card-edit-button">
+        <img src='/img/more-horizontal.svg' alt='burger icon' />
+      </div>
+      {dropDown && <div className='dropdown-card-items'>
+        <ul>
+          <li onClick={() => communityEditCard(community.id)}>
+            <img src='/img/edit-icon.svg' alt='burger icon' /> <span>Edit</span>
+            </li>
+          <li onClick={() => communityDeleteCard(community.id)}>
+            <img src='/img/trash-icon.svg' alt='burger icon' /> <span>Delete</span>
+            </li>
+        </ul>
+      </div>}
+    </div>
+      </div>}
         <div className='card-1-text'>
           <div className='card-1-title'>
             <h3 className='text-1-card valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-32px'>
@@ -77,7 +95,7 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
               {followCount} followers
             </div>
           </div>
-          {creator
+          {(creator || community.auto_follow)
             ? <button className='secondary-btn join-community-btn' onClick={visitCurrentCommunity}>Visit</button>
             : (follower
                 ? <button className='secondary-btn join-community-btn' onClick={followCommunity}>Join community</button>
@@ -86,8 +104,8 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
                   <button className='secondary-btn join-community-btn' onClick={visitCurrentCommunity}>Visit</button>
                   </div>)}
         </div>
+        </div>
       </Background>
-    </div>
   )
 }
 

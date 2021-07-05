@@ -7,6 +7,7 @@
   overflow: hidden;
   width: 100%;
   justify-content: space-between;
+  position: relative;
 }
 
 .card-container {
@@ -118,12 +119,42 @@
 }
 
 .card-edit {
-  padding-right: 2em;
-  padding-top: 2em;
-  width: 100%;
+  position: absolute;
+  right: 24px;
+}
+
+.card-edit-alternate {
+  top: 24px;
+}
+
+.card-edit-button {
+  cursor: pointer;
+}
+
+.dropdown-card-items {
+    background: var(--dropdowns);
+    right: 0;
+    border-radius: 4px;
+    color: #fff;
+    position: absolute;
+}
+
+.dropdown-card-items li {
+  list-style: none;
+  width: 120px;
+  padding: 10px;
+  cursor: pointer;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+}
+
+.dropdown-card-items li span {
+  margin-left: 10px;
+}
+
+.dropdown-card-items li:hover {
+  background-color: var(--background-color);
+  border-radius: 4px;
 }
 
 .card-edit button:first-child {

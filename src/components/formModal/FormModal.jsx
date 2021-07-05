@@ -93,7 +93,7 @@ const FromModal = ({ setActive, openAddCollection, data, setData }) => {
                   title={data ? 'Edit Group' : 'Create Group'}
                   clickHandler={clearData}
                 />
-                <DragDrop files={files} onChange={setFiles} />
+                <DragDrop files={files} onChange={setFiles} dataImg={data && data.filename} tag="group"/>
                 <div className='collection-input-container'>
                   <InputFields
                     type='text'
@@ -147,7 +147,7 @@ const FromModal = ({ setActive, openAddCollection, data, setData }) => {
                   title={data ? 'Edit Group' : 'Create Group'}
                   clickHandler={clearData}
                 />
-                <DragDrop files={files} onChange={setFiles} />
+                <DragDrop files={files} onChange={setFiles} dataImg={data && data.filename} tag="enterprise"/>
                 <div className='collection-input-container'>
                   <InputFields
                     type='text'

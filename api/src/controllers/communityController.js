@@ -147,7 +147,6 @@ const createCommunity = async (req, res) => {
     if (req.file) {
       filename = req.file.filename
     }
-
     if (!req.user.id) {
       return res.json({ message: 'Not authorized to create.' })
     }
@@ -180,7 +179,7 @@ const createCommunity = async (req, res) => {
       if (followCommunity) return res.json({ message: 'Community is Created !!!' }).status(200)
     }
   } catch (error) {
-    res.json({ error: error.message }).status(400)
+    return res.json({ error: error.message }).status(400)
   }
 }
 
@@ -249,14 +248,14 @@ const deleteCommunity = async (req, res) => {
 const updateCommunity = async (req, res) => {
   try {
     const {
-      name, description
+      name, description, file, toggleActive
     } = req.body
 
     let filename = ''
     if (req.file) {
       filename = req.file.filename
     }
-
+    
     if (!req.user.id) {
       return res.json({ message: 'Not authorized to update.' })
     }
@@ -268,9 +267,9 @@ const updateCommunity = async (req, res) => {
       if (community.creatorId !== req.user.id) {
         return res.json({ message: 'Not authorized to update.' })
       }
-
+      
       // auto follow through transactions
-      if (req.body.auto_follow) {
+      if (req.body.auto_follow === 'true') {
         const result = await sequelize.transaction(async (t) => {
           const userIdArrays = await db.User.findAll({ attributes: ['id'] })
 
@@ -300,23 +299,40 @@ const updateCommunity = async (req, res) => {
           }
 
           await db.CommunityUser.bulkCreate(allFollow, { transaction: t })
-          await db.Community.update({ ...req.body, slug: '', attachment: 'community/' + filename },
-            { where: { id } },
-            { transaction: t })
 
-          return 'Community is updated with autoFollow'
+          if(!req.file) {
+            await db.Community.update({...req.body, slug: ''},
+               { where: { id } })
+             return 'Community is updated with autoFollow'
+          }
+
+           await db.Community.update({...req.body, slug: '', attachment: 'community/' + filename},
+               { where: { id } })
+             return 'Community is updated with autoFollow'
         })
 
         return res.json({ message: result })
       } else {
+
+        if(!req.file) {
+          await db.Community.update({
+            name,
+            description
+          },
+          { where: { id }, returning: true, attributes: ['id'] })
+          return res.json({ message: 'Community Updated !!!' }).status(200)
+        }
+  
         await db.Community.update({
-          name,
-          description,
-          attachment: 'community/' + filename
-        },
-        { where: { id }, returning: true, attributes: ['id'] })
-        return res.json({ message: 'Community Updated !!!' }).status(200)
+            name,
+            description,
+            attachment: 'community/' + filename
+          },
+          { where: { id }, returning: true, attributes: ['id'] })
+          return res.json({ message: 'Community Updated !!!' }).status(200)
       }
+
+      
     } else {
       res.status(404)
       throw new Error('Community not found')

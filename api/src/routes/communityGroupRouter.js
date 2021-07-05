@@ -16,6 +16,6 @@ router
   .route('/:groupId/community/:id')
   .get(checkCommunity, getGroupsById)
   .delete(protect, checkCommunity, deleteGroups)
-  .put(protect, checkCommunity, updateGroups)
+  .put(protect, checkCommunity, upload.single('group'), resizeImage, updateGroups)
 
 module.exports = router

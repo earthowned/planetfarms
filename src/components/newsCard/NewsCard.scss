@@ -49,7 +49,7 @@
   flex-direction: column;
   left: 24px;
   position: absolute;
-  top: 50px;
+  top: 6em;
   width: 90%;
 }
 
@@ -111,6 +111,7 @@
   height: 280px;
   width: 100%;
   margin-bottom: 1.2em;
+  border: 1px solid var(--dropdowns);
 }
 
 .news-card-header {
@@ -118,6 +119,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .news-card-header .card-edit {
@@ -168,7 +170,7 @@
 .news-show-date {
   width: 150px;
   color: var(--primary-white);
-  border: 1px solid var(--dropdowns);
+  border: 0.5px solid #FFFFFF;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -177,6 +179,7 @@
   margin-right: 2em;
   margin-top: 1em;
   margin-left: 24px;
+  background: rgba(255, 255, 255, 0.16);
 }
 
 @media only screen and (max-width: 758px) {

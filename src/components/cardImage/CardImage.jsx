@@ -14,7 +14,7 @@ const Follow = () => {
         <div className='flex-row-7'>
           <img
             style={{ height: '20px', width: '20px', cursor: 'pointer' }}
-            src={follow ? 'img/follow-icon.svg' : 'img/followed-icon.svg'}
+            src={follow ? 'img/follow-icon.svg' : '/img/followed-icon.svg'}
             alt='follow'
           />
         </div>
@@ -40,11 +40,11 @@ function CardImage ({ data = [], className }) {
         return (
           <div onClick={() => history.push(`/community-members-profile/${profile.id}`)} key={profile.id} className='card-image-1'>
             <div className='profile-card-image'>
-              <img src={profile?.attachments} alt='group-profile' />
+              <img src={profile?.attachments || '/img/profile-image.svg'} alt='group-profile' />
             </div>
             <div className='profile-card-name'>
-              <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile?.name || 'anonymous'} </div>
-              <div className='card-text ibmplexsans-normal-monsoon-14px '>{profile?.email}</div>
+              <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile?.user.name || 'anonymous'} </div>
+              <div className='card-text ibmplexsans-normal-monsoon-14px '>{profile?.user.email}</div>
             </div>
             {Follow()}
           </div>

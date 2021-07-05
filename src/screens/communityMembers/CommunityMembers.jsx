@@ -15,6 +15,11 @@ function CommunityMembers ({ history }) {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
+  // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
   useEffect(() => {
     if (userInfo) {
       if (search) dispatch(searchMembers(search))
@@ -25,6 +30,7 @@ function CommunityMembers ({ history }) {
   }, [search, dispatch, history, userInfo])
 
   return (
+    <DashboardLayout title={currentCommunity.name}>
     <div className='community-members'>
       <div className='community-members-flex-col'>
         <div className='search-container'>
@@ -35,6 +41,7 @@ function CommunityMembers ({ history }) {
         </div>
       </div>
     </div>
+    </DashboardLayout>
   )
 }
 export default CommunityMembers
