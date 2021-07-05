@@ -5,12 +5,18 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const LoginScreen = () => {
   const history = useHistory()
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(true);
+
+  // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+
   useEffect(() => {
     const userInfo = window.localStorage.getItem('userInfo')
     if (userInfo) {
       setLoggedIn(true)
-      history.push('/community-page-news')
+      history.push(`/community-page-news/${currentCommunity.slug}`)
     } else {
       setLoggedIn(false)
     }
