@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ReactPlayer from 'react-player'
 import { ReactComponent as Play } from '../../assets/images/play.svg'
+import { ReactComponent as BookMark } from '../../assets/images/book-outlined.svg'
 import './Video.scss'
 
 const Video = ({ title, description, url, thumbnail }) => {
@@ -13,6 +14,10 @@ const Video = ({ title, description, url, thumbnail }) => {
             <h1 className='videoTitle'>{title}</h1>
             <p className='videoDesc'>{description}</p>
           </div>
+          <div className='addToLibrary'>
+            <BookMark />
+          </div>
+
           <ReactPlayer
             className='video'
             url={url}

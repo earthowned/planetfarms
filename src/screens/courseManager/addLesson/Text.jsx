@@ -1,3 +1,4 @@
+import './Text.scss'
 const Text = ({ heading, desc }) => {
   return (
     <>

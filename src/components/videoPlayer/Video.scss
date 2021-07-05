@@ -26,13 +26,22 @@
     h1.videoTitle {
       font-size: 1.5em;
       word-wrap: break-word;
-      line-height: 1.25em;
+      line-height: 2em;
       margin-bottom: 0.5em;
+      font-weight: 600;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
     p.videoDesc {
       font-size: 1em;
       line-height: 1.5em;
       width: 80%;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
   .hide {
@@ -40,11 +49,65 @@
   }
 
   svg.play {
-    width: 3em;
+    width: 4em;
+    height: 4em;
     z-index: 1;
   }
   .video {
     border-radius: 0.4em;
+  }
+
+  .addToLibrary {
+    width: 2.8em;
+    height: 3em;
+    background: rgba(255, 255, 255, 0.16);
+    border: 0.5px solid #fff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    right: 1.5em;
+    top: 1.5em;
+    z-index: 1;
+
+    svg {
+      width: 1.7em;
+      height: 1.5em;
+    }
+
+    &:hover {
+      &::after {
+        content: 'Add to my library';
+        width: 140px;
+        height: 30px;
+        position: absolute;
+        right: 80px;
+        top: 10px;
+        color: #000;
+        background: #fff;
+        border-radius: 4px;
+        display: grid;
+        place-items: center;
+      }
+
+      &::before {
+        content: '';
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 65px;
+        top: 10px;
+        color: #000;
+        background: #fff;
+        border-radius: 20px;
+        display: grid;
+        place-items: center;
+        clip-path: polygon(100% 50%, 0 0, 0 100%);
+      }
+    }
   }
 }
 .react-player__preview::before {
@@ -54,5 +117,5 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
 }
