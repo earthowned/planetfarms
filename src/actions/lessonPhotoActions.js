@@ -7,14 +7,11 @@ import {
 } from '../constants/lessonPhotoConstants'
 
 export const createLessonImg =
-  (lessonImgDataToPost, lessonId) => async (dispatch) => {
+  (lessonImg, photoDescription, isImgDesc, lessonId) => async (dispatch) => {
     const lessonImgData = new FormData()
-    lessonImgData.append('lessonImg', lessonImgDataToPost.lessonImg)
-    lessonImgData.append(
-      'photoDescription',
-      lessonImgDataToPost.photoDescription
-    )
-    lessonImgData.append('isImgDesc', lessonImgDataToPost.isImgDesc)
+    lessonImgData.append('lessonImg', lessonImg)
+    lessonImgData.append('photoDescription', photoDescription)
+    lessonImgData.append('isImgDesc', isImgDesc)
     lessonImgData.append('lessonId', lessonId)
 
     try {

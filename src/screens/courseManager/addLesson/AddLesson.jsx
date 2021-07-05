@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createLesson } from '../../../actions/lessonActions'
-import { createVideo } from '../../../actions/videoActions'
-import { createLessonImg } from '../../../actions/lessonPhotoActions'
-import { createLessonText } from '../../../actions/lessonTextActions'
 import { createMaterial } from '../../../actions/materialActions'
+import { addVideo } from './addVideo'
+import { addText } from './addText'
+import { addImage } from './addImage'
 
 import AddTestModal from '../../../components/addTestModal/AddTestModal'
 import BackButton from '../../../components/backButton/BackButton'
@@ -22,6 +22,7 @@ import './AddLesson.scss'
 
 const AddLesson = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const { courseId } = useParams()
   const postLessonData = useSelector((state) => state.addLesson)
 
@@ -33,10 +34,8 @@ const AddLesson = () => {
   const [lessonCover, setLessonCover] = useState(null)
   const [videoDataToPost, setVideoDataToPost] = useState(null)
   const [lessonImgDataToPost, setLessonImgDataToPost] = useState(null)
-  const [lessonText, setLessonText] = useState(null)
+  const [lessonText, setLessonText] = useState([])
   const [material, setMaterial] = useState(null)
-
-  console.log(lessonData)
 
   const { register, errors, handleSubmit } = useForm()
 
@@ -56,23 +55,25 @@ const AddLesson = () => {
       postLessonData.loading === false
     ) {
       const id = postLessonData.course.data.id
+      history.push(`/lesson/${id}`)
       const lessonId = id
+
       if (id) {
-        if (videoDataToPost !== null) {
-          dispatch(createVideo(videoDataToPost, lessonId))
+        if (videoDataToPost) {
+          addVideo(lessonData, lessonId, dispatch)
         }
-        if (lessonImgDataToPost !== null) {
-          dispatch(createLessonImg(lessonImgDataToPost, lessonId))
+        if (lessonImgDataToPost) {
+          addImage(lessonData, lessonId, dispatch)
         }
-        if (lessonText !== null) {
-          dispatch(createLessonText(lessonText, lessonId))
+        if (lessonText) {
+          addText(lessonData, lessonId, dispatch)
         }
         if (material !== null) {
           dispatch(createMaterial(material, lessonId))
         }
       }
     }
-  }, [postLessonData])
+  }, [postLessonData, addVideo, addImage, addText])
 
   return (
     <>
@@ -158,21 +159,16 @@ const AddContent = ({
       <DragDrop onChange={(img) => setLessonCover(img)} />
       {lessonData &&
         lessonData.map((vid, index) => (
-          <>
+          <div key={index}>
             <Video
-              key={vid.videoTitle}
               title={vid.videoTitle}
               description={vid.videoDescription}
               url={vid.videoLink || vid.videoResource?.preview}
               thumbnail={vid.videoCover?.preview}
             />
-            <Image
-              key={vid.lessonImg?.name}
-              src={vid.lessonImg?.preview}
-              desc={vid.photoDescription}
-            />
+            <Image src={vid.lessonImg?.preview} desc={vid.photoDescription} />
             <Text heading={vid.textHeading} desc={vid.textDescription} />
-          </>
+          </div>
         ))}
       <div className='admin-lesson-create-btn-wrapper'>
         <button className='secondary-btn' onClick={() => setVideoModal(true)}>
@@ -197,8 +193,6 @@ const AddContent = ({
 }
 
 const LessonMaterial = ({ material, setMaterial }) => {
-  const [lessonMaterial, setLessonMaterial] = useState([])
-
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
