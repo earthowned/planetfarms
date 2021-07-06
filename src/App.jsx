@@ -42,6 +42,7 @@ import LoginSignUp from './screens/loginSignUp/LoginSignUp'
 import ScrollToTop from './utils/scrollToTop'
 import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
+import UserVerification from './screens/userVerification/UserVerification'
 
 function App () {
   return (
@@ -59,6 +60,9 @@ function App () {
           </Route>
           <Route path='/forgot-password'>
             <ForgotPassword />
+          </Route>
+          <Route path='/verification'>
+            <UserVerification />
           </Route>
           <Route exact path='/calendar/my-events'>
             <CalendarScreen />

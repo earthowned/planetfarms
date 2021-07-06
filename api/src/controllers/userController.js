@@ -290,7 +290,7 @@ const updateUser = async (req, res) => {
           { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
           { where: { userID: id } }
         )
-          .then(() => res.json({ message: 'User Updated !!!' }).status(200))
+          .then(() => res.status(200))
           .catch((err) => res.json({ error: err.message }).status(400))
       } else {
         res.status(404)
