@@ -1,7 +1,8 @@
 const Test = require('../models/testModel')
+const Question = require('../models/questionModel')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-
+const sequelize = require('../config/database.js')
 // @desc    Fetch all tests
 // @route   GET /api/Test
 // @access  Public
@@ -33,17 +34,31 @@ const getLessonTests = (req, res) => {
 // @desc    Add individual Test
 // @route   POST /api/Test/add
 // @access  Public
-const addTest = (req, res) => {
-  const {
-    test_name, lessonId, description
+const addTest = async (req, res) => {
+  try {
+    const {
+    test_name, lessonId, description, questions
   } = req.body
-  Test.create({
-    test_name,
-    description,
-    lessonId
-  })
-    .then(() => res.json({ message: 'Test Created !!!' }).status(200))
-    .catch((err) => res.json({ error: err.message }).status(400))
+
+  const result = await sequelize.transaction(async (t) => {
+
+    const test = await Test.create({
+      test_name,
+      lessonId,
+      description
+    }, { transaction: t });
+  
+    await questions.map(async (item) => await Question.create({...item, testId: test.id}), {transaction: t});
+    // await Question.bulkCreate([...questions, { testId: test.id}], { transaction: t });
+
+    return "test is created with questions.";
+  });
+
+  if(result) res.json({ message: result }).status(200);
+
+  } catch (error) {
+    res.json(error).status(400);
+  }
 }
 
 // @desc    Update a Test
