@@ -110,20 +110,20 @@ const searchMemberName = (req, res) => {
 
   db.CommunityUser.findAll(
     {
-    where: { communityId: req.params.id, active: true },
-    attributes: ['id'],
-    include: [{
-      model: db.User,
-      attributes: ['email', 'firstName'],
-      where: {
-        [Op.or]: [
-          { firstName: { [Op.iLike]: '%' + name + '%' } },
-          { email: { [Op.iLike]: '%' + name + '%' } }
-        ]
-      }
-    }],
-    required: true
-  }
+      where: { communityId: req.params.id, active: true },
+      attributes: ['id'],
+      include: [{
+        model: db.User,
+        attributes: ['email', 'firstName'],
+        where: {
+          [Op.or]: [
+            { firstName: { [Op.iLike]: '%' + name + '%' } },
+            { email: { [Op.iLike]: '%' + name + '%' } }
+          ]
+        }
+      }],
+      required: true
+    }
   )
     .then(member => res.json({ member }).status(200))
     .catch(err => res.json({ error: err }).status(400))

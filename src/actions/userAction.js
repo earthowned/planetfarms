@@ -97,18 +97,18 @@ export const register = (name, password) => async (dispatch) => {
         }
       })
       const response = await Auth.signIn(name, password)
-      userdata = { token: response?.signInUserSession?.idToken?.jwtToken }
-      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: response?.attributes?.sub }, {
+      userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
+      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
         headers: {
-          Authorization: 'Bearer ' + response?.signInUserSession?.idToken?.jwtToken
+          Authorization: 'Bearer ' + userdata.token
         }
       })
         .catch(err => console.log(err))
     }
+    window.localStorage.setItem('userInfo', JSON.stringify(userdata))
     dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata })
     dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata })
-    window.localStorage.setItem('userInfo', JSON.stringify(userdata))
-    routingCommunityNews()
+    // routingCommunityNews(false)
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -118,19 +118,26 @@ export const register = (name, password) => async (dispatch) => {
 }
 
 export const login = (name, password) => async (dispatch) => {
+  let data = {}
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
-    const response = await Auth.signIn(name, password)
-    const data = { token: response?.signInUserSession?.idToken?.jwtToken || '' }
-    // const config = { headers: { 'Content-Type': 'application/json' } }
-    // const { data } = await axios.post(
-    //   `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
-    //   { name, password },
-    //   config
-    // )
+    if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
+      const config = { headers: { 'Content-Type': 'application/json' } }
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
+        { name, password },
+        config
+      )
+    } else {
+      const response = await Auth.signIn(name, password)
+      data = {
+        token: response?.signInUserSession?.idToken?.jwtToken || '',
+        id: response?.attributes?.sub || ''
+      }
+    }
     window.localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
-    routingCommunityNews()
+    routingCommunityNews(true)
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -337,9 +344,10 @@ export const changePassword = (username, oldPassword, newPassword) => async (dis
   }
 }
 
-const routingCommunityNews = async () => {
+export const routingCommunityNews = async (route = false) => {
   const userdata = localStorage.getItem('userInfo')
   const token = JSON.parse(userdata).token
+  console.log(token)
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -348,5 +356,7 @@ const routingCommunityNews = async () => {
   }
   const communityData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities/user`, config)
   localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
-  document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
+  if (route) {
+    document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
+  }
 }

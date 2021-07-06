@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
-const { changeFormat } = require('../helpers/filehelpers');
+const { changeFormat } = require('../helpers/filehelpers')
 // @desc    Fetch all enterprises
 // @route   GET /api/enterprises
 // @access  Public
@@ -177,7 +177,7 @@ const getEnterprisesById = (req, res) => {
   )
     .then(enterprises => {
       if (enterprises) {
-        res.json({...enterprises.dataValues, filename: changeFormat(enterprises.dataValues.filename)})
+        res.json({ ...enterprises.dataValues, filename: changeFormat(enterprises.dataValues.filename) })
       } else {
         res.status(404)
         throw new Error('Enterprises not found')
@@ -235,10 +235,10 @@ const updateEnterprises = (req, res) => {
     title, description, roles
   } = req.body
 
-     let filename = ''
-    if (req.file) {
-      filename = req.file.filename
-    }
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
 
   const id = req.params.enterpriseId
   db.Enterprise.findByPk(id,
@@ -255,7 +255,7 @@ const updateEnterprises = (req, res) => {
       if (enterprises.creatorId !== req.user.id) return res.json({ message: 'Not authorized to update' })
       const { id } = enterprises
 
-      if(filename) {
+      if (filename) {
         db.Enterprise.update({
           title, description, roles, filename: 'enterprise/' + filename
         },
@@ -270,7 +270,6 @@ const updateEnterprises = (req, res) => {
           .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))
           .catch((err) => res.json({ error: err.message }).status(400))
       }
-
     } else {
       res.status(404)
       throw new Error('Enterprises not found')
@@ -295,7 +294,7 @@ const searchEnterprisesTitle = (req, res) => {
     }]
   })
     .then(enterprises => res.json({
-   enterprises: enterprises.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) }))
+      enterprises: enterprises.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) }))
     }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }

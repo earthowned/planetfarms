@@ -172,17 +172,17 @@ export const communityUpdate = (newCommunity) => async (dispatch) => {
   try {
     dispatch({ type: COMMUNITY_UPDATE_REQUEST })
     const formData = new FormData()
-      formData.append('name', newCommunity.name)
-      formData.append('description', newCommunity.description)
-      formData.append('community', newCommunity.file)
-      formData.append('category', newCommunity.category)
-      formData.append('auto_follow', newCommunity.toggleActive)
-    
-      const {id} = newCommunity;
+    formData.append('name', newCommunity.name)
+    formData.append('description', newCommunity.description)
+    formData.append('community', newCommunity.file)
+    formData.append('category', newCommunity.category)
+    formData.append('auto_follow', newCommunity.toggleActive)
+
+    const { id } = newCommunity
     const config = await configFunc()
     const data = await axios.put(
             `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`,
-           formData, config
+            formData, config
     )
     dispatch({
       type: COMMUNITY_UPDATE_SUCCESS,

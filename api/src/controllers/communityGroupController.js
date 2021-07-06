@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
-const { changeFormat } = require('../helpers/filehelpers');
+const { changeFormat } = require('../helpers/filehelpers')
 
 const paginate = ({ page, pageSize }) => {
   const offset = page * pageSize
@@ -172,7 +172,7 @@ const getGroupsById = (req, res) => {
   })
     .then(groups => {
       if (groups) {
-        res.json({...groups.dataValues, filename: changeFormat(groups.dataValues.filename)})
+        res.json({ ...groups.dataValues, filename: changeFormat(groups.dataValues.filename) })
       } else {
         res.status(404)
         throw new Error('Community Groups not found')
@@ -228,10 +228,10 @@ const updateGroups = (req, res) => {
     title, description, category
   } = req.body
 
-   let filename = ''
-    if (req.file) {
-      filename = req.file.filename
-    }
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
 
   const id = req.params.groupId
 
@@ -249,7 +249,7 @@ const updateGroups = (req, res) => {
       if (groups.creatorId !== req.user.id) return res.json({ message: 'Not authorized to update' })
       const { id } = groups
 
-      if(filename) {
+      if (filename) {
         db.Group.update({
           title, description, category, filename: 'group/' + filename
         },
@@ -258,13 +258,12 @@ const updateGroups = (req, res) => {
           .catch((err) => res.json({ error: err.message }).status(400))
       } else {
         db.Group.update({
-            title, description, category
-          },
-          { where: { id } })
-            .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
-            .catch((err) => res.json({ error: err.message }).status(400))
+          title, description, category
+        },
+        { where: { id } })
+          .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
       }
-
     } else {
       return res.status(404).json({ message: 'Groups not found' })
     }
@@ -287,9 +286,9 @@ const searchGroupsTitle = (req, res) => {
       where: { id: req.params.id }
     }]
   })
-    .then(groups => res.json({ 
-     groups: groups.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.filename) }))
-     }).status(200))
+    .then(groups => res.json({
+      groups: groups.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.filename) }))
+    }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 

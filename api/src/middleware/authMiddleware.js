@@ -1,16 +1,12 @@
 const jwt = require('jsonwebtoken')
-const db = require('../models');
-// const LocalAuth = require('../models/localAuthModel.js')
-// const User = require('../models/userModel.js')
 const jwkToPem = require('jwk-to-pem')
 const jwk = require('./jwks.json')
-const LocalAuth = require('../models/localAuthModel.js')
-const User = require('../models/userModel.js')
-
+const db = require('../models')
+// const LocalAuth = require('../models/localAuthModel.js')
+// const User = require('../models/userModel.js')
 const pem = jwkToPem(jwk.keys[0])
 
-const protect = async (req, res, next) => {
-  let token
+module.exports = async (req, res, next) => {
   let decoded
   let recoded
   if (
@@ -18,7 +14,7 @@ const protect = async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     try {
-      token = req.headers.authorization.split(' ')[1]
+      const token = req.headers.authorization.split(' ')[1]
       if (process.env.AUTH_METHOD !== 'cognito') {
         decoded = jwt.verify(token, process.env.JWT_SECRET)
       }
@@ -29,10 +25,10 @@ const protect = async (req, res, next) => {
       * TODO: Maintain session and check again local session
       */
       if (process.env.AUTH_METHOD !== 'cognito') {
-        req.user = await LocalAuth.findByPk(decoded.id)
+        req.user = await db.LocalAuth.findByPk(decoded.id)
       } else {
         // req.user = await User.findOne({ where: { userID: decoded.id } })
-        req.user = await User.findOne({ where: { userID: recoded.sub } })
+        req.user = await db.User.findOne({ where: { userID: recoded.sub } })
       }
       next()
     } catch (error) {

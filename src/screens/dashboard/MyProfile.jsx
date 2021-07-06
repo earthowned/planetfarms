@@ -20,7 +20,7 @@ function MyProfile () {
   const userDetails = useSelector((state) => state.userDetails)
   console.log(userDetails)
   const { user } = userDetails
-console.log(user)
+  console.log(user)
   useEffect(() => {
     if (userInfo) {
       dispatch(getMyDetails())

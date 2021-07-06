@@ -166,13 +166,13 @@ const CommunityHeader = ({ setActive, search, setSearch }) => {
 }
 
 const CommunityModal = ({ setActive, data, setEditData }) => {
-  const [files, setFiles] = useState();
+  const [files, setFiles] = useState()
   const [toggleActive, setToggleActive] = useState(data ? data.auto_follow : false)
 
   const { error } = useSelector(state => state.addCommunity)
   const { register: regi, errors, handleSubmit } = useForm()
   const dispatch = useDispatch()
-  
+
   function addCommunity ({ communityName, description, category }) {
     if (communityName && description) {
       dispatch(createCommunity({ file: files, name: communityName, description, category, toggleActive }))
@@ -211,7 +211,7 @@ const CommunityModal = ({ setActive, data, setEditData }) => {
             {error && <div className='error-header'>
               <div className='error'>{error}</div>
             </div>}
-            <DragDrop files={files} onChange={setFiles} dataImg={data && data.attachment} tag="community" />
+            <DragDrop files={files} onChange={setFiles} dataImg={data && data.attachment} tag='community' />
             <InputFields
               type='text'
               placeholder='Community Name'

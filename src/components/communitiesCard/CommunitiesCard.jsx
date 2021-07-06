@@ -57,34 +57,34 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
   }
 
   const communityEditCard = (id) => {
-    editCard(id);
+    editCard(id)
     setDropDown(false)
   }
 
   const communityDeleteCard = (id) => {
-    deleteCard(id);
+    deleteCard(id)
     setDropDown(false)
   }
   return (
-      <Background image={community.attachment} tag="/community/">
-        <div ckey={community.id} className='community-card'>
+    <Background image={community.attachment} tag='/community/'>
+      <div ckey={community.id} className='community-card'>
         {creator && <div className='card-edit card-edit-alternate'>
-        <div>
-      <div onClick={() => setDropDown(!dropDown)} className="card-edit-button">
-        <img src='/img/more-horizontal.svg' alt='burger icon' />
-      </div>
-      {dropDown && <div className='dropdown-card-items'>
-        <ul>
-          <li onClick={() => communityEditCard(community.id)}>
-            <img src='/img/edit-icon.svg' alt='burger icon' /> <span>Edit</span>
-            </li>
-          <li onClick={() => communityDeleteCard(community.id)}>
-            <img src='/img/trash-icon.svg' alt='burger icon' /> <span>Delete</span>
-            </li>
-        </ul>
-      </div>}
-    </div>
-      </div>}
+          <div>
+            <div onClick={() => setDropDown(!dropDown)} className='card-edit-button'>
+              <img src='/img/more-horizontal.svg' alt='burger icon' />
+            </div>
+            {dropDown && <div className='dropdown-card-items'>
+              <ul>
+                <li onClick={() => communityEditCard(community.id)}>
+                  <img src='/img/edit-icon.svg' alt='burger icon' /> <span>Edit</span>
+                </li>
+                <li onClick={() => communityDeleteCard(community.id)}>
+                  <img src='/img/trash-icon.svg' alt='burger icon' /> <span>Delete</span>
+                </li>
+              </ul>
+                         </div>}
+          </div>
+                    </div>}
         <div className='card-1-text'>
           <div className='card-1-title'>
             <h3 className='text-1-card valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-32px'>
@@ -102,10 +102,10 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
                 : <div className='community-switch-btn-group'>
                   <button className='secondary-btn unfollow-community-btn' onClick={followCommunity}>Unfollow</button>
                   <button className='secondary-btn join-community-btn' onClick={visitCurrentCommunity}>Visit</button>
-                  </div>)}
+                </div>)}
         </div>
-        </div>
-      </Background>
+      </div>
+    </Background>
   )
 }
 

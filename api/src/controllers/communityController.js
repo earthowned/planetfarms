@@ -2,7 +2,7 @@ const db = require('../models')
 const Sequelize = require('sequelize')
 const { sequelize } = require('../models')
 const Op = Sequelize.Op
-const { changeFormat } = require('../helpers/filehelpers');
+const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc Fetch all communities
 // @route GET/api/communities
@@ -192,7 +192,7 @@ const getCommunityById = async (req, res) => {
   db.Community.findByPk(id)
     .then(communities => {
       if (communities) {
-        res.json({...communities.dataValues, attachment: changeFormat(communities.dataValues.attachment)})
+        res.json({ ...communities.dataValues, attachment: changeFormat(communities.dataValues.attachment) })
       } else {
         res.status(404)
         throw new Error('Community not found')
@@ -255,7 +255,7 @@ const updateCommunity = async (req, res) => {
     if (req.file) {
       filename = req.file.filename
     }
-    
+
     if (!req.user.id) {
       return res.json({ message: 'Not authorized to update.' })
     }
@@ -267,7 +267,7 @@ const updateCommunity = async (req, res) => {
       if (community.creatorId !== req.user.id) {
         return res.json({ message: 'Not authorized to update.' })
       }
-      
+
       // auto follow through transactions
       if (req.body.auto_follow === 'true') {
         const result = await sequelize.transaction(async (t) => {
@@ -300,21 +300,20 @@ const updateCommunity = async (req, res) => {
 
           await db.CommunityUser.bulkCreate(allFollow, { transaction: t })
 
-          if(!req.file) {
-            await db.Community.update({...req.body, slug: ''},
-               { where: { id } })
-             return 'Community is updated with autoFollow'
+          if (!req.file) {
+            await db.Community.update({ ...req.body, slug: '' },
+              { where: { id } })
+            return 'Community is updated with autoFollow'
           }
 
-           await db.Community.update({...req.body, slug: '', attachment: 'community/' + filename},
-               { where: { id } })
-             return 'Community is updated with autoFollow'
+          await db.Community.update({ ...req.body, slug: '', attachment: 'community/' + filename },
+            { where: { id } })
+          return 'Community is updated with autoFollow'
         })
 
         return res.json({ message: result })
       } else {
-
-        if(!req.file) {
+        if (!req.file) {
           await db.Community.update({
             name,
             description
@@ -322,17 +321,15 @@ const updateCommunity = async (req, res) => {
           { where: { id }, returning: true, attributes: ['id'] })
           return res.json({ message: 'Community Updated !!!' }).status(200)
         }
-  
-        await db.Community.update({
-            name,
-            description,
-            attachment: 'community/' + filename
-          },
-          { where: { id }, returning: true, attributes: ['id'] })
-          return res.json({ message: 'Community Updated !!!' }).status(200)
-      }
 
-      
+        await db.Community.update({
+          name,
+          description,
+          attachment: 'community/' + filename
+        },
+        { where: { id }, returning: true, attributes: ['id'] })
+        return res.json({ message: 'Community Updated !!!' }).status(200)
+      }
     } else {
       res.status(404)
       throw new Error('Community not found')
@@ -350,7 +347,7 @@ const searchCommunityName = (req, res) => {
   const order = req.query.order || 'ASC'
 
   db.Community.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['name', order]] })
-    .then(communities => res.json({ 
+    .then(communities => res.json({
       communities: communities.map(rec => ({ ...rec.dataValues, attachment: changeFormat(rec.attachment) }))
     }).status(200))
     .catch(err => res.json({ error: err }).status(400))
@@ -380,9 +377,9 @@ const searchUserCommunityName = (req, res) => {
     where: { name: { [Op.iLike]: '%' + name + '%' } },
     order: [['name', order]]
   })
-    .then(communities => res.json({ 
+    .then(communities => res.json({
       communities: communities.map(rec => ({ ...rec.dataValues, attachment: changeFormat(rec.attachment) }))
-     }).status(200))
+    }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 

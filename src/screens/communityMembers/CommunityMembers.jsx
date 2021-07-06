@@ -16,9 +16,9 @@ function CommunityMembers ({ history }) {
   const { userInfo } = userLogin
 
   // fetching current community
-const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
+  const currentCommunity = localStorage.getItem('currentCommunity')
+    ? JSON.parse(localStorage.getItem('currentCommunity'))
+    : null
 
   useEffect(() => {
     if (userInfo) {

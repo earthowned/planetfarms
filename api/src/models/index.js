@@ -26,7 +26,7 @@ const db = {
   News: require('./newsModel')(sequelize, Sequelize.DataTypes),
   GroupUser: require('./groupUserModal')(sequelize, Sequelize.DataTypes),
   EnterpriseUser: require('./enterpriseUserModal')(sequelize, Sequelize.DataTypes),
-  LocalAuth: require('./localAuthModel')(sequelize, Sequelize.DataTypes),
+  LocalAuth: require('./localAuthModel')(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach(modelName => {

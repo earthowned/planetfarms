@@ -85,7 +85,7 @@ const Enterprise = () => {
             <div className='enterpriseCard'>
               {pathname === `/enterprises/${currentCommunity.slug}`
                 ? <CommunityGroupCard
-                    type="enterprise"
+                    type='enterprise'
                     location='/community-group-view-page/:id'
                     data={enterprises}
                     editCard={editCard}
@@ -93,7 +93,7 @@ const Enterprise = () => {
                     deleteCard={deleteCard}
                   />
                 : <CommunityGroupCard
-                    type="enterprise"
+                    type='enterprise'
                     location='/community-group-view-page/:id'
                     data={userEnterprises}
                     editCard={editCard}

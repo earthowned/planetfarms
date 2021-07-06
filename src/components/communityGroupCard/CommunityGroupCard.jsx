@@ -61,41 +61,43 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
   }
 
   const groupEditCard = (id) => {
-    editCard(id);
-    setDropDown(false);
+    editCard(id)
+    setDropDown(false)
   }
 
   const groupDeleteCard = (id) => {
-    deleteCard(id);
-    setDropDown(false);
+    deleteCard(id)
+    setDropDown(false)
   }
 
   return (
     <div key={item.id} className='card-1 border-1px-onyx'>
       {creator && <div className='card-edit card-edit-alternate'>
         <div>
-      <div onClick={() => setDropDown(!dropDown)} className="card-edit-button">
-        <img src='/img/more-horizontal.svg' alt='burger icon' />
-      </div>
-      {dropDown && <div className='dropdown-card-items'>
-        <ul>
-          <li onClick={() => groupEditCard(item.id)}>
-            <img src='/img/edit-icon.svg' alt='burger icon' /> <span>Edit</span>
-            </li>
-          <li onClick={() => groupDeleteCard(item.id)}>
-            <img src='/img/trash-icon.svg' alt='burger icon' /> <span>Delete</span>
-            </li>
-        </ul>
+          <div onClick={() => setDropDown(!dropDown)} className='card-edit-button'>
+            <img src='/img/more-horizontal.svg' alt='burger icon' />
+          </div>
+          {dropDown && <div className='dropdown-card-items'>
+            <ul>
+              <li onClick={() => groupEditCard(item.id)}>
+                <img src='/img/edit-icon.svg' alt='burger icon' /> <span>Edit</span>
+              </li>
+              <li onClick={() => groupDeleteCard(item.id)}>
+                <img src='/img/trash-icon.svg' alt='burger icon' /> <span>Delete</span>
+              </li>
+            </ul>
+                       </div>}
+        </div>
       </div>}
-    </div>
-      </div>}
-      <div className='card-container' style={{ 
-        background: `linear-gradient(359.99deg, rgba(25, 28, 33, 0.4) 10.01%, rgba(25, 28, 33, 0.4) 40.99%), 
+      <div
+        className='card-container' style={{
+          background: `linear-gradient(359.99deg, rgba(25, 28, 33, 0.4) 10.01%, rgba(25, 28, 33, 0.4) 40.99%), 
         url(${process.env.REACT_APP_CDN_BASE_URL + '/' + type + '/' + item.filename})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        }} />
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
       <div className='community-group-card-inner-content'>
         <div onClick={() => history.push(`/community-group-view-page/${item.id}`)} className='card-text-container'>
           <div className='farmers ibmplexsans-semi-bold-caribbean-green-14px'>

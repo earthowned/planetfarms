@@ -140,11 +140,11 @@ export const groupUpdate = (newGroup) => async (dispatch) => {
     formData.append('group', newGroup.file)
     formData.append('category', newGroup.category)
 
-    const { id} = newGroup
+    const { id } = newGroup
     const config = configFunc()
     const data = await axios.put(
             `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`,
-           formData,
+            formData,
             config
     )
 
