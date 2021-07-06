@@ -42,17 +42,15 @@ const MoreCourse = () => {
       <div className='more-course-feature-container'>
         <MoreCourseTitle />
         <div className='more-course-container'>
-          {moreCourseData.map((data) => {
-            return (
-              <>
-                <MoreCourseItem data={data} />
-              </>
-            )
+          {moreCourseData.map((data, index) => {
+            return <MoreCourseItem key={index} data={data} />
           })}
         </div>
-        {
-          screenSize < 650 && <div className='secondary-btn-container margin-left-1'><Secondarybtn name='See all users' /></div>
-        }
+        {screenSize < 650 && (
+          <div className='secondary-btn-container margin-left-1'>
+            <Secondarybtn name='See all users' />
+          </div>
+        )}
       </div>
     </>
   )

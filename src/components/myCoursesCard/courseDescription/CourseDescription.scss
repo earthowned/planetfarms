@@ -24,6 +24,10 @@
 .course-title {
   font-size: 32px;
   font-weight: 600;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .course-desc {
@@ -31,6 +35,10 @@
   margin-top: 24px;
   color: var(--primary-white);
   text-align: justify;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .course-page-name {

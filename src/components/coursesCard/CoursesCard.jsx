@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, Link } from 'react-router-dom'
 import useGetFetchData from '../../utils/useGetFetchData'
 import { GET_COURSE } from '../../utils/urlConstants'
 
@@ -9,7 +9,6 @@ import './CoursesCard.scss'
 
 const CoursesCard = ({ category, setModalActive }) => {
   const { data: courseData } = useGetFetchData('course', GET_COURSE)
-  console.log(courseData)
   return (
     <div className='course-card-wrapper'>
       <div className='courses-card-container'>
@@ -79,8 +78,10 @@ function Star ({ num }) {
 function CardContent ({ item }) {
   return (
     <div className='card-content'>
-      <h3>{item.title}</h3>
-      <h3>{item.author}</h3>
+      <Link to={`/course/${item.id}`}>
+        <h1>{item.title}</h1>
+        <h3>{item.author}</h3>
+      </Link>
       <div className='course-stars'>
         <Star num={item.stars} />
         <p>({item.total} total)</p>
@@ -102,10 +103,7 @@ function EnrollContainer ({ item }) {
           <span>You're subscriber</span>
         </button>
       ) : (
-        <button
-          className='join-btn'
-          onClick={() => history.push(`/course/${item.id}`)}
-        >
+        <button className='join-btn'>
           <span>Join Course</span>
         </button>
       )}

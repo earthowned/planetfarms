@@ -36,8 +36,8 @@ const ProgressBar = ({ data, isLoading }) => {
   isLoading && console.log('Loading....')
   const courseData = data?.data
   const lessonData = courseData?.lessons
-
-  const lessonLength = 5
+  console.log(lessonData.length)
+  const lessonLength = lessonData.length
   const lessonIndicator = lessonLength * (115 / lessonLength)
   const accurateIndicator = lessonIndicator === 115 ? 92 : lessonIndicator
   const windowWidth = useSizeFinder()
@@ -112,7 +112,7 @@ const CourseDetail = ({
               <DropDownCourse setFeedbackModal={setFeedbackModal} />
             )}
           </div>
-          <p className='course-desc'>{data?.description}</p>
+          <p className='course-desc'>{data?.data?.description}</p>
           {/* lesson progress bar */}
           <ProgressBar data={data} isLoading={isLoading} />
         </div>
@@ -152,13 +152,14 @@ const DropDownCourse = ({ setFeedbackModal }) => {
 }
 
 const LessonCourse = ({ data, setPurchaseModal }) => {
+  console.log(data)
   return (
     <div className='lessons-container'>
       {data?.data?.isFree === false && (
         <div className='purchase-course-wrapper'>
           <div className='purchase-course'>
             <h4>
-              Buy this course for <span>$59.99</span>
+              Buy this course for <span>${data?.data?.price}</span>
             </h4>
             <div>
               <Button
