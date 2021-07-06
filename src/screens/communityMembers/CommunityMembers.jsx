@@ -31,16 +31,16 @@ const currentCommunity = localStorage.getItem('currentCommunity')
 
   return (
     <DashboardLayout title={currentCommunity.name}>
-    <div className='community-members'>
-      <div className='community-members-flex-col'>
-        <div className='search-container'>
-          <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
-        </div>
-        <div className='community-members-grid-row'>
-          {members && <CardImage follow='Follow' data={members.data || members} />}
+      <div className='community-members'>
+        <div className='community-members-flex-col'>
+          <div className='search-container'>
+            <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
+          </div>
+          <div className='community-members-grid-row'>
+            {members && <CardImage follow='Follow' data={members.data || members} />}
+          </div>
         </div>
       </div>
-    </div>
     </DashboardLayout>
   )
 }

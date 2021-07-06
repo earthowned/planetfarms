@@ -80,9 +80,9 @@ const authUser = async (req, res) => {
     
     if (user) {
       await res.json({
-        token: generateToken(user.dataValues.userID),
-        id: user.dataValues.id,
-        userID: user.dataValues.userID
+        //userID: user.dataValues.userID
+        token: username,
+        id: username
       })
     } else {
       await res.status(401).json({
@@ -104,8 +104,9 @@ const localAuth = async (name, password) => {
 
 const cognitoAuth = async (name, password) => {
   const user = await Auth.signIn(name, password)
-  const newUser = await db.User.findOne({where: {userID: user?.attributes?.sub}})
-  return newUser
+  return user?.signInUserSession?.idToken?.jwtToken || ''
+  /*const newUser = await db.User.findOne({where: {userID: user?.attributes?.sub}})
+  return newUser*/
 }
 
 // @desc    Register a new user
@@ -113,16 +114,19 @@ const cognitoAuth = async (name, password) => {
 // @access  Public
 const registerUser = async (req, res) => {
   try {
-    const { name, password } = req.body
+    const { name, password, email, id } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
-      const registeredUser = await Auth.signUp({ username: name, password })
+      // const registeredUser = await Auth.signUp({
+      //   username: name,
+      //   password,
+      //   attributes: {
+      //     email
+      //   }
+      // })
+      // await User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       const user = await db.User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       if (user && subscribeCommunity(user)) {
-        res.status(201).json({
-          id: user.dataValues.id,
-          userID: user.dataValues.userID,
-          token: generateToken(user.dataValues.id)
-        })
+        res.status(201).send('SUCCESS')
       }
     } else {
       registerLocal(name, password, res)
@@ -156,7 +160,6 @@ const registerLocal = async (name, password, res) => {
   } catch (error) {
     res.json(error);
   }
-  
 }
 
 const subscribeCommunity = async (user) => {
@@ -324,7 +327,7 @@ const updateUser = async (req, res) => {
           { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
           { where: { userID: id } }
         )
-          .then(() => res.json({ message: 'User Updated !!!' }).status(200))
+          .then(() => res.status(200))
           .catch((err) => res.json({ error: err.message }).status(400))
       } else {
         res.status(404)

@@ -45,7 +45,7 @@ console.log(user)
               <ContactInformation user={user} />
               <AdditionalInformation user={user} />
             </div>
-            <EditInformation clickHandler={editUserInformation} image={user.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
+            <EditInformation clickHandler={editUserInformation} image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
           </div>
         </div>
       </div>
