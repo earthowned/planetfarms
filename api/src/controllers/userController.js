@@ -78,7 +78,7 @@ const authUser = async (req, res) => {
     const username = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
     if (username) {
       await res.json({
-        token: generateToken(username),
+        token: username,
         id: username
       })
     } else {
@@ -100,7 +100,7 @@ const localAuth = async (name, password) => {
 
 const cognitoAuth = async (name, password) => {
   const user = await Auth.signIn(name, password)
-  return user?.attributes?.sub || ''
+  return user?.signInUserSession?.idToken?.jwtToken || ''
 }
 
 // @desc    Register a new user
@@ -108,17 +108,18 @@ const cognitoAuth = async (name, password) => {
 // @access  Public
 const registerUser = async (req, res) => {
   try {
-    const { name, password, email } = req.body
+    const { name, password, email, id } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
-      const registeredUser = await Auth.signUp({
-        username: name,
-        password,
-        attributes: {
-          email
-        }
-      })
-      res.send({ token: generateToken(registeredUser.userSub) })
-      await User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
+      // const registeredUser = await Auth.signUp({
+      //   username: name,
+      //   password,
+      //   attributes: {
+      //     email
+      //   }
+      // })
+      // await User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
+      await User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
+      res.status(201).send('SUCCESS')
     } else {
       registerLocal(name, password, email, res)
     }
@@ -286,7 +287,7 @@ const updateUser = async (req, res) => {
           { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
           { where: { userID: id } }
         )
-          .then(() => res.json({ message: 'User Updated !!!' }).status(200))
+          .then(() => res.status(200))
           .catch((err) => res.json({ error: err.message }).status(400))
       } else {
         res.status(404)
