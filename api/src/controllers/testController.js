@@ -11,7 +11,7 @@ const getTests = (req, res) => {
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['test_name', order]]
   Test.findAll({ offset: page, limit: pageSize, order: ordervalue })
-    .then(news => res.json({ news, page, pageSize }).status(200))
+    .then(tests => res.json({ tests, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
 
@@ -26,7 +26,7 @@ const getLessonTests = (req, res) => {
   Test.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {
       lessonId: req.params.id
   } })
-    .then(news => res.json({ news, page, pageSize }).status(200))
+    .then(tests => res.json({ tests, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
 
