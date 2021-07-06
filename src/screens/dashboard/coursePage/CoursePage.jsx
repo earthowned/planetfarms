@@ -18,7 +18,13 @@ function MyCoursePage ({ unpaid }) {
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
 
   const { courseId } = useParams()
-  const { data } = useGetFetchData('singleCourse', GET_COURSE + '/' + courseId)
+  const { data, isLoading } = useGetFetchData(
+    'singleCourse',
+    GET_COURSE + '/' + courseId
+  )
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
 
   return (
     <>

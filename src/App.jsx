@@ -156,7 +156,6 @@ function App () {
             {/* <Route exact path="/mycoursepage">
               <MyCoursePage />
             </Route> */}
-            {/* lesson view page */}
             <Route path='/lesson/:id'>
               <LessonPage />
             </Route>
