@@ -37,23 +37,17 @@ Amplify.configure({
   Auth: {
     // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
     // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
-
     // REQUIRED - Amazon Cognito Region
     region: process.env.REACT_APP_COGNITO_REGION,
-
     // OPTIONAL - Amazon Cognito Federated Identity Pool Region
     // Required only if it's different from Amazon Cognito Region
     // identityPoolRegion: 'XX-XXXX-X',
-
     // OPTIONAL - Amazon Cognito User Pool ID
     userPoolId: process.env.REACT_APP_COGNITO_POOL_ID,
-
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
     userPoolWebClientId: process.env.REACT_APP_COGNITO_CLIENT_ID,
-
     // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
     mandatorySignIn: false,
-
     // OPTIONAL - Configuration for cookie storage
     // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
     /* cookieStorage: {
@@ -69,16 +63,12 @@ Amplify.configure({
       // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
           secure: true
       }, */
-
     // OPTIONAL - customized storage object
     // storage: MyStorage,
-
     // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
     authenticationFlowType: 'USER_PASSWORD_AUTH',
-
     // OPTIONAL - Manually set key value pairs that can be passed to Cognito Lambda Triggers
     // clientMetadata: { myCustomKey: 'myCustomValue' },
-
     // OPTIONAL - Hosted UI configuration
     oauth: {
       domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
@@ -95,7 +85,6 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST })
     dispatch({ type: USER_LOGIN_REQUEST })
     let userdata
-
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
       const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
       userdata = data
@@ -108,7 +97,6 @@ export const register = (name, password) => async (dispatch) => {
         }
       })
       const response = await Auth.signIn(name, password)
-      console.log('response: ', response)
       userdata = { token: response?.signInUserSession?.idToken?.jwtToken }
       await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: response?.attributes?.sub }, {
         headers: {
@@ -131,11 +119,8 @@ export const register = (name, password) => async (dispatch) => {
 export const login = (name, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
-
     const response = await Auth.signIn(name, password)
-
     const data = { token: response?.signInUserSession?.idToken?.jwtToken || '' }
-
     // const config = { headers: { 'Content-Type': 'application/json' } }
     // const { data } = await axios.post(
     //   `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
@@ -189,8 +174,6 @@ export const getMyDetails = () => async (dispatch, getState) => {
       numberOfVisit: data.numberOfVisit,
       attachments: data.attachments
     }
-    console.log('data: ', data)
-    console.log('userdata: ', userdata)
     dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message
@@ -226,7 +209,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
       given_name: user.firstName,
       family_name: user.lastName,
       birthdate: user.birthday,
-      phone_number: user.phone ? '+' + user.phone : ''
+      phone_number: user.phone ? user.phone : ''
     })
 
     const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)

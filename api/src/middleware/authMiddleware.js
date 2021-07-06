@@ -20,10 +20,8 @@ const protect = async (req, res, next) => {
         decoded = jwt.verify(token, process.env.JWT_SECRET)
       }
       jwt.verify(token, pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
-        console.log('Error: ' + err)
         recoded = decodedToken
       })
-      console.log('Decoded: ', recoded)
       /*
       * TODO: Maintain session and check again local session
       */
@@ -35,7 +33,6 @@ const protect = async (req, res, next) => {
       }
       next()
     } catch (error) {
-      console.error(error)
       res.status(401).json({
         error: 'Not authorized, token failed'
       })

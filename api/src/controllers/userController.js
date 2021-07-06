@@ -76,10 +76,8 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     const username = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
-    console.log('Access Token: ', username)
     if (username) {
       await res.json({
-        // token: generateToken(username),
         token: username,
         id: username
       })
@@ -119,10 +117,9 @@ const registerUser = async (req, res) => {
       //     email
       //   }
       // })
-      console.log(req.body)
       // await User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       await User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
-      res.status(201).send('SUCESS')
+      res.status(201).send('SUCCESS')
     } else {
       registerLocal(name, password, email, res)
     }

@@ -10,7 +10,7 @@ import { ReactComponent as UserAvatar } from '../../assets/images/user-green-out
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 
 const UserVerification = () => {
-  const [code, setCode] = useState('123456')
+  const [code, setCode] = useState(null)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)
@@ -89,8 +89,8 @@ const UserVerification = () => {
                     required: {
                       value: true,
                       message: 'You must enter code'
-                    },
-                    validate: v => v === code || 'You must enter correct code'
+                    }
+                    // validate: v => v === code || 'You must enter correct code'
                   })}
                   errors={errors}
                 >

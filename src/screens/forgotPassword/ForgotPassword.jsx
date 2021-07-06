@@ -9,9 +9,8 @@ import { login } from '../../actions/userAction'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 
-
 const ForgotPassword = () => {
-  const [code, setCode] = useState("123456")
+  const [code, setCode] = useState('123456')
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)
@@ -53,7 +52,6 @@ const ForgotPassword = () => {
     setShowConfirmPassword(!showConfirmPassword)
   }
 
-
   return (
     <SignLayout>
       <form className='sign' onSubmit={handleSubmit(onSubmit)}>
@@ -75,8 +73,8 @@ const ForgotPassword = () => {
           >
             <UserAvatar />
           </Input>
-          {isVerifiedUser ?
-            <>
+          {isVerifiedUser
+            ? <>
 
               <Input
                 placeholder='Code'
@@ -136,15 +134,12 @@ const ForgotPassword = () => {
                 <Button name='Change Password' onClick={changePassword} />
                 <Button name='Resend Code' onClick={resendCode} />
               </div>
-            </> :
+              </>
 
-            <div className='btnWrapper'>
+            : <div className='btnWrapper'>
               <Button name='I already have code' onClick={alreadyHaveCode} />
               <Button name='Send Code' onClick={sendCode} />
-            </div>
-          }
-
-
+              </div>}
 
           <div className='option'>
             <p className='transparent16px'>
