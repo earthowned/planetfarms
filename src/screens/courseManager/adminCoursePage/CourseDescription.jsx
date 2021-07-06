@@ -2,7 +2,6 @@ import { GET_THUMBNAIL } from '../../../utils/urlConstants'
 import Filter from '../../../components/filter/Filter'
 
 const CourseDescription = ({ data }) => {
-  console.log(data)
   return (
     <div className='admin-course-page-container'>
       <div className='admin-course-img-wrapper'>

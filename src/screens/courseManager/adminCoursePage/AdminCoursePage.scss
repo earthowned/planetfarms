@@ -98,14 +98,52 @@
   display: flex;
 }
 
-.admin-lesson > div img {
-  width: 264px;
-  height: 160px;
-  margin-right: 24px;
+.coverImg {
+  width: 16.5em;
+  height: 10em;
+  margin-right: 1.5em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--dropdowns);
+  border-radius: 0.2em;
+  overflow: hidden;
+
+  &__img {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__text {
+    div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--background-color-light);
+
+      p {
+        font-size: 2em;
+      }
+    }
+  }
+  p {
+    width: 100%;
+  }
+}
+.lessonTitle {
+  font-size: 1.5em;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
-.admin-lesson > div div {
-  width: 50%;
+.admin-lesson .lessonInfo {
+  width: 65%;
   display: flex;
   flex-direction: column;
   text-align: justify;
@@ -129,6 +167,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--background-color-light);
 }
 
 .add-lesson-btn {
@@ -172,22 +211,32 @@
 
   .admin-lesson {
     flex-direction: column;
-    width: 70%;
+    width: 100%;
     height: auto;
+    position: relative;
   }
 
   .admin-lesson > div {
     flex-direction: column;
   }
 
-  .admin-lesson > div img {
+  .admin-lesson .coverImg {
     width: 100%;
-    object-position: center;
-    object-fit: cover;
     margin-right: 0;
+
+    &__img {
+      height: 16.5em;
+      opacity: 0.7;
+
+      img {
+        width: 100%;
+        height: 100%;
+        margin-right: 0;
+      }
+    }
   }
 
-  .admin-lesson > div div {
+  .admin-lesson .lessonInfo {
     width: 100%;
     margin-top: 16px;
   }
@@ -197,8 +246,11 @@
   }
 
   .lesson-btn {
-    margin-top: 16px;
-    width: 160px;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    width: 3.5em;
+    height: 3.3em;
   }
 }
 
@@ -215,11 +267,14 @@
     width: 100%;
   }
 
-  .lesson-btn {
-    width: 100%;
-  }
-
   .study-course-wrapper {
     padding: 16px;
+  }
+}
+
+@media (max-width: 478px) {
+  .secondary-btn.lesson-btn {
+    width: 2.5em;
+    height: 2.5em;
   }
 }

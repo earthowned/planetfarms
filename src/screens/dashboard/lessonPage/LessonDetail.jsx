@@ -4,7 +4,7 @@ import {
   GET_COVERIMG,
   GET_VIDEO,
   VIDEO_COVER,
-  LESSON_IMG
+  LESSON_IMG,
 } from '../../../utils/urlConstants'
 
 import Video from '../../../components/videoPlayer/Video'
@@ -30,9 +30,9 @@ const LessonDetail = ({ data }) => {
   const newData = lessonData.flat()
 
   return (
-    <div className='lesson-description-wrapper'>
+    <div className="lesson-description-wrapper">
       <h1>{data?.data?.title}</h1>
-      <div className='lesson-description-img-wrapper'>
+      <div className="lesson-description-img-wrapper">
         <img
           src={`${GET_COVERIMG}${data?.data?.coverImg}`}
           alt={`${data?.data?.title}_img`}
@@ -64,23 +64,6 @@ const LessonDetail = ({ data }) => {
             )}
           </div>
         ))}
-
-      {data?.data?.videos.map((video) => {
-        return (
-          <Video
-            key={video.id}
-            title={video.videoTitle}
-            description={video.videoDescription}
-            url={
-              video.videoLink === 'undefined'
-                ? `${GET_VIDEO}${video.videoResource}`
-                : video.videoLink
-            }
-            thumbnail={`${VIDEO_COVER}${video.videoCover}`}
-          />
-        )
-      })}
-
       <LessonTest />
     </div>
   )

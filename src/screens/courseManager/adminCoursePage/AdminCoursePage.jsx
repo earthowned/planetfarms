@@ -20,7 +20,7 @@ const AdminCoursePage = () => {
     <DashboardLayout title='Course page'>
       <BackButton location='/admin/courses' />
       <CourseDescription data={data} isLoading={isLoading} />
-      <LessonBlock courseId={courseId} />
+      <LessonBlock courseId={courseId} data={data} />
       <div className='study-course-wrapper'>
         <h3>Also study this course</h3>
         <p>
