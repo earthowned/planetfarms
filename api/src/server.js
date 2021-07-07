@@ -86,8 +86,8 @@ Material.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
 Lessons.belongsTo(Courses, { constraints: true, foreignKey: 'courseId' })
 Courses.hasMany(Lessons)
 
-// 1:m association between lesson and test
-Lessons.hasMany(Test, {foreignKey: 'lessonId'});
+// 1:1 association between lesson and test
+Lessons.hasOne(Test, {foreignKey: 'lessonId'});
 Test.belongsTo(Lessons, {foreignKey: 'lessonId'});
 
 // 1:m association between test and question
