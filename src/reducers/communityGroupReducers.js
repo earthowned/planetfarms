@@ -11,7 +11,22 @@ import {
   GROUP_LIST_BYID_REQUEST,
   GROUP_LIST_BYID_SUCCESS,
   GROUP_LIST_BYID_FAIL,
-  GROUP_CREATE_RESET
+  GROUP_CREATE_RESET,
+  GROUP_UPDATE_REQUEST,
+  GROUP_UPDATE_SUCCESS,
+  GROUP_UPDATE_FAIL,
+  GROUP_DELETE_REQUEST,
+  GROUP_DELETE_SUCCESS,
+  GROUP_DELETE_FAIL,
+  GROUP_FOLLOW_REQUEST,
+  GROUP_FOLLOW_SUCCESS,
+  GROUP_FOLLOW_FAIL,
+  USER_GROUP_LIST_REQUEST,
+  USER_GROUP_LIST_SUCCESS,
+  USER_GROUP_LIST_FAIL,
+  USER_GROUP_SEARCH_REQUEST,
+  USER_GROUP_SEARCH_SUCCESS,
+  USER_GROUP_SEARCH_FAIL
 
 } from '../constants/communityGroupConstants'
 
@@ -24,7 +39,8 @@ export const groupListReducer = (state = { groups: [] }, action) => {
         loading: false,
         groups: action.payload.groups,
         pages: action.payload.pages,
-        page: action.payload.page
+        page: action.payload.page,
+        totalPages: action.payload.totalPages
       }
     case GROUP_LIST_FAIL:
       return { loading: false, error: action.payload }
@@ -61,11 +77,79 @@ export const groupCreateReducer = (state = {}, action) => {
     case GROUP_CREATE_REQUEST:
       return { loading: true }
     case GROUP_CREATE_SUCCESS:
-      return { loading: false, success: true, group: action.payload }
+      return { loading: false, success: action.payload }
     case GROUP_CREATE_FAIL:
       return { loading: false, error: action.payload }
     case GROUP_CREATE_RESET:
       return {}
+    default:
+      return state
+  }
+}
+
+export const groupUpdateReducer = (state = { success: false }, action) => {
+  switch (action.type) {
+    case GROUP_UPDATE_REQUEST:
+      return { ...state, loading: true }
+    case GROUP_UPDATE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case GROUP_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const groupDeleteReducer = (state = { success: false }, action) => {
+  switch (action.type) {
+    case GROUP_DELETE_REQUEST:
+      return { ...state, loading: true }
+    case GROUP_DELETE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case GROUP_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const groupFollowReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GROUP_FOLLOW_REQUEST:
+      return { loading: true }
+    case GROUP_FOLLOW_SUCCESS:
+      return { loading: false, success: true }
+    case GROUP_FOLLOW_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userGroupListReducer = (state = { userGroups: [] }, action) => {
+  switch (action.type) {
+    case USER_GROUP_LIST_REQUEST:
+      return { loading: true, userGroups: [] }
+    case USER_GROUP_LIST_SUCCESS:
+      return {
+        loading: false,
+        userGroups: action.payload.groups,
+        pages: action.payload.pages,
+        page: action.payload.page,
+        totalPages: action.payload.totalPages
+      }
+    case USER_GROUP_LIST_FAIL:
+      return { loading: false, error: action.payload }
+    case USER_GROUP_SEARCH_REQUEST:
+      return { loading: true, userGroups: [] }
+    case USER_GROUP_SEARCH_SUCCESS:
+      return {
+        loading: false,
+        userGroups: action.payload.groups,
+        order: action.payload.order
+      }
+    case USER_GROUP_SEARCH_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

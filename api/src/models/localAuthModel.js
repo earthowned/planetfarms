@@ -1,18 +1,25 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
 
-const LocalAuth = db.define('localauths', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+module.exports = (sequelize, DataTypes) => {
+  const LocalAuth = sequelize.define('localauths', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    username: {
+      type: DataTypes.STRING
+    },
+    password: {
+      type: DataTypes.STRING
+    }
   },
-  username: {
-    type: Sequelize.STRING
-  },
-  password: {
-    type: Sequelize.STRING
+  { timestamps: true }
+  )
+
+  LocalAuth.associate = (models) => {
+    LocalAuth.hasOne(models.User, {
+      foreignKey: 'userID'
+    })
   }
-})
-
-module.exports = LocalAuth
+  return LocalAuth
+}

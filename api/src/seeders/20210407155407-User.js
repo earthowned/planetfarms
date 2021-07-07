@@ -3,7 +3,8 @@ const faker = require('faker')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    let amount = 20
+    const data = []
+    let amount = 10
     const date = new Date()
 
     const profiledata = [] // for userProfiles table

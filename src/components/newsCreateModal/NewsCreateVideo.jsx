@@ -63,7 +63,7 @@ const CreateVideo = ({ getRootProps, getInputProps, files, setFiles, videoActive
                   <span>OR</span> <button className='secondary-btn'>Choose video</button>
                 </div>
               </div>
-              <Button name='Add Video block' clickHandler={addVideo} />
+              <Button name='Add Video block' onClick={addVideo} />
             </div>
           </div>
         </div>

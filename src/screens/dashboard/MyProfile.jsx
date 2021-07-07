@@ -18,8 +18,9 @@ function MyProfile () {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const userDetails = useSelector((state) => state.userDetails)
+  console.log(userDetails)
   const { user } = userDetails
-
+  console.log(user)
   useEffect(() => {
     if (userInfo) {
       dispatch(getMyDetails())
@@ -44,7 +45,7 @@ function MyProfile () {
               <ContactInformation user={user} />
               <AdditionalInformation user={user} />
             </div>
-            <EditInformation clickHandler={editUserInformation} image={user.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
+            <EditInformation clickHandler={editUserInformation} image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
           </div>
         </div>
       </div>

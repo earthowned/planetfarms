@@ -21,10 +21,20 @@
   width: 100%;
 }
 
+.community-card {
+  width: 100%;
+  height: 528px;
+  padding: 24px;
+  position: relative;
+  border: 1px solid var(--dropdowns);
+  border-radius: 4px;
+}
+
 .card-1-text {
-  align-items: flex-start;
+  justify-content: flex-end;
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 100%;
 }
 
@@ -38,6 +48,11 @@
 .text-1-card {
   letter-spacing: 0;
   line-height: 40px;
+}
+
+.text-1-description {
+  color: var(--primary-white);
+  font-size: 18px;
 }
 
 .valign-text-middle {
@@ -72,6 +87,17 @@
 .join-community-btn {
   font-weight: 600;
   font-size: 16px;
+  margin-top: 40px;
+}
+
+.community-switch-btn-group {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.community-switch-btn-group button {
+  width: 150px;
   margin-top: 40px;
 }
 

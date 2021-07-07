@@ -1,59 +1,70 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
+import { visitCommunity } from '../../actions/communityActions'
 import Calendar from '../calendar/Calendar'
-
 import './Sidebar.css'
-
-const mainnav = [
-  {
-    name: 'Ragarians',
-    slug: '/community-page-news',
-    image: <RagIcon />,
-    dropdown: [
-      {
-        name: 'Members',
-        slug: '/community-members',
-        initial: 'Me'
-      },
-      {
-        name: 'Groups',
-        slug: '/community-group',
-        initial: 'Gr'
-      },
-      {
-        name: 'Enterprises',
-        slug: '/enterprises',
-        initial: 'En'
-      }
-    ]
-  },
-  {
-    name: 'Library',
-    slug: '/library',
-    image: <Book />,
-    dropdown: []
-  },
-  {
-    name: 'Courses',
-    slug: '/courses',
-    image: <Cap />,
-    dropdown: []
-  },
-  {
-    name: 'Calendar',
-    slug: '/calendar/my-events',
-    image: <CalendarIcon />,
-    dropdown: []
-  }
-]
 
 const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
   const [dropdownActive, setDropdownActive] = useState(true)
+  const { currentCommunity } = useSelector(state => state.activeCommunity)
   const history = useHistory()
   const handleToggle = () => {
     setToggle(!toggle)
     setDropdownActive(!toggle)
   }
+  const dispatch = useDispatch()
+
+  const mainnav = [
+    {
+      name: currentCommunity ? currentCommunity.name : 'PlanetFarms',
+      slug: `/community-page-news/${currentCommunity && currentCommunity.slug}`,
+      image: <RagIcon />,
+      dropdown: [
+        {
+          name: 'Members',
+          slug: `/community-members/${currentCommunity && currentCommunity.slug}`,
+          initial: 'Me'
+        },
+        {
+          name: 'Groups',
+          slug: `/community-group/${currentCommunity && currentCommunity.slug}`,
+          initial: 'Gr'
+        },
+        {
+          name: 'Enterprises',
+          slug: `/enterprises/${currentCommunity && currentCommunity.slug}`,
+          initial: 'En'
+        }
+      ]
+    },
+    {
+      name: 'Library',
+      slug: '/library',
+      image: <Book />,
+      dropdown: []
+    },
+    {
+      name: 'Courses',
+      slug: '/courses',
+      image: <Cap />,
+      dropdown: []
+    },
+    {
+      name: 'Calendar',
+      slug: '/calendar/my-events',
+      image: <CalendarIcon />,
+      dropdown: []
+    }
+  ]
+
+  useEffect(() => {
+    const currentCommunity = localStorage.getItem('currentCommunity')
+      ? JSON.parse(localStorage.getItem('currentCommunity'))
+      : null
+
+    if (!currentCommunity) dispatch(visitCommunity(3))
+  }, [])
   return (
     <>
       {

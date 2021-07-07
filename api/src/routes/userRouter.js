@@ -8,19 +8,18 @@ const {
   forgotPasswordSubmit,
   resendCode,
   confirmSignUpWithCode,
-  getUserById,
   getUserProfileByUserID,
   getMyProfile,
   getUsers,
   updateUser,
   searchUserName
 } = require('../controllers/userController.js')
-const { protect } = require('../middleware/authMiddleware')
+
+const protect = require('../middleware/authMiddleware')
 const { upload } = require('../helpers/filehelpers')
 
 router.route('/').post(registerUser).get(protect, getUsers)
 router.route('/profile').get(protect, getMyProfile).put(protect, upload.single('attachments'), updateUser)
-router.route('/:id').get(protect, getUserById).put(protect, updateUser)
 router.route('/profile/:userID').get(protect, getUserProfileByUserID).put(protect, updateUser)
 router.post('/login', authUser)
 router.route('/search').get(searchUserName)

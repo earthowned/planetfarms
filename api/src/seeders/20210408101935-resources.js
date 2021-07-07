@@ -4,7 +4,7 @@ const faker = require('faker')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const data = []
-    let amount = 50
+    let amount = 10
 
     while (amount--) {
       data.push({

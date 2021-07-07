@@ -48,7 +48,7 @@ const CreateImage = ({ getRootProps, getInputProps, files, setFiles, imageActive
                   <p className='error-message'>{imageDescriptionError ? 'Please enter Video Description' : ' '} </p>
                   </div>
                 : <div />}
-              <Button name='Add block' clickHandler={addImage} />
+              <Button name='Add block' onClick={addImage} />
             </div>
           </div>
         </div>
