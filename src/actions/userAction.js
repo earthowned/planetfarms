@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
+import { configFunc } from '../utils/apiFunc'
 
 import {
   USER_DETAILS_FAIL,
@@ -153,7 +154,7 @@ export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
     const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+    const config = await configFunc()
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile/${id}`, config)
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
   } catch (error) {
@@ -169,8 +170,7 @@ export const getMyDetails = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
     const { userLogin: { userInfo } } = getState()
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-
+    const config = configFunc()
     const { attributes } = await Auth.currentAuthenticatedUser()
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, config)
     const userdata = {
@@ -251,7 +251,7 @@ export const listUsers = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_LIST_REQUEST })
     const { userLogin: { userInfo } } = getState()
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+    const config = configFunc()
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users`, config)
     dispatch({ type: USER_LIST_SUCCESS, payload: data })
   } catch (error) {
@@ -282,7 +282,8 @@ export const searchUsers = (search) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   Auth.signOut().then(
     () => {
-      window.localStorage.removeItem('userInfo')
+      window.localStorage.clear()
+      //window.localStorage.removeItem('userInfo')
       dispatch({ type: USER_LOGOUT })
       document.location.href = '/login'
     }

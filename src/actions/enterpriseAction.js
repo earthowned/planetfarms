@@ -22,7 +22,7 @@ import {
   USER_ENTERPRISE_LIST_SUCCESS,
   USER_ENTERPRISE_LIST_FAIL
 } from '../constants/enterpriseConstants'
-import configFunc from '../utils/ConfigFunc'
+import { configFunc } from '../utils/apiFunc'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_DELETE_FAIL, COMMUNITY_DELETE_REQUEST, COMMUNITY_DELETE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, COMMUNITY_UPDATE_FAIL, COMMUNITY_UPDATE_REQUEST, COMMUNITY_UPDATE_SUCCESS, COMMUNITY_VISIT_FAIL, COMMUNITY_VISIT_REQUEST, COMMUNITY_VISIT_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from '../constants/communityConstants'
-import configFunc from '../utils/ConfigFunc'
+import { configFunc, getApi } from '../utils/apiFunc'
+import { logout } from '../actions/userAction'
 
 export const listCommunities = ({ pageNumber }) => async (
   dispatch
@@ -52,15 +53,15 @@ export const listUserCommunities = ({ userPageNumber = '' }) => async (
 ) => {
   try {
     dispatch({ type: USER_COMMUNITY_LIST_REQUEST })
-    const config = await configFunc()
-    const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user?pageNumber=${userPageNumber}`, config
+    const { data } = await getApi(
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities/user?pageNumber=${userPageNumber}`
     )
     dispatch({
       type: USER_COMMUNITY_LIST_SUCCESS,
       payload: data
     })
   } catch (error) {
+    console.log(error)
     dispatch({
       type: USER_COMMUNITY_LIST_FAIL,
       payload:

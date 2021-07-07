@@ -25,7 +25,7 @@ import {
   USER_GROUP_LIST_SUCCESS,
   USER_GROUP_LIST_FAIL
 } from '../constants/communityGroupConstants'
-import configFunc from '../utils/ConfigFunc'
+import { configFunc } from '../utils/apiFunc'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')

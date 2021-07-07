@@ -26,9 +26,11 @@ module.exports = async (req, res, next) => {
       */
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.LocalAuth.findByPk(decoded.id)
-      } else {
+      } else if(recoded) {
         // req.user = await User.findOne({ where: { userID: decoded.id } })
         req.user = await db.User.findOne({ where: { userID: recoded.sub } })
+      } else {
+        throw Error('User not found')
       }
       next()
     } catch (error) {
@@ -37,4 +39,7 @@ module.exports = async (req, res, next) => {
       })
     }
   }
+  res.status(401).json({
+    error: 'Not authorized, token failed'
+  })
 }

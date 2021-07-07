@@ -20,7 +20,7 @@ import {
   NEWS_UPDATE_SUCCESS,
   NEWS_UPDATE_FAIL
 } from '../constants/newsConstants'
-import configFunc from '../utils/ConfigFunc'
+import { configFunc } from '../utils/apiFunc'
 
 import { logout } from './userAction'
 
@@ -77,8 +77,8 @@ export const createNews = (newNews) => async (dispatch, getState) => {
   try {
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
-    // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData)
+    const config = configFunc()
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, config)
 
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     dispatch({ type: NEWS_CLEAR, payload: data })
