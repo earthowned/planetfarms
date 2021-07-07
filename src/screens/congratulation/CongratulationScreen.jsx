@@ -17,12 +17,21 @@ function CongratulationScreen () {
   const [profileImage, setProfileImage] = useState(null)
   const dispatch = useDispatch()
 
-  const { register, errors, handleSubmit } = useForm()
-
+  
   const location = useLocation()
   const history = useHistory()
   const editInformations = location?.state?.editInformations
   const userdetail = location?.state?.user
+
+  const { register, errors, handleSubmit } = useForm({
+    defaultValues: {
+      firstName: userdetail?.firstName,
+      lastName: userdetail?.lastName,
+      email: userdetail?.email,
+      phone: userdetail?.phone,
+      birthday: userdetail?.dateOfBirth
+    }
+  })
 
   const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
@@ -85,7 +94,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.lastName}
                 noIcon='noIcon'
               />
             </div>
@@ -104,7 +112,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.email}
                 noIcon='noIcon'
               />
             </div>
@@ -120,7 +127,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.phone}
                 noIcon='noIcon'
               />
             </div>
@@ -139,7 +145,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.dateOfBirth && moment(userdetail.dateOfBirth).format('YYYY-MM-DD')}
                 noIcon='noIcon'
               />
             </div>
