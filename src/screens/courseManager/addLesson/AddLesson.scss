@@ -18,6 +18,10 @@
   font-size: 40px;
   /* margin-bottom: 40px; */
   color: var(--primary-white);
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .admin-lesson-create-container .drag-drop-container {
@@ -43,6 +47,22 @@
 .add-lesson-drag .avatar {
   width: 100%;
   height: 452px;
+}
+.editimg {
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1em;
+
+  p {
+    font-size: 1.25em;
+    padding: 1em;
+  }
 }
 
 .dropzone-container > div {
@@ -106,6 +126,19 @@
   padding: 0 40px;
   border-radius: 4px;
   color: var(--primary-white);
+
+  @media (max-width: 800px) {
+    #lesson-cancel-btn {
+      width: auto;
+      padding-left: 3em;
+      padding-right: 3em;
+    }
+  }
+  @media (max-width: 730px) {
+    flex-direction: column;
+    height: auto;
+    padding: 1em;
+  }
 }
 
 .primary-btn {

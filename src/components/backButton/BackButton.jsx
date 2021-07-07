@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 const BackButton = ({ location }) => {
   return (
-
     <div className='back-btn-container'>
       <Link className='back-link' to={location}>
         <div className='back-btn-inner-container'>

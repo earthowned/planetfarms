@@ -1,23 +1,26 @@
 import React, { useState } from 'react'
+import { useHistory, Link } from 'react-router-dom'
 import useHideOnClick from '../../../utils/useHideOnClick'
 
-const LessonActions = () => {
+const LessonActions = ({ id }) => {
+  const history = useHistory()
   const [actionActive, setActionActive] = useState(false)
-
-  let domNode = useHideOnClick(() => {
+  const domNode = useHideOnClick(() => {
     setActionActive(false)
   })
   return (
-    <div className="actions" ref={domNode}>
+    <div className='actions' ref={domNode}>
       <button
-        className="secondary-btn lesson-btn"
+        className='secondary-btn lesson-btn'
         onClick={() => setActionActive(!actionActive)}
       >
-        <img src="/img/more-horizontal.svg" alt="horizontal icon" />
+        <img src='/img/more-horizontal.svg' alt='horizontal icon' />
       </button>
       {actionActive && (
         <ul className={actionActive ? 'show' : 'hide'}>
-          <li>Edit</li>
+          <Link to={`/admin/edit-lesson/${id}`}>
+            <li>Edit</li>
+          </Link>
           <li>Delete</li>
         </ul>
       )}
