@@ -1,16 +1,21 @@
 const express = require('express')
 const router = express.Router()
-const { upload } = require('../helpers/filehelpers')
+const checkCommunity = require('../middleware/checkCommunity')
+const { upload, resizeImage } = require('../helpers/filehelpers')
+const protect = require('../middleware/authMiddleware')
+const {
+  getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises,
+  updateEnterprises, searchEnterprisesTitle, getUserEnterprises
+} = require('../controllers/enterprisesController')
 
-const { getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises, updateEnterprises, searchEnterprisesTitle } = require('../controllers/enterprisesController')
-
-router.route('/').get(getEnterprises)
-router.route('/add').post(upload.single('enterprise'), addEnterprises)
-router.route('/search').get(searchEnterprisesTitle)
+router.route('/community/:id').get(protect, checkCommunity, getEnterprises)
+router.route('/community/:id/user').get(protect, checkCommunity, getUserEnterprises)
+router.route('/add/community/:id').post(protect, checkCommunity, upload.single('enterprise'), resizeImage, addEnterprises)
+router.route('/community/:id/search').get(checkCommunity, searchEnterprisesTitle)
 router
-  .route('/:id')
-  .get(getEnterprisesById)
-  .delete(deleteEnterprises)
-  .put(updateEnterprises)
+  .route('/:enterpriseId/community/:id')
+  .get(checkCommunity, getEnterprisesById)
+  .delete(protect, checkCommunity, deleteEnterprises)
+  .put(protect, checkCommunity, upload.single('enterprise'), resizeImage, updateEnterprises)
 
 module.exports = router

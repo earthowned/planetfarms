@@ -1,7 +1,7 @@
-const Enterprises = require('../models/enterprisesModel')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-
+const db = require('../models')
+const { changeFormat } = require('../helpers/filehelpers')
 // @desc    Fetch all enterprises
 // @route   GET /api/enterprises
 // @access  Public
@@ -11,42 +11,173 @@ const paginate = ({ page, pageSize }) => {
   return { offset, limit }
 }
 
-const getEnterprises = (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
-  const order = req.query.order || 'DESC'
-  const ordervalue = order && [['title', order]]
-  Enterprises.findAll({ offset: page, limit: pageSize, ordervalue })
-    .then(enterprises => {
-      paginate({ page, pageSize })
-      res.json({ enterprises, page, pageSize }).status(200)
+// @desc Fetch all enterprises by a community
+// @route GET/api/enterprises/community/:id
+// @access Pirvate
+
+const getEnterprises = async (req, res) => {
+  const pageSize = 3
+  const page = Number(req.query.pageNumber) || 1
+  // const order = req.query.order || 'DESC'
+  // const ordervalue = order && [['name', order]]
+  try {
+    const enterprises = await db.Enterprise.findAndCountAll({
+      offset: (page - 1) * pageSize,
+      limit: pageSize,
+      // ordervalue,
+      order: [['createdAt', 'DESC']],
+      where: { deleted: false, communityId: req.params.id },
+      attributes: {
+        include: [
+          [
+            db.sequelize.literal(`(
+                          SELECT COUNT("userId")
+                          FROM enterprises_users
+                          WHERE "enterpriseId" = enterprises.id AND active = true
+                    )`),
+            'enterpriseFollowersCount'
+          ],
+          [
+            db.sequelize.literal(`
+                      CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+                        ELSE 'false'
+                      END
+                    `), 'isCreator'
+          ],
+          [
+            db.sequelize.literal(`(
+                          SELECT COUNT("userId") 
+                          FROM enterprises_users
+                          WHERE "enterpriseId" = enterprises.id AND active = true AND "userId" = ${req.user.id}
+                    )`),
+            'isFollowed'
+          ]
+        ],
+        exclude: ['deleted']
+      }
     })
-    .catch((err) => res.json({ err }).status(400))
+
+    const totalPages = Math.ceil(enterprises.count / pageSize)
+    res.json({
+      enterprises: enterprises.rows.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) })),
+      totalItems: enterprises.count,
+      totalPages,
+      page,
+      pageSize
+    }).status(200)
+  } catch (error) {
+    res.json(error)
+  }
+}
+
+// @desc Fetch all enterprises by a community
+// @route GET/api/enterprises/community/:id/user
+// @access Pirvate
+
+const getUserEnterprises = async (req, res) => {
+  const pageSize = 3
+  const page = Number(req.query.pageNumber) || 1
+  // const order = req.query.order || 'DESC'
+  // const ordervalue = order && [['name', order]]
+  try {
+    const enterprises = await db.Enterprise.findAndCountAll({
+      offset: (page - 1) * pageSize,
+      limit: pageSize,
+      // ordervalue,
+      order: [['createdAt', 'DESC']],
+      where: { deleted: false, communityId: req.params.id },
+      attributes: {
+        include: [
+          [
+            db.sequelize.literal(`(
+                          SELECT COUNT("userId")
+                          FROM enterprises_users
+                          WHERE "enterpriseId" = enterprises.id AND active = true
+                    )`),
+            'enterpriseFollowersCount'
+          ],
+          [
+            db.sequelize.literal(`
+                      CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+                        ELSE 'false'
+                      END
+                    `), 'isCreator'
+          ],
+          [
+            db.sequelize.literal(`(
+                          SELECT COUNT("userId") 
+                          FROM enterprises_users
+                          WHERE "enterpriseId" = enterprises.id AND active = true AND "userId" = ${req.user.id}
+                    )`),
+            'isFollowed'
+          ]
+        ],
+        exclude: ['deleted']
+      },
+      include: [{
+        model: db.User,
+        as: 'enterprise_followers',
+        attributes: [],
+        where: { id: req.user.id },
+        through: {
+          attributes: [],
+          where: { active: true }
+        }
+      }]
+    })
+
+    const totalPages = Math.ceil(enterprises.count / pageSize)
+    res.json({
+      enterprises: enterprises.rows.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) })),
+      totalItems: enterprises.count,
+      totalPages,
+      page,
+      pageSize
+    }).status(200)
+  } catch (error) {
+    res.json(error)
+  }
 }
 
 // @desc    Add individual enterprises
-// @route   POST /api/enterprises/add
+// @route   POST /api/enterprises/add/community/:id
 // @access  Public
-const addEnterprises = (req, res) => {
-  let filename = ''
-  if (req.file) {
-    filename = req.file.filename
+const addEnterprises = async (req, res) => {
+  try {
+    let filename = ''
+    if (req.file) {
+      filename = req.file.filename
+    }
+
+    const followEnterprise = await db.sequelize.transaction(async (t) => {
+      const enterprise = await db.Enterprise.create({ ...req.body, communityId: req.params.id, creatorId: req.user.id, slug: '', filename: 'uploads/' + filename }, { transaction: t })
+      await db.EnterpriseUser.create({ userId: req.user.id, enterpriseId: enterprise.id }, { transaction: t })
+      return true
+    })
+    if (followEnterprise) return res.json({ message: 'Enterprise is Created !!!' }).status(200)
+  } catch (error) {
+    res.json(error)
   }
-  Enterprises.create({ ...req.body, filename })
-    .then(() => res.json({ message: 'Enterprises Created !!!' }).status(200))
-    .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Fetch single enterprises
-// @route   GET /api/enterprises/:id
+// @route   GET /api/enterprises/:enterpriseId/community/:id
 // @access  Public
 const getEnterprisesById = (req, res) => {
-  const id = req.params.id
+  const id = req.params.enterpriseId
 
-  Enterprises.findByPk(id)
+  db.Enterprise.findByPk(id,
+    {
+      include: [{
+        model: db.Community,
+        attributes: ['id'],
+        where: { id: req.params.id }
+      }]
+    }
+  )
     .then(enterprises => {
       if (enterprises) {
-        res.json(enterprises)
+        res.json({ ...enterprises.dataValues, filename: changeFormat(enterprises.dataValues.filename) })
       } else {
         res.status(404)
         throw new Error('Enterprises not found')
@@ -55,54 +186,125 @@ const getEnterprisesById = (req, res) => {
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
-const deleteEnterprises = (req, res) => {
-  const id = req.params.id
-  Enterprises.findByPk(id).then(enterprises => {
+// @desc    Delete single enterprises
+// @route   DELETE /api/enterprises/:enterpriseId/community/:id
+// @access  Private
+const deleteEnterprises = async (req, res) => {
+  try {
+    // const id = req.params.id
+
+    if (!req.user.id) {
+      return res.json({ message: 'Not authorized to delete.' })
+    }
+    const enterprise = await db.Enterprise.findByPk(req.params.enterpriseId, { where: { communityId: req.params.id } })
+
+    if (enterprise) {
+      const { id } = enterprise
+      if (enterprise.creatorId !== req.user.id) {
+        return res.json({ message: 'Not authorized to delete.' })
+      }
+
+      const result = await db.sequelize.transaction(async (t) => {
+        const enterpriseUserIds = await db.EnterpriseUser.findAll({ where: { enterpriseId: id } }, { transaction: t })
+
+        enterpriseUserIds.forEach(async function (enterpriseId) {
+          const { id } = enterpriseId
+          await db.EnterpriseUser.update({ active: false }, { where: { id } }, { transaction: t })
+        })
+
+        await db.Enterprise.update({ deleted: true }, { where: { id } }, { transaction: t })
+
+        return 'Enterprise Deleted with links.'
+      })
+
+      return res.json({ message: result }).status(200)
+    } else {
+      res.status(404)
+      throw new Error('Enterprise not found')
+    }
+  } catch (error) {
+    res.json(error)
+  }
+}
+
+// @desc    Update a enterprises
+// @route   UPDATE /api/enterprises/:enterpriseId/community/:id
+// @access  Private
+const updateEnterprises = (req, res) => {
+  const {
+    title, description, roles
+  } = req.body
+
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
+  }
+
+  const id = req.params.enterpriseId
+  db.Enterprise.findByPk(id,
+    {
+      where: { creatorId: req.user.id },
+      include: [{
+        model: db.Community,
+        attributes: ['id'],
+        where: { id: req.params.id }
+      }]
+    }
+  ).then(enterprises => {
     if (enterprises) {
+      if (enterprises.creatorId !== req.user.id) return res.json({ message: 'Not authorized to update' })
       const { id } = enterprises
-      Enterprises.destroy({ where: { id } })
-        .then(() => res.json({ message: 'Enterprises Deleted !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
+
+      if (filename) {
+        db.Enterprise.update({
+          title, description, roles, filename: 'enterprise/' + filename
+        },
+        { where: { id } })
+          .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      } else {
+        db.Enterprise.update({
+          title, description, roles
+        },
+        { where: { id } })
+          .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))
+          .catch((err) => res.json({ error: err.message }).status(400))
+      }
     } else {
       res.status(404)
       throw new Error('Enterprises not found')
     }
-  })
-}
-
-// @desc    Update a enterprises
-// @route   PUT /api/enterprises/:id
-// @access  Public
-const updateEnterprises = (req, res) => {
-  const {
-    title, description, roles, attachments
-  } = req.body
-  const id = req.params.id
-  Enterprises.findByPk(id).then(enterprises => {
-    if (enterprises) {
-      const { id } = enterprises
-      Enterprises.update({
-        title, description, roles, attachments
-      },
-      { where: { id } })
-        .then(() => res.json({ message: 'Enterprises Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
-    }
-    res.status(404)
-    throw new Error('Enterprises not found')
-  })
+  }).catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Search title
-// @route   POST /api/enterprises/search
+// @route   GET /api/enterprises/:enterpriseId/community/:id/search
 // @access  Private
 const searchEnterprisesTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  Enterprises.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
-    .then(enterprises => res.json({ enterprises }).status(200))
+  db.Enterprise.findAll({
+    where: { title: { [Op.iLike]: '%' + title + '%' } },
+    order: [['title', order]],
+    include: [{
+      model: db.Community,
+      attributes: ['id'],
+      where: { id: req.params.id }
+    }]
+  })
+    .then(enterprises => res.json({
+      enterprises: enterprises.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.dataValues.filename) }))
+    }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getEnterprises, addEnterprises, getEnterprisesById, deleteEnterprises, updateEnterprises, searchEnterprisesTitle }
+module.exports = {
+  getEnterprises,
+  addEnterprises,
+  getEnterprisesById,
+  deleteEnterprises,
+  updateEnterprises,
+  searchEnterprisesTitle,
+  getUserEnterprises
+}

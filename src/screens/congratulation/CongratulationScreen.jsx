@@ -35,7 +35,7 @@ function CongratulationScreen () {
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     const attachments = profileImage
     dispatch(updateUser({ firstName, lastName, phone, birthday, email, attachments }))
-    user ? history.push('/myProfile') : history.push('/community-page-news')
+    user ? history.push('/myProfile') : history.push('/')
   }
 
   return (
@@ -152,7 +152,7 @@ function CongratulationScreen () {
                   <Secondarybtn name='Cancel' clickHandler={() => history.goBack()} />
                   )
                 : (
-                  <Secondarybtn name='Skip for now' clickHandler={() => history.push('/community-page-news')} />
+                  <Secondarybtn name='Skip for now' clickHandler={() => history.push('/')} />
                   )}
             </div>
             <div className='btn'>

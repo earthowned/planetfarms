@@ -85,7 +85,7 @@ function App () {
           <Route path='/messenger/:id'>
             <MobileMessage />
           </Route>
-          <Route exact path='/community-page-news'>
+          <Route exact path='/community-page-news/:id'>
             <CommunityPagenews />
           </Route>
           <Route path='/community-page-news/:title/:category'>
@@ -97,13 +97,16 @@ function App () {
           <Route path='/community-switching'>
             <AllCommunitiesCard />
           </Route>
-          <Route path='/community-members'>
+          <Route path='/community-members/:id'>
             <CommunityMembers />
           </Route>
           <Route path='/community-members-profile/:id'>
             <CommunityMembersProfile />
           </Route>
-          <Route path='/community-group'>
+          <Route path='/community-group/:id'>
+            <CommunityGroup />
+          </Route>
+          <Route path='/your-community-group/:id'>
             <CommunityGroup />
           </Route>
           <Route path='/community-group-view-page/:id'>
@@ -130,7 +133,10 @@ function App () {
           <Route path='/courses/users'>
             <CourseUsers />
           </Route>
-          <Route path='/enterprises'>
+          <Route path='/enterprises/:id'>
+            <Enterprises />
+          </Route>
+          <Route path='/your-enterprises/:id'>
             <Enterprises />
           </Route>
           <Route path='/enterprises-view'>

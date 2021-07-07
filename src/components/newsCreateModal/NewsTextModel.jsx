@@ -57,7 +57,7 @@ const CreateText = ({ textActive, setTextActive }) => {
                 />
                 <ErrorText className='error-message' error={collectionDescriptionError} message='Please enter Video Description' />
               </div>
-              <Button name='Add block' clickHandler={addText} />
+              <Button name='Add block' onClick={addText} />
             </div>
           </div>
         </div>

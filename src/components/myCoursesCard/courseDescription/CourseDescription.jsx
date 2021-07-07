@@ -76,7 +76,10 @@ const CourseDetail = ({ setFeedbackModal, unpaid, setPurchaseModal }) => {
         <div className='course-description'>
           <div className='course-description-header'>
             <h1 className='course-title'>Jimmy Beam personal course</h1>
-            {unpaid ? <div className='dropdown-course-container'><Button name='Buy Course' clickHandler={() => setPurchaseModal(true)} /></div> : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
+            {unpaid ? <div className='dropdown-course-container'>
+              <Button name='Buy Course' clickHandler={() => setPurchaseModal(true)} />
+            </div>
+              : <DropDownCourse setFeedbackModal={setFeedbackModal} />}
           </div>
           <p className='course-desc'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

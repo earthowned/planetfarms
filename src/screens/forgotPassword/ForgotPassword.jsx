@@ -83,8 +83,8 @@ const ForgotPassword = () => {
                   required: {
                     value: true,
                     message: 'You must enter code'
-                  },
-                  //validate: v => v === code || 'You must enter correct code'
+                  }
+                  // validate: v => v === code || 'You must enter correct code'
                 })}
                 errors={errors}
               >
