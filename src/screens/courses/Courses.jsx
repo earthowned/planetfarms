@@ -22,6 +22,8 @@ const Courses = () => {
 
   const { data } = useGetFetchData("courseCategory", CATEGORY);
 
+  console.log(data);
+  
   function createNewCourseFunc() {
     setCreateNewCourse(true);
     setCreateCourse(false);

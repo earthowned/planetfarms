@@ -1,6 +1,8 @@
+import { useHistory } from 'react-router-dom'
 import Button from '../../../components/button/Button'
 
-const LessonTest = () => {
+const LessonTest = ({id}) => {
+  const history = useHistory();
   return (
     <div className='lesson-test-panel'>
       <div className='lesson-test-panel-left'>
@@ -9,7 +11,7 @@ const LessonTest = () => {
           Make a lesson test where you can use new information that you know
         </p>
         <div className='lesson-test-btn-wrapper'>
-          <Button name='Start text' />
+          <Button name='Start test' onClick={() => history.push(`/lesson-test-page/${id}`)} />
         </div>
       </div>
       <div className='lesson-test-panel-right'>

@@ -22,7 +22,7 @@ const LessonPage = () => {
   return (
     <DashboardLayout title='Course page'>
       <BackButton location='/course/184' />
-      <LessonDetail data={data} />
+      <LessonDetail data={data} id={id} />
       <MaterialComponent />
     </DashboardLayout>
   )

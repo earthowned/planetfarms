@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { createTest } from '../../actions/testActions'
 import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
 
 import './AddTestModal.scss'
 
 const AddTestModal = ({ setTestModal }) => {
+  const {courseId: lessonId} = useParams();
   const [questions, setQuestions] = useState([
+    //data structure
     // {
-    //   question: '',
-    //   correctanswer: ''
-    // },
-    // {
-    //   question: '',
-    //   correctanswer: ''
+    //   question: "",
+    //   answer: "",
+    //   options: []
     // }
   ])
+
+  const dispatch = useDispatch();
 
   function addQuestion () {
     // questions.push({
@@ -31,7 +35,8 @@ const AddTestModal = ({ setTestModal }) => {
   // }, [questions])
 
   function addTest () {
-    console.log(questions)
+    dispatch(createTest(lessonId, questions));
+    setTestModal(false);
   }
 
   return (
@@ -56,7 +61,7 @@ const AddTestModal = ({ setTestModal }) => {
 function QuestionAnswerComponent ({ pos, questions, index}) {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState([""]);
 
   function onQuestionChange(e) {
     setQuestion(e.target.value);
@@ -67,7 +72,9 @@ function QuestionAnswerComponent ({ pos, questions, index}) {
   }
 
   function addOption() {
-    setOptions(prev => [...prev, ''])
+    setOptions(prev => {
+      return [...prev, '']
+    })
   }
   
   questions[pos].question = question
@@ -104,11 +111,28 @@ function OptionAnswer ({options, setOptions, item, pos}) {
   
    function onAnswerChange(e) {
     setAnswer(e.target.value);
-    options[pos] = answer;
   }
+  options[pos] = answer;
+  
+//  function addOption() {
+//     setOptions(prev => {
+//       if(prev === '') {
+//         return [...prev]
+//       }
+//       return [...prev, '']
+//     })
+//   }
+
+  useEffect(() => {
+    // if(options.includes('')) {
+    //   options.splice(-1, 1)
+    // }
+    // if(answer.length ) {
+    //   addOption()
+    // }
+  }, [])
 
   function removeItem (id) {
-    console.log(id);
     let newOptions = [...options];
     const index = newOptions.indexOf(id);
     console.log(index)
@@ -118,12 +142,9 @@ function OptionAnswer ({options, setOptions, item, pos}) {
     }
   }
 
-  
-
-  
   return (
     <div className="test-answer-input-field" key={pos}>
-      <input className='default-input-variation incorrect-option' placeholder='Correct answer' value={answer} onChange={(e) => onAnswerChange(e)} />
+      <input className='default-input-variation incorrect-option' placeholder='Incorrect answer' value={answer} onChange={(e) => onAnswerChange(e)} />
       <img src="/img/minus-circle-outline.svg" alt="minus image" onClick={() => removeItem(item)} />
     </div>
   )

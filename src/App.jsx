@@ -34,7 +34,7 @@ import MyGroupViewPage from './screens/communityGroup/myGroupPage/MyGroup'
 import MobileMessage from './components/mobileMessage/MobileMessage'
 import Courses from './screens/courses/Courses'
 import LessonPage from './screens/dashboard/lessonPage/LessonPage'
-import LessonTest from './screens/lessonTest/LessonTest'
+import LessonTestPage from './screens/lessonTestPage/LessonTestPage'
 import CourseCollection from './screens/courses/courseCollection/CourseCollection'
 import EditCollection from './screens/courses/editCollection/EditCollection'
 import AdminCoursePage from './screens/courseManager/adminCoursePage/AdminCoursePage'
@@ -159,12 +159,15 @@ function App () {
             <Route path='/lesson/:id'>
               <LessonPage />
             </Route>
+            {/* <Route exact path='/lesson/:id/testpage'>
+              <LessonTestPage />
+            </Route> */}
             <Route
               path='/course/:courseId'
               component={() => <MyCoursePage unpaid='unpaid' />}
             />
-            <Route path='/test-lesson-1'>
-              <LessonTest />
+            <Route path='/lesson-test-page/:lessonId'>
+              <LessonTestPage />
             </Route>
             <Route path='/myProfile'>
               <MyProfile />

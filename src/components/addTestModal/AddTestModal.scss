@@ -19,6 +19,7 @@
   color: var(--primary-color);
   height: 24px;
   cursor: pointer;
+  margin-top: 12px;
 }
 
 .question-container button h4 {
@@ -40,7 +41,7 @@
 }
 
 .test-correct-answer {
-  margin-bottom: 22px;
+  margin-bottom: 12px;
 }
 
 .test-correct-answer input {
@@ -109,6 +110,7 @@
 }
 
 .option-answers {
+  margin-bottom: 24px;
 
   .incorrect-option {
     margin: 12px 0;
