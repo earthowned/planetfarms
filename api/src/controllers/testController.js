@@ -40,7 +40,7 @@ const addTest = async (req, res) => {
     test_name, lessonId, description, questions
   } = req.body
   
-  const result = await sequelize.transaction(async (t) => {
+  if(questions.length < 1) return res.json({message: 'Please provide questions for the test.'});  const result = await sequelize.transaction(async (t) => {
 
     const test = await Test.create({
       test_name,
@@ -53,7 +53,8 @@ const addTest = async (req, res) => {
     questions.forEach(async (item) => {
       const questionObj = {
         ...item,
-        testId: test.id
+        testId: test.id,
+        options: [...item.options, item.answer]
       }
       newQuestions.push(questionObj)
     })

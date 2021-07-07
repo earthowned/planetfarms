@@ -1,7 +1,8 @@
 const Question = require('../models/questionModel')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-
+const sequelize = require('../config/database.js')
+const {fn, col} = sequelize
 // @desc    Fetch all tests
 // @route   GET /api/Test
 // @access  Public
@@ -15,18 +16,51 @@ const getQuestions = (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 
+// randomize the answers
+function randomAnswer(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
+
 // @desc    Fetch all tests
 // @route   GET /api/Question
 // @access  Public
 const getTestQuestions = (req, res) => {
-  const pageSize = 3
+  const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['question', order]]
-  Question.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {
+  Question.findAll({ 
+    offset: page, 
+    limit: pageSize, 
+    order: ordervalue, 
+    where: {
       testId: req.params.id
-  } })
-    .then(questions => res.json({ questions, page, pageSize }).status(200))
+    },
+    attributes: ["options", "question"]
+})
+    .then(questions => {
+      if(questions) {
+        
+        questions.forEach(item => randomAnswer(item.options));
+
+        // let newOptions = randomArrayShuffle(options);
+      return res.json({ questions, 
+        page, pageSize }).status(200)
+      }
+
+      // const [...item] = questions
+
+      return res.json(questions);
+
+  })
     .catch((err) => res.json({ err }).status(400))
 }
 
