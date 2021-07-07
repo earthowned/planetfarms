@@ -24,12 +24,11 @@ const ForgotPassword = () => {
   }
   const verifyUsername = ({ username }) => {
     username && setIsVerifiedUser(true)
-    setUsernameState(username)
   }
   const resendCode = (e) => {
     e.preventDefault()
     handleSubmit(verifyUsername)()
-    dispatch(confirmPin(usernameState))
+    dispatch(confirmPin())
     isVerifiedUser && console.log('code sent')
   }
   const alreadyHaveCode = (e) => {
@@ -40,7 +39,7 @@ const ForgotPassword = () => {
   const sendCode = (e) => {
     e.preventDefault()
     handleSubmit(verifyUsername)()
-    dispatch(confirmPin(usernameState))
+    dispatch(confirmPin())
     isVerifiedUser && console.log('code sent')
   }
   const changePassword = (e) => {
@@ -70,7 +69,6 @@ const ForgotPassword = () => {
                 message: 'You must enter username'
               }
             })}
-            setValue={setUsernameState}
             disabled={isVerifiedUser}
             errors={errors}
           >

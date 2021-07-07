@@ -15,7 +15,6 @@ import { ReactComponent as UserAvatar } from '../../assets/images/user-green-out
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 import './SignInSignUp.scss'
 import { listUserCommunities, visitCommunity } from '../../actions/communityActions'
-import axios from 'axios'
 
 const SignIn = () => {
   const { welcomeBack, rememberMe, text1, google, facebook, failMessage } =
