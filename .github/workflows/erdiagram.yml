@@ -1,0 +1,59 @@
+name: ER Diagram
+
+on:
+  push:
+    branches: [er-diagram]
+  workflow_dispatch:
+    inputs:
+
+jobs:
+  screenshots:
+    name: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Setup Go environment
+        uses: actions/setup-go@v2.1.3
+        with:
+          go-version: '1.14.0'
+          
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          java-version: '16'
+          
+      - name: Planet Farms
+        run: |
+          #export gitter_channel="${{ secrets.CHANNEL }}"
+          cd api
+          echo "JWT_SECRET=sercet" >> .env
+          echo "DATABASE_NAME=planetfarms" >> .env
+          echo "DATABASE_USERNAME=test" >> .env
+          echo "DATABASE_PASSWORD=pass" >> .env
+          echo "DATABASE_HOST=localhost" >> .env
+          echo "AUTH_METHOD=local" >> .env
+          echo "COGNITO_REGION=" >> .env
+          echo "COGNITO_POOL_ID=" >> .env
+          echo "COGNITO_CLIENT_ID=" >> .env
+          echo "COGNITO_DOMAIN_NAME=" >> .env
+          docker-compose up -d
+          npm i
+          npx sequelize-cli db:migrate
+          cd ..
+          go get -u github.com/achiku/planter
+          mkdir -p diagrams
+          cd diagrams
+          wget https://versaweb.dl.sourceforge.net/project/plantuml/plantuml.jar
+          planter postgres://test:pass@localhost:5432/planetfarms?sslmode=disable -o er_diagram.uml
+          java -jar plantuml.jar -verbose er_diagram.uml
+          
+      - name: Upload Diagrams
+        uses: actions/upload-artifact@v2
+        with:
+          name: er-diagrams
+          path: *.png
