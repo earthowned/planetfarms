@@ -39,7 +39,7 @@ const addTest = async (req, res) => {
     const {
     test_name, lessonId, description, questions
   } = req.body
-
+  
   const result = await sequelize.transaction(async (t) => {
 
     const test = await Test.create({
@@ -47,10 +47,18 @@ const addTest = async (req, res) => {
       lessonId,
       description
     }, { transaction: t });
-  
-    await questions.map(async (item) => await Question.create({...item, testId: test.id}), {transaction: t});
-    // await Question.bulkCreate([...questions, { testId: test.id}], { transaction: t });
+    
+    const newQuestions = []
 
+    questions.forEach(async (item) => {
+      const questionObj = {
+        ...item,
+        testId: test.id
+      }
+      newQuestions.push(questionObj)
+    })
+    // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
+    await  Question.bulkCreate(newQuestions, {transaction: t})
     return "test is created with questions.";
   });
 

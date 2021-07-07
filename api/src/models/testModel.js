@@ -17,6 +17,7 @@ const Test = db.define(
       },
     lessonId: {
       type: Sequelize.INTEGER,
+      unique: true,
       allowNull: false,
     },
     createdAt: {
