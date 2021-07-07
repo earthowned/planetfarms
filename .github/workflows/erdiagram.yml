@@ -7,10 +7,25 @@ on:
     inputs:
 
 jobs:
-  screenshots:
+  diagrams:
     name: 
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: planetfarms
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -41,7 +56,6 @@ jobs:
           echo "COGNITO_POOL_ID=" >> .env
           echo "COGNITO_CLIENT_ID=" >> .env
           echo "COGNITO_DOMAIN_NAME=" >> .env
-          docker-compose up -d
           npm i
           npx sequelize-cli db:migrate
           cd ..
