@@ -200,6 +200,50 @@
   margin-bottom: 24px;
 }
 
+.actions {
+  position: relative;
+
+  @media (max-width: 850px) {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+
+    .lesson-btn {
+      width: 3.5em;
+      height: 3.3em;
+    }
+  }
+
+  @media (max-width: 478px) {
+    .lesson-btn {
+      width: 2.5em;
+      height: 2.5em;
+    }
+  }
+
+  ul {
+    position: absolute;
+    border: 2px solid red;
+    width: 7em;
+    right: 110%;
+    top: 1em;
+    background: #000;
+    color: var(--primary-white);
+    border: 0.5px solid var(--primary-white);
+    padding: 0.5em 1em;
+    z-index: 99999;
+    border-radius: 0.2em;
+
+    li {
+      list-style: none;
+      margin: 0.2em 0;
+      cursor: pointer;
+      font-size: 1em;
+      line-height: 1.5em;
+    }
+  }
+}
+
 @media only screen and (max-width: 850px) {
   .admin-course-details--header {
     flex-direction: column-reverse;
@@ -244,14 +288,13 @@
   .admin-lesson p {
     margin: 16px 0;
   }
+}
 
-  .lesson-btn {
-    position: absolute;
-    right: 1em;
-    top: 1em;
-    width: 3.5em;
-    height: 3.3em;
-  }
+.show {
+  display: block;
+}
+.hide {
+  display: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -269,12 +312,5 @@
 
   .study-course-wrapper {
     padding: 16px;
-  }
-}
-
-@media (max-width: 478px) {
-  .secondary-btn.lesson-btn {
-    width: 2.5em;
-    height: 2.5em;
   }
 }

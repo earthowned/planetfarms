@@ -7,7 +7,9 @@ const DragDrop = ({
   fileType,
   className,
   setVideo,
-  text
+  text,
+  img,
+  editText
 }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
@@ -38,6 +40,8 @@ const DragDrop = ({
       type={type}
       setVideo={setVideo}
       text={text}
+      img={img}
+      editText={editText}
     />
   )
 }
@@ -51,7 +55,9 @@ function DragDropComponent ({
   className,
   type,
   setVideo,
-  text
+  text,
+  img,
+  editText
 }) {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
@@ -61,6 +67,7 @@ function DragDropComponent ({
         onChange={(e) => fileChange(e)}
       >
         <input {...getInputProps()} />
+
         {files ? (
           <>
             <img
@@ -78,19 +85,28 @@ function DragDropComponent ({
               )}
             </div>
           </>
-        ) : (
+        ) : img ? (
           <>
-            {type === 'video' ? (
-              <p className='videoName'>Choose video</p>
-            ) : text ? (
-              <p>{text}</p>
-            ) : (
-              <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                Drag & Drop files in this area or Click Here to attach video
-                cover
-              </h6>
-            )}
+            <img className='avatar' src={img} alt='img' />
+            <div className='editimg'>
+              <p>{editText} </p>
+            </div>
           </>
+        ) : (
+          ''(
+            <>
+              {type === 'video' ? (
+                <p className='videoName'>Choose video</p>
+              ) : text ? (
+                <p>{text}</p>
+              ) : (
+                <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+                  Drag & Drop files in this area or Click Here to attach video
+                  cover
+                </h6>
+              )}
+            </>
+          )
         )}
       </div>
       {files && (

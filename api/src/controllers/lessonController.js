@@ -53,9 +53,16 @@ const deleteLesson = async (req, res) => {
 
 const updateLesson = async (req, res) => {
   const { id } = req.params
-  const lesson = await Lessons.update(req.body, {
-    where: { id }
-  })
+  let coverImg = ''
+  if (req.file) {
+    coverImg = req.file.filename
+  }
+  const lesson = await Lessons.update(
+    { ...req.body, coverImg },
+    {
+      where: { id }
+    }
+  )
   res.status(202).json({
     status: true,
     message: 'lesson updated successfully',

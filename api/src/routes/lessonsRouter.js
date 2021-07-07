@@ -6,12 +6,16 @@ const {
   getLessonById,
   addLesson,
   deleteLesson,
-  updateLesson,
+  updateLesson
 } = require('../controllers/lessonController')
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
 router.route('/').get(getLessons)
 router.route('/add').post(upload.single('coverImg'), addLesson)
-router.route('/:id').get(getLessonById).put(updateLesson).delete(deleteLesson)
+router
+  .route('/:id')
+  .get(getLessonById)
+  .put(upload.single('coverImg'), updateLesson)
+  .delete(deleteLesson)
 
 module.exports = router

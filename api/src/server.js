@@ -87,12 +87,12 @@ Lessons.belongsTo(Courses, { constraints: true, foreignKey: 'courseId' })
 Courses.hasMany(Lessons)
 
 // 1:1 association between lesson and test
-Lessons.hasOne(Test, {foreignKey: 'lessonId'});
-Test.belongsTo(Lessons, {foreignKey: 'lessonId'});
+Lessons.hasOne(Test, { foreignKey: 'lessonId' })
+Test.belongsTo(Lessons, { foreignKey: 'lessonId' })
 
 // 1:m association between test and question
-Test.hasMany(Question, {foreignKey: 'testId'})
-Question.belongsTo(Test, {foreignKey: 'testId'});
+Test.hasMany(Question, { foreignKey: 'testId' })
+Question.belongsTo(Test, { foreignKey: 'testId' })
 
 
 // port connection

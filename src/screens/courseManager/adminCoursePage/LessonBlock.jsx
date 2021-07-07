@@ -2,6 +2,8 @@ import React from 'react'
 import { useHistory, Link } from 'react-router-dom'
 
 import { GET_COVERIMG } from '../../../utils/urlConstants'
+import LessonActions from './LessonActions'
+
 const LessonBlock = ({ data, courseId }) => {
   const history = useHistory()
   const lessonData = data?.data?.lessons
@@ -46,12 +48,7 @@ const LessonBlock = ({ data, courseId }) => {
                         </Link>
                       </div>
                     </div>
-                    <button className='secondary-btn lesson-btn'>
-                      <img
-                        src='/img/more-horizontal.svg'
-                        alt='horizontal icon'
-                      />
-                    </button>
+                    <LessonActions id={lesson.id} />
                   </div>
                 </React.Fragment>
               )
