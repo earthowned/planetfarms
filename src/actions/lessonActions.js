@@ -6,43 +6,41 @@ import {
   LESSON_CREATE_FAIL,
   LESSON_UPDATE_REQUEST,
   LESSON_UPDATE_SUCCESS,
-  LESSON_UPDATE_FAIL,
+  LESSON_UPDATE_FAIL
 } from '../constants/lessonConstants'
 
 export const createLesson =
   ({ courseId, title, coverImg }) =>
-  async (dispatch) => {
-    const lessonFormData = new FormData()
+    async (dispatch) => {
+      const lessonFormData = new FormData()
 
-    lessonFormData.append('courseId', courseId)
-    lessonFormData.append('title', title)
-    lessonFormData.append('coverImg', coverImg)
+      lessonFormData.append('courseId', courseId)
+      lessonFormData.append('title', title)
+      lessonFormData.append('coverImg', coverImg)
 
-    try {
-      dispatch({ type: LESSON_CREATE_REQUEST })
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-      const { data } = await Axios.post(ADD_LESSONS, lessonFormData, config)
-      dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
-      return data
-    } catch (error) {
-      dispatch({
-        type: LESSON_CREATE_FAIL,
-        payload:
+      try {
+        dispatch({ type: LESSON_CREATE_REQUEST })
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+        const { data } = await Axios.post(ADD_LESSONS, lessonFormData, config)
+        dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
+        return data
+      } catch (error) {
+        dispatch({
+          type: LESSON_CREATE_FAIL,
+          payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message,
-      })
+            : error.message
+        })
+      }
     }
-  }
 
 export const updateLesson = (title, coverImg, lessonId) => async (dispatch) => {
-  console.log(title)
-  console.log(coverImg)
-  let updateLessonFormData = new FormData()
+  const updateLessonFormData = new FormData()
   updateLessonFormData.append('title', title)
   updateLessonFormData.append('coverImg', coverImg)
 
@@ -50,8 +48,8 @@ export const updateLesson = (title, coverImg, lessonId) => async (dispatch) => {
     dispatch({ type: LESSON_UPDATE_REQUEST })
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+        'Content-Type': 'multipart/form-data'
+      }
     }
 
     const { data } = await Axios.put(
@@ -59,16 +57,15 @@ export const updateLesson = (title, coverImg, lessonId) => async (dispatch) => {
       updateLessonFormData,
       config
     )
-    console.log(data)
     dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
-    // return data
+    return data
   } catch (error) {
     dispatch({
       type: LESSON_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message,
+          : error.message
     })
   }
 }

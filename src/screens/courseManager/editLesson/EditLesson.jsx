@@ -21,9 +21,10 @@ const EditLesson = () => {
     'editLessonData',
     GET_LESSONS + `/${id}`
   )
-  const img = data?.data?.coverImg
+  const fetchImg = data?.data?.coverImg
+  console.log(fetchImg)
   const [lessonTitle, setLessonTitle] = useState()
-  const [lessonCover, setLessonCover] = useState(img)
+  const [lessonCover, setLessonCover] = useState(fetchImg)
   //   const [videoModal, setVideoModal] = useState(false)
   //   const [imageModal, setImageModal] = useState(false)
   //   const [textModal, setTextModal] = useState(false)
@@ -33,12 +34,11 @@ const EditLesson = () => {
     return <span>Loading</span>
   }
   const lessonId = data?.data?.id
-  //   console.log(lessonId)
   const updateLessonForm = ({ title }) => {
     const coverImg = lessonCover
     dispatch(updateLesson(title, coverImg, lessonId))
   }
-  //   console.log(data.data)
+
   return (
     <DashboardLayout title='Edit lesson'>
       <BackButton location='' />
