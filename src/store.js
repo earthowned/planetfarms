@@ -11,7 +11,10 @@ import {
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import { courseCreateReducer } from './reducers/courseReducers'
-import { lessonCreateReducer } from './reducers/lessonReducers'
+import {
+  lessonCreateReducer,
+  lessonUpdateReducer
+} from './reducers/lessonReducers'
 import { videoCreateReducer } from './reducers/videoReducers'
 import { lessonPhotoCreateReducer } from './reducers/lessonPhotoReducer'
 import { lessonTextCreateReducer } from './reducers/lessonTextReducer'
@@ -29,6 +32,7 @@ const reducer = combineReducers({
   addNewNews: newsCreateReducer,
   addCourse: courseCreateReducer,
   addLesson: lessonCreateReducer,
+  updateLesson: lessonUpdateReducer,
   addVideo: videoCreateReducer,
   addLessonPhoto: lessonPhotoCreateReducer,
   addLessonText: lessonTextCreateReducer,
