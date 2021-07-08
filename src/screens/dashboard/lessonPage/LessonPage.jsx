@@ -21,7 +21,7 @@ const LessonPage = () => {
 
   return (
     <DashboardLayout title='Course page'>
-      <BackButton location='/course/184' />
+      <BackButton location={'/course/' + data?.data?.courseId} />
       <LessonDetail data={data} id={id} />
       <MaterialComponent />
     </DashboardLayout>
