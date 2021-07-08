@@ -14,7 +14,8 @@ const UserTest = db.define('users_tests', {
     endTime: Sequelize.STRING,
     test_taken: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.NOW
     }
 }, { timestamps: false })
 

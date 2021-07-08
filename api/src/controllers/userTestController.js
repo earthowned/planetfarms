@@ -11,10 +11,8 @@ const UserTest = require('../models/userTestModel')
 const getUserTests = (req, res) => {
   const pageSize = 3
   const page = Number(req.query.pageNumber) || 0
-  const order = req.query.order || 'ASC'
-
   let userId = 1;
-  UserTest.findAll({ offset: page, limit: pageSize})
+  UserTest.findAll({ offset: page, limit: pageSize, where: {userId}})
     .then(tests => res.json({ tests, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
@@ -25,37 +23,46 @@ const getUserTests = (req, res) => {
 const takeTest = async (req, res) => {
   try {
     const {
-    test_name, lessonId, description, questions
+    lessonId, startTime
   } = req.body
-  
-  if(questions.length < 1) return res.json({message: 'Please provide questions for the test.'});  const result = await sequelize.transaction(async (t) => {
-
-    const test = await Test.create({
-      test_name,
-      lessonId,
-      description
-    }, { transaction: t });
-    
-    const newQuestions = []
-
-    questions.forEach(async (item) => {
-      const questionObj = {
-        ...item,
-        testId: test.id,
-        options: [...item.options, item.answer]
-      }
-      newQuestions.push(questionObj)
-    })
-    // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
-    await  Question.bulkCreate(newQuestions, {transaction: t})
-    return "test is created with questions.";
-  });
-
-  if(result) res.json({ message: result }).status(200);
-
+  const userId = 1;
+  const test =  await Test.findOne({where: lessonId});
+  if(!test) {
+      return res.json({message: 'Test doesn\'t exist.'})
+  }
+  await UserTest.create({lessonId, userId, startTime, testId: test.id})
+  res.json({message: 'Test has started.'});
   } catch (error) {
     res.json(error).status(400);
   }
 }
 
-module.exports = { getUserTests, takeTest}
+const endTest = async (req, res) => {
+    try {
+        const {endTime, choices} = req.body;
+        const test = await UserTest.findOne({where: {id: req.params.id}});
+        
+        if(!test) {
+            return res.json({message: 'Test doesn\'t exist.'})
+        }
+
+        const score = await sequelize.transaction(async (t) => {
+            const solutions = await Question.findAll({where: {testId: test.testId}, attributes: ["answer"]}, {transaction: t});
+            let marks = 0;
+    
+            solutions.forEach((item, index) => {
+                if(choices[index] === item.answer) marks++
+            })
+    
+            await UserTest.update({marks,endTime}, {where: {id: req.params.id}}, {transaction: t});
+            const result = await UserTest.findOne({where: {id: req.params.id}, attributes: ['marks']}, {transaction: t});
+            return result;
+        })
+        return res.json({message: `You have obtained ${score.marks} marks`})
+
+    } catch (error) {
+        res.json(error).status(400);
+    }
+}
+
+module.exports = { getUserTests, takeTest, endTest}
