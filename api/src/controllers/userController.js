@@ -295,7 +295,6 @@ const getMyProfile = (req, res) => {
 // @desc    Update user
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
-  
   try {
     let attachment = ''
     if (req.file) {

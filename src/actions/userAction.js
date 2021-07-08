@@ -101,7 +101,7 @@ export const register = (name, password) => async (dispatch) => {
       })
       const response = await Auth.signIn(name, password)
       userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
         headers: {
           Authorization: 'Bearer ' + userdata.token
         }
@@ -179,6 +179,9 @@ export const getMyDetails = () => async (dispatch) => {
       numberOfVisit: data.numberOfVisit,
       attachments: data.attachments
     }
+    // Auth.resendSignUp('testtesttest2');
+    // Auth.confirmSignUp('testtesttest2', '873680');
+
     dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message
@@ -274,14 +277,15 @@ export const logout = () => (dispatch) => {
   }).catch(err => console.log(err))
 }
 
-export const confirmPin = (username) => async (dispatch) => {
+export const confirmPin = (username, code) => async (dispatch) => {
   try {
-    console.log(username)
+    console.log(username, code)
     dispatch({ type: USER_CONFIRM_CODE_REQUEST })
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/users/resendCode`,
       { username }
     )
+    await Auth.confirmSignUp(username, code)
     dispatch({ type: USER_CONFIRM_CODE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
