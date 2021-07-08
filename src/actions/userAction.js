@@ -2,6 +2,7 @@ import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
 import { getApi } from '../utils/apiFunc'
 
+import FormData from 'form-data'
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
@@ -16,6 +17,18 @@ import {
   USER_RESEND_CODE_REQUEST,
   USER_RESEND_CODE_SUCCESS,
   USER_RESEND_CODE_FAIL,
+  USER_ATTR_CONFIRM_CODE_REQUEST,
+  USER_ATTR_CONFIRM_CODE_SUCCESS,
+  USER_ATTR_CONFIRM_CODE_FAIL,
+  USER_ATTR_RESEND_CODE_REQUEST,
+  USER_ATTR_RESEND_CODE_SUCCESS,
+  USER_ATTR_RESEND_CODE_FAIL,
+  USER_FORGOT_PWD_CONFIRM_CODE_REQUEST,
+  USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS,
+  USER_FORGOT_PWD_CONFIRM_CODE_FAIL,
+  USER_FORGOT_PWD_RESEND_CODE_REQUEST,
+  USER_FORGOT_PWD_RESEND_CODE_SUCCESS,
+  USER_FORGOT_PWD_RESEND_CODE_FAIL,
   USER_PASSWORD_CHANGE_REQUEST,
   USER_PASSWORD_CHANGE_SUCCESS,
   USER_PASSWORD_CHANGE_FAIL,
@@ -212,7 +225,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
       given_name: user.firstName,
       family_name: user.lastName,
       birthdate: user.birthday,
-      phone_number: user.phone ? user.phone : ''
+      phone_number: user.phone ? '+' + user.phone : ''
     })
     const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
     const { attributes } = await Auth.currentAuthenticatedUser()
@@ -238,7 +251,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
   }
 }
 
-export const listUsers = () => async (dispatch, getState) => {
+export const listUsers = () => async (dispatch) => {
   try {
     dispatch({ type: USER_LIST_REQUEST })
     const { userLogin: { userInfo } } = getState()
@@ -281,11 +294,8 @@ export const confirmPin = (username, code) => async (dispatch) => {
   try {
     console.log(username, code)
     dispatch({ type: USER_CONFIRM_CODE_REQUEST })
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/api/users/resendCode`,
-      { username }
-    )
-    await Auth.confirmSignUp(username, code)
+
+    const { data } = await Auth.confirmSignUp(username, code)
     dispatch({ type: USER_CONFIRM_CODE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
@@ -302,12 +312,85 @@ export const resendCodeAction = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_RESEND_CODE_REQUEST })
     const data = await Auth.resendSignUp(username)
-    // dispatch({ type: USER_RESEND_CODE_SUCCESS, payload: data })
+    dispatch({ type: USER_RESEND_CODE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: USER_RESEND_CODE_FAIL,
       payload:
         error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
+    })
+  }
+}
+
+export const verifyCurrentUserAttribute = (attr) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_ATTR_RESEND_CODE_REQUEST })
+    const data = await Auth.verifyCurrentUserAttribute(attr)
+    console.log(data)
+    dispatch({ type: USER_ATTR_RESEND_CODE_SUCCESS })
+  } catch (error) {
+    dispatch({
+      type: USER_ATTR_RESEND_CODE_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
+    })
+  }
+}
+
+export const verifyCurrentUserAttributeSubmit = (attr, code) => async (dispatch) => {
+  try {
+    console.log(attr, code)
+    dispatch({ type: USER_ATTR_CONFIRM_CODE_REQUEST })
+    const { data } = await Auth.verifyCurrentUserAttributeSubmit(attr, code)
+    console.log(data)
+    dispatch({ type: USER_ATTR_CONFIRM_CODE_SUCCESS })
+  } catch (error) {
+    dispatch({
+      type: USER_ATTR_CONFIRM_CODE_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
+    })
+  }
+}
+
+export const forgotPassword = (username) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_REQUEST })
+    const { data } = await Auth.forgotPassword(username)
+    console.log(data)
+    dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_SUCCESS })
+    return data
+  } catch (error) {
+    dispatch({
+      type: USER_FORGOT_PWD_RESEND_CODE_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
+    })
+  }
+}
+
+export const forgotPasswordSubmit = (username, code, confirmPassword) => async (dispatch) => {
+  try {
+    console.log(username, code)
+    dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_REQUEST })
+    const { data } = await Auth.forgotPasswordSubmit(username, code, confirmPassword)
+    console.log(data)
+    dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS })
+    return data
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: USER_FORGOT_PWD_CONFIRM_CODE_FAIL,
+      payload:
+        error?.response && error.response.data.error
           ? error.response.data.error
           : error.message
     })
@@ -335,7 +418,7 @@ export const changePassword = (username, oldPassword, newPassword) => async (dis
 
 export const routingCommunityNews = async (dispatch, route = false) => {
   const communityData = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`)
-  localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
+  window.localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
   if (route) {
     document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
   }

@@ -1,17 +1,22 @@
-import React, { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useRef, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Input from '../../components/input/Input'
 import SignLayout from '../../layout/signLayout/SignLayout'
 import Button from '../../components/button/Button'
-import { confirmPin } from '../../actions/userAction'
+import { forgotPassword, forgotPasswordSubmit } from '../../actions/userAction'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 
 const ForgotPassword = () => {
+<<<<<<< HEAD
   const [code, setCode] = useState(null)
   const [usernameState, setUsernameState] = useState('')
+=======
+  const [message, setMessage] = useState('')
+  const [usernameValue, setUsernameValue] = useState('')
+>>>>>>> 28e8483 (Forgot Password and, Email, Phone & User verification)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)
@@ -19,34 +24,33 @@ const ForgotPassword = () => {
   const { register: regi, errors, handleSubmit, watch } = useForm()
   const newPassword = useRef({})
   newPassword.current = watch('newPassword', '')
-  const onSubmit = ({ username, newPassword }) => {
-    // return dispatch(changePassword(username, password))
-    console.log(username, newPassword)
-  }
-  const verifyUsername = ({ username }) => {
-    username && setIsVerifiedUser(true)
-  }
+
+  const history = useHistory()
+
+  const userAttrConfirmCode = useSelector((state) => state.userAttrConfirmCode)
+  const userAttrResendCode = useSelector((state) => state.userAttrResendCode)
+  const { error: confirmErr, status: confirmStatus } = userAttrConfirmCode
+  const { error: resendErr, status: resendStatus } = userAttrResendCode
+
   const resendCode = (e) => {
     e.preventDefault()
-    handleSubmit(verifyUsername)()
-    dispatch(confirmPin())
+    dispatch(forgotPassword(usernameValue))
     isVerifiedUser && console.log('code sent')
   }
-  const alreadyHaveCode = (e) => {
-    e.preventDefault()
-    handleSubmit(verifyUsername)()
+  const alreadyHaveCode = ({ username }) => {
+    if (!usernameValue) setUsernameValue(username)
     isVerifiedUser && console.log('type code')
   }
-  const sendCode = (e) => {
-    e.preventDefault()
-    handleSubmit(verifyUsername)()
-    dispatch(confirmPin())
+  const sendCode = ({ username }) => {
+    if (!usernameValue) setUsernameValue(username)
+    dispatch(forgotPassword(username))
     isVerifiedUser && console.log('code sent')
   }
-  const changePassword = (e) => {
-    e.preventDefault()
-    console.log('Password Changed Successfully')
+  const verifyAccount = ({ code, confirmPassword }) => {
+    dispatch(forgotPasswordSubmit(usernameValue, code, confirmPassword))
+    console.log('User Account Verified Successfully')
   }
+
   const toggleNewPasswordVisibility = (e) => {
     setShowNewPassword(!showNewPassword)
   }
@@ -54,11 +58,30 @@ const ForgotPassword = () => {
     setShowConfirmPassword(!showConfirmPassword)
   }
 
+  // const userLogin = useSelector((state) => state.userLogin)
+  // const { userInfo } = userLogin
+  // console.log(userInfo)
+
+  useEffect(() => {
+    usernameValue && setIsVerifiedUser(true)
+    console.log(confirmStatus)
+    if (confirmStatus) {
+      setMessage('Successful')
+      history.push('/myProfile')
+    } else if (resendStatus) {
+      setMessage('Code has been sent successfully.')
+    }
+  }, [confirmStatus, resendStatus, usernameValue])
+
   return (
     <SignLayout>
-      <form className='sign' onSubmit={handleSubmit(onSubmit)}>
+      <form className='sign'>
         <h1 className='welcome'>Forgot Password</h1>
         <div className='container'>
+          {confirmErr && <div className='error'>{confirmErr}</div>}
+          {resendErr && <div className='error'>{resendErr}</div>}
+          {message && <div className='message'>{message}</div>}
+
           <Input
             placeholder='Username'
             type='text'
@@ -70,7 +93,7 @@ const ForgotPassword = () => {
                 message: 'You must enter username'
               }
             })}
-            disabled={isVerifiedUser}
+            disabled={false}
             errors={errors}
           >
             <UserAvatar />

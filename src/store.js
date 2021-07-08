@@ -26,7 +26,11 @@ import {
   userUpdateReducer,
   userRegisterReducer,
   userConfirmCodeReducer,
-  userResendCodeReducer
+  userResendCodeReducer,
+  userAttrConfirmCodeReducer,
+  userAttrResendCodeReducer,
+  userForgotPwdConfirmCodeReducer,
+  userForgotPwdResendCodeReducer
 } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import {
@@ -72,6 +76,10 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userConfirmCode: userConfirmCodeReducer,
   userResendCode: userResendCodeReducer,
+  userAttrConfirmCode: userAttrConfirmCodeReducer,
+  userAttrResendCode: userAttrResendCodeReducer,
+  userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
+  userForgotPwdResendCode: userForgotPwdResendCodeReducer,
   addNewNews: newsCreateReducer,
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
