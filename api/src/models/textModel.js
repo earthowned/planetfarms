@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../config/database.js')
 
-const LessonText = db.define(
-  'lessonTexts',
+const Text = db.define(
+  'texts',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -25,4 +25,4 @@ const LessonText = db.define(
   { timestamps: true }
 )
 
-module.exports = LessonText
+module.exports = Text

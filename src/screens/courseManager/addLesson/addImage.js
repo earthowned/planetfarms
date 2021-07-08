@@ -1,4 +1,4 @@
-import { createLessonImg } from '../../../actions/lessonPhotoActions'
+import { createLessonImg } from '../../../actions/photoActions'
 
 export const addImage = function (lessonData, lessonId, dispatch) {
   let i = 0

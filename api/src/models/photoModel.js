@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../config/database.js')
 
-const LessonPhoto = db.define(
-  'lessonPhotos',
+const Photo = db.define(
+  'photos',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -28,4 +28,4 @@ const LessonPhoto = db.define(
   { timestamps: true }
 )
 
-module.exports = LessonPhoto
+module.exports = Photo

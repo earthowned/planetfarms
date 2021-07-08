@@ -34,7 +34,7 @@ const AddLesson = () => {
   const [lessonCover, setLessonCover] = useState(null)
   const [videoDataToPost, setVideoDataToPost] = useState(null)
   const [lessonImgDataToPost, setLessonImgDataToPost] = useState(null)
-  const [lessonText, setLessonText] = useState([])
+  const [text, setText] = useState([])
   const [material, setMaterial] = useState(null)
 
   const { register, errors, handleSubmit } = useForm()
@@ -65,7 +65,7 @@ const AddLesson = () => {
         if (lessonImgDataToPost) {
           addImage(lessonData, lessonId, dispatch)
         }
-        if (lessonText) {
+        if (text) {
           addText(lessonData, lessonId, dispatch)
         }
         if (material !== null) {
@@ -106,7 +106,7 @@ const AddLesson = () => {
           placeholder='Text Heading'
           lessonData={lessonData}
           setLessonData={setLessonData}
-          setLessonText={setLessonText}
+          setText={setText}
         />
       )}
       <DashboardLayout title='Add new lesson'>

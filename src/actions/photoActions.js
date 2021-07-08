@@ -4,7 +4,7 @@ import {
   LESSSON_PHOTO_CREATE_REQUEST,
   LESSSON_PHOTO_CREATE_SUCCESS,
   LESSSON_PHOTO_CREATE_FAIL
-} from '../constants/lessonPhotoConstants'
+} from '../constants/photoConstants'
 
 export const createLessonImg =
   (lessonImg, photoDescription, isImgDesc, lessonId) => async (dispatch) => {

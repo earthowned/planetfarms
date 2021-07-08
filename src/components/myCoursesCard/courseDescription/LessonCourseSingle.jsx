@@ -5,10 +5,10 @@ const LessonCourseSingle = ({ data }) => {
   const history = useHistory()
   return (
     <div className='lesson-card-wrapper'>
-      <div className='lock-lesson'>
+      {/* <div className='lock-lesson'>
         <img src='/img/lesson-lock.svg' alt='lock icon' />
         <h4>Finish Lesson</h4>
-      </div>
+  </div> */}
       <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
         <div className='lessonCoverImg'>
           <img
@@ -24,7 +24,7 @@ const LessonCourseSingle = ({ data }) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed totam
             non dolorem nam ex ipsam?
           </p>
-          <button onClick={() => history.push(`/mycoursepage/${data.id}`)}>
+          <button onClick={() => history.push(`/lesson/${data.id}`)}>
             See Lesson
           </button>
         </div>

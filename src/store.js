@@ -16,8 +16,8 @@ import {
   lessonUpdateReducer
 } from './reducers/lessonReducers'
 import { videoCreateReducer } from './reducers/videoReducers'
-import { lessonPhotoCreateReducer } from './reducers/lessonPhotoReducer'
-import { lessonTextCreateReducer } from './reducers/lessonTextReducer'
+import { photoCreateReducer } from './reducers/photoReducer'
+import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
 import { testCreateReducer, testQuestionListReducer } from './reducers/testReducers'
 
@@ -35,8 +35,8 @@ const reducer = combineReducers({
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
   addVideo: videoCreateReducer,
-  addLessonPhoto: lessonPhotoCreateReducer,
-  addLessonText: lessonTextCreateReducer,
+  addPhoto: photoCreateReducer,
+  addText: textCreateReducer,
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer
