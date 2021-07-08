@@ -94,7 +94,6 @@ Test.belongsTo(Lessons, { foreignKey: 'lessonId' })
 Test.hasMany(Question, { foreignKey: 'testId' })
 Question.belongsTo(Test, { foreignKey: 'testId' })
 
-
 // port connection
 app.listen(PORT, () => {
   console.log(`PlanetFarms is running on PORT ${PORT}.`)

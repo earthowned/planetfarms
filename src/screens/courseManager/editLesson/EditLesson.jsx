@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 
-import { GET_LESSONS, GET_COVERIMG } from '../../../utils/urlConstants'
+import {
+  GET_LESSONS,
+  GET_COVERIMG,
+  GET_VIDEO,
+  VIDEO_COVER,
+  LESSON_IMG
+} from '../../../utils/urlConstants'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import { updateLesson } from '../../../actions/lessonActions'
 
@@ -11,6 +17,9 @@ import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../../components/backButton/BackButton'
 import { ErrorText } from '../../../components/formUI/FormUI'
 import DragDrop from '../../../components/dragDrop/DragDrop'
+import Image from '../../../components/lessonImage/Image'
+import Video from '../../../components/videoPlayer/Video'
+import Text from '../addLesson/Text'
 import '../addLesson/AddLesson.scss'
 
 const EditLesson = () => {
@@ -21,27 +30,42 @@ const EditLesson = () => {
     'editLessonData',
     GET_LESSONS + `/${id}`
   )
+  if (isLoading) {
+    ;<span>Loading</span>
+  }
   const fetchImg = data?.data?.coverImg
-  console.log(fetchImg)
+  const title = data?.data?.title
   const [lessonTitle, setLessonTitle] = useState()
   const [lessonCover, setLessonCover] = useState(fetchImg)
   //   const [videoModal, setVideoModal] = useState(false)
   //   const [imageModal, setImageModal] = useState(false)
   //   const [textModal, setTextModal] = useState(false)
   //   const [testModal, setTestModal] = useState(false)
+  const [lessonData, setLessonData] = useState([])
+  const textData = data?.data?.texts.map((text) => {
+    return text
+  })
+  const videoData = data?.data?.videos.map((video) => {
+    return video
+  })
+  const photoData = data?.data?.photos.map((photo) => {
+    return photo
+  })
+  useEffect(() => {
+    setLessonData([textData, videoData, photoData])
+  }, [])
+  const newData = lessonData.flat()
 
-  if (isLoading) {
-    return <span>Loading</span>
-  }
   const lessonId = data?.data?.id
   const updateLessonForm = ({ title }) => {
     const coverImg = lessonCover
     dispatch(updateLesson(title, coverImg, lessonId))
   }
+  //   console.log(lessonData)
 
   return (
     <DashboardLayout title='Edit lesson'>
-      <BackButton location='' />
+      <BackButton location={`/admin/course/${data?.data?.courseId}`} />
       <div className='admin-lesson-create-container'>
         <input
           type='text'
@@ -54,7 +78,7 @@ const EditLesson = () => {
               message: 'You must enter lesson title'
             }
           })}
-          defaultValue={data?.data?.title}
+          defaultValue={title}
           onChange={(e) => setLessonTitle(e.target.value)}
         />
         <ErrorText
@@ -66,6 +90,32 @@ const EditLesson = () => {
           img={GET_COVERIMG + data?.data?.coverImg}
           editText='Drag & Drop image in this area or Click Here to edit image'
         />
+        {newData
+          .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
+          .map((data, index) => (
+            <div key={index}>
+              <Text heading={data?.textHeading} desc={data?.textDescription} />
+              <Video
+                title={data?.videoTitle}
+                description={data?.videoDescription}
+                url={
+                  data?.videoLink === 'undefined'
+                    ? `${GET_VIDEO}${data?.videoResource}`
+                    : data?.videoLink
+                }
+                thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
+              />
+
+              {data?.lessonImg === undefined ? (
+                ''
+              ) : (
+                <Image
+                  src={`${LESSON_IMG}${data?.lessonImg}`}
+                  desc={data?.isImgDesc === true && data?.photoDescription}
+                />
+              )}
+            </div>
+          ))}
         <div className='save-lesson-modal'>
           <h4>Do you want to edit lesson?</h4>
           <div>
