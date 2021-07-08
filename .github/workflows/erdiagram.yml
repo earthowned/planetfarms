@@ -73,4 +73,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: er-diagrams
-          path: ./er_diagram.png
+          path: er_diagram.png
