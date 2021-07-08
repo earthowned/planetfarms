@@ -68,16 +68,16 @@ jobs:
           planter postgres://test:pass@localhost:5432/planetfarms?sslmode=disable -o er_diagram.uml
           java -jar plantuml.jar -verbose er_diagram.uml
           echo "Files in diagram folder"
-          ls
+          ls -l --b=M
           
       - name: Upload Diagrams
         uses: actions/upload-artifact@v2
         with:
           name: er-diagrams
-          path: $GITHUB_WORKSPACE/diagrams/er_diagram.png
+          path: er_diagram.png
           
       - name: Upload Diagram2
         uses: actions/upload-artifact@v2
         with:
           name: er-diagram2
-          path: er_diagram.uml
+          path: ../README.md
