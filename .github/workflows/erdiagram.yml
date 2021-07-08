@@ -73,4 +73,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: er-diagrams
-          path: er_diagram.png
+          path: $GITHUB_WORKSPACE/diagrams/er_diagram.png
+          
+      - name: Upload Diagram2
+        uses: actions/upload-artifact@v2
+        with:
+          name: er-diagram2
+          path: er_diagram.uml
