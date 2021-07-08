@@ -9,7 +9,6 @@ import './CoursesCard.scss'
 
 const CoursesCard = ({ category, setModalActive }) => {
   const { data: courseData } = useGetFetchData('course', GET_COURSE)
-  console.log(courseData?.courses);
   return (
     <div className='course-card-wrapper'>
       <div className='courses-card-container'>
