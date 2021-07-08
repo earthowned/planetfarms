@@ -1,4 +1,4 @@
-name: ER Diagram
+name: Manual ER Diagram
 
 on:
   workflow_dispatch:
@@ -6,16 +6,16 @@ on:
 
 jobs:
   diagrams:
-    name: ER Diagram
+    name: Manual ER Diagram
     runs-on: ubuntu-latest
 
     services:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: planetfarms
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: pass
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
         options: >-
@@ -43,18 +43,13 @@ jobs:
           
       - name: Planet Farms
         run: |
-          #export gitter_channel="${{ secrets.CHANNEL }}"
           cd api
-          echo "JWT_SECRET=sercet" >> .env
-          echo "DATABASE_NAME=planetfarms" >> .env
-          echo "DATABASE_USERNAME=test" >> .env
-          echo "DATABASE_PASSWORD=pass" >> .env
+          echo "JWT_SECRET=secret" >> .env
+          echo "DATABASE_NAME=${{ secrets.POSTGRES_DB }}" >> .env
+          echo "DATABASE_USERNAME=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "DATABASE_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
           echo "DATABASE_HOST=localhost" >> .env
           echo "AUTH_METHOD=local" >> .env
-          echo "COGNITO_REGION=" >> .env
-          echo "COGNITO_POOL_ID=" >> .env
-          echo "COGNITO_CLIENT_ID=" >> .env
-          echo "COGNITO_DOMAIN_NAME=" >> .env
           npm i
           npx sequelize-cli db:migrate
           cd ..
@@ -63,12 +58,12 @@ jobs:
           mkdir -p diagrams
           cd diagrams
           wget https://versaweb.dl.sourceforge.net/project/plantuml/plantuml.jar
-          planter postgres://test:pass@localhost:5432/planetfarms?sslmode=disable -o er_diagram.uml
-          java -jar plantuml.jar -verbose er_diagram.uml
+          planter postgres://test:pass@localhost:5432/planetfarms?sslmode=disable -o diagram.uml
+          java -jar plantuml.jar -verbose diagram.uml
           cd ..
           
       - name: Upload Diagrams
         uses: actions/upload-artifact@v2
         with:
-          name: er-diagrams
-          path: diagrams/*.png
+          name: diagrams
+          path: diagrams/diagram*
