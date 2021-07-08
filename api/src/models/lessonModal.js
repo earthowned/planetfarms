@@ -15,6 +15,9 @@ const Lessons = db.define(
     coverImg: {
       type: Sequelize.STRING,
     },
+    courseId: {
+      type: Sequelize.INTEGER
+    },
     createdAt: {
       type: Sequelize.DATE,
     },

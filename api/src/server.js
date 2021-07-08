@@ -32,6 +32,9 @@ const testRouter = require('./routes/testRouter')
 const Test = require('./models/testModel')
 const questionRouter = require('./routes/questionRouter')
 const Question = require('./models/questionModel')
+const userTestRouter = require('./routes/userTestRouter')
+const UserTest = require('./models/userTestModel')
+const User = require('./models/userModel')
 
 const PORT = process.env.port || 5000
 
@@ -58,6 +61,7 @@ app.use('/api/lesson-text', lessonTextRouter)
 app.use('/api/materials', materialRouter)
 app.use('/api/tests', testRouter)
 app.use('/api/questions', questionRouter)
+app.use('/api/user_tests', userTestRouter)
 
 // home page response
 app.get('/', (request, response) => {
@@ -94,6 +98,24 @@ Test.belongsTo(Lessons, { foreignKey: 'lessonId' })
 Test.hasMany(Question, { foreignKey: 'testId' })
 Question.belongsTo(Test, { foreignKey: 'testId' })
 
+//m:n association between user and test through user_test
+User.belongsToMany(Test, {
+  foreignKey: 'userId',
+  through: 'users_tests'
+})
+
+Test.belongsToMany(User, {
+  foreignKey: 'testId',
+  through: 'users_tests'
+})
+
+UserTest.belongsTo(User, {
+  foreignKey: 'userId'
+})
+
+UserTest.belongsTo(Test, {
+  foreignKey: 'testId'
+})
 
 // port connection
 app.listen(PORT, () => {
