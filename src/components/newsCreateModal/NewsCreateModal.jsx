@@ -29,7 +29,7 @@ const NewsCreateModal = ({
   lessonData,
   setLessonData,
   setLessonImgDataToPost,
-  setLessonText
+  setText
 }) => {
   const [files, setFiles] = useState(null)
 
@@ -89,7 +89,7 @@ const NewsCreateModal = ({
           placeholder={placeholder}
           lessonData={lessonData}
           setLessonData={setLessonData}
-          setLessonText={setLessonText}
+          setText={setText}
         />
       )
 

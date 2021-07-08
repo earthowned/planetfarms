@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('lessonTexts', {
+    await queryInterface.createTable('texts', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -22,10 +22,10 @@ module.exports = {
         type: Sequelize.DATE,
       },
     })
-    await queryInterface.addConstraint('lessonTexts', {
+    await queryInterface.addConstraint('texts', {
       fields: ['lessonId'],
       type: 'foreign key',
-      name: 'lessonId_fkey_forlessonTexts',
+      name: 'lessonId_fkey_fortexts',
       references: {
         table: 'lessons',
         field: 'id',
@@ -34,6 +34,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable('lessonTexts', {})
+    queryInterface.dropTable('texts', {})
   },
 }

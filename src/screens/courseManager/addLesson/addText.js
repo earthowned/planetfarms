@@ -1,4 +1,4 @@
-import { createLessonText } from '../../../actions/lessonTextActions'
+import { createText } from '../../../actions/textActions'
 
 export const addText = function (lessonData, lessonId, dispatch) {
   let i = 0
@@ -8,7 +8,7 @@ export const addText = function (lessonData, lessonId, dispatch) {
     const textHeading = lessonData[i].textHeading
     const textDescription = lessonData[i].textDescription
     if (lessonData.textHeading || lessonData[i].textDescription) {
-      dispatch(createLessonText(textHeading, textDescription, lessonId))
+      dispatch(createText(textHeading, textDescription, lessonId))
     }
   }
 }

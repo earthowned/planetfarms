@@ -4,9 +4,9 @@ import {
   LESSSON_TEXT_CREATE_REQUEST,
   LESSSON_TEXT_CREATE_SUCCESS,
   LESSSON_TEXT_CREATE_FAIL
-} from '../constants/lessonTextConstants'
+} from '../constants/textConstants'
 
-export const createLessonText =
+export const createText =
   (textHeading, textDescription, lessonId) => async (dispatch) => {
     const textData = { textHeading, textDescription, lessonId }
 

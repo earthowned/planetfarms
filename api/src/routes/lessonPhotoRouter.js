@@ -4,19 +4,19 @@ require('express-async-errors')
 const { upload } = require('../helpers/filehelpers')
 
 const {
-  getLessonPhotos,
-  getLessonPhotoById,
-  addlessonPhoto,
-  deleteLessonPhoto,
-  updateLessonPhoto,
-} = require('../controllers/lessonPhotoController')
+  getPhotos,
+  getPhotoById,
+  addphoto,
+  deletePhoto,
+  updatePhoto,
+} = require('../controllers/photoController')
 
-router.route('/').get(getLessonPhotos)
-router.route('/add').post(upload.single('lessonImg'), addlessonPhoto)
+router.route('/').get(getPhotos)
+router.route('/add').post(upload.single('lessonImg'), addphoto)
 router
   .route('/:id')
-  .get(getLessonPhotoById)
-  .delete(deleteLessonPhoto)
-  .put(updateLessonPhoto)
+  .get(getPhotoById)
+  .delete(deletePhoto)
+  .put(updatePhoto)
 
 module.exports = router

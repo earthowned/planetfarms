@@ -85,28 +85,25 @@ function DragDropComponent ({
               )}
             </div>
           </>
-        ) : img ? (
+        ) : (img ?
           <>
             <img className='avatar' src={img} alt='img' />
             <div className='editimg'>
               <p>{editText} </p>
             </div>
           </>
-        ) : (
-          ''(
-            <>
-              {type === 'video' ? (
-                <p className='videoName'>Choose video</p>
-              ) : text ? (
-                <p>{text}</p>
-              ) : (
-                <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                  Drag & Drop files in this area or Click Here to attach video
-                  cover
-                </h6>
-              )}
-            </>
-          )
+        :  <>
+            {type === 'video' ? (
+              <p className='videoName'>Choose video</p>
+            ) : text ? (
+              <p>{text}</p>
+            ) : (
+              <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+                Drag & Drop files in this area or Click Here to attach video
+                cover
+              </h6>
+            )}
+          </>  
         )}
       </div>
       {files && (

@@ -3,9 +3,9 @@ import {
   LESSSON_PHOTO_CREATE_SUCCESS,
   LESSSON_PHOTO_CREATE_FAIL,
   LESSSON_PHOTO_CREATE_RESET
-} from '../constants/lessonPhotoConstants'
+} from '../constants/photoConstants'
 
-export const lessonPhotoCreateReducer = (state = {}, action) => {
+export const photoCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case LESSSON_PHOTO_CREATE_REQUEST:
       return { loading: true }

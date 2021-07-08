@@ -3,19 +3,19 @@ const router = express.Router()
 require('express-async-errors')
 
 const {
-  getLessonText,
-  getLessonTextById,
-  addLessonText,
-  deleteLessonText,
-  updateLessonText,
-} = require('../controllers/lessonTextController')
+  getText,
+  getTextById,
+  addText,
+  deleteText,
+  updateText,
+} = require('../controllers/textController')
 
-router.route('/').get(getLessonText)
-router.route('/add').post(addLessonText)
+router.route('/').get(getText)
+router.route('/add').post(addText)
 router
   .route('/:id')
-  .get(getLessonTextById)
-  .delete(deleteLessonText)
-  .put(updateLessonText)
+  .get(getTextById)
+  .delete(deleteText)
+  .put(updateText)
 
 module.exports = router
