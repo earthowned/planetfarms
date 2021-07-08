@@ -1,14 +1,12 @@
 name: ER Diagram
 
 on:
-  push:
-    branches: [er-diagram]
   workflow_dispatch:
     inputs:
 
 jobs:
   diagrams:
-    name: 
+    name: ER Diagram
     runs-on: ubuntu-latest
 
     services:
