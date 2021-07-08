@@ -1,59 +1,76 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import Input from '../../components/input/Input'
 import SignLayout from '../../layout/signLayout/SignLayout'
 import Button from '../../components/button/Button'
-import { resendCodeAction, confirmPin } from '../../actions/userAction'
+import { verifyCurrentUserAttribute, verifyCurrentUserAttributeSubmit } from '../../actions/userAction'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
-import { loadingBar } from 'aws-amplify'
 
-const UserVerification = () => {
+const Verification = ({ attr, title }) => {
+  const [message, setMessage] = useState('')
   const [usernameValue, setUsernameValue] = useState('')
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)
   const dispatch = useDispatch()
   const { register: regi, errors, handleSubmit } = useForm()
 
-  const userConfirmCode = useSelector((state) => state.userConfirmCode)
-  const userResendCode = useSelector((state) => state.userResendCode)
-  const { error: confirmErr, status: confirmStatus } = userConfirmCode
-  const { error: resendErr, status: resendStatus } = userResendCode
+  const history = useHistory()
 
-  const verifyUsername = ({ username }) => {
+  const userAttrConfirmCode = useSelector((state) => state.userAttrConfirmCode)
+  const userAttrResendCode = useSelector((state) => state.userAttrResendCode)
+  const { error: confirmErr, status: confirmStatus } = userAttrConfirmCode
+  const { error: resendErr, status: resendStatus } = userAttrResendCode
+
+  const resendCode = ({ username }) => {
     if (!usernameValue) setUsernameValue(username)
-    usernameValue && setIsVerifiedUser(true)
-  }
-  const resendCode = () => {
-    dispatch(resendCodeAction(usernameValue))
+    dispatch(verifyCurrentUserAttribute(attr))
     isVerifiedUser && console.log('code sent')
   }
   const alreadyHaveCode = ({ username }) => {
+    console.log(attr)
     if (!usernameValue) setUsernameValue(username)
-    usernameValue && setIsVerifiedUser(true)
     isVerifiedUser && console.log('type code')
   }
   const sendCode = ({ username }) => {
     if (!usernameValue) setUsernameValue(username)
-    usernameValue && setIsVerifiedUser(true)
-    dispatch(resendCodeAction(usernameValue))
+    dispatch(verifyCurrentUserAttribute(attr))
     isVerifiedUser && console.log('code sent')
   }
   const verifyAccount = ({ code }) => {
     console.log(usernameValue, code)
-    dispatch(confirmPin(usernameValue, code))
+    dispatch(verifyCurrentUserAttributeSubmit(attr, code))
     console.log('User Account Verified Successfully')
   }
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
+  }, [userInfo])
+
+  useEffect(() => {
+    usernameValue && setIsVerifiedUser(true)
+    console.log(confirmStatus)
+    if (confirmStatus) {
+      history.push('/myProfile')
+    } else if (resendStatus) {
+      setMessage('Code has been sent successfully.')
+    }
+  }, [confirmStatus, resendStatus, usernameValue])
 
   return (
     <SignLayout>
       <form className='sign'>
-        <h1 className='welcome'>Confirm Verification</h1>
+        <h1 className='welcome'>{title}</h1>
         <div className='container'>
           {confirmErr && <div className='error'>{confirmErr}</div>}
           {resendErr && <div className='error'>{resendErr}</div>}
-          {/* {message && <div className='error'>{message}</div>} */}
+          {message && <div className='message'>{message}</div>}
 
           <Input
             placeholder='Username'
@@ -120,4 +137,4 @@ const UserVerification = () => {
   )
 }
 
-export default UserVerification
+export default Verification

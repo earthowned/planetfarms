@@ -227,17 +227,6 @@ const forgotPasswordSubmit = async (req, res) => {
     .catch((err) => console.log(err))
 }
 
-const resendCode = async (req, res) => {
-  const { username } = req.body
-  try {
-    await Auth.resendSignUp(username)
-    res.json({ message: 'code resent successfully' }).status(200)
-  } catch (err) {
-    res.status(401)
-    throw new Error('error resending code: ', err)
-  }
-}
-
 const confirmSignUpWithCode = async (req, res) => {
   const { username, code } = req.body
   try {
@@ -353,4 +342,4 @@ const searchUserName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getMyProfile, getUsers, updateUser, searchUserName }
+module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getMyProfile, getUsers, updateUser, searchUserName }

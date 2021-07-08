@@ -38,11 +38,12 @@ import EditCollection from './screens/courses/editCollection/EditCollection'
 import AdminCoursePage from './screens/courseManager/adminCoursePage/AdminCoursePage'
 import AddLesson from './screens/courseManager/addLesson/AddLesson'
 import CourseUsers from './screens/courses/courseUsers/CourseUsers'
-import LoginSignUp from './screens/loginSignUp/LoginSignUp'
 import ScrollToTop from './utils/scrollToTop'
 import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
-import UserVerification from './screens/userVerification/UserVerification'
+import UserVerification from './screens/verification/UserVerification'
+import EmailVerification from './screens/verification/EmailVerification'
+import PhoneVerification from './screens/verification/PhoneVerification'
 
 function App () {
   return (
@@ -63,6 +64,12 @@ function App () {
           </Route>
           <Route path='/verification'>
             <UserVerification />
+          </Route>
+          <Route path='/email-verification'>
+            <EmailVerification />
+          </Route>
+          <Route path='/phone-verification'>
+            <PhoneVerification />
           </Route>
           <Route exact path='/calendar/my-events'>
             <CalendarScreen />
