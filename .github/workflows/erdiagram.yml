@@ -71,7 +71,7 @@ jobs:
           ls -l --b=M
           cd ..
           ls
-          echo ${{GITHUB_WORKSPACE}}
+          echo ${{github.workspace}}
           
       - name: Upload Diagrams
         uses: actions/upload-artifact@v2
