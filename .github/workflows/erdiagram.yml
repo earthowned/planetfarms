@@ -67,14 +67,10 @@ jobs:
           wget https://versaweb.dl.sourceforge.net/project/plantuml/plantuml.jar
           planter postgres://test:pass@localhost:5432/planetfarms?sslmode=disable -o er_diagram.uml
           java -jar plantuml.jar -verbose er_diagram.uml
-          echo "Files in diagram folder"
-          ls -l --b=M
           cd ..
-          ls
-          echo ${{github.workspace}}
           
       - name: Upload Diagrams
         uses: actions/upload-artifact@v2
         with:
           name: er-diagrams
-          path: diagrams/er_diagram.png
+          path: diagrams/*.png
