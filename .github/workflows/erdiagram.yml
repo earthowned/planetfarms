@@ -69,15 +69,12 @@ jobs:
           java -jar plantuml.jar -verbose er_diagram.uml
           echo "Files in diagram folder"
           ls -l --b=M
+          cd ..
+          ls
+          echo ${{GITHUB_WORKSPACE}}
           
       - name: Upload Diagrams
         uses: actions/upload-artifact@v2
         with:
           name: er-diagrams
-          path: er_diagram.png
-          
-      - name: Upload Diagram2
-        uses: actions/upload-artifact@v2
-        with:
-          name: er-diagram2
-          path: ../README.md
+          path: diagrams/er_diagram.png
