@@ -14,6 +14,13 @@ services:
     image: adminer
     ports:
       - 8081:8080
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: planetfarms@ole.org
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 8082:80
   nginx:
     image: nginx:alpine
     ports:
