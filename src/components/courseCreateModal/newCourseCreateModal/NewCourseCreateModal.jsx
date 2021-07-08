@@ -39,12 +39,13 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
       })
     )
   }
+  // console.log(cData)
   useEffect(() => {
     if (Object.keys(cData).length !== 0 && cData.loading === false) {
       const id = cData.data.data.id
       history.push(`/admin/course/${id}`)
     }
-  }, [cData])
+  }, [])
 
   return (
     <div className="newCourse">
