@@ -1,7 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     queryInterface.removeColumn('lessons', 'steps')
-    queryInterface.removeColumn('lessons', 'courseId')
     queryInterface.addColumn('lessons', 'courseId', Sequelize.INTEGER)
     queryInterface.addConstraint('lessons', {
       fields: ['courseId'],
