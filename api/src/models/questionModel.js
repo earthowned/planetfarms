@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
     question: {
       type: DataTypes.TEXT,
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     testId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
     createdAt: {
       allowNull: false,

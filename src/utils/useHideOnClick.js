@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 
 const useHideOnClick = (handler) => {
-  let domNode = useRef()
+  const domNode = useRef()
   useEffect(() => {
-    let hideShowHandler = (event) => {
+    const hideShowHandler = (event) => {
       if (!domNode.current.contains(event.target)) {
         handler()
       }

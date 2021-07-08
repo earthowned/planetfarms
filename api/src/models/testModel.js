@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
     test_name: {
       type: DataTypes.STRING
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     lessonId: {
       type: DataTypes.INTEGER,
       unique: true,
-      allowNull: false,
+      allowNull: false
     },
     createdAt: {
       allowNull: false,
@@ -36,7 +36,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   return Test
 }
-
 
 // module.exports = (sequelize, DataTypes) => {
 //   const Test = sequelize.define('tests', {

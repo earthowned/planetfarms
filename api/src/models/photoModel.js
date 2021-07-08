@@ -3,23 +3,23 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     photoDescription: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     lessonImg: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     isImgDesc: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE
     },
     updatedAt: {
-      type: DataTypes.DATE,
-    },
+      type: DataTypes.DATE
+    }
   },
   { timestamps: true })
   Photo.associate = (models) => {

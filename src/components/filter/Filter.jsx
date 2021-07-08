@@ -30,24 +30,23 @@ const Filter = ({ data = [], newFilter, name, noImage }) => {
             </ul>
           )}
         </div>
-          ) : <div className='filter-container'>
-            <div onClick={() => setActive(!active)} className='filter-title'>
-              {text.length > 0
-                ? text[0].label
-                : 'Choose the option'}
-              <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
-            </div>
-            {active && <ul className='filter-dropdown'>
-              {
+      ) : <div className='filter-container'>
+        <div onClick={() => setActive(!active)} className='filter-title'>
+          {text.length > 0
+            ? text[0].label
+            : 'Choose the option'}
+          <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
+        </div>
+        {active && <ul className='filter-dropdown'>
+          {
               data.length > 0 && data.map(item => (
                 <Link className='nav-link' to={`${item.link}`}>
                   <li onClick={() => setActive(false)}>{item.label}</li>
                 </Link>
               ))
             }
-            </ul>}
-            </div>
-      }
+        </ul>}
+          </div>}
     </>
   )
 }

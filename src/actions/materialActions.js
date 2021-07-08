@@ -2,7 +2,7 @@ import { Axios, ADD_MATERIAL } from '../utils/urlConstants'
 import {
   MATERIAL_CREATE_REQUEST,
   MATERIAL_CREATE_SUCCESS,
-  MATERIAL_CREATE_FAIL,
+  MATERIAL_CREATE_FAIL
 } from '../constants/materialConstants'
 
 export const createMaterial = (material, lessonId) => async (dispatch) => {
@@ -14,8 +14,8 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
     dispatch({ type: MATERIAL_CREATE_REQUEST })
     const config = {
       Headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+        'Content-Type': 'multipart/form-data'
+      }
     }
     const { data } = await Axios.post(ADD_MATERIAL, materialData, config)
     dispatch({ type: MATERIAL_CREATE_SUCCESS, payload: data })
@@ -25,7 +25,7 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message,
+          : error.message
     })
   }
 }

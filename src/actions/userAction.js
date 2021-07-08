@@ -283,7 +283,7 @@ export const logout = () => (dispatch) => {
   Auth.signOut().then(
     () => {
       window.localStorage.clear()
-      //window.localStorage.removeItem('userInfo')
+      // window.localStorage.removeItem('userInfo')
       dispatch({ type: USER_LOGOUT })
       document.location.href = '/login'
     }

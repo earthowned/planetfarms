@@ -7,12 +7,12 @@ module.exports = {
       name: 'courseId_fkey_forLessons',
       references: {
         table: 'courses',
-        field: 'id',
-      },
+        field: 'id'
+      }
     })
   },
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.dropTable('lessons', {})
-  },
+  }
 }

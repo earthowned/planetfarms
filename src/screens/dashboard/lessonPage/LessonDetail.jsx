@@ -4,7 +4,7 @@ import {
   GET_COVERIMG,
   GET_VIDEO,
   VIDEO_COVER,
-  LESSON_IMG,
+  LESSON_IMG
 } from '../../../utils/urlConstants'
 
 import Video from '../../../components/videoPlayer/Video'
@@ -30,9 +30,9 @@ const LessonDetail = ({ data, id }) => {
   const newData = lessonData.flat()
 
   return (
-    <div className="lesson-description-wrapper">
+    <div className='lesson-description-wrapper'>
       <h1>{data?.data?.title}</h1>
-      <div className="lesson-description-img-wrapper">
+      <div className='lesson-description-img-wrapper'>
         <img
           src={`${GET_COVERIMG}${data?.data?.coverImg}`}
           alt={`${data?.data?.title}_img`}

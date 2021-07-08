@@ -1,11 +1,11 @@
-import { TEST_CREATE_FAIL, TEST_CREATE_REQUEST, TEST_CREATE_SUCCESS, TEST_QUESTION_LIST_FAIL, TEST_QUESTION_LIST_REQUEST, TEST_QUESTION_LIST_SUCCESS } from "../constants/testConstants"
-import axios from 'axios';
+import { TEST_CREATE_FAIL, TEST_CREATE_REQUEST, TEST_CREATE_SUCCESS, TEST_QUESTION_LIST_FAIL, TEST_QUESTION_LIST_REQUEST, TEST_QUESTION_LIST_SUCCESS } from '../constants/testConstants'
+import axios from 'axios'
 
 export const createTest = (lessonId, questions) => async (dispatch, getState) => {
   try {
     dispatch({ type: TEST_CREATE_REQUEST })
-    console.log(lessonId, questions);
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/tests/add`, {lessonId, questions})
+    console.log(lessonId, questions)
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/tests/add`, { lessonId, questions })
     dispatch({ type: TEST_CREATE_SUCCESS, payload: data })
   } catch (error) {
     const message =
@@ -16,19 +16,18 @@ export const createTest = (lessonId, questions) => async (dispatch, getState) =>
   }
 }
 
-export const listTestQuestions = (testId ) => async (
+export const listTestQuestions = (testId) => async (
   dispatch
 ) => {
   try {
-    
     // const {data: {tests: [test]}} = await axios.get( `${process.env.REACT_APP_API_BASE_URL}/api/tests/lesson/${lessonId}`);
-    const {data} = await axios.get( `${process.env.REACT_APP_API_BASE_URL}/api/user_tests/${testId}`);
-    
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/${testId}`)
+
     dispatch({ type: TEST_QUESTION_LIST_REQUEST })
     const questions = await axios.get(
       `${process.env.REACT_APP_API_BASE_URL}/api/questions/test/${data.testId}`
     )
-    
+
     dispatch({
       type: TEST_QUESTION_LIST_SUCCESS,
       payload: questions.data

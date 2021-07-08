@@ -1,15 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
   const Lesson = sequelize.define('lessons', {
     id: {
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-      },
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     coverImg: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     courseId: {
       type: DataTypes.INTEGER
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   },
-  { timestamps: true });
+  { timestamps: true })
 
   Lesson.associate = (models) => {
     Lesson.hasOne(models.Test, {
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     Lesson.hasMany(models.Text)
     Lesson.hasMany(models.Material)
     Lesson.belongsTo(models.Courses, { constraints: true, foreignKey: 'courseId' })
-  };
+  }
 
-  return Lesson;
-};
+  return Lesson
+}

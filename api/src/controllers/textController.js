@@ -9,7 +9,7 @@ const getText = async (_req, res) => {
   res.status(200).json({
     status: true,
     message: 'fetched all lesson text successfully',
-    data: texts,
+    data: texts
   })
 }
 
@@ -22,7 +22,7 @@ const getTextById = async (req, res) => {
   res.status(200).json({
     status: true,
     message: 'fetched lesson text successfully',
-    data: text,
+    data: text
   })
 }
 
@@ -31,7 +31,7 @@ const addText = async (req, res) => {
   res.status(201).json({
     status: true,
     message: 'added new lesson text successfully',
-    data: text,
+    data: text
   })
 }
 
@@ -44,14 +44,14 @@ const deleteText = async (req, res) => {
   res.status(202).json({
     status: true,
     message: 'Lesson text deleted successfully',
-    data: text,
+    data: text
   })
 }
 
 const updateText = async (req, res) => {
   const { id } = req.params
   const text = await db.Text.update(req.body, {
-    where: { id },
+    where: { id }
   })
   if (!text) {
     throw new NotFoundError()
@@ -59,7 +59,7 @@ const updateText = async (req, res) => {
   res.status(202).json({
     status: true,
     message: 'Lesson text updated successfully',
-    data: text,
+    data: text
   })
 }
 
@@ -68,5 +68,5 @@ module.exports = {
   getTextById,
   addText,
   deleteText,
-  updateText,
+  updateText
 }

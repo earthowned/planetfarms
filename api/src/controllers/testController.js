@@ -22,9 +22,14 @@ const getLessonTests = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['test_name', order]]
-  db.Test.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {
+  db.Test.findAll({
+    offset: page,
+    limit: pageSize,
+    order: ordervalue,
+    where: {
       lessonId: req.params.id
-  } })
+    }
+  })
     .then(tests => res.json({ tests, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
@@ -35,36 +40,35 @@ const getLessonTests = (req, res) => {
 const addTest = async (req, res) => {
   try {
     const {
-    test_name, lessonId, description, questions
-  } = req.body
-  
-  if(questions.length < 1) return res.json({message: 'Please provide questions for the test.'}); 
-  const result = await sequelize.transaction(async (t) => {
-    const test = await db.Test.create({
-      test_name,
-      lessonId,
-      description
-    }, { transaction: t });
-    
-    const newQuestions = []
+      test_name, lessonId, description, questions
+    } = req.body
 
-    questions.forEach(async (item) => {
-      const questionObj = {
-        ...item,
-        testId: test.id,
-        options: [...item.options, item.answer]
-      }
-      newQuestions.push(questionObj)
+    if (questions.length < 1) return res.json({ message: 'Please provide questions for the test.' })
+    const result = await sequelize.transaction(async (t) => {
+      const test = await db.Test.create({
+        test_name,
+        lessonId,
+        description
+      }, { transaction: t })
+
+      const newQuestions = []
+
+      questions.forEach(async (item) => {
+        const questionObj = {
+          ...item,
+          testId: test.id,
+          options: [...item.options, item.answer]
+        }
+        newQuestions.push(questionObj)
+      })
+      // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
+      await Question.bulkCreate(newQuestions, { transaction: t })
+      return 'test is created with questions.'
     })
-    // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
-    await  Question.bulkCreate(newQuestions, {transaction: t})
-    return "test is created with questions.";
-  });
 
-  if(result) res.json({ message: result }).status(200);
-
+    if (result) res.json({ message: result }).status(200)
   } catch (error) {
-    res.json(error).status(400);
+    res.json(error).status(400)
   }
 }
 
@@ -80,9 +84,9 @@ const updateTest = (req, res) => {
     if (test) {
       const { id } = test
       db.Test.update({
-       test_name,
-       lessonId,
-       description
+        test_name,
+        lessonId,
+        description
       },
       { where: { id } })
         .then(() => res.json({ message: 'Test Updated !!!' }).status(200))

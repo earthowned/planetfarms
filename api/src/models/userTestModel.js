@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
     userId: DataTypes.INTEGER,
     testId: DataTypes.INTEGER,
@@ -24,6 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'testId'
     })
   }
-  
+
   return UserTest
 }

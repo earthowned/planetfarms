@@ -8,7 +8,7 @@ const {
   getPhotoById,
   addphoto,
   deletePhoto,
-  updatePhoto,
+  updatePhoto
 } = require('../controllers/photoController')
 
 router.route('/').get(getPhotos)

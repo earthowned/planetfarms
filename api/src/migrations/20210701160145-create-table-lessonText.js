@@ -4,23 +4,23 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
       },
       lessonId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       textHeading: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       textDescription: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       createdAt: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     })
     await queryInterface.addConstraint('texts', {
       fields: ['lessonId'],
@@ -28,12 +28,12 @@ module.exports = {
       name: 'lessonId_fkey_fortexts',
       references: {
         table: 'lessons',
-        field: 'id',
-      },
+        field: 'id'
+      }
     })
   },
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.dropTable('texts', {})
-  },
+  }
 }

@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { addQuestion, getQuestions, updateQuestion, getQuestionById, deleteQuestion, 
-    getTestQuestions } = require('../controllers/questionController')
+const {
+  addQuestion, getQuestions, updateQuestion, getQuestionById, deleteQuestion,
+  getTestQuestions
+} = require('../controllers/questionController')
 
 router.route('/').get(getQuestions)
 router.route('/test/:id').get(getTestQuestions)

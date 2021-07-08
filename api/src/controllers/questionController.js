@@ -2,7 +2,7 @@ const Question = require('../models/questionModel')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const sequelize = require('../config/database.js')
-const {fn, col} = sequelize
+const { fn, col } = sequelize
 // @desc    Fetch all tests
 // @route   GET /api/Test
 // @access  Public
@@ -17,16 +17,16 @@ const getQuestions = (req, res) => {
 }
 
 // randomize the answers
-function randomAnswer(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+function randomAnswer (array) {
+  let currentIndex = array.length; let temporaryValue; let randomIndex
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex -= 1
+    temporaryValue = array[currentIndex]
+    array[currentIndex] = array[randomIndex]
+    array[randomIndex] = temporaryValue
   }
-  return array;
+  return array
 }
 
 // @desc    Fetch all tests
@@ -35,31 +35,32 @@ function randomAnswer(array) {
 const getTestQuestions = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
-  
-  Question.findAll({ 
-    offset: page, 
-    limit: pageSize, 
-  
+
+  Question.findAll({
+    offset: page,
+    limit: pageSize,
+
     where: {
       testId: req.params.id
     },
-    attributes: ["options", "question"]
-})
+    attributes: ['options', 'question']
+  })
     .then(questions => {
-      if(questions) {
-        
-        questions.forEach(item => randomAnswer(item.options));
+      if (questions) {
+        questions.forEach(item => randomAnswer(item.options))
 
         // let newOptions = randomArrayShuffle(options);
-      return res.json({ questions, 
-        page, pageSize }).status(200)
+        return res.json({
+          questions,
+          page,
+          pageSize
+        }).status(200)
       }
 
       // const [...item] = questions
 
-      return res.json(questions);
-
-  })
+      return res.json(questions)
+    })
     .catch((err) => res.json({ err }).status(400))
 }
 
@@ -89,7 +90,7 @@ const updateQuestion = (req, res) => {
     if (questions) {
       const { id } = questions
       Question.update({
-      question, answer, options, testId
+        question, answer, options, testId
       },
       { where: { id } })
         .then(() => res.json({ message: 'Question Updated !!!' }).status(200))

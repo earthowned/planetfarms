@@ -3,29 +3,29 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     videoTitle: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     videoDescription: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     videoCover: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     videoLink: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     videoResource: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE
     },
     updatedAt: {
-      type: DataTypes.DATE,
-    },
+      type: DataTypes.DATE
+    }
   },
   { timestamps: true })
   Video.associate = (models) => {

@@ -5,7 +5,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.removeColumn('courses', 'isFree', Sequelize.BOOLEAN)
-  },
+  }
 }
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -14,5 +14,5 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.removeColumn('courses', 'category', Sequelize.STRING)
-  },
+  }
 }

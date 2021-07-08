@@ -15,7 +15,7 @@ const getCourses = (req, res) => {
     offset: page,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson],
+    include: [db.Lesson]
   })
     .then((courses) => {
       // queryUtils.paginate({ page, pageSize })
@@ -36,7 +36,7 @@ const addCourse = async (req, res) => {
   res.status(201).json({
     status: true,
     message: ' new course added successfully',
-    data: course,
+    data: course
   })
 }
 
@@ -53,7 +53,7 @@ const updateCourse = (req, res) => {
     gradeLevel,
     subjectLevel,
     creator,
-    steps,
+    steps
   } = req.body
   const id = req.params.id
   db.Courses.findByPk(id).then((product) => {
@@ -70,7 +70,7 @@ const updateCourse = (req, res) => {
           gradeLevel,
           subjectLevel,
           creator,
-          steps,
+          steps
         },
         { where: { id }, include: [db.Lesson] }
       )
@@ -89,7 +89,7 @@ const getCourseById = async (req, res) => {
   const { id } = req.params
   const course = await db.Courses.findOne({
     where: { id },
-    include: [db.Lesson],
+    include: [db.Lesson]
   })
   if (!course) {
     throw new NotFoundError()
@@ -97,7 +97,7 @@ const getCourseById = async (req, res) => {
   res.status(200).json({
     status: true,
     message: 'fetched course successfully',
-    data: course,
+    data: course
   })
 }
 
@@ -108,8 +108,8 @@ const deleteCourse = (req, res) => {
   const id = req.params.id
   db.Courses.findOne({
     where: {
-      id: id,
-    },
+      id: id
+    }
   }).then((resource) => {
     if (resource) {
       const { id } = resource
@@ -134,7 +134,7 @@ const searchCoursesTitle = (req, res) => {
 
   db.Courses.findAll({
     where: { title: { [Op.iLike]: '%' + title + '%' } },
-    order: [['title', order]],
+    order: [['title', order]]
   })
     .then((title) => res.json({ title }).status(200))
     .catch((err) => res.json({ error: err }).status(400))
@@ -146,5 +146,5 @@ module.exports = {
   updateCourse,
   getCourseById,
   deleteCourse,
-  searchCoursesTitle,
+  searchCoursesTitle
 }

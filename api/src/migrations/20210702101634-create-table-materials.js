@@ -4,20 +4,20 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
       },
       lessonId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       material: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       createdAt: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     })
     await queryInterface.addConstraint('materials', {
       fields: ['lessonId'],
@@ -25,12 +25,12 @@ module.exports = {
       name: 'lessonId_fkey_forMaterials',
       references: {
         table: 'lessons',
-        field: 'id',
-      },
+        field: 'id'
+      }
     })
   },
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.dropTable('materials', {})
-  },
+  }
 }

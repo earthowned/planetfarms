@@ -3,20 +3,20 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     textHeading: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     textDescription: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE
     },
     updatedAt: {
-      type: DataTypes.DATE,
-    },
+      type: DataTypes.DATE
+    }
   },
   { timestamps: true })
   Text.associate = (models) => {

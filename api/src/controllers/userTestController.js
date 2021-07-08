@@ -11,20 +11,20 @@ const UserTest = require('../models/userTestModel')
 const getUserTests = (req, res) => {
   const pageSize = 3
   const page = Number(req.query.pageNumber) || 0
-  
-  let userId = 1;
-  UserTest.findAll({ offset: page, limit: pageSize, where: {userId, testId: req.params.id}})
+
+  const userId = 1
+  UserTest.findAll({ offset: page, limit: pageSize, where: { userId, testId: req.params.id } })
     .then(tests => res.json({ tests, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
 
 const getSingleUserTest = async (req, res) => {
   try {
-   let userId = 1;
-  const userTest = await UserTest.findOne({where: {id: req.params.id, userId}});
-  res.json(userTest); 
+    const userId = 1
+    const userTest = await UserTest.findOne({ where: { id: req.params.id, userId } })
+    res.json(userTest)
   } catch (error) {
-    res.json(error).status(400);
+    res.json(error).status(400)
   }
 }
 
@@ -34,46 +34,45 @@ const getSingleUserTest = async (req, res) => {
 const takeTest = async (req, res) => {
   try {
     const {
-    lessonId, startTime
-  } = req.body
-  const userId = 1;
-  const test =  await Test.findOne({where: {lessonId: parseInt(lessonId)}});
-  if(!test) {
-      return res.json({message: 'Test doesn\'t exist.'})
-  }
-  const userTest = await UserTest.create({lessonId, userId, startTime, testId: test.id})
-  res.json({message: 'Test has started.', id: userTest.id});
+      lessonId, startTime
+    } = req.body
+    const userId = 1
+    const test = await Test.findOne({ where: { lessonId: parseInt(lessonId) } })
+    if (!test) {
+      return res.json({ message: 'Test doesn\'t exist.' })
+    }
+    const userTest = await UserTest.create({ lessonId, userId, startTime, testId: test.id })
+    res.json({ message: 'Test has started.', id: userTest.id })
   } catch (error) {
-    res.json(error).status(400);
+    res.json(error).status(400)
   }
 }
 
 const endTest = async (req, res) => {
-    try {
-        const {endTime, choices} = req.body;
-        const test = await UserTest.findOne({where: {id: req.params.id}});
-        
-        if(!test) {
-            return res.json({message: 'Test doesn\'t exist.'})
-        }
+  try {
+    const { endTime, choices } = req.body
+    const test = await UserTest.findOne({ where: { id: req.params.id } })
 
-        const score = await sequelize.transaction(async (t) => {
-            const solutions = await Question.findAll({where: {testId: test.testId}, attributes: ["answer"]}, {transaction: t});
-            let marks = 0;
-          
-            solutions.forEach((item, index) => {
-                if(choices[index] === item.answer) marks++
-            })
-    
-            await UserTest.update({marks,endTime}, {where: {id: req.params.id}}, {transaction: t});
-            const result = await UserTest.findOne({where: {id: req.params.id}, attributes: ['marks']}, {transaction: t});
-            return result;
-        })
-        return res.json({message: `You have obtained ${score.marks} marks`})
-
-    } catch (error) {
-        res.json(error).status(400);
+    if (!test) {
+      return res.json({ message: 'Test doesn\'t exist.' })
     }
+
+    const score = await sequelize.transaction(async (t) => {
+      const solutions = await Question.findAll({ where: { testId: test.testId }, attributes: ['answer'] }, { transaction: t })
+      let marks = 0
+
+      solutions.forEach((item, index) => {
+        if (choices[index] === item.answer) marks++
+      })
+
+      await UserTest.update({ marks, endTime }, { where: { id: req.params.id } }, { transaction: t })
+      const result = await UserTest.findOne({ where: { id: req.params.id }, attributes: ['marks'] }, { transaction: t })
+      return result
+    })
+    return res.json({ message: `You have obtained ${score.marks} marks` })
+  } catch (error) {
+    res.json(error).status(400)
+  }
 }
 
-module.exports = { getUserTests, takeTest, endTest, getSingleUserTest}
+module.exports = { getUserTests, takeTest, endTest, getSingleUserTest }

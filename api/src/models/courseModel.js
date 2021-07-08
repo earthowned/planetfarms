@@ -3,51 +3,51 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     title: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT
     },
     languageOfInstruction: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     memberLimit: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     method: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     gradeLevel: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     subjectLevel: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     creator: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     thumbnail: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     steps: {
-      type: DataTypes.JSON,
+      type: DataTypes.JSON
     },
     _attachments: {
-      type: DataTypes.BLOB('long'),
+      type: DataTypes.BLOB('long')
     },
     price: {
-      type: DataTypes.DOUBLE,
+      type: DataTypes.DOUBLE
     },
     category: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     isFree: {
       type: DataTypes.BOOLEAN,
-      default: false,
-    },
+      default: false
+    }
   },
   { timestamps: true })
   Courses.associate = (models) => {

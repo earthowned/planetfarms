@@ -2,7 +2,7 @@ import {
   COURSE_CREATE_REQUEST,
   COURSE_CREATE_SUCCESS,
   COURSE_CREATE_FAIL,
-  COURSE_CREATE_RESET,
+  COURSE_CREATE_RESET
 } from '../constants/courseConstants'
 
 export const courseCreateReducer = (state = {}, action) => {

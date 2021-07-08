@@ -5,5 +5,5 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.addColumn('lessons', 'lessonId', Sequelize.STRING)
-  },
+  }
 }

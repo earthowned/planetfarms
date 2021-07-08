@@ -47,97 +47,97 @@ import ForgotPassword from './screens/forgotPassword/ForgotPassword'
 import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/userVerification/UserVerification'
 
-function App() {
+function App () {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
         <ScrollToTop>
           <Switch>
-            <Route path="/:path(|login)" exact>
+            <Route path='/:path(|login)' exact>
               <LoginScreen />
             </Route>
-            <Route path="/register">
+            <Route path='/register'>
               <SignupScreen />
             </Route>
-            <Route path="/register-complete">
+            <Route path='/register-complete'>
               <CongratulationScreen />
             </Route>
-            <Route path="/forgot-password">
+            <Route path='/forgot-password'>
               <ForgotPassword />
             </Route>
             <Route path='/verification'>
               <UserVerification />
             </Route>
-            <Route exact path="/calendar/my-events">
+            <Route exact path='/calendar/my-events'>
               <CalendarScreen />
             </Route>
-            <Route exact path="/library">
+            <Route exact path='/library'>
               <Library />
             </Route>
-            <Route exact path="/library/collection">
+            <Route exact path='/library/collection'>
               <Collection />
             </Route>
-            <Route path="/library/collection/users">
+            <Route path='/library/collection/users'>
               <UserCollection />
             </Route>
-            <Route path="/library/collection/saved">
+            <Route path='/library/collection/saved'>
               <SavedCollection />
             </Route>
-            <Route exact path="/messenger">
+            <Route exact path='/messenger'>
               <Messenger />
             </Route>
-            <Route path="/messenger/:id">
+            <Route path='/messenger/:id'>
               <MobileMessage />
             </Route>
             <Route exact path='/community-page-news/:id'>
               <CommunityPagenews />
             </Route>
-            <Route path="/community-page-news/:title/:category">
+            <Route path='/community-page-news/:title/:category'>
               <NewsAdd />
             </Route>
-            <Route path="/community-page-news-view">
+            <Route path='/community-page-news-view'>
               <CommunityNewsViewPage />
             </Route>
-            <Route path="/community-switching">
+            <Route path='/community-switching'>
               <AllCommunitiesCard />
             </Route>
             <Route path='/community-members/:id'>
               <CommunityMembers />
             </Route>
-            <Route path="/community-members-profile/:id">
+            <Route path='/community-members-profile/:id'>
               <CommunityMembersProfile />
             </Route>
-            <Route path="/community-group/:id">
+            <Route path='/community-group/:id'>
               <CommunityGroup />
             </Route>
             <Route path='/your-community-group/:id'>
               <CommunityGroup />
             </Route>
-            <Route path="/community-group-view-page/:id">
+            <Route path='/community-group-view-page/:id'>
               <CommunityGroupViewPage />
             </Route>
-            <Route exact path="/courses">
+            <Route exact path='/courses'>
               <Courses />
             </Route>
-            <Route exact path="/courses/my-courses">
+            <Route exact path='/courses/my-courses'>
               <CourseCollection />
             </Route>
-            <Route path="/courses/my-courses/:id">
+            <Route path='/courses/my-courses/:id'>
               <EditCollection />
             </Route>
-            <Route path="/admin/courses">
+            <Route path='/admin/courses'>
               <Courses />
             </Route>
-            <Route path="/admin/course/:courseId">
+            <Route path='/admin/course/:courseId'>
               <AdminCoursePage />
             </Route>
-            <Route path="/admin/add-lesson/:courseId">
+            <Route path='/admin/add-lesson/:courseId'>
               <AddLesson />
             </Route>
-            <Route path="/admin/edit-lesson/:id">
+            <Route path='/admin/edit-lesson/:id'>
               <EditLesson />
             </Route>
-            <Route path="/courses/users">
+            <Route path='/courses/users'>
               <CourseUsers />
             </Route>
             <Route path='/enterprises/:id'>
@@ -146,47 +146,47 @@ function App() {
             <Route path='/your-enterprises/:id'>
               <Enterprises />
             </Route>
-            <Route path="/enterprises-view">
+            <Route path='/enterprises-view'>
               <EnterprisesViewPage />
             </Route>
-            <Route path="/my-group-view-page/:id">
+            <Route path='/my-group-view-page/:id'>
               <MyGroupViewPage />
             </Route>
-            <Route path="/dashboard">
+            <Route path='/dashboard'>
               <DashboardComponent />
             </Route>
-            <Route path="/achievements">
+            <Route path='/achievements'>
               <Achievements />
             </Route>
-            <Route path="/mylibrary">
+            <Route path='/mylibrary'>
               <MyLibrary />
             </Route>
-            <Route path="/mysurvey">
+            <Route path='/mysurvey'>
               <MySurvey />
             </Route>
-            <Route path="/mycourse">
+            <Route path='/mycourse'>
               <MyCourse />
             </Route>
             {/* <Route exact path="/mycoursepage">
               <MyCoursePage />
             </Route> */}
-            <Route path="/lesson/:id">
+            <Route path='/lesson/:id'>
               <LessonPage />
             </Route>
             {/* <Route exact path='/lesson/:id/testpage'>
               <LessonTestPage />
             </Route> */}
             <Route
-              path="/course/:courseId"
-              component={() => <MyCoursePage unpaid="unpaid" />}
+              path='/course/:courseId'
+              component={() => <MyCoursePage unpaid='unpaid' />}
             />
             <Route path='/lesson-test-page/:testId'>
               <LessonTestPage />
             </Route>
-            <Route path="/myProfile">
+            <Route path='/myProfile'>
               <MyProfile />
             </Route>
-            <Route path="/userInfo">
+            <Route path='/userInfo'>
               <UserInfo />
             </Route>
             <Route path='/coursepage'>

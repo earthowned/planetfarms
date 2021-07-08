@@ -11,7 +11,7 @@ const {
   updateCourse,
   getCourseById,
   deleteCourse,
-  searchCoursesTitle,
+  searchCoursesTitle
 } = require('../controllers/courseController.js')
 const { upload } = require('../helpers/filehelpers')
 

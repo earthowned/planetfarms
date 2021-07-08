@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Courses.css'
-import useGetFetchData from "../../utils/useGetFetchData";
-import { CATEGORY } from "../../utils/urlConstants";
+import useGetFetchData from '../../utils/useGetFetchData'
+import { CATEGORY } from '../../utils/urlConstants'
 
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import CoursesHeader from '../../components/coursesHeader/CoursesHeader'
@@ -14,19 +14,19 @@ import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCr
 import CollectionModal from '../../components/collectionModal/CollectionModal'
 
 const Courses = () => {
-  const [active, setActive] = useState(false);
-  const [modalactive, setModalActive] = useState(false);
-  const [newCollectionactive, setNewCollectionActive] = useState(false);
-  const [createCourse, setCreateCourse] = useState(false);
-  const [createNewCourse, setCreateNewCourse] = useState(false);
+  const [active, setActive] = useState(false)
+  const [modalactive, setModalActive] = useState(false)
+  const [newCollectionactive, setNewCollectionActive] = useState(false)
+  const [createCourse, setCreateCourse] = useState(false)
+  const [createNewCourse, setCreateNewCourse] = useState(false)
 
-  const { data } = useGetFetchData("courseCategory", CATEGORY);
+  const { data } = useGetFetchData('courseCategory', CATEGORY)
 
-  console.log(data);
-  
-  function createNewCourseFunc() {
-    setCreateNewCourse(true);
-    setCreateCourse(false);
+  console.log(data)
+
+  function createNewCourseFunc () {
+    setCreateNewCourse(true)
+    setCreateCourse(false)
   }
   return (
     <>
@@ -34,12 +34,12 @@ const Courses = () => {
         <GroupModal
           clickHandler={setModalActive}
           setNewCollection={setNewCollectionActive}
-          name="Add to collection"
-          btnName="Add to collection"
+          name='Add to collection'
+          btnName='Add to collection'
         />
       )}
       {newCollectionactive && (
-        <SimpleModal setNewCollection={setNewCollectionActive} name="Courses" />
+        <SimpleModal setNewCollection={setNewCollectionActive} name='Courses' />
       )}
       {createCourse && (
         <CourseCreateModal
@@ -51,8 +51,8 @@ const Courses = () => {
       {createNewCourse && (
         <NewCourseCreateModal clickHandler={setCreateNewCourse} />
       )}
-      <DashboardLayout title="All courses">
-        <div className="courses-main-container">
+      <DashboardLayout title='All courses'>
+        <div className='courses-main-container'>
           <CoursesHeader
             setActive={setActive}
             setCreateCourse={setCreateCourse}
@@ -65,11 +65,11 @@ const Courses = () => {
               setModalActive={setModalActive}
               key={category.id}
             />
-          );
+          )
         })}
       </DashboardLayout>
     </>
-  );
-};
+  )
+}
 
-export default Courses;
+export default Courses

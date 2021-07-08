@@ -4,32 +4,32 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
       },
       lessonId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       videoTitle: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       videoDescription: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       videoCover: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       videoLink: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       videoResource: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       createdAt: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     })
     await queryInterface.addConstraint('videos', {
       fields: ['lessonId'],
@@ -37,12 +37,12 @@ module.exports = {
       name: 'lessonId_fkey_forVidoes',
       references: {
         table: 'lessons',
-        field: 'id',
-      },
+        field: 'id'
+      }
     })
   },
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.dropTable('videos', {})
-  },
+  }
 }

@@ -27,7 +27,7 @@ const CoursesCard = ({ category, setModalActive }) => {
             )
             .map((course) => {
               return (
-                <Background image={course?.thumbnail} key={course.id} tag="thumbnail">
+                <Background image={course?.thumbnail} key={course.id} tag='thumbnail'>
                   <div className='courses-card'>
                     <AddCollection
                       item={course}

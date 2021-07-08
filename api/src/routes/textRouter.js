@@ -7,7 +7,7 @@ const {
   getTextById,
   addText,
   deleteText,
-  updateText,
+  updateText
 } = require('../controllers/textController')
 
 router.route('/').get(getText)

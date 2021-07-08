@@ -2,7 +2,7 @@ import {
   MATERIAL_CREATE_REQUEST,
   MATERIAL_CREATE_SUCCESS,
   MATERIAL_CREATE_FAIL,
-  MATERIAL_CREATE_RESET,
+  MATERIAL_CREATE_RESET
 } from '../constants/materialConstants'
 
 export const materialCreateReducer = (state = {}, action) => {

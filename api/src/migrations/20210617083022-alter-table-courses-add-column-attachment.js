@@ -1,13 +1,13 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.addColumn("courses", "_attachments", Sequelize.BLOB("long"));
+    queryInterface.addColumn('courses', '_attachments', Sequelize.BLOB('long'))
   },
 
   down: async (queryInterface, Sequelize) => {
     queryInterface.removeColumn(
-      "courses",
-      "_attachments",
-      Sequelize.BLOB("long")
-    );
-  },
-};
+      'courses',
+      '_attachments',
+      Sequelize.BLOB('long')
+    )
+  }
+}
