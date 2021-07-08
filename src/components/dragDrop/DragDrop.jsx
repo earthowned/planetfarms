@@ -93,7 +93,7 @@ function DragDropComponent ({
             </div>
           </>
         ) : (
-          ''(
+          (
             <>
               {type === 'video' ? (
                 <p className='videoName'>Choose video</p>

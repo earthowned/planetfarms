@@ -12,6 +12,7 @@ import BackButton from '../../../components/backButton/BackButton'
 import { ErrorText } from '../../../components/formUI/FormUI'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import '../addLesson/AddLesson.scss'
+import AddTestModal from '../../../components/addTestModal/AddTestModal'
 
 const EditLesson = () => {
   const { id } = useParams()
@@ -28,7 +29,7 @@ const EditLesson = () => {
   //   const [videoModal, setVideoModal] = useState(false)
   //   const [imageModal, setImageModal] = useState(false)
   //   const [textModal, setTextModal] = useState(false)
-  //   const [testModal, setTestModal] = useState(false)
+    const [testModal, setTestModal] = useState(false)
 
   if (isLoading) {
     return <span>Loading</span>
@@ -40,6 +41,8 @@ const EditLesson = () => {
   }
 
   return (
+    <>
+    {testModal && <AddTestModal setTestModal={setTestModal} />}
     <DashboardLayout title='Edit lesson'>
       <BackButton location='' />
       <div className='admin-lesson-create-container'>
@@ -66,6 +69,12 @@ const EditLesson = () => {
           img={GET_COVERIMG + data?.data?.coverImg}
           editText='Drag & Drop image in this area or Click Here to edit image'
         />
+        <div className='admin-lesson-create-btn-wrapper'>
+        <button className='secondary-btn' onClick={() => setTestModal(true)}>
+          <img src='/img/test-outline.svg' alt='test icon' />{' '}
+          <span>Add test</span>
+        </button>
+        </div>
         <div className='save-lesson-modal'>
           <h4>Do you want to edit lesson?</h4>
           <div>
@@ -83,6 +92,7 @@ const EditLesson = () => {
         </div>
       </div>
     </DashboardLayout>
+    </>
   )
 }
 

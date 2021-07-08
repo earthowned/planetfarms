@@ -7,7 +7,7 @@ import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
 import './AddTestModal.scss'
 
 const AddTestModal = ({ setTestModal }) => {
-  const {courseId: lessonId} = useParams();
+  const {id} = useParams();
   const [questions, setQuestions] = useState([
     //data structure
     // {
@@ -35,7 +35,7 @@ const AddTestModal = ({ setTestModal }) => {
   // }, [questions])
 
   function addTest () {
-    dispatch(createTest(lessonId, questions));
+    dispatch(createTest(id, questions));
     setTestModal(false);
   }
 
