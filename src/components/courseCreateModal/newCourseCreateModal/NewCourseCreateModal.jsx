@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { CATEGORY } from '../../../utils/urlConstants'
-import uuid from 'react-uuid'
 
 import { createResource } from '../../../actions/courseActions'
-import { COURSE_CREATE_SUCCESS } from '../../../constants/courseConstants'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import DragDrop from '../../dragDrop/DragDrop'
 import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
@@ -15,7 +13,6 @@ import './NewCourseCreateModal.scss'
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const cData = useSelector((state) => state.addCourse)
   const [isFree, setIsFree] = useState(false)
   const [courseImage, setCourseImage] = useState('')
 
@@ -36,56 +33,50 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
         price,
         thumbnail,
         isFree,
+        history
       })
     )
   }
-  // console.log(cData)
-  useEffect(() => {
-    if (Object.keys(cData).length !== 0 && cData.loading === false) {
-      const id = cData.data.data.id
-      history.push(`/admin/course/${id}`)
-    }
-  }, [])
 
   return (
-    <div className="newCourse">
-      <form className="container" onSubmit={handleSubmit(submitForm)}>
-        <div className="header">
+    <div className='newCourse'>
+      <form className='container' onSubmit={handleSubmit(submitForm)}>
+        <div className='header'>
           <h2>Usual course</h2>
           <img
-            src="/img/close-outline.svg"
+            src='/img/close-outline.svg'
             onClick={() => clickHandler(false)}
-            alt="close-icon"
+            alt='close-icon'
           />
         </div>
         <DragDrop onChange={(img) => setCourseImage(img)} />
-        <div className="inputContainer">
+        <div className='inputContainer'>
           <input
             className={errors.title ? 'input errorBox' : 'input'}
-            placeholder="Course title*"
-            name="title"
+            placeholder='Course title*'
+            name='title'
             ref={register({
               required: {
                 value: true,
-                message: 'You must enter course title',
-              },
+                message: 'You must enter course title'
+              }
             })}
           />
-          <p className="error">{errors.title && errors.title.message}</p>
+          <p className='error'>{errors.title && errors.title.message}</p>
           <select
-            name="category"
+            name='category'
             className={
               errors.category
                 ? 'input input-select errorBox'
                 : 'input input-select'
             }
-            placeholder="Select Category*"
+            placeholder='Select Category*'
             ref={register({
-              required: 'You must select Category',
+              required: 'You must select Category'
             })}
-            defaultValue="Select Category"
+            defaultValue='Select Category'
           >
-            <option defaultValue="" disabled>
+            <option defaultValue='' disabled>
               Select Category
             </option>
             {res?.results.map((category) => (
@@ -94,46 +85,46 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
               </option>
             ))}
           </select>
-          <p className="error">{errors.category && errors.category.message}</p>
+          <p className='error'>{errors.category && errors.category.message}</p>
 
           <textarea
             className={errors.description ? 'errorBox' : ''}
-            placeholder="Course description"
-            name="description"
+            placeholder='Course description'
+            name='description'
             ref={register({
               required: {
                 value: true,
-                message: 'You must add description',
-              },
+                message: 'You must add description'
+              }
             })}
           />
-          <p className="error">
+          <p className='error'>
             {errors.description && errors.description.message}
           </p>
-          <div className="new-course-toggle">
+          <div className='new-course-toggle'>
             <h4>Free course</h4>
             <ToggleSwitch onClick={() => setIsFree(!isFree)} isFree={isFree} />
           </div>
           {!isFree && (
             <input
-              type="number"
-              name="price"
+              type='number'
+              name='price'
               className={errors.price ? 'input errorBox' : 'input'}
-              placeholder="Course price"
+              placeholder='Course price'
               ref={register({
                 required: {
                   value: true,
-                  message: 'You must enter price',
-                },
+                  message: 'You must enter price'
+                }
               })}
             />
           )}
-          <p className="error">{errors.price && errors.price.message}</p>
+          <p className='error'>{errors.price && errors.price.message}</p>
         </div>
-        <button className="default-btn btn-size">Create course</button>
+        <button className='default-btn btn-size'>Create course</button>
       </form>
     </div>
   )
 }
 
-export default NewCourseCreateModal
+export default React.memo(NewCourseCreateModal)
