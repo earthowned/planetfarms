@@ -1,12 +1,8 @@
-const Lessons = require('../models/lessonModal')
-const Video = require('../models/videoModel')
-const Photo = require('../models/photoModel')
-const Text = require('../models/textModel')
-const Material = require('../models/materialModel')
+const db = require('../models')
 
 const getLessons = async (_req, res) => {
-  const lessons = await Lessons.findAll({
-    include: [Video, Photo, Text, Material],
+  const lessons = await db.Lesson.findAll({
+    include: [db.Video, db.Photo, db.Text, db.Material],
   })
   res.status(200).json({
     status: true,
@@ -16,9 +12,9 @@ const getLessons = async (_req, res) => {
 }
 const getLessonById = async (req, res) => {
   const { id } = req.params
-  const lesson = await Lessons.findOne({
+  const lesson = await db.Lesson.findOne({
     where: { id },
-    include: [Video, Photo, Text, Material],
+    include: [db.Video, db.Photo, db.Text, db.Material],
   })
   res.status(200).json({
     status: true,
@@ -33,7 +29,7 @@ const addLesson = async (req, res) => {
     coverImg = req.file.filename
   }
 
-  const lesson = await Lessons.create({ ...req.body, coverImg })
+  const lesson = await db.Lesson.create({ ...req.body, coverImg })
   res.status(201).json({
     status: true,
     message: 'added new lesson successfully',
@@ -43,7 +39,7 @@ const addLesson = async (req, res) => {
 
 const deleteLesson = async (req, res) => {
   const { id } = req.params
-  const lesson = await Lessons.destroy({ where: { id } })
+  const lesson = await db.Lesson.destroy({ where: { id } })
   res.status(202).json({
     status: true,
     message: 'deleted lesson successfully',
@@ -58,7 +54,7 @@ const updateLesson = async (req, res) => {
     coverImg = req.file.filename
   }
 
-  const lesson = await Lessons.update(
+  const lesson = await db.Lesson.update(
     { ...req.body, coverImg },
     {
       where: { id },

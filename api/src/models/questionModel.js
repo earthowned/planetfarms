@@ -1,40 +1,38 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Question = db.define(
-  'questions',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Question = sequelize.define('questions', {
     id: {
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      question: {
-        type: Sequelize.TEXT,
-        allowNull: false
-      },
-      answer: {
-        type: Sequelize.TEXT,
-        allowNull: false
-      },
-      options: {
-        type: Sequelize.ARRAY(Sequelize.TEXT),
-        allowNull: false
-      },
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    question: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    answer: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    options: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: false
+    },
     testId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
+      allowNull: false,
+      type: DataTypes.DATE
+    },
     updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-        }
+      allowNull: false,
+      type: DataTypes.DATE
+    }
   },
-  { timestamps: true }
-)
-
-module.exports = Question
+  { timestamps: true })
+  Question.associate = (models) => {
+    Question.belongsTo(models.Test, { foreignKey: 'testId' })
+  }
+  return Question
+}

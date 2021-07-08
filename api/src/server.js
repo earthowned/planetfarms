@@ -25,21 +25,10 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 const errorHandler = require('./middleware/errorHandler')
 const NotFoundError = require('./errors/notFoundError')
-const Lessons = require('./models/lessonModal')
-const Video = require('./models/videoModel')
-const Photo = require('./models/photoModel')
-const Text = require('./models/textModel')
-const Material = require('./models/materialModel')
-const Courses = require('./models/courseModel')
 const materialRouter = require('./routes/materialRouter')
 const testRouter = require('./routes/testRouter')
-const Test = require('./models/testModel')
 const questionRouter = require('./routes/questionRouter')
-const Question = require('./models/questionModel')
 const userTestRouter = require('./routes/userTestRouter')
-const UserTest = require('./models/userTestModel')
-const User = require('./models/userModel')
-const path = require('path')
 
 const PORT = process.env.port || 5000
 
@@ -86,45 +75,6 @@ app.all('*', async (_req, _res) => {
 })
 
 app.use(errorHandler)
-
-// linking course table with lesson table(association)
-Lessons.hasMany(Video)
-Lessons.hasMany(Photo)
-Lessons.hasMany(Text)
-Lessons.hasMany(Material)
-Video.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
-Photo.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
-Text.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
-Material.belongsTo(Lessons, { constraints: true, foreignKey: 'lessonId' })
-Lessons.belongsTo(Courses, { constraints: true, foreignKey: 'courseId' })
-Courses.hasMany(Lessons)
-
-// 1:1 association between lesson and test
-Lessons.hasOne(Test, { foreignKey: 'lessonId' })
-Test.belongsTo(Lessons, { foreignKey: 'lessonId' })
-
-// 1:m association between test and question
-Test.hasMany(Question, { foreignKey: 'testId' })
-Question.belongsTo(Test, { foreignKey: 'testId' })
-
-//m:n association between user and test through user_test
-User.belongsToMany(Test, {
-  foreignKey: 'userId',
-  through: 'users_tests'
-})
-
-Test.belongsToMany(User, {
-  foreignKey: 'testId',
-  through: 'users_tests'
-})
-
-UserTest.belongsTo(User, {
-  foreignKey: 'userId'
-})
-
-UserTest.belongsTo(Test, {
-  foreignKey: 'testId'
-})
 
 // port connection
 app.listen(PORT, () => {

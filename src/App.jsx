@@ -192,9 +192,6 @@ function App() {
             <Route path='/coursepage'>
               <MyCoursePage unpaid='unpaid' />
             </Route>
-            <Route path='/test-lesson-1'>
-              <LessonTest />
-            </Route>
           </Switch>
         </ScrollToTop>
       </Router>

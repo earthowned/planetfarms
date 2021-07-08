@@ -1,60 +1,57 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-const Lessons = require('./lessonModal')
-
-const Courses = db.define(
-  'courses',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Courses = sequelize.define('courses', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     title: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
     },
     description: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
     },
     languageOfInstruction: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     memberLimit: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     method: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     gradeLevel: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     subjectLevel: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     creator: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     thumbnail: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     steps: {
-      type: Sequelize.JSON,
+      type: DataTypes.JSON,
     },
     _attachments: {
-      type: Sequelize.BLOB('long'),
+      type: DataTypes.BLOB('long'),
     },
     price: {
-      type: Sequelize.DOUBLE,
+      type: DataTypes.DOUBLE,
     },
     category: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     isFree: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       default: false,
     },
   },
-  { timestamps: true }
-)
-
-module.exports = Courses
+  { timestamps: true })
+  Courses.associate = (models) => {
+    Courses.hasMany(models.Lesson)
+  }
+  return Courses
+}

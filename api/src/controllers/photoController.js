@@ -1,8 +1,8 @@
-const Photo = require('../models/photoModel')
+const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 
 const getPhotos = async (_req, res) => {
-  const photos = await Photo.findAll()
+  const photos = await db.Photo.findAll()
   if (!photos) {
     throw new NotFoundError()
   }
@@ -15,7 +15,7 @@ const getPhotos = async (_req, res) => {
 
 const getPhotoById = async (req, res) => {
   const { id } = req.params
-  const photo = await Photo.findOne({ where: { id } })
+  const photo = await db.Photo.findOne({ where: { id } })
   if (!photo) {
     throw new NotFoundError()
   }
@@ -31,7 +31,7 @@ const addphoto = async (req, res) => {
   if (req.file) {
     lessonImg = req.file.filename
   }
-  const photo = await Photo.create({ ...req.body, lessonImg })
+  const photo = await db.Photo.create({ ...req.body, lessonImg })
   res.status(201).json({
     status: true,
     message: 'added new lesson photo successfully',
@@ -41,7 +41,7 @@ const addphoto = async (req, res) => {
 
 const deletePhoto = async (req, res) => {
   const { id } = req.params
-  const photo = await Photo.destroy({ where: { id } })
+  const photo = await db.Photo.destroy({ where: { id } })
   if (!photo) {
     throw new NotFoundError()
   }
@@ -54,7 +54,7 @@ const deletePhoto = async (req, res) => {
 
 const updatePhoto = async (req, res) => {
   const { id } = req.params
-  const photo = await Photo.update(req.body, {
+  const photo = await db.Photo.update(req.body, {
     where: { id }
   })
   if (!photo) {

@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-const Courses = require('../models/courseModel.js')
-const Lessons = require('../models/lessonModal')
+const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 
 // @desc    Fetch all course
@@ -12,11 +11,11 @@ const getCourses = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
 
-  Courses.findAll({
+  db.Courses.findAll({
     offset: page,
     limit: pageSize,
     order: [['title', order]],
-    include: [Lessons],
+    include: [db.Lesson],
   })
     .then((courses) => {
       // queryUtils.paginate({ page, pageSize })
@@ -33,7 +32,7 @@ const addCourse = async (req, res) => {
   if (req.file) {
     thumbnail = req.file.filename
   }
-  const course = await Courses.create({ ...req.body, thumbnail })
+  const course = await db.Courses.create({ ...req.body, thumbnail })
   res.status(201).json({
     status: true,
     message: ' new course added successfully',
@@ -57,10 +56,10 @@ const updateCourse = (req, res) => {
     steps,
   } = req.body
   const id = req.params.id
-  Courses.findByPk(id).then((product) => {
+  db.Courses.findByPk(id).then((product) => {
     if (product) {
       const { id } = product
-      Courses.update(
+      db.Courses.update(
         {
           _attachments: 'uploads/' + req.file.filename,
           title,
@@ -73,7 +72,7 @@ const updateCourse = (req, res) => {
           creator,
           steps,
         },
-        { where: { id }, include: [Lessons] }
+        { where: { id }, include: [db.Lesson] }
       )
         .then(() => res.json({ message: 'Course Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
@@ -88,9 +87,9 @@ const updateCourse = (req, res) => {
 // @access  Public
 const getCourseById = async (req, res) => {
   const { id } = req.params
-  const course = await Courses.findOne({
+  const course = await db.Courses.findOne({
     where: { id },
-    include: [Lessons],
+    include: [db.Lesson],
   })
   if (!course) {
     throw new NotFoundError()
@@ -107,14 +106,14 @@ const getCourseById = async (req, res) => {
 // @access  Public
 const deleteCourse = (req, res) => {
   const id = req.params.id
-  Courses.findOne({
+  db.Courses.findOne({
     where: {
       id: id,
     },
   }).then((resource) => {
     if (resource) {
       const { id } = resource
-      Courses.destroy({ where: { id } })
+      db.Courses.destroy({ where: { id } })
         .then(() =>
           res.json({ message: 'Course Deleted Successfully' }).status(200)
         )
@@ -133,7 +132,7 @@ const searchCoursesTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  Courses.findAll({
+  db.Courses.findAll({
     where: { title: { [Op.iLike]: '%' + title + '%' } },
     order: [['title', order]],
   })

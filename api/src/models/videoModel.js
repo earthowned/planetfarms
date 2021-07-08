@@ -1,38 +1,36 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Video = db.define(
-  'videos',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Video = sequelize.define('videos', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-
     videoTitle: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     videoDescription: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     videoCover: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     videoLink: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     videoResource: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     createdAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
     },
     updatedAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
     },
   },
-  { timestamps: true }
-)
+  { timestamps: true })
+  Video.associate = (models) => {
+    Video.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
+  }
 
-module.exports = Video
+  return Video
+}

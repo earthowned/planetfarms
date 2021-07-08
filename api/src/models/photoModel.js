@@ -1,31 +1,29 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Photo = db.define(
-  'photos',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Photo = sequelize.define('photos', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     photoDescription: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     lessonImg: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     isImgDesc: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     createdAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
     },
     updatedAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
     },
   },
-  { timestamps: true }
-)
-
-module.exports = Photo
+  { timestamps: true })
+  Photo.associate = (models) => {
+    Photo.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
+  }
+  return Photo
+}

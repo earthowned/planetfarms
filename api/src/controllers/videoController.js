@@ -1,8 +1,8 @@
-const Video = require('../models/videoModel')
+const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 
 const getVideos = async (_req, res) => {
-  const videos = await Video.findAll()
+  const videos = await db.Video.findAll()
   if (!videos) {
     throw new NotFoundError()
   }
@@ -15,7 +15,7 @@ const getVideos = async (_req, res) => {
 
 const getVideosById = async (req, res) => {
   const { id } = req.params
-  const video = await Video.findOne({ where: { id } })
+  const video = await db.Video.findOne({ where: { id } })
   if (!video) {
     throw new NotFoundError()
   }
@@ -33,7 +33,7 @@ const addVideo = async (req, res) => {
     videoCover = req.files.videoCover[0].filename
     videoResource = req.files.videoResource[0].filename
   }
-  const video = await Video.create({ ...req.body, videoCover, videoResource })
+  const video = await db.Video.create({ ...req.body, videoCover, videoResource })
 
   res.status(201).json({
     status: true,
@@ -44,7 +44,7 @@ const addVideo = async (req, res) => {
 
 const deleteVideo = async (req, res) => {
   const { id } = req.params
-  const video = await Video.destroy({ where: { id } })
+  const video = await db.Video.destroy({ where: { id } })
   res.status(202).json({
     status: true,
     message: 'Video deleted successfully',
@@ -54,7 +54,7 @@ const deleteVideo = async (req, res) => {
 
 const updateVideo = async (req, res) => {
   const { id } = req.params
-  const video = await Video.update(req.body, {
+  const video = await db.Video.update(req.body, {
     where: { id }
   })
   res.status(202).json({

@@ -1,8 +1,6 @@
-const Test = require('../models/testModel')
-const Question = require('../models/questionModel')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-const sequelize = require('../config/database.js')
+const db = require('../models')
 // @desc    Fetch all tests
 // @route   GET /api/Test
 // @access  Public
@@ -11,7 +9,7 @@ const getTests = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['test_name', order]]
-  Test.findAll({ offset: page, limit: pageSize, order: ordervalue })
+  db.Test.findAll({ offset: page, limit: pageSize, order: ordervalue })
     .then(tests => res.json({ tests, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
@@ -24,14 +22,14 @@ const getLessonTests = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['test_name', order]]
-  Test.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {
+  db.Test.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {
       lessonId: req.params.id
   } })
     .then(tests => res.json({ tests, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
 
-// @desc    Add individual Test
+// @desc    Add individual db.Test
 // @route   POST /api/Test/add
 // @access  Public
 const addTest = async (req, res) => {
@@ -40,9 +38,9 @@ const addTest = async (req, res) => {
     test_name, lessonId, description, questions
   } = req.body
   
-  if(questions.length < 1) return res.json({message: 'Please provide questions for the test.'});  const result = await sequelize.transaction(async (t) => {
-
-    const test = await Test.create({
+  if(questions.length < 1) return res.json({message: 'Please provide questions for the test.'}); 
+  const result = await sequelize.transaction(async (t) => {
+    const test = await db.Test.create({
       test_name,
       lessonId,
       description
@@ -70,7 +68,7 @@ const addTest = async (req, res) => {
   }
 }
 
-// @desc    Update a Test
+// @desc    Update a db.Test
 // @route   PUT /api/Test/:id
 // @access  Public
 const updateTest = (req, res) => {
@@ -78,10 +76,10 @@ const updateTest = (req, res) => {
     test_name, lessonId, description
   } = req.body
   const id = req.params.id
-  Test.findByPk(id).then(test => {
+  db.Test.findByPk(id).then(test => {
     if (test) {
       const { id } = test
-      Test.update({
+      db.Test.update({
        test_name,
        lessonId,
        description
@@ -95,13 +93,13 @@ const updateTest = (req, res) => {
   })
 }
 
-// @desc    Fetch single Test
+// @desc    Fetch single db.Test
 // @route   GET /api/Test/:id
 // @access  Public
 const getTestById = (req, res) => {
   const id = req.params.id
 
-  Test.findByPk(id)
+  db.Test.findByPk(id)
     .then(test => {
       if (test) {
         res.json(test)
@@ -113,15 +111,15 @@ const getTestById = (req, res) => {
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
-// @desc    Delete a Test
+// @desc    Delete a db.Test
 // @route   delete /api/Test/:id
 // @access  Public
 const deleteTest = (req, res) => {
   const id = req.params.id
-  Test.findByPk(id).then(test => {
+  db.Test.findByPk(id).then(test => {
     if (test) {
       const { id } = test
-      Test.destroy({ where: { id } })
+      db.Test.destroy({ where: { id } })
         .then(() => res.json({ message: 'Test Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -138,7 +136,7 @@ const searchTestTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  Test.findAll({ where: { test_name: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
+  db.Test.findAll({ where: { test_name: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
     .then(title => res.json({ title }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }

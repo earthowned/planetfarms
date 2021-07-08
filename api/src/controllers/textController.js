@@ -1,8 +1,8 @@
-const Text = require('../models/textModel')
+const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 
 const getText = async (_req, res) => {
-  const texts = await Text.findAll()
+  const texts = await db.Text.findAll()
   if (!texts) {
     throw new NotFoundError()
   }
@@ -15,7 +15,7 @@ const getText = async (_req, res) => {
 
 const getTextById = async (req, res) => {
   const { id } = req.params
-  const text = await Text.findOne({ where: { id } })
+  const text = await db.Text.findOne({ where: { id } })
   if (!text) {
     throw new NotFoundError()
   }
@@ -27,7 +27,7 @@ const getTextById = async (req, res) => {
 }
 
 const addText = async (req, res) => {
-  const text = await Text.create(req.body)
+  const text = await db.Text.create(req.body)
   res.status(201).json({
     status: true,
     message: 'added new lesson text successfully',
@@ -37,7 +37,7 @@ const addText = async (req, res) => {
 
 const deleteText = async (req, res) => {
   const { id } = req.params
-  const text = await Text.destroy({ where: { id } })
+  const text = await db.Text.destroy({ where: { id } })
   if (!text) {
     throw new NotFoundError()
   }
@@ -50,7 +50,7 @@ const deleteText = async (req, res) => {
 
 const updateText = async (req, res) => {
   const { id } = req.params
-  const text = await Text.update(req.body, {
+  const text = await db.Text.update(req.body, {
     where: { id },
   })
   if (!text) {

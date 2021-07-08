@@ -1,28 +1,26 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Text = db.define(
-  'texts',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Text = sequelize.define('texts', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     textHeading: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     textDescription: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     createdAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
     },
     updatedAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
     },
   },
-  { timestamps: true }
-)
-
-module.exports = Text
+  { timestamps: true })
+  Text.associate = (models) => {
+    Text.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
+  }
+  return Text
+}

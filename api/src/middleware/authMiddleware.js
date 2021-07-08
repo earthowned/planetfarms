@@ -9,6 +9,7 @@ const pem = jwkToPem(jwk.keys[0])
 module.exports = async (req, res, next) => {
   let decoded
   let recoded
+  console.log(req.headers)
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -39,7 +40,8 @@ module.exports = async (req, res, next) => {
       })
     }
   }
+  /*console.log('errr')
   res.status(401).json({
     error: 'Not authorized, token failed'
-  })
+  })*/
 }

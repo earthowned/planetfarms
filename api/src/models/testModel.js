@@ -1,38 +1,41 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Test = db.define(
-  'tests',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Test = sequelize.define('tests', {
     id: {
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      test_name: {
-        type: Sequelize.STRING
-      },
-      description: {
-        type: Sequelize.STRING
-      },
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    test_name: {
+      type: DataTypes.STRING
+    },
+    description: {
+      type: DataTypes.STRING
+    },
     lessonId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       unique: true,
       allowNull: false,
     },
     createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
+      allowNull: false,
+      type: DataTypes.DATE
+    },
     updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-        }
+      allowNull: false,
+      type: DataTypes.DATE
+    }
   },
-  { timestamps: true }
-)
-
-module.exports = Test
+  { timestamps: true })
+  Test.associate = (models) => {
+    Test.belongsTo(models.Lesson, { foreignKey: 'lessonId' })
+    Test.hasMany(models.Question, { foreignKey: 'testId' })
+    Test.belongsToMany(models.User, {
+      foreignKey: 'testId',
+      through: 'users_tests'
+    })
+  }
+  return Test
+}
 
 
 // module.exports = (sequelize, DataTypes) => {

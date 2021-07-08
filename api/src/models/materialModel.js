@@ -1,28 +1,26 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Material = db.define(
-  'materials',
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Material = sequelize.define('materials', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     material: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     name: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     createdAt: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     updatedAt: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
   },
-  { timestamps: true }
-)
-
-module.exports = Material
+  { timestamps: true })
+  Material.associate = (models) => {
+    Material.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
+  }
+  return Material
+}
