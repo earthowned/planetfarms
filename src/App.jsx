@@ -45,6 +45,7 @@ import ScrollToTop from './utils/scrollToTop'
 import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
 import EditLesson from './screens/courseManager/editLesson/EditLesson'
+import UserVerification from './screens/userVerification/UserVerification'
 
 function App() {
   return (
@@ -63,6 +64,9 @@ function App() {
             </Route>
             <Route path="/forgot-password">
               <ForgotPassword />
+            </Route>
+            <Route path='/verification'>
+              <UserVerification />
             </Route>
             <Route exact path="/calendar/my-events">
               <CalendarScreen />
@@ -85,7 +89,7 @@ function App() {
             <Route path="/messenger/:id">
               <MobileMessage />
             </Route>
-            <Route exact path="/community-page-news">
+            <Route exact path='/community-page-news/:id'>
               <CommunityPagenews />
             </Route>
             <Route path="/community-page-news/:title/:category">
@@ -97,13 +101,16 @@ function App() {
             <Route path="/community-switching">
               <AllCommunitiesCard />
             </Route>
-            <Route path="/community-members">
+            <Route path='/community-members/:id'>
               <CommunityMembers />
             </Route>
             <Route path="/community-members-profile/:id">
               <CommunityMembersProfile />
             </Route>
-            <Route path="/community-group">
+            <Route path="/community-group/:id">
+              <CommunityGroup />
+            </Route>
+            <Route path='/your-community-group/:id'>
               <CommunityGroup />
             </Route>
             <Route path="/community-group-view-page/:id">
@@ -133,7 +140,10 @@ function App() {
             <Route path="/courses/users">
               <CourseUsers />
             </Route>
-            <Route path="/enterprises">
+            <Route path='/enterprises/:id'>
+              <Enterprises />
+            </Route>
+            <Route path='/your-enterprises/:id'>
               <Enterprises />
             </Route>
             <Route path="/enterprises-view">
@@ -178,6 +188,12 @@ function App() {
             </Route>
             <Route path="/userInfo">
               <UserInfo />
+            </Route>
+            <Route path='/coursepage'>
+              <MyCoursePage unpaid='unpaid' />
+            </Route>
+            <Route path='/test-lesson-1'>
+              <LessonTest />
             </Route>
           </Switch>
         </ScrollToTop>

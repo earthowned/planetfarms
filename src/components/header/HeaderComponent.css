@@ -38,6 +38,19 @@
   margin-right: 0.8em;
 }
 
+.community-switch-btn button {
+  background: none;
+  outline: none;
+  border: none;
+  color: var(--background-color);
+  background-color: var(--primary-color);
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .message {
   position: relative;
   cursor: pointer;

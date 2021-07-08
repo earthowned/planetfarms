@@ -9,7 +9,9 @@ const DragDrop = ({
   setVideo,
   text,
   img,
-  editText
+  editText,
+  dataImg,
+  tag
 }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
@@ -42,6 +44,8 @@ const DragDrop = ({
       text={text}
       img={img}
       editText={editText}
+      dataImg={dataImg}
+      tag={tag}
     />
   )
 }
@@ -57,7 +61,9 @@ function DragDropComponent ({
   setVideo,
   text,
   img,
-  editText
+  editText,
+  dataImg,
+  tag
 }) {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
@@ -85,25 +91,20 @@ function DragDropComponent ({
               )}
             </div>
           </>
-        ) : (img ?
-          <>
-            <img className='avatar' src={img} alt='img' />
-            <div className='editimg'>
-              <p>{editText} </p>
-            </div>
-          </>
-        :  <>
-            {type === 'video' ? (
-              <p className='videoName'>Choose video</p>
-            ) : text ? (
-              <p>{text}</p>
-            ) : (
-              <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-                Drag & Drop files in this area or Click Here to attach video
-                cover
-              </h6>
-            )}
-          </>  
+        ) : (
+          dataImg
+            ? <><img
+                className='avatar'
+                src={process.env.REACT_APP_CDN_BASE_URL + `/${tag}/` + dataImg}
+                alt='files[0].preview'
+                />
+              <div className='drag-drop-icon-container'>
+                <img src='/img/camera-outline.svg' alt='camera icon' />
+              </div>
+            </>
+            : <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+              Drag & Drop files in this area or Click Here to attach video cover
+            </h6>
         )}
       </div>
       {files && (

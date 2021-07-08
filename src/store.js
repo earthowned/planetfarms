@@ -1,36 +1,62 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { newsListReducer, newsCreateReducer } from './reducers/newsReducers'
+import { newsListReducer, newsCreateReducer, newsDeleteReducer, newsUpdateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
-import { enterpriseListReducer } from './reducers/enterpriseReducers'
-import {
-  groupListReducer,
-  groupViewReducer
-} from './reducers/communityGroupReducers'
-import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
-import { eventListReducer } from './reducers/calendarEventReducer'
 import { courseCreateReducer } from './reducers/courseReducers'
-import {
-  lessonCreateReducer,
-  lessonUpdateReducer
-} from './reducers/lessonReducers'
+import { lessonCreateReducer, lessonUpdateReducer } from './reducers/lessonReducers'
 import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
 import { testCreateReducer, testQuestionListReducer } from './reducers/testReducers'
+import {
+  enterpriseCreateReducer, enterpriseDeleteReducer,
+  enterpriseFollowReducer,
+  enterpriseListReducer, enterpriseUpdateReducer, userEnterpriseListReducer
+} from './reducers/enterpriseReducers'
+import {
+  groupCreateReducer, groupDeleteReducer, groupFollowReducer, groupListReducer,
+  groupUpdateReducer, groupViewReducer, userGroupListReducer
+} from './reducers/communityGroupReducers'
+import {
+  userDetailsReducer,
+  userListReducer,
+  userLoginReducer,
+  userUpdateReducer,
+  userRegisterReducer
+} from './reducers/userReducers'
+import { eventListReducer } from './reducers/calendarEventReducer'
+import {
+  communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer,
+  communityVisitReducer, communityDeleteReducer, communityUpdateReducer
+} from './reducers/communityReducers'
+import { memberListReducer } from './reducers/memberReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
   groupView: groupViewReducer,
   listGroups: groupListReducer,
+  listUserGroups: userGroupListReducer,
+  groupUpdate: groupUpdateReducer,
+  groupDelete: groupDeleteReducer,
+  groupCreate: groupCreateReducer,
+  groupFollow: groupFollowReducer,
   listEnterprises: enterpriseListReducer,
+  listUserEnterprises: userEnterpriseListReducer,
+  enterpriseUpdate: enterpriseUpdateReducer,
+  enterpriseDelete: enterpriseDeleteReducer,
+  enterpriseCreate: enterpriseCreateReducer,
+  enterpriseFollow: enterpriseFollowReducer,
   listResources: resourceListReducer,
   listNews: newsListReducer,
-  userLogin: userLoginReducer,
-  userRegister: userRegisterReducer,
-  addNewNews: newsCreateReducer,
+  addCommunity: communityCreateReducer,
+  joinCommunity: communityJoinReducer,
+  listCommunities: communityListReducer,
+  listUserCommunities: userCommunityListReducer,
+  communityDelete: communityDeleteReducer,
+  communityUpdate: communityUpdateReducer,
+  activeCommunity: communityVisitReducer,
   addCourse: courseCreateReducer,
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
@@ -39,21 +65,30 @@ const reducer = combineReducers({
   addText: textCreateReducer,
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
-  listTestQuestions: testQuestionListReducer
+  listTestQuestions: testQuestionListReducer,
+  addNewNews: newsCreateReducer,
+  newsDelete: newsDeleteReducer,
+  newsUpdate: newsUpdateReducer,
+  listMember: memberListReducer,
+  userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
+  userList: userListReducer,
+  userUpdate: userUpdateReducer
 })
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
+const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+
+const currentCommunityFromStorage = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
 const initialState = {
-  userLogin: { userInfo: userInfoFromStorage }
+  userLogin: { userInfo: userInfoFromStorage },
+  activeCommunity: { currentCommunity: currentCommunityFromStorage }
 }
+
 const middleware = [thunk]
-const store = createStore(
-  reducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-)
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
 
 export default store

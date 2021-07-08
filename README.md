@@ -9,6 +9,8 @@ After you clone the repository. You can create or edit `.env` file and add `REAC
 
 ### `npm install`
 
+Make sure you have **NodeJS 14.x** or higher
+
 You can install dependencies by `npm install` in your Frontend and after that you can go to Backend by `cd api` and `npm install` to install dependencies in your Backend.
 
 ### `npm start`
@@ -43,6 +45,7 @@ DATABASE_NAME=<database name>
 DATABASE_USERNAME=<database username>
 DATABASE_PASSWORD=<database password>
 DATABASE_HOST=<database server>
+FRONTEND_URL=<url of your frontend>
 AUTH_METHOD=<**local** or **cognito**>
 COGNITO_REGION=<required only if using cognito auth method>
 COGNITO_POOL_ID=<required only if using cognito auth method>

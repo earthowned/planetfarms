@@ -1,38 +1,38 @@
 import React from 'react'
 import './ProfileFormCard.scss'
 
-const ProfileFormCard = ({ data: { title, first_inputTitle, first_inputValue, second_inputTitle, second_inputValue, third_inputTitle, third_inputValue } }) => {
+const ProfileFormCard = ({ data: { title, firstTitle, firstValue, secondTitle, secondValue, thirdTitle, thirdValue } }) => {
   return (
     <div className='myProfile-container'>
       <h2 className='myProfile-container-row-title'>{title}</h2>
       <div className='myProfile-container-row'>
         <div className='form-group'>
-          <label>{first_inputTitle}</label>
-          <input value={first_inputValue} />
+          <label>{firstTitle}</label>
+          <p>{firstValue}</p>
         </div>
         <div className='form-group'>
-          <label>{second_inputTitle}</label>
-          <input value={second_inputValue} />
+          <label>{secondTitle}</label>
+          <p>{secondValue}</p>
         </div>
-        {third_inputTitle && <div className='form-group'>
-          <label>{third_inputTitle}</label>
-          <input value={third_inputValue} />
-        </div>}
+        {thirdTitle &&
+          <div className='form-group'>
+            <label>{thirdTitle}</label>
+            <p>{thirdValue}</p>
+          </div>}
       </div>
     </div>
-
   )
 }
 
-export const PersonalInformation = () => {
+export const PersonalInformation = ({ user }) => {
   const PersonalInformationdata = {
     title: 'Personal information',
-    first_inputTitle: 'First name',
-    first_inputValue: 'Mikhail',
-    second_inputTitle: 'Last Name',
-    second_inputValue: 'Ugryum',
-    third_inputTitle: 'Date of birhday',
-    third_inputValue: '08/05/2021'
+    firstTitle: 'First Name',
+    firstValue: user?.firstName || 'N/A',
+    secondTitle: 'Last Name',
+    secondValue: user?.lastName || 'N/A',
+    thirdTitle: 'Date of birhday',
+    thirdValue: user?.dateOfBirth ? new Date(user?.dateOfBirth).toDateString() : 'N/A'
   }
   return (
 
@@ -42,26 +42,26 @@ export const PersonalInformation = () => {
   )
 }
 
-export const ContactInformation = () => {
+export const ContactInformation = ({ user }) => {
   const ContactInformationdatadata = {
     title: 'Contact information',
-    first_inputTitle: 'Email',
-    first_inputValue: 'johndoe@gmail.com',
-    second_inputTitle: 'Phone',
-    second_inputValue: '+1 61 2575684'
+    firstTitle: 'Email',
+    firstValue: user?.email || 'N/A',
+    secondTitle: 'Phone',
+    secondValue: user?.phone || 'N/A'
   }
   return (
     <ProfileFormCard data={ContactInformationdatadata} />
   )
 }
 
-export const AdditionalInformation = () => {
+export const AdditionalInformation = ({ user }) => {
   const AdditionalInformationdata = {
     title: 'Additional information',
-    first_inputTitle: 'Last login',
-    first_inputValue: '09/22/2020',
-    second_inputTitle: 'Numbers of visits',
-    second_inputValue: '153'
+    firstTitle: 'Last login',
+    firstValue: user?.lastLogin ? new Date(user?.lastLogin).toDateString() : 'N/A',
+    secondTitle: 'Numbers of visits',
+    secondValue: user?.numberOfVisit || 'N/A'
   }
   return (
     <ProfileFormCard data={AdditionalInformationdata} />

@@ -14,6 +14,8 @@ import OAuthBtn from '../oAuthBtn/OAuthBtn'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 import './SignInSignUp.scss'
+import { listUserCommunities, visitCommunity } from '../../actions/communityActions'
+import axios from 'axios'
 
 const SignIn = () => {
   const { welcomeBack, rememberMe, text1, google, facebook, failMessage } =
@@ -23,6 +25,8 @@ const SignIn = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
+  const { currentCommunity } = useSelector((state) => state.activeCommunity)
+
   const { loading, error, userInfo } = userLogin
   const { register: regi, errors, handleSubmit } = useForm()
 
@@ -55,11 +59,13 @@ const SignIn = () => {
     }); */
 
     if (userInfo) {
-      history.push('/community-page-news')
+      if (currentCommunity) {
+        return dispatch(visitCommunity(currentCommunity.id))
+      }
     }
 
     // getUser().then((userData) => setUser(userData));
-  }, [history, userInfo])
+  }, [history, userInfo, dispatch])
 
   function getUser () {
     /* return Auth.currentAuthenticatedUser()
@@ -102,14 +108,14 @@ const SignIn = () => {
   }
 
   const onSubmit = ({ username, password }) => {
-    return dispatch(login(username, password))
+    dispatch(login(username, password))
   }
 
   return (
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>Sign In</h1>
       <div className='container'>
-        {error && <div className='error'>{failMessage}</div>}
+        {error && <div className='error'>{error}</div>}
 
         <Input
           placeholder='Username'

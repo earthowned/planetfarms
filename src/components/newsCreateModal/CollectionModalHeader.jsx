@@ -9,7 +9,7 @@ const CollectionModalHeader = ({
       title={title}
       src='/img/close-outline.svg'
       alt='close-icon'
-      clickHandler={() => clickHandler(false)}
+      clickHandler={() => clickHandler()}
     />
   )
 }

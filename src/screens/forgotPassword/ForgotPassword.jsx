@@ -9,9 +9,8 @@ import { login } from '../../actions/userAction'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 
-
 const ForgotPassword = () => {
-  const [code, setCode] = useState("123456")
+  const [code, setCode] = useState(null)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)
@@ -43,7 +42,6 @@ const ForgotPassword = () => {
   }
   const changePassword = (e) => {
     e.preventDefault()
-
     console.log('Password Changed Successfully')
   }
   const toggleNewPasswordVisibility = (e) => {
@@ -52,7 +50,6 @@ const ForgotPassword = () => {
   const toggleConfirmPasswordVisibility = (e) => {
     setShowConfirmPassword(!showConfirmPassword)
   }
-
 
   return (
     <SignLayout>
@@ -75,9 +72,8 @@ const ForgotPassword = () => {
           >
             <UserAvatar />
           </Input>
-          {isVerifiedUser ?
-            <>
-
+          {isVerifiedUser
+            ? <>
               <Input
                 placeholder='Code'
                 type='number'
@@ -87,14 +83,13 @@ const ForgotPassword = () => {
                   required: {
                     value: true,
                     message: 'You must enter code'
-                  },
-                  validate: v => v === code || 'You must enter correct code'
+                  }
+                  // validate: v => v === code || 'You must enter correct code'
                 })}
                 errors={errors}
               >
                 <Lock className='error-icon' />
               </Input>
-
               <Input
                 type={showNewPassword ? 'text' : 'password'}
                 placeholder='New Password'
@@ -116,7 +111,6 @@ const ForgotPassword = () => {
               >
                 <Lock className='error-icon' />
               </Input>
-
               <Input
                 type={showConfirmPassword ? 'text' : 'password'}
                 placeholder='Confirm Password'
@@ -131,21 +125,15 @@ const ForgotPassword = () => {
               >
                 <Lock className='error-icon' />
               </Input>
-
               <div className='btnWrapper'>
                 <Button name='Change Password' onClick={changePassword} />
                 <Button name='Resend Code' onClick={resendCode} />
               </div>
-            </> :
-
-            <div className='btnWrapper'>
+              </>
+            : <div className='btnWrapper'>
               <Button name='I already have code' onClick={alreadyHaveCode} />
               <Button name='Send Code' onClick={sendCode} />
-            </div>
-          }
-
-
-
+              </div>}
           <div className='option'>
             <p className='transparent16px'>
               <span className='span span-1'>Go back to </span>

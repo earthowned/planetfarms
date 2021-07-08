@@ -1,16 +1,21 @@
 const express = require('express')
 const router = express.Router()
-const { upload } = require('../helpers/filehelpers')
+const { upload, resizeImage } = require('../helpers/filehelpers')
+const checkCommunity = require('../middleware/checkCommunity')
+const {
+  getGroups, addGroups, getGroupsById,
+  deleteGroups, updateGroups, searchGroupsTitle, getUserGroups
+} = require('../controllers/communityGroupController')
+const protect = require('../middleware/authMiddleware')
 
-const { getGroups, addGroups, getGroupsById, deleteGroups, updateGroups, searchGroupsTitle } = require('../controllers/communityGroupController')
-
-router.route('/').get(getGroups)
-router.route('/add').post(upload.single('group'), addGroups)
-router.route('/search').get(searchGroupsTitle)
+router.route('/community/:id').get(protect, checkCommunity, getGroups)
+router.route('/community/:id/user').get(protect, checkCommunity, getUserGroups)
+router.route('/add/community/:id').post(protect, checkCommunity, upload.single('group'), resizeImage, addGroups)
+router.route('/community/:id/search').get(checkCommunity, searchGroupsTitle)
 router
-  .route('/:id')
-  .get(getGroupsById)
-  .delete(deleteGroups)
-  .put(updateGroups)
+  .route('/:groupId/community/:id')
+  .get(checkCommunity, getGroupsById)
+  .delete(protect, checkCommunity, deleteGroups)
+  .put(protect, checkCommunity, upload.single('group'), resizeImage, updateGroups)
 
 module.exports = router

@@ -33,6 +33,15 @@
   justify-content: space-around;
 }
 
+.collection-modal-inner-container .error-header {
+  color: var(--secondary-red);
+  margin-bottom: 24px;
+  font-weight: 800;
+  border: 1px solid var(--dropdowns);
+  padding: 8px;
+  border-radius: 6px;
+}
+
 .collection-modal-header {
   width: 100%;
   display: flex;
@@ -54,6 +63,10 @@
   justify-content: center;
   margin-bottom: 1em;
   position: relative;
+}
+
+.collection-modal-inner-container form {
+  width: 100%;
 }
 
 .drag-drop-container {
