@@ -17,16 +17,19 @@ module.exports = async (req, res, next) => {
       const token = req.headers.authorization.split(' ')[1]
       if (process.env.AUTH_METHOD !== 'cognito') {
         decoded = jwt.verify(token, process.env.JWT_SECRET)
+      } else {
+        jwt.verify(token, pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
+          recoded = decodedToken
+          console.log(err)
+          console.log(recoded)
+        })
       }
-      jwt.verify(token, pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
-        recoded = decodedToken
-      })
       /*
       * TODO: Maintain session and check again local session
       */
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.LocalAuth.findByPk(decoded.id)
-      } else if(recoded) {
+      } else if (recoded) {
         // req.user = await User.findOne({ where: { userID: decoded.id } })
         req.user = await db.User.findOne({ where: { userID: recoded.sub } })
       } else {
@@ -39,7 +42,7 @@ module.exports = async (req, res, next) => {
       })
     }
   }
-  res.status(401).json({
-    error: 'Not authorized, token failed'
-  })
+  // res.status(401).json({
+  //   error: 'Not authorized, token failed'
+  // })
 }

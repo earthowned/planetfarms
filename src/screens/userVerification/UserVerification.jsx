@@ -5,59 +5,54 @@ import { useDispatch, useSelector } from 'react-redux'
 import Input from '../../components/input/Input'
 import SignLayout from '../../layout/signLayout/SignLayout'
 import Button from '../../components/button/Button'
-import { resendCodeAction } from '../../actions/userAction'
+import { resendCodeAction, confirmPin } from '../../actions/userAction'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
+import { loadingBar } from 'aws-amplify'
 
 const UserVerification = () => {
-  const [code, setCode] = useState(null)
-  const [showNewPassword, setShowNewPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [usernameValue, setUsernameValue] = useState('')
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)
   const dispatch = useDispatch()
-  const { register: regi, errors, handleSubmit, watch } = useForm()
-  const newPassword = useRef({})
-  newPassword.current = watch('newPassword', '')
-  const onSubmit = ({ username, newPassword }) => {
-    // return dispatch(changePassword(username, password))
-    console.log(username, newPassword)
+  const { register: regi, errors, handleSubmit } = useForm()
+
+  const userConfirmCode = useSelector((state) => state.userConfirmCode)
+  const userResendCode = useSelector((state) => state.userResendCode)
+  const { error: confirmErr, status: confirmStatus } = userConfirmCode
+  const { error: resendErr, status: resendStatus } = userResendCode
+
+  const verifyUsername = ({ username }) => {
+    if (!usernameValue) setUsernameValue(username)
+    usernameValue && setIsVerifiedUser(true)
   }
-  const verifyUsername = async ({ username }) => {
-    dispatch(resendCodeAction(username))
-    username && setIsVerifiedUser(true)
-  }
-  const resendCode = (e) => {
-    e.preventDefault()
-    handleSubmit(verifyUsername)()
+  const resendCode = () => {
+    dispatch(resendCodeAction(usernameValue))
     isVerifiedUser && console.log('code sent')
   }
-  const alreadyHaveCode = (e) => {
-    e.preventDefault()
-    handleSubmit(verifyUsername)()
+  const alreadyHaveCode = ({ username }) => {
+    if (!usernameValue) setUsernameValue(username)
+    usernameValue && setIsVerifiedUser(true)
     isVerifiedUser && console.log('type code')
   }
-  const sendCode = (e) => {
-    e.preventDefault()
-    handleSubmit(verifyUsername)()
+  const sendCode = ({ username }) => {
+    if (!usernameValue) setUsernameValue(username)
+    usernameValue && setIsVerifiedUser(true)
+    dispatch(resendCodeAction(usernameValue))
     isVerifiedUser && console.log('code sent')
   }
-  const verifyAccount = (e) => {
-    e.preventDefault()
+  const verifyAccount = ({ code }) => {
+    console.log(usernameValue, code)
+    dispatch(confirmPin(usernameValue, code))
     console.log('User Account Verified Successfully')
-  }
-  const toggleNewPasswordVisibility = (e) => {
-    setShowNewPassword(!showNewPassword)
-  }
-  const toggleConfirmPasswordVisibility = (e) => {
-    setShowConfirmPassword(!showConfirmPassword)
   }
 
   return (
     <SignLayout>
-      <form className='sign' onSubmit={handleSubmit(onSubmit)}>
+      <form className='sign'>
         <h1 className='welcome'>Confirm Verification</h1>
         <div className='container'>
-          {/* {error && <div className='error'>{error}</div>} */}
+          {confirmErr && <div className='error'>{confirmErr}</div>}
+          {resendErr && <div className='error'>{resendErr}</div>}
           {/* {message && <div className='error'>{message}</div>} */}
 
           <Input
@@ -98,16 +93,16 @@ const UserVerification = () => {
                 </Input>
 
                 <div className='btnWrapper'>
-                  <Button name='Verify' onClick={verifyAccount} />
-                  <Button name='Resend Code' onClick={resendCode} />
+                  <Button name='Verify' onClick={handleSubmit(verifyAccount)} />
+                  <Button name='Resend Code' onClick={handleSubmit(resendCode)} />
                 </div>
               </>
               )
 
             : (
               <div className='btnWrapper'>
-                <Button name='I already have code' onClick={alreadyHaveCode} />
-                <Button name='Send Code' onClick={sendCode} />
+                <Button name='I already have code' onClick={handleSubmit(alreadyHaveCode)} />
+                <Button name='Send Code' onClick={handleSubmit(sendCode)} />
               </div>
               )}
 

@@ -17,7 +17,6 @@ function CongratulationScreen () {
   const [profileImage, setProfileImage] = useState(null)
   const dispatch = useDispatch()
 
-  
   const location = useLocation()
   const history = useHistory()
   const editInformations = location?.state?.editInformations
@@ -77,7 +76,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.firstName}
                 noIcon='noIcon'
               />
             </div>

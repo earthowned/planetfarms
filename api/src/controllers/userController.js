@@ -81,8 +81,8 @@ const authUser = async (req, res) => {
     if (user) {
       await res.json({
         // userID: user.dataValues.userID
-        token: username,
-        id: username
+        token: user,
+        id: user
       })
     } else {
       await res.status(401).json({
@@ -123,7 +123,7 @@ const registerUser = async (req, res) => {
       //     email
       //   }
       // })
-      // await User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
+      // const user = await db.User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       const user = await db.User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       if (user && subscribeCommunity(user)) {
         res.status(201).send('SUCCESS')
@@ -296,24 +296,26 @@ const getUserProfileByUserID = async (req, res) => {
 // @route   GET /api/user/profile
 // @access  Public
 const getMyProfile = (req, res) => {
-  const user = req.user
-  console.log(user)
-  res.json({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    phone: user.phone,
-    email: user.email,
-    dateOfBirth: user.dateOfBirth,
-    lastLogin: user.lastLogin,
-    numberOfVisit: user.numberOfVisit,
-    attachments: user.attachments
-  })
+  if (req.user) {
+    const user = req.user
+
+    console.log(user)
+    res.json({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phone: user.phone,
+      email: user.email,
+      dateOfBirth: user.dateOfBirth,
+      lastLogin: user.lastLogin,
+      numberOfVisit: user.numberOfVisit,
+      attachments: user.attachments
+    })
+  }
 }
 
 // @desc    Update user
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
-  const currentAuthMember = await Auth.currentAuthenticatedUser()
   try {
     let attachment = ''
     if (req.file) {

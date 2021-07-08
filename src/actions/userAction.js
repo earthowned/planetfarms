@@ -99,7 +99,7 @@ export const register = (name, password) => async (dispatch) => {
       })
       const response = await Auth.signIn(name, password)
       userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
         headers: {
           Authorization: 'Bearer ' + userdata.token
         }
@@ -124,7 +124,7 @@ export const login = (name, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
       const config = { headers: { 'Content-Type': 'application/json' } }
-      const { data } = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
         { name, password },
         config
@@ -183,6 +183,9 @@ export const getMyDetails = () => async (dispatch, getState) => {
       numberOfVisit: data.numberOfVisit,
       attachments: data.attachments
     }
+    // Auth.resendSignUp('testtesttest2');
+    // Auth.confirmSignUp('testtesttest2', '873680');
+
     dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message
@@ -223,6 +226,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
 
     const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
     const { attributes } = await Auth.currentAuthenticatedUser()
+    console.log(attributes)
 
     const userdata = {
       firstName: attributes.given_name,
@@ -283,21 +287,22 @@ export const logout = () => (dispatch) => {
   Auth.signOut().then(
     () => {
       window.localStorage.clear()
-      //window.localStorage.removeItem('userInfo')
+      // window.localStorage.removeItem('userInfo')
       dispatch({ type: USER_LOGOUT })
       document.location.href = '/login'
     }
   ).catch(err => console.log(err))
 }
 
-export const confirmPin = (username) => async (dispatch) => {
+export const confirmPin = (username, code) => async (dispatch) => {
   try {
-    console.log(username)
+    console.log(username, code)
     dispatch({ type: USER_CONFIRM_CODE_REQUEST })
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/users/resendCode`,
       { username }
     )
+    await Auth.confirmSignUp(username, code)
     dispatch({ type: USER_CONFIRM_CODE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
