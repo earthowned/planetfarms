@@ -10,10 +10,12 @@ const protect = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1]
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
+      console.log(decoded)
       /*
       * TODO: Maintain session and check again local session
       */
-      if (process.env.AUTH_METHOD !== 'cognito') { req.user = await User.findByPk(decoded.id) }
+      // if (process.env.AUTH_METHOD !== 'cognito') { req.user = await User.findByPk(decoded.id) }
+      req.user = await User.findByPk(decoded.id)
       next()
     } catch (error) {
       console.error(error)

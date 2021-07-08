@@ -170,7 +170,7 @@ function App() {
               path="/course/:courseId"
               component={() => <MyCoursePage unpaid="unpaid" />}
             />
-            <Route path='/lesson-test-page/:lessonId'>
+            <Route path='/lesson-test-page/:testId'>
               <LessonTestPage />
             </Route>
             <Route path="/myProfile">

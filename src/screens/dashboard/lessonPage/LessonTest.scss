@@ -1,0 +1,38 @@
+.test-result-container {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column-reverse;
+    
+    .test-attempt {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .marks-obtained {
+            flex: .7;
+            margin-bottom: 16px;
+            h4 {
+                font-size: 16px;
+                color: #F8EBDF;
+            }
+
+            p {
+                font-size: 14px;
+                color: #8A8A8A;
+            }
+        }
+
+        button {
+            flex: .3;
+            height: 40px;
+        }
+    }
+
+    .show-more {
+        color: var(--primary-color);
+        text-decoration: underline;
+        font-size: 16px;
+        font-weight: 600;
+    }
+}
