@@ -35,12 +35,11 @@ function randomAnswer(array) {
 const getTestQuestions = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
-  const order = req.query.order || 'ASC'
-  const ordervalue = order && [['question', order]]
+  
   Question.findAll({ 
     offset: page, 
     limit: pageSize, 
-    order: ordervalue, 
+  
     where: {
       testId: req.params.id
     },
