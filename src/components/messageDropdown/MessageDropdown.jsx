@@ -98,17 +98,24 @@ const MessageDropdown = ({
             ))
           ) : (
             <>
-              {contacts.map((contact) => (
-                <MessageCard contact={contact} />
+              {contacts.map((contact, index) => (
+                <MessageCard contact={contact} key={index} />
               ))}
-              <button onClick={() => handleClick()} className='messenger-btn-container secondary-btn'>
+              <button
+                onClick={() => handleClick()}
+                className='messenger-btn-container secondary-btn'
+              >
                 {btnName}
               </button>{' '}
             </>
           )}
         </div>
       ) : (
-        <div className={`message-dropdown-mobile ${messageActive && 'slide'} ${notificationActive && 'slide'}`}>
+        <div
+          className={`message-dropdown-mobile ${messageActive && 'slide'} ${
+            notificationActive && 'slide'
+          }`}
+        >
           <div className='message-dropdown-mobile-inner-container'>
             <div className='message-dropdown-mobile-header'>
               <h4>{message}</h4>
@@ -116,8 +123,8 @@ const MessageDropdown = ({
                 <img src='/img/close-outline.svg' alt='close-outline' />
               </div>
             </div>
-            {contacts.map((contact) => (
-              <MessageCard contact={contact} />
+            {contacts.map((contact, index) => (
+              <MessageCard contact={contact} key={index} />
             ))}
             <Link
               to='/messenger'

@@ -3,6 +3,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { newsListReducer, newsCreateReducer, newsDeleteReducer, newsUpdateReducer } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
+import { courseCreateReducer } from './reducers/courseReducers'
+import { lessonCreateReducer, lessonUpdateReducer } from './reducers/lessonReducers'
+import { videoCreateReducer } from './reducers/videoReducers'
+import { photoCreateReducer } from './reducers/photoReducer'
+import { textCreateReducer } from './reducers/textReducer'
+import { materialCreateReducer } from './reducers/materiallReducer'
+import { testCreateReducer, testQuestionListReducer } from './reducers/testReducers'
 import {
   enterpriseCreateReducer, enterpriseDeleteReducer,
   enterpriseFollowReducer,
@@ -50,12 +57,21 @@ const reducer = combineReducers({
   communityDelete: communityDeleteReducer,
   communityUpdate: communityUpdateReducer,
   activeCommunity: communityVisitReducer,
-  userLogin: userLoginReducer,
-  userRegister: userRegisterReducer,
+  addCourse: courseCreateReducer,
+  addLesson: lessonCreateReducer,
+  updateLesson: lessonUpdateReducer,
+  addVideo: videoCreateReducer,
+  addPhoto: photoCreateReducer,
+  addText: textCreateReducer,
+  addMaterial: materialCreateReducer,
+  addTest: testCreateReducer,
+  listTestQuestions: testQuestionListReducer,
   addNewNews: newsCreateReducer,
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
   listMember: memberListReducer,
+  userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer

@@ -36,6 +36,10 @@
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 16px;
+
+  h1 {
+    text-transform: capitalize;
+  }
 }
 
 .admin-course-details p {
@@ -74,7 +78,7 @@
 }
 
 .admin-lesson-lists-container {
-  padding: 24px 40px 40px; 
+  padding: 24px 40px 40px;
 }
 
 .admin-lesson-lists-container h3 {
@@ -94,14 +98,52 @@
   display: flex;
 }
 
-.admin-lesson > div img {
-  width: 264px;
-  height: 160px;
-  margin-right: 24px;
+.coverImg {
+  width: 16.5em;
+  height: 10em;
+  margin-right: 1.5em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--dropdowns);
+  border-radius: 0.2em;
+  overflow: hidden;
+
+  &__img {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__text {
+    div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--background-color-light);
+
+      p {
+        font-size: 2em;
+      }
+    }
+  }
+  p {
+    width: 100%;
+  }
+}
+.lessonTitle {
+  font-size: 1.5em;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
-.admin-lesson > div div {
-  width: 50%;
+.admin-lesson .lessonInfo {
+  width: 65%;
   display: flex;
   flex-direction: column;
   text-align: justify;
@@ -125,6 +167,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--background-color-light);
 }
 
 .add-lesson-btn {
@@ -157,6 +200,50 @@
   margin-bottom: 24px;
 }
 
+.actions {
+  position: relative;
+
+  @media (max-width: 850px) {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+
+    .lesson-btn {
+      width: 3.5em;
+      height: 3.3em;
+    }
+  }
+
+  @media (max-width: 478px) {
+    .lesson-btn {
+      width: 2.5em;
+      height: 2.5em;
+    }
+  }
+
+  ul {
+    position: absolute;
+    border: 2px solid red;
+    width: 7em;
+    right: 110%;
+    top: 1em;
+    background: #000;
+    color: var(--primary-white);
+    border: 0.5px solid var(--primary-white);
+    padding: 0.5em 1em;
+    z-index: 99999;
+    border-radius: 0.2em;
+
+    li {
+      list-style: none;
+      margin: 0.2em 0;
+      cursor: pointer;
+      font-size: 1em;
+      line-height: 1.5em;
+    }
+  }
+}
+
 @media only screen and (max-width: 850px) {
   .admin-course-details--header {
     flex-direction: column-reverse;
@@ -168,34 +255,46 @@
 
   .admin-lesson {
     flex-direction: column;
-    width: 70%;
+    width: 100%;
     height: auto;
+    position: relative;
   }
 
   .admin-lesson > div {
     flex-direction: column;
   }
 
-  .admin-lesson > div img {
+  .admin-lesson .coverImg {
     width: 100%;
-    object-position: center;
-    object-fit: cover;
     margin-right: 0;
+
+    &__img {
+      height: 16.5em;
+      opacity: 0.7;
+
+      img {
+        width: 100%;
+        height: 100%;
+        margin-right: 0;
+      }
+    }
   }
 
-  .admin-lesson > div div {
+  .admin-lesson .lessonInfo {
     width: 100%;
     margin-top: 16px;
   }
 
-  .admin-lesson p{
+  .admin-lesson p {
     margin: 16px 0;
   }
+}
 
-  .lesson-btn {
-    margin-top: 16px;
-    width: 160px;
-  }
+.show {
+  display: block;
+}
+.hide {
+  display: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -208,10 +307,6 @@
   }
 
   .admin-lesson {
-    width: 100%;
-  }
-
-  .lesson-btn {
     width: 100%;
   }
 

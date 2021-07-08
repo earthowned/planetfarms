@@ -6,7 +6,12 @@ const sharp = require('sharp')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const dir = path.join(path.dirname(__dirname), '..', 'files', `${file.fieldname}`)
+    const dir = path.join(
+      path.dirname(__dirname),
+      '..',
+      'files',
+      `${file.fieldname}`
+    )
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir)
     }
@@ -18,7 +23,7 @@ const storage = multer.diskStorage({
 })
 
 function checkFileType (file, cb) {
-  const filetypes = /jpg|jpeg|png/
+  const filetypes = /jpg|jpeg|png|mp4|pdf/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
 
@@ -36,7 +41,10 @@ const upload = multer({
   }
 })
 
-const multipleUpload = upload.fields([{ name: 'avatar' }, { name: 'attachment' }])
+const multipleUpload = upload.fields([
+  { name: 'avatar' },
+  { name: 'attachment' }
+])
 
 const uploadArray = multer({ storage }).array('files')
 
@@ -55,12 +63,12 @@ const resizeImage = (req, res, next) => {
     }
     if (req.body.render) {
       newImage.toBuffer().then((data) => {
-      // To display the image
+        // To display the image
         res.writeHead(200, {
           'Content-Type': 'image/webp',
           'Content-Length': data.length
         })
-        return (res.end(data))
+        return res.end(data)
       })
     } else {
       const savePath = dir + '.' + format
@@ -74,4 +82,10 @@ const resizeImage = (req, res, next) => {
 
 const changeFormat = (filename) => filename && path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
 
-module.exports = { multipleUpload, uploadArray, upload, resizeImage, changeFormat }
+module.exports = {
+  multipleUpload,
+  uploadArray,
+  upload,
+  resizeImage,
+  changeFormat
+}

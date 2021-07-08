@@ -6,6 +6,7 @@
 .courses-card-container > h4 {
   color: #fff;
   margin-bottom: 16px;
+  text-transform: capitalize;
 }
 
 .courses-card {
@@ -17,11 +18,18 @@
   position: relative;
 }
 
-.courses-card h3 {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 32px;
+.courses-card {
+  h1,
+  h3 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
 }
 
 .collection-btn {

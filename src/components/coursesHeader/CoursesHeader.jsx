@@ -3,45 +3,28 @@ import Filter from '../filter/Filter'
 import SearchComponent from '../searchComponent/SearchComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import './CoursesHeader.css'
+import data from './headerData'
+import './CoursesHeader.scss'
 import useSizeFinder from '../../utils/sizeFinder'
 
-const data = [
-  {
-    label: 'All courses',
-    link: '/courses'
-  },
-  {
-    label: 'My courses & collections',
-    link: '/courses/my-courses'
-  },
-  {
-    label: 'Users collections',
-    link: '/courses/users'
-  },
-  {
-    label: 'My collections',
-    link: '/courses/my-collection'
-  }
-]
-
-const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCourse }) => {
+const CoursesHeader = ({
+  setActive,
+  setCreateCollection,
+  location,
+  setCreateCourse
+}) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { pathname } = useLocation()
-  console.log(pathname)
   const history = useHistory()
 
   const dispatch = useDispatch()
-  const [search, setSearch] = useState(null)
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
-    // if (!userInfo) {
-    //     history.push('/login')
-    // }
-    // if (search) dispatch(searchResources(search))
-    // if (!search) dispatch(listResources())
-
+    if (!userInfo) {
+      history.push('/login')
+    }
   }, [search, dispatch, history, userInfo])
 
   function createCollection () {
@@ -52,51 +35,71 @@ const CoursesHeader = ({ setActive, setCreateCollection, location, setCreateCour
   const windowWidth = useSizeFinder()
 
   return (
-    <div className='courses-main-header-container'>
-      <div className='courses-container'>
-        {windowWidth > 839
-          ? <><ul className='courses-list-container'>
-            {
-              data.map(item => {
+    <div className='courseHeader'>
+      <div className='container'>
+        {windowWidth > 839 ? (
+          <>
+            <ul className='lists'>
+              {data.map(({ name, slug }) => {
                 return (
-                  <li>
+                  <li key={slug}>
                     <Link
-                      className={`nav-link ${(pathname === `${item.link}`)
-                    ? 'courses-list-item active'
-                    : 'library-list-item'}`} to={`${item.link}`}
+                      className={`nav-link ${
+                        pathname === `${slug}`
+                          ? 'list list-active'
+                          : 'library-list-item'
+                      }`}
+                      to={`${slug}`}
                     >
-                      {item.label}
+                      {name}
                     </Link>
                   </li>
                 )
-              })
-            }
-          </ul>
-            <div className='courses-search-container'>
-              <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
+              })}
+            </ul>
+            <div className='searchBox'>
+              <SearchComponent
+                search={search}
+                setSearch={setSearch}
+                className='search-btn margin-0'
+              />
             </div>
           </>
-          : <>
+        ) : (
+          <>
             <Filter data={data} newFilter='new' />
-            <div className='courses-search-container'>
-              <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
+            <div className='searchBox'>
+              <SearchComponent
+                search={search}
+                setSearch={setSearch}
+                className='search search-btn margin-0'
+              />
             </div>
-          </>}
+          </>
+        )}
       </div>
-      <div className='courses-sub-header'>
-        <div className='courses-sub-header-1'>
-
-          <div className='courses-btn-container'>
-            {
-              pathname === '/admin/courses'
-                ? <button className='default-btn' onClick={() => setCreateCourse(true)}>Add new Courses</button>
-                : <button className='default-btn' onClick={() => setCreateCourse(true)}>Add Courses</button>
-            }
+      <div className='coursesSubHeader'>
+        <div className='subcontainer'>
+          <div className='btnContainer'>
+            {pathname === '/admin/courses' ? (
+              <button
+                className='default-btn'
+                onClick={() => setCreateCourse(true)}
+              >
+                Add new Courses
+              </button>
+            ) : (
+              <button
+                className='default-btn'
+                onClick={() => setCreateCourse(true)}
+              >
+                Add Courses
+              </button>
+            )}
           </div>
-
         </div>
 
-        <div className='courses-sub-header-2'>
+        <div className='subHeader2'>
           <Filter name='filter by category' />
         </div>
       </div>

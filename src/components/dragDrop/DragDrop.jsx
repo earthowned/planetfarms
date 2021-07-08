@@ -1,10 +1,21 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-const DragDrop = ({ onChange = () => {}, dataImg, tag }) => {
+const DragDrop = ({
+  onChange = () => {},
+  type,
+  fileType,
+  className,
+  setVideo,
+  text,
+  img,
+  editText,
+  dataImg,
+  tag
+}) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
+    accept: `${type ? `${type}/*` : fileType ? `${fileType}` : 'image/*'}`,
     onDrop: (acceptedFiles) => {
       acceptedFiles.map((file) =>
         Object.assign(file, { preview: URL.createObjectURL(file) })
@@ -27,6 +38,12 @@ const DragDrop = ({ onChange = () => {}, dataImg, tag }) => {
       fileChange={fileChange}
       files={files}
       setFiles={setFiles}
+      className={className}
+      type={type}
+      setVideo={setVideo}
+      text={text}
+      img={img}
+      editText={editText}
       dataImg={dataImg}
       tag={tag}
     />
@@ -39,17 +56,24 @@ function DragDropComponent ({
   fileChange,
   files,
   setFiles,
+  className,
+  type,
+  setVideo,
+  text,
+  img,
+  editText,
   dataImg,
   tag
 }) {
   return (
-    <div className='drag-drop-container'>
+    <div className={className ? `${className}` : 'drag-drop-container'}>
       <div
         className='drag-drop'
         {...getRootProps()}
         onChange={(e) => fileChange(e)}
       >
         <input {...getInputProps()} />
+
         {files ? (
           <>
             <img
@@ -58,7 +82,13 @@ function DragDropComponent ({
               alt='files[0].preview'
             />
             <div className='drag-drop-icon-container'>
-              <img src='/img/camera-outline.svg' alt='camera icon' />
+              {type === 'video' ? (
+                <p className='videoName'>{files.name}</p>
+              ) : text === text ? (
+                <p>{text}</p>
+              ) : (
+                <img src='/img/camera-outline.svg' alt='camera icon' />
+              )}
             </div>
           </>
         ) : (
@@ -81,7 +111,8 @@ function DragDropComponent ({
         <img
           src='/img/close-outline.svg'
           className='drag-drop-close'
-          onClick={() => setFiles(null)}
+          onClick={() => setFiles(!files)}
+          alt='drag_drop_img_close'
         />
       )}
     </div>

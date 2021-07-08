@@ -1,0 +1,38 @@
+.toggle {
+  position: relative;
+  width: 2.375em;
+  height: 1.25em;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &-item {
+    background: var(--primary-white);
+    width: 1.25em;
+    height: 1.25em;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(0);
+    transition: all 0.2s ease-in-out;
+  }
+
+  &-container {
+    width: 2.375em;
+    height: 1.25em;
+    background: var(--primary-black);
+    border-radius: 10px;
+  }
+
+  .active {
+    transform: translateX(100%);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .active + &-container {
+    width: 2.375em;
+    height: 1.25em;
+    background: var(--primary-color);
+    transition: all 0.2s ease-in-out;
+  }
+}

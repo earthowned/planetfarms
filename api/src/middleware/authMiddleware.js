@@ -9,6 +9,7 @@ const pem = jwkToPem(jwk.keys[0])
 module.exports = async (req, res, next) => {
   let decoded
   let recoded
+  console.log(req.headers)
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -26,7 +27,7 @@ module.exports = async (req, res, next) => {
       */
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.LocalAuth.findByPk(decoded.id)
-      } else if(recoded) {
+      } else if (recoded) {
         // req.user = await User.findOne({ where: { userID: decoded.id } })
         req.user = await db.User.findOne({ where: { userID: recoded.sub } })
       } else {
@@ -39,7 +40,8 @@ module.exports = async (req, res, next) => {
       })
     }
   }
+  /* console.log('errr')
   res.status(401).json({
     error: 'Not authorized, token failed'
-  })
+  }) */
 }

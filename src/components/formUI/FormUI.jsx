@@ -71,12 +71,10 @@ ref
 }
 )
 
-export const ErrorText = (props) => {
+export const ErrorText = ({ className, message }) => {
   return (
     <>
-      <p className={props.className}>
-        {props.error ? `Please enter ${props.message}` : ''}
-      </p>
+      <p className={className}>{message}</p>
     </>
   )
 }
@@ -91,17 +89,19 @@ export const SubmitButton = (props) => {
   )
 }
 
-export const TextArea = (props) => {
-  return (
-    <>
-      <textarea
-        className={props.className}
-        placeholder={props.placeholder}
-        cols='3'
-        rows='3'
-        value={props.value}
-        onChange={props.onChange}
-      />
-    </>
-  )
-}
+export const TextArea = React.forwardRef(
+  ({ className, placeholder, name, rows, cols }, ref) => {
+    return (
+      <>
+        <textarea
+          className={className}
+          placeholder={placeholder}
+          cols={cols}
+          rows={rows}
+          name={name}
+          ref={ref}
+        />
+      </>
+    )
+  }
+)

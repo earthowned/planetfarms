@@ -11,7 +11,7 @@
 .course-description {
   width: 100%;
   color: var(--primary-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
   letter-spacing: 0;
 }
 
@@ -24,6 +24,10 @@
 .course-title {
   font-size: 32px;
   font-weight: 600;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .course-desc {
@@ -31,6 +35,10 @@
   margin-top: 24px;
   color: var(--primary-white);
   text-align: justify;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .course-page-name {
@@ -237,10 +245,10 @@
 }
 
 .bg-image {
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/60616b2488353a18d38d9e60/releases/607fbf4f636b54e6f9b34253/img/bg-image@1x.png);
   background-size: cover;
-  height: 336px;
+  /* height: 336px; */
   width: 100%;
+  display: block;
 }
 
 .more-course-container {
@@ -561,6 +569,7 @@
   color: var(--primary-white);
   display: flex;
   height: 160px;
+  margin: 1em 0;
 }
 
 .lesson-card.lock-active {
@@ -587,8 +596,17 @@
   line-height: 24px;
 }
 
-.lesson-card img {
+.lessonCoverImg {
+  width: 20em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 2em;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
 }
 
 .lesson-card-content {
@@ -654,6 +672,7 @@
   color: #fff;
   margin-top: 14px;
   position: absolute;
+  z-index: 5;
 }
 
 .dropdown-course-items li {
@@ -689,10 +708,11 @@
   margin: 3em 0 1em;
   position: relative;
   z-index: 1;
+  // flex-wrap: wrap;
 }
 
 .lesson-bar::before {
-  content: "";
+  content: '';
   width: 90%;
   height: 1px;
   background: #015a3e;
@@ -815,7 +835,7 @@
     width: 100%;
   }
 
-  .lesson-card img {
+  .lesson-card .lessonCoverImg {
     margin-right: 0;
   }
 }
@@ -902,6 +922,10 @@
   .margin-left-1 {
     margin-left: 0;
   }
+  .lessonCoverImg {
+    width: 100%;
+  }
 }
 
-@media screen and (max-width: 375px) { }
+@media screen and (max-width: 375px) {
+}

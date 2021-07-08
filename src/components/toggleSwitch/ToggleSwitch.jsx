@@ -1,15 +1,11 @@
 import React, { useState } from 'react'
 import './ToggleSwitch.scss'
 
-function ToggleSwitch () {
-  const [active, setActive] = useState(false)
+function ToggleSwitch ({ onClick, isFree }) {
   return (
     <>
-      <div className='toggle-main-container'>
-        <div
-          onClick={() => setActive(!active)}
-          className={`${active ? 'toggle-item active' : 'toggle-item'}`}
-        />
+      <div className='toggle' onClick={onClick}>
+        <div className={`${isFree ? 'toggle-item active' : 'toggle-item'}`} />
         <div className='toggle-container' />
       </div>
     </>

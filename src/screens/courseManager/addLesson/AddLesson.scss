@@ -16,15 +16,20 @@
   height: 48px;
   width: 100%;
   font-size: 40px;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
   color: var(--primary-white);
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .admin-lesson-create-container .drag-drop-container {
   width: 100%;
   height: 456px;
-  border: 2px dashed #F8EBDF;
+  border: 2px dashed #f8ebdf;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .admin-lesson-create-container .drag-drop-container .drag-drop h6 {
@@ -36,12 +41,28 @@
 .add-lesson-drag {
   width: 100%;
   height: 456px;
-  border: 2px dashed #F8EBDF;
+  border: 2px dashed #f8ebdf;
 }
 
 .add-lesson-drag .avatar {
   width: 100%;
   height: 452px;
+}
+.editimg {
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1em;
+
+  p {
+    font-size: 1.25em;
+    padding: 1em;
+  }
 }
 
 .dropzone-container > div {
@@ -96,7 +117,7 @@
 }
 
 .save-lesson-modal {
-  background: #191B1D;
+  background: #191b1d;
   margin-top: 40px;
   display: flex;
   height: 88px;
@@ -105,6 +126,19 @@
   padding: 0 40px;
   border-radius: 4px;
   color: var(--primary-white);
+
+  @media (max-width: 800px) {
+    #lesson-cancel-btn {
+      width: auto;
+      padding-left: 3em;
+      padding-right: 3em;
+    }
+  }
+  @media (max-width: 730px) {
+    flex-direction: column;
+    height: auto;
+    padding: 1em;
+  }
 }
 
 .primary-btn {
@@ -112,6 +146,44 @@
   border: 1px solid var(--primary-color);
   color: #000;
   margin-left: 20px;
+}
+
+.addMaterial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 1.3em 1em;
+
+  img {
+    display: none;
+  }
+
+  .drag-drop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      width: 100%;
+      font-size: 1em;
+      color: var(--primary-white);
+      display: block !important;
+    }
+
+    .drag-drop-icon-container {
+      width: 100%;
+      height: 100%;
+      background: var(--background-color-light);
+      color: var(--primary-white);
+      font-size: 1em;
+    }
+  }
 }
 
 @media only screen and (max-width: 900px) {
@@ -131,7 +203,7 @@
     margin-bottom: 14px;
   }
 
-   #lesson-save-btn {
+  #lesson-save-btn {
     width: 110px;
   }
 }
@@ -183,4 +255,10 @@
   .admin-lesson-create-container input {
     font-size: 26px;
   }
+}
+.test {
+  color: #fff;
+}
+.errorMsg {
+  margin-bottom: 1.5em;
 }
