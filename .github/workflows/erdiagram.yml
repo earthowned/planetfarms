@@ -61,11 +61,12 @@ jobs:
           npx sequelize-cli db:migrate
           cd ..
           go get -u github.com/achiku/planter
+          sudo apt install graphviz
           mkdir -p diagrams
           cd diagrams
           wget https://versaweb.dl.sourceforge.net/project/plantuml/plantuml.jar
           planter postgres://test:pass@localhost:5432/planetfarms?sslmode=disable -o er_diagram.uml
-          java -jar plantuml.jar -verbose -graphvizdot /opt/local/bin/dot er_diagram.uml
+          java -jar plantuml.jar -verbose er_diagram.uml
           echo "Files in diagram folder"
           ls
           
