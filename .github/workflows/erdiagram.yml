@@ -41,7 +41,7 @@ jobs:
           distribution: 'zulu'
           java-version: '16'
           
-      - name: Planet Farms
+      - name: Planet Farms API
         run: |
           cd api
           echo "JWT_SECRET=secret" >> .env
