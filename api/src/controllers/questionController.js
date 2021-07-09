@@ -1,4 +1,5 @@
-const Question = require('../models/questionModel')
+// const Question = require('../models/questionModel')
+const db = require('../models/index')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const sequelize = require('../config/database.js')
@@ -11,10 +12,26 @@ const getQuestions = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['question', order]]
-  Question.findAll({ offset: page, limit: pageSize, order: ordervalue })
+  db.Question.findAll({ offset: page, limit: pageSize, order: ordervalue })
     .then(questions => res.json({ questions, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
+
+// @desc    Fetch all tests
+// @route   GET /api/Test
+// @access  Public
+const getLessonQuestions = async (req, res) => {
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 0
+  const order = req.query.order || 'ASC'
+  const ordervalue = order && [['question', order]]
+  const test = await db.Test.findOne({where: {lessonId: req.params.id}});
+  if(!test) return res.json({message: 'test doesn\'t exist.'})
+  db.Question.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {testId: test.id} })
+    .then(questions => res.json({ questions, page, pageSize }).status(200))
+    .catch((err) => res.json({ err }).status(400))
+}
+
 
 // randomize the answers
 function randomAnswer (array) {
@@ -36,7 +53,7 @@ const getTestQuestions = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
 
-  Question.findAll({
+  db.Question.findAll({
     offset: page,
     limit: pageSize,
 
@@ -71,7 +88,7 @@ const addQuestion = (req, res) => {
   const {
     question, answer, options, testId
   } = req.body
-  Question.create({
+  db.Question.create({
     question, answer, options, testId
   })
     .then(() => res.json({ message: 'Question Created !!!' }).status(200))
@@ -86,10 +103,10 @@ const updateQuestion = (req, res) => {
     question, answer, options, testId
   } = req.body
   const id = req.params.id
-  Question.findByPk(id).then(questions => {
+  db.Question.findByPk(id).then(questions => {
     if (questions) {
       const { id } = questions
-      Question.update({
+      db.Question.update({
         question, answer, options, testId
       },
       { where: { id } })
@@ -107,7 +124,7 @@ const updateQuestion = (req, res) => {
 const getQuestionById = (req, res) => {
   const id = req.params.id
 
-  Question.findByPk(id)
+  db.Question.findByPk(id)
     .then(question => {
       if (question) {
         res.json(question)
@@ -124,10 +141,10 @@ const getQuestionById = (req, res) => {
 // @access  Public
 const deleteQuestion = (req, res) => {
   const id = req.params.id
-  Question.findByPk(id).then(question => {
+  db.Question.findByPk(id).then(question => {
     if (question) {
       const { id } = question
-      Question.destroy({ where: { id } })
+      db.Question.destroy({ where: { id } })
         .then(() => res.json({ message: 'Question Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -144,9 +161,9 @@ const searchQuestionTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  Question.findAll({ where: { test_name: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
+  db.Question.findAll({ where: { test_name: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
     .then(title => res.json({ title }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { addQuestion, getQuestions, updateQuestion, getQuestionById, deleteQuestion, searchQuestionTitle, getTestQuestions }
+module.exports = { addQuestion, getQuestions, updateQuestion, getQuestionById, deleteQuestion, searchQuestionTitle, getTestQuestions, getLessonQuestions }

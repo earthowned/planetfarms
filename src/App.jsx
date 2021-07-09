@@ -48,6 +48,7 @@ import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/verification/UserVerification'
 import EmailVerification from './screens/verification/EmailVerification'
 import PhoneVerification from './screens/verification/PhoneVerification'
+import AddTest from './screens/addTest/AddTest'
 
 function App () {
   return (
@@ -98,6 +99,8 @@ function App () {
             {/* <PrivateRoute component={LessonTestPage} exact path='/lesson/:id/testpage' /> */}
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' />
             <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' />
+            <PrivateRoute component={AddTest} path='/admin/add-test/:lessonId' />
+            <PrivateRoute component={AddTest} path='/admin/edit-test/:lessonId' />
             <PrivateRoute component={MyProfile} path='/myProfile' />
             <PrivateRoute component={UserInfo} path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />

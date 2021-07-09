@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { useHistory } from 'react-router-dom'
 import Button from '../../../components/button/Button'
+import { configFunc } from '../../../utils/apiFunc'
 import './LessonTest.scss'
 
 const LessonTest = ({ id }) => {
@@ -14,7 +15,9 @@ const LessonTest = ({ id }) => {
 
   const startTest = async () => {
     const currentDate = moment().toDate().getTime().toString()
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/start`, { lessonId: id, startTime: currentDate })
+    const config = configFunc();
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/start`, 
+    { lessonId: id, startTime: currentDate }, config)
     setStart(data)
   }
 
@@ -26,10 +29,11 @@ const LessonTest = ({ id }) => {
   }, [start])
 
   const getTestsResults = async () => {
+    const config = configFunc();
     const { data: { tests } } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/tests/lesson/${id}`)
     setTests(tests)
     if (tests.length > 0) {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/test/${tests[0].id}`)
+      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/test/${tests[0].id}`, config)
       setResults(data.tests)
     }
   }
@@ -37,14 +41,17 @@ const LessonTest = ({ id }) => {
     <div className='lesson-test-panel'>
       <div className='lesson-test-panel-left'>
         <h3>Lesson test</h3>
-        <p>
+        {tests.length > 0
+        ? <><p>
           Make a lesson test where you can use new information that you know
         </p>
         <div className='lesson-test-btn-wrapper'>
-          {tests.length > 0 && <Button name='Start test' onClick={startTest} />}
-        </div>
+          <Button name='Start test' onClick={startTest} />
+        </div></>
+        : <p>Test is not available at the moment.</p>
+        }
       </div>
-      <div className='lesson-test-panel-right'>
+      {tests.length > 0 && <div className='lesson-test-panel-right'>
         <h4>My results</h4>
         {results.length > 0
           ? <div className='test-result-container'>
@@ -55,12 +62,19 @@ const LessonTest = ({ id }) => {
             return (
               <div className='test-attempt'>
                 <div className='marks-obtained'>
-                  <h4>{index === 0 ? 'First attempt' : 'Second attempt'} {item.marks}</h4>
+                  <h4>{index === 0 ? 'First attempt' : 'Second attempt'}: <span>{item.marks}/{item.total_marks}</span></h4>
                   <p>{item.test_taken}</p>
                 </div>
-                <button className='default-btn'>
-                  Success
-                </button>
+                {
+                  item.is_passed
+                  ? <button className='default-btn'>
+                      Success
+                    </button>
+                  : <button className='default-btn red-bg'>
+                      failed
+                    </button>
+                }
+                
               </div>
             )
           })
@@ -70,7 +84,7 @@ const LessonTest = ({ id }) => {
           : <div className='lesson-test-panel-right--attempts'>
             <h4>You didn't finish test yet.</h4>
             </div>}
-      </div>
+      </div>}
     </div>
   )
 }

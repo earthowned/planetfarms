@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     marks: DataTypes.INTEGER,
     startTime: DataTypes.STRING,
     endTime: DataTypes.STRING,
+    total_marks: DataTypes.INTEGER,
+    is_passed: DataTypes.BOOLEAN,
     test_taken: {
       type: DataTypes.DATE,
       allowNull: false,
