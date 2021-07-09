@@ -101,7 +101,7 @@ function App () {
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' />
             <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' />
             <PrivateRoute component={AddTest} path='/admin/add-test/:lessonId' />
-            <PrivateRoute component={EditTest} path='/admin/edit-test/:lessonId' />
+            <PrivateRoute component={AddTest} path='/admin/edit-test/:lessonId' />
             <PrivateRoute component={MyProfile} path='/myProfile' />
             <PrivateRoute component={UserInfo} path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />

@@ -38,7 +38,6 @@ const EditLesson = () => {
   //   const [videoModal, setVideoModal] = useState(false)
   //   const [imageModal, setImageModal] = useState(false)
   //   const [textModal, setTextModal] = useState(false)
-<<<<<<< HEAD
   const [testModal, setTestModal] = useState(false)
 
   const { register, errors, handleSubmit } = useForm()
@@ -54,10 +53,8 @@ const EditLesson = () => {
   const [lessonCover, setLessonCover] = useState(`${fetchImg}`)
   const title = data?.data?.title
 
-=======
   //   const [testModal, setTestModal] = useState(false)
   const [lessonData, setLessonData] = useState([])
->>>>>>> afe68b5 (test api and ui implementation)
   const textData = data?.data?.texts.map((text) => {
     return text
   })
@@ -84,6 +81,7 @@ const EditLesson = () => {
 
   return (
     <>
+<<<<<<< HEAD
 <<<<<<< HEAD
       {isLoading ? (
         <span>Loading...</span>
@@ -178,6 +176,8 @@ const EditLesson = () => {
                   </button>
                 </div>
 =======
+=======
+>>>>>>> fdc15d8 (test api and ui implementation)
       <DashboardLayout title='Edit lesson'>
         <BackButton location={`/admin/course/${data?.data?.courseId}`} />
         <div className='admin-lesson-create-container'>
