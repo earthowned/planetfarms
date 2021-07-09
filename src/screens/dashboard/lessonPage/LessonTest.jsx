@@ -15,9 +15,9 @@ const LessonTest = ({ id }) => {
 
   const startTest = async () => {
     const currentDate = moment().toDate().getTime().toString()
-    const config = configFunc();
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/start`, 
-    { lessonId: id, startTime: currentDate }, config)
+    const config = configFunc()
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/start`,
+      { lessonId: id, startTime: currentDate }, config)
     setStart(data)
   }
 
@@ -29,7 +29,7 @@ const LessonTest = ({ id }) => {
   }, [start])
 
   const getTestsResults = async () => {
-    const config = configFunc();
+    const config = configFunc()
     const { data: { tests } } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/tests/lesson/${id}`)
     setTests(tests)
     if (tests.length > 0) {
@@ -40,15 +40,16 @@ const LessonTest = ({ id }) => {
   return (
     <div className='lesson-test-panel'>
       <div className='lesson-test-panel-left'>
-        <h3>Lesson test</h3>
         {tests.length > 0
-        ? <><p>
-          Make a lesson test where you can use new information that you know
-        </p>
-        <div className='lesson-test-btn-wrapper'>
-          <Button name='Start test' onClick={startTest} />
-        </div></>
-        : <p>Test is not available at the moment.</p>
+          && <>
+          <h3>Lesson test</h3>
+          <p>
+            Make a lesson test where you can use new information that you know
+          </p>
+            <div className='lesson-test-btn-wrapper'>
+              <Button name='Start test' onClick={startTest} />
+            </div>
+            </>
         }
       </div>
       {tests.length > 0 && <div className='lesson-test-panel-right'>
@@ -67,14 +68,14 @@ const LessonTest = ({ id }) => {
                 </div>
                 {
                   item.is_passed
-                  ? <button className='default-btn'>
+                    ? <button className='default-btn'>
                       Success
                     </button>
-                  : <button className='default-btn red-bg'>
+                    : <button className='default-btn red-bg'>
                       failed
                     </button>
                 }
-                
+
               </div>
             )
           })
