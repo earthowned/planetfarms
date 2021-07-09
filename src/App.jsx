@@ -46,6 +46,7 @@ import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
 import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/userVerification/UserVerification'
+import AddTest from './screens/addTest/AddTest'
 
 function App () {
   return (
@@ -182,6 +183,12 @@ function App () {
             />
             <Route path='/lesson-test-page/:testId'>
               <LessonTestPage />
+            </Route>
+            <Route path='/admin/add-test/:lessonId'>
+              <AddTest />
+            </Route>
+            <Route path='/admin/edit-test/:lessonId'>
+              <AddTest />
             </Route>
             <Route path='/myProfile'>
               <MyProfile />

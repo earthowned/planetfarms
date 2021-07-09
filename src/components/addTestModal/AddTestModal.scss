@@ -1,9 +1,21 @@
 .question-answer-container {
   width: 100%;
+  position: relative;
+  margin-bottom: 50px;
+
+  .test-error {
+    position: absolute;
+    top: -30px;
+  }
 }
 
 .question-container {
   width: 100%;
+
+  // p {
+  //   color: var(--secondary-red);
+  //   margin-bottom: 8px;
+  // }
 }
 
 .question-container input {
@@ -27,7 +39,7 @@
 }
 
 .test-answers-wrapper {
-  margin-top: 40px;
+  margin-top: 20px;
 
   .test-answer-input-field {
     display: flex;

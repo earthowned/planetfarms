@@ -26,6 +26,11 @@
         button {
             flex: .3;
             height: 40px;
+            color: var(--primar-white);
+        }
+
+        .red-bg {
+            background: var(--secondary-red);
         }
     }
 

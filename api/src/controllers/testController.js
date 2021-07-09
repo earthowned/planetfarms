@@ -59,7 +59,11 @@ const addTest = async (req, res) => {
           testId: test.id,
           options: [...item.options, item.answer]
         }
-        newQuestions.push(questionObj)
+        const {question, answer, options} = questionObj
+        //Checking empty values
+        if(question && answer && !options.includes('')) {
+          newQuestions.push(questionObj)
+        }
       })
       // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
       await db.Question.bulkCreate(newQuestions, { transaction: t })
