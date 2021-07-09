@@ -76,11 +76,11 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    const user = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
+    const user = await localAuth(name, password)
     if (user) {
       await res.json({
-        token: user,
-        id: user
+        token: generateToken(user.dataValues.userID),
+        id: user.dataValues.userID
       })
     } else {
       await res.status(401).json({
@@ -96,13 +96,8 @@ const authUser = async (req, res) => {
 
 const localAuth = async (name, password) => {
   const user = await db.LocalAuth.findOne({ where: { username: name, password: password } })
-  const newUser = await db.User.findOne({ where: { userID: user.dataValues.id } })
-  return generateToken(newUser.dataValues.userID)
-}
-
-const cognitoAuth = async (name, password) => {
-  const user = await Auth.signIn(name, password)
-  return user?.signInUserSession?.idToken?.jwtToken || ''
+  const newUser = await db.User.findOne({ where: { userID: { [Op.like]: user.dataValues.id.toString() } } })
+  return newUser
 }
 
 // @desc    Register a new user
@@ -136,9 +131,9 @@ const registerLocal = async (name, password, res) => {
 
     if (newUser && subscribeCommunity(newUser)) {
       res.status(201).json({
-        id: newUser.dataValues.id,
+        id: newUser.dataValues.userID,
         userID: newUser.dataValues.userID,
-        token: generateToken(newUser.dataValues.id)
+        token: generateToken(newUser.dataValues.userID)
       })
     } else {
       res.status(400).json({
