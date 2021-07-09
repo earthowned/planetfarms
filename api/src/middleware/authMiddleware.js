@@ -1,10 +1,14 @@
 const jwt = require('jsonwebtoken')
 const jwkToPem = require('jwk-to-pem')
-const jwk = require('./jwks.json')
 const db = require('../models')
 // const LocalAuth = require('../models/localAuthModel.js')
 // const User = require('../models/userModel.js')
-const pem = jwkToPem(jwk.keys[0])
+
+let jwk;
+let pem;
+if(process.env.AUTH_METHOD === 'cognito') jwk = require('./jwks.json')
+if(jwk) pem = jwkToPem(jwk.keys[0])
+
 
 module.exports = async (req, res, next) => {
   let decoded
