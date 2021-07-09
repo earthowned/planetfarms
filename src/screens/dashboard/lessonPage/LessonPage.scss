@@ -132,58 +132,6 @@
   cursor: pointer;
 }
 
-.document-wrapper {
-  margin-top: 3em;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
-  grid-gap: 14px;
-}
-
-.document {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px;
-  background: #212225;
-  border-radius: 4px;
-  position: relative;
-}
-
-.document img {
-  cursor: pointer;
-}
-
-.document-download-toggle {
-  position: absolute;
-  width: 208px;
-  height: 112px;
-  background: #2b2b2c;
-  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
-  z-index: 2;
-  right: 0;
-  bottom: -6em;
-}
-
-.document-download-toggle div {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 14px;
-  cursor: pointer;
-}
-
-.document-download-toggle div img {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-}
-
-.document-download-toggle div:hover {
-  background-color: rgba(255, 255, 255, 0.16);
-}
-
 @media only screen and (max-width: 750px) {
   .lesson-description-wrapper {
     padding: 10px;
@@ -223,17 +171,9 @@
     font-size: 20px;
   }
 
-  .document-wrapper {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-
   .download-all h4 {
     font-size: 12px;
     width: 70px;
     line-height: 16px;
-  }
-
-  .document-wrapper .document h4 {
-    font-size: 12px;
   }
 }
