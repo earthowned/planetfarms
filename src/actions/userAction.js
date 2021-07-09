@@ -328,7 +328,7 @@ export const changePassword = (username, oldPassword, newPassword) => async (dis
   }
 }
 
-export const routingCommunityNews = async (route = false) => {
+export const routingCommunityNews = async (dispatch, route = false) => {
   const communityData = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`)
   localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
   if (route) {
