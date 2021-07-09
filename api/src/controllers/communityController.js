@@ -29,35 +29,34 @@ const getCommunities = async (req, res) => {
         include: [
           [
             sequelize.literal(`(
-                          SELECT COUNT("userId")
-                          FROM communities_users
-                          WHERE "communityId" = communities.id AND active = true
-                    )`),
+              SELECT COUNT("userId")
+              FROM communities_users
+              WHERE "communityId" = communities.id AND active = true
+            )`),
             'followersCount'
           ],
           [
             sequelize.literal(`
-                      CASE WHEN "creatorId"=${req.user.id} THEN 'true'
-                        ELSE 'false'
-                      END
-                    `), 'isCreator'
+              CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+                ELSE 'false'
+              END
+            `), 'isCreator'
           ],
           [
             sequelize.literal(`(
-                          SELECT COUNT("userId") 
-                          FROM communities_users
-                          WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
-                    )`),
+              SELECT COUNT("userId") 
+              FROM communities_users
+              WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
+            )`),
             'isFollowed'
           ]
         ],
         exclude: ['deleted']
       }
     })
-
     const totalPages = Math.ceil(communities.count / pageSize)
     res.json({
-      communities: communities.rows.map(rec => ({ ...rec.dataValues, attachment: changeFormat(rec.attachment) })),
+      communities: communities.rows.map(rec => ({ ...rec.dataValues})),
       totalItems: communities.count,
       totalPages,
       page,
@@ -86,44 +85,39 @@ const getUserCommunities = async (req, res) => {
       include: [
         [
           sequelize.literal(`(
-                          SELECT COUNT("userId")
-                          FROM communities_users
-                          WHERE "communityId" = communities.id AND active = true
-                    )`),
+            SELECT COUNT("userId")
+            FROM communities_users
+            WHERE "communityId" = communities.id AND active = true
+          )`),
           'followersCount'
         ],
         [
           sequelize.literal(`
-                      CASE WHEN "creatorId"=${req.user.id} THEN 'true'
-                        ELSE 'false'
-                      END
-                    `), 'isCreator'
+            CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+              ELSE 'false'
+            END
+          `), 'isCreator'
         ],
         [
           sequelize.literal(`(
-                          SELECT COUNT("userId") 
-                          FROM communities_users
-                          WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
-                    )`),
+            SELECT COUNT("userId") 
+            FROM communities_users
+            WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
+          )`),
           'isFollowed'
         ]
       ],
       exclude: ['deleted']
     },
     order: [['createdAt', 'DESC']],
-    where: {
-      deleted: false
-    },
+    where: { deleted: false },
     include: [{
       model: db.User,
       as: 'followers',
       attributes: [],
       where: { id: req.user.id },
-      through: {
-        attributes: []
-      }
-    }
-    ]
+      through: { attributes: [] }
+    }]
   })
     .then(communities => {
       const totalPages = Math.ceil(communities.count / pageSize)
