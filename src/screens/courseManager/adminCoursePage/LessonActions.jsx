@@ -6,13 +6,13 @@ import useHideOnClick from '../../../utils/useHideOnClick'
 const LessonActions = ({ id }) => {
   const history = useHistory()
   const [actionActive, setActionActive] = useState(false)
-  const [tests, setTests] = useState([]);
+  const [tests, setTests] = useState([])
   const domNode = useHideOnClick(() => {
     setActionActive(false)
   })
 
   useEffect(() => {
-    getTests();
+    getTests()
   }, [])
 
   async function getTests () {
@@ -36,12 +36,12 @@ const LessonActions = ({ id }) => {
           <li>Delete</li>
           {
             tests.length > 0
-            ? <Link to={`/admin/edit-test/${id}`}>
-              <li>Edit test</li>
-            </Link>
-            : <Link to={`/admin/add-test/${id}`}>
-              <li>Add test</li>
-            </Link>
+              ? <Link to={`/admin/edit-test/${id}`}>
+                <li>Edit test</li>
+                </Link>
+              : <Link to={`/admin/add-test/${id}`}>
+                <li>Add test</li>
+                </Link>
           }
         </ul>
       )}
