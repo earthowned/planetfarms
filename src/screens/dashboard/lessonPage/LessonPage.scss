@@ -177,3 +177,26 @@
     line-height: 16px;
   }
 }
+.admin-lesson-materials-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  background: var(--cards);
+  border: 1px solid var(--dropdowns);
+  border-radius: 4px;
+  color: var(--primary-white);
+  margin-top: 40px;
+}
+.material {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 1085px) {
+    justify-content: space-between;
+  }
+}
