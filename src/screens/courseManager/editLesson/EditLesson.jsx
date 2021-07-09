@@ -81,8 +81,6 @@ const EditLesson = () => {
 
   return (
     <>
-<<<<<<< HEAD
-<<<<<<< HEAD
       {isLoading ? (
         <span>Loading...</span>
       ) : (
@@ -175,60 +173,6 @@ const EditLesson = () => {
                     Edit Lesson
                   </button>
                 </div>
-=======
-=======
->>>>>>> fdc15d8 (test api and ui implementation)
-      <DashboardLayout title='Edit lesson'>
-        <BackButton location={`/admin/course/${data?.data?.courseId}`} />
-        <div className='admin-lesson-create-container'>
-          <input
-            type='text'
-            placeholder='Write title here'
-            value={lessonTitle}
-            name='title'
-            ref={register({
-              required: {
-                value: true,
-                message: 'You must enter lesson title'
-              }
-            })}
-            defaultValue={title}
-            onChange={(e) => setLessonTitle(e.target.value)}
-          />
-          <ErrorText
-            className='errorMsg'
-            message={errors.title && errors.title.message}
-          />
-          <DragDrop
-            onChange={(img) => setLessonCover(img)}
-            img={GET_COVERIMG + data?.data?.coverImg}
-            editText='Drag & Drop image in this area or Click Here to edit image'
-          />
-          {newData
-            .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
-            .map((data, index) => (
-              <div key={index}>
-                <Text heading={data?.textHeading} desc={data?.textDescription} />
-                <Video
-                  title={data?.videoTitle}
-                  description={data?.videoDescription}
-                  url={
-                  data?.videoLink === 'undefined'
-                    ? `${GET_VIDEO}${data?.videoResource}`
-                    : data?.videoLink
-                }
-                  thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
-                />
-
-                {data?.lessonImg === undefined ? (
-                  ''
-                ) : (
-                  <Image
-                    src={`${LESSON_IMG}${data?.lessonImg}`}
-                    desc={data?.isImgDesc === true && data?.photoDescription}
-                  />
-                )}
->>>>>>> afe68b5 (test api and ui implementation)
               </div>
             </div>
           </DashboardLayout>

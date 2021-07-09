@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.mi
 import { createTest } from '../../actions/testActions'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './AddTest.scss'
-import { InputFields} from '../../components/formUI/FormUI';
+import { InputFields } from '../../components/formUI/FormUI'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
@@ -14,8 +14,8 @@ const AddTest = () => {
   const { pathname } = useLocation()
 
   const history = useHistory()
-  const [questionError, setQuestionError] = useState(false)
   const [formError, setFormError] = useState(false)
+  // const [questionError, setQuestionError] = useState(false);
 
   const [newQuestions, setNewQuestions] = useState([])
   const [questions, setQuestions] = useState([])
@@ -29,14 +29,14 @@ const AddTest = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(pathname === `/admin/edit-test/${lessonId}`) getLessonQuestions()
+    if (pathname === `/admin/edit-test/${lessonId}`) getLessonQuestions()
   }, [])
 
   async function getLessonQuestions () {
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/questions/lesson/${lessonId}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/questions/lesson/${lessonId}`)
     setNewQuestions(data.questions)
     setQuestions(data.questions)
-    console.log(data.questions);
+    console.log(data.questions)
   }
 
   function addQuestion () {
@@ -77,7 +77,7 @@ const AddTest = () => {
   }
 
   function editTest () {
-    console.log(questions);
+    console.log(questions)
   }
   // function editTest () {
   //   // if (questions.length > 0) {
@@ -126,16 +126,16 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
   const [options, setOptions] = useState([''])
-  const [newOptions, setNewOptions] = useState([]);
+  const [newOptions, setNewOptions] = useState([])
 
   const { register: regi, handleSubmit, errors } = useForm()
 
   useEffect(() => {
-    if(newQuestions.length > 0) {
-        setQuestion(newQuestions[index].question)
-        setAnswer(newQuestions[index].answer)
-        setNewOptions(newQuestions[index].options)
-        setOptions(newQuestions[index].options)
+    if (newQuestions.length > 0) {
+      setQuestion(newQuestions[index].question)
+      setAnswer(newQuestions[index].answer)
+      setNewOptions(newQuestions[index].options)
+      setOptions(newQuestions[index].options)
     }
   }, [newQuestions])
 
@@ -161,10 +161,10 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
   questions[pos].options = options
   return (
     <div className='question-answer-container' key={index}>
-      {formError && <p className="error-message test-error">Please fill out all the input.</p>}
+      {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
       <div className='question-container'>
         <div>
-            {/* <InputFields
+          {/* <InputFields
               type='text'
               placeholder='Question'
               name='question'
@@ -178,12 +178,13 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
               })}
               errors={errors}
             /> */}
-            {/* {questionError && <p>Please enter the question.</p>} */}
-          <input 
-          className='default-input-variation' 
-          placeholder='Question' 
-          value={question} 
-          onChange={(e) => onQuestionChange(e)} />
+          {/* {questionError && <p>Please enter the question.</p>} */}
+          <input
+            className='default-input-variation'
+            placeholder='Question'
+            value={question}
+            onChange={(e) => onQuestionChange(e)}
+          />
         </div>
         <button><img src='/img/green-camera.svg' alt='photo icon' /> <h4>Add photo</h4></button>
       </div>
@@ -212,15 +213,15 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
           <span>Answer will be mixed for users</span>
         </div>
         <div className='option-answers'>
-          {options.length > 0 && options.map((item, index) => 
-          <OptionAnswer 
-          options={options} 
-          pos={index} 
-          setOptions={setOptions} 
-          newOptions={newOptions} 
-          item={item} 
-          setFormError={setFormError}
-          />)}
+          {options.length > 0 && options.map((item, index) =>
+            <OptionAnswer
+              options={options}
+              pos={index}
+              setOptions={setOptions}
+              newOptions={newOptions}
+              item={item}
+              setFormError={setFormError}
+            />)}
           <button onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
         </div>
       </div>
@@ -230,7 +231,7 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
 
 function OptionAnswer ({ options, setOptions, item, pos, newOptions, setFormError }) {
   const [answer, setAnswer] = useState('')
-    const { register: regi, handleSubmit, errors } = useForm()
+  const { register: regi, handleSubmit, errors } = useForm()
   function onAnswerChange (e) {
     setAnswer(e.target.value)
     setFormError(false)
@@ -252,8 +253,8 @@ function OptionAnswer ({ options, setOptions, item, pos, newOptions, setFormErro
     //   addOption()
     // }
 
-    if(newOptions.length > 0) {
-        setAnswer(newOptions[pos])
+    if (newOptions.length > 0) {
+      setAnswer(newOptions[pos])
     }
   }, [newOptions])
 
@@ -268,11 +269,13 @@ function OptionAnswer ({ options, setOptions, item, pos, newOptions, setFormErro
   }
 
   options[pos] = answer
-  
+
   return (
     <div className='test-answer-input-field' key={pos}>
-      <input className='default-input-variation incorrect-option' 
-      placeholder='Incorrect answer' value={answer} onChange={(e) => onAnswerChange(e)} />
+      <input
+        className='default-input-variation incorrect-option'
+        placeholder='Incorrect answer' value={answer} onChange={(e) => onAnswerChange(e)}
+      />
       {/* <InputFields
               type='text'
               placeholder='Incorrect answer'
