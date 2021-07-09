@@ -10,7 +10,6 @@ module.exports = async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     try {
-      throw Error('TokenExpired')
       const token = req.headers.authorization.split(' ')[1]
       if (process.env.AUTH_METHOD !== 'cognito') {
         decoded = jwt.verify(token, process.env.JWT_SECRET)
@@ -28,10 +27,9 @@ module.exports = async (req, res, next) => {
           recoded = decodedToken
         })
       }
-
       /*
-    * TODO: Maintain session and check again local session
-    */
+      * TODO: Maintain session and check again local session
+      */
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.LocalAuth.findByPk(decoded.id)
       } else if (recoded) {
