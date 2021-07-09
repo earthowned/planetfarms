@@ -44,7 +44,7 @@ const addTest = async (req, res) => {
     } = req.body
 
     if (questions.length < 1) return res.json({ message: 'Please provide questions for the test.' })
-    const result = await sequelize.transaction(async (t) => {
+    const result = await db.sequelize.transaction(async (t) => {
       const test = await db.Test.create({
         test_name,
         lessonId,
@@ -62,7 +62,7 @@ const addTest = async (req, res) => {
         newQuestions.push(questionObj)
       })
       // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
-      await Question.bulkCreate(newQuestions, { transaction: t })
+      await db.Question.bulkCreate(newQuestions, { transaction: t })
       return 'test is created with questions.'
     })
 
