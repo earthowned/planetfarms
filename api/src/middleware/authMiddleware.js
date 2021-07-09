@@ -22,7 +22,6 @@ module.exports = async (req, res, next) => {
       }
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.LocalAuth.findByPk(decoded.id)
-        console.log(req.user)
       } else if (recoded) {
         req.user = await db.User.findOne({ where: { userID: recoded.sub } })
       } else {
