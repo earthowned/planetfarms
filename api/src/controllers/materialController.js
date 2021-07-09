@@ -1,6 +1,6 @@
 const Material = require('../models/materialModel')
 const NotFoundError = require('../errors/notFoundError')
-
+const db = require('../models')
 const getMaterials = async (_req, res) => {
   const data = await Material.findAll()
   if (!data) {
@@ -31,7 +31,7 @@ const addMaterial = async (req, res) => {
     material = req.file.filename
     name = req.file.originalname
   }
-  const data = await Material.create({ ...req.body, material, name })
+  const data = await db.Material.create({ ...req.body, material, name })
   res.status(201).json({
     status: true,
     message: 'Materail added successfully',
