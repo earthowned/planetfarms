@@ -1,0 +1,12 @@
+.add-test-container {
+  width: 100%;
+  position: relative;
+
+  .add-test-inner-container {
+    width: 50%;
+  }
+}
+
+.test-correct-answer > h4 {
+    color: var(--primary-white);
+}
