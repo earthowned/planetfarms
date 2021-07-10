@@ -24,7 +24,6 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
 
   // TODO: remove this comment after page not found component is created
   // error && history.push("/pagenotfound")
-  console.log(userInfo.id)
   const submitForm = async ({ title, category, description, price }) => {
     const thumbnail = courseImage
     const creator = userInfo.id
