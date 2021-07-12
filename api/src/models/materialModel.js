@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     { timestamps: true }
   )
+
   Material.associate = (models) => {
     Material.belongsTo(models.Lesson, {
       constraints: true,
