@@ -32,6 +32,7 @@ import {
   communityVisitReducer, communityDeleteReducer, communityUpdateReducer
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
+import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -74,7 +75,10 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
-  userUpdate: userUpdateReducer
+  userUpdate: userUpdateReducer,
+  listQuestions: questionListReducer,
+  questionDelete: questionDeleteReducer,
+  questionUpdate: questionUpdateReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null

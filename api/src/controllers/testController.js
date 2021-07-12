@@ -44,6 +44,7 @@ const addTest = async (req, res) => {
     } = req.body
 
     if (questions.length < 1) return res.json({ message: 'Please provide questions for the test.' })
+
     const result = await db.sequelize.transaction(async (t) => {
       const test = await db.Test.create({
         test_name,
@@ -77,28 +78,49 @@ const addTest = async (req, res) => {
 }
 
 // @desc    Update a db.Test
-// @route   PUT /api/Test/:id
+// @route   PUT /api/test/:id
 // @access  Public
-const updateTest = (req, res) => {
-  const {
-    test_name, lessonId, description
-  } = req.body
-  const id = req.params.id
-  db.Test.findByPk(id).then(test => {
-    if (test) {
-      const { id } = test
-      db.Test.update({
-        test_name,
-        lessonId,
-        description
-      },
-      { where: { id } })
-        .then(() => res.json({ message: 'Test Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
-    }
-    res.status(404)
-    throw new Error('Test not found')
-  })
+const updateTest = async (req, res) => {
+  try {
+    const {
+      questions
+    } = req.body
+    const id = req.params.id
+
+    const test = await db.Test.findByPk(id);
+    if (!test) return res.json({ message: 'Test doesn\'t exists' });
+
+    // seperating old and new quetions
+    const oldQuestions = []
+    const newQuestions = []
+
+    questions.forEach(item => {
+      if (item.id) {
+        oldQuestions.push(item)
+      } else {
+        const questionObj = {
+          ...item,
+          testId: test.id,
+          options: [...item.options, item.answer]
+        }
+        newQuestions.push(questionObj)
+      }
+    })
+
+    //bulk updating 
+    oldQuestions.forEach(async (item) => {
+      const {question, answer, options, id} = item
+      await db.Question.update({question, answer, options}, {where: id})
+    })
+
+    //adding new questions to the test
+    await db.Question.bulkCreate(newQuestions)
+
+    res.json({message: "Test updated with new questions"}).status(200);
+
+  } catch (error) {
+    res.json(error)
+  }
 }
 
 // @desc    Fetch single db.Test

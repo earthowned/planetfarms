@@ -96,7 +96,7 @@ const addQuestion = (req, res) => {
 }
 
 // @desc    Update a Question
-// @route   PUT /api/Question/:id
+// @route   PUT /api/question/:id
 // @access  Public
 const updateQuestion = (req, res) => {
   const {
@@ -112,10 +112,10 @@ const updateQuestion = (req, res) => {
       { where: { id } })
         .then(() => res.json({ message: 'Question Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
+    } else {
+      return res.json({message: 'Question not found'}).status(200)
     }
-    res.status(404)
-    throw new Error('Question not found')
-  })
+  }).catch(err => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Fetch single Question

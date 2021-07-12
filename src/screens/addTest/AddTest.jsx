@@ -4,9 +4,8 @@ import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.mi
 import { createTest } from '../../actions/testActions'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './AddTest.scss'
-import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { checkArrayForFilledValue } from '../../utils/checkFilledArray'
 
 const AddTest = () => {
   const { lessonId } = useParams()
@@ -26,17 +25,6 @@ const AddTest = () => {
 
   const dispatch = useDispatch()
 
-  // updating
-  // useEffect(() => {
-  //   if (pathname === `/admin/edit-test/${lessonId}`) getLessonQuestions()
-  // }, [])
-
-  // async function getLessonQuestions () {
-  //   const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/questions/lesson/${lessonId}`)
-  //   setNewQuestions(data.questions)
-  //   setQuestions(data.questions)
-  // }
-
   function addQuestion () {
     setQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
     setFormError(false)
@@ -52,37 +40,10 @@ const AddTest = () => {
       if (checkArrayForFilledValue(questions)) {
         dispatch(createTest(lessonId, questions))
         history.goBack()
-      } else {
-        setFormError(true)
-      }
+      } 
     }
     setFormError(true)
   }
-
-  function checkArrayForFilledValue (arr) {
-    let empty = 0;
-    arr.forEach(el => {
-      if(!el.question || !el.answer || el.options.includes('')) {
-        empty++
-      }
-    })
-
-    if(empty > 0) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  // function editTest () {
-  //   // if (questions.length > 0) {
-  //   //   if (questions.question && questions.answer && !questions.options.includes('')) {
-        
-  //   //   }
-  //   // }
-  //   // setFormError(true)
-  //   console.log(questions);
-  // }
 
   return (
     <DashboardLayout title='Add Test'>
@@ -98,7 +59,7 @@ const AddTest = () => {
                 newQuestions={newQuestions}
                 setFormError={setFormError}
                 formError={formError}
-                                                                      />)}
+              />)}
 
               <button onClick={() => addQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add question</span></button>
               <div className='btn-container'>
@@ -117,19 +78,7 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
   const [options, setOptions] = useState([''])
-  // const [newOptions, setNewOptions] = useState([])
-
-  // const { register: regi, handleSubmit, errors } = useForm()
-
-  // useEffect(() => {
-  //   if (newQuestions.length > 0) {
-  //     setQuestion(newQuestions[index].question)
-  //     setAnswer(newQuestions[index].answer)
-  //     setNewOptions(newQuestions[index].options)
-  //     setOptions(newQuestions[index].options)
-  //   }
-  // }, [newQuestions])
-
+  
   function onQuestionChange (e) {
     setQuestion(e.target.value)
     setFormError(false)
@@ -184,8 +133,8 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
               setFormError={setFormError}
               newQuestions={newQuestions}
             />)}
-          <button onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
         </div>
+        <button className="add-new-course" onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
       </div>
     </div>
   )
@@ -193,28 +142,10 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
 
 function OptionAnswer ({ options, setOptions, item, pos, newOptions, setFormError, newQuestions }) {
   const [answer, setAnswer] = useState('')
-  const { register: regi, handleSubmit, errors } = useForm()
   function onAnswerChange (e) {
     setAnswer(e.target.value)
     setFormError(false)
   }
-
-  //  function addOption() {
-  //     setOptions(prev => {
-  //       if(prev === '') {
-  //         return [...prev]
-  //       }
-  //       return [...prev, '']
-  //     })
-  //   }
-  useEffect(() => {
-    // if(options.includes('')) {
-    //   options.splice(-1, 1)
-    // }
-    // if(answer.length ) {
-    //   addOption()
-    // }
-  }, [])
 
   function removeItem (id) {
     const newOptions = [...options]
