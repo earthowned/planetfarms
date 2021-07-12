@@ -260,5 +260,12 @@
   color: #fff;
 }
 .errorMsg {
-  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+.lessonDesc {
+  margin-bottom: 2em;
 }

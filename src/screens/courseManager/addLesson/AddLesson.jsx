@@ -40,22 +40,25 @@ const AddLesson = () => {
 
   console.log(lessonData)
 
-  const submitLessonForm = ({ title }) => {
+  const submitLessonForm = ({ title, lessonDesc }) => {
     const coverImg = lessonCover
     dispatch(
       createLesson({
         title,
         courseId,
-        coverImg
+        coverImg,
+        lessonDesc
       })
     )
   }
+
+  console.log(postLessonData)
   useEffect(() => {
     if (
       Object.keys(postLessonData).length !== 0 &&
       postLessonData.loading === false
     ) {
-      const id = postLessonData.course.data.id
+      const id = postLessonData?.course?.data?.id
       const lessonId = id
       if (id) {
         if (videoDataToPost) {

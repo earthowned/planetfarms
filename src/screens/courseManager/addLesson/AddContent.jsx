@@ -1,5 +1,5 @@
 import DragDrop from '../../../components/dragDrop/DragDrop'
-import { ErrorText } from '../../../components/formUI/FormUI'
+import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
 import Video from '../../../components/videoPlayer/Video'
 import Image from '../../../components/lessonImage/Image'
 import Text from './Text'
@@ -16,6 +16,10 @@ const AddContent = ({
 }) => {
   return (
     <div className='admin-lesson-create-container'>
+      <ErrorText
+        className='errorMsg'
+        message={errors.title && errors.title.message}
+      />
       <input
         type='text'
         placeholder='Write title here'
@@ -27,11 +31,35 @@ const AddContent = ({
           }
         })}
       />
+
       <ErrorText
         className='errorMsg'
-        message={errors.title && errors.title.message}
+        message={errors.lessonDesc && errors.lessonDesc.message}
       />
+      <TextArea
+        className='default-input-variation text-area-variation lessonDesc'
+        placeholder='Enter Lesson description'
+        cols='3'
+        rows='4'
+        name='lessonDesc'
+        ref={register({
+          required: {
+            value: true,
+            message: 'Please enter a lesson description'
+          },
+          minLength: {
+            value: 10,
+            message: 'Please enter less then 255 character'
+          },
+          maxLength: {
+            value: 255,
+            message: 'Please enter less then 255 character'
+          }
+        })}
+      />
+
       <DragDrop onChange={(img) => setLessonCover(img)} />
+
       {lessonData &&
         lessonData.map((vid, index) => (
           <div key={index}>

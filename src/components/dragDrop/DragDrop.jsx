@@ -50,7 +50,7 @@ const DragDrop = ({
   )
 }
 
-function DragDropComponent ({
+const DragDropComponent = ({
   getInputProps,
   getRootProps,
   fileChange,
@@ -64,7 +64,7 @@ function DragDropComponent ({
   editText,
   dataImg,
   tag
-}) {
+}) => {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
       <div

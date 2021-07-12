@@ -10,12 +10,12 @@ import {
 } from '../constants/lessonConstants'
 
 export const createLesson =
-  ({ courseId, title, coverImg }) =>
+  ({ courseId, title, lessonDesc, coverImg }) =>
     async (dispatch) => {
       const lessonFormData = new FormData()
-
       lessonFormData.append('courseId', courseId)
       lessonFormData.append('title', title)
+      lessonFormData.append('lessonDesc', lessonDesc)
       lessonFormData.append('coverImg', coverImg)
 
       try {

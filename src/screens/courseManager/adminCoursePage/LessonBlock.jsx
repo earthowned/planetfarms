@@ -57,13 +57,12 @@ const LessonBlock = ({ data, courseId }) => {
         ) : (
           ''
         )}
-        <div
-          className='add-lesson-btn secondary-btn'
-          onClick={() => history.push(`/admin/add-lesson/${courseId}`)}
-        >
-          <img src='/img/plus.svg' alt='lesson add' />
-          <span>Add new lesson for users</span>
-        </div>
+        <Link to={`/admin/add-lesson/${courseId}`}>
+          <div className='add-lesson-btn secondary-btn'>
+            <img src='/img/plus.svg' alt='lesson add' />
+            <span>Add new lesson for users</span>
+          </div>
+        </Link>
       </div>
     </div>
   )
