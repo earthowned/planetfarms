@@ -182,20 +182,17 @@ export const getMyDetails = () => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
     const config = configFunc()
-    const { attributes } = await Auth.currentAuthenticatedUser()
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, config)
     const userdata = {
-      firstName: attributes.given_name,
-      lastName: attributes.family_name,
-      phone: attributes.phone_number,
-      email: attributes.email,
-      dateOfBirth: attributes.birthdate,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+      email: data.email,
+      dateOfBirth: data.dateOfBirth,
       lastLogin: data.lastLogin,
       numberOfVisit: data.numberOfVisit,
       attachments: data.attachments
     }
-    // Auth.resendSignUp('testtesttest2');
-    // Auth.confirmSignUp('testtesttest2', '873680');
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
   } catch (error) {
@@ -207,7 +204,7 @@ export const getMyDetails = () => async (dispatch) => {
   }
 }
 
-export const updateUser = (user) => async (dispatch, getState) => {
+export const updateUser = (user, history) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
@@ -227,6 +224,8 @@ export const updateUser = (user) => async (dispatch, getState) => {
 
     const currentUser = await Auth.currentAuthenticatedUser()
 
+    const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
+
     await Auth.updateUserAttributes(currentUser, {
       email: user.email,
       given_name: user.firstName,
@@ -235,24 +234,8 @@ export const updateUser = (user) => async (dispatch, getState) => {
       phone_number: user.phone ? '+' + user.phone : ''
     })
 
-    const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
-    const { attributes } = await Auth.currentAuthenticatedUser()
-    console.log(attributes)
-
-    const userdata = {
-      firstName: attributes.given_name,
-      lastName: attributes.family_name,
-      phone: attributes.phone_number,
-      email: attributes.email,
-      dateOfBirth: attributes.birthdate,
-      lastLogin: data.lastLogin,
-      numberOfVisit: data.numberOfVisit,
-      attachments: data.attachments
-    }
-
-    dispatch({ type: USER_UPDATE_SUCCESS })
-    dispatch({ type: USER_DETAILS_RESET })
-    dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: { user: data } })
+    history.push('/myProfile')
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message
     if (message === 'Not authorized, token failed') {

@@ -42,8 +42,8 @@ function CongratulationScreen () {
 
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     const attachments = profileImage
-    dispatch(updateUser({ firstName, lastName, phone, birthday, email, attachments }))
-    user ? history.push('/myProfile') : history.push('/')
+    dispatch(updateUser({ firstName, lastName, phone, birthday, email, attachments }, history))
+    !user && history.push('/')
   }
 
   return (
