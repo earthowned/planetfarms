@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { configFunc, getApi } from '../utils/apiFunc'
 import {
   ENTERPRISE_LIST_REQUEST,
   ENTERPRISE_LIST_SUCCESS,
@@ -22,63 +23,49 @@ import {
   USER_ENTERPRISE_LIST_SUCCESS,
   USER_ENTERPRISE_LIST_FAIL
 } from '../constants/enterpriseConstants'
-import { configFunc } from '../utils/apiFunc'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listEnterprises = ({ pageNumber = '' }) => async (
-  dispatch
-) => {
+export const listEnterprises = ({ pageNumber = '' }) => async (dispatch) => {
   try {
     dispatch({ type: ENTERPRISE_LIST_REQUEST })
-    const config = configFunc()
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${currentCommunity.id}?pageNumber=${pageNumber}`,
-      config
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${currentCommunity.id}?pageNumber=${pageNumber}`
     )
-    dispatch({
-      type: ENTERPRISE_LIST_SUCCESS,
-      payload: data
-    })
+    dispatch({ type: ENTERPRISE_LIST_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: ENTERPRISE_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+      payload: error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
     })
   }
 }
 
-export const searchEnterprises = (search) => async (
-  dispatch
-) => {
+export const searchEnterprises = (search) => async (dispatch) => {
   try {
     dispatch({ type: ENTERPRISE_SEARCH_REQUEST })
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${currentCommunity.id}/search?title=${search}`)
-    dispatch({
-      type: ENTERPRISE_SEARCH_SUCCESS,
-      payload: data
-    })
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${currentCommunity.id}/search?title=${search}`
+    )
+    dispatch({ type: ENTERPRISE_SEARCH_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: ENTERPRISE_SEARCH_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+      payload: error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
     })
   }
 }
 
-export const createEnterprise = (newEnterprise) => async (
-  dispatch,
-  getState
-) => {
+export const createEnterprise = (newEnterprise) => async (dispatch, getState) => {
   const formData = new FormData()
   formData.append('title', newEnterprise.title)
   formData.append('description', newEnterprise.description)
@@ -86,26 +73,17 @@ export const createEnterprise = (newEnterprise) => async (
   formData.append('category', newEnterprise.category)
   formData.append('roles', newEnterprise.roles)
   try {
-    dispatch({
-      type: ENTERPRISE_CREATE_REQUEST
-    })
+    dispatch({ type: ENTERPRISE_CREATE_REQUEST })
     const config = configFunc()
     await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`, formData,
       config
     )
-    dispatch({
-      type: ENTERPRISE_CREATE_SUCCESS,
-      payload: true
-    })
+    dispatch({ type: ENTERPRISE_CREATE_SUCCESS, payload: true })
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-    dispatch({
-      type: ENTERPRISE_CREATE_FAIL,
-      payload: message
-    })
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message
+    dispatch({ type: ENTERPRISE_CREATE_FAIL, payload: message })
   }
 }
 
@@ -118,27 +96,18 @@ export const enterpriseUpdate = (newEnterprise) => async (dispatch) => {
     formData.append('enterprise', newEnterprise.file)
     formData.append('category', newEnterprise.category)
     formData.append('roles', newEnterprise.roles)
-
     const { id } = newEnterprise
     const config = configFunc()
     const data = await axios.put(
-            `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`,
-            formData, config
+      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`,
+      formData, config
     )
-
-    dispatch({
-      type: ENTERPRISE_UPDATE_SUCCESS,
-      payload: data
-    })
+    dispatch({ type: ENTERPRISE_UPDATE_SUCCESS, payload: data })
   } catch (error) {
-    const message =
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
-    dispatch({
-      type: ENTERPRISE_UPDATE_FAIL,
-      payload: message
-    })
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message
+    dispatch({ type: ENTERPRISE_UPDATE_FAIL, payload: message })
   }
 }
 
@@ -147,41 +116,28 @@ export const enterpriseDelete = (id) => async (dispatch) => {
     dispatch({ type: ENTERPRISE_DELETE_REQUEST })
     const config = configFunc()
     const data = await axios.delete(
-            `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`,
-            config
+      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/${id}/community/${currentCommunity.id}`,
+      config
     )
-
-    dispatch({
-      type: ENTERPRISE_DELETE_SUCCESS,
-      payload: data
-    })
+    dispatch({ type: ENTERPRISE_DELETE_SUCCESS, payload: data })
   } catch (error) {
-    const message =
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
-    dispatch({
-      type: ENTERPRISE_DELETE_FAIL,
-      payload: message
-    })
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message
+    dispatch({ type: ENTERPRISE_DELETE_FAIL, payload: message })
   }
 }
 
 export const followEnterprise = (enterpriseId) => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: ENTERPRISE_FOLLOW_REQUEST
-    })
+    dispatch({ type: ENTERPRISE_FOLLOW_REQUEST })
     const config = configFunc()
     await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises-users/follow`, { enterpriseId }, config)
-    dispatch({
-      type: ENTERPRISE_FOLLOW_SUCCESS
-    })
+    dispatch({ type: ENTERPRISE_FOLLOW_SUCCESS })
   } catch (error) {
-    const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message
     dispatch({
       type: ENTERPRISE_FOLLOW_FAIL,
       payload: message
@@ -189,29 +145,20 @@ export const followEnterprise = (enterpriseId) => async (dispatch, getState) => 
   }
 }
 
-export const listUserEnterprises = ({ communityId, pageNumber = '' }) => async (
-  dispatch
-) => {
+export const listUserEnterprises = ({ communityId, pageNumber = '' }) => async (dispatch) => {
   try {
     dispatch({ type: USER_ENTERPRISE_LIST_REQUEST })
-
-    const config = configFunc()
-    const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${communityId}/user?pageNumber=${pageNumber}`,
-            config
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/community/${communityId}/user?pageNumber=${pageNumber}`
     )
-
-    dispatch({
-      type: USER_ENTERPRISE_LIST_SUCCESS,
-      payload: data
-    })
+    dispatch({ type: USER_ENTERPRISE_LIST_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: USER_ENTERPRISE_LIST_FAIL,
-      payload:
-              error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message
+      payload: error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
     })
   }
 }
