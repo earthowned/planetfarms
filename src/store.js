@@ -20,6 +20,7 @@ import {
   groupUpdateReducer, groupViewReducer, userGroupListReducer
 } from './reducers/communityGroupReducers'
 import {
+  accessTokenReducer,
   userDetailsReducer,
   userListReducer,
   userLoginReducer,
@@ -74,7 +75,8 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
-  userUpdate: userUpdateReducer
+  userUpdate: userUpdateReducer,
+  accessToken: accessTokenReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null

@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from './reactQuery'
+import PrivateRoute from './components/privateRoute/PrivateRoute'
 // Screens
 import LoginScreen from './screens/login/LoginScreen'
 import SignupScreen from './screens/signUp/SignupScreen'
@@ -183,9 +184,7 @@ function App () {
             <Route path='/lesson-test-page/:testId'>
               <LessonTestPage />
             </Route>
-            <Route path='/myProfile'>
-              <MyProfile />
-            </Route>
+            <PrivateRoute component={MyProfile} path='/myProfile' />
             <Route path='/userInfo'>
               <UserInfo />
             </Route>

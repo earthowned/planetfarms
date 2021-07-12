@@ -3,6 +3,9 @@ import Amplify, { Auth } from 'aws-amplify'
 import { configFunc } from '../utils/apiFunc'
 
 import {
+  ACCESS_TOKEN_FAIL,
+  ACCESS_TOKEN_REQUEST,
+  ACCESS_TOKEN_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
@@ -169,10 +172,24 @@ export const getUserDetails = (id) => async (dispatch) => {
   }
 }
 
+export const checkAndUpdateToken = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ACCESS_TOKEN_REQUEST })
+    const { userLogin: { userInfo } } = getState()
+
+    dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: {} })
+  } catch (error) {
+    const message = error.response && error.response.data.error ? error.response.data.error : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({ type: ACCESS_TOKEN_FAIL, payload: message })
+  }
+}
+
 export const getMyDetails = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
-    const { userLogin: { userInfo } } = getState()
     const config = configFunc()
     const { attributes } = await Auth.currentAuthenticatedUser()
     const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, config)
