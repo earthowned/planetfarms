@@ -84,27 +84,30 @@ function DragDropComponent ({
             <div className='drag-drop-icon-container'>
               {type === 'video' ? (
                 <p className='videoName'>{files.name}</p>
-              ) : text === text ? (
+              ) : text ? (
                 <p>{text}</p>
               ) : (
                 <img src='/img/camera-outline.svg' alt='camera icon' />
               )}
             </div>
           </>
+        ) : dataImg ? (
+          <>
+            <img
+              className='avatar'
+              src={process.env.REACT_APP_CDN_BASE_URL + `/${tag}/` + dataImg}
+              alt='files[0].preview'
+            />
+            <div className='drag-drop-icon-container'>
+              <img src='/img/camera-outline.svg' alt='camera icon' />
+            </div>
+          </>
+        ) : text ? (
+          <p>{text}</p>
         ) : (
-          dataImg
-            ? <><img
-                className='avatar'
-                src={process.env.REACT_APP_CDN_BASE_URL + `/${tag}/` + dataImg}
-                alt='files[0].preview'
-                />
-              <div className='drag-drop-icon-container'>
-                <img src='/img/camera-outline.svg' alt='camera icon' />
-              </div>
-            </>
-            : <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
-              Drag & Drop files in this area or Click Here to attach video cover
-            </h6>
+          <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+            Drag & Drop files in this area or Click Here to attach video cover
+          </h6>
         )}
       </div>
       {files && (

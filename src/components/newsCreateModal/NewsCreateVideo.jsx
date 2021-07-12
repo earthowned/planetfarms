@@ -132,6 +132,7 @@ const CreateVideo = ({
                       }
                       onChange={(vid) => setVideo(vid)}
                       setVideo={setVideo}
+                      text='Add Video'
                     />
                   )}
                 </div>

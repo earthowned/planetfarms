@@ -37,6 +37,10 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1em;
+
+  span {
+    margin: 0 0.5em;
+  }
 }
 
 .video-row-3 > input {
@@ -138,8 +142,8 @@
     left: 0;
     top: 0;
 
-    h6 {
-      display: none;
+    p {
+      color: #fff;
     }
   }
 }
