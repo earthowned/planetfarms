@@ -9,7 +9,6 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
   const materialData = new FormData()
   materialData.append('material', material)
   materialData.append('lessonId', lessonId)
-
   try {
     dispatch({ type: MATERIAL_CREATE_REQUEST })
     const config = {
