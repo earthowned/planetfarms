@@ -39,7 +39,7 @@
 }
 
 .test-answers-wrapper {
-  margin-top: 20px;
+  margin: 20px 0;
 
   .test-answer-input-field {
     display: flex;
@@ -76,7 +76,7 @@
   border-radius: 4px;
 }
 
-.test-answer-options button {
+.add-new-course {
   outline: none;
   border: none;
   background: none;
@@ -85,10 +85,10 @@
   color: var(--primary-color);
   height: 24px;
   cursor: pointer;
-}
 
-.test-answer-options button h4 {
-  margin-left: 8px;
+  span {
+    margin-left: 8px;
+  }
 }
 
 .add-question-btn {

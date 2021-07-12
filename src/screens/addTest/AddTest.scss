@@ -3,10 +3,68 @@
   position: relative;
 
   .add-test-inner-container {
-    width: 50%;
+    width: 100%;
+  }
+}
+
+.test-answers-wrapper {
+  width: 100%;
+}
+
+.test-correct-answer {
+  width: 45%;
+
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    }
+}
+
+.option-answers {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 767px) {
+    display: block;
+    width: 100%;
+  }
+  
+  .test-answer-input-field {
+    width: 45%;
+
+    @media only screen and (max-width: 767px) {
+    width: 100%;
+    }
   }
 }
 
 .test-correct-answer > h4 {
   color: var(--primary-white);
+}
+
+.question-btn-contaianer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 48px;
+    outline: none;
+    padding: 1em;
+    border-radius: 4px;
+    background: var(--background-color-light);
+    color: var(--primary-white);
+    border: 0.5px solid var(--primary-white);
+    font-weight: 400;
+    cursor: pointer;
+    text-align: center;
+    text-transform: capitalize;
+  }
 }
