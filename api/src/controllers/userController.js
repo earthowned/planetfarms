@@ -298,20 +298,20 @@ const updateUser = async (req, res) => {
         name: firstName + ' ' + lastName
       }).catch((err) => console.log(err.message))
     }
-    User.findOne({ where: { userID: id } }).then(user => {
+    db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
           { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
           { where: { userID: id } }
         ).then(() => res.status(200))
-          .catch((err) => res.json({ error: err.message }).status(400))
+          .catch((err) => res.json({ error: err.message }).status(403))
       } else {
         res.status(404)
         throw new Error('User not found')
       }
     })
   } catch (err) {
-    res.json({ error: err.message })
+    res.status(403).json({ error: err.message })
   }
 }
 
