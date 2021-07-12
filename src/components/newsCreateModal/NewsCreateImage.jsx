@@ -13,8 +13,7 @@ const CreateImage = ({
   imageActive,
   setImageActive,
   lessonData,
-  setLessonData,
-  setLessonImgDataToPost
+  setLessonData
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(false)
   const [lessonImg, setLessonImg] = useState(null)
@@ -31,7 +30,6 @@ const CreateImage = ({
       }
     ]
     setLessonData(imgData)
-    setLessonImgDataToPost({ lessonImg, photoDescription, isImgDesc })
     setImageActive(false)
   }
 

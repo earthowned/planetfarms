@@ -16,8 +16,7 @@ const CreateVideo = ({
   videoActive,
   setVideoActive,
   lessonData,
-  setLessonData,
-  setVideoDataToPost
+  setLessonData
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const [videoCover, setVideoCover] = useState(null)
@@ -36,13 +35,6 @@ const CreateVideo = ({
         videoResource
       }
     ]
-    setVideoDataToPost({
-      videoCover,
-      videoTitle,
-      videoDescription,
-      videoLink,
-      videoResource
-    })
     setLessonData(vData)
     setVideoActive(false)
   }

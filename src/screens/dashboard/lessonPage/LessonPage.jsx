@@ -18,20 +18,25 @@ const LessonPage = () => {
   if (isLoading) {
     return <span>Loading...</span>
   }
+
   const materialData = data?.data?.materials
 
   return (
     <DashboardLayout title='Course page'>
       <BackButton location={'/course/' + data?.data?.courseId} />
-      <LessonDetail data={data} id={id} />
-      <div className='admin-lesson-materials-container'>
-        <h1>Materials</h1>
-        <div className='material'>
-          {materialData.map((mater) => {
-            return <Material key={mater.id} name={mater?.name} />
-          })}
+      <LessonDetail data={data?.data} id={id} />
+      {materialData.length !== 0 ? (
+        <div className='admin-lesson-materials-container'>
+          <h1>Materials</h1>
+          <div className='material'>
+            {materialData.map((mater) => {
+              return <Material key={mater.id} name={mater?.name} />
+            })}
+          </div>
         </div>
-      </div>
+      ) : (
+        ''
+      )}
     </DashboardLayout>
   )
 }

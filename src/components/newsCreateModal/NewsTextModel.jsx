@@ -10,8 +10,7 @@ const CreateText = ({
   setTextActive,
   placeholder,
   lessonData,
-  setLessonData,
-  setText
+  setLessonData
 }) => {
   const { register, errors, handleSubmit } = useForm()
 
@@ -24,7 +23,6 @@ const CreateText = ({
       }
     ]
     setLessonData(textData)
-    setText({ textHeading, textDescription })
     setTextActive(false)
   }
   return (

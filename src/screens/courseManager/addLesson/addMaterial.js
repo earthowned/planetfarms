@@ -7,7 +7,7 @@ export const addMaterial = function ({ material: mate, lessonId, dispatch }) {
   for (i; i < materialData; i++) {
     const material = mate[i].mData
     if (material) {
-      dispatch(createMaterial(material, lessonId))
+      return dispatch(createMaterial(material, lessonId))
     }
   }
 }

@@ -13,14 +13,15 @@ import Image from '../../../components/lessonImage/Image'
 import LessonTest from './LessonTest'
 
 const LessonDetail = ({ data, id }) => {
+  console.log(data)
   const [lessonData, setLessonData] = useState([])
-  const textData = data?.data?.texts.map((text) => {
+  const textData = data?.texts.map((text) => {
     return text
   })
-  const videoData = data?.data?.videos.map((video) => {
+  const videoData = data?.videos.map((video) => {
     return video
   })
-  const photoData = data?.data?.photos.map((photo) => {
+  const photoData = data?.photos.map((photo) => {
     return photo
   })
 
@@ -28,14 +29,15 @@ const LessonDetail = ({ data, id }) => {
     setLessonData([textData, videoData, photoData])
   }, [])
   const newData = lessonData.flat()
+  console.log(newData)
 
   return (
     <div className='lesson-description-wrapper'>
-      <h1>{data?.data?.title}</h1>
+      <h1>{data?.title}</h1>
       <div className='lesson-description-img-wrapper'>
         <img
-          src={`${GET_COVERIMG}${data?.data?.coverImg}`}
-          alt={`${data?.data?.title}_img`}
+          src={`${GET_COVERIMG}${data?.coverImg}`}
+          alt={`${data?.title}_img`}
         />
       </div>
       {newData
@@ -69,4 +71,4 @@ const LessonDetail = ({ data, id }) => {
   )
 }
 
-export default React.memo(LessonDetail)
+export default LessonDetail
