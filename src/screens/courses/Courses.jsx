@@ -11,7 +11,6 @@ import SimpleModal from '../../components/simpleModal/SimpleModal'
 
 import CourseCreateModal from '../../components/courseCreateModal/CourseCreateModal'
 import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
-import CollectionModal from '../../components/collectionModal/CollectionModal'
 
 const Courses = () => {
   const [active, setActive] = useState(false)
@@ -20,9 +19,10 @@ const Courses = () => {
   const [createCourse, setCreateCourse] = useState(false)
   const [createNewCourse, setCreateNewCourse] = useState(false)
 
-  const { data } = useGetFetchData('courseCategory', CATEGORY)
-
-  console.log(data)
+  const { data, isLoading } = useGetFetchData('courseCategory', CATEGORY)
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
 
   function createNewCourseFunc () {
     setCreateNewCourse(true)

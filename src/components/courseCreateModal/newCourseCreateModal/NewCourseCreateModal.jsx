@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CATEGORY } from '../../../utils/urlConstants'
 
 import { createResource } from '../../../actions/courseActions'
@@ -13,6 +13,8 @@ import './NewCourseCreateModal.scss'
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const history = useHistory()
   const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   const [isFree, setIsFree] = useState(false)
   const [courseImage, setCourseImage] = useState('')
 
@@ -22,9 +24,9 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
 
   // TODO: remove this comment after page not found component is created
   // error && history.push("/pagenotfound")
-
   const submitForm = async ({ title, category, description, price }) => {
     const thumbnail = courseImage
+    const creator = userInfo.id
     dispatch(
       createResource({
         title,
@@ -33,6 +35,7 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
         price,
         thumbnail,
         isFree,
+        creator,
         history
       })
     )
