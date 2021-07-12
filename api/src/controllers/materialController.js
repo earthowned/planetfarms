@@ -1,4 +1,3 @@
-const Material = require('../models/materialModel')
 const NotFoundError = require('../errors/notFoundError')
 const db = require('../models')
 const getMaterials = async (_req, res) => {
@@ -14,7 +13,7 @@ const getMaterials = async (_req, res) => {
 }
 const getMaterialById = async (req, res) => {
   const { id } = req.params
-  const data = await Material.findOne({ where: { id } })
+  const data = await db.Material.findOne({ where: { id } })
   if (!data) {
     throw new NotFoundError()
   }
@@ -40,7 +39,7 @@ const addMaterial = async (req, res) => {
 }
 const deleteMaterial = async (req, res) => {
   const { id } = req.params
-  const data = await Material.destroy({ where: { id } })
+  const data = await db.Material.destroy({ where: { id } })
   if (!data) {
     throw new NotFoundError()
   }
@@ -53,7 +52,7 @@ const deleteMaterial = async (req, res) => {
 
 const updateMaterial = async (req, res) => {
   const { id } = req.params
-  const data = await Material.update(req.body, {
+  const data = await db.Material.update(req.body, {
     where: { id }
   })
   res.status(202).json({

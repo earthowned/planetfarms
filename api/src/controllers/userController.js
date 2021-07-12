@@ -127,25 +127,12 @@ const registerUser = async (req, res) => {
 
 const registerLocal = async (name, password, res) => {
   try {
-    const userExists = await db.LocalAuth.findOne({
-      where: { username: name }
-    })
+    const userExists = await db.LocalAuth.findOne({ where: { username: name } })
     if (userExists) { return res.json({ message: 'Users already Exists !!!' }).status(400) }
 
     const newUser = await db.sequelize.transaction(async (t) => {
-      const user = await db.LocalAuth.create(
-        { username: name, password: password },
-        { transaction: t }
-      )
-      return await db.User.create(
-        {
-          userID: user.id,
-          isLocalAuth: true,
-          lastLogin: new Date(),
-          numberOfVisit: 0
-        },
-        { transaction: t }
-      )
+      const user = await db.LocalAuth.create({ username: name, password: password }, { transaction: t })
+      return await db.User.create({ userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
     })
 
     if (newUser && subscribeCommunity(newUser)) {
@@ -167,13 +154,10 @@ const registerLocal = async (name, password, res) => {
 const subscribeCommunity = async (user) => {
   try {
     return await db.sequelize.transaction(async (t) => {
-      const communitiesArray = await db.Community.findAll(
-        {
-          attributes: ['id'],
-          where: { auto_follow: true }
-        },
-        { transaction: t }
-      )
+      const communitiesArray = await db.Community.findAll({
+        attributes: ['id'], where: { auto_follow: true }
+      },
+      { transaction: t })
       const allFollow = []
       for (let i = 0; i < communitiesArray.length; i++) {
         const followObj = {
@@ -196,18 +180,11 @@ const changePassword = async (req, res) => {
     let userWithNewPassword
     if (process.env.AUTH_METHOD === 'cognito') {
       const authUser = await Auth.currentAuthenticatedUser()
-      userWithNewPassword = await Auth.changePassword(
-        authUser,
-        oldPassword,
-        newPassword
-      )
+      userWithNewPassword = await Auth.changePassword(authUser, oldPassword, newPassword)
     } else {
       const oldUser = await db.User.findByPk(user.id)
       if (oldUser) {
-        userWithNewPassword = await db.User.update(
-          { password: newPassword },
-          { where: { id: user.id } }
-        )
+        userWithNewPassword = await db.User.update({ password: newPassword }, { where: { id: user.id } })
       }
     }
     if (userWithNewPassword) {
@@ -226,16 +203,13 @@ const forgotPassword = async (req, res) => {
   // Send confirmation code to user's email
   const { username } = req.body
   Auth.forgotPassword(username)
-    .then((CodeDeliveryDetails) =>
-      res.json({ details: CodeDeliveryDetails }).status(200)
-    )
+    .then((CodeDeliveryDetails) => res.json({ details: CodeDeliveryDetails }).status(200))
     .catch((err) => console.log(err))
 }
 
 const forgotPasswordSubmit = async (req, res) => {
   // Send confirmation code to user's email
   const { username, code, newPassword } = req.body
-
   Auth.forgotPasswordSubmit(username, code, newPassword)
     .then((data) => console.log(data))
     .catch((err) => console.log(err))
@@ -338,14 +312,7 @@ const updateUser = async (req, res) => {
     db.User.findOne({ where: { userID: id } }).then((user) => {
       if (user) {
         db.User.update(
-          {
-            email,
-            firstName,
-            lastName,
-            phone,
-            dateOfBirth: birthday,
-            attachments: attachment
-          },
+          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
           { where: { userID: id } }
         )
           .then(() => res.status(200))
@@ -366,10 +333,7 @@ const updateUser = async (req, res) => {
 const searchUserName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
-  db.User.findAll({
-    where: { name: { [Op.iLike]: '%' + name + '%' } },
-    order: [['title', order]]
-  })
+  db.User.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
     .then((users) => res.json({ users }).status(200))
     .catch((err) => res.json({ error: err }).status(400))
 }
