@@ -31,9 +31,7 @@ const EditLesson = () => {
     'editLessonData',
     GET_LESSONS + `/${id}`
   )
-  if (isLoading) {
-    ;<span>Loading</span>
-  }
+
   const fetchImg = data?.data?.coverImg
   const title = data?.data?.title
   const [lessonTitle, setLessonTitle] = useState()
@@ -45,25 +43,32 @@ const EditLesson = () => {
   //   const [testModal, setTestModal] = useState(false)
   const [lessonData, setLessonData] = useState([])
   const textData = data?.data?.texts.map((text) => {
-    return text
+    return { text }
   })
   const videoData = data?.data?.videos.map((video) => {
-    return video
+    return { video }
   })
   const photoData = data?.data?.photos.map((photo) => {
-    return photo
+    return { photo }
   })
   useEffect(() => {
     setLessonData([textData, videoData, photoData])
   }, [])
-  const newData = lessonData.flat()
+
+  if (isLoading) {
+    return <span>Loading</span>
+  }
+  let newData
+  if (lessonData) {
+    newData = lessonData.flat()
+  }
 
   const lessonId = data?.data?.id
   const updateLessonForm = ({ title }) => {
     const coverImg = lessonCover
     dispatch(updateLesson(title, coverImg, lessonId))
   }
-  //   console.log(lessonData)
+  console.log(newData)
 
   return (
     <>
@@ -95,7 +100,10 @@ const EditLesson = () => {
             editText='Drag & Drop image in this area or Click Here to edit image'
           />
           <div className='admin-lesson-create-btn-wrapper'>
-            <button className='secondary-btn' onClick={() => setTestModal(true)}>
+            <button
+              className='secondary-btn'
+              onClick={() => setTestModal(true)}
+            >
               <img src='/img/test-outline.svg' alt='test icon' />{' '}
               <span>Add test</span>
             </button>
@@ -104,15 +112,18 @@ const EditLesson = () => {
             .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
             .map((data, index) => (
               <div key={index}>
-                <Text heading={data?.textHeading} desc={data?.textDescription} />
+                <Text
+                  heading={data?.textHeading}
+                  desc={data?.textDescription}
+                />
                 <Video
                   title={data?.videoTitle}
                   description={data?.videoDescription}
                   url={
-                  data?.videoLink === 'undefined'
-                    ? `${GET_VIDEO}${data?.videoResource}`
-                    : data?.videoLink
-                }
+                    data?.videoLink === 'undefined'
+                      ? `${GET_VIDEO}${data?.videoResource}`
+                      : data?.videoLink
+                  }
                   thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
                 />
 
@@ -147,4 +158,4 @@ const EditLesson = () => {
   )
 }
 
-export default EditLesson
+export default React.memo(EditLesson)

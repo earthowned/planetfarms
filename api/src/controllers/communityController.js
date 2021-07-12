@@ -56,7 +56,7 @@ const getCommunities = async (req, res) => {
     })
     const totalPages = Math.ceil(communities.count / pageSize)
     res.json({
-      communities: communities.rows.map(rec => ({ ...rec.dataValues})),
+      communities: communities.rows.map(rec => ({ ...rec.dataValues })),
       totalItems: communities.count,
       totalPages,
       page,

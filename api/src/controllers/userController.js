@@ -57,7 +57,13 @@ function amplifyConfig () {
       // OPTIONAL - Hosted UI configuration
       oauth: {
         domain: process.env.COGNITO_DOMAIN_NAME, // domain_name
-        scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+        scope: [
+          'phone',
+          'email',
+          'profile',
+          'openid',
+          'aws.cognito.signin.user.admin'
+        ],
         redirectSignIn: process.env.FRONTEND_URL,
         redirectSignOut: process.env.FRONTEND_URL,
         responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
@@ -122,13 +128,11 @@ const registerUser = async (req, res) => {
 const registerLocal = async (name, password, res) => {
   try {
     const userExists = await db.LocalAuth.findOne({ where: { username: name } })
-    if (userExists) return res.json({ message: 'Users already Exists !!!' }).status(400)
-
+    if (userExists) { return res.json({ message: 'Users already Exists !!!' }).status(400) }
     const newUser = await db.sequelize.transaction(async (t) => {
       const user = await db.LocalAuth.create({ username: name, password: password }, { transaction: t })
       return await db.User.create({ userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
     })
-
     if (newUser && subscribeCommunity(newUser)) {
       res.status(201).json({
         id: newUser.dataValues.userID,
@@ -136,9 +140,7 @@ const registerLocal = async (name, password, res) => {
         token: generateToken(newUser.dataValues.userID)
       })
     } else {
-      res.status(400).json({
-        error: 'Invalid user data'
-      })
+      res.status(400).json({ error: 'Invalid user data' })
     }
   } catch (error) {
     res.json(error)
@@ -188,8 +190,7 @@ const changePassword = async (req, res) => {
       throw new Error('Invalid email or password')
     }
   } catch (e) {
-    res.status(401)
-    res.json({ error: e })
+    res.status(401).json({ error: e })
   }
 }
 
@@ -204,7 +205,6 @@ const forgotPassword = async (req, res) => {
 const forgotPasswordSubmit = async (req, res) => {
   // Send confirmation code to user's email
   const { username, code, newPassword } = req.body
-
   Auth.forgotPasswordSubmit(username, code, newPassword)
     .then((data) => console.log(data))
     .catch((err) => console.log(err))
@@ -280,7 +280,6 @@ const getUserProfileByUserID = async (req, res) => {
 // @access  Public
 const getMyProfile = (req, res) => {
   const user = req.user
-  console.log(user)
   res.json({
     firstName: user.firstName,
     lastName: user.lastName,
@@ -303,14 +302,12 @@ const updateUser = async (req, res) => {
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    // const id = req.params.id
-    db.User.findOne({ where: { userID: id } }).then(user => {
+    db.User.findOne({ where: { userID: id } }).then((user) => {
       if (user) {
         db.User.update(
           { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
           { where: { userID: id } }
-        )
-          .then(() => res.status(200))
+        ).then(() => res.status(200))
           .catch((err) => res.json({ error: err.message }).status(400))
       } else {
         res.status(404)
@@ -329,8 +326,22 @@ const searchUserName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
   db.User.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
-    .then(users => res.json({ users }).status(200))
-    .catch(err => res.json({ error: err }).status(400))
+    .then((users) => res.json({ users }).status(200))
+    .catch((err) => res.json({ error: err }).status(400))
 }
 
-module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, resendCode, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getMyProfile, getUsers, updateUser, searchUserName }
+module.exports = {
+  registerUser,
+  authUser,
+  changePassword,
+  forgotPassword,
+  forgotPasswordSubmit,
+  resendCode,
+  confirmSignUpWithCode,
+  getUserById,
+  getUserProfileByUserID,
+  getMyProfile,
+  getUsers,
+  updateUser,
+  searchUserName
+}
