@@ -141,7 +141,7 @@ export const login = (name, password) => async (dispatch) => {
     }
     window.localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
-    routingCommunityNews(true)
+    routingCommunityNews(dispatch, true)
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
