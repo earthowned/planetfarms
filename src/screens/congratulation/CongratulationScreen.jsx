@@ -28,7 +28,7 @@ function CongratulationScreen () {
       lastName: userdetail?.lastName,
       email: userdetail?.email,
       phone: userdetail?.phone,
-      birthday: userdetail?.dateOfBirth
+      birthday: userdetail ? moment(userdetail.dateOfBirth).format('YYYY-MM-DD') : ''
     }
   })
 
