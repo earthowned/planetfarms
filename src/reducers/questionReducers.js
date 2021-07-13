@@ -3,9 +3,9 @@ import { QUESTION_DELETE_FAIL, QUESTION_DELETE_REQUEST, QUESTION_DELETE_SUCCESS,
 export const questionDeleteReducer = (state = {}, action) => {
     switch (action.type) {
         case QUESTION_DELETE_REQUEST:
-            return { ...state, loading: true }
+            return { ...state, loading: true, success: false }
         case QUESTION_DELETE_SUCCESS:
-            return { loading: false, success: action.payload }
+            return { loading: false, success: true }
         case QUESTION_DELETE_FAIL:
             return { loading: false, error: action.payload }
         default:
@@ -16,9 +16,9 @@ export const questionDeleteReducer = (state = {}, action) => {
 export const questionUpdateReducer = (state = {}, action) => {
     switch (action.type) {
         case QUESTION_UPDATE_REQUEST:
-            return { ...state, loading: true }
+            return { ...state, loading: true, success: false }
         case QUESTION_UPDATE_SUCCESS:
-            return { loading: false, success: action.payload }
+            return { loading: false, success: true }
         case QUESTION_UPDATE_FAIL:
             return { loading: false, error: action.payload }
         default:
@@ -26,14 +26,14 @@ export const questionUpdateReducer = (state = {}, action) => {
     }
 }
 
-export const questionListReducer = (state = { questions: [] }, action) => {
+export const questionListReducer = (state = { fetchedQuestions: [] }, action) => {
     switch (action.type) {
         case QUESTION_LIST_REQUEST:
             return { loading: true, QUESTION: [] }
         case QUESTION_LIST_SUCCESS:
             return {
                 loading: false,
-                questions: action.payload.questions,
+                fetchedQuestions: action.payload.questions,
                 pages: action.payload.pages,
                 page: action.payload.page,
                 totalPages: action.payload.totalPages

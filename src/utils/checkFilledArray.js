@@ -1,14 +1,21 @@
 export function checkArrayForFilledValue(arr) {
     let empty = 0;
     arr.forEach(el => {
-        if (!el.question || !el.answer || el.options.includes('')) {
-            empty++
+        if(el.type === "subjective") {
+            console.log(el.type)
+            if(!el.question) empty++
+            console.log(empty)
+        }
+        
+        if(el.type === "mcq") {
+            console.log(el.type)
+            if (!el.question || !el.answer || el.options.includes('')) empty++
+            console.log(empty)
         }
     })
-
-    if (empty > 0) {
-        return false;
-    } else {
+    console.log(empty)
+    if (empty === 0) {
         return true;
     }
+    return false;
 }

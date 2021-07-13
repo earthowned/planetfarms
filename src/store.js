@@ -9,7 +9,7 @@ import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
-import { testCreateReducer, testQuestionListReducer } from './reducers/testReducers'
+import { testCreateReducer, testQuestionEditReducer, testQuestionListReducer } from './reducers/testReducers'
 import {
   enterpriseCreateReducer, enterpriseDeleteReducer,
   enterpriseFollowReducer,
@@ -67,6 +67,7 @@ const reducer = combineReducers({
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,
+  editTestQuestions: testQuestionEditReducer,
   addNewNews: newsCreateReducer,
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,

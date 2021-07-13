@@ -13,7 +13,6 @@ const AddTest = () => {
 
   const history = useHistory()
   const [formError, setFormError] = useState(false)
-
   const [newQuestions, setNewQuestions] = useState([])
   const [questions, setQuestions] = useState([])
   // data structure of questions
@@ -25,8 +24,13 @@ const AddTest = () => {
 
   const dispatch = useDispatch()
 
-  function addQuestion () {
-    setQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
+  function addMcqQuestion () {
+    setQuestions(prev => [...prev, { question: '', answer: '', type: "mcq", options: [] }])
+    setFormError(false)
+  }
+
+  function addSubjectiveQuestion () {
+    setQuestions(prev => [...prev, {question: "", type: "subjective"}])
     setFormError(false)
   }
 
@@ -36,6 +40,7 @@ const AddTest = () => {
   }
 
   function addTest () {
+    console.log(questions)
     if (questions.length > 0) {
       if (checkArrayForFilledValue(questions)) {
         dispatch(createTest(lessonId, questions))
@@ -52,16 +57,32 @@ const AddTest = () => {
           <div>
             <div className='add-test-inner-container'>
               {/* {questions.length > 0 && questions.map((index, item) => <QuestionAnswerComponent pos={questions.length - 1} index={index} questions={questions} questionError={questionError} />)} */}
-              {questions.length > 0 && questions.map((item, index) => <QuestionAnswerComponent
+              {questions.length > 0 && questions.map((item, index) => {
+              
+              if(item.type === 'subjective') {
+                return <SubjectiveQuestion 
+                pos={questions.length - 1}
+                questions={questions}
+                setFormError={setFormError}
+                formError={formError}
+                index={index}
+                />
+              } else {
+                return <QuestionAnswerComponent
                 pos={questions.length - 1}
                 index={index}
                 questions={questions}
                 newQuestions={newQuestions}
                 setFormError={setFormError}
                 formError={formError}
-              />)}
+              />}
+              })}
 
-              <button onClick={() => addQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add question</span></button>
+              <div className="btn-container">
+              <button onClick={() => addMcqQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add MCQ</span></button>
+              <button onClick={() => addSubjectiveQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add Subjective Question</span></button>
+              </div>
+              
               <div className='btn-container'>
                 <button className='secondary-btn reset-test-btn' onClick={resetQuestion}>Reset test</button>  
                <button className='secondary-btn color-primary' onClick={(addTest)}>Add test</button>
@@ -71,6 +92,31 @@ const AddTest = () => {
         </div>
       </div>
     </DashboardLayout>
+  )
+}
+
+function SubjectiveQuestion ({formError, setFormError, questions, pos, index}) {
+  const [question, setQuestion] = useState('')
+  function onQuestionChange (e) {
+    setQuestion(e.target.value)
+    setFormError(false)
+  }
+  questions[index].question = question
+  return (
+    <div className='question-answer-container' key={pos}>
+    {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+    <h4 className="question-title">Subjective Question</h4>
+      <div className='question-container'>
+        <div>
+          <input
+            className='default-input-variation'
+            placeholder='Question'
+            value={question}
+            onChange={(e) => onQuestionChange(e)}
+          />
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -96,12 +142,13 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
     setFormError(false)
   }
 
-  questions[pos].question = question
-  questions[pos].answer = answer
-  questions[pos].options = options
+  questions[index].question = question
+  questions[index].answer = answer
+  questions[index].options = options
   return (
     <div className='question-answer-container' key={index}>
       {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+      <h4 className="question-title">MCQ Question</h4>
       <div className='question-container'>
         <div>
           <input
