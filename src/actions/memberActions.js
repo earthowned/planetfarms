@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { getApi } from '../utils/apiFunc'
 import {
   MEMBER_LIST_FAIL, MEMBER_LIST_REQUEST, MEMBER_LIST_SUCCESS,
   MEMBER_SEARCH_FAIL, MEMBER_SEARCH_REQUEST,
@@ -15,10 +15,10 @@ export const listMembers = () => async (
 ) => {
   try {
     dispatch({ type: MEMBER_LIST_REQUEST })
-    const { data } = await axios.get(
+    const { data } = await getApi(
+      dispatch,
       `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}`
     )
-
     dispatch({
       type: MEMBER_LIST_SUCCESS,
       payload: data
@@ -39,8 +39,10 @@ export const searchMembers = (search) => async (
 ) => {
   try {
     dispatch({ type: MEMBER_SEARCH_REQUEST })
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}/search?name=${search}`)
-
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}/search?name=${search}`
+    )
     dispatch({
       type: MEMBER_SEARCH_SUCCESS,
       payload: data.member

@@ -6,7 +6,16 @@ import {
 } from '../constants/courseConstants'
 
 export const createResource =
-  ({ title, category, description, price, thumbnail, isFree, history }) =>
+  ({
+    title,
+    category,
+    description,
+    price,
+    thumbnail,
+    isFree,
+    creator,
+    history
+  }) =>
     async (dispatch) => {
       const formData = new FormData()
       formData.append('title', title)
@@ -15,6 +24,7 @@ export const createResource =
       formData.append('price', price)
       formData.append('thumbnail', thumbnail)
       formData.append('isFree', isFree)
+      formData.append('creator', creator)
 
       try {
         dispatch({ type: COURSE_CREATE_REQUEST })

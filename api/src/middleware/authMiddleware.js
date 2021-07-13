@@ -17,9 +17,19 @@ module.exports = async (req, res, next) => {
         const jwk = require('./jwks.json')
         const pem = jwkToPem(jwk.keys[0])
         jwt.verify(token, pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
+          if (err) {
+            if (err.message === 'jwt expired') {
+              throw Error('TokenExpired')
+            } else {
+              throw Error('InvalidToken')
+            }
+          }
           recoded = decodedToken
         })
       }
+      /*
+      * TODO: Maintain session and check again local session
+      */
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.LocalAuth.findByPk(decoded.id)
       } else if (recoded) {
@@ -29,9 +39,26 @@ module.exports = async (req, res, next) => {
       }
       next()
     } catch (error) {
-      res.status(401).json({
-        error: 'Not authorized, token failed'
-      })
+      switch (error.message) {
+        case 'InvalidToken':
+          res.status(401).json({
+            error: 'Invalid token provided.',
+            name: error.message
+          })
+          break
+        case 'TokenExpired':
+          res.status(401).json({
+            error: 'The token has been expired.',
+            name: error.message
+          })
+          break
+        default:
+          res.status(401).json({
+            error: error.message,
+            name: error.message
+          })
+          break
+      }
     }
   }
 }
