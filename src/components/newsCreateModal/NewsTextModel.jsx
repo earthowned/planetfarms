@@ -58,18 +58,7 @@ const CreateText = ({
                   cols='3'
                   rows='7'
                   name='textDescription'
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: 'Please enter a text description'
-                    }
-                  })}
-                />
-                <ErrorText
-                  className='errorMsg'
-                  message={
-                    errors.textDescription && errors.textDescription.message
-                  }
+                  ref={register}
                 />
               </div>
               <Button name='Add block' onClick={handleSubmit(addText)} />

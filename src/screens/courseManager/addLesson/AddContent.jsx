@@ -32,30 +32,12 @@ const AddContent = ({
         })}
       />
 
-      <ErrorText
-        className='errorMsg'
-        message={errors.lessonDesc && errors.lessonDesc.message}
-      />
       <TextArea
         className='default-input-variation text-area-variation lessonDesc'
         placeholder='Enter Lesson description'
         cols='3'
         rows='4'
         name='lessonDesc'
-        ref={register({
-          required: {
-            value: true,
-            message: 'Please enter a lesson description'
-          },
-          minLength: {
-            value: 10,
-            message: 'Please enter less then 255 character'
-          },
-          maxLength: {
-            value: 255,
-            message: 'Please enter less then 255 character'
-          }
-        })}
       />
 
       <DragDrop onChange={(img) => setLessonCover(img)} />

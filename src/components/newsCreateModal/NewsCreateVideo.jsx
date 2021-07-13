@@ -72,23 +72,12 @@ const CreateVideo = ({
                 />
 
                 <TextArea
-                  className='default-input-variation text-area-variation'
+                  className='default-input-variation text-area-variation lessonDesc'
                   placeholder='Video description'
                   cols='3'
                   rows='7'
                   name='videoDescription'
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: 'Please enter a video description'
-                    }
-                  })}
-                />
-                <ErrorText
-                  className='errorMsg'
-                  message={
-                    errors.videoDescription && errors.videoDescription.message
-                  }
+                  ref={register}
                 />
                 <div className='video-row-3'>
                   {!video && (
