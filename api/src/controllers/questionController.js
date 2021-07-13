@@ -21,15 +21,30 @@ const getQuestions = (req, res) => {
 // @route   GET /api/Test
 // @access  Public
 const getLessonQuestions = async (req, res) => {
-  const pageSize = 10
+  try {
+    const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['question', order]]
+  
   const test = await db.Test.findOne({where: {lessonId: req.params.id}});
+
   if(!test) return res.json({message: 'test doesn\'t exist.'})
-  db.Question.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {testId: test.id} })
-    .then(questions => res.json({ questions, page, pageSize }).status(200))
-    .catch((err) => res.json({ err }).status(400))
+
+  const newquestions = await db.Question.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {testId: test.id} })
+
+  const questions = newquestions.map(item => {
+    if(item.type === "mcq") {
+      item.options = item.options.filter(el => el !== item.answer)
+    }
+    return item;
+  })
+
+  res.json({ questions, page, pageSize }).status(200)
+
+  } catch (error) {
+    res.json(error);
+  }
 }
 
 
@@ -98,24 +113,30 @@ const addQuestion = (req, res) => {
 // @desc    Update a Question
 // @route   PUT /api/question/:id
 // @access  Public
-const updateQuestion = (req, res) => {
-  const {
-    question, answer, options, testId
-  } = req.body
-  const id = req.params.id
-  db.Question.findByPk(id).then(questions => {
-    if (questions) {
-      const { id } = questions
-      db.Question.update({
-        question, answer, options, testId
-      },
-      { where: { id } })
-        .then(() => res.json({ message: 'Question Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
-    } else {
-      return res.json({message: 'Question not found'}).status(200)
-    }
-  }).catch(err => res.json({ error: err.message }).status(400))
+const updateQuestion = async (req, res) => {
+
+  try {
+      const {
+        question, answer, options, testId, type
+      } = req.body
+      const id = req.params.id
+
+      const questionExist = await db.Question.findByPk(id);
+
+      if(!questionExist) return res.json({message: 'Question doesn\'t exist'});
+
+      if(questionExist.type === "subjective") {
+        await db.Question.update({question, testId, type}, {where: {id}})
+        return res.json({message: 'Question updated !!!'}).status(200)
+      } 
+        
+        await db.Question.update({question, answer, options: [...options, answer], testId, type}, {where: {id}})
+
+        return res.json({message: 'Question updated !!!'}).status(200)
+
+  } catch (error) {
+    res.json(error)
+  }
 }
 
 // @desc    Fetch single Question
