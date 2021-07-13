@@ -1,11 +1,10 @@
 import React from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 import LessonActions from './LessonActions'
 
 const LessonBlock = ({ data, courseId }) => {
-  const history = useHistory()
   const lessonData = data?.data?.lessons
 
   return (

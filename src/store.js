@@ -1,23 +1,42 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { newsListReducer, newsCreateReducer, newsDeleteReducer, newsUpdateReducer } from './reducers/newsReducers'
+import {
+  newsListReducer,
+  newsCreateReducer,
+  newsDeleteReducer,
+  newsUpdateReducer
+} from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
 import { courseCreateReducer } from './reducers/courseReducers'
-import { lessonCreateReducer, lessonUpdateReducer } from './reducers/lessonReducers'
+import {
+  lessonCreateReducer,
+  lessonUpdateReducer
+} from './reducers/lessonReducers'
 import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
-import { testCreateReducer, testQuestionListReducer } from './reducers/testReducers'
 import {
-  enterpriseCreateReducer, enterpriseDeleteReducer,
+  testCreateReducer,
+  testQuestionListReducer
+} from './reducers/testReducers'
+import {
+  enterpriseCreateReducer,
+  enterpriseDeleteReducer,
   enterpriseFollowReducer,
-  enterpriseListReducer, enterpriseUpdateReducer, userEnterpriseListReducer
+  enterpriseListReducer,
+  enterpriseUpdateReducer,
+  userEnterpriseListReducer
 } from './reducers/enterpriseReducers'
 import {
-  groupCreateReducer, groupDeleteReducer, groupFollowReducer, groupListReducer,
-  groupUpdateReducer, groupViewReducer, userGroupListReducer
+  groupCreateReducer,
+  groupDeleteReducer,
+  groupFollowReducer,
+  groupListReducer,
+  groupUpdateReducer,
+  groupViewReducer,
+  userGroupListReducer
 } from './reducers/communityGroupReducers'
 import {
   userDetailsReducer,
@@ -28,8 +47,13 @@ import {
 } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import {
-  communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer,
-  communityVisitReducer, communityDeleteReducer, communityUpdateReducer
+  communityListReducer,
+  communityCreateReducer,
+  communityJoinReducer,
+  userCommunityListReducer,
+  communityVisitReducer,
+  communityDeleteReducer,
+  communityUpdateReducer
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
 
@@ -77,7 +101,9 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer
 })
 
-const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+const userInfoFromStorage = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : null
 
 const currentCommunityFromStorage = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
@@ -89,6 +115,10 @@ const initialState = {
 }
 
 const middleware = [thunk]
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+const store = createStore(
+  reducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware))
+)
 
 export default store

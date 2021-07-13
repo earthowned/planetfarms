@@ -13,7 +13,6 @@ import Image from '../../../components/lessonImage/Image'
 import LessonTest from './LessonTest'
 
 const LessonDetail = ({ data, id }) => {
-  console.log(data)
   const [lessonData, setLessonData] = useState([])
   const textData = data?.texts.map((text) => {
     return text
@@ -29,7 +28,6 @@ const LessonDetail = ({ data, id }) => {
     setLessonData([textData, videoData, photoData])
   }, [])
   const newData = lessonData.flat()
-  console.log(newData)
 
   return (
     <div className='lesson-description-wrapper'>
