@@ -7,13 +7,16 @@ import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { checkArrayForFilledValue } from '../../utils/checkFilledArray'
-import { listQuestions, updateQuestion } from '../../actions/questionActions'
+import { listQuestions, updateQuestion, deleteSingleQuestion } from '../../actions/questionActions'
+import { updateTestQuestion } from '../../actions/testActions'
 
 const EditTest = () => {
     const { lessonId } = useParams()
     const { pathname } = useLocation()
-    
     const {success: questionUpdateSuccess} = useSelector(state => state.questionUpdate)
+    const {success: questionDeleteSuccess} = useSelector(state => state.questionDelete)
+    const {success: testQuestionsEditSuccess} = useSelector(state => state.editTestQuestions)
+    // const {loading, error, fetchedQuestions} = useSelector(state => state.listQuestions)
     
     const history = useHistory()
     const [deleteModal, setDeleteModal] = useState(false)
@@ -22,10 +25,10 @@ const EditTest = () => {
     const [newQuestions, setNewQuestions] = useState([])
     const [oldQuestions, setOldQuestions] = useState([])
     const [questions, setQuestions] = useState([])
-
+    
     // data structure of questions
     // [{
-    //   question: "",
+        //   question: "",
     //   answer: "",
     //   options: []
     // }]
@@ -33,21 +36,46 @@ const EditTest = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-            getLessonQuestions()
-    }, [questionUpdateSuccess])
+        getLessonQuestions()
+        // dispatch(listQuestions(lessonId));
+        // console.log(fetchedQuestions)
+        //     if(fetchedQuestions) {
+        //         setQuestions(fetchedQuestions)
+        //         setOldQuestions(fetchedQuestions)
+        //         setNewQuestions(fetchedQuestions)
+        //         console.log(fetchedQuestions)
+        //     }
+    }, [questionUpdateSuccess, questionDeleteSuccess])
 
     async function getLessonQuestions() {
-        const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/questions/lesson/${lessonId}`)
-        setQuestions(data.questions)
-        setOldQuestions(data.questions)
-        setNewQuestions(data.questions)
+        try {
+         const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/questions/lesson/${lessonId}`)
+                 setQuestions(data.questions)
+                setOldQuestions(data.questions)
+                setNewQuestions(data.questions)   
+        } catch (error) {
+            setFormError(true)
+        }
+        
     }
 
-    function addQuestion() {
-        setQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
-        setNewQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
-        setFormError(false)
-    }
+    // function addQuestion() {
+    //     setQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
+    //     setNewQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
+    //     setFormError(false)
+    // }
+
+      function addMcqQuestion () {
+            setQuestions(prev => [...prev, { question: '', answer: '', type: "mcq", options: [] }])
+            setNewQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
+            setFormError(false)
+        }
+
+        function addSubjectiveQuestion () {
+            setQuestions(prev => [...prev, {question: "", type: "subjective"}])
+            setNewQuestions(prev => [...prev, { question: '', type: "subjective"}])
+            setFormError(false)
+        }
 
     function resetQuestion() {
         setQuestions(oldQuestions);
@@ -56,7 +84,8 @@ const EditTest = () => {
     }
 
     const confirmDelete = async () => {
-        dispatch(deleteId(deleteId));
+        // console.log(deleteId)
+        dispatch(deleteSingleQuestion(deleteId));
         setDeleteModal(false)
     }
 
@@ -66,13 +95,12 @@ const EditTest = () => {
     }
 
     async function editTest() {
-        const data = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/tests/${newQuestions[0].testId}`, { questions: newQuestions });
-        // if (questions.length > 0) {
-        //     if (checkArrayForFilledValue(questions)) {
-        //     } else {
-        //         setFormError(true)
-        //     }
-        // }
+        if (questions.length > 0) {
+            if (checkArrayForFilledValue(newQuestions)) {
+                return dispatch(updateTestQuestion(newQuestions))
+            } 
+        }
+        
         setFormError(true)
     }
 
@@ -97,19 +125,32 @@ const EditTest = () => {
                 <div className='add-test-container'>
                     <div>
                         <div className='add-test-inner-container'>
-                            {questions.length > 0 && questions.map((item, index) => <QuestionAnswerComponent
-                                pos={questions.length - 1}
-                                index={index}
-                                questions={questions}
-                                newQuestions={newQuestions}
-                                
-                                setFormError={setFormError}
-                                formError={formError}
-                                deleteQuestion={deleteQuestion}
-                                // editTest={editTest}
-                            />)}
-
-                            <button onClick={() => addQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add question</span></button>
+                            {questions.length > 0 && questions.map((item, index) => {
+                                if(item.type === 'subjective') {
+                                        return <SubjectiveQuestion 
+                                        pos={questions.length - 1}
+                                        questions={questions}
+                                        newQuestions={newQuestions}
+                                        setFormError={setFormError}
+                                        formError={formError}
+                                        index={index}
+                                        deleteQuestion={deleteQuestion}
+                                        />
+                                    } else {
+                                        return <QuestionAnswerComponent
+                                        pos={questions.length - 1}
+                                        index={index}
+                                        questions={questions}
+                                        newQuestions={newQuestions}
+                                        setFormError={setFormError}
+                                        formError={formError}
+                                        deleteQuestion={deleteQuestion}
+                                    />}
+                            })}
+                             <div className="btn-container">
+                                <button onClick={() => addMcqQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add MCQ</span></button>
+                                <button onClick={() => addSubjectiveQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add Subjective Question</span></button>
+                            </div>
                             {(newQuestions.length - oldQuestions.length) > 0 && <div className='btn-container'>
                                 <button className='secondary-btn reset-test-btn' onClick={resetQuestion}>Reset Edit</button>
                                 <button className='secondary-btn color-primary' onClick={editTest}>Add new Questions</button>
@@ -121,6 +162,48 @@ const EditTest = () => {
         </DashboardLayout>
         </>
     )
+}
+
+function SubjectiveQuestion ({formError, setFormError, questions, pos, index, newQuestions, deleteQuestion}) {
+  const [question, setQuestion] = useState('')
+    const dispatch = useDispatch();
+  useEffect(() => {
+            setQuestion(questions[index].question)
+    }, [])
+
+  function onQuestionChange (e) {
+    setQuestion(e.target.value)
+    setFormError(false)
+  }
+
+  function editQuestion () {
+    dispatch(updateQuestion({ id: questions[index].id, testId: parseInt(questions[index].testId), question, type:"subjective"}))
+  }
+
+  if(newQuestions.length > 0) {
+        newQuestions[index].question = question
+    }
+
+  return (
+    <div className='question-answer-container' key={pos}>
+    {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+    <h4 className="question-title">Subjective Question</h4>
+      <div className='question-container'>
+        <div>
+          <input
+            className='default-input-variation'
+            placeholder='Question'
+            value={question}
+            onChange={(e) => onQuestionChange(e)}
+          />
+        </div>
+      </div>
+      {questions[index].id && <div className="question-btn-contaianer">
+                <button onClick={() => editQuestion()}>Edit Question</button>
+                <button onClick={() => deleteQuestion(questions[index].id)}>Delete Question</button>
+            </div>}
+    </div>
+  )
 }
 
 function QuestionAnswerComponent({ pos, questions, index, newQuestions, setFormError, formError, deleteQuestion}) {
@@ -167,6 +250,7 @@ function QuestionAnswerComponent({ pos, questions, index, newQuestions, setFormE
     return (
         <div className='question-answer-container' key={index}>
             {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+            <h4 className="question-title">MCQ Question</h4>
             <div className='question-container'>
                 <div>
                     <input

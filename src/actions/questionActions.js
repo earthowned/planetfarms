@@ -20,7 +20,7 @@ export const listQuestions = (lessonId) => async (
   }
 }
 
-export const deleteQuestion = (deleteId) => async (dispatch, getState) => {
+export const deleteSingleQuestion = (deleteId) => async (dispatch, getState) => {
     try {
         dispatch({ type: QUESTION_DELETE_REQUEST })
     
@@ -41,17 +41,18 @@ export const deleteQuestion = (deleteId) => async (dispatch, getState) => {
 export const updateQuestion = (newQuestions) => async (dispatch) => {
     try {
         dispatch({ type: QUESTION_UPDATE_REQUEST })
-        const {id, question, answer, options, testId} = newQuestions
-      const {data} =  await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/questions/${id}`, {
+        const {id, question, answer, options, testId, type} = newQuestions
+      const data =  await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/questions/${id}`, {
             question,
             answer,
             options,
-            testId
+            testId,
+            type
         })
         
         dispatch({
             type: QUESTION_UPDATE_SUCCESS,
-            payload: (data.message ? true : false)
+            payload: data
         })
     } catch (error) {
         const message = error.response && error.response.data.message

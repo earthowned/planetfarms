@@ -17,6 +17,10 @@ import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
+<<<<<<< HEAD
+=======
+import { testCreateReducer, testQuestionEditReducer, testQuestionListReducer } from './reducers/testReducers'
+>>>>>>> 53596e0 (refersh page on delete and edit in edit-tes page)
 import {
   testCreateReducer,
   testQuestionListReducer
@@ -98,6 +102,11 @@ const reducer = combineReducers({
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,
+  editTestQuestions: testQuestionEditReducer,
+  addNewNews: newsCreateReducer,
+  newsDelete: newsDeleteReducer,
+  newsUpdate: newsUpdateReducer,
+  listMember: memberListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userConfirmCode: userConfirmCodeReducer,
@@ -106,12 +115,6 @@ const reducer = combineReducers({
   userAttrResendCode: userAttrResendCodeReducer,
   userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
   userForgotPwdResendCode: userForgotPwdResendCodeReducer,
-  addNewNews: newsCreateReducer,
-  newsDelete: newsDeleteReducer,
-  newsUpdate: newsUpdateReducer,
-  listMember: memberListReducer,
-  userLogin: userLoginReducer,
-  userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer,
