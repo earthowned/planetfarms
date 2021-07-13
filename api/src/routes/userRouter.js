@@ -12,7 +12,8 @@ const {
   getMyProfile,
   getUsers,
   updateUser,
-  searchUserName
+  searchUserName,
+  sendTokenStatus
 } = require('../controllers/userController.js')
 
 const protect = require('../middleware/authMiddleware')
@@ -22,6 +23,7 @@ router.route('/').post(registerUser).get(protect, getUsers)
 router.route('/profile').get(protect, getMyProfile).put(protect, upload.single('attachments'), updateUser)
 router.route('/profile/:userID').get(protect, getUserProfileByUserID).put(protect, updateUser)
 router.post('/login', authUser)
+router.route('/token').get(protect, sendTokenStatus)
 router.route('/search').get(searchUserName)
 router.post('/changePassword', changePassword)
 router.post('/forgotPassword', forgotPassword)

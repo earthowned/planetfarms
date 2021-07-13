@@ -4,9 +4,9 @@ import { checkAndUpdateToken } from '../../actions/userAction'
 import { useDispatch } from 'react-redux'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const hasAccess = () => {
-    return dispatch(checkAndUpdateToken)
+    return dispatch(checkAndUpdateToken())
   }
   return (
     <Route

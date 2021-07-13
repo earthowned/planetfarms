@@ -46,7 +46,7 @@ export const accessTokenReducer = (state = {}, action) => {
     case ACCESS_TOKEN_REQUEST:
       return { loading: true }
     case ACCESS_TOKEN_SUCCESS:
-      return { loading: false, userInfo: action.payload }
+      return { loading: false, status: action.payload }
     case ACCESS_TOKEN_FAIL:
       return { loading: false, error: action.payload }
     default:

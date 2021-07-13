@@ -60,5 +60,10 @@ module.exports = async (req, res, next) => {
           break
       }
     }
+  } else {
+    res.status(401).json({
+      error: 'Unauthorized',
+      name: 'Unauthorized'
+    })
   }
 }

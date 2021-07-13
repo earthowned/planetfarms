@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
-import { getApi } from '../utils/apiFunc'
+import { getApi, postApi } from '../utils/apiFunc'
 
 import {
   ACCESS_TOKEN_FAIL,
@@ -92,7 +92,7 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     let userdata
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
+      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
       userdata = data
     } else {
       await Auth.signUp({
@@ -104,7 +104,7 @@ export const register = (name, password) => async (dispatch) => {
       })
       const response = await Auth.signIn(name, password)
       userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
+      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
         headers: {
           Authorization: 'Bearer ' + userdata.token
         }
@@ -129,7 +129,8 @@ export const login = (name, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
       const config = { headers: { 'Content-Type': 'application/json' } }
-      const response = await axios.post(
+      const response = await postApi(
+        dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
         { name, password },
         config
@@ -168,18 +169,34 @@ export const getUserDetails = (id) => async (dispatch) => {
 }
 
 export const checkAndUpdateToken = () => async (dispatch, getState) => {
-  try {
-    dispatch({ type: ACCESS_TOKEN_REQUEST })
-    const { userLogin: { userInfo } } = getState()
-
-    dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: {} })
-  } catch (error) {
-    const message = error.response && error.response.data.error ? error.response.data.error : error.message
-    if (message === 'Not authorized, token failed') {
-      dispatch(logout())
+  dispatch({ type: ACCESS_TOKEN_REQUEST })
+  console.log(await Auth.currentSession())
+  getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`).then((data) => {
+    if (data) {
+      if (data?.response?.status === 201) {
+        dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+        return true
+      } else {
+        const message = data.response && data.response.data.name ? data.response.data.name : data.message
+        console.log('message: ', message)
+        if (message === 'TokenExpired') {
+          Auth.currentSession().then((res) => {
+            console.log(res)
+            const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
+            userInfo.token = res?.idToken?.jwtToken || ''
+            console.log(userInfo)
+            window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+            dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
+            dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: false })
+            return false
+          })
+        } else if (message === 'InvalidToken') {
+          dispatch({ type: USER_DETAILS_FAIL, payload: message })
+          dispatch(logout())
+        }
+      }
     }
-    dispatch({ type: ACCESS_TOKEN_FAIL, payload: message })
-  }
+  })
 }
 
 export const getMyDetails = () => async (dispatch) => {
@@ -295,7 +312,7 @@ export const logout = () => (dispatch) => {
 export const confirmPin = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_CONFIRM_CODE_REQUEST })
-    const { data } = await axios.post(
+    const { data } = await postApi(dispatch,
       `${process.env.REACT_APP_API_BASE_URL}/api/users/resendCode`,
       { username }
     )
@@ -330,7 +347,7 @@ export const resendCodeAction = (username) => async (dispatch) => {
 export const changePassword = (username, oldPassword, newPassword) => async (dispatch) => {
   try {
     dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
-    const { data } = await axios.post(
+    const { data } = await postApi(dispatch,
       `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
       { username, oldPassword, newPassword }
     )
@@ -348,7 +365,7 @@ export const changePassword = (username, oldPassword, newPassword) => async (dis
 
 export const routingCommunityNews = async (dispatch, route = false) => {
   const communityData = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`)
-  localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
+  window.localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
   if (route) {
     document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
   }

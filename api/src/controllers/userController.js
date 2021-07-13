@@ -170,6 +170,10 @@ const subscribeCommunity = async (user) => {
   }
 }
 
+const sendTokenStatus = (req, res) => {
+  res.status(201).json({ message: 'accepted' })
+}
+
 const changePassword = async (req, res) => {
   try {
     const { user, oldPassword, newPassword } = req.body
@@ -343,5 +347,6 @@ module.exports = {
   getMyProfile,
   getUsers,
   updateUser,
-  searchUserName
+  searchUserName,
+  sendTokenStatus
 }
