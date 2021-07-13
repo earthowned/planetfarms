@@ -52,22 +52,34 @@ const addTest = async (req, res) => {
         description
       }, { transaction: t })
 
-      const newQuestions = []
+      const mcqQuestions = []
+      const subjectiveQuestions = []
 
       questions.forEach(async (item) => {
+        if(item.type === "subjective") {
+           const questionObj = {
+          ...item,
+          testId: test.id
+        }
+          subjectiveQuestions.push(questionObj)
+        }
+
         const questionObj = {
           ...item,
           testId: test.id,
           options: [...item.options, item.answer]
         }
+
         const {question, answer, options} = questionObj
         //Checking empty values
-        if(question && answer && !options.includes('')) {
-          newQuestions.push(questionObj)
+        if(question && answer && !options.includes('')){
+          mcqQuestions.push(questionObj)
         }
+        
       })
       // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
-      await db.Question.bulkCreate(newQuestions, { transaction: t })
+      await db.Question.bulkCreate(mcqQuestions, { transaction: t })
+      await db.Question.bulkCreate(subjectiveQuestions, { transaction: t })
       return 'test is created with questions.'
     })
 
