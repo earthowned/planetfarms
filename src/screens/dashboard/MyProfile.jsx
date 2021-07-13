@@ -24,8 +24,6 @@ function MyProfile () {
   useEffect(() => {
     if (userInfo) {
       dispatch(getMyDetails())
-    } else {
-      history.push('/login')
     }
   }, [dispatch, history, userInfo])
 

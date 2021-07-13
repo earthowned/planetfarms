@@ -168,9 +168,8 @@ export const getUserDetails = (id) => async (dispatch) => {
   }
 }
 
-export const checkAndUpdateToken = () => async (dispatch, getState) => {
+export const checkAndUpdateToken = () => async (dispatch) => {
   dispatch({ type: ACCESS_TOKEN_REQUEST })
-  console.log(await Auth.currentSession())
   getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`).then((data) => {
     if (data) {
       if (data?.response?.status === 201) {
@@ -178,13 +177,10 @@ export const checkAndUpdateToken = () => async (dispatch, getState) => {
         return true
       } else {
         const message = data.response && data.response.data.name ? data.response.data.name : data.message
-        console.log('message: ', message)
         if (message === 'TokenExpired') {
           Auth.currentSession().then((res) => {
-            console.log(res)
             const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
             userInfo.token = res?.idToken?.jwtToken || ''
-            console.log(userInfo)
             window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
             dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: false })

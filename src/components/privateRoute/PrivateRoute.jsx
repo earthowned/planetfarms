@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux'
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch()
   const hasAccess = () => {
-    return dispatch(checkAndUpdateToken())
+    const userInfo = window.localStorage.getItem('userInfo')
+    return userInfo && dispatch(checkAndUpdateToken())
   }
   return (
     <Route
