@@ -75,11 +75,14 @@ const getTestQuestions = (req, res) => {
     where: {
       testId: req.params.id
     },
-    attributes: ['options', 'question']
+    attributes: ['options', 'question', 'type']
   })
     .then(questions => {
       if (questions) {
-        questions.forEach(item => randomAnswer(item.options))
+
+        questions.forEach(item => {
+          if(item.type === "mcq") randomAnswer(item.options)
+        })
 
         // let newOptions = randomArrayShuffle(options);
         return res.json({
