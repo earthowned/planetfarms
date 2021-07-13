@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
+import { useSelector } from 'react-redux'
 
-import { GET_LESSONS, Axios } from '../../../utils/urlConstants'
+import { GET_LESSONS, Axios, GET_COURSE } from '../../../utils/urlConstants'
 
 import LessonDetail from './LessonDetail'
 import BackButton from '../../../components/backButton/BackButton'
@@ -13,17 +14,29 @@ import './LessonPage.scss'
 
 const LessonPage = () => {
   const [materialData, setMaterialData] = useState([])
+  const [path, setPath] = useState('')
   const { id } = useParams()
-  const history = useHistory()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  const userId = userInfo.id
 
-  const { isLoading, data } = useQuery('lessonData', async () => {
-    const { data } = await Axios.get(GET_LESSONS + `/${id}`)
-    setMaterialData(data?.data?.materials)
-    return data
-  })
-  const goToPreviousPath = () => {
-    history.goBack()
-  }
+  const { isLoading, data } = useQuery(
+    'lessonData',
+    async () => {
+      const { data } = await Axios.get(GET_LESSONS + `/${id}`)
+      setMaterialData(data?.data?.materials)
+      return data
+    },
+    {
+      onSuccess: (data) => {
+        const id = data?.data?.courseId
+        Axios.get(GET_COURSE + `/${id}`).then((res) => {
+          const dat = res?.data?.data.creator
+          setPath(dat === userId ? `/admin/course/${id}` : `/course/${id}`)
+        })
+      }
+    }
+  )
 
   return (
     <>
@@ -31,7 +44,7 @@ const LessonPage = () => {
         <span>Loading</span>
       ) : (
         <DashboardLayout title='Course page'>
-          <BackButton onClick={goToPreviousPath} />
+          <BackButton location={path} />
           <LessonDetail data={data?.data} id={id} />
           {materialData ? (
             <div className='admin-lesson-materials-container'>
