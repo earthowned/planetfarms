@@ -10,6 +10,7 @@ import { addText } from './addText'
 import { addImage } from './addImage'
 import { addMaterial } from './addMaterial'
 
+import LessonMaterial from './LessonMaterial'
 import AddTestModal from '../../../components/addTestModal/AddTestModal'
 import BackButton from '../../../components/backButton/BackButton'
 import DragDrop from '../../../components/dragDrop/DragDrop'
@@ -19,7 +20,6 @@ import { ErrorText } from '../../../components/formUI/FormUI'
 import Video from '../../../components/videoPlayer/Video'
 import Image from '../../../components/lessonImage/Image'
 import Text from './Text'
-import Material from '../../../components/material/Material'
 import './AddLesson.scss'
 
 const AddLesson = () => {
@@ -190,34 +190,6 @@ const AddContent = ({
           <span>Add test</span>
         </button>
       </div>
-    </div>
-  )
-}
-
-const LessonMaterial = ({ material, setMaterial }) => {
-  const matData = (mData) => {
-    setMaterial(() => [...material, { mData }])
-  }
-
-  return (
-    <div className='admin-lesson-materials-container'>
-      <h1>Materials</h1>
-
-      {material.length !== 0 ? (
-        <div className='material'>
-          {material.map((mater, i) => {
-            return <Material key={i} name={mater?.mData?.name} />
-          })}
-        </div>
-      ) : (
-        <p>You dont have any materials in lesson Add it for your users.</p>
-      )}
-      <DragDrop
-        fileType='application/pdf'
-        className='secondary-btn addMaterial'
-        text='Add Materials'
-        onChange={(mat) => matData(mat)}
-      />
     </div>
   )
 }
