@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import EnrollContainer from "./EnrollContainer";
-import Star from "./Star";
+import { Link } from 'react-router-dom'
+import EnrollContainer from './EnrollContainer'
+import Star from './Star'
 
-const CardContent = ({ item, userId }) => {
+const CardContent = ({ item, userInfo }) => {
   const path =
-    item.creator === userId ? `/admin/course/${item.id}` : `/course/${item.id}`;
+    item.creator === userInfo.id ? `/admin/course/${item.id}` : `/course/${item.id}`;
   return (
     <div className="card-content">
       <Link to={path}>
@@ -17,7 +17,7 @@ const CardContent = ({ item, userId }) => {
       </div>
       <EnrollContainer item={item} />
     </div>
-  );
-};
+  )
+}
 
-export default CardContent;
+export default CardContent

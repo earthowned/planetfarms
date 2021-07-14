@@ -14,17 +14,17 @@ export const createResource =
     thumbnail,
     isFree,
     creator,
-    history,
+    history
   }) =>
-  async (dispatch) => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("category", category);
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("thumbnail", thumbnail);
-    formData.append("isFree", isFree);
-    formData.append("creator", creator);
+    async (dispatch) => {
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('category', category)
+      formData.append('description', description)
+      formData.append('price', price)
+      formData.append('thumbnail', thumbnail)
+      formData.append('isFree', isFree)
+      formData.append('creator', creator)
 
     try {
       dispatch({ type: COURSE_CREATE_REQUEST });

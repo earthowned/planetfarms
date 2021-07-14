@@ -12,16 +12,35 @@ module.exports = async (req, res, next) => {
     try {
       const token = req.headers.authorization.split(' ')[1]
       if (process.env.AUTH_METHOD !== 'cognito') {
-        decoded = jwt.verify(token, process.env.JWT_SECRET)
+        jwt.verify(token, process.env.JWT_SECRET, function (err, decodedToken) {
+          if (err) {
+            if (err.message === 'jwt expired') {
+              throw Error('TokenExpired')
+            } else {
+              throw Error('InvalidToken')
+            }
+          }
+          decoded = decodedToken
+        })
       } else {
         const jwk = require('./jwks.json')
         const pem = jwkToPem(jwk.keys[0])
         jwt.verify(token, pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
+          if (err) {
+            if (err.message === 'jwt expired') {
+              throw Error('TokenExpired')
+            } else {
+              throw Error('InvalidToken')
+            }
+          }
           recoded = decodedToken
         })
       }
+      /*
+      * TODO: Maintain session and check again local session
+      */
       if (process.env.AUTH_METHOD !== 'cognito') {
-        req.user = await db.LocalAuth.findByPk(decoded.id)
+        req.user = await db.User.findOne({ where: { userID: decoded.id } })
       } else if (recoded) {
         req.user = await db.User.findOne({ where: { userID: recoded.sub } })
       } else {
@@ -29,9 +48,26 @@ module.exports = async (req, res, next) => {
       }
       next()
     } catch (error) {
-      res.status(401).json({
-        error: 'Not authorized, token failed'
-      })
+      switch (error.message) {
+        case 'InvalidToken':
+          res.status(401).json({
+            error: 'Invalid token provided.',
+            name: error.message
+          })
+          break
+        case 'TokenExpired':
+          res.status(401).json({
+            error: 'The token has been expired.',
+            name: error.message
+          })
+          break
+        default:
+          res.status(401).json({
+            error: 'Not authorized, token failed',
+            name: 'Unauthorized'
+          })
+          break
+      }
     }
   }
 }
