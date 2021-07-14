@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { createTest } from '../../actions/testActions'
@@ -6,14 +6,15 @@ import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './AddTest.scss'
 import { useHistory } from 'react-router-dom'
 import { checkArrayForFilledValue } from '../../utils/checkFilledArray'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const AddTest = () => {
   const { lessonId } = useParams()
-  const { pathname } = useLocation()
-
+  
   const history = useHistory()
   const [formError, setFormError] = useState(false)
-  const [newQuestions, setNewQuestions] = useState([])
+  const[count, setCount] = useState(0);
+  const [newQuestions, setNewQuestions] = useState([]);
   const [questions, setQuestions] = useState([])
   // data structure of questions
   // [{
@@ -24,23 +25,26 @@ const AddTest = () => {
 
   const dispatch = useDispatch()
 
+  
   function addMcqQuestion () {
-    setQuestions(prev => [...prev, { question: '', answer: '', type: "mcq", options: [] }])
+    setCount(cur => cur + 1)
+    setQuestions(prev => [...prev, { id: count, question: '', answer: '', type: "mcq", options: [] }])
+    setNewQuestions(questions);
     setFormError(false)
   }
 
   function addSubjectiveQuestion () {
-    setQuestions(prev => [...prev, {question: "", type: "subjective"}])
+    setCount(cur => cur + 1)
+    setQuestions(prev => [...prev, {id: count, question: "", type: "subjective"}])
     setFormError(false)
   }
-
+console.log(questions);
   function resetQuestion () {
     setQuestions([])
     setFormError(false)
   }
 
   function addTest () {
-    console.log(questions)
     if (questions.length > 0) {
       if (checkArrayForFilledValue(questions)) {
         dispatch(createTest(lessonId, questions))
@@ -50,6 +54,73 @@ const AddTest = () => {
     setFormError(true)
   }
 
+  // useEffect(() => {
+  //   setQuestions(newQuestions)
+  // }, [newQuestions])
+
+  function removeQuestion (id) {
+    const result = Array.from(questions);
+    let index = result.findIndex(function (o) {
+      return o.id === id
+    })
+    
+    const newArray = [];
+
+    for (let i = index + 1; i < result.length; i++ ) {
+      let newObject = {
+        id: result[i].id,
+        question: result[i].question,
+        type: result[i].type
+      }
+      
+      newArray.push(newObject);
+    }
+    
+    setNewQuestions(newArray);
+    //  setQuestions([])
+    //   setQuestions(newArray)
+    
+    // setQuestions(questions.splice(index, 1));
+  }
+
+  
+  // a little function to help us with reordering the result
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+
+  const [removed] = result.splice(startIndex, 1);
+  console.log(removed);
+  result.splice(endIndex, 0, removed);
+  
+  return result;
+};
+
+
+  function onDragEnd(result) {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+    
+    const list = reorder(
+      questions,
+      result.source.index,
+      result.destination.index
+    );
+
+    setQuestions(list)
+    const {destination, source, draggableId} = result;
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+  }
+
   return (
     <DashboardLayout title='Add Test'>
       <div>
@@ -57,26 +128,50 @@ const AddTest = () => {
           <div>
             <div className='add-test-inner-container'>
               {/* {questions.length > 0 && questions.map((index, item) => <QuestionAnswerComponent pos={questions.length - 1} index={index} questions={questions} questionError={questionError} />)} */}
-              {questions.length > 0 && questions.map((item, index) => {
-              
-              if(item.type === 'subjective') {
-                return <SubjectiveQuestion 
-                pos={questions.length - 1}
-                questions={questions}
-                setFormError={setFormError}
-                formError={formError}
-                index={index}
-                />
-              } else {
-                return <QuestionAnswerComponent
-                pos={questions.length - 1}
-                index={index}
-                questions={questions}
-                newQuestions={newQuestions}
-                setFormError={setFormError}
-                formError={formError}
-              />}
-              })}
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="droppable">
+                  {(provided, snapshot) => {
+                    return <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      style={{background: snapshot.isDragging && "green"}}
+                      >
+                        {questions.map((item, index) => 
+                              {
+                                  if(item.type === 'subjective') {
+                                    return <SubjectiveQuestion 
+                                    pos={questions.length - 1}
+                                    questions={questions}
+                                    setFormError={setFormError}
+                                    formError={formError}
+                                    index={index}
+                                    item={item}
+                                    setQuestions={setQuestions}
+                                    removeQuestion={removeQuestion}
+                                    newQuestions={newQuestions}
+                                    innerRef={provided.innerRef}
+                                    provided={provided}
+                                    />
+                                  } else {
+                                    return <QuestionAnswerComponent
+                                    pos={questions.length - 1}
+                                    index={index}
+                                    questions={questions}
+                                    setFormError={setFormError}
+                                    formError={formError}
+                                    item={item}
+                                    innerRef={provided.innerRef}
+                                    provided={provided}
+                                  />}
+                                }
+                                
+                        )}
+
+              {provided.placeholder}
+                      </div>
+                }}
+              </Droppable>
+              </DragDropContext>
 
               <div className="btn-container">
               <button onClick={() => addMcqQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add MCQ</span></button>
@@ -95,32 +190,45 @@ const AddTest = () => {
   )
 }
 
-function SubjectiveQuestion ({formError, setFormError, questions, pos, index}) {
+function SubjectiveQuestion ({formError, setFormError, questions,newQuestions, pos, index, item, removeQuestion, provided, innerRef}) {
   const [question, setQuestion] = useState('')
   function onQuestionChange (e) {
     setQuestion(e.target.value)
     setFormError(false)
   }
+
+    
   questions[index].question = question
+  
   return (
-    <div className='question-answer-container' key={pos}>
-    {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
-    <h4 className="question-title">Subjective Question</h4>
-      <div className='question-container'>
-        <div>
-          <input
-            className='default-input-variation'
-            placeholder='Question'
-            value={question}
-            onChange={(e) => onQuestionChange(e)}
-          />
-        </div>
-      </div>
-    </div>
+    <Draggable draggableId={item.id.toString()} index={index}>
+      {(provided, snapshot) => {
+        return <div className='question-answer-container' key={pos} 
+               {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                ref={provided.innerRef}
+              >
+              {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+              <h4 className="question-title">Subjective Question</h4> 
+              {/* <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => removeQuestion(item.id)}/> */}
+                <div className='question-container'> 
+                  <div>
+                    <input
+                     value={question}
+                      onChange={(e) => onQuestionChange(e)}
+                      className='default-input-variation'
+                      placeholder='Question'
+                      
+                    />
+                  </div>
+                </div>
+              </div>
+      }}
+    </Draggable>
   )
 }
 
-function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setFormError, formError }) {
+function QuestionAnswerComponent ({ pos, questions, index, setFormError, formError, item, provided, innerRef }) {
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
   const [options, setOptions] = useState([''])
@@ -146,12 +254,19 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
   questions[index].answer = answer
   questions[index].options = options
   return (
-    <div className='question-answer-container' key={index}>
+    <Draggable draggableId={item.id.toString()} index={index}>
+      {(provided, snapshot) => {
+        return <div className='question-answer-container' key={pos} 
+               {...provided.draggableProps}
+                {...provided.dragHandleProps}
+              >
       {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
-      <h4 className="question-title">MCQ Question</h4>
+      <h4 className="question-title">MCQ Question</h4> 
+      {/* <img src='/img/minus-circle-outline.svg' alt='minus image' /> */}
       <div className='question-container'>
         <div>
           <input
+          ref={provided.innerRef}
             className='default-input-variation'
             placeholder='Question'
             value={question}
@@ -175,19 +290,19 @@ function QuestionAnswerComponent ({ pos, questions, index, newQuestions, setForm
               options={options}
               pos={index}
               setOptions={setOptions}
-              // newOptions={newOptions}
               item={item}
               setFormError={setFormError}
-              newQuestions={newQuestions}
             />)}
         </div>
         <button className="add-new-course" onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
       </div>
     </div>
+    }}
+    </Draggable>
   )
 }
 
-function OptionAnswer ({ options, setOptions, item, pos, newOptions, setFormError, newQuestions }) {
+function OptionAnswer ({ options, setOptions, item, pos, setFormError}) {
   const [answer, setAnswer] = useState('')
   function onAnswerChange (e) {
     setAnswer(e.target.value)
