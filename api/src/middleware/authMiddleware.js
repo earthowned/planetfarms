@@ -31,7 +31,9 @@ module.exports = async (req, res, next) => {
       * TODO: Maintain session and check again local session
       */
       if (process.env.AUTH_METHOD !== 'cognito') {
-        req.user = await db.LocalAuth.findByPk(decoded.id)
+        req.user = await db.User.findOne({ where: { userID: decoded.id } })
+        console.log(req.user)
+
       } else if (recoded) {
         req.user = await db.User.findOne({ where: { userID: recoded.sub } })
       } else {
