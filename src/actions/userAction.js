@@ -216,18 +216,22 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`
       }
     }
-
-    const currentUser = await Auth.currentAuthenticatedUser()
+    let currentUser
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
+      currentUser = await Auth.currentAuthenticatedUser()
+    }
 
     const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
 
-    await Auth.updateUserAttributes(currentUser, {
-      email: user.email,
-      given_name: user.firstName,
-      family_name: user.lastName,
-      birthdate: user.birthday,
-      phone_number: user.phone ? '+' + user.phone : ''
-    })
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
+      await Auth.updateUserAttributes(currentUser, {
+        email: user.email,
+        given_name: user.firstName,
+        family_name: user.lastName,
+        birthdate: user.birthday,
+        phone_number: user.phone ? '+' + user.phone : ''
+      })
+    }
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: { user: data } })
     history.push('/myProfile')
@@ -282,8 +286,12 @@ export const confirmPin = (username, code) => async (dispatch) => {
     console.log(username, code)
     dispatch({ type: USER_CONFIRM_CODE_REQUEST })
 
-    const { data } = await Auth.confirmSignUp(username, code)
-    dispatch({ type: USER_CONFIRM_CODE_SUCCESS, payload: data })
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
+      const { data } = await Auth.confirmSignUp(username, code)
+      dispatch({ type: USER_CONFIRM_CODE_SUCCESS, payload: data })
+    } else {
+      document.location.href = '/'
+    }
   } catch (error) {
     dispatch({
       type: USER_CONFIRM_CODE_FAIL,
@@ -298,9 +306,14 @@ export const confirmPin = (username, code) => async (dispatch) => {
 export const resendCodeAction = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_RESEND_CODE_REQUEST })
+
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
     const data = await Auth.resendSignUp(username)
     console.log(data)
     dispatch({ type: USER_RESEND_CODE_SUCCESS })
+    } else {
+      document.location.href = '/'
+    }
   } catch (error) {
     dispatch({
       type: USER_RESEND_CODE_FAIL,
@@ -315,9 +328,13 @@ export const resendCodeAction = (username) => async (dispatch) => {
 export const verifyCurrentUserAttribute = (attr) => async (dispatch) => {
   try {
     dispatch({ type: USER_ATTR_RESEND_CODE_REQUEST })
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
     const data = await Auth.verifyCurrentUserAttribute(attr)
     console.log(data)
     dispatch({ type: USER_ATTR_RESEND_CODE_SUCCESS })
+    } else {
+      document.location.href = '/'
+    }
   } catch (error) {
     dispatch({
       type: USER_ATTR_RESEND_CODE_FAIL,
@@ -333,9 +350,13 @@ export const verifyCurrentUserAttributeSubmit = (attr, code) => async (dispatch)
   try {
     console.log(attr, code)
     dispatch({ type: USER_ATTR_CONFIRM_CODE_REQUEST })
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
     const { data } = await Auth.verifyCurrentUserAttributeSubmit(attr, code)
     console.log(data)
     dispatch({ type: USER_ATTR_CONFIRM_CODE_SUCCESS })
+    } else {
+      document.location.href = '/'
+    }
   } catch (error) {
     dispatch({
       type: USER_ATTR_CONFIRM_CODE_FAIL,
@@ -350,10 +371,14 @@ export const verifyCurrentUserAttributeSubmit = (attr, code) => async (dispatch)
 export const forgotPassword = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_REQUEST })
-    const { data } = await Auth.forgotPassword(username)
-    console.log(data)
-    dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_SUCCESS })
-    return data
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
+      const { data } = await Auth.forgotPassword(username)
+      console.log(data)
+      dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_SUCCESS })
+      return data
+    } else {
+      document.location.href = '/'
+    }
   } catch (error) {
     dispatch({
       type: USER_FORGOT_PWD_RESEND_CODE_FAIL,
@@ -369,10 +394,14 @@ export const forgotPasswordSubmit = (username, code, confirmPassword) => async (
   try {
     console.log(username, code)
     dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_REQUEST })
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
     const { data } = await Auth.forgotPasswordSubmit(username, code, confirmPassword)
     console.log(data)
     dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS })
     return data
+    } else {
+      document.location.href = '/'
+    }
   } catch (error) {
     console.log(error)
     dispatch({
@@ -388,11 +417,11 @@ export const forgotPasswordSubmit = (username, code, confirmPassword) => async (
 export const changePassword = (username, oldPassword, newPassword) => async (dispatch) => {
   try {
     dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
-      { username, oldPassword, newPassword }
-    )
-    dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS, payload: data })
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
+        { username, oldPassword, newPassword }
+      )
+      dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: USER_PASSWORD_CHANGE_FAIL,
