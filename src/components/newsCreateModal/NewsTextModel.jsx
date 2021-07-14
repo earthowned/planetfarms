@@ -28,8 +28,8 @@ const CreateText = ({
   return (
     <>
       {textActive && (
-        <div className='collection-modal-container'>
-          <div>
+        <div className='collection-modal-container addBlock addBlock__text'>
+          <div className='block'>
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add text'
@@ -53,7 +53,7 @@ const CreateText = ({
                   message={errors.textHeading && errors.textHeading.message}
                 />
                 <TextArea
-                  className='default-input-variation text-area-variation'
+                  className='default-input-variation text-area-variation textarea'
                   placeholder='Text description'
                   cols='3'
                   rows='7'
@@ -61,7 +61,11 @@ const CreateText = ({
                   ref={register}
                 />
               </div>
-              <Button name='Add block' onClick={handleSubmit(addText)} />
+              <Button
+                className='add'
+                name='Add Text block'
+                onClick={handleSubmit(addText)}
+              />
             </div>
           </div>
         </div>

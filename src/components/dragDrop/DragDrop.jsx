@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-
+import './DragDrop.scss'
 const DragDrop = ({
   onChange = () => {},
   type,
@@ -103,7 +103,7 @@ const DragDropComponent = ({
             </div>
           </>
         ) : text ? (
-          <p>{text}</p>
+          <h6 className='dragDropText'>{text}</h6>
         ) : (
           <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
             Drag & Drop files in this area or Click Here to attach video cover

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Button from '../button/Button'
-// import { savevideoDetail } from '../../actions/newsActions'
 import DragDrop from '../dragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 import { InputFields, ErrorText, TextArea } from '../formUI/FormUI'
@@ -12,7 +11,6 @@ const CreateVideo = ({
   getRootProps,
   getInputProps,
   files,
-  // setFiles,
   videoActive,
   setVideoActive,
   lessonData,
@@ -41,8 +39,8 @@ const CreateVideo = ({
   return (
     <>
       {videoActive && (
-        <div className='collection-modal-container'>
-          <div>
+        <div className='collection-modal-container addBlock addBlock__video'>
+          <div className='block'>
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add video'
@@ -72,10 +70,10 @@ const CreateVideo = ({
                 />
 
                 <TextArea
-                  className='default-input-variation text-area-variation lessonDesc'
+                  className='default-input-variation text-area-variation textarea'
                   placeholder='Video description'
                   cols='3'
-                  rows='7'
+                  rows='4'
                   name='videoDescription'
                   ref={register}
                 />
@@ -122,7 +120,11 @@ const CreateVideo = ({
                   message={errors.videoLink && errors.videoLink.message}
                 />
               </div>
-              <Button name='Add Video block' onClick={handleSubmit(addVideo)} />
+              <Button
+                className='add'
+                name='Add Video block'
+                onClick={handleSubmit(addVideo)}
+              />
             </div>
           </div>
         </div>

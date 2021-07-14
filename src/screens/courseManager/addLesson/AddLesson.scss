@@ -275,8 +275,23 @@
     margin-top: 0;
   }
 }
+
 .lessonDesc {
-  margin: 2em 0;
+  margin: 1.5em 0;
+  border: 1px solid var(--primary-grey);
+  outline: none;
+  background-color: var(--popups);
+  color: #ffff;
+  font-size: 1.05em;
+  font-family: inherit;
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+
+  &::-webkit-input-placeholder {
+    color: var(--primary-grey);
+  }
 }
 
 .material {

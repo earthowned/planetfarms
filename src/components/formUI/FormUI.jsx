@@ -50,8 +50,8 @@ export const SelectFields = React.forwardRef(
           className='default-input-variation'
           onChange={onChange}
         >
-          {option.map((x) => (
-            <>
+          {option.map((x, i) => (
+            <React.Fragment key={i}>
               {x === 'Select Category' ? (
                 <option value='' disabled selected hidden>
                   Select Category
@@ -59,7 +59,7 @@ export const SelectFields = React.forwardRef(
               ) : (
                 <option value={x}>{x}</option>
               )}
-            </>
+            </React.Fragment>
           ))}
         </select>
       </div>
@@ -86,7 +86,7 @@ export const SubmitButton = (props) => {
 }
 
 export const TextArea = React.forwardRef(
-  ({ className, placeholder, name, rows, cols, onChange }, ref) => {
+  ({ className, placeholder, name, rows, cols, onChange, disabled }, ref) => {
     return (
       <>
         <textarea
@@ -97,6 +97,7 @@ export const TextArea = React.forwardRef(
           name={name}
           ref={ref}
           onChange={onChange}
+          disabled={disabled}
         />
       </>
     )

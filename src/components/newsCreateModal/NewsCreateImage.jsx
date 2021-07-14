@@ -7,6 +7,7 @@ import CollectionModalHeader from './CollectionModalHeader'
 import { TextArea } from '../formUI/FormUI'
 
 import './NewsCreateModal.scss'
+import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
 
 const CreateImage = ({
   imageActive,
@@ -31,35 +32,42 @@ const CreateImage = ({
     setLessonData(imgData)
     setImageActive(false)
   }
-  console.log(isImgDesc)
-
   return (
     <>
       {imageActive && (
-        <div className='collection-modal-container'>
-          <div>
+        <div className='collection-modal-container addBlock'>
+          <div className='block'>
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add photo'
                 clickHandler={setImageActive}
               />
-              <DragDrop onChange={(img) => setLessonImg(img)} />
-
+              <DragDrop
+                onChange={(img) => setLessonImg(img)}
+                text='Drag & Drop files in this area or Click Here to attach'
+              />
+              <div className='description'>
+                <label>Add photo description ?</label>{' '}
+                <ToggleSwitch
+                  onClick={() => setIsImgDesc(!isImgDesc)}
+                  isFree={isImgDesc}
+                />
+              </div>
               <div className='photo-input-container'>
                 <TextArea
-                  placeholder='Enter image description'
+                  placeholder='Photo description'
                   className='default-input-variation text-area-variation textarea'
                   cols='3'
-                  rows='7'
+                  rows='3'
                   name='photoDescription'
                   ref={register}
-                  onChange={(e) => setIsImgDesc(!!e.target.value)}
                 />
               </div>
 
               <Button
-                name='Add block'
+                name='Add Photo block'
                 onClick={handleSubmit(submitLessonImg)}
+                className='add'
               />
             </div>
           </div>
