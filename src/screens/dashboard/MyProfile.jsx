@@ -12,42 +12,47 @@ import { getMyDetails } from '../../actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-function MyProfile ({name}) {
+function MyProfile () {
   const history = useHistory()
   const dispatch = useDispatch()
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
   const userDetails = useSelector((state) => state.userDetails)
-  console.log(userDetails)
-  const { user } = userDetails
-  console.log(user)
+  const { user, loading } = userDetails
   useEffect(() => {
-    if (userInfo) {
-      dispatch(getMyDetails())
-    }
-  }, [dispatch, history, userInfo])
+    dispatch(getMyDetails())
+  }, [dispatch, history])
 
   const editUserInformation = () => {
     history.push({ pathname: '/register-complete', state: { editInformations: true, user } })
   }
   return (
-    <DashboardLayout title='My Profile'>
-      <div className='x10-4-0-my-personals'>
-        <div className='flex-col-2'>
-          <div className='frame-2923'>
-            <BackButton location='/dashboard' />
-          </div>
-          <div className='profile border-1px-onyx'>
-            <div className='profile-info'>
-              <PersonalInformation user={user} />
-              <ContactInformation user={user} />
-              <AdditionalInformation user={user} />
+    <>
+    {
+      loading ? 
+      <div>
+        <p>
+          Loading...
+        </p>
+      </div> :
+
+      <DashboardLayout title='My Profile'>
+        <div className='x10-4-0-my-personals'>
+          <div className='flex-col-2'>
+            <div className='frame-2923'>
+              <BackButton location='/dashboard' />
             </div>
-            <EditInformation clickHandler={editUserInformation} image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
+            <div className='profile border-1px-onyx'>
+              <div className='profile-info'>
+                <PersonalInformation user={user} />
+                <ContactInformation user={user} />
+                <AdditionalInformation user={user} />
+              </div>
+              <EditInformation clickHandler={editUserInformation} image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
+            </div>
           </div>
         </div>
-      </div>
-    </DashboardLayout>
+      </DashboardLayout>
+    }
+    </>
   )
 }
 
