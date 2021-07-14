@@ -26,22 +26,16 @@ const Verification = ({ attr, title }) => {
   const resendCode = ({ username }) => {
     if (!usernameValue) setUsernameValue(username)
     dispatch(verifyCurrentUserAttribute(attr))
-    isVerifiedUser && console.log('code sent')
   }
   const alreadyHaveCode = ({ username }) => {
-    console.log(attr)
     if (!usernameValue) setUsernameValue(username)
-    isVerifiedUser && console.log('type code')
   }
   const sendCode = ({ username }) => {
     if (!usernameValue) setUsernameValue(username)
     dispatch(verifyCurrentUserAttribute(attr))
-    isVerifiedUser && console.log('code sent')
   }
   const verifyAccount = ({ code }) => {
-    console.log(usernameValue, code)
     dispatch(verifyCurrentUserAttributeSubmit(attr, code))
-    console.log('User Account Verified Successfully')
   }
 
   const userLogin = useSelector((state) => state.userLogin)
@@ -55,7 +49,6 @@ const Verification = ({ attr, title }) => {
 
   useEffect(() => {
     usernameValue && setIsVerifiedUser(true)
-    console.log(confirmStatus)
     if (confirmStatus) {
       history.push('/myProfile')
     } else if (resendStatus) {
@@ -71,7 +64,6 @@ const Verification = ({ attr, title }) => {
           {confirmErr && <div className='error'>{confirmErr}</div>}
           {resendErr && <div className='error'>{resendErr}</div>}
           {message && <div className='message'>{message}</div>}
-
           <Input
             placeholder='Username'
             type='text'
@@ -91,7 +83,6 @@ const Verification = ({ attr, title }) => {
           {isVerifiedUser
             ? (
               <>
-
                 <Input
                   placeholder='Code'
                   type='number'
@@ -102,27 +93,23 @@ const Verification = ({ attr, title }) => {
                       value: true,
                       message: 'You must enter code'
                     }
-                    // validate: v => v === code || 'You must enter correct code'
                   })}
                   errors={errors}
                 >
                   <Lock className='error-icon' />
                 </Input>
-
                 <div className='btnWrapper'>
                   <Button name='Verify' onClick={handleSubmit(verifyAccount)} />
                   <Button name='Resend Code' onClick={handleSubmit(resendCode)} />
                 </div>
               </>
               )
-
             : (
               <div className='btnWrapper'>
                 <Button name='I already have code' onClick={handleSubmit(alreadyHaveCode)} />
                 <Button name='Send Code' onClick={handleSubmit(sendCode)} />
               </div>
               )}
-
           <div className='option'>
             <p className='transparent16px'>
               <span className='span span-1'>Go back to </span>

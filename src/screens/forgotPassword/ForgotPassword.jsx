@@ -44,7 +44,6 @@ const ForgotPassword = () => {
   }
   const verifyAccount = ({ code, confirmPassword }) => {
     dispatch(forgotPasswordSubmit(usernameValue, code, confirmPassword))
-    console.log('User Account Verified Successfully')
   }
 
   const toggleNewPasswordVisibility = (e) => {
@@ -60,7 +59,6 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     usernameValue && setIsVerifiedUser(true)
-    console.log(confirmStatus)
     if (confirmStatus) {
       setMessage('Successful')
       history.push('/myProfile')
@@ -97,7 +95,6 @@ const ForgotPassword = () => {
           {isVerifiedUser
             ? (
               <>
-
                 <Input
                   placeholder='Code'
                   type='number'
@@ -149,21 +146,18 @@ const ForgotPassword = () => {
                 >
                   <Lock className='error-icon' />
                 </Input>
-
                 <div className='btnWrapper'>
                   <Button name='Verify' onClick={handleSubmit(verifyAccount)} />
                   <Button name='Resend Code' onClick={resendCode} />
                 </div>
               </>
               )
-
             : (
               <div className='btnWrapper'>
                 <Button name='I already have code' onClick={handleSubmit(alreadyHaveCode)} />
                 <Button name='Send Code' onClick={handleSubmit(sendCode)} />
               </div>
               )}
-
           <div className='option'>
             <p className='transparent16px'>
               <span className='span span-1'>Go back to </span>

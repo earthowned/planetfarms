@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
     try {
       const token = req.headers.authorization.split(' ')[1]
       if (process.env.AUTH_METHOD !== 'cognito') {
-        jwt.verify(token, process.env.JWT_SECRET, function (err, decodedToken){
+        jwt.verify(token, process.env.JWT_SECRET, function (err, decodedToken) {
           if (err) {
             if (err.message === 'jwt expired') {
               throw Error('TokenExpired')
@@ -41,8 +41,6 @@ module.exports = async (req, res, next) => {
       */
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.User.findOne({ where: { userID: decoded.id } })
-        console.log(req.user)
-
       } else if (recoded) {
         req.user = await db.User.findOne({ where: { userID: recoded.sub } })
       } else {
