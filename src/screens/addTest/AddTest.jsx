@@ -44,7 +44,7 @@ const AddTest = () => {
     if (questions.length > 0) {
       if (checkArrayForFilledValue(questions)) {
         dispatch(createTest(lessonId, questions))
-        history.goBack()
+       return history.goBack()
       } 
     }
     setFormError(true)

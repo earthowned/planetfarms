@@ -61,7 +61,6 @@ export const listUserCommunities = ({ userPageNumber = '' }) => async (
       payload: data
     })
   } catch (error) {
-    console.log(error)
     dispatch({
       type: USER_COMMUNITY_LIST_FAIL,
       payload:

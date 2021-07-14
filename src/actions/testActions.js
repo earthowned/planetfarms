@@ -45,7 +45,7 @@ export const listTestQuestions = (testId) => async (
   }
 }
 
-export const updateTestQuestion = (newQuestions) => async (dispatch) => {
+export const updateTestQuestion = ({newQuestions, lessonId}) => async (dispatch) => {
     try {
         dispatch({ type: TEST_QUESTION_EDIT_REQUEST })
         const {data} = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/tests/${newQuestions[0].testId}`, { questions: newQuestions });
@@ -54,6 +54,8 @@ export const updateTestQuestion = (newQuestions) => async (dispatch) => {
             type: TEST_QUESTION_EDIT_SUCCESS,
             payload: data
         })
+
+        document.location.href = `/admin/edit-test/${lessonId}`
     } catch (error) {
         const message = error.response && error.response.data.message
                 ? error.response.data.message
