@@ -9,9 +9,9 @@ import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityGroup.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { searchGroups, listGroups, groupDelete, listUserGroups } from '../../actions/communityGroupActions'
-import axios from 'axios'
 import Pagination from '../../components/pagination/Pagination'
 import useSizeFinder from '../../utils/sizeFinder'
+import { getApi } from '../../utils/apiFunc'
 
 const CommunityGroup = () => {
   // fetching current community
@@ -65,7 +65,7 @@ const CommunityGroup = () => {
   }, [search, dispatch, groupUpdateSuccess, groupDeleteSuccess, groupCreateSuccess, pathname, pageNumber, userPageNumber])
 
   const editCard = async (id) => {
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
+    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/groups/${id}/community/${currentCommunity.id}`)
     setEditData(data)
     setActive(true)
   }

@@ -12,7 +12,7 @@ import { getMyDetails } from '../../actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-function MyProfile () {
+function MyProfile ({name}) {
   const history = useHistory()
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)

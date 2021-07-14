@@ -41,7 +41,6 @@ import EditCollection from './screens/courses/editCollection/EditCollection'
 import AdminCoursePage from './screens/courseManager/adminCoursePage/AdminCoursePage'
 import AddLesson from './screens/courseManager/addLesson/AddLesson'
 import CourseUsers from './screens/courses/courseUsers/CourseUsers'
-import LoginSignUp from './screens/loginSignUp/LoginSignUp'
 import ScrollToTop from './utils/scrollToTop'
 import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
@@ -54,143 +53,52 @@ function App () {
       <Router>
         <ScrollToTop>
           <Switch>
-            <Route path='/:path(|login)' exact>
-              <LoginScreen />
-            </Route>
-            <Route path='/register'>
-              <SignupScreen />
-            </Route>
-            <Route path='/register-complete'>
-              <CongratulationScreen />
-            </Route>
-            <Route path='/forgot-password'>
-              <ForgotPassword />
-            </Route>
-            <Route path='/verification'>
-              <UserVerification />
-            </Route>
-            <Route exact path='/calendar/my-events'>
-              <CalendarScreen />
-            </Route>
-            <Route exact path='/library'>
-              <Library />
-            </Route>
-            <Route exact path='/library/collection'>
-              <Collection />
-            </Route>
-            <Route path='/library/collection/users'>
-              <UserCollection />
-            </Route>
-            <Route path='/library/collection/saved'>
-              <SavedCollection />
-            </Route>
-            <Route exact path='/messenger'>
-              <Messenger />
-            </Route>
-            <Route path='/messenger/:id'>
-              <MobileMessage />
-            </Route>
-            <Route exact path='/community-page-news/:id'>
-              <CommunityPagenews />
-            </Route>
-            <Route path='/community-page-news/:title/:category'>
-              <NewsAdd />
-            </Route>
-            <Route path='/community-page-news-view'>
-              <CommunityNewsViewPage />
-            </Route>
-            <Route path='/community-switching'>
-              <AllCommunitiesCard />
-            </Route>
-            <Route path='/community-members/:id'>
-              <CommunityMembers />
-            </Route>
-            <Route path='/community-members-profile/:id'>
-              <CommunityMembersProfile />
-            </Route>
-            <Route path='/community-group/:id'>
-              <CommunityGroup />
-            </Route>
-            <Route path='/your-community-group/:id'>
-              <CommunityGroup />
-            </Route>
-            <Route path='/community-group-view-page/:id'>
-              <CommunityGroupViewPage />
-            </Route>
-            <Route exact path='/courses'>
-              <Courses />
-            </Route>
-            <Route exact path='/courses/my-courses'>
-              <CourseCollection />
-            </Route>
-            <Route path='/courses/my-courses/:id'>
-              <EditCollection />
-            </Route>
-            <Route path='/admin/courses'>
-              <Courses />
-            </Route>
-            <Route path='/admin/course/:courseId'>
-              <AdminCoursePage />
-            </Route>
-            <Route path='/admin/add-lesson/:courseId'>
-              <AddLesson />
-            </Route>
-            <Route path='/admin/edit-lesson/:id'>
-              <EditLesson />
-            </Route>
-            <Route path='/courses/users'>
-              <CourseUsers />
-            </Route>
-            <Route path='/enterprises/:id'>
-              <Enterprises />
-            </Route>
-            <Route path='/your-enterprises/:id'>
-              <Enterprises />
-            </Route>
-            <Route path='/enterprises-view'>
-              <EnterprisesViewPage />
-            </Route>
-            <Route path='/my-group-view-page/:id'>
-              <MyGroupViewPage />
-            </Route>
-            <Route path='/dashboard'>
-              <DashboardComponent />
-            </Route>
-            <Route path='/achievements'>
-              <Achievements />
-            </Route>
-            <Route path='/mylibrary'>
-              <MyLibrary />
-            </Route>
-            <Route path='/mysurvey'>
-              <MySurvey />
-            </Route>
-            <Route path='/mycourse'>
-              <MyCourse />
-            </Route>
-            {/* <Route exact path="/mycoursepage">
-              <MyCoursePage />
-            </Route> */}
-            <Route path='/lesson/:id'>
-              <LessonPage />
-            </Route>
-            {/* <Route exact path='/lesson/:id/testpage'>
-              <LessonTestPage />
-            </Route> */}
-            <Route
-              path='/course/:courseId'
-              component={() => <MyCoursePage unpaid='unpaid' />}
-            />
-            <Route path='/lesson-test-page/:testId'>
-              <LessonTestPage />
-            </Route>
+            <Route component={LoginScreen} path='/:path(|login)' exact />
+            <Route component={SignupScreen} path='/register' />
+            <Route component={ForgotPassword} path='/forgot-password' />
+            <Route component={UserVerification} path='/verification' />
+            <PrivateRoute component={CongratulationScreen} path='/register-complete' />
+            <PrivateRoute component={CalendarScreen} exact path='/calendar/my-events' />
+            <PrivateRoute component={Library} exact path='/library' />
+            <PrivateRoute component={Collection} exact path='/library/collection' />
+            <PrivateRoute component={UserCollection} path='/library/collection/users' />
+            <PrivateRoute component={SavedCollection} path='/library/collection/saved' />
+            <PrivateRoute component={Messenger} exact path='/messenger' />
+            <PrivateRoute component={MobileMessage} path='/messenger/:id' />
+            <PrivateRoute component={CommunityPagenews} exact path='/community-page-news/:id' />
+            <PrivateRoute component={NewsAdd} path='/community-page-news/:title/:category' />
+            <PrivateRoute component={CommunityNewsViewPage} path='/community-page-news-view' />
+            <PrivateRoute component={AllCommunitiesCard} path='/community-switching' />
+            <PrivateRoute component={CommunityMembers} path='/community-members/:id' />
+            <PrivateRoute component={CommunityMembersProfile} path='/community-members-profile/:id' />
+            <PrivateRoute component={CommunityGroup} path='/community-group/:id' />
+            <PrivateRoute component={CommunityGroup} path='/your-community-group/:id' />
+            <PrivateRoute component={CommunityGroupViewPage} path='/community-group-view-page/:id' />
+            <PrivateRoute component={Courses} exact path='/courses' />
+            <PrivateRoute component={CourseCollection} exact path='/courses/my-courses' />
+            <PrivateRoute component={EditCollection} path='/courses/my-courses/:id' />
+            <PrivateRoute component={Courses} path='/admin/courses' />
+            <PrivateRoute component={AdminCoursePage} path='/admin/course/:courseId' />
+            <PrivateRoute component={AddLesson} path='/admin/add-lesson/:courseId' />
+            <PrivateRoute component={EditLesson} path='/admin/edit-lesson/:id' />
+            <PrivateRoute component={CourseUsers} path='/courses/users' />
+            <PrivateRoute component={Enterprises} path='/enterprises/:id' />
+            <PrivateRoute component={Enterprises} path='/your-enterprises/:id' />
+            <PrivateRoute component={EnterprisesViewPage} path='/enterprises-view' />
+            <PrivateRoute component={MyGroupViewPage} path='/my-group-view-page/:id' />
+            <PrivateRoute component={DashboardComponent} path='/dashboard' />
+            <PrivateRoute component={Achievements} path='/achievements' />
+            <PrivateRoute component={MyLibrary} path='/mylibrary' />
+            <PrivateRoute component={MySurvey} path='/mysurvey' />
+            <PrivateRoute component={MyCourse} path='/mycourse' />
+            {/* <PrivateRoute component={MyCoursePage} exact path="/mycoursepage" /> */}
+            <PrivateRoute component={LessonPage} path='/lesson/:id' />
+            {/* <PrivateRoute component={LessonTestPage} exact path='/lesson/:id/testpage' /> */}
+            <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' />
+            <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' />
             <PrivateRoute component={MyProfile} path='/myProfile' />
-            <Route path='/userInfo'>
-              <UserInfo />
-            </Route>
-            <Route path='/coursepage'>
-              <MyCoursePage unpaid='unpaid' />
-            </Route>
+            <PrivateRoute component={UserInfo} path='/userInfo' />
+            <PrivateRoute component={()=> <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
           </Switch>
         </ScrollToTop>
       </Router>

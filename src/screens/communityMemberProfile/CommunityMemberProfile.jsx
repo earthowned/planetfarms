@@ -25,8 +25,6 @@ function CommunityMembersProfile () {
   useEffect(() => {
     if (userInfo) {
       dispatch(getUserDetails(id))
-    } else {
-      history.push('/login')
     }
   }, [dispatch, history, id, userInfo])
 
