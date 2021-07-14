@@ -13,9 +13,11 @@ const AddTest = () => {
   
   const history = useHistory()
   const [formError, setFormError] = useState(false)
-  const[count, setCount] = useState(0);
+  const[count, setCount] = useState(1);
+  const[position, setPosition] = useState([]);
   const [newQuestions, setNewQuestions] = useState([]);
   const [questions, setQuestions] = useState([])
+  
   // data structure of questions
   // [{
   //   question: "",
@@ -28,30 +30,32 @@ const AddTest = () => {
   
   function addMcqQuestion () {
     setCount(cur => cur + 1)
-    setQuestions(prev => [...prev, { id: count, question: '', answer: '', type: "mcq", options: [] }])
-    setNewQuestions(questions);
+    setQuestions(prev => [...prev, {id: count.toString(), question: '', answer: '', type: "mcq", options: [] }])
+    setPosition(prev => [...prev, {id: count.toString(), type: "mcq", answer: "", options: []}])
     setFormError(false)
   }
 
   function addSubjectiveQuestion () {
     setCount(cur => cur + 1)
-    setQuestions(prev => [...prev, {id: count, question: "", type: "subjective"}])
+    setQuestions(prev => [...prev, {id: count.toString(), question: "", type: "subjective"}])
+    setPosition(prev => [...prev, {id: count.toString(), question: "", type: "subjective"}])
     setFormError(false)
   }
-console.log(questions);
+
   function resetQuestion () {
     setQuestions([])
     setFormError(false)
   }
 
   function addTest () {
-    if (questions.length > 0) {
-      if (checkArrayForFilledValue(questions)) {
-        dispatch(createTest(lessonId, questions))
-       return history.goBack()
-      } 
-    }
-    setFormError(true)
+    console.log(questions)
+    // if (questions.length > 0) {
+    //   if (checkArrayForFilledValue(questions)) {
+    //     dispatch(createTest(lessonId, questions))
+    //    return history.goBack()
+    //   } 
+    // }
+    // setFormError(true)
   }
 
   // useEffect(() => {
@@ -87,10 +91,9 @@ console.log(questions);
   // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
-
   const [removed] = result.splice(startIndex, 1);
-  console.log(removed);
   result.splice(endIndex, 0, removed);
+  setNewQuestions([...questions])
   
   return result;
 };
@@ -108,19 +111,12 @@ const reorder = (list, startIndex, endIndex) => {
       result.destination.index
     );
 
-    setQuestions(list)
-    const {destination, source, draggableId} = result;
-    if (!destination) {
-      return;
-    }
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return;
-    }
+    setQuestions(list);
+    // setPosition(list);
+    // setQuestions(list)
+  
   }
-
+  
   return (
     <DashboardLayout title='Add Test'>
       <div>
@@ -134,9 +130,13 @@ const reorder = (list, startIndex, endIndex) => {
                     return <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      style={{background: snapshot.isDragging && "green"}}
+                      style={{
+                        background: snapshot.isDraggingOver && "green",
+                        width: "100%",
+                        minHeight: "auto"
+                      }}
                       >
-                        {questions.map((item, index) => 
+                        {position.map((item, index) => 
                               {
                                   if(item.type === 'subjective') {
                                     return <SubjectiveQuestion 
@@ -146,7 +146,7 @@ const reorder = (list, startIndex, endIndex) => {
                                     formError={formError}
                                     index={index}
                                     item={item}
-                                    setQuestions={setQuestions}
+                                    // setQuestions={setQuestions}
                                     removeQuestion={removeQuestion}
                                     newQuestions={newQuestions}
                                     innerRef={provided.innerRef}
@@ -162,6 +162,7 @@ const reorder = (list, startIndex, endIndex) => {
                                     item={item}
                                     innerRef={provided.innerRef}
                                     provided={provided}
+                                    newQuestions={newQuestions}
                                   />}
                                 }
                                 
@@ -190,18 +191,20 @@ const reorder = (list, startIndex, endIndex) => {
   )
 }
 
-function SubjectiveQuestion ({formError, setFormError, questions,newQuestions, pos, index, item, removeQuestion, provided, innerRef}) {
-  const [question, setQuestion] = useState('')
+function SubjectiveQuestion ({formError, setFormError, questions,newQuestions, pos, index, item}) {
+  const [question, setQuestion] = useState("")
   function onQuestionChange (e) {
     setQuestion(e.target.value)
     setFormError(false)
+    questions[index].question = e.target.value
   }
 
-    
-  questions[index].question = question
-  
+  useEffect(() => {        
+          setQuestion(questions[index].question)
+    }, [newQuestions])
+
   return (
-    <Draggable draggableId={item.id.toString()} index={index}>
+    <Draggable draggableId={item.id} index={index}>
       {(provided, snapshot) => {
         return <div className='question-answer-container' key={pos} 
                {...provided.draggableProps}
@@ -211,7 +214,9 @@ function SubjectiveQuestion ({formError, setFormError, questions,newQuestions, p
               {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
               <h4 className="question-title">Subjective Question</h4> 
               {/* <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => removeQuestion(item.id)}/> */}
-                <div className='question-container'> 
+               
+              { (questions[index].type === "subjective")
+               ? <div className='question-container'> 
                   <div>
                     <input
                      value={question}
@@ -222,24 +227,38 @@ function SubjectiveQuestion ({formError, setFormError, questions,newQuestions, p
                     />
                   </div>
                 </div>
+                : <QuestionAnswerComponent questions={[{
+                  type: questions[index].type,
+                  question: questions[index].question,
+                  answer: questions[index].answer,
+                  options: [...questions[index].options]
+                }]}
+                item={questions[index].id}
+                index={index}
+                />
+                }
+                
               </div>
       }}
     </Draggable>
   )
 }
 
-function QuestionAnswerComponent ({ pos, questions, index, setFormError, formError, item, provided, innerRef }) {
+function QuestionAnswerComponent ({ pos, questions, index, setFormError, formError, item, provided, innerRef, newQuestions }) {
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
   const [options, setOptions] = useState([''])
   
   function onQuestionChange (e) {
     setQuestion(e.target.value)
-    setFormError(false)
+      questions[index].question = e.target.value
+      setFormError(false)
   }
 
   function onAnswerChange (e) {
     setAnswer(e.target.value)
+      questions[index].answer = e.target.value
+    
     setFormError(false)
   }
 
@@ -247,26 +266,40 @@ function QuestionAnswerComponent ({ pos, questions, index, setFormError, formErr
     setOptions(prev => {
       return [...prev, '']
     })
+
     setFormError(false)
   }
 
-  questions[index].question = question
-  questions[index].answer = answer
+  useEffect(() => {
+          
+          setQuestion(questions[index].question)
+          setAnswer(questions[index].answer)
+          console.log([...questions[index].options])
+        setOptions([...questions[index].options])
+    
+    }, [newQuestions])
+    
+    console.log(questions[index].type)
+  // questions[index].question = question
+  // questions[index].answer = answer
   questions[index].options = options
   return (
-    <Draggable draggableId={item.id.toString()} index={index}>
+    <Draggable draggableId={item.id} index={index}>
       {(provided, snapshot) => {
         return <div className='question-answer-container' key={pos} 
                {...provided.draggableProps}
                 {...provided.dragHandleProps}
+                ref={provided.innerRef}
               >
       {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
       <h4 className="question-title">MCQ Question</h4> 
       {/* <img src='/img/minus-circle-outline.svg' alt='minus image' /> */}
-      <div className='question-container'>
+      {
+        questions[index].type === "mcq" 
+        ?<>
+     <div className='question-container'>
         <div>
           <input
-          ref={provided.innerRef}
             className='default-input-variation'
             placeholder='Question'
             value={question}
@@ -295,7 +328,19 @@ function QuestionAnswerComponent ({ pos, questions, index, setFormError, formErr
             />)}
         </div>
         <button className="add-new-course" onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
-      </div>
+      </div></>
+      : <SubjectiveQuestion 
+            questions={[{
+                  type: questions[index].type,
+                  question: questions[index].question,
+                  answer: questions[index].answer,
+                  options: [...questions[index].options]
+                }]}
+                item={questions[index].id}
+                index={index}
+      />
+      
+      }
     </div>
     }}
     </Draggable>
