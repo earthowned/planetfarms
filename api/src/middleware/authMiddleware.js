@@ -12,7 +12,16 @@ module.exports = async (req, res, next) => {
     try {
       const token = req.headers.authorization.split(' ')[1]
       if (process.env.AUTH_METHOD !== 'cognito') {
-        decoded = jwt.verify(token, process.env.JWT_SECRET)
+        jwt.verify(token, process.env.JWT_SECRET, function (err, decodedToken){
+          if (err) {
+            if (err.message === 'jwt expired') {
+              throw Error('TokenExpired')
+            } else {
+              throw Error('InvalidToken')
+            }
+          }
+          decoded = decodedToken
+        })
       } else {
         const jwk = require('./jwks.json')
         const pem = jwkToPem(jwk.keys[0])
