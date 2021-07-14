@@ -21,6 +21,11 @@ const LessonPage = () => {
   }
   const materialData = data?.data?.materials
 
+  const downloadFile = (url, name) => {
+    console.log(url, name)
+    const blob = new File([url], `${name}`)
+    saveAs(blob)
+  }
   return (
     <DashboardLayout title='Course page'>
       <BackButton location={'/course/' + data?.data?.courseId} />
@@ -29,18 +34,20 @@ const LessonPage = () => {
         <h1>Materials</h1>
         <div className='material'>
           {materialData.map((mater) => {
+            console.log(mater)
             return (
               <Material key={mater.id} name={mater?.name}>
-                <a
-                  href={`${MATERIAL}${mater?.material}`}
-                  download
-                  target='_blank'
+                <div
+                  onClick={() =>
+                    downloadFile(
+                      `${MATERIAL}${mater?.material}`,
+                      `${mater?.name}`
+                    )}
                 >
-                  <div>
-                    <img src='/img/download-icon.svg' alt='download icon' />{' '}
-                    <span>Download</span>
-                  </div>
-                </a>
+                  <img src='/img/download-icon.svg' alt='download icon' />{' '}
+                  <span>Download</span>
+                </div>
+
                 <div>
                   <img src='/img/book-outlined.svg' alt='library icon' />{' '}
                   <span>Add to my library</span>
