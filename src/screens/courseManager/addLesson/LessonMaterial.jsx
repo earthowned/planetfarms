@@ -19,10 +19,12 @@ const LessonMaterial = ({ material, setMaterial }) => {
           {material.map((mater, i) => {
             return (
               <Material key={i} name={mater?.mData?.name}>
-                <div>
-                  <img src='/img/download-icon.svg' alt='download icon' />{' '}
-                  <span>Download</span>
-                </div>
+                <a href={mater?.mData?.preview} download={mater?.mData?.name}>
+                  <div>
+                    <img src='/img/download-icon.svg' alt='download icon' />{' '}
+                    <span>Download</span>
+                  </div>
+                </a>
                 <div onClick={removeItem} name={mater?.mData?.name}>
                   <img src='/img/trash-icon.svg' alt='trash icon' />
                   <span>Delete</span>

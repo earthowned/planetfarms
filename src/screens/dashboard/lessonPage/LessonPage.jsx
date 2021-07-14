@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
-import { GET_LESSONS } from '../../../utils/urlConstants'
+import { saveAs } from 'file-saver'
+import { GET_LESSONS, MATERIAL } from '../../../utils/urlConstants'
 import useGetFetchData from '../../../utils/useGetFetchData'
 
 import LessonDetail from './LessonDetail'
@@ -28,7 +29,24 @@ const LessonPage = () => {
         <h1>Materials</h1>
         <div className='material'>
           {materialData.map((mater) => {
-            return <Material key={mater.id} name={mater?.name} />
+            return (
+              <Material key={mater.id} name={mater?.name}>
+                <a
+                  href={`${MATERIAL}${mater?.material}`}
+                  download
+                  target='_blank'
+                >
+                  <div>
+                    <img src='/img/download-icon.svg' alt='download icon' />{' '}
+                    <span>Download</span>
+                  </div>
+                </a>
+                <div>
+                  <img src='/img/book-outlined.svg' alt='library icon' />{' '}
+                  <span>Add to my library</span>
+                </div>
+              </Material>
+            )
           })}
         </div>
       </div>

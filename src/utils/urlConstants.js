@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL + '/api/'
+const CDN_URL = process.env.REACT_APP_CDN_BASE_URL
 
 export const Axios = axios.create({
   baseURL: BASE_URL
@@ -35,3 +36,4 @@ export const GET_COVERIMG = BASE_URL + '../coverImg/'
 export const GET_VIDEO = BASE_URL + '../videoResource/'
 export const VIDEO_COVER = BASE_URL + '../videoCover/'
 export const LESSON_IMG = BASE_URL + '../lessonImg/'
+export const MATERIAL = CDN_URL + '/material/'
