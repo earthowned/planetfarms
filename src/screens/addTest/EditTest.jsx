@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.mi
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './AddTest.scss'
 import { useForm } from 'react-hook-form'
-import { useHistory } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { checkArrayForFilledValue } from '../../utils/checkFilledArray'
 import { listQuestions, updateQuestion, deleteSingleQuestion } from '../../actions/questionActions'
@@ -13,10 +13,6 @@ import { updateTestQuestion } from '../../actions/testActions'
 const EditTest = () => {
     const { lessonId } = useParams()
     const { pathname } = useLocation()
-    const {success: questionUpdateSuccess} = useSelector(state => state.questionUpdate)
-    const {success: questionDeleteSuccess} = useSelector(state => state.questionDelete)
-    const {success: testQuestionsEditSuccess} = useSelector(state => state.editTestQuestions)
-    // const {loading, error, fetchedQuestions} = useSelector(state => state.listQuestions)
     
     const history = useHistory()
     const [deleteModal, setDeleteModal] = useState(false)
@@ -37,37 +33,23 @@ const EditTest = () => {
 
     useEffect(() => {
         getLessonQuestions()
-        // dispatch(listQuestions(lessonId));
-        // console.log(fetchedQuestions)
-        //     if(fetchedQuestions) {
-        //         setQuestions(fetchedQuestions)
-        //         setOldQuestions(fetchedQuestions)
-        //         setNewQuestions(fetchedQuestions)
-        //         console.log(fetchedQuestions)
-        //     }
-    }, [questionUpdateSuccess, questionDeleteSuccess])
+    }, [])
 
     async function getLessonQuestions() {
         try {
          const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/questions/lesson/${lessonId}`)
-                 setQuestions(data.questions)
-                setOldQuestions(data.questions)
-                setNewQuestions(data.questions)   
+                setQuestions(data.questions)
+               setOldQuestions(data.questions)
+               setNewQuestions(data.questions)   
         } catch (error) {
             setFormError(true)
         }
         
     }
 
-    // function addQuestion() {
-    //     setQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
-    //     setNewQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
-    //     setFormError(false)
-    // }
-
       function addMcqQuestion () {
-            setQuestions(prev => [...prev, { question: '', answer: '', type: "mcq", options: [] }])
-            setNewQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
+            setQuestions(prev => [...prev, { question: '', answer: '', type: "mcq", options: [""] }])
+            setNewQuestions(prev => [...prev, { question: '', answer: '', type: "mcq", options: [""] }])
             setFormError(false)
         }
 
@@ -85,7 +67,7 @@ const EditTest = () => {
 
     const confirmDelete = async () => {
         // console.log(deleteId)
-        dispatch(deleteSingleQuestion(deleteId));
+        dispatch(deleteSingleQuestion({deleteId, lessonId}));
         setDeleteModal(false)
     }
 
@@ -95,10 +77,11 @@ const EditTest = () => {
     }
 
     async function editTest() {
+    
         if (questions.length > 0) {
             if (checkArrayForFilledValue(newQuestions)) {
-                return dispatch(updateTestQuestion(newQuestions))
-            } 
+                return dispatch(updateTestQuestion({newQuestions, lessonId}))
+            }
         }
         
         setFormError(true)
@@ -116,11 +99,7 @@ const EditTest = () => {
                 </div>
             </div>
         </div>}
-        <DashboardLayout
-            title={pathname === `/admin/edit-test/${lessonId}`
-                ? 'Edit Test'
-                : 'Add Test'
-            }>
+        <DashboardLayout title='Edit Test'>
             <div>
                 <div className='add-test-container'>
                     <div>
@@ -135,6 +114,7 @@ const EditTest = () => {
                                         formError={formError}
                                         index={index}
                                         deleteQuestion={deleteQuestion}
+                                        lessonId={lessonId}
                                         />
                                     } else {
                                         return <QuestionAnswerComponent
@@ -145,6 +125,7 @@ const EditTest = () => {
                                         setFormError={setFormError}
                                         formError={formError}
                                         deleteQuestion={deleteQuestion}
+                                        lessonId={lessonId}
                                     />}
                             })}
                              <div className="btn-container">
@@ -164,7 +145,7 @@ const EditTest = () => {
     )
 }
 
-function SubjectiveQuestion ({formError, setFormError, questions, pos, index, newQuestions, deleteQuestion}) {
+function SubjectiveQuestion ({formError, setFormError, questions, pos, index, newQuestions, deleteQuestion, lessonId}) {
   const [question, setQuestion] = useState('')
     const dispatch = useDispatch();
   useEffect(() => {
@@ -177,7 +158,7 @@ function SubjectiveQuestion ({formError, setFormError, questions, pos, index, ne
   }
 
   function editQuestion () {
-    dispatch(updateQuestion({ id: questions[index].id, testId: parseInt(questions[index].testId), question, type:"subjective"}))
+    dispatch(updateQuestion({ id: questions[index].id, testId: parseInt(questions[index].testId), question, type:"subjective", lessonId}))
   }
 
   if(newQuestions.length > 0) {
@@ -206,11 +187,11 @@ function SubjectiveQuestion ({formError, setFormError, questions, pos, index, ne
   )
 }
 
-function QuestionAnswerComponent({ pos, questions, index, newQuestions, setFormError, formError, deleteQuestion}) {
+function QuestionAnswerComponent({ pos, questions, index, newQuestions, setFormError, formError, deleteQuestion, lessonId}) {
     const [question, setQuestion] = useState('')
     const [answer, setAnswer] = useState('')
     const [options, setOptions] = useState([])
-    const [newOptions, setNewOptions] = useState([])
+    const [newOptions, setNewOptions] = useState([""])
 
     const dispatch = useDispatch();
 
@@ -239,7 +220,7 @@ function QuestionAnswerComponent({ pos, questions, index, newQuestions, setFormE
     }
 
     function editQuestion () {
-        dispatch(updateQuestion({ id: questions[index].id, testId: parseInt(questions[index].testId), question, answer, options}))
+        dispatch(updateQuestion({ id: questions[index].id, testId: parseInt(questions[index].testId), question, answer, options, lessonId}))
     }
 
     if(newQuestions.length > 0) {
