@@ -20,7 +20,7 @@ const Input = React.forwardRef(
     },
     ref
   ) => {
-    const [showLabel, setShowLabel] = useState(value)
+    const [showLabel, setShowLabel] = useState('')
 
     return (
       <>
@@ -37,24 +37,27 @@ const Input = React.forwardRef(
                   {children}
                 </div>
               )}
+
               <input
                 className='inputField'
                 placeholder={placeholder}
-                value={showLabel}
+                value={value}
                 name={name}
                 id={id}
                 ref={ref}
                 type={type}
                 onChange={(e) => setShowLabel(e.target.value)}
                 disabled={disabled}
-                autocomplete='off'
+                autoComplete='off'
               />
               {togglePasswordVisibility && (
                 <div className='pwShowHide' onClick={togglePasswordVisibility}>
                   <span>
-                    {showPassword
-                      ? <EyeOpenIcon className=' pwShowHide-show' />
-                      : <EyeCloseIcon className=' pwShowHide-hide' />}
+                    {showPassword ? (
+                      <EyeOpenIcon className=' pwShowHide-show' />
+                    ) : (
+                      <EyeCloseIcon className=' pwShowHide-hide' />
+                    )}
                   </span>
                 </div>
               )}
