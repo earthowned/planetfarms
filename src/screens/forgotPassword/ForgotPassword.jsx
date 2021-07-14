@@ -12,6 +12,7 @@ import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 const ForgotPassword = () => {
   const [message, setMessage] = useState('')
   const [usernameValue, setUsernameValue] = useState('')
+
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)

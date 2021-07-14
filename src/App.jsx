@@ -1,5 +1,7 @@
 import React from 'react'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
+import { QueryClientProvider } from 'react-query'
+import { queryClient } from './reactQuery'
 // Screens
 import LoginScreen from './screens/login/LoginScreen'
 import SignupScreen from './screens/signUp/SignupScreen'
@@ -32,7 +34,7 @@ import MyGroupViewPage from './screens/communityGroup/myGroupPage/MyGroup'
 import MobileMessage from './components/mobileMessage/MobileMessage'
 import Courses from './screens/courses/Courses'
 import LessonPage from './screens/dashboard/lessonPage/LessonPage'
-import LessonTest from './screens/lessonTest/LessonTest'
+import LessonTestPage from './screens/lessonTestPage/LessonTestPage'
 import CourseCollection from './screens/courses/courseCollection/CourseCollection'
 import EditCollection from './screens/courses/editCollection/EditCollection'
 import AdminCoursePage from './screens/courseManager/adminCoursePage/AdminCoursePage'
@@ -41,153 +43,166 @@ import CourseUsers from './screens/courses/courseUsers/CourseUsers'
 import ScrollToTop from './utils/scrollToTop'
 import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
+import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/verification/UserVerification'
 import EmailVerification from './screens/verification/EmailVerification'
 import PhoneVerification from './screens/verification/PhoneVerification'
 
 function App () {
   return (
-    <Router>
-      <ScrollToTop>
-        <Switch>
-          <Route path='/:path(|login)' exact>
-            <LoginScreen />
-          </Route>
-          <Route path='/register'>
-            <SignupScreen />
-          </Route>
-          <Route path='/register-complete'>
-            <CongratulationScreen />
-          </Route>
-          <Route path='/forgot-password'>
-            <ForgotPassword />
-          </Route>
-          <Route path='/verification'>
-            <UserVerification />
-          </Route>
-          <Route path='/email-verification'>
-            <EmailVerification />
-          </Route>
-          <Route path='/phone-verification'>
-            <PhoneVerification />
-          </Route>
-          <Route exact path='/calendar/my-events'>
-            <CalendarScreen />
-          </Route>
-          <Route exact path='/library'>
-            <Library />
-          </Route>
-          <Route exact path='/library/collection'>
-            <Collection />
-          </Route>
-          <Route path='/library/collection/users'>
-            <UserCollection />
-          </Route>
-          <Route path='/library/collection/saved'>
-            <SavedCollection />
-          </Route>
-          <Route exact path='/messenger'>
-            <Messenger />
-          </Route>
-          <Route path='/messenger/:id'>
-            <MobileMessage />
-          </Route>
-          <Route exact path='/community-page-news/:id'>
-            <CommunityPagenews />
-          </Route>
-          <Route path='/community-page-news/:title/:category'>
-            <NewsAdd />
-          </Route>
-          <Route path='/community-page-news-view'>
-            <CommunityNewsViewPage />
-          </Route>
-          <Route path='/community-switching'>
-            <AllCommunitiesCard />
-          </Route>
-          <Route path='/community-members/:id'>
-            <CommunityMembers />
-          </Route>
-          <Route path='/community-members-profile/:id'>
-            <CommunityMembersProfile />
-          </Route>
-          <Route path='/community-group/:id'>
-            <CommunityGroup />
-          </Route>
-          <Route path='/your-community-group/:id'>
-            <CommunityGroup />
-          </Route>
-          <Route path='/community-group-view-page/:id'>
-            <CommunityGroupViewPage />
-          </Route>
-          <Route exact path='/courses'>
-            <Courses />
-          </Route>
-          <Route exact path='/courses/my-courses'>
-            <CourseCollection />
-          </Route>
-          <Route path='/courses/my-courses/:id'>
-            <EditCollection />
-          </Route>
-          <Route path='/admin/courses'>
-            <Courses />
-          </Route>
-          <Route path='/admin/coursepage'>
-            <AdminCoursePage />
-          </Route>
-          <Route path='/admin/lesson-page'>
-            <AddLesson />
-          </Route>
-          <Route path='/courses/users'>
-            <CourseUsers />
-          </Route>
-          <Route path='/enterprises/:id'>
-            <Enterprises />
-          </Route>
-          <Route path='/your-enterprises/:id'>
-            <Enterprises />
-          </Route>
-          <Route path='/enterprises-view'>
-            <EnterprisesViewPage />
-          </Route>
-          <Route path='/my-group-view-page/:id'>
-            <MyGroupViewPage />
-          </Route>
-          <Route path='/dashboard'>
-            <DashboardComponent />
-          </Route>
-          <Route path='/achievements'>
-            <Achievements />
-          </Route>
-          <Route path='/mylibrary'>
-            <MyLibrary />
-          </Route>
-          <Route path='/mysurvey'>
-            <MySurvey />
-          </Route>
-          <Route path='/mycourse'>
-            <MyCourse />
-          </Route>
-          <Route exact path='/mycoursepage'>
-            <MyCoursePage />
-          </Route>
-          <Route path='/mycoursepage/:id'>
-            <LessonPage />
-          </Route>
-          <Route path='/coursepage'>
-            <MyCoursePage unpaid='unpaid' />
-          </Route>
-          <Route path='/test-lesson-1'>
-            <LessonTest />
-          </Route>
-          <Route path='/myProfile'>
-            <MyProfile />
-          </Route>
-          <Route path='/userInfo'>
-            <UserInfo />
-          </Route>
-        </Switch>
-      </ScrollToTop>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <ScrollToTop>
+          <Switch>
+            <Route path='/:path(|login)' exact>
+              <LoginScreen />
+            </Route>
+            <Route path='/register'>
+              <SignupScreen />
+            </Route>
+            <Route path='/register-complete'>
+              <CongratulationScreen />
+            </Route>
+            <Route path='/forgot-password'>
+              <ForgotPassword />
+            </Route>
+            <Route path='/verification'>
+              <UserVerification />
+            </Route>
+            <Route path='/email-verification'>
+              <EmailVerification />
+            </Route>
+            <Route path='/phone-verification'>
+              <PhoneVerification />
+            </Route>
+            <Route exact path='/calendar/my-events'>
+              <CalendarScreen />
+            </Route>
+            <Route exact path='/library'>
+              <Library />
+            </Route>
+            <Route exact path='/library/collection'>
+              <Collection />
+            </Route>
+            <Route path='/library/collection/users'>
+              <UserCollection />
+            </Route>
+            <Route path='/library/collection/saved'>
+              <SavedCollection />
+            </Route>
+            <Route exact path='/messenger'>
+              <Messenger />
+            </Route>
+            <Route path='/messenger/:id'>
+              <MobileMessage />
+            </Route>
+            <Route exact path='/community-page-news/:id'>
+              <CommunityPagenews />
+            </Route>
+            <Route path='/community-page-news/:title/:category'>
+              <NewsAdd />
+            </Route>
+            <Route path='/community-page-news-view'>
+              <CommunityNewsViewPage />
+            </Route>
+            <Route path='/community-switching'>
+              <AllCommunitiesCard />
+            </Route>
+            <Route path='/community-members/:id'>
+              <CommunityMembers />
+            </Route>
+            <Route path='/community-members-profile/:id'>
+              <CommunityMembersProfile />
+            </Route>
+            <Route path='/community-group/:id'>
+              <CommunityGroup />
+            </Route>
+            <Route path='/your-community-group/:id'>
+              <CommunityGroup />
+            </Route>
+            <Route path='/community-group-view-page/:id'>
+              <CommunityGroupViewPage />
+            </Route>
+            <Route exact path='/courses'>
+              <Courses />
+            </Route>
+            <Route exact path='/courses/my-courses'>
+              <CourseCollection />
+            </Route>
+            <Route path='/courses/my-courses/:id'>
+              <EditCollection />
+            </Route>
+            <Route path='/admin/courses'>
+              <Courses />
+            </Route>
+            <Route path='/admin/course/:courseId'>
+              <AdminCoursePage />
+            </Route>
+            <Route path='/admin/add-lesson/:courseId'>
+              <AddLesson />
+            </Route>
+            <Route path='/admin/edit-lesson/:id'>
+              <EditLesson />
+            </Route>
+            <Route path='/courses/users'>
+              <CourseUsers />
+            </Route>
+            <Route path='/enterprises/:id'>
+              <Enterprises />
+            </Route>
+            <Route path='/your-enterprises/:id'>
+              <Enterprises />
+            </Route>
+            <Route path='/enterprises-view'>
+              <EnterprisesViewPage />
+            </Route>
+            <Route path='/my-group-view-page/:id'>
+              <MyGroupViewPage />
+            </Route>
+            <Route path='/dashboard'>
+              <DashboardComponent />
+            </Route>
+            <Route path='/achievements'>
+              <Achievements />
+            </Route>
+            <Route path='/mylibrary'>
+              <MyLibrary />
+            </Route>
+            <Route path='/mysurvey'>
+              <MySurvey />
+            </Route>
+            <Route path='/mycourse'>
+              <MyCourse />
+            </Route>
+            {/* <Route exact path="/mycoursepage">
+              <MyCoursePage />
+            </Route> */}
+            <Route path='/lesson/:id'>
+              <LessonPage />
+            </Route>
+            {/* <Route exact path='/lesson/:id/testpage'>
+              <LessonTestPage />
+            </Route> */}
+            <Route
+              path='/course/:courseId'
+              component={() => <MyCoursePage unpaid='unpaid' />}
+            />
+            <Route path='/lesson-test-page/:testId'>
+              <LessonTestPage />
+            </Route>
+            <Route path='/myProfile'>
+              <MyProfile />
+            </Route>
+            <Route path='/userInfo'>
+              <UserInfo />
+            </Route>
+            <Route path='/coursepage'>
+              <MyCoursePage unpaid='unpaid' />
+            </Route>
+          </Switch>
+        </ScrollToTop>
+      </Router>
+    </QueryClientProvider>
   )
 }
 

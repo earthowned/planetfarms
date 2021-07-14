@@ -1,7 +1,3 @@
-// const Sequelize = require('sequelize')
-// const {sequelize} = require('../config/database.js')
-
-// module.exports = User
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('users', {
     id: {
@@ -43,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
   { timestamps: true }
   )
   User.associate = (models) => {
+    User.belongsToMany(models.Test, {
+      foreignKey: 'userId',
+      through: 'users_tests'
+    })
     User.belongsToMany(models.Community, {
       through: 'communities_users',
       foreignKey: 'userId',

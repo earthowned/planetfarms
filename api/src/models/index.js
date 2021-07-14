@@ -20,13 +20,21 @@ const config = require(path.join(__dirname, '/../config/config.js'))[env]
 const db = {
   User: require('./userModel')(sequelize, Sequelize.DataTypes),
   Community: require('./communityModel')(sequelize, Sequelize.DataTypes),
-  CommunityUser: require('./communityUserModal')(sequelize, Sequelize.DataTypes),
+  CommunityUser: require('./communityUserModel')(sequelize, Sequelize.DataTypes),
   Group: require('./communityGroupModel')(sequelize, Sequelize.DataTypes),
   Enterprise: require('./enterprisesModel')(sequelize, Sequelize.DataTypes),
   News: require('./newsModel')(sequelize, Sequelize.DataTypes),
-  GroupUser: require('./groupUserModal')(sequelize, Sequelize.DataTypes),
-  EnterpriseUser: require('./enterpriseUserModal')(sequelize, Sequelize.DataTypes),
-  LocalAuth: require('./localAuthModel')(sequelize, Sequelize.DataTypes)
+  GroupUser: require('./groupUserModel')(sequelize, Sequelize.DataTypes),
+  EnterpriseUser: require('./enterpriseUserModel')(sequelize, Sequelize.DataTypes),
+  LocalAuth: require('./localAuthModel')(sequelize, Sequelize.DataTypes),
+  Courses: require('./courseModel')(sequelize, Sequelize.DataTypes),
+  Lesson: require('./lessonModel')(sequelize, Sequelize.DataTypes),
+  Video: require('./videoModel')(sequelize, Sequelize.DataTypes),
+  Text: require('./textModel')(sequelize, Sequelize.DataTypes),
+  Photo: require('./photoModel')(sequelize, Sequelize.DataTypes),
+  Material: require('./materialModel')(sequelize, Sequelize.DataTypes),
+  Test: require('./testModel')(sequelize, Sequelize.DataTypes),
+  Question: require('./questionModel')(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach(modelName => {

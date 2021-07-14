@@ -1,42 +1,133 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { CATEGORY } from '../../../utils/urlConstants'
+
+import { createResource } from '../../../actions/courseActions'
+import useGetFetchData from '../../../utils/useGetFetchData'
 import DragDrop from '../../dragDrop/DragDrop'
 import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
 import './NewCourseCreateModal.scss'
 
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const history = useHistory()
+  const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  const [isFree, setIsFree] = useState(false)
+  const [courseImage, setCourseImage] = useState('')
 
-  const createFunc = () => {
-    history.push('/admin/coursepage')
-    clickHandler(false)
+  const { register, errors, handleSubmit } = useForm()
+
+  const { data: res } = useGetFetchData('category', CATEGORY)
+
+  // TODO: remove this comment after page not found component is created
+  // error && history.push("/pagenotfound")
+  const submitForm = async ({ title, category, description, price }) => {
+    const thumbnail = courseImage
+    const creator = userInfo.id
+    dispatch(
+      createResource({
+        title,
+        category,
+        description,
+        price,
+        thumbnail,
+        isFree,
+        creator,
+        history
+      })
+    )
   }
 
   return (
-    <div className='new-course-modal-container'>
-      <div className='new-course-modal-inner-container'>
-        <div className='new-course-modal-header'>
-          <h4>Usual course</h4>
-          <img src='/img/close-outline.svg' onClick={() => clickHandler(false)} alt='close-icon' />
+    <div className='newCourse'>
+      <form className='container' onSubmit={handleSubmit(submitForm)}>
+        <div className='header'>
+          <h2>Usual course</h2>
+          <img
+            src='/img/close-outline.svg'
+            onClick={() => clickHandler(false)}
+            alt='close-icon'
+          />
         </div>
-        <DragDrop />
-        <div className='new-course-input-container'>
-          <input className='default-input-variation' placeholder='Collection title' /> <br />
-          <select className='default-input-variation' placeholder='Collection title'>
-            <option>Select category</option>
-            <option>Travelling</option>
+        <DragDrop onChange={(img) => setCourseImage(img)} />
+        <div className='inputContainer'>
+          <input
+            className={errors.title ? 'input errorBox' : 'input'}
+            placeholder='Course title*'
+            name='title'
+            ref={register({
+              required: {
+                value: true,
+                message: 'You must enter course title'
+              }
+            })}
+          />
+          <p className='error'>{errors.title && errors.title.message}</p>
+          <select
+            name='category'
+            className={
+              errors.category
+                ? 'input input-select errorBox'
+                : 'input input-select'
+            }
+            placeholder='Select Category*'
+            ref={register({
+              required: 'You must select Category'
+            })}
+            defaultValue='Select Category'
+          >
+            <option defaultValue='' disabled>
+              Select Category
+            </option>
+            {res?.results.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
           </select>
-          <textarea placeholder='Course description' />
+          <p className='error'>{errors.category && errors.category.message}</p>
+
+          <textarea
+            className={errors.description ? 'errorBox' : ''}
+            placeholder='Course description'
+            name='description'
+            ref={register({
+              required: {
+                value: true,
+                message: 'You must add description'
+              }
+            })}
+          />
+          <p className='error'>
+            {errors.description && errors.description.message}
+          </p>
           <div className='new-course-toggle'>
             <h4>Free course</h4>
-            <ToggleSwitch />
+            <ToggleSwitch onClick={() => setIsFree(!isFree)} isFree={isFree} />
           </div>
-          <input className='default-input-variation' placeholder='Course price' />
+          {!isFree && (
+            <input
+              type='number'
+              name='price'
+              className={errors.price ? 'input errorBox' : 'input'}
+              placeholder='Course price'
+              ref={register({
+                required: {
+                  value: true,
+                  message: 'You must enter price'
+                }
+              })}
+            />
+          )}
+          <p className='error'>{errors.price && errors.price.message}</p>
         </div>
-        <button className='default-btn btn-size' onClick={() => createFunc()}>Create course</button>
-      </div>
+        <button className='default-btn btn-size'>Create course</button>
+      </form>
     </div>
   )
 }
 
-export default NewCourseCreateModal
+export default React.memo(NewCourseCreateModal)

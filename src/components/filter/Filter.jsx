@@ -12,35 +12,41 @@ const Filter = ({ data = [], newFilter, name, noImage }) => {
 
   return (
     <>
-      {
-        !newFilter ? <div className='filter-container'>
+      {!newFilter ? (
+        <div className='filter-container'>
           <div onClick={() => setActive(!active)} className='filter-title'>
-            <img src='/img/funnel-outline.svg' /> filter by <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
+            <img src='/img/funnel-outline.svg' alt='funnel outlin' /> filter by{' '}
+            <img
+              className='dropdown-icon'
+              src='/img/chevron-right-outline.svg'
+              alt='chevron-right-outline'
+            />
           </div>
-          {active && <ul className='filter-dropdown'>
-            <li>Progress</li>
-            <li>Recent Uses</li>
-            <li>Most Used</li>
-          </ul>}
+          {active && (
+            <ul className='filter-dropdown'>
+              <li>Progress</li>
+              <li>Recent Uses</li>
+              <li>Most Used</li>
+            </ul>
+          )}
         </div>
-          : <div className='filter-container'>
-            <div onClick={() => setActive(!active)} className='filter-title'>
-              {text.length > 0
-                ? text[0].label
-                : 'Choose the option'}
-              <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
-            </div>
-            {active && <ul className='filter-dropdown'>
-              {
+      ) : <div className='filter-container'>
+        <div onClick={() => setActive(!active)} className='filter-title'>
+          {text.length > 0
+            ? text[0].label
+            : 'Choose the option'}
+          <img className='dropdown-icon' src='/img/chevron-right-outline.svg' />
+        </div>
+        {active && <ul className='filter-dropdown'>
+          {
               data.length > 0 && data.map(item => (
                 <Link className='nav-link' to={`${item.link}`}>
                   <li onClick={() => setActive(false)}>{item.label}</li>
                 </Link>
               ))
             }
-            </ul>}
-            </div>
-      }
+        </ul>}
+          </div>}
     </>
   )
 }

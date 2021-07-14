@@ -57,7 +57,13 @@ function amplifyConfig () {
       // OPTIONAL - Hosted UI configuration
       oauth: {
         domain: process.env.COGNITO_DOMAIN_NAME, // domain_name
-        scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+        scope: [
+          'phone',
+          'email',
+          'profile',
+          'openid',
+          'aws.cognito.signin.user.admin'
+        ],
         redirectSignIn: process.env.FRONTEND_URL,
         redirectSignOut: process.env.FRONTEND_URL,
         responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
@@ -76,13 +82,14 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    const user = (process.env.AUTH_METHOD === 'cognito') ? await cognitoAuth(name, password) : await localAuth(name, password)
-
+    const user = await localAuth(name, password)
     if (user) {
       await res.json({
         // userID: user.dataValues.userID
         token: user,
         id: user
+        // token: generateToken(user.dataValues.userID),
+        // id: user.dataValues.userID
       })
     } else {
       await res.status(401).json({
@@ -98,15 +105,8 @@ const authUser = async (req, res) => {
 
 const localAuth = async (name, password) => {
   const user = await db.LocalAuth.findOne({ where: { username: name, password: password } })
-  const newUser = await db.User.findOne({ where: { userID: user.dataValues.id } })
+  const newUser = await db.User.findOne({ where: { userID: { [Op.like]: user.dataValues.id.toString() } } })
   return newUser
-}
-
-const cognitoAuth = async (name, password) => {
-  const user = await Auth.signIn(name, password)
-  return user?.signInUserSession?.idToken?.jwtToken || ''
-  /* const newUser = await db.User.findOne({where: {userID: user?.attributes?.sub}})
-  return newUser */
 }
 
 // @desc    Register a new user
@@ -116,14 +116,6 @@ const registerUser = async (req, res) => {
   try {
     const { name, password, id } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
-      // const registeredUser = await Auth.signUp({
-      //   username: name,
-      //   password,
-      //   attributes: {
-      //     email
-      //   }
-      // })
-      // const user = await db.User.create({ userID: registeredUser.userSub, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       const user = await db.User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
       if (user && subscribeCommunity(user)) {
         res.status(201).send('SUCCESS')
@@ -139,23 +131,19 @@ const registerUser = async (req, res) => {
 const registerLocal = async (name, password, res) => {
   try {
     const userExists = await db.LocalAuth.findOne({ where: { username: name } })
-    if (userExists) return res.json({ message: 'Users already Exists !!!' }).status(400)
-
+    if (userExists) { return res.json({ message: 'Users already Exists !!!' }).status(400) }
     const newUser = await db.sequelize.transaction(async (t) => {
       const user = await db.LocalAuth.create({ username: name, password: password }, { transaction: t })
       return await db.User.create({ userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
     })
-
     if (newUser && subscribeCommunity(newUser)) {
       res.status(201).json({
-        id: newUser.dataValues.id,
+        id: newUser.dataValues.userID,
         userID: newUser.dataValues.userID,
-        token: generateToken(newUser.dataValues.id)
+        token: generateToken(newUser.dataValues.userID)
       })
     } else {
-      res.status(400).json({
-        error: 'Invalid user data'
-      })
+      res.status(400).json({ error: 'Invalid user data' })
     }
   } catch (error) {
     res.json(error)
@@ -205,8 +193,7 @@ const changePassword = async (req, res) => {
       throw new Error('Invalid email or password')
     }
   } catch (e) {
-    res.status(401)
-    res.json({ error: e })
+    res.status(401).json({ error: e })
   }
 }
 
@@ -221,7 +208,6 @@ const forgotPassword = async (req, res) => {
 const forgotPasswordSubmit = async (req, res) => {
   // Send confirmation code to user's email
   const { username, code, newPassword } = req.body
-
   Auth.forgotPasswordSubmit(username, code, newPassword)
     .then((data) => console.log(data))
     .catch((err) => console.log(err))
@@ -285,21 +271,17 @@ const getUserProfileByUserID = async (req, res) => {
 // @route   GET /api/user/profile
 // @access  Public
 const getMyProfile = (req, res) => {
-  if (req.user) {
-    const user = req.user
-
-    console.log(user)
-    res.json({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      phone: user.phone,
-      email: user.email,
-      dateOfBirth: user.dateOfBirth,
-      lastLogin: user.lastLogin,
-      numberOfVisit: user.numberOfVisit,
-      attachments: user.attachments
-    })
-  }
+  const user = req.user
+  res.json({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    phone: user.phone,
+    email: user.email,
+    dateOfBirth: user.dateOfBirth,
+    lastLogin: user.lastLogin,
+    numberOfVisit: user.numberOfVisit,
+    attachments: user.attachments
+  })
 }
 
 // @desc    Update user
@@ -312,7 +294,6 @@ const updateUser = async (req, res) => {
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-
     db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
@@ -338,8 +319,8 @@ const searchUserName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
   db.User.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
-    .then(users => res.json({ users }).status(200))
-    .catch(err => res.json({ error: err }).status(400))
+    .then((users) => res.json({ users }).status(200))
+    .catch((err) => res.json({ error: err }).status(400))
 }
 
 module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getMyProfile, getUsers, updateUser, searchUserName }
