@@ -243,7 +243,6 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
 export const listUsers = () => async (dispatch) => {
   try {
     dispatch({ type: USER_LIST_REQUEST })
-    const { userLogin: { userInfo } } = getState()
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`)
     dispatch({ type: USER_LIST_SUCCESS, payload: data })
   } catch (error) {
