@@ -225,7 +225,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
         given_name: user.firstName,
         family_name: user.lastName,
         birthdate: user.birthday,
-        phone_number: user.phone ? '+' + user.phone : ''
+        phone_number: user.phone ? user.phone : ''
       })
     }
     dispatch({ type: USER_DETAILS_SUCCESS, payload: { user: data } })
