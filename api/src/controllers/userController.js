@@ -85,11 +85,9 @@ const authUser = async (req, res) => {
     const user = await localAuth(name, password)
     if (user) {
       await res.json({
-        // userID: user.dataValues.userID
-        token: user,
-        id: user
-        // token: generateToken(user.dataValues.userID),
-        // id: user.dataValues.userID
+        
+        token: generateToken(user.dataValues.userID),
+        id: user.dataValues.userID
       })
     } else {
       await res.status(401).json({
