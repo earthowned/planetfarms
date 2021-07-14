@@ -186,7 +186,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: false })
             return false
           })
-        } else if (message === 'InvalidToken') {
+        } else if (message === 'InvalidToken' || message === 'Unauthorized') {
           dispatch({ type: USER_DETAILS_FAIL, payload: message })
           dispatch(logout())
         }

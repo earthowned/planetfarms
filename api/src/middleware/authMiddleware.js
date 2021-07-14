@@ -54,8 +54,8 @@ module.exports = async (req, res, next) => {
           break
         default:
           res.status(401).json({
-            error: 'Invalid token provided.',
-            name: 'InvalidToken'
+            error: 'Unauthorized',
+            name: 'Unauthorized'
           })
           break
       }
