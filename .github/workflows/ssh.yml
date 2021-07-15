@@ -1,5 +1,4 @@
 name: 'SSH'
-description: 'SSH to github.planetfarms.io'
 
 on: [push]
 
