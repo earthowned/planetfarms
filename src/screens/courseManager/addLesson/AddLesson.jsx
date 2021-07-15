@@ -47,7 +47,7 @@ const AddLesson = () => {
       })
     )
   }
-
+  console.log(material)
   useEffect(async () => {
     if (
       Object.keys(postLessonData).length !== 0 &&
@@ -67,8 +67,10 @@ const AddLesson = () => {
             await addText({ lessonData: lessonData[i], lessonId, dispatch })
           }
         }
-        if (material !== null) {
-          await addMaterial({ material, lessonId, dispatch })
+        for (let i = 0; i < material.length; i++) {
+          if (material[i].mData) {
+            await addMaterial({ material: material[i], lessonId, dispatch })
+          }
         }
       }
       history.push(`/lesson/${id}`)
@@ -119,7 +121,10 @@ const AddLesson = () => {
           lessonData={lessonData}
         />
         <LessonMaterial material={material} setMaterial={setMaterial} />
-        <LessonSaveModal onClick={handleSubmit(submitLessonForm)} />
+        <LessonSaveModal
+          pathId={courseId}
+          onClick={handleSubmit(submitLessonForm)}
+        />
       </DashboardLayout>
     </>
   )

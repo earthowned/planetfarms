@@ -38,6 +38,7 @@ const AddContent = ({
         cols='3'
         rows='4'
         name='lessonDesc'
+        ref={register}
       />
 
       <DragDrop onChange={(img) => setLessonCover(img)} />
