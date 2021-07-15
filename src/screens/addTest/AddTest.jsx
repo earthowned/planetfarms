@@ -137,10 +137,8 @@ const reorder = (list, startIndex, endIndex) => {
                       }}
                       >
                         {position.map((item, index) => 
-                              {
-                                  if(item.type === 'subjective') {
-                                    return <SubjectiveQuestion 
-                                    pos={questions.length - 1}
+                        <Question 
+                         pos={questions.length - 1}
                                     questions={questions}
                                     setFormError={setFormError}
                                     formError={formError}
@@ -151,20 +149,36 @@ const reorder = (list, startIndex, endIndex) => {
                                     newQuestions={newQuestions}
                                     innerRef={provided.innerRef}
                                     provided={provided}
-                                    />
-                                  } else {
-                                    return <QuestionAnswerComponent
-                                    pos={questions.length - 1}
-                                    index={index}
-                                    questions={questions}
-                                    setFormError={setFormError}
-                                    formError={formError}
-                                    item={item}
-                                    innerRef={provided.innerRef}
-                                    provided={provided}
-                                    newQuestions={newQuestions}
-                                  />}
-                                }
+                                    position={position}
+                        />
+                              // {
+                              //     if(item.type === 'subjective') {
+                              //       return <SubjectiveQuestion 
+                              //       pos={questions.length - 1}
+                              //       questions={questions}
+                              //       setFormError={setFormError}
+                              //       formError={formError}
+                              //       index={index}
+                              //       item={item}
+                              //       // setQuestions={setQuestions}
+                              //       removeQuestion={removeQuestion}
+                              //       newQuestions={newQuestions}
+                              //       innerRef={provided.innerRef}
+                              //       provided={provided}
+                              //       />
+                              //     } else {
+                              //       return <QuestionAnswerComponent
+                              //       pos={questions.length - 1}
+                              //       index={index}
+                              //       questions={questions}
+                              //       setFormError={setFormError}
+                              //       formError={formError}
+                              //       item={item}
+                              //       innerRef={provided.innerRef}
+                              //       provided={provided}
+                              //       newQuestions={newQuestions}
+                              //     />}
+                              //   }
                                 
                         )}
 
@@ -191,8 +205,12 @@ const reorder = (list, startIndex, endIndex) => {
   )
 }
 
-function SubjectiveQuestion ({formError, setFormError, questions,newQuestions, pos, index, item}) {
+function Question ({formError, setFormError, questions,newQuestions, pos, index, item}) {
   const [question, setQuestion] = useState("")
+  const [answer, setAnswer] = useState('')
+  const [options, setOptions] = useState([''])
+  const [newOptions, setNewOptions] = useState([''])
+
   function onQuestionChange (e) {
     setQuestion(e.target.value)
     setFormError(false)
@@ -200,61 +218,16 @@ function SubjectiveQuestion ({formError, setFormError, questions,newQuestions, p
   }
 
   useEffect(() => {        
-          setQuestion(questions[index].question)
+    if(question[index] === "subjective") {
+      setQuestion(questions[index].question)
+    }
+
+           setQuestion(questions[index].question)
+          setAnswer(questions[index].answer)
+        setNewOptions(questions[index].options)
     }, [newQuestions])
 
-  return (
-    <Draggable draggableId={item.id} index={index}>
-      {(provided, snapshot) => {
-        return <div className='question-answer-container' key={pos} 
-               {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                ref={provided.innerRef}
-              >
-              {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
-              <h4 className="question-title">Subjective Question</h4> 
-              {/* <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => removeQuestion(item.id)}/> */}
-               
-              { (questions[index].type === "subjective")
-               ? <div className='question-container'> 
-                  <div>
-                    <input
-                     value={question}
-                      onChange={(e) => onQuestionChange(e)}
-                      className='default-input-variation'
-                      placeholder='Question'
-                      
-                    />
-                  </div>
-                </div>
-                : <QuestionAnswerComponent questions={[{
-                  type: questions[index].type,
-                  question: questions[index].question,
-                  answer: questions[index].answer,
-                  options: [...questions[index].options]
-                }]}
-                item={questions[index].id}
-                index={index}
-                />
-                }
-                
-              </div>
-      }}
-    </Draggable>
-  )
-}
-
-function QuestionAnswerComponent ({ pos, questions, index, setFormError, formError, item, provided, innerRef, newQuestions }) {
-  const [question, setQuestion] = useState('')
-  const [answer, setAnswer] = useState('')
-  const [options, setOptions] = useState([''])
-  
-  function onQuestionChange (e) {
-    setQuestion(e.target.value)
-      questions[index].question = e.target.value
-      setFormError(false)
-  }
-
+console.log(questions[index].options)
   function onAnswerChange (e) {
     setAnswer(e.target.value)
       questions[index].answer = e.target.value
@@ -270,91 +243,95 @@ function QuestionAnswerComponent ({ pos, questions, index, setFormError, formErr
     setFormError(false)
   }
 
-  useEffect(() => {
-          
-          setQuestion(questions[index].question)
-          setAnswer(questions[index].answer)
-          console.log([...questions[index].options])
-        setOptions([...questions[index].options])
-    
-    }, [newQuestions])
-    
-    console.log(questions[index].type)
   // questions[index].question = question
   // questions[index].answer = answer
   questions[index].options = options
-  return (
-    <Draggable draggableId={item.id} index={index}>
+    
+  return <Draggable draggableId={item.id} index={index}>
       {(provided, snapshot) => {
         return <div className='question-answer-container' key={pos} 
                {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 ref={provided.innerRef}
               >
-      {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
-      <h4 className="question-title">MCQ Question</h4> 
-      {/* <img src='/img/minus-circle-outline.svg' alt='minus image' /> */}
-      {
-        questions[index].type === "mcq" 
-        ?<>
-     <div className='question-container'>
-        <div>
-          <input
-            className='default-input-variation'
-            placeholder='Question'
-            value={question}
-            onChange={(e) => onQuestionChange(e)}
-          />
-        </div>
-        <button><img src='/img/green-camera.svg' alt='photo icon' /> <h4>Add photo</h4></button>
-      </div>
-      <div className='test-answers-wrapper'>
-        <div className='test-correct-answer'>
-          <h4>Write correct answer in this field</h4>
-          <div className='test-answer-input-field'>
-            <input className='default-input-variation' placeholder='Correct answer' value={answer} onChange={(e) => onAnswerChange(e)} />
-            <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => setAnswer('')} />
-          </div>
-          <span>Answer will be mixed for users</span>
-        </div>
-        <div className='option-answers'>
-          {options.length > 0 && options.map((item, index) =>
-            <OptionAnswer
-              options={options}
-              pos={index}
-              setOptions={setOptions}
-              item={item}
-              setFormError={setFormError}
-            />)}
-        </div>
-        <button className="add-new-course" onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
-      </div></>
-      : <SubjectiveQuestion 
-            questions={[{
-                  type: questions[index].type,
-                  question: questions[index].question,
-                  answer: questions[index].answer,
-                  options: [...questions[index].options]
-                }]}
-                item={questions[index].id}
-                index={index}
-      />
-      
-      }
-    </div>
-    }}
+              { (questions[index].type === "subjective")
+               ? <>
+                  {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+                  <h4 className="question-title">Subjective Question</h4> 
+                  <div className='question-container'> 
+                      <div>
+                        <input
+                        value={question}
+                          onChange={(e) => onQuestionChange(e)}
+                          className='default-input-variation'
+                          placeholder='Question'
+                          
+                        />
+                      </div>
+                    </div>
+                    </>
+                : <>
+                    {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+                    <h4 className="question-title">MCQ Question</h4> 
+                  <div className='question-container'>
+                      <div>
+                        <input
+                          className='default-input-variation'
+                          placeholder='Question'
+                          value={question}
+                          onChange={(e) => onQuestionChange(e)}
+                        />
+                      </div>
+                      <button><img src='/img/green-camera.svg' alt='photo icon' /> <h4>Add photo</h4></button>
+                    </div>
+                    <div className='test-answers-wrapper'>
+                      <div className='test-correct-answer'>
+                        <h4>Write correct answer in this field</h4>
+                        <div className='test-answer-input-field'>
+                          <input className='default-input-variation' placeholder='Correct answer' value={answer} onChange={(e) => onAnswerChange(e)} />
+                          <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => setAnswer('')} />
+                        </div>
+                        <span>Answer will be mixed for users</span>
+                      </div>
+                      <div className='option-answers'>
+                        {options.length > 0 && options.map((item, index) =>
+                          <OptionAnswer
+                            options={options}
+                            pos={index}
+                            setOptions={setOptions}
+                            item={item}
+                            setFormError={setFormError}
+                            newOptions={newOptions}
+                          />)}
+                      </div>
+                      <button className="add-new-course" onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
+                    </div>
+                    </>
+                }
+              </div>
+      }}
     </Draggable>
-  )
 }
 
-function OptionAnswer ({ options, setOptions, item, pos, setFormError}) {
+function OptionAnswer ({ options, setOptions, item, pos, setFormError, newOptions}) {
   const [answer, setAnswer] = useState('')
   function onAnswerChange (e) {
     setAnswer(e.target.value)
     setFormError(false)
+    options[pos] = e.target.value
   }
 
-  function removeItem (id) {
+   useEffect(() => {
+        if (newOptions.length > 0) {
+            setAnswer(newOptions[pos])
+        }
+    }, [newOptions])
+
+  // console.log(newOptions)
+  // console.log(options)
+  
+
+ function removeItem (id) {
     const newOptions = [...options]
     const index = newOptions.indexOf(id)
     console.log(index)
@@ -363,9 +340,6 @@ function OptionAnswer ({ options, setOptions, item, pos, setFormError}) {
       setOptions(newOptions)
     }
   }
-
-  options[pos] = answer
-
   return (
     <div className='test-answer-input-field' key={pos}>
       <input
@@ -376,5 +350,163 @@ function OptionAnswer ({ options, setOptions, item, pos, setFormError}) {
     </div>
   )
 }
+
+// function SubjectiveQuestion ({formError, setFormError, questions,newQuestions, pos, index, item}) {
+//   const [question, setQuestion] = useState("")
+//   function onQuestionChange (e) {
+//     setQuestion(e.target.value)
+//     setFormError(false)
+//     questions[index].question = e.target.value
+//   }
+
+//   useEffect(() => {        
+//           setQuestion(questions[index].question)
+//     }, [newQuestions])
+
+//   return (
+//     <Draggable draggableId={item.id} index={index}>
+//       {(provided, snapshot) => {
+//         return <div className='question-answer-container' key={pos} 
+//                {...provided.draggableProps}
+//                 {...provided.dragHandleProps}
+//                 ref={provided.innerRef}
+//               >
+//               {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+//               <h4 className="question-title">Subjective Question</h4> 
+//               {/* <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => removeQuestion(item.id)}/> */}
+               
+//               {/* { (questions[index].type === "subjective")
+//                ?  */}
+//                <div className='question-container'> 
+//                   <div>
+//                     <input
+//                      value={question}
+//                       onChange={(e) => onQuestionChange(e)}
+//                       className='default-input-variation'
+//                       placeholder='Question'
+                      
+//                     />
+//                   </div>
+//                 </div>
+//                 {/* // : <QuestionAnswerComponent questions={[{ */}
+//                 {/* //   type: questions[index].type,
+//                 //   question: questions[index].question,
+//                 //   answer: questions[index].answer,
+//                 //   options: [...questions[index].options]
+//                 // }]}
+//                 // item={questions[index].id}
+//                 // index={index}
+//                 // />
+//                 // } */}
+                
+//               </div>
+//       }}
+//     </Draggable>
+//   )
+// }
+
+// function QuestionAnswerComponent ({ pos, questions, index, setFormError, formError, item, provided, innerRef, newQuestions }) {
+//   const [question, setQuestion] = useState('')
+//   const [answer, setAnswer] = useState('')
+//   const [options, setOptions] = useState([''])
+  
+//   function onQuestionChange (e) {
+//     setQuestion(e.target.value)
+//       questions[index].question = e.target.value
+//       setFormError(false)
+//   }
+
+//   function onAnswerChange (e) {
+//     setAnswer(e.target.value)
+//       questions[index].answer = e.target.value
+    
+//     setFormError(false)
+//   }
+
+//   function addOption () {
+//     setOptions(prev => {
+//       return [...prev, '']
+//     })
+
+//     setFormError(false)
+//   }
+
+//   useEffect(() => {
+          
+//           setQuestion(questions[index].question)
+//           setAnswer(questions[index].answer)
+//           console.log([...questions[index].options])
+//         setOptions([...questions[index].options])
+    
+//     }, [newQuestions])
+    
+//     console.log(questions[index].type)
+//   // questions[index].question = question
+//   // questions[index].answer = answer
+//   questions[index].options = options
+//   return (
+//     <Draggable draggableId={item.id} index={index}>
+//       {(provided, snapshot) => {
+//         return <div className='question-answer-container' key={pos} 
+//                {...provided.draggableProps}
+//                 {...provided.dragHandleProps}
+//                 ref={provided.innerRef}
+//               >
+//       {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+//       <h4 className="question-title">MCQ Question</h4> 
+//       {/* <img src='/img/minus-circle-outline.svg' alt='minus image' /> */}
+//       {/* {
+//         questions[index].type === "mcq" 
+//         ?<> */}
+//      <div className='question-container'>
+//         <div>
+//           <input
+//             className='default-input-variation'
+//             placeholder='Question'
+//             value={question}
+//             onChange={(e) => onQuestionChange(e)}
+//           />
+//         </div>
+//         <button><img src='/img/green-camera.svg' alt='photo icon' /> <h4>Add photo</h4></button>
+//       </div>
+//       <div className='test-answers-wrapper'>
+//         <div className='test-correct-answer'>
+//           <h4>Write correct answer in this field</h4>
+//           <div className='test-answer-input-field'>
+//             <input className='default-input-variation' placeholder='Correct answer' value={answer} onChange={(e) => onAnswerChange(e)} />
+//             <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => setAnswer('')} />
+//           </div>
+//           <span>Answer will be mixed for users</span>
+//         </div>
+//         <div className='option-answers'>
+//           {options.length > 0 && options.map((item, index) =>
+//             <OptionAnswer
+//               options={options}
+//               pos={index}
+//               setOptions={setOptions}
+//               item={item}
+//               setFormError={setFormError}
+//             />)}
+//         </div>
+//         <button className="add-new-course" onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
+//       </div>
+//       {/* </>
+//       : <SubjectiveQuestion 
+//             questions={[{
+//                   type: questions[index].type,
+//                   question: questions[index].question,
+//                   answer: questions[index].answer,
+//                   options: [...questions[index].options]
+//                 }]}
+//                 item={questions[index].id}
+//                 index={index}
+//       />
+      
+//       } */}
+//     </div>
+//     }}
+//     </Draggable>
+//   )
+// }
 
 export default AddTest
