@@ -12,12 +12,12 @@ const LessonBlock = ({ data, courseId }) => {
       <div className='admin-lesson-lists-container'>
         {lessonData ? (
           <>
-            <h3>Lessons</h3>
+            <h3 className='lessonHead'>Lessons</h3>
             {lessonData.map((lesson) => {
               return (
                 <React.Fragment key={lesson.id}>
                   <div className='admin-lesson'>
-                    <div>
+                    <div className='lessonBlock'>
                       {lesson.coverImg ? (
                         <div className='coverImg coverImg__img'>
                           <img
@@ -34,14 +34,10 @@ const LessonBlock = ({ data, courseId }) => {
                         </div>
                       )}
                       <div className='lessonInfo'>
-                        <h4 className='lessonTitle'>{lesson.title}</h4>
-                        {/* TODO:need to add new lesson desc col in db and update   */}
-                        <p>
-                          lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Delectus, odio! Architecto, aspernatur
-                          similique. Expedita, ullam error reiciendis eos
-                          dolorum id?
-                        </p>
+                        <h3 className='lessonTitle'>{lesson.title}</h3>
+                        {lesson?.lessonDesc && (
+                          <p className='lessonDescText'>{lesson?.lessonDesc}</p>
+                        )}
                         <Link to={`/lesson/${lesson.id}`}>
                           <button className='text-btn'>See lesson</button>
                         </Link>

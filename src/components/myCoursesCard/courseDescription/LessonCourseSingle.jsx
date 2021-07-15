@@ -3,6 +3,7 @@ import { GET_COVERIMG } from '../../../utils/urlConstants'
 
 const LessonCourseSingle = ({ data }) => {
   const history = useHistory()
+
   return (
     <div className='lesson-card-wrapper'>
       {/* <div className='lock-lesson'>
@@ -19,11 +20,8 @@ const LessonCourseSingle = ({ data }) => {
         </div>
         <div className='lesson-card-content'>
           <h3>{data.title}</h3>
-          {/* TODO:Need to add lesson description */}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed totam
-            non dolorem nam ex ipsam?
-          </p>
+
+          {data.lessonDesc && <p>{data.lessonDesc}</p>}
           <button onClick={() => history.push(`/lesson/${data.id}`)}>
             See Lesson
           </button>
