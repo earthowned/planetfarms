@@ -19,9 +19,10 @@ jobs:
           chmod 700 ~/.ssh
           echo "github.planetfarms.io ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDtrYtt44iGGRUDlL9aC3S/Xb40TuPx18NxngzjkSGrtq5tkPKQbOAZmEyVOONEFwHqIRQUgCbjQGwYtunbXaco=" > ~/.ssh/known_hosts
           #ssh -o StrictHostKeyChecking=no root@github.planetfarms.io
-          ssh root@github.planetfarms.io
+          ssh root@github.planetfarms.io <<'EOF'
           pwd
           ls -la
+          EOF
 
           
 
