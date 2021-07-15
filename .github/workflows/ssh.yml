@@ -23,6 +23,8 @@ jobs:
           cd /srv/planetfarms/
           pwd
           git branch
+          git checkout main
+          git branch
           EOF
 
           
