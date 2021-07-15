@@ -14,6 +14,24 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_CONFIRM_CODE_REQUEST,
+  USER_CONFIRM_CODE_SUCCESS,
+  USER_CONFIRM_CODE_FAIL,
+  USER_RESEND_CODE_REQUEST,
+  USER_RESEND_CODE_SUCCESS,
+  USER_RESEND_CODE_FAIL,
+  USER_ATTR_CONFIRM_CODE_REQUEST,
+  USER_ATTR_CONFIRM_CODE_SUCCESS,
+  USER_ATTR_CONFIRM_CODE_FAIL,
+  USER_ATTR_RESEND_CODE_REQUEST,
+  USER_ATTR_RESEND_CODE_SUCCESS,
+  USER_ATTR_RESEND_CODE_FAIL,
+  USER_FORGOT_PWD_CONFIRM_CODE_REQUEST,
+  USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS,
+  USER_FORGOT_PWD_CONFIRM_CODE_FAIL,
+  USER_FORGOT_PWD_RESEND_CODE_REQUEST,
+  USER_FORGOT_PWD_RESEND_CODE_SUCCESS,
+  USER_FORGOT_PWD_RESEND_CODE_FAIL,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -64,6 +82,84 @@ export const userLoginReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case USER_LOGOUT:
       return {}
+    default:
+      return state
+  }
+}
+
+export const userConfirmCodeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_CONFIRM_CODE_REQUEST:
+      return { loading: true }
+    case USER_CONFIRM_CODE_SUCCESS:
+      return { loading: false, status: true }
+    case USER_CONFIRM_CODE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userResendCodeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_RESEND_CODE_REQUEST:
+      return { loading: true }
+    case USER_RESEND_CODE_SUCCESS:
+      return { loading: false, status: true }
+    case USER_RESEND_CODE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userAttrConfirmCodeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_ATTR_CONFIRM_CODE_REQUEST:
+      return { loading: true }
+    case USER_ATTR_CONFIRM_CODE_SUCCESS:
+      return { loading: false, status: true }
+    case USER_ATTR_CONFIRM_CODE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userAttrResendCodeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_ATTR_RESEND_CODE_REQUEST:
+      return { loading: true }
+    case USER_ATTR_RESEND_CODE_SUCCESS:
+      return { loading: false, status: true }
+    case USER_ATTR_RESEND_CODE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userForgotPwdConfirmCodeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_FORGOT_PWD_CONFIRM_CODE_REQUEST:
+      return { loading: true }
+    case USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS:
+      return { loading: false, status: true }
+    case USER_FORGOT_PWD_CONFIRM_CODE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userForgotPwdResendCodeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_FORGOT_PWD_RESEND_CODE_REQUEST:
+      return { loading: true }
+    case USER_FORGOT_PWD_RESEND_CODE_SUCCESS:
+      return { loading: false, status: true }
+    case USER_FORGOT_PWD_RESEND_CODE_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

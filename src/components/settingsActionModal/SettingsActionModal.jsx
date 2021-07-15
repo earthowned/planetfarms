@@ -74,39 +74,39 @@ const SettingInput = ({ settingAction, setInput }) => {
   }
   return (
     <>
-    {
+      {
       {
         logout: <></>,
         changePassword:
-          <div className='input-container'>
-            {['Old Password', 'New Password', 'Confirm Password'].map((title) =>
-              <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
-                <div className='input-content'>
-                  <input
-                    placeholder={title}
-                    className='username ibmplexsans-regular-normal-monsoon-16px'
-                    onChange={(e) => changeInput(e)}
-                    name='Code'
-                    autoFocus='autoFocus'
-                  />
-                </div>
-              </div>
-            )}
-          </div>,
+  <div className='input-container'>
+    {['Old Password', 'New Password', 'Confirm Password'].map((title) =>
+      <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+        <div className='input-content'>
+          <input
+            placeholder={title}
+            className='username ibmplexsans-regular-normal-monsoon-16px'
+            onChange={(e) => changeInput(e)}
+            name='Code'
+            autoFocus='autoFocus'
+          />
+        </div>
+      </div>
+    )}
+  </div>,
         default:
-          <div className='input-container'>
-            <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
-              <div className='input-content'>
-                <input
-                  placeholder={settingAction.inputText}
-                  className='username ibmplexsans-regular-normal-monsoon-16px'
-                  onChange={(e) => changeInput(e)}
-                  name='Code'
-                  autoFocus='autoFocus'
-                />
-              </div>
-            </div>
-          </div>
+  <div className='input-container'>
+    <div className={`default-input ${inputErr ? 'user-error' : 'border-1px-onyx'}`}>
+      <div className='input-content'>
+        <input
+          placeholder={settingAction.inputText}
+          className='username ibmplexsans-regular-normal-monsoon-16px'
+          onChange={(e) => changeInput(e)}
+          name='Code'
+          autoFocus='autoFocus'
+        />
+      </div>
+    </div>
+  </div>
       }[settingAction.id]
     }
     </>

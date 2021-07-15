@@ -6,7 +6,6 @@ const {
   changePassword,
   forgotPassword,
   forgotPasswordSubmit,
-  resendCode,
   confirmSignUpWithCode,
   getUserProfileByUserID,
   getMyProfile,
@@ -28,7 +27,6 @@ router.route('/search').get(searchUserName)
 router.post('/changePassword', changePassword)
 router.post('/forgotPassword', forgotPassword)
 router.post('/forgotPasswordSubmit', forgotPasswordSubmit)
-router.post('/resendCode', resendCode)
 router.post('/confirmSignUp', confirmSignUpWithCode)
 
 module.exports = router

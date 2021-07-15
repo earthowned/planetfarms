@@ -1,39 +1,21 @@
 'use strict'
-const faker = require('faker')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
     const data = []
-    let amount = 10
     const date = new Date()
-    while (amount--) {
-      data.push({
-        name: faker.name.title(),
-        description: faker.lorem.sentence(),
-        attachment: faker.system.commonFileName(),
-        creatorId: amount,
-        createdAt: date,
-        updatedAt: date
-      })
-    }
+    data.push({
+      name: 'PlanetFarms',
+      description: 'Default community',
+      category: 'Farms',
+      slug: 'planetfarms',
+      auto_follow: true,
+      createdAt: date,
+      updatedAt: date
+    })
     return queryInterface.bulkInsert('communities', data, {})
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
     await queryInterface.bulkDelete('communities', null, {})
   }
 }

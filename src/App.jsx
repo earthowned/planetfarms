@@ -45,7 +45,9 @@ import ScrollToTop from './utils/scrollToTop'
 import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
 import EditLesson from './screens/courseManager/editLesson/EditLesson'
-import UserVerification from './screens/userVerification/UserVerification'
+import UserVerification from './screens/verification/UserVerification'
+import EmailVerification from './screens/verification/EmailVerification'
+import PhoneVerification from './screens/verification/PhoneVerification'
 
 function App () {
   return (

@@ -175,8 +175,8 @@ const sendTokenStatus = (req, res) => {
 }
 
 const changePassword = async (req, res) => {
+  const { user, oldPassword, newPassword } = req.body
   try {
-    const { user, oldPassword, newPassword } = req.body
     let userWithNewPassword
     if (process.env.AUTH_METHOD === 'cognito') {
       const authUser = await Auth.currentAuthenticatedUser()
@@ -212,17 +212,6 @@ const forgotPasswordSubmit = async (req, res) => {
   Auth.forgotPasswordSubmit(username, code, newPassword)
     .then((data) => console.log(data))
     .catch((err) => console.log(err))
-}
-
-const resendCode = async (req, res) => {
-  const { username } = req.body
-  try {
-    await Auth.resendSignUp(username)
-    res.json({ message: 'code resent successfully' }).status(200)
-  } catch (err) {
-    res.status(401)
-    throw new Error('error resending code: ', err)
-  }
 }
 
 const confirmSignUpWithCode = async (req, res) => {
@@ -306,20 +295,21 @@ const updateUser = async (req, res) => {
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    db.User.findOne({ where: { userID: id } }).then((user) => {
+    db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
           { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
           { where: { userID: id } }
-        ).then(() => res.status(200))
-          .catch((err) => res.json({ error: err.message }).status(400))
+        )
+          .then(() => res.sendStatus(200))
+          .catch((err) => res.status(403).json({ error: err.message }))
       } else {
         res.status(404)
         throw new Error('User not found')
       }
     })
   } catch (err) {
-    res.json({ error: err.message })
+    res.status(403).json({ error: err.message })
   }
 }
 
