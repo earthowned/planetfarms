@@ -155,6 +155,25 @@ export const login = (name, password) => async (dispatch) => {
         token: response?.signInUserSession?.idToken?.jwtToken || '',
         id: response?.attributes?.sub || ''
       }
+      window.localStorage.setItem('userInfo', JSON.stringify(data))
+      await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: data.id }, {
+        headers: {
+          Authorization: 'Bearer ' + data.token
+        }
+      })
+
+      await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, {
+        firstName: response.attributes.given_name,
+        lastName: response.attributes.family_name,
+        birthday: response.attributes.birthdate,
+        phone: response.attributes.phone_number,
+        email: response.attributes.email
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + data.token
+        }
+      })
     }
     window.localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
@@ -190,7 +209,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
       } else {
         const message = data.response && data.response.data.name ? data.response.data.name : data.message
         if (message === 'TokenExpired') {
-          if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
+          if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
             Auth.currentSession().then((res) => {
               const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
               userInfo.token = res?.idToken?.jwtToken || ''
@@ -201,7 +220,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
             })
           } else {
             const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
-            postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, {id: userInfo.id}).then((res)=>{
+            postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, { id: userInfo.id }).then((res) => {
               userInfo.token = res?.token || ''
               window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
               dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
@@ -209,8 +228,6 @@ export const checkAndUpdateToken = () => async (dispatch) => {
               return true
             })
             // userInfo.token = res?.idToken?.jwtToken || ''
-
-
           }
         } else if (message === 'InvalidToken' || message === 'Unauthorized') {
           dispatch({ type: USER_DETAILS_FAIL, payload: message })
