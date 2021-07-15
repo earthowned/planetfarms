@@ -53,6 +53,11 @@ COGNITO_CLIENT_ID=<required only if using cognito auth method>
 COGNITO_DOMAIN_NAME=<required only if using cognito auth method>
 ```
 
+### `initial setup`
+
+If you are running cognito authentication then you need to copy file from https://cognito-idp.{region}.amazonaws.com/{poolId}/.well-known/jwks.json
+ and save it under **api/src/middleware** folder
+
 ### `docker-compose up`
 
 [Docker](https://www.docker.com/) is a software platform for building applications based on containers — small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another.
