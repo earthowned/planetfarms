@@ -15,6 +15,8 @@ jobs:
           ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
       - name: 
         run: |
+          env
+          echo ${GITHUB_REF}
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           echo "github.planetfarms.io ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDtrYtt44iGGRUDlL9aC3S/Xb40TuPx18NxngzjkSGrtq5tkPKQbOAZmEyVOONEFwHqIRQUgCbjQGwYtunbXaco=" > ~/.ssh/known_hosts
@@ -25,6 +27,7 @@ jobs:
           git branch
           git checkout main
           git branch
+          git pull
           EOF
 
           
