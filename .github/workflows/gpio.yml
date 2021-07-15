@@ -1,10 +1,14 @@
-name: 'Manual Deploy on GPIO'
+name: Manual GPIO Deploy
 
-on: [push]
+on:
+  #push:
+  #  branches:
+  #    - testgpio
+  workflow_dispatch:
 
 jobs:
   GPIO:
-    name: SSH to GPIO
+    name: Manual GPIO Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -16,19 +20,19 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
 
-      - name: 
+      - name: deploy
         run: |
           branch="${GITHUB_REF#refs/heads/}"
           echo "The branched that was pushed is $branch"
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           echo "github.planetfarms.io ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDtrYtt44iGGRUDlL9aC3S/Xb40TuPx18NxngzjkSGrtq5tkPKQbOAZmEyVOONEFwHqIRQUgCbjQGwYtunbXaco=" > ~/.ssh/known_hosts
-          #ssh -o StrictHostKeyChecking=no root@github.planetfarms.io
-          ssh root@github.planetfarms.io <<'EOF'
+          ssh root@github.planetfarms.io <<EOF
           cd /srv/planetfarms/
           pwd
           git branch
-          git checkout main
+          git pull
+          git checkout $branch
           git branch
           git pull
           screen -ls
@@ -44,6 +48,3 @@ jobs:
           screen -dmS api bash -c 'cd /srv/planetfarms/api; npm start'
           screen -ls
           EOF
-
-          
-
