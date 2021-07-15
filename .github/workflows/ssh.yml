@@ -15,8 +15,8 @@ jobs:
           ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
       - name: 
         run: |
-          env
-          echo ${GITHUB_REF#refs/heads/}
+          branch="${GITHUB_REF#refs/heads/}"
+          echo "The branched that pushed was $branch"
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           echo "github.planetfarms.io ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDtrYtt44iGGRUDlL9aC3S/Xb40TuPx18NxngzjkSGrtq5tkPKQbOAZmEyVOONEFwHqIRQUgCbjQGwYtunbXaco=" > ~/.ssh/known_hosts
