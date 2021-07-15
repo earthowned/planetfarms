@@ -26,7 +26,7 @@ const LessonDetail = ({ data, id }) => {
 
   useEffect(() => {
     setLessonData([textData, videoData, photoData])
-  }, [])
+  }, [data])
   const newData = lessonData.flat()
 
   return (
