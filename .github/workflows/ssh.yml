@@ -9,6 +9,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+      - name: sshagent
+        uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.GPIO_SSHKEY}}
       - name: 
         run: |
           ssh root@github.planetfarms.io
