@@ -1,11 +1,12 @@
 module.exports = {
   up: async (queryInterface, _Sequelize) => {
-    const data = ['Farming', 'Agriculture', 'Travelling', 'New Course'].map(
+    const date = new Date()
+    const data = ['Farms'].map(
       (name) => {
         return {
           name,
-          createdAt: new Date(),
-          updatedAt: new Date()
+          createdAt: date,
+          updatedAt: date
         }
       }
     )
