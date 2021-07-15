@@ -34,8 +34,6 @@ const AddLesson = () => {
 
   const { register, errors, handleSubmit } = useForm()
 
-  console.log(lessonData)
-
   const submitLessonForm = ({ title, lessonDesc }) => {
     const coverImg = lessonCover
     dispatch(
@@ -47,33 +45,37 @@ const AddLesson = () => {
       })
     )
   }
-  console.log(material)
-  useEffect(async () => {
-    if (
-      Object.keys(postLessonData).length !== 0 &&
-      postLessonData.loading === false
-    ) {
-      const id = postLessonData?.course?.data?.id
-      const lessonId = id
-      if (id) {
-        for (let i = 0; i < lessonData.length; i++) {
-          if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
+  useEffect(() => {
+    const lessonDataToPost = async () => {
+      if (
+        Object.keys(postLessonData).length !== 0 &&
+        postLessonData.loading === false
+      ) {
+        const id = postLessonData?.course?.data?.id
+        const lessonId = id
+        if (id) {
+          for (let i = 0; i < lessonData.length; i++) {
+            if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
+              await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
+            }
+            if (lessonData[i]?.lessonImg) {
+              await addImage({ lessonData: lessonData[i], lessonId, dispatch })
+            }
+            if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
+              await addText({ lessonData: lessonData[i], lessonId, dispatch })
+            }
           }
-          if (lessonData[i]?.lessonImg) {
-            await addImage({ lessonData: lessonData[i], lessonId, dispatch })
+          for (let i = 0; i < material.length; i++) {
+            if (material[i].mData) {
+              await addMaterial({ material: material[i], lessonId, dispatch })
+            }
           }
-          if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            await addText({ lessonData: lessonData[i], lessonId, dispatch })
-          }
-        }
-        for (let i = 0; i < material.length; i++) {
-          if (material[i].mData) {
-            await addMaterial({ material: material[i], lessonId, dispatch })
-          }
+          history.push(`/lesson/${id}`)
         }
       }
-      history.push(`/lesson/${id}`)
+    }
+    if (lessonData.length !== 0 || material.length !== 0) {
+      lessonDataToPost()
     }
   }, [postLessonData])
 
