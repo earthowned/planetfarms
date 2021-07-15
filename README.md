@@ -63,7 +63,12 @@ To run docker first you need to install docker on your computer after than enter
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
 
-Now to actually create that table in database you need to run `npx sequelize-cli db:migrate` command. This command will create table and to seed your database you can run `npx sequelize-cli db:seed:all`.
+Now to actually create that table in database you need to run `npx sequelize-cli db:migrate` command. This command will create tables
+When you are setting up new community please run following seed which will provide required data
+`npx sequelize-cli db:seed --seed 20210615104502-categories.js`
+`npx sequelize-cli db:seed --seed 20210608081218-communities.js`
+
+For testing environment you can seed all databases by running `npx sequelize-cli db:seed:all`.
 
 ### `npx standard --fix`
 
