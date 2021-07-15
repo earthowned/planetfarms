@@ -213,31 +213,42 @@ export const checkAndUpdateToken = () => async (dispatch) => {
             Auth.currentSession().then((res) => {
               const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
               userInfo.token = res?.idToken?.jwtToken || ''
-              window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
-              dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
-              dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
-              return true
+              if(userInfo.token == '') return tokenFailure(dispatch, message)
+              else {
+                window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+                dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
+                dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+                return true
+              }
             })
           } else {
             const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
             postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, { id: userInfo.id }).then((res) => {
               userInfo.token = res?.token || ''
-              window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
-              dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
-              dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
-              return true
+              if(userInfo.token == '') return tokenFailure(dispatch, message)
+              else {
+                window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+                dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
+                dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+                return true
+              }
             })
-            // userInfo.token = res?.idToken?.jwtToken || ''
           }
         } else if (message === 'InvalidToken' || message === 'Unauthorized') {
-          dispatch({ type: USER_DETAILS_FAIL, payload: message })
-          window.localStorage.clear()
-          dispatch({ type: USER_LOGOUT })
-          return false
+          return tokenFailure(dispatch, message)
         }
       }
+    } else {
+      return tokenFailure(dispatch, 'Unauthorized')
     }
   })
+}
+
+const tokenFailure = (dispatch, message) => {
+  dispatch({ type: USER_DETAILS_FAIL, payload: message })
+  window.localStorage.clear()
+  dispatch({ type: USER_LOGOUT })
+  return false
 }
 
 export const getMyDetails = () => async (dispatch) => {

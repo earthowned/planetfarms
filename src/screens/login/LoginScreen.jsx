@@ -17,7 +17,9 @@ const LoginScreen = () => {
     const userInfo = window.localStorage.getItem('userInfo')
     if (userInfo) {
       setLoggedIn(true)
-      if (dispatch(checkAndUpdateToken())) {
+      const route = dispatch(checkAndUpdateToken())
+      console.log(route)
+      if (route) {
         routingCommunityNews(dispatch, true)
       }
     } else {
