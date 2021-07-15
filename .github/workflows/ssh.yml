@@ -28,6 +28,18 @@ jobs:
           git checkout main
           git branch
           git pull
+          screen -ls
+          screen -X -S api kill
+          screen -X -S react kill
+          screen -ls
+          npm i
+          cd api/
+          npm i
+          npx sequelize-cli db:migrate
+          cd ..
+          screen -dmS react bash -c 'cd /srv/planetfarms; npm start'
+          screen -dmS api bash -c 'cd /srv/planetfarms/api; npm start'
+          screen -ls
           EOF
 
           
