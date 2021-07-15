@@ -15,7 +15,6 @@ jobs:
           ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
       - name: 
         run: |
-          mkdir -p ~/.ssh/known_hosts
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/known_hosts
           ssh root@github.planetfarms.io
