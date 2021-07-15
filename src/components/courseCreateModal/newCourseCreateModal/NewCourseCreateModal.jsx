@@ -15,7 +15,7 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  const [isFree, setIsFree] = useState(false)
+  const [isFree, setIsFree] = useState(true)
   const [courseImage, setCourseImage] = useState('')
 
   const { register, errors, handleSubmit } = useForm()

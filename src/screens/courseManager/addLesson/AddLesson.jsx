@@ -57,13 +57,13 @@ const AddLesson = () => {
       const lessonId = id
       if (id) {
         for (let i = 0; i < lessonData.length; i++) {
-          if (lessonData[i]?.videoCover) {
+          if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
             await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
           }
           if (lessonData[i]?.lessonImg) {
             await addImage({ lessonData: lessonData[i], lessonId, dispatch })
           }
-          if (lessonData[i]?.textHeading) {
+          if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
             await addText({ lessonData: lessonData[i], lessonId, dispatch })
           }
         }
