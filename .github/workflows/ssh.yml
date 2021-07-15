@@ -15,7 +15,9 @@ jobs:
           ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
       - name: 
         run: |
+          mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          chmod 600 ~/.ssh/known_hosts
-          ssh root@github.planetfarms.io
+          #echo "github.planetfarms.io ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDtrYtt44iGGRUDlL9aC3S/Xb40TuPx18NxngzjkSGrtq5tkPKQbOAZmEyVOONEFwHqIRQUgCbjQGwYtunbXaco=" >
+          ssh -o StrictHostKeyChecking=no root@github.planetfarms.io
+          
 
