@@ -27,7 +27,6 @@ const Courses = () => {
   if (isLoading) {
     return <span>Loading...</span>
   }
-  const userId = userInfo.id
 
   function createNewCourseFunc () {
     setCreateNewCourse(true)
@@ -69,7 +68,6 @@ const Courses = () => {
               category={category.name}
               setModalActive={setModalActive}
               key={category.id}
-              userId={userId}
             />
           )
         })}

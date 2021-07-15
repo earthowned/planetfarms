@@ -1,3 +1,6 @@
+import React from 'react'
+import { useSelector } from 'react-redux'
+
 import useGetFetchData from '../../utils/useGetFetchData'
 import { GET_COURSE } from '../../utils/urlConstants'
 
@@ -7,7 +10,9 @@ import CardLayout from '../../layout/cardLayout/CardLayout'
 import Background from '../background/Background'
 import './CoursesCard.scss'
 
-const CoursesCard = ({ category, setModalActive, userId }) => {
+const CoursesCard = ({ category, setModalActive }) => {
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   const { data: courseData, isLoading } = useGetFetchData('course', GET_COURSE)
   if (isLoading) {
     return <span>Loading</span>
@@ -41,7 +46,7 @@ const CoursesCard = ({ category, setModalActive, userId }) => {
                       item={course}
                       setModalActive={setModalActive}
                     />
-                    <CardContent item={course} userId={userId} />
+                    <CardContent item={course} userInfo={userInfo} />
                   </div>
                 </Background>
               )
@@ -52,4 +57,4 @@ const CoursesCard = ({ category, setModalActive, userId }) => {
   )
 }
 
-export default CoursesCard
+export default React.memo(CoursesCard)

@@ -43,7 +43,13 @@ import {
   userListReducer,
   userLoginReducer,
   userUpdateReducer,
-  userRegisterReducer
+  userRegisterReducer,
+  userConfirmCodeReducer,
+  userResendCodeReducer,
+  userAttrConfirmCodeReducer,
+  userAttrResendCodeReducer,
+  userForgotPwdConfirmCodeReducer,
+  userForgotPwdResendCodeReducer
 } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import {
@@ -90,6 +96,14 @@ const reducer = combineReducers({
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,
+  userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
+  userConfirmCode: userConfirmCodeReducer,
+  userResendCode: userResendCodeReducer,
+  userAttrConfirmCode: userAttrConfirmCodeReducer,
+  userAttrResendCode: userAttrResendCodeReducer,
+  userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
+  userForgotPwdResendCode: userForgotPwdResendCodeReducer,
   addNewNews: newsCreateReducer,
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
@@ -101,12 +115,10 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer
 })
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
-  : null
+const userInfoFromStorage = window.localStorage.getItem('userInfo') ? JSON.parse(window.localStorage.getItem('userInfo')) : null
 
-const currentCommunityFromStorage = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
+const currentCommunityFromStorage = window.localStorage.getItem('currentCommunity')
+  ? JSON.parse(window.localStorage.getItem('currentCommunity'))
   : null
 
 const initialState = {
