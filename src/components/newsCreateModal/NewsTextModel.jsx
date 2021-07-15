@@ -8,21 +8,22 @@ import './NewsCreateModal.scss'
 const CreateText = ({
   textActive,
   setTextActive,
-  placeholder,
   lessonData,
   setLessonData
 }) => {
   const { register, errors, handleSubmit } = useForm()
 
   const addText = ({ textHeading, textDescription }) => {
-    const textData = [
-      ...lessonData,
-      {
-        textHeading,
-        textDescription
-      }
-    ]
-    setLessonData(textData)
+    if (textHeading.length !== 0 || textDescription.length !== 0) {
+      const textData = [
+        ...lessonData,
+        {
+          textHeading,
+          textDescription
+        }
+      ]
+      setLessonData(textData)
+    }
     setTextActive(false)
   }
   return (
@@ -39,26 +40,32 @@ const CreateText = ({
                 <InputFields
                   type='text'
                   className='default-input-variation'
-                  placeholder={placeholder}
+                  placeholder='Text Heading (Optional)'
                   name='textHeading'
+                  ref={register}
+                />
+                <TextArea
+                  className={`default-input-variation text-area-variation ${
+                    errors.textDescription
+                      ? 'textarea textarea__error'
+                      : 'textarea'
+                  }`}
+                  placeholder='Text description'
+                  cols='3'
+                  rows='7'
+                  name='textDescription'
                   ref={register({
                     required: {
                       value: true,
-                      message: 'Please enter Heading'
+                      message: 'Please enter a text description'
                     }
                   })}
                 />
                 <ErrorText
                   className='errorMsg'
-                  message={errors.textHeading && errors.textHeading.message}
-                />
-                <TextArea
-                  className='default-input-variation text-area-variation textarea'
-                  placeholder='Text description'
-                  cols='3'
-                  rows='7'
-                  name='textDescription'
-                  ref={register}
+                  message={
+                    errors.textDescription && errors.textDescription.message
+                  }
                 />
               </div>
               <Button

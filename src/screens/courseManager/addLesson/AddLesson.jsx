@@ -101,7 +101,6 @@ const AddLesson = () => {
           type='text'
           textActive={textModal}
           setTextActive={setTextModal}
-          placeholder='Text Heading'
           lessonData={lessonData}
           setLessonData={setLessonData}
         />

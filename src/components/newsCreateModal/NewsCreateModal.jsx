@@ -15,19 +15,14 @@ const NewsCreateModal = ({
   imageActive,
   setImageActive,
   textActive,
-  placeholder,
   setTextActive,
   groupActive,
   setGroupActive,
   groupEditActive,
   setGroupEditActive,
-  enterpriseActive,
-  setEnterpriseActive,
   addVideoData,
-  setVideoDataToPost,
   lessonData,
-  setLessonData,
-  setLessonImgDataToPost
+  setLessonData
 }) => {
   const [files, setFiles] = useState(null)
 
@@ -82,7 +77,6 @@ const NewsCreateModal = ({
           files={files}
           textActive={textActive}
           setTextActive={setTextActive}
-          placeholder={placeholder}
           lessonData={lessonData}
           setLessonData={setLessonData}
         />

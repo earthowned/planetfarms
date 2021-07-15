@@ -220,6 +220,13 @@
         font-size: 1.05em;
         font-family: inherit;
 
+        &__error {
+          border-color: var(--secondary-red);
+          &:focus {
+            border-color: var(--secondary-red) !important;
+          }
+        }
+
         &:focus {
           border-color: var(--primary-color);
         }
