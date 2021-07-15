@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
-import './DragDrop.scss'
+import { useState } from "react";
+import { useDropzone } from "react-dropzone";
+import "./DragDrop.scss";
 const DragDrop = ({
   onChange = () => {},
   type,
@@ -11,25 +11,26 @@ const DragDrop = ({
   img,
   editText,
   dataImg,
-  tag
+  tag,
+  onClick,
 }) => {
-  const [files, setFiles] = useState()
+  const [files, setFiles] = useState();
   const { getRootProps, getInputProps } = useDropzone({
-    accept: `${type ? `${type}/*` : fileType ? `${fileType}` : 'image/*'}`,
+    accept: `${type ? `${type}/*` : fileType ? `${fileType}` : "image/*"}`,
     onDrop: (acceptedFiles) => {
       acceptedFiles.map((file) =>
         Object.assign(file, { preview: URL.createObjectURL(file) })
-      )
-      setFiles(acceptedFiles[0])
-      onChange(acceptedFiles[0])
-    }
-  })
+      );
+      setFiles(acceptedFiles[0]);
+      onChange(acceptedFiles[0]);
+    },
+  });
   const fileChange = (e) => {
-    const selectedFile = e.target.files[0]
-    Object.assign(selectedFile, { preview: URL.createObjectURL(selectedFile) })
-    setFiles(selectedFile)
-    onChange(selectedFile)
-  }
+    const selectedFile = e.target.files[0];
+    Object.assign(selectedFile, { preview: URL.createObjectURL(selectedFile) });
+    setFiles(selectedFile);
+    onChange(selectedFile);
+  };
 
   return (
     <DragDropComponent
@@ -46,9 +47,10 @@ const DragDrop = ({
       editText={editText}
       dataImg={dataImg}
       tag={tag}
+      onClick={onClick}
     />
-  )
-}
+  );
+};
 
 const DragDropComponent = ({
   getInputProps,
@@ -63,12 +65,13 @@ const DragDropComponent = ({
   img,
   editText,
   dataImg,
-  tag
+  tag,
+  onClick,
 }) => {
   return (
-    <div className={className ? `${className}` : 'drag-drop-container'}>
+    <div className={className ? `${className}` : "drag-drop-container"}>
       <div
-        className='drag-drop'
+        className="drag-drop"
         {...getRootProps()}
         onChange={(e) => fileChange(e)}
       >
@@ -77,49 +80,52 @@ const DragDropComponent = ({
         {files ? (
           <>
             <img
-              className='avatar'
+              className="avatar"
               src={files.preview}
-              alt='files[0].preview'
+              alt="files[0].preview"
             />
-            <div className='drag-drop-icon-container'>
-              {type === 'video' ? (
-                <p className='videoName'>{files.name}</p>
+            <div className="drag-drop-icon-container">
+              {type === "video" ? (
+                <p className="videoName">{files.name}</p>
               ) : text ? (
                 <p>{text}</p>
               ) : (
-                <img src='/img/camera-outline.svg' alt='camera icon' />
+                <img src="/img/camera-outline.svg" alt="camera icon" />
               )}
             </div>
           </>
         ) : dataImg ? (
           <>
             <img
-              className='avatar'
+              className="avatar"
               src={process.env.REACT_APP_CDN_BASE_URL + `/${tag}/` + dataImg}
-              alt='files[0].preview'
+              alt="files[0].preview"
             />
-            <div className='drag-drop-icon-container'>
-              <img src='/img/camera-outline.svg' alt='camera icon' />
+            <div className="drag-drop-icon-container">
+              <img src="/img/camera-outline.svg" alt="camera icon" />
             </div>
           </>
         ) : text ? (
-          <h6 className='dragDropText'>{text}</h6>
+          <h6 className="dragDropText">{text}</h6>
         ) : (
-          <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
+          <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
             Drag & Drop files in this area or Click Here to attach video cover
           </h6>
         )}
       </div>
       {files && (
         <img
-          src='/img/close-outline.svg'
-          className='drag-drop-close'
-          onClick={() => setFiles(!files)}
-          alt='drag_drop_img_close'
+          src="/img/close-outline.svg"
+          className="drag-drop-close"
+          onClick={() => {
+            setFiles(null);
+            onClick();
+          }}
+          alt="drag_drop_img_close"
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default DragDrop
+export default DragDrop;

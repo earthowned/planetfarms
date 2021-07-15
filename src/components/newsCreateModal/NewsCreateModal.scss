@@ -92,6 +92,12 @@
   margin: 0.5em 0 1em 0;
   font-size: 1em;
 }
+.error {
+  border-color: var(--secondary-red);
+  &:focus {
+    border-color: var(--secondary-red) !important;
+  }
+}
 
 .videoUploadBtn {
   color: transparent;

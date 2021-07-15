@@ -36,6 +36,7 @@ const CreateVideo = ({
     setLessonData(vData)
     setVideoActive(false)
   }
+  console.log(video)
   return (
     <>
       {videoActive && (
@@ -76,14 +77,16 @@ const CreateVideo = ({
                         className={
                           videoLink
                             ? 'default-input-variation last-input-variation full'
-                            : 'default-input-variation last-input-variation'
+                            : `default-input-variation last-input-variation ${
+                                errors.videoLink ? 'error' : ''
+                              }`
                         }
                         placeholder='Video link'
                         name='videoLink'
                         ref={register({
                           required: {
                             value: true,
-                            message: 'Please enter a video Link'
+                            message: 'Please enter a video Link or Video File'
                           }
                         })}
                         onChange={(e) => setVideoLink(e.target.value)}
@@ -102,6 +105,7 @@ const CreateVideo = ({
                       }
                       onChange={(vid) => setVideo(vid)}
                       setVideo={setVideo}
+                      onClick={() => setVideo(null)}
                       text='Add Video'
                     />
                   )}
