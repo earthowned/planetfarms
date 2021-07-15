@@ -15,7 +15,7 @@ const CreateImage = ({
   lessonData,
   setLessonData
 }) => {
-  const [isImgDesc, setIsImgDesc] = useState(false)
+  const [isImgDesc, setIsImgDesc] = useState(true)
   const [lessonImg, setLessonImg] = useState(null)
 
   const { register, handleSubmit } = useForm()
@@ -53,16 +53,18 @@ const CreateImage = ({
                   isFree={isImgDesc}
                 />
               </div>
-              <div className='photo-input-container'>
-                <TextArea
-                  placeholder='Photo description'
-                  className='default-input-variation text-area-variation textarea'
-                  cols='3'
-                  rows='3'
-                  name='photoDescription'
-                  ref={register}
-                />
-              </div>
+              {isImgDesc && (
+                <div className='photo-input-container'>
+                  <TextArea
+                    placeholder='Photo description (optional)'
+                    className='default-input-variation text-area-variation textarea'
+                    cols='3'
+                    rows='3'
+                    name='photoDescription'
+                    ref={register}
+                  />
+                </div>
+              )}
 
               <Button
                 name='Add Photo block'

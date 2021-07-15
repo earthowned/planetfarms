@@ -55,18 +55,14 @@ const CreateVideo = ({
               <div className='video-input-container'>
                 <InputFields
                   className='default-input-variation'
-                  placeholder='Video title'
+                  placeholder='Video title (Optional)'
                   name='videoTitle'
                   ref={register}
-                />
-                <ErrorText
-                  className='errorMsg'
-                  message={errors.videoTitle && errors.videoTitle.message}
                 />
 
                 <TextArea
                   className='default-input-variation text-area-variation textarea'
-                  placeholder='Video description'
+                  placeholder='Video description (Optional)'
                   cols='3'
                   rows='4'
                   name='videoDescription'
