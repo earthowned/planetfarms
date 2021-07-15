@@ -12,8 +12,10 @@ jobs:
       - name: sshagent
         uses: webfactory/ssh-agent@v0.5.2
         with:
-          ssh-private-key: ${{ secrets.GPIO_SSHKEY}}
+          ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
       - name: 
         run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           ssh root@github.planetfarms.io
 
