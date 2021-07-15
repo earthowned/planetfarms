@@ -1,0 +1,16 @@
+name: 'SSH'
+description: 'SSH to github.planetfarms.io'
+
+on: [push]
+
+jobs:
+  ssh-planetforms:
+    runs-on: ubuntu-latest
+    name: SSH to github.planetfarms.io
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: 
+        run: |
+          ssh root@github.planetfarms.io
+
