@@ -1,22 +1,25 @@
-name: 'SSH'
+name: 'Manual Deploy on GPIO'
 
 on: [push]
 
 jobs:
-  ssh-planetforms:
+  GPIO:
+    name: SSH to GPIO
     runs-on: ubuntu-latest
-    name: SSH to github.planetfarms.io
+
     steps:
       - name: checkout
         uses: actions/checkout@v2
+
       - name: sshagent
         uses: webfactory/ssh-agent@v0.5.2
         with:
           ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
+
       - name: 
         run: |
           branch="${GITHUB_REF#refs/heads/}"
-          echo "The branched that pushed was $branch"
+          echo "The branched that was pushed is $branch"
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           echo "github.planetfarms.io ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDtrYtt44iGGRUDlL9aC3S/Xb40TuPx18NxngzjkSGrtq5tkPKQbOAZmEyVOONEFwHqIRQUgCbjQGwYtunbXaco=" > ~/.ssh/known_hosts
