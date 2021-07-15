@@ -26,31 +26,31 @@ function MyProfile () {
   }
   return (
     <>
-    {
-      loading ? 
-      <div>
-        <p>
-          Loading...
-        </p>
-      </div> :
+      {
+      loading
+        ? <div>
+          <p>
+            Loading...
+          </p>
+        </div>
 
-      <DashboardLayout title='My Profile'>
-        <div className='x10-4-0-my-personals'>
-          <div className='flex-col-2'>
-            <div className='frame-2923'>
-              <BackButton location='/dashboard' />
-            </div>
-            <div className='profile border-1px-onyx'>
-              <div className='profile-info'>
-                <PersonalInformation user={user} />
-                <ContactInformation user={user} />
-                <AdditionalInformation user={user} />
+        : <DashboardLayout title='My Profile'>
+          <div className='x10-4-0-my-personals'>
+            <div className='flex-col-2'>
+              <div className='frame-2923'>
+                <BackButton location='/dashboard' />
               </div>
-              <EditInformation clickHandler={editUserInformation} image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
+              <div className='profile border-1px-onyx'>
+                <div className='profile-info'>
+                  <PersonalInformation user={user} />
+                  <ContactInformation user={user} />
+                  <AdditionalInformation user={user} />
+                </div>
+                <EditInformation clickHandler={editUserInformation} image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
+              </div>
             </div>
           </div>
-        </div>
-      </DashboardLayout>
+        </DashboardLayout>
     }
     </>
   )

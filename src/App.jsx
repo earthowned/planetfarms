@@ -100,7 +100,7 @@ function App () {
             <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' />
             <PrivateRoute component={MyProfile} path='/myProfile' />
             <PrivateRoute component={UserInfo} path='/userInfo' />
-            <PrivateRoute component={()=> <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
+            <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
           </Switch>
         </ScrollToTop>
       </Router>
