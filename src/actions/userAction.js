@@ -178,17 +178,33 @@ export const checkAndUpdateToken = () => async (dispatch) => {
       } else {
         const message = data.response && data.response.data.name ? data.response.data.name : data.message
         if (message === 'TokenExpired') {
-          Auth.currentSession().then((res) => {
+          if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
+            Auth.currentSession().then((res) => {
+              const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
+              userInfo.token = res?.idToken?.jwtToken || ''
+              window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+              dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
+              dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+              return true
+            })
+          } else {
             const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
-            userInfo.token = res?.idToken?.jwtToken || ''
-            window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
-            dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
-            dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: false })
-            return false
-          })
+            postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, {id: userInfo.id}).then((res)=>{
+              userInfo.token = res?.token || ''
+              window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+              dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
+              dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+              return true
+            })
+            // userInfo.token = res?.idToken?.jwtToken || ''
+
+
+          }
         } else if (message === 'InvalidToken' || message === 'Unauthorized') {
           dispatch({ type: USER_DETAILS_FAIL, payload: message })
-          dispatch(logout())
+          window.localStorage.clear()
+          dispatch({ type: USER_LOGOUT })
+          return false
         }
       }
     }
@@ -361,6 +377,7 @@ export const changePassword = (username, oldPassword, newPassword) => async (dis
 
 export const routingCommunityNews = async (dispatch, route = false) => {
   const communityData = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`)
+  console.log('communityData: ', communityData)
   window.localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
   if (route) {
     document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
