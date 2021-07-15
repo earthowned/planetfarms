@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createLesson } from '../../../actions/lessonActions'
-// import { createMaterial } from "../../../actions/materialActions";
 import { addVideo } from './addVideo'
 import { addText } from './addText'
 import { addImage } from './addImage'

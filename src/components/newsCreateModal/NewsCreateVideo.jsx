@@ -57,12 +57,7 @@ const CreateVideo = ({
                   className='default-input-variation'
                   placeholder='Video title'
                   name='videoTitle'
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: 'Please enter video title'
-                    }
-                  })}
+                  ref={register}
                 />
                 <ErrorText
                   className='errorMsg'
