@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 })
 
 function checkFileType (file, cb) {
-  const filetypes = /jpg|jpeg|png|mp4|pdf/
+  const filetypes = /jpg|jpeg|png|mp4|pdf|doc|docx|ppt|pptx|txt|xlsx/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
 
@@ -54,8 +54,18 @@ const resizeImage = (req, res, next) => {
     // user might not send image sometimes
     if (!req.file) next()
 
-    const filename = path.basename(req.file.path).split('.').slice(0, -1).join('.')
-    let dir = path.join(path.dirname(__dirname), '..', 'files', `${req.file.fieldname}`, filename)
+    const filename = path
+      .basename(req.file.path)
+      .split('.')
+      .slice(0, -1)
+      .join('.')
+    let dir = path.join(
+      path.dirname(__dirname),
+      '..',
+      'files',
+      `${req.file.fieldname}`,
+      filename
+    )
     let newImage = sharp(req.file.path)
     if (width) {
       newImage = newImage.resize(parseInt(width))
@@ -80,7 +90,9 @@ const resizeImage = (req, res, next) => {
   }
 }
 
-const changeFormat = (filename) => filename && path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
+const changeFormat = (filename) =>
+  filename &&
+  path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
 
 module.exports = {
   multipleUpload,
