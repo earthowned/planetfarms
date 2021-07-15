@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { createLesson } from '../../../actions/lessonActions'
-import { addVideo } from './addVideo'
-import { addText } from './addText'
-import { addImage } from './addImage'
-import { addMaterial } from './addMaterial'
 
 import AddContent from './AddContent'
 import LessonMaterial from './LessonMaterial'
@@ -22,7 +18,6 @@ const AddLesson = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { courseId } = useParams()
-  const postLessonData = useSelector((state) => state.addLesson)
 
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
@@ -41,43 +36,13 @@ const AddLesson = () => {
         title,
         courseId,
         coverImg,
-        lessonDesc
+        lessonDesc,
+        lessonData,
+        material,
+        history
       })
     )
   }
-  useEffect(() => {
-    const lessonDataToPost = async () => {
-      if (
-        Object.keys(postLessonData).length !== 0 &&
-        postLessonData.loading === false
-      ) {
-        const id = postLessonData?.course?.data?.id
-        const lessonId = id
-        if (id) {
-          for (let i = 0; i < lessonData.length; i++) {
-            if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-              await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
-            }
-            if (lessonData[i]?.lessonImg) {
-              await addImage({ lessonData: lessonData[i], lessonId, dispatch })
-            }
-            if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-              await addText({ lessonData: lessonData[i], lessonId, dispatch })
-            }
-          }
-          for (let i = 0; i < material.length; i++) {
-            if (material[i].mData) {
-              await addMaterial({ material: material[i], lessonId, dispatch })
-            }
-          }
-          history.push(`/lesson/${id}`)
-        }
-      }
-    }
-    if (lessonData.length !== 0 || material.length !== 0) {
-      lessonDataToPost()
-    }
-  }, [postLessonData])
 
   return (
     <>
