@@ -56,8 +56,7 @@ const LessonDetail = ({ data, id }) => {
               <Image
                 src={`${LESSON_IMG}${data?.lessonImg}`}
                 desc={data?.isImgDesc === true && data?.photoDescription}
-              />
-            }
+              />}
           </div>
         ))}
       <LessonTest id={id} />

@@ -25,9 +25,6 @@ const LessonPage = () => {
     userId,
     setPath
   )
-
-  console.log(data)
-
   return (
     <>
       {isLoading ? (
