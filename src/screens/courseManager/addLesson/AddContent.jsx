@@ -12,7 +12,7 @@ const AddContent = ({
   register,
   errors,
   setLessonCover,
-  lessonData
+  lessonData,
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -22,19 +22,19 @@ const AddContent = ({
       />
       <input
         type='text'
-        placeholder='Write title here'
+        placeholder='Write Title Here'
         name='title'
         ref={register({
           required: {
             value: true,
-            message: 'You must enter lesson title'
-          }
+            message: 'You must enter lesson title',
+          },
         })}
       />
 
       <TextArea
         className='default-input-variation text-area-variation lessonDesc'
-        placeholder='Lesson description'
+        placeholder='Lesson Description'
         cols='3'
         rows='4'
         name='lessonDesc'

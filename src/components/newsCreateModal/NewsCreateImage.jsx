@@ -44,7 +44,7 @@ const CreateImage = ({
               />
               <DragDrop
                 onChange={(img) => setLessonImg(img)}
-                text='Drag & Drop files in this area or Click Here to attach'
+                text='Drag & Drop photo in this area or Click Here to attach'
               />
               <div className='description'>
                 <label>Add photo description ?</label>{' '}
@@ -56,7 +56,7 @@ const CreateImage = ({
               {isImgDesc && (
                 <div className='photo-input-container'>
                   <TextArea
-                    placeholder='Photo description (optional)'
+                    placeholder='Photo Description (Optional)'
                     className='default-input-variation text-area-variation textarea'
                     cols='3'
                     rows='3'
@@ -67,7 +67,7 @@ const CreateImage = ({
               )}
 
               <Button
-                name='Add Photo block'
+                name='Add Photo Block'
                 onClick={handleSubmit(submitLessonImg)}
                 className='add'
               />

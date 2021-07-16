@@ -50,7 +50,7 @@ const CreateText = ({
                       ? 'textarea textarea__error'
                       : 'textarea'
                   }`}
-                  placeholder='Text description'
+                  placeholder='Text Description'
                   cols='3'
                   rows='7'
                   name='textDescription'
@@ -70,7 +70,7 @@ const CreateText = ({
               </div>
               <Button
                 className='add'
-                name='Add Text block'
+                name='Add Text Block'
                 onClick={handleSubmit(addText)}
               />
             </div>

@@ -51,19 +51,20 @@ const CreateVideo = ({
                 getInputProps={getInputProps}
                 getRootProps={getRootProps}
                 files={files}
+                text='Drag & Drop photo in this area or Click Here to attach Video Cover'
                 onChange={(img) => setVideoCover(img)}
               />
               <div className='video-input-container'>
                 <InputFields
                   className='default-input-variation'
-                  placeholder='Video title (Optional)'
+                  placeholder='Video Title (Optional)'
                   name='videoTitle'
                   ref={register}
                 />
 
                 <TextArea
                   className='default-input-variation text-area-variation textarea'
-                  placeholder='Video description (Optional)'
+                  placeholder='Video Description (Optional)'
                   cols='3'
                   rows='4'
                   name='videoDescription'
@@ -81,7 +82,7 @@ const CreateVideo = ({
                                 errors.videoLink ? 'error' : ''
                               }`
                         }
-                        placeholder='Video link'
+                        placeholder='Video Link'
                         name='videoLink'
                         ref={register({
                           required: {
@@ -117,7 +118,7 @@ const CreateVideo = ({
               </div>
               <Button
                 className='add'
-                name='Add Video block'
+                name='Add Video Block'
                 onClick={handleSubmit(addVideo)}
               />
             </div>
