@@ -7,7 +7,6 @@ import CreateImage from './NewsCreateImage'
 import CreateText from './NewsTextModel'
 import CollectionModalHeader from './CollectionModalHeader'
 import DragDrop from '../dragDrop/DragDrop'
-import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
 
 const NewsCreateModal = ({
   type,
@@ -16,20 +15,14 @@ const NewsCreateModal = ({
   imageActive,
   setImageActive,
   textActive,
-  placeholder,
   setTextActive,
   groupActive,
   setGroupActive,
   groupEditActive,
   setGroupEditActive,
-  enterpriseActive,
-  setEnterpriseActive,
   addVideoData,
-  setVideoDataToPost,
   lessonData,
-  setLessonData,
-  setLessonImgDataToPost,
-  setText
+  setLessonData
 }) => {
   const [files, setFiles] = useState(null)
 
@@ -44,7 +37,6 @@ const NewsCreateModal = ({
           setVideoActive={setVideoActive}
           lessonData={lessonData}
           setLessonData={setLessonData}
-          setVideoDataToPost={setVideoDataToPost}
         />
       )
 
@@ -76,7 +68,6 @@ const NewsCreateModal = ({
           setImageActive={setImageActive}
           lessonData={lessonData}
           setLessonData={setLessonData}
-          setLessonImgDataToPost={setLessonImgDataToPost}
         />
       )
 
@@ -86,10 +77,8 @@ const NewsCreateModal = ({
           files={files}
           textActive={textActive}
           setTextActive={setTextActive}
-          placeholder={placeholder}
           lessonData={lessonData}
           setLessonData={setLessonData}
-          setText={setText}
         />
       )
 

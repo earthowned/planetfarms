@@ -36,7 +36,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
+
+  span {
+    margin: 0 0.5em;
+  }
 }
 
 .video-row-3 > input {
@@ -70,9 +74,7 @@
   height: 300px;
   resize: none;
 }
-.textarea {
-  margin-bottom: 1.5em;
-}
+
 .preview-image {
   width: 100px;
   height: 100px;
@@ -89,6 +91,12 @@
   color: var(--secondary-red);
   margin: 0.5em 0 1em 0;
   font-size: 1em;
+}
+.error {
+  border-color: var(--secondary-red);
+  &:focus {
+    border-color: var(--secondary-red) !important;
+  }
 }
 
 .videoUploadBtn {
@@ -138,8 +146,8 @@
     left: 0;
     top: 0;
 
-    h6 {
-      display: none;
+    p {
+      color: #fff;
     }
   }
 }
@@ -160,5 +168,177 @@
 
   .videoUploadBtn::before {
     width: 90%;
+  }
+}
+
+.addBlock {
+  .block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-bottom: 0;
+    background: rgba(var(--primary-black), 0.2);
+
+    .collection-modal-inner-container {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--primary-black);
+      border-radius: 0.4em;
+
+      @media (max-width: 768px) {
+        top: 45%;
+      }
+
+      .toggle {
+        .toggle-container {
+          background: var(--cards);
+        }
+        .active + .toggle-container {
+          background: var(--primary-color);
+        }
+      }
+      .input-container {
+        .block {
+          border: 1px solid var(--primary-grey);
+          background-color: var(--popups);
+          .label {
+            width: 100%;
+            margin-left: 2.5em;
+          }
+          .inputField {
+            padding: 1.2em 0;
+            color: #fff;
+          }
+
+          &:focus-within {
+            border: 1px solid var(--primary-color);
+          }
+        }
+      }
+      .textarea {
+        margin-bottom: 1.5em;
+        border: 1px solid var(--primary-grey);
+        outline: none;
+        background-color: var(--popups);
+        color: #ffff;
+        font-size: 1.05em;
+        font-family: inherit;
+
+        &__error {
+          border-color: var(--secondary-red);
+          &:focus {
+            border-color: var(--secondary-red) !important;
+          }
+        }
+
+        &:focus {
+          border-color: var(--primary-color);
+        }
+
+        &::-webkit-input-placeholder {
+          color: var(--primary-grey);
+        }
+      }
+    }
+    .drag-drop-container {
+      width: 100%;
+      height: 15em;
+      border: 2px dashed #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .drag-drop {
+      height: 100%;
+      border: none;
+
+      h6 {
+        text-transform: lowercase;
+        letter-spacing: 0.8px;
+        line-height: 2;
+
+        &::first-letter {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  &__video {
+    .block {
+      height: 100%;
+    }
+
+    .block {
+      .collection-modal-header,
+      .drag-drop-container,
+      .input-container {
+        margin-bottom: 1.5em;
+      }
+    }
+    .video-row-3 {
+      input {
+        border: 1px solid var(--primary-grey);
+        outline: none;
+        background-color: var(--popups);
+        color: #ffff;
+        font-size: 1.05em;
+        font-family: inherit;
+        width: 50%;
+
+        &:focus {
+          border-color: var(--primary-color);
+        }
+
+        &::-webkit-input-placeholder {
+          color: var(--primary-grey);
+        }
+
+        @media (max-width: 768px) {
+          margin: 0;
+        }
+      }
+      .dragDropText {
+        color: #ffff;
+        height: auto;
+      }
+      @media (max-width: 768px) {
+        span {
+          margin: 0.8em 0;
+        }
+        .videoUploadBtn {
+          width: 100% !important;
+
+          .drag-drop {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+  &__text {
+    .input-container {
+      margin-bottom: 1.5em;
+    }
+  }
+}
+.collection-modal-container.addBlock__video {
+  height: 100%;
+  z-index: 5001 !important;
+
+  @media (max-width: 768px) {
+    .block {
+      margin-top: 5em;
+      position: relative;
+      overflow-y: scroll;
+      margin-top: 0;
+
+      .collection-modal-inner-container {
+        top: 60%;
+      }
+    }
   }
 }

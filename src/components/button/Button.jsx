@@ -1,13 +1,14 @@
 import React from 'react'
 import './Button.scss'
 
-const Button = ({ name, clickHandler, onClick, disabled = false }) => {
-  // function submitForm(e) {
-  //   e.preventDefault();
-  //   clickHandler();
-  // }
+const Button = ({ name, onClick, disabled = false, className }) => {
   return (
-    <button type='submit' className='btn-default' onClick={onClick} disabled={disabled}>
+    <button
+      type='submit'
+      className={`btn-default ${className}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {name}
     </button>
   )

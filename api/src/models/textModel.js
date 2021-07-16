@@ -1,26 +1,32 @@
 module.exports = (sequelize, DataTypes) => {
-  const Text = sequelize.define('texts', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+  const Text = sequelize.define(
+    'texts',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      textHeading: {
+        type: DataTypes.STRING
+      },
+      textDescription: {
+        type: DataTypes.TEXT
+      },
+      createdAt: {
+        type: DataTypes.DATE
+      },
+      updatedAt: {
+        type: DataTypes.DATE
+      }
     },
-    textHeading: {
-      type: DataTypes.STRING
-    },
-    textDescription: {
-      type: DataTypes.STRING
-    },
-    createdAt: {
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      type: DataTypes.DATE
-    }
-  },
-  { timestamps: true })
+    { timestamps: true }
+  )
   Text.associate = (models) => {
-    Text.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
+    Text.belongsTo(models.Lesson, {
+      constraints: true,
+      foreignKey: 'lessonId'
+    })
   }
   return Text
 }

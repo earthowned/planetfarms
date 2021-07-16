@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+
 import './Courses.css'
 import useGetFetchData from '../../utils/useGetFetchData'
 import { CATEGORY } from '../../utils/urlConstants'
@@ -13,6 +15,8 @@ import CourseCreateModal from '../../components/courseCreateModal/CourseCreateMo
 import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
 
 const Courses = () => {
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   const [active, setActive] = useState(false)
   const [modalactive, setModalActive] = useState(false)
   const [newCollectionactive, setNewCollectionActive] = useState(false)

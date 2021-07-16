@@ -6,7 +6,7 @@
   display: flex;
   color: var(--background-color);
   overflow: hidden;
-  padding: 1em 2em;
+  padding: 0.9em 2.5em;
   cursor: pointer;
   border: none;
   outline: none;
@@ -30,4 +30,7 @@
 
 .border-active {
   border: 1px solid var(--primary-color);
+}
+.add {
+  width: auto;
 }

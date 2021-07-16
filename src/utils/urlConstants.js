@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL + '/api/'
+const CDN_URL = process.env.REACT_APP_CDN_BASE_URL
 
 export const Axios = axios.create({
   baseURL: BASE_URL
@@ -30,8 +31,8 @@ export const ADD_LESSON_TEXT = 'lesson-text/add'
 export const ADD_MATERIAL = 'materials/add'
 
 // get files
-export const GET_THUMBNAIL = BASE_URL + '../thumbnail/'
-export const GET_COVERIMG = BASE_URL + '../coverImg/'
-export const GET_VIDEO = BASE_URL + '../videoResource/'
-export const VIDEO_COVER = BASE_URL + '../videoCover/'
-export const LESSON_IMG = BASE_URL + '../lessonImg/'
+export const GET_THUMBNAIL = CDN_URL + '/thumbnail/'
+export const GET_COVERIMG = CDN_URL + '/coverImg/'
+export const GET_VIDEO = CDN_URL + '/videoResource/'
+export const VIDEO_COVER = CDN_URL + '/videoCover/'
+export const LESSON_IMG = CDN_URL + '/lessonImg/'

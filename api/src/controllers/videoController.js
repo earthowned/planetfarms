@@ -30,10 +30,18 @@ const addVideo = async (req, res) => {
   let videoCover = ''
   let videoResource = ''
   if (req.files) {
-    videoCover = req.files.videoCover[0].filename
-    videoResource = req.files.videoResource[0].filename
+    if (req.files.videoCover) {
+      videoCover = req.files.videoCover[0].filename
+    }
+    if (req.files.videoResource) {
+      videoResource = req.files.videoResource[0].filename
+    }
   }
-  const video = await db.Video.create({ ...req.body, videoCover, videoResource })
+  const video = await db.Video.create({
+    ...req.body,
+    videoCover,
+    videoResource
+  })
 
   res.status(201).json({
     status: true,

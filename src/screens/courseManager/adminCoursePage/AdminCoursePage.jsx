@@ -1,20 +1,33 @@
 import React from 'react'
+import { useParams, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+import useGetFetchData from '../../../utils/useGetFetchData'
+import { GET_COURSE } from '../../../utils/urlConstants'
+
 import BackButton from '../../../components/backButton/BackButton'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
-import './AdminCoursePage.scss'
-import { useParams } from 'react-router-dom'
-import { GET_COURSE } from '../../../utils/urlConstants'
-import useGetFetchData from '../../../utils/useGetFetchData'
 import CourseDescription from './CourseDescription'
 import LessonBlock from './LessonBlock'
+import './AdminCoursePage.scss'
 
 const AdminCoursePage = () => {
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   const { courseId } = useParams()
 
   const { data, isLoading } = useGetFetchData(
     'recentCourse',
     GET_COURSE + '/' + courseId
   )
+  if (isLoading) {
+    return <span>Loading..</span>
+  }
+  const creator = data?.data?.creator
+  const userId = userInfo.id
+  if (userId !== creator) {
+    return <Redirect to='/courses' />
+  }
 
   return (
     <DashboardLayout title='Course page'>
