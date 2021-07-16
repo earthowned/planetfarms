@@ -1,28 +1,44 @@
 import axios from 'axios'
-import { logout } from '../actions/userAction'
 
 export const configFunc = () => {
-  const userdata = localStorage.getItem('userInfo')
+  const userdata = window.localStorage.getItem('userInfo')
   const token = JSON.parse(userdata).token
   const headers = { 'Content-Type': 'application/json' }
   headers.Authorization = token && `Bearer ${token}`
   return { headers }
 }
 
-export const getApi = (dispatch, url, config = configFunc()) => {
-  return axios.get(url, config)
+export const getApi = async (dispatch, url, config = configFunc()) => {
+  return await axios.get(url, config)
     .catch(err => {
       const errName = err.response.data.name
       switch (errName) {
         case 'InvalidToken':
-          dispatch(logout())
-          break
+          // dispatch(logout())
+          return err
         case 'TokenExpired':
-          dispatch(logout())
-          break
+          // dispatch(logout())
+          return err
         default:
           break
       }
-      return err
+      // return err
+    })
+}
+
+export const postApi = async (dispatch, url, data, config = configFunc()) => {
+  return await axios.post(url, data, config)
+    .catch(err => {
+      const errName = err.response.data.name
+      switch (errName) {
+        case 'InvalidToken':
+          // dispatch(logout())
+          return err
+        case 'TokenExpired':
+          // dispatch(logout())
+          return err
+        default:
+          return err
+      }
     })
 }

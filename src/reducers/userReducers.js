@@ -1,4 +1,7 @@
 import {
+  ACCESS_TOKEN_FAIL,
+  ACCESS_TOKEN_REQUEST,
+  ACCESS_TOKEN_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_RESET,
@@ -51,6 +54,19 @@ export const userRegisterReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case USER_LOGOUT:
       return {}
+    default:
+      return state
+  }
+}
+
+export const accessTokenReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ACCESS_TOKEN_REQUEST:
+      return { loading: true }
+    case ACCESS_TOKEN_SUCCESS:
+      return { loading: false, status: action.payload }
+    case ACCESS_TOKEN_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

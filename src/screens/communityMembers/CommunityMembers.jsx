@@ -24,8 +24,6 @@ function CommunityMembers ({ history }) {
     if (userInfo) {
       if (search) dispatch(searchMembers(search))
       if (!search) dispatch(listMembers())
-    } else {
-      history.push('/login')
     }
   }, [search, dispatch, history, userInfo])
 

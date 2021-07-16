@@ -1,9 +1,12 @@
 import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
-import { getApi } from '../utils/apiFunc'
+import { getApi, postApi } from '../utils/apiFunc'
 
 import FormData from 'form-data'
 import {
+  ACCESS_TOKEN_FAIL,
+  ACCESS_TOKEN_REQUEST,
+  ACCESS_TOKEN_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
@@ -102,7 +105,7 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     let userdata
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
+      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
       userdata = data
     } else {
       await Auth.signUp({
@@ -114,7 +117,7 @@ export const register = (name, password) => async (dispatch) => {
       })
       const response = await Auth.signIn(name, password)
       userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
-      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
+      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
         headers: {
           Authorization: 'Bearer ' + userdata.token
         }
@@ -139,7 +142,8 @@ export const login = (name, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
       const config = { headers: { 'Content-Type': 'application/json' } }
-      const response = await axios.post(
+      const response = await postApi(
+        dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
         { name, password },
         config
@@ -151,6 +155,25 @@ export const login = (name, password) => async (dispatch) => {
         token: response?.signInUserSession?.idToken?.jwtToken || '',
         id: response?.attributes?.sub || ''
       }
+      window.localStorage.setItem('userInfo', JSON.stringify(data))
+      await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: data.id }, {
+        headers: {
+          Authorization: 'Bearer ' + data.token
+        }
+      })
+
+      await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, {
+        firstName: response.attributes.given_name,
+        lastName: response.attributes.family_name,
+        birthday: response.attributes.birthdate,
+        phone: response.attributes.phone_number,
+        email: response.attributes.email
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + data.token
+        }
+      })
     }
     window.localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
@@ -174,6 +197,58 @@ export const getUserDetails = (id) => async (dispatch) => {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message
     dispatch({ type: USER_DETAILS_FAIL, payload: message })
   }
+}
+
+export const checkAndUpdateToken = () => async (dispatch) => {
+  dispatch({ type: ACCESS_TOKEN_REQUEST })
+  getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`).then((data) => {
+    if (data) {
+      if (data?.response?.status === 201) {
+        dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+        return true
+      } else {
+        const message = data.response && data.response.data.name ? data.response.data.name : data.message
+        if (message === 'TokenExpired') {
+          if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+            Auth.currentSession().then((res) => {
+              const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
+              userInfo.token = res?.idToken?.jwtToken || ''
+              if(userInfo.token == '') return tokenFailure(dispatch, message)
+              else {
+                window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+                dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
+                dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+                return true
+              }
+            })
+          } else {
+            const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
+            postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, { id: userInfo.id }).then((res) => {
+              userInfo.token = res?.token || ''
+              if(userInfo.token == '') return tokenFailure(dispatch, message)
+              else {
+                window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+                dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
+                dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+                return true
+              }
+            })
+          }
+        } else if (message === 'InvalidToken' || message === 'Unauthorized') {
+          return tokenFailure(dispatch, message)
+        }
+      }
+    } else {
+      return tokenFailure(dispatch, 'Unauthorized')
+    }
+  })
+}
+
+const tokenFailure = (dispatch, message) => {
+  dispatch({ type: USER_DETAILS_FAIL, payload: message })
+  window.localStorage.clear()
+  dispatch({ type: USER_LOGOUT })
+  return false
 }
 
 export const getMyDetails = () => async (dispatch) => {
@@ -395,9 +470,9 @@ export const forgotPasswordSubmit = (username, code, confirmPassword) => async (
 export const changePassword = (username, oldPassword, newPassword) => async (dispatch) => {
   try {
     dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
-    const { data } = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
-        { username, oldPassword, newPassword }
+    const { data } = await postApi(dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
+      { username, oldPassword, newPassword }
     )
     dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS, payload: data })
   } catch (error) {

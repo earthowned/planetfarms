@@ -113,8 +113,13 @@ const registerUser = async (req, res) => {
   try {
     const { name, password, id } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
-      const user = await db.User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
-      if (user && subscribeCommunity(user)) {
+      const data = await db.User.findOne({ where: { userID: id } })
+      if (!data) {
+        const user = await db.User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
+        if (user && await subscribeCommunity(user)) {
+          res.status(201).send('SUCCESS')
+        }
+      } else {
         res.status(201).send('SUCCESS')
       }
     } else {
@@ -133,7 +138,7 @@ const registerLocal = async (name, password, res) => {
       const user = await db.LocalAuth.create({ username: name, password: password }, { transaction: t })
       return await db.User.create({ userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
     })
-    if (newUser && subscribeCommunity(newUser)) {
+    if (newUser && await subscribeCommunity(newUser)) {
       res.status(201).json({
         id: newUser.dataValues.userID,
         userID: newUser.dataValues.userID,
@@ -168,6 +173,10 @@ const subscribeCommunity = async (user) => {
   } catch (error) {
     return false
   }
+}
+
+const sendTokenStatus = (req, res) => {
+  res.status(201).json({ message: 'accepted' })
 }
 
 const changePassword = async (req, res) => {
@@ -320,4 +329,18 @@ const searchUserName = (req, res) => {
     .catch((err) => res.json({ error: err }).status(400))
 }
 
-module.exports = { registerUser, authUser, changePassword, forgotPassword, forgotPasswordSubmit, confirmSignUpWithCode, getUserById, getUserProfileByUserID, getMyProfile, getUsers, updateUser, searchUserName }
+module.exports = {
+  registerUser,
+  authUser,
+  changePassword,
+  forgotPassword,
+  forgotPasswordSubmit,
+  confirmSignUpWithCode,
+  getUserById,
+  getUserProfileByUserID,
+  getMyProfile,
+  getUsers,
+  updateUser,
+  searchUserName,
+  sendTokenStatus
+}
