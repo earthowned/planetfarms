@@ -152,7 +152,15 @@ function CongratulationScreen () {
             <div className='btn'>
               {editInformations
                 ? (
-                  <Secondarybtn name='Cancel' clickHandler={() => history.goBack()} />
+                  <Secondarybtn
+                    name='Cancel' clickHandler={() => {
+                      if (!editInformations) {
+                        history.goBack()
+                      } else {
+                        history.push('/myProfile')
+                      }
+                    }}
+                  />
                   )
                 : (
                   <Secondarybtn name='Skip for now' clickHandler={() => history.push('/')} />

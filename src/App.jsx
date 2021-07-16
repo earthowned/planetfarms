@@ -48,6 +48,7 @@ import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/verification/UserVerification'
 import EmailVerification from './screens/verification/EmailVerification'
 import PhoneVerification from './screens/verification/PhoneVerification'
+import LogoutUser from './screens/logoutUser/LogoutUser'
 
 function App () {
   return (
@@ -59,6 +60,7 @@ function App () {
             <Route component={SignupScreen} path='/register' />
             <Route component={ForgotPassword} path='/forgot-password' />
             <Route component={UserVerification} path='/verification' />
+            <PrivateRoute component={LogoutUser} path='/logout' />
             <PrivateRoute component={CongratulationScreen} path='/register-complete' />
             <PrivateRoute component={CalendarScreen} exact path='/calendar/my-events' />
             <PrivateRoute component={Library} exact path='/library' />

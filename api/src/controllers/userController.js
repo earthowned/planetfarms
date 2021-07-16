@@ -83,7 +83,7 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     const user = await localAuth(name, password)
-    if (user) {
+    if (user && await subscribeCommunity(user)) {
       await res.json({
         token: generateToken(user.dataValues.userID),
         id: user.dataValues.userID
@@ -303,7 +303,7 @@ const updateUser = async (req, res) => {
     db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
-          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
+          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment || user.dataValues.attachments },
           { where: { userID: id } }
         )
           .then(() => res.sendStatus(200))
