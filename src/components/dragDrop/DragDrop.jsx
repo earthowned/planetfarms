@@ -9,10 +9,6 @@ const DragDrop = ({
   text,
   fetchImg,
   dataImg,
-<<<<<<< HEAD
-=======
-  tag,
->>>>>>> 13b20283aab98fc147705a882053bf3bcba9bfdb
   onClick = () => {}
 }) => {
   const [files, setFiles] = useState()
@@ -60,10 +56,6 @@ const DragDropComponent = ({
   type,
   text,
   dataImg,
-<<<<<<< HEAD
-=======
-  tag,
->>>>>>> 13b20283aab98fc147705a882053bf3bcba9bfdb
   onClick = () => {}
 }) => {
   return (
