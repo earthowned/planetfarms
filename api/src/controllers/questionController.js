@@ -71,7 +71,7 @@ const getTestQuestions = (req, res) => {
   db.Question.findAll({
     offset: page,
     limit: pageSize,
-
+    order: [['position', "ASC"]],
     where: {
       testId: req.params.id
     },

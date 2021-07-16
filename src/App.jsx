@@ -2,6 +2,8 @@ import React from 'react'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from './reactQuery'
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 // Screens
 import LoginScreen from './screens/login/LoginScreen'
 import SignupScreen from './screens/signUp/SignupScreen'
@@ -186,7 +188,9 @@ function App () {
               <LessonTestPage />
             </Route>
             <Route path='/admin/add-test/:lessonId'>
+              <DndProvider backend={HTML5Backend}>
               <AddTest />
+              </DndProvider>
             </Route>
             <Route path='/admin/edit-test/:lessonId'>
               <EditTest />
