@@ -6,13 +6,10 @@ const DragDrop = ({
   type,
   fileType,
   className,
-  setVideo,
   text,
-  img,
-  editText,
+  fetchImg,
   dataImg,
-  tag,
-  onClick = () => {},
+  onClick = () => {}
 }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
@@ -23,7 +20,7 @@ const DragDrop = ({
       )
       setFiles(acceptedFiles[0])
       onChange(acceptedFiles[0])
-    },
+    }
   })
   const fileChange = (e) => {
     const selectedFile = e.target.files[0]
@@ -41,12 +38,9 @@ const DragDrop = ({
       setFiles={setFiles}
       className={className}
       type={type}
-      setVideo={setVideo}
       text={text}
-      img={img}
-      editText={editText}
+      fetchImg={fetchImg}
       dataImg={dataImg}
-      tag={tag}
       onClick={onClick}
     />
   )
@@ -60,13 +54,9 @@ const DragDropComponent = ({
   setFiles,
   className,
   type,
-  setVideo,
   text,
-  img,
-  editText,
   dataImg,
-  tag,
-  onClick = () => {},
+  onClick = () => {}
 }) => {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
@@ -96,13 +86,10 @@ const DragDropComponent = ({
           </>
         ) : dataImg ? (
           <>
-            <img
-              className='avatar'
-              src={process.env.REACT_APP_CDN_BASE_URL + `/${tag}/` + dataImg}
-              alt='files[0].preview'
-            />
+            <img className='avatar' src={dataImg} alt='files[0].preview' />
             <div className='drag-drop-icon-container'>
               <img src='/img/camera-outline.svg' alt='camera icon' />
+              <h6 className='dragDropText'>{text}</h6>
             </div>
           </>
         ) : text ? (
