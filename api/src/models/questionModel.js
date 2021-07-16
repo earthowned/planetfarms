@@ -39,6 +39,9 @@ module.exports = (sequelize, DataTypes) => {
   { timestamps: true })
   Question.associate = (models) => {
     Question.belongsTo(models.Test, { foreignKey: 'testId' })
+    Question.hasMany(models.UserTestAnswer, {
+      foreignKey: "questionId"
+    })
   }
   return Question
 }
