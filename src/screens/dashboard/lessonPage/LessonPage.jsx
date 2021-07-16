@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuery } from 'react-query'
 import { useSelector } from 'react-redux'
 
-import { GET_LESSONS, Axios, GET_COURSE } from '../../../utils/urlConstants'
+import useGetLessonData from '../../../utils/useGetLessonData'
 
 import LessonDetail from './LessonDetail'
 import BackButton from '../../../components/backButton/BackButton'
@@ -20,22 +19,11 @@ const LessonPage = () => {
   const { userInfo } = userLogin
   const userId = userInfo.id
 
-  const { isLoading, data } = useQuery(
-    'lessonData',
-    async () => {
-      const { data } = await Axios.get(GET_LESSONS + `/${id}`)
-      setMaterialData(data?.data?.materials)
-      return data
-    },
-    {
-      onSuccess: (data) => {
-        const id = data?.data?.courseId
-        Axios.get(GET_COURSE + `/${id}`).then((res) => {
-          const dat = res?.data?.data.creator
-          setPath(dat === userId ? `/admin/course/${id}` : `/course/${id}`)
-        })
-      }
-    }
+  const { isLoading, data } = useGetLessonData(
+    id,
+    setMaterialData,
+    userId,
+    setPath
   )
 
   console.log(data)
