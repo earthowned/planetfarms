@@ -63,7 +63,7 @@ const endTest = async (req, res) => {
     }
 
     const score = await db.sequelize.transaction(async (t) => {
-      const solutions = await db.Question.findAll({ where: { testId: test.testId }, attributes: ['answer', "type"] }, { transaction: t })
+      const solutions = await db.Question.findAll({ where: { testId: test.testId }, attributes: ['answer', "type"], order: [['position', "ASC"]] }, { transaction: t })
       let marks = 0
 
       solutions.forEach((item, index) => {

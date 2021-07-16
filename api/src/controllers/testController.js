@@ -55,9 +55,10 @@ const addTest = async (req, res) => {
       const mcqQuestions = []
       const subjectiveQuestions = []
 
-      questions.forEach(async (item) => {
+      questions.forEach(async (item, index) => {
+        let pos = index + 1;
        //seperating mcq and subjective questions
-       populateQuestions(item, mcqQuestions, subjectiveQuestions, test)
+       populateQuestions(item, mcqQuestions, subjectiveQuestions, test, pos)
       })
       // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
       await db.Question.bulkCreate(mcqQuestions, { transaction: t })
@@ -72,16 +73,18 @@ const addTest = async (req, res) => {
 }
 
 // this populates the array and separate the questions
-function populateQuestions (item, mcqQuestions, subjectiveQuestions, test) {
+function populateQuestions (item, mcqQuestions, subjectiveQuestions, test, pos) {
    if(item.type === "subjective") {
            const questionObj = {
           ...item,
+          position: pos,
           testId: test.id
         }
           subjectiveQuestions.push(questionObj)
         } else {
           const questionObj = {
             ...item,
+            position: pos,
             testId: test.id,
             options: [...item.options, item.answer]
           }

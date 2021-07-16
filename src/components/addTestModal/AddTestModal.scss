@@ -1,7 +1,7 @@
 .question-answer-container {
   width: 100%;
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 
   .test-error {
     position: absolute;
@@ -9,8 +9,8 @@
   }
 
   .question-title {
+    margin: 20px 0;
     color: var(--primary-grey);
-    margin-bottom: 12px;
   }
 }
 
