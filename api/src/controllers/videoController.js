@@ -9,7 +9,7 @@ const getVideos = async (_req, res) => {
   res.status(200).json({
     status: true,
     message: 'fetched all videos successfully',
-    data: videos,
+    data: videos
   })
 }
 
@@ -22,7 +22,7 @@ const getVideosById = async (req, res) => {
   res.status(200).json({
     status: true,
     message: 'fetched video successfully',
-    data: video,
+    data: video
   })
 }
 
@@ -40,13 +40,13 @@ const addVideo = async (req, res) => {
   const video = await db.Video.create({
     ...req.body,
     videoCover,
-    videoResource,
+    videoResource
   })
 
   res.status(201).json({
     status: true,
     message: 'added new video successfully',
-    data: video,
+    data: video
   })
 }
 
@@ -56,19 +56,19 @@ const deleteVideo = async (req, res) => {
   res.status(202).json({
     status: true,
     message: 'Video deleted successfully',
-    data: video,
+    data: video
   })
 }
 
 const updateVideo = async (req, res) => {
   const { id } = req.params
   const video = await db.Video.update(req.body, {
-    where: { id },
+    where: { id }
   })
   res.status(202).json({
     status: true,
     message: 'Video updated successfully',
-    data: video,
+    data: video
   })
 }
 
@@ -77,5 +77,5 @@ module.exports = {
   getVideosById,
   addVideo,
   deleteVideo,
-  updateVideo,
+  updateVideo
 }

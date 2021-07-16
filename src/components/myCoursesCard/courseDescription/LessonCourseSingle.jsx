@@ -9,7 +9,7 @@ const LessonCourseSingle = ({ data }) => {
       {/* <div className='lock-lesson'>
         <img src='/img/lesson-lock.svg' alt='lock icon' />
         <h4>Finish Lesson</h4>
-  </div> */}
+      </div> */}
       <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
         <div className='lessonCoverImg'>
           <img
@@ -20,7 +20,6 @@ const LessonCourseSingle = ({ data }) => {
         </div>
         <div className='lesson-card-content'>
           <h3>{data.title}</h3>
-
           {data.lessonDesc && <p>{data.lessonDesc}</p>}
           <button onClick={() => history.push(`/lesson/${data.id}`)}>
             See Lesson

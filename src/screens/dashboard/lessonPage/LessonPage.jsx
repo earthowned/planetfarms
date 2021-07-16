@@ -37,9 +37,6 @@ const LessonPage = () => {
       }
     }
   )
-
-  console.log(data)
-
   return (
     <>
       {isLoading ? (

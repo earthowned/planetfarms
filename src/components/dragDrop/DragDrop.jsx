@@ -12,7 +12,7 @@ const DragDrop = ({
   editText,
   dataImg,
   tag,
-  onClick = () => {},
+  onClick = () => {}
 }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
@@ -23,7 +23,7 @@ const DragDrop = ({
       )
       setFiles(acceptedFiles[0])
       onChange(acceptedFiles[0])
-    },
+    }
   })
   const fileChange = (e) => {
     const selectedFile = e.target.files[0]
@@ -66,7 +66,7 @@ const DragDropComponent = ({
   editText,
   dataImg,
   tag,
-  onClick = () => {},
+  onClick = () => {}
 }) => {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
