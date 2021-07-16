@@ -8,14 +8,6 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      questionId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "questions",
-          key: 'id'
-        }
-      },
       userTestId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -23,6 +15,10 @@ module.exports = {
           model: "users_tests",
           key: 'id'
         }
+      },
+      question: {
+        type: Sequelize.TEXT,
+        allowNull: false,
       },
       answer: {
         type: Sequelize.TEXT,

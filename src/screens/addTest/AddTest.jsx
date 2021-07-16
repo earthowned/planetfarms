@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min'
-import { createTest } from '../../actions/testActions'
+import { createTest, updateTestQuestion } from '../../actions/testActions'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './AddTest.scss'
 import { useHistory } from 'react-router-dom'
@@ -10,16 +10,42 @@ import { checkArrayForFilledValue } from '../../utils/checkFilledArray'
 // import { Card } from "./Card";
 import { useDrag, useDrop } from "react-dnd";
 import update from "immutability-helper";
+import axios from 'axios'
+import { deleteSingleQuestion, updateQuestion } from '../../actions/questionActions'
 
 const AddTest = () => {
     const [cards, setCards] = useState([]);
     const [count, setCount] = useState(1);
     const [questions, setQuestions] = useState([]);
+    const [newQuestions, setNewQuestions] = useState([]);
     const [formError, setFormError] = useState(false);
     const [options, setOptions] = useState([]);
+    const [deleteModal, setDeleteModal] = useState(false)
+    const [deleteId, setDeleteId] = useState();
 
     const {lessonId} = useParams();
+    const {pathname} = useLocation();
+    const history = useHistory();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+      if(pathname === `/admin/edit-test/${lessonId}`) getLessonQuestions()
+    }, [])
+
+    async function getLessonQuestions() {
+        try {
+         const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/questions/lesson/${lessonId}`)
+               if(data) {
+                 setCards(data.questions)
+                 setQuestions(data.questions)
+                 setNewQuestions(data.questions)
+               }
+        } catch (error) {
+            setFormError(true)
+        }
+        
+    }
+
 
     function addMCQQuestion() {
       setCount((cur) => cur + 1);
@@ -49,13 +75,56 @@ const AddTest = () => {
       if (questions.length > 0) {
       if (checkArrayForFilledValue(questions) && !options.includes("")) {
           const newQuestions = orderQuestions();
-
-        return dispatch(createTest(lessonId, newQuestions))
-      //  return history.goBack()
+        dispatch(createTest(lessonId, newQuestions))
+        return history.goBack()
       }
     } 
     setFormError(true)
     }
+    
+    //edit section
+
+    const confirmDelete = async () => {
+        // console.log(deleteId)
+        dispatch(deleteSingleQuestion({deleteId, lessonId}));
+        setDeleteModal(false)
+    }
+
+    const deleteQuestion = (id) => {
+        setDeleteId(id)
+        setDeleteModal(true)
+    }
+
+
+    async function editTest() {
+      const editQuestions =  orderQuestions();
+      //  await dispatch(updateTestQuestion({editQuestions, lessonId}))
+      const {data} = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/tests/${editQuestions[0].testId}`, { questions: editQuestions });
+       console.log(editQuestions);
+    //   if (questions.length > 0) {
+    //   if (checkArrayForFilledValue(questions) && !options.includes("")) {
+    //       const editQuestions = orderQuestions();
+    //     // dispatch(createTest(lessonId, newQuestions))
+    //     // return history.goBack()
+    //     // console.log(editQuestions);
+    //     // console.log(editQuestions);
+    //     console.log(editQuestions);
+    //     dispatch(updateTestQuestion({editQuestions, lessonId}))
+
+    //   }
+    // } 
+    // setFormError(true)
+      // console.log(questions);
+      // console.log(cards);
+        // if (questions.length > 0) {
+        //     if (checkArrayForFilledValue(newQuestions)) {
+        //         return dispatch(updateTestQuestion({newQuestions, lessonId}))
+        //     }
+        // }
+        
+        // setFormError(true)
+    }
+
 
     function orderQuestions () {
       const newQuestions = [];
@@ -63,15 +132,19 @@ const AddTest = () => {
         cards.forEach(el => {
           if(el.type === "mcq") {
             const newObj ={
+              id: questions[questions.findIndex(item => item.id === el.id)].id,
               question: questions[questions.findIndex(item => item.id === el.id)].question,
               answer: questions[questions.findIndex(item => item.id === el.id)].answer,
               options: questions[questions.findIndex(item => item.id === el.id)].options,
+              testId: questions[questions.findIndex(item => item.id === el.id)].testId,
               type: "mcq"
             }
             newQuestions.push(newObj)
           } else {
             const newObj ={
+              id: questions[questions.findIndex(item => item.id === el.id)].id,
               question: questions[questions.findIndex(item => item.id === el.id)].question,
+              testId: questions[questions.findIndex(item => item.id === el.id)].testId,
               type: "subjective"
             }
             newQuestions.push(newObj)
@@ -108,12 +181,25 @@ const AddTest = () => {
           setFormError={setFormError}
           options={options}
           setOptions={setOptions}
+          cards={cards}
+          deleteQuestion={deleteQuestion}
         />
       );
     };
     return (
+      <>
+      {deleteModal && <div className='simple-modal-container'>
+            <div className='simple-modal-inner-container'>
+                <div>
+                    <h4>Are you sure you want to delete?</h4>
+                </div>
+                <div>
+                    <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
+                    <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
+                </div>
+            </div>
+        </div>}
       <DashboardLayout title="Add Test">
-        
         <div div className='add-test-container' >{cards.map((card, i) => renderCard(card, i))}</div>
         <div className="btn-container">
               <button onClick={addMCQQuestion} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add MCQ</span></button>
@@ -121,9 +207,14 @@ const AddTest = () => {
               </div>
               <div className='btn-container'>
                 <button className='secondary-btn reset-test-btn' onClick={resetQuestion}>Reset test</button>  
-                <button className='secondary-btn color-primary' onClick={submitQuestion}>Add test</button>
+                {
+                pathname === `/admin/edit-test/${lessonId}` 
+                ? <button className='secondary-btn color-primary' onClick={editTest}>Edit test</button>
+                : <button className='secondary-btn color-primary' onClick={submitQuestion}>Add test</button>
+                }
               </div>
       </DashboardLayout>
+      </>
     );
 };
 
@@ -139,7 +230,7 @@ const style2 = {
   cursor: "move"
 };
 
-const Card = ({ id, type, index, moveCard, questions, formError, setFormError, setOptions, options }) => {
+const Card = ({ id, type, index, moveCard, questions, formError, setFormError, setOptions, options, cards, deleteQuestion }) => {
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -210,12 +301,16 @@ const Card = ({ id, type, index, moveCard, questions, formError, setFormError, s
           setFormError={setFormError}
           options={options}
           setOptions={setOptions}
+          cards={cards}
+          deleteQuestion={deleteQuestion}
         />
       ) : (
         <SubjectiveQuestion 
           questions={questions} id={id} 
           formError={formError}
           setFormError={setFormError}
+          cards={cards}
+          deleteQuestion={deleteQuestion}
         />
       )}
       </div>
@@ -223,14 +318,26 @@ const Card = ({ id, type, index, moveCard, questions, formError, setFormError, s
   );
 };
 
-function SubjectiveQuestion({ questions, id, formError, setFormError }) {
+function SubjectiveQuestion({ questions, id, formError, setFormError, cards, deleteQuestion }) {
     const [question, setQuestion] = useState("");
-  
+  const dispatch = useDispatch();
+  const {lessonId} = useParams();
   function changeQuestion(e) {
     setQuestion(e.target.value);
     questions[questions.findIndex((el) => el.id === id)].question =
       e.target.value;
       setFormError(false)
+  }
+
+  useEffect(() => {
+    if(questions.length > 0) {
+    setQuestion(questions[questions.findIndex((el) => el.id === id)].question)
+    }
+  }, [questions])
+
+  function editQuestion () {
+    dispatch(updateQuestion({ id: questions[questions.findIndex((el) => el.id === id)].id, 
+      testId: parseInt(questions[questions.findIndex((el) => el.id === id)].testId), question, type:"subjective", lessonId}))
   }
 
   return (
@@ -246,15 +353,22 @@ function SubjectiveQuestion({ questions, id, formError, setFormError }) {
               placeholder='Question'
                 />
           </div>
+          {cards[cards.findIndex((el) => el.id === id)].question && <div className="question-btn-contaianer">
+                <button onClick={() => editQuestion()}>Edit Question</button>
+                <button onClick={() => deleteQuestion(questions[questions.findIndex((el) => el.id === id)].id)}>Delete Question</button>
+            </div>}
         </div>
     </>
   );
 }
 
-function MCQQuestion({ id, questions, formError, setFormError, options, setOptions }) {
+function MCQQuestion({ id, questions, formError, setFormError, options, setOptions, cards, deleteQuestion }) {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  
+  const [newOptions, setNewOptions] = useState([""])
+  const {lessonId} = useParams();
+  const {pathname} = useLocation();
+  const dispatch = useDispatch();
   function changeQuestion(e) {
     setQuestion(e.target.value);
     questions[questions.findIndex((el) => el.id === id)].question =
@@ -270,13 +384,26 @@ function MCQQuestion({ id, questions, formError, setFormError, options, setOptio
   }
 
   useEffect(() => {
-    setOptions(questions[questions.findIndex((el) => el.id === id)].options);
-  }, []);
+    if(pathname === `/admin/add-test/${lessonId}`) {
+      setOptions(questions[questions.findIndex((el) => el.id === id)].options);
+    } else {
+      if(questions.length) {
+        setQuestion(questions[questions.findIndex((el) => el.id === id)].question)
+        setAnswer(questions[questions.findIndex((el) => el.id === id)].answer)
+        setNewOptions(questions[questions.findIndex((el) => el.id === id)].options)
+        setOptions(questions[questions.findIndex((el) => el.id === id)].options)
+      }
+    }
+  }, [questions])
 
   function addQuestion() {
     setOptions((cur) => [...cur, ""]);
     setFormError(false)
   }
+
+  function editQuestion () {
+        dispatch(updateQuestion({ id: questions[cards.findIndex((el) => el.id === id)].id, testId: parseInt(questions[questions.findIndex((el) => el.id === id)].testId), question, answer, options, lessonId}))
+    }
 
   return (
     <>
@@ -304,16 +431,20 @@ function MCQQuestion({ id, questions, formError, setFormError, options, setOptio
             </div>
             <div className='option-answers'>
                   {options.length > 0 && options.map((item, index) =>
-                         <InputComponent index={index} questions={questions} id={id} setFormError={setFormError} options={options} />
+                         <InputComponent index={index} questions={questions} id={id} setFormError={setFormError} options={options} newOptions={newOptions}/>
                     )}
              </div>
              <button className="add-new-course" onClick={addQuestion}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
         </div>
+        {cards[cards.findIndex((el) => el.id === id)].question && <div className="question-btn-contaianer">
+                <button onClick={() => editQuestion()}>Edit Question</button>
+                <button onClick={() => deleteQuestion(questions[questions.findIndex((el) => el.id === id)].id)}>Delete Question</button>
+            </div>}
     </>
   );
 }
 
-function InputComponent({ index, questions, id, setFormError, options }) {
+function InputComponent({ index, questions, id, setFormError, options, newOptions }) {
   const [question, setQuestion] = useState("");
   function onQuestionChange(e) {
     setQuestion(e.target.value);
@@ -322,6 +453,12 @@ function InputComponent({ index, questions, id, setFormError, options }) {
       options[index] = e.target.value
       setFormError(false)
   }
+
+  useEffect(() => {
+        if (newOptions.length > 0) {
+            setQuestion(newOptions[index])
+        }
+    }, [])
 
    function removeItem () {
     // const newOptions = [...options]

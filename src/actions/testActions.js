@@ -47,9 +47,10 @@ export const listTestQuestions = (testId) => async (
 
 export const updateTestQuestion = ({newQuestions, lessonId}) => async (dispatch) => {
     try {
+      console.log(newQuestions[0].testId)
         dispatch({ type: TEST_QUESTION_EDIT_REQUEST })
         const {data} = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/tests/${newQuestions[0].testId}`, { questions: newQuestions });
-        
+        console.log(data);
         dispatch({
             type: TEST_QUESTION_EDIT_SUCCESS,
             payload: data

@@ -49,7 +49,7 @@ import ForgotPassword from './screens/forgotPassword/ForgotPassword'
 import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/userVerification/UserVerification'
 import AddTest from './screens/addTest/AddTest'
-import EditTest from './screens/addTest/EditTest'
+
 
 function App () {
   return (
@@ -193,7 +193,9 @@ function App () {
               </DndProvider>
             </Route>
             <Route path='/admin/edit-test/:lessonId'>
-              <EditTest />
+              <DndProvider backend={HTML5Backend}>
+              <AddTest />
+              </DndProvider>
             </Route>
             <Route path='/myProfile'>
               <MyProfile />
