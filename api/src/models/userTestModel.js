@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     UserTest.belongsTo(models.Test, {
       foreignKey: 'testId'
     })
+    UserTest.hasMany(models.UserTestAnswer, {
+      foreignKey: "userTestId"
+    })
   }
 
   return UserTest

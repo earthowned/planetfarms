@@ -25,6 +25,19 @@ const getSingleUserTest = async (req, res) => {
   }
 }
 
+// @desc    Get all answers provided by the user in particular test
+// @route   POST /api/user_tests/:id/answers
+// @access  Public
+
+const getUserTestAnswers = async (req, res) => {
+  try {
+    const userAnswers = await db.UserTestAnswer.findAll({where: {userTestId: req.params.id}, include: [db.Question]});
+    res.json(userAnswers)
+  } catch (error) {
+    res.json(error).status(400)
+  }
+}
+
 // @desc    Add individual Test
 // @route   POST /api/Test/add
 // @access  Public
@@ -63,15 +76,21 @@ const endTest = async (req, res) => {
     }
 
     const score = await db.sequelize.transaction(async (t) => {
-      const solutions = await db.Question.findAll({ where: { testId: test.testId }, attributes: ['answer', "type"], order: [['position', "ASC"]] }, { transaction: t })
+      const solutions = await db.Question.findAll({ where: { testId: test.testId }, attributes: ['id', 'answer', "type"], order: [['position', "ASC"]] }, { transaction: t })
       let marks = 0
 
+      //counting marks
       solutions.forEach((item, index) => {
         if(item.type === "subjective") {
             if(choices[index]) marks++
         } else {
           if (choices[index] === item.answer) marks++
         }
+      })
+
+      //addomg amswers to the user_test_answers tbl
+      solutions.forEach(async (item, index) => {
+        await db.UserTestAnswer.create({questionId: item.id, userTestId: test.id, answer: choices[index]})
       })
 
       await db.UserTest.update({ marks, endTime }, { where: { id: req.params.id } }, { transaction: t })
@@ -94,4 +113,4 @@ const endTest = async (req, res) => {
   }
 }
 
-module.exports = { getUserTests, takeTest, endTest, getSingleUserTest }
+module.exports = { getUserTests, takeTest, endTest, getSingleUserTest, getUserTestAnswers }
