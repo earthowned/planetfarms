@@ -7,6 +7,21 @@
   border: 1px solid var(--dropdowns);
   border-radius: 4px;
   color: var(--primary-white);
+
+  .drag-drop-container {
+    margin: 2em 0;
+    height: 23em !important;
+    width: 100%;
+    border: 2px dashed #f8ebdf;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .drag-drop h6 {
+      width: 50%;
+      text-align: center;
+      line-height: 25px;
+    }
+  }
 }
 
 .admin-lesson-create-container input {
@@ -22,20 +37,6 @@
   &::first-letter {
     text-transform: uppercase;
   }
-}
-
-.admin-lesson-create-container .drag-drop-container {
-  width: 100%;
-  height: 456px;
-  border: 2px dashed #f8ebdf;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.admin-lesson-create-container .drag-drop-container .drag-drop h6 {
-  width: 50%;
-  text-align: center;
-  line-height: 25px;
 }
 
 .add-lesson-drag {
@@ -277,7 +278,7 @@
 }
 
 .lessonDesc {
-  margin: 1.5em 0;
+  margin: 2em 0;
   border: 1px solid var(--primary-grey);
   outline: none;
   background-color: var(--popups);
