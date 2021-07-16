@@ -6,16 +6,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     userTestId: DataTypes.INTEGER,
-    questionId: DataTypes.INTEGER,
+    question: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     answer: {
         type: DataTypes.TEXT,
     }
   }, { timestamps: false })
 
   UserTestAnswer.associate = (models) => {
-    UserTestAnswer.belongsTo(models.Question, {
-      foreignKey: 'questionId'
-    })
     UserTestAnswer.belongsTo(models.UserTest, {
       foreignKey: 'userTestId'
     })

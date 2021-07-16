@@ -23,12 +23,14 @@ export const listQuestions = (lessonId) => async (
 export const deleteSingleQuestion = ({deleteId, lessonId}) => async (dispatch, getState) => {
     try {
         dispatch({ type: QUESTION_DELETE_REQUEST })
-    
+      console.log(deleteId)
+
         const data = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/questions/${deleteId}`)
         dispatch({
             type: QUESTION_DELETE_SUCCESS,
             payload: data
         })
+        // console.log()
         document.location.href = `/admin/edit-test/${lessonId}`
     } catch (error) {
         const message =
@@ -55,6 +57,7 @@ export const updateQuestion = (newQuestions) => async (dispatch) => {
             type: QUESTION_UPDATE_SUCCESS,
             payload: data
         })
+        console.log(lessonId)
 
         document.location.href = `/admin/edit-test/${lessonId}`
     } catch (error) {

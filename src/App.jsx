@@ -51,7 +51,7 @@ import UserVerification from './screens/verification/UserVerification'
 import EmailVerification from './screens/verification/EmailVerification'
 import PhoneVerification from './screens/verification/PhoneVerification'
 import AddTest from './screens/addTest/AddTest'
-import EditTest from './screens/addTest/EditTest'
+
 
 function App () {
   return (
@@ -107,7 +107,11 @@ function App () {
                 <AddTest />
               </DndProvider>
             } path='/admin/add-test/:lessonId' />
-            <PrivateRoute component={AddTest} path='/admin/edit-test/:lessonId' />
+            <PrivateRoute component={() =>
+              <DndProvider backend={HTML5Backend}>
+                <AddTest />
+              </DndProvider>
+            } path='/admin/edit-test/:lessonId' />
             <PrivateRoute component={MyProfile} path='/myProfile' />
             <PrivateRoute component={UserInfo} path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />

@@ -116,19 +116,23 @@ const updateTest = async (req, res) => {
         const subjectiveQuestions = []
         const mcqQuestions = []
 
-        questions.forEach(item => {
-          if (item.id) {
-            oldQuestions.push(item)
+        questions.forEach(async (item, index)=> {
+          let pos = index + 1;
+          console.log(pos);
+          if (item.testId) {
+            oldQuestions.push({...item, position: pos})
           } else {
             //seperating mcq and subjective questions
-          populateQuestions(item, mcqQuestions, subjectiveQuestions, test)
+          populateQuestions(item, mcqQuestions, subjectiveQuestions, test, pos)
           }
         })
 
+        //positioning
+
         //bulk updating 
         oldQuestions.forEach(async (item) => {
-          const {question, answer, options, id, type} = item
-          await db.Question.update({question, answer, options, type}, {where: id}, {transaction: t})
+          const {question, answer, options, id, type, position} = item
+          await db.Question.update({question, answer, options, type, position}, {where: id}, {transaction: t})
         })
 
         //adding new questions to the test

@@ -17,8 +17,8 @@ const getQuestions = (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 
-// @desc    Fetch all tests
-// @route   GET /api/Test
+// @desc    Fetch all questions
+// @route   GET /api/questions/lesson/:lessonId
 // @access  Public
 const getLessonQuestions = async (req, res) => {
   try {
@@ -31,7 +31,7 @@ const getLessonQuestions = async (req, res) => {
 
   if(!test) return res.json({message: 'test doesn\'t exist.'})
 
-  const newquestions = await db.Question.findAll({ offset: page, limit: pageSize, order: ordervalue, where: {testId: test.id} })
+  const newquestions = await db.Question.findAll({ offset: page, limit: pageSize, order: [['position', "ASC"]], where: {testId: test.id} })
 
   const questions = newquestions.map(item => {
     if(item.type === "mcq") {
