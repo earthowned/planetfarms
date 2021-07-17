@@ -6,7 +6,16 @@ import { ReactComponent as Play } from '../../assets/images/play.svg'
 import { ReactComponent as BookMark } from '../../assets/images/book-outlined.svg'
 import './Video.scss'
 
-const Video = ({ title, description, url, thumbnail, itemId }) => {
+const Video = ({
+  title,
+  description,
+  url,
+  thumbnail,
+  itemId,
+  isEditable,
+  onRemove,
+  id
+}) => {
   const [showInfo, setShowInfo] = useState(false)
   return (
     <>
@@ -17,9 +26,13 @@ const Video = ({ title, description, url, thumbnail, itemId }) => {
             <p className='videoDesc'>{description}</p>
             <p className='videoDesc'>{itemId}</p>
           </div>
-          <div className='addToLibrary'>
-            <BookMark />
-          </div>
+          {isEditable ? (
+            <Actions onRemove={onRemove} id={id} />
+          ) : (
+            <div className='addToLibrary'>
+              <BookMark />
+            </div>
+          )}
 
           <ReactPlayer
             className='video'
@@ -32,7 +45,6 @@ const Video = ({ title, description, url, thumbnail, itemId }) => {
             light={thumbnail}
             onClickPreview={() => setShowInfo(!showInfo)}
           />
-          <Actions />
         </div>
       ) : (
         ''

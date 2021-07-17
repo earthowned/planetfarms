@@ -55,10 +55,15 @@ const AddContent = ({
               url={vid.videoLink || vid.videoResource?.preview}
               thumbnail={vid.videoCover?.preview}
               id={vid.itemId}
+              isEditable
+              onRemove={onRemove}
+              id={vid.itemId}
             />
             <Image
               src={vid.lessonImg?.preview}
               desc={vid.photoDescription}
+              id={vid.itemId}
+              onRemove={onRemove}
               id={vid.itemId}
             />
             <Text
