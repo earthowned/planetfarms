@@ -28,7 +28,6 @@ const AddLesson = () => {
   const [material, setMaterial] = useState([])
 
   const { register, errors, handleSubmit } = useForm()
-
   const submitLessonForm = ({ title, lessonDesc }) => {
     const coverImg = lessonCover
     dispatch(
@@ -42,6 +41,12 @@ const AddLesson = () => {
         history
       })
     )
+  }
+  console.log(lessonData)
+
+  const removeItem = (id) => {
+    const newLessonData = lessonData.filter((item) => item.itemId !== id)
+    setLessonData(newLessonData)
   }
 
   return (
@@ -86,6 +91,8 @@ const AddLesson = () => {
           setLessonCover={setLessonCover}
           lessonCover={lessonCover}
           lessonData={lessonData}
+          setLessonData={setLessonData}
+          onRemove={removeItem}
         />
         <LessonMaterial material={material} setMaterial={setMaterial} />
         <LessonSaveModal

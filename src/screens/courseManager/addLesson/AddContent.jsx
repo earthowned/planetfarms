@@ -1,3 +1,4 @@
+import React from 'react'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
 import Video from '../../../components/videoPlayer/Video'
@@ -13,6 +14,8 @@ const AddContent = ({
   errors,
   setLessonCover,
   lessonData,
+  setLessonData,
+  onRemove
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -27,8 +30,8 @@ const AddContent = ({
         ref={register({
           required: {
             value: true,
-            message: 'You must enter lesson title',
-          },
+            message: 'You must enter lesson title'
+          }
         })}
       />
 
@@ -51,9 +54,19 @@ const AddContent = ({
               description={vid.videoDescription}
               url={vid.videoLink || vid.videoResource?.preview}
               thumbnail={vid.videoCover?.preview}
+              id={vid.itemId}
             />
-            <Image src={vid.lessonImg?.preview} desc={vid.photoDescription} />
-            <Text heading={vid.textHeading} desc={vid.textDescription} />
+            <Image
+              src={vid.lessonImg?.preview}
+              desc={vid.photoDescription}
+              id={vid.itemId}
+            />
+            <Text
+              heading={vid.textHeading}
+              desc={vid.textDescription}
+              onRemove={onRemove}
+              id={vid.itemId}
+            />
           </div>
         ))}
       <div className='admin-lesson-create-btn-wrapper'>
@@ -78,4 +91,4 @@ const AddContent = ({
   )
 }
 
-export default AddContent
+export default React.memo(AddContent)

@@ -13,7 +13,9 @@ const CreateImage = ({
   imageActive,
   setImageActive,
   lessonData,
-  setLessonData
+  setLessonData,
+  itemId,
+  setItemId
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(true)
   const [lessonImg, setLessonImg] = useState(null)
@@ -21,9 +23,11 @@ const CreateImage = ({
   const { register, handleSubmit } = useForm()
 
   const submitLessonImg = ({ photoDescription }) => {
+    setItemId(lessonData.length + 1)
     const imgData = [
       ...lessonData,
       {
+        itemId,
         lessonImg,
         photoDescription,
         isImgDesc
