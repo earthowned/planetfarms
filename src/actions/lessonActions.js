@@ -14,13 +14,23 @@ import {
 } from '../constants/lessonConstants'
 
 export const createLesson =
-  ({ courseId, title, lessonDesc, coverImg, lessonData, material, history }) =>
+  ({
+    courseId,
+    title,
+    lessonDesc,
+    order,
+    coverImg,
+    lessonData,
+    material,
+    history
+  }) =>
     async (dispatch) => {
       const lessonFormData = new FormData()
       lessonFormData.append('courseId', courseId)
       lessonFormData.append('title', title)
       lessonFormData.append('lessonDesc', lessonDesc)
       lessonFormData.append('coverImg', coverImg)
+      lessonFormData.append('order', order)
       try {
         dispatch({ type: LESSON_CREATE_REQUEST })
         const config = {
