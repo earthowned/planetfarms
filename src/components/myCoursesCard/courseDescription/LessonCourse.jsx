@@ -3,7 +3,6 @@ import LessonCourseSingle from './LessonCourseSingle'
 
 const LessonCourse = ({ data, setPurchaseModal }) => {
   const lessonLen = data?.data?.lessons.length
-  console.log(data?.data?.lessons)
 
   return (
     <div className='lessons-container'>

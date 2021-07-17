@@ -6,10 +6,6 @@ const LessonCourseSingle = ({ data }) => {
 
   return (
     <div className='lesson-card-wrapper'>
-      {/* <div className='lock-lesson'>
-        <img src='/img/lesson-lock.svg' alt='lock icon' />
-        <h4>Finish Lesson</h4>
-      </div> */}
       <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
         <div className='lessonCoverImg'>
           <img
