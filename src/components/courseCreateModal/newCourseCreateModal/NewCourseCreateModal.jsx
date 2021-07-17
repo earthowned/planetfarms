@@ -53,7 +53,6 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
       )
     }
   }
-  console.log(selectedCategory)
   return (
     <div className='newCourse'>
       <form className='container' onSubmit={handleSubmit(submitForm)}>
