@@ -14,30 +14,29 @@ import LessonTest from './LessonTest'
 
 const LessonDetail = ({ data, id }) => {
   const [lessonData, setLessonData] = useState([])
-  const textData = data?.data?.texts.map((text) => {
+  const textData = data?.texts.map((text) => {
     return text
   })
-  const videoData = data?.data?.videos.map((video) => {
+  const videoData = data?.videos.map((video) => {
     return video
   })
-  const photoData = data?.data?.photos.map((photo) => {
+  const photoData = data?.photos.map((photo) => {
     return photo
   })
 
   useEffect(() => {
     setLessonData([textData, videoData, photoData])
-  }, [])
+  }, [data])
   const newData = lessonData.flat()
-
   return (
     <div className='lesson-description-wrapper'>
-      <h1>{data?.data?.title}</h1>
-      <div className='lesson-description-img-wrapper'>
+      <h1>{data?.title}</h1>
+      {data?.coverImg && <div className='lesson-description-img-wrapper'>
         <img
-          src={`${GET_COVERIMG}${data?.data?.coverImg}`}
-          alt={`${data?.data?.title}_img`}
+          src={`${GET_COVERIMG}${data?.coverImg}`}
+          alt={`${data?.title}_img`}
         />
-      </div>
+      </div>}
       {newData
         .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
         .map((data, index) => (
@@ -53,15 +52,11 @@ const LessonDetail = ({ data, id }) => {
               }
               thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
             />
-
-            {data?.lessonImg === undefined ? (
-              ''
-            ) : (
+            {data?.lessonImg &&
               <Image
                 src={`${LESSON_IMG}${data?.lessonImg}`}
                 desc={data?.isImgDesc === true && data?.photoDescription}
-              />
-            )}
+              />}
           </div>
         ))}
       <LessonTest id={id} />
@@ -69,4 +64,4 @@ const LessonDetail = ({ data, id }) => {
   )
 }
 
-export default React.memo(LessonDetail)
+export default LessonDetail

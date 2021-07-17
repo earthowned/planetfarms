@@ -1,31 +1,20 @@
 import { createVideo } from '../../../actions/videoActions'
 
-export const addVideo = function (lessonData, lessonId, dispatch) {
-  let i = 0
-  const lessonDataLen = lessonData.length
-  for (i; i < lessonDataLen; i++) {
-    const videoCover = lessonData[i].videoCover
-    const videoTitle = lessonData[i].videoTitle
-    const videoDescription = lessonData[i].videoDescription
-    const videoLink = lessonData[i].videoLink
-    const videoResource = lessonData[i].videoResource
-    if (
-      videoCover ||
-      videoTitle ||
-      videoDescription ||
-      videoLink ||
-      videoResource
-    ) {
-      dispatch(
-        createVideo(
-          videoCover,
-          videoTitle,
-          videoDescription,
-          videoLink,
-          videoResource,
-          lessonId
-        )
-      )
-    }
-  }
+export const addVideo = function ({ lessonData, lessonId, dispatch }) {
+  const videoCover = lessonData.videoCover
+  const videoTitle = lessonData.videoTitle
+  const videoDescription = lessonData.videoDescription
+  const videoLink = lessonData.videoLink
+  const videoResource = lessonData.videoResource
+
+  return dispatch(
+    createVideo(
+      videoCover,
+      videoTitle,
+      videoDescription,
+      videoLink,
+      videoResource,
+      lessonId
+    )
+  )
 }

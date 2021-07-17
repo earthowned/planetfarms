@@ -1,4 +1,8 @@
 import { Axios, ADD_LESSONS, GET_LESSONS } from '../utils/urlConstants'
+import { addText } from '../screens/courseManager/addLesson/addText'
+import { addVideo } from '../screens/courseManager/addLesson/addVideo'
+import { addImage } from '../screens/courseManager/addLesson/addImage'
+import { addMaterial } from '../screens/courseManager/addLesson/addMaterial'
 
 import {
   LESSON_CREATE_REQUEST,
@@ -10,14 +14,23 @@ import {
 } from '../constants/lessonConstants'
 
 export const createLesson =
-  ({ courseId, title, coverImg }) =>
+  ({
+    courseId,
+    title,
+    lessonDesc,
+    order,
+    coverImg,
+    lessonData,
+    material,
+    history
+  }) =>
     async (dispatch) => {
       const lessonFormData = new FormData()
-
       lessonFormData.append('courseId', courseId)
       lessonFormData.append('title', title)
+      lessonFormData.append('lessonDesc', lessonDesc)
       lessonFormData.append('coverImg', coverImg)
-
+      lessonFormData.append('order', order)
       try {
         dispatch({ type: LESSON_CREATE_REQUEST })
         const config = {
@@ -27,7 +40,24 @@ export const createLesson =
         }
         const { data } = await Axios.post(ADD_LESSONS, lessonFormData, config)
         dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
-        return data
+        const lessonId = data?.data?.id
+        for (let i = 0; i < lessonData.length; i++) {
+          if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
+            await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
+          }
+          if (lessonData[i]?.lessonImg) {
+            await addImage({ lessonData: lessonData[i], lessonId, dispatch })
+          }
+          if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
+            await addText({ lessonData: lessonData[i], lessonId, dispatch })
+          }
+        }
+        for (let i = 0; i < material.length; i++) {
+          if (material[i].mData) {
+            await addMaterial({ material: material[i], lessonId, dispatch })
+          }
+        }
+        history.push(`/lesson/${lessonId}`)
       } catch (error) {
         dispatch({
           type: LESSON_CREATE_FAIL,

@@ -4,22 +4,21 @@ import { useForm } from 'react-hook-form'
 import Button from '../button/Button'
 import DragDrop from '../dragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
-import { TextArea, ErrorText } from '../formUI/FormUI'
-import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
+import { TextArea } from '../formUI/FormUI'
 
 import './NewsCreateModal.scss'
+import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
 
 const CreateImage = ({
   imageActive,
   setImageActive,
   lessonData,
-  setLessonData,
-  setLessonImgDataToPost
+  setLessonData
 }) => {
-  const [isImgDesc, setIsImgDesc] = useState(false)
+  const [isImgDesc, setIsImgDesc] = useState(true)
   const [lessonImg, setLessonImg] = useState(null)
 
-  const { register, errors, handleSubmit } = useForm()
+  const { register, handleSubmit } = useForm()
 
   const submitLessonImg = ({ photoDescription }) => {
     const imgData = [
@@ -31,21 +30,22 @@ const CreateImage = ({
       }
     ]
     setLessonData(imgData)
-    setLessonImgDataToPost({ lessonImg, photoDescription, isImgDesc })
     setImageActive(false)
   }
-
   return (
     <>
       {imageActive && (
-        <div className='collection-modal-container'>
-          <div>
+        <div className='collection-modal-container addBlock'>
+          <div className='block'>
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add photo'
                 clickHandler={setImageActive}
               />
-              <DragDrop onChange={(img) => setLessonImg(img)} />
+              <DragDrop
+                onChange={(img) => setLessonImg(img)}
+                text='Drag & Drop photo in this area or Click Here to attach'
+              />
               <div className='description'>
                 <label>Add photo description ?</label>{' '}
                 <ToggleSwitch
@@ -53,34 +53,23 @@ const CreateImage = ({
                   isFree={isImgDesc}
                 />
               </div>
-              {isImgDesc ? (
+              {isImgDesc && (
                 <div className='photo-input-container'>
                   <TextArea
-                    placeholder='Enter image description'
+                    placeholder='Photo Description (Optional)'
                     className='default-input-variation text-area-variation textarea'
                     cols='3'
-                    rows='7'
+                    rows='3'
                     name='photoDescription'
-                    ref={register({
-                      required: {
-                        value: true,
-                        message: 'Please enter a photo description'
-                      }
-                    })}
-                  />
-                  <ErrorText
-                    className='errorMsg'
-                    message={
-                      errors.photoDescription && errors.photoDescription.message
-                    }
+                    ref={register}
                   />
                 </div>
-              ) : (
-                <div />
               )}
+
               <Button
-                name='Add block'
+                name='Add Photo Block'
                 onClick={handleSubmit(submitLessonImg)}
+                className='add'
               />
             </div>
           </div>

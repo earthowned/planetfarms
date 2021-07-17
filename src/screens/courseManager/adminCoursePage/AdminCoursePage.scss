@@ -81,7 +81,7 @@
   padding: 24px 40px 40px;
 }
 
-.admin-lesson-lists-container h3 {
+.admin-lesson-lists-container .lessonHead {
   margin-bottom: 40px;
 }
 
@@ -92,6 +92,11 @@
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 40px;
+
+  .lessonBlock {
+    width: 100%;
+    margin-right: 0.3em;
+  }
 }
 
 .admin-lesson > div {
@@ -99,7 +104,7 @@
 }
 
 .coverImg {
-  width: 16.5em;
+  width: 30%;
   height: 10em;
   margin-right: 1.5em;
   text-align: center;
@@ -113,7 +118,6 @@
   &__img {
     img {
       width: 100%;
-      height: 100%;
     }
   }
   &__text {
@@ -136,18 +140,22 @@
 }
 .lessonTitle {
   font-size: 1.5em;
+  margin-bottom: 0.5em;
 
   &::first-letter {
     text-transform: capitalize;
   }
 }
+.lessonDescText {
+  margin-bottom: 0.5em;
+}
 
 .admin-lesson .lessonInfo {
-  width: 65%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   text-align: justify;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
 }
 
