@@ -25,11 +25,9 @@ function MyProfile () {
   const verification = {
     emailClickHandler: () => {
       emailClickHandler(true)
-      console.log('email verify')
     },
     phoneClickHandler: () => {
       phoneClickHandler(true)
-      console.log('phone verify')
     }
   }
   useEffect(() => {
@@ -51,14 +49,6 @@ function MyProfile () {
   }
   return (
     <>
-      {/* {
-        showEmailVerificationModal &&
-        <VerificationModal type='email' clickHandler={emailClickHandler}/>
-      }
-      {
-        showPhoneVerificationModal &&
-        <VerificationModal type='phone' clickHandler={phoneClickHandler}/>
-      } */}
       {
       loading
         ? <div>

@@ -65,7 +65,7 @@ export const ContactInformation = ({ user, verification }) => {
     secondVerify: user?.phone && {
       isVerified: user?.phoneVerified,
       clickHandler: verification?.phoneClickHandler
-    },
+    }
   }
   return (
     <ProfileFormCard data={ContactInformationdatadata} />

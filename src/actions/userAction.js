@@ -212,7 +212,6 @@ export const checkAndUpdateToken = () => async (dispatch) => {
     }
   }).catch((data) => {
     const message = data.response && data.response.data.name ? data.response.data.name : data.message
-    console.log('message')
     if (message === 'TokenExpired') {
       if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
         Auth.currentSession().then((res) => {
