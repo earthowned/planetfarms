@@ -213,7 +213,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
             Auth.currentSession().then((res) => {
               const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
               userInfo.token = res?.idToken?.jwtToken || ''
-              if(userInfo.token == '') return tokenFailure(dispatch, message)
+              if (userInfo.token == '') return tokenFailure(dispatch, message)
               else {
                 window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
                 dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
@@ -225,7 +225,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
             const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
             postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, { id: userInfo.id }).then((res) => {
               userInfo.token = res?.token || ''
-              if(userInfo.token == '') return tokenFailure(dispatch, message)
+              if (userInfo.token == '') return tokenFailure(dispatch, message)
               else {
                 window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
                 dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })

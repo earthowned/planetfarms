@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,6 +9,7 @@ import useGetFetchData from '../../../utils/useGetFetchData'
 import DragDrop from '../../dragDrop/DragDrop'
 import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
 import './NewCourseCreateModal.scss'
+import Filter from '../../filter/Filter'
 
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const history = useHistory()
@@ -17,30 +18,41 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const { userInfo } = userLogin
   const [isFree, setIsFree] = useState(true)
   const [courseImage, setCourseImage] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [categoryError, setCategoryError] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
 
   const { data: res } = useGetFetchData('category', CATEGORY)
 
-  // TODO: remove this comment after page not found component is created
-  // error && history.push("/pagenotfound")
-  const submitForm = async ({ title, category, description, price }) => {
+  useEffect(() => {
+    if (selectedCategory.length !== 0) {
+      setCategoryError('')
+    }
+  }, [selectedCategory])
+
+  const submitForm = async ({ title, description, price }) => {
+    setCategoryError(
+      selectedCategory.length === 0 ? 'Please select a category' : ''
+    )
     const thumbnail = courseImage
     const creator = userInfo.id
-    dispatch(
-      createResource({
-        title,
-        category,
-        description,
-        price,
-        thumbnail,
-        isFree,
-        creator,
-        history
-      })
-    )
+    const category = selectedCategory
+    if (category.length !== 0) {
+      dispatch(
+        createResource({
+          title,
+          category,
+          description,
+          price,
+          thumbnail,
+          isFree,
+          creator,
+          history
+        })
+      )
+    }
   }
-
   return (
     <div className='newCourse'>
       <form className='container' onSubmit={handleSubmit(submitForm)}>
@@ -65,30 +77,15 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
               }
             })}
           />
-          <p className='error'>{errors.title && errors.title.message}</p>
-          <select
-            name='category'
-            className={
-              errors.category
-                ? 'input input-select errorBox'
-                : 'input input-select'
-            }
-            placeholder='Select Category*'
-            ref={register({
-              required: 'You must select Category'
-            })}
-            defaultValue='Select Category'
-          >
-            <option defaultValue='' disabled>
-              Select Category
-            </option>
-            {res?.results.map((category) => (
-              <option key={category.id} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-          <p className='error'>{errors.category && errors.category.message}</p>
+          {errors.title && <p className='error'>{errors.title.message}</p>}
+          <Filter
+            isCategory
+            category={res?.results}
+            className='categoryFilter'
+            setSelectedCategory={setSelectedCategory}
+            selectedCategory={selectedCategory}
+          />
+          {categoryError && <p className='error'>{categoryError}</p>}
 
           <textarea
             className={errors.description ? 'errorBox' : ''}
@@ -101,9 +98,9 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
               }
             })}
           />
-          <p className='error'>
-            {errors.description && errors.description.message}
-          </p>
+          {errors.description && (
+            <p className='error'>{errors.description.message}</p>
+          )}
           <div className='new-course-toggle'>
             <h4>Free course</h4>
             <ToggleSwitch onClick={() => setIsFree(!isFree)} isFree={isFree} />
@@ -122,7 +119,7 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
               })}
             />
           )}
-          <p className='error'>{errors.price && errors.price.message}</p>
+          {errors.price && <p className='error'>{errors.price.message}</p>}
         </div>
         <button className='default-btn btn-size'>Create course</button>
       </form>

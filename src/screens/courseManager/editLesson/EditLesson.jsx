@@ -106,6 +106,7 @@ const EditLesson = () => {
                 message={errors.title && errors.title.message}
               />
               <DragDrop
+                editImg
                 onChange={(img) => setLessonCover(img)}
                 dataImg={GET_COVERIMG + data?.data?.coverImg}
                 text='Drag & Drop image in this area or Click Here to edit image'

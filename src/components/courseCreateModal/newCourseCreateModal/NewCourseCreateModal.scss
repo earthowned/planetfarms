@@ -26,26 +26,28 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 40px;
 
       img {
         cursor: pointer;
       }
     }
+    .drag-drop-container {
+      height: 15em;
+      margin-top: 2em;
+      margin-bottom: 0;
+      .drag-drop {
+        width: 100%;
+        height: 100%;
+        border: 2px dashed var(--primary-white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    .drag-drop {
-      width: 100%;
-      height: 216px;
-      border: 2px dashed var(--primary-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1em;
-
-      h6 {
-        width: 50%;
-        text-align: center;
-        line-height: 1.5;
+        h6 {
+          width: 50%;
+          text-align: center;
+          line-height: 1.5;
+        }
       }
     }
     .inputContainer {
@@ -55,7 +57,7 @@
         width: 100%;
         height: 5em;
         display: block;
-        margin-bottom: 1em;
+        margin-top: 2em;
         background: var(--cards);
         border: 1px solid var(--dropdowns);
         color: var(--primary-white);
@@ -85,12 +87,12 @@
         padding: 1em;
         font-family: inherit;
         border-radius: 0.3em;
-        margin-bottom: 1em;
+        margin-top: 2em;
       }
       .error {
         font-size: 0.8em;
         color: var(--secondary-red);
-        margin-bottom: 1em;
+        margin-top: 1em;
         height: 1em;
       }
     }
@@ -100,7 +102,7 @@
 .new-course-toggle {
   display: flex;
   align-items: center;
-  margin: 40px 0;
+  margin-top: 2em;
 }
 
 .new-course-toggle h4 {
@@ -109,7 +111,7 @@
 
 .btn-size {
   width: 12.5em;
-  margin-top: 1em;
+  margin-top: 2em;
 
   @media (max-width: 480px) {
     width: 100%;
