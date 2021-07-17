@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 require('express-async-errors')
-const { upload } = require('../helpers/filehelpers')
+const { upload, resizeImage } = require('../helpers/filehelpers')
 
 const {
   getVideos,
@@ -16,6 +16,7 @@ router
   .route('/add')
   .post(
     upload.fields([{ name: 'videoCover' }, { name: 'videoResource' }]),
+    resizeImage,
     addVideo
   )
 router.route('/:id').get(getVideosById).delete(deleteVideo).put(updateVideo)

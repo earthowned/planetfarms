@@ -11,11 +11,11 @@ const {
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
 router.route('/').get(getLessons)
-router.route('/add').post(upload.single('coverImg'), addLesson)
+router.route('/add').post(upload.single('coverImg'), resizeImage, addLesson)
 router
   .route('/:id')
   .get(getLessonById)
-  .put(upload.single('coverImg'), updateLesson)
+  .put(upload.single('coverImg'), resizeImage, updateLesson)
   .delete(deleteLesson)
 
 module.exports = router
