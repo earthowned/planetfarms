@@ -118,6 +118,26 @@
   color: #fff;
   margin-top: 1em;
   width: 100%;
+
+  
+  .verified-txt {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    height: 20px;
+    
+    .secondary-btn-variant {
+      margin-left: 10px;
+      width: 80px;
+      height: 30px;
+    }
+
+    .verified-img {
+      margin-right: 10px;
+    }
+  }
 }
 
 .myProfile-container:not(:last-child) {

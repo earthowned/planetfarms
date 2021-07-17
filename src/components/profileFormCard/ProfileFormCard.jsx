@@ -2,6 +2,7 @@ import React from 'react'
 import Secondarybtn from '../secondaryBtn/Secondarybtn'
 import './ProfileFormCard.scss'
 import CheckCircle from '../../assets/images/check-circle.svg'
+import MinusCircle from '../../assets/images/minus-circle-outline.svg'
 
 const ProfileFormCard = ({ data: { title, firstTitle, firstValue, firstVerify, secondTitle, secondValue, secondVerify, thirdTitle, thirdValue, thirdVerify } }) => {
   return (
@@ -11,21 +12,21 @@ const ProfileFormCard = ({ data: { title, firstTitle, firstValue, firstVerify, s
         <div className='form-group'>
           <label>{firstTitle}</label>
           <p>{firstValue}</p>
-          {firstVerify ? (firstVerify.clickHandler ? <Secondarybtn name='Verify' clickHandler={firstVerify.clickHandler} />
-            : <p><img className='verified-img' src={CheckCircle} alt='logo' /> Verified</p>) : ''}
+          {firstVerify ? (!firstVerify.isVerified ? <p className='verified-txt'><img className='verified-img' src={MinusCircle} alt='logo' />Not verified <Secondarybtn name='Verify' clickHandler={firstVerify.clickHandler} /></p>
+            : <p className='verified-txt'><img className='verified-img' src={CheckCircle} alt='logo' />Verified</p>) : ''}
         </div>
         <div className='form-group'>
           <label>{secondTitle}</label>
           <p>{secondValue}</p>
-          {thirdVerify ? (thirdVerify.clickHandler ? <Secondarybtn name='Verify' clickHandler={thirdVerify.clickHandler} />
-            : <p><img className='verified-img' src={CheckCircle} alt='logo' /> Verified</p>) : ''}
+          {secondVerify ? (!secondVerify.isVerified ? <p className='verified-txt'><img className='verified-img' src={MinusCircle} alt='logo' />Not verified <Secondarybtn name='Verify' clickHandler={secondVerify.clickHandler} /></p>
+            : <p className='verified-txt'><img className='verified-img' src={CheckCircle} alt='logo' />Verified</p>) : ''}
         </div>
         {thirdTitle &&
           <div className='form-group'>
             <label>{thirdTitle}</label>
             <p>{thirdValue}</p>
-            {thirdVerify ? (thirdVerify.clickHandler ? <Secondarybtn name='Verify' clickHandler={thirdVerify.clickHandler} />
-              : <p><img className='verified-img' src={CheckCircle} alt='logo' /> Verified</p>) : ''}
+            {thirdVerify ? (!thirdVerify.isVerified ? <p className='verified-txt'><img className='verified-img' src={MinusCircle} alt='logo' />Not verified <Secondarybtn name='Verify' clickHandler={thirdVerify.clickHandler} /></p>
+              : <p className='verified-txt'><img className='verified-img' src={CheckCircle} alt='logo' />Verified</p>) : ''}
           </div>}
       </div>
     </div>
@@ -50,13 +51,21 @@ export const PersonalInformation = ({ user }) => {
   )
 }
 
-export const ContactInformation = ({ user }) => {
+export const ContactInformation = ({ user, verification }) => {
   const ContactInformationdatadata = {
     title: 'Contact information',
     firstTitle: 'Email',
     firstValue: user?.email || 'N/A',
+    firstVerify: user?.email && {
+      isVerified: user?.emailVerified,
+      clickHandler: verification?.emailClickHandler
+    },
     secondTitle: 'Phone',
-    secondValue: user?.phone || 'N/A'
+    secondValue: user?.phone || 'N/A',
+    secondVerify: user?.phone && {
+      isVerified: user?.phoneVerified,
+      clickHandler: verification?.phoneClickHandler
+    },
   }
   return (
     <ProfileFormCard data={ContactInformationdatadata} />

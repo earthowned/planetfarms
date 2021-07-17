@@ -266,8 +266,11 @@ export const getMyDetails = () => async (dispatch) => {
       numberOfVisit: data.numberOfVisit,
       attachments: data.attachments
     }
-    const user = await Auth.currentAuthenticatedUser()
-    console.log(user)
+    const { attributes } = await Auth.currentAuthenticatedUser({
+      bypassCache: true
+    })
+    userdata.phoneVerified = attributes.phone_number_verified
+    userdata.emailVerified = attributes.email_verified
     dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message
@@ -294,7 +297,9 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
     }
     let currentUser
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-      currentUser = await Auth.currentAuthenticatedUser()
+      currentUser = await Auth.currentAuthenticatedUser({
+        bypassCache: true
+      })
     }
     const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
@@ -395,6 +400,7 @@ export const resendCodeAction = (username) => async (dispatch) => {
 export const verifyCurrentUserAttribute = (attr) => async (dispatch) => {
   try {
     dispatch({ type: USER_ATTR_RESEND_CODE_REQUEST })
+    dispatch({ type: USER_ATTR_CONFIRM_CODE_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const data = await Auth.verifyCurrentUserAttribute(attr)
       dispatch({ type: USER_ATTR_RESEND_CODE_SUCCESS })
@@ -411,14 +417,23 @@ export const verifyCurrentUserAttribute = (attr) => async (dispatch) => {
   }
 }
 
-export const verifyCurrentUserAttributeSubmit = (attr, code) => async (dispatch) => {
+export const verifyCurrentUserAttributeSubmit = (attr, code) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_ATTR_CONFIRM_CODE_REQUEST })
+    dispatch({ type: USER_ATTR_RESEND_CODE_REQUEST })
+    const { userDetails: { user } } = getState()
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-      const { data } = await Auth.verifyCurrentUserAttributeSubmit(attr, code)
+      await Auth.verifyCurrentUserAttributeSubmit(attr, code)
+      const userdata = user
+      const { attributes } = await Auth.currentAuthenticatedUser({
+        bypassCache: true
+      })
+      userdata.phoneVerified = attributes.phone_number_verified
+      userdata.emailVerified = attributes.email_verified
+      dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
       dispatch({ type: USER_ATTR_CONFIRM_CODE_SUCCESS })
     } else {
-      document.location.href = '/'
+      document.location.href = '/myProfile'
     }
   } catch (error) {
     dispatch({

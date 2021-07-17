@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
+import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from './reactQuery'
 import PrivateRoute from './components/privateRoute/PrivateRoute'
@@ -46,8 +46,6 @@ import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
 import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/verification/UserVerification'
-import EmailVerification from './screens/verification/EmailVerification'
-import PhoneVerification from './screens/verification/PhoneVerification'
 import LogoutUser from './screens/logoutUser/LogoutUser'
 
 function App () {
@@ -56,10 +54,11 @@ function App () {
       <Router>
         <ScrollToTop>
           <Switch>
-            <Route component={LoginScreen} path='/:path(|login)' exact />
+            <Route component={LoginScreen} path='/login' exact />
             <Route component={SignupScreen} path='/register' />
             <Route component={ForgotPassword} path='/forgot-password' />
-            <Route component={UserVerification} path='/verification' />
+            <PrivateRoute component={UserVerification} path='/verification' />
+            <PrivateRoute component={() => <Redirect to='/login' />} path='/' exact />
             <PrivateRoute component={LogoutUser} path='/logout' />
             <PrivateRoute component={CongratulationScreen} path='/register-complete' />
             <PrivateRoute component={CalendarScreen} exact path='/calendar/my-events' />
