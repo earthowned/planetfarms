@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom'
-import { saveAs } from 'file-saver'
 import { GET_LESSONS, MATERIAL } from '../../../utils/urlConstants'
-import useGetFetchData from '../../../utils/useGetFetchData'
 
+import useGetFetchData from '../../../utils/useGetFetchData'
 import LessonDetail from './LessonDetail'
 import BackButton from '../../../components/backButton/BackButton'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
@@ -21,11 +20,6 @@ const LessonPage = () => {
   }
   const materialData = data?.data?.materials
 
-  const downloadFile = (url, name) => {
-    console.log(url, name)
-    const blob = new File([url], `${name}`)
-    saveAs(blob)
-  }
   return (
     <DashboardLayout title='Course page'>
       <BackButton location={'/course/' + data?.data?.courseId} />
@@ -34,19 +28,18 @@ const LessonPage = () => {
         <h1>Materials</h1>
         <div className='material'>
           {materialData.map((mater) => {
-            console.log(mater)
             return (
               <Material key={mater.id} name={mater?.name}>
-                <div
-                  onClick={() =>
-                    downloadFile(
-                      `${MATERIAL}${mater?.material}`,
-                      `${mater?.name}`
-                    )}
+                <a
+                  href={`${MATERIAL}${mater?.material}`}
+                  download={mater.name}
+                  target='_blank'
                 >
-                  <img src='/img/download-icon.svg' alt='download icon' />{' '}
-                  <span>Download</span>
-                </div>
+                  <div>
+                    <img src='/img/download-icon.svg' alt='download icon' />{' '}
+                    <span>Download</span>
+                  </div>
+                </a>
 
                 <div>
                   <img src='/img/book-outlined.svg' alt='library icon' />{' '}

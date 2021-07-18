@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "file-saver": "^2.0.5",
+    "js-file-download": "^0.4.12",
     "moment": "^2.29.1",
     "node-sass": "^6.0.0",
     "parcel-bundler": "^1.12.4",
