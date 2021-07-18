@@ -1,15 +1,23 @@
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
+const { changeFormat } = require('../helpers/filehelpers')
+const CircularJSON = require('circular-json')
 
 const getVideos = async (_req, res) => {
   const videos = await db.Video.findAll()
   if (!videos) {
     throw new NotFoundError()
   }
+  const data = {
+    videos: videos.map((video) => ({
+      ...video.dataValues,
+      videoCover: changeFormat(video.videoCover)
+    }))
+  }
   res.status(200).json({
     status: true,
     message: 'fetched all videos successfully',
-    data: videos
+    data: data.videos
   })
 }
 
@@ -19,10 +27,17 @@ const getVideosById = async (req, res) => {
   if (!video) {
     throw new NotFoundError()
   }
+  const videoCover = changeFormat(video?.dataValues?.videoCover)
+  const videoData = video.dataValues
+  const data = Object.assign({
+    ...video,
+    dataValues: { ...videoData, videoCover }
+  })
+  const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
     status: true,
     message: 'fetched video successfully',
-    data: video
+    data: str.dataValues
   })
 }
 
