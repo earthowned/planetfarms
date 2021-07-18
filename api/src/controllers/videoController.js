@@ -37,6 +37,7 @@ const addVideo = async (req, res) => {
       videoResource = req.files.videoResource[0].filename
     }
   }
+  // console.log(req)
   const video = await db.Video.create({
     ...req.body,
     videoCover,

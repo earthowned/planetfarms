@@ -11,11 +11,18 @@ const {
   updateVideo
 } = require('../controllers/videoController')
 
+// get image file middleware
+const fileChanger = (req, _res, next) => {
+  req.file = req.files.videoCover[0]
+  next()
+}
+
 router.route('/').get(getVideos)
 router
   .route('/add')
   .post(
     upload.fields([{ name: 'videoCover' }, { name: 'videoResource' }]),
+    fileChanger,
     resizeImage,
     addVideo
   )
