@@ -22,7 +22,7 @@ const AddTest = () => {
     const [questions, setQuestions] = useState([]);
     const [newQuestions, setNewQuestions] = useState([]);
     const [formError, setFormError] = useState(false);
-    const [options, setOptions] = useState([]);
+    // const [options, setOptions] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false)
     const [deleteId, setDeleteId] = useState();
     const [editModal, setEditModal] = useState(false)
@@ -86,8 +86,9 @@ const AddTest = () => {
 
     function submitQuestion() {
       if (questions.length > 0) {
-      if (checkArrayForFilledValue(questions) && !options.includes("")) {
+      if (checkArrayForFilledValue(questions)) {
           const newQuestions = orderQuestions();
+          
         dispatch(createTest(lessonId, newQuestions))
         return history.goBack()
       }
@@ -111,12 +112,13 @@ const AddTest = () => {
 
     async function editTest() {
         if (questions.length > 0) {
-            if (checkArrayForFilledValue(questions) && !options.includes("")) {
+            if (checkArrayForFilledValue(questions)) {
                 const editQuestions = orderQuestions();
                 const {data} = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/tests/${editQuestions[0].testId}`, { questions: editQuestions });
                 if(data) document.location.href = `/admin/edit-test/${lessonId}`
             }
           }
+          setFormError(true)
     }
 
     
@@ -180,9 +182,10 @@ const AddTest = () => {
           newQuestions={newQuestions}
           formError={formError}
           setFormError={setFormError}
-          options={options}
-          setOptions={setOptions}
+          // options={options}
+          // setOptions={setOptions}
           cards={cards}
+          setCards={setCards}
           deleteQuestion={deleteQuestion}
           editQuestion={editQuestion}
         />
@@ -191,7 +194,7 @@ const AddTest = () => {
     return (
       <>
       <DeleteQuestionModal confirmDelete={confirmDelete} setDeleteModal={setDeleteModal} deleteModal={deleteModal} />
-      <EditQuestionModal questions={questions} editId={editId} editModal={editModal} setEditModal={setEditModal} />
+      <EditQuestionModal questions={questions} setQuestions={setQuestions} editId={editId} editModal={editModal} setEditModal={setEditModal} />
       <DashboardLayout title="Add Test">
         <div div className='add-test-container' >{cards.map((card, i) => renderCard(card, i))}</div>
         <div className="btn-container">
@@ -242,9 +245,7 @@ const EditQuestionModal = ({questions, editId, editModal, setEditModal}) => {
         // setEditModal(false)
         if(questions[questions.findIndex((el) => el.id === editId)].type === "mcq") {
           if(!newOptions.includes("")) {
-            // id, question, answer, options, testId, type, lessonId
-            console.log(question, answer)
-             console.log(newOptions, questions[questions.findIndex((el) => el.id === editId)].id)
+            
             return dispatch(updateQuestion({
               id: questions[questions.findIndex((el) => el.id === editId)].id, 
               options: newOptions,
@@ -344,7 +345,14 @@ const EditQuestionModal = ({questions, editId, editModal, setEditModal}) => {
                       {modalFormError ? <p className='error-message test-error'>Please fill all the inputs.</p> : <p></p>}
                       <div className='option-answers'>
                             {newOptions.length > 0 && newOptions.map((item, index) =>
-                                  <ModalInput item={item} newOptions={newOptions} index={index} setModalFormError={setModalFormError} />
+                                  <ModalInput
+                                  id= {questions[questions.findIndex((el) => el.id === editId)].id}
+                                  item={item} 
+                                  newOptions={newOptions} 
+                                  setNewOptions={setNewOptions}
+                                  questions={questions} 
+                                  index={index} 
+                                  setModalFormError={setModalFormError} />
                               )}
                       </div>
                       <div className="add-new-course" onClick={addQuestion}><img src='/img/plus.svg' alt='add icon' /> 
@@ -359,20 +367,41 @@ const EditQuestionModal = ({questions, editId, editModal, setEditModal}) => {
     </>
   )
 }
-const ModalInput = ({item, newOptions, index, setModalFormError}) => {
+
+const ModalInput = ({item, newOptions, setNewOptions, index, setModalFormError, questions, id}) => {
   const[option, setOption] = useState(item)
+
+  useEffect(() => {
+        if (newOptions.length > 0) {          
+            setOption(newOptions[index])
+            if(questions.length) {
+              questions[questions.findIndex((el) => el.id === id)].options = newOptions
+            }
+        }
+    }, [newOptions])
+
   function onQuestionChange(e) {
     setOption(e.target.value);
       newOptions[index] = e.target.value
       setModalFormError(false)
   }
+
+  function removeItem () {
+    let removedItem = newOptions.splice(index, 1);
+    let newItems = newOptions.filter((el)=> el !== removedItem)
+    setNewOptions(newItems)
+  }
+
   return (
-    <input 
-      value={option} 
-      onChange={(e) => onQuestionChange(e)} 
-      className='default-input-variation'
-      placeholder='Question'
-    />
+    <div className="question-modal-options">
+          <input 
+            value={option} 
+            onChange={(e) => onQuestionChange(e)} 
+            className='default-input-variation'
+            placeholder='Question'
+          />
+        {newOptions.length > 1 && <img src='/img/minus-circle-outline.svg' alt='minus image'  onClick={removeItem} />}
+    </div>
   )
 }
 
@@ -388,9 +417,9 @@ const style2 = {
   cursor: "move"
 };
 
-const Card = ({ id, type, index, moveCard, questions, 
+const Card = ({ id, type, index, moveCard, questions, setQuestions,
   formError, setFormError, setOptions, options, 
-  cards, deleteQuestion, newQuestions, editQuestion }) => {
+  cards, setCards, deleteQuestion, newQuestions, editQuestion }) => {
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -456,22 +485,27 @@ const Card = ({ id, type, index, moveCard, questions,
       {type === "mcq" ? (
         <MCQQuestion
           questions={questions}
+          setQuestions={setQuestions}
           id={id}
           formError={formError}
           setFormError={setFormError}
           options={options}
           setOptions={setOptions}
           cards={cards}
+          setCards={setCards}
           deleteQuestion={deleteQuestion}
           editQuestion={editQuestion}
           newQuestions={newQuestions}
         />
       ) : (
         <SubjectiveQuestion 
-          questions={questions} id={id} 
+          questions={questions} 
+          setQuestions={setQuestions}
+          id={id} 
           formError={formError}
           setFormError={setFormError}
           cards={cards}
+          setCards={setCards}
           deleteQuestion={deleteQuestion}
           editQuestion={editQuestion}
           newQuestions={newQuestions}
@@ -482,7 +516,7 @@ const Card = ({ id, type, index, moveCard, questions,
   );
 };
 
-function SubjectiveQuestion({ questions, id, formError, setFormError, cards, deleteQuestion, newQuestions, editQuestion }) {
+function SubjectiveQuestion({ questions, setQuestions, id, formError, setFormError, cards, setCards, deleteQuestion, newQuestions, editQuestion }) {
     const [question, setQuestion] = useState("");
     const [isDisable, setIsDisable] = useState(false);
   
@@ -502,10 +536,30 @@ function SubjectiveQuestion({ questions, id, formError, setFormError, cards, del
     }
   }, [newQuestions])
 
+  useEffect(() => {
+    if(questions.length){
+      setQuestion(questions[questions.findIndex((el) => el.id === id)].question)
+    }
+  }, [cards])
+
+  const removeQuestion = () => {
+    //for questions
+    let removed = questions.splice(questions.findIndex((el) => el.id === id), 1)
+    let newQuestions = questions.filter(item => item.id !== removed.id);
+    setQuestions(newQuestions)
+    //for cards
+    let removedCard = cards.splice(cards.findIndex((el) => el.id === id), 1);
+    let newCards = cards.filter(item => item.id !== removedCard.id);
+    setCards(newCards)
+  }
+
   return (
     <>
     {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
+    <div className="question-header">
       <h4 className="question-title">Subjective Question</h4> 
+      {!isDisable && <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeQuestion}/>}
+    </div>
       <div className='question-container'> 
           <div>
             <input
@@ -525,7 +579,8 @@ function SubjectiveQuestion({ questions, id, formError, setFormError, cards, del
   );
 }
 
-function MCQQuestion({ id, questions, formError, setFormError, options, setOptions, cards, deleteQuestion, newQuestions, editQuestion }) {
+function MCQQuestion({ id, questions, setQuestions, formError, setFormError, cards, setCards, deleteQuestion, newQuestions, editQuestion }) {
+  const[options, setOptions] = useState([""])
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [newOptions, setNewOptions] = useState([""])
@@ -564,6 +619,26 @@ function MCQQuestion({ id, questions, formError, setFormError, options, setOptio
     }
   }, [newQuestions])
 
+  // update on card change
+  useEffect(() => {
+    if(questions.length){
+      setQuestion(questions[questions.findIndex((el) => el.id === id)].question)
+      setAnswer(questions[questions.findIndex((el) => el.id === id)].answer)
+      setNewOptions(questions[questions.findIndex((el) => el.id === id)].options)
+      setOptions(questions[questions.findIndex((el) => el.id === id)].options)
+    }
+  }, [cards])
+
+   const removeQuestion = () => {
+    //for questions
+    let removed = questions.splice(questions.findIndex((el) => el.id === id), 1)
+    let newQuestions = questions.filter(item => item.id !== removed.id);
+    setQuestions(newQuestions)
+    //for cards
+    let removedCard = cards.splice(cards.findIndex((el) => el.id === id), 1);
+    let newCards = cards.filter(item => item.id !== removedCard.id);
+    setCards(newCards)
+  }
   
   function addQuestion() {
     setOptions((cur) => [...cur, ""]);
@@ -573,7 +648,10 @@ function MCQQuestion({ id, questions, formError, setFormError, options, setOptio
   return (
     <>
     {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
-      <h4 className="question-title">MCQ Question</h4>
+      <div className="question-header">
+        <h4 className="question-title">MCQ Question</h4>
+        {!isDisable && <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeQuestion}/>}
+      </div>
       <div className='question-container'>
           <div>
               <input
@@ -596,7 +674,7 @@ function MCQQuestion({ id, questions, formError, setFormError, options, setOptio
                 onChange={(e) => changeAnswer(e)} 
                 disabled={isDisable}
                 />
-                 <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => setAnswer('')} />
+                 {!isDisable && <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => setAnswer('')} />}
              </div>
              <span>Answer will be mixed for users</span>
             </div>
@@ -608,10 +686,13 @@ function MCQQuestion({ id, questions, formError, setFormError, options, setOptio
                          index={index} 
                          questions={questions} id={id} 
                          setFormError={setFormError} 
-                         options={options} 
+                         options={options}
+                         setOptions={setOptions}
                          newOptions={newOptions}
+                         setNewOptions={setNewOptions}
                          item={item}
                          isDisable={isDisable}
+                         newQuestions={newQuestions}
                          />
 
                     )}
@@ -629,7 +710,7 @@ function MCQQuestion({ id, questions, formError, setFormError, options, setOptio
   );
 }
 
-function InputComponent({ index, questions, id, setFormError, options, newOptions, isDisable }) {
+function InputComponent({ index, questions, id, setFormError, options, setOptions, newOptions, setNewOptions, isDisable, newQuestions }) {
   const [question, setQuestion] = useState("");
   function onQuestionChange(e) {
     setQuestion(e.target.value);
@@ -640,31 +721,44 @@ function InputComponent({ index, questions, id, setFormError, options, newOption
   }
 
   useEffect(() => {
-        if (newOptions.length > 0) {
+        if (newOptions.length > 0) {          
             setQuestion(newOptions[index])
+            if(questions.length) {
+              questions[questions.findIndex((el) => el.id === id)].options = newOptions
+            }
         }
-    }, [])
+    }, [newOptions])
 
    function removeItem () {
-    // const newOptions = [...options]
-    // const index = newOptions.indexOf(id)
-    // console.log(index)
-    // if (index !== -1) {
-    //   newOptions.splice(index, 1)
-    //   setOptions(newOptions)
-    // }
+    let removedItem = newOptions.splice(index, 1);
+    let newItems = newOptions.filter((el)=> el !== removedItem)
+    setNewOptions(newItems)
+    let removedList = options.splice(index, 1);
+    let newLists = options.filter((el, index )=> index !== removedList)
+    setOptions(newLists)
   }
 
   return (
         <div className='test-answer-input-field' key={index}>
-          <input
+          {
+          questions[questions.findIndex((el) => el.id === id)]?.testId
+          ? 
+          (newOptions[index] !== undefined ) && <input
               className='default-input-variation incorrect-option'
               placeholder='Incorrect answer' 
               disabled={isDisable}
               value={question} 
               onChange={(e) => onQuestionChange(e)}
             />
-            <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => removeItem()} />
+          : <input
+              className='default-input-variation incorrect-option'
+              placeholder='Incorrect answer' 
+              disabled={isDisable}
+              value={question} 
+              onChange={(e) => onQuestionChange(e)}
+            />
+          }
+            {!isDisable && (newOptions.length > 1 && <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeItem} />)}
         </div>
   );
 }

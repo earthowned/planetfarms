@@ -48,10 +48,21 @@
         flex-wrap: wrap;
         margin: 12px 0;
 
-        input {
+        .question-modal-options {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           width: 48%;
           margin-bottom: 12px;
-      }
+
+          input {
+            width: 90%;
+          }
+
+          img {
+            cursor: pointer;
+          }
+        }
     }
     }
   }

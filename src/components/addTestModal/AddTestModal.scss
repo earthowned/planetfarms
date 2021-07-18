@@ -8,9 +8,19 @@
     top: -30px;
   }
 
-  .question-title {
-    margin: 20px 0;
-    color: var(--primary-grey);
+  .question-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .question-title {
+      margin: 20px 0;
+      color: var(--primary-grey);
+    }
+
+    img {
+      cursor: pointer;
+    }
   }
 }
 
