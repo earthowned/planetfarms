@@ -24,7 +24,7 @@ const Enterprise = () => {
   const { userEnterprises } = dataUser
   // const {enterprises} = data;
   // console.log(enterprises);
-  const enterprises = data.enterprises.enterprises ? data.enterprises.enterprises : data.enterprises
+  const enterprises = data?.enterprises?.enterprises ? data.enterprises.enterprises : data.enterprises
   const { success: enterpriseUpdateSuccess } = useSelector((state) => state.enterpriseUpdate)
   const { success: enterpriseDeleteSuccess } = useSelector((state) => state.enterpriseDelete)
   const { success: enterpriseCreateSuccess } = useSelector((state) => state.enterpriseCreate)
@@ -36,6 +36,7 @@ const Enterprise = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const [userPageNumber, setUserPageNumber] = useState(1)
   const dispatch = useDispatch()
+
 
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
@@ -115,27 +116,6 @@ const Enterprise = () => {
 }
 
 function EnterpriseHeader ({ search, setSearch, setActive }) {
-  return (
-    <div className='enterprises-row'>
-      <div className='enterprises-header'>
-        <FirstHeader />
-        <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
-      </div>
-      <div className='create-enterprises-wrapper'>
-        <div className='add-enterprises'>
-          <div className='create-enterprise-text ibmplexsans-semi-bold-shark-16px' onClick={() => setActive(true)}>
-            Create Enterprise
-          </div>
-        </div>
-        <div className='enterprise-filter'>
-          <Filter />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function FirstHeader () {
   const windowWidth = useSizeFinder()
   const { pathname } = useLocation()
 
@@ -154,29 +134,81 @@ function FirstHeader () {
       link: `/your-enterprises/${currentCommunity.slug}`
     }
   ]
+
   return (
-    <>
-      {windowWidth > 720
-        ? <ul className='courses-list-container'>
-          {
-          nav.map(item => {
-            return (
-              <li>
-                <Link
-                  className={`nav-link ${(pathname === `${item.link}`)
-                  ? 'courses-list-item active'
-                  : 'library-list-item'}`} to={`${item.link}`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            )
-          })
-        }
-        </ul>
-        : <Filter name='All Enterprises' noImage />}
-    </>
+    <div className='library-main-header-container'>
+                <div className='library-container'>
+                  {windowWidth > 720
+                    ? <>
+                      <ul className='library-list-container'>
+                        {nav.map((menu) => (
+                          <li>
+                            <Link className={`nav-link ${(pathname === menu.link) ? 'library-list-item active' : 'library-list-item'}`} to={menu.link}>{menu.label}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                      <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
+                    </>
+                    : <>
+                      <Filter />
+                      <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
+                      </>}
+                </div>
+                <div className='library-sub-header'>
+                  <div className='library-sub-header-1'>
+                    <div className='library-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Create Enterprise</button></div>
+                  </div>
+
+                  <div className='library-sub-header-2'>
+                    <Filter />
+                  </div>
+                </div>
+      </div>
   )
 }
+
+// function FirstHeader () {
+//   const windowWidth = useSizeFinder()
+//   const { pathname } = useLocation()
+
+//   // fetching current community
+//   const currentCommunity = localStorage.getItem('currentCommunity')
+//     ? JSON.parse(localStorage.getItem('currentCommunity'))
+//     : null
+
+//   const nav = [
+//     {
+//       label: 'All enterprises',
+//       link: `/enterprises/${currentCommunity.slug}`
+//     },
+//     {
+//       label: 'Your Enterprises',
+//       link: `/your-enterprises/${currentCommunity.slug}`
+//     }
+//   ]
+//   return (
+//     <>
+//       {windowWidth > 720
+//         ? <ul className='courses-list-container'>
+//           {
+//           nav.map(item => {
+//             return (
+//               <li>
+//                 <Link
+//                   className={`nav-link ${(pathname === `${item.link}`)
+//                   ? 'courses-list-item active'
+//                   : 'library-list-item'}`} to={`${item.link}`}
+//                 >
+//                   {item.label}
+//                 </Link>
+//               </li>
+//             )
+//           })
+//         }
+//         </ul>
+//         : <Filter name='All Enterprises' noImage />}
+//     </>
+//   )
+// }
 
 export default Enterprise

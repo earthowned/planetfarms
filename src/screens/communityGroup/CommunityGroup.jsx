@@ -51,9 +51,7 @@ const CommunityGroup = () => {
   const [deleteModal, setDeleteModal] = useState(false)
   const [pageNumber, setPageNumber] = useState(1)
   const [userPageNumber, setUserPageNumber] = useState(1)
-  const handleClickCreate = () => {
-  }
-
+  
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
     if (!search) dispatch(listGroups({ pageNumber }))
@@ -98,39 +96,35 @@ const CommunityGroup = () => {
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>
-            <div className='community-group-main-header-container'>
-              <div className='flex-row-5'>
-                {windowWidth > 720
-                  ? <ul className='courses-list-container'>
-                    {
-                  nav.map(item => {
-                    return (
-                      <li>
-                        <Link
-                          className={`nav-link ${(pathname === `${item.link}`)
-                          ? 'courses-list-item active'
-                          : 'library-list-item'}`} to={`${item.link}`}
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    )
-                  })
-                }
-                    </ul>
-                  : <Filter name='All Enterprises' noImage />}
-                <div className='community-group-search-container'>
-                  <SearchComponent className='search-bar' search={search} setSearch={setSearch} />
+            <div className='library-main-header-container'>
+                <div className='library-container'>
+                  {windowWidth > 720
+                    ? <>
+                      <ul className='library-list-container'>
+                        {nav.map((menu) => (
+                          <li>
+                            <Link className={`nav-link ${(pathname === menu.link) ? 'library-list-item active' : 'library-list-item'}`} to={menu.link}>{menu.label}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                      <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
+                    </>
+                    : <>
+                      <Filter />
+                      <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
+                      </>}
+                </div>
+                <div className='library-sub-header'>
+                  <div className='library-sub-header-1'>
+                    <div className='library-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Create Group</button></div>
+                  </div>
+
+                  <div className='library-sub-header-2'>
+                    <Filter />
+                  </div>
                 </div>
               </div>
-              <div className='button-filter-container'>
-                <div className='community-group-header-btn-container' onClick={() => setActive(true)}>
-                  <Button name='Create group' onClick={handleClickCreate} />
-                </div>
-                {/* <FilterByCategory /> comes here */}
-                <Filter />
-              </div>
-            </div>
+
             <div className='community-group-container'>
               {
           pathname === `/community-group/${currentCommunity.slug}`
