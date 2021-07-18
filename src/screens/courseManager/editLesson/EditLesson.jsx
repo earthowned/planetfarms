@@ -54,7 +54,7 @@ const EditLesson = () => {
   const title = data?.data?.title
 
   //   const [testModal, setTestModal] = useState(false)
-  const [lessonData, setLessonData] = useState([])
+  // const [lessonData, setLessonData] = useState([])
   const textData = data?.data?.texts.map((text) => {
     return text
   })

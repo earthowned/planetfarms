@@ -17,14 +17,8 @@ import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
-<<<<<<< HEAD
-=======
 import { testCreateReducer, testQuestionEditReducer, testQuestionListReducer } from './reducers/testReducers'
->>>>>>> 53596e0 (refersh page on delete and edit in edit-tes page)
-import {
-  testCreateReducer,
-  testQuestionListReducer
-} from './reducers/testReducers'
+
 import {
   enterpriseCreateReducer,
   enterpriseDeleteReducer,
