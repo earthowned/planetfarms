@@ -250,13 +250,6 @@ const CommunityModal = ({ setActive, data, setEditData }) => {
             <div className='auto-follow-btn'>
               <h5>Auto follow</h5>
               <ToggleSwitch onClick={() => setToggleActive(!toggleActive)} isFree={toggleActive} />
-              {/* <div className='toggle'>
-                <div
-                  onClick={() => setToggleActive(!toggleActive)}
-                  className={`${toggleActive ? 'toggle-item active' : 'toggle-item'}`}
-                />
-                <div className='toggle-container' />
-              </div> */}
             </div>
             {data
               ? <Button name='Update Community' onClick={updateCommunity} />
