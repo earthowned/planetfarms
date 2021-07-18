@@ -1,0 +1,59 @@
+.settings-modal-container {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  width: 100%;
+  background: var(--background-color-modal);
+  height: 100%;
+  z-index: 5005;
+  color: var(--primary-white);
+  font-family: var(--font-family);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.settings-modal-inner-container {
+  width: 450px;
+  background: var(--cards);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow-y: auto;
+
+  .settings-modal-title {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .close-btn {
+      background: none;
+      border: none;
+    }
+  }
+
+  .popup-btn-wrapper {
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      width: auto;
+      padding: 0.9em 2.5em;
+    }
+  }
+
+  .settings-modal-message {
+    margin-bottom: 20px;
+  }
+
+}
+
+

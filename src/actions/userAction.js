@@ -484,19 +484,24 @@ export const forgotPasswordSubmit = (username, code, confirmPassword) => async (
   }
 }
 
-export const changePassword = (username, oldPassword, newPassword) => async (dispatch) => {
+export const changePassword = (oldPassword, newPassword) => async (dispatch) => {
   try {
     dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
-    const { data } = await postApi(dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
-      { username, oldPassword, newPassword }
-    )
-    dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS, payload: data })
+    // const { data } = await postApi(dispatch,
+    //   `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
+    //   { username, oldPassword, newPassword }
+    // )
+
+    const user = await Auth.currentAuthenticatedUser()
+    const data = await Auth.changePassword(user, oldPassword, newPassword)
+    console.log(data)
+
+    // dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: USER_PASSWORD_CHANGE_FAIL,
-      payload: error.response && error.response.data.error
-        ? error.response.data.error
+      payload: error.response && error.response.data.message
+        ? error.response.data.message
         : error.message
     })
   }

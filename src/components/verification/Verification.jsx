@@ -76,8 +76,8 @@ const Verification = ({ attr, title, clickHandler }) => {
           <Lock className='error-icon' />
         </Input>
         <div className='btnWrapper'>
-          <Button name='Verify' onClick={handleSubmit(verifyAccount)} />
           <Button name='Resend Code' onClick={resendCode} />
+          <Button name='Verify' onClick={handleSubmit(verifyAccount)} />
         </div>
       </>
 
