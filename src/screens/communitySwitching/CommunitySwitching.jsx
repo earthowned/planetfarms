@@ -16,6 +16,7 @@ import Pagination from '../../components/pagination/Pagination'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { InputFields, SelectFields } from '../../components/formUI/FormUI'
+import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch'
 
 function App () {
   const communitiesState = useSelector((state) => state.listCommunities)
@@ -248,13 +249,14 @@ const CommunityModal = ({ setActive, data, setEditData }) => {
             />
             <div className='auto-follow-btn'>
               <h5>Auto follow</h5>
-              <div className='toggle-main-container'>
+              <ToggleSwitch onClick={() => setToggleActive(!toggleActive)} isFree={toggleActive} />
+              {/* <div className='toggle'>
                 <div
                   onClick={() => setToggleActive(!toggleActive)}
                   className={`${toggleActive ? 'toggle-item active' : 'toggle-item'}`}
                 />
                 <div className='toggle-container' />
-              </div>
+              </div> */}
             </div>
             {data
               ? <Button name='Update Community' onClick={updateCommunity} />
