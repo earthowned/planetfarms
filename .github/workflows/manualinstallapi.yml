@@ -1,8 +1,6 @@
 name: Manual API Install
 
-on:
-  workflow_dispatch:
-    inputs:
+on: [push]
 
 jobs:
   diagrams:
