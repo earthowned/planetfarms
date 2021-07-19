@@ -3,7 +3,7 @@ name: Manual API Install
 on: [push]
 
 jobs:
-  diagrams:
+  api:
     name: Manual API Install
     runs-on: ubuntu-latest
 
@@ -43,5 +43,6 @@ jobs:
           npx sequelize-cli db:migrate &> npxoutput #1>&2 
           echo "**********************"
           cat npxoutput
+          sed 's///g' npxoutput
           echo "**********************"
           echo $?
