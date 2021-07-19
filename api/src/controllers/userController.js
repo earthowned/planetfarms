@@ -86,7 +86,8 @@ const authUser = async (req, res) => {
     if (user && await subscribeCommunity(user)) {
       await res.json({
         token: generateToken(user.dataValues.userID),
-        id: user.dataValues.userID
+        userID: user.dataValues.userID,
+        id: user.id
       })
     } else {
       await res.status(401).json({
@@ -102,7 +103,7 @@ const authUser = async (req, res) => {
 
 const localAuth = async (name, password) => {
   const user = await db.LocalAuth.findOne({ where: { username: name, password: password } })
-  const newUser = await db.User.findOne({ where: { userID: { [Op.like]: user.dataValues.id.toString() } } })
+  const newUser = await db.User.findOne({ where: { userID: user.id }})
   return newUser
 }
 
@@ -140,7 +141,7 @@ const registerLocal = async (name, password, res) => {
     })
     if (newUser && await subscribeCommunity(newUser)) {
       res.status(201).json({
-        id: newUser.dataValues.userID,
+        id: newUser.id,
         userID: newUser.dataValues.userID,
         token: generateToken(newUser.dataValues.userID)
       })
@@ -300,6 +301,7 @@ const updateUser = async (req, res) => {
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
+    console.log(id);
     db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
