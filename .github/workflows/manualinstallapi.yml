@@ -46,4 +46,6 @@ jobs:
           sed -i '/^$/d' errorout
           echo "**********************"
           [[ -s errorout ]] && echo "not empty" || echo "its empty"
+          rm errorout
+          touch errorout
           [[ -s errorout ]] && exit 1 || exit 0
