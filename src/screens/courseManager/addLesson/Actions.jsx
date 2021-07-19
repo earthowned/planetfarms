@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import useHideOnClick from '../../../utils/useHideOnClick'
-
-const LessonActions = ({ id, onRemove = () => {} }) => {
+const LessonActions = ({ id, onRemove = () => {}, poopUp }) => {
   const [actionActive, setActionActive] = useState(false)
 
   const domNode = useHideOnClick(() => {
@@ -18,7 +17,7 @@ const LessonActions = ({ id, onRemove = () => {} }) => {
       </button>
       {actionActive && (
         <ul className={actionActive ? 'actionBtn show' : 'hide'}>
-          <li>Edit</li>
+          <li onClick={poopUp}>Edit</li>
           <li onClick={() => onRemove(id)}>Delete</li>
         </ul>
       )}

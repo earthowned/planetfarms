@@ -7,6 +7,7 @@ import Text from './Text'
 
 const AddContent = ({
   setVideoModal,
+  videoModal,
   setImageModal,
   setTextModal,
   setTestModal,
@@ -14,8 +15,9 @@ const AddContent = ({
   errors,
   setLessonCover,
   lessonData,
-  setLessonData,
-  onRemove
+  onRemove,
+  setEditVideoModel,
+  modelPopUp
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -57,14 +59,14 @@ const AddContent = ({
               id={vid.itemId}
               isEditable
               onRemove={onRemove}
-              id={vid.itemId}
+              setEditVideoModel={setEditVideoModel}
+              modelPopUp={modelPopUp}
             />
             <Image
               src={vid.lessonImg?.preview}
               desc={vid.photoDescription}
               id={vid.itemId}
               onRemove={onRemove}
-              id={vid.itemId}
             />
             <Text
               heading={vid.textHeading}

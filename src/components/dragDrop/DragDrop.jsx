@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import './DragDrop.scss'
 const DragDrop = ({
@@ -9,6 +9,7 @@ const DragDrop = ({
   text,
   fetchImg,
   dataImg,
+  dropFile,
   onClick = () => {}
 }) => {
   const [files, setFiles] = useState()
@@ -28,6 +29,10 @@ const DragDrop = ({
     setFiles(selectedFile)
     onChange(selectedFile)
   }
+
+  useEffect(() => {
+    dropFile && setFiles(dropFile)
+  }, [dropFile])
 
   return (
     <DragDropComponent

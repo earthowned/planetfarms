@@ -14,9 +14,14 @@ const Video = ({
   itemId,
   isEditable,
   onRemove,
-  id
+  id,
+  setEditVideoModel,
+  modelPopUp
 }) => {
   const [showInfo, setShowInfo] = useState(false)
+  const poopUp = () => {
+    modelPopUp(setEditVideoModel(true), id)
+  }
   return (
     <>
       {url ? (
@@ -27,7 +32,7 @@ const Video = ({
             <p className='videoDesc'>{itemId}</p>
           </div>
           {isEditable ? (
-            <Actions onRemove={onRemove} id={id} />
+            <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
           ) : (
             <div className='addToLibrary'>
               <BookMark />
