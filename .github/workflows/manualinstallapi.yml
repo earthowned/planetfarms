@@ -52,6 +52,6 @@ jobs:
           echo "**********************"
           npx sequelize-cli db:migrate 2>&1 npxoutput 
           echo "**********************"
-          cat npxoutput
+          # cat npxoutput
           echo "**********************"
           echo $?
