@@ -1,10 +1,12 @@
-name: Manual API Install
+name: Manual API init DB Test
 
-on: [push]
+on: 
+  workflow_dispatch:
+    inputs:
 
 jobs:
   api:
-    name: Manual API Install
+    name: Manual API init DB Test
     runs-on: ubuntu-latest
 
     services:
@@ -46,6 +48,4 @@ jobs:
           sed -i '/^$/d' errorout
           echo "**********************"
           [[ -s errorout ]] && echo "not empty" || echo "its empty"
-          rm errorout
-          touch errorout
           [[ -s errorout ]] && exit 1 || exit 0
