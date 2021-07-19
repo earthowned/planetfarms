@@ -103,7 +103,7 @@ const authUser = async (req, res) => {
 
 const localAuth = async (name, password) => {
   const user = await db.LocalAuth.findOne({ where: { username: name, password: password } })
-  const newUser = await db.User.findOne({ where: { userID: user.id }})
+  const newUser = await db.User.findOne({ where: { userID: user.id } })
   return newUser
 }
 
@@ -301,7 +301,6 @@ const updateUser = async (req, res) => {
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    console.log(id);
     db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(

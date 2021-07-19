@@ -105,7 +105,7 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST })
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })      
+      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
       userdata = data
     } else {
       await Auth.signUp({
@@ -128,7 +128,6 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata })
     dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata })
     await routingCommunityNews(dispatch, false)
-
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -177,7 +176,7 @@ export const login = (name, password) => async (dispatch) => {
       })
     }
     window.localStorage.setItem('userInfo', JSON.stringify(data))
-    console.log(data);
+    console.log(data)
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     await routingCommunityNews(dispatch, true)
   } catch (error) {
@@ -311,8 +310,8 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
         birthdate: user.birthday,
         phone_number: user.phone ? user.phone : ''
       })
-    } 
-    
+    }
+
     dispatch({ type: USER_DETAILS_SUCCESS, payload: { user: data } })
     history.push('/myProfile')
   } catch (error) {
