@@ -18,7 +18,8 @@ const AddContent = ({
   onRemove,
   setEditVideoModel,
   modelPopUp,
-  setEditTextModel
+  setEditTextModel,
+  setEditPhotoModel
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -68,6 +69,8 @@ const AddContent = ({
               desc={vid.photoDescription}
               id={vid.itemId}
               onRemove={onRemove}
+              setEditPhotoModel={setEditPhotoModel}
+              modelPopUp={modelPopUp}
             />
             <Text
               heading={vid.textHeading}

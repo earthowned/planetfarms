@@ -22,8 +22,8 @@ const EditText = ({
         data.itemId === editId
           ? {
               ...data,
-              textHeading: textHeading,
-              textDescription: textDescription
+              textHeading,
+              textDescription
             }
           : data
       )

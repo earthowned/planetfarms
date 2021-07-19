@@ -29,11 +29,11 @@ const EditVideo = ({
         data.itemId === editId
           ? {
               ...data,
-              videoCover: videoCover,
-              videoTitle: videoTitle,
-              videoDescription: videoDescription,
-              videoLink: videoLink,
-              videoResource: videoResource
+              videoCover,
+              videoTitle,
+              videoDescription,
+              videoLink,
+              videoResource
             }
           : data
       )
@@ -42,7 +42,7 @@ const EditVideo = ({
   }
 
   const editingVideoData = lessonData.find((video) => video.itemId === editId)
-  console.log(editingVideoData)
+
   useEffect(() => {
     editingVideoData?.videoCover && setVideoCover(editingVideoData?.videoCover)
     editingVideoData?.videoResource && setVideo(editingVideoData?.videoResource)
