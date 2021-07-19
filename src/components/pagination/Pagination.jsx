@@ -36,7 +36,7 @@ const Pagination = ({ pageNumber = 1, resourceList, setPageNumber }) => {
 
 function PageNumber ({ num, pageNumber, setPageNumber }) {
   return (
-    <span onClick={() => setPageNumber(num)} className={num === pageNumber && 'active'}>{num}</span>
+    <button onClick={() => setPageNumber(num)} className={num === pageNumber && 'active'}>{num}</button>
   )
 }
 export default Pagination
