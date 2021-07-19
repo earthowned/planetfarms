@@ -19,7 +19,7 @@ const Filter = ({
   useEffect(() => {
     setText(data.filter((item) => pathname === item.link))
   }, [pathname])
-  
+
   const getCategory = (e) => {
     const targetCategory = e.currentTarget.getAttribute('value')
     setSelectedCategory(targetCategory)
