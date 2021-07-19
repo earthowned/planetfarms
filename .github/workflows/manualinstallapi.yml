@@ -1,0 +1,54 @@
+name: Manual API Install
+
+on:
+  workflow_dispatch:
+    inputs:
+
+jobs:
+  diagrams:
+    name: Manual API Install
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Setup Go environment
+        uses: actions/setup-go@v2.1.3
+        with:
+          go-version: '1.14.0'
+          
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'zulu'
+          java-version: '16'
+          
+      - name: Planet Farms API
+        run: |
+          cd api
+          echo "JWT_SECRET=secret" >> .env
+          echo "DATABASE_NAME=${{ secrets.POSTGRES_DB }}" >> .env
+          echo "DATABASE_USERNAME=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "DATABASE_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "DATABASE_HOST=localhost" >> .env
+          echo "AUTH_METHOD=local" >> .env
+          npm i
+          npx sequelize-cli db:migrate
