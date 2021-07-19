@@ -40,9 +40,10 @@ jobs:
           echo "AUTH_METHOD=local" >> .env
           npm i
           echo "**********************"
-          npx sequelize-cli db:migrate &> npxoutput #1>&2 
+          npx sequelize-cli db:migrate &> errorout  
           echo "**********************"
-          cat npxoutput
-          sed 's///g' npxoutput
+          sed -i '/^==\s/d' errorout
+          sed -i '/^$/d' errorout
           echo "**********************"
-          echo $?
+          [[ -s errorout ]] && echo "not empty" || echo "its empty"
+          [[ -s errorout ]] && exit 1 || exit 0
