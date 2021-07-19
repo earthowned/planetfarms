@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import './Enterprises.css'
-import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import CommunityGroupCard from '../../components/communityGroupCard/CommunityGroupCard'
 import { useSelector, useDispatch } from 'react-redux'

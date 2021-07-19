@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { listResources, searchResources } from '../../actions/resourceActions'
 import Pagination from '../../components/pagination/Pagination'
 import SubHeader from '../../components/subHeader/SubHeader'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import {nav} from './CollectionData';
 
 const Library = () => {

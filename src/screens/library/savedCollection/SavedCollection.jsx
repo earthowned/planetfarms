@@ -4,7 +4,7 @@ import GroupModal from '../../../components/groupModal/GroupModal'
 import LibraryCard from '../../../components/libraryCard/LibraryCard'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './SavedCollection.css'
-import { groupCollection, collections, library, nav } from '../CollectionData'
+import { groupCollection, library, nav } from '../CollectionData'
 import SimpleModal from '../../../components/simpleModal/SimpleModal'
 import SubHeader from '../../../components/subHeader/SubHeader'
 
