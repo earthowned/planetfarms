@@ -49,6 +49,6 @@ jobs:
           echo "DATABASE_HOST=localhost" >> .env
           echo "AUTH_METHOD=local" >> .env
           npm i
-          npx sequelize-cli db:migrate > npxoutput
+          npx sequelize-cli db:migrate 2> npxoutput
           cat npxoutput
           echo $?
