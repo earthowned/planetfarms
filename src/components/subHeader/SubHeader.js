@@ -12,7 +12,7 @@ const SubHeader = ({search, setSearch, nav, setCreateActive, btnName}) => {
     return (
         <div className='sub-header-main-container'>
                 <div className='sub-header-left-container'>
-                  {windowWidth > 720
+                  {windowWidth > 640
                     ? <>
                       <ul className='sub-header-list-container'>
                         {nav.map((menu) => (
@@ -24,7 +24,7 @@ const SubHeader = ({search, setSearch, nav, setCreateActive, btnName}) => {
                       <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
                     </>
                     : <>
-                      <Filter />
+                      <Filter newFilter={true} data={nav} />
                       <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
                       </>}
                 </div>
