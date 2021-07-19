@@ -17,7 +17,14 @@ const LessonActions = ({ id, onRemove = () => {}, poopUp }) => {
       </button>
       {actionActive && (
         <ul className={actionActive ? 'actionBtn show' : 'hide'}>
-          <li onClick={poopUp}>Edit</li>
+          <li
+            onClick={() => {
+              poopUp()
+              setActionActive(!actionActive)
+            }}
+          >
+            Edit
+          </li>
           <li onClick={() => onRemove(id)}>Delete</li>
         </ul>
       )}

@@ -14,6 +14,7 @@ import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './AddLesson.scss'
 import EditVideo from '../editLesson/EditVideo'
+import EditText from '../editLesson/EditText'
 
 const AddLesson = () => {
   const dispatch = useDispatch()
@@ -28,7 +29,8 @@ const AddLesson = () => {
   const [lessonCover, setLessonCover] = useState(null)
   const [material, setMaterial] = useState([])
   const [editVideoModel, setEditVideoModel] = useState(false)
-  const [editVideoId, setEditVideoId] = useState('')
+  const [editTextModel, setEditTextModel] = useState(false)
+  const [editId, setEditId] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
   const submitLessonForm = ({ title, lessonDesc }) => {
@@ -41,7 +43,7 @@ const AddLesson = () => {
         lessonDesc,
         lessonData,
         material,
-        history,
+        history
       })
     )
   }
@@ -51,8 +53,8 @@ const AddLesson = () => {
     setLessonData(newLessonData)
   }
   const modelPopUp = (poupState, id) => {
-    // poupState()
-    setEditVideoId(id)
+    setEditId(id)
+    console.log(id)
   }
 
   return (
@@ -91,7 +93,16 @@ const AddLesson = () => {
           setEditVideoModel={setEditVideoModel}
           lessonData={lessonData}
           setLessonData={setLessonData}
-          editVideoId={editVideoId}
+          editId={editId}
+        />
+      )}
+      {editTextModel && (
+        <EditText
+          editTextModel={editTextModel}
+          setEditTextModel={setEditTextModel}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
+          editId={editId}
         />
       )}
       <DashboardLayout title='Add new lesson'>
@@ -109,6 +120,7 @@ const AddLesson = () => {
           setLessonData={setLessonData}
           onRemove={removeItem}
           setEditVideoModel={setEditVideoModel}
+          setEditTextModel={setEditTextModel}
           modelPopUp={modelPopUp}
         />
         <LessonMaterial material={material} setMaterial={setMaterial} />

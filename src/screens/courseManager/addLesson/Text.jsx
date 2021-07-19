@@ -1,7 +1,17 @@
 import Actions from './Actions'
 
 import './Text.scss'
-const Text = ({ heading, desc, onRemove, id }) => {
+const Text = ({
+  heading,
+  desc,
+  onRemove,
+  id,
+  setEditTextModel,
+  modelPopUp
+}) => {
+  const poopUp = () => {
+    modelPopUp(setEditTextModel(true), id)
+  }
   return (
     <>
       {heading || desc ? (
@@ -10,7 +20,7 @@ const Text = ({ heading, desc, onRemove, id }) => {
             <h1>{heading}</h1>
             <p>{desc}</p>
           </div>
-          <Actions onRemove={onRemove} id={id} />
+          <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
         </div>
       ) : (
         ''
