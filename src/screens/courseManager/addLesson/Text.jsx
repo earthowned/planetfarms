@@ -7,7 +7,8 @@ const Text = ({
   onRemove,
   id,
   setEditTextModel,
-  modelPopUp
+  modelPopUp,
+  isEditable
 }) => {
   const poopUp = () => {
     modelPopUp(setEditTextModel(true), id)
@@ -18,9 +19,15 @@ const Text = ({
         <div className='text'>
           <div className='block'>
             <h1>{heading}</h1>
-            <p>{desc}</p>
+            <p>
+              {desc} {id}
+            </p>
           </div>
-          <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
+          {isEditable ? (
+            <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
+          ) : (
+            ''
+          )}
         </div>
       ) : (
         ''

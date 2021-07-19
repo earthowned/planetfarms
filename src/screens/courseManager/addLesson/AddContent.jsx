@@ -71,6 +71,7 @@ const AddContent = ({
               onRemove={onRemove}
               setEditPhotoModel={setEditPhotoModel}
               modelPopUp={modelPopUp}
+              isEditable
             />
             <Text
               heading={vid.textHeading}
@@ -79,6 +80,7 @@ const AddContent = ({
               id={vid.itemId}
               setEditTextModel={setEditTextModel}
               modelPopUp={modelPopUp}
+              isEditable
             />
           </div>
         ))}
