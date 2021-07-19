@@ -23,10 +23,10 @@ const ForgotPassword = () => {
 
   const history = useHistory()
 
-  const userAttrConfirmCode = useSelector((state) => state.userAttrConfirmCode)
-  const userAttrResendCode = useSelector((state) => state.userAttrResendCode)
-  const { error: confirmErr, status: confirmStatus } = userAttrConfirmCode
-  const { error: resendErr, status: resendStatus } = userAttrResendCode
+  const userForgotPwdConfirmCode = useSelector((state) => state.userForgotPwdConfirmCode)
+  const userForgotPwdResendCode = useSelector((state) => state.userForgotPwdResendCode)
+  const { error: confirmErr, status: confirmStatus } = userForgotPwdConfirmCode
+  const { error: resendErr, status: resendStatus, deliveryDetails } = userForgotPwdResendCode
 
   const resendCode = (e) => {
     e.preventDefault()
@@ -63,9 +63,9 @@ const ForgotPassword = () => {
       setMessage('Successful')
       history.push('/myProfile')
     } else if (resendStatus) {
-      setMessage('Code has been sent successfully.')
+      setMessage(`Code has been sent to your ${deliveryDetails.AttributeName.split('_').join(' ')}.`)
     }
-  }, [confirmStatus, resendStatus, usernameValue])
+  }, [confirmStatus, resendStatus, usernameValue, deliveryDetails])
 
   return (
     <SignLayout>

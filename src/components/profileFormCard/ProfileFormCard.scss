@@ -153,6 +153,7 @@
 
 .myProfile-container-row {
   display: flex;
+  word-break: break-word;
 }
 
 .myProfile-container-row .form-group {
@@ -181,6 +182,7 @@
 @media only screen and (max-width: 700px) {
   .myProfile-container-row .form-group {
     margin: 0.6em 0;
+    width: 100%;
   }
 
   .myProfile-container-row-title {

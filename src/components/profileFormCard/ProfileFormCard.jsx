@@ -12,8 +12,10 @@ const ProfileFormCard = ({ data: { title, firstTitle, firstValue, firstVerify, s
         <div className='form-group'>
           <label>{firstTitle}</label>
           <p>{firstValue}</p>
-          {firstVerify ? (!firstVerify.isVerified ? <p className='verified-txt'><img className='verified-img' src={MinusCircle} alt='logo' />Not verified <Secondarybtn name='Verify' clickHandler={firstVerify.clickHandler} /></p>
-            : <p className='verified-txt'><img className='verified-img' src={CheckCircle} alt='logo' />Verified</p>) : ''}
+          {
+          firstVerify ? (!firstVerify.isVerified ? <p className='verified-txt'><img className='verified-img' src={MinusCircle} alt='logo' />Not verified <Secondarybtn name='Verify' clickHandler={firstVerify.clickHandler} /></p>
+            : <p className='verified-txt'><img className='verified-img' src={CheckCircle} alt='logo' />Verified</p>) : ''
+}
         </div>
         <div className='form-group'>
           <label>{secondTitle}</label>
@@ -56,16 +58,16 @@ export const ContactInformation = ({ user, verification }) => {
     title: 'Contact information',
     firstTitle: 'Email',
     firstValue: user?.email || 'N/A',
-    firstVerify: user?.email && {
+    firstVerify: user?.email && process.env.REACT_APP_AUTH_METHOD === 'cognito' ? {
       isVerified: user?.emailVerified,
       clickHandler: verification?.emailClickHandler
-    },
+    } : null,
     secondTitle: 'Phone',
     secondValue: user?.phone || 'N/A',
-    secondVerify: user?.phone && {
+    secondVerify: user?.phone && process.env.REACT_APP_AUTH_METHOD === 'cognito' ? {
       isVerified: user?.phoneVerified,
       clickHandler: verification?.phoneClickHandler
-    }
+    } : null
   }
   return (
     <ProfileFormCard data={ContactInformationdatadata} />

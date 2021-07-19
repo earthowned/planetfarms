@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { changePassword, logout } from '../../actions/userAction'
+import { USER_PASSWORD_CHANGE_RESET } from '../../constants/userConstants'
 import Button from '../../components/button/Button'
 import Input from '../../components/input/Input'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
@@ -24,8 +25,7 @@ const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
             <h2>{settingAction.name}</h2>
             <button onClick={() => setModalActive(false)} className='close-btn'><img src='/img/close-outline.svg' alt='close-outline' /></button>
           </div>
-          <p className='settings-modal-message'>{settingAction.inputText}</p>
-          <SettingInput settingAction={settingAction} setInput={setInput} register={register} errors={errors} handleSubmit={handleSubmit} watch={watch} />
+          <SettingInput settingAction={settingAction} setModalActive={setModalActive} setInput={setInput} register={register} errors={errors} handleSubmit={handleSubmit} watch={watch} />
           <p className='settings-modal-message'>{settingAction.message}</p>
           <div className='popup-btn-wrapper'>
             <Button name='Cancel' onClick={() => setModalActive(false)} className='secondary-btn' />
@@ -37,13 +37,15 @@ const SettingsActionModal = ({ setModalActive, setting, settingAction }) => {
   )
 }
 
-const SettingInput = ({ settingAction, setInput, register, errors, handleSubmit, watch }) => {
+const SettingInput = ({ settingAction, setModalActive, setInput, register, errors, handleSubmit, watch }) => {
   const [inputErr, setInputErr] = useState(false)
   const [showOldPassword, setShowOldPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const { error, status } = useSelector(state => state.changePassword)
   const newPassword = useRef({})
   newPassword.current = watch('newPassword', '')
+  const dispatch = useDispatch()
   const toggleOldPasswordVisibility = (e) => {
     setShowOldPassword(!showOldPassword)
   }
@@ -57,6 +59,14 @@ const SettingInput = ({ settingAction, setInput, register, errors, handleSubmit,
     setInput(e.target.value)
     setInputErr(false)
   }
+
+  useEffect(() => {
+    if (status) {
+      setModalActive(false)
+      dispatch({ type: USER_PASSWORD_CHANGE_RESET })
+    }
+  }, [status])
+
   return (
     <>
       {
@@ -64,6 +74,8 @@ const SettingInput = ({ settingAction, setInput, register, errors, handleSubmit,
         logout: <></>,
         changePassword:
   <div className='input-container'>
+    {error && <div className='error'>{error}</div>}
+
     <Input
       type={showOldPassword ? 'text' : 'password'}
       placeholder='Old Password'
