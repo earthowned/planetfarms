@@ -50,7 +50,7 @@ jobs:
           echo "AUTH_METHOD=local" >> .env
           npm i
           echo "**********************"
-          npx sequelize-cli db:migrate 2> npxoutput 2>&1
+          npx sequelize-cli db:migrate 2>&1 npxoutput 
           echo "**********************"
           cat npxoutput
           echo "**********************"
