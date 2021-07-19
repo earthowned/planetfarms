@@ -12,6 +12,7 @@ import { searchGroups, listGroups, groupDelete, listUserGroups } from '../../act
 import Pagination from '../../components/pagination/Pagination'
 import useSizeFinder from '../../utils/sizeFinder'
 import { getApi } from '../../utils/apiFunc'
+import SubHeader from '../../components/subHeader/SubHeader'
 
 const CommunityGroup = () => {
   // fetching current community
@@ -20,7 +21,6 @@ const CommunityGroup = () => {
     : null
 
   // navigtion bar
-  const windowWidth = useSizeFinder()
   const { pathname } = useLocation()
 
   const nav = [
@@ -92,39 +92,11 @@ const CommunityGroup = () => {
             <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
           </div>
         </div>
-                      </div>}
+      </div>}
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>
-            <div className='library-main-header-container'>
-                <div className='library-container'>
-                  {windowWidth > 720
-                    ? <>
-                      <ul className='library-list-container'>
-                        {nav.map((menu) => (
-                          <li>
-                            <Link className={`nav-link ${(pathname === menu.link) ? 'library-list-item active' : 'library-list-item'}`} to={menu.link}>{menu.label}</Link>
-                          </li>
-                        ))}
-                      </ul>
-                      <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
-                    </>
-                    : <>
-                      <Filter />
-                      <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
-                      </>}
-                </div>
-                <div className='library-sub-header'>
-                  <div className='library-sub-header-1'>
-                    <div className='library-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Create Group</button></div>
-                  </div>
-
-                  <div className='library-sub-header-2'>
-                    <Filter />
-                  </div>
-                </div>
-              </div>
-
+            <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName="Create Group"/>
             <div className='community-group-container'>
               {
           pathname === `/community-group/${currentCommunity.slug}`

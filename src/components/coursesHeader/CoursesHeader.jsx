@@ -21,11 +21,11 @@ const CoursesHeader = ({
   const dispatch = useDispatch()
   const [search, setSearch] = useState('')
 
-  useEffect(() => {
-    if (!userInfo) {
-      history.push('/login')
-    }
-  }, [search, dispatch, history, userInfo])
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     history.push('/login')
+  //   }
+  // }, [search, dispatch, history, userInfo])
 
   function createCollection () {
     setActive(true)
@@ -33,7 +33,7 @@ const CoursesHeader = ({
   }
 
   const windowWidth = useSizeFinder()
-
+  console.log(data[0].slug)
   return (
     <div className='courseHeader'>
       <div className='container'>

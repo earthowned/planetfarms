@@ -6,11 +6,10 @@ import CommunityGroupCard from '../../components/communityGroupCard/CommunityGro
 import { useSelector, useDispatch } from 'react-redux'
 import { enterpriseDelete, listEnterprises, listUserEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
 import FormModal from '../../components/formModal/FormModal'
-import Filter from '../../components/filter/Filter'
-import useSizeFinder from '../../utils/sizeFinder'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import Pagination from '../../components/pagination/Pagination'
+import SubHeader from '../../components/subHeader/SubHeader'
 
 const Enterprise = () => {
   // fetching current community
@@ -36,7 +35,18 @@ const Enterprise = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const [userPageNumber, setUserPageNumber] = useState(1)
   const dispatch = useDispatch()
-
+  
+  // for navigation
+  const nav = [
+    {
+      label: 'All enterprises',
+      link: `/enterprises/${currentCommunity.slug}`
+    },
+    {
+      label: 'Your Enterprises',
+      link: `/your-enterprises/${currentCommunity.slug}`
+    }
+  ]
 
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
@@ -82,7 +92,7 @@ const Enterprise = () => {
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>
-            <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
+            <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName="Create Enterprise"/>
             <div className='enterpriseCard'>
               {pathname === `/enterprises/${currentCommunity.slug}`
                 ? <CommunityGroupCard
@@ -114,101 +124,5 @@ const Enterprise = () => {
     </>
   )
 }
-
-function EnterpriseHeader ({ search, setSearch, setActive }) {
-  const windowWidth = useSizeFinder()
-  const { pathname } = useLocation()
-
-  // fetching current community
-  const currentCommunity = localStorage.getItem('currentCommunity')
-    ? JSON.parse(localStorage.getItem('currentCommunity'))
-    : null
-
-  const nav = [
-    {
-      label: 'All enterprises',
-      link: `/enterprises/${currentCommunity.slug}`
-    },
-    {
-      label: 'Your Enterprises',
-      link: `/your-enterprises/${currentCommunity.slug}`
-    }
-  ]
-
-  return (
-    <div className='library-main-header-container'>
-                <div className='library-container'>
-                  {windowWidth > 720
-                    ? <>
-                      <ul className='library-list-container'>
-                        {nav.map((menu) => (
-                          <li>
-                            <Link className={`nav-link ${(pathname === menu.link) ? 'library-list-item active' : 'library-list-item'}`} to={menu.link}>{menu.label}</Link>
-                          </li>
-                        ))}
-                      </ul>
-                      <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
-                    </>
-                    : <>
-                      <Filter />
-                      <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
-                      </>}
-                </div>
-                <div className='library-sub-header'>
-                  <div className='library-sub-header-1'>
-                    <div className='library-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Create Enterprise</button></div>
-                  </div>
-
-                  <div className='library-sub-header-2'>
-                    <Filter />
-                  </div>
-                </div>
-      </div>
-  )
-}
-
-// function FirstHeader () {
-//   const windowWidth = useSizeFinder()
-//   const { pathname } = useLocation()
-
-//   // fetching current community
-//   const currentCommunity = localStorage.getItem('currentCommunity')
-//     ? JSON.parse(localStorage.getItem('currentCommunity'))
-//     : null
-
-//   const nav = [
-//     {
-//       label: 'All enterprises',
-//       link: `/enterprises/${currentCommunity.slug}`
-//     },
-//     {
-//       label: 'Your Enterprises',
-//       link: `/your-enterprises/${currentCommunity.slug}`
-//     }
-//   ]
-//   return (
-//     <>
-//       {windowWidth > 720
-//         ? <ul className='courses-list-container'>
-//           {
-//           nav.map(item => {
-//             return (
-//               <li>
-//                 <Link
-//                   className={`nav-link ${(pathname === `${item.link}`)
-//                   ? 'courses-list-item active'
-//                   : 'library-list-item'}`} to={`${item.link}`}
-//                 >
-//                   {item.label}
-//                 </Link>
-//               </li>
-//             )
-//           })
-//         }
-//         </ul>
-//         : <Filter name='All Enterprises' noImage />}
-//     </>
-//   )
-// }
 
 export default Enterprise

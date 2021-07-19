@@ -62,7 +62,7 @@ const Courses = () => {
             setCreateCourse={setCreateCourse}
           />
         </div>
-        {data?.results.map((category) => {
+        {data.length && data?.results.map((category) => {
           return (
             <CoursesCard
               category={category.name}
