@@ -28,30 +28,10 @@
   font-size: 14px;
 }
 
-/* .pagination button:first-child {
-  border-radius: 4px;
-  margin-right: 14px;
-} */
-
 .pagination button:not(:last-child) {
   border-radius: 4px;
   margin-right: 14px;
 }
-
-/* .pagination span {
-  margin-right: 14px;
-  background: var(--primary-color);
-  padding: 4.5px 16px;
-  border: none;
-  font-weight: 600;
-  font-size: 16px;
-  border-radius: 4px;
-  margin-top: 10px;
-  cursor: pointer;
-  width: 40px;
-  display: block;
-  flex: 1;
-} */
 
 .pagination button.active {
   background: var(--dropdowns);
@@ -74,10 +54,3 @@
 .pagination button:disabled:not(:last-child) {
   margin-right: 14px;
 }
-
-/* @media only screen and (max-width: 550px) {
-  .pagination button:first-child,
-  .pagination span {
-    margin-right: 4px;
-  }
-} */
