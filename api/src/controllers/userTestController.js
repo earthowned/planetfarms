@@ -1,8 +1,6 @@
 const db = require('../models/index')
 const Sequelize = require('sequelize')
 
-
-
 // @desc    Fetch all tests
 // @route   GET /api/Test
 // @access  Public
@@ -30,7 +28,7 @@ const getSingleUserTest = async (req, res) => {
 
 const getUserTestAnswers = async (req, res) => {
   try {
-    const userAnswers = await db.UserTestAnswer.findAll({where: {userTestId: req.params.id}, include: [db.Question]});
+    const userAnswers = await db.UserTestAnswer.findAll({ where: { userTestId: req.params.id }, include: [db.Question] })
     res.json(userAnswers)
   } catch (error) {
     res.json(error).status(400)
@@ -45,16 +43,15 @@ const takeTest = async (req, res) => {
     const {
       lessonId, startTime
     } = req.body
-    
-    
+
     const test = await db.Test.findOne({ where: { lessonId: parseInt(lessonId) } })
-    
+
     if (!test) {
       return res.json({ message: 'Test doesn\'t exist.' })
     }
 
-    const totalMarks = await db.Question.findAndCountAll({where: {testId: test.id}});
-    
+    const totalMarks = await db.Question.findAndCountAll({ where: { testId: test.id } })
+
     const userTest = await db.UserTest.create({ lessonId, userId: req.user.id, startTime, testId: test.id, total_marks: totalMarks.count })
     res.json({ message: 'Test has started.', id: userTest.id })
   } catch (error) {
@@ -69,27 +66,27 @@ const endTest = async (req, res) => {
   try {
     const { endTime, choices } = req.body
     const test = await db.UserTest.findOne({ where: { id: req.params.id } })
-    
+
     if (!test) {
       return res.json({ message: 'Test doesn\'t exist.' })
     }
 
     const score = await db.sequelize.transaction(async (t) => {
-      const solutions = await db.Question.findAll({ where: { testId: test.testId }, attributes: ['question', 'answer', "type"], order: [['position', "ASC"]] }, { transaction: t })
+      const solutions = await db.Question.findAll({ where: { testId: test.testId }, attributes: ['question', 'answer', 'type'], order: [['position', 'ASC']] }, { transaction: t })
       let marks = 0
 
-      //counting marks
+      // counting marks
       solutions.forEach((item, index) => {
-        if(item.type === "subjective") {
-            if(choices[index]) marks++
+        if (item.type === 'subjective') {
+          if (choices[index]) marks++
         } else {
           if (choices[index] === item.answer) marks++
         }
       })
 
-      //addomg amswers to the user_test_answers tbl
+      // addomg amswers to the user_test_answers tbl
       solutions.forEach(async (item, index) => {
-        await db.UserTestAnswer.create({question: item.question, userTestId: test.id, answer: choices[index]})
+        await db.UserTestAnswer.create({ question: item.question, userTestId: test.id, answer: choices[index] })
       })
 
       await db.UserTest.update({ marks, endTime }, { where: { id: req.params.id } }, { transaction: t })
@@ -98,15 +95,15 @@ const endTest = async (req, res) => {
     })
 
     // console.log(score);
-    let passMarks = Math.floor(score.total_marks / 2);
+    const passMarks = Math.floor(score.total_marks / 2)
 
-    if(score.marks >= passMarks) {
-      await db.UserTest.update({is_passed: true}, {where: {id: req.params.id}});
-      return res.json({message: `You have passed the test.`})
+    if (score.marks >= passMarks) {
+      await db.UserTest.update({ is_passed: true }, { where: { id: req.params.id } })
+      return res.json({ message: 'You have passed the test.' })
     }
 
-    await db.UserTest.update({is_passed: false}, {where: {id: req.params.id}});
-    res.json({message: `You have failed the test.`})
+    await db.UserTest.update({ is_passed: false }, { where: { id: req.params.id } })
+    res.json({ message: 'You have failed the test.' })
   } catch (error) {
     res.json(error).status(400)
   }

@@ -25,7 +25,7 @@ const LessonTest = ({ id }) => {
     if (start) {
       history.push({
         pathname: `/lesson-test-page/${start.id}`,
-        state: {lessonId: id}
+        state: { lessonId: id }
       })
     }
   }, [start])
@@ -46,17 +46,16 @@ const LessonTest = ({ id }) => {
   return (
     <div className='lesson-test-panel'>
       <div className='lesson-test-panel-left'>
-        {tests.length > 0
-          && <>
-          <h3>Lesson test</h3>
-          <p>
-            Make a lesson test where you can use new information that you know
-          </p>
+        {tests.length > 0 &&
+          <>
+            <h3>Lesson test</h3>
+            <p>
+              Make a lesson test where you can use new information that you know
+            </p>
             <div className='lesson-test-btn-wrapper'>
               <Button name='Start test' onClick={startTest} />
             </div>
-            </>
-        }
+          </>}
       </div>
       {tests.length > 0 && <div className='lesson-test-panel-right'>
         <h4>My results</h4>

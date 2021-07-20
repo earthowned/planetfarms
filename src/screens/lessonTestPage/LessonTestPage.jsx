@@ -14,14 +14,14 @@ import './LessonTestPage.scss'
 const LessonTestPage = () => {
   const { testId } = useParams()
   const history = useHistory()
-  const location = useLocation();
+  const location = useLocation()
   const { questions = [] } = useSelector(state => state.listTestQuestions)
   const dispatch = useDispatch()
   const [choices, setChoices] = useState([])
   const [modalActive, setModalActive] = useState(false)
   const [messageModal, setMessageModal] = useState(false)
   const [completeMessage, setCompleteMessage] = useState('')
-  
+
   useEffect(() => {
     if (!questions.length) dispatch(listTestQuestions(testId))
     if (completeMessage) setMessageModal(true)
@@ -73,12 +73,12 @@ const LessonTestPage = () => {
               {
                questions.length > 1
                  ? questions.map((data, index) => {
-                        if(data.type === "subjective") {
-                           return <SubjectiveQuestion data={data} count={index + 1} pos={index} choices={choices} />
-                        } else {
-                          return <MCQTestQuestion data={data} count={index + 1} pos={index} choices={choices} />
-                        }
-                })
+                     if (data.type === 'subjective') {
+                       return <SubjectiveQuestion data={data} count={index + 1} pos={index} choices={choices} />
+                     } else {
+                       return <MCQTestQuestion data={data} count={index + 1} pos={index} choices={choices} />
+                     }
+                   })
                  : <h4>No Tests available</h4>
             }
               <div className='test-btn-container'>
@@ -92,15 +92,15 @@ const LessonTestPage = () => {
   )
 }
 
-const SubjectiveQuestion = ({data, count, pos, choices}) => {
-  const [answer, setAnswer] = useState('');
+const SubjectiveQuestion = ({ data, count, pos, choices }) => {
+  const [answer, setAnswer] = useState('')
   choices[pos] = answer
   return (
     <div className='question-wrapper' key={count}>
       <h4>Question {count}.</h4>
       <h4>{data.question}</h4>
       <div className='answer-options-container'>
-          <textarea onChange = {(e) => setAnswer(e.target.value)} row="10" col="4" />
+        <textarea onChange={(e) => setAnswer(e.target.value)} row='10' col='4' />
       </div>
     </div>
   )
