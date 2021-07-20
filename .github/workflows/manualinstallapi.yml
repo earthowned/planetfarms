@@ -24,14 +24,12 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-          
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
-          
+
       - name: Planet Farms API
         run: |
           cd api
@@ -41,12 +39,13 @@ jobs:
           echo "DATABASE_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
           echo "DATABASE_HOST=localhost" >> .env
           echo "AUTH_METHOD=local" >> .env
+          echo "**********************1"
           npm i
-          echo "**********************"
-          npx sequelize-cli db:migrate &> errorout  
-          echo "**********************"
-          sed -i '/^==\s/d' errorout
-          sed -i '/^$/d' errorout
-          echo "**********************"
-          [[ -s errorout ]] && echo "not empty" || echo "its empty"
-          [[ -s errorout ]] && exit 1 || exit 0
+          echo "**********************2"
+          npx sequelize-cli db:migrate &> output
+          cat output
+          sed -i '/^==\s/d' output
+          sed -i '/^$/d' output
+          echo "**********************3"
+          [[ -s output ]] && echo "not empty" || echo "its empty"
+          [[ -s output ]] && exit 1 || exit 0
