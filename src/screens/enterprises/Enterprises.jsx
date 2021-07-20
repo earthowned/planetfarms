@@ -34,7 +34,7 @@ const Enterprise = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const [userPageNumber, setUserPageNumber] = useState(1)
   const dispatch = useDispatch()
-  
+
   // for navigation
   const nav = [
     {
@@ -91,7 +91,7 @@ const Enterprise = () => {
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>
-            <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName="Create Enterprise"/>
+            <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Create Enterprise' />
             <div className='enterpriseCard'>
               {pathname === `/enterprises/${currentCommunity.slug}`
                 ? <CommunityGroupCard

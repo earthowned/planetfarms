@@ -48,7 +48,7 @@ const CommunityGroup = () => {
   const [deleteModal, setDeleteModal] = useState(false)
   const [pageNumber, setPageNumber] = useState(1)
   const [userPageNumber, setUserPageNumber] = useState(1)
-  
+
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
     if (!search) dispatch(listGroups({ pageNumber }))
@@ -93,7 +93,7 @@ const CommunityGroup = () => {
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>
-            <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName="Create Group"/>
+            <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Create Group' />
             <div className='community-group-container'>
               {
           pathname === `/community-group/${currentCommunity.slug}`

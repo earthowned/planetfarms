@@ -24,7 +24,7 @@ const SavedCollection = () => {
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
       {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
       <DashboardLayout title='library'>
-          <SubHeader nav={nav} btnName="Add files" setCreateActive={setActive} />
+        <SubHeader nav={nav} btnName='Add files' setCreateActive={setActive} />
         {['Farming', 'Branding'].map((category) =>
           <div className='library-collection'>
             <h4>{category} Collections</h4>

@@ -5,13 +5,12 @@ import ListView from '../../components/listView/ListView'
 import SimpleModal from '../../components/simpleModal/SimpleModal'
 import CollectionModal from '../../components/collectionModal/CollectionModal'
 import GroupModal from '../../components/groupModal/GroupModal'
-import { groupCollection } from './CollectionData'
+import { groupCollection, nav } from './CollectionData'
 import { useSelector, useDispatch } from 'react-redux'
 import { listResources, searchResources } from '../../actions/resourceActions'
 import Pagination from '../../components/pagination/Pagination'
 import SubHeader from '../../components/subHeader/SubHeader'
 import { useHistory } from 'react-router-dom'
-import {nav} from './CollectionData';
 
 const Library = () => {
   const resourceList = useSelector((state) => state.listResources)
@@ -26,7 +25,7 @@ const Library = () => {
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
   const [pageNumber, setPageNumber] = useState(1)
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState(null)
   const dispatch = useDispatch()
 
   function openAddCollection () {
@@ -34,15 +33,13 @@ const Library = () => {
     setActive(false)
   }
 
-   useEffect(() => {
+  useEffect(() => {
     if (!userInfo) {
       history.push('/login')
     }
     if (search) dispatch(searchResources(search))
     if (!search) dispatch(listResources('', pageNumber))
-
   }, [search, dispatch, history, userInfo, pageNumber])
-
 
   return (
     <>
@@ -58,7 +55,7 @@ const Library = () => {
 
       <DashboardLayout title='library'>
         <div className='library-main-container'>
-          <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName="Add files"/>
+          <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Add files' />
           {['Articles', 'Videos'].map(type => (
             <div className='list-container'>
               <ListView

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import nav from './courseNav';
+import nav from './courseNav'
 import './Courses.css'
 import useGetFetchData from '../../utils/useGetFetchData'
 import { CATEGORY } from '../../utils/urlConstants'
@@ -12,7 +12,7 @@ import SimpleModal from '../../components/simpleModal/SimpleModal'
 
 import CourseCreateModal from '../../components/courseCreateModal/CourseCreateModal'
 import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
-import SubHeader from '../../components/subHeader/SubHeader';
+import SubHeader from '../../components/subHeader/SubHeader'
 
 const Courses = () => {
   const userLogin = useSelector((state) => state.userLogin)
@@ -22,7 +22,7 @@ const Courses = () => {
   const [newCollectionactive, setNewCollectionActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
   const [createNewCourse, setCreateNewCourse] = useState(false)
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState(null)
 
   const { data, isLoading } = useGetFetchData('courseCategory', CATEGORY)
   if (isLoading) {
@@ -58,12 +58,13 @@ const Courses = () => {
       )}
       <DashboardLayout title='All courses'>
         <div className='courses-main-container'>
-          <SubHeader 
-          search={search} 
-          setSearch={setSearch} 
-          nav={nav} 
-          setCreateActive={setCreateCourse} 
-          btnName="Add Courses"/>
+          <SubHeader
+            search={search}
+            setSearch={setSearch}
+            nav={nav}
+            setCreateActive={setCreateCourse}
+            btnName='Add Courses'
+          />
         </div>
         {data.length && data?.results.map((category) => {
           return (

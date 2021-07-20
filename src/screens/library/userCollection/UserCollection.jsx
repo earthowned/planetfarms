@@ -26,14 +26,14 @@ const UserCollection = () => {
         clickHandler={setGroupModal}
         data={groupCollection} btnName='add to collections'
         setNewCollection={setNewCollection}
-        />}
+                     />}
 
       {modalActive && <CollectionModal setActive={setModalActive} openAddCollection={openAddCollection} />}
 
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
 
       <DashboardLayout title='library'>
-          <SubHeader nav={nav} btnName="Add files" setCreateActive={setModalActive} />
+        <SubHeader nav={nav} btnName='Add files' setCreateActive={setModalActive} />
         <h4 className='farming-collection-header'>Farming Collections</h4>
 
         <CardLayout data={farming}>

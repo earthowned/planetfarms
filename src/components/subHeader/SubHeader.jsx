@@ -14,7 +14,7 @@ const SubHeader = ({ search, setSearch, nav, setCreateActive, btnName }) => {
   const history = useHistory()
 
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login')
