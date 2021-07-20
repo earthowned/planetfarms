@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Checkbox.scss'
+import { ReactComponent as Tick } from '../../assets/images/tick.svg'
 import { ErrorMessage } from '@hookform/error-message'
 
 const Checkbox = React.forwardRef(({ label, name, value, errors, onChange }, ref) => {
@@ -27,7 +28,7 @@ const Checkbox = React.forwardRef(({ label, name, value, errors, onChange }, ref
             checked={checked}
             onChange={e => { setChecked(e.target.checked) }}
           />
-          {checked && <img src='/img/tick.svg' alt='checkbox-for-terms' />}
+          {checked && <Tick alt='checkbox-for-terms' />}
         </div>
         <div className='me white16px'>
           {label}

@@ -4,6 +4,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.removeColumn('courses', 'category', Sequelize.STRING)
+    queryInterface.removeColumn('courses', 'category')
   }
 }

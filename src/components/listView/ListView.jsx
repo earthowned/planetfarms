@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import CardLayout from '../../layout/cardLayout/CardLayout'
 import useSizeFinder from '../../utils/sizeFinder'
-import './ListView.css'
+import './ListView.scss'
 
 const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }) => {
   const windowWidth = useSizeFinder()
@@ -45,7 +45,7 @@ const ListViewCardComponent = ({ item, modalActive, setModalActive }) => {
       <div className='list-btn-wrapper'>
         <span>Add to</span>
         <button className='secondary-btn-border btn-img-wrapper' onClick={() => setActive(!active)}>
-          {active ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <span>Added</span></>) : (<><img src='./img/book.svg' alt='My library' /> <span>My library</span></>)}
+          {active ? (<><img src='./img/checkmark-outline.svg' alt='Added' /> <h4>Added</h4></>) : (<><img src='./img/book.svg' alt='My library' /> <h4>My library</h4></>)}
         </button>
         <button className='secondary-btn-border' onClick={() => setModalActive(!modalActive)}>Collections</button>
       </div>

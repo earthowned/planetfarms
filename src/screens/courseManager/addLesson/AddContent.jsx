@@ -11,7 +11,7 @@ const AddContent = ({
   register,
   errors,
   setLessonCover,
-  lessonData,
+  lessonData
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -26,8 +26,8 @@ const AddContent = ({
         ref={register({
           required: {
             value: true,
-            message: 'You must enter lesson title',
-          },
+            message: 'You must enter lesson title'
+          }
         })}
       />
 

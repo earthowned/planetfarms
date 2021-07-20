@@ -83,7 +83,7 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     const user = await localAuth(name, password)
-    if (user) {
+    if (user && await subscribeCommunity(user)) {
       await res.json({
         token: generateToken(user.dataValues.userID),
         id: user.dataValues.userID
@@ -180,26 +180,20 @@ const sendTokenStatus = (req, res) => {
 }
 
 const changePassword = async (req, res) => {
-  const { user, oldPassword, newPassword } = req.body
-  try {
+  const { oldPassword, newPassword } = req.body
+  const user = req.user
+  if (process.env.AUTH_METHOD !== 'cognito') {
     let userWithNewPassword
-    if (process.env.AUTH_METHOD === 'cognito') {
-      const authUser = await Auth.currentAuthenticatedUser()
-      userWithNewPassword = await Auth.changePassword(authUser, oldPassword, newPassword)
+    const oldUser = await db.LocalAuth.findByPk(user.userID)
+    if (oldUser.dataValues.password === oldPassword) {
+      userWithNewPassword = await db.LocalAuth.update({ password: newPassword }, { where: { id: user.userID } })
     } else {
-      const oldUser = await db.User.findByPk(user.id)
-      if (oldUser) {
-        userWithNewPassword = await db.User.update({ password: newPassword }, { where: { id: user.id } })
-      }
+      // throw new Error('Incorrect old password')
+      res.status(401).json({ message: 'Incorrect old password' })
     }
     if (userWithNewPassword) {
-      res.json({ message: 'Password Updated !!!' }).status(200)
-    } else {
-      res.status(401)
-      throw new Error('Invalid email or password')
+      res.json({ message: 'The user password has been updated.' }).status(200)
     }
-  } catch (e) {
-    res.status(401).json({ error: e })
   }
 }
 
@@ -303,7 +297,7 @@ const updateUser = async (req, res) => {
     db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
-          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
+          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment || user.dataValues.attachments },
           { where: { userID: id } }
         )
           .then(() => res.sendStatus(200))
