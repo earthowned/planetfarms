@@ -124,6 +124,9 @@ export const register = (name, password) => async (dispatch) => {
       })
         .catch(err => console.log(err))
     }
+    
+    if(userdata.error) return dispatch({type: USER_REGISTER_FAIL, payload: userdata.error})
+
     window.localStorage.setItem('userInfo', JSON.stringify(userdata))
     dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata })
     dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata })
@@ -148,6 +151,7 @@ export const login = (name, password) => async (dispatch) => {
         { name, password },
         config
       )
+
       data = tokendata
     } else {
       const response = await Auth.signIn(name, password)
@@ -175,8 +179,8 @@ export const login = (name, password) => async (dispatch) => {
         }
       })
     }
+
     window.localStorage.setItem('userInfo', JSON.stringify(data))
-    console.log(data)
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     await routingCommunityNews(dispatch, true)
   } catch (error) {

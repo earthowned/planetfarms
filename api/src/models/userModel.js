@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
   },
   { timestamps: true }
   )
+
   User.associate = (models) => {
     User.belongsToMany(models.Test, {
       foreignKey: 'userId',

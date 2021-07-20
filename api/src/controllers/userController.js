@@ -3,6 +3,7 @@ const db = require('../models')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
 const Sequelize = require('sequelize')
+const bcrypt = require('bcryptjs');
 // const User = require('../models/userModel.js')
 // const LocalAuth = require('../models/localAuthModel.js')
 const Op = Sequelize.Op
@@ -82,7 +83,7 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    const user = await localAuth(name, password)
+    const user = await localAuth(res, name, password)
     if (user && await subscribeCommunity(user)) {
       await res.json({
         token: generateToken(user.dataValues.userID),
@@ -101,10 +102,26 @@ const authUser = async (req, res) => {
   }
 }
 
-const localAuth = async (name, password) => {
-  const user = await db.LocalAuth.findOne({ where: { username: name, password: password } })
-  const newUser = await db.User.findOne({ where: { userID: user.id } })
-  return newUser
+const localAuth = async (res, name, password) => {
+  try {
+
+    const user = await db.LocalAuth.findOne({ where: {username: name } })
+
+    if(!user) {
+      res.json({error: 'User doesn\'t exists.'}).status(400);
+    }
+
+    //checking password
+    if(!bcrypt.compareSync(password, user.password)) {
+      return res.status(400).json({error: 'Invalid password or username.'})
+    }
+
+    const newUser = await db.User.findOne({ where: { userID: user.id } })
+    return newUser
+    
+  } catch (error) {
+    res.json(error)
+  }
 }
 
 // @desc    Register a new user
@@ -134,7 +151,7 @@ const registerUser = async (req, res) => {
 const registerLocal = async (name, password, res) => {
   try {
     const userExists = await db.LocalAuth.findOne({ where: { username: name } })
-    if (userExists) { return res.json({ message: 'Users already Exists !!!' }).status(400) }
+    if (userExists) { return res.json({ error: 'Users already Exists !!!' }).status(400) }
     const newUser = await db.sequelize.transaction(async (t) => {
       const user = await db.LocalAuth.create({ username: name, password: password }, { transaction: t })
       return await db.User.create({ userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
