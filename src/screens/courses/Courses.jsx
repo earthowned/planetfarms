@@ -66,7 +66,7 @@ const Courses = () => {
             btnName='Add Courses'
           />
         </div>
-        {data.length && data?.results.map((category) => {
+        {data?.results?.map((category) => {
           return (
             <CoursesCard
               category={category.name}
