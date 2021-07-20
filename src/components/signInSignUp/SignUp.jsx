@@ -45,12 +45,14 @@ const SignIn = () => {
     }
   }, [history, userInfo])
 
-  const onSubmit = ({ username, password }) => {
-    return dispatch(register(username, password))
+  const signUp = ({ username, password }) => {
+    console.log(username, password)
+    dispatch(register(username, password))
+    // return dispatch(register(username, password))
   }
 
   return (
-    <form className='sign' onSubmit={handleSubmit(onSubmit)}>
+    <form className='sign' onSubmit={handleSubmit(signUp)}>
       <h1 className='welcome'>{welcomeBack}</h1>
       <div className='container'>
         {error && <div className='error'>{error}</div>}
