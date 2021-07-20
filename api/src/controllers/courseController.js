@@ -20,17 +20,17 @@ const getCourses = async (req, res) => {
     include: [db.Lesson]
   })
 
-  const data = {
-    courses: courses.map((course) => ({
-      ...course.dataValues,
-      thumbnail: changeFormat(course.thumbnail)
-    }))
-  }
-  console.log(data.courses)
+  courses.forEach((course) => {
+    course.thumbnail = changeFormat(course.thumbnail)
+    course.lessons.forEach((lesson) => {
+      lesson.coverImg = changeFormat(lesson.coverImg)
+    })
+  })
+
   res.status(200).json({
     status: true,
     message: 'fetched courses successfully',
-    data: data.courses,
+    data: courses,
     page,
     pageSize
   })
@@ -106,11 +106,15 @@ const getCourseById = async (req, res) => {
   if (!course) {
     throw new NotFoundError()
   }
+  course.lessons.forEach((lesson) => {
+    lesson.coverImg = changeFormat(lesson.coverImg)
+  })
   const thumbnail = changeFormat(course?.dataValues?.thumbnail)
+  const coverImg = changeFormat(course?.dataValues?.lessons?.coverImg)
   const courseData = course.dataValues
   const data = Object.assign({
     ...course,
-    dataValues: { ...courseData, thumbnail }
+    dataValues: { ...courseData, thumbnail, coverImg }
   })
   const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
