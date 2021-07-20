@@ -20,8 +20,6 @@ const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises)
   const dataUser = useSelector((state) => state.listUserEnterprises)
   const { userEnterprises } = dataUser
-  // const {enterprises} = data;
-  // console.log(enterprises);
   const enterprises = data?.enterprises?.enterprises ? data.enterprises.enterprises : data.enterprises
   const { success: enterpriseUpdateSuccess } = useSelector((state) => state.enterpriseUpdate)
   const { success: enterpriseDeleteSuccess } = useSelector((state) => state.enterpriseDelete)
@@ -87,7 +85,7 @@ const Enterprise = () => {
             <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
           </div>
         </div>
-                      </div>}
+      </div>}
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>
@@ -112,11 +110,10 @@ const Enterprise = () => {
                   />}
             </div>
             {
-               pathname === `/enterprises/${currentCommunity.slug}`
-                 ? <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
-                 : <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
-              }
-
+              pathname === `/enterprises/${currentCommunity.slug}`
+                ? <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
+                : <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
+            }
           </div>
         </div>
       </DashboardLayout>
