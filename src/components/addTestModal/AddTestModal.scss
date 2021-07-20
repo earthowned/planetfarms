@@ -118,6 +118,30 @@
   margin-top: 8px;
 }
 
+.questions-btn-container {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+
+  button {
+    width: 45%;
+
+    span {
+      line-height: 1.6;
+    }
+  }
+
+  @media screen and (max-width: 1440px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
 .btn-container {
   margin-top: 24px;
   width: 100%;

@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { listTestQuestions } from '../../actions/testActions'
 import BackButton from '../../components/backButton/BackButton'
 import Button from '../../components/button/Button'
@@ -14,12 +14,14 @@ import './LessonTestPage.scss'
 const LessonTestPage = () => {
   const { testId } = useParams()
   const history = useHistory()
+  const location = useLocation();
   const { questions = [] } = useSelector(state => state.listTestQuestions)
   const dispatch = useDispatch()
   const [choices, setChoices] = useState([])
   const [modalActive, setModalActive] = useState(false)
   const [messageModal, setMessageModal] = useState(false)
   const [completeMessage, setCompleteMessage] = useState('')
+  
   useEffect(() => {
     if (!questions.length) dispatch(listTestQuestions(testId))
     if (completeMessage) setMessageModal(true)
@@ -34,9 +36,9 @@ const LessonTestPage = () => {
   }
 
   const goToLesson = () => {
-    history.goBack()
     setCompleteMessage('')
     setMessageModal(false)
+    document.location.href = `/lesson/${location.state.lessonId}`
   }
 
   return (

@@ -17,7 +17,6 @@ const getUserTests = (req, res) => {
 
 const getSingleUserTest = async (req, res) => {
   try {
-    
     const userTest = await db.UserTest.findOne({ where: { id: req.params.id, userId: req.user.id } })
     res.json(userTest)
   } catch (error) {
@@ -76,7 +75,7 @@ const endTest = async (req, res) => {
     }
 
     const score = await db.sequelize.transaction(async (t) => {
-      const solutions = await db.Question.findAll({ where: { testId: test.testId }, attributes: ['id', 'answer', "type"], order: [['position', "ASC"]] }, { transaction: t })
+      const solutions = await db.Question.findAll({ where: { testId: test.testId }, attributes: ['question', 'answer', "type"], order: [['position', "ASC"]] }, { transaction: t })
       let marks = 0
 
       //counting marks
@@ -90,7 +89,7 @@ const endTest = async (req, res) => {
 
       //addomg amswers to the user_test_answers tbl
       solutions.forEach(async (item, index) => {
-        await db.UserTestAnswer.create({questionId: item.id, userTestId: test.id, answer: choices[index]})
+        await db.UserTestAnswer.create({question: item.question, userTestId: test.id, answer: choices[index]})
       })
 
       await db.UserTest.update({ marks, endTime }, { where: { id: req.params.id } }, { transaction: t })

@@ -12,21 +12,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDrag, useDrop } from "react-dnd";
 import update from "immutability-helper";
 import axios from 'axios'
-import { deleteSingleQuestion, updateQuestion } from '../../actions/questionActions'
-import { InputFields } from '../../components/formUI/FormUI'
-import { useFieldArray, useForm } from 'react-hook-form'
+import { deleteSingleQuestion } from '../../actions/questionActions'
 
 const AddTest = () => {
     const [cards, setCards] = useState([]);
-    // const [count, setCount] = useState(1);
     const [questions, setQuestions] = useState([]);
     const [newQuestions, setNewQuestions] = useState([]);
     const [formError, setFormError] = useState(false);
-    // const [options, setOptions] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false)
     const [deleteId, setDeleteId] = useState();
-    const [editModal, setEditModal] = useState(false)
-    const [editId, setEditId] = useState();
 
     const {lessonId} = useParams();
     const {pathname} = useLocation();
@@ -36,8 +30,6 @@ const AddTest = () => {
     useEffect(() => {
       if(pathname === `/admin/edit-test/${lessonId}`) getLessonQuestions()
     }, [])
-
-    
 
     async function getLessonQuestions() {
         try {
@@ -95,8 +87,6 @@ const AddTest = () => {
     } 
     setFormError(true)
     }
-    
-    //edit section
 
     const confirmDelete = async () => {
         // console.log(deleteId)
@@ -120,13 +110,6 @@ const AddTest = () => {
           }
           setFormError(true)
     }
-
-    
-    const editQuestion = (id) => {
-        setEditId(id)
-        setEditModal(true)
-    }
-
 
     function orderQuestions () {
       const newQuestions = [];
@@ -182,26 +165,22 @@ const AddTest = () => {
           newQuestions={newQuestions}
           formError={formError}
           setFormError={setFormError}
-          // options={options}
-          // setOptions={setOptions}
           cards={cards}
           setCards={setCards}
           deleteQuestion={deleteQuestion}
-          editQuestion={editQuestion}
         />
       );
     };
     return (
       <>
       <DeleteQuestionModal confirmDelete={confirmDelete} setDeleteModal={setDeleteModal} deleteModal={deleteModal} />
-      <EditQuestionModal questions={questions} setQuestions={setQuestions} editId={editId} editModal={editModal} setEditModal={setEditModal} />
       <DashboardLayout title="Add Test">
         <div div className='add-test-container' >{cards.map((card, i) => renderCard(card, i))}</div>
-        <div className="btn-container">
-              <button onClick={addMCQQuestion} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add MCQ</span></button>
+              <div className="questions-btn-container">
+              <button onClick={addMCQQuestion} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add Objective Question</span></button>
               <button onClick={addSubjectiveQuestion} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add Subjective Question</span></button>
               </div>
-              <div className='btn-container'>
+              <div className='questions-btn-container'>
                 <button className='secondary-btn reset-test-btn' onClick={resetQuestion}>Reset test</button>  
                 {
                 pathname === `/admin/edit-test/${lessonId}` 
@@ -232,179 +211,6 @@ const DeleteQuestionModal = ({confirmDelete, setDeleteModal, deleteModal}) => {
   )
 }
 
-const EditQuestionModal = ({questions, editId, editModal, setEditModal}) => {
-  const [newOptions, setNewOptions] = useState([]);
-  const { register: regi, errors, handleSubmit } = useForm()
-  const [modalFormError, setModalFormError] = useState(false);
-  
-  const dispatch = useDispatch();
-  const {lessonId} = useParams();
-
-  const confirmEdit = async ({question, answer}) => {
-        // dispatch(updateQuestion());
-        // setEditModal(false)
-        if(questions[questions.findIndex((el) => el.id === editId)].type === "mcq") {
-          if(!newOptions.includes("")) {
-            
-            return dispatch(updateQuestion({
-              id: questions[questions.findIndex((el) => el.id === editId)].id, 
-              options: newOptions,
-              question,
-              answer,
-              lessonId,
-              type: questions[questions.findIndex((el) => el.id === editId)].type,
-              testId: questions[questions.findIndex((el) => el.id === editId)].testId
-            }));
-          }
-          return setModalFormError(true)
-        }
-
-        return dispatch(updateQuestion({
-          id: questions[questions.findIndex((el) => el.id === editId)].id,
-          question, 
-          lessonId, 
-          type: questions[questions.findIndex((el) => el.id === editId)].type,
-          testId: questions[questions.findIndex((el) => el.id === editId)].testId
-        }))
-    }
-
-    function addQuestion() {
-      setNewOptions((cur) => [...cur, ""]);
-      setModalFormError(false)
-    }
-
-    function closeModal () {
-      setEditModal(false)
-      setModalFormError(false)
-      // setNewOptions([]);
-    }
-
-    useEffect(() => {
-      if(editId) {
-        if(questions[questions.findIndex((el) => el.id === editId)].type === "mcq") {
-          setNewOptions(questions[questions.findIndex((el) => el.id === editId)].options)
-        }
-      }
-    }, [editId])
-  return(
-    <>
-    {editModal && <div className="question-modal-container">
-            <form className='question-modal-inner-container' onSubmit={handleSubmit(confirmEdit)}>
-              <div className="question-modal-header">
-                    <h4>Edit Question</h4>
-                    <img src="/img/close-outline.svg" alt="close icon" onClick={() => closeModal()} />
-                </div>
-                {
-                  questions[questions.findIndex((el) => el.id === editId)].type === "subjective" 
-                  ? <div className="question-form-conatiner">
-                      <InputFields
-                      type='text'
-                      placeholder='Question'
-                      name='question'
-                      id='question'
-                      defaultValue={questions[questions.findIndex((el) => el.id === editId)].question}
-                      ref={regi({
-                        required: {
-                          value: true,
-                          message: 'You must enter the Question'
-                        }
-                      })}
-                      errors={errors}
-                      />
-                    </div>
-                  : <div className="question-form-conatiner">
-                      <InputFields
-                      type='text'
-                      placeholder='Question'
-                      name='question'
-                      id='question'
-                      defaultValue={questions[questions.findIndex((el) => el.id === editId)].question}
-                      ref={regi({
-                        required: {
-                          value: true,
-                          message: 'You must enter the Question'
-                        }
-                      })}
-                      errors={errors}
-                      />
-                      <InputFields
-                      type='text'
-                      placeholder='Answer'
-                      name='answer'
-                      id='answer'
-                      defaultValue={questions[questions.findIndex((el) => el.id === editId)].answer}
-                      ref={regi({
-                        required: {
-                          value: true,
-                          message: 'You must enter the Answer'
-                        }
-                      })}
-                      errors={errors}
-                      />
-                      <span>Options</span>
-                      {modalFormError ? <p className='error-message test-error'>Please fill all the inputs.</p> : <p></p>}
-                      <div className='option-answers'>
-                            {newOptions.length > 0 && newOptions.map((item, index) =>
-                                  <ModalInput
-                                  id= {questions[questions.findIndex((el) => el.id === editId)].id}
-                                  item={item} 
-                                  newOptions={newOptions} 
-                                  setNewOptions={setNewOptions}
-                                  questions={questions} 
-                                  index={index} 
-                                  setModalFormError={setModalFormError} />
-                              )}
-                      </div>
-                      <div className="add-new-course" onClick={addQuestion}><img src='/img/plus.svg' alt='add icon' /> 
-                      <span>Add new answer</span></div>
-                      </div>
-                }
-                <div className="btn-container">
-                    <button className='secondary-btn'>Confirm</button>
-                </div>
-            </form>
-        </div>}
-    </>
-  )
-}
-
-const ModalInput = ({item, newOptions, setNewOptions, index, setModalFormError, questions, id}) => {
-  const[option, setOption] = useState(item)
-
-  useEffect(() => {
-        if (newOptions.length > 0) {          
-            setOption(newOptions[index])
-            if(questions.length) {
-              questions[questions.findIndex((el) => el.id === id)].options = newOptions
-            }
-        }
-    }, [newOptions])
-
-  function onQuestionChange(e) {
-    setOption(e.target.value);
-      newOptions[index] = e.target.value
-      setModalFormError(false)
-  }
-
-  function removeItem () {
-    let removedItem = newOptions.splice(index, 1);
-    let newItems = newOptions.filter((el)=> el !== removedItem)
-    setNewOptions(newItems)
-  }
-
-  return (
-    <div className="question-modal-options">
-          <input 
-            value={option} 
-            onChange={(e) => onQuestionChange(e)} 
-            className='default-input-variation'
-            placeholder='Question'
-          />
-        {newOptions.length > 1 && <img src='/img/minus-circle-outline.svg' alt='minus image'  onClick={removeItem} />}
-    </div>
-  )
-}
-
 const ItemTypes = {
   CARD: "card"
 };
@@ -419,7 +225,7 @@ const style2 = {
 
 const Card = ({ id, type, index, moveCard, questions, setQuestions,
   formError, setFormError, setOptions, options, 
-  cards, setCards, deleteQuestion, newQuestions, editQuestion }) => {
+  cards, setCards, deleteQuestion, newQuestions }) => {
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -494,7 +300,6 @@ const Card = ({ id, type, index, moveCard, questions, setQuestions,
           cards={cards}
           setCards={setCards}
           deleteQuestion={deleteQuestion}
-          editQuestion={editQuestion}
           newQuestions={newQuestions}
         />
       ) : (
@@ -507,7 +312,6 @@ const Card = ({ id, type, index, moveCard, questions, setQuestions,
           cards={cards}
           setCards={setCards}
           deleteQuestion={deleteQuestion}
-          editQuestion={editQuestion}
           newQuestions={newQuestions}
         />
       )}
@@ -516,9 +320,12 @@ const Card = ({ id, type, index, moveCard, questions, setQuestions,
   );
 };
 
-function SubjectiveQuestion({ questions, setQuestions, id, formError, setFormError, cards, setCards, deleteQuestion, newQuestions, editQuestion }) {
+function SubjectiveQuestion({ questions, setQuestions, id, formError, setFormError, cards, setCards, deleteQuestion, newQuestions }) {
     const [question, setQuestion] = useState("");
     const [isDisable, setIsDisable] = useState(false);
+
+    const {pathname} = useLocation();
+    const {lessonId} = useParams();
   
   function changeQuestion(e) {
     setQuestion(e.target.value);
@@ -558,7 +365,12 @@ function SubjectiveQuestion({ questions, setQuestions, id, formError, setFormErr
     {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
     <div className="question-header">
       <h4 className="question-title">Subjective Question</h4> 
-      {!isDisable && <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeQuestion}/>}
+      {
+           pathname === `/admin/add-test/${lessonId}`
+           ? <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeQuestion}/>
+           : <img src='/img/minus-circle-outline.svg' alt='minus image' 
+           onClick={() => deleteQuestion(questions[questions.findIndex((el) => el.id === id)].id)}/>
+      }
     </div>
       <div className='question-container'> 
           <div>
@@ -570,21 +382,20 @@ function SubjectiveQuestion({ questions, setQuestions, id, formError, setFormErr
               disabled={isDisable}
                 />
           </div>
-          {cards[cards.findIndex((el) => el.id === id)].question && <div className="question-btn-contaianer">
+          {/* {cards[cards.findIndex((el) => el.id === id)].question && <div className="question-btn-contaianer">
                 <button onClick={() => editQuestion(questions[questions.findIndex((el) => el.id === id)].id)}>Edit Question</button>
                 <button onClick={() => deleteQuestion(questions[questions.findIndex((el) => el.id === id)].id)}>Delete Question</button>
-            </div>}
+            </div>} */}
         </div>
     </>
   );
 }
 
-function MCQQuestion({ id, questions, setQuestions, formError, setFormError, cards, setCards, deleteQuestion, newQuestions, editQuestion }) {
+function MCQQuestion({ id, questions, setQuestions, formError, setFormError, cards, setCards, deleteQuestion, newQuestions }) {
   const[options, setOptions] = useState([""])
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [newOptions, setNewOptions] = useState([""])
-  const [isDisable, setIsDisable] = useState(false);
   const {lessonId} = useParams();
   const {pathname} = useLocation();
 
@@ -603,6 +414,14 @@ function MCQQuestion({ id, questions, setQuestions, formError, setFormError, car
       setFormError(false)
   }
 
+  function addQuestion() {
+    setOptions((cur) => [...cur, ""]);
+    // setOptions((cur) => [...cur, ""]);
+    questions[questions.findIndex((el) => el.id === id)].options.push("")
+    console.log(options);
+    setFormError(false)
+  }
+
   useEffect(() => {
     if(pathname === `/admin/add-test/${lessonId}`) {
       setOptions(questions[questions.findIndex((el) => el.id === id)].options);
@@ -610,21 +429,18 @@ function MCQQuestion({ id, questions, setQuestions, formError, setFormError, car
       if(newQuestions.length) {
         setQuestion(questions[questions.findIndex((el) => el.id === id)].question)
         setAnswer(questions[questions.findIndex((el) => el.id === id)].answer)
-        setNewOptions(questions[questions.findIndex((el) => el.id === id)].options)
+        // setNewOptions(questions[questions.findIndex((el) => el.id === id)].options)
         setOptions(questions[questions.findIndex((el) => el.id === id)].options)
-         if(questions[questions.findIndex((el) => el.id === id)].testId) {
-          setIsDisable(true)
-        }
       }
     }
-  }, [newQuestions])
+  }, [newQuestions, options])
 
   // update on card change
   useEffect(() => {
     if(questions.length){
       setQuestion(questions[questions.findIndex((el) => el.id === id)].question)
       setAnswer(questions[questions.findIndex((el) => el.id === id)].answer)
-      setNewOptions(questions[questions.findIndex((el) => el.id === id)].options)
+      // setNewOptions(questions[questions.findIndex((el) => el.id === id)].options)
       setOptions(questions[questions.findIndex((el) => el.id === id)].options)
     }
   }, [cards])
@@ -639,18 +455,18 @@ function MCQQuestion({ id, questions, setQuestions, formError, setFormError, car
     let newCards = cards.filter(item => item.id !== removedCard.id);
     setCards(newCards)
   }
-  
-  function addQuestion() {
-    setOptions((cur) => [...cur, ""]);
-    setFormError(false)
-  }
 
   return (
     <>
     {formError && <p className='error-message test-error'>Please fill out all the input.</p>}
       <div className="question-header">
-        <h4 className="question-title">MCQ Question</h4>
-        {!isDisable && <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeQuestion}/>}
+        <h4 className="question-title">Objective Question</h4>
+         {
+           pathname === `/admin/add-test/${lessonId}`
+           ? <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeQuestion}/>
+           : <img src='/img/minus-circle-outline.svg' alt='minus image' 
+           onClick={() => deleteQuestion(questions[questions.findIndex((el) => el.id === id)].id)}/>
+          }
       </div>
       <div className='question-container'>
           <div>
@@ -659,7 +475,6 @@ function MCQQuestion({ id, questions, setQuestions, formError, setFormError, car
                   placeholder='Question'
                   value={question}
                   onChange={(e) => changeQuestion(e)}
-                  disabled={isDisable}
             />
           </div>
         <button><img src='/img/green-camera.svg' alt='photo icon' /> <h4>Add photo</h4></button>
@@ -672,16 +487,12 @@ function MCQQuestion({ id, questions, setQuestions, formError, setFormError, car
                 placeholder='Correct answer' 
                 value={answer} 
                 onChange={(e) => changeAnswer(e)} 
-                disabled={isDisable}
                 />
-                 {!isDisable && <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => setAnswer('')} />}
              </div>
              <span>Answer will be mixed for users</span>
             </div>
             <div className='option-answers'>
                   {options.length > 0 && options.map((item, index) => 
-                    // isDisable 
-                    // ? <input className='default-input-variation incorrect-option' value={item} disabled={isDisable} />
                     <InputComponent 
                          index={index} 
                          questions={questions} id={id} 
@@ -691,27 +502,22 @@ function MCQQuestion({ id, questions, setQuestions, formError, setFormError, car
                          newOptions={newOptions}
                          setNewOptions={setNewOptions}
                          item={item}
-                         isDisable={isDisable}
                          newQuestions={newQuestions}
                          />
 
                     )}
              </div>
-             {!isDisable && 
              <button className="add-new-course" 
              onClick={addQuestion}><img src='/img/plus.svg' alt='add icon' /> 
-             <span>Add new answer</span></button>}
+             <span>Add new answer</span></button>
         </div>
-        {cards[cards.findIndex((el) => el.id === id)].question && <div className="question-btn-contaianer">
-                <button onClick={() => editQuestion(questions[questions.findIndex((el) => el.id === id)].id)}>Edit Question</button>
-                <button onClick={() => deleteQuestion(questions[questions.findIndex((el) => el.id === id)].id)}>Delete Question</button>
-            </div>}
     </>
   );
 }
 
-function InputComponent({ index, questions, id, setFormError, options, setOptions, newOptions, setNewOptions, isDisable, newQuestions }) {
+function InputComponent({ index, questions, id, setFormError, options, setOptions, newOptions, setNewOptions }) {
   const [question, setQuestion] = useState("");
+
   function onQuestionChange(e) {
     setQuestion(e.target.value);
     questions[questions.findIndex((el) => el.id === id)].options[index] =
@@ -720,45 +526,40 @@ function InputComponent({ index, questions, id, setFormError, options, setOption
       setFormError(false)
   }
 
+  function removeItem () {
+    
+    // console.log(options)
+    let removedItem = options.splice(index, 1);
+    let newItems = options.filter((el)=> el !== removedItem)
+    setOptions(newItems)
+    // let removedList = options.splice(index, 1);
+    // let newLists = options.filter((el, index )=> index !== removedList)
+    // setOptions(newLists)
+  }
+
+ 
   useEffect(() => {
-        if (newOptions.length > 0) {          
-            setQuestion(newOptions[index])
+        if (options.length > 0) {          
+            setQuestion(options[index])
             if(questions.length) {
-              questions[questions.findIndex((el) => el.id === id)].options = newOptions
+              questions[questions.findIndex((el) => el.id === id)].options = options
             }
         }
-    }, [newOptions])
-
-   function removeItem () {
-    let removedItem = newOptions.splice(index, 1);
-    let newItems = newOptions.filter((el)=> el !== removedItem)
-    setNewOptions(newItems)
-    let removedList = options.splice(index, 1);
-    let newLists = options.filter((el, index )=> index !== removedList)
-    setOptions(newLists)
-  }
+    }, [options])
 
   return (
         <div className='test-answer-input-field' key={index}>
-          {
-          questions[questions.findIndex((el) => el.id === id)]?.testId
-          ? 
-          (newOptions[index] !== undefined ) && <input
+          <input
               className='default-input-variation incorrect-option'
               placeholder='Incorrect answer' 
-              disabled={isDisable}
               value={question} 
               onChange={(e) => onQuestionChange(e)}
             />
-          : <input
-              className='default-input-variation incorrect-option'
-              placeholder='Incorrect answer' 
-              disabled={isDisable}
-              value={question} 
-              onChange={(e) => onQuestionChange(e)}
-            />
-          }
-            {!isDisable && (newOptions.length > 1 && <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeItem} />)}
+            {
+            options.length === 1 
+            ? <img src='/img/minus-circle-outline.svg' alt='minus image'  />
+            : <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={removeItem} />
+            }
         </div>
   );
 }

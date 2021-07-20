@@ -23,10 +23,16 @@ const LessonTest = ({ id }) => {
 
   useEffect(() => {
     if (start) {
-      history.push(`/lesson-test-page/${start.id}`)
+      history.push({
+        pathname: `/lesson-test-page/${start.id}`,
+        state: {lessonId: id}
+      })
     }
-    getTestsResults()
   }, [start])
+
+  useEffect(() => {
+    getTestsResults()
+  }, [])
 
   const getTestsResults = async () => {
     const config = configFunc()
