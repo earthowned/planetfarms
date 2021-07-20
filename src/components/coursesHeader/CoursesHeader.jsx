@@ -21,11 +21,11 @@ const CoursesHeader = ({
   const dispatch = useDispatch()
   const [search, setSearch] = useState('')
 
-  useEffect(() => {
-    if (!userInfo) {
-      history.push('/login')
-    }
-  }, [search, dispatch, history, userInfo])
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     history.push('/login')
+  //   }
+  // }, [search, dispatch, history, userInfo])
 
   function createCollection () {
     setActive(true)
@@ -33,7 +33,6 @@ const CoursesHeader = ({
   }
 
   const windowWidth = useSizeFinder()
-
   return (
     <div className='courseHeader'>
       <div className='container'>
@@ -98,7 +97,6 @@ const CoursesHeader = ({
             )}
           </div>
         </div>
-
         <div className='subHeader2'>
           <Filter name='filter by category' />
         </div>
