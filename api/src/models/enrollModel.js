@@ -8,12 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true
       },
       userId: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
       },
       isEnroll: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
+        type: DataTypes.BOOLEAN
       },
       createdAt: {
         type: DataTypes.DATE
