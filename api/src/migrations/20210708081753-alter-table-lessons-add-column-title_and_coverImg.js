@@ -1,11 +1,11 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.addColumn('lessons', 'title', Sequelize.STRING)
-    queryInterface.addColumn('lessons', 'coverImg', Sequelize.STRING)
+    await queryInterface.addColumn('lessons', 'title', Sequelize.STRING)
+    await queryInterface.addColumn('lessons', 'coverImg', Sequelize.STRING)
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.removeColumn('lessons', 'title')
-    queryInterface.removeColumn('lessons', 'coverImg')
+    await queryInterface.removeColumn('lessons', 'title')
+    await queryInterface.removeColumn('lessons', 'coverImg')
   }
 }
