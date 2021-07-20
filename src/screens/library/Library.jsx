@@ -53,7 +53,7 @@ const Library = () => {
 
       {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
 
-      <DashboardLayout title='library'>
+      <DashboardLayout title='Library'>
         <div className='library-main-container'>
           <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Add files' />
           {['Articles', 'Videos'].map(type => (
