@@ -1,7 +1,8 @@
 import { useHistory } from 'react-router-dom'
 
-const EnrollContainer = ({ item }) => {
+const EnrollContainer = ({ item, userInfo }) => {
   const history = useHistory()
+  const adminCoursePath = `/admin/course/${item.id}`
   return (
     <div className='enroll-container'>
       {item.enroll ? (
@@ -13,7 +14,13 @@ const EnrollContainer = ({ item }) => {
         </button>
       ) : (
         <button className='join-btn'>
-          <span>Join Course</span>
+          {item.creator === userInfo.id ? (
+            <span onClick={() => history.push(adminCoursePath)}>
+              View Course
+            </span>
+          ) : (
+            <span>Join Course</span>
+          )}
         </button>
       )}
       <h4>{item.isFree === true ? 'Free' : `$ ${item.price}`}</h4>
