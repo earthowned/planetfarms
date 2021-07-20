@@ -79,6 +79,7 @@ function App () {
             <PrivateRoute component={CommunityGroupViewPage} path='/community-group-view-page/:id' />
             <PrivateRoute component={Courses} exact path='/courses' />
             <PrivateRoute component={CourseCollection} exact path='/courses/my-courses' />
+            <PrivateRoute component={CourseCollection} exact path='/courses/saved-collection' />
             <PrivateRoute component={EditCollection} path='/courses/my-courses/:id' />
             <PrivateRoute component={Courses} path='/admin/courses' />
             <PrivateRoute component={AdminCoursePage} path='/admin/course/:courseId' />

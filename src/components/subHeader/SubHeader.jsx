@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import useSizeFinder from '../../utils/sizeFinder'
 import Filter from '../filter/Filter'
 import SearchComponent from '../searchComponent/SearchComponent'
@@ -8,6 +9,17 @@ import './SubHeader.scss'
 const SubHeader = ({ search, setSearch, nav, setCreateActive, btnName }) => {
   const windowWidth = useSizeFinder()
   const { pathname } = useLocation()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  const history = useHistory()
+
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
+  }, [search, dispatch, history, userInfo])
 
   return (
     <div className='sub-header-main-container'>

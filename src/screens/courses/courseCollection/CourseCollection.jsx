@@ -3,8 +3,10 @@ import Background from '../../../components/background/Background'
 import CoursesHeader from '../../../components/coursesHeader/CoursesHeader'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { Link } from 'react-router-dom'
+import nav from '../courseNav';
 import './CourseCollection.css'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
+import SubHeader from '../../../components/subHeader/SubHeader'
 
 const farming = Array(6).fill(
   {
@@ -29,11 +31,17 @@ const mycollection = [
 
 const CourseCollection = () => {
   const [active, setActive] = useState(false)
+  const [search, setSearch] = useState(null)
 
   return (
     <DashboardLayout title='All courses'>
       <div className='courses-main-container'>
-        <CoursesHeader setActive={setActive} />
+        <SubHeader 
+          search={search} 
+          setSearch={setSearch} 
+          nav={nav} 
+          setCreateActive={setActive} 
+          btnName="Add Courses"/>
         <CourseUserCard name='My Courses' data={farming} btnName='Manage course' subName='subscribers' />
         <CourseUserCard name='My Collections' data={mycollection} btnName='Edit Collection' subName='users saved' />
       </div>

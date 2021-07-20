@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import Background from '../../../components/background/Background'
 import CoursesHeader from '../../../components/coursesHeader/CoursesHeader'
+import SubHeader from '../../../components/subHeader/SubHeader'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
+import nav from '../courseNav';
 import './CourseUsers.css'
 
 export const farming = [
@@ -14,10 +16,17 @@ export const farming = [
 
 const CourseUsers = () => {
   const [active, setActive] = useState(false)
+  const [search, setSearch] = useState(null);
+
   return (
     <DashboardLayout title='All courses'>
       <div className='courses-main-container'>
-        <CoursesHeader setActive={setActive} />
+        <SubHeader 
+          search={search} 
+          setSearch={setSearch} 
+          nav={nav} 
+          setCreateActive={setActive} 
+          btnName="Add Courses"/>
         <CourseUserCard name='Farming Collections' />
         <CourseUserCard name='Branding Collections' />
       </div>
