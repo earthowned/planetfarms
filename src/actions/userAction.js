@@ -266,7 +266,7 @@ export const getMyDetails = () => async (dispatch) => {
       numberOfVisit: data.numberOfVisit,
       attachments: data.attachments
     }
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito'){
+    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const { attributes } = await Auth.currentAuthenticatedUser({
         bypassCache: true
       })
@@ -487,10 +487,10 @@ export const forgotPasswordSubmit = (username, code, confirmPassword) => async (
 }
 
 export const changePassword = (oldPassword, newPassword) => async (dispatch) => {
-  let resdata;
+  let resdata
   try {
     dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
-    if (process.env.REACT_APP_AUTH_METHOD !== 'cognito'){
+    if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
       const { data } = await postApi(dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
         { oldPassword, newPassword }
@@ -500,7 +500,6 @@ export const changePassword = (oldPassword, newPassword) => async (dispatch) => 
       const user = await Auth.currentAuthenticatedUser()
       resdata = await Auth.changePassword(user, oldPassword, newPassword)
     }
-
 
     dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS })
   } catch (error) {

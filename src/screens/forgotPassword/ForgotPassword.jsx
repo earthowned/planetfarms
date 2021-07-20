@@ -75,7 +75,6 @@ const ForgotPassword = () => {
           {confirmErr && <div className='error'>{confirmErr}</div>}
           {resendErr && <div className='error'>{resendErr}</div>}
           {message && <div className='message'>{message}</div>}
-
           <Input
             placeholder='Username'
             type='text'
@@ -147,8 +146,8 @@ const ForgotPassword = () => {
                   <Lock className='error-icon' />
                 </Input>
                 <div className='btnWrapper'>
-                  <Button name='Verify' onClick={handleSubmit(verifyAccount)} />
                   <Button name='Resend Code' onClick={resendCode} />
+                  <Button name='Change Password' onClick={handleSubmit(verifyAccount)} />
                 </div>
               </>
               )
