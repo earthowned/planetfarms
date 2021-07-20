@@ -1,35 +1,66 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { newsListReducer, newsCreateReducer, newsDeleteReducer, newsUpdateReducer } from './reducers/newsReducers'
+import {
+  newsListReducer,
+  newsCreateReducer,
+  newsDeleteReducer,
+  newsUpdateReducer
+} from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
 import { courseCreateReducer } from './reducers/courseReducers'
-import { lessonCreateReducer, lessonUpdateReducer } from './reducers/lessonReducers'
+import {
+  lessonCreateReducer,
+  lessonUpdateReducer
+} from './reducers/lessonReducers'
 import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
-import { testCreateReducer, testQuestionListReducer } from './reducers/testReducers'
 import {
-  enterpriseCreateReducer, enterpriseDeleteReducer,
+  testCreateReducer,
+  testQuestionListReducer
+} from './reducers/testReducers'
+import {
+  enterpriseCreateReducer,
+  enterpriseDeleteReducer,
   enterpriseFollowReducer,
-  enterpriseListReducer, enterpriseUpdateReducer, userEnterpriseListReducer
+  enterpriseListReducer,
+  enterpriseUpdateReducer,
+  userEnterpriseListReducer
 } from './reducers/enterpriseReducers'
 import {
-  groupCreateReducer, groupDeleteReducer, groupFollowReducer, groupListReducer,
-  groupUpdateReducer, groupViewReducer, userGroupListReducer
+  groupCreateReducer,
+  groupDeleteReducer,
+  groupFollowReducer,
+  groupListReducer,
+  groupUpdateReducer,
+  groupViewReducer,
+  userGroupListReducer
 } from './reducers/communityGroupReducers'
 import {
+  accessTokenReducer,
   userDetailsReducer,
   userListReducer,
   userLoginReducer,
   userUpdateReducer,
-  userRegisterReducer
+  userRegisterReducer,
+  userConfirmCodeReducer,
+  userResendCodeReducer,
+  userAttrConfirmCodeReducer,
+  userAttrResendCodeReducer,
+  userForgotPwdConfirmCodeReducer,
+  userForgotPwdResendCodeReducer
 } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import {
-  communityListReducer, communityCreateReducer, communityJoinReducer, userCommunityListReducer,
-  communityVisitReducer, communityDeleteReducer, communityUpdateReducer
+  communityListReducer,
+  communityCreateReducer,
+  communityJoinReducer,
+  userCommunityListReducer,
+  communityVisitReducer,
+  communityDeleteReducer,
+  communityUpdateReducer
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
 
@@ -66,6 +97,14 @@ const reducer = combineReducers({
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,
+  userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
+  userConfirmCode: userConfirmCodeReducer,
+  userResendCode: userResendCodeReducer,
+  userAttrConfirmCode: userAttrConfirmCodeReducer,
+  userAttrResendCode: userAttrResendCodeReducer,
+  userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
+  userForgotPwdResendCode: userForgotPwdResendCodeReducer,
   addNewNews: newsCreateReducer,
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
@@ -74,13 +113,14 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
-  userUpdate: userUpdateReducer
+  userUpdate: userUpdateReducer,
+  accessToken: accessTokenReducer
 })
 
-const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+const userInfoFromStorage = window.localStorage.getItem('userInfo') ? JSON.parse(window.localStorage.getItem('userInfo')) : null
 
-const currentCommunityFromStorage = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
+const currentCommunityFromStorage = window.localStorage.getItem('currentCommunity')
+  ? JSON.parse(window.localStorage.getItem('currentCommunity'))
   : null
 
 const initialState = {
@@ -89,6 +129,10 @@ const initialState = {
 }
 
 const middleware = [thunk]
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+const store = createStore(
+  reducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware))
+)
 
 export default store

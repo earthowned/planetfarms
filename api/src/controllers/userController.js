@@ -83,7 +83,7 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     const user = await localAuth(name, password)
-    if (user) {
+    if (user && await subscribeCommunity(user)) {
       await res.json({
         token: generateToken(user.dataValues.userID),
         id: user.dataValues.userID
@@ -113,8 +113,13 @@ const registerUser = async (req, res) => {
   try {
     const { name, password, id } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
-      const user = await db.User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
-      if (user && subscribeCommunity(user)) {
+      const data = await db.User.findOne({ where: { userID: id } })
+      if (!data) {
+        const user = await db.User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
+        if (user && await subscribeCommunity(user)) {
+          res.status(201).send('SUCCESS')
+        }
+      } else {
         res.status(201).send('SUCCESS')
       }
     } else {
@@ -133,7 +138,7 @@ const registerLocal = async (name, password, res) => {
       const user = await db.LocalAuth.create({ username: name, password: password }, { transaction: t })
       return await db.User.create({ userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
     })
-    if (newUser && subscribeCommunity(newUser)) {
+    if (newUser && await subscribeCommunity(newUser)) {
       res.status(201).json({
         id: newUser.dataValues.userID,
         userID: newUser.dataValues.userID,
@@ -170,9 +175,13 @@ const subscribeCommunity = async (user) => {
   }
 }
 
+const sendTokenStatus = (req, res) => {
+  res.status(201).json({ message: 'accepted' })
+}
+
 const changePassword = async (req, res) => {
+  const { user, oldPassword, newPassword } = req.body
   try {
-    const { user, oldPassword, newPassword } = req.body
     let userWithNewPassword
     if (process.env.AUTH_METHOD === 'cognito') {
       const authUser = await Auth.currentAuthenticatedUser()
@@ -208,17 +217,6 @@ const forgotPasswordSubmit = async (req, res) => {
   Auth.forgotPasswordSubmit(username, code, newPassword)
     .then((data) => console.log(data))
     .catch((err) => console.log(err))
-}
-
-const resendCode = async (req, res) => {
-  const { username } = req.body
-  try {
-    await Auth.resendSignUp(username)
-    res.json({ message: 'code resent successfully' }).status(200)
-  } catch (err) {
-    res.status(401)
-    throw new Error('error resending code: ', err)
-  }
 }
 
 const confirmSignUpWithCode = async (req, res) => {
@@ -302,20 +300,21 @@ const updateUser = async (req, res) => {
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    db.User.findOne({ where: { userID: id } }).then((user) => {
+    db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
-          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment },
+          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment || user.dataValues.attachments },
           { where: { userID: id } }
-        ).then(() => res.status(200))
-          .catch((err) => res.json({ error: err.message }).status(400))
+        )
+          .then(() => res.sendStatus(200))
+          .catch((err) => res.status(403).json({ error: err.message }))
       } else {
         res.status(404)
         throw new Error('User not found')
       }
     })
   } catch (err) {
-    res.json({ error: err.message })
+    res.status(403).json({ error: err.message })
   }
 }
 
@@ -336,12 +335,12 @@ module.exports = {
   changePassword,
   forgotPassword,
   forgotPasswordSubmit,
-  resendCode,
   confirmSignUpWithCode,
   getUserById,
   getUserProfileByUserID,
   getMyProfile,
   getUsers,
   updateUser,
-  searchUserName
+  searchUserName,
+  sendTokenStatus
 }

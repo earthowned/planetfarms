@@ -17,25 +17,31 @@ function CongratulationScreen () {
   const [profileImage, setProfileImage] = useState(null)
   const dispatch = useDispatch()
 
-  const { register, errors, handleSubmit } = useForm()
-
   const location = useLocation()
   const history = useHistory()
   const editInformations = location?.state?.editInformations
   const userdetail = location?.state?.user
 
+  const { register, errors, handleSubmit } = useForm({
+    defaultValues: {
+      firstName: userdetail?.firstName,
+      lastName: userdetail?.lastName,
+      email: userdetail?.email,
+      phone: userdetail?.phone,
+      birthday: userdetail ? moment(userdetail.dateOfBirth).format('YYYY-MM-DD') : ''
+    }
+  })
+
   const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
 
-  const userLogin = useSelector((state) => state.userLogin)
   const userDetails = useSelector((state) => state.userDetails)
-  const { userInfo } = userLogin
   const { user } = userDetails
 
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     const attachments = profileImage
-    dispatch(updateUser({ firstName, lastName, phone, birthday, email, attachments }))
-    user ? history.push('/myProfile') : history.push('/')
+    dispatch(updateUser({ firstName, lastName, phone, birthday, email, attachments }, history))
+    !user && history.push('/')
   }
 
   return (
@@ -68,7 +74,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.firstName}
                 noIcon='noIcon'
               />
             </div>
@@ -85,7 +90,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.lastName}
                 noIcon='noIcon'
               />
             </div>
@@ -104,7 +108,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.email}
                 noIcon='noIcon'
               />
             </div>
@@ -113,14 +116,13 @@ function CongratulationScreen () {
               <Input
                 name='phone'
                 placeholder='Phone Number (Optional)'
-                type='number'
+                type='text'
                 ref={register({
                   required: {
                     value: false
                   }
                 })}
                 errors={errors}
-                value={userdetail?.phone}
                 noIcon='noIcon'
               />
             </div>
@@ -139,7 +141,6 @@ function CongratulationScreen () {
                   }
                 })}
                 errors={errors}
-                value={userdetail?.dateOfBirth && moment(userdetail.dateOfBirth).format('YYYY-MM-DD')}
                 noIcon='noIcon'
               />
             </div>
@@ -149,7 +150,15 @@ function CongratulationScreen () {
             <div className='btn'>
               {editInformations
                 ? (
-                  <Secondarybtn name='Cancel' clickHandler={() => history.goBack()} />
+                  <Secondarybtn
+                    name='Cancel' clickHandler={() => {
+                      if (!editInformations) {
+                        history.goBack()
+                      } else {
+                        history.push('/myProfile')
+                      }
+                    }}
+                  />
                   )
                 : (
                   <Secondarybtn name='Skip for now' clickHandler={() => history.push('/')} />

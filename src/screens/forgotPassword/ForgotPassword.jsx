@@ -1,16 +1,18 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import Input from '../../components/input/Input'
 import SignLayout from '../../layout/signLayout/SignLayout'
 import Button from '../../components/button/Button'
-import { login } from '../../actions/userAction'
+import { forgotPassword, forgotPasswordSubmit } from '../../actions/userAction'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 
 const ForgotPassword = () => {
-  const [code, setCode] = useState(null)
+  const [message, setMessage] = useState('')
+  const [usernameValue, setUsernameValue] = useState('')
+
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isVerifiedUser, setIsVerifiedUser] = useState(false)
@@ -18,32 +20,32 @@ const ForgotPassword = () => {
   const { register: regi, errors, handleSubmit, watch } = useForm()
   const newPassword = useRef({})
   newPassword.current = watch('newPassword', '')
-  const onSubmit = ({ username, newPassword }) => {
-    // return dispatch(changePassword(username, password))
-    console.log(username, newPassword)
-  }
-  const verifyUsername = ({ username }) => {
-    username && setIsVerifiedUser(true)
-  }
+
+  const history = useHistory()
+
+  const userAttrConfirmCode = useSelector((state) => state.userAttrConfirmCode)
+  const userAttrResendCode = useSelector((state) => state.userAttrResendCode)
+  const { error: confirmErr, status: confirmStatus } = userAttrConfirmCode
+  const { error: resendErr, status: resendStatus } = userAttrResendCode
+
   const resendCode = (e) => {
     e.preventDefault()
-    handleSubmit(verifyUsername)()
+    dispatch(forgotPassword(usernameValue))
     isVerifiedUser && console.log('code sent')
   }
-  const alreadyHaveCode = (e) => {
-    e.preventDefault()
-    handleSubmit(verifyUsername)()
+  const alreadyHaveCode = ({ username }) => {
+    if (!usernameValue) setUsernameValue(username)
     isVerifiedUser && console.log('type code')
   }
-  const sendCode = (e) => {
-    e.preventDefault()
-    handleSubmit(verifyUsername)()
+  const sendCode = ({ username }) => {
+    if (!usernameValue) setUsernameValue(username)
+    dispatch(forgotPassword(username))
     isVerifiedUser && console.log('code sent')
   }
-  const changePassword = (e) => {
-    e.preventDefault()
-    console.log('Password Changed Successfully')
+  const verifyAccount = ({ code, confirmPassword }) => {
+    dispatch(forgotPasswordSubmit(usernameValue, code, confirmPassword))
   }
+
   const toggleNewPasswordVisibility = (e) => {
     setShowNewPassword(!showNewPassword)
   }
@@ -51,11 +53,29 @@ const ForgotPassword = () => {
     setShowConfirmPassword(!showConfirmPassword)
   }
 
+  // const userLogin = useSelector((state) => state.userLogin)
+  // const { userInfo } = userLogin
+  // console.log(userInfo)
+
+  useEffect(() => {
+    usernameValue && setIsVerifiedUser(true)
+    if (confirmStatus) {
+      setMessage('Successful')
+      history.push('/myProfile')
+    } else if (resendStatus) {
+      setMessage('Code has been sent successfully.')
+    }
+  }, [confirmStatus, resendStatus, usernameValue])
+
   return (
     <SignLayout>
-      <form className='sign' onSubmit={handleSubmit(onSubmit)}>
+      <form className='sign'>
         <h1 className='welcome'>Forgot Password</h1>
         <div className='container'>
+          {confirmErr && <div className='error'>{confirmErr}</div>}
+          {resendErr && <div className='error'>{resendErr}</div>}
+          {message && <div className='message'>{message}</div>}
+
           <Input
             placeholder='Username'
             type='text'
@@ -67,73 +87,77 @@ const ForgotPassword = () => {
                 message: 'You must enter username'
               }
             })}
-            disabled={isVerifiedUser}
+            disabled={false}
             errors={errors}
           >
             <UserAvatar />
           </Input>
           {isVerifiedUser
-            ? <>
-              <Input
-                placeholder='Code'
-                type='number'
-                name='code'
-                id='code'
-                ref={regi({
-                  required: {
-                    value: true,
-                    message: 'You must enter code'
-                  }
-                  // validate: v => v === code || 'You must enter correct code'
-                })}
-                errors={errors}
-              >
-                <Lock className='error-icon' />
-              </Input>
-              <Input
-                type={showNewPassword ? 'text' : 'password'}
-                placeholder='New Password'
-                name='newPassword'
-                id='newPassword'
-                ref={regi({
-                  required: {
-                    value: true,
-                    message: 'You must enter new password'
-                  },
-                  minLength: {
-                    value: 8,
-                    message: 'Password must be maximum 8 characters'
-                  }
-                })}
-                showPassword={showNewPassword}
-                togglePasswordVisibility={toggleNewPasswordVisibility}
-                errors={errors}
-              >
-                <Lock className='error-icon' />
-              </Input>
-              <Input
-                type={showConfirmPassword ? 'text' : 'password'}
-                placeholder='Confirm Password'
-                name='confirmPassword'
-                id='confirmPassword'
-                ref={regi({
-                  validate: v => v === newPassword.current || 'You must retype your new password'
-                })}
-                showPassword={showConfirmPassword}
-                togglePasswordVisibility={toggleConfirmPasswordVisibility}
-                errors={errors}
-              >
-                <Lock className='error-icon' />
-              </Input>
-              <div className='btnWrapper'>
-                <Button name='Change Password' onClick={changePassword} />
-                <Button name='Resend Code' onClick={resendCode} />
-              </div>
+            ? (
+              <>
+                <Input
+                  placeholder='Code'
+                  type='number'
+                  name='code'
+                  id='code'
+                  ref={regi({
+                    required: {
+                      value: true,
+                      message: 'You must enter code'
+                    }
+                    // validate: v => v === code || 'You must enter correct code'
+                  })}
+                  errors={errors}
+                >
+                  <Lock className='error-icon' />
+                </Input>
+                <Input
+                  type={showNewPassword ? 'text' : 'password'}
+                  placeholder='New Password'
+                  name='newPassword'
+                  id='newPassword'
+                  ref={regi({
+                    required: {
+                      value: true,
+                      message: 'You must enter new password'
+                    },
+                    minLength: {
+                      value: 8,
+                      message: 'Password must be maximum 8 characters'
+                    }
+                  })}
+                  showPassword={showNewPassword}
+                  togglePasswordVisibility={toggleNewPasswordVisibility}
+                  errors={errors}
+                >
+                  <Lock className='error-icon' />
+                </Input>
+                <Input
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder='Confirm Password'
+                  name='confirmPassword'
+                  id='confirmPassword'
+                  ref={regi({
+                    validate: v => v === newPassword.current || 'You must retype your new password'
+                  })}
+                  showPassword={showConfirmPassword}
+                  togglePasswordVisibility={toggleConfirmPasswordVisibility}
+                  errors={errors}
+                >
+                  <Lock className='error-icon' />
+                </Input>
+                <div className='btnWrapper'>
+                  <Button name='Verify' onClick={handleSubmit(verifyAccount)} />
+                  <Button name='Resend Code' onClick={resendCode} />
+                </div>
               </>
-            : <div className='btnWrapper'>
-              <Button name='I already have code' onClick={alreadyHaveCode} />
-              <Button name='Send Code' onClick={sendCode} />
-              </div>}
+              )
+            : (
+              <div className='btnWrapper'>
+                <Button name='I already have code' onClick={handleSubmit(alreadyHaveCode)} />
+                <Button name='Send Code' onClick={handleSubmit(sendCode)} />
+              </div>
+              )}
           <div className='option'>
             <p className='transparent16px'>
               <span className='span span-1'>Go back to </span>

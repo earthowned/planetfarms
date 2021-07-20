@@ -8,30 +8,29 @@ import './NewsCreateModal.scss'
 const CreateText = ({
   textActive,
   setTextActive,
-  placeholder,
   lessonData,
-  setLessonData,
-  setText
+  setLessonData
 }) => {
   const { register, errors, handleSubmit } = useForm()
 
   const addText = ({ textHeading, textDescription }) => {
-    const textData = [
-      ...lessonData,
-      {
-        textHeading,
-        textDescription
-      }
-    ]
-    setLessonData(textData)
-    setText({ textHeading, textDescription })
+    if (textHeading.length !== 0 || textDescription.length !== 0) {
+      const textData = [
+        ...lessonData,
+        {
+          textHeading,
+          textDescription
+        }
+      ]
+      setLessonData(textData)
+    }
     setTextActive(false)
   }
   return (
     <>
       {textActive && (
-        <div className='collection-modal-container'>
-          <div>
+        <div className='collection-modal-container addBlock addBlock__text'>
+          <div className='block'>
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add text'
@@ -41,22 +40,17 @@ const CreateText = ({
                 <InputFields
                   type='text'
                   className='default-input-variation'
-                  placeholder={placeholder}
+                  placeholder='Text Heading (Optional)'
                   name='textHeading'
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: 'Please enter Heading'
-                    }
-                  })}
-                />
-                <ErrorText
-                  className='errorMsg'
-                  message={errors.textHeading && errors.textHeading.message}
+                  ref={register}
                 />
                 <TextArea
-                  className='default-input-variation text-area-variation'
-                  placeholder='Text description'
+                  className={`default-input-variation text-area-variation ${
+                    errors.textDescription
+                      ? 'textarea textarea__error'
+                      : 'textarea'
+                  }`}
+                  placeholder='Text Description'
                   cols='3'
                   rows='7'
                   name='textDescription'
@@ -74,7 +68,11 @@ const CreateText = ({
                   }
                 />
               </div>
-              <Button name='Add block' onClick={handleSubmit(addText)} />
+              <Button
+                className='add'
+                name='Add Text Block'
+                onClick={handleSubmit(addText)}
+              />
             </div>
           </div>
         </div>

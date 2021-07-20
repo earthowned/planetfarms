@@ -1,17 +1,16 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-
+import './DragDrop.scss'
 const DragDrop = ({
   onChange = () => {},
   type,
   fileType,
   className,
-  setVideo,
   text,
-  img,
-  editText,
+  fetchImg,
   dataImg,
-  tag
+  editImg,
+  onClick = () => {}
 }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
@@ -40,17 +39,16 @@ const DragDrop = ({
       setFiles={setFiles}
       className={className}
       type={type}
-      setVideo={setVideo}
       text={text}
-      img={img}
-      editText={editText}
+      fetchImg={fetchImg}
       dataImg={dataImg}
-      tag={tag}
+      onClick={onClick}
+      editImg={editImg}
     />
   )
 }
 
-function DragDropComponent ({
+const DragDropComponent = ({
   getInputProps,
   getRootProps,
   fileChange,
@@ -58,13 +56,11 @@ function DragDropComponent ({
   setFiles,
   className,
   type,
-  setVideo,
   text,
-  img,
-  editText,
   dataImg,
-  tag
-}) {
+  editImg,
+  onClick = () => {}
+}) => {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
       <div
@@ -84,7 +80,7 @@ function DragDropComponent ({
             <div className='drag-drop-icon-container'>
               {type === 'video' ? (
                 <p className='videoName'>{files.name}</p>
-              ) : text === text ? (
+              ) : editImg ? (
                 <p>{text}</p>
               ) : (
                 <img src='/img/camera-outline.svg' alt='camera icon' />
@@ -93,17 +89,14 @@ function DragDropComponent ({
           </>
         ) : dataImg ? (
           <>
-            <img
-              className='avatar'
-              src={process.env.REACT_APP_CDN_BASE_URL + `/${tag}/` + dataImg}
-              alt='files[0].preview'
-            />
+            <img className='avatar' src={dataImg} alt='files[0].preview' />
             <div className='drag-drop-icon-container'>
               <img src='/img/camera-outline.svg' alt='camera icon' />
+              <h6 className='dragDropText'>{text}</h6>
             </div>
           </>
         ) : text ? (
-          <p>{text}</p>
+          <h6 className='dragDropText'>{text}</h6>
         ) : (
           <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
             Drag & Drop files in this area or Click Here to attach video cover
@@ -114,7 +107,10 @@ function DragDropComponent ({
         <img
           src='/img/close-outline.svg'
           className='drag-drop-close'
-          onClick={() => setFiles(!files)}
+          onClick={() => {
+            setFiles(null)
+            onClick()
+          }}
           alt='drag_drop_img_close'
         />
       )}

@@ -24,7 +24,10 @@ const AddTestModal = ({ setTestModal }) => {
     //   question: '',
     //   correctanswer: ''
     // })
-    setQuestions(prev => [...prev, { question: '', answer: '', options: [] }])
+    setQuestions((prev) => [
+      ...prev,
+      { question: '', answer: '', options: [] }
+    ])
   }
 
   function resetQuestion () {
@@ -41,15 +44,38 @@ const AddTestModal = ({ setTestModal }) => {
 
   return (
     <div>
-      <div className='collection-modal-container'>
-        <div>
+      <div className='collection-modal-container addBlock'>
+        <div className='block'>
           <div className='collection-modal-inner-container'>
-            <CollectionModalHeader title='Add test' clickHandler={setTestModal} />
-            {questions.length > 0 && questions.map((index, item) => <QuestionAnswerComponent pos={questions.length - 1} index={index} questions={questions} />)}
-            <button onClick={() => addQuestion()} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add question</span></button>
+            <CollectionModalHeader
+              title='Add test'
+              clickHandler={setTestModal}
+            />
+            {questions.length > 0 &&
+              questions.map((index, item) => (
+                <QuestionAnswerComponent
+                  pos={questions.length - 1}
+                  index={index}
+                  questions={questions}
+                />
+              ))}
+            <button
+              onClick={() => addQuestion()}
+              className='secondary-btn add-question-btn'
+            >
+              <img src='/img/plus.svg' alt='add icon' />
+              <span>Add question</span>
+            </button>
             <div className='btn-container'>
-              <button className='secondary-btn reset-test-btn' onClick={resetQuestion}>Reset test</button>
-              <button className='secondary-btn color-primary' onClick={(addTest)}>Add test</button>
+              <button
+                className='secondary-btn reset-test-btn'
+                onClick={resetQuestion}
+              >
+                Reset test
+              </button>
+              <button className='secondary-btn color-primary' onClick={addTest}>
+                Add test
+              </button>
             </div>
           </div>
         </div>
@@ -72,7 +98,7 @@ function QuestionAnswerComponent ({ pos, questions, index }) {
   }
 
   function addOption () {
-    setOptions(prev => {
+    setOptions((prev) => {
       return [...prev, '']
     })
   }
@@ -84,22 +110,50 @@ function QuestionAnswerComponent ({ pos, questions, index }) {
     <div className='question-answer-container' key={index}>
       <div className='question-container'>
         <div>
-          <input className='default-input-variation' placeholder='Question' value={question} onChange={(e) => onQuestionChange(e)} />
+          <input
+            className='default-input-variation'
+            placeholder='Question'
+            value={question}
+            onChange={(e) => onQuestionChange(e)}
+          />
         </div>
-        <button><img src='/img/green-camera.svg' alt='photo icon' /> <h4>Add photo</h4></button>
+        <button>
+          <img src='/img/green-camera.svg' alt='photo icon' />{' '}
+          <h4>Add photo</h4>
+        </button>
       </div>
       <div className='test-answers-wrapper'>
         <div className='test-correct-answer'>
           <h4>Write correct answer in this field</h4>
           <div className='test-answer-input-field'>
-            <input className='default-input-variation' placeholder='Correct answer' value={answer} onChange={(e) => onAnswerChange(e)} />
-            <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => setAnswer('')} />
+            <input
+              className='default-input-variation'
+              placeholder='Correct answer'
+              value={answer}
+              onChange={(e) => onAnswerChange(e)}
+            />
+            <img
+              src='/img/minus-circle-outline.svg'
+              alt='minus image'
+              onClick={() => setAnswer('')}
+            />
           </div>
           <span>Answer will be mixed for users</span>
         </div>
         <div className='option-answers'>
-          {options.length > 0 && options.map((item, index) => <OptionAnswer options={options} pos={index} setOptions={setOptions} item={item} />)}
-          <button onClick={addOption}><img src='/img/plus.svg' alt='add icon' /> <span>Add new answer</span></button>
+          {options.length > 0 &&
+            options.map((item, index) => (
+              <OptionAnswer
+                options={options}
+                pos={index}
+                setOptions={setOptions}
+                item={item}
+              />
+            ))}
+          <button onClick={addOption}>
+            <img src='/img/plus.svg' alt='add icon' />{' '}
+            <span>Add new answer</span>
+          </button>
         </div>
       </div>
     </div>
@@ -144,8 +198,17 @@ function OptionAnswer ({ options, setOptions, item, pos }) {
 
   return (
     <div className='test-answer-input-field' key={pos}>
-      <input className='default-input-variation incorrect-option' placeholder='Incorrect answer' value={answer} onChange={(e) => onAnswerChange(e)} />
-      <img src='/img/minus-circle-outline.svg' alt='minus image' onClick={() => removeItem(item)} />
+      <input
+        className='default-input-variation incorrect-option'
+        placeholder='Incorrect answer'
+        value={answer}
+        onChange={(e) => onAnswerChange(e)}
+      />
+      <img
+        src='/img/minus-circle-outline.svg'
+        alt='minus image'
+        onClick={() => removeItem(item)}
+      />
     </div>
   )
 }
