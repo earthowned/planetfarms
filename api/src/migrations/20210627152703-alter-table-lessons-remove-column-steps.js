@@ -1,7 +1,8 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     queryInterface.removeColumn('lessons', 'steps')
-    queryInterface.changeColumn('lessons', 'courseId', Sequelize.INTEGER)
+    queryInterface.removeColumn('lessons', 'courseId')
+    queryInterface.addColumn('lessons', 'courseId', Sequelize.INTEGER)
     queryInterface.addConstraint('lessons', {
       fields: ['courseId'],
       type: 'foreign key',
@@ -16,6 +17,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     queryInterface.addColumn('lessons', 'steps', Sequelize.JSON)
     queryInterface.removeConstraint('lessons', 'courseId_fkey_forLesson')
-    queryInterface.changeColumn('lessons', 'courseId', Sequelize.STRING)
+    queryInterface.removeColumn('lessons', 'courseId')
+    queryInterface.addColumn('lessons', 'courseId', Sequelize.STRING)
   }
 }

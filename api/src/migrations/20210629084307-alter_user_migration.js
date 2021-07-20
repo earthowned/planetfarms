@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.removeColumn('users', 'name', Sequelize.STRING)
-    queryInterface.removeColumn('users', 'password', Sequelize.STRING)
+    queryInterface.removeColumn('users', 'name')
+    queryInterface.removeColumn('users', 'password')
     queryInterface.addColumn('users', 'userID', Sequelize.STRING)
     queryInterface.addColumn('users', 'isLocalAuth', Sequelize.BOOLEAN)
     queryInterface.addColumn('users', 'firstName', Sequelize.STRING)
@@ -16,14 +16,14 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     queryInterface.addColumn('users', 'name', Sequelize.STRING)
     queryInterface.addColumn('users', 'password', Sequelize.STRING)
-    queryInterface.removeColumn('users', 'userID', Sequelize.STRING)
-    queryInterface.removeColumn('users', 'isLocalAuth', Sequelize.BOOLEAN)
-    queryInterface.removeColumn('users', 'firstName', Sequelize.STRING)
-    queryInterface.removeColumn('users', 'lastName', Sequelize.STRING)
-    queryInterface.removeColumn('users', 'phone', Sequelize.TEXT)
-    queryInterface.removeColumn('users', 'dateOfBirth', Sequelize.DATE)
-    queryInterface.removeColumn('users', 'lastLogin', Sequelize.DATE)
-    queryInterface.removeColumn('users', 'numberOfVisit', Sequelize.INTEGER)
-    queryInterface.removeColumn('users', 'attachments', Sequelize.TEXT)
+    queryInterface.removeColumn('users', 'userID')
+    queryInterface.removeColumn('users', 'isLocalAuth')
+    queryInterface.removeColumn('users', 'firstName')
+    queryInterface.removeColumn('users', 'lastName')
+    queryInterface.removeColumn('users', 'phone')
+    queryInterface.removeColumn('users', 'dateOfBirth')
+    queryInterface.removeColumn('users', 'lastLogin')
+    queryInterface.removeColumn('users', 'numberOfVisit')
+    queryInterface.removeColumn('users', 'attachments')
   }
 }
