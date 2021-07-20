@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 import BackButton from '../../../components/backButton/BackButton'
 import Button from '../../../components/button/Button'
 import CourseDescription from '../../../components/myCoursesCard/courseDescription/CourseDescription'
@@ -13,6 +15,8 @@ import { GET_COURSE } from '../../../utils/urlConstants'
 import useGetFetchData from '../../../utils/useGetFetchData'
 
 function MyCoursePage ({ unpaid }) {
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   const [feedbackModal, setFeedbackModal] = useState(false)
   const [purchaseModal, setPurchaseModal] = useState(false)
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
@@ -41,9 +45,9 @@ function MyCoursePage ({ unpaid }) {
       <DashboardLayout title='Course Page'>
         <CoursePage
           setFeedbackModal={setFeedbackModal}
-          unpaid={unpaid}
           setPurchaseModal={setPurchaseModal}
           data={data}
+          userInfo={userInfo}
         />
       </DashboardLayout>
     </>
@@ -51,16 +55,16 @@ function MyCoursePage ({ unpaid }) {
 }
 export default MyCoursePage
 
-function CoursePage ({ setFeedbackModal, unpaid, setPurchaseModal, data }) {
+function CoursePage ({ setFeedbackModal, setPurchaseModal, data, userInfo }) {
   return (
     <div className='course-page'>
       <div className='course-page-flex-col-4'>
         <BackButton location='/mycourse' />
         <CourseDescription
           setFeedbackModal={setFeedbackModal}
-          unpaid={unpaid}
           setPurchaseModal={setPurchaseModal}
           data={data}
+          userInfo={userInfo}
         />
       </div>
     </div>
