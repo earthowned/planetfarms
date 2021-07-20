@@ -8,7 +8,6 @@ import Input from '../../components/input/Input'
 import Button from '../../components/button/Button'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../components/backButton/BackButton'
-// import ConfirmModal from '../../components/simpleModal/ConfirmModal'
 import DragDrop from '../../components/dragDrop/DragDrop'
 import { updateUser } from '../../actions/userAction'
 import './Congratulation.scss'
@@ -55,7 +54,6 @@ function CongratulationScreen () {
           </div>
           <div className='edit-information border-1px-onyx'>
             <form className='edit-information-container'>
-
               <div className='congratulation-container'>
                 <div className='form'>
                   <div className='row'>
@@ -74,7 +72,6 @@ function CongratulationScreen () {
                         noIcon='noIcon'
                       />
                     </div>
-
                     <div className='row-1-col'>
                       <Input
                         name='lastName'
@@ -91,7 +88,6 @@ function CongratulationScreen () {
                       />
                     </div>
                   </div>
-
                   <div className='row'>
                     <div className='row-1-col'>
                       <Input
@@ -108,7 +104,6 @@ function CongratulationScreen () {
                         noIcon='noIcon'
                       />
                     </div>
-
                     <div className='row-1-col'>
                       <Input
                         name='phone'
@@ -124,7 +119,6 @@ function CongratulationScreen () {
                       />
                     </div>
                   </div>
-
                   <div className='row row-last'>
                     <div className='row-1-col'>
                       <Input
@@ -141,7 +135,6 @@ function CongratulationScreen () {
                       />
                     </div>
                   </div>
-
                   <div className='button-wrapper'>
                     <div className='btn'>
                       <Button

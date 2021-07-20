@@ -51,26 +51,18 @@ function MyProfile () {
     <>
       {
       loading
-        ? (
-          <div>
-            <p>
-              Loading...
-            </p>
-          </div>
-          )
-
+        ? <div><p>Loading...</p></div>
         : (
           <>
             {
-          showEmailVerificationModal &&
-            <VerificationModal type='email' clickHandler={emailClickHandler} />
-        }
+            showEmailVerificationModal &&
+              <VerificationModal type='email' clickHandler={emailClickHandler} />
+            }
             {
-          showPhoneVerificationModal &&
-            <VerificationModal type='phone' clickHandler={phoneClickHandler} />
-        }
+            showPhoneVerificationModal &&
+              <VerificationModal type='phone' clickHandler={phoneClickHandler} />
+            }
             <DashboardLayout title='My Profile'>
-
               <div className='x10-4-0-my-personals'>
                 <div className='flex-col-2'>
                   <div className='frame-2923'>
