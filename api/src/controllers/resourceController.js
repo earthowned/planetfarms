@@ -11,16 +11,25 @@ const getResources = (req, res) => {
   const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  Resource.findAndCountAll({ offset: (page - 1) * pageSize, limit: pageSize, ordervalue })
-    .then(resources => {
+  Resource.findAndCountAll({
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
+    ordervalue
+  })
+    .then((resources) => {
       const totalPages = Math.ceil(resources.count / pageSize)
-      res.json({
-        resources: resources.rows.map(rec => ({ ...rec.dataValues, filename: changeFormat(rec.filename) })),
-        totalItems: resources.count,
-        totalPages,
-        page,
-        pageSize
-      }).status(200)
+      res
+        .json({
+          resources: resources.rows.map((rec) => ({
+            ...rec.dataValues,
+            filename: changeFormat(rec.filename)
+          })),
+          totalItems: resources.count,
+          totalPages,
+          page,
+          pageSize
+        })
+        .status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
@@ -44,7 +53,7 @@ const addResource = (req, res) => {
 const getResourcesById = (req, res) => {
   const id = req.params.id
   Resource.findByPk(id)
-    .then(resource => {
+    .then((resource) => {
       if (resource) {
         res.json({ ...resource, filename: changeFormat(resource.filename) })
       } else {
@@ -57,7 +66,7 @@ const getResourcesById = (req, res) => {
 
 const deleteResources = (req, res) => {
   const id = req.params.id
-  Resource.findByPk(id).then(resource => {
+  Resource.findByPk(id).then((resource) => {
     if (resource) {
       const { id } = resource
       Resource.destroy({ where: { id } })
@@ -75,7 +84,7 @@ const deleteResources = (req, res) => {
 // @access  Public
 const updateResources = (req, res) => {
   const id = req.params.id
-  Resource.findByPk(id).then(resource => {
+  Resource.findByPk(id).then((resource) => {
     if (resource) {
       const { id } = resource
       Resource.update(req.body, { where: { id } })
@@ -93,10 +102,28 @@ const updateResources = (req, res) => {
 const searchResourcesTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
-  Resource.findAll({ where: { title: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
-    .then(resources => res.json(resources.map(rec => ({ ...rec, filename: changeFormat(rec.filename) })))
-      .status(200))
-    .catch(err => res.json({ error: err }).status(400))
+  Resource.findAll({
+    where: { title: { [Op.iLike]: '%' + title + '%' } },
+    order: [['title', order]]
+  })
+    .then((resources) =>
+      res
+        .json(
+          resources.map((rec) => ({
+            ...rec,
+            filename: changeFormat(rec.filename)
+          }))
+        )
+        .status(200)
+    )
+    .catch((err) => res.json({ error: err }).status(400))
 }
 
-module.exports = { getResources, addResource, getResourcesById, deleteResources, updateResources, searchResourcesTitle }
+module.exports = {
+  getResources,
+  addResource,
+  getResourcesById,
+  deleteResources,
+  updateResources,
+  searchResourcesTitle
+}
