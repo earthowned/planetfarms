@@ -27,7 +27,7 @@ function checkFileType (file, cb) {
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
 
-  if ((path.extname(file.originalname) === '.pdf' || extname) && mimetype) {
+  if (extname || mimetype) {
     return cb(null, true)
   } else {
     throw new Error('Format not valid')
