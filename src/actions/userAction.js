@@ -249,6 +249,7 @@ const tokenFailure = (dispatch, message) => {
   dispatch({ type: USER_DETAILS_FAIL, payload: message })
   window.localStorage.clear()
   dispatch({ type: USER_LOGOUT })
+  window.location.href = '/'
   return false
 }
 
@@ -288,7 +289,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
     userProfileFormData.append('firstName', user.firstName)
     userProfileFormData.append('lastName', user.lastName)
     userProfileFormData.append('phone', user.phone)
-    userProfileFormData.append('birthday', user.birthday)
+    if (user.birthday) userProfileFormData.append('birthday', user.birthday)
     userProfileFormData.append('email', user.email)
     userProfileFormData.append('attachments', user.attachments)
     const config = {
@@ -305,13 +306,14 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
     }
     const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-      await Auth.updateUserAttributes(currentUser, {
+      const toBeUpdated = {
         email: user.email,
         given_name: user.firstName,
         family_name: user.lastName,
-        birthdate: user.birthday,
         phone_number: user.phone ? user.phone : ''
-      })
+      }
+      if (user.birthday) toBeUpdated.birthdate = user.birthday
+      await Auth.updateUserAttributes(currentUser, toBeUpdated)
     }
     dispatch({ type: USER_DETAILS_SUCCESS, payload: { user: data } })
     history.push('/myProfile')
