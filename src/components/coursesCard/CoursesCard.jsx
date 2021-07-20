@@ -10,7 +10,7 @@ import CardLayout from '../../layout/cardLayout/CardLayout'
 import Background from '../background/Background'
 import './CoursesCard.scss'
 
-const CoursesCard = ({ category, setModalActive }) => {
+const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { data: courseData, isLoading } = useGetFetchData('course', GET_COURSE)
@@ -46,7 +46,11 @@ const CoursesCard = ({ category, setModalActive }) => {
                       item={course}
                       setModalActive={setModalActive}
                     />
-                    <CardContent item={course} userInfo={userInfo} />
+                    <CardContent
+                      item={course}
+                      userInfo={userInfo}
+                      setPurchaseModal={setPurchaseModal}
+                    />
                   </div>
                 </Background>
               )
