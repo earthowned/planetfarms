@@ -26,7 +26,7 @@ const AdminCoursePage = () => {
   console.log(data);
   const creator = data?.data?.creator
   const userId = userInfo.id
-  if (userId !== parseInt(creator)) {
+  if (userId !== creator) {
     return <Redirect to='/courses' />
   }
 
