@@ -1,8 +1,18 @@
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+
+import { addEnroll } from '../../actions/enrollActions'
 
 const EnrollContainer = ({ item, userInfo, setPurchaseModal }) => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const adminCoursePath = `/admin/course/${item.id}`
+
+  const enrollFreeCourse = (courseId) => {
+    const userId = userInfo.id
+    console.log(courseId, userId)
+    dispatch(addEnroll(courseId, userId, history))
+  }
 
   return (
     <>
@@ -21,7 +31,14 @@ const EnrollContainer = ({ item, userInfo, setPurchaseModal }) => {
                 View Course
               </span>
             ) : (
-              <span onClick={() => setPurchaseModal(true)}>Join Course</span>
+              <span
+                onClick={() =>
+                  item.isFree === true
+                    ? enrollFreeCourse(item.id)
+                    : setPurchaseModal(true)}
+              >
+                Join Course
+              </span>
             )}
           </button>
         )}

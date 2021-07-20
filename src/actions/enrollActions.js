@@ -6,7 +6,11 @@ import {
   ENROLL_CREATE_FAIL
 } from '../constants/enrollConstants'
 
-export const addEnroll = (courseId, userId, isEnroll) => async (dispatch) => {
+export const addEnroll = (courseId, userId, history) => async (dispatch) => {
+  let isEnroll
+  if (courseId && userId) {
+    isEnroll = true
+  }
   const enrollData = { courseId, userId, isEnroll }
   try {
     dispatch({ type: ENROLL_CREATE_REQUEST })
@@ -17,6 +21,7 @@ export const addEnroll = (courseId, userId, isEnroll) => async (dispatch) => {
     }
     const { data } = await Axios.post(ADD_ENROLL, enrollData, config)
     dispatch({ type: ENROLL_CREATE_SUCCESS, payload: data })
+    history.push(`/course/${courseId}`)
   } catch (error) {
     dispatch({
       type: ENROLL_CREATE_FAIL,
