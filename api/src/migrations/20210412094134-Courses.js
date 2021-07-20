@@ -40,9 +40,6 @@ module.exports = {
         },
         steps: {
           type: Sequelize.JSON
-        },
-        _attachments: {
-          type: Sequelize.BLOB('long')
         }
       }
     )

@@ -14,7 +14,7 @@ const ProfileFormCard = ({ data: { title, firstTitle, firstValue, firstVerify, s
           <p>{firstValue}</p>
           {
             firstVerify ? (!firstVerify.isVerified ? <p className='verified-txt'><img className='verified-img' src={MinusCircle} alt='logo' />Not verified <Secondarybtn name='Verify' clickHandler={firstVerify.clickHandler} /></p>
-            : <p className='verified-txt'><img className='verified-img' src={CheckCircle} alt='logo' />Verified</p>) : ''
+              : <p className='verified-txt'><img className='verified-img' src={CheckCircle} alt='logo' />Verified</p>) : ''
           }
         </div>
         <div className='form-group'>

@@ -15,9 +15,6 @@ module.exports = {
       category: {
         type: Sequelize.STRING
       },
-      attachments: {
-        type: Sequelize.BLOB('long')
-      },
       createdAt: {
         type: Sequelize.DATE
       },
