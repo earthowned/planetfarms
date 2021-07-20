@@ -49,6 +49,7 @@ import {
   userResendCodeReducer,
   userAttrConfirmCodeReducer,
   userAttrResendCodeReducer,
+  changePasswordReducer,
   userForgotPwdConfirmCodeReducer,
   userForgotPwdResendCodeReducer
 } from './reducers/userReducers'
@@ -103,14 +104,13 @@ const reducer = combineReducers({
   userResendCode: userResendCodeReducer,
   userAttrConfirmCode: userAttrConfirmCodeReducer,
   userAttrResendCode: userAttrResendCodeReducer,
+  changePassword: changePasswordReducer,
   userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
   userForgotPwdResendCode: userForgotPwdResendCodeReducer,
   addNewNews: newsCreateReducer,
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
   listMember: memberListReducer,
-  userLogin: userLoginReducer,
-  userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer,

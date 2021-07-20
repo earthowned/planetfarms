@@ -88,10 +88,13 @@
       display: flex;
       flex-direction: column;
       height: 24px;
-      padding: 3px 0;
       width: 24px;
       cursor: pointer;
       margin-left: auto;
+
+      span {
+        margin: 0px;
+      }
 
       svg {
         width: 100%;

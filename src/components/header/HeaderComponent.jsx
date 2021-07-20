@@ -64,7 +64,7 @@ const HeaderComponent = ({ title }) => {
             {notification && (
               <MessageDropdown
                 clickHandler={setNotification}
-                message='Your Settings'
+                message='Your notifications'
                 btnName='See all notifications'
                 handleClick={handleClick}
               />
@@ -74,9 +74,10 @@ const HeaderComponent = ({ title }) => {
             <img src='/img/avatar-img.svg' alt='avatar-img' />
             {profileSettings && (
               <MessageDropdown
+                clickHandler={setProfileSettings}
                 clickProfileHandler={clickProfileHandler}
                 profileSettings={profileSettings}
-                message='Your Settings'
+                message='Your settings'
                 btnName='See all notifications'
               />
             )}
