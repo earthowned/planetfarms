@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import moment from 'moment'
 
@@ -35,15 +35,9 @@ function CongratulationScreen () {
   const welcomeBack = editInformations ? 'Edit Information' : 'Congratulations!'
   const welcomeBack2 = 'Please fill these fields to communicate with other people easier:'
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const userDetails = useSelector((state) => state.userDetails)
-  const { userInfo } = userLogin
-  const { user } = userDetails
-
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     const attachments = profileImage
     dispatch(updateUser({ firstName, lastName, phone, birthday, email, attachments }, history))
-    !user && history.push('/')
   }
 
   return (
@@ -118,7 +112,7 @@ function CongratulationScreen () {
               <Input
                 name='phone'
                 placeholder='Phone Number (Optional)'
-                type='number'
+                type='text'
                 ref={register({
                   required: {
                     value: false
@@ -152,7 +146,11 @@ function CongratulationScreen () {
             <div className='btn'>
               {editInformations
                 ? (
-                  <Secondarybtn name='Cancel' clickHandler={() => history.goBack()} />
+                  <Secondarybtn
+                    name='Cancel' clickHandler={() => {
+                      history.push('/myProfile')
+                    }}
+                  />
                   )
                 : (
                   <Secondarybtn name='Skip for now' clickHandler={() => history.push('/')} />

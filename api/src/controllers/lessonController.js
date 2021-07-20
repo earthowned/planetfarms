@@ -56,7 +56,6 @@ const addLesson = async (req, res) => {
   if (req.file) {
     coverImg = req.file.filename
   }
-
   const lesson = await db.Lesson.create({ ...req.body, coverImg })
   res.status(201).json({
     status: true,

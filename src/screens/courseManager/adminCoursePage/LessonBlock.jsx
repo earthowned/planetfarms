@@ -13,41 +13,45 @@ const LessonBlock = ({ data, courseId }) => {
         {lessonData ? (
           <>
             <h3 className='lessonHead'>Lessons</h3>
-            {lessonData.map((lesson) => {
-              return (
-                <React.Fragment key={lesson.id}>
-                  <div className='admin-lesson'>
-                    <div className='lessonBlock'>
-                      {lesson.coverImg ? (
-                        <div className='coverImg coverImg__img'>
-                          <img
-                            src={`${GET_COVERIMG}${lesson.coverImg}`}
-                            className='lesson image'
-                            alt='lesson_card'
-                          />
-                        </div>
-                      ) : (
-                        <div className='coverImg coverImg__text'>
-                          <div>
-                            <p>{lesson.title}</p>
+            {lessonData
+              .sort((a, b) => (a.order > b.order ? 1 : -1))
+              .map((lesson) => {
+                return (
+                  <React.Fragment key={lesson.id}>
+                    <div className='admin-lesson'>
+                      <div className='lessonBlock'>
+                        {lesson.coverImg ? (
+                          <div className='coverImg coverImg__img'>
+                            <img
+                              src={`${GET_COVERIMG}${lesson.coverImg}`}
+                              className='lesson image'
+                              alt='lesson_card'
+                            />
                           </div>
-                        </div>
-                      )}
-                      <div className='lessonInfo'>
-                        <h3 className='lessonTitle'>{lesson.title}</h3>
-                        {lesson?.lessonDesc && (
-                          <p className='lessonDescText'>{lesson?.lessonDesc}</p>
+                        ) : (
+                          <div className='coverImg coverImg__text'>
+                            <div>
+                              <p>{lesson.title}</p>
+                            </div>
+                          </div>
                         )}
-                        <Link to={`/lesson/${lesson.id}`}>
-                          <button className='text-btn'>See lesson</button>
-                        </Link>
+                        <div className='lessonInfo'>
+                          <h3 className='lessonTitle'>{lesson.title}</h3>
+                          {lesson?.lessonDesc && (
+                            <p className='lessonDescText'>
+                              {lesson?.lessonDesc}
+                            </p>
+                          )}
+                          <Link to={`/lesson/${lesson.id}`}>
+                            <button className='text-btn'>See lesson</button>
+                          </Link>
+                        </div>
                       </div>
+                      <LessonActions id={lesson.id} />
                     </div>
-                    <LessonActions id={lesson.id} />
-                  </div>
-                </React.Fragment>
-              )
-            })}
+                  </React.Fragment>
+                )
+              })}
           </>
         ) : (
           ''

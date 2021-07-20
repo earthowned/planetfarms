@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       courseId: {
         type: DataTypes.INTEGER
       },
+      order: {
+        type: DataTypes.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE

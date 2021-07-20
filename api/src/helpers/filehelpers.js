@@ -23,11 +23,11 @@ const storage = multer.diskStorage({
 })
 
 function checkFileType (file, cb) {
-  const filetypes = /jpg|jpeg|png|mp4|pdf/
+  const filetypes = /jpg|jpeg|png|mp4|pdf|doc|docx|ppt|pptx|txt|xlsx/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
 
-  if ((path.extname(file.originalname) === '.pdf' || extname) && mimetype) {
+  if (extname || mimetype) {
     return cb(null, true)
   } else {
     throw new Error('Format not valid')
