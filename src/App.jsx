@@ -63,7 +63,7 @@ function App () {
             <PrivateRoute component={UserVerification} path='/verification' />
             <PrivateRoute component={() => <Redirect to='/login' />} path='/' exact />
             <PrivateRoute component={LogoutUser} path='/logout' />
-            <PrivateRoute component={CongratulationScreen} path='/register-complete' />
+            <PrivateRoute component={CongratulationScreen} path='/edit-information' />
             <PrivateRoute component={CalendarScreen} exact path='/calendar/my-events' />
             <PrivateRoute component={Library} exact path='/library' />
             <PrivateRoute component={Collection} exact path='/library/collection' />

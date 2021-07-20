@@ -39,7 +39,7 @@ function MyProfile () {
   }, [dispatch, history, status])
 
   const editUserInformation = () => {
-    history.push({ pathname: '/register-complete', state: { editInformations: true, user } })
+    history.push({ pathname: '/edit-information', state: { editInformations: true, user } })
   }
   const emailClickHandler = (bool) => {
     setShowEmailVerificationModal(bool)
@@ -51,40 +51,36 @@ function MyProfile () {
     <>
       {
       loading
-        ? <div>
-          <p>
-            Loading...
-          </p>
-        </div>
-
-        : <>
-          {
-          showEmailVerificationModal &&
-            <VerificationModal type='email' clickHandler={emailClickHandler} />
-        }
-          {
-          showPhoneVerificationModal &&
-            <VerificationModal type='phone' clickHandler={phoneClickHandler} />
-        }
-          <DashboardLayout title='My Profile'>
-
-            <div className='x10-4-0-my-personals'>
-              <div className='flex-col-2'>
-                <div className='frame-2923'>
-                  <BackButton location='/dashboard' />
-                </div>
-                <div className='profile border-1px-onyx'>
-                  <div className='profile-info'>
-                    <PersonalInformation user={user} />
-                    <ContactInformation user={user} verification={verification} />
-                    <AdditionalInformation user={user} />
+        ? <div><p>Loading...</p></div>
+        : (
+          <>
+            {
+            showEmailVerificationModal &&
+              <VerificationModal type='email' clickHandler={emailClickHandler} />
+            }
+            {
+            showPhoneVerificationModal &&
+              <VerificationModal type='phone' clickHandler={phoneClickHandler} />
+            }
+            <DashboardLayout title='My Profile'>
+              <div className='x10-4-0-my-personals'>
+                <div className='flex-col-2'>
+                  <div className='frame-2923'>
+                    <BackButton location='/dashboard' />
                   </div>
-                  <EditInformation clickHandler={editUserInformation} image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
+                  <div className='profile border-1px-onyx'>
+                    <div className='profile-info'>
+                      <PersonalInformation user={user} />
+                      <ContactInformation user={user} verification={verification} />
+                      <AdditionalInformation user={user} />
+                    </div>
+                    <EditInformation clickHandler={editUserInformation} image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments} />
+                  </div>
                 </div>
               </div>
-            </div>
-          </DashboardLayout>
-        </>
+            </DashboardLayout>
+          </>
+          )
     }
     </>
   )

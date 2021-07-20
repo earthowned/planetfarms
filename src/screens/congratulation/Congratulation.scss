@@ -51,7 +51,7 @@
     flex-wrap: wrap;
     width: 100%;
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 900px) {
       flex-direction: column-reverse;
     }
 
@@ -59,7 +59,7 @@
       flex: 1;
       margin-right: 2em;
 
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 900px) {
         width: 100%;
       }
 
@@ -111,7 +111,7 @@
       margin-bottom: 2em;
       margin-top: 0;
 
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 900px) {
         width: 100%;
       }
 
@@ -120,7 +120,7 @@
       }
 
       .btn {
-        width: 45%;
+        // width: 45%;
 
         @media only screen and (max-width: 480px) {
           width: 100%;
@@ -131,6 +131,26 @@
         }
       }
     }
+  }
+}
+
+.border-1px-onyx {
+  border: 1px solid var(--background-color);
+}
+
+.x10-4-0-my-personals .edit-information {
+  height: auto;
+  background-color: var(--cards);
+  border-radius: 4px;
+  margin-top: 40px;
+  padding: 24px 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .edit-information-container {
+    width: 100%;
   }
 }
 
@@ -151,7 +171,7 @@
     margin: 0;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 900px) {
     margin-bottom: 4em;
     width: 100%;
   }
@@ -173,6 +193,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    white-space: normal;
   }
 
   .file-upload {
@@ -189,4 +210,12 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.edit-information .edit-information-container img:not(.avatar) {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  object-position: right;
+  margin-bottom: 14px;
 }
