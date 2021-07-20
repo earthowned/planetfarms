@@ -33,7 +33,7 @@ const LessonPage = () => {
       ) : (
         <DashboardLayout title='Course page'>
           <BackButton location={path} />
-          <LessonDetail data={data} id={id} />
+          <LessonDetail data={data?.data} id={id} />
           <div className='admin-lesson-materials-container'>
             <h1>Materials</h1>
             <div className='material'>
