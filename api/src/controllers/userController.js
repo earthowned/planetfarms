@@ -3,7 +3,7 @@ const db = require('../models')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
 const Sequelize = require('sequelize')
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 // const User = require('../models/userModel.js')
 // const LocalAuth = require('../models/localAuthModel.js')
 const Op = Sequelize.Op
@@ -104,21 +104,19 @@ const authUser = async (req, res) => {
 
 const localAuth = async (res, name, password) => {
   try {
+    const user = await db.LocalAuth.findOne({ where: { username: name } })
 
-    const user = await db.LocalAuth.findOne({ where: {username: name } })
-
-    if(!user) {
-      res.json({error: 'User doesn\'t exists.'}).status(400);
+    if (!user) {
+      res.json({ error: 'User doesn\'t exists.' }).status(400)
     }
 
-    //checking password
-    if(!bcrypt.compareSync(password, user.password)) {
-      return res.status(400).json({error: 'Invalid password or username.'})
+    // checking password
+    if (!bcrypt.compareSync(password, user.password)) {
+      return res.status(400).json({ error: 'Invalid password or username.' })
     }
 
     const newUser = await db.User.findOne({ where: { userID: user.id } })
     return newUser
-    
   } catch (error) {
     res.json(error)
   }

@@ -124,8 +124,8 @@ export const register = (name, password) => async (dispatch) => {
       })
         .catch(err => console.log(err))
     }
-    
-    if(userdata.error) return dispatch({type: USER_REGISTER_FAIL, payload: userdata.error})
+
+    if (userdata.error) return dispatch({ type: USER_REGISTER_FAIL, payload: userdata.error })
 
     window.localStorage.setItem('userInfo', JSON.stringify(userdata))
     dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata })

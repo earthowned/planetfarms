@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 
 module.exports = (sequelize, DataTypes) => {
   const LocalAuth = sequelize.define('localauths', {
@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => {
   )
 
   LocalAuth.beforeCreate((user) => {
-    let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(user.password, salt);
-    user.password = hash;
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(user.password, salt)
+    user.password = hash
   })
 
   LocalAuth.associate = (models) => {
