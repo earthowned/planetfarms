@@ -64,6 +64,7 @@ import {
   communityUpdateReducer
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
+import { addEnrollReducer } from './reducers/enrollReducer'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -114,12 +115,17 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer,
-  accessToken: accessTokenReducer
+  accessToken: accessTokenReducer,
+  addEnroll: addEnrollReducer
 })
 
-const userInfoFromStorage = window.localStorage.getItem('userInfo') ? JSON.parse(window.localStorage.getItem('userInfo')) : null
+const userInfoFromStorage = window.localStorage.getItem('userInfo')
+  ? JSON.parse(window.localStorage.getItem('userInfo'))
+  : null
 
-const currentCommunityFromStorage = window.localStorage.getItem('currentCommunity')
+const currentCommunityFromStorage = window.localStorage.getItem(
+  'currentCommunity'
+)
   ? JSON.parse(window.localStorage.getItem('currentCommunity'))
   : null
 

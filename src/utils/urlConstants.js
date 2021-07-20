@@ -30,6 +30,10 @@ export const ADD_LESSON_TEXT = 'lesson-text/add'
 // lesson material
 export const ADD_MATERIAL = 'materials/add'
 
+// enroll
+export const GET_ENROLL = 'enrolls'
+export const ADD_ENROLL = 'enrolls/add'
+
 // get files
 export const GET_THUMBNAIL = CDN_URL + '/thumbnail/'
 export const GET_COVERIMG = CDN_URL + '/coverImg/'
