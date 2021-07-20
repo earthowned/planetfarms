@@ -227,32 +227,15 @@ export const checkAndUpdateToken = () => async (dispatch) => {
           }
         })
       } else {
-        const message = data.response && data.response.data.name ? data.response.data.name : data.message
-        if (message === 'TokenExpired') {
-          if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-            Auth.currentSession().then((res) => {
-              const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
-              userInfo.token = res?.idToken?.jwtToken || ''
-              if (userInfo.token == '') return tokenFailure(dispatch, message)
-              else {
-                window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
-                dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
-                dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
-                return true
-              }
-            })
-          } else {
-            const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
-            postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, { id: userInfo.id }).then((res) => {
-              userInfo.token = res?.token || ''
-              if (userInfo.token == '') return tokenFailure(dispatch, message)
-              else {
-                window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
-                dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
-                dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
-                return true
-              }
-            })
+        const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
+        postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, { id: userInfo.id }).then((res) => {
+          userInfo.token = res?.token || ''
+          if (userInfo.token == '') return tokenFailure(dispatch, message)
+          else {
+            window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+            dispatch({ type: USER_LOGIN_SUCCESS, payload: userInfo })
+            dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+            return true
           }
         })
       }
