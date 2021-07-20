@@ -1,9 +1,10 @@
 import { useState } from 'react'
+
 import useHideOnClick from '../../utils//useHideOnClick'
 
 import './Material.scss'
 
-const Material = ({ name }) => {
+const Material = ({ name, children }) => {
   const [isActive, setIsActive] = useState(false)
   const domNode = useHideOnClick(() => {
     setIsActive(false)
@@ -27,14 +28,7 @@ const Material = ({ name }) => {
                 : 'document-download-toggle hide'
             }
           >
-            <div>
-              <img src='/img/download-icon.svg' alt='download icon' />{' '}
-              <span>Download</span>
-            </div>
-            <div>
-              <img src='/img/book-outlined.svg' alt='library icon' />{' '}
-              <span>Add to my library</span>
-            </div>
+            {children}
           </div>
         )}
       </div>

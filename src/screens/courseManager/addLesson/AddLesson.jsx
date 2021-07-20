@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 import { createLesson } from '../../../actions/lessonActions'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import { GET_COURSE } from '../../../utils/urlConstants'
-
 import AddContent from './AddContent'
 import LessonMaterial from './LessonMaterial'
 import LessonSaveModal from './LessonSaveModal'
