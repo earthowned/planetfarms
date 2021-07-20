@@ -49,7 +49,6 @@ const multipleUpload = upload.fields([
 const uploadArray = multer({ storage }).array('files')
 
 const resizeImage = (req, res, next) => {
-  console.log(req.file)
   const { format, height, width } = { format: 'webp', ...req.body }
   try {
     // user might not send image sometimes

@@ -55,7 +55,6 @@ const getResourcesById = (req, res) => {
   Resource.findByPk(id)
     .then((resource) => {
       if (resource) {
-        console.log(resource)
         res.json({ ...resource, filename: changeFormat(resource.filename) })
       } else {
         res.status(404)

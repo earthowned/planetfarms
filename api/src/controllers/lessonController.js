@@ -4,15 +4,8 @@ const CircularJSON = require('circular-json')
 
 const getLessons = async (_req, res) => {
   const lessons = await db.Lesson.findAll({
-    include: [db.Video, db.Photo, db.Text, db.Material],
+    include: [db.Video, db.Photo, db.Text, db.Material]
   })
-
-  // const data = {
-  //   lessons: lessons.map((less) => ({
-  //     ...less.dataValues,
-  //     coverImg: changeFormat(less.coverImg),
-  //   })),
-  // }
 
   lessons.forEach((lesson) => {
     lesson.coverImg = changeFormat(lesson.coverImg)
@@ -27,14 +20,14 @@ const getLessons = async (_req, res) => {
   res.status(200).json({
     status: true,
     message: 'fetched all lessons successfully',
-    data: lessons,
+    data: lessons
   })
 }
 const getLessonById = async (req, res) => {
   const { id } = req.params
   const lesson = await db.Lesson.findOne({
     where: { id },
-    include: [db.Video, db.Photo, db.Text, db.Material],
+    include: [db.Video, db.Photo, db.Text, db.Material]
   })
 
   lesson.photos.forEach((photo) => {
@@ -48,13 +41,13 @@ const getLessonById = async (req, res) => {
   const lessonData = lesson.dataValues
   const data = Object.assign({
     ...lesson,
-    dataValues: { ...lessonData, coverImg },
+    dataValues: { ...lessonData, coverImg }
   })
   const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
     status: true,
     message: 'fetched lesson successfully',
-    data: str.dataValues,
+    data: str.dataValues
   })
 }
 
@@ -68,7 +61,7 @@ const addLesson = async (req, res) => {
   res.status(201).json({
     status: true,
     message: 'added new lesson successfully',
-    data: lesson,
+    data: lesson
   })
 }
 
@@ -78,7 +71,7 @@ const deleteLesson = async (req, res) => {
   res.status(202).json({
     status: true,
     message: 'deleted lesson successfully',
-    data: lesson,
+    data: lesson
   })
 }
 
@@ -92,13 +85,13 @@ const updateLesson = async (req, res) => {
   const lesson = await db.Lesson.update(
     { ...req.body, coverImg },
     {
-      where: { id },
+      where: { id }
     }
   )
   res.status(202).json({
     status: true,
     message: 'lesson updated successfully',
-    data: lesson,
+    data: lesson
   })
 }
 
@@ -107,5 +100,5 @@ module.exports = {
   getLessonById,
   addLesson,
   deleteLesson,
-  updateLesson,
+  updateLesson
 }
