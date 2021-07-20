@@ -76,7 +76,6 @@ const AddLesson = () => {
           setLessonData={setLessonData}
         />
       )}
-      {testModal && <AddTestModal setTestModal={setTestModal} />}
       {textModal && (
         <NewsCreateModal
           type='text'
@@ -92,7 +91,6 @@ const AddLesson = () => {
           setVideoModal={setVideoModal}
           setImageModal={setImageModal}
           setTextModal={setTextModal}
-          setTestModal={setTestModal}
           register={register}
           errors={errors}
           setLessonCover={setLessonCover}

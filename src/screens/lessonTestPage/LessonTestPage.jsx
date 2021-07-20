@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { listTestQuestions } from '../../actions/testActions'
 import BackButton from '../../components/backButton/BackButton'
 import Button from '../../components/button/Button'
@@ -14,12 +14,14 @@ import './LessonTestPage.scss'
 const LessonTestPage = () => {
   const { testId } = useParams()
   const history = useHistory()
+  const location = useLocation()
   const { questions = [] } = useSelector(state => state.listTestQuestions)
   const dispatch = useDispatch()
   const [choices, setChoices] = useState([])
   const [modalActive, setModalActive] = useState(false)
   const [messageModal, setMessageModal] = useState(false)
   const [completeMessage, setCompleteMessage] = useState('')
+
   useEffect(() => {
     if (!questions.length) dispatch(listTestQuestions(testId))
     if (completeMessage) setMessageModal(true)
@@ -34,9 +36,9 @@ const LessonTestPage = () => {
   }
 
   const goToLesson = () => {
-    history.goBack()
     setCompleteMessage('')
     setMessageModal(false)
+    document.location.href = `/lesson/${location.state.lessonId}`
   }
 
   return (
@@ -70,7 +72,13 @@ const LessonTestPage = () => {
               <h1>Test for lesson 1</h1>
               {
                questions.length > 1
-                 ? questions.map((data, index) => <TestQuestion data={data} count={index + 1} pos={index} choices={choices} />)
+                 ? questions.map((data, index) => {
+                     if (data.type === 'subjective') {
+                       return <SubjectiveQuestion data={data} count={index + 1} pos={index} choices={choices} />
+                     } else {
+                       return <MCQTestQuestion data={data} count={index + 1} pos={index} choices={choices} />
+                     }
+                   })
                  : <h4>No Tests available</h4>
             }
               <div className='test-btn-container'>
@@ -84,7 +92,21 @@ const LessonTestPage = () => {
   )
 }
 
-const TestQuestion = ({ data, count, pos, choices }) => {
+const SubjectiveQuestion = ({ data, count, pos, choices }) => {
+  const [answer, setAnswer] = useState('')
+  choices[pos] = answer
+  return (
+    <div className='question-wrapper' key={count}>
+      <h4>Question {count}.</h4>
+      <h4>{data.question}</h4>
+      <div className='answer-options-container'>
+        <textarea onChange={(e) => setAnswer(e.target.value)} row='10' col='4' />
+      </div>
+    </div>
+  )
+}
+
+const MCQTestQuestion = ({ data, count, pos, choices }) => {
   const [selected, setSelected] = useState('')
 
   choices[pos] = selected

@@ -3,6 +3,8 @@ import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-d
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from './reactQuery'
 import PrivateRoute from './components/privateRoute/PrivateRoute'
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 // Screens
 import LoginScreen from './screens/login/LoginScreen'
 import SignupScreen from './screens/signUp/SignupScreen'
@@ -46,6 +48,7 @@ import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
 import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/verification/UserVerification'
+import AddTest from './screens/addTest/AddTest'
 import LogoutUser from './screens/logoutUser/LogoutUser'
 
 function App () {
@@ -99,6 +102,16 @@ function App () {
             {/* <PrivateRoute component={LessonTestPage} exact path='/lesson/:id/testpage' /> */}
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' />
             <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' />
+            <PrivateRoute component={() =>
+              <DndProvider backend={HTML5Backend}>
+                <AddTest />
+              </DndProvider>
+            } path='/admin/add-test/:lessonId' />
+            <PrivateRoute component={() =>
+              <DndProvider backend={HTML5Backend}>
+                <AddTest />
+              </DndProvider>
+            } path='/admin/edit-test/:lessonId' />
             <PrivateRoute component={MyProfile} path='/myProfile' />
             <PrivateRoute component={UserInfo} path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />

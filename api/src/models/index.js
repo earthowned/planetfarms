@@ -34,6 +34,8 @@ const db = {
   Photo: require('./photoModel')(sequelize, Sequelize.DataTypes),
   Material: require('./materialModel')(sequelize, Sequelize.DataTypes),
   Test: require('./testModel')(sequelize, Sequelize.DataTypes),
+  UserTest: require('./userTestModel')(sequelize, Sequelize.DataTypes),
+  UserTestAnswer: require('./userTestAnswerModel')(sequelize, Sequelize.DataTypes),
   Question: require('./questionModel')(sequelize, Sequelize.DataTypes)
 }
 

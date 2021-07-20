@@ -17,10 +17,8 @@ import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
-import {
-  testCreateReducer,
-  testQuestionListReducer
-} from './reducers/testReducers'
+import { testCreateReducer, testQuestionEditReducer, testQuestionListReducer } from './reducers/testReducers'
+
 import {
   enterpriseCreateReducer,
   enterpriseDeleteReducer,
@@ -64,6 +62,7 @@ import {
   communityUpdateReducer
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
+import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -98,6 +97,11 @@ const reducer = combineReducers({
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,
+  editTestQuestions: testQuestionEditReducer,
+  addNewNews: newsCreateReducer,
+  newsDelete: newsDeleteReducer,
+  newsUpdate: newsUpdateReducer,
+  listMember: memberListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userConfirmCode: userConfirmCodeReducer,
@@ -107,14 +111,13 @@ const reducer = combineReducers({
   changePassword: changePasswordReducer,
   userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
   userForgotPwdResendCode: userForgotPwdResendCodeReducer,
-  addNewNews: newsCreateReducer,
-  newsDelete: newsDeleteReducer,
-  newsUpdate: newsUpdateReducer,
-  listMember: memberListReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer,
-  accessToken: accessTokenReducer
+  accessToken: accessTokenReducer,
+  listQuestions: questionListReducer,
+  questionDelete: questionDeleteReducer,
+  questionUpdate: questionUpdateReducer
 })
 
 const userInfoFromStorage = window.localStorage.getItem('userInfo') ? JSON.parse(window.localStorage.getItem('userInfo')) : null

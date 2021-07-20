@@ -1,4 +1,4 @@
-import { TEST_CREATE_FAIL, TEST_CREATE_REQUEST, TEST_CREATE_RESET, TEST_CREATE_SUCCESS, TEST_QUESTION_LIST_FAIL, TEST_QUESTION_LIST_REQUEST, TEST_QUESTION_LIST_SUCCESS } from '../constants/testConstants'
+import { TEST_CREATE_FAIL, TEST_CREATE_REQUEST, TEST_CREATE_RESET, TEST_CREATE_SUCCESS, TEST_QUESTION_EDIT_FAIL, TEST_QUESTION_EDIT_REQUEST, TEST_QUESTION_EDIT_SUCCESS, TEST_QUESTION_LIST_FAIL, TEST_QUESTION_LIST_REQUEST, TEST_QUESTION_LIST_SUCCESS } from '../constants/testConstants'
 
 export const testCreateReducer = (state = {}, action) => {
   switch (action.type) {
@@ -30,6 +30,22 @@ export const testQuestionListReducer = (state = { questions: [] }, action) => {
         totalPages: action.payload.totalPages
       }
     case TEST_QUESTION_LIST_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const testQuestionEditReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TEST_QUESTION_EDIT_REQUEST:
+      return { loading: true, success: false }
+    case TEST_QUESTION_EDIT_SUCCESS:
+      return {
+        loading: false,
+        success: true
+      }
+    case TEST_QUESTION_EDIT_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
