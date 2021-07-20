@@ -47,5 +47,7 @@ jobs:
           sed -i '/^==\s/d' output
           sed -i '/^$/d' output
           echo "**********************3"
+          cat output
+          echo "**********************4"
           [[ -s output ]] && echo "not empty" || echo "its empty"
           [[ -s output ]] && exit 1 || exit 0
