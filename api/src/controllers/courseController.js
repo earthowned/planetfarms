@@ -2,26 +2,38 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
+const CircularJSON = require('circular-json')
+const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc    Fetch all course
 // @route   GET /api/courses
 // @access  Public
-const getCourses = (req, res) => {
+const getCourses = async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
 
-  db.Courses.findAll({
+  const courses = await db.Courses.findAll({
     offset: page,
     limit: pageSize,
     order: [['title', order]],
     include: [db.Lesson]
   })
-    .then((courses) => {
-      // queryUtils.paginate({ page, pageSize })
-      res.json({ courses, page, pageSize }).status(200)
-    })
-    .catch((err) => res.json({ err }).status(400))
+
+  const data = {
+    courses: courses.map((course) => ({
+      ...course.dataValues,
+      thumbnail: changeFormat(course.thumbnail)
+    }))
+  }
+  console.log(data.courses)
+  res.status(200).json({
+    status: true,
+    message: 'fetched courses successfully',
+    data: data.courses,
+    page,
+    pageSize
+  })
 }
 
 // @desc    Add individual course
@@ -94,10 +106,17 @@ const getCourseById = async (req, res) => {
   if (!course) {
     throw new NotFoundError()
   }
+  const thumbnail = changeFormat(course?.dataValues?.thumbnail)
+  const courseData = course.dataValues
+  const data = Object.assign({
+    ...course,
+    dataValues: { ...courseData, thumbnail }
+  })
+  const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
     status: true,
     message: 'fetched course successfully',
-    data: course
+    data: str.dataValues
   })
 }
 
