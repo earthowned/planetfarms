@@ -17,155 +17,127 @@
     width: 75%;
 
     @media only screen and (max-width: 840px) {
-        width: 100%;
+      width: 100%;
     }
 
     .search-btn {
-        margin-top: 40px;
+      margin-top: 40px;
 
-        @media only screen and (max-width: 840px) {
-            margin-top: 24px;
-        }
+      @media only screen and (max-width: 840px) {
+        margin-top: 24px;
+      }
     }
 
     .sub-header-list-container {
+      color: var(--primary-white);
+      list-style: none;
+      display: flex;
+      margin: 0;
+
+      li {
+        margin-right: 0.5em;
+        margin-left: 0;
+      }
+
+      .sub-header-list-item {
+        background: var(--background-color);
+        border: 0.5px solid var(--primary-white);
+        border-radius: 4px;
         color: var(--primary-white);
-        list-style: none;
+        cursor: pointer;
+        outline: none;
         display: flex;
-        margin: 0;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 50px;
 
-        li {
-            margin-right: 0.5em;
-            margin-left: 0;
+        &.active {
+          background: var(--primary-white);
+          color: var(--background-color);
         }
 
-        .sub-header-list-item {
-            background: var(--background-color);
-            border: 0.5px solid var(--primary-white);
-            border-radius: 4px;
-            color: var(--primary-white);
-            cursor: pointer;
-            outline: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 200px;
-            height: 50px;
-
-            &.active {
-            background: var(--primary-white);
-            color: var(--background-color);
-            }
-
-            &:hover {
-            color: var(--background-color);
-            background: var(--primary-white);
-            }
-
-            &:focus {
-            color: var(--background-color);
-            background: var(--primary-white);
-            }
-
-            @media only screen and (max-width: 1450px) {
-                text-align: center;
-                width: 140px;
-                font-size: 14px;
-            }
-
-            @media only screen and (max-width: 1100px) {
-                text-align: center;
-                width: 120px;
-                font-size: 14px;
-            }
+        &:hover {
+          color: var(--background-color);
+          background: var(--primary-white);
         }
+
+        &:focus {
+          color: var(--background-color);
+          background: var(--primary-white);
         }
+
+        @media only screen and (max-width: 1450px) {
+          text-align: center;
+          width: 140px;
+          font-size: 14px;
+        }
+
+        @media only screen and (max-width: 1100px) {
+          text-align: center;
+          width: 120px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .sub-header-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 40px;
+    width: 248px;
+
+    @media only screen and (max-width: 840px) {
+      margin-top: 24px;
+      margin-left: 0;
+      width: 100%;
     }
 
-    .sub-header-right-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-left: 40px;
-        width: 248px;
+    .row-1 {
+      width: 100%;
+      margin: 0;
+
+      @media only screen and (max-width: 840px) {
+        width: 100%;
+      }
+
+      .sub-header-btn-container {
+        width: 100%;
 
         @media only screen and (max-width: 840px) {
-            margin-top: 24px;
-            margin-left: 0;
-            width: 100%;
+          width: 100%;
+          margin-bottom: 10px;
         }
-
-        .row-1 {
-            width: 100%;
-            margin: 0;
-
-            @media only screen and (max-width: 840px) {
-                width: 100%;
-            }
-
-            .sub-header-btn-container {
-                width: 100%;
-
-                @media only screen and (max-width: 840px) {
-                     width: 100%;
-                     margin-bottom: 10px;
-                }
-                }
-        }
-
-        .row-2 {
-            width: 100%;
-            margin-top: 40px;
-
-            @media only screen and (max-width: 840px) {
-                width: 100%;
-                margin-top: 0;
-            }
-
-            .filter-container {
-            width: 100%;
-
-            @media only screen and (max-width: 1200px) {
-                width: none;
-            }
-
-            @media only screen and (max-width: 840px) {
-                  width: 100%;
-                 margin-top: 14px;
-            }
-            }
-        }
+      }
     }
+
+    .row-2 {
+      width: 100%;
+      margin-top: 40px;
+
+      @media only screen and (max-width: 840px) {
+        width: 100%;
+        margin-top: 0;
+      }
+
+      .filter-container {
+        width: 100%;
+
+        @media only screen and (max-width: 1200px) {
+          width: none;
+        }
+
+        @media only screen and (max-width: 840px) {
+          width: 100%;
+          margin-top: 14px;
+        }
+      }
+    }
+  }
 }
-
-// @media only screen and (max-width: 1350px) {
-//   .sub-header-list-item {
-//     width: 170px;
-//   }
-// }
-
-// @media only screen and (max-width: 1350px) {
-//   .sub-header-list-item {
-//     text-align: center;
-//     width: 140px;
-//     font-size: 14px;
-//   }
-// }
-
-// @media only screen and (max-width: 1200px) {
-//   .row-2 .filter-container {
-//     width: none;
-//   }
-// }
-
-// @media only screen and (max-width: 1100px) {
-//   .sub-header-list-item {
-//     text-align: center;
-//     width: 120px;
-//     font-size: 14px;
-//   }
-// }
 
 @media only screen and (max-width: 840px) {
   .sub-header-left-container {
@@ -182,22 +154,22 @@
     width: 100%;
 
     .row-1 {
-        width: 100%;
+      width: 100%;
 
-        .sub-header-btn-container {
-            width: 100%;
-            margin-bottom: 10px;
-        }
+      .sub-header-btn-container {
+        width: 100%;
+        margin-bottom: 10px;
+      }
     }
 
     .row-2 {
-         width: 100%;
-    margin-top: 0;
+      width: 100%;
+      margin-top: 0;
     }
 
     .filter-container {
-        width: 100%;
-        margin-top: 14px;
+      width: 100%;
+      margin-top: 14px;
     }
   }
 
@@ -206,7 +178,4 @@
     height: auto;
   }
 
-//   .sub-header-left-container .filter-container {
-//     width: 100%;
-//   }
 }

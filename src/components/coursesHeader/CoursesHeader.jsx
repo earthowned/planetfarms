@@ -33,7 +33,6 @@ const CoursesHeader = ({
   }
 
   const windowWidth = useSizeFinder()
-  console.log(data[0].slug)
   return (
     <div className='courseHeader'>
       <div className='container'>
@@ -98,7 +97,6 @@ const CoursesHeader = ({
             )}
           </div>
         </div>
-
         <div className='subHeader2'>
           <Filter name='filter by category' />
         </div>
