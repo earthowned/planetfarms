@@ -26,8 +26,8 @@ const LessonTestPage = () => {
   useEffect(() => {
     if (!questions.length) dispatch(listTestQuestions(testId))
     if (completeMessage) setMessageModal(true)
-    if(location){
-      setLessonId(location.state.lessonId);
+    if (location) {
+      setLessonId(location.state.lessonId)
     }
   }, [completeMessage])
 
@@ -38,7 +38,6 @@ const LessonTestPage = () => {
       setCompleteMessage(data.message)
     }
   }
-
 
   const goToLesson = () => {
     setCompleteMessage('')

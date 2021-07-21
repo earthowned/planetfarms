@@ -12,7 +12,7 @@ const LessonTest = () => {
   const [results, setResults] = useState([])
   const [test, setTest] = useState(null)
   const history = useHistory()
-  const {id} = useParams();
+  const { id } = useParams()
 
   const startTest = async () => {
     const currentDate = moment().toDate().getTime().toString()
@@ -34,13 +34,13 @@ const LessonTest = () => {
 
   const getTestsResults = async () => {
     const config = configFunc()
-      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/lesson/${id}`, config)
+    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/lesson/${id}`, config)
 
-      setTest(data.test);
-    console.log(data);
-      if(data.tests !== undefined){
-        setResults(data.tests)
-      }
+    setTest(data.test)
+    console.log(data)
+    if (data.tests !== undefined) {
+      setResults(data.tests)
+    }
   }
   return (
     <div className='lesson-test-panel'>
