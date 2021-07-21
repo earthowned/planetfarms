@@ -12,16 +12,18 @@ import SimpleModal from '../../components/simpleModal/SimpleModal'
 
 import CourseCreateModal from '../../components/courseCreateModal/CourseCreateModal'
 import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
+import { PurchaseModal } from '../../components/purchaseModal/PurchaseModal'
 import SubHeader from '../../components/subHeader/SubHeader'
 
 const Courses = () => {
   const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
   const [active, setActive] = useState(false)
   const [modalactive, setModalActive] = useState(false)
   const [newCollectionactive, setNewCollectionActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
   const [createNewCourse, setCreateNewCourse] = useState(false)
+  const [purchaseModal, setPurchaseModal] = useState(false)
+  const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
   const [search, setSearch] = useState(null)
 
   const { data, isLoading } = useGetFetchData('courseCategory', CATEGORY)
@@ -29,12 +31,18 @@ const Courses = () => {
     return <span>Loading...</span>
   }
 
-  function createNewCourseFunc () {
+  function createNewCourseFunc() {
     setCreateNewCourse(true)
     setCreateCourse(false)
   }
   return (
     <>
+      {purchaseModal && (
+        <PurchaseModal
+          clickHandler={setPurchaseModal}
+          setPurchaseSuccessModal={setPurchaseSuccessModal}
+        />
+      )}
       {modalactive && (
         <GroupModal
           clickHandler={setModalActive}
@@ -72,6 +80,7 @@ const Courses = () => {
               category={category.name}
               setModalActive={setModalActive}
               key={category.id}
+              setPurchaseModal={setPurchaseModal}
             />
           )
         })}

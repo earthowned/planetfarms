@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom'
 import EnrollContainer from './EnrollContainer'
 import Star from './Star'
 
-const CardContent = ({ item, userInfo }) => {
+const CardContent = ({ item, userInfo, setPurchaseModal }) => {
   const path =
-    item.creator === userInfo.id ? `/admin/course/${item.id}` : `/course/${item.id}`
+    item.creator === userInfo.id
+      ? `/admin/course/${item.id}`
+      : `/course/${item.id}`
   return (
     <div className='card-content'>
       <Link to={path}>
@@ -15,7 +17,11 @@ const CardContent = ({ item, userInfo }) => {
         <Star num={item.stars} />
         <p>({item.total} total)</p>
       </div>
-      <EnrollContainer item={item} />
+      <EnrollContainer
+        item={item}
+        userInfo={userInfo}
+        setPurchaseModal={setPurchaseModal}
+      />
     </div>
   )
 }

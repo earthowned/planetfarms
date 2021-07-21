@@ -17,7 +17,7 @@ const getCourses = async (req, res) => {
     offset: page,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson]
+    include: [db.Lesson, db.Enroll]
   })
 
   courses.forEach((course) => {
@@ -84,7 +84,7 @@ const updateCourse = (req, res) => {
           creator,
           steps
         },
-        { where: { id }, include: [db.Lesson] }
+        { where: { id }, include: [db.Lesson, db.Enroll] }
       )
         .then(() => res.json({ message: 'Course Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
@@ -101,7 +101,7 @@ const getCourseById = async (req, res) => {
   const { id } = req.params
   const course = await db.Courses.findOne({
     where: { id },
-    include: [db.Lesson]
+    include: [db.Lesson, db.Enroll]
   })
   if (!course) {
     throw new NotFoundError()
