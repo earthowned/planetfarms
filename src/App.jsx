@@ -103,12 +103,12 @@ function App () {
             {/* <PrivateRoute component={LessonTestPage} exact path='/lesson/:id/testpage' /> */}
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' />
             <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' />
-            <Route component={() =>
+            <PrivateRoute component={() =>
               <DndProvider backend={HTML5Backend}>
                 <AddTest />
               </DndProvider>
             } path='/admin/add-test/:lessonId' />
-            <Route component={() =>
+            <PrivateRoute component={() =>
               <DndProvider backend={HTML5Backend}>
                 <AddTest />
               </DndProvider>
