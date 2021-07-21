@@ -21,10 +21,14 @@ const LessonTestPage = () => {
   const [modalActive, setModalActive] = useState(false)
   const [messageModal, setMessageModal] = useState(false)
   const [completeMessage, setCompleteMessage] = useState('')
+  const [lessonId, setLessonId] = useState()
 
   useEffect(() => {
     if (!questions.length) dispatch(listTestQuestions(testId))
     if (completeMessage) setMessageModal(true)
+    if (location) {
+      setLessonId(location.state.lessonId)
+    }
   }, [completeMessage])
 
   const submitTest = async () => {
@@ -38,7 +42,7 @@ const LessonTestPage = () => {
   const goToLesson = () => {
     setCompleteMessage('')
     setMessageModal(false)
-    document.location.href = `/lesson/${location.state.lessonId}`
+    document.location.href = `/lesson/${lessonId}`
   }
 
   return (
@@ -82,7 +86,7 @@ const LessonTestPage = () => {
                  : <h4>No Tests available</h4>
             }
               <div className='test-btn-container'>
-                <Button name='Finish test' onClick={submitTest} />
+                <button className='default-btn' onClick={submitTest}>Finish Test</button>
               </div>
             </div>
           </div>

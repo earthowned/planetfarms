@@ -56,9 +56,9 @@ const addTest = async (req, res) => {
       const subjectiveQuestions = []
 
       questions.forEach(async (item, index) => {
-        let pos = index + 1;
-       //seperating mcq and subjective questions
-       populateQuestions(item, mcqQuestions, subjectiveQuestions, test, pos)
+        const pos = index + 1
+        // seperating mcq and subjective questions
+        populateQuestions(item, mcqQuestions, subjectiveQuestions, test, pos)
       })
       // await questions.map(async (item) => await Question.create({...item, testId: test.id}, {transaction: t}));
       await db.Question.bulkCreate(mcqQuestions, { transaction: t })
@@ -74,31 +74,30 @@ const addTest = async (req, res) => {
 
 // this populates the array and separate the questions
 function populateQuestions (item, mcqQuestions, subjectiveQuestions, test, pos) {
-  
-   if(item.type === "subjective") {
-           const questionObj = {
-          question: item.question,
-          type: item.type,
-          position: pos,
-          testId: test.id
-        }
-          subjectiveQuestions.push(questionObj)
-        } else {
-          const questionObj = {
-            question: item.question,
-            answer: item.answer,
-            type: item.type,
-            position: pos,
-            testId: test.id,
-            options: [...item.options, item.answer]
-          }
-  
-          const {question, answer, options} = questionObj
-          //Checking empty values
-          if(question && answer && !options.includes('')){
-            mcqQuestions.push(questionObj)
-          }
-        }
+  if (item.type === 'subjective') {
+    const questionObj = {
+      question: item.question,
+      type: item.type,
+      position: pos,
+      testId: test.id
+    }
+    subjectiveQuestions.push(questionObj)
+  } else {
+    const questionObj = {
+      question: item.question,
+      answer: item.answer,
+      type: item.type,
+      position: pos,
+      testId: test.id,
+      options: [...item.options, item.answer]
+    }
+
+    const { question, answer, options } = questionObj
+    // Checking empty values
+    if (question && answer && !options.includes('')) {
+      mcqQuestions.push(questionObj)
+    }
+  }
 }
 
 // @desc    Update a db.Test
@@ -111,44 +110,42 @@ const updateTest = async (req, res) => {
     } = req.body
     const id = req.params.id
 
-    const test = await db.Test.findByPk(id);
-    if (!test) return res.json({ message: 'Test doesn\'t exists' });
+    const test = await db.Test.findByPk(id)
+    if (!test) return res.json({ message: 'Test doesn\'t exists' })
 
     const result = await db.sequelize.transaction(async (t) => {
-        // seperating old and new quetions
-        const oldQuestions = []
-        const subjectiveQuestions = []
-        const mcqQuestions = []
+      // seperating old and new quetions
+      const oldQuestions = []
+      const subjectiveQuestions = []
+      const mcqQuestions = []
 
-        questions.forEach(async (item, index)=> {
-          let pos = index + 1;
-          console.log(pos);
-          if (item.testId) {
-            oldQuestions.push({...item, position: pos})
-          } else {
-            //seperating mcq and subjective questions
+      questions.forEach(async (item, index) => {
+        const pos = index + 1
+        console.log(pos)
+        if (item.testId) {
+          oldQuestions.push({ ...item, position: pos })
+        } else {
+          // seperating mcq and subjective questions
           populateQuestions(item, mcqQuestions, subjectiveQuestions, test, pos)
-          }
-        })
+        }
+      })
 
-        //positioning
+      // positioning
 
-        //bulk updating 
-        oldQuestions.forEach(async (item) => {
-          const {question, answer, options, id, type, position} = item
-          console.log(position);
-          await db.Question.update({question, answer, options, type, position}, {where: {id}}, {transaction: t})
-        })
+      // bulk updating
+      oldQuestions.forEach(async (item) => {
+        const { question, answer, options, id, type, position } = item
+        await db.Question.update({ question, answer, options: [...options, answer], type, position }, { where: { id } }, { transaction: t })
+      })
 
-        //adding new questions to the test
-        await db.Question.bulkCreate(mcqQuestions, {transaction: t})
-        await db.Question.bulkCreate(subjectiveQuestions, {transaction: t})
+      // adding new questions to the test
+      await db.Question.bulkCreate(mcqQuestions, { transaction: t })
+      await db.Question.bulkCreate(subjectiveQuestions, { transaction: t })
 
-        return "Test is successfully updated."
-  })
+      return 'Test is successfully updated.'
+    })
 
-  res.json({message: result}).status(200)
-  
+    res.json({ message: result }).status(200)
   } catch (error) {
     res.json(error)
   }

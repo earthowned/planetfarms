@@ -13,6 +13,7 @@ import { useDrag, useDrop } from 'react-dnd'
 import update from 'immutability-helper'
 import axios from 'axios'
 import { deleteSingleQuestion } from '../../actions/questionActions'
+import BackButton from '../../components/backButton/BackButton'
 
 const AddTest = () => {
   const [cards, setCards] = useState([])
@@ -70,7 +71,6 @@ const AddTest = () => {
       setQuestions([])
       setCards([])
     }
-
     setFormError(false)
   }
 
@@ -78,12 +78,13 @@ const AddTest = () => {
     if (questions.length > 0) {
       if (checkArrayForFilledValue(questions)) {
         const newQuestions = orderQuestions()
-
+        console.log(newQuestions)
         dispatch(createTest(lessonId, newQuestions))
         return history.goBack()
       }
+    } else {
+      setFormError(true)
     }
-    setFormError(true)
   }
 
   const confirmDelete = async () => {
@@ -172,6 +173,7 @@ const AddTest = () => {
     <>
       <DeleteQuestionModal confirmDelete={confirmDelete} setDeleteModal={setDeleteModal} deleteModal={deleteModal} />
       <DashboardLayout title='Add Test'>
+        <BackButton onClick={() => history.goBack()} />
         <div div className='add-test-container'>{cards.map((card, i) => renderCard(card, i))}</div>
         <div className='questions-btn-container'>
           <button onClick={addMCQQuestion} className='secondary-btn add-question-btn'><img src='/img/plus.svg' alt='add icon' /><span>Add Objective Question</span></button>
