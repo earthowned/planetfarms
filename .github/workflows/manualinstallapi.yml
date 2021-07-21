@@ -44,8 +44,11 @@ jobs:
           echo "**********************2"
           npx sequelize-cli db:migrate &> output
           cat output
-          sed -i '/^==\s/d' output
           sed -i '/^$/d' output
+          sed -i '1,3d' output
+          sed -i '/^==\s/d' output
           echo "**********************3"
+          cat output
+          echo "**********************4"
           [[ -s output ]] && echo "not empty" || echo "its empty"
           [[ -s output ]] && exit 1 || exit 0

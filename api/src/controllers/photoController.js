@@ -1,15 +1,23 @@
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
+const { changeFormat } = require('../helpers/filehelpers')
+const CircularJSON = require('circular-json')
 
 const getPhotos = async (_req, res) => {
   const photos = await db.Photo.findAll()
   if (!photos) {
     throw new NotFoundError()
   }
+  const data = {
+    photos: photos.map((photo) => ({
+      ...photo.dataValues,
+      lessonImg: changeFormat(photo.lessonImg)
+    }))
+  }
   res.status(200).json({
     status: true,
     message: 'fetched all lesson photos successfully',
-    data: photos
+    data: data
   })
 }
 
@@ -19,10 +27,17 @@ const getPhotoById = async (req, res) => {
   if (!photo) {
     throw new NotFoundError()
   }
+  const lessonImg = changeFormat(photo?.dataValues?.lessonImg)
+  const photoData = photo.dataValues
+  const data = Object.assign({
+    ...photo,
+    dataValues: { ...photoData, lessonImg }
+  })
+  const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
     status: true,
     message: 'fetched lesson photo successfully',
-    data: photo
+    data: str.dataValues
   })
 }
 

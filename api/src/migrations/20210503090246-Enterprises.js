@@ -23,9 +23,6 @@ module.exports = {
         ],
         defaultValue: 'Farmer'
       },
-      attachments: {
-        type: Sequelize.BLOB('long')
-      },
       createdAt: {
         type: Sequelize.DATE
       },

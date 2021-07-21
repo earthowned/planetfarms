@@ -6,20 +6,26 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     question: {
-      type: DataTypes.TEXT,
-      allowNull: false
+      type: DataTypes.TEXT
     },
     answer: {
       type: DataTypes.TEXT,
-      allowNull: false
+      
     },
     options: {
       type: DataTypes.ARRAY(DataTypes.TEXT),
-      allowNull: false
+      
     },
     testId: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    type: {
+      type: DataTypes.STRING,
+      defaultValue: 'mcq'
+    },
+    position: {
+      type: DataTypes.INTEGER
     },
     createdAt: {
       allowNull: false,

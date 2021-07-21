@@ -1,9 +1,36 @@
 .question-answer-container {
   width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+
+  .test-error {
+    position: absolute;
+    top: -30px;
+  }
+
+  .question-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .question-title {
+      margin: 20px 0;
+      color: var(--primary-grey);
+    }
+
+    img {
+      cursor: pointer;
+    }
+  }
 }
 
 .question-container {
   width: 100%;
+
+  // p {
+  //   color: var(--secondary-red);
+  //   margin-bottom: 8px;
+  // }
 }
 
 .question-container input {
@@ -27,7 +54,7 @@
 }
 
 .test-answers-wrapper {
-  margin-top: 40px;
+  margin: 20px 0;
 
   .test-answer-input-field {
     display: flex;
@@ -64,7 +91,7 @@
   border-radius: 4px;
 }
 
-.test-answer-options button {
+.add-new-course {
   outline: none;
   border: none;
   background: none;
@@ -73,10 +100,10 @@
   color: var(--primary-color);
   height: 24px;
   cursor: pointer;
-}
 
-.test-answer-options button h4 {
-  margin-left: 8px;
+  span {
+    margin-left: 8px;
+  }
 }
 
 .add-question-btn {
@@ -89,6 +116,30 @@
 
 .add-question-btn span {
   margin-top: 8px;
+}
+
+.questions-btn-container {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+
+  button {
+    width: 45%;
+
+    span {
+      line-height: 1.6;
+    }
+  }
+
+  @media screen and (max-width: 1440px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .btn-container {
@@ -131,5 +182,4 @@
   span {
     margin-left: 8px;
   }
-
 }

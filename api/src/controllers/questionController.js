@@ -1,4 +1,5 @@
-const Question = require('../models/questionModel')
+// const Question = require('../models/questionModel')
+const db = require('../models/index')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const sequelize = require('../config/database.js')
@@ -11,10 +12,41 @@ const getQuestions = (req, res) => {
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['question', order]]
-  Question.findAll({ offset: page, limit: pageSize, order: ordervalue })
+  db.Question.findAll({ offset: page, limit: pageSize, order: ordervalue })
     .then(questions => res.json({ questions, page, pageSize }).status(200))
     .catch((err) => res.json({ err }).status(400))
 }
+
+// @desc    Fetch all questions
+// @route   GET /api/questions/lesson/:lessonId
+// @access  Public
+const getLessonQuestions = async (req, res) => {
+  try {
+    const pageSize = 10
+  const page = Number(req.query.pageNumber) || 0
+  const order = req.query.order || 'ASC'
+  const ordervalue = order && [['question', order]]
+  
+  const test = await db.Test.findOne({where: {lessonId: req.params.id}});
+
+  if(!test) return res.json({message: 'test doesn\'t exist.'})
+
+  const newquestions = await db.Question.findAll({ offset: page, limit: pageSize, order: [['position', "ASC"]], where: {testId: test.id} })
+
+  const questions = newquestions.map(item => {
+    if(item.type === "mcq") {
+      item.options = item.options.filter(el => el !== item.answer)
+    }
+    return item;
+  })
+
+  res.json({ questions, page, pageSize }).status(200)
+
+  } catch (error) {
+    res.json(error);
+  }
+}
+
 
 // randomize the answers
 function randomAnswer (array) {
@@ -36,18 +68,21 @@ const getTestQuestions = (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
 
-  Question.findAll({
+  db.Question.findAll({
     offset: page,
     limit: pageSize,
-
+    order: [['position', "ASC"]],
     where: {
       testId: req.params.id
     },
-    attributes: ['options', 'question']
+    attributes: ['options', 'question', 'type']
   })
     .then(questions => {
       if (questions) {
-        questions.forEach(item => randomAnswer(item.options))
+
+        questions.forEach(item => {
+          if(item.type === "mcq") randomAnswer(item.options)
+        })
 
         // let newOptions = randomArrayShuffle(options);
         return res.json({
@@ -71,7 +106,7 @@ const addQuestion = (req, res) => {
   const {
     question, answer, options, testId
   } = req.body
-  Question.create({
+  db.Question.create({
     question, answer, options, testId
   })
     .then(() => res.json({ message: 'Question Created !!!' }).status(200))
@@ -79,26 +114,32 @@ const addQuestion = (req, res) => {
 }
 
 // @desc    Update a Question
-// @route   PUT /api/Question/:id
+// @route   PUT /api/question/:id
 // @access  Public
-const updateQuestion = (req, res) => {
-  const {
-    question, answer, options, testId
-  } = req.body
-  const id = req.params.id
-  Question.findByPk(id).then(questions => {
-    if (questions) {
-      const { id } = questions
-      Question.update({
-        question, answer, options, testId
-      },
-      { where: { id } })
-        .then(() => res.json({ message: 'Question Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
-    }
-    res.status(404)
-    throw new Error('Question not found')
-  })
+const updateQuestion = async (req, res) => {
+
+  try {
+      const {
+        question, answer, options, testId, type
+      } = req.body
+      const id = req.params.id
+
+      const questionExist = await db.Question.findByPk(id);
+
+      if(!questionExist) return res.json({message: 'Question doesn\'t exist'});
+
+      if(questionExist.type === "subjective") {
+        await db.Question.update({question, testId, type}, {where: {id}})
+        return res.json({message: 'Question updated !!!'}).status(200)
+      } 
+        
+        await db.Question.update({question, answer, options: [...options, answer], testId, type}, {where: {id}})
+
+        return res.json({message: 'Question updated !!!'}).status(200)
+
+  } catch (error) {
+    res.json(error)
+  }
 }
 
 // @desc    Fetch single Question
@@ -107,7 +148,7 @@ const updateQuestion = (req, res) => {
 const getQuestionById = (req, res) => {
   const id = req.params.id
 
-  Question.findByPk(id)
+  db.Question.findByPk(id)
     .then(question => {
       if (question) {
         res.json(question)
@@ -124,10 +165,10 @@ const getQuestionById = (req, res) => {
 // @access  Public
 const deleteQuestion = (req, res) => {
   const id = req.params.id
-  Question.findByPk(id).then(question => {
+  db.Question.findByPk(id).then(question => {
     if (question) {
       const { id } = question
-      Question.destroy({ where: { id } })
+      db.Question.destroy({ where: { id } })
         .then(() => res.json({ message: 'Question Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -144,9 +185,9 @@ const searchQuestionTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
 
-  Question.findAll({ where: { test_name: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
+  db.Question.findAll({ where: { test_name: { [Op.iLike]: '%' + title + '%' } }, order: [['title', order]] })
     .then(title => res.json({ title }).status(200))
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { addQuestion, getQuestions, updateQuestion, getQuestionById, deleteQuestion, searchQuestionTitle, getTestQuestions }
+module.exports = { addQuestion, getQuestions, updateQuestion, getQuestionById, deleteQuestion, searchQuestionTitle, getTestQuestions, getLessonQuestions }

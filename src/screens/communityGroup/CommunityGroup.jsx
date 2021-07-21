@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Button from '../../components/button/Button'
 import FormModal from '../../components/formModal/FormModal'
 import CommunityGroupCard from '../../components/communityGroupCard/CommunityGroupCard'
-import Filter from '../../components/filter/Filter'
-import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './CommunityGroup.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { searchGroups, listGroups, groupDelete, listUserGroups } from '../../actions/communityGroupActions'
 import Pagination from '../../components/pagination/Pagination'
-import useSizeFinder from '../../utils/sizeFinder'
 import { getApi } from '../../utils/apiFunc'
+import SubHeader from '../../components/subHeader/SubHeader'
 
 const CommunityGroup = () => {
   // fetching current community
@@ -20,7 +18,6 @@ const CommunityGroup = () => {
     : null
 
   // navigtion bar
-  const windowWidth = useSizeFinder()
   const { pathname } = useLocation()
 
   const nav = [
@@ -51,8 +48,6 @@ const CommunityGroup = () => {
   const [deleteModal, setDeleteModal] = useState(false)
   const [pageNumber, setPageNumber] = useState(1)
   const [userPageNumber, setUserPageNumber] = useState(1)
-  const handleClickCreate = () => {
-  }
 
   useEffect(() => {
     if (search) dispatch(searchGroups(search))
@@ -94,43 +89,11 @@ const CommunityGroup = () => {
             <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
           </div>
         </div>
-                      </div>}
+      </div>}
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>
-            <div className='community-group-main-header-container'>
-              <div className='flex-row-5'>
-                {windowWidth > 720
-                  ? <ul className='courses-list-container'>
-                    {
-                  nav.map(item => {
-                    return (
-                      <li>
-                        <Link
-                          className={`nav-link ${(pathname === `${item.link}`)
-                          ? 'courses-list-item active'
-                          : 'library-list-item'}`} to={`${item.link}`}
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    )
-                  })
-                }
-                    </ul>
-                  : <Filter name='All Enterprises' noImage />}
-                <div className='community-group-search-container'>
-                  <SearchComponent className='search-bar' search={search} setSearch={setSearch} />
-                </div>
-              </div>
-              <div className='button-filter-container'>
-                <div className='community-group-header-btn-container' onClick={() => setActive(true)}>
-                  <Button name='Create group' onClick={handleClickCreate} />
-                </div>
-                {/* <FilterByCategory /> comes here */}
-                <Filter />
-              </div>
-            </div>
+            <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Create Group' />
             <div className='community-group-container'>
               {
           pathname === `/community-group/${currentCommunity.slug}`

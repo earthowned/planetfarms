@@ -38,7 +38,7 @@ const EditLesson = () => {
   //   const [videoModal, setVideoModal] = useState(false)
   //   const [imageModal, setImageModal] = useState(false)
   //   const [textModal, setTextModal] = useState(false)
-  const [testModal, setTestModal] = useState(false)
+  // const [testModal, setTestModal] = useState(false)
 
   const { register, errors, handleSubmit } = useForm()
 
@@ -53,6 +53,8 @@ const EditLesson = () => {
   const [lessonCover, setLessonCover] = useState(`${fetchImg}`)
   const title = data?.data?.title
 
+  //   const [testModal, setTestModal] = useState(false)
+  // const [lessonData, setLessonData] = useState([])
   const textData = data?.data?.texts.map((text) => {
     return text
   })
@@ -83,7 +85,7 @@ const EditLesson = () => {
         <span>Loading...</span>
       ) : (
         <>
-          {testModal && <AddTestModal setTestModal={setTestModal} />}
+          {/* {testModal && <AddTestModal setTestModal={setTestModal} />} */}
           <DashboardLayout title='Edit lesson'>
             <BackButton location={path} />
             <div className='admin-lesson-create-container'>
@@ -144,7 +146,7 @@ const EditLesson = () => {
                   </div>
                 ))}
 
-              <div className='admin-lesson-create-btn-wrapper'>
+              {/* <div className='admin-lesson-create-btn-wrapper'>
                 <button
                   className='secondary-btn'
                   onClick={() => setTestModal(true)}
@@ -152,7 +154,7 @@ const EditLesson = () => {
                   <img src='/img/test-outline.svg' alt='test icon' />{' '}
                   <span>Add test</span>
                 </button>
-              </div>
+              </div> */}
 
               <div className='save-lesson-modal'>
                 <h4>Do you want to edit lesson?</h4>

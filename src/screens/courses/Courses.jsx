@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-
+import nav from './courseNav'
 import './Courses.css'
 import useGetFetchData from '../../utils/useGetFetchData'
 import { CATEGORY } from '../../utils/urlConstants'
 
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
-import CoursesHeader from '../../components/coursesHeader/CoursesHeader'
 import CoursesCard from '../../components/coursesCard/CoursesCard'
 import GroupModal from '../../components/groupModal/GroupModal'
 import SimpleModal from '../../components/simpleModal/SimpleModal'
@@ -14,6 +13,7 @@ import SimpleModal from '../../components/simpleModal/SimpleModal'
 import CourseCreateModal from '../../components/courseCreateModal/CourseCreateModal'
 import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
 import { PurchaseModal } from '../../components/purchaseModal/PurchaseModal'
+import SubHeader from '../../components/subHeader/SubHeader'
 
 const Courses = () => {
   const userLogin = useSelector((state) => state.userLogin)
@@ -24,6 +24,7 @@ const Courses = () => {
   const [createNewCourse, setCreateNewCourse] = useState(false)
   const [purchaseModal, setPurchaseModal] = useState(false)
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
+  const [search, setSearch] = useState(null)
 
   const { data, isLoading } = useGetFetchData('courseCategory', CATEGORY)
   if (isLoading) {
@@ -65,12 +66,15 @@ const Courses = () => {
       )}
       <DashboardLayout title='All courses'>
         <div className='courses-main-container'>
-          <CoursesHeader
-            setActive={setActive}
-            setCreateCourse={setCreateCourse}
+          <SubHeader
+            search={search}
+            setSearch={setSearch}
+            nav={nav}
+            setCreateActive={setCreateCourse}
+            btnName='Add Courses'
           />
         </div>
-        {data?.results.map((category) => {
+        {data?.results?.map((category) => {
           return (
             <CoursesCard
               category={category.name}

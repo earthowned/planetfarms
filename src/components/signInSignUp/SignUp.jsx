@@ -41,7 +41,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (userInfo) {
-      history.push('/register-complete')
+      history.push('/')
     }
   }, [history, userInfo])
 

@@ -1,9 +1,22 @@
 const db = require('../models')
+const { changeFormat } = require('../helpers/filehelpers')
+const CircularJSON = require('circular-json')
 
 const getLessons = async (_req, res) => {
   const lessons = await db.Lesson.findAll({
     include: [db.Video, db.Photo, db.Text, db.Material]
   })
+
+  lessons.forEach((lesson) => {
+    lesson.coverImg = changeFormat(lesson.coverImg)
+    lesson.photos.forEach((photo) => {
+      photo.lessonImg = changeFormat(photo.lessonImg)
+    })
+    lesson.videos.forEach((video) => {
+      video.videoCover = changeFormat(video.videoCover)
+    })
+  })
+
   res.status(200).json({
     status: true,
     message: 'fetched all lessons successfully',
@@ -16,10 +29,25 @@ const getLessonById = async (req, res) => {
     where: { id },
     include: [db.Video, db.Photo, db.Text, db.Material]
   })
+
+  lesson.photos.forEach((photo) => {
+    photo.lessonImg = changeFormat(photo.lessonImg)
+  })
+  lesson.videos.forEach((video) => {
+    video.videoCover = changeFormat(video.videoCover)
+  })
+
+  const coverImg = changeFormat(lesson?.dataValues?.coverImg)
+  const lessonData = lesson.dataValues
+  const data = Object.assign({
+    ...lesson,
+    dataValues: { ...lessonData, coverImg }
+  })
+  const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
     status: true,
     message: 'fetched lesson successfully',
-    data: lesson
+    data: str.dataValues
   })
 }
 
