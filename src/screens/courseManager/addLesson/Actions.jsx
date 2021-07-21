@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useHideOnClick from '../../../utils/useHideOnClick'
-const LessonActions = ({ id, onRemove = () => {}, poopUp }) => {
+const LessonActions = ({ id, onRemove = () => {}, poopUp, refetch }) => {
   const [actionActive, setActionActive] = useState(false)
 
   const domNode = useHideOnClick(() => {

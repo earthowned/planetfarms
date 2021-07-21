@@ -15,7 +15,11 @@ import {
 } from './reducers/lessonReducers'
 import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer, photoUpdateReducer } from './reducers/photoReducer'
-import { textCreateReducer, textUpdateReducer } from './reducers/textReducer'
+import {
+  textCreateReducer,
+  textUpdateReducer,
+  deleteTextReducer
+} from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
 import {
   testCreateReducer,
@@ -96,6 +100,7 @@ const reducer = combineReducers({
   updatePhoto: photoUpdateReducer,
   addText: textCreateReducer,
   updateText: textUpdateReducer,
+  deleteText: deleteTextReducer,
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,

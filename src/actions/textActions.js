@@ -67,19 +67,19 @@ export const updateText =
       }
     }
 
-// export const deleteText = () => async (dispatch) => {
-//   try {
-//     dispatch({ type: LESSSON_TEXT_UPDATE_REQUEST })
-//     const { data } = await Axios.put(GET_LESSON_TEXT + `/${textId}`)
-//     dispatch({ type: LESSSON_TEXT_UPDATE_SUCCESS, payload: data })
-//     setEditTextModel(false)
-//   } catch (error) {
-//     dispatch({
-//       type: LESSSON_TEXT_UPDATE_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message
-//     })
-//   }
-// }
+export const deleteText = (id, refetch) => async (dispatch) => {
+  try {
+    dispatch({ type: LESSSON_TEXT_DELETE_REQUEST })
+    const { data } = await Axios.delete(GET_LESSON_TEXT + `/${id}`)
+    dispatch({ type: LESSSON_TEXT_DELETE_SUCCESS, payload: data })
+    refetch()
+  } catch (error) {
+    dispatch({
+      type: LESSSON_TEXT_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
