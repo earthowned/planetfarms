@@ -18,7 +18,6 @@ const LoginScreen = () => {
     if (userInfo) {
       setLoggedIn(true)
       const route = dispatch(checkAndUpdateToken())
-      console.log(route)
       if (route) {
         routingCommunityNews(dispatch, true)
       }

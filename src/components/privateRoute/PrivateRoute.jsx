@@ -7,7 +7,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch()
   const hasAccess = () => {
     const userInfo = window.localStorage.getItem('userInfo')
-    return userInfo && dispatch(checkAndUpdateToken())
+    return dispatch(checkAndUpdateToken()) // userInfo && 
   }
   return (
     <Route
