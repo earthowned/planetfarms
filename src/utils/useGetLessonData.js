@@ -2,7 +2,7 @@ import { useQuery } from 'react-query'
 import { GET_LESSONS, Axios, GET_COURSE } from './urlConstants'
 
 const useGetLessonData = (id, setMaterialData, userId, setPath) => {
-  const { isLoading, data } = useQuery(
+  const { isLoading, data, refetch } = useQuery(
     'lessonData',
     async () => {
       const { data } = await Axios.get(GET_LESSONS + `/${id}`)
@@ -19,7 +19,7 @@ const useGetLessonData = (id, setMaterialData, userId, setPath) => {
       }
     }
   )
-  return { isLoading, data }
+  return { isLoading, data, refetch }
 }
 
 export default useGetLessonData

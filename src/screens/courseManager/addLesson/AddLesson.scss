@@ -16,10 +16,14 @@
     border-radius: 4px;
     overflow: hidden;
 
-    .drag-drop h6 {
+    .drag-drop .ddtext {
       width: 50%;
       text-align: center;
       line-height: 25px;
+    }
+    .drag-drop-icon-container .dragDropText {
+      width: auto;
+      margin: 0 1em;
     }
   }
   .autoWidth {

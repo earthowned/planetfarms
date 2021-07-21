@@ -15,7 +15,7 @@ import {
 } from './reducers/lessonReducers'
 import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
-import { textCreateReducer } from './reducers/textReducer'
+import { textCreateReducer, textUpdateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
 import {
   testCreateReducer,
@@ -94,6 +94,7 @@ const reducer = combineReducers({
   addVideo: videoCreateReducer,
   addPhoto: photoCreateReducer,
   addText: textCreateReducer,
+  updateText: textUpdateReducer,
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,
@@ -117,9 +118,13 @@ const reducer = combineReducers({
   accessToken: accessTokenReducer
 })
 
-const userInfoFromStorage = window.localStorage.getItem('userInfo') ? JSON.parse(window.localStorage.getItem('userInfo')) : null
+const userInfoFromStorage = window.localStorage.getItem('userInfo')
+  ? JSON.parse(window.localStorage.getItem('userInfo'))
+  : null
 
-const currentCommunityFromStorage = window.localStorage.getItem('currentCommunity')
+const currentCommunityFromStorage = window.localStorage.getItem(
+  'currentCommunity'
+)
   ? JSON.parse(window.localStorage.getItem('currentCommunity'))
   : null
 

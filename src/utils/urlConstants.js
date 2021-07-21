@@ -25,6 +25,7 @@ export const ADD_VIDEOS = 'videos/add'
 export const ADD_LESSON_PHOTO = 'lesson-photos/add'
 
 // lesson Text
+export const GET_LESSON_TEXT = 'lesson-text'
 export const ADD_LESSON_TEXT = 'lesson-text/add'
 
 // lesson material

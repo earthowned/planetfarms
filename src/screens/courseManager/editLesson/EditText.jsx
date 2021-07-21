@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form'
+import { updateText } from '../../../actions/textActions'
+import { useDispatch } from 'react-redux'
 
 import Button from '../../../components/button/Button'
 import ModelHandler from './ModelHandler'
@@ -8,32 +10,50 @@ import {
   TextArea
 } from '../../../components/formUI/FormUI'
 import '../../../components/newsCreateModal//NewsCreateModal.scss'
+
 const EditText = ({
   editTextModel,
   setEditTextModel,
   lessonData,
   setLessonData,
   editId,
-  newData
+  textData,
+  editFetchedData,
+  refetch
 }) => {
   const { register, errors, handleSubmit } = useForm()
+  const dispatch = useDispatch()
   const addText = ({ textHeading, textDescription }) => {
-    setLessonData(
-      lessonData.map((data) =>
-        data.itemId === editId
-          ? {
-              ...data,
-              textHeading,
-              textDescription
-            }
-          : data
+    editFetchedData
+      ? dispatch(
+          updateText(
+            editId,
+            textHeading,
+            textDescription,
+            setEditTextModel,
+            refetch
+          )
+        )
+      : editUnSavedTextOnDb()
+
+    function editUnSavedTextOnDb () {
+      setLessonData(
+        lessonData.map((data) =>
+          data.itemId === editId
+            ? {
+                ...data,
+                textHeading,
+                textDescription
+              }
+            : data
+        )
       )
-    )
-    setEditTextModel(false)
+      setEditTextModel(false)
+    }
   }
 
   const editingTextData =
-    newData?.find((text) => text.id === editId) ||
+    textData?.find((text) => text.id === editId) ||
     lessonData?.find((text) => text.itemId === editId)
   return (
     <>
