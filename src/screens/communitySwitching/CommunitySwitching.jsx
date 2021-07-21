@@ -79,16 +79,16 @@ function App () {
 
 export default App
 
- const nav = [
-    {
-      label: 'All communities',
-      link: '/community-switching/all-communities'
-    },
-    {
-      label: 'My communities',
-      link: '/community-switching/my-communities'
-    }
-  ]
+const nav = [
+  {
+    label: 'All communities',
+    link: '/community-switching/all-communities'
+  },
+  {
+    label: 'My communities',
+    link: '/community-switching/my-communities'
+  }
+]
 
 function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, userPageNumber }) {
   const { pathname } = useLocation()
@@ -119,7 +119,7 @@ function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, use
 
   return (
     <>
-      <SubHeader setSearch={setSearch} search={search} setCreateActive={setModalActive} nav={nav} btnName="Create Community" />
+      <SubHeader setSearch={setSearch} search={search} setCreateActive={setModalActive} nav={nav} btnName='Create Community' />
       <div>
         {
           pathname === '/community-switching/my-communities'
