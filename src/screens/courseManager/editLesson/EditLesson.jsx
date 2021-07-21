@@ -32,6 +32,7 @@ const EditLesson = () => {
   const [lessonData, setLessonData] = useState([])
   const [lessonTitle, setLessonTitle] = useState()
   const [editTextModel, setEditTextModel] = useState(false)
+  const [editPhotoModel, setEditPhotoModel] = useState(false)
   const [testModal, setTestModal] = useState(false)
   const [editId, setEditId] = useState('')
 
@@ -71,7 +72,6 @@ const EditLesson = () => {
   const modelPopUp = (poupState, dataId) => {
     setEditId(dataId)
   }
-  console.log(lessonData)
   return (
     <>
       {isLoading ? (
@@ -85,6 +85,16 @@ const EditLesson = () => {
               setEditTextModel={setEditTextModel}
               editId={editId}
               textData={lessonData}
+              editFetchedData
+              refetch={refetch}
+            />
+          )}
+          {editPhotoModel && (
+            <EditPhoto
+              editPhotoModel={editPhotoModel}
+              setEditPhotoModel={setEditPhotoModel}
+              editId={editId}
+              photoData={lessonData}
               editFetchedData
               refetch={refetch}
             />
@@ -120,6 +130,7 @@ const EditLesson = () => {
                 lessonData={lessonData}
                 modelPopUp={modelPopUp}
                 setEditTextModel={setEditTextModel}
+                setEditPhotoModel={setEditPhotoModel}
               />
               <AddContentBlock setTestModal={setTestModal} />
               <EditLessonFooter

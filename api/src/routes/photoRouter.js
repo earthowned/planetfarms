@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 require('express-async-errors')
-const { upload } = require('../helpers/filehelpers')
+const { upload, resizeImage } = require('../helpers/filehelpers')
 
 const {
   getPhotos,
@@ -17,6 +17,6 @@ router
   .route('/:id')
   .get(getPhotoById)
   .delete(deletePhoto)
-  .put(updatePhoto)
+  .put(upload.single('lessonImg'), resizeImage, updatePhoto)
 
 module.exports = router

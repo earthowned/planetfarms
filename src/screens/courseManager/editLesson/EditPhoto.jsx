@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+
+import { updatePhoto } from '../../../actions/photoActions'
+import { LESSON_IMG } from '../../../utils/urlConstants'
 
 import Button from '../../../components/button/Button'
 import DragDrop from '../../../components/dragDrop/DragDrop'
@@ -13,30 +17,54 @@ const EditPhoto = ({
   setEditPhotoModel,
   lessonData,
   setLessonData,
-  editId
+  photoData,
+  editId,
+  editFetchedData,
+  refetch
 }) => {
+  const dispatch = useDispatch()
   const { register, handleSubmit } = useForm()
   const [isImgDesc, setIsImgDesc] = useState(true)
   const [lessonImg, setLessonImg] = useState(null)
+
   const submitLessonImg = ({ photoDescription }) => {
-    setLessonData(
-      lessonData.map((data) =>
-        data.itemId === editId
-          ? {
-              ...data,
-              lessonImg,
-              photoDescription
-            }
-          : data
+    const editLocalPhoto = () => {
+      setLessonData(
+        lessonData.map((data) =>
+          data.itemId === editId
+            ? {
+                ...data,
+                lessonImg,
+                photoDescription
+              }
+            : data
+        )
       )
-    )
-    setEditPhotoModel(false)
+      setEditPhotoModel(false)
+    }
+
+    editFetchedData
+      ? dispatch(
+          updatePhoto(
+            editId,
+            lessonImg,
+            photoDescription,
+            isImgDesc,
+            setEditPhotoModel,
+            refetch
+          )
+        )
+      : editLocalPhoto()
   }
-  const editingPhotoData = lessonData.find((photo) => photo.itemId === editId)
-  console.log(editingPhotoData)
+
+  const editingPhotoData =
+    photoData?.find((photo) => photo.id === editId) ||
+    lessonData.find((photo) => photo.itemId === editId)
+
   useEffect(() => {
     editingPhotoData?.lessonImg && setLessonImg(editingPhotoData?.lessonImg)
   }, [editingPhotoData])
+
   return (
     <>
       {editPhotoModel && (
@@ -49,8 +77,12 @@ const EditPhoto = ({
               />
               <DragDrop
                 onChange={(img) => setLessonImg(img)}
-                text='Drag & Drop photo in this area or Click Here to attach'
-                dataImg={lessonImg?.preview}
+                text='Drag & Drop photo in this area or Click Here to edit'
+                dataImg={
+                  typeof lessonImg === 'object'
+                    ? lessonImg?.preview
+                    : LESSON_IMG + lessonImg
+                }
               />
               <div className='description'>
                 <label>Add photo description ?</label>{' '}
