@@ -10,11 +10,8 @@ module.exports = async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     try {
-      console.log(req.headers.authorization.split(' '))
       const token = req.headers.authorization.split(' ')[1]
-      console.log(token)
       if (process.env.AUTH_METHOD !== 'cognito') {
-
         jwt.verify(token, process.env.JWT_SECRET, function (err, decodedToken) {
           if (err) {
             if (err.message === 'jwt expired') {
@@ -42,7 +39,6 @@ module.exports = async (req, res, next) => {
       /*
       * TODO: Maintain session and check again local session
       */
-      console.log(decoded)
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.User.findOne({ where: { userID: decoded.id } })
       } else if (recoded) {
