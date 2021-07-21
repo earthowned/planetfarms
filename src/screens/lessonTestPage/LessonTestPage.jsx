@@ -86,7 +86,7 @@ const LessonTestPage = () => {
                  : <h4>No Tests available</h4>
             }
               <div className='test-btn-container'>
-                <Button name='Finish test' onClick={submitTest} />
+                <button className='default-btn' onClick={submitTest}>Finish Test</button>
               </div>
             </div>
           </div>
