@@ -89,7 +89,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
               src='/img/calendar-icon.svg'
               alt='calendar-icon'
               onClick={() => history.push('/calendar/my-events')}
-              />
+                                         />
             </div>
           </div>
           </>
@@ -123,7 +123,7 @@ function MainNav ({ dropdownActive, setDropdownActive, navMenu, toggle }) {
                   : navitem.name === 'Library'
                     ? () => history.push(`${navitem.slug}`)
                     : () => history.push(`${navitem.slug}`)}
-                className={`${"/".concat(pathname.split('/')[1])  === `${navitem.slug}` ? ' text-menu text-active' : 'text-menu'}`}
+                className={`${'/'.concat(pathname.split('/')[1]) === `${navitem.slug}` ? ' text-menu text-active' : 'text-menu'}`}
               >
                 <div onClick={() => history.push(`${navitem.slug}`)} className='align-content'>
                   {
