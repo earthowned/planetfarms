@@ -10,7 +10,10 @@ import {
   LESSSON_PHOTO_CREATE_FAIL,
   LESSSON_PHOTO_UPDATE_REQUEST,
   LESSSON_PHOTO_UPDATE_SUCCESS,
-  LESSSON_PHOTO_UPDATE_FAIL
+  LESSSON_PHOTO_UPDATE_FAIL,
+  LESSSON_PHOTO_DELETE_REQUEST,
+  LESSSON_PHOTO_DELETE_SUCCESS,
+  LESSSON_PHOTO_DELETE_FAIL
 } from '../constants/photoConstants'
 
 export const createLessonImg =
@@ -74,3 +77,20 @@ export const updatePhoto =
         })
       }
     }
+
+export const deletePhoto = (id, refetch) => async (dispatch) => {
+  try {
+    dispatch({ type: LESSSON_PHOTO_DELETE_REQUEST })
+    const { data } = await Axios.delete(GET_LESSON_PHOTO + `/${id}`)
+    dispatch({ type: LESSSON_PHOTO_DELETE_SUCCESS, payload: data })
+    refetch()
+  } catch (error) {
+    dispatch({
+      type: LESSSON_PHOTO_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}

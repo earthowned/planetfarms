@@ -8,7 +8,8 @@ const LessonContent = ({
   setEditTextModel,
   setEditPhotoModel,
   modelPopUp,
-  onRemove
+  removeTextItem,
+  removePhoto
 }) => {
   return (
     <>
@@ -23,7 +24,7 @@ const LessonContent = ({
               setEditTextModel={setEditTextModel}
               modelPopUp={modelPopUp}
               id={data?.id}
-              onRemove={onRemove}
+              onRemove={removeTextItem}
             />
             <Video
               title={data?.videoTitle}
@@ -46,6 +47,7 @@ const LessonContent = ({
                 setEditPhotoModel={setEditPhotoModel}
                 isEditable
                 desc={data?.isImgDesc === true && data?.photoDescription}
+                onRemove={removePhoto}
               />
             )}
           </div>
