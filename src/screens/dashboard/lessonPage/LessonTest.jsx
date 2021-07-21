@@ -2,16 +2,17 @@ import axios from 'axios'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import Button from '../../../components/button/Button'
 import { configFunc } from '../../../utils/apiFunc'
 import './LessonTest.scss'
 
-const LessonTest = ({ id }) => {
+const LessonTest = () => {
   const [start, setStart] = useState()
   const [results, setResults] = useState([])
-  const [tests, setTests] = useState([])
+  const [test, setTest] = useState(null)
   const history = useHistory()
+  const {id} = useParams();
 
   const startTest = async () => {
     const currentDate = moment().toDate().getTime().toString()
@@ -28,25 +29,23 @@ const LessonTest = ({ id }) => {
         state: { lessonId: id }
       })
     }
-  }, [start])
-
-  useEffect(() => {
     getTestsResults()
-  }, [])
+  }, [start])
 
   const getTestsResults = async () => {
     const config = configFunc()
-    const { data: { tests } } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/tests/lesson/${id}`)
-    setTests(tests)
-    if (tests.length > 0) {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/test/${tests[0].id}`, config)
-      setResults(data.tests)
-    }
+      const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/lesson/${id}`, config)
+
+      setTest(data.test);
+    console.log(data);
+      if(data.tests !== undefined){
+        setResults(data.tests)
+      }
   }
   return (
     <div className='lesson-test-panel'>
       <div className='lesson-test-panel-left'>
-        {tests.length > 0 &&
+        {test &&
           <>
             <h3>Lesson test</h3>
             <p>
@@ -57,9 +56,9 @@ const LessonTest = ({ id }) => {
             </div>
           </>}
       </div>
-      {tests.length > 0 && <div className='lesson-test-panel-right'>
+      {test && <div className='lesson-test-panel-right'>
         <h4>My results</h4>
-        {results.length > 0
+        {results.length
           ? <div className='test-result-container'>
             {results.length > 2 && <h4 className='show-more'>Show all results</h4>}
             <div>

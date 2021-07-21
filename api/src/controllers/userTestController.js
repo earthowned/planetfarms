@@ -2,15 +2,24 @@ const db = require('../models/index')
 const Sequelize = require('sequelize')
 
 // @desc    Fetch all tests
-// @route   GET /api/Test
+// @route   GET /api/user_tests/lesson/:lessonId
 // @access  Public
-const getUserTests = (req, res) => {
-  const pageSize = 3
-  const page = Number(req.query.pageNumber) || 0
+const getUserTests = async (req, res) => {
+  try {
+    const pageSize = 3
+    const page = Number(req.query.pageNumber) || 0
+    
+    const test = await db.Test.findOne({where: {lessonId: req.params.lessonId}});
+  
+    if(!test) return res.json({test}).status(400);
+    
+    const tests = await db.UserTest.findAll({ offset: page, limit: pageSize, where: { userId: req.user.id, testId: test.id } })
 
-  db.UserTest.findAll({ offset: page, limit: pageSize, where: { userId: req.user.id, testId: req.params.id } })
-    .then(tests => res.json({ tests, page, pageSize }).status(200))
-    .catch((err) => res.json({ err }).status(400))
+    res.json({tests, test}).status(400);
+
+  } catch (error) {
+    res.json(error).status(400);
+  }
 }
 
 const getSingleUserTest = async (req, res) => {
@@ -31,7 +40,7 @@ const getUserTestAnswers = async (req, res) => {
     const userAnswers = await db.UserTestAnswer.findAll({ where: { userTestId: req.params.id }, include: [db.Question] })
     res.json(userAnswers)
   } catch (error) {
-    res.json(error).status(400)
+    res.json(error)
   }
 }
 

@@ -21,10 +21,14 @@ const LessonTestPage = () => {
   const [modalActive, setModalActive] = useState(false)
   const [messageModal, setMessageModal] = useState(false)
   const [completeMessage, setCompleteMessage] = useState('')
+  const [lessonId, setLessonId] = useState()
 
   useEffect(() => {
     if (!questions.length) dispatch(listTestQuestions(testId))
     if (completeMessage) setMessageModal(true)
+    if(location){
+      setLessonId(location.state.lessonId);
+    }
   }, [completeMessage])
 
   const submitTest = async () => {
@@ -35,10 +39,11 @@ const LessonTestPage = () => {
     }
   }
 
+
   const goToLesson = () => {
     setCompleteMessage('')
     setMessageModal(false)
-    document.location.href = `/lesson/${location.state.lessonId}`
+    document.location.href = `/lesson/${lessonId}`
   }
 
   return (

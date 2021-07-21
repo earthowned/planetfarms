@@ -4,7 +4,7 @@ const { getUserTests, takeTest, endTest, getSingleUserTest, getUserTestAnswers }
 const  protect = require('../middleware/authMiddleware')
 
 router.route('/:id/answers').get(getUserTestAnswers)
-router.route('/test/:id').get(protect, getUserTests)
+router.route('/lesson/:lessonId').get(protect, getUserTests)
 router.route('/start').post(protect, takeTest)
 router.route('/:id').put(endTest).get(protect, getSingleUserTest)
 module.exports = router
