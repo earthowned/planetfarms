@@ -5,7 +5,6 @@ import { configFunc } from '../utils/apiFunc'
 export const createTest = (lessonId, questions) => async (dispatch, getState) => {
   try {
     dispatch({ type: TEST_CREATE_REQUEST })
-
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/tests/add`, { lessonId, questions })
     dispatch({ type: TEST_CREATE_SUCCESS, payload: data })
   } catch (error) {

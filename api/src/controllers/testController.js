@@ -136,8 +136,7 @@ const updateTest = async (req, res) => {
         //bulk updating 
         oldQuestions.forEach(async (item) => {
           const {question, answer, options, id, type, position} = item
-          console.log(position);
-          await db.Question.update({question, answer, options, type, position}, {where: {id}}, {transaction: t})
+          await db.Question.update({question, answer, options: [...options, answer], type, position}, {where: {id}}, {transaction: t})
         })
 
         //adding new questions to the test
