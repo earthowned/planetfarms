@@ -71,7 +71,6 @@ const AddTest = () => {
       setQuestions([])
       setCards([])
     }
-
     setFormError(false)
   }
 
@@ -81,10 +80,11 @@ const AddTest = () => {
         const newQuestions = orderQuestions()
         console.log(newQuestions)
         dispatch(createTest(lessonId, newQuestions))
-        // return history.goBack()
+        return history.goBack()
       }
+    } else {
+      setFormError(true)
     }
-    setFormError(true)
   }
 
   const confirmDelete = async () => {
