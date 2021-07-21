@@ -10,7 +10,7 @@ import { ReactComponent as UserAvatar } from '../../assets/images/user-green-out
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 
 const ForgotPassword = () => {
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({})
   const [usernameValue, setUsernameValue] = useState('')
 
   const [showNewPassword, setShowNewPassword] = useState(false)
@@ -60,21 +60,25 @@ const ForgotPassword = () => {
   useEffect(() => {
     usernameValue && setIsVerifiedUser(true)
     if (confirmStatus) {
-      setMessage('Successful')
+      setMessage({ text: 'Successful', class: 'message' })
       history.push('/myProfile')
     } else if (resendStatus) {
-      setMessage(`Code has been sent to your ${deliveryDetails.AttributeName.split('_').join(' ')}.`)
+      setMessage({ text: `Code has been sent to your ${deliveryDetails.AttributeName.split('_').join(' ')}.`, class: 'message' })
     }
-  }, [confirmStatus, resendStatus, usernameValue, deliveryDetails])
+    if (confirmErr) {
+      setMessage({ text: confirmErr, class: 'error' })
+    } else if (resendErr) {
+      setMessage({ text: resendErr, class: 'error' })
+    }
+  }, [confirmStatus, resendStatus, usernameValue, deliveryDetails, confirmErr, resendErr])
 
   return (
     <SignLayout>
       <form className='sign'>
         <h1 className='welcome'>Forgot Password</h1>
         <div className='container'>
-          {confirmErr && <div className='error'>{confirmErr}</div>}
-          {resendErr && <div className='error'>{resendErr}</div>}
-          {message && <div className='message'>{message}</div>}
+
+          {message && <div className={message.class}>{message.text}</div>}
           <Input
             placeholder='Username'
             type='text'
