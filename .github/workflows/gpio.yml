@@ -37,6 +37,7 @@ jobs:
           git pull
           screen -ls
           killall node
+          sleep 1
           #screen -X -S api kill
           #screen -X -S react kill
           screen -ls

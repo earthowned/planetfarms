@@ -212,7 +212,8 @@ export const checkAndUpdateToken = () => async (dispatch) => {
       return tokenFailure(dispatch, 'Unauthorized')
     }
   }).catch((data) => {
-    const message = data.response && data.response.data.name ? data.response.data.name : data.message
+    return tokenFailure(dispatch, 'Unauthorized')
+    /*const message = data.response && data.response.data.name ? data.response.data.name : data.message
     if (message === 'TokenExpired') {
       if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
         Auth.currentSession().then((res) => {
@@ -225,7 +226,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
             return true
           }
-        })
+        }).catch(data => tokenFailure(dispatch, 'Unauthorized'))
       } else {
         const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
         postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`, { id: userInfo.id }).then((res) => {
@@ -237,11 +238,11 @@ export const checkAndUpdateToken = () => async (dispatch) => {
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
             return true
           }
-        })
+        }).catch(data => tokenFailure(dispatch, 'Unauthorized'))
       }
     } else {
       return tokenFailure(dispatch, 'Unauthorized')
-    }
+    }*/
   })
 }
 
@@ -249,7 +250,7 @@ const tokenFailure = (dispatch, message) => {
   dispatch({ type: USER_DETAILS_FAIL, payload: message })
   window.localStorage.clear()
   dispatch({ type: USER_LOGOUT })
-  window.location.href = '/'
+  window.location.href = '/login'
   return false
 }
 
