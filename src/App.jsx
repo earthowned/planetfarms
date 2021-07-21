@@ -3,8 +3,8 @@ import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-d
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from './reactQuery'
 import PrivateRoute from './components/privateRoute/PrivateRoute'
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 // Screens
 import LoginScreen from './screens/login/LoginScreen'
 import SignupScreen from './screens/signUp/SignupScreen'
@@ -59,11 +59,11 @@ function App () {
         <ScrollToTop>
           <Switch>
             <Route component={LoginScreen} path='/login' exact />
-            <Route component={SignupScreen} path='/register' exact/>
+            <Route component={SignupScreen} path='/register' exact />
             <Route component={ForgotPassword} path='/forgot-password' />
-            <PrivateRoute component={UserVerification} path='/verification' exact/>
+            <PrivateRoute component={UserVerification} path='/verification' exact />
             <PrivateRoute component={() => <Redirect to='/login' />} path='/' exact />
-            <PrivateRoute component={LogoutUser} path='/logout' exact/>
+            <PrivateRoute component={LogoutUser} path='/logout' exact />
             <PrivateRoute component={CongratulationScreen} path='/edit-information' exact />
             <PrivateRoute component={CalendarScreen} exact path='/calendar/my-events' />
             <PrivateRoute component={Library} exact path='/library' />
@@ -104,20 +104,22 @@ function App () {
             {/* <PrivateRoute component={LessonTestPage} exact path='/lesson/:id/testpage' /> */}
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' exact />
             <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' exact />
-            <PrivateRoute component={() =>
-              <DndProvider backend={HTML5Backend}>
-                <AddTest />
-              </DndProvider>
-            } path='/admin/add-test/:lessonId' exact />
-            <PrivateRoute component={() =>
-              <DndProvider backend={HTML5Backend}>
-                <AddTest />
-              </DndProvider>
-            } path='/admin/edit-test/:lessonId' />
+            <PrivateRoute
+              component={() =>
+                <DndProvider backend={HTML5Backend}>
+                  <AddTest />
+                </DndProvider>} path='/admin/add-test/:lessonId' exact
+            />
+            <PrivateRoute
+              component={() =>
+                <DndProvider backend={HTML5Backend}>
+                  <AddTest />
+                </DndProvider>} path='/admin/edit-test/:lessonId'
+            />
             <PrivateRoute component={MyProfile} exact path='/myProfile' />
             <PrivateRoute component={UserInfo} exact path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
-            <Route component={PageNotFound} />
+            <PrivateRoute component={PageNotFound} />
           </Switch>
         </ScrollToTop>
       </Router>
