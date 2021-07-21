@@ -9,5 +9,6 @@ const {
 
 router.route('/').post(upload.single('image'), resize)
 router.route('/').post(render)
+router.route('/resize').post(resize)
 
 module.exports = router

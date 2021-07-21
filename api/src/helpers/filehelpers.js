@@ -49,24 +49,28 @@ const multipleUpload = upload.fields([
 const uploadArray = multer({ storage }).array('files')
 
 const resizeImage = (req, res, next) => {
-  const { format, height, width } = { format: 'webp', ...req.body }
+  const { format, height, width, filePath, fieldName } = { format: 'webp', ...req.body }
   try {
     // user might not send image sometimes
-    if (!req.file) next()
-
+    if (!req.file && !filePath) next()
+    if (req.file) {
+      filePath = req.file.path
+      fieldName = req.file.fieldname
+    }
     const filename = path
-      .basename(req.file.path)
+      .basename(filePath)
       .split('.')
       .slice(0, -1)
       .join('.')
+    const origFile = path.basename(filePath)
     let dir = path.join(
       path.dirname(__dirname),
       '..',
       'files',
-      `${req.file.fieldname}`,
+      `${fieldName}`,
       filename
     )
-    let newImage = sharp(req.file.path)
+    let newImage = sharp(filePath)
     if (width) {
       newImage = newImage.resize(parseInt(width))
       dir = dir + '-' + width + 'x' + height
@@ -83,7 +87,7 @@ const resizeImage = (req, res, next) => {
     } else {
       const savePath = dir + '.' + format
       newImage = newImage.toFile(savePath)
-      return next(null, true)
+      return next(origFile, true)
     }
   } catch (error) {
     console.error(error)

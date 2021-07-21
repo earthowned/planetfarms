@@ -3,10 +3,10 @@ const { resizeImage } = require('../helpers/filehelpers')
 
 const resize = (req, res, next) => {
   try {
-    resizeImage(req, res, () => {
+    resizeImage(req, res, (filename) => {
       return res.status(201).json({
         message: 'File uploded successfully',
-        image: req.file.filename
+        image: filename
       })
     })
   } catch (error) {
