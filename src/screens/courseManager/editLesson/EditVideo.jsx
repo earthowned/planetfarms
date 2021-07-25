@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { VIDEO_COVER } from '../../../utils/urlConstants'
+
 import Button from '../../../components/button/Button'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import ModelHandler from './ModelHandler'
@@ -16,7 +18,8 @@ const EditVideo = ({
   setEditVideoModel,
   lessonData,
   setLessonData,
-  editId
+  editId,
+  videoData
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const [videoCover, setVideoCover] = useState(null)
@@ -41,13 +44,18 @@ const EditVideo = ({
     setEditVideoModel(false)
   }
 
-  const editingVideoData = lessonData.find((video) => video.itemId === editId)
+  const editingVideoData =
+    videoData?.find((video) => video.id === editId) ||
+    lessonData?.find((video) => video.itemId === editId)
 
+  console.log(editingVideoData)
+  // typeof lessonImg === 'object' ? lessonImg?.preview : LESSON_IMG + lessonImg
   useEffect(() => {
     editingVideoData?.videoCover && setVideoCover(editingVideoData?.videoCover)
     editingVideoData?.videoResource && setVideo(editingVideoData?.videoResource)
     editingVideoData?.videoLink && setVideoLink(editingVideoData?.videoLink)
   }, [editingVideoData])
+
   return (
     editVideoModel && (
       <div className='collection-modal-container addBlock addBlock__video'>
@@ -57,7 +65,11 @@ const EditVideo = ({
             <DragDrop
               text='Drag & Drop or Click Here to edit Video Cover'
               onChange={(img) => setVideoCover(img)}
-              dataImg={editingVideoData?.videoCover?.preview}
+              dataImg={
+                typeof videoCover === 'object'
+                  ? videoCover?.preview
+                  : VIDEO_COVER + videoCover
+              }
             />
             <div className='video-input-container'>
               <InputFields
@@ -116,7 +128,7 @@ const EditVideo = ({
                     setVideo={setVideo}
                     onClick={() => setVideo(null)}
                     text='Add Video'
-                    dropFile={editingVideoData?.videoResource}
+                    dropFile={video}
                   />
                 )}
               </div>

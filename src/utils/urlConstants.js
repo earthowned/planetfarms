@@ -19,6 +19,7 @@ export const GET_LESSONS = 'lessons'
 export const ADD_LESSONS = 'lessons/add'
 
 // videos
+export const GET_VIDEOS = 'videos'
 export const ADD_VIDEOS = 'videos/add'
 
 // lesson photos

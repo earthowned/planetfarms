@@ -13,7 +13,10 @@ import {
   lessonCreateReducer,
   lessonUpdateReducer
 } from './reducers/lessonReducers'
-import { videoCreateReducer } from './reducers/videoReducers'
+import {
+  videoCreateReducer,
+  updateVideoReducer
+} from './reducers/videoReducers'
 import {
   photoCreateReducer,
   photoUpdateReducer,
@@ -100,6 +103,7 @@ const reducer = combineReducers({
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
   addVideo: videoCreateReducer,
+  updateVideo: updateVideoReducer,
   addPhoto: photoCreateReducer,
   updatePhoto: photoUpdateReducer,
   deletePhoto: photoDeleteReducer,

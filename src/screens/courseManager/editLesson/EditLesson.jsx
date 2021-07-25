@@ -35,6 +35,7 @@ const EditLesson = () => {
   const [lessonTitle, setLessonTitle] = useState()
   const [editTextModel, setEditTextModel] = useState(false)
   const [editPhotoModel, setEditPhotoModel] = useState(false)
+  const [editVideoModel, setEditVideoModel] = useState(false)
   const [testModal, setTestModal] = useState(false)
   const [editId, setEditId] = useState('')
 
@@ -108,6 +109,16 @@ const EditLesson = () => {
               refetch={refetch}
             />
           )}
+          {editVideoModel && (
+            <EditVideo
+              editVideoModel={editVideoModel}
+              setEditVideoModel={setEditVideoModel}
+              videoData={lessonData}
+              editId={editId}
+              editFetchedData
+              refetch={refetch}
+            />
+          )}
           <DashboardLayout title='Edit lesson'>
             <BackButton location={path} />
             <div className='admin-lesson-create-container'>
@@ -140,6 +151,7 @@ const EditLesson = () => {
                 modelPopUp={modelPopUp}
                 setEditTextModel={setEditTextModel}
                 setEditPhotoModel={setEditPhotoModel}
+                setEditVideoModel={setEditVideoModel}
                 removeTextItem={removeTextItem}
                 removePhoto={removePhoto}
               />
