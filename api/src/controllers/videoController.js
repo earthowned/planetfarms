@@ -62,9 +62,22 @@ const deleteVideo = async (req, res) => {
 
 const updateVideo = async (req, res) => {
   const { id } = req.params
-  const video = await db.Video.update(req.body, {
-    where: { id }
-  })
+  let videoCover
+  let videoResource
+  if (req.files) {
+    if (req.files.videoCover) {
+      videoCover = req.files.videoCover[0].filename
+    }
+    if (req.files.videoResource) {
+      videoResource = req.files.videoResource[0].filename
+    }
+  }
+  const video = await db.Video.update(
+    { ...req.body, videoCover, videoResource },
+    {
+      where: { id }
+    }
+  )
   res.status(202).json({
     status: true,
     message: 'Video updated successfully',

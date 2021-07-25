@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 require('express-async-errors')
-const { upload } = require('../helpers/filehelpers')
+const { upload, resizeImage } = require('../helpers/filehelpers')
 
 const {
   getVideos,
@@ -11,6 +11,16 @@ const {
   updateVideo
 } = require('../controllers/videoController')
 
+// get image file middleware
+const fileChanger = (req, _res, next) => {
+  if (req.files) {
+    if (req.files.videoCover) {
+      req.file = req.files.videoCover[0]
+    }
+  }
+  next()
+}
+
 router.route('/').get(getVideos)
 router
   .route('/add')
@@ -18,6 +28,15 @@ router
     upload.fields([{ name: 'videoCover' }, { name: 'videoResource' }]),
     addVideo
   )
-router.route('/:id').get(getVideosById).delete(deleteVideo).put(updateVideo)
+router
+  .route('/:id')
+  .get(getVideosById)
+  .delete(deleteVideo)
+  .put(
+    upload.fields([{ name: 'videoCover' }, { name: 'videoResource' }]),
+    fileChanger,
+    resizeImage,
+    updateVideo
+  )
 
 module.exports = router

@@ -54,7 +54,7 @@ const deletePhoto = async (req, res) => {
 
 const updatePhoto = async (req, res) => {
   const { id } = req.params
-  let lessonImg = ''
+  let lessonImg
   if (req.file) {
     lessonImg = req.file.filename
   }
