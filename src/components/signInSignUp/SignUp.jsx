@@ -50,20 +50,24 @@ const SignIn = () => {
   }
 
   return (
-    <form className='sign' onSubmit={handleSubmit(onSubmit)}>
+    <form className='sign' onSubmit={handleSubmit(onSubmit)} noValidate>
       <h1 className='welcome'>{welcomeBack}</h1>
       <div className='container'>
         {error && <div className='error'>{error}</div>}
         <Input
-          placeholder='Username'
-          type='text'
+          placeholder='Email'
+          type='email'
           name='username'
           id='username'
           autoFocus='autoFocus'
           ref={regi({
             required: {
               value: true,
-              message: 'You must enter username'
+              message: 'You must enter email'
+            },
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: 'You must enter valid email'
             }
           })}
           errors={errors}

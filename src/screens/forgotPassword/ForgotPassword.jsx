@@ -69,21 +69,25 @@ const ForgotPassword = () => {
 
   return (
     <SignLayout>
-      <form className='sign'>
+      <form className='sign' noValidate>
         <h1 className='welcome'>Forgot Password</h1>
         <div className='container'>
           {confirmErr && <div className='error'>{confirmErr}</div>}
           {resendErr && <div className='error'>{resendErr}</div>}
           {message && <div className='message'>{message}</div>}
           <Input
-            placeholder='Username'
-            type='text'
+            placeholder='Email'
+            type='email'
             name='username'
             id='username'
             ref={regi({
               required: {
                 value: true,
-                message: 'You must enter username'
+                message: 'You must enter email'
+              },
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'You must enter valid email'
               }
             })}
             disabled={false}

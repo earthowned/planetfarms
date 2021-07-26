@@ -113,12 +113,12 @@ export const register = (name, password) => async (dispatch) => {
         username: name,
         password,
         attributes: {
-          email: null
+          email: name
         }
       })
       const response = await Auth.signIn(name, password)
       userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
-      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
+      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id, email: name }, {
         headers: {
           Authorization: 'Bearer ' + userdata.token
         }
@@ -213,7 +213,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
     }
   }).catch((data) => {
     return tokenFailure(dispatch, 'Unauthorized')
-    /*const message = data.response && data.response.data.name ? data.response.data.name : data.message
+    /* const message = data.response && data.response.data.name ? data.response.data.name : data.message
     if (message === 'TokenExpired') {
       if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
         Auth.currentSession().then((res) => {
@@ -242,7 +242,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
       }
     } else {
       return tokenFailure(dispatch, 'Unauthorized')
-    }*/
+    } */
   })
 }
 
