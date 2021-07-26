@@ -6,14 +6,14 @@ import './PageNotFound.scss'
 const PageNotFound = () => {
   const history = useHistory()
   return (
-    <SignLayout bannerClass='not-found-page--banner'>
-      <form className='sign'>
+    <SignLayout>
+      <div class="sign">
         <h1 className='welcome page-title'>404 Error</h1>
         <div className='container page-container'>
           <p className='page-sub-title'>Sorry! Page Not Found</p>
           <button className='page-button' onClick={() => history.push('/dashboard')}>Go back to Dashboard</button>
         </div>
-      </form>
+      </div>
     </SignLayout>
   )
 }
