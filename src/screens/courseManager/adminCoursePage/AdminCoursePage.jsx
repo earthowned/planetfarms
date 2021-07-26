@@ -16,7 +16,7 @@ const AdminCoursePage = () => {
   const { userInfo } = userLogin
   const { courseId } = useParams()
 
-  const { data, isLoading } = useGetFetchData(
+  const { data, isLoading, refetch } = useGetFetchData(
     'recentCourse',
     GET_COURSE + '/' + courseId
   )
@@ -33,7 +33,7 @@ const AdminCoursePage = () => {
     <DashboardLayout title='Course page'>
       <BackButton location='/admin/courses' />
       <CourseDescription data={data} isLoading={isLoading} />
-      <LessonBlock courseId={courseId} data={data} />
+      <LessonBlock courseId={courseId} data={data} refetch={refetch} />
       <div className='study-course-wrapper'>
         <h3>Also study this course</h3>
         <p>

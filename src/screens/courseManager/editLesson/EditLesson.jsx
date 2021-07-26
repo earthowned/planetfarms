@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -25,6 +25,7 @@ import EditPhoto from './EditPhoto'
 
 const EditLesson = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { id } = useParams()
@@ -70,7 +71,7 @@ const EditLesson = () => {
   const lessonId = data?.data?.id
   const updateLessonForm = ({ title }) => {
     const coverImg = lessonCover
-    dispatch(updateLesson(title, coverImg, lessonId))
+    dispatch(updateLesson(title, coverImg, lessonId, history))
   }
 
   const modelPopUp = (poupState, dataId) => {
