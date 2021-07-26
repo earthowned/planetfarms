@@ -11,7 +11,13 @@ const LessonMaterial = ({ material, setMaterial }) => {
       {material.length !== 0 ? (
         <div className='material'>
           {material.map((mater, i) => {
-            return <Material key={i} name={mater?.mData?.name} />
+            console.log(mater)
+            return (
+              <Material
+                key={i}
+                name={mater?.mData ? mater?.mData?.name : mater?.name}
+              />
+            )
           })}
         </div>
       ) : (

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 import useGetLessonData from '../../../utils/useGetLessonData'
-import { updateLesson } from '../../../actions/lessonActions'
+import { createLesson, updateLesson } from '../../../actions/lessonActions'
 import { deleteText } from '../../../actions/textActions'
 import { deletePhoto } from '../../../actions/photoActions'
 import { deleteVideo } from '../../../actions/videoActions'
@@ -18,10 +18,12 @@ import LessonContent from './LessonContent'
 import AddTestModal from '../../../components/addTestModal/AddTestModal'
 import AddContentBlock from './AddContentBlock'
 import EditLessonFooter from './EditLessonFooter'
-import '../addLesson/AddLesson.scss'
 import EditVideo from './EditVideo'
 import EditText from './EditText'
 import EditPhoto from './EditPhoto'
+import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
+import '../addLesson/AddLesson.scss'
+import LessonMaterial from '../addLesson/LessonMaterial'
 
 const EditLesson = () => {
   const dispatch = useDispatch()
@@ -32,8 +34,13 @@ const EditLesson = () => {
   const userId = userInfo.id
 
   const [path, setPath] = useState('')
+  const [videoModal, setVideoModal] = useState(false)
+  const [imageModal, setImageModal] = useState(false)
+  const [textModal, setTextModal] = useState(false)
+  const [material, setMaterial] = useState([])
   const [materialData, setMaterialData] = useState([])
   const [lessonData, setLessonData] = useState([])
+  const [lessonEditData, setLessonEditData] = useState([])
   const [lessonTitle, setLessonTitle] = useState()
   const [editTextModel, setEditTextModel] = useState(false)
   const [editPhotoModel, setEditPhotoModel] = useState(false)
@@ -65,13 +72,16 @@ const EditLesson = () => {
   })
 
   useEffect(() => {
-    setLessonData([textData, videoData, photoData].flat())
-  }, [data])
+    setLessonEditData([textData, videoData, photoData, lessonData].flat())
+    setMaterial(data?.data?.materials)
+  }, [data, lessonData])
 
   const lessonId = data?.data?.id
   const updateLessonForm = ({ title }) => {
     const coverImg = lessonCover
-    dispatch(updateLesson(title, coverImg, lessonId, history))
+    dispatch(
+      updateLesson(title, coverImg, lessonId, history, lessonData, material)
+    )
   }
 
   const modelPopUp = (poupState, dataId) => {
@@ -87,13 +97,40 @@ const EditLesson = () => {
   const removeVideo = (id) => {
     dispatch(deleteVideo(id, refetch))
   }
-
+  console.log(material)
   return (
     <>
       {isLoading ? (
         <span>Loading...</span>
       ) : (
         <>
+          {videoModal && (
+            <NewsCreateModal
+              type='video'
+              videoActive={videoModal}
+              setVideoActive={setVideoModal}
+              lessonData={lessonData}
+              setLessonData={setLessonData}
+            />
+          )}
+          {imageModal && (
+            <NewsCreateModal
+              type='image'
+              imageActive={imageModal}
+              setImageActive={setImageModal}
+              lessonData={lessonData}
+              setLessonData={setLessonData}
+            />
+          )}
+          {textModal && (
+            <NewsCreateModal
+              type='text'
+              textActive={textModal}
+              setTextActive={setTextModal}
+              lessonData={lessonData}
+              setLessonData={setLessonData}
+            />
+          )}
           {testModal && <AddTestModal setTestModal={setTestModal} />}
           {editTextModel && (
             <EditText
@@ -153,7 +190,8 @@ const EditLesson = () => {
               />
 
               <LessonContent
-                lessonData={lessonData}
+                lessonData={lessonEditData}
+                newLessonData={lessonData}
                 modelPopUp={modelPopUp}
                 setEditTextModel={setEditTextModel}
                 setEditPhotoModel={setEditPhotoModel}
@@ -162,7 +200,13 @@ const EditLesson = () => {
                 removePhoto={removePhoto}
                 removeVideo={removeVideo}
               />
-              <AddContentBlock setTestModal={setTestModal} />
+              <AddContentBlock
+                setTestModal={setTestModal}
+                setVideoModal={setVideoModal}
+                setImageModal={setImageModal}
+                setTextModal={setTextModal}
+              />
+              <LessonMaterial material={material} setMaterial={setMaterial} />
               <EditLessonFooter
                 onClick={handleSubmit(updateLessonForm)}
                 id={id}
