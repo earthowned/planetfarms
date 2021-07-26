@@ -44,7 +44,6 @@ function CardImage ({ data = [], className }) {
             </div>
             <div className='profile-card-name'>
               <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile?.user.firstName || 'anonymous'} </div>
-              {/* <div className='card-text ibmplexsans-normal-monsoon-14px '>{profile?.user.email}</div> */}
             </div>
             {Follow()}
           </div>
