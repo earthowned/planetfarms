@@ -38,13 +38,13 @@ function CardImage ({ data = [], className }) {
     <>
       {data.length > 0 && data.map((profile) => {
         return (
-          <div onClick={() => history.push(`/community-members-profile/${profile.id}`)} key={profile.id} className='card-image-1'>
+          <div onClick={() => history.push(`/community-members-profile/${profile.userId}`)} key={profile.userId} className='card-image-1'>
             <div className='profile-card-image'>
               <img src={profile?.attachments || '/img/profile-image.svg'} alt='group-profile' />
             </div>
             <div className='profile-card-name'>
-              <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile?.user.name || 'anonymous'} </div>
-              <div className='card-text ibmplexsans-normal-monsoon-14px '>{profile?.user.email}</div>
+              <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile?.user.firstName || 'anonymous'} </div>
+              {/* <div className='card-text ibmplexsans-normal-monsoon-14px '>{profile?.user.email}</div> */}
             </div>
             {Follow()}
           </div>
