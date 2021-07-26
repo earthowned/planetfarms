@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import './DragDrop.scss'
 const DragDrop = ({
   onChange = () => {},
+  previousImageUrl,
   type,
   fileType,
   className,
@@ -29,6 +30,16 @@ const DragDrop = ({
     setFiles(selectedFile)
     onChange(selectedFile)
   }
+
+  useEffect(() => {
+    if (previousImageUrl) {
+      const filename = previousImageUrl.split('/').pop()
+      const file = new File([new Blob()], filename, { type: 'image/' + filename.split('.').pop() })
+      const preview = { preview: previousImageUrl }
+      Object.assign(file, preview)
+      setFiles(file)
+    }
+  }, [previousImageUrl])
 
   return (
     <DragDropComponent

@@ -288,16 +288,18 @@ const getMyProfile = (req, res) => {
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
   try {
-    let attachment = ''
+    let attachment
     if (req.file) {
       attachment = req.file.filename
+    } else {
+      attachment = req.body.attachments === 'undefined' || req.body.attachments === 'null' ? null : req.body.attachments
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
     db.User.findOne({ where: { userID: id } }).then(user => {
       if (user) {
         db.User.update(
-          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment || user.dataValues.attachments },
+          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment || '' },
           { where: { userID: id } }
         )
           .then(() => res.sendStatus(200))

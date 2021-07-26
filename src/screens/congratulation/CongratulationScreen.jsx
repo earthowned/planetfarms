@@ -13,12 +13,14 @@ import { updateUser } from '../../actions/userAction'
 import './Congratulation.scss'
 
 function CongratulationScreen () {
-  const [profileImage, setProfileImage] = useState(null)
   const dispatch = useDispatch()
 
   const location = useLocation()
   const history = useHistory()
   const userdetail = location?.state?.user
+
+  const image = userdetail && userdetail?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + userdetail.attachments
+  const [profileImage, setProfileImage] = useState(`${userdetail.attachments}`)
 
   const { register, errors, handleSubmit } = useForm({
     defaultValues: {
@@ -145,7 +147,7 @@ function CongratulationScreen () {
                   </div>
                 </div>
                 <div className='dragAndDrop'>
-                  <DragDrop onChange={(img) => setProfileImage(img)} />
+                  <DragDrop onClick={() => setProfileImage()} onChange={(img) => setProfileImage(img)} previousImageUrl={image} />
                 </div>
               </div>
             </form>
