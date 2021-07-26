@@ -257,7 +257,7 @@ const getUserProfileByUserID = async (req, res) => {
   try {
     const id = req.params.userID
     let profile
-    if(id === req.user.id) {
+    if (id === req.user.id) {
       profile = await db.User.findOne({ where: { id } })
     } else {
       profile = await db.User.findOne({ where: { id }, attributes: { exclude: ['email', 'phone'] } })
