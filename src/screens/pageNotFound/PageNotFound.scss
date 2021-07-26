@@ -1,82 +1,20 @@
-.page-layout {
-  margin: 0 auto;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.page-container {
+  color: var(--primary-white);
 
-  .wrapper {
-    width: 95%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: row;
+  .page-sub-title {
+    color: var(--primary-white);
+    margin-bottom: 40px;
+  }
 
-    .form {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        flex-direction: column;
-        margin: 0 2em;
-        flex: 50%;
-
-        .icons {
-        height: 60px;
-        margin-bottom: 3em;
-        margin-top: 3em;
-        }
-
-        .content {
-            margin-top: 5em;
-            
-            .page-title {
-                color: var(--primary-white);
-                font-size: 60px;
-                line-height: 1.2;
-                margin-bottom: 24px;
-                text-align: center;
-            }
-
-            .page-sub-title {
-                color: var(--primary-white);
-                margin-bottom: 40px;
-            }
-
-            .page-button {
-                width: 200px;
-                height: 40px;
-                background: var(--primary-color);
-                outline: none;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-weight: bolder;
-                font-size: 14px;
-            }
-
-            @media only screen and (max-width: 600px) {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 0;
-            }
-        }
-
-        @media only screen and (max-width: 425px) {
-        justify-content: center;
-        align-items: center;
-        }
-    }
-
-    .banner {
-        @media only screen and (max-width: 768px) {
-        display: block;
-        }
-
-        @media only screen and (max-width: 600px) {
-        display: none;
-        }
-    }
+  .page-button {
+    width: 200px;
+    height: 40px;
+    background: var(--primary-color);
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 14px;
   }
 }
