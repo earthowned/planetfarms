@@ -6,7 +6,7 @@ module.exports = {
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.addConstraint('questions', {
-      fields:  ['question'],
+      fields: ['question'],
       type: 'unique',
       name: 'questions_question_key'
     })
