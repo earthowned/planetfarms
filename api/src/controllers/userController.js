@@ -257,33 +257,32 @@ const getUserProfileByUserID = async (req, res) => {
   try {
     const id = req.params.userID
 
-  // fetching userID for community members
-  // desc: in community member the userId is availabe not userID
-    const user = await db.User.findOne({where: {id}, attriburtes: ['userID']});
-    
-    let userID;
-    if(user?.userID) {
+    // fetching userID for community members
+    // desc: in community member the userId is availabe not userID
+    const user = await db.User.findOne({ where: { id }, attriburtes: ['userID'] })
+
+    let userID
+    if (user?.userID) {
       userID = user.userID
     } else {
       userID = id
     }
 
-    let profile;
+    let profile
 
     // if logged in user, then show email and phone
-    
-    if(user.id === req.user.id) {
-      profile = await db.User.findOne({ where: { userID }});
+
+    if (user.id === req.user.id) {
+      profile = await db.User.findOne({ where: { userID } })
     } else {
-      profile = await db.User.findOne({ where: { userID }, attributes: { exclude: ['email', 'phone']} });
+      profile = await db.User.findOne({ where: { userID }, attributes: { exclude: ['email', 'phone'] } })
     }
-    
-    if(!profile) {
-      return res.status(404).json({error: 'Profile not found'})
+
+    if (!profile) {
+      return res.status(404).json({ error: 'Profile not found' })
     }
-      
+
     res.json(profile)
-  
   } catch (err) {
     res.json({ error: err.message }).status(400)
   }
