@@ -10,9 +10,9 @@ const DragDrop = ({
   fetchImg,
   dataImg,
   dropFile,
-  onClick = () => {}
+  onClick = () => {},
+  videoTitle
 }) => {
-  console.log(dropFile)
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
     accept: `${type ? `${type}/*` : fileType ? `${fileType}` : 'image/*'}`,
@@ -48,6 +48,7 @@ const DragDrop = ({
       fetchImg={fetchImg}
       dataImg={dataImg}
       onClick={onClick}
+      videoTitle={videoTitle}
     />
   )
 }
@@ -62,7 +63,8 @@ const DragDropComponent = ({
   type,
   text,
   dataImg,
-  onClick = () => {}
+  onClick = () => {},
+  videoTitle
 }) => {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
@@ -106,7 +108,7 @@ const DragDropComponent = ({
           </h6>
         )}
       </div>
-      {files && (
+      {files || videoTitle ? (
         <img
           src='/img/close-outline.svg'
           className='drag-drop-close'
@@ -116,6 +118,8 @@ const DragDropComponent = ({
           }}
           alt='drag_drop_img_close'
         />
+      ) : (
+        ''
       )}
     </div>
   )

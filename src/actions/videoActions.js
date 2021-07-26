@@ -48,7 +48,16 @@ export const createVideo =
     }
 
 export const updateVideo =
-  (id, videoCover, videoTitle, videoDescription, videoLink, videoResource) =>
+  (
+    id,
+    videoCover,
+    videoTitle,
+    videoDescription,
+    videoLink,
+    videoResource,
+    setEditVideoModel,
+    refetch
+  ) =>
     async (dispatch) => {
       const videoData = new FormData()
       videoData.append('videoCover', videoCover)
@@ -66,6 +75,8 @@ export const updateVideo =
         }
         const { data } = await Axios.put(GET_VIDEOS + `/${id}`, videoData, config)
         dispatch({ type: VIDEO_UPDATE_SUCCESS, payload: data })
+        refetch()
+        setEditVideoModel(false)
       } catch (error) {
         dispatch({
           type: VIDEO_UPDATE_FAIL,

@@ -82,6 +82,7 @@ const EditLesson = () => {
   const removePhoto = (id) => {
     dispatch(deletePhoto(id, refetch))
   }
+
   return (
     <>
       {isLoading ? (
