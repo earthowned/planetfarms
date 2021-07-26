@@ -8,6 +8,7 @@ import useGetLessonData from '../../../utils/useGetLessonData'
 import { updateLesson } from '../../../actions/lessonActions'
 import { deleteText } from '../../../actions/textActions'
 import { deletePhoto } from '../../../actions/photoActions'
+import { deleteVideo } from '../../../actions/videoActions'
 
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../../components/backButton/BackButton'
@@ -82,6 +83,9 @@ const EditLesson = () => {
   const removePhoto = (id) => {
     dispatch(deletePhoto(id, refetch))
   }
+  const removeVideo = (id) => {
+    dispatch(deleteVideo(id, refetch))
+  }
 
   return (
     <>
@@ -155,6 +159,7 @@ const EditLesson = () => {
                 setEditVideoModel={setEditVideoModel}
                 removeTextItem={removeTextItem}
                 removePhoto={removePhoto}
+                removeVideo={removeVideo}
               />
               <AddContentBlock setTestModal={setTestModal} />
               <EditLessonFooter

@@ -6,7 +6,10 @@ import {
   VIDEO_CREATE_FAIL,
   VIDEO_UPDATE_REQUEST,
   VIDEO_UPDATE_SUCCESS,
-  VIDEO_UPDATE_FAIL
+  VIDEO_UPDATE_FAIL,
+  VIDEO_DELETE_REQUEST,
+  VIDEO_DELETE_SUCCESS,
+  VIDEO_DELETE_FAIL
 } from '../constants/videoConstants'
 
 export const createVideo =
@@ -87,3 +90,20 @@ export const updateVideo =
         })
       }
     }
+
+export const deleteVideo = (id, refetch) => async (dispatch) => {
+  try {
+    dispatch({ type: VIDEO_DELETE_REQUEST })
+    const { data } = await Axios.delete(GET_VIDEOS + `/${id}`)
+    dispatch({ type: VIDEO_DELETE_SUCCESS, payload: data })
+    refetch()
+  } catch (error) {
+    dispatch({
+      type: VIDEO_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
