@@ -39,7 +39,10 @@ const addLesson = async (req, res) => {
 
 const deleteLesson = async (req, res) => {
   const { id } = req.params
-  const lesson = await db.Lesson.destroy({ where: { id } })
+  const lesson = await db.Lesson.destroy({
+    where: { id },
+    include: [db.Video, db.Photo, db.Text, db.Material]
+  })
   res.status(202).json({
     status: true,
     message: 'deleted lesson successfully',

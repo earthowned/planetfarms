@@ -11,7 +11,8 @@ import { resourceListReducer } from './reducers/resourceReducers'
 import { courseCreateReducer } from './reducers/courseReducers'
 import {
   lessonCreateReducer,
-  lessonUpdateReducer
+  lessonUpdateReducer,
+  lessonDeleteReducer
 } from './reducers/lessonReducers'
 import {
   videoCreateReducer,
@@ -103,6 +104,7 @@ const reducer = combineReducers({
   addCourse: courseCreateReducer,
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
+  deleteLesson: lessonDeleteReducer,
   addVideo: videoCreateReducer,
   deleteVideo: deleteVideoReducer,
   updateVideo: updateVideoReducer,

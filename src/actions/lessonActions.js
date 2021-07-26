@@ -10,7 +10,10 @@ import {
   LESSON_CREATE_FAIL,
   LESSON_UPDATE_REQUEST,
   LESSON_UPDATE_SUCCESS,
-  LESSON_UPDATE_FAIL
+  LESSON_UPDATE_FAIL,
+  LESSON_DELETE_REQUEST,
+  LESSON_DELETE_SUCCESS,
+  LESSON_DELETE_FAIL
 } from '../constants/lessonConstants'
 
 export const createLesson =
@@ -59,29 +62,48 @@ export const createLesson =
       }
     }
 
-export const updateLesson = (title, coverImg, lessonId) => async (dispatch) => {
-  const updateLessonFormData = new FormData()
-  updateLessonFormData.append('title', title)
-  updateLessonFormData.append('coverImg', coverImg)
+export const updateLesson =
+  (title, coverImg, lessonId, history) => async (dispatch) => {
+    const updateLessonFormData = new FormData()
+    updateLessonFormData.append('title', title)
+    updateLessonFormData.append('coverImg', coverImg)
 
-  try {
-    dispatch({ type: LESSON_UPDATE_REQUEST })
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data'
+    try {
+      dispatch({ type: LESSON_UPDATE_REQUEST })
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       }
-    }
 
-    const { data } = await Axios.put(
-      GET_LESSONS + '/' + lessonId,
-      updateLessonFormData,
-      config
-    )
-    dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
-    return data
+      const { data } = await Axios.put(
+        GET_LESSONS + '/' + lessonId,
+        updateLessonFormData,
+        config
+      )
+      dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
+      history.push(`/lesson/${lessonId}`)
+      return data
+    } catch (error) {
+      dispatch({
+        type: LESSON_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }
+
+export const deleteLesson = (id, refetch) => async (dispatch) => {
+  try {
+    dispatch({ type: LESSON_DELETE_REQUEST })
+    const { data } = await Axios.delete(GET_LESSONS + `/${id}`)
+    dispatch({ type: LESSON_DELETE_SUCCESS, payload: data })
+    refetch()
   } catch (error) {
     dispatch({
-      type: LESSON_UPDATE_FAIL,
+      type: LESSON_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
