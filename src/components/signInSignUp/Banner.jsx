@@ -1,8 +1,8 @@
 import './Banner.scss'
 
-const Banner = () => {
+const Banner = ({ bannerClass }) => {
   return (
-    <div className='banner'>
+    <div className={`banner ${bannerClass}`}>
       <div className='banner__image'>
         <div className='banner__overlap'>
           <img src='/img/banner-icon.svg' alt='banner-icon' />

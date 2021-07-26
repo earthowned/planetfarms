@@ -2,7 +2,7 @@ import Logo from '../../components/logo/Logo'
 import Banner from '../../components/signInSignUp/Banner'
 import './SignLayout.scss'
 
-const SignLayout = ({ children }) => {
+const SignLayout = ({ children, bannerClass }) => {
   return (
     <div className='sign-layout'>
       <div className='wrapper'>
@@ -12,7 +12,7 @@ const SignLayout = ({ children }) => {
           </div>
           {children}
         </div>
-        <Banner />
+        <Banner bannerClass={bannerClass} />
       </div>
     </div>
   )

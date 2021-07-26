@@ -119,7 +119,7 @@ function App () {
             <PrivateRoute component={MyProfile} exact path='/myProfile' />
             <PrivateRoute component={UserInfo} exact path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
-            <PrivateRoute component={PageNotFound} />
+            <Route component={PageNotFound} />
           </Switch>
         </ScrollToTop>
       </Router>

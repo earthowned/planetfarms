@@ -1,27 +1,20 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import Logo from '../../components/logo/Logo'
-import Banner from '../../components/signInSignUp/Banner'
+import SignLayout from '../../layout/signLayout/SignLayout'
 import './PageNotFound.scss'
 
 const PageNotFound = () => {
   const history = useHistory()
   return (
-    <div className='page-layout'>
-      <div className='wrapper'>
-        <div className='form'>
-          <div className='icons'>
-            <Logo />
-          </div>
-          <div className='content'>
-            <h1 className='page-title'>404 Error</h1>
-            <p className='page-sub-title'>Sorry! Page Not Found</p>
-            <button className='page-button' onClick={() => history.push('/dashboard')}>Go back to Dashboard</button>
-          </div>
+    <SignLayout bannerClass='not-found-page--banner'>
+      <form className='sign'>
+        <h1 className='welcome page-title'>404 Error</h1>
+        <div className='container page-container'>
+          <p className='page-sub-title'>Sorry! Page Not Found</p>
+          <button className='page-button' onClick={() => history.push('/dashboard')}>Go back to Dashboard</button>
         </div>
-        <Banner />
-      </div>
-    </div>
+      </form>
+    </SignLayout>
   )
 }
 
