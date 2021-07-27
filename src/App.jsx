@@ -50,6 +50,7 @@ import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/verification/UserVerification'
 import AddTest from './screens/addTest/AddTest'
 import LogoutUser from './screens/logoutUser/LogoutUser'
+import Category from './screens/category/Category'
 
 function App () {
   return (
@@ -113,6 +114,7 @@ function App () {
                 <AddTest />
               </DndProvider>
             } path='/admin/edit-test/:lessonId' />
+            <PrivateRoute component={Category} path='/admin/categories' />
             <PrivateRoute component={MyProfile} path='/myProfile' />
             <PrivateRoute component={UserInfo} path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
