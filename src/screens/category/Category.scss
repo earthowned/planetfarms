@@ -1,48 +1,19 @@
-@mixin borderStyle {
-  border-left: 1.5px solid var(--background-color);
-  padding: 8px;
-  text-align: center;
+.category__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 40px;
+
+  button {
+    width: 200px;
+  }
 }
 
-.tbl {
-//   border: 1px solid var(--primary-white);
-//   color: var(--primary-white);
-  width: 100%;
-  border-collapse: collapse;
-
-  &__heading {
-    font-size: 18px;
-
-      th:first-child {
-         background-color: var(--primary-color);
-        padding: 12px 0;
-      }
-
-      th:not(:first-child) {
-        @include borderStyle;
-        background-color: var(--primary-color);
-        padding: 12px 0;
-        }
-    }
-
-  &__body {
-      color: var(--primary-white);
-
-      tr {
-        background-color: var(--dropdowns);
-
-        &:nth-child(even) {
-          background-color: var(--popups);
-        }
-        
-        td:first-child {
-            padding: 8px;
-            text-align: center;  
-        }
-
-        td:not(:first-child) {
-          @include borderStyle;
-        }
-      }
-  }
+.category-btn {
+  width: 200px;
+  height: 40px;
+  border-radius: 4px;
+  font-weight: bolder;
+  margin-left: 0;
 }
