@@ -69,7 +69,7 @@ const ForgotPassword = () => {
 
   return (
     <SignLayout>
-      <form className='sign' noValidate>
+      <form className='sign'>
         <h1 className='welcome'>Forgot Password</h1>
         <div className='container'>
           {confirmErr && <div className='error'>{confirmErr}</div>}
@@ -77,7 +77,7 @@ const ForgotPassword = () => {
           {message && <div className='message'>{message}</div>}
           <Input
             placeholder='Email'
-            type='email'
+            type='text'
             name='username'
             id='username'
             ref={regi({

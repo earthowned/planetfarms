@@ -50,13 +50,13 @@ const SignIn = () => {
   }
 
   return (
-    <form className='sign' onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>
       <div className='container'>
         {error && <div className='error'>{error}</div>}
         <Input
           placeholder='Email'
-          type='email'
+          type='text'
           name='username'
           id='username'
           autoFocus='autoFocus'
