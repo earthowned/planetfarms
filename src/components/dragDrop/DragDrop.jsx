@@ -34,7 +34,7 @@ const DragDrop = ({
   useEffect(() => {
     if (previousImageUrl) {
       const filename = previousImageUrl.split('/').pop()
-      const file = new File([new Blob()], filename, { type: 'image/' + filename.split('.').pop() })
+      const file = new File([new Blob()], filename)
       const preview = { preview: previousImageUrl }
       Object.assign(file, preview)
       setFiles(file)
