@@ -35,12 +35,18 @@ const PORT = process.env.port || 5000
 
 // middleware
 app.use(express.json())
+const whiteListDomain = [
+  'http://localhost:3000',
+  'https://dev.planetfarms.io',
+  'http://github.planetfarms.io:3000'
+]
 app.use(
   cors({
-    origin:
-      'http://localhost:3000' ||
-      'https://dev.planetfarms.io/' ||
-      'http://github.planetfarms.io:3000/',
+    origin: [
+      'http://localhost:3000',
+      'https://dev.planetfarms.io',
+      'http://github.planetfarms.io:3000'
+    ],
     credentials: true
   })
 )
