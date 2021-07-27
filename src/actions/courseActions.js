@@ -31,7 +31,8 @@ export const createResource =
         const config = {
           headers: {
             'Content-Type': 'multipart/form-data'
-          }
+          },
+          withCredentials: true
         }
         const { data } = await Axios.post(ADD_COURSE, formData, config)
         dispatch({ type: COURSE_CREATE_SUCCESS, payload: data })

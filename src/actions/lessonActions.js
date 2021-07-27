@@ -36,7 +36,8 @@ export const createLesson =
         const config = {
           headers: {
             'Content-Type': 'multipart/form-data'
-          }
+          },
+          withCredentials: true
         }
         const { data } = await Axios.post(ADD_LESSONS, lessonFormData, config)
         dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })

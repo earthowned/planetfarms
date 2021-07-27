@@ -29,7 +29,8 @@ export const createVideo =
         const config = {
           headers: {
             'Content-Type': 'multipart/form-data'
-          }
+          },
+          withCredentials: true
         }
         const { data } = await Axios.post(ADD_VIDEOS, videoData, config)
         dispatch({ type: VIDEO_CREATE_SUCCESS, payload: data })

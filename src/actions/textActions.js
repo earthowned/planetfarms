@@ -15,7 +15,8 @@ export const createText =
       const config = {
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        withCredentials: true
       }
       const { data } = await Axios.post(ADD_LESSON_TEXT, textData, config)
       dispatch({ type: LESSSON_TEXT_CREATE_SUCCESS, payload: data })

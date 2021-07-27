@@ -14,7 +14,8 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
     const config = {
       Headers: {
         'Content-Type': 'multipart/form-data'
-      }
+      },
+      withCredentials: true
     }
     const { data } = await Axios.post(ADD_MATERIAL, materialData, config)
     dispatch({ type: MATERIAL_CREATE_SUCCESS, payload: data })

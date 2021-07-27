@@ -19,7 +19,8 @@ export const createLessonImg =
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data'
-        }
+        },
+        withCredentials: true
       }
       const { data } = await Axios.post(ADD_LESSON_PHOTO, lessonImgData, config)
       dispatch({ type: LESSSON_PHOTO_CREATE_SUCCESS, payload: data })
