@@ -64,12 +64,13 @@ import {
 import { memberListReducer } from './reducers/memberReducers'
 import { addEnrollReducer } from './reducers/enrollReducer'
 import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
-import { 
-  categoryCreateReducer, 
-  categoryDeleteReducer, 
-  categoryListReducer, 
-  categoryUpdateReducer, 
-  categoryViewReducer } from './reducers/categoryReducer'
+import {
+  categoryCreateReducer,
+  categoryDeleteReducer,
+  categoryListReducer,
+  categoryUpdateReducer,
+  categoryViewReducer
+} from './reducers/categoryReducer'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,

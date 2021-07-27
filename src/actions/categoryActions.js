@@ -25,8 +25,8 @@ const currentCommunity = localStorage.getItem('currentCommunity')
 
 export const listCategories = () => async (dispatch) => {
   try {
-    dispatch({ type: CATEGORY_LIST_REQUEST })   
-    const {data} = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/categories`)
+    dispatch({ type: CATEGORY_LIST_REQUEST })
+    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/categories`)
     dispatch({ type: CATEGORY_LIST_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
@@ -39,16 +39,15 @@ export const listCategories = () => async (dispatch) => {
 }
 
 export const createCategory = (newCategory) => async (dispatch, getState) => {
- 
   try {
     dispatch({ type: CATEGORY_CREATE_REQUEST })
     const config = configFunc()
-    const {name} = newCategory;
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/categories`,{name},
+    const { name } = newCategory
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/categories`, { name },
       config
     )
-    if(data?.error) {
-        return dispatch({ type: CATEGORY_CREATE_FAIL, payload: data.error })
+    if (data?.error) {
+      return dispatch({ type: CATEGORY_CREATE_FAIL, payload: data.error })
     }
 
     dispatch({ type: CATEGORY_CREATE_SUCCESS, payload: data })
@@ -63,7 +62,7 @@ export const createCategory = (newCategory) => async (dispatch, getState) => {
 export const listCategoryById = (id) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_LIST_BYID_REQUEST })
-    const {data} = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/categories/${id}`)
+    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/categories/${id}`)
     dispatch({ type: CATEGORY_LIST_BYID_SUCCESS, payload: data })
   } catch (error) {
     const message = error.response && error.response.data.message
@@ -76,20 +75,19 @@ export const listCategoryById = (id) => async (dispatch) => {
 export const categoryUpdate = (newCategory) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_UPDATE_REQUEST })
-   
+
     const config = configFunc()
-    const {id, name} = newCategory
-    
-    const {data} = await axios.put(
+    const { id, name } = newCategory
+
+    const { data } = await axios.put(
       `${process.env.REACT_APP_API_BASE_URL}/api/categories/${id}`,
-      {name},
+      { name },
       config
     )
 
-     if(data?.error) {
-        return dispatch({ type: CATEGORY_UPDATE_FAIL, payload: data.error })
+    if (data?.error) {
+      return dispatch({ type: CATEGORY_UPDATE_FAIL, payload: data.error })
     }
-
 
     dispatch({ type: CATEGORY_UPDATE_SUCCESS, payload: true })
   } catch (error) {

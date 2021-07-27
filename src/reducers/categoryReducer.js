@@ -24,7 +24,7 @@ export const categoryListReducer = (state = { categories: [] }, action) => {
     case CATEGORY_LIST_SUCCESS:
       return {
         loading: false,
-        categories: action.payload.results,
+        categories: action.payload.results
         // pages: action.payload.pages,
         // page: action.payload.page,
         // totalPages: action.payload.totalPages
@@ -41,7 +41,7 @@ export const categoryViewReducer = (state = { category: {} }, action) => {
     case CATEGORY_LIST_BYID_REQUEST:
       return { ...state, loading: true }
     case CATEGORY_LIST_BYID_SUCCESS:
-      return { loading: false, category: action.payload.results}
+      return { loading: false, category: action.payload.results }
     case CATEGORY_LIST_BYID_FAIL:
       return { loading: false, error: action.payload }
     default:
