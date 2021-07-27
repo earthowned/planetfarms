@@ -98,7 +98,7 @@ const CreateVideo = ({
 
                   {!videoLink && (
                     <DragDrop
-                      fileType='video/mp4,video/mov'
+                      fileType='video/mp4,video/quicktime'
                       className={
                         video
                           ? 'videoUploadBtn videoUploadBtn-full'
