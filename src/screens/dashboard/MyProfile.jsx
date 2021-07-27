@@ -8,21 +8,24 @@ import {
   PersonalInformation
 } from '../../components/profileFormCard/ProfileFormCard'
 import EditInformation from '../../components/editInformation/EditInformation'
-import { getMyDetails } from '../../actions/userAction'
+import { getMyDetails, getUserDetails } from '../../actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import VerificationModal from '../../components/verificationModal/VerificationModal'
+import { useLocation } from 'react-router-dom'
 
 function MyProfile () {
-  const [showEmailVerificationModal, setShowEmailVerificationModal] =
-    useState(false)
-  const [showPhoneVerificationModal, setShowPhoneVerificationModal] =
-    useState(false)
+  const { id } = useParams()
+  const {pathname} = useLocation()
+  const [showEmailVerificationModal, setShowEmailVerificationModal] = useState(false)
+  const [showPhoneVerificationModal, setShowPhoneVerificationModal] = useState(false)
   const history = useHistory()
   const dispatch = useDispatch()
   const userDetails = useSelector((state) => state.userDetails)
   const { status } = useSelector((state) => state.userAttrConfirmCode)
   const { user, loading } = userDetails
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   const verification = {
     emailClickHandler: () => {
@@ -32,13 +35,24 @@ function MyProfile () {
       phoneClickHandler(true)
     }
   }
+
+  // for myProfile
   useEffect(() => {
-    dispatch(getMyDetails())
-    if (status) {
-      emailClickHandler(false)
-      phoneClickHandler(false)
+    if(pathname === "/myProfile") {
+      dispatch(getMyDetails())
+      if (status) {
+        emailClickHandler(false)
+        phoneClickHandler(false)
+      }
     }
   }, [dispatch, history, status])
+
+  // for community members
+  useEffect(() => {
+      if (userInfo && id) {
+        dispatch(getUserDetails(id))
+      }
+  }, [dispatch, history, id, userInfo])
 
   const editUserInformation = () => {
     history.push({

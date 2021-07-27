@@ -27,7 +27,6 @@ import CommunityPagenews from './screens/communityNews/CommunityNews'
 import CommunityNewsViewPage from './screens/communityNewsView/CommunityNewsView'
 import NewsAdd from './screens/communityNews/newsAdd/NewsAdd'
 import CommunityMembers from './screens/communityMembers/CommunityMembers'
-import CommunityMembersProfile from './screens/communityMemberProfile/CommunityMemberProfile'
 import UserInfo from './screens/cabinetUserInfo/CabinetUserInfo'
 import CommunityGroup from './screens/communityGroup/CommunityGroup'
 import Enterprises from './screens/enterprises/Enterprises'
@@ -78,7 +77,7 @@ function App () {
             <PrivateRoute component={CommunityNewsViewPage} path='/community-page-news-view' exact />
             <PrivateRoute component={AllCommunitiesCard} path='/community-switching' exact />
             <PrivateRoute component={CommunityMembers} path='/community-members/:id' exact />
-            <PrivateRoute component={CommunityMembersProfile} path='/community-members-profile/:id' exact />
+            <PrivateRoute component={MyProfile} path='/community-members-profile/:id' exact />
             <PrivateRoute component={CommunityGroup} path='/community-group/:id' exact />
             <PrivateRoute component={CommunityGroup} path='/your-community-group/:id' exact />
             <PrivateRoute component={CommunityGroupViewPage} path='/community-group-view-page/:id' exact />
