@@ -3,6 +3,7 @@ const shortid = require('shortid')
 const path = require('path')
 const fs = require('fs')
 const sharp = require('sharp')
+const BadRequestError = require('../errors/badRequestError')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -30,7 +31,7 @@ function checkFileType (file, cb) {
   if (extname || mimetype) {
     return cb(null, true)
   } else {
-    throw new Error('Format not valid')
+    return cb(new BadRequestError('Format not valid'))
   }
 }
 
@@ -86,7 +87,7 @@ const resizeImage = (req, res, next) => {
       return next(null, true)
     }
   } catch (error) {
-    console.error(error)
+    throw error
   }
 }
 
@@ -99,5 +100,6 @@ module.exports = {
   uploadArray,
   upload,
   resizeImage,
-  changeFormat
+  changeFormat,
+  storage
 }

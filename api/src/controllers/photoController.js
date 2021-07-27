@@ -42,6 +42,7 @@ const getPhotoById = async (req, res) => {
 }
 
 const addphoto = async (req, res) => {
+  console.log(res.status)
   let lessonImg = ''
   if (req.file) {
     lessonImg = req.file.filename
