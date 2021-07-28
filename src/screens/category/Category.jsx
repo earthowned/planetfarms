@@ -14,7 +14,7 @@ import { configFunc } from '../../utils/apiFunc'
 import './Category.scss'
 import GetRole from '../../utils/getRole.jsx'
 
-const Category = ({role}) => {
+const Category = ({ role }) => {
   const [deleteModal, setDeleteModal] = useState(false)
   const [editModal, setEditModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
@@ -35,7 +35,7 @@ const Category = ({role}) => {
   }, [success, deleteSuccess, updateSuccess])
 
   const config = configFunc()
-  
+
   const confirmDelete = async () => {
     // await axios.delete( `${process.env.REACT_APP_API_BASE_URL}/api/categories/${deleteId}`, config)
     dispatch(categoryDelete(deleteId))
@@ -54,7 +54,7 @@ const Category = ({role}) => {
     setEditModal(true)
   }
 
-  if(role !== 'sysadmin') {
+  if (role !== 'sysadmin') {
     return <Redirect to='/dashboard' />
   }
   return (

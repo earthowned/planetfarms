@@ -9,23 +9,23 @@ const Table = ({ tblData = [], setEditModal, setDeleteModal }) => {
     }
   }, [])
   return (
-    <div className="tbl-wrapper">
-    <table className='tbl'>
-      <thead className='tbl__heading'>
-        <tr>
-          <th>S.N.</th>
-          {
+    <div className='tbl-wrapper'>
+      <table className='tbl'>
+        <thead className='tbl__heading'>
+          <tr>
+            <th>S.N.</th>
+            {
                             property.map((propKey, index) => {
                               if (propKey !== 'id') {
                                 return <th key={index}>{propKey}</th>
                               }
                             })
                         }
-          <th>Options</th>
-        </tr>
-      </thead>
-      <tbody className='tbl__body'>
-        {
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody className='tbl__body'>
+          {
                        tblData.length && tblData.map((item, index) => {
                          return (
                            <tr key={index}>
@@ -47,8 +47,8 @@ const Table = ({ tblData = [], setEditModal, setDeleteModal }) => {
                          )
                        })
                     }
-      </tbody>
-    </table>
+        </tbody>
+      </table>
     </div>
   )
 }
