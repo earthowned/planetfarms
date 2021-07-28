@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     active: {
       type: DataTypes.INTEGER,
       defaultValue: true
+    },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'manager'
     }
   },
   { timestamps: true }

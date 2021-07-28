@@ -85,7 +85,7 @@ const getAllMembers = async (req, res) => {
     const data = await db.CommunityUser.findAll(
       {
         where: { communityId: req.params.id, active: true },
-        attributes: ['userId'],
+        attributes: ['userId', "role"],
         include: [{
           model: db.User,
           attributes: ['firstName']
@@ -98,6 +98,54 @@ const getAllMembers = async (req, res) => {
     })
   } catch (error) {
     res.status(400).json({ error })
+  }
+}
+
+// @desc Get the community-users
+// @route GET /api/community-users/community/:id/details
+// @access Public
+
+const getAllMemberDetails = async (req, res) => {
+  try {
+    const data = await db.CommunityUser.findAll(
+      {
+        where: { communityId: req.params.id, active: true },
+        attributes: ['id', 'userId', 'role'],
+        include: [{
+          model: db.User,
+          attributes: ['firstName', 'lastName', 'email', "phone", "dateOfBirth"]
+        }],
+        required: true
+      }
+    )
+
+    // flattening the array to show only one object
+    const newArray = data.map(item => {
+      const {userId, role, id} = item.dataValues
+        const {...rest} = item.user
+          return {id, userId, role, ...rest.dataValues}
+      }
+    )
+
+    res.json({
+      results: newArray
+    })
+  } catch (error) {
+    res.status(400).json({ error })
+  }
+}
+
+// @desc Update the community users
+// @route PUT /api/community-users/:memberId/community/:id/
+// @access Public
+
+const updateMemberRole = async (req, res) => {
+  try {
+    const {role} = req.body
+   await db.CommunityUser.update({role: role}, {where: {id: parseInt(req.params.memberId)}})
+    res.json({message: 'Successfully role updated'})
+  } catch (error) {
+    res.status(400).json({error})
   }
 }
 
@@ -129,4 +177,4 @@ const searchMemberName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getCommunityUsers, followCommunity, getAllMembers, searchMemberName }
+module.exports = { getCommunityUsers, followCommunity, getAllMembers, searchMemberName, getAllMemberDetails, updateMemberRole }
