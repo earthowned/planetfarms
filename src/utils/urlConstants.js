@@ -31,6 +31,7 @@ export const GET_LESSON_TEXT = 'lesson-text'
 export const ADD_LESSON_TEXT = 'lesson-text/add'
 
 // lesson material
+export const GET_MATERIAL = 'materials'
 export const ADD_MATERIAL = 'materials/add'
 
 // get files
@@ -39,3 +40,4 @@ export const GET_COVERIMG = CDN_URL + '/coverImg/'
 export const GET_VIDEO = CDN_URL + '/videoResource/'
 export const VIDEO_COVER = CDN_URL + '/videoCover/'
 export const LESSON_IMG = CDN_URL + '/lessonImg/'
+export const MATERIAL = CDN_URL + '/material/'

@@ -29,7 +29,10 @@ import {
   textUpdateReducer,
   deleteTextReducer
 } from './reducers/textReducer'
-import { materialCreateReducer } from './reducers/materiallReducer'
+import {
+  materialCreateReducer,
+  materialDeleteReducer
+} from './reducers/materiallReducer'
 import {
   testCreateReducer,
   testQuestionListReducer
@@ -115,6 +118,7 @@ const reducer = combineReducers({
   updateText: textUpdateReducer,
   deleteText: deleteTextReducer,
   addMaterial: materialCreateReducer,
+  deleteMaterial: materialDeleteReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,
   userLogin: userLoginReducer,
