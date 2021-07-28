@@ -280,7 +280,8 @@ const getMyProfile = (req, res) => {
     dateOfBirth: user.dateOfBirth,
     lastLogin: user.lastLogin,
     numberOfVisit: user.numberOfVisit,
-    attachments: user.attachments
+    attachments: user.attachments,
+    role: user.role
   })
 }
 

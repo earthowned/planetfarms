@@ -2,6 +2,12 @@
   border-left: 1.5px solid var(--background-color);
   padding: 8px;
   text-align: center;
+  font-size: 18px;
+}
+
+.tbl-wrapper {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .tbl {
@@ -14,13 +20,13 @@
 
     th:first-child {
       background-color: var(--primary-color);
-      padding: 12px 0;
+      padding: 12px;
     }
 
     th:not(:first-child) {
       @include borderStyle;
       background-color: var(--primary-color);
-      padding: 12px 0;
+      padding: 12px;
     }
   }
 

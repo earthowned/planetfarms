@@ -9,6 +9,7 @@ const Table = ({ tblData = [], setEditModal, setDeleteModal }) => {
     }
   }, [])
   return (
+    <div className="tbl-wrapper">
     <table className='tbl'>
       <thead className='tbl__heading'>
         <tr>
@@ -48,6 +49,7 @@ const Table = ({ tblData = [], setEditModal, setDeleteModal }) => {
                     }
       </tbody>
     </table>
+    </div>
   )
 }
 

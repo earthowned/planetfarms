@@ -266,7 +266,8 @@ export const getMyDetails = () => async (dispatch) => {
       dateOfBirth: data.dateOfBirth,
       lastLogin: data.lastLogin,
       numberOfVisit: data.numberOfVisit,
-      attachments: data.attachments
+      attachments: data.attachments,
+      role: data.role
     }
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const { attributes } = await Auth.currentAuthenticatedUser({

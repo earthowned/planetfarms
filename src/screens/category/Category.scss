@@ -5,8 +5,17 @@
   width: 100%;
   margin-bottom: 40px;
 
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   button {
     width: 200px;
+
+    @media screen and (max-width: 600px) {
+      margin-top: 40px;
+    }
   }
 }
 
@@ -16,4 +25,5 @@
   border-radius: 4px;
   font-weight: bolder;
   margin-left: 0;
+  cursor: pointer;
 }
