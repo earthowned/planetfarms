@@ -137,6 +137,14 @@ export const register = (name, password) => async (dispatch) => {
   }
 }
 
+export const socialSignIn = (provider) => async (dispatch) => {
+  try {
+    Auth.federatedSignIn({ provider })
+  } catch (err){
+    console.log('err: ', err)
+  }
+}
+
 export const login = (name, password) => async (dispatch) => {
   let data = {}
   try {

@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
-import { login } from '../../actions/userAction'
+import { login, socialSignIn } from '../../actions/userAction'
 import { USER_LOGIN_SUCCESS } from '../../constants/userConstants'
 import { SignInSignUpData } from './SignInSignUpData'
 
@@ -98,12 +98,12 @@ const SignIn = () => {
 
   const loginWithFacebook = (e) => {
     e.preventDefault()
-    // Auth.federatedSignIn({ provider: "Facebook" });
+    dispatch(socialSignIn('Facebook'))
   }
-
+  
   const loginWithGoogle = (e) => {
     e.preventDefault()
-    // Auth.federatedSignIn({ provider: "Google" });
+    dispatch(socialSignIn('Google'))
   }
 
   const onSubmit = ({ username, password }) => {
@@ -111,7 +111,7 @@ const SignIn = () => {
   }
 
   return (
-    <form className='sign' onSubmit={handleSubmit(onSubmit)}>
+    <form className='sign'>
       <h1 className='welcome'>Sign In</h1>
       <div className='container'>
         {error && <div className='error'>{error}</div>}
@@ -157,7 +157,7 @@ const SignIn = () => {
         </div>
 
         <div className='btnWrapper'>
-          <Button name='Sign In' />
+          <Button name='Sign In' onClick={handleSubmit(onSubmit)}/>
           <Link to='/forgot-password' className='fPassword green16px'>
             Forgot Password?
           </Link>
