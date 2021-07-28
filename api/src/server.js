@@ -36,16 +36,7 @@ const PORT = process.env.port || 5000
 // middleware
 app.use(express.json())
 
-app.use(
-  cors({
-    origin: [
-      'http://localhost:3000',
-      'https://dev.planetfarms.io',
-      'http://github.planetfarms.io:3000'
-    ],
-    credentials: true
-  })
-)
+app.use(cors())
 dotenv.config()
 
 // routes
