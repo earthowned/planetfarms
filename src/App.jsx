@@ -11,6 +11,7 @@ import SignupScreen from './screens/signUp/SignupScreen'
 import CongratulationScreen from './screens/congratulation/CongratulationScreen'
 import Messenger from './screens/messenger/Messenger'
 import Library from './screens/library/Library'
+import SocialRedirect from './components/socialRedirect/SocialRedirect'
 import './App.css'
 import DashboardComponent from './screens/dashboard/MainDashboard'
 import Achievements from './screens/dashboard/Achievements'
@@ -58,6 +59,7 @@ function App () {
       <Router>
         <ScrollToTop>
           <Switch>
+            <Route component={SocialRedirect} path='/redirect' exact />
             <Route component={LoginScreen} path='/login' exact />
             <Route component={SignupScreen} path='/register' exact />
             <Route component={ForgotPassword} path='/forgot-password' />
