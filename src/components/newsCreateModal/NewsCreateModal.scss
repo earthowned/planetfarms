@@ -97,6 +97,7 @@
 
 .error {
   border-color: var(--secondary-red);
+
   &:focus {
     border-color: var(--secondary-red) !important;
   }
@@ -207,6 +208,7 @@
           background: var(--primary-color);
         }
       }
+
       .input-container {
         .block {
           border: 1px solid var(--dropdowns);
@@ -239,17 +241,18 @@
 
         &__error {
           border-color: var(--secondary-red);
+
           &:focus {
             border-color: var(--secondary-red) !important;
           }
         }
 
-        &:focus {
-          border-color: var(--primary-color);
-        }
-
         &::-webkit-input-placeholder {
           color: var(--primary-grey);
+        }
+
+        &:focus {
+          border-color: var(--primary-color);
         }
       }
     }
