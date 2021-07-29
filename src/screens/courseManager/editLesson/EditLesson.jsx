@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 import useGetLessonData from '../../../utils/useGetLessonData'
-import { createLesson, updateLesson } from '../../../actions/lessonActions'
-import { deleteText } from '../../../actions/textActions'
-import { deletePhoto } from '../../../actions/photoActions'
-import { deleteVideo } from '../../../actions/videoActions'
-import { deleteMaterial } from '../../../actions/materialActions'
+import { updateLesson } from '../../../actions/lessonActions'
+import { useDeleteActions } from './deleteAction'
+import { useFetchLessonData } from './fetchLessonData'
 
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../../components/backButton/BackButton'
@@ -38,10 +36,8 @@ const EditLesson = () => {
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
-  const [material, setMaterial] = useState([])
   const [materialData, setMaterialData] = useState([])
   const [lessonData, setLessonData] = useState([])
-  const [lessonEditData, setLessonEditData] = useState([])
   const [lessonTitle, setLessonTitle] = useState()
   const [editTextModel, setEditTextModel] = useState(false)
   const [editPhotoModel, setEditPhotoModel] = useState(false)
@@ -62,20 +58,24 @@ const EditLesson = () => {
   const [lessonCover, setLessonCover] = useState(`${fetchImg}`)
   const title = data?.data?.title
 
-  const textData = data?.data?.texts.map((text) => {
-    return text
-  })
-  const videoData = data?.data?.videos.map((video) => {
-    return video
-  })
-  const photoData = data?.data?.photos.map((photo) => {
-    return photo
-  })
-
-  useEffect(() => {
-    setLessonEditData([textData, videoData, photoData, lessonData].flat())
-    setMaterial(data?.data?.materials)
-  }, [data, lessonData])
+  const { lessonEditData, material, setMaterial } = useFetchLessonData(
+    data,
+    lessonData
+  )
+  const {
+    removeTextItem,
+    removePhoto,
+    removeVideo,
+    removeMaterial,
+    removeItem,
+    removeLocalMaterial
+  } = useDeleteActions(
+    refetch,
+    lessonData,
+    setLessonData,
+    material,
+    setMaterial
+  )
 
   const lessonId = data?.data?.id
   const updateLessonForm = ({ title }) => {
@@ -88,19 +88,7 @@ const EditLesson = () => {
   const modelPopUp = (poupState, dataId) => {
     setEditId(dataId)
   }
-
-  const removeTextItem = (id) => {
-    dispatch(deleteText(id, refetch))
-  }
-  const removePhoto = (id) => {
-    dispatch(deletePhoto(id, refetch))
-  }
-  const removeVideo = (id) => {
-    dispatch(deleteVideo(id, refetch))
-  }
-  const removeMaterial = (id) => {
-    dispatch(deleteMaterial(id, refetch))
-  }
+  console.log(material)
   return (
     <>
       {isLoading ? (
@@ -140,9 +128,11 @@ const EditLesson = () => {
               editTextModel={editTextModel}
               setEditTextModel={setEditTextModel}
               editId={editId}
-              textData={lessonData}
+              textData={lessonEditData}
               editFetchedData
               refetch={refetch}
+              lessonData={lessonData}
+              setLessonData={setLessonData}
             />
           )}
           {editPhotoModel && (
@@ -150,19 +140,23 @@ const EditLesson = () => {
               editPhotoModel={editPhotoModel}
               setEditPhotoModel={setEditPhotoModel}
               editId={editId}
-              photoData={lessonData}
+              photoData={lessonEditData}
               editFetchedData
               refetch={refetch}
+              lessonData={lessonData}
+              setLessonData={setLessonData}
             />
           )}
           {editVideoModel && (
             <EditVideo
               editVideoModel={editVideoModel}
               setEditVideoModel={setEditVideoModel}
-              videoData={lessonData}
+              videoData={lessonEditData}
               editId={editId}
               editFetchedData
               refetch={refetch}
+              lessonData={lessonData}
+              setLessonData={setLessonData}
             />
           )}
           <DashboardLayout title='Edit lesson'>
@@ -202,6 +196,7 @@ const EditLesson = () => {
                 removeTextItem={removeTextItem}
                 removePhoto={removePhoto}
                 removeVideo={removeVideo}
+                removeLocalData={removeItem}
               />
               <AddContentBlock
                 setTestModal={setTestModal}
@@ -213,6 +208,7 @@ const EditLesson = () => {
                 material={material}
                 setMaterial={setMaterial}
                 removeMaterial={removeMaterial}
+                removeLocalMaterial={removeLocalMaterial}
               />
               <EditLessonFooter
                 onClick={handleSubmit(updateLessonForm)}

@@ -60,7 +60,7 @@ const AddLesson = () => {
 
   const removeMaterial = (e) => {
     const name = e.currentTarget.getAttribute('name')
-    setMaterial(material.filter((item) => item?.mData?.name !== name))
+    setMaterial(material.filter((item) => item?.mData?.preview !== name))
   }
 
   return (
@@ -142,7 +142,7 @@ const AddLesson = () => {
         <LessonMaterial
           material={material}
           setMaterial={setMaterial}
-          removeMaterial={removeMaterial}
+          removeLocalMaterial={removeMaterial}
         />
         <LessonSaveModal
           pathId={courseId}

@@ -13,14 +13,14 @@ const LessonContent = ({
   modelPopUp,
   removeTextItem,
   removePhoto,
-  removeVideo
+  removeVideo,
+  removeLocalData
 }) => {
   const [allLessonData, setAllLessonData] = useState([])
 
   useEffect(() => {
     setAllLessonData(lessonData, newLessonData)
   }, [lessonData, newLessonData])
-  console.log(allLessonData)
 
   function video (data) {
     if (typeof data?.videoResource === 'string') {
@@ -41,8 +41,8 @@ const LessonContent = ({
               isEditable
               setEditTextModel={setEditTextModel}
               modelPopUp={modelPopUp}
-              id={data?.id}
-              onRemove={removeTextItem}
+              id={data?.id || data?.itemId}
+              onRemove={data?.id ? removeTextItem : removeLocalData}
             />
             <Video
               title={data?.videoTitle}
@@ -59,9 +59,9 @@ const LessonContent = ({
               }
               setEditVideoModel={setEditVideoModel}
               isEditable
-              id={data?.id}
+              id={data?.id || data?.itemId}
               modelPopUp={modelPopUp}
-              onRemove={removeVideo}
+              onRemove={data?.id ? removeVideo : removeLocalData}
             />
 
             {data?.lessonImg === undefined ? (
@@ -73,12 +73,12 @@ const LessonContent = ({
                     ? `${LESSON_IMG}${data?.lessonImg}`
                     : data?.lessonImg.preview
                 }
-                id={data?.id}
+                id={data?.id || data?.itemId}
                 modelPopUp={modelPopUp}
                 setEditPhotoModel={setEditPhotoModel}
                 isEditable
                 desc={data?.isImgDesc === true && data?.photoDescription}
-                onRemove={removePhoto}
+                onRemove={data?.id ? removePhoto : removeLocalData}
               />
             )}
           </div>
