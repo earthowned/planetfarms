@@ -1,4 +1,5 @@
 import { Axios, ADD_LESSONS, GET_LESSONS } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
 import { addText } from '../screens/courseManager/addLesson/addText'
 import { addVideo } from '../screens/courseManager/addLesson/addVideo'
 import { addImage } from '../screens/courseManager/addLesson/addImage'
@@ -36,10 +37,14 @@ export const createLesson =
         const config = {
           headers: {
             'Content-Type': 'multipart/form-data'
-          },
-          withCredentials: true
+          }
         }
-        const { data } = await Axios.post(ADD_LESSONS, lessonFormData, config)
+        const { data } = await postApi(
+          dispatch,
+          ADD_LESSONS,
+          lessonFormData,
+          config
+        )
         dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
         const lessonId = data?.data?.id
         for (let i = 0; i < lessonData.length; i++) {

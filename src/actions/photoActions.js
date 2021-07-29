@@ -1,4 +1,5 @@
 import { Axios, ADD_LESSON_PHOTO } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
 
 import {
   LESSSON_PHOTO_CREATE_REQUEST,
@@ -19,10 +20,14 @@ export const createLessonImg =
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data'
-        },
-        withCredentials: true
+        }
       }
-      const { data } = await Axios.post(ADD_LESSON_PHOTO, lessonImgData, config)
+      const { data } = await postApi(
+        dispatch,
+        ADD_LESSON_PHOTO,
+        lessonImgData,
+        config
+      )
       dispatch({ type: LESSSON_PHOTO_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({
