@@ -111,11 +111,11 @@ const localAuth = async (name, password) => {
 // @access  Public
 const registerUser = async (req, res) => {
   try {
-    const { name, password, id } = req.body
+    const { name, password, id, email } = req.body
     if (process.env.AUTH_METHOD === 'cognito') {
       const data = await db.User.findOne({ where: { userID: id } })
       if (!data) {
-        const user = await db.User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
+        const user = await db.User.create({ email, userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
         if (user && await subscribeCommunity(user)) {
           res.status(201).send('SUCCESS')
         }
@@ -136,7 +136,7 @@ const registerLocal = async (name, password, res) => {
     if (userExists) { return res.json({ message: 'Users already Exists !!!' }).status(400) }
     const newUser = await db.sequelize.transaction(async (t) => {
       const user = await db.LocalAuth.create({ username: name, password: password }, { transaction: t })
-      return await db.User.create({ userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
+      return await db.User.create({ email: name, userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
     })
     if (newUser && await subscribeCommunity(newUser)) {
       res.status(201).json({

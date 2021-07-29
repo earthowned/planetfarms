@@ -117,14 +117,18 @@ const SignIn = () => {
         {error && <div className='error'>{error}</div>}
 
         <Input
-          placeholder='Username'
+          placeholder='Email'
           type='text'
           name='username'
           id='username'
           ref={regi({
             required: {
               value: true,
-              message: 'You must enter username'
+              message: 'You must enter email'
+            },
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: 'You must enter valid email'
             }
           })}
           errors={errors}
