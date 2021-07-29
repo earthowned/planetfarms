@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { socialSignInRedirect } from '../../actions/userAction'
 
-const SocialRedirect = () => {
+const LoginRedirect = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -16,4 +16,4 @@ const SocialRedirect = () => {
   )
 }
 
-export default SocialRedirect
+export default LoginRedirect

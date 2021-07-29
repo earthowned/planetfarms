@@ -193,11 +193,6 @@ export const socialSignInRedirect = (provider) => async (dispatch) => {
         : error.message
     })
   }
-
-  // try {
-  // } catch (err){
-  //   console.log('err: ', err)
-  // }
 }
 
 export const login = (name, password) => async (dispatch) => {
@@ -422,11 +417,9 @@ export const searchUsers = (search) => async (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
-  Auth.signOut().then(() => {
-    window.localStorage.clear()
-    dispatch({ type: USER_LOGOUT })
-    document.location.href = '/login'
-  }).catch(err => console.log(err))
+  window.localStorage.clear()
+  dispatch({ type: USER_LOGOUT })
+  document.location.href = '/login'
 }
 
 export const confirmPin = (username, code) => async (dispatch) => {

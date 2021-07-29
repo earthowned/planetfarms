@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { login, socialSignIn } from '../../actions/userAction'
 import { USER_LOGIN_SUCCESS } from '../../constants/userConstants'
 import { SignInSignUpData } from './SignInSignUpData'
+import { Auth } from 'aws-amplify'
 
 import Button from '../button/Button'
 import Checkbox from '../checkbox/Checkbox'
@@ -36,6 +37,12 @@ const SignIn = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
   }
+
+  useEffect(async () => {
+    const response = await Auth.currentAuthenticatedUser()
+    console.log(response)
+    if (response) history.push('/redirect')
+  }, [])
 
   useEffect(() => {
     /* Hub.listen("auth", ({ payload: { event, data } }) => {
@@ -100,7 +107,7 @@ const SignIn = () => {
     e.preventDefault()
     dispatch(socialSignIn('Facebook'))
   }
-  
+
   const loginWithGoogle = (e) => {
     e.preventDefault()
     dispatch(socialSignIn('Google'))
@@ -157,7 +164,7 @@ const SignIn = () => {
         </div>
 
         <div className='btnWrapper'>
-          <Button name='Sign In' onClick={handleSubmit(onSubmit)}/>
+          <Button name='Sign In' onClick={handleSubmit(onSubmit)} />
           <Link to='/forgot-password' className='fPassword green16px'>
             Forgot Password?
           </Link>
