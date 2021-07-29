@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { configFunc, getApi } from '../utils/apiFunc'
+import { configFunc, getApi, postApi } from '../utils/apiFunc'
 import {
   GROUP_LIST_REQUEST,
   GROUP_LIST_SUCCESS,
@@ -76,10 +76,7 @@ export const createGroup = (newGroup) => async (dispatch, getState) => {
   formData.append('category', newGroup.category)
   try {
     dispatch({ type: GROUP_CREATE_REQUEST })
-    const config = configFunc()
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups/add/community/${currentCommunity.id}`, formData,
-      config
-    )
+    const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/groups/add/community/${currentCommunity.id}`, formData)
     dispatch({ type: GROUP_CREATE_SUCCESS, payload: data })
   } catch (error) {
     const message = error.response && error.response.data.message
@@ -146,8 +143,7 @@ export const groupDelete = (id) => async (dispatch) => {
 export const followGroup = (groupId) => async (dispatch, getState) => {
   try {
     dispatch({ type: GROUP_FOLLOW_REQUEST })
-    const config = configFunc()
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/groups-users/follow`, { groupId }, config)
+    await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/groups-users/follow`, { groupId })
     dispatch({ type: GROUP_FOLLOW_SUCCESS })
   } catch (error) {
     const message = error.response && error.response.data.message

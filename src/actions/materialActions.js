@@ -1,4 +1,4 @@
-import { Axios, ADD_MATERIAL } from '../utils/urlConstants'
+import { ADD_MATERIAL } from '../utils/urlConstants'
 import { postApi } from '../utils/apiFunc'
 
 import {

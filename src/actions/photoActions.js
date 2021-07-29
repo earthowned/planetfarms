@@ -1,4 +1,4 @@
-import { Axios, ADD_LESSON_PHOTO } from '../utils/urlConstants'
+import { ADD_LESSON_PHOTO } from '../utils/urlConstants'
 import { postApi } from '../utils/apiFunc'
 
 import {

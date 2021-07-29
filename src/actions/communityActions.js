@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { configFunc, getApi } from '../utils/apiFunc'
+import { configFunc, getApi, postApi } from '../utils/apiFunc'
 import { COMMUNITY_CREATE_FAIL, COMMUNITY_CREATE_REQUEST, COMMUNITY_CREATE_SUCCESS, COMMUNITY_DELETE_FAIL, COMMUNITY_DELETE_REQUEST, COMMUNITY_DELETE_SUCCESS, COMMUNITY_JOIN_FAIL, COMMUNITY_JOIN_REQUEST, COMMUNITY_JOIN_SUCCESS, COMMUNITY_LIST_FAIL, COMMUNITY_LIST_REQUEST, COMMUNITY_LIST_SUCCESS, COMMUNITY_SEARCH_FAIL, COMMUNITY_SEARCH_REQUEST, COMMUNITY_SEARCH_SUCCESS, COMMUNITY_UPDATE_FAIL, COMMUNITY_UPDATE_REQUEST, COMMUNITY_UPDATE_SUCCESS, COMMUNITY_VISIT_FAIL, COMMUNITY_VISIT_REQUEST, COMMUNITY_VISIT_SUCCESS, USER_COMMUNITY_LIST_FAIL, USER_COMMUNITY_LIST_REQUEST, USER_COMMUNITY_LIST_SUCCESS, USER_COMMUNITY_SEARCH_FAIL, USER_COMMUNITY_SEARCH_REQUEST, USER_COMMUNITY_SEARCH_SUCCESS } from '../constants/communityConstants'
 
 export const listCommunities = ({ pageNumber }) => async (dispatch) => {
@@ -91,8 +91,7 @@ export const createCommunity = (newCommunity) => async (dispatch, getState) => {
     dispatch({
       type: COMMUNITY_CREATE_REQUEST
     })
-    const config = await configFunc()
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/communities/add`, formData, config)
+    await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/communities/add`, formData)
     dispatch({
       type: COMMUNITY_CREATE_SUCCESS
     })
@@ -110,8 +109,7 @@ export const createCommunity = (newCommunity) => async (dispatch, getState) => {
 export const joinCommunity = (communityId) => async (dispatch, getState) => {
   try {
     dispatch({ type: COMMUNITY_JOIN_REQUEST })
-    const config = await configFunc()
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/follow`, { communityId }, config)
+    await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/follow`, { communityId })
     dispatch({ type: COMMUNITY_JOIN_SUCCESS })
   } catch (error) {
     const message = error.response && error.response.data.message
@@ -158,7 +156,7 @@ export const communityUpdate = (newCommunity) => async (dispatch) => {
     const config = await configFunc()
     const data = await axios.put(
       `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`,
-      formData, config
+      formData
     )
     dispatch({
       type: COMMUNITY_UPDATE_SUCCESS,

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { getApi, postApi } from '../utils/apiFunc'
 import {
   CALENDAR_EVENT_LIST_REQUEST,
   CALENDAR_EVENT_LIST_SUCCESS,
@@ -13,9 +13,7 @@ export const listCalendarEvents = (sort = '', pageNumber = '') => async (
 ) => {
   try {
     dispatch({ type: CALENDAR_EVENT_LIST_REQUEST })
-    const { data } = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/calendar`
-    )
+    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/calendar`)
     console.log('calendar', data)
     dispatch({
       type: CALENDAR_EVENT_LIST_SUCCESS,
@@ -37,7 +35,7 @@ export const createCalendarEvent = (newCalendarEvent) => async (dispatch, getSta
     dispatch({
       type: CALENDAR_EVENT_CREATE_REQUEST
     })
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/calendar/add`, newCalendarEvent)
+    const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/calendar/add`, newCalendarEvent)
     dispatch({
       type: CALENDAR_EVENT_CREATE_SUCCESS,
       payload: data

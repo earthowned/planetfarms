@@ -1,4 +1,4 @@
-import { Axios, ADD_VIDEOS } from '../utils/urlConstants'
+import { ADD_VIDEOS } from '../utils/urlConstants'
 import { postApi } from '../utils/apiFunc'
 
 import {
