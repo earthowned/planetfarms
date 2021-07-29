@@ -206,7 +206,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
     }
   }).catch((data) => {
     return tokenFailure(dispatch, 'Unauthorized')
-    /*const message = data.response && data.response.data.name ? data.response.data.name : data.message
+    /* const message = data.response && data.response.data.name ? data.response.data.name : data.message
     if (message === 'TokenExpired') {
       if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
         Auth.currentSession().then((res) => {
@@ -235,7 +235,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
       }
     } else {
       return tokenFailure(dispatch, 'Unauthorized')
-    }*/
+    } */
   })
 }
 

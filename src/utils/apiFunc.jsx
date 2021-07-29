@@ -5,7 +5,7 @@ export const configFunc = (options = { headers: {} }) => {
   const token = JSON.parse(userdata).token
   const headers = { 'Content-Type': 'application/json' }
   headers.Authorization = token && `Bearer ${token}`
-  return {headers: { ...headers, ...options.headers } }
+  return { headers: { ...headers, ...options.headers } }
 }
 
 export const getApi = async (dispatch, url, config) => {
