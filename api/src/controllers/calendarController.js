@@ -1,5 +1,5 @@
 const Calendar = require('../models/calendarModel')
-const Sequelize = require('sequelize')
+const Sequelize = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 const Op = Sequelize.Op
 
 // @desc Fetch all calendars events

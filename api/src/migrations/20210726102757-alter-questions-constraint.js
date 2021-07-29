@@ -2,13 +2,15 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint('questions', 'questions_question_key')
+    await queryInterface.removeIndex('questions', ['question'], {
+      indexName: 'questions_question_key',
+      indicesType: 'UNIQUE'
+    })
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.addConstraint('questions', {
-      fields: ['question'],
-      type: 'unique',
-      name: 'questions_question_key'
+    await queryInterface.addIndex('questions', ['question'], {
+      indexName: 'questions_question_key',
+      indicesType: 'UNIQUE'
     })
   }
 }

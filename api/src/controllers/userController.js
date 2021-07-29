@@ -2,7 +2,7 @@ const generateToken = require('../utils/generateToken.js')
 const db = require('../models')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
-const Sequelize = require('sequelize')
+const Sequelize = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 // const User = require('../models/userModel.js')
 // const LocalAuth = require('../models/localAuthModel.js')
 const Op = Sequelize.Op

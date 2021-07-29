@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const Sequelize = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')

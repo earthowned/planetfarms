@@ -1,5 +1,5 @@
 const db = require('../models')
-const Sequelize = require('sequelize')
+const Sequelize = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 const { sequelize } = require('../models')
 const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')

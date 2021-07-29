@@ -1,5 +1,5 @@
 const Resource = require('../models/resourceModel.js')
-const Sequelize = require('sequelize')
+const Sequelize = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
 
