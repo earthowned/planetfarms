@@ -1,4 +1,4 @@
-const CustomError = require('./customeError')
+const CustomError = require('./customError')
 
 class BadRequestError extends CustomError {
   statusCode = 400

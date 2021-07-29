@@ -5,7 +5,6 @@ export const configFunc = (options = { headers: {} }) => {
   const token = JSON.parse(userdata).token
   const headers = { 'Content-Type': 'application/json' }
   headers.Authorization = token && `Bearer ${token}`
-  console.log(options)
   return {headers: { ...headers, ...options.headers } }
 }
 
