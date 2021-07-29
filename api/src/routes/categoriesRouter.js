@@ -10,7 +10,7 @@ const {
 } = require('../controllers/categoryController')
 const permit = require('../middleware/permission')
 
-router.route('/').get(protect, permit(['sysadmin', 'user']), getCategories).post(protect, permit(['sysadmin', 'member']), addCategory)
-router.route('/:id').get(getSingleCategory).put(protect, permit(['sysadmin']), updateCategory).delete(protect, permit('sysadmin'), deleteCategory)
+router.route('/').get(protect, permit(['sysadmin']), getCategories).post(protect, permit(['sysadmin']), addCategory)
+router.route('/:id').get(getSingleCategory).put(protect, permit(['sysadmin']), updateCategory).delete(protect, permit(['sysadmin']), deleteCategory)
 
 module.exports = router

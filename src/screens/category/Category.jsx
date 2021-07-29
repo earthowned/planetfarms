@@ -1,8 +1,7 @@
-import axios from 'axios'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { categoryDelete, categoryUpdate, createCategory, listCategories } from '../../actions/categoryActions'
 import BackButton from '../../components/backButton/BackButton'
 import Button from '../../components/button/Button'
@@ -10,11 +9,11 @@ import { InputFields } from '../../components/formUI/FormUI'
 import CollectionModalHeader from '../../components/newsCreateModal/CollectionModalHeader'
 import Table from '../../components/table/Table'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
-import { configFunc } from '../../utils/apiFunc'
 import './Category.scss'
-import GetRole from '../../utils/getRole.jsx'
+import CheckPermit from '../../utils/checkPermit.jsx'
+import { getApi } from '../../utils/apiFunc'
 
-const Category = ({ role }) => {
+const Category = () => {
   const [deleteModal, setDeleteModal] = useState(false)
   const [editModal, setEditModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
@@ -34,10 +33,7 @@ const Category = ({ role }) => {
     dispatch(listCategories())
   }, [success, deleteSuccess, updateSuccess])
 
-  const config = configFunc()
-
   const confirmDelete = async () => {
-    // await axios.delete( `${process.env.REACT_APP_API_BASE_URL}/api/categories/${deleteId}`, config)
     dispatch(categoryDelete(deleteId))
     setDeleteModal(false)
   }
@@ -45,18 +41,16 @@ const Category = ({ role }) => {
   const deleteModalFunc = (id) => {
     setDeleteId(id)
     setDeleteModal(true)
+    console.log(id);
   }
 
   const editModalFunc = async (id) => {
     setEditId(id)
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/categories/${id}`, config)
+    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/categories/${id}`)
     setData(data.results)
     setEditModal(true)
   }
 
-  if (role !== 'sysadmin') {
-    return <Redirect to='/dashboard' />
-  }
   return (
     <>
       {deleteModal && <CategoryDelete setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
@@ -70,7 +64,29 @@ const Category = ({ role }) => {
         </div>
         {loading
           ? <h4 style={{ color: '#fff' }}>Loading ... </h4>
-          : <Table tblData={categories} setEditModal={editModalFunc} setDeleteModal={deleteModalFunc} />}
+          : <Table
+            addSymbolNumber={true}
+            addOptions={true}
+            options= {
+              [{
+                'img': '/img/edit-icon.svg',
+                'action': editModalFunc
+              },
+              {
+                'img': '/img/trash-icon.svg',
+                'action': deleteModalFunc
+              },]
+            }
+            customizedTbl= {{
+              tblHeader: ['Name', 'Created', 'Updated'],
+              tblData: categories,
+              tblProperty: ['name', 'createdAt', 'updatedAt']
+            }}
+            // defaultTbl={{
+            //   tblData: categories
+            // }}
+            />
+        }
       </DashboardLayout>
     </>
   )
@@ -168,4 +184,4 @@ const CategoryForm = ({ data, editId, setData, setEditModal, setAddModal }) => {
   )
 }
 
-export default GetRole(Category)
+export default CheckPermit(Category, `${process.env.REACT_APP_API_BASE_URL}/api/categories`)
