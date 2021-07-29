@@ -2,18 +2,17 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
-import { configFunc, getApi } from '../../utils/apiFunc'
-import './ComMemberAdmin.scss';
+import {  getApi, getCommunity, putApi } from '../../utils/apiFunc'
+import './CommunityMemberAdmin.scss';
 
 const ComMemberAdmin = () => {
     const [data, setData] = useState([]);
     const [success, setSuccess] = useState(null);
-    // fetching current community
-    const currentCommunity = localStorage.getItem('currentCommunity')
-    ? JSON.parse(localStorage.getItem('currentCommunity'))
-    : null
+    
     const dispatch = useDispatch();
-    const config = configFunc()
+    
+    // getting current community from localstorage
+    const currentCommunity = getCommunity();
 
     useEffect(() => {
         getMemberDetails()
@@ -28,9 +27,14 @@ const ComMemberAdmin = () => {
     }
 
     const allowAccess = async (id) => {
-        const {data} = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/${id}/community/${currentCommunity.id}`,
-         {role: "manager"}, config)
-         setSuccess(data)
+        // const {data} = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/communities-users/${id}/community/${currentCommunity.id}`,
+        // {role: "manager"}, config)
+        const {data} = await putApi(
+            dispatch,
+            `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/${id}/community/${currentCommunity.id}`,
+            {role: 'manager'}
+        )
+        setSuccess(data)
     }
 
     return (

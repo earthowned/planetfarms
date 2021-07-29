@@ -85,7 +85,7 @@ const getAllMembers = async (req, res) => {
     const data = await db.CommunityUser.findAll(
       {
         where: { communityId: req.params.id, active: true },
-        attributes: ['userId', "role"],
+        attributes: ['userId', 'role'],
         include: [{
           model: db.User,
           attributes: ['firstName']
@@ -113,7 +113,7 @@ const getAllMemberDetails = async (req, res) => {
         attributes: ['id', 'userId', 'role'],
         include: [{
           model: db.User,
-          attributes: ['firstName', 'lastName', 'email', "phone", "dateOfBirth"]
+          attributes: ['firstName', 'lastName', 'email', 'phone', 'dateOfBirth']
         }],
         required: true
       }
@@ -142,7 +142,7 @@ const getAllMemberDetails = async (req, res) => {
 const updateMemberRole = async (req, res) => {
   try {
     const {role} = req.body
-   await db.CommunityUser.update({role: role}, {where: {id: parseInt(req.params.memberId)}})
+   await db.CommunityUser.update({role}, {where: {id: parseInt(req.params.memberId)}})
     res.json({message: 'Successfully role updated'})
   } catch (error) {
     res.status(400).json({error})
