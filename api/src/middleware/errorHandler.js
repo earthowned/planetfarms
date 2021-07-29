@@ -1,4 +1,3 @@
-const multer = require('multer')
 const CustomError = require('../errors/customeError')
 
 const errorHandler = (err, _req, res, _next) => {
