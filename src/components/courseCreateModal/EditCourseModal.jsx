@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { CATEGORY, GET_THUMBNAIL } from '../../utils/urlConstants'
 
 import { updateCourse } from '../../actions/courseActions'
@@ -36,7 +36,6 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
     setCategoryError(
       selectedCategory.length === 0 ? 'Please select a category' : ''
     )
-    const id = data?.data?.id
     const thumbnail = courseImage
     const category = selectedCategory
     if (category.length !== 0) {
@@ -48,6 +47,7 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
           price,
           category,
           thumbnail,
+          isFree,
           refetch,
           setIsEditCourse
         })
