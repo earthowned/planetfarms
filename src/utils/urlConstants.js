@@ -12,7 +12,7 @@ export const CATEGORY = 'categories'
 
 // course
 export const GET_COURSE = 'courses'
-export const ADD_COURSE = 'courses/add'
+export const ADD_COURSE = BASE_URL + 'courses/add'
 
 // lesson
 export const GET_LESSONS = 'lessons'
