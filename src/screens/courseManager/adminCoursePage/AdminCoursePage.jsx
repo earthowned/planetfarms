@@ -18,7 +18,7 @@ const AdminCoursePage = () => {
   const { courseId } = useParams()
   const [isEditCourse, setIsEditCourse] = useState(false)
 
-  const { data, isLoading } = useGetFetchData(
+  const { data, isLoading, refetch } = useGetFetchData(
     'recentCourse',
     GET_COURSE + '/' + courseId
   )
@@ -44,6 +44,7 @@ const AdminCoursePage = () => {
           isEditCourse={isEditCourse}
           setIsEditCourse={setIsEditCourse}
           data={data}
+          refetch={refetch}
         />
       )}
       <LessonBlock courseId={courseId} data={data} />

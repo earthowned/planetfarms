@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { CATEGORY, GET_THUMBNAIL } from '../../utils/urlConstants'
 
-import { createResource } from '../../actions/courseActions'
+import { updateCourse } from '../../actions/courseActions'
 import useGetFetchData from '../../utils/useGetFetchData'
 import DragDrop from '../dragDrop/DragDrop'
 import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
 import Filter from '../filter/Filter'
 import './newCourseCreateModal/NewCourseCreateModal.scss'
 
-const EditCourseModal = ({ isEditCourse, setIsEditCourse, data }) => {
-  const history = useHistory()
+const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
   const dispatch = useDispatch()
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
   const [isFree, setIsFree] = useState(data?.data?.isFree)
   const [courseImage, setCourseImage] = useState('')
+  const [courseId, setCourseId] = useState('')
   const [selectedCategory, setSelectedCategory] = useState(
     `${data?.data?.category}`
   )
@@ -31,17 +28,30 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data }) => {
     if (selectedCategory.length !== 0) {
       setCategoryError('')
     }
-  }, [selectedCategory])
+    setCourseId(data?.data?.id)
+  }, [data, selectedCategory])
+  console.log(courseId)
 
   const submitForm = async ({ title, description, price }) => {
     setCategoryError(
       selectedCategory.length === 0 ? 'Please select a category' : ''
     )
+    const id = data?.data?.id
     const thumbnail = courseImage
-    const creator = userInfo.id
     const category = selectedCategory
     if (category.length !== 0) {
-      console.log(title, description, price)
+      dispatch(
+        updateCourse({
+          courseId,
+          title,
+          description,
+          price,
+          category,
+          thumbnail,
+          refetch,
+          setIsEditCourse
+        })
+      )
     }
   }
   return (
