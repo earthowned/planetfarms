@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -9,12 +9,14 @@ import BackButton from '../../../components/backButton/BackButton'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import CourseDescription from './CourseDescription'
 import LessonBlock from './LessonBlock'
+import EditCourseModal from '../../../components/courseCreateModal/EditCourseModal'
 import './AdminCoursePage.scss'
 
 const AdminCoursePage = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { courseId } = useParams()
+  const [isEditCourse, setIsEditCourse] = useState(false)
 
   const { data, isLoading } = useGetFetchData(
     'recentCourse',
@@ -23,7 +25,6 @@ const AdminCoursePage = () => {
   if (isLoading) {
     return <span>Loading..</span>
   }
-
   const creator = data?.data?.creator
   const userId = userInfo.id
   if (userId !== creator) {
@@ -33,7 +34,18 @@ const AdminCoursePage = () => {
   return (
     <DashboardLayout title='Course page'>
       <BackButton location='/admin/courses' />
-      <CourseDescription data={data} isLoading={isLoading} />
+      <CourseDescription
+        data={data}
+        isLoading={isLoading}
+        setIsEditCourse={setIsEditCourse}
+      />
+      {isEditCourse && (
+        <EditCourseModal
+          isEditCourse={isEditCourse}
+          setIsEditCourse={setIsEditCourse}
+          data={data}
+        />
+      )}
       <LessonBlock courseId={courseId} data={data} />
       <div className='study-course-wrapper'>
         <h3>Also study this course</h3>

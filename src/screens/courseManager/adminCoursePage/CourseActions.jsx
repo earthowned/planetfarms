@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import useHideOnClick from '../../../utils/useHideOnClick'
 
-const CourseActions = ({ id }) => {
+const CourseActions = ({ setIsEditCourse }) => {
   const [actionActive, setActionActive] = useState(false)
   const domNode = useHideOnClick(() => {
     setActionActive(false)
@@ -17,7 +17,14 @@ const CourseActions = ({ id }) => {
       </button>
       {actionActive && (
         <ul className={actionActive ? 'show' : 'hide'}>
-          <li>Edit</li>
+          <li
+            onClick={() => {
+              setIsEditCourse(true)
+              setActionActive(!actionActive)
+            }}
+          >
+            Edit
+          </li>
           <li>Delete</li>
         </ul>
       )}
