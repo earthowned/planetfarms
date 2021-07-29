@@ -8,7 +8,10 @@ import {
   newsUpdateReducer
 } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
-import { courseCreateReducer } from './reducers/courseReducers'
+import {
+  courseCreateReducer,
+  updateCourseReducer
+} from './reducers/courseReducers'
 import {
   lessonCreateReducer,
   lessonUpdateReducer
@@ -17,7 +20,11 @@ import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
-import { testCreateReducer, testQuestionEditReducer, testQuestionListReducer } from './reducers/testReducers'
+import {
+  testCreateReducer,
+  testQuestionEditReducer,
+  testQuestionListReducer
+} from './reducers/testReducers'
 
 import {
   enterpriseCreateReducer,
@@ -97,6 +104,7 @@ const reducer = combineReducers({
   communityUpdate: communityUpdateReducer,
   activeCommunity: communityVisitReducer,
   addCourse: courseCreateReducer,
+  updateCourse: updateCourseReducer,
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
   addVideo: videoCreateReducer,
