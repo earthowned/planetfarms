@@ -156,7 +156,7 @@ export const communityUpdate = (newCommunity) => async (dispatch) => {
     const config = await configFunc()
     const data = await axios.put(
       `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`,
-      formData
+      formData, config
     )
     dispatch({
       type: COMMUNITY_UPDATE_SUCCESS,
