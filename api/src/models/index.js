@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const Sequelize = require('sequelize')
+const Sequelize = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 const sequelize = require('../config/database')
 const basename = path.basename(__filename)
 const env = process.env.NODE_ENV || 'development'

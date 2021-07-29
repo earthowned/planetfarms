@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const Sequelize = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 const db = require('../config/database.js')
 
 const Calendar = db.define(

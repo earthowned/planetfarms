@@ -1,4 +1,4 @@
-const { Op } = require('sequelize')
+const { Op } = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 const db = require('../models')
 
 // @desc Get the enterprises-users

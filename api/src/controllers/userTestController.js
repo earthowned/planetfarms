@@ -1,5 +1,5 @@
 const db = require('../models/index')
-const Sequelize = require('sequelize')
+const Sequelize = process.env.DB === 'cockroach' ? require('sequelize-cockroachdb') : require('sequelize')
 
 // @desc    Fetch all tests
 // @route   GET /api/user_tests/lesson/:lessonId
