@@ -27,11 +27,10 @@ import {
   USER_ATTR_RESEND_CODE_SUCCESS,
   USER_ATTR_RESEND_CODE_FAIL,
   USER_FORGOT_PWD_CONFIRM_CODE_REQUEST,
-  USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS,
-  USER_FORGOT_PWD_CONFIRM_CODE_FAIL,
+  USER_FORGOT_PWD_CODE_SUCCESS,
+  USER_FORGOT_PWD_CODE_FAIL,
+  USER_FORGOT_PWD_CODE_RESET,
   USER_FORGOT_PWD_RESEND_CODE_REQUEST,
-  USER_FORGOT_PWD_RESEND_CODE_SUCCESS,
-  USER_FORGOT_PWD_RESEND_CODE_FAIL,
   USER_PASSWORD_CHANGE_REQUEST,
   USER_PASSWORD_CHANGE_SUCCESS,
   USER_PASSWORD_CHANGE_FAIL,
@@ -447,14 +446,14 @@ export const forgotPassword = (username) => async (dispatch) => {
     dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const data = await Auth.forgotPassword(username)
-      dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_SUCCESS, payload: data.CodeDeliveryDetails })
+      dispatch({ type: USER_FORGOT_PWD_CODE_SUCCESS, payload: `Code has been sent to your ${data.CodeDeliveryDetails.AttributeName.split('_').join(' ')}.` })
       return data
     } else {
       document.location.href = '/'
     }
   } catch (error) {
     dispatch({
-      type: USER_FORGOT_PWD_RESEND_CODE_FAIL,
+      type: USER_FORGOT_PWD_CODE_FAIL,
       payload: error.response && error.response.data.error
         ? error.response.data.error
         : error.message
@@ -462,18 +461,20 @@ export const forgotPassword = (username) => async (dispatch) => {
   }
 }
 
-export const forgotPasswordSubmit = (username, code, confirmPassword) => async (dispatch) => {
+export const forgotPasswordSubmit = (username, code, confirmPassword, history) => async (dispatch) => {
   try {
     dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       await Auth.forgotPasswordSubmit(username, code, confirmPassword)
-      dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS })
+      dispatch({ type: USER_FORGOT_PWD_CODE_SUCCESS, payload: 'Password has been changed successfully.' })
+      dispatch({ type: USER_FORGOT_PWD_CODE_RESET })
+      history.push('/login')
     } else {
       document.location.href = '/'
     }
   } catch (error) {
     dispatch({
-      type: USER_FORGOT_PWD_CONFIRM_CODE_FAIL,
+      type: USER_FORGOT_PWD_CODE_FAIL,
       payload: error?.response && error.response.data.error
         ? error.response.data.error
         : error.message

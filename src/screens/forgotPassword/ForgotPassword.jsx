@@ -5,72 +5,52 @@ import { useDispatch, useSelector } from 'react-redux'
 import Input from '../../components/input/Input'
 import SignLayout from '../../layout/signLayout/SignLayout'
 import Button from '../../components/button/Button'
+import { USER_FORGOT_PWD_CODE_RESET } from '../../constants/userConstants'
 import { forgotPassword, forgotPasswordSubmit } from '../../actions/userAction'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 
 const ForgotPassword = () => {
-  const [message, setMessage] = useState({})
   const [usernameValue, setUsernameValue] = useState('')
-
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [isVerifiedUser, setIsVerifiedUser] = useState(false)
   const dispatch = useDispatch()
+  const history = useHistory()
   const { register: regi, errors, handleSubmit, watch } = useForm()
   const newPassword = useRef({})
   newPassword.current = watch('newPassword', '')
 
-  const history = useHistory()
-
-  const userForgotPwdConfirmCode = useSelector((state) => state.userForgotPwdConfirmCode)
-  const userForgotPwdResendCode = useSelector((state) => state.userForgotPwdResendCode)
-  const { error: confirmErr, status: confirmStatus } = userForgotPwdConfirmCode
-  const { error: resendErr, status: resendStatus, deliveryDetails } = userForgotPwdResendCode
+  const { message: ErrorMessage } = useSelector((state) => state.userForgotPwdCodeMessage)
 
   const resendCode = (e) => {
     e.preventDefault()
     dispatch(forgotPassword(usernameValue))
-    isVerifiedUser && console.log('code sent')
   }
+
   const alreadyHaveCode = ({ username }) => {
     if (!usernameValue) setUsernameValue(username)
-    isVerifiedUser && console.log('type code')
   }
+
   const sendCode = ({ username }) => {
     if (!usernameValue) setUsernameValue(username)
     dispatch(forgotPassword(username))
-    isVerifiedUser && console.log('code sent')
   }
+
   const verifyAccount = ({ code, confirmPassword }) => {
-    dispatch(forgotPasswordSubmit(usernameValue, code, confirmPassword))
+    dispatch(forgotPasswordSubmit(usernameValue, code, confirmPassword, history))
   }
 
   const toggleNewPasswordVisibility = (e) => {
     setShowNewPassword(!showNewPassword)
   }
+
   const toggleConfirmPasswordVisibility = (e) => {
     setShowConfirmPassword(!showConfirmPassword)
   }
 
-  // const userLogin = useSelector((state) => state.userLogin)
-  // const { userInfo } = userLogin
-  // console.log(userInfo)
-
   useEffect(() => {
-    usernameValue && setIsVerifiedUser(true)
-    if (confirmStatus) {
-      setMessage({ text: 'Successful', class: 'message' })
-      history.push('/myProfile')
-    } else if (resendStatus) {
-      setMessage({ text: `Code has been sent to your ${deliveryDetails.AttributeName.split('_').join(' ')}.`, class: 'message' })
-    }
-    if (confirmErr) {
-      setMessage({ text: confirmErr, class: 'error' })
-    } else if (resendErr) {
-      setMessage({ text: resendErr, class: 'error' })
-    }
-  }, [confirmStatus, resendStatus, usernameValue, deliveryDetails, confirmErr, resendErr])
+    dispatch({ type: USER_FORGOT_PWD_CODE_RESET })
+  }, [])
 
   return (
     <SignLayout>
@@ -78,7 +58,7 @@ const ForgotPassword = () => {
         <h1 className='welcome'>Forgot Password</h1>
         <div className='container'>
 
-          {message && <div className={message.class}>{message.text}</div>}
+          {ErrorMessage && <div className={ErrorMessage.type}>{ErrorMessage.message}</div>}
           <Input
             placeholder='Username'
             type='text'
@@ -95,7 +75,7 @@ const ForgotPassword = () => {
           >
             <UserAvatar />
           </Input>
-          {isVerifiedUser
+          {usernameValue
             ? (
               <>
                 <Input
@@ -108,7 +88,6 @@ const ForgotPassword = () => {
                       value: true,
                       message: 'You must enter code'
                     }
-                    // validate: v => v === code || 'You must enter correct code'
                   })}
                   errors={errors}
                 >
