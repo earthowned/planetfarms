@@ -24,7 +24,7 @@ function Profile () {
   const userDetails = useSelector((state) => state.userDetails)
   const { status } = useSelector((state) => state.userAttrConfirmCode)
   const { user, loading } = userDetails
-  
+
   const verification = {
     emailClickHandler: () => {
       emailClickHandler(true)
@@ -35,11 +35,11 @@ function Profile () {
   }
 
   useEffect(() => {
-      dispatch(getUserDetails(id))
-      if(status) {
-        emailClickHandler(false)
-        phoneClickHandler(false)
-      }
+    dispatch(getUserDetails(id))
+    if (status) {
+      emailClickHandler(false)
+      phoneClickHandler(false)
+    }
   }, [dispatch, history, status])
 
   const editUserInformation = () => {

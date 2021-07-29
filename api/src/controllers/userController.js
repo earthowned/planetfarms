@@ -297,7 +297,7 @@ const getUserProfileByUserID = async (req, res) => {
     if (!profile) {
       return res.status(404).json({ error: 'Profile not found' })
     }
-    res.json({results: profile})
+    res.json({ results: profile })
   } catch (err) {
     res.json({ error: err.message }).status(400)
   }
