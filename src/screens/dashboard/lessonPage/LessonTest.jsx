@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { useHistory, useParams } from 'react-router-dom'
 import Button from '../../../components/button/Button'
-import { postApi } from '../../../utils/apiFunc'
+import { getApi, postApi } from '../../../utils/apiFunc'
 import './LessonTest.scss'
 
 const LessonTest = () => {
