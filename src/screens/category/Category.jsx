@@ -41,7 +41,7 @@ const Category = () => {
   const deleteModalFunc = (id) => {
     setDeleteId(id)
     setDeleteModal(true)
-    console.log(id);
+    console.log(id)
   }
 
   const editModalFunc = async (id) => {
@@ -65,28 +65,27 @@ const Category = () => {
         {loading
           ? <h4 style={{ color: '#fff' }}>Loading ... </h4>
           : <Table
-            addSymbolNumber={true}
-            addOptions={true}
-            options= {
+              addSymbolNumber
+              addOptions
+              options={
               [{
-                'img': '/img/edit-icon.svg',
-                'action': editModalFunc
+                img: '/img/edit-icon.svg',
+                action: editModalFunc
               },
               {
-                'img': '/img/trash-icon.svg',
-                'action': deleteModalFunc
-              },]
+                img: '/img/trash-icon.svg',
+                action: deleteModalFunc
+              }]
             }
-            customizedTbl= {{
-              tblHeader: ['Name', 'Created', 'Updated'],
-              tblData: categories,
-              tblProperty: ['name', 'createdAt', 'updatedAt']
-            }}
+              customizedTbl={{
+                tblHeader: ['Name', 'Created', 'Updated'],
+                tblData: categories,
+                tblProperty: ['name', 'createdAt', 'updatedAt']
+              }}
             // defaultTbl={{
             //   tblData: categories
             // }}
-            />
-        }
+            />}
       </DashboardLayout>
     </>
   )

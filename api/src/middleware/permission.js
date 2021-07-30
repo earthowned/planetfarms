@@ -1,6 +1,5 @@
 const permit = (role) => {
   return (req, res, next) => {
-    
     if (checkRole(req, role)) {
       next()
     } else {
@@ -10,12 +9,12 @@ const permit = (role) => {
 }
 
 function checkRole (req, role) {
-  let authorize = false;
+  let authorize = false
   role.forEach(el => {
-      if(el === req.user.role) return authorize = true;
-    })
+    if (el === req.user.role) return authorize = true
+  })
 
-    return authorize;
+  return authorize
 }
 
 module.exports = permit

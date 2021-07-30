@@ -8,14 +8,14 @@ export const Axios = axios.create({
 })
 
 // categories
-export const CATEGORY = 'categories'
+export const CATEGORY = BASE_URL + 'categories'
 
 // course
-export const GET_COURSE = 'courses'
+export const GET_COURSE = BASE_URL + 'courses'
 export const ADD_COURSE = BASE_URL + 'courses/add'
 
 // lesson
-export const GET_LESSONS = 'lessons'
+export const GET_LESSONS = BASE_URL + 'lessons'
 export const ADD_LESSONS = BASE_URL + 'lessons/add'
 
 // videos
@@ -31,8 +31,8 @@ export const ADD_LESSON_TEXT = BASE_URL + 'lesson-text/add'
 export const ADD_MATERIAL = BASE_URL + 'materials/add'
 
 // enroll
-export const GET_ENROLL = 'enrolls'
-export const ADD_ENROLL = 'enrolls/add'
+export const GET_ENROLL = BASE_URL + 'enrolls'
+export const ADD_ENROLL = BASE_URL + 'enrolls/add'
 
 // get files
 export const GET_THUMBNAIL = CDN_URL + '/thumbnail/'

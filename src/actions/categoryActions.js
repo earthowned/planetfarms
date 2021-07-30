@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { configFunc, getApi } from '../utils/apiFunc'
+import { configFunc, getApi, postApi } from '../utils/apiFunc'
 import {
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
@@ -41,11 +41,8 @@ export const listCategories = () => async (dispatch) => {
 export const createCategory = (newCategory) => async (dispatch, getState) => {
   try {
     dispatch({ type: CATEGORY_CREATE_REQUEST })
-    const config = configFunc()
     const { name } = newCategory
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/categories`, { name },
-      config
-    )
+    const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/categories`, { name })
     if (data?.error) {
       return dispatch({ type: CATEGORY_CREATE_FAIL, payload: data.error })
     }

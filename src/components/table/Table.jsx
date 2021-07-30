@@ -7,10 +7,10 @@ import './Table.scss'
 // in this prop: you have to pass object with only one property tblData : fetchedData (i.e. fetched d)
 
 // 2. customizedTbl: which creates tbl based on the options provided in this object, this accepts three property
-//tblHeader: array that accepts header of your table
-//tblData: array that is your fetched data or row
-//tblProperty: array that shows various key of your tblData
-//Note: tblHeader and tblProperty should be in order
+// tblHeader: array that accepts header of your table
+// tblData: array that is your fetched data or row
+// tblProperty: array that shows various key of your tblData
+// Note: tblHeader and tblProperty should be in order
 
 // you can show or hide options and symbol number (S.N.) through props: addOptions and  addSymbolNumber respectively
 // options can also be configured:
@@ -18,23 +18,22 @@ import './Table.scss'
 // img: the path of the image you want to show as button
 // action: this holds function that is executed when the button is clicked (fn: returns id of the item)
 
-
-const Table = ({ addSymbolNumber, customizedTbl = {tblData: []}, defaultTbl = {tblData: []}, addOptions, options = [] }) => {
+const Table = ({ addSymbolNumber, customizedTbl = { tblData: [] }, defaultTbl = { tblData: [] }, addOptions, options = [] }) => {
   const [property, setProperty] = useState([])
   const [header, setHeader] = useState([])
   const [tblData, setTblData] = useState([])
   useEffect(() => {
     if (defaultTbl.tblData.length) {
-      const {tblData} = defaultTbl
+      const { tblData } = defaultTbl
       setProperty(Object.keys(tblData[0]))
       setHeader(Object.keys(tblData[0]))
       setTblData(tblData)
     }
 
-    if(customizedTbl.tblData.length) {
-      const {tblHeader, tblData, tblProperty} = customizedTbl
-      setHeader(tblHeader);
-      setTblData(tblData);
+    if (customizedTbl.tblData.length) {
+      const { tblHeader, tblData, tblProperty } = customizedTbl
+      setHeader(tblHeader)
+      setTblData(tblData)
       setProperty(tblProperty)
     }
   }, [])
@@ -47,7 +46,7 @@ const Table = ({ addSymbolNumber, customizedTbl = {tblData: []}, defaultTbl = {t
             {addSymbolNumber && <th>S.N.</th>}
             {
               header.map((propKey, index) => {
-                  return <th key={index}>{propKey}</th>
+                return <th key={index}>{propKey}</th>
               })
             }
             {addOptions && <th>Options</th>}
@@ -61,17 +60,18 @@ const Table = ({ addSymbolNumber, customizedTbl = {tblData: []}, defaultTbl = {t
                   {addSymbolNumber && <td>{index + 1}</td>}
                   {
                     property.map((propkey, index) => {
-                        return <td key={index}>{item[propkey]}</td>
+                      return <td key={index}>{item[propkey]}</td>
                     })
                   }
-                  { addOptions && <td>
+                  {addOptions && <td>
                     <div className='tbl-options'>
                       {
-                        options.length && options.map(el=>  {
-                        return <img src={el.img} alt='edit-btn' onClick={async () => await el.action(item.id)} />})
+                        options.length && options.map(el => {
+                          return <img src={el.img} alt='edit-btn' onClick={async () => await el.action(item.id)} />
+                        })
                       }
                     </div>
-                  </td>}
+                                 </td>}
                 </tr>
               )
             })

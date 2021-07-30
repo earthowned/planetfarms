@@ -20,8 +20,8 @@ const CheckPermit = (OriginalComponent, url) => {
       setData(data)
     }
 
-    if(data?.error) return <Redirect to="/dashboard" />
-    return <>{data?.results  && <OriginalComponent />}</>
+    if (data?.error) return <Redirect to='/dashboard' />
+    return <>{data?.results && <OriginalComponent />}</>
   }
   return NewComponent
 }
