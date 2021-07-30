@@ -42,7 +42,10 @@ const db = {
   Test: require('./testModel')(sequelize, Sequelize.DataTypes),
   Question: require('./questionModel')(sequelize, Sequelize.DataTypes),
   Enroll: require('./enrollModel')(sequelize, Sequelize.DataTypes),
-  LessonPro: require('./lessonProgressModel')(sequelize, Sequelize.DataTypes),
+  LessonProgress: require('./lessonProgressModel')(
+    sequelize,
+    Sequelize.DataTypes
+  ),
   UserTest: require('./userTestModel')(sequelize, Sequelize.DataTypes),
   UserTestAnswer: require('./userTestAnswerModel')(
     sequelize,
