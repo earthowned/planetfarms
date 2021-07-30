@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'testId'
     })
     UserTest.hasMany(models.UserTestAnswer, {
-      foreignKey: "userTestId"
+      foreignKey: 'userTestId'
     })
   }
 

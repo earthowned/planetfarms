@@ -1,4 +1,5 @@
-import { Axios, ADD_COURSE } from '../utils/urlConstants'
+import { ADD_COURSE } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
 import {
   COURSE_CREATE_REQUEST,
   COURSE_CREATE_SUCCESS,
@@ -33,7 +34,7 @@ export const createResource =
             'Content-Type': 'multipart/form-data'
           }
         }
-        const { data } = await Axios.post(ADD_COURSE, formData, config)
+        const { data } = await postApi(dispatch, ADD_COURSE, formData, config)
         dispatch({ type: COURSE_CREATE_SUCCESS, payload: data })
         const id = data?.data?.id
         history.push(`/admin/course/${id}`)
