@@ -31,7 +31,7 @@ const Courses = () => {
     return <span>Loading...</span>
   }
 
-  function createNewCourseFunc() {
+  function createNewCourseFunc () {
     setCreateNewCourse(true)
     setCreateCourse(false)
   }

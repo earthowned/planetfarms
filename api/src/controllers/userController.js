@@ -254,17 +254,21 @@ const getUserById = (req, res) => {
 // @route   GET /api/user/profile/:userID
 // @access  Public
 const getUserProfileByUserID = async (req, res) => {
-  const id = req.params.userID
-  await db.User.findOne({ where: { userID: id } })
-    .then((profile) => {
-      if (profile) {
-        res.json(profile)
-      } else {
-        res.status(404)
-        throw new Error('Profile not found')
-      }
-    })
-    .catch((err) => res.json({ error: err.message }).status(400))
+  try {
+    const id = req.params.userID
+    let profile
+    if (id === req.user.id) {
+      profile = await db.User.findOne({ where: { id } })
+    } else {
+      profile = await db.User.findOne({ where: { id }, attributes: { exclude: ['email', 'phone'] } })
+    }
+    if (!profile) {
+      return res.status(404).json({ error: 'Profile not found' })
+    }
+    res.json(profile)
+  } catch (err) {
+    res.json({ error: err.message }).status(400)
+  }
 }
 
 // @desc    Fetch logged user profile

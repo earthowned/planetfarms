@@ -1,4 +1,4 @@
-const CustomError = require('./customeError')
+const CustomError = require('./customError')
 
 class NotFoundError extends CustomError {
   statusCode = 404

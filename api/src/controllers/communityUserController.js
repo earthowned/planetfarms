@@ -85,10 +85,10 @@ const getAllMembers = async (req, res) => {
     const data = await db.CommunityUser.findAll(
       {
         where: { communityId: req.params.id, active: true },
-        attributes: ['id'],
+        attributes: ['userId'],
         include: [{
           model: db.User,
-          attributes: ['email', 'firstName']
+          attributes: ['firstName']
         }],
         required: true
       }

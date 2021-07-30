@@ -105,8 +105,7 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     let userdata
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const config = { headers: { 'Content-Type': 'application/json' } }
-      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password }, config)
+      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
       userdata = data
     } else {
       await Auth.signUp({
@@ -118,11 +117,7 @@ export const register = (name, password) => async (dispatch) => {
       })
       const response = await Auth.signIn(name, password)
       userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
-      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id }, {
-        headers: {
-          Authorization: 'Bearer ' + userdata.token
-        }
-      })
+      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id })
         .catch(err => console.log(err))
     }
     window.localStorage.setItem('userInfo', JSON.stringify(userdata))
@@ -142,12 +137,10 @@ export const login = (name, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const config = { headers: { 'Content-Type': 'application/json' } }
       const { data: tokendata } = await postApi(
         dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
-        { name, password },
-        config
+        { name, password }
       )
       data = tokendata
     } else {

@@ -1,0 +1,31 @@
+@media only screen and (max-width: 768px) {
+  .sign {
+    justify-content: center;
+    align-items: center;
+
+    .container {
+      align-items: center;
+    }
+  }
+}
+
+.page-container {
+  color: var(--primary-white);
+
+  .page-sub-title {
+    color: var(--primary-white);
+    margin-bottom: 40px;
+  }
+
+  .page-button {
+    width: 200px;
+    height: 40px;
+    background: var(--primary-color);
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 14px;
+  }
+}

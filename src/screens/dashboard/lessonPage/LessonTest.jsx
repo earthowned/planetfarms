@@ -1,10 +1,9 @@
-import axios from 'axios'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 
 import { useHistory, useParams } from 'react-router-dom'
 import Button from '../../../components/button/Button'
-import { configFunc } from '../../../utils/apiFunc'
+import { getApi, postApi } from '../../../utils/apiFunc'
 import './LessonTest.scss'
 
 const LessonTest = () => {
@@ -14,11 +13,10 @@ const LessonTest = () => {
   const history = useHistory()
   const { id } = useParams()
 
-  const startTest = async () => {
+  const startTest = async (dispatch) => {
     const currentDate = moment().toDate().getTime().toString()
-    const config = configFunc()
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/start`,
-      { lessonId: id, startTime: currentDate }, config)
+    const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/user_tests/start`,
+      { lessonId: id, startTime: currentDate })
     setStart(data)
   }
 
@@ -32,12 +30,9 @@ const LessonTest = () => {
     getTestsResults()
   }, [start])
 
-  const getTestsResults = async () => {
-    const config = configFunc()
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user_tests/lesson/${id}`, config)
-
+  const getTestsResults = async (dispatch) => {
+    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/user_tests/lesson/${id}`)
     setTest(data.test)
-    console.log(data)
     if (data.tests !== undefined) {
       setResults(data.tests)
     }
@@ -79,7 +74,6 @@ const LessonTest = () => {
                       failed
                     </button>
                 }
-
               </div>
             )
           })

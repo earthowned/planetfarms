@@ -9,12 +9,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT
     },
     answer: {
-      type: DataTypes.TEXT,
-      
+      type: DataTypes.TEXT
+
     },
     options: {
-      type: DataTypes.ARRAY(DataTypes.TEXT),
-      
+      type: DataTypes.ARRAY(DataTypes.TEXT)
+
     },
     testId: {
       type: DataTypes.INTEGER,
