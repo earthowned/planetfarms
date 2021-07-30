@@ -10,7 +10,8 @@ import {
 import { resourceListReducer } from './reducers/resourceReducers'
 import {
   courseCreateReducer,
-  updateCourseReducer
+  updateCourseReducer,
+  deleteCourseReducer
 } from './reducers/courseReducers'
 import {
   lessonCreateReducer,
@@ -105,6 +106,7 @@ const reducer = combineReducers({
   activeCommunity: communityVisitReducer,
   addCourse: courseCreateReducer,
   updateCourse: updateCourseReducer,
+  deleteCourse: deleteCourseReducer,
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
   addVideo: videoCreateReducer,

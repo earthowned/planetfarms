@@ -26,3 +26,15 @@ export const updateCourseReducer = (state = {}, action) => {
       return state
   }
 }
+export const deleteCourseReducer = (state = {}, action) => {
+  switch (action.type) {
+    case course.COURSE_DELETE_REQUEST:
+      return { loading: true }
+    case course.COURSE_DELETE_SUCCESS:
+      return { loading: false, success: true, data: action.payload }
+    case course.COURSE_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
