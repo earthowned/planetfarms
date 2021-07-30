@@ -1,4 +1,6 @@
-import { Axios, ADD_MATERIAL } from '../utils/urlConstants'
+import { ADD_MATERIAL } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
+
 import {
   MATERIAL_CREATE_REQUEST,
   MATERIAL_CREATE_SUCCESS,
@@ -16,7 +18,7 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
         'Content-Type': 'multipart/form-data'
       }
     }
-    const { data } = await Axios.post(ADD_MATERIAL, materialData, config)
+    const { data } = await postApi(dispatch, ADD_MATERIAL, materialData, config)
     dispatch({ type: MATERIAL_CREATE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({

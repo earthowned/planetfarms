@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     userTestId: DataTypes.INTEGER,
     question: {
-        type: DataTypes.TEXT,
-        allowNull: false
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     answer: {
-        type: DataTypes.TEXT,
+      type: DataTypes.TEXT
     }
   }, { timestamps: false })
 
