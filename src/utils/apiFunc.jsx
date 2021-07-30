@@ -19,3 +19,7 @@ export const postApi = async (dispatch, url, data, config) => {
 export const putApi = async (dispatch, url, data, config = configFunc()) => {
   return await axios.put(url, data, config)
 }
+
+export const deleteApi = async (url) => {
+  return await axios.delete(url)
+}
