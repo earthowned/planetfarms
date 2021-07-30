@@ -64,7 +64,11 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
             alt='close-icon'
           />
         </div>
-        <DragDrop onChange={(img) => setCourseImage(img)} />
+        <DragDrop
+          onChange={(img) => setCourseImage(img)}
+          fileType='image/png,image/jpeg,image/jpg'
+          text='Drag & Drop course image or click here to attach image'
+        />
         <div className='inputContainer'>
           <input
             className={errors.title ? 'input errorBox' : 'input'}

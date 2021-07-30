@@ -204,6 +204,7 @@ const EditLesson = () => {
                 editImg
                 onChange={(img) => setLessonCover(img)}
                 dataImg={GET_COVERIMG + data?.data?.coverImg}
+                fileType='image/png,image/jpeg,image/jpg'
                 text='Drag & Drop image in this area or Click Here to edit image'
               />
 

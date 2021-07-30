@@ -31,7 +31,7 @@ const EnrollContainer = ({ item, userInfo, setPurchaseModal }) => {
         {isEnroll === true && enrollCourseId === item.id ? (
           <button
             className='join-btn'
-            onClick={() => history.push('/course/'+item.id)}
+            onClick={() => history.push('/course/' + item.id)}
           >
             <span>You're subscriber</span>
           </button>

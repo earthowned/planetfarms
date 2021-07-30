@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { configFunc, getApi } from '../utils/apiFunc'
+import { configFunc, getApi, postApi } from '../utils/apiFunc'
 import {
   ENTERPRISE_LIST_REQUEST,
   ENTERPRISE_LIST_SUCCESS,
@@ -74,10 +74,7 @@ export const createEnterprise = (newEnterprise) => async (dispatch, getState) =>
   formData.append('roles', newEnterprise.roles)
   try {
     dispatch({ type: ENTERPRISE_CREATE_REQUEST })
-    const config = configFunc()
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`, formData,
-      config
-    )
+    await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`, formData)
     dispatch({ type: ENTERPRISE_CREATE_SUCCESS, payload: true })
   } catch (error) {
     const message = error.response && error.response.data.message
@@ -131,8 +128,7 @@ export const enterpriseDelete = (id) => async (dispatch) => {
 export const followEnterprise = (enterpriseId) => async (dispatch, getState) => {
   try {
     dispatch({ type: ENTERPRISE_FOLLOW_REQUEST })
-    const config = configFunc()
-    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/enterprises-users/follow`, { enterpriseId }, config)
+    await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/enterprises-users/follow`, { enterpriseId })
     dispatch({ type: ENTERPRISE_FOLLOW_SUCCESS })
   } catch (error) {
     const message = error.response && error.response.data.message

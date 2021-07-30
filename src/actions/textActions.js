@@ -1,4 +1,5 @@
 import { Axios, GET_LESSON_TEXT, ADD_LESSON_TEXT } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
 
 import {
   LESSSON_TEXT_CREATE_REQUEST,
@@ -18,12 +19,11 @@ export const createText =
 
     try {
       dispatch({ type: LESSSON_TEXT_CREATE_REQUEST })
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-      const { data } = await Axios.post(ADD_LESSON_TEXT, textData, config)
+      const { data } = await postApi(
+        dispatch,
+        ADD_LESSON_TEXT,
+        textData
+      )
       dispatch({ type: LESSSON_TEXT_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({

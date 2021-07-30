@@ -1,4 +1,5 @@
 import { Axios, ADD_VIDEOS, GET_VIDEOS } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
 
 import {
   VIDEO_CREATE_REQUEST,
@@ -37,7 +38,7 @@ export const createVideo =
             'Content-Type': 'multipart/form-data'
           }
         }
-        const { data } = await Axios.post(ADD_VIDEOS, videoData, config)
+        const { data } = await postApi(dispatch, ADD_VIDEOS, videoData, config)
         dispatch({ type: VIDEO_CREATE_SUCCESS, payload: data })
       } catch (error) {
         dispatch({

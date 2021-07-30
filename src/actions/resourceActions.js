@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { getApi } from '../utils/apiFunc'
+import { getApi, postApi } from '../utils/apiFunc'
 import {
   RESOURCE_LIST_REQUEST,
   RESOURCE_LIST_SUCCESS,
@@ -55,11 +54,10 @@ export const createResource = (newResource) => async (dispatch, getState) => {
     const { userLogin: { userInfo } } = getState()
     const config = {
       headers: {
-      // Authorization: `Bearer ${userInfo.token}`,
         'Content-Type': 'multipart/form-data'
       }
     }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, formData, config)
+    const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/resources/add`, formData, config)
     dispatch({ type: RESOURCE_CREATE_SUCCESS, payload: data })
   } catch (error) {
     const message = error.response && error.response.data.message
