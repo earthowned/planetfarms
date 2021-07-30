@@ -77,6 +77,26 @@ const EditLesson = () => {
     setMaterial
   )
 
+  //   const [testModal, setTestModal] = useState(false)
+  // const [lessonData, setLessonData] = useState([])
+  const textData = data?.data?.texts.map((text) => {
+    return text
+  })
+  const videoData = data?.data?.videos.map((video) => {
+    return video
+  })
+  const photoData = data?.data?.photos.map((photo) => {
+    return photo
+  })
+  useEffect(() => {
+    setLessonData([textData, videoData, photoData])
+  }, [data])
+
+  let newData
+  if (lessonData) {
+    newData = lessonData.flat()
+  }
+
   const lessonId = data?.data?.id
   const updateLessonForm = ({ title }) => {
     const coverImg = lessonCover
@@ -181,6 +201,7 @@ const EditLesson = () => {
                 message={errors.title && errors.title.message}
               />
               <DragDrop
+                editImg
                 onChange={(img) => setLessonCover(img)}
                 dataImg={GET_COVERIMG + data?.data?.coverImg}
                 text='Drag & Drop image in this area or Click Here to edit image'

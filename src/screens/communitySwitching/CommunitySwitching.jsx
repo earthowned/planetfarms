@@ -16,6 +16,8 @@ import Pagination from '../../components/pagination/Pagination'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { InputFields, SelectFields } from '../../components/formUI/FormUI'
+import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch'
+import SubHeader from '../../components/subHeader/SubHeader'
 
 function App () {
   const communitiesState = useSelector((state) => state.listCommunities)
@@ -77,6 +79,17 @@ function App () {
 
 export default App
 
+const nav = [
+  {
+    label: 'All communities',
+    link: '/community-switching/all-communities'
+  },
+  {
+    label: 'My communities',
+    link: '/community-switching/my-communities'
+  }
+]
+
 function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, userPageNumber }) {
   const { pathname } = useLocation()
   const [search, setSearch] = useState(null)
@@ -106,7 +119,7 @@ function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, use
 
   return (
     <>
-      <CommunityHeader setActive={setModalActive} search={search} setSearch={setSearch} />
+      <SubHeader setSearch={setSearch} search={search} setCreateActive={setModalActive} nav={nav} btnName='Create Community' />
       <div>
         {
           pathname === '/community-switching/my-communities'
@@ -117,51 +130,6 @@ function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, use
         }
       </div>
     </>
-  )
-}
-
-const CommunityHeader = ({ setActive, search, setSearch }) => {
-  const { pathname } = useLocation()
-  const history = useHistory()
-  const windowWidth = useSizeFinder()
-  const nav = [
-    {
-      label: 'All communities',
-      link: '/community-switching/all-communities'
-    },
-    {
-      label: 'My communities',
-      link: '/community-switching/my-communities'
-    }
-  ]
-  return (
-    <div className='library-main-header-container'>
-      <div className='library-container'>
-        {windowWidth > 839
-          ? <>
-            <ul className='library-list-container'>
-              {nav.map((menu) => (
-                <li>
-                  <Link className={`nav-link ${(pathname === menu.link) ? 'library-list-item active' : 'library-list-item'}`} to={menu.link}>{menu.label}</Link>
-                </li>
-              ))}
-            </ul>
-            <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
-          </>
-          : <>
-            <Filter data={nav} newFilter='new' />
-            <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
-            </>}
-      </div>
-      <div className='library-sub-header'>
-        <div className='library-sub-header-1'>
-          <div className='library-btn-container'><button className='default-btn' onClick={() => setActive(true)}>Create Community</button></div>
-        </div>
-        <div className='library-sub-header-2'>
-          <Filter />
-        </div>
-      </div>
-    </div>
   )
 }
 
@@ -248,13 +216,7 @@ const CommunityModal = ({ setActive, data, setEditData }) => {
             />
             <div className='auto-follow-btn'>
               <h5>Auto follow</h5>
-              <div className='toggle-main-container'>
-                <div
-                  onClick={() => setToggleActive(!toggleActive)}
-                  className={`${toggleActive ? 'toggle-item active' : 'toggle-item'}`}
-                />
-                <div className='toggle-container' />
-              </div>
+              <ToggleSwitch onClick={() => setToggleActive(!toggleActive)} isFree={toggleActive} />
             </div>
             {data
               ? <Button name='Update Community' onClick={updateCommunity} />

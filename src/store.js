@@ -35,6 +35,7 @@ import {
 } from './reducers/materiallReducer'
 import {
   testCreateReducer,
+  testQuestionEditReducer,
   testQuestionListReducer
 } from './reducers/testReducers'
 import {
@@ -65,6 +66,7 @@ import {
   userResendCodeReducer,
   userAttrConfirmCodeReducer,
   userAttrResendCodeReducer,
+  changePasswordReducer,
   userForgotPwdConfirmCodeReducer,
   userForgotPwdResendCodeReducer
 } from './reducers/userReducers'
@@ -79,6 +81,8 @@ import {
   communityUpdateReducer
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
+import { addEnrollReducer } from './reducers/enrollReducer'
+import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -121,24 +125,28 @@ const reducer = combineReducers({
   deleteMaterial: materialDeleteReducer,
   addTest: testCreateReducer,
   listTestQuestions: testQuestionListReducer,
-  userLogin: userLoginReducer,
-  userRegister: userRegisterReducer,
-  userConfirmCode: userConfirmCodeReducer,
-  userResendCode: userResendCodeReducer,
-  userAttrConfirmCode: userAttrConfirmCodeReducer,
-  userAttrResendCode: userAttrResendCodeReducer,
-  userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
-  userForgotPwdResendCode: userForgotPwdResendCodeReducer,
+  editTestQuestions: testQuestionEditReducer,
   addNewNews: newsCreateReducer,
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
   listMember: memberListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userConfirmCode: userConfirmCodeReducer,
+  userResendCode: userResendCodeReducer,
+  userAttrConfirmCode: userAttrConfirmCodeReducer,
+  userAttrResendCode: userAttrResendCodeReducer,
+  changePassword: changePasswordReducer,
+  userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
+  userForgotPwdResendCode: userForgotPwdResendCodeReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer,
-  accessToken: accessTokenReducer
+  accessToken: accessTokenReducer,
+  addEnroll: addEnrollReducer,
+  listQuestions: questionListReducer,
+  questionDelete: questionDeleteReducer,
+  questionUpdate: questionUpdateReducer
 })
 
 const userInfoFromStorage = window.localStorage.getItem('userInfo')

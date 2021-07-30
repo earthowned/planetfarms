@@ -9,6 +9,7 @@ const DragDrop = ({
   text,
   fetchImg,
   dataImg,
+  editImg,
   dropFile,
   onClick = () => {},
   videoTitle
@@ -49,6 +50,7 @@ const DragDrop = ({
       dataImg={dataImg}
       onClick={onClick}
       videoTitle={videoTitle}
+      editImg={editImg}
     />
   )
 }
@@ -63,6 +65,7 @@ const DragDropComponent = ({
   type,
   text,
   dataImg,
+  editImg,
   onClick = () => {},
   videoTitle
 }) => {
@@ -85,7 +88,7 @@ const DragDropComponent = ({
             <div className='drag-drop-icon-container'>
               {type === 'video' ? (
                 <p className='videoName'>{files.name}</p>
-              ) : text ? (
+              ) : editImg ? (
                 <p>{text}</p>
               ) : (
                 <img src='/img/camera-outline.svg' alt='camera icon' />

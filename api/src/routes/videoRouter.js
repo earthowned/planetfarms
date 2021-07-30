@@ -26,6 +26,8 @@ router
   .route('/add')
   .post(
     upload.fields([{ name: 'videoCover' }, { name: 'videoResource' }]),
+    fileChanger,
+    resizeImage,
     addVideo
   )
 router

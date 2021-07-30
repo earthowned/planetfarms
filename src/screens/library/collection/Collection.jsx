@@ -2,10 +2,11 @@ import { useState } from 'react'
 import CollectionModal from '../../../components/collectionModal/CollectionModal'
 import GroupModal from '../../../components/groupModal/GroupModal'
 import LibraryCard from '../../../components/libraryCard/LibraryCard'
-import LibraryHeader from '../../../components/libraryHeader/LibraryHeader'
+// import LibraryHeader from '../../../components/libraryHeader/LibraryHeader'
 import SimpleModal from '../../../components/simpleModal/SimpleModal'
+import SubHeader from '../../../components/subHeader/SubHeader'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
-import { groupCollection, collections } from '../CollectionData'
+import { groupCollection, collections, nav } from '../CollectionData'
 
 import './Collection.css'
 
@@ -41,9 +42,7 @@ const Collection = () => {
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
       {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
       <DashboardLayout title='library'>
-        <div className='library-main-container'>
-          <LibraryHeader setActive={setActive} />
-        </div>
+        <SubHeader nav={nav} btnName='Add files' setCreateActive={setActive} />
         <div className='library-collection'>
           <h4>My library (files)</h4>
           <LibraryCard data={library} />

@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 
 import { createLesson } from '../../../actions/lessonActions'
-
+import useGetFetchData from '../../../utils/useGetFetchData'
+import { GET_COURSE } from '../../../utils/urlConstants'
 import AddContent from './AddContent'
 import LessonMaterial from './LessonMaterial'
 import LessonSaveModal from './LessonSaveModal'
@@ -33,16 +34,27 @@ const AddLesson = () => {
   const [editTextModel, setEditTextModel] = useState(false)
   const [editPhotoModel, setEditPhotoModel] = useState(false)
   const [editId, setEditId] = useState('')
+  const [fetchLesson, setFetchLesson] = useState([])
 
   const { register, errors, handleSubmit } = useForm()
+  const { data } = useGetFetchData(
+    'get_course_by_id',
+    GET_COURSE + `/${courseId}`
+  )
+  useEffect(() => {
+    setFetchLesson(data?.data?.lessons)
+  }, [data, courseId])
+
   const submitLessonForm = ({ title, lessonDesc }) => {
     const coverImg = lessonCover
+    const order = fetchLesson.length + 1
     dispatch(
       createLesson({
         title,
         courseId,
         coverImg,
         lessonDesc,
+        order,
         lessonData,
         material,
         history
@@ -83,7 +95,6 @@ const AddLesson = () => {
           setLessonData={setLessonData}
         />
       )}
-      {testModal && <AddTestModal setTestModal={setTestModal} />}
       {textModal && (
         <NewsCreateModal
           type='text'
@@ -126,7 +137,6 @@ const AddLesson = () => {
           setVideoModal={setVideoModal}
           setImageModal={setImageModal}
           setTextModal={setTextModal}
-          setTestModal={setTestModal}
           register={register}
           errors={errors}
           setLessonCover={setLessonCover}

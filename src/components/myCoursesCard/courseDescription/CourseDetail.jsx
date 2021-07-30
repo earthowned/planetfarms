@@ -1,4 +1,8 @@
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { GET_THUMBNAIL } from '../../../utils/urlConstants'
+import { addEnroll } from '../../../actions/enrollActions'
 
 import ProgressBar from './ProgressBar'
 import Button from '../../button/Button'
@@ -6,11 +10,31 @@ import DropDownCourse from './DropDownCourse'
 
 const CourseDetail = ({
   setFeedbackModal,
-  unpaid,
   setPurchaseModal,
   data,
-  isLoading
+  isLoading,
+  userInfo
 }) => {
+  const dispatch = useDispatch()
+  const [isEnroll, setIsEnroll] = useState('')
+  const [joinCourse, setJoinCourse] = useState(false)
+  const [enrollCourseId, setEnrollCourseId] = useState('')
+
+  useEffect(() => {
+    const isEnrolled = data?.data?.enrolls
+      .filter((enroll) => enroll.userId === userInfo.id)
+      .map((enroll) => {
+        setIsEnroll(enroll.isEnroll)
+        setEnrollCourseId(enroll.courseId)
+      })
+  }, [data])
+
+  const enrollFreeCourse = (courseId) => {
+    setJoinCourse(!joinCourse)
+    const userId = userInfo.id
+    dispatch(addEnroll(courseId, userId))
+  }
+
   return (
     <div className='description-course-page'>
       <img
@@ -29,9 +53,17 @@ const CourseDetail = ({
                   clickHandler={() => setPurchaseModal(true)}
                 />
               </div>
-            ) : (
-              <DropDownCourse setFeedbackModal={setFeedbackModal} />
-            )}
+            ) : joinCourse ||
+              (isEnroll === true && enrollCourseId === data?.data?.id) ? (
+                <DropDownCourse setFeedbackModal={setFeedbackModal} />
+                ) : (
+                  <div className='dropdown-course-container'>
+                    <Button
+                      name='Join Course'
+                      onClick={() => enrollFreeCourse(data?.data?.id)}
+                    />
+                  </div>
+                )}
           </div>
           <p className='course-desc'>{data?.data?.description}</p>
           <ProgressBar data={data} isLoading={isLoading} />

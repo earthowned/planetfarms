@@ -24,7 +24,7 @@ router.route('/profile/:userID').get(protect, getUserProfileByUserID).put(protec
 router.post('/login', authUser)
 router.route('/token').get(protect, sendTokenStatus)
 router.route('/search').get(searchUserName)
-router.post('/changePassword', changePassword)
+router.route('/changePassword').post(protect, changePassword)
 router.post('/forgotPassword', forgotPassword)
 router.post('/forgotPasswordSubmit', forgotPasswordSubmit)
 router.post('/confirmSignUp', confirmSignUpWithCode)

@@ -37,13 +37,13 @@ function CommunityMembersProfile () {
       <div className='x10-4-0-my-personals'>
         <div className='flex-col-2'>
           <div className='frame-2923'>
-            <BackButton location='/community-members' />
+            <BackButton onClick={() => history.goBack()} />
           </div>
           <div className='profile border-1px-onyx'>
             <div className='profile-info'>
               {user && <>
                 <PersonalInformation user={user} />
-                <ContactInformation user={user} />
+                {user?.phone === undefined || <ContactInformation user={user} />}
                 <AdditionalInformation user={user} />
               </>}
             </div>

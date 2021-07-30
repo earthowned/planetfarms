@@ -12,6 +12,11 @@ const LessonMaterial = ({
     setMaterial(() => [...material, { mData }])
   }
 
+  const removeItem = (e) => {
+    const name = e.currentTarget.getAttribute('name')
+    setMaterial(material.filter((item) => item?.mData?.name !== name))
+  }
+
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
@@ -55,7 +60,7 @@ const LessonMaterial = ({
         <p>You dont have any materials in lesson Add it for your users.</p>
       )}
       <DragDrop
-        fileType='application/pdf'
+        fileType='application/pdf,.doc,.txt,application/vnd.ms-powerpoint,application/vnd.ms-excel'
         className='secondary-btn addMaterial'
         text='Add Materials'
         onChange={(mat) => matData(mat)}

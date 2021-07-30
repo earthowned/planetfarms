@@ -26,6 +26,10 @@ import {
   USER_ATTR_RESEND_CODE_REQUEST,
   USER_ATTR_RESEND_CODE_SUCCESS,
   USER_ATTR_RESEND_CODE_FAIL,
+  USER_PASSWORD_CHANGE_REQUEST,
+  USER_PASSWORD_CHANGE_SUCCESS,
+  USER_PASSWORD_CHANGE_RESET,
+  USER_PASSWORD_CHANGE_FAIL,
   USER_FORGOT_PWD_CONFIRM_CODE_REQUEST,
   USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS,
   USER_FORGOT_PWD_CONFIRM_CODE_FAIL,
@@ -139,6 +143,21 @@ export const userAttrResendCodeReducer = (state = {}, action) => {
   }
 }
 
+export const changePasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_PASSWORD_CHANGE_REQUEST:
+      return { loading: true }
+    case USER_PASSWORD_CHANGE_SUCCESS:
+      return { loading: false, status: true }
+    case USER_PASSWORD_CHANGE_RESET:
+      return { loading: false }
+    case USER_PASSWORD_CHANGE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
 export const userForgotPwdConfirmCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_FORGOT_PWD_CONFIRM_CODE_REQUEST:
@@ -157,7 +176,7 @@ export const userForgotPwdResendCodeReducer = (state = {}, action) => {
     case USER_FORGOT_PWD_RESEND_CODE_REQUEST:
       return { loading: true }
     case USER_FORGOT_PWD_RESEND_CODE_SUCCESS:
-      return { loading: false, status: true }
+      return { loading: false, status: true, deliveryDetails: action.payload }
     case USER_FORGOT_PWD_RESEND_CODE_FAIL:
       return { loading: false, error: action.payload }
     default:

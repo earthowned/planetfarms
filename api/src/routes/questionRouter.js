@@ -2,13 +2,15 @@ const express = require('express')
 const router = express.Router()
 const {
   addQuestion, getQuestions, updateQuestion, getQuestionById, deleteQuestion,
-  getTestQuestions
+  getTestQuestions,
+  getLessonQuestions
 } = require('../controllers/questionController')
 
 router.route('/').get(getQuestions)
 router.route('/test/:id').get(getTestQuestions)
+router.route('/lesson/:id').get(getLessonQuestions)
 router.route('/add').post(addQuestion)
-// router.route('/search').get(searchQuestionTitle)
+
 router
   .route('/:id')
   .get(getQuestionById)

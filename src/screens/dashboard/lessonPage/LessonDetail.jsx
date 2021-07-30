@@ -14,13 +14,13 @@ import LessonTest from './LessonTest'
 
 const LessonDetail = ({ data, id }) => {
   const [lessonData, setLessonData] = useState([])
-  const textData = data?.texts.map((text) => {
+  const textData = data?.texts?.map((text) => {
     return text
   })
-  const videoData = data?.videos.map((video) => {
+  const videoData = data?.videos?.map((video) => {
     return video
   })
-  const photoData = data?.photos.map((photo) => {
+  const photoData = data?.photos?.map((photo) => {
     return photo
   })
 

@@ -24,9 +24,11 @@ const LessonCourse = ({ data, setPurchaseModal }) => {
         ''
       )}
       <h3>Lessons</h3>
-      {data?.data?.lessons.map((data, index) => {
-        return <LessonCourseSingle data={data} key={index} />
-      })}
+      {data?.data?.lessons
+        .sort((a, b) => (a.order > b.order ? 1 : -1))
+        .map((data) => {
+          return <LessonCourseSingle data={data} key={data.id} />
+        })}
     </div>
   )
 }

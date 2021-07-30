@@ -12,11 +12,7 @@ const {
 } = require('../controllers/photoController')
 
 router.route('/').get(getPhotos)
-router.route('/add').post(upload.single('lessonImg'), addphoto)
-router
-  .route('/:id')
-  .get(getPhotoById)
-  .delete(deletePhoto)
-  .put(upload.single('lessonImg'), resizeImage, updatePhoto)
+router.route('/add').post(upload.single('lessonImg'), resizeImage, addphoto)
+router.route('/:id').get(getPhotoById).delete(deletePhoto).put(upload.single('lessonImg'), resizeImage, updatePhoto)
 
 module.exports = router

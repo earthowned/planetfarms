@@ -19,6 +19,7 @@ const communityRoutes = require('./routes/communityRouter')
 const communityUsersRoutes = require('./routes/communityUserRouter')
 const groupUsersRoutes = require('./routes/groupUserRouter')
 const enterpriseUsersRoutes = require('./routes/enterpriseUserRouter')
+const enrollRouter = require('./routes/enrollRouter')
 const resizerRoutes = require('./routes/resizerRouter')
 const sequelize = require('./config/database.js')
 const cors = require('cors')
@@ -60,6 +61,7 @@ app.use('/api/materials', materialRouter)
 app.use('/api/tests', testRouter)
 app.use('/api/questions', questionRouter)
 app.use('/api/user_tests', userTestRouter)
+app.use('/api/enrolls', enrollRouter)
 
 // home page response
 app.get('/', (request, response) => {

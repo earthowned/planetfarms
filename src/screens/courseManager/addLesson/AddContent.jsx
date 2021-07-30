@@ -10,7 +10,6 @@ const AddContent = ({
   videoModal,
   setImageModal,
   setTextModal,
-  setTestModal,
   register,
   errors,
   setLessonCover,
@@ -96,10 +95,6 @@ const AddContent = ({
         <button className='secondary-btn' onClick={() => setTextModal(true)}>
           <img src='/img/text-outline.svg' alt='text icon' />{' '}
           <span>Add text</span>
-        </button>
-        <button className='secondary-btn' onClick={() => setTestModal(true)}>
-          <img src='/img/test-outline.svg' alt='test icon' />{' '}
-          <span>Add test</span>
         </button>
       </div>
     </div>

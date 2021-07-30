@@ -41,6 +41,18 @@
 
 .answer-options-container {
   margin-top: 20px;
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    outline: none;
+    background: #212225;
+    border: 1px solid #3A3939;
+    border-radius: 4px;
+    color: var(--primary-white);
+    padding: 12px;
+  }
 }
 
 .answer-options {

@@ -8,15 +8,10 @@
 
   &__image {
     overflow: hidden;
-    /*width: 481px;*/
     height: 600px;
     align-items: center;
     justify-content: center;
     display: flex;
-
-    /*@media only screen and (max-width: 1024px) {
-      width: 300px;
-    }*/
   }
 
   &__overlap {

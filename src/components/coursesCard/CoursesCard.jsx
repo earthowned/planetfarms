@@ -10,10 +10,13 @@ import CardLayout from '../../layout/cardLayout/CardLayout'
 import Background from '../background/Background'
 import './CoursesCard.scss'
 
-const CoursesCard = ({ category, setModalActive }) => {
+const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  const { data: courseData, isLoading } = useGetFetchData('course', GET_COURSE)
+  const { data: courseData, isLoading } = useGetFetchData(
+    'ALL_COURSE_DATA',
+    GET_COURSE
+  )
   if (isLoading) {
     return <span>Loading</span>
   }
@@ -21,7 +24,7 @@ const CoursesCard = ({ category, setModalActive }) => {
   return (
     <div className='course-card-wrapper'>
       <div className='courses-card-container'>
-        {courseData?.courses
+        {courseData?.data
           .filter((cat) =>
             cat.category.toLowerCase().includes(category.toLowerCase())
           )
@@ -30,7 +33,7 @@ const CoursesCard = ({ category, setModalActive }) => {
             <h4 key={catge.id}>{catge.category}</h4>
           ))}
         <CardLayout data={courseData}>
-          {courseData?.courses
+          {courseData?.data
             .filter((cat) =>
               cat.category.toLowerCase().includes(category.toLowerCase())
             )
@@ -46,7 +49,11 @@ const CoursesCard = ({ category, setModalActive }) => {
                       item={course}
                       setModalActive={setModalActive}
                     />
-                    <CardContent item={course} userInfo={userInfo} />
+                    <CardContent
+                      item={course}
+                      userInfo={userInfo}
+                      setPurchaseModal={setPurchaseModal}
+                    />
                   </div>
                 </Background>
               )

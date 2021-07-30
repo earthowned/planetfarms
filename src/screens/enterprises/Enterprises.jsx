@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './Enterprises.css'
-import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import CommunityGroupCard from '../../components/communityGroupCard/CommunityGroupCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { enterpriseDelete, listEnterprises, listUserEnterprises, searchEnterprises } from '../../actions/enterpriseAction'
 import FormModal from '../../components/formModal/FormModal'
-import Filter from '../../components/filter/Filter'
-import useSizeFinder from '../../utils/sizeFinder'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import Pagination from '../../components/pagination/Pagination'
+import SubHeader from '../../components/subHeader/SubHeader'
 
 const Enterprise = () => {
   // fetching current community
@@ -22,9 +20,7 @@ const Enterprise = () => {
   const data = useSelector((state) => state.listEnterprises)
   const dataUser = useSelector((state) => state.listUserEnterprises)
   const { userEnterprises } = dataUser
-  // const {enterprises} = data;
-  // console.log(enterprises);
-  const enterprises = data.enterprises.enterprises ? data.enterprises.enterprises : data.enterprises
+  const enterprises = data?.enterprises?.enterprises ? data.enterprises.enterprises : data.enterprises
   const { success: enterpriseUpdateSuccess } = useSelector((state) => state.enterpriseUpdate)
   const { success: enterpriseDeleteSuccess } = useSelector((state) => state.enterpriseDelete)
   const { success: enterpriseCreateSuccess } = useSelector((state) => state.enterpriseCreate)
@@ -36,6 +32,18 @@ const Enterprise = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const [userPageNumber, setUserPageNumber] = useState(1)
   const dispatch = useDispatch()
+
+  // for navigation
+  const nav = [
+    {
+      label: 'All enterprises',
+      link: `/enterprises/${currentCommunity.slug}`
+    },
+    {
+      label: 'Your Enterprises',
+      link: `/your-enterprises/${currentCommunity.slug}`
+    }
+  ]
 
   useEffect(() => {
     if (search) dispatch(searchEnterprises(search))
@@ -77,11 +85,11 @@ const Enterprise = () => {
             <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
           </div>
         </div>
-                      </div>}
+      </div>}
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>
-            <EnterpriseHeader search={search} setSearch={setSearch} setActive={setActive} />
+            <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Create Enterprise' />
             <div className='enterpriseCard'>
               {pathname === `/enterprises/${currentCommunity.slug}`
                 ? <CommunityGroupCard
@@ -102,79 +110,13 @@ const Enterprise = () => {
                   />}
             </div>
             {
-               pathname === `/enterprises/${currentCommunity.slug}`
-                 ? <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
-                 : <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
-              }
-
+              pathname === `/enterprises/${currentCommunity.slug}`
+                ? <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
+                : <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
+            }
           </div>
         </div>
       </DashboardLayout>
-    </>
-  )
-}
-
-function EnterpriseHeader ({ search, setSearch, setActive }) {
-  return (
-    <div className='enterprises-row'>
-      <div className='enterprises-header'>
-        <FirstHeader />
-        <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
-      </div>
-      <div className='create-enterprises-wrapper'>
-        <div className='add-enterprises'>
-          <div className='create-enterprise-text ibmplexsans-semi-bold-shark-16px' onClick={() => setActive(true)}>
-            Create Enterprise
-          </div>
-        </div>
-        <div className='enterprise-filter'>
-          <Filter />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function FirstHeader () {
-  const windowWidth = useSizeFinder()
-  const { pathname } = useLocation()
-
-  // fetching current community
-  const currentCommunity = localStorage.getItem('currentCommunity')
-    ? JSON.parse(localStorage.getItem('currentCommunity'))
-    : null
-
-  const nav = [
-    {
-      label: 'All enterprises',
-      link: `/enterprises/${currentCommunity.slug}`
-    },
-    {
-      label: 'Your Enterprises',
-      link: `/your-enterprises/${currentCommunity.slug}`
-    }
-  ]
-  return (
-    <>
-      {windowWidth > 720
-        ? <ul className='courses-list-container'>
-          {
-          nav.map(item => {
-            return (
-              <li>
-                <Link
-                  className={`nav-link ${(pathname === `${item.link}`)
-                  ? 'courses-list-item active'
-                  : 'library-list-item'}`} to={`${item.link}`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            )
-          })
-        }
-        </ul>
-        : <Filter name='All Enterprises' noImage />}
     </>
   )
 }

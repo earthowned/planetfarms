@@ -1,0 +1,143 @@
+.question-modal-container {
+  position: fixed;
+  width: 100%;
+  background: var(--background-color-modal);
+  height: 100%;
+  z-index: 5005;
+  color: var(--primary-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  .question-modal-inner-container {
+    width: 80%;
+    height: auto;
+    background: var(--cards);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    overflow-y: scroll;
+
+    .question-modal-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      
+      h4 {
+      margin-bottom: 16px;
+      }
+
+      img {
+        cursor: pointer;
+      }
+    }
+    
+    .question-form-conatiner {
+      width: 100%;
+
+      .input-container {
+        width: 100%;
+        margin-bottom: 12px;
+      }
+
+      .option-answers {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 12px 0;
+
+        .question-modal-options {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 48%;
+          margin-bottom: 12px;
+
+          input {
+            width: 90%;
+          }
+
+          img {
+            cursor: pointer;
+          }
+        }
+    }
+    }
+  }
+}
+
+.add-test-container {
+  width: 100%;
+  position: relative;
+  margin-top: 24px;
+
+  .add-test-inner-container {
+    margin-top: 40px;
+    width: 100%;
+  }
+}
+
+.test-answers-wrapper {
+  width: 100%;
+}
+
+.test-correct-answer {
+  width: 45%;
+
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    }
+}
+
+.option-answers {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 767px) {
+    display: block;
+    width: 100%;
+  }
+  
+  .test-answer-input-field {
+    width: 45%;
+
+    @media only screen and (max-width: 767px) {
+    width: 100%;
+    }
+  }
+}
+
+.test-correct-answer > h4 {
+  color: var(--primary-white);
+}
+
+.question-btn-contaianer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+
+  button {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 48px;
+    outline: none;
+    padding: 1em;
+    border-radius: 4px;
+    background: var(--background-color-light);
+    color: var(--primary-white);
+    border: 0.5px solid var(--primary-white);
+    font-weight: 400;
+    cursor: pointer;
+    text-align: center;
+    text-transform: capitalize;
+  }
+}

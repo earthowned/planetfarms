@@ -36,8 +36,10 @@ jobs:
           git branch
           git pull
           screen -ls
-          screen -X -S api kill
-          screen -X -S react kill
+          killall node
+          sleep 1
+          #screen -X -S api kill
+          #screen -X -S react kill
           screen -ls
           npm i
           cd api/

@@ -38,6 +38,7 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+  width: 80%;
 }
 
 .edit-information-container {
@@ -81,7 +82,10 @@
 
 @media only screen and (max-width: 700px) {
   .myProfile-container-row {
-    flex-direction: column-reverse;
+    flex-direction: column;
+    .form-group {
+      width: 100%;
+    }
   }
 }
 

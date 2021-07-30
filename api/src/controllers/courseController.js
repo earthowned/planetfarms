@@ -2,26 +2,38 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
+const CircularJSON = require('circular-json')
+const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc    Fetch all course
 // @route   GET /api/courses
 // @access  Public
-const getCourses = (req, res) => {
+const getCourses = async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 0
   const order = req.query.order || 'ASC'
 
-  db.Courses.findAll({
+  const courses = await db.Courses.findAll({
     offset: page,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson]
+    include: [db.Lesson, db.Enroll]
   })
-    .then((courses) => {
-      // queryUtils.paginate({ page, pageSize })
-      res.json({ courses, page, pageSize }).status(200)
+
+  courses.forEach((course) => {
+    course.thumbnail = changeFormat(course.thumbnail)
+    course.lessons.forEach((lesson) => {
+      lesson.coverImg = changeFormat(lesson.coverImg)
     })
-    .catch((err) => res.json({ err }).status(400))
+  })
+
+  res.status(200).json({
+    status: true,
+    message: 'fetched courses successfully',
+    data: courses,
+    page,
+    pageSize
+  })
 }
 
 // @desc    Add individual course
@@ -72,7 +84,7 @@ const updateCourse = (req, res) => {
           creator,
           steps
         },
-        { where: { id }, include: [db.Lesson] }
+        { where: { id }, include: [db.Lesson, db.Enroll] }
       )
         .then(() => res.json({ message: 'Course Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
@@ -89,15 +101,26 @@ const getCourseById = async (req, res) => {
   const { id } = req.params
   const course = await db.Courses.findOne({
     where: { id },
-    include: [db.Lesson]
+    include: [db.Lesson, db.Enroll]
   })
   if (!course) {
     throw new NotFoundError()
   }
+  course.lessons.forEach((lesson) => {
+    lesson.coverImg = changeFormat(lesson.coverImg)
+  })
+  const thumbnail = changeFormat(course?.dataValues?.thumbnail)
+  const coverImg = changeFormat(course?.dataValues?.lessons?.coverImg)
+  const courseData = course.dataValues
+  const data = Object.assign({
+    ...course,
+    dataValues: { ...courseData, thumbnail, coverImg }
+  })
+  const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
     status: true,
     message: 'fetched course successfully',
-    data: course
+    data: str.dataValues
   })
 }
 

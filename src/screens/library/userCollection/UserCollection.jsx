@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import './UserCollection.css'
-
-import LibraryHeader from '../../../components/libraryHeader/LibraryHeader'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import CollectionModal from '../../../components/collectionModal/CollectionModal'
 import SimpleModal from '../../../components/simpleModal/SimpleModal'
 import Background from '../../../components/background/Background'
-import { farming, groupCollection } from '../CollectionData'
+import { farming, groupCollection, nav } from '../CollectionData'
 import GroupModal from '../../../components/groupModal/GroupModal'
 import CardLayout from '../../../layout/cardLayout/CardLayout'
+import SubHeader from '../../../components/subHeader/SubHeader'
 
 const UserCollection = () => {
   const [modalActive, setModalActive] = useState(false)
@@ -34,10 +33,7 @@ const UserCollection = () => {
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
 
       <DashboardLayout title='library'>
-        <div className='library-main-container'>
-          <LibraryHeader setActive={setModalActive} />
-        </div>
-
+        <SubHeader nav={nav} btnName='Add files' setCreateActive={setModalActive} />
         <h4 className='farming-collection-header'>Farming Collections</h4>
 
         <CardLayout data={farming}>
