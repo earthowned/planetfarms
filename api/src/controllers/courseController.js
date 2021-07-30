@@ -19,6 +19,9 @@ const getCourses = async (req, res) => {
     order: [['title', order]],
     include: [db.Lesson, db.Enroll]
   })
+  if (!courses) {
+    throw new NotFoundError()
+  }
   courses.forEach((course) => {
     course.thumbnail = changeFormat(course.thumbnail)
     course.lessons.forEach((lesson) => {
@@ -115,8 +118,10 @@ const getCourseById = async (req, res) => {
 // @access  Public
 const deleteCourse = async (req, res) => {
   const { id } = req.params
-
   const course = await db.Course.destroy({ where: { id } })
+  if (!course) {
+    throw new NotFoundError()
+  }
   res.status(202).json({
     status: true,
     message: 'course deleted successfully',
