@@ -1,9 +1,8 @@
-const db = require("../models")
+const db = require('../models')
 
 const memberPermit = (role) => {
-    
   return async (req, res, next) => {
-      const member = await db.CommunityUser.findOne({where: {userId: req.user.id, communityId: req.params.id}, attributes: ['role']});
+    const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId: req.params.id }, attributes: ['role'] })
     if (member.dataValues.role === role) {
       next()
     } else {

@@ -121,10 +121,10 @@ const getAllMemberDetails = async (req, res) => {
 
     // flattening the array to show only one object
     const newArray = data.map(item => {
-      const {userId, role, id} = item.dataValues
-        const {...rest} = item.user
-          return {id, userId, role, ...rest.dataValues}
-      }
+      const { userId, role, id } = item.dataValues
+      const { ...rest } = item.user
+      return { id, userId, role, ...rest.dataValues }
+    }
     )
 
     res.json({
@@ -141,11 +141,11 @@ const getAllMemberDetails = async (req, res) => {
 
 const updateMemberRole = async (req, res) => {
   try {
-    const {role} = req.body
-   await db.CommunityUser.update({role}, {where: {id: parseInt(req.params.memberId)}})
-    res.json({message: 'Successfully role updated'})
+    const { role } = req.body
+    await db.CommunityUser.update({ role }, { where: { id: parseInt(req.params.memberId) } })
+    res.json({ message: 'Successfully role updated' })
   } catch (error) {
-    res.status(400).json({error})
+    res.status(400).json({ error })
   }
 }
 
