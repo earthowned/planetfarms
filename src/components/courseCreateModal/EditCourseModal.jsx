@@ -54,6 +54,7 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
       )
     }
   }
+
   return (
     <>
       {isEditCourse && (
@@ -133,7 +134,7 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
               )}
               {errors.price && <p className='error'>{errors.price.message}</p>}
             </div>
-            <button className='default-btn btn-size'>Create course</button>
+            <button className='default-btn btn-size'>Edit course</button>
           </form>
         </div>
       )}

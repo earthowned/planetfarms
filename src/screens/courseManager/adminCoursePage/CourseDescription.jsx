@@ -2,11 +2,25 @@ import { GET_THUMBNAIL } from '../../../utils/urlConstants'
 import Filter from '../../../components/filter/Filter'
 import CourseActions from './CourseActions'
 
-const CourseDescription = ({ data, setIsEditCourse }) => {
+const CourseDescription = ({
+  data,
+  setIsEditCourse,
+  courseId,
+  deleteCourse,
+  history,
+  dispatch
+}) => {
   return (
     <div className='admin-course-page-container'>
       <div className='admin-course-img-wrapper'>
-        <CourseActions id={data?.data?.id} setIsEditCourse={setIsEditCourse} />
+        <CourseActions
+          id={data?.data?.id}
+          setIsEditCourse={setIsEditCourse}
+          courseId={courseId}
+          deleteCourse={deleteCourse}
+          history={history}
+          dispatch={dispatch}
+        />
         <img
           src={GET_THUMBNAIL + data?.data?.thumbnail}
           alt={data?.data?.title + '_img'}

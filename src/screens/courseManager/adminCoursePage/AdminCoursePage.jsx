@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { useParams, Redirect } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useParams, Redirect, useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import useGetFetchData from '../../../utils/useGetFetchData'
 import { GET_COURSE } from '../../../utils/urlConstants'
+import { deleteCourse } from '../../../actions/courseActions'
 
 import BackButton from '../../../components/backButton/BackButton'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
@@ -13,6 +14,8 @@ import EditCourseModal from '../../../components/courseCreateModal/EditCourseMod
 import './AdminCoursePage.scss'
 
 const AdminCoursePage = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { courseId } = useParams()
@@ -38,6 +41,10 @@ const AdminCoursePage = () => {
         data={data}
         isLoading={isLoading}
         setIsEditCourse={setIsEditCourse}
+        courseId={courseId}
+        deleteCourse={deleteCourse}
+        history={history}
+        dispatch={dispatch}
       />
       {isEditCourse && (
         <EditCourseModal

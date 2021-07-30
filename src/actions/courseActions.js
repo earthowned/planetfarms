@@ -85,11 +85,12 @@ export const updateCourse = ({
   }
 }
 
-export const deleteCourse = (courseId) => async (dispatch) => {
+export const deleteCourse = (courseId, history) => async (dispatch) => {
   try {
     dispatch({ type: course.COURSE_DELETE_REQUEST })
     const { data } = await deleteApi(COURSE + `/${courseId}`)
     dispatch({ type: course.COURSE_DELETE_SUCCESS, payload: data })
+    history.push('/courses')
   } catch (error) {
     const message =
       error.response && error.response.data.message
