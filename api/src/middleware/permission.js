@@ -9,12 +9,7 @@ const permit = (role) => {
 }
 
 function checkRole (req, role) {
-  let authorize = false
-  role.forEach(el => {
-    if (el === req.user.role) return authorize = true
-  })
-
-  return authorize
+  return role.some(el => el === req.user.role)
 }
 
 module.exports = permit

@@ -4,14 +4,12 @@ const getCategories = async (_req, res) => {
   const categories = await Category.findAll()
   res.status(200).json({
     status: true,
-    message: 'fetched all categories successfully',
     results: categories
   })
 }
 
 const getSingleCategory = async (req, res) => {
   const category = await Category.findOne({ where: { id: req.params.id } })
-
   if (!category) {
     return res.status(201).json({
       status: true,
@@ -19,10 +17,8 @@ const getSingleCategory = async (req, res) => {
       results: category
     })
   }
-
   res.status(200).json({
     status: true,
-    message: 'fetched single category successfully',
     results: category
   })
 }
@@ -32,7 +28,7 @@ const addCategory = async (req, res) => {
     const category = await Category.create(req.body)
     res.status(201).json({
       status: true,
-      message: 'add new category successfully',
+      message: 'Category added successfully',
       results: category
     })
   } catch (error) {
@@ -46,7 +42,7 @@ const deleteCategory = async (req, res) => {
     const category = await Category.destroy({ where: { id } })
     res.status(202).json({
       status: true,
-      message: 'deleted category successfully',
+      message: 'Category deleted successfully',
       results: category
     })
   } catch (error) {
@@ -60,7 +56,7 @@ const updateCategory = async (req, res) => {
     const category = await Category.update(req.body, { where: { id } })
     res.status(202).json({
       status: true,
-      message: 'category updated successfully',
+      message: 'Category updated successfully',
       results: category
     })
   } catch (error) {

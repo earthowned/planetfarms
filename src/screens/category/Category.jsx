@@ -41,7 +41,6 @@ const Category = () => {
   const deleteModalFunc = (id) => {
     setDeleteId(id)
     setDeleteModal(true)
-    console.log(id)
   }
 
   const editModalFunc = async (id) => {
@@ -56,7 +55,6 @@ const Category = () => {
       {deleteModal && <CategoryDelete setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
       {editModal && <CategoryForm data={data} editId={editId} setData={setData} setEditModal={setEditModal} setAddModal={setAddModal} />}
       {addModal && <CategoryForm setData={setData} setEditModal={setEditModal} setAddModal={setAddModal} />}
-
       <DashboardLayout title='category'>
         <div className='category__header'>
           <BackButton onClick={() => history.goBack()} />
@@ -66,25 +64,21 @@ const Category = () => {
           ? <h4 style={{ color: '#fff' }}>Loading ... </h4>
           : <Table
               addSymbolNumber
-              addOptions
               options={
-              [{
-                img: '/img/edit-icon.svg',
-                action: editModalFunc
-              },
-              {
-                img: '/img/trash-icon.svg',
-                action: deleteModalFunc
-              }]
-            }
-              customizedTbl={{
-                tblHeader: ['Name', 'Created', 'Updated'],
+                [{
+                  img: '/img/edit-icon.svg',
+                  action: editModalFunc
+                },
+                {
+                  img: '/img/trash-icon.svg',
+                  action: deleteModalFunc
+                }]
+              }
+              data={{
+                tblHeader: ['Name'],
                 tblData: categories,
-                tblProperty: ['name', 'createdAt', 'updatedAt']
+                tblProperty: ['name']
               }}
-            // defaultTbl={{
-            //   tblData: categories
-            // }}
             />}
       </DashboardLayout>
     </>
@@ -109,13 +103,10 @@ const CategoryDelete = ({ setDeleteModal, confirmDelete }) => {
 
 const CategoryForm = ({ data, editId, setData, setEditModal, setAddModal }) => {
   const { register: regi, errors, handleSubmit } = useForm()
-
   const { error, loading } = useSelector(state => state.addCategory)
   const { error: updateError, loading: updateLoading } = useSelector(state => state.categoryUpdate)
   const [errorMessage, setErrorMessage] = useState('')
-
   const dispatch = useDispatch()
-
   function clearInput () {
     setData(null)
     setEditModal(false)
@@ -138,7 +129,6 @@ const CategoryForm = ({ data, editId, setData, setEditModal, setAddModal }) => {
     if (name) {
       dispatch(categoryUpdate({ name, id: editId }))
     }
-
     if (updateError) {
       setErrorMessage(updateError)
     } else {
@@ -168,7 +158,7 @@ const CategoryForm = ({ data, editId, setData, setEditModal, setAddModal }) => {
               ref={regi({
                 required: {
                   value: true,
-                  message: 'You must enter the category name.'
+                  message: 'Category name is required.'
                 }
               })}
               errors={errors}

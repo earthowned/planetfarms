@@ -18,24 +18,15 @@ import './Table.scss'
 // img: the path of the image you want to show as button
 // action: this holds function that is executed when the button is clicked (fn: returns id of the item)
 
-const Table = ({ addSymbolNumber, customizedTbl = { tblData: [] }, defaultTbl = { tblData: [] }, addOptions, options = [] }) => {
+const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
   const [property, setProperty] = useState([])
   const [header, setHeader] = useState([])
   const [tblData, setTblData] = useState([])
   useEffect(() => {
-    if (defaultTbl.tblData.length) {
-      const { tblData } = defaultTbl
-      setProperty(Object.keys(tblData[0]))
-      setHeader(Object.keys(tblData[0]))
-      setTblData(tblData)
-    }
-
-    if (customizedTbl.tblData.length) {
-      const { tblHeader, tblData, tblProperty } = customizedTbl
-      setHeader(tblHeader)
-      setTblData(tblData)
-      setProperty(tblProperty)
-    }
+    const { tblHeader, tblData, tblProperty } = data
+    setHeader(tblHeader || Object.keys(tblData[0]))
+    setTblData(tblData)
+    setProperty(tblProperty || Object.keys(tblData[0]))
   }, [])
 
   return (
@@ -49,7 +40,7 @@ const Table = ({ addSymbolNumber, customizedTbl = { tblData: [] }, defaultTbl = 
                 return <th key={index}>{propKey}</th>
               })
             }
-            {addOptions && <th>Options</th>}
+            {options.length && <th>Options</th>}
           </tr>
         </thead>
         <tbody className='tbl__body'>
@@ -63,15 +54,15 @@ const Table = ({ addSymbolNumber, customizedTbl = { tblData: [] }, defaultTbl = 
                       return <td key={index}>{item[propkey]}</td>
                     })
                   }
-                  {addOptions && <td>
+                  {options.length && <td>
                     <div className='tbl-options'>
                       {
-                        options.length && options.map(el => {
+                        options.map(el => {
                           return <img src={el.img} alt='edit-btn' onClick={async () => await el.action(item.id)} />
                         })
                       }
                     </div>
-                                 </td>}
+                  </td>}
                 </tr>
               )
             })

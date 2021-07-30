@@ -46,7 +46,6 @@ export const createCategory = (newCategory) => async (dispatch, getState) => {
     if (data?.error) {
       return dispatch({ type: CATEGORY_CREATE_FAIL, payload: data.error })
     }
-
     dispatch({ type: CATEGORY_CREATE_SUCCESS, payload: data })
   } catch (error) {
     const message = error.response && error.response.data.message
@@ -72,20 +71,16 @@ export const listCategoryById = (id) => async (dispatch) => {
 export const categoryUpdate = (newCategory) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_UPDATE_REQUEST })
-
     const config = configFunc()
     const { id, name } = newCategory
-
     const { data } = await axios.put(
       `${process.env.REACT_APP_API_BASE_URL}/api/categories/${id}`,
       { name },
       config
     )
-
     if (data?.error) {
       return dispatch({ type: CATEGORY_UPDATE_FAIL, payload: data.error })
     }
-
     dispatch({ type: CATEGORY_UPDATE_SUCCESS, payload: true })
   } catch (error) {
     const message = error.response && error.response.data.message

@@ -7,7 +7,6 @@ module.exports = {
       defaultValue: 'user'
     })
   },
-
   down: async (queryInterface, Sequelize) => {
     queryInterface.removeColumn('users', 'role')
   }
