@@ -64,6 +64,13 @@ import {
 import { memberListReducer } from './reducers/memberReducers'
 import { addEnrollReducer } from './reducers/enrollReducer'
 import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
+import {
+  categoryCreateReducer,
+  categoryDeleteReducer,
+  categoryListReducer,
+  categoryUpdateReducer,
+  categoryViewReducer
+} from './reducers/categoryReducer'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -119,7 +126,12 @@ const reducer = combineReducers({
   addEnroll: addEnrollReducer,
   listQuestions: questionListReducer,
   questionDelete: questionDeleteReducer,
-  questionUpdate: questionUpdateReducer
+  questionUpdate: questionUpdateReducer,
+  listCategories: categoryListReducer,
+  categoryDelete: categoryDeleteReducer,
+  categoryUpdate: categoryUpdateReducer,
+  categoryView: categoryViewReducer,
+  addCategory: categoryCreateReducer
 })
 
 const userInfoFromStorage = window.localStorage.getItem('userInfo')

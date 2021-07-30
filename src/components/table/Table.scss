@@ -1,0 +1,63 @@
+@mixin borderStyle {
+  border-left: 1.5px solid var(--background-color);
+  padding: 8px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.tbl-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+
+  &__heading {
+    font-size: 18px;
+    text-transform: capitalize;
+
+    th:first-child {
+      background-color: var(--primary-color);
+      padding: 12px;
+    }
+
+    th:not(:first-child) {
+      @include borderStyle;
+      background-color: var(--primary-color);
+      padding: 12px;
+    }
+  }
+
+  &__body {
+    color: var(--primary-white);
+
+    tr {
+      background-color: var(--dropdowns);
+
+      &:nth-child(even) {
+        background-color: var(--popups);
+      }
+
+      td:first-child {
+        padding: 8px;
+        text-align: center;  
+      }
+
+      td:not(:first-child) {
+        @include borderStyle;
+      }
+    }
+  }
+}
+
+.tbl-options {
+  img {
+    cursor: pointer;
+
+    &:last-child {
+      margin-left: 14px;
+    }
+  }
+}
