@@ -10,14 +10,14 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listMembers = () => async (
+export const listMembers = ({ sort, pageNumber }) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: MEMBER_LIST_REQUEST })
     const { data } = await getApi(
       dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}`
+      `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}?pageNumber=${pageNumber}`
     )
     dispatch({
       type: MEMBER_LIST_SUCCESS,

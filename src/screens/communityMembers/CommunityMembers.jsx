@@ -14,6 +14,7 @@ function CommunityMembers ({ history }) {
   const { members } = useSelector(state => state.listMember)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+  const [pageNumber, setPageNumber] = useState(1)
 
   // fetching current community
   const currentCommunity = localStorage.getItem('currentCommunity')
@@ -23,9 +24,9 @@ function CommunityMembers ({ history }) {
   useEffect(() => {
     if (userInfo) {
       if (search) dispatch(searchMembers(search))
-      if (!search) dispatch(listMembers())
+      if (!search) dispatch(listMembers({ sort: '', pageNumber }))
     }
-  }, [search, dispatch, history, userInfo])
+  }, [search, dispatch, history, userInfo, pageNumber])
 
   return (
     <DashboardLayout title={currentCommunity.name}>
@@ -35,7 +36,7 @@ function CommunityMembers ({ history }) {
             <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
           </div>
           <div className='community-members-grid-row'>
-            {members && <CardImage follow='Follow' data={members.data || members} />}
+            {members && <CardImage follow='Follow' data={members.communities_users} />}
           </div>
         </div>
       </div>
