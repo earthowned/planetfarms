@@ -118,7 +118,7 @@ const getCourseById = async (req, res) => {
 // @access  Public
 const deleteCourse = async (req, res) => {
   const { id } = req.params
-  const course = await db.Course.destroy({ where: { id } })
+  const course = await db.Courses.destroy({ where: { id } })
   if (!course) {
     throw new NotFoundError()
   }
