@@ -1,8 +1,6 @@
-'use strict'
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('lesson_progesss', {
+    await queryInterface.createTable('lesson_progresses', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -10,7 +8,7 @@ module.exports = {
       },
       lessonId: {
         type: Sequelize.INTEGER,
-        unique: true,
+        unique: false,
         references: {
           model: 'lessons',
           key: 'id'
@@ -34,6 +32,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('lesson_progesss')
+    await queryInterface.dropTable('lesson_progresses')
   }
 }

@@ -27,6 +27,7 @@ const getProgressById = async (req, res) => {
 }
 
 const addProgress = async (req, res) => {
+  console.log(req.body)
   const progress = await db.LessonProgress.create(req.body)
   res.status(201).json({
     status: true,
