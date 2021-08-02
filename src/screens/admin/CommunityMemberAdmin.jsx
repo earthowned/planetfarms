@@ -1,8 +1,7 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
-import { getApi, getCommunity, putApi } from '../../utils/apiFunc'
+import { getApi, putApi } from '../../utils/apiFunc'
 import './CommunityMemberAdmin.scss'
 
 const ComMemberAdmin = () => {
@@ -11,8 +10,11 @@ const ComMemberAdmin = () => {
 
   const dispatch = useDispatch()
 
-  // getting current community from localstorage
-  const currentCommunity = getCommunity()
+  
+  // fetching current community
+  const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
 
   useEffect(() => {
     getMemberDetails()
@@ -42,29 +44,29 @@ const ComMemberAdmin = () => {
       <div className='com-member-container'>
         <div className='com-member-header'>
           {
-                    ['firstName', 'lastName', 'email', 'phone', 'dateOfBirth', 'role', 'options'].map(el => {
-                      return (
-                        <p>{el}</p>
-                      )
-                    })
-                }
+            ['firstName', 'lastName', 'email', 'phone', 'dateOfBirth', 'role', 'options'].map(el => {
+              return (
+                <p>{el}</p>
+              )
+            })
+          }
         </div>
         {
-                    data.map(item => {
-                      const { firstName, lastName, email, phone, dateOfBirth, role } = item
-                      return (
-                        <div className='com-member-item'>
-                          <p>{firstName || 'name'}</p>
-                          <p>{lastName || 'lastname'}</p>
-                          <p>{email || 'email'}</p>
-                          <p>{phone || 'phone'}</p>
-                          <p>{dateOfBirth || 'dateOfBirth'}</p>
-                          <p>{role || 'role'}</p>
-                          <p className='access-btn'><img src='/img/edit-icon.svg' onClick={() => allowAccess(item.id)} /></p>
-                        </div>
-                      )
-                    })
-                }
+          data.map(item => {
+            const { firstName, lastName, email, phone, dateOfBirth, role } = item
+            return (
+              <div className='com-member-item'>
+                <p>{firstName || 'name'}</p>
+                <p>{lastName || 'lastname'}</p>
+                <p>{email || 'email'}</p>
+                <p>{phone || 'phone'}</p>
+                <p>{dateOfBirth || 'dateOfBirth'}</p>
+                <p>{role || 'role'}</p>
+                <p className='access-btn'><img src='/img/edit-icon.svg' onClick={() => allowAccess(item.id)} /></p>
+              </div>
+            )
+          })
+        }
       </div>
     </DashboardLayout>
   )

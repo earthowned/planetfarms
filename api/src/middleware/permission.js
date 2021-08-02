@@ -1,15 +1,33 @@
-const permit = (role) => {
-  return (req, res, next) => {
-    if (checkRole(req, role)) {
+const db = require("../models")
+
+function checkRole (dbRole, roles) {
+  return roles.some(el => el === dbRole)
+}
+
+// async function checkMemberRole(req, roles) {
+//   const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId: req.params.id }, attributes: ['role'] })
+//   console.log(member.dataValues.role);
+//   console.log(checkRole(member.dataValues.role, roles))
+//   if (checkRole(member.dataValues.role, roles)) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+// }
+
+const permit = (roles) => {
+  return async (req, res, next) => {
+    // getting member role
+    const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId: req.params.id }, attributes: ['role'] })
+
+    if (checkRole(member.dataValues.role, roles) || checkRole(req.user.role, roles)) {
+      console.log("hellonworld")
       next()
     } else {
       res.json({ error: 'Sorry, You don\'t have permission' })
+      return;
     }
   }
-}
-
-function checkRole (req, role) {
-  return role.some(el => el === req.user.role)
 }
 
 module.exports = permit
