@@ -7,6 +7,7 @@ const fs = require('fs')
 require('express-async-errors')
 const {
   getCourses,
+  getCoursesByCategoryName,
   addCourse,
   updateCourse,
   getCourseById,
@@ -16,6 +17,7 @@ const {
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
 router.route('/').get(getCourses)
+router.route('/:category').get(getCoursesByCategoryName)
 
 // for upload we have just worked with images jpg|jpeg|png for other types of file we need to work.
 router.route('/add').post(upload.single('thumbnail'), resizeImage, addCourse)

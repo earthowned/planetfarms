@@ -13,9 +13,11 @@ import './CoursesCard.scss'
 const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
   const { data: courseData, isLoading } = useGetFetchData(
     'ALL_COURSE_DATA',
-    GET_COURSE
+    GET_COURSE + '/' + category,
+    { category }
   )
   if (isLoading) {
     return <span>Loading</span>

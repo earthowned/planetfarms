@@ -36,6 +36,43 @@ const getCourses = async (req, res) => {
   })
 }
 
+// @desc    Fetch courses by category name
+// @route   GET /api/courses/:category?pageNumber=${pageNumber}
+// @access  Public
+const getCoursesByCategoryName = async (req, res) => {
+  const pageSize = 3
+  const page = Number(req.query.pageNumber) || 1
+  const category = req.params.category
+  const order = req.query.order || 'ASC'
+
+  const courses = await db.Courses.findAndCountAll({
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
+    order: [['title', order]],
+    include: [db.Lesson, db.Enroll],
+    where: { category }
+  })
+
+  courses.rows.forEach((course) => {
+    course.thumbnail = changeFormat(course.thumbnail)
+    course.lessons.forEach((lesson) => {
+      lesson.coverImg = changeFormat(lesson.coverImg)
+    })
+  })
+
+  const totalPages = Math.ceil(courses.count / pageSize)
+
+  res.status(200).json({
+    status: true,
+    message: 'fetched courses successfully',
+    data: courses.rows,
+    totalItems: courses.count,
+    page,
+    pageSize,
+    totalPages
+  })
+}
+
 // @desc    Add individual course
 // @route   POST /api/courses/add
 // @access  Public
@@ -166,6 +203,7 @@ const searchCoursesTitle = (req, res) => {
 module.exports = {
   addCourse,
   getCourses,
+  getCoursesByCategoryName,
   updateCourse,
   getCourseById,
   deleteCourse,

@@ -37,9 +37,6 @@ module.exports = (sequelize, DataTypes) => {
       steps: {
         type: DataTypes.JSON
       },
-      _attachments: {
-        type: DataTypes.BLOB('long')
-      },
       price: {
         type: DataTypes.DOUBLE
       },
