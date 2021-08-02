@@ -1,0 +1,52 @@
+name: Manual DPIO Deploy
+
+on:
+  push:
+   branches:
+     - manual-docker
+  workflow_dispatch:
+
+jobs:
+  DPIO:
+    name: Manual DPIO Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: sshagent
+        uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
+
+      - name: deploy
+        run: |
+          branch="${GITHUB_REF#refs/heads/}"
+          echo "The branched that was pushed is $branch"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "docker.planetfarms.io ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEJkFFbVc+t4N2MsHQVFs6WG+Tnv1rFiX6Cdq036NMEI1P2MiA1nlDkoRw/VdO+8t3P7z9wiP1JwoY/ouAaCLrY=" > ~/.ssh/known_hosts
+          ssh root@docker.planetfarms.io <<EOF
+          cd /srv/planetfarms/
+          pwd
+          git branch
+          git pull
+          git checkout $branch
+          git branch
+          git pull
+          screen -ls
+          killall node
+          sleep 1
+          #screen -X -S api kill
+          #screen -X -S react kill
+          screen -ls
+          npm i
+          cd api/
+          npm i
+          npx sequelize-cli db:migrate
+          cd ..
+          screen -dmS react bash -c 'cd /srv/planetfarms; npm start'
+          screen -dmS api bash -c 'cd /srv/planetfarms/api; npm start'
+          screen -ls
+          EOF
