@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     attachments: {
       type: DataTypes.TEXT
+    },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'user'
     }
   },
   { timestamps: true }
