@@ -4,7 +4,7 @@ import LessonCourseSingle from './LessonCourseSingle'
 
 const LessonCourse = ({ data, setPurchaseModal, isEnroll }) => {
   const lessonLen = data?.data?.lessons.length
-  console.log(isEnroll)
+  console.log(data)
 
   return (
     <div className='lessons-container'>

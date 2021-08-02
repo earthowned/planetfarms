@@ -6,6 +6,7 @@ const LessonCourseSingle = ({ data }) => {
 
   return (
     <div className='lesson-card-wrapper'>
+      {data?.order !== 1 ? <div className='lesson-permission' /> : ''}
       <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
         <div className='lessonCoverImg'>
           <img
