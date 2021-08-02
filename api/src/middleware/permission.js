@@ -1,4 +1,4 @@
-const db = require("../models")
+const db = require('../models')
 
 function checkRole (dbRole, roles) {
   return roles.some(el => el === dbRole)
@@ -21,11 +21,9 @@ const permit = (roles) => {
     const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId: req.params.id }, attributes: ['role'] })
 
     if (checkRole(member.dataValues.role, roles) || checkRole(req.user.role, roles)) {
-      console.log("hellonworld")
       next()
     } else {
       res.json({ error: 'Sorry, You don\'t have permission' })
-      return;
     }
   }
 }

@@ -12,9 +12,8 @@ const ComMemberAdmin = () => {
 
   const dispatch = useDispatch()
 
-  
   // fetching current community
-  const currentCommunity = getCommunity();
+  const currentCommunity = getCommunity()
 
   useEffect(() => {
     getMemberDetails()
@@ -28,8 +27,6 @@ const ComMemberAdmin = () => {
     setData(data.results)
   }
 
-  console.log(data);
-
   const allowAccess = async (id) => {
     const { data } = await putApi(
       dispatch,
@@ -41,12 +38,12 @@ const ComMemberAdmin = () => {
 
   return (
     <DashboardLayout title={currentCommunity.name}>
-      {data.length && <Table 
-        addSymbolNumber={true} 
+      {data.length && <Table
+        addSymbolNumber
         data={{
           tblData: data,
           tblProperty: ['firstName', 'lastName', 'email', 'phone', 'dateOfBirth', 'role', 'options'],
-          tblHeader: ['First Name', 'Last Name', 'Email', 'Phone', 'Date of Birth', 'Role', 'options'],
+          tblHeader: ['First Name', 'Last Name', 'Email', 'Phone', 'Date of Birth', 'Role', 'options']
         }}
         options={
           [
@@ -56,7 +53,7 @@ const ComMemberAdmin = () => {
             }
           ]
         }
-      />}
+                      />}
     </DashboardLayout>
   )
 }
