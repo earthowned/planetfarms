@@ -25,6 +25,7 @@ const CourseDescription = ({
           data={data}
           setPurchaseModal={setPurchaseModal}
           isEnroll={isEnroll}
+          userInfo={userInfo}
         />
       </div>
       <MoreCourse />
