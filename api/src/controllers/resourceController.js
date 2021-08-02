@@ -34,6 +34,39 @@ const getResources = (req, res) => {
     .catch((err) => res.json({ err }).status(400))
 }
 
+// @desc    Fetch all resources
+// @route   GET /api/resources/:category?pageNumber=${pageNumber}
+// @access  Public
+const getResourcesByCategory = (req, res) => {
+  const pageSize = 5
+  const page = Number(req.query.pageNumber) || 1
+  const category = req.params.category
+  const order = req.query.order || 'ASC'
+  const ordervalue = order && [['title', order]]
+  Resource.findAndCountAll({
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
+    ordervalue,
+    where: { resourceType: category }
+  })
+    .then((resources) => {
+      const totalPages = Math.ceil(resources.count / pageSize)
+      res
+        .json({
+          resources: resources.rows.map((rec) => ({
+            ...rec.dataValues,
+            filename: changeFormat(rec.filename)
+          })),
+          totalItems: resources.count,
+          totalPages,
+          page,
+          pageSize
+        })
+        .status(200)
+    })
+    .catch((err) => res.json({ err }).status(400))
+}
+
 // @desc    Add individual resource
 // @route   POST /api/resources/add
 // @access  Public
@@ -122,6 +155,7 @@ const searchResourcesTitle = (req, res) => {
 module.exports = {
   getResources,
   addResource,
+  getResourcesByCategory,
   getResourcesById,
   deleteResources,
   updateResources,

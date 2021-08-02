@@ -11,6 +11,8 @@ import { listResources, searchResources } from '../../actions/resourceActions'
 import Pagination from '../../components/pagination/Pagination'
 import SubHeader from '../../components/subHeader/SubHeader'
 import { useHistory } from 'react-router-dom'
+import useGetFetchData from '../../utils/useGetFetchData'
+import { GET_LIBRARY } from '../../utils/urlConstants'
 
 const Library = () => {
   const resourceList = useSelector((state) => state.listResources)
@@ -38,7 +40,8 @@ const Library = () => {
       history.push('/login')
     }
     if (search) dispatch(searchResources(search))
-    if (!search) dispatch(listResources('', pageNumber))
+    if (!search) dispatch(listResources({ sort: '', pageNumber }))
+    console.log(resources)
   }, [search, dispatch, history, userInfo, pageNumber])
 
   return (
@@ -57,18 +60,43 @@ const Library = () => {
         <div className='library-main-container'>
           <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Add files' />
           {['Articles', 'Videos'].map(type => (
-            <div className='list-container'>
-              <ListView
+            <div className='list-container' key={type}>
+              <LibraryCategory
                 title={type} data={resources}
                 setNewCollection={setNewCollection}
                 modalActive={modalActive}
                 setModalActive={setModalActive}
               />
-              <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
+
             </div>
           ))}
         </div>
       </DashboardLayout>
+    </>
+  )
+}
+
+const LibraryCategory = ({ title, data, setNewCollection, modalActive, setModalActive }) => {
+  const [pageNumber, setPageNumber] = useState(1)
+
+  const { data: libraryData, isLoading } = useGetFetchData(
+    'LIBRARY_CATEGORY_DATA',
+    GET_LIBRARY + '/' + title.toLowerCase() + '?pageNumber=' + pageNumber,
+    { title, pageNumber }
+  )
+  if (isLoading) {
+    return (<div>Loading...</div>)
+  }
+
+  return (
+    <>
+      <ListView
+        title={title} data={libraryData?.resources}
+        setNewCollection={setNewCollection}
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+      />
+      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={libraryData} />
     </>
   )
 }

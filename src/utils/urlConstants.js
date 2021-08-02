@@ -41,3 +41,6 @@ export const GET_VIDEO = CDN_URL + '/videoResource/'
 export const VIDEO_COVER = CDN_URL + '/videoCover/'
 export const LESSON_IMG = CDN_URL + '/lessonImg/'
 export const MATERIAL = CDN_URL + '/material/'
+
+// library
+export const GET_LIBRARY = BASE_URL + 'resources'

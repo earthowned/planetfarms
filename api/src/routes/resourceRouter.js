@@ -7,9 +7,10 @@ const path = require('path')
 const protect = require('../middleware/authMiddleware')
 const { uploadArray, upload, resizeImage } = require('../helpers/filehelpers')
 
-const { getResources, addResource, getResourcesById, deleteResources, updateResources, searchResourcesTitle } = require('../controllers/resourceController.js')
+const { getResources, getResourcesByCategory, addResource, getResourcesById, deleteResources, updateResources, searchResourcesTitle } = require('../controllers/resourceController.js')
 
 router.route('/').get(getResources)
+router.route('/:category').get(getResourcesByCategory)
 // router.route('/add').post(protect, upload.single('avatar'), addResource)
 router.route('/add').post(upload.single('file'), resizeImage, addResource)
 router.route('/search').get(searchResourcesTitle)
