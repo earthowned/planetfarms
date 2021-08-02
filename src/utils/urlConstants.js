@@ -28,6 +28,9 @@ export const ADD_LESSON_PHOTO = BASE_URL + 'lesson-photos/add'
 // lesson Text
 export const ADD_LESSON_TEXT = BASE_URL + 'lesson-text/add'
 
+// lesson progress
+export const LESSON_PROGRESS = BASE_URL + 'lesson-progress'
+
 // lesson material
 export const ADD_MATERIAL = BASE_URL + 'materials/add'
 

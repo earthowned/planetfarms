@@ -17,7 +17,12 @@ import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
-import { testCreateReducer, testQuestionEditReducer, testQuestionListReducer } from './reducers/testReducers'
+import { lessonProgressCreateReducer } from './reducers/lessonProgressReducer'
+import {
+  testCreateReducer,
+  testQuestionEditReducer,
+  testQuestionListReducer
+} from './reducers/testReducers'
 
 import {
   enterpriseCreateReducer,
@@ -63,7 +68,11 @@ import {
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
 import { addEnrollReducer } from './reducers/enrollReducer'
-import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
+import {
+  questionDeleteReducer,
+  questionListReducer,
+  questionUpdateReducer
+} from './reducers/questionReducers'
 import {
   categoryCreateReducer,
   categoryDeleteReducer,
@@ -104,6 +113,7 @@ const reducer = combineReducers({
   addText: textCreateReducer,
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
+  addLessonProgress: lessonProgressCreateReducer,
   listTestQuestions: testQuestionListReducer,
   editTestQuestions: testQuestionEditReducer,
   addNewNews: newsCreateReducer,

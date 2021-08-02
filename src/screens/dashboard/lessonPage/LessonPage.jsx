@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { MATERIAL, GET_COURSE } from '../../../utils/urlConstants'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { createLessonProgress } from '../../../actions/lessonProgressActions'
 import useGetLessonData from '../../../utils/useGetLessonData'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import LessonDetail from './LessonDetail'
@@ -15,6 +16,7 @@ import Button from '../../../components/button/Button'
 
 const LessonPage = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const [materialData, setMaterialData] = useState([])
   const [cData, setCData] = useState([])
   const [courseId, setCourseId] = useState('')
@@ -47,7 +49,7 @@ const LessonPage = () => {
   }, [courseData])
 
   const nextPage = () => {
-    history.push(`/lesson/${cData[0]?.id}`)
+    dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
   }
 
   return (
