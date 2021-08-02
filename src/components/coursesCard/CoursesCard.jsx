@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import useGetFetchData from '../../utils/useGetFetchData'
@@ -10,13 +10,17 @@ import CardLayout from '../../layout/cardLayout/CardLayout'
 import Background from '../background/Background'
 import './CoursesCard.scss'
 
-const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
+const CoursesCard = ({ category, setModalActive, setPurchaseModal, setCourseData, pageNumber }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const { data: courseData, isLoading } = useGetFetchData(
     'ALL_COURSE_DATA',
-    GET_COURSE
+    GET_COURSE + '?pageNumber=' + pageNumber,
+    pageNumber
   )
+  useEffect(() => {
+    if (courseData) setCourseData(courseData)
+  }, [courseData])
   if (isLoading) {
     return <span>Loading</span>
   }

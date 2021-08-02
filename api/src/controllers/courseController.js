@@ -9,30 +9,34 @@ const { changeFormat } = require('../helpers/filehelpers')
 // @route   GET /api/courses
 // @access  Public
 const getCourses = async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
+  const pageSize = 6
+  const page = Number(req.query.pageNumber) || 1
   const order = req.query.order || 'ASC'
 
-  const courses = await db.Courses.findAll({
-    offset: page,
+  const courses = await db.Courses.findAndCountAll({
+    offset: (page - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
     include: [db.Lesson, db.Enroll]
   })
 
-  courses.forEach((course) => {
+  courses.rows.forEach((course) => {
     course.thumbnail = changeFormat(course.thumbnail)
     course.lessons.forEach((lesson) => {
       lesson.coverImg = changeFormat(lesson.coverImg)
     })
   })
 
+  const totalPages = Math.ceil(courses.count / pageSize)
+
   res.status(200).json({
     status: true,
     message: 'fetched courses successfully',
-    data: courses,
+    data: courses.rows,
+    totalItems: courses.count,
     page,
-    pageSize
+    pageSize,
+    totalPages
   })
 }
 
