@@ -6,12 +6,13 @@ import { listUsers, searchUsers } from '../../actions/userAction'
 import CardImage from '../../components/cardImage/CardImage'
 import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import Pagination from '../../components/pagination/Pagination'
 import './CommunityMembers.css'
 
 function CommunityMembers ({ history }) {
   const dispatch = useDispatch()
   const [search, setSearch] = useState(null)
-  const { members } = useSelector(state => state.listMember)
+  const resourceList = useSelector(state => state.listMember)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const [pageNumber, setPageNumber] = useState(1)
@@ -36,8 +37,9 @@ function CommunityMembers ({ history }) {
             <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
           </div>
           <div className='community-members-grid-row'>
-            {members && <CardImage follow='Follow' data={members.communities_users} />}
+            {resourceList.members && <CardImage follow='Follow' data={resourceList.members} />}
           </div>
+          <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
         </div>
       </div>
     </DashboardLayout>

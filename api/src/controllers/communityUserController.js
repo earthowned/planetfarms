@@ -83,7 +83,7 @@ const followCommunity = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
   try {
-    const pageSize = 5
+    const pageSize = 8
     const page = Number(req.query.pageNumber) || 1
     const order = req.query.order || 'ASC'
     const ordervalue = order && [['createdAt', order]]
@@ -103,7 +103,6 @@ const getAllMembers = async (req, res) => {
       }
     )
     const totalPages = Math.ceil(data.count / pageSize)
-    console.log(data.rows[1].dataValues.user)
     res.json({
       communities_users: data.rows.map((rec) => ({
         ...rec.dataValues,

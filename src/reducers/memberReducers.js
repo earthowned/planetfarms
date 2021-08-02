@@ -11,9 +11,11 @@ export const memberListReducer = (state = { members: [] }, action) => {
     case MEMBER_LIST_SUCCESS:
       return {
         loading: false,
-        members: action.payload,
-        pages: action.payload.pages,
-        page: action.payload.page
+        members: action.payload.communities_users,
+        totalItems: action.payload.totalItems,
+        page: action.payload.page,
+        pageSize: action.payload.pageSize,
+        totalPages: action.payload.totalPages
       }
 
     case MEMBER_LIST_FAIL:
