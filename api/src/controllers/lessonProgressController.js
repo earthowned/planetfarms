@@ -2,7 +2,8 @@ const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 
 const getProgress = async (req, res) => {
-  const progress = await db.LessonProgress.findAll
+  const progress = await db.LessonProgress.findAll(req.body)
+  console.log(progress)
   if (!progress) {
     throw new NotFoundError()
   }

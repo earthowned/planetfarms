@@ -16,6 +16,7 @@ export const ADD_COURSE = BASE_URL + 'courses/add'
 
 // lesson
 export const GET_LESSONS = BASE_URL + 'lessons'
+export const LESSONS = 'lessons'
 export const ADD_LESSONS = BASE_URL + 'lessons/add'
 
 // videos

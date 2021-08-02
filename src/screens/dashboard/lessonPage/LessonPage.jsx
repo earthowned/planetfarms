@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { GET_LESSONS, MATERIAL } from '../../../utils/urlConstants'
+import { MATERIAL } from '../../../utils/urlConstants'
 import { useSelector } from 'react-redux'
 
 import useGetLessonData from '../../../utils/useGetLessonData'
-import useGetFetchData from '../../../utils/useGetFetchData'
 import LessonDetail from './LessonDetail'
 import BackButton from '../../../components/backButton/BackButton'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
@@ -26,6 +25,7 @@ const LessonPage = () => {
     userId,
     setPath
   )
+
   return (
     <>
       {isLoading ? (
@@ -44,6 +44,7 @@ const LessonPage = () => {
                       href={`${MATERIAL}${mater?.material}`}
                       download={mater.name}
                       target='_blank'
+                      rel='noopener noreferrer'
                     >
                       <div>
                         <img src='/img/download-icon.svg' alt='download icon' />{' '}

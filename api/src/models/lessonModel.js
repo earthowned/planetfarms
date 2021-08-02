@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     Lesson.hasMany(models.Photo)
     Lesson.hasMany(models.Text)
     Lesson.hasMany(models.Material)
+    Lesson.hasMany(models.LessonProgress)
     Lesson.belongsTo(models.Courses, {
       constraints: true,
       foreignKey: 'courseId'

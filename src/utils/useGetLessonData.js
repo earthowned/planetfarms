@@ -1,11 +1,11 @@
 import { useQuery } from 'react-query'
-import { GET_LESSONS, Axios, GET_COURSE } from './urlConstants'
+import { LESSONS, Axios, GET_COURSE } from './urlConstants'
 
 const useGetLessonData = (id, setMaterialData, userId, setPath) => {
   const { isLoading, data } = useQuery(
     'lessonData',
     async () => {
-      const { data } = await Axios.get(GET_LESSONS + `/${id}`)
+      const { data } = await Axios.get(LESSONS + `/${id}`)
       setMaterialData(data?.data?.materials)
       return data
     },
