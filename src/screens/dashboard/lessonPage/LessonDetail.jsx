@@ -31,12 +31,14 @@ const LessonDetail = ({ data, id }) => {
   return (
     <div className='lesson-description-wrapper'>
       <h1>{data?.title}</h1>
-      {data?.coverImg && <div className='lesson-description-img-wrapper'>
-        <img
-          src={`${GET_COVERIMG}${data?.coverImg}`}
-          alt={`${data?.title}_img`}
-        />
-      </div>}
+      {data?.coverImg && (
+        <div className='lesson-description-img-wrapper'>
+          <img
+            src={`${GET_COVERIMG}${data?.coverImg}`}
+            alt={`${data?.title}_img`}
+          />
+        </div>
+      )}
       {newData
         .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
         .map((data, index) => (
@@ -52,11 +54,12 @@ const LessonDetail = ({ data, id }) => {
               }
               thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
             />
-            {data?.lessonImg &&
+            {data?.lessonImg && (
               <Image
                 src={`${LESSON_IMG}${data?.lessonImg}`}
                 desc={data?.isImgDesc === true && data?.photoDescription}
-              />}
+              />
+            )}
           </div>
         ))}
       <LessonTest id={id} />

@@ -27,7 +27,6 @@ const getEnrollById = async (req, res) => {
 }
 
 const addEnroll = async (req, res) => {
-  console.log(req)
   const enroll = await db.Enroll.create(req.body)
   res.status(201).json({
     status: true,

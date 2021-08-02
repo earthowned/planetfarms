@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -20,42 +20,71 @@ function MyCoursePage ({ unpaid }) {
   const [feedbackModal, setFeedbackModal] = useState(false)
   const [purchaseModal, setPurchaseModal] = useState(false)
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
+  const [enrolls, setEnrolls] = useState([])
+  const [isEnroll, setIsEnroll] = useState(false)
 
   const { courseId } = useParams()
   const { data, isLoading } = useGetFetchData(
     'singleCourse',
     GET_COURSE + '/' + courseId
   )
-  if (isLoading) {
-    return <span>Loading...</span>
-  }
+
+  useEffect(() => {
+    setEnrolls(
+      isLoading
+        ? 'loading'
+        : data?.data?.enrolls
+          .filter((enrolled) => enrolled.userId === userInfo.id)
+          .map((enroll) => {
+            return enroll
+          })
+    )
+  }, [data])
+  useEffect(() => {
+    setIsEnroll(enrolls[0]?.isEnroll)
+  }, [enrolls])
 
   return (
     <>
-      {feedbackModal && <FeedbackModal setFeedbackModal={setFeedbackModal} />}
-      {purchaseModal && (
-        <PurchaseModal
-          clickHandler={setPurchaseModal}
-          setPurchaseSuccessModal={setPurchaseSuccessModal}
-        />
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : (
+        <>
+          {feedbackModal && (
+            <FeedbackModal setFeedbackModal={setFeedbackModal} />
+          )}
+          {purchaseModal && (
+            <PurchaseModal
+              clickHandler={setPurchaseModal}
+              setPurchaseSuccessModal={setPurchaseSuccessModal}
+            />
+          )}
+          {purchaseSuccessModal && (
+            <PurchaseSuccessModal clickHandler={setPurchaseSuccessModal} />
+          )}
+          <DashboardLayout title='Course Page'>
+            <CoursePage
+              setFeedbackModal={setFeedbackModal}
+              setPurchaseModal={setPurchaseModal}
+              data={data}
+              userInfo={userInfo}
+              isEnroll={isEnroll}
+            />
+          </DashboardLayout>
+        </>
       )}
-      {purchaseSuccessModal && (
-        <PurchaseSuccessModal clickHandler={setPurchaseSuccessModal} />
-      )}
-      <DashboardLayout title='Course Page'>
-        <CoursePage
-          setFeedbackModal={setFeedbackModal}
-          setPurchaseModal={setPurchaseModal}
-          data={data}
-          userInfo={userInfo}
-        />
-      </DashboardLayout>
     </>
   )
 }
 export default MyCoursePage
 
-function CoursePage ({ setFeedbackModal, setPurchaseModal, data, userInfo }) {
+function CoursePage ({
+  setFeedbackModal,
+  setPurchaseModal,
+  data,
+  userInfo,
+  isEnroll
+}) {
   return (
     <div className='course-page'>
       <div className='course-page-flex-col-4'>
@@ -65,6 +94,7 @@ function CoursePage ({ setFeedbackModal, setPurchaseModal, data, userInfo }) {
           setPurchaseModal={setPurchaseModal}
           data={data}
           userInfo={userInfo}
+          isEnroll={isEnroll}
         />
       </div>
     </div>

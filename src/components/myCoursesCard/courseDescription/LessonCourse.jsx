@@ -1,8 +1,10 @@
+import React from 'react'
 import Button from '../../button/Button'
 import LessonCourseSingle from './LessonCourseSingle'
 
-const LessonCourse = ({ data, setPurchaseModal }) => {
+const LessonCourse = ({ data, setPurchaseModal, isEnroll }) => {
   const lessonLen = data?.data?.lessons.length
+  console.log(isEnroll)
 
   return (
     <div className='lessons-container'>
@@ -26,9 +28,16 @@ const LessonCourse = ({ data, setPurchaseModal }) => {
       <h3>Lessons</h3>
       {data?.data?.lessons
         .sort((a, b) => (a.order > b.order ? 1 : -1))
-        .map((data) => {
-          return <LessonCourseSingle data={data} key={data.id} />
-        })}
+        .map((data) => (
+          <React.Fragment key={data.id}>
+            {isEnroll === false ? (
+              <div className='purchase-course-wrapper enroll-course' />
+            ) : (
+              ''
+            )}
+            <LessonCourseSingle data={data} />
+          </React.Fragment>
+        ))}
     </div>
   )
 }

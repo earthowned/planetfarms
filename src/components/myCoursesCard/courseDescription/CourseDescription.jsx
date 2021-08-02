@@ -5,11 +5,11 @@ import './CourseDescription.scss'
 
 const CourseDescription = ({
   setFeedbackModal,
-
   setPurchaseModal,
   data,
   isLoading,
-  userInfo
+  userInfo,
+  isEnroll
 }) => {
   return (
     <>
@@ -21,7 +21,11 @@ const CourseDescription = ({
           isLoading={isLoading}
           userInfo={userInfo}
         />
-        <LessonCourse data={data} setPurchaseModal={setPurchaseModal} />
+        <LessonCourse
+          data={data}
+          setPurchaseModal={setPurchaseModal}
+          isEnroll={isEnroll}
+        />
       </div>
       <MoreCourse />
     </>

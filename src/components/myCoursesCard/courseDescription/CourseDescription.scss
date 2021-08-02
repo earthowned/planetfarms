@@ -11,7 +11,7 @@
 .course-description {
   width: 100%;
   color: var(--primary-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
   letter-spacing: 0;
 }
 
@@ -300,6 +300,9 @@
   align-items: center;
   justify-content: center;
 }
+.enroll-course {
+  background: rgba(20, 20, 20, 0.2);
+}
 
 .purchase-course {
   width: 464px;
@@ -328,7 +331,7 @@
 }
 
 .lessons-container > h3 {
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -478,7 +481,7 @@
 
 .lesson-desc {
   color: var(--primary-white);
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -563,7 +566,7 @@
 
 .lesson-card {
   padding: 1em 0;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   color: var(--primary-white);
@@ -589,7 +592,7 @@
 .lock-lesson h4 {
   color: var(--primary-white);
   margin-top: 10px;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -714,7 +717,7 @@
 }
 
 .lesson-bar::before {
-  content: "";
+  content: '';
   width: 90%;
   height: 1px;
   background: #015a3e;
