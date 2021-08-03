@@ -45,7 +45,12 @@ module.exports = (sequelize, DataTypes) => {
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
-    }
+    },
+    videoTitle: DataTypes.STRING,
+    videoDescription: DataTypes.STRING,
+    videoCover: DataTypes.STRING,
+    videoLink: DataTypes.STRING,
+    videoResource: DataTypes.STRING
   },
   { timestamps: true }
   )
