@@ -1,3 +1,11 @@
+.btn-container {
+  position: relative;
+  height: 100%;
+  width: auto !important;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
 .btn-default {
   align-items: center;
   justify-content: center;

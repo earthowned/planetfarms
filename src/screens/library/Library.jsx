@@ -53,6 +53,7 @@ const Library = () => {
                 setNewCollection={setNewCollection}
                 modalActive={modalActive}
                 setModalActive={setModalActive}
+                loadingState={resourceList.loading}
               />
             </div>
           ))}

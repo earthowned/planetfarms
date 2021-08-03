@@ -4,7 +4,7 @@ import { ReactComponent as Lock } from '../../assets/images/minus-circle-outline
 
 // Wrapper function for loading spinner
 // Pass loading state to this component as props 'loadingState'
-const ComponentLoadingWrapper = ({ loadingState = true, children }) => {
+const ComponentLoadingWrapper = ({ loadingState = false, children }) => {
   return (
     <>
       {loadingState &&

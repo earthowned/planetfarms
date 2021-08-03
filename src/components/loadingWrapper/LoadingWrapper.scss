@@ -1,4 +1,4 @@
-.loading-spinner-container {
+.loading-container {
     position: fixed;
     top: 0%;
     left: 0%;
@@ -10,7 +10,7 @@
     align-items: center;
     z-index: 5;
 
-    .loading-spinner-wrapper {
+    .loading-wrapper {
         width: 100px;
         height: 100px;
         display: flex;
@@ -26,7 +26,7 @@
             }
         }
 
-        .loading-spinner {
+        .loading {
             color: var(--primary-white);
             animation: spin-anim 1s linear infinite;
             height: 50px;

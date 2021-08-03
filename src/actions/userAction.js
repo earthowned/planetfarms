@@ -276,6 +276,7 @@ export const getMyDetails = () => async (dispatch) => {
 export const updateUser = (user, history) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST })
+    dispatch({ type: USER_DETAILS_REQUEST })
     const { userLogin: { userInfo } } = getState()
     const userProfileFormData = new FormData()
     userProfileFormData.append('firstName', user.firstName)

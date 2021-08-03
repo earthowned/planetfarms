@@ -33,7 +33,7 @@ function CongratulationScreen () {
   })
 
   const userDetails = useSelector((state) => state.userDetails)
-  const { user } = userDetails
+  const { user, loading } = userDetails
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     const attachments = profileImage
     dispatch(
@@ -140,6 +140,7 @@ function CongratulationScreen () {
                       <Button
                         name='Continue'
                         onClick={handleSubmit(onSubmit)}
+                        loadingState={loading}
                       />
                     </div>
                   </div>
