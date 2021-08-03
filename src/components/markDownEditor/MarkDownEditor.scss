@@ -1,0 +1,39 @@
+.mark-down-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  textarea {
+    width: 100%;
+    resize: none;
+  }
+
+  .markdown-button {
+    position: absolute;
+    z-index: 100;
+    bottom: 55px;
+    right: 10px;
+    width: 100px;
+    height: 30px;
+    padding: 0;
+    // outline: none;
+    // border: 1px solid var(--strokes);
+    // background: var(--background-color);
+    // color: var(--primary-white);
+    // padding: 8px 12px;
+    // border-radius: 4px;
+    // cursor: pointer;
+  }
+}
+
+.button-color {
+  background-color: var(--primary-grey);
+  border-color: var(--primary-grey);
+  padding: 8px;
+}
+
+.rdw-storybook-custom-option {
+  border: 1px solid #f1f1f1;
+  padding: 3px 10px;
+  height: 22px;
+}

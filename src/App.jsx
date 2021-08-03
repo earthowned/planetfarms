@@ -52,6 +52,7 @@ import AddTest from './screens/addTest/AddTest'
 import LogoutUser from './screens/logoutUser/LogoutUser'
 import Category from './screens/category/Category'
 import PageNotFound from './screens/pageNotFound/PageNotFound'
+import MarkDownEditor from './components/markDownEditor/MarkDownEditor'
 
 function App () {
   return (
@@ -121,6 +122,7 @@ function App () {
             <PrivateRoute component={MyProfile} exact path='/myProfile' />
             <PrivateRoute component={UserInfo} exact path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
+            <Route path="/markdown-editor" component={MarkDownEditor} />
             <PrivateRoute component={PageNotFound} />
           </Switch>
         </ScrollToTop>
