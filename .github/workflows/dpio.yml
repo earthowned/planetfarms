@@ -1,9 +1,9 @@
 name: Manual DPIO Deploy
 
 on:
-  # push:
-  #  branches:
-  #    - manual-docker
+  push:
+    branches:
+      - manual-docker
   workflow_dispatch:
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       - name: sshagent
         uses: webfactory/ssh-agent@v0.5.2
         with:
-          ssh-private-key: ${{ secrets.GPIO_SSHKEY }}
+          ssh-private-key: ${{ secrets.DPIO_SSHKEY }}
 
       - name: deploy
         run: |
