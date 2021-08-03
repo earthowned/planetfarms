@@ -101,7 +101,10 @@ const getCourseById = async (req, res) => {
   const { id } = req.params
   const course = await db.Courses.findOne({
     where: { id },
-    include: [{ model: db.Lesson, include: db.LessonProgress }, db.Enroll]
+    include: [
+      { model: db.Lesson, include: [db.LessonProgress, db.Test] },
+      db.Enroll
+    ]
   })
   if (!course) {
     throw new NotFoundError()

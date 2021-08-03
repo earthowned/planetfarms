@@ -64,9 +64,11 @@ const LessonPage = () => {
     const passedAndProgress = () => {
       history.push(`/lesson/${cData[0]?.id}`)
     }
-    isPassed && isCompleted ? passedAndProgress() : passedButNoProgress()
+    ;(isPassed && isCompleted) || isCreator
+      ? passedAndProgress()
+      : passedButNoProgress()
   }
-  console.log(isCompleted)
+
   return (
     <>
       {isLoading ? (
@@ -111,7 +113,7 @@ const LessonPage = () => {
           )}
           {courseData?.data?.lessons?.length === data?.data?.order ? (
             ''
-          ) : isPassed || isCompleted ? (
+          ) : isCreator || isPassed || isCompleted ? (
             <Button className='nextBtn' name='Next' onClick={nextPage} />
           ) : (
             ''

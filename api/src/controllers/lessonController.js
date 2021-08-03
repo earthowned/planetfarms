@@ -4,7 +4,14 @@ const CircularJSON = require('circular-json')
 
 const getLessons = async (_req, res) => {
   const lessons = await db.Lesson.findAll({
-    include: [db.Video, db.Photo, db.Text, db.Material, db.LessonProgress]
+    include: [
+      db.Video,
+      db.Photo,
+      db.Text,
+      db.Material,
+      db.LessonProgress,
+      db.Test
+    ]
   })
 
   lessons.forEach((lesson) => {
@@ -27,7 +34,14 @@ const getLessonById = async (req, res) => {
   const { id } = req.params
   const lesson = await db.Lesson.findOne({
     where: { id },
-    include: [db.Video, db.Photo, db.Text, db.Material, db.LessonProgress]
+    include: [
+      db.Video,
+      db.Photo,
+      db.Text,
+      db.Material,
+      db.LessonProgress,
+      db.Test
+    ]
   })
 
   lesson.photos.forEach((photo) => {
