@@ -9,7 +9,7 @@ const types = {
   'Start time': 'time'
 }
 
-function getType (types, getName) {
+function getType (getName) {
   for (const type in types) {
     if (type === getName) {
       return types[type]
@@ -32,7 +32,7 @@ const InputComponent = ({ text, error, image, changeHandler, name, autoFocus }) 
             {text ? <div className='overhead-text'>{name && name}</div> : <div>&nbsp;</div>}
             <input
               ref={userInput}
-              type={getType(types, name)}
+              type={getType(name)}
               className='username ibmplexsans-regular-normal-monsoon-16px'
               placeholder={name && name}
               value={text}
