@@ -41,15 +41,21 @@ const LessonPage = () => {
     GET_COURSE + '/' + courseId,
     { courseId }
   )
+
   useEffect(() => {
     const order = data?.data?.order + 1
     setCData(
       courseData?.data?.lessons?.filter((lesson) => lesson.order === order)
     )
   }, [courseData])
+  console.log(cData)
 
   const nextPage = () => {
-    dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
+    const nextLessonData = Object.assign({}, ...cData)
+    console.log(nextLessonData.id)
+    courseData?.data?.creator === userId
+      ? history.push(`/lesson/${nextLessonData.id}`)
+      : dispatch(createLessonProgress(nextLessonData.id, userId, true, history))
   }
 
   return (
@@ -94,7 +100,11 @@ const LessonPage = () => {
           ) : (
             ''
           )}
-          <Button className='nextBtn' name='Next' onClick={nextPage} />
+          {courseData?.data?.lessons?.length === data?.data?.order ? (
+            ''
+          ) : (
+            <Button className='nextBtn' name='Next' onClick={nextPage} />
+          )}
         </DashboardLayout>
       )}
     </>

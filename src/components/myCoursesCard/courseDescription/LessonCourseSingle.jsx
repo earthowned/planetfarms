@@ -11,7 +11,6 @@ const LessonCourseSingle = ({ data, userInfo }) => {
     setIsCompleted(data.lesson_progresses[0]?.isCompleted || false)
     setUserId(data.lesson_progresses[0]?.userId || null)
   }, [data])
-  console.log(userId)
   return (
     <div className='lesson-card-wrapper'>
       {data?.order !== 1 ? (
