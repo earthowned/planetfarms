@@ -10,12 +10,7 @@ const types = {
 }
 
 function getType (getName) {
-  for (const type in types) {
-    if (type === getName) {
-      return types[type]
-    }
-  }
-  return 'text'
+  return types[getName] || 'text'
 }
 
 const InputComponent = ({ text, error, image, changeHandler, name, autoFocus }) => {
