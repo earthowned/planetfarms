@@ -1,9 +1,9 @@
 name: Manual DPIO Deploy
 
 on:
-  push:
-    branches:
-      - manual-docker
+  #push:
+  #  branches:
+  #    - manual-docker
   workflow_dispatch:
 
 jobs:
