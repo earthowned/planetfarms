@@ -12,7 +12,7 @@ import Text from '../../courseManager/addLesson/Text'
 import Image from '../../../components/lessonImage/Image'
 import LessonTest from './LessonTest'
 
-const LessonDetail = ({ data, id }) => {
+const LessonDetail = ({ data, id, setIsPassed }) => {
   const [lessonData, setLessonData] = useState([])
   const textData = data?.texts?.map((text) => {
     return text
@@ -62,7 +62,7 @@ const LessonDetail = ({ data, id }) => {
             )}
           </div>
         ))}
-      <LessonTest id={id} />
+      <LessonTest id={id} setIsPassed={setIsPassed} />
     </div>
   )
 }

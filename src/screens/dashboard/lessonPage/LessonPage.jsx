@@ -18,6 +18,7 @@ const LessonPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const [isCreator, setIsCreator] = useState(false)
+  const [isPassed, setIsPassed] = useState(false)
   const [materialData, setMaterialData] = useState([])
   const [cData, setCData] = useState([])
   const [courseId, setCourseId] = useState('')
@@ -35,7 +36,9 @@ const LessonPage = () => {
     setPath
   )
   useEffect(() => {
-    setCourseId(data?.data?.courseId)
+    if (data?.data?.courseId !== undefined) {
+      setCourseId(data?.data?.courseId)
+    }
   }, [data])
 
   const { data: courseData } = useGetFetchData(
@@ -63,7 +66,7 @@ const LessonPage = () => {
       ) : (
         <DashboardLayout title='Course page'>
           <BackButton location={path} />
-          <LessonDetail data={data?.data} id={id} />
+          <LessonDetail data={data?.data} id={id} setIsPassed={setIsPassed} />
           {materialData.length !== 0 ? (
             <div className='admin-lesson-materials-container'>
               <h1>Materials</h1>
@@ -100,8 +103,10 @@ const LessonPage = () => {
           )}
           {courseData?.data?.lessons?.length === data?.data?.order ? (
             ''
-          ) : (
+          ) : isPassed ? (
             <Button className='nextBtn' name='Next' onClick={nextPage} />
+          ) : (
+            ''
           )}
         </DashboardLayout>
       )}
