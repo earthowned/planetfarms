@@ -18,11 +18,11 @@ const LessonPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const [isCreator, setIsCreator] = useState(false)
+  const [isCompleted, setIsCompleted] = useState(false)
   const [isPassed, setIsPassed] = useState(false)
   const [materialData, setMaterialData] = useState([])
   const [cData, setCData] = useState([])
   const [courseId, setCourseId] = useState('')
-  const [nextId, setNextId] = useState('')
   const [path, setPath] = useState('')
   const { id } = useParams()
   const userLogin = useSelector((state) => state.userLogin)
@@ -33,12 +33,14 @@ const LessonPage = () => {
     id,
     setMaterialData,
     userId,
-    setPath
+    setPath,
+    { id }
   )
   useEffect(() => {
     if (data?.data?.courseId !== undefined) {
       setCourseId(data?.data?.courseId)
     }
+    setIsCompleted(data?.data?.lesson_progresses[0]?.isCompleted || false)
   }, [data])
 
   const { data: courseData } = useGetFetchData(
@@ -56,9 +58,15 @@ const LessonPage = () => {
   }, [courseData])
 
   const nextPage = () => {
-    dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
+    const passedButNoProgress = () => {
+      dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
+    }
+    const passedAndProgress = () => {
+      history.push(`/lesson/${cData[0]?.id}`)
+    }
+    isPassed && isCompleted ? passedAndProgress() : passedButNoProgress()
   }
-
+  console.log(isCompleted)
   return (
     <>
       {isLoading ? (
@@ -103,7 +111,7 @@ const LessonPage = () => {
           )}
           {courseData?.data?.lessons?.length === data?.data?.order ? (
             ''
-          ) : isPassed ? (
+          ) : isPassed || isCompleted ? (
             <Button className='nextBtn' name='Next' onClick={nextPage} />
           ) : (
             ''
