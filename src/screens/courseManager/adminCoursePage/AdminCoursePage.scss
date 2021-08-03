@@ -121,6 +121,7 @@
       width: 100%;
     }
   }
+
   &__text {
     div {
       width: 100%;
@@ -135,10 +136,12 @@
       }
     }
   }
+
   p {
     width: 100%;
   }
 }
+
 .lessonTitle {
   font-size: 1.5em;
   margin-bottom: 0.5em;
@@ -147,6 +150,7 @@
     text-transform: capitalize;
   }
 }
+
 .lessonDescText {
   margin-bottom: 0.5em;
 }
@@ -250,6 +254,7 @@
       line-height: 1.5em;
     }
   }
+
   &__course {
     position: absolute;
     right: 1em;
@@ -306,6 +311,7 @@
 .show {
   display: block;
 }
+
 .hide {
   display: none;
 }

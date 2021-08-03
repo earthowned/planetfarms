@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { CATEGORY, GET_THUMBNAIL } from '../../utils/urlConstants'
-
 import { updateCourse } from '../../actions/courseActions'
 import useGetFetchData from '../../utils/useGetFetchData'
 import DragDrop from '../dragDrop/DragDrop'
@@ -19,9 +18,7 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
     `${data?.data?.category}`
   )
   const [categoryError, setCategoryError] = useState('')
-
   const { register, errors, handleSubmit } = useForm()
-
   const { data: res } = useGetFetchData('category', CATEGORY)
 
   useEffect(() => {
@@ -30,7 +27,6 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
     }
     setCourseId(data?.data?.id)
   }, [data, selectedCategory])
-  console.log(courseId)
 
   const submitForm = async ({ title, description, price }) => {
     setCategoryError(
