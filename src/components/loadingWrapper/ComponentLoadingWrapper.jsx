@@ -6,15 +6,15 @@ import { ReactComponent as Lock } from '../../assets/images/minus-circle-outline
 // Pass loading state to this component as props 'loadingState'
 const ComponentLoadingWrapper = ({ loadingState = true, children }) => {
   return (
-    <div>
+    <>
       {loadingState &&
-        <div className='loading-spinner-container'>
-          <div className='loading-spinner-wrapper'>
-            <Lock className='loading-spinner' />
+        <div className='component-loading-container'>
+          <div className='component-loading-wrapper'>
+            <Lock className='component-loading' />
           </div>
         </div>}
       {children}
-    </div>
+    </>
   )
 }
 

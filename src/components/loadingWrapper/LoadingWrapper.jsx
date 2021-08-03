@@ -8,9 +8,9 @@ const LoadingWrapper = ({ loadingState = true, children }) => {
   return (
     <>
       {loadingState &&
-        <div className='loading-spinner-container'>
-          <div className='loading-spinner-wrapper'>
-            <Lock className='loading-spinner' />
+        <div className='loading-container'>
+          <div className='loading-wrapper'>
+            <Lock className='loading' />
           </div>
         </div>}
       {children}
