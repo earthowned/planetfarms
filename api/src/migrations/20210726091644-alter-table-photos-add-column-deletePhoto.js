@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.removeConstraint('photos', 'lessonId_fkey_forphotos')
-    queryInterface.addConstraint('photos', {
+    await queryInterface.removeConstraint('photos', 'lessonId_fkey_forphotos')
+    await queryInterface.addConstraint('photos', {
       fields: ['lessonId'],
       type: 'foreign key',
       name: 'lessonId_fkey_forphotos',
@@ -14,7 +14,8 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.addConstraint('photos', {
+    await queryInterface.removeConstraint('photos', 'lessonId_fkey_forphotos')
+    await queryInterface.addConstraint('photos', {
       fields: ['lessonId'],
       type: 'foreign key',
       name: 'lessonId_fkey_forphotos',
@@ -23,6 +24,5 @@ module.exports = {
         field: 'id'
       }
     })
-    queryInterface.removeConstraint('photos', 'lessonId_fkey_forphotos')
   }
 }
