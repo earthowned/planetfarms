@@ -4,21 +4,23 @@ import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
 
 const ContentAdd = ({data, setVideoModal, setImageModal, setTextModal}) => {
-    return (
-        <>
-            {data.length &&
-        data.map((vid, index) => (
-          <div key={index}>
-            <Video
+  return (
+    <>
+      {
+        data.length &&
+          data.map((vid, index) => (
+            <div key={index}>
+              <Video
               title={vid.videoTitle}
               description={vid.videoDescription}
               url={vid.videoLink || vid.videoResource?.preview}
               thumbnail={vid.videoCover?.preview}
-            />
-            <Image src={vid.lessonImg?.preview} desc={vid.photoDescription} />
-            <Text heading={vid.textHeading} desc={vid.textDescription} />
+              />
+              <Image src={vid.lessonImg?.preview} desc={vid.photoDescription} />
+              <Text heading={vid.textHeading} desc={vid.textDescription} />
           </div>
-        ))}
+        ))
+      }
       <div className='admin-lesson-create-btn-wrapper'>
         <button className='secondary-btn' onClick={() => setVideoModal(true)}>
           <img src='/img/video-outline.svg' alt='video icon' />{' '}
@@ -33,7 +35,7 @@ const ContentAdd = ({data, setVideoModal, setImageModal, setTextModal}) => {
           <span>Add text</span>
         </button>
       </div>
-        </>
+    </>
     )
 }
 
