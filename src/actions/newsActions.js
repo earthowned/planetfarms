@@ -69,14 +69,25 @@ export const searchNews = (search) => async (dispatch) => {
 
 export const createNews = (newNews) => async (dispatch, getState) => {
   const formData = new FormData()
-  formData.append('news', newNews.file)
+  formData.append('newsImage', newNews.lessonImg)
+  formData.append('newsVideo', newNews.videoCover)
   formData.append('title', newNews.title)
   formData.append('category', newNews.category)
-  formData.append('imageDetail', newNews.imageDetail)
+  formData.append('videoTitle', newNews.videoTitle)
+  formData.append('videoDescription', newNews.videoDescription)
+  formData.append('videoLink', newNews.videoLink)
   try {
+    const configFunc = () => {
+        const userdata = window.localStorage.getItem('userInfo')
+        const token = JSON.parse(userdata).token
+        const headers = { 'Content-Type': 'multipart/form-data' }
+        headers.Authorization = token && `Bearer ${token}`
+        return { headers }
+    }
+
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, configFunc())
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, configFunc)
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     dispatch({ type: NEWS_CLEAR, payload: data })
   } catch (error) {

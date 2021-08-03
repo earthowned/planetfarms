@@ -36,6 +36,7 @@ const CreateVideo = ({
     setLessonData(vData)
     setVideoActive(false)
   }
+  
   return (
     <>
       {videoActive && (
