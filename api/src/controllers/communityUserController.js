@@ -1,21 +1,6 @@
 const { Op } = require('sequelize')
 const db = require('../models')
 
-// @desc Get the community-users
-// @route GET /api/community-users
-// @access Public
-
-const getCommunityUsers = async (req, res) => {
-  try {
-    const data = await db.CommunityUser.findAll()
-    res.json({
-      data
-    })
-  } catch (error) {
-    res.status(400).json({ error })
-  }
-}
-
 // @desc follow community
 // @route POST /api/community-users/follow
 // @access Public
@@ -81,7 +66,7 @@ const followCommunity = async (req, res) => {
 // @access Public
 
 const getAllMembers = async (req, res) => {
-  try {
+   try {
     const data = await db.CommunityUser.findAll(
       {
         where: { communityId: req.params.id, active: true },
@@ -102,7 +87,7 @@ const getAllMembers = async (req, res) => {
 }
 
 // @desc Get the community-users
-// @route GET /api/community-users/community/:id/details
+// @route GET /api/community-users/admin/community/:id
 // @access Public
 
 const getAllMemberDetails = async (req, res) => {
@@ -177,4 +162,4 @@ const searchMemberName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getCommunityUsers, followCommunity, getAllMembers, searchMemberName, getAllMemberDetails, updateMemberRole }
+module.exports = { followCommunity, getAllMembers, searchMemberName, updateMemberRole, getAllMemberDetails }
