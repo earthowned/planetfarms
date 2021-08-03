@@ -5,7 +5,6 @@ import * as lessonProgress from '../constants/lessonProgressConstants'
 export const createLessonProgress =
   (lessonId, userId, isCompleted, history) => async (dispatch) => {
     const progressData = { lessonId, userId, isCompleted }
-
     try {
       dispatch({ type: lessonProgress.LESSON_PROGRESS_CREATE_REQUEST })
       const { data } = await postApi(

@@ -10,16 +10,18 @@ import LessonDetail from './LessonDetail'
 import BackButton from '../../../components/backButton/BackButton'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import Material from '../../../components/material/Material'
+import Button from '../../../components/button/Button'
 
 import './LessonPage.scss'
-import Button from '../../../components/button/Button'
 
 const LessonPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
+  const [isCreator, setIsCreator] = useState(false)
   const [materialData, setMaterialData] = useState([])
   const [cData, setCData] = useState([])
   const [courseId, setCourseId] = useState('')
+  const [nextId, setNextId] = useState('')
   const [path, setPath] = useState('')
   const { id } = useParams()
   const userLogin = useSelector((state) => state.userLogin)
@@ -43,19 +45,15 @@ const LessonPage = () => {
   )
 
   useEffect(() => {
+    setIsCreator(courseData?.data?.creator === userId)
     const order = data?.data?.order + 1
     setCData(
       courseData?.data?.lessons?.filter((lesson) => lesson.order === order)
     )
   }, [courseData])
-  console.log(cData)
 
   const nextPage = () => {
-    const nextLessonData = Object.assign({}, ...cData)
-    console.log(nextLessonData.id)
-    courseData?.data?.creator === userId
-      ? history.push(`/lesson/${nextLessonData.id}`)
-      : dispatch(createLessonProgress(nextLessonData.id, userId, true, history))
+    dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
   }
 
   return (
