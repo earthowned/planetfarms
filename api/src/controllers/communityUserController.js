@@ -133,7 +133,6 @@ const updateMemberRole = async (req, res) => {
 // @access  Private
 const searchMemberName = (req, res) => {
   const { name } = req.query
-  const order = req.query.order || 'ASC'
 
   db.CommunityUser.findAll(
     {
