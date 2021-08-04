@@ -53,7 +53,7 @@ const getCollectionById = (req, res) => {
 // @todo we have to work on  relation mapping betweenn collection and resources
 
 const addcollection = (req, res) => {
-  const { name, docType, resourceType, linkId } = { ...req.body, resourceType: 'articles' }
+  const { name, docType, resourceType, linkId } = req.body
   Collection.create({
     name,
     docType,
