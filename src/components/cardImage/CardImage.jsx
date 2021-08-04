@@ -34,6 +34,7 @@ const Follow = () => {
 
 function CardImage ({ data = [], className }) {
   const history = useHistory()
+  console.log(data)
   return (
     <>
       {data.length > 0 && data.map((profile) => {
@@ -43,7 +44,7 @@ function CardImage ({ data = [], className }) {
               <img src={profile?.attachments || '/img/profile-image.svg'} alt='group-profile' />
             </div>
             <div className='profile-card-name'>
-              <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile?.user.firstName || 'anonymous'} </div>
+              <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>{profile.firstName || 'anonymous'} </div>
             </div>
             {Follow()}
           </div>

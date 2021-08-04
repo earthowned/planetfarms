@@ -67,54 +67,30 @@ const followCommunity = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
    try {
-    const data = await db.CommunityUser.findAll(
-      {
-        where: { communityId: req.params.id, active: true },
-        attributes: ['userId', 'role'],
-        include: [{
-          model: db.User,
-          attributes: ['firstName']
-        }],
-        required: true
+      const data = await db.CommunityUser.findAll(
+        {
+          where: { communityId: req.params.id, active: true },
+          attributes: ['id', 'userId', 'role'],
+          include: [{
+            model: db.User,
+            attributes: ['firstName', 'lastName', 'email', 'phone', 'dateOfBirth']
+          }],
+          required: true
+        }
+      )
+        
+      // flattening the array to show only one object
+      const newArray = data.map(item => {
+        const { userId, role, id } = item.dataValues
+        const { ...rest } = item.user
+        return { id, userId, role, ...rest.dataValues }
       }
-    )
-    res.json({
-      data
-    })
-  } catch (error) {
-    res.status(400).json({ error })
-  }
-}
-
-// @desc Get the community-users
-// @route GET /api/community-users/admin/community/:id
-// @access Public
-
-const getAllMemberDetails = async (req, res) => {
-  try {
-    const data = await db.CommunityUser.findAll(
-      {
-        where: { communityId: req.params.id, active: true },
-        attributes: ['id', 'userId', 'role'],
-        include: [{
-          model: db.User,
-          attributes: ['firstName', 'lastName', 'email', 'phone', 'dateOfBirth']
-        }],
-        required: true
-      }
-    )
-
-    // flattening the array to show only one object
-    const newArray = data.map(item => {
-      const { userId, role, id } = item.dataValues
-      const { ...rest } = item.user
-      return { id, userId, role, ...rest.dataValues }
-    }
-    )
-
-    res.json({
-      results: newArray
-    })
+      )
+  
+      res.json({
+        results : newArray
+      })
+      return;
   } catch (error) {
     res.status(400).json({ error })
   }
@@ -162,4 +138,4 @@ const searchMemberName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { followCommunity, getAllMembers, searchMemberName, updateMemberRole, getAllMemberDetails }
+module.exports = { followCommunity, getAllMembers, searchMemberName, updateMemberRole}

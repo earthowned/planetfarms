@@ -35,7 +35,7 @@ function CommunityMembers ({ history }) {
             <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
           </div>
           <div className='community-members-grid-row'>
-            {members && <CardImage follow='Follow' data={members.data || members} />}
+            {members.length && <CardImage follow='Follow' data={members || members} />}
           </div>
         </div>
       </div>
