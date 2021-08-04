@@ -4,16 +4,12 @@ import Filter from '../../../components/filter/Filter'
 const CourseDescription = ({ data }) => {
   return (
     <div className='admin-course-page-container'>
-      <div className='admin-course-img-wrapper'>
-        {data?.data?.thumbnail ? (
-          <img
-            src={GET_THUMBNAIL + data?.data?.thumbnail}
-            alt={data?.data?.title + '_img'}
-          />
-        ) : (
-          ''
-        )}
-      </div>
+      {data?.data?.thumbnail && <div className='admin-course-img-wrapper'>
+        <img
+          src={GET_THUMBNAIL + data?.data?.thumbnail}
+          alt={data?.data?.title + '_img'}
+        />
+      </div>}
       <div className='admin-course-details-wrapper'>
         <div className='admin-course-details'>
           <div className='admin-course-details--header'>
