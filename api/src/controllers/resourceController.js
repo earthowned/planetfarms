@@ -4,50 +4,19 @@ const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc    Fetch all resources
-// @route   GET /api/resources
+// @route   GET /api/resources?pageNumber=${pageNumber}&category=${category}
 // @access  Public
 const getResources = (req, res) => {
   const pageSize = 5
   const page = Number(req.query.pageNumber) || 1
-  const order = req.query.order || 'ASC'
-  const ordervalue = order && [['title', order]]
-  Resource.findAndCountAll({
-    offset: (page - 1) * pageSize,
-    limit: pageSize,
-    ordervalue
-  })
-    .then((resources) => {
-      const totalPages = Math.ceil(resources.count / pageSize)
-      res
-        .json({
-          resources: resources.rows.map((rec) => ({
-            ...rec.dataValues,
-            filename: changeFormat(rec.filename)
-          })),
-          totalItems: resources.count,
-          totalPages,
-          page,
-          pageSize
-        })
-        .status(200)
-    })
-    .catch((err) => res.json({ err }).status(400))
-}
-
-// @desc    Fetch all resources
-// @route   GET /api/resources/:category?pageNumber=${pageNumber}
-// @access  Public
-const getResourcesByCategory = (req, res) => {
-  const pageSize = 5
-  const page = Number(req.query.pageNumber) || 1
-  const category = req.params.category
+  const { category } = req.query
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
   Resource.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     ordervalue,
-    where: { resourceType: category }
+    where: category ? { resourceType: category } : {}
   })
     .then((resources) => {
       const totalPages = Math.ceil(resources.count / pageSize)
@@ -155,7 +124,6 @@ const searchResourcesTitle = (req, res) => {
 module.exports = {
   getResources,
   addResource,
-  getResourcesByCategory,
   getResourcesById,
   deleteResources,
   updateResources,

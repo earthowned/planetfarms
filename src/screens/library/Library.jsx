@@ -81,7 +81,7 @@ const LibraryCategory = ({ title, data, setNewCollection, modalActive, setModalA
 
   const { data: libraryData, isLoading } = useGetFetchData(
     'LIBRARY_CATEGORY_DATA',
-    GET_LIBRARY + '/' + title.toLowerCase() + '?pageNumber=' + pageNumber,
+    GET_LIBRARY + '?pageNumber=' + pageNumber + '&category=' + title.toLowerCase(),
     { title, pageNumber }
   )
   if (isLoading) {
