@@ -79,16 +79,16 @@ const LibraryCategory = ({ title, search, setNewCollection, modalActive, setModa
     return (<div>Loading...</div>)
   }
   return (
-    libraryData?.resources.length > 0 ?
-    <>
-      <ListView
-        title={title} data={libraryData?.resources}
-        setNewCollection={setNewCollection}
-        modalActive={modalActive}
-        setModalActive={setModalActive}
-      />
-      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={libraryData} />
-    </> : <></>
+    libraryData?.resources.length > 0
+      ? <>
+        <ListView
+          title={title} data={libraryData?.resources}
+          setNewCollection={setNewCollection}
+          modalActive={modalActive}
+          setModalActive={setModalActive}
+        />
+        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={libraryData} />
+      </> : <></>
   )
 }
 
