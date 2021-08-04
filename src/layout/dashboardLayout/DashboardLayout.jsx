@@ -11,6 +11,7 @@ import { TABLET_SIZE } from '../../constants/sizeConstants'
 
 // importing custom hooks sizefinder to calculate window width from utils
 import useSizeFinder from '../../utils/sizeFinder'
+import SettingsActionModal from '../../components/settingsActionModal/SettingsActionModal'
 
 const DashboardLayout = ({ title, children }) => {
   const dispatch = useDispatch()
@@ -21,8 +22,12 @@ const DashboardLayout = ({ title, children }) => {
   const [notificationActive, setNotificationActive] = useState(false)
   const [messageActive, setMessageActive] = useState(false)
   const [userActive, setUserActive] = useState(false)
+
+  //for profile dropdown in mobile view
   const [modalActive, setModalActive] = useState(false)
   const [profileSettings, setProfileSettings] = useState(false)
+  const [settingAction, setSettingAction] = useState(null)
+  const [active, setActive] = useState(false)
 
   const { pathname } = useLocation()
 
@@ -67,6 +72,7 @@ const DashboardLayout = ({ title, children }) => {
     // making the user off
     setUserActive(false)
   }
+
   function SignOutModal (e) {
     setModalActive(true)
   }
@@ -91,6 +97,16 @@ const DashboardLayout = ({ title, children }) => {
     }
   }
 
+   function profileSettingNoti () {
+    setProfileSettings(!profileSettings)
+    setActive(false)
+  }
+
+  function clickProfileHandler (settings) {
+    setSettingAction(settings)
+    setModalActive(true)
+  }
+
   return (
     <div>
       {windowWidth > TABLET_SIZE ? (
@@ -105,6 +121,7 @@ const DashboardLayout = ({ title, children }) => {
         </div>
       ) : (
         <>
+        <div>{modalActive && <SettingsActionModal setModalActive={setModalActive} settingAction={settingAction} />} </div>
           <MessageDropdown
             mobileView='mobileView'
             btnName='see more'
@@ -123,7 +140,19 @@ const DashboardLayout = ({ title, children }) => {
           <div className='layout-container'>
             <div className='dashboard-header'>
               <img className='mobile-logo' src='/img/logo.svg' alt='text logo of planet farm' />
-              <img src='/img/avatar-img.svg' alt='avatar-img' onClick={signOut} />
+              {/* mobile view: profie dropdown */}
+              <div onClick={() => profileSettingNoti()} className='message'>
+                <img src='/img/avatar-img.svg' alt='avatar-img' />
+                {profileSettings && (
+                  <MessageDropdown
+                    clickHandler={setProfileSettings}
+                    clickProfileHandler={clickProfileHandler}
+                    profileSettings={profileSettings}
+                    message='Your settings'
+                    btnName='See all notifications'
+                  />
+                )}
+              </div>
             </div>
             <h1>{title}</h1>
             <div>{children}</div>
@@ -139,7 +168,7 @@ const DashboardLayout = ({ title, children }) => {
             <div onClick={() => activeNotification()} className={`mobile-tab-wrapper ${notificationActive ? 'bgactive' : ''}`}>
               <NotificationMenu activeNotification={activeNotification} />
             </div>
-            <div onClick={(e) => { activeBurger(); SignOutModal(e) }} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
+            <div onClick={(e) => { activeBurger()}} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
               <Hamburger activeBurger={activeBurger} />
             </div>
           </div>
