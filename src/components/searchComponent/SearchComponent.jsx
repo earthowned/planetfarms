@@ -4,7 +4,14 @@ import './SearchComponent.scss'
 const SearchComponent = ({ className, search, setSearch, showEditIcon }) => {
   return (
     <div className='search-btn'>
-      <img src='/img/search-outline-icon.svg' alt='Search' /> <input value={search} type='text' onChange={(e) => setSearch(e.target.value)} className='search-1' placeholder='Search...' />
+      <img src='/img/search-outline-icon.svg' alt='Search' />{' '}
+      <input
+        value={search ? search : ''}
+        type='text'
+        onChange={(e) => setSearch(e.target.value)}
+        className='search-1'
+        placeholder='Search...'
+      />
       {showEditIcon && <img src='/img/edit-icon.svg' alt='edit icon' />}
     </div>
   )
