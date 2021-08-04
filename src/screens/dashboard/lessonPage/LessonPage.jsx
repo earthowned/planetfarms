@@ -20,6 +20,7 @@ const LessonPage = () => {
   const [isCreator, setIsCreator] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const [isPassed, setIsPassed] = useState(false)
+  const [isTest, setIsTest] = useState(false)
   const [materialData, setMaterialData] = useState([])
   const [cData, setCData] = useState([])
   const [courseId, setCourseId] = useState('')
@@ -41,6 +42,7 @@ const LessonPage = () => {
       setCourseId(data?.data?.courseId)
     }
     setIsCompleted(data?.data?.lesson_progresses[0]?.isCompleted || false)
+    setIsTest(data?.data?.test !== null)
   }, [data])
 
   const { data: courseData } = useGetFetchData(
@@ -67,6 +69,10 @@ const LessonPage = () => {
     ;(isPassed && isCompleted) || isCreator
       ? passedAndProgress()
       : passedButNoProgress()
+  }
+
+  const nextPageWithOutTest = () => {
+    dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
   }
 
   return (
@@ -113,8 +119,16 @@ const LessonPage = () => {
           )}
           {courseData?.data?.lessons?.length === data?.data?.order ? (
             ''
-          ) : isCreator || isPassed || isCompleted ? (
-            <Button className='nextBtn' name='Next' onClick={nextPage} />
+          ) : !isTest ? (
+            <Button
+              className='nextBtn'
+              name='Next'
+              onClick={
+                isCreator || isPassed || isCompleted
+                  ? nextPage
+                  : nextPageWithOutTest
+              }
+            />
           ) : (
             ''
           )}
