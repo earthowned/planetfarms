@@ -10,6 +10,9 @@ export const Axios = axios.create({
 // categories
 export const CATEGORY = BASE_URL + 'categories'
 
+// library
+export const GET_LIBRARY = BASE_URL + 'resources'
+
 // course
 export const GET_COURSE = BASE_URL + 'courses'
 export const ADD_COURSE = BASE_URL + 'courses/add'
