@@ -6,8 +6,7 @@ import SimpleModal from '../../components/simpleModal/SimpleModal'
 import CollectionModal from '../../components/collectionModal/CollectionModal'
 import GroupModal from '../../components/groupModal/GroupModal'
 import { groupCollection, nav } from './CollectionData'
-import { useSelector, useDispatch } from 'react-redux'
-import { listResources, searchResources } from '../../actions/resourceActions'
+import { useSelector } from 'react-redux'
 import Pagination from '../../components/pagination/Pagination'
 import SubHeader from '../../components/subHeader/SubHeader'
 import { useHistory } from 'react-router-dom'
@@ -15,10 +14,6 @@ import useGetFetchData from '../../utils/useGetFetchData'
 import { GET_LIBRARY } from '../../utils/urlConstants'
 
 const Library = () => {
-  const resourceList = useSelector((state) => state.listResources)
-  const data = useSelector((state) => state.listResources)
-  let resources = resourceList.searchResources ? resourceList.searchResources : resourceList.resources
-  if (data) resources = data.resources
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const history = useHistory()
@@ -27,7 +22,6 @@ const Library = () => {
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
   const [search, setSearch] = useState()
-  const dispatch = useDispatch()
 
   function openAddCollection () {
     setModalActive(true)
@@ -36,7 +30,7 @@ const Library = () => {
 
   useEffect(() => {
     if (!userInfo) history.push('/login')
-  }, [search, dispatch, history, userInfo])
+  }, [search, history, userInfo])
 
   return (
     <>
@@ -55,7 +49,7 @@ const Library = () => {
             <div className='list-container' key={type}>
               <LibraryCategory
                 search={search}
-                title={type} data={resources}
+                title={type}
                 setNewCollection={setNewCollection}
                 modalActive={modalActive}
                 setModalActive={setModalActive}
@@ -70,10 +64,13 @@ const Library = () => {
 
 const LibraryCategory = ({ title, search, setNewCollection, modalActive, setModalActive }) => {
   const [pageNumber, setPageNumber] = useState(1)
+  useEffect(() => {
+    setPageNumber(1)
+  }, [search])
   const { data: libraryData, isLoading } = useGetFetchData(
     'LIBRARY_CATEGORY_DATA',
     GET_LIBRARY + '?pageNumber=' + pageNumber + '&category=' + title.toLowerCase() + '&search=' + (search || ''),
-    { title, pageNumber, search }
+    { title, pageNumber }
   )
   if (isLoading) {
     return (<div>Loading...</div>)
