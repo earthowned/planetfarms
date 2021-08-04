@@ -16,7 +16,7 @@ const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
 
   const { data: courseData, isLoading } = useGetFetchData(
     'ALL_COURSE_DATA',
-    GET_COURSE + '/' + category,
+    GET_COURSE + '?category=' + category,
     { category }
   )
   if (isLoading) {

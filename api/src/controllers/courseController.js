@@ -6,43 +6,12 @@ const CircularJSON = require('circular-json')
 const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc    Fetch all course
-// @route   GET /api/courses
+// @route   GET /api/courses?pageNumber=${pageNumber}&category=${category}
 // @access  Public
 const getCourses = async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
-  const order = req.query.order || 'ASC'
-
-  const courses = await db.Courses.findAll({
-    offset: page,
-    limit: pageSize,
-    order: [['title', order]],
-    include: [db.Lesson, db.Enroll]
-  })
-
-  courses.forEach((course) => {
-    course.thumbnail = changeFormat(course.thumbnail)
-    course.lessons.forEach((lesson) => {
-      lesson.coverImg = changeFormat(lesson.coverImg)
-    })
-  })
-
-  res.status(200).json({
-    status: true,
-    message: 'fetched courses successfully',
-    data: courses,
-    page,
-    pageSize
-  })
-}
-
-// @desc    Fetch courses by category name
-// @route   GET /api/courses/:category?pageNumber=${pageNumber}
-// @access  Public
-const getCoursesByCategoryName = async (req, res) => {
   const pageSize = 3
   const page = Number(req.query.pageNumber) || 1
-  const category = req.params.category
+  const { category } = req.query
   const order = req.query.order || 'ASC'
 
   const courses = await db.Courses.findAndCountAll({
@@ -50,7 +19,7 @@ const getCoursesByCategoryName = async (req, res) => {
     limit: pageSize,
     order: [['title', order]],
     include: [db.Lesson, db.Enroll],
-    where: { category }
+    where: category ? { category } : {}
   })
 
   courses.rows.forEach((course) => {
@@ -203,7 +172,6 @@ const searchCoursesTitle = (req, res) => {
 module.exports = {
   addCourse,
   getCourses,
-  getCoursesByCategoryName,
   updateCourse,
   getCourseById,
   deleteCourse,
