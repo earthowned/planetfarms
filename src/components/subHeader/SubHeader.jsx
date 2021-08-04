@@ -19,7 +19,7 @@ const SubHeader = ({ search, setSearch, nav, setCreateActive, btnName }) => {
     if (!userInfo) {
       history.push('/login')
     }
-  }, [search, dispatch, history, userInfo])
+  }, [userInfo])
 
   return (
     <div className='sub-header-main-container'>
