@@ -64,18 +64,19 @@ export default MyCoursesCard
 
 const CourseCard = ({ data }) => {
   return (
-    data && data.map(item => {
+    data &&
+    data.map((item, i) => {
       return (
-        <Background image={item.bgImage}>
+        <Background staticImg={item.bgImage} key={i}>
           <div className='my-course-content'>
             <h3>{item.name}</h3>
             <p>{item.activity || item.status}</p>
-            {
-              item.lesson && <div className='lesson-progress'>
+            {item.lesson && (
+              <div className='lesson-progress'>
                 <div className='lesson-completed' />
                 <span>{item.lesson}</span>
               </div>
-            }
+            )}
           </div>
         </Background>
       )

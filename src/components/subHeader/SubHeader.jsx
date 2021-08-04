@@ -24,26 +24,50 @@ const SubHeader = ({ search, setSearch, nav, setCreateActive, btnName }) => {
   return (
     <div className='sub-header-main-container'>
       <div className='sub-header-left-container'>
-        {windowWidth > 640
-          ? <>
+        {windowWidth > 640 ? (
+          <>
             <ul className='sub-header-list-container'>
-              {nav.map((menu) => (
-                <li>
-                  <Link className={`nav-link ${(pathname === menu.link) ? 'sub-header-list-item active' : 'sub-header-list-item'}`} to={menu.link}>{menu.label}</Link>
+              {nav.map((menu, i) => (
+                <li key={i}>
+                  <Link
+                    className={`nav-link ${
+                      pathname === menu.link
+                        ? 'sub-header-list-item active'
+                        : 'sub-header-list-item'
+                    }`}
+                    to={menu.link}
+                  >
+                    {menu.label}
+                  </Link>
                 </li>
               ))}
             </ul>
-            <SearchComponent search={search} setSearch={setSearch} className='search-btn margin-0' />
-            </>
-          : <>
+            <SearchComponent
+              search={search}
+              setSearch={setSearch}
+              className='search-btn margin-0'
+            />
+          </>
+        ) : (
+          <>
             <Filter newFilter data={nav} />
-            <SearchComponent search={search} setSearch={setSearch} className='search search-btn margin-0' />
-            </>}
+            <SearchComponent
+              search={search}
+              setSearch={setSearch}
+              className='search search-btn margin-0'
+            />
+          </>
+        )}
       </div>
       <div className='sub-header-right-container'>
         <div className='row-1'>
           <div className='sub-header-btn-container'>
-            <button className='default-btn' onClick={() => setCreateActive(true)}>{btnName}</button>
+            <button
+              className='default-btn'
+              onClick={() => setCreateActive(true)}
+            >
+              {btnName}
+            </button>
           </div>
         </div>
 
