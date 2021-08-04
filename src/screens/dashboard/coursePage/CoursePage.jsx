@@ -24,7 +24,7 @@ function MyCoursePage ({ unpaid }) {
   const [isEnroll, setIsEnroll] = useState(false)
 
   const { courseId } = useParams()
-  const { data, isLoading } = useGetFetchData(
+  const { data, isLoading, refetch } = useGetFetchData(
     'singleCourse',
     GET_COURSE + '/' + courseId
   )
@@ -69,6 +69,7 @@ function MyCoursePage ({ unpaid }) {
               data={data}
               userInfo={userInfo}
               isEnroll={isEnroll}
+              refetch={refetch}
             />
           </DashboardLayout>
         </>
@@ -83,7 +84,8 @@ function CoursePage ({
   setPurchaseModal,
   data,
   userInfo,
-  isEnroll
+  isEnroll,
+  refetch
 }) {
   return (
     <div className='course-page'>
@@ -95,6 +97,7 @@ function CoursePage ({
           data={data}
           userInfo={userInfo}
           isEnroll={isEnroll}
+          refetch={refetch}
         />
       </div>
     </div>

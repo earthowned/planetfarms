@@ -7,7 +7,8 @@ const LessonCourse = ({
   setPurchaseModal,
   isEnroll,
   userInfo,
-  creator
+  creator,
+  joinCourse
 }) => {
   const lessonLen = data?.data?.lessons.length
 
@@ -44,6 +45,8 @@ const LessonCourse = ({
               data={data}
               userInfo={userInfo}
               creator={creator}
+              isEnroll={isEnroll}
+              joinCourse={joinCourse}
             />
           </React.Fragment>
         ))}

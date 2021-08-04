@@ -10,12 +10,17 @@ const CourseDescription = ({
   data,
   isLoading,
   userInfo,
-  isEnroll
+  isEnroll,
+  refetch
 }) => {
   const [creator, setCreator] = useState('')
+  const [joinCourse, setJoinCourse] = useState(false)
+
   useEffect(() => {
     setCreator(data?.data?.creator)
-  }, [data])
+    setJoinCourse(isEnroll || false)
+  }, [data, isEnroll])
+
   return (
     <>
       <div className='course-page-container border-1px-onyx'>
@@ -25,6 +30,8 @@ const CourseDescription = ({
           data={data}
           isLoading={isLoading}
           userInfo={userInfo}
+          refetch={refetch}
+          joinCourse={joinCourse}
         />
         <LessonCourse
           data={data}
@@ -32,6 +39,7 @@ const CourseDescription = ({
           isEnroll={isEnroll}
           userInfo={userInfo}
           creator={creator}
+          joinCourse={joinCourse}
         />
       </div>
       <MoreCourse />

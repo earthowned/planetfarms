@@ -2,7 +2,13 @@ import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 
-const LessonCourseSingle = ({ data, userInfo, creator }) => {
+const LessonCourseSingle = ({
+  data,
+  userInfo,
+  creator,
+  isEnroll,
+  joinCourse
+}) => {
   const history = useHistory()
   const [isCompleted, setIsCompleted] = useState(false)
   const [userId, setUserId] = useState('')
@@ -13,13 +19,12 @@ const LessonCourseSingle = ({ data, userInfo, creator }) => {
   }, [data])
   return (
     <div className='lesson-card-wrapper'>
-      {data?.order !== 1 ? (
-        (userId === userInfo.id && isCompleted === true) ||
-        creator === userInfo.id ? (
-              ''
-            ) : (
-              <div className='lesson-permission' />
-            )
+      {data?.order !== 1 || creator === userInfo.id || joinCourse !== true ? (
+        userId === userInfo.id && isCompleted === true ? (
+          ''
+        ) : (
+          <div className='lesson-permission' />
+        )
       ) : (
         ''
       )}

@@ -13,15 +13,15 @@ const CourseDetail = ({
   setPurchaseModal,
   data,
   isLoading,
-  userInfo
+  userInfo,
+  refetch,
+  joinCourse
 }) => {
   const dispatch = useDispatch()
   const [isEnroll, setIsEnroll] = useState('')
-  const [joinCourse, setJoinCourse] = useState(false)
   const [enrollCourseId, setEnrollCourseId] = useState('')
-
   useEffect(() => {
-    const isEnrolled = data?.data?.enrolls
+    data?.data?.enrolls
       .filter((enroll) => enroll.userId === userInfo.id)
       .map((enroll) => {
         setIsEnroll(enroll.isEnroll)
@@ -30,11 +30,9 @@ const CourseDetail = ({
   }, [data])
 
   const enrollFreeCourse = (courseId) => {
-    setJoinCourse(!joinCourse)
     const userId = userInfo.id
-    dispatch(addEnroll(courseId, userId))
+    dispatch(addEnroll(courseId, userId, false, refetch))
   }
-
   return (
     <div className='description-course-page'>
       <img
