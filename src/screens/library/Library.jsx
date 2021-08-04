@@ -26,8 +26,7 @@ const Library = () => {
   const [newCollection, setNewCollection] = useState(false)
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
-  const [pageNumber, setPageNumber] = useState(1)
-  const [search, setSearch] = useState(null)
+  const [search, setSearch] = useState()
   const dispatch = useDispatch()
 
   function openAddCollection () {
@@ -37,9 +36,7 @@ const Library = () => {
 
   useEffect(() => {
     if (!userInfo) history.push('/login')
-    if (search) dispatch(searchResources(search))
-    if (!search) dispatch(listResources({ sort: '', pageNumber }))
-  }, [search, dispatch, history, userInfo, pageNumber])
+  }, [search, dispatch, history, userInfo])
 
   return (
     <>
@@ -57,6 +54,7 @@ const Library = () => {
           {['Articles', 'Videos'].map(type => (
             <div className='list-container' key={type}>
               <LibraryCategory
+                search={search}
                 title={type} data={resources}
                 setNewCollection={setNewCollection}
                 modalActive={modalActive}
@@ -70,17 +68,18 @@ const Library = () => {
   )
 }
 
-const LibraryCategory = ({ title, data, setNewCollection, modalActive, setModalActive }) => {
+const LibraryCategory = ({ title, search, setNewCollection, modalActive, setModalActive }) => {
   const [pageNumber, setPageNumber] = useState(1)
   const { data: libraryData, isLoading } = useGetFetchData(
     'LIBRARY_CATEGORY_DATA',
-    GET_LIBRARY + '?pageNumber=' + pageNumber + '&category=' + title.toLowerCase(),
-    { title, pageNumber }
+    GET_LIBRARY + '?pageNumber=' + pageNumber + '&category=' + title.toLowerCase() + '&search=' + (search || ''),
+    { title, pageNumber, search }
   )
   if (isLoading) {
     return (<div>Loading...</div>)
   }
   return (
+    libraryData?.resources.length > 0 ?
     <>
       <ListView
         title={title} data={libraryData?.resources}
@@ -89,7 +88,7 @@ const LibraryCategory = ({ title, data, setNewCollection, modalActive, setModalA
         setModalActive={setModalActive}
       />
       <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={libraryData} />
-    </>
+    </> : <></>
   )
 }
 

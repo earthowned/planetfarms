@@ -2,6 +2,7 @@ const Resource = require('../models/resourceModel.js')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
+const { where } = require('sequelize')
 
 // @desc    Fetch all resources
 // @route   GET /api/resources?pageNumber=${pageNumber}&category=${category}
@@ -9,14 +10,17 @@ const { changeFormat } = require('../helpers/filehelpers')
 const getResources = (req, res) => {
   const pageSize = 5
   const page = Number(req.query.pageNumber) || 1
-  const { category } = req.query
+  const { category, search } = req.query
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
   Resource.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     ordervalue,
-    where: category ? { resourceType: category } : {}
+    where: {
+      ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
+      ...(category ? { resourceType: category } : {})
+    }
   })
     .then((resources) => {
       const totalPages = Math.ceil(resources.count / pageSize)
