@@ -24,6 +24,10 @@ module.exports = {
     await queryInterface.removeColumn('resources', 'isDownloadable')
     await queryInterface.removeColumn('resources', 'openUrl')
     await queryInterface.removeColumn('resources', 'attachments')
+    await queryInterface.removeColumn('resources', 'createdDate')
+    await queryInterface.removeColumn('resources', 'updatedDate')
+    await queryInterface.addColumn('resources', 'createdAt', Sequelize.DATE)
+    await queryInterface.addColumn('resources', 'updatedAt', Sequelize.DATE)
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -51,5 +55,9 @@ module.exports = {
     await queryInterface.addColumn('resources', 'isDownloadable', Sequelize.BOOLEAN)
     await queryInterface.addColumn('resources', 'openUrl', Sequelize.STRING)
     await queryInterface.addColumn('resources', 'attachments', Sequelize.TEXT)
+    await queryInterface.addColumn('resources', 'createdDate', Sequelize.DATE)
+    await queryInterface.addColumn('resources', 'updatedDate', Sequelize.DATE)
+    await queryInterface.removeColumn('resources', 'createdAt')
+    await queryInterface.removeColumn('resources', 'updatedAt')
   }
 }
