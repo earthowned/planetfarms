@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import MoreCourse from './MoreCourse'
 import CourseDetail from './CourseDetail'
 import LessonCourse from './LessonCourse'
@@ -11,6 +12,10 @@ const CourseDescription = ({
   userInfo,
   isEnroll
 }) => {
+  const [creator, setCreator] = useState('')
+  useEffect(() => {
+    setCreator(data?.data?.creator)
+  }, [data])
   return (
     <>
       <div className='course-page-container border-1px-onyx'>
@@ -26,6 +31,7 @@ const CourseDescription = ({
           setPurchaseModal={setPurchaseModal}
           isEnroll={isEnroll}
           userInfo={userInfo}
+          creator={creator}
         />
       </div>
       <MoreCourse />

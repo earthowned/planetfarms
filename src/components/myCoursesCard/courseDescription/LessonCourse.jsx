@@ -2,7 +2,13 @@ import React from 'react'
 import Button from '../../button/Button'
 import LessonCourseSingle from './LessonCourseSingle'
 
-const LessonCourse = ({ data, setPurchaseModal, isEnroll, userInfo }) => {
+const LessonCourse = ({
+  data,
+  setPurchaseModal,
+  isEnroll,
+  userInfo,
+  creator
+}) => {
   const lessonLen = data?.data?.lessons.length
 
   return (
@@ -34,7 +40,11 @@ const LessonCourse = ({ data, setPurchaseModal, isEnroll, userInfo }) => {
             ) : (
               ''
             )}
-            <LessonCourseSingle data={data} userInfo={userInfo} />
+            <LessonCourseSingle
+              data={data}
+              userInfo={userInfo}
+              creator={creator}
+            />
           </React.Fragment>
         ))}
     </div>
