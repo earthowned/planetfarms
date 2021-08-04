@@ -13,38 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.TEXT
       },
-      languageOfInstruction: {
-        type: DataTypes.STRING
-      },
-      memberLimit: {
-        type: DataTypes.STRING
-      },
-      method: {
-        type: DataTypes.STRING
-      },
-      gradeLevel: {
-        type: DataTypes.STRING
-      },
-      subjectLevel: {
-        type: DataTypes.STRING
-      },
       creator: {
         type: DataTypes.STRING
       },
       thumbnail: {
         type: DataTypes.STRING
       },
-      steps: {
-        type: DataTypes.JSON
-      },
-      _attachments: {
-        type: DataTypes.BLOB('long')
-      },
       price: {
         type: DataTypes.DOUBLE
-      },
-      category: {
-        type: DataTypes.STRING
       },
       isFree: {
         type: DataTypes.BOOLEAN,
@@ -56,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
   Courses.associate = (models) => {
     Courses.hasMany(models.Lesson)
     Courses.hasMany(models.Enroll)
+    Courses.belongsTo(models.Category, {
+      foreignKey: 'categoryId',
+      onDelete: 'CASCADE'
+    })
   }
   return Courses
 }

@@ -17,7 +17,7 @@ const getCourses = async (req, res) => {
     offset: page,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson, db.Enroll]
+    include: [db.Lesson, db.Enroll, db.Category]
   })
 
   courses.forEach((course) => {

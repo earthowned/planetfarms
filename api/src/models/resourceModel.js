@@ -1,94 +1,92 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Resources = db.define('resources',
-  {
-    title: {
-      type: Sequelize.TEXT
+module.exports = (sequelize, DataTypes) => {
+  const Resources = sequelize.define('resources',
+    {
+      title: {
+        type: DataTypes.TEXT
+      },
+      resourceFor: {
+        type: DataTypes.TEXT
+      },
+      publisher: {
+        type: DataTypes.STRING
+      },
+      linkToLicense: {
+        type: DataTypes.STRING
+      },
+      uploadDate: {
+        type: DataTypes.DATE
+      },
+      addedBy: {
+        type: DataTypes.STRING
+      },
+      openWith: {
+        type: DataTypes.STRING
+      },
+      subject: {
+        type: DataTypes.TEXT
+      },
+      articleDate: {
+        type: DataTypes.DATE
+      },
+      kind: {
+        type: DataTypes.STRING
+      },
+      language: {
+        type: DataTypes.STRING
+      },
+      author: {
+        type: DataTypes.STRING
+      },
+      sum: {
+        type: DataTypes.DOUBLE
+      },
+      level: {
+        type: DataTypes.TEXT
+      },
+      languages: {
+        type: DataTypes.TEXT
+      },
+      timesRated: {
+        type: DataTypes.STRING
+      },
+      tag: {
+        type: DataTypes.TEXT
+      },
+      year: {
+        type: DataTypes.DATE
+      },
+      averageRating: {
+        type: DataTypes.DOUBLE
+      },
+      filename: {
+        type: DataTypes.STRING
+      },
+      mediaType: {
+        type: DataTypes.STRING
+      },
+      description: {
+        type: DataTypes.TEXT
+      },
+      tags: {
+        type: DataTypes.STRING
+      },
+      medium: {
+        type: DataTypes.STRING
+      },
+      isDownloadable: {
+        type: DataTypes.BOOLEAN
+      },
+      resourceType: {
+        type: DataTypes.STRING
+      },
+      openUrl: {
+        type: DataTypes.STRING
+      },
+      attachments: {
+        type: DataTypes.TEXT
+      }
     },
-    resourceFor: {
-      type: Sequelize.TEXT
-    },
-    publisher: {
-      type: Sequelize.STRING
-    },
-    linkToLicense: {
-      type: Sequelize.STRING
-    },
-    uploadDate: {
-      type: Sequelize.DATE
-    },
-    addedBy: {
-      type: Sequelize.STRING
-    },
-    openWith: {
-      type: Sequelize.STRING
-    },
-    subject: {
-      type: Sequelize.TEXT
-    },
-    articleDate: {
-      type: Sequelize.DATE
-    },
-    kind: {
-      type: Sequelize.STRING
-    },
-    language: {
-      type: Sequelize.STRING
-    },
-    author: {
-      type: Sequelize.STRING
-    },
-    sum: {
-      type: Sequelize.DOUBLE
-    },
-    level: {
-      type: Sequelize.TEXT
-    },
-    languages: {
-      type: Sequelize.TEXT
-    },
-    timesRated: {
-      type: Sequelize.STRING
-    },
-    tag: {
-      type: Sequelize.TEXT
-    },
-    year: {
-      type: Sequelize.DATE
-    },
-    averageRating: {
-      type: Sequelize.DOUBLE
-    },
-    filename: {
-      type: Sequelize.STRING
-    },
-    mediaType: {
-      type: Sequelize.STRING
-    },
-    description: {
-      type: Sequelize.TEXT
-    },
-    tags: {
-      type: Sequelize.STRING
-    },
-    medium: {
-      type: Sequelize.STRING
-    },
-    isDownloadable: {
-      type: Sequelize.BOOLEAN
-    },
-    resourceType: {
-      type: Sequelize.STRING
-    },
-    openUrl: {
-      type: Sequelize.STRING
-    },
-    attachments: {
-      type: Sequelize.TEXT
-    }
-  },
-  { timestamps: false }
-)
-
-module.exports = Resources
+    { timestamps: false }
+  )
+  return Resources
+}

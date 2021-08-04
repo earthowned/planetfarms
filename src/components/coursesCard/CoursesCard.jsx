@@ -26,16 +26,16 @@ const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
       <div className='courses-card-container'>
         {courseData?.data
           .filter((cat) =>
-            cat.category.toLowerCase().includes(category.toLowerCase())
+            cat.category?.name.toLowerCase().includes(category.toLowerCase())
           )
           .slice(0, 1)
           .map((catge) => (
-            <h4 key={catge.id}>{catge.category}</h4>
+            <h4 key={catge.id}>{catge.category?.name}</h4>
           ))}
         <CardLayout data={courseData}>
           {courseData?.data
             .filter((cat) =>
-              cat.category.toLowerCase().includes(category.toLowerCase())
+              cat.category?.name.toLowerCase().includes(category.toLowerCase())
             )
             .map((course) => {
               return (
