@@ -6,17 +6,14 @@ import SimpleModal from '../../components/simpleModal/SimpleModal'
 import CollectionModal from '../../components/collectionModal/CollectionModal'
 import GroupModal from '../../components/groupModal/GroupModal'
 import { groupCollection, nav } from './CollectionData'
-import { useSelector, useDispatch } from 'react-redux'
-import { listResources, searchResources } from '../../actions/resourceActions'
+import { useSelector } from 'react-redux'
 import Pagination from '../../components/pagination/Pagination'
 import SubHeader from '../../components/subHeader/SubHeader'
 import { useHistory } from 'react-router-dom'
+import useGetFetchData from '../../utils/useGetFetchData'
+import { GET_LIBRARY } from '../../utils/urlConstants'
 
 const Library = () => {
-  const resourceList = useSelector((state) => state.listResources)
-  const data = useSelector((state) => state.listResources)
-  let resources = resourceList.searchResources ? resourceList.searchResources : resourceList.resources
-  if (data) resources = data.resources
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const history = useHistory()
@@ -24,9 +21,7 @@ const Library = () => {
   const [newCollection, setNewCollection] = useState(false)
   const [active, setActive] = useState(false)
   const [modalActive, setModalActive] = useState(false)
-  const [pageNumber, setPageNumber] = useState(1)
-  const [search, setSearch] = useState(null)
-  const dispatch = useDispatch()
+  const [search, setSearch] = useState()
 
   function openAddCollection () {
     setModalActive(true)
@@ -34,12 +29,8 @@ const Library = () => {
   }
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push('/login')
-    }
-    if (search) dispatch(searchResources(search))
-    if (!search) dispatch(listResources('', pageNumber))
-  }, [search, dispatch, history, userInfo, pageNumber])
+    if (!userInfo) history.push('/login')
+  }, [search, history, userInfo])
 
   return (
     <>
@@ -48,28 +39,53 @@ const Library = () => {
         data={groupCollection} btnName='add to collections'
         setNewCollection={setNewCollection}
                       />}
-
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
-
       {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
 
       <DashboardLayout title='Library'>
         <div className='library-main-container'>
           <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Add files' />
           {['Articles', 'Videos'].map(type => (
-            <div className='list-container'>
-              <ListView
-                title={type} data={resources}
+            <div className='list-container' key={type}>
+              <LibraryCategory
+                search={search}
+                title={type}
                 setNewCollection={setNewCollection}
                 modalActive={modalActive}
                 setModalActive={setModalActive}
               />
-              <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={resourceList} />
             </div>
           ))}
         </div>
       </DashboardLayout>
     </>
+  )
+}
+
+const LibraryCategory = ({ title, search, setNewCollection, modalActive, setModalActive }) => {
+  const [pageNumber, setPageNumber] = useState(1)
+  useEffect(() => {
+    setPageNumber(1)
+  }, [search])
+  const { data: libraryData, isLoading } = useGetFetchData(
+    'LIBRARY_CATEGORY_DATA',
+    GET_LIBRARY + '?pageNumber=' + pageNumber + '&category=' + title.toLowerCase() + '&search=' + (search || ''),
+    { title, pageNumber, search }
+  )
+  if (isLoading) {
+    return (<div>Loading...</div>)
+  }
+  return (
+    libraryData?.resources.length > 0
+      ? <>
+        <ListView
+          title={title} data={libraryData?.resources}
+          setNewCollection={setNewCollection}
+          modalActive={modalActive}
+          setModalActive={setModalActive}
+        />
+        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={libraryData} />
+      </> : <></>
   )
 }
 
