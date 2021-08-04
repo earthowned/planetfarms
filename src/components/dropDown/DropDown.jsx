@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import useHideOnClick from '../../utils/useHideOnClick';
-import './DropDown.scss';
+import useHideOnClick from '../../utils/useHideOnClick'
+import './DropDown.scss'
 
-const DropDown = ({data, title, getRole, id, role}) => {
-  const[active, setActive] = useState()
+const DropDown = ({ data, title, getRole, id, role }) => {
+  const [active, setActive] = useState()
   const domNode = useHideOnClick(() => {
-      setActive(false)
-    })
+    setActive(false)
+  })
 
   function clickHandler (item) {
     setActive(false)
@@ -18,22 +18,20 @@ const DropDown = ({data, title, getRole, id, role}) => {
       <div onClick={() => setActive(!active)} className='dropdown-title'>
         <span>{title}</span>
         <img
-        className='dropdown-icon'
-        src='/img/chevron-right-outline.svg'
+          className='dropdown-icon'
+          src='/img/chevron-right-outline.svg'
         />
       </div>
       {active && (
         <ul className='dropdown-lists'>
-        {data.length > 0 &&
+          {data.length > 0 &&
           data.filter(el => el !== role).map((item) => (
             <li onClick={() => clickHandler(item)}>{item}</li>
-          ))
-        }
+          ))}
         </ul>
-        )
-      }
+      )}
     </div>
-    )
+  )
 }
 
 export default DropDown

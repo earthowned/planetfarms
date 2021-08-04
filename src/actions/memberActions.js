@@ -22,7 +22,7 @@ export const listMembers = () => async (
       dispatch,
       `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}`
     )
-    console.log(data);
+    console.log(data)
     dispatch({
       type: MEMBER_LIST_SUCCESS,
       payload: data
@@ -66,7 +66,7 @@ export const allowAccess = (id, role) => async (
 ) => {
   try {
     dispatch({ type: MEMBER_ACCESS_REQUEST })
-   const {data} =  await putApi(
+    const { data } = await putApi(
       dispatch,
       `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/${id}/community/${currentCommunity.id}`,
       { role }

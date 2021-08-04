@@ -66,11 +66,11 @@ const followCommunity = async (req, res) => {
 // @access Public
 
 const getAllMembers = async (req, res) => {
-   try {
-     const communityId = req.params.id;
-     const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId }, attributes: ['role'] })
-  
-    if(member.dataValues.role === 'manager') {
+  try {
+    const communityId = req.params.id
+    const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId }, attributes: ['role'] })
+
+    if (member.dataValues.role === 'manager') {
       const data = await db.CommunityUser.findAll(
         {
           where: { communityId: req.params.id, active: true },
@@ -82,18 +82,18 @@ const getAllMembers = async (req, res) => {
           required: true
         }
       )
-  
+
       // flattening the array to show only one object
       const newArray = data.map(item => {
         const { userId, role, id } = item.dataValues
         return { id, userId, role, ...item.user.dataValues }
       })
-  
+
       res.json({
-        results : newArray
+        results: newArray
       })
-      return;
-      }
+      return
+    }
 
     const newData = await db.CommunityUser.findAll(
       {
@@ -106,7 +106,7 @@ const getAllMembers = async (req, res) => {
         required: true
       }
     )
-   return res.json({
+    return res.json({
       results: newData
     })
   } catch (error) {
@@ -156,4 +156,4 @@ const searchMemberName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { followCommunity, getAllMembers, searchMemberName, updateMemberRole}
+module.exports = { followCommunity, getAllMembers, searchMemberName, updateMemberRole }

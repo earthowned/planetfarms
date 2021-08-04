@@ -19,7 +19,7 @@ import './Table.scss'
 // img: the path of the image you want to show as button
 // action: this holds function that is executed when the button is clicked (fn: returns id of the item)
 
-const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [], dropdown= {dropdownList : []} }) => {
+const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [], dropdown = { dropdownList: [] } }) => {
   const [property, setProperty] = useState([])
   const [header, setHeader] = useState([])
   const [tblData, setTblData] = useState([])
@@ -70,7 +70,7 @@ const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [], dropdown
                     </div>
                   </td>}
                   {
-                    dropdown.dropdownList.length > 0 && <td><DropDown getRole={getRole} id={item.id} title="change role" role={item.role} data={dropdown.dropdownList}/></td>
+                    dropdown.dropdownList.length > 0 && <td><DropDown getRole={getRole} id={item.id} title='change role' role={item.role} data={dropdown.dropdownList} /></td>
                   }
                 </tr>
               )
