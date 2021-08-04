@@ -8,11 +8,19 @@ const LessonCourseSingle = ({ data }) => {
     <div className='lesson-card-wrapper'>
       <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
         <div className='lessonCoverImg'>
-          <img
-            className='lesson-card-img'
-            src={`${GET_COVERIMG}${data.coverImg}`}
-            alt='background image'
-          />
+          {data.coverImg ? (
+            <img
+              className='lesson-card-img'
+              src={`${GET_COVERIMG}${data.coverImg}`}
+              alt='background image'
+            />
+          ) : (
+            <div className='coverImg coverImg__text lessonImg'>
+              <div>
+                <p>{data.title}</p>
+              </div>
+            </div>
+          )}
         </div>
         <div className='lesson-card-content'>
           <h3>{data.title}</h3>
