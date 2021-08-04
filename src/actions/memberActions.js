@@ -22,6 +22,7 @@ export const listMembers = () => async (
       dispatch,
       `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}`
     )
+    console.log(data);
     dispatch({
       type: MEMBER_LIST_SUCCESS,
       payload: data

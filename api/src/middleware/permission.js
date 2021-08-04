@@ -1,31 +1,37 @@
 const db = require('../models')
 
-function checkRole (dbRole, roles) {
-  return roles.some(el => el === dbRole)
-}
-
-// async function checkMemberRole(req, roles) {
-//   const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId: req.params.id }, attributes: ['role'] })
-//   console.log(member.dataValues.role);
-//   console.log(checkRole(member.dataValues.role, roles))
-//   if (checkRole(member.dataValues.role, roles)) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-// }
-
 const permit = (roles) => {
   return async (req, res, next) => {
     // getting member role
     const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId: req.params.id }, attributes: ['role'] })
 
-    if (checkRole(member.dataValues.role, roles) || checkRole(req.user.role, roles)) {
-      next()
+    if(member.dataValues.role) {
+      checkMemberRoles(roles, member, next, res)
     } else {
-      res.json({ error: 'Sorry, You don\'t have permission' })
+      checkUserRoles(roles, next, res, req)
     }
+
   }
+}
+
+const checkRole = (roles, dbRole) => {
+  return roles.includes(dbRole)
+}
+
+const checkMemberRoles = (roles, member, next, res) => {
+  if (checkRole(roles, member.dataValues.role)) {
+        next()
+      } else {
+        res.json({ error: 'Sorry, You don\'t have permission' })
+      }
+}
+
+const checkUserRoles = (roles, next, res, req) => {
+   if (checkRole(roles, req.user.role)) {
+        next()
+      } else {
+        res.json({ error: 'Sorry, You don\'t have permission' })
+      }
 }
 
 module.exports = permit

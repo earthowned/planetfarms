@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import useHideOnClick from '../../utils/useHideOnClick';
 import './DropDown.scss';
 
 const DropDown = ({data, title, getRole, id, role}) => {
   const[active, setActive] = useState()
+  const domNode = useHideOnClick(() => {
+      setActive(false)
+    })
 
   function clickHandler (item) {
     setActive(false)
@@ -10,7 +14,7 @@ const DropDown = ({data, title, getRole, id, role}) => {
   }
 
   return (
-    <div className='dropdown-wrapper'>
+    <div className='dropdown-wrapper' ref={domNode}>
       <div onClick={() => setActive(!active)} className='dropdown-title'>
         <span>{title}</span>
         <img

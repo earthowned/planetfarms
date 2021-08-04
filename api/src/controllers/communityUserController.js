@@ -67,6 +67,10 @@ const followCommunity = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
    try {
+     const communityId = req.params.id;
+     const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId }, attributes: ['role'] })
+  
+    if(member.dataValues.role === 'manager') {
       const data = await db.CommunityUser.findAll(
         {
           where: { communityId: req.params.id, active: true },
@@ -78,19 +82,33 @@ const getAllMembers = async (req, res) => {
           required: true
         }
       )
-        
+  
       // flattening the array to show only one object
       const newArray = data.map(item => {
         const { userId, role, id } = item.dataValues
-        const { ...rest } = item.user
-        return { id, userId, role, ...rest.dataValues }
-      }
-      )
+        return { id, userId, role, ...item.user.dataValues }
+      })
   
       res.json({
         results : newArray
       })
       return;
+      }
+
+    const newData = await db.CommunityUser.findAll(
+      {
+        where: { communityId, active: true },
+        attributes: ['userId', 'role'],
+        include: [{
+          model: db.User,
+          attributes: ['firstName']
+        }],
+        required: true
+      }
+    )
+   return res.json({
+      results: newData
+    })
   } catch (error) {
     res.status(400).json({ error })
   }

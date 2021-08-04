@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import DropDown from '../dropDown/DropDown'
-import Filter from '../filter/Filter'
 import './Table.scss'
 
 // description:
