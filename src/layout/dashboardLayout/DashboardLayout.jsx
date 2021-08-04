@@ -23,7 +23,7 @@ const DashboardLayout = ({ title, children }) => {
   const [messageActive, setMessageActive] = useState(false)
   const [userActive, setUserActive] = useState(false)
 
-  //for profile dropdown in mobile view
+  // for profile dropdown in mobile view
   const [modalActive, setModalActive] = useState(false)
   const [profileSettings, setProfileSettings] = useState(false)
   const [settingAction, setSettingAction] = useState(null)
@@ -97,7 +97,7 @@ const DashboardLayout = ({ title, children }) => {
     }
   }
 
-   function profileSettingNoti () {
+  function profileSettingNoti () {
     setProfileSettings(!profileSettings)
     setActive(false)
   }
@@ -121,7 +121,7 @@ const DashboardLayout = ({ title, children }) => {
         </div>
       ) : (
         <>
-        <div>{modalActive && <SettingsActionModal setModalActive={setModalActive} settingAction={settingAction} />} </div>
+          <div>{modalActive && <SettingsActionModal setModalActive={setModalActive} settingAction={settingAction} />} </div>
           <MessageDropdown
             mobileView='mobileView'
             btnName='see more'
@@ -168,7 +168,7 @@ const DashboardLayout = ({ title, children }) => {
             <div onClick={() => activeNotification()} className={`mobile-tab-wrapper ${notificationActive ? 'bgactive' : ''}`}>
               <NotificationMenu activeNotification={activeNotification} />
             </div>
-            <div onClick={(e) => { activeBurger()}} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
+            <div onClick={(e) => { activeBurger() }} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
               <Hamburger activeBurger={activeBurger} />
             </div>
           </div>
