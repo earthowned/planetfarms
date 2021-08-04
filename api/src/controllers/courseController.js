@@ -40,16 +40,21 @@ const getCourses = async (req, res) => {
 // @route   POST /api/courses/add
 // @access  Public
 const addCourse = async (req, res) => {
-  let thumbnail = ''
-  if (req.file) {
-    thumbnail = req.file.filename
+  try {
+    let thumbnail = ''
+    if (req.file) {
+      thumbnail = req.file.filename
+    }
+
+    const course = await db.Courses.create({ ...req.body, thumbnail })
+    res.status(201).json({
+      status: true,
+      message: ' new course added successfully',
+      data: course
+    })
+  } catch (error) {
+    return res.json({ error: 'error.message' })
   }
-  const course = await db.Courses.create({ ...req.body, thumbnail })
-  res.status(201).json({
-    status: true,
-    message: ' new course added successfully',
-    data: course
-  })
 }
 
 // @desc    Update a course
