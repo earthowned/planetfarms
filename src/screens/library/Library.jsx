@@ -36,12 +36,9 @@ const Library = () => {
   }
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push('/login')
-    }
+    if (!userInfo) history.push('/login')
     if (search) dispatch(searchResources(search))
     if (!search) dispatch(listResources({ sort: '', pageNumber }))
-    console.log(resources)
   }, [search, dispatch, history, userInfo, pageNumber])
 
   return (
@@ -51,9 +48,7 @@ const Library = () => {
         data={groupCollection} btnName='add to collections'
         setNewCollection={setNewCollection}
                       />}
-
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
-
       {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
 
       <DashboardLayout title='Library'>
@@ -67,7 +62,6 @@ const Library = () => {
                 modalActive={modalActive}
                 setModalActive={setModalActive}
               />
-
             </div>
           ))}
         </div>
@@ -78,7 +72,6 @@ const Library = () => {
 
 const LibraryCategory = ({ title, data, setNewCollection, modalActive, setModalActive }) => {
   const [pageNumber, setPageNumber] = useState(1)
-
   const { data: libraryData, isLoading } = useGetFetchData(
     'LIBRARY_CATEGORY_DATA',
     GET_LIBRARY + '?pageNumber=' + pageNumber + '&category=' + title.toLowerCase(),
@@ -87,7 +80,6 @@ const LibraryCategory = ({ title, data, setNewCollection, modalActive, setModalA
   if (isLoading) {
     return (<div>Loading...</div>)
   }
-
   return (
     <>
       <ListView
