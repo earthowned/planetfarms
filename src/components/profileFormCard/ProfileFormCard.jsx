@@ -3,6 +3,7 @@ import Secondarybtn from '../secondaryBtn/Secondarybtn'
 import './ProfileFormCard.scss'
 import CheckCircle from '../../assets/images/check-circle.svg'
 import MinusCircle from '../../assets/images/minus-circle-outline.svg'
+import moment from 'moment'
 
 const ProfileFormCard = ({ data: { title, firstTitle, firstValue, firstVerify, secondTitle, secondValue, secondVerify, thirdTitle, thirdValue, thirdVerify } }) => {
   return (
@@ -43,7 +44,7 @@ export const PersonalInformation = ({ user }) => {
     secondTitle: 'Last Name',
     secondValue: user?.lastName || 'N/A',
     thirdTitle: 'Date of birth',
-    thirdValue: user?.dateOfBirth ? new Date(user?.dateOfBirth).toLocaleString('en-US', { timezone: 'UTC' }) : 'N/A'
+    thirdValue: user?.dateOfBirth ? moment.utc(new Date(user?.dateOfBirth)).format('ddd LL') : 'N/A'
   }
   return (
     <>
@@ -77,7 +78,7 @@ export const AdditionalInformation = ({ user }) => {
   const AdditionalInformationdata = {
     title: 'Additional information',
     firstTitle: 'Last login',
-    firstValue: user?.lastLogin ? new Date(user?.lastLogin).toDateString() : 'N/A',
+    firstValue: user?.lastLogin ? moment(user?.lastLogin).format('ddd LL') : 'N/A',
     secondTitle: 'Numbers of visits',
     secondValue: user?.numberOfVisit || 'N/A'
   }
