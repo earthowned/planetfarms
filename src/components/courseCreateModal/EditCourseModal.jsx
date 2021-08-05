@@ -118,6 +118,7 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
                 <input
                   type='number'
                   name='price'
+                  defaultValue={data?.data?.price}
                   className={errors.price ? 'input errorBox' : 'input'}
                   placeholder='Course price'
                   ref={register({
