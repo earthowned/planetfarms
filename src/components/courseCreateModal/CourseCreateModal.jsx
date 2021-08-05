@@ -4,9 +4,9 @@ import './CourseCreateModal.scss'
 
 const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
   const [selectedBtn, setSelectedBtn] = useState('')
-  const selectCourseType = (type) => {
-    setSelectedBtn(type)
-    console.log(type)
+
+  const createCourseHandler = () => {
+    console.log(selectedBtn)
   }
   return (
     <div className='course-create-container'>
@@ -20,7 +20,7 @@ const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
         <h4>Choose what type of course would you like to create</h4>
         <div className='course-type selected'>
           <button
-            onClick={() => selectCourseType('usual')}
+            onClick={() => setSelectedBtn('usual')}
             className={selectedBtn === 'usual' ? selectedBtn : ''}
           >
             <Background staticImg='/img/farmer.svg'>
@@ -31,7 +31,7 @@ const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
             </Background>
           </button>
           <button
-            onClick={() => selectCourseType('live')}
+            onClick={() => setSelectedBtn('live')}
             className={selectedBtn === 'live' ? selectedBtn : ''}
           >
             <Background staticImg='/img/live-exp.png'>
@@ -43,7 +43,13 @@ const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
           </button>
         </div>
         <div className='course-create-modal-btn'>
-          <button className='default-btn' onClick={() => collectionAdded()}>
+          <button
+            className='default-btn'
+            onClick={() =>
+              selectedBtn === 'usual'
+                ? collectionAdded()
+                : createCourseHandler()}
+          >
             Continue
           </button>
         </div>
