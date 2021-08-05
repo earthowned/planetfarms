@@ -119,18 +119,13 @@ const LessonPage = () => {
           )}
           {courseData?.data?.lessons?.length === data?.data?.order ? (
             ''
-          ) : !isTest ? (
+          ) : (
             <Button
               className='nextBtn'
               name='Next'
-              onClick={
-                isCreator || isPassed || isCompleted
-                  ? nextPage
-                  : nextPageWithOutTest
-              }
+              disabled={isCreator ? false : !isPassed}
+              onClick={isPassed || isCompleted ? nextPage : nextPageWithOutTest}
             />
-          ) : (
-            ''
           )}
         </DashboardLayout>
       )}

@@ -22,7 +22,6 @@ const LessonTestPage = () => {
   const [completeMessage, setCompleteMessage] = useState('')
   const [lessonId, setLessonId] = useState()
   const lessonTitle = title.split('-').join(' ')
-
   useEffect(() => {
     if (!questions.length) dispatch(listTestQuestions(testId))
     if (completeMessage) setMessageModal(true)
@@ -96,7 +95,7 @@ const LessonTestPage = () => {
                         data={data}
                         count={index + 1}
                         pos={index}
-                        choices={choices}
+                        setChoices={setChoices}
                         key={index}
                       />
                     )
@@ -106,7 +105,7 @@ const LessonTestPage = () => {
                         data={data}
                         count={index + 1}
                         pos={index}
-                        choices={choices}
+                        setChoices={setChoices}
                         key={index}
                       />
                     )
@@ -128,9 +127,9 @@ const LessonTestPage = () => {
   )
 }
 
-const SubjectiveQuestion = ({ data, count, pos, choices }) => {
+const SubjectiveQuestion = ({ data, count, pos, setChoices }) => {
   const [answer, setAnswer] = useState('')
-  choices[pos] = answer
+  setChoices(answer)
   return (
     <div className='question-wrapper' key={count}>
       <h4>Question {count}.</h4>
@@ -146,10 +145,9 @@ const SubjectiveQuestion = ({ data, count, pos, choices }) => {
   )
 }
 
-const MCQTestQuestion = ({ data, count, pos, choices }) => {
+const MCQTestQuestion = ({ data, count, pos, setChoices }) => {
   const [selected, setSelected] = useState('')
-
-  choices[pos] = selected
+  setChoices(selected)
 
   return (
     <div className='question-wrapper' key={count}>

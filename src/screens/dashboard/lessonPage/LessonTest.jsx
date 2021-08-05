@@ -28,18 +28,20 @@ const LessonTest = React.memo(({ title, setIsPassed }) => {
     `${process.env.REACT_APP_API_BASE_URL}/api/user_tests/lesson/${id}`
   )
   const lessonName = title.replace(/\s+/g, '-').toLowerCase()
-  useEffect(() => {
+  useEffect(async () => {
     if (start) {
       history.push(`/test-${lessonName}/${id}/${start.id}`)
     }
     setTest(userTestData?.test)
     setResults(userTestData?.tests)
+  }, [userTestData, id, start, lessonName])
+
+  useEffect(() => {
     const passedData = [
       ...new Set(userTestData?.tests?.map((isPass) => isPass.is_passed))
     ]
     setIsPassed(passedData.includes(true) || false)
-  }, [userTestData, id, start, lessonName])
-
+  }, [userTestData])
   return (
     <>
       {isLoading ? (
