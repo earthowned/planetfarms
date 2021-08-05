@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import useGetFetchData from '../../utils/useGetFetchData'
@@ -10,17 +10,17 @@ import CardLayout from '../../layout/cardLayout/CardLayout'
 import Background from '../background/Background'
 import './CoursesCard.scss'
 
-const CoursesCard = ({ category, setModalActive, setPurchaseModal, setCourseData, pageNumber }) => {
+import Pagination from '../../components/pagination/Pagination'
+
+const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
   const userLogin = useSelector((state) => state.userLogin)
+  const [pageNumber, setPageNumber] = useState(1)
   const { userInfo } = userLogin
   const { data: courseData, isLoading } = useGetFetchData(
     'ALL_COURSE_DATA',
-    GET_COURSE + '?pageNumber=' + pageNumber,
-    pageNumber
+    GET_COURSE + '?category=' + category.id,
+    { category }
   )
-  useEffect(() => {
-    if (courseData) setCourseData(courseData)
-  }, [courseData])
   if (isLoading) {
     return <span>Loading</span>
   }
@@ -28,19 +28,10 @@ const CoursesCard = ({ category, setModalActive, setPurchaseModal, setCourseData
   return (
     <div className='course-card-wrapper'>
       <div className='courses-card-container'>
-        {courseData?.data
-          .filter((cat) =>
-            cat.category.toLowerCase().includes(category.toLowerCase())
-          )
-          .slice(0, 1)
-          .map((catge) => (
-            <h4 key={catge.id}>{catge.category}</h4>
-          ))}
+        {courseData?.data.length !== 0 &&
+          <h4>{category?.name}</h4>}
         <CardLayout data={courseData}>
           {courseData?.data
-            .filter((cat) =>
-              cat.category.toLowerCase().includes(category.toLowerCase())
-            )
             .map((course) => {
               return (
                 <Background
@@ -63,6 +54,7 @@ const CoursesCard = ({ category, setModalActive, setPurchaseModal, setCourseData
               )
             })}
         </CardLayout>
+        {courseData?.data.length !== 0 && <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={courseData} />}
       </div>
     </div>
   )

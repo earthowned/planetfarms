@@ -15,11 +15,7 @@ import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCr
 import { PurchaseModal } from '../../components/purchaseModal/PurchaseModal'
 import SubHeader from '../../components/subHeader/SubHeader'
 
-import Pagination from '../../components/pagination/Pagination'
-
 const Courses = () => {
-  const userLogin = useSelector((state) => state.userLogin)
-  const [active, setActive] = useState(false)
   const [modalactive, setModalActive] = useState(false)
   const [newCollectionactive, setNewCollectionActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
@@ -27,8 +23,6 @@ const Courses = () => {
   const [purchaseModal, setPurchaseModal] = useState(false)
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
   const [search, setSearch] = useState(null)
-  const [pageNumber, setPageNumber] = useState(1)
-  const [courseData, setCourseData] = useState({})
 
   const { data, isLoading } = useGetFetchData('courseCategory', CATEGORY)
   if (isLoading) {
@@ -82,16 +76,13 @@ const Courses = () => {
         {data?.results?.map((category) => {
           return (
             <CoursesCard
-              pageNumber={pageNumber}
-              setCourseData={setCourseData}
-              category={category.name}
+              category={{ id: category.id, name: category.name }}
               setModalActive={setModalActive}
               key={category.id}
               setPurchaseModal={setPurchaseModal}
             />
           )
         })}
-        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={courseData} />
 
       </DashboardLayout>
     </>

@@ -11,13 +11,18 @@ const { changeFormat } = require('../helpers/filehelpers')
 const getCourses = async (req, res) => {
   const pageSize = 6
   const page = Number(req.query.pageNumber) || 1
+  const { category, search } = req.query
   const order = req.query.order || 'ASC'
 
   const courses = await db.Courses.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson, db.Enroll]
+    include: [db.Lesson, db.Enroll],
+    where: {
+      ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
+      ...(category ? { categoryId: Number(category) } : {})
+    }
   })
 
   courses.rows.forEach((course) => {
