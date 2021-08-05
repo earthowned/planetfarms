@@ -31,7 +31,7 @@ const NewsSingleCard = ({ news, editCard }) => {
     setDropDown(false)
   }
   return (
-    <Background tag='/newsImage/' image={news._attachments}>
+    <Background tag='/news/' image={news._attachments}>
       <div className='news-card'>
         <div className='news-card-header'>
           <div className='news-show-date'>{moment(news.createdAt).fromNow()}</div>
@@ -53,7 +53,7 @@ const NewsSingleCard = ({ news, editCard }) => {
             </div>
           </div>
         </div>
-        <Link to={{ pathname: '/community-page-news-view', state: { news } }}>
+        <Link to={{ pathname: `/community-news-view-page/${news.id}`, state: { news } }}>
           <div key={news.id}>
             <div className='newsCard-group'>
               <div className='frame-text'>

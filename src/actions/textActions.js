@@ -7,8 +7,8 @@ import {
 } from '../constants/textConstants'
 
 export const createText =
-  (textHeading, textDescription, lessonId) => async (dispatch) => {
-    const textData = { textHeading, textDescription, lessonId }
+  (textHeading, textDescription, lessonId, newsId) => async (dispatch) => {
+    const textData = { textHeading, textDescription, lessonId, newsId }
 
     try {
       dispatch({ type: LESSSON_TEXT_CREATE_REQUEST })

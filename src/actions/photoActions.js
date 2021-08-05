@@ -5,14 +5,15 @@ import {
   LESSSON_PHOTO_CREATE_SUCCESS,
   LESSSON_PHOTO_CREATE_FAIL
 } from '../constants/photoConstants'
+import axios from 'axios'
 
 export const createLessonImg =
-  (lessonImg, photoDescription, isImgDesc, lessonId) => async (dispatch) => {
+  (lessonImg, photoDescription, isImgDesc, lessonId, newsId) => async (dispatch) => {
     const lessonImgData = new FormData()
     lessonImgData.append('lessonImg', lessonImg)
     lessonImgData.append('photoDescription', photoDescription)
     lessonImgData.append('isImgDesc', isImgDesc)
-    lessonImgData.append('lessonId', lessonId)
+    newsId ? lessonImgData.append('newsId', newsId) : lessonImgData.append('lessonId', lessonId)
 
     try {
       dispatch({ type: LESSSON_PHOTO_CREATE_REQUEST })

@@ -23,6 +23,9 @@ import {
 } from '../constants/newsConstants'
 
 import { logout } from './userAction'
+import { addVideo } from '../screens/courseManager/addLesson/addVideo'
+import { addImage } from '../screens/courseManager/addLesson/addImage'
+import { addText } from '../screens/courseManager/addLesson/addText'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -67,15 +70,11 @@ export const searchNews = (search) => async (dispatch) => {
   }
 }
 
-export const createNews = (newNews) => async (dispatch, getState) => {
+export const createNews = (newNews, news) => async (dispatch, getState) => {
   const formData = new FormData()
-  formData.append('newsImage', newNews.lessonImg)
-  formData.append('newsVideo', newNews.videoCover)
-  formData.append('title', newNews.title)
-  formData.append('category', newNews.category)
-  formData.append('videoTitle', newNews.videoTitle)
-  formData.append('videoDescription', newNews.videoDescription)
-  formData.append('videoLink', newNews.videoLink)
+  formData.append('title', news.title)
+  formData.append('category', news.category)
+  formData.append('news', news.lessonImg)
   try {
     const configFunc = () => {
         const userdata = window.localStorage.getItem('userInfo')
@@ -89,6 +88,20 @@ export const createNews = (newNews) => async (dispatch, getState) => {
     const { userLogin: { userInfo } } = getState()
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, configFunc)
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
+    
+    const newsId = data?.data?.id
+        for (let i = 0; i < newNews.length; i++) {
+          if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
+            await addVideo({ data: newNews[i], lessonId: null, newsId, dispatch })
+          }
+          if (newNews[i]?.lessonImg) {
+            await addImage({ data: newNews[i], lessonId: null, newsId, dispatch })
+          }
+          if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
+            await addText({ data: newNews[i], lessonId: null, newsId, dispatch })
+          }
+        }
+      
     dispatch({ type: NEWS_CLEAR, payload: data })
   } catch (error) {
     const message =
