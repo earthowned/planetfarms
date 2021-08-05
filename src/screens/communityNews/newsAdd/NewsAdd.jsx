@@ -40,10 +40,11 @@ const NewsAdd = () => {
   }, [])
 
   const submitNewsForm = ({ title }) => {
+    
     const newData = convertArrToObject(newsData)
     newData.title = title
     newData.category = category;
-    dispatch(createNews(newData));
+    dispatch(createNews(newsData, newData));
   }
 
   // converting the arrray into object for submission

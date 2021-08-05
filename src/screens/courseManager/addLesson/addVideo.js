@@ -1,12 +1,11 @@
 import { createVideo } from '../../../actions/videoActions'
 
-export const addVideo = function ({ lessonData, lessonId, dispatch }) {
-  const videoCover = lessonData.videoCover
-  const videoTitle = lessonData.videoTitle
-  const videoDescription = lessonData.videoDescription
-  const videoLink = lessonData.videoLink
-  const videoResource = lessonData.videoResource
-
+export const addVideo = function ({ data, lessonId, newsId, dispatch }) {
+  const videoCover = data.videoCover
+  const videoTitle = data.videoTitle
+  const videoDescription = data.videoDescription
+  const videoLink = data.videoLink
+  const videoResource = data.videoResource
   return dispatch(
     createVideo(
       videoCover,
@@ -14,7 +13,8 @@ export const addVideo = function ({ lessonData, lessonId, dispatch }) {
       videoDescription,
       videoLink,
       videoResource,
-      lessonId
+      lessonId,
+      newsId
     )
   )
 }
