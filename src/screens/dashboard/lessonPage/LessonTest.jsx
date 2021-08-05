@@ -7,7 +7,7 @@ import { postApi } from '../../../utils/apiFunc'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import './LessonTest.scss'
 
-const LessonTest = React.memo(({ setIsPassed }) => {
+const LessonTest = React.memo(({ title, setIsPassed }) => {
   const [start, setStart] = useState()
   const [results, setResults] = useState([])
   const [test, setTest] = useState(null)
@@ -27,11 +27,11 @@ const LessonTest = React.memo(({ setIsPassed }) => {
     'user_test_data_data',
     `${process.env.REACT_APP_API_BASE_URL}/api/user_tests/lesson/${id}`
   )
-
+  const lessonName = title.replace(/\s+/g, '-').toLowerCase()
   useEffect(() => {
     if (start) {
       history.push({
-        pathname: `/lesson-test-page/${start.id}`,
+        pathname: `/test-${lessonName}/${start.id}`,
         state: { lessonId: id }
       })
     }
@@ -41,7 +41,7 @@ const LessonTest = React.memo(({ setIsPassed }) => {
       ...new Set(userTestData?.tests?.map((isPass) => isPass.is_passed))
     ]
     setIsPassed(passedData.includes(true) || false)
-  }, [userTestData])
+  }, [userTestData, id, start, lessonName])
 
   return (
     <>

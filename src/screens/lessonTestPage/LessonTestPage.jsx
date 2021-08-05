@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams, useHistory } from 'react-router-dom'
 import { listTestQuestions } from '../../actions/testActions'
 import BackButton from '../../components/backButton/BackButton'
 import Radiobox from '../../components/radioBox/Radiobox'
@@ -12,6 +12,7 @@ import './LessonTestPage.scss'
 const LessonTestPage = () => {
   const { testId } = useParams()
   const location = useLocation()
+  const history = useHistory()
   const { questions = [] } = useSelector((state) => state.listTestQuestions)
   const dispatch = useDispatch()
   const [choices, setChoices] = useState([])
@@ -43,7 +44,7 @@ const LessonTestPage = () => {
   const goToLesson = () => {
     setCompleteMessage('')
     setMessageModal(false)
-    document.location.href = `/lesson/${lessonId}`
+    history.push(`/lesson/${lessonId}`)
   }
 
   return (

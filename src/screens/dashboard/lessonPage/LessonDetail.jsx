@@ -62,7 +62,7 @@ const LessonDetail = ({ data, id, setIsPassed }) => {
             )}
           </div>
         ))}
-      <LessonTest id={id} setIsPassed={setIsPassed} />
+      <LessonTest title={data?.title} id={id} setIsPassed={setIsPassed} />
     </div>
   )
 }
