@@ -42,11 +42,10 @@ export const PersonalInformation = ({ user }) => {
     firstValue: user?.firstName || 'N/A',
     secondTitle: 'Last Name',
     secondValue: user?.lastName || 'N/A',
-    thirdTitle: 'Date of birhday',
-    thirdValue: user?.dateOfBirth ? new Date(user?.dateOfBirth).toDateString() : 'N/A'
+    thirdTitle: 'Date of birth',
+    thirdValue: user?.dateOfBirth ? new Date(user?.dateOfBirth).toLocaleString('en-US', { timezone: 'UTC' }) : 'N/A'
   }
   return (
-
     <>
       <ProfileFormCard data={PersonalInformationdata} />
     </>
