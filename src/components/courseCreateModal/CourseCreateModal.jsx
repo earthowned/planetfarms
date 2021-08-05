@@ -3,11 +3,17 @@ import Background from '../background/Background'
 import PopupModal from '../modal/Modal'
 import './CourseCreateModal.scss'
 
-const CourseCreateModal = ({ collectionAdded, openModal, closeModal }) => {
+const CourseCreateModal = ({
+  collectionAdded,
+  openModal,
+  closeModal,
+  setCreateLiveCourse
+}) => {
   const [selectedBtn, setSelectedBtn] = useState('')
 
-  const createCourseHandler = () => {
-    console.log(selectedBtn)
+  const createLiveCourse = () => {
+    setCreateLiveCourse(true)
+    closeModal(false)
   }
   return (
     <PopupModal
@@ -46,7 +52,7 @@ const CourseCreateModal = ({ collectionAdded, openModal, closeModal }) => {
         <button
           className='default-btn'
           onClick={() =>
-            selectedBtn === 'usual' ? collectionAdded() : createCourseHandler()}
+            selectedBtn === 'usual' ? collectionAdded() : createLiveCourse()}
         >
           Continue
         </button>

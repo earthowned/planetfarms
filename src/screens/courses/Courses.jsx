@@ -11,6 +11,7 @@ import GroupModal from '../../components/groupModal/GroupModal'
 import SimpleModal from '../../components/simpleModal/SimpleModal'
 
 import CourseCreateModal from '../../components/courseCreateModal/CourseCreateModal'
+import LiveCourseModal from '../../components/courseCreateModal/liveCourse/LiveCourseModal'
 import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
 import { PurchaseModal } from '../../components/purchaseModal/PurchaseModal'
 import SubHeader from '../../components/subHeader/SubHeader'
@@ -21,6 +22,7 @@ const Courses = () => {
   const [newCollectionactive, setNewCollectionActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
   const [createNewCourse, setCreateNewCourse] = useState(false)
+  const [createLiveCourse, setCreateLiveCourse] = useState(false)
   const [purchaseModal, setPurchaseModal] = useState(false)
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
   const [search, setSearch] = useState(null)
@@ -59,10 +61,17 @@ const Courses = () => {
           openModal={createCourse}
           closeModal={setCreateCourse}
           collectionAdded={createNewCourseFunc}
+          setCreateLiveCourse={setCreateLiveCourse}
         />
       )}
       {createNewCourse && (
         <NewCourseCreateModal clickHandler={setCreateNewCourse} />
+      )}
+      {createLiveCourse && (
+        <LiveCourseModal
+          openModal={createLiveCourse}
+          closeModal={setCreateLiveCourse}
+        />
       )}
       <DashboardLayout title='All courses'>
         <div className='courses-main-container'>
