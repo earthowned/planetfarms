@@ -91,7 +91,7 @@ const endTest = async (req, res) => {
   try {
     const { endTime, choices } = req.body
     const test = await db.UserTest.findOne({ where: { id: req.params.id } })
-
+    console.log(choices)
     if (!test) {
       return res.json({ message: "Test doesn't exist." })
     }
@@ -137,9 +137,9 @@ const endTest = async (req, res) => {
       return result
     })
 
-    // console.log(score);
-    const passMarks = Math.floor(score.total_marks / 2)
-
+    // console.log(score)
+    const passMarks = Math.ceil(score.total_marks / 2)
+    // console.log(passMarks)
     if (score.marks >= passMarks) {
       await db.UserTest.update(
         { is_passed: true },

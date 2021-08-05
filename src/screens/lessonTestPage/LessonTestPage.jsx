@@ -95,7 +95,7 @@ const LessonTestPage = () => {
                         data={data}
                         count={index + 1}
                         pos={index}
-                        setChoices={setChoices}
+                        choices={choices}
                         key={index}
                       />
                     )
@@ -105,7 +105,7 @@ const LessonTestPage = () => {
                         data={data}
                         count={index + 1}
                         pos={index}
-                        setChoices={setChoices}
+                        choices={choices}
                         key={index}
                       />
                     )
@@ -127,9 +127,9 @@ const LessonTestPage = () => {
   )
 }
 
-const SubjectiveQuestion = ({ data, count, pos, setChoices }) => {
+const SubjectiveQuestion = ({ data, count, pos, choices }) => {
   const [answer, setAnswer] = useState('')
-  setChoices(answer)
+  choices[pos] = answer
   return (
     <div className='question-wrapper' key={count}>
       <h4>Question {count}.</h4>
@@ -145,9 +145,9 @@ const SubjectiveQuestion = ({ data, count, pos, setChoices }) => {
   )
 }
 
-const MCQTestQuestion = ({ data, count, pos, setChoices }) => {
+const MCQTestQuestion = ({ data, count, pos, choices }) => {
   const [selected, setSelected] = useState('')
-  setChoices(selected)
+  choices[pos] = selected
 
   return (
     <div className='question-wrapper' key={count}>
