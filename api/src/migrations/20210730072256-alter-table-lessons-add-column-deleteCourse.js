@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint('lessons', 'courseId_fkey_forLesson')
+    await queryInterface.removeConstraint('lessons', 'courseId_fkey_forLessons')
     await queryInterface.addConstraint('lessons', {
       fields: ['courseId'],
       type: 'foreign key',
@@ -14,7 +14,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint('lessons', 'courseId_fkey_forLesson')
+    await queryInterface.removeConstraint('lessons', 'courseId_fkey_forLessons')
     await queryInterface.addConstraint('lessons', {
       fields: ['courseId'],
       type: 'foreign key',
