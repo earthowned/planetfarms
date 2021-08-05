@@ -10,14 +10,14 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listMembers = ({ sort, pageNumber }) => async (
+export const listMembers = ({ sort, pageNumber, pageSize }) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: MEMBER_LIST_REQUEST })
     const { data } = await getApi(
       dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}?pageNumber=${pageNumber}`
+      `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}?pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
     dispatch({
       type: MEMBER_LIST_SUCCESS,
@@ -34,18 +34,18 @@ export const listMembers = ({ sort, pageNumber }) => async (
   }
 }
 
-export const searchMembers = (search) => async (
+export const searchMembers = (search, { sort, pageNumber, pageSize }) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: MEMBER_SEARCH_REQUEST })
     const { data } = await getApi(
       dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}/search?name=${search}`
+      `${process.env.REACT_APP_API_BASE_URL}/api/communities-users/community/${currentCommunity.id}/search?name=${search}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
     dispatch({
       type: MEMBER_SEARCH_SUCCESS,
-      payload: data.member
+      payload: data.communities_users
     })
   } catch (error) {
     dispatch({

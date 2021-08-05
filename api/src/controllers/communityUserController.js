@@ -83,7 +83,7 @@ const followCommunity = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
   try {
-    const pageSize = 8
+    const pageSize = Number(req.query.pageSize) || 8
     const page = Number(req.query.pageNumber) || 1
     const order = req.query.order || 'ASC'
     const ordervalue = order && [['createdAt', order]]
@@ -122,13 +122,17 @@ const getAllMembers = async (req, res) => {
 // @route   POST /api/news/community/:id/search
 // @access  Private
 const searchMemberName = (req, res) => {
-  const { name } = req.query
-  const order = req.query.order || 'ASC'
+  const { name, pageSize, pageNumber, order } = req.query
+  const page = Number(pageNumber) || 1
+  const ordervalue = [['createdAt', order || 'ASC']]
 
-  db.CommunityUser.findAll(
+  db.CommunityUser.findAndCountAll(
     {
+      offset: (page - 1) * pageSize,
+      limit: pageSize,
+      order: ordervalue,
       where: { communityId: req.params.id, active: true },
-      attributes: ['id'],
+      attributes: ['id', 'createdAt'],
       include: [{
         model: db.User,
         attributes: ['email', 'firstName'],
@@ -142,8 +146,20 @@ const searchMemberName = (req, res) => {
       required: true
     }
   )
-    .then(member => res.json({ member }).status(200))
-    .catch(err => res.json({ error: err }).status(400))
+    .then(data => {
+      const totalPages = Math.ceil(data.count / pageSize)
+      res.json({
+        communities_users: data.rows.map((rec) => ({
+          ...rec.dataValues,
+          filename: changeFormat(rec.filename)
+        })),
+        totalItems: data.count,
+        totalPages,
+        page,
+        pageSize
+      }).status(200)
+    })
+    .catch(err => res.json({ error: err.message }).status(400))
 }
 
 module.exports = { getCommunityUsers, followCommunity, getAllMembers, searchMemberName }
