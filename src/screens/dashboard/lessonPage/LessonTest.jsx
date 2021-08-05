@@ -30,10 +30,7 @@ const LessonTest = React.memo(({ title, setIsPassed }) => {
   const lessonName = title.replace(/\s+/g, '-').toLowerCase()
   useEffect(() => {
     if (start) {
-      history.push({
-        pathname: `/test-${lessonName}/${start.id}`,
-        state: { lessonId: id }
-      })
+      history.push(`/test-${lessonName}/${id}/${start.id}`)
     }
     setTest(userTestData?.test)
     setResults(userTestData?.tests)

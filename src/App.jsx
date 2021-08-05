@@ -227,7 +227,7 @@ function App () {
             />
             <PrivateRoute
               component={LessonTestPage}
-              path='/test-:title/:testId'
+              path='/test-:title/:id/:testId'
               exact
             />
             <PrivateRoute
