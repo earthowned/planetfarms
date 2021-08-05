@@ -57,7 +57,6 @@ const ForgotPassword = () => {
       <form className='sign'>
         <h1 className='welcome'>Forgot Password</h1>
         <div className='container'>
-
           {ErrorMessage && <div className={ErrorMessage.type}>{ErrorMessage.message}</div>}
           <Input
             placeholder='Username'
@@ -70,7 +69,7 @@ const ForgotPassword = () => {
                 message: 'You must enter username'
               }
             })}
-            disabled={false}
+            disabled={usernameValue}
             errors={errors}
           >
             <UserAvatar />
