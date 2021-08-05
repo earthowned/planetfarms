@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     videoResource: {
       type: DataTypes.STRING
     },
+    newsId: {
+      type: DataTypes.INTEGER
+    },
     createdAt: {
       type: DataTypes.DATE
     },
@@ -30,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
   { timestamps: true })
   Video.associate = (models) => {
     Video.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
+    Video.belongsTo(models.News, { constraints: true, foreignKey: 'newsId' })
   }
 
   return Video

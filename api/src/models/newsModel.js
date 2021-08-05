@@ -46,11 +46,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    videoTitle: DataTypes.STRING,
-    videoDescription: DataTypes.STRING,
-    videoCover: DataTypes.STRING,
-    videoLink: DataTypes.STRING,
-    videoResource: DataTypes.STRING
   },
   { timestamps: true }
   )
@@ -58,6 +53,9 @@ module.exports = (sequelize, DataTypes) => {
   // association
   News.associate = (models) => {
     News.belongsTo(models.Community, { foreignKey: 'communityId' })
+    News.hasMany(models.Video, {foreignKey: 'newsId'})
+    News.hasMany(models.Text, {foreignKey: 'newsId'})
+    News.hasMany(models.Photo, {foreignKey: 'newsId'})
   }
   return News
 }
