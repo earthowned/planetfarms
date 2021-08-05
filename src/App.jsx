@@ -1,5 +1,10 @@
 import React from 'react'
-import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import {
+  Switch,
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from 'react-router-dom'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from './reactQuery'
 import PrivateRoute from './components/privateRoute/PrivateRoute'
@@ -62,40 +67,152 @@ function App () {
             <Route component={LoginScreen} path='/login' exact />
             <Route component={SignupScreen} path='/register' exact />
             <Route component={ForgotPassword} path='/forgot-password' />
-            <PrivateRoute component={UserVerification} path='/verification' exact />
-            <PrivateRoute component={() => <Redirect to='/login' />} path='/' exact />
+            <PrivateRoute
+              component={UserVerification}
+              path='/verification'
+              exact
+            />
+            <PrivateRoute
+              component={() => <Redirect to='/login' />}
+              path='/'
+              exact
+            />
             <PrivateRoute component={LogoutUser} path='/logout' exact />
-            <PrivateRoute component={CongratulationScreen} path='/edit-information' exact />
-            <PrivateRoute component={CalendarScreen} exact path='/calendar/my-events' />
+            <PrivateRoute
+              component={CongratulationScreen}
+              path='/edit-information'
+              exact
+            />
+            <PrivateRoute
+              component={CalendarScreen}
+              exact
+              path='/calendar/my-events'
+            />
             <PrivateRoute component={Library} exact path='/library' />
-            <PrivateRoute component={Collection} exact path='/library/collection' />
-            <PrivateRoute component={UserCollection} path='/library/collection/users' exact />
-            <PrivateRoute component={SavedCollection} path='/library/collection/saved' exact />
+            <PrivateRoute
+              component={Collection}
+              exact
+              path='/library/collection'
+            />
+            <PrivateRoute
+              component={UserCollection}
+              path='/library/collection/users'
+              exact
+            />
+            <PrivateRoute
+              component={SavedCollection}
+              path='/library/collection/saved'
+              exact
+            />
             <PrivateRoute component={Messenger} exact path='/messenger' />
-            <PrivateRoute component={MobileMessage} path='/messenger/:id' exact />
-            <PrivateRoute component={CommunityPagenews} exact path='/community-page-news/:id' />
-            <PrivateRoute component={NewsAdd} path='/community-page-news/:title/:category' exact />
-            <PrivateRoute component={CommunityNewsViewPage} path='/community-page-news-view' exact />
-            <PrivateRoute component={AllCommunitiesCard} path='/community-switching' exact />
-            <PrivateRoute component={CommunityMembers} path='/community-members/:id' exact />
-            <PrivateRoute component={CommunityMembersProfile} path='/community-members-profile/:id' exact />
-            <PrivateRoute component={CommunityGroup} path='/community-group/:id' exact />
-            <PrivateRoute component={CommunityGroup} path='/your-community-group/:id' exact />
-            <PrivateRoute component={CommunityGroupViewPage} path='/community-group-view-page/:id' exact />
+            <PrivateRoute
+              component={MobileMessage}
+              path='/messenger/:id'
+              exact
+            />
+            <PrivateRoute
+              component={CommunityPagenews}
+              exact
+              path='/community-page-news/:id'
+            />
+            <PrivateRoute
+              component={NewsAdd}
+              path='/community-page-news/:title/:category'
+              exact
+            />
+            <PrivateRoute
+              component={CommunityNewsViewPage}
+              path='/community-page-news-view'
+              exact
+            />
+            <PrivateRoute
+              component={AllCommunitiesCard}
+              path='/community-switching'
+              exact
+            />
+            <PrivateRoute
+              component={CommunityMembers}
+              path='/community-members/:id'
+              exact
+            />
+            <PrivateRoute
+              component={CommunityMembersProfile}
+              path='/community-members-profile/:id'
+              exact
+            />
+            <PrivateRoute
+              component={CommunityGroup}
+              path='/community-group/:id'
+              exact
+            />
+            <PrivateRoute
+              component={CommunityGroup}
+              path='/your-community-group/:id'
+              exact
+            />
+            <PrivateRoute
+              component={CommunityGroupViewPage}
+              path='/community-group-view-page/:id'
+              exact
+            />
             <PrivateRoute component={Courses} exact path='/courses' />
-            <PrivateRoute component={CourseCollection} exact path='/courses/my-courses' />
-            <PrivateRoute component={CourseCollection} exact path='/courses/saved-collection' />
-            <PrivateRoute component={EditCollection} path='/courses/my-courses/:id' exact />
+            <PrivateRoute
+              component={CourseCollection}
+              exact
+              path='/courses/my-courses'
+            />
+            <PrivateRoute
+              component={CourseCollection}
+              exact
+              path='/courses/saved-collection'
+            />
+            <PrivateRoute
+              component={EditCollection}
+              path='/courses/my-courses/:id'
+              exact
+            />
             <PrivateRoute component={Courses} path='/admin/courses' exact />
-            <PrivateRoute component={AdminCoursePage} path='/admin/course/:courseId' exact />
-            <PrivateRoute component={AddLesson} path='/admin/add-lesson/:courseId' exact />
-            <PrivateRoute component={EditLesson} path='/admin/edit-lesson/:id' exact />
+            <PrivateRoute
+              component={AdminCoursePage}
+              path='/admin/course/:courseId'
+              exact
+            />
+            <PrivateRoute
+              component={AddLesson}
+              path='/admin/add-lesson/:courseId'
+              exact
+            />
+            <PrivateRoute
+              component={EditLesson}
+              path='/admin/edit-lesson/:id'
+              exact
+            />
             <PrivateRoute component={CourseUsers} path='/courses/users' exact />
-            <PrivateRoute component={Enterprises} path='/enterprises/:id' exact />
-            <PrivateRoute component={Enterprises} path='/your-enterprises/:id' exact />
-            <PrivateRoute component={EnterprisesViewPage} path='/enterprises-view' exact />
-            <PrivateRoute component={MyGroupViewPage} path='/my-group-view-page/:id' exact />
-            <PrivateRoute component={DashboardComponent} path='/dashboard' exact />
+            <PrivateRoute
+              component={Enterprises}
+              path='/enterprises/:id'
+              exact
+            />
+            <PrivateRoute
+              component={Enterprises}
+              path='/your-enterprises/:id'
+              exact
+            />
+            <PrivateRoute
+              component={EnterprisesViewPage}
+              path='/enterprises-view'
+              exact
+            />
+            <PrivateRoute
+              component={MyGroupViewPage}
+              path='/my-group-view-page/:id'
+              exact
+            />
+            <PrivateRoute
+              component={DashboardComponent}
+              path='/dashboard'
+              exact
+            />
             <PrivateRoute component={Achievements} path='/achievements' exact />
             <PrivateRoute component={MyLibrary} path='/mylibrary' exact />
             <PrivateRoute component={MySurvey} path='/mysurvey' exact />
@@ -103,24 +220,40 @@ function App () {
             {/* <PrivateRoute component={MyCoursePage} exact path="/mycoursepage" /> */}
             <PrivateRoute component={LessonPage} path='/lesson/:id' exact />
             {/* <PrivateRoute component={LessonTestPage} exact path='/lesson/:id/testpage' /> */}
-            <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' exact />
-            <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' exact />
             <PrivateRoute
-              component={() =>
-                <DndProvider backend={HTML5Backend}>
-                  <AddTest />
-                </DndProvider>} path='/admin/add-test/:lessonId' exact
+              component={() => <MyCoursePage unpaid='unpaid' />}
+              path='/course/:courseId'
+              exact
             />
             <PrivateRoute
-              component={() =>
+              component={LessonTestPage}
+              path='/lesson-test-page/:testId'
+              exact
+            />
+            <PrivateRoute
+              component={() => (
                 <DndProvider backend={HTML5Backend}>
                   <AddTest />
-                </DndProvider>} path='/admin/edit-test/:lessonId'
+                </DndProvider>
+              )}
+              path='/admin/add-test/:lessonId'
+              exact
+            />
+            <PrivateRoute
+              component={() => (
+                <DndProvider backend={HTML5Backend}>
+                  <AddTest />
+                </DndProvider>
+              )}
+              path='/admin/edit-test/:lessonId'
             />
             <PrivateRoute component={Category} path='/admin/categories' />
             <PrivateRoute component={MyProfile} exact path='/myProfile' />
             <PrivateRoute component={UserInfo} exact path='/userInfo' />
-            <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
+            <PrivateRoute
+              component={() => <MyCoursePage unpaid='unpaid' />}
+              path='/coursepage'
+            />
             <PrivateRoute component={PageNotFound} />
           </Switch>
         </ScrollToTop>

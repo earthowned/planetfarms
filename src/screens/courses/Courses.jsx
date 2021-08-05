@@ -17,7 +17,6 @@ import SubHeader from '../../components/subHeader/SubHeader'
 
 const Courses = () => {
   const userLogin = useSelector((state) => state.userLogin)
-  const [active, setActive] = useState(false)
   const [modalactive, setModalActive] = useState(false)
   const [newCollectionactive, setNewCollectionActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
@@ -57,7 +56,8 @@ const Courses = () => {
       {createCourse && (
         <CourseCreateModal
           setNewCollection={setNewCollectionActive}
-          clickHandler={setCreateCourse}
+          openModal={createCourse}
+          closeModal={setCreateCourse}
           collectionAdded={createNewCourseFunc}
         />
       )}
