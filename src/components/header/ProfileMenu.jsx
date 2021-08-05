@@ -7,20 +7,14 @@ const ProfileMenu = () => {
   const [profileSettings, setProfileSettings] = useState(false)
   const [modalActive, setModalActive] = useState(false)
   const [settingAction, setSettingAction] = useState(null)
-
-  function profileSettingNoti () {
-    setProfileSettings(!profileSettings)
-  }
-
   function clickProfileHandler (settings) {
     setSettingAction(settings)
     setModalActive(true)
   }
-
   return (
     <>
       <div>{modalActive && <SettingsActionModal setModalActive={setModalActive} settingAction={settingAction} />} </div>
-      <div onClick={() => profileSettingNoti()} className='message'>
+      <div onClick={() => setProfileSettings(!profileSettings)} className='message'>
         <img src='/img/avatar-img.svg' alt='avatar-img' />
         {profileSettings && (
           <MessageDropdown
@@ -28,7 +22,7 @@ const ProfileMenu = () => {
             clickProfileHandler={clickProfileHandler}
             profileSettings={profileSettings}
             message='Your settings'
-            btnName='See all notifications'
+            btnName='Go to settings'
           />
         )}
       </div>

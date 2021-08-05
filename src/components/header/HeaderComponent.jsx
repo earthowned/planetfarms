@@ -56,9 +56,9 @@ const HeaderComponent = ({ title }) => {
               />
             )}
           </li>
-          
+
           <li className='message'>
-           <ProfileMenu />
+            <ProfileMenu />
           </li>
         </ul>
       </header>
