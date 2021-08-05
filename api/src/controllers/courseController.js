@@ -40,58 +40,45 @@ const getCourses = async (req, res) => {
 // @route   POST /api/courses/add
 // @access  Public
 const addCourse = async (req, res) => {
-  let thumbnail = ''
-  if (req.file) {
-    thumbnail = req.file.filename
+  try {
+    let thumbnail = ''
+    if (req.file) {
+      thumbnail = req.file.filename
+    }
+
+    const course = await db.Courses.create({ ...req.body, thumbnail })
+    res.status(201).json({
+      status: true,
+      message: ' new course added successfully',
+      data: course
+    })
+  } catch (error) {
+    return res.json({ error: 'error.message' })
   }
-  const course = await db.Courses.create({ ...req.body, thumbnail })
-  res.status(201).json({
-    status: true,
-    message: ' new course added successfully',
-    data: course
-  })
 }
 
 // @desc    Update a course
 // @route   PUT /api/courses/:id
 // @access  Public
-const updateCourse = (req, res) => {
-  const {
-    title,
-    description,
-    languageOfInstruction,
-    memberLimit,
-    method,
-    gradeLevel,
-    subjectLevel,
-    creator,
-    steps
-  } = req.body
-  const id = req.params.id
-  db.Courses.findByPk(id).then((product) => {
-    if (product) {
-      const { id } = product
-      db.Courses.update(
-        {
-          _attachments: 'uploads/' + req.file.filename,
-          title,
-          description,
-          languageOfInstruction,
-          memberLimit,
-          method,
-          gradeLevel,
-          subjectLevel,
-          creator,
-          steps
-        },
-        { where: { id }, include: [db.Lesson, db.Enroll] }
-      )
-        .then(() => res.json({ message: 'Course Updated !!!' }).status(200))
-        .catch((err) => res.json({ error: err.message }).status(400))
+const updateCourse = async (req, res) => {
+  const { id } = req.params
+  try {
+    let thumbnail
+    if (req.file) {
+      thumbnail = req.file.filename
     }
-    res.status(404)
-    throw new Error('Course not found')
-  })
+    const course = await db.Courses.update(
+      { ...req.body, thumbnail },
+      { where: { id } }
+    )
+    res.status(202).json({
+      status: true,
+      message: 'course updated successfully',
+      data: course
+    })
+  } catch (error) {
+    res.json({ status: true, message: error.message })
+  }
 }
 
 // @desc    Fetch single course
