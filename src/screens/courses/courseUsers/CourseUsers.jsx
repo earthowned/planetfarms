@@ -40,13 +40,9 @@ const CourseUserCard = ({ name }) => {
     <>
       <h4 className='courses-users-collection-header'>{name}</h4>
       <CardLayout data={farming}>
-        {
-          farming.map(item => {
-            return (
-              <BackgroundUserCard item={item} />
-            )
-          })
-        }
+        {farming.map((item, i) => {
+          return <BackgroundUserCard item={item} key={i} />
+        })}
       </CardLayout>
     </>
   )
@@ -55,12 +51,22 @@ const CourseUserCard = ({ name }) => {
 export const BackgroundUserCard = ({ item }) => {
   const [savedActive, setSavedActive] = useState(false)
   return (
-    <Background image={item.img}>
+    <Background staticImg={item.img}>
       <div className='courses-users-inner-container'>
         <div className='courses-users-content'>
           <h3>{item.title}</h3>
-          <button className='trasnsparent-btn fixed-width courses-users-btn' onClick={() => setSavedActive(!savedActive)}>
-            {savedActive ? <><img src='/img/check-circle.svg' alt='circle-icon' /> <span>Saved</span></> : 'Save Collection'}
+          <button
+            className='trasnsparent-btn fixed-width courses-users-btn'
+            onClick={() => setSavedActive(!savedActive)}
+          >
+            {savedActive ? (
+              <>
+                <img src='/img/check-circle.svg' alt='circle-icon' />{' '}
+                <span>Saved</span>
+              </>
+            ) : (
+              'Save Collection'
+            )}
           </button>
         </div>
       </div>
