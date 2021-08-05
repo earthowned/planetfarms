@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import nav from './courseNav'
 import './Courses.css'
 import useGetFetchData from '../../utils/useGetFetchData'
@@ -22,7 +21,7 @@ const Courses = () => {
   const [createNewCourse, setCreateNewCourse] = useState(false)
   const [purchaseModal, setPurchaseModal] = useState(false)
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
-  const [search, setSearch] = useState(null)
+  const [search, setSearch] = useState('')
 
   const { data, isLoading } = useGetFetchData('courseCategory', CATEGORY)
   if (isLoading) {
@@ -76,7 +75,8 @@ const Courses = () => {
         {data?.results?.map((category) => {
           return (
             <CoursesCard
-              category={{ id: category.id, name: category.name }}
+              search={search}
+              category={category}
               setModalActive={setModalActive}
               key={category.id}
               setPurchaseModal={setPurchaseModal}

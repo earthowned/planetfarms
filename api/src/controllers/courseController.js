@@ -6,7 +6,7 @@ const CircularJSON = require('circular-json')
 const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc    Fetch all course
-// @route   GET /api/courses
+// @route   GET /api/courses?pageNumber=${pageNumber}&category=${category}&search=${search}
 // @access  Public
 const getCourses = async (req, res) => {
   const pageSize = 6
@@ -144,26 +144,10 @@ const deleteCourse = (req, res) => {
   })
 }
 
-// @desc    Search title
-// @route   POST /api/courses/search
-// @access  Private
-const searchCoursesTitle = (req, res) => {
-  const { title } = req.query
-  const order = req.query.order || 'ASC'
-
-  db.Courses.findAll({
-    where: { title: { [Op.iLike]: '%' + title + '%' } },
-    order: [['title', order]]
-  })
-    .then((title) => res.json({ title }).status(200))
-    .catch((err) => res.json({ error: err }).status(400))
-}
-
 module.exports = {
   addCourse,
   getCourses,
   updateCourse,
   getCourseById,
-  deleteCourse,
-  searchCoursesTitle
+  deleteCourse
 }
