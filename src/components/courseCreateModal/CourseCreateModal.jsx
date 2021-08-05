@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Background from '../background/Background'
 import './CourseCreateModal.scss'
 
 const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
+  const [selectedBtn, setSelectedBtn] = useState('')
+  const selectCourseType = (type) => {
+    setSelectedBtn(type)
+    console.log(type)
+  }
   return (
     <div className='course-create-container'>
       <div className='course-create-modal'>
@@ -13,8 +18,11 @@ const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
           </button>
         </div>
         <h4>Choose what type of course would you like to create</h4>
-        <div className='course-type'>
-          <button>
+        <div className='course-type selected'>
+          <button
+            onClick={() => selectCourseType('usual')}
+            className={selectedBtn === 'usual' ? selectedBtn : ''}
+          >
             <Background staticImg='/img/farmer.svg'>
               <div>
                 <h3>Usual course</h3>
@@ -22,7 +30,10 @@ const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
               </div>
             </Background>
           </button>
-          <button>
+          <button
+            onClick={() => selectCourseType('live')}
+            className={selectedBtn === 'live' ? selectedBtn : ''}
+          >
             <Background staticImg='/img/live-exp.png'>
               <div>
                 <h3>Live experience</h3>

@@ -46,7 +46,10 @@
   cursor: pointer;
 }
 
-.course-type button:focus {
+.selected .usual {
+  border: 3px solid var(--primary-color);
+}
+.selected .live {
   border: 3px solid var(--primary-color);
 }
 
