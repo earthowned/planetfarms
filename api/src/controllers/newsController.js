@@ -40,23 +40,16 @@ const getNews = (req, res) => {
 // @route POST /api/news/add/community/:id
 // @access  Public
 const addNews = (req, res) => {
-  let imageFilename = ''
-  let videoFilename = ''
-  if (req.files) {
-    imageFilename = req.files['newsImage'][0].filename
-    videoFilename = req.files['newsVideo'][0].filename
+  let filename = ''
+  if (req.file) {
+    filename = req.file.filename
   }
 
   const {
     title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category, videoTitle, videoDescription, videoLink
   } = req.body
   db.News.create({
-    // _attachments: 'uploads/' + req.file.filename,
-    _attachments: 'news/' + imageFilename,
-    videoCover: videoFilename,
-    videoTitle,
-    videoDescription,
-    videoLink,
+    _attachments: 'news/' + filename,
     title,
     message,
     docType,
