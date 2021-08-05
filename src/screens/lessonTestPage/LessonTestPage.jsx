@@ -11,6 +11,7 @@ import './LessonTestPage.scss'
 
 const LessonTestPage = () => {
   const { testId } = useParams()
+  const { title } = useParams()
   const location = useLocation()
   const history = useHistory()
   const { questions = [] } = useSelector((state) => state.listTestQuestions)
@@ -20,6 +21,7 @@ const LessonTestPage = () => {
   const [messageModal, setMessageModal] = useState(false)
   const [completeMessage, setCompleteMessage] = useState('')
   const [lessonId, setLessonId] = useState()
+  const lessonTitle = title.split('-').join(' ')
 
   useEffect(() => {
     if (!questions.length) dispatch(listTestQuestions(testId))
@@ -86,7 +88,7 @@ const LessonTestPage = () => {
               <BackButton />
             </div>
             <div className='test-wrapper'>
-              <h1>Test for lesson 1</h1>
+              <h1>Test for {lessonTitle}</h1>
               {questions.length !== 0 ? (
                 questions.map((data, index) => {
                   if (data.type === 'subjective') {
@@ -96,6 +98,7 @@ const LessonTestPage = () => {
                         count={index + 1}
                         pos={index}
                         choices={choices}
+                        key={index}
                       />
                     )
                   } else {
@@ -105,6 +108,7 @@ const LessonTestPage = () => {
                         count={index + 1}
                         pos={index}
                         choices={choices}
+                        key={index}
                       />
                     )
                   }
