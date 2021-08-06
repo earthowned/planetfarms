@@ -20,7 +20,8 @@ const Video = ({
 }) => {
   const [showInfo, setShowInfo] = useState(false)
   const poopUp = () => {
-    modelPopUp(setEditVideoModel(true), id)
+    modelPopUp(id)
+    setEditVideoModel(true)
   }
   return (
     <>

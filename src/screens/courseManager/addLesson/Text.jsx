@@ -12,7 +12,8 @@ const Text = ({
   refetch
 }) => {
   const poopUp = () => {
-    modelPopUp(setEditTextModel(true), id)
+    modelPopUp(id)
+    setEditTextModel(true)
   }
   return (
     <>

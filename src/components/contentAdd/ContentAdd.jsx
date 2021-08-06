@@ -7,7 +7,7 @@ const ContentAdd = ({data, setVideoModal, setImageModal, setTextModal}) => {
   return (
     <>
       {
-        data.length &&
+        data.length > 0 &&
           data.map((vid, index) => (
             <div key={index}>
               <Video

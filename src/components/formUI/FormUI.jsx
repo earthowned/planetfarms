@@ -86,10 +86,11 @@ export const SubmitButton = (props) => {
 }
 
 export const TextArea = React.forwardRef(
-  ({ className, placeholder, name, rows, cols, onChange, disabled }, ref) => {
+  ({ className, placeholder, name, rows, cols, onChange, disabled, defaultValue }, ref) => {
     return (
       <>
         <textarea
+          defaultValue={defaultValue}
           className={className}
           placeholder={placeholder}
           cols={cols}

@@ -10,11 +10,13 @@ const EditContent = ({
   setEditTextModel,
   setEditPhotoModel,
   setEditVideoModel,
-  modelPopUp,
   removeTextItem,
   removePhoto,
   removeVideo,
-  removeLocalData
+  removeLocalData,
+  editImageFunc,
+  editVideoFunc,
+  editTextFunc
 }) => {
   const [allLessonData, setAllLessonData] = useState([])
 
@@ -29,7 +31,7 @@ const EditContent = ({
       return data?.videoResource?.preview
     }
   }
-  console.log(data);
+
   return (
     <>{
       data && <>
@@ -42,7 +44,7 @@ const EditContent = ({
                     : item?.lessonImg.preview
                 }
                 id={item?.id || item?.itemId}
-                modelPopUp={modelPopUp}
+                modelPopUp={editImageFunc}
                 setEditPhotoModel={setEditPhotoModel}
                 isEditable
                 desc={item?.isImgDesc === true && item?.photoDescription}
@@ -58,7 +60,7 @@ const EditContent = ({
               desc={item?.textDescription}
               isEditable
               setEditTextModel={setEditTextModel}
-              modelPopUp={modelPopUp}
+              modelPopUp={editTextFunc}
               id={item?.id || item?.itemId}
               onRemove={item?.id ? removeTextItem : removeLocalData}
             />
@@ -83,7 +85,7 @@ const EditContent = ({
               setEditVideoModel={setEditVideoModel}
               isEditable
               id={item?.id || item?.itemId}
-              modelPopUp={modelPopUp}
+              modelPopUp={editVideoFunc}
               onRemove={item?.id ? removeVideo : removeLocalData}
             />
         })

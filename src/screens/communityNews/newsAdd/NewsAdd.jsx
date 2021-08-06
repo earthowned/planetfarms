@@ -13,13 +13,14 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
 import ContentAdd from '../../../components/contentAdd/ContentAdd'
-import { getApi } from '../../../utils/apiFunc'
+import { configFunc, getApi } from '../../../utils/apiFunc'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import Image from '../../../components/lessonImage/Image'
 import Text from '../../courseManager/addLesson/Text'
 import Video from '../../../components/videoPlayer/Video'
 import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../../utils/urlConstants'
 import EditContent from '../../../components/editContent/EditContent'
+import axios from 'axios'
 
 const NewsAdd = () => {
   const { currentCommunity } = useSelector(state => state.activeCommunity)
@@ -29,6 +30,12 @@ const NewsAdd = () => {
   const [createVideoModal, setCreateVideoModal] = useState(false)
   const [createImageModal, setCreateImageModal] = useState(false)
   const [createTextModal, setCreateTextModal] = useState(false)
+  const [deleteVideoModal, setDeleteVideoModal] = useState(false)
+  const [deleteImageModal, setDeleteImageModal] = useState(false)
+  const [deleteTextModal, setDeleteTextModal] = useState(false)
+  const [videoId, setVideoId] = useState(null)
+  const [imageId, setImageId] = useState(null)
+  const [textId, setTextId] = useState(null)
   const [videoActive, setVideoActive] = useState(true)
   const [imageActive, setImageActive] = useState(true)
   const [textActive, setTextActive] = useState(true)
@@ -36,6 +43,9 @@ const NewsAdd = () => {
   const [newsSingleData, setNewsSingleData] = useState([])
   const [category, setCategory] = useState(state?.category || null)
   const [newsCover, setNewsCover] = useState(null);
+  const [imageData, setImageData] = useState(null)
+  const [videoData, setVideoData] = useState(null)
+  const [textData, setTextData] = useState(null)
 
   const news = useSelector((state) => (state.addNewNews !== {} ? state.addNewNews : ''))
   const { register, errors, handleSubmit } = useForm()
@@ -79,11 +89,67 @@ const NewsAdd = () => {
     console.log(newsCover)
   }
 
+  async function editImageFunc (id) {
+    if(newsSingleData?.photos) {
+      let photo = newsSingleData.photos.filter(el => el.id === id);
+      setImageData(photo)
+    }
+  }
+
+  console.log(newsSingleData)
+
+  async function editTextFunc (id) {
+    if(newsSingleData?.texts) {
+      let text = newsSingleData.texts.filter(el => el.id === id);
+      setTextData(text)
+    }
+  }
+
+  async function editVideoFunc (id) {
+    if(newsSingleData?.videos) {
+      let video = newsSingleData.videos.filter(el => el.id === id);
+      setVideoData(video)
+    }
+  }
+
+  function deleteImageModalFunc (id) {
+    setDeleteImageModal(true)
+    setImageId(id)
+  }
+
+  async function deleteImageConfirm () {
+    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/lesson-photos/${imageId}`)
+    setDeleteImageModal(false)
+  }
+
+  function deleteVideoModalFunc (id) {
+    setDeleteVideoModal(true)
+    setVideoId(id)
+  }
+
+  async function deleteVideoConfirm () {
+    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/videos/${videoId}`)
+    setDeleteVideoModal(false)
+  }
+
+  function deleteTextModalFunc (id) {
+    setDeleteTextModal(true)
+    setTextId(id)
+  }
+
+  async function deleteTextConfirm () {
+    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/lesson-text/${textId}`)
+    setDeleteTextModal(false)
+  }
+
   return (
     <>
-      {createVideoModal && <NewsCreateModal type='video' videoActive={videoActive} setVideoActive={setVideoActive} lessonData={newsData} setLessonData={setNewsData} />}
-      {createImageModal && <NewsCreateModal type='image' imageActive={imageActive} setImageActive={setImageActive} lessonData={newsData} setLessonData={setNewsData} />}
-      {createTextModal && <NewsCreateModal type='text' textActive={textActive} setTextActive={setTextActive} lessonData={newsData} setLessonData={setNewsData} />}
+      {createVideoModal && <NewsCreateModal type='video' videoActive={videoActive} setVideoActive={setVideoActive} lessonData={newsData} setLessonData={setNewsData} videoData={videoData} />}
+      {createImageModal && <NewsCreateModal type='image' imageActive={imageActive} setImageActive={setImageActive} lessonData={newsData} setLessonData={setNewsData} imageData={imageData} />}
+      {createTextModal && <NewsCreateModal type='text' textActive={textActive} setTextActive={setTextActive} lessonData={newsData} setLessonData={setNewsData} textData={textData} />}
+      {deleteVideoModal && <DeleteContent setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
+      {deleteImageModal && <DeleteContent setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
+      {deleteTextModal && <DeleteContent setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
       <DashboardLayout title={newsSingleData ? 'Edit News' : 'Add News'}>
         <BackButton location={`/community-page-news/${currentCommunity.slug}`} />
         <AddNewsContent
@@ -96,6 +162,12 @@ const NewsAdd = () => {
           newsData = {newsData}
           newsSingleData = {newsSingleData}
           setNewsCover={setNewsCover}
+          editVideoFunc={editVideoFunc}
+          editImageFunc={editImageFunc}
+          editTextFunc={editTextFunc}
+          setDeleteVideoModal={deleteVideoModalFunc}
+          setDeleteImageModal={deleteImageModalFunc}
+          setDeleteTextModal={deleteTextModalFunc}
         />
 
         {
@@ -109,6 +181,21 @@ const NewsAdd = () => {
   )
 }
 
+const DeleteContent = ({confirmDelete, setDeleteModal}) => {
+  return <div className='simple-modal-container'>
+        <div className='simple-modal-inner-container'>
+          <div>
+            <h4>Are you sure you want to delete?</h4>
+            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
+          </div>
+          <div>
+            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
+            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
+          </div>
+        </div>
+      </div>
+}
+
 const AddNewsContent = ({
   errors,
   newsData,
@@ -117,7 +204,13 @@ const AddNewsContent = ({
   setTextModal,
   register,
   newsSingleData,
-  setNewsCover
+  setNewsCover,
+  editImageFunc,
+  editVideoFunc,
+  editTextFunc,
+  setDeleteVideoModal,
+  setDeleteImageModal,
+  setDeleteTextModal
 }) => {
 
   const [title, setTitle] = useState('');
@@ -132,7 +225,6 @@ const AddNewsContent = ({
     }
   }, [newsData, newsSingleData])
 
-console.log(newsSingleData);
   return  <div className='admin-lesson-create-container'>
       <ErrorText
         className='errorMsg'
@@ -150,11 +242,20 @@ console.log(newsSingleData);
           }
         })}
       />
-    
-      {/* Edit component for news */}
-     
+
       {
-        newsSingleData && <EditContent data={newsSingleData}/>
+        newsSingleData && <EditContent 
+        data={newsSingleData}
+        setEditPhotoModel={setImageModal}
+        setEditTextModel={setTextModal}
+        setEditVideoModel={setVideoModal}
+        editVideoFunc={editVideoFunc}
+        editImageFunc={editImageFunc}
+        editTextFunc={editTextFunc}
+        removeTextItem={setDeleteTextModal}
+        removePhoto={setDeleteImageModal}
+        removeVideo={setDeleteVideoModal}
+        />
       }
 
       <ContentAdd data={newsData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
