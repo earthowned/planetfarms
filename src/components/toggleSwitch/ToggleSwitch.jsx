@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
 import './ToggleSwitch.scss'
 
-function ToggleSwitch ({ onClick, isFree }) {
+function ToggleSwitch ({ onClick, isToggle }) {
   return (
     <>
       <div className='toggle' onClick={onClick}>
-        <div className={`${isFree ? 'toggle-item active' : 'toggle-item'}`} />
+        <div className={`${isToggle ? 'toggle-item active' : 'toggle-item'}`} />
         <div className='toggle-container' />
       </div>
     </>

@@ -7,16 +7,17 @@ import { CATEGORY } from '../../../utils/urlConstants'
 import { createResource } from '../../../actions/courseActions'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import DragDrop from '../../dragDrop/DragDrop'
-import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
+import ToggleDiv from './ToggleDiv'
 import './NewCourseCreateModal.scss'
 import Filter from '../../filter/Filter'
 
-const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
+const NewCourseCreateModal = ({ clickHandler }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const [isFree, setIsFree] = useState(true)
+  const [isForCommunity, setIsForCommunity] = useState(true)
   const [courseImage, setCourseImage] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [categoryError, setCategoryError] = useState('')
@@ -105,10 +106,11 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
           {errors.description && (
             <p className='error'>{errors.description.message}</p>
           )}
-          <div className='new-course-toggle'>
-            <h4>Free course</h4>
-            <ToggleSwitch onClick={() => setIsFree(!isFree)} isFree={isFree} />
-          </div>
+          <ToggleDiv
+            placeholder='Free course ?'
+            state={isFree}
+            setState={setIsFree}
+          />
           {!isFree && (
             <input
               type='number'
@@ -124,6 +126,11 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
             />
           )}
           {errors.price && <p className='error'>{errors.price.message}</p>}
+          <ToggleDiv
+            placeholder='Only for Community Member ?'
+            state={isForCommunity}
+            setState={setIsForCommunity}
+          />
         </div>
         <button className='default-btn btn-size'>Create course</button>
       </form>
