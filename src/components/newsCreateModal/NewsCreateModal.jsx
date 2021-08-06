@@ -22,7 +22,10 @@ const NewsCreateModal = ({
   setGroupEditActive,
   addVideoData,
   lessonData,
-  setLessonData
+  setLessonData,
+  imageData,
+  textData,
+  videoData
 }) => {
   const [files, setFiles] = useState(null)
 
@@ -37,6 +40,7 @@ const NewsCreateModal = ({
           setVideoActive={setVideoActive}
           lessonData={lessonData}
           setLessonData={setLessonData}
+          data={videoData}
         />
       )
 
@@ -68,6 +72,7 @@ const NewsCreateModal = ({
           setImageActive={setImageActive}
           lessonData={lessonData}
           setLessonData={setLessonData}
+          data={imageData}
         />
       )
 
@@ -79,6 +84,7 @@ const NewsCreateModal = ({
           setTextActive={setTextActive}
           lessonData={lessonData}
           setLessonData={setLessonData}
+          data={textData}
         />
       )
 

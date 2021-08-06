@@ -7,6 +7,11 @@ const LessonActions = ({ id, onRemove = () => {}, poopUp, refetch }) => {
     setActionActive(false)
   })
 
+  const openCloseModal = () => {
+    poopUp()
+    setActionActive(!actionActive)
+  }
+
   return (
     <div className='actions lessonAction' ref={domNode}>
       <button
@@ -18,10 +23,7 @@ const LessonActions = ({ id, onRemove = () => {}, poopUp, refetch }) => {
       {actionActive && (
         <ul className={actionActive ? 'actionBtn show' : 'hide'}>
           <li
-            onClick={() => {
-              poopUp()
-              setActionActive(!actionActive)
-            }}
+            onClick={openCloseModal}
           >
             Edit
           </li>

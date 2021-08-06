@@ -8,12 +8,15 @@ import { TextArea } from '../formUI/FormUI'
 
 import './NewsCreateModal.scss'
 import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
+import { LESSON_IMG } from '../../utils/urlConstants'
+import { useEffect } from 'react'
 
 const CreateImage = ({
   imageActive,
   setImageActive,
   lessonData,
-  setLessonData
+  setLessonData,
+  data = []
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(true)
   const [lessonImg, setLessonImg] = useState(null)
@@ -32,6 +35,12 @@ const CreateImage = ({
     setLessonData(imgData)
     setImageActive(false)
   }
+
+  useEffect(() => {
+    if(data.length > 0) {
+      setIsImgDesc(data[0].isImgDesc)
+    }
+  }, [])
   return (
     <>
       {imageActive && (
@@ -45,6 +54,7 @@ const CreateImage = ({
               <DragDrop
                 onChange={(img) => setLessonImg(img)}
                 text='Drag & Drop photo in this area or Click Here to attach'
+                dataImg={data.length > 0 && `${LESSON_IMG}${data[0].lessonImg}`}
               />
               <div className='description'>
                 <label>Add photo description ?</label>{' '}
@@ -56,6 +66,7 @@ const CreateImage = ({
               {isImgDesc && (
                 <div className='photo-input-container'>
                   <TextArea
+                    defaultValue={data.length > 0 && data[0].photoDescription}
                     placeholder='Photo Description (Optional)'
                     className='default-input-variation text-area-variation textarea'
                     cols='3'

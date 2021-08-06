@@ -11,8 +11,10 @@ const Image = ({
   isEditable
 }) => {
   const poopUp = () => {
-    modelPopUp(setEditPhotoModel(true), id)
+    modelPopUp(id)
+    setEditPhotoModel(true)
   }
+  console.log(src);
   return (
     <>
       {src ? (

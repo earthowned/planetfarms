@@ -9,7 +9,8 @@ const CreateText = ({
   textActive,
   setTextActive,
   lessonData,
-  setLessonData
+  setLessonData,
+  data
 }) => {
   const { register, errors, handleSubmit } = useForm()
 
@@ -26,6 +27,7 @@ const CreateText = ({
     }
     setTextActive(false)
   }
+  
   return (
     <>
       {textActive && (
@@ -43,6 +45,7 @@ const CreateText = ({
                   placeholder='Text Heading (Optional)'
                   name='textHeading'
                   ref={register}
+                  defaultValue={data.length > 0 && data[0].textHeading}
                 />
                 <TextArea
                   className={`default-input-variation text-area-variation ${
@@ -54,6 +57,7 @@ const CreateText = ({
                   cols='3'
                   rows='7'
                   name='textDescription'
+                  defaultValue={data.length > 0 && data[0].textDescription}
                   ref={register({
                     required: {
                       value: true,

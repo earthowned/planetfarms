@@ -6,6 +6,7 @@ import DragDrop from '../dragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 import { InputFields, ErrorText, TextArea } from '../formUI/FormUI'
 import './NewsCreateModal.scss'
+import { LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
 
 const CreateVideo = ({
   getRootProps,
@@ -14,7 +15,8 @@ const CreateVideo = ({
   videoActive,
   setVideoActive,
   lessonData,
-  setLessonData
+  setLessonData,
+  data
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const [videoCover, setVideoCover] = useState(null)
@@ -52,6 +54,7 @@ const CreateVideo = ({
                 getRootProps={getRootProps}
                 files={files}
                 text='Drag & Drop photo in this area or Click Here to attach Video Cover'
+                dataImg={data.length > 0 && `${VIDEO_COVER}${data[0]?.videoCover}`}
                 onChange={(img) => setVideoCover(img)}
               />
               <div className='video-input-container'>
@@ -60,6 +63,7 @@ const CreateVideo = ({
                   placeholder='Video Title (Optional)'
                   name='videoTitle'
                   ref={register}
+                  defaultValue={data.length > 0 && data[0].videoTitle}
                 />
 
                 <TextArea
@@ -69,6 +73,7 @@ const CreateVideo = ({
                   rows='4'
                   name='videoDescription'
                   ref={register}
+                  defaultValue={data.length > 0 && data[0].videoDescription}
                 />
                 <div className='video-row-3'>
                   {!video && (
@@ -84,6 +89,7 @@ const CreateVideo = ({
                         }
                         placeholder='Video Link'
                         name='videoLink'
+                        defaultValue={data.length > 0 && data[0].videoLink}
                         ref={register({
                           required: {
                             value: true,
