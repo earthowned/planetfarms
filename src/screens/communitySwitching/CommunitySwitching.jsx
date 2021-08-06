@@ -3,7 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import Button from '../../components/button/Button'
-import { listCommunities, searchCommunities, createCommunity, listUserCommunities, searchUserCommunities, communityDelete, communityUpdate } from '../../actions/communityActions'
+import {
+  listCommunities,
+  searchCommunities,
+  createCommunity,
+  listUserCommunities,
+  searchUserCommunities,
+  communityDelete,
+  communityUpdate
+} from '../../actions/communityActions'
 import CommunitiesCard from '../../components/communitiesCard/CommunitiesCard'
 import DragDrop from '../../components/dragDrop/DragDrop'
 import Filter from '../../components/filter/Filter'
@@ -33,7 +41,9 @@ function App () {
   const dispatch = useDispatch()
 
   const editCard = async (id) => {
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`)
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_BASE_URL}/api/communities/${id}`
+    )
     setEditData(data)
     setModalActive(true)
   }
@@ -50,28 +60,55 @@ function App () {
 
   return (
     <>
-      {modalActive && <CommunityModal setActive={setModalActive} data={editData} setEditData={setEditData} />}
-      {deleteModal && <div className='simple-modal-container'>
-        <div className='simple-modal-inner-container'>
-          <div>
-            <h4>Are you sure you want to delete?</h4>
-            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
-          </div>
-          <div>
-            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
-            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
+      {modalActive && (
+        <CommunityModal
+          setActive={setModalActive}
+          data={editData}
+          setEditData={setEditData}
+        />
+      )}
+      {deleteModal && (
+        <div className='simple-modal-container'>
+          <div className='simple-modal-inner-container'>
+            <div>
+              <h4>Are you sure you want to delete?</h4>
+              {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
+            </div>
+            <div>
+              <button className='secondary-btn' onClick={confirmDelete}>
+                Confirm
+              </button>
+              <button
+                className='secondary-btn'
+                onClick={() => setDeleteModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
-                      </div>}
+      )}
       <DashboardLayout title='All Communities'>
         <AllCommunities
-          setModalActive={setModalActive} editCard={editCard} deleteCard={deleteCard} pageNumber={pageNumber} userPageNumber={userPageNumber}
+          setModalActive={setModalActive}
+          editCard={editCard}
+          deleteCard={deleteCard}
+          pageNumber={pageNumber}
+          userPageNumber={userPageNumber}
         />
-        {
-          pathname === '/community-switching/my-communities'
-            ? <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={userCommunitiesState} />
-            : <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={communitiesState} />
-        }
+        {pathname === '/community-switching/my-communities' ? (
+          <Pagination
+            pageNumber={userPageNumber}
+            setPageNumber={setUserPageNumber}
+            resourceList={userCommunitiesState}
+          />
+        ) : (
+          <Pagination
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+            resourceList={communitiesState}
+          />
+        )}
       </DashboardLayout>
     </>
   )
@@ -90,11 +127,21 @@ const nav = [
   }
 ]
 
-function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, userPageNumber }) {
+function AllCommunities ({
+  setModalActive,
+  editCard,
+  deleteCard,
+  pageNumber,
+  userPageNumber
+}) {
   const { pathname } = useLocation()
   const [search, setSearch] = useState(null)
-  const { success: communityDeleteSuccess } = useSelector((state) => state.communityDelete)
-  const { success: communityUpdateSuccess } = useSelector((state) => state.communityUpdate)
+  const { success: communityDeleteSuccess } = useSelector(
+    (state) => state.communityDelete
+  )
+  const { success: communityUpdateSuccess } = useSelector(
+    (state) => state.communityUpdate
+  )
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -102,7 +149,11 @@ function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, use
   const { error, loading, communities } = communitiesState
 
   const userCommunitiesState = useSelector((state) => state.listUserCommunities)
-  const { error: user_com_error, loading: user_com_loading, userCommunities } = userCommunitiesState
+  const {
+    error: user_com_error,
+    loading: user_com_loading,
+    userCommunities
+  } = userCommunitiesState
   // create community
   const createCommunity = useSelector((state) => state.addCommunity)
   const { success: createSuccess } = createCommunity
@@ -115,19 +166,44 @@ function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, use
       if (!search) dispatch(listUserCommunities({ userPageNumber }))
       if (search) dispatch(searchUserCommunities(search))
     }
-  }, [search, dispatch, createSuccess, pathname, communityDeleteSuccess, communityUpdateSuccess, pageNumber, userPageNumber])
+  }, [
+    search,
+    dispatch,
+    createSuccess,
+    pathname,
+    communityDeleteSuccess,
+    communityUpdateSuccess,
+    pageNumber,
+    userPageNumber
+  ])
 
   return (
     <>
-      <SubHeader setSearch={setSearch} search={search} setCreateActive={setModalActive} nav={nav} btnName='Create Community' />
+      <SubHeader
+        setSearch={setSearch}
+        search={search}
+        setCreateActive={setModalActive}
+        nav={nav}
+        btnName='Create Community'
+      />
       <div>
-        {
-          pathname === '/community-switching/my-communities'
-            ? <><CommunitiesCard data={userCommunities} editCard={editCard} deleteCard={deleteCard} />
-            </>
-            : <><CommunitiesCard data={communities} editCard={editCard} deleteCard={deleteCard} />
-            </>
-        }
+        {pathname === '/community-switching/my-communities' ? (
+          <>
+            <CommunitiesCard
+              data={userCommunities}
+              editCard={editCard}
+              deleteCard={deleteCard}
+            />
+          </>
+        ) : (
+          <>
+            <CommunitiesCard
+              data={communities}
+              editCard={editCard}
+              deleteCard={deleteCard}
+            />
+          </>
+        )}
       </div>
     </>
   )
@@ -135,31 +211,43 @@ function AllCommunities ({ setModalActive, editCard, deleteCard, pageNumber, use
 
 const CommunityModal = ({ setActive, data, setEditData }) => {
   const [files, setFiles] = useState()
-  const [toggleActive, setToggleActive] = useState(data ? data.auto_follow : false)
+  const [toggleActive, setToggleActive] = useState(
+    data ? data.auto_follow : false
+  )
 
-  const { error } = useSelector(state => state.addCommunity)
+  const { error } = useSelector((state) => state.addCommunity)
   const { register: regi, errors, handleSubmit } = useForm()
   const dispatch = useDispatch()
 
   function addCommunity ({ communityName, description, category }) {
     if (communityName && description) {
-      dispatch(createCommunity({ file: files, name: communityName, description, category, toggleActive }))
+      dispatch(
+        createCommunity({
+          file: files,
+          name: communityName,
+          description,
+          category,
+          toggleActive
+        })
+      )
       if (!error) {
         setActive(false)
-      };
+      }
     }
   }
 
   function updateCommunity ({ description, communityName, category }) {
     if (description && communityName) {
-      dispatch(communityUpdate({
-        id: data.id,
-        name: communityName,
-        category,
-        description,
-        file: files,
-        toggleActive
-      }))
+      dispatch(
+        communityUpdate({
+          id: data.id,
+          name: communityName,
+          category,
+          description,
+          file: files,
+          toggleActive
+        })
+      )
       clearInput()
       setActive(false)
     }
@@ -174,12 +262,26 @@ const CommunityModal = ({ setActive, data, setEditData }) => {
     <div className='collection-modal-container'>
       <div>
         <div className='collection-modal-inner-container'>
-          <CollectionModalHeader title={data ? 'Update Community' : 'Create Community'} clickHandler={clearInput} />
-          <form onSubmit={data ? handleSubmit(updateCommunity) : handleSubmit(addCommunity)}>
-            {error && <div className='error-header'>
-              <div className='error'>{error}</div>
-            </div>}
-            <DragDrop files={files} onChange={setFiles} dataImg={data && data.attachment} tag='community' />
+          <CollectionModalHeader
+            title={data ? 'Update Community' : 'Create Community'}
+            clickHandler={clearInput}
+          />
+          <form
+            onSubmit={
+              data ? handleSubmit(updateCommunity) : handleSubmit(addCommunity)
+            }
+          >
+            {error && (
+              <div className='error-header'>
+                <div className='error'>{error}</div>
+              </div>
+            )}
+            <DragDrop
+              files={files}
+              onChange={setFiles}
+              dataImg={data && data.attachment}
+              tag='community'
+            />
             <InputFields
               type='text'
               placeholder='Community Name'
@@ -216,11 +318,16 @@ const CommunityModal = ({ setActive, data, setEditData }) => {
             />
             <div className='auto-follow-btn'>
               <h5>Auto follow</h5>
-              <ToggleSwitch onClick={() => setToggleActive(!toggleActive)} isFree={toggleActive} />
+              <ToggleSwitch
+                onClick={() => setToggleActive(!toggleActive)}
+                isToggle={toggleActive}
+              />
             </div>
-            {data
-              ? <Button name='Update Community' onClick={updateCommunity} />
-              : <Button name='Create Community' onClick={addCommunity} />}
+            {data ? (
+              <Button name='Update Community' onClick={updateCommunity} />
+            ) : (
+              <Button name='Create Community' onClick={addCommunity} />
+            )}
           </form>
         </div>
       </div>

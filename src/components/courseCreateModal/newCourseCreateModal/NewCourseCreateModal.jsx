@@ -15,6 +15,8 @@ const NewCourseCreateModal = ({ clickHandler }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
+  const community = useSelector((state) => state.activeCommunity)
+  console.log(community)
   const { userInfo } = userLogin
   const [isFree, setIsFree] = useState(true)
   const [isForCommunity, setIsForCommunity] = useState(true)
@@ -39,6 +41,8 @@ const NewCourseCreateModal = ({ clickHandler }) => {
     const thumbnail = courseImage
     const creator = userInfo.id
     const category = selectedCategory
+    const isPublic = !isForCommunity
+    const communityId = community?.currentCommunity?.id
     if (category.length !== 0) {
       dispatch(
         createResource({
@@ -48,6 +52,8 @@ const NewCourseCreateModal = ({ clickHandler }) => {
           price,
           thumbnail,
           isFree,
+          isPublic,
+          communityId,
           creator,
           history
         })

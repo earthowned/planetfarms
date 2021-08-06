@@ -3,7 +3,8 @@ const db = require('../config/database')
 const { sequelize } = require('./index')
 
 module.exports = (sequelize, DataTypes) => {
-  const Community = sequelize.define('communities',
+  const Community = sequelize.define(
+    'communities',
     {
       name: {
         type: DataTypes.STRING,
@@ -65,6 +66,10 @@ module.exports = (sequelize, DataTypes) => {
 
     // 1:M community and group
     Community.hasMany(models.News, {
+      foreignKey: 'communityId'
+    })
+
+    Community.hasMany(models.Courses, {
       foreignKey: 'communityId'
     })
   }

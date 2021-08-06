@@ -49,6 +49,13 @@ module.exports = (sequelize, DataTypes) => {
       isFree: {
         type: DataTypes.BOOLEAN,
         default: false
+      },
+      isPublic: {
+        type: DataTypes.BOOLEAN,
+        default: false
+      },
+      communityId: {
+        type: DataTypes.INTEGER
       }
     },
     { timestamps: true }
@@ -56,6 +63,7 @@ module.exports = (sequelize, DataTypes) => {
   Courses.associate = (models) => {
     Courses.hasMany(models.Lesson)
     Courses.hasMany(models.Enroll)
+    Courses.belongsTo(models.Community, { foreignKey: 'communityId' })
   }
   return Courses
 }

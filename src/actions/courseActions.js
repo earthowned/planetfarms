@@ -15,6 +15,8 @@ export const createResource =
     thumbnail,
     isFree,
     creator,
+    isPublic,
+    communityId,
     history
   }) =>
     async (dispatch) => {
@@ -25,6 +27,8 @@ export const createResource =
       formData.append('price', price)
       formData.append('thumbnail', thumbnail)
       formData.append('isFree', isFree)
+      formData.append('isPublic', isPublic)
+      formData.append('communityId', communityId)
       formData.append('creator', creator)
 
       try {
