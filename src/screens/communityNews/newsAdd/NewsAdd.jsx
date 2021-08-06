@@ -96,8 +96,7 @@ const NewsAdd = () => {
     }
   }
 
-  console.log(newsSingleData)
-
+console.log(newsData)
   async function editTextFunc (id) {
     if(newsSingleData?.texts) {
       let text = newsSingleData.texts.filter(el => el.id === id);
@@ -215,15 +214,21 @@ const AddNewsContent = ({
 
   const [title, setTitle] = useState('');
   
+  // for creation
   useEffect(() => {
-    if(newsData.length) {
+    if(newsData.length > 0) {
       setTitle(newsData[0].title)
+      console.log(newsData[0].title)
     }
+  }, [newsData])
 
+  // for Edit
+  useEffect(() => {
     if(newsSingleData) {
       setTitle(newsSingleData.title)
     }
-  }, [newsData, newsSingleData])
+  }, [newsSingleData])
+  
 
   return  <div className='admin-lesson-create-container'>
       <ErrorText

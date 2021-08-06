@@ -16,7 +16,7 @@ const CreateVideo = ({
   setVideoActive,
   lessonData,
   setLessonData,
-  data
+  data = []
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const [videoCover, setVideoCover] = useState(null)
@@ -54,7 +54,7 @@ const CreateVideo = ({
                 getRootProps={getRootProps}
                 files={files}
                 text='Drag & Drop photo in this area or Click Here to attach Video Cover'
-                dataImg={data.length > 0 && `${VIDEO_COVER}${data[0]?.videoCover}`}
+                dataImg={data.length > 0 ? `${VIDEO_COVER}${data[0]?.videoCover}` : ''}
                 onChange={(img) => setVideoCover(img)}
                 fileType='image/png,image/jpeg,image/jpg'
               />
