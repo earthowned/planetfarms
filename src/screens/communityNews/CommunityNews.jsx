@@ -8,7 +8,7 @@ import NewsAddModal from '../../components/newAddModal/NewsAddModal'
 import Filter from '../../components/filter/Filter'
 import useSizeFinder from '../../utils/sizeFinder'
 import { useDispatch, useSelector } from 'react-redux'
-import { searchNews, listNews } from '../../actions/newsActions'
+import { searchNews, listNews, deleteNews } from '../../actions/newsActions'
 import Pagination from '../../components/pagination/Pagination'
 import axios from 'axios'
 
@@ -19,20 +19,50 @@ function CommunityNews () {
 
   const [addModal, setAddModal] = useState(false)
   const [editData, setEditData] = useState(null)
+  const [deleteModal, setDeleteModal] = useState(false)
+  const [deleteId, setDeleteId] = useState(null)
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+   const deleteNewsCard = (id) => {
+    setDeleteId(id)
+    setDeleteModal(true);
+  }
+
+  const confirmDelete = () => {
+    dispatch(deleteNews(deleteId))
+    setDeleteModal(false);
+  }
 
   const editCard = async (id) => {
-    const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
-    setEditData(data)
-    setAddModal(true)
+    // const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
+    // setEditData(data)
+    // setAddModal(true)
+    history.push(`/community-news/edit/${id}`)
   }
   return (
+    <>
+    {deleteModal && <div className='simple-modal-container'>
+        <div className='simple-modal-inner-container'>
+          <div>
+            <h4>Are you sure you want to delete?</h4>
+            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
+          </div>
+          <div>
+            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
+            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
+          </div>
+        </div>
+      </div>}
     <DashboardLayout title='Ragrarians News'>{addModal && <NewsAddModal
       setAddModal={setAddModal}
       editData={editData}
       setEditData={setEditData}
                                                           />}
-      <CommunityPagenews {...CommunityPageNewsData} setAddModal={setAddModal} editCard={editCard} />
+      <CommunityPagenews {...CommunityPageNewsData} setAddModal={setAddModal} editCard={editCard} deleteNewsCard={deleteNewsCard}/>
     </DashboardLayout>
+    </>
   )
 }
 
@@ -68,7 +98,8 @@ function CommunityPagenews (props) {
     carsIndustry,
     mediaNews,
     seeAllTopics,
-    setAddModal
+    setAddModal,
+    deleteNewsCard
   } = props
 
   const windowWidth = useSizeFinder()
@@ -105,7 +136,7 @@ function CommunityPagenews (props) {
         </div>
         <div className='community-page-news-section'>
           <div className='community-news-cards'>
-            <NewsCard news={news} editCard={props.editCard} />
+            <NewsCard news={news} editCard={props.editCard} deleteNewsCard={deleteNewsCard} />
             <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={newsList} />
           </div>
           {(windowWidth < 1200)
