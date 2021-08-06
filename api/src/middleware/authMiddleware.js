@@ -21,7 +21,7 @@ const responses = [
   }
 ]
 
-function checkAuthorization(err) {
+function checkAuthorization (err) {
   if (err.message === 'jwt expired') {
     throw Error('TokenExpired')
   } else {
@@ -31,35 +31,34 @@ function checkAuthorization(err) {
 
 const throwError = message => responses.filter(response => response.name.match(message))
 
-function maintainState() {
-      if (process.env.AUTH_METHOD !== 'cognito') {
-        req.user = await db.User.findOne({ where: { userID: decoded.id } })
-      } else if (recoded) {
-        req.user = await db.User.findOne({ where: { userID: recoded.sub } })
-      } else {
-        throw Error('User not found')
-      }
-
-}
-
 const recode = (err, decodedToken) => {
   if (err) {
-   checkAuthorization(err) 
+    checkAuthorization(err)
   }
   recoded = decodedToken
 }
 
 const decode = (err, decodedToken) => {
   if (err) {
-   checkAuthorization(err) 
+    checkAuthorization(err)
   }
   decoded = decodedToken
+}
+const maintainState = async (req) => {
+  if (process.env.AUTH_METHOD !== 'cognito') {
+    req.user = await db.User.findOne({ where: { userID: decoded.id } })
+  } else if (recoded) {
+    req.user = await db.User.findOne({ where: { userID: recoded.sub } })
+  } else {
+    throw Error('User not found')
+  }
 }
 
 module.exports = async (req, res, next) => {
   let decoded
   let recoded
   const headers = req.headers.authorization && req.headers.authorization.startsWith('Bear')
+
   if (
     headers
   ) {
@@ -78,7 +77,7 @@ module.exports = async (req, res, next) => {
       maintainState()
       next()
     } catch (error) {
-      res.status(401).json(throwError(error.message))      
+      res.status(401).json(throwError(error.message))
     }
   } else {
     res.status(401).json(throwError('Unauthorized'))
