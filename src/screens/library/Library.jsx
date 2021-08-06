@@ -78,7 +78,7 @@ const LibraryCategory = ({ title, search, setNewCollection, modalActive, setModa
   //   return (<div>Loading...</div>)
   // }
   return (
-    libraryData?.resources.length > 0
+    libraryData?.resources?.length > 0
       ? <ComponentLoadingWrapper loadingState={isLoading}>
         <ListView
           title={title} data={libraryData?.resources}
