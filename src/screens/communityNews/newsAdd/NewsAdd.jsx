@@ -19,6 +19,7 @@ import Image from '../../../components/lessonImage/Image'
 import Text from '../../courseManager/addLesson/Text'
 import Video from '../../../components/videoPlayer/Video'
 import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../../utils/urlConstants'
+import EditContent from '../../../components/editContent/EditContent'
 
 const NewsAdd = () => {
   const { currentCommunity } = useSelector(state => state.activeCommunity)
@@ -187,6 +188,10 @@ console.log(newsSingleData);
         })
       }
       </>
+      }
+
+      {
+        newsSingleData && <EditContent data={newsSingleData}/>
       }
 
       <ContentAdd data={newsData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
