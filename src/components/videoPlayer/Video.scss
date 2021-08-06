@@ -29,7 +29,6 @@
       line-height: 2em;
       margin-bottom: 0.5em;
       font-weight: 600;
-      color: var(--primary-white);
 
       &::first-letter {
         text-transform: uppercase;
@@ -39,7 +38,6 @@
       font-size: 1em;
       line-height: 1.5em;
       width: 80%;
-      color: var(--primary-white);
 
       &::first-letter {
         text-transform: uppercase;
@@ -110,6 +108,13 @@
         clip-path: polygon(100% 50%, 0 0, 0 100%);
       }
     }
+  }
+  .actions {
+    position: absolute;
+    z-index: 5;
+    top: 1%;
+    right: 1%;
+    background: var(--background-color-image);
   }
 }
 .react-player__preview::before {
