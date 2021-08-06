@@ -1,35 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { listMembers } from '../../actions/memberActions'
 import CardImage from '../../components/cardImage/CardImage'
 import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import Pagination from '../../components/pagination/Pagination'
 import './CommunityMembers.css'
 import useSizeFinder from '../../utils/sizeFinder'
+import useGetFetchData from '../../utils/useGetFetchData'
+import { GET_MEMBERS } from '../../utils/urlConstants'
 
-function CommunityMembers ({ history }) {
+function CommunityMembers () {
   const [col, setCol] = useState(3)
-  const windowWidth = useSizeFinder()
-  const dispatch = useDispatch()
-  const [search, setSearch] = useState('')
-  const memberList = useSelector(state => state.listMember)
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
   const [pageNumber, setPageNumber] = useState(1)
+  const [pageSize, setPageSize] = useState(9)
+  const [search, setSearch] = useState('')
+  const windowWidth = useSizeFinder()
 
   // fetching current community
   const currentCommunity = window.localStorage.getItem('currentCommunity')
     ? JSON.parse(window.localStorage.getItem('currentCommunity'))
     : null
-
-  const pageSizeByColumn = (callbackFunc, params) => {
-    if (col === 3) {
-      return callbackFunc({ ...params, pageSize: 9 })
-    } else if (col === 4) {
-      return callbackFunc({ ...params, pageSize: 8 })
-    }
-  }
 
   useEffect(() => {
     if (windowWidth < 1439 && windowWidth > 768) {
@@ -40,10 +29,18 @@ function CommunityMembers ({ history }) {
   }, [windowWidth])
 
   useEffect(() => {
-    if (userInfo) {
-      dispatch(pageSizeByColumn(listMembers, { sort: '', pageNumber, pageSize: 8, search }))
+    if (col === 3) {
+      setPageSize(9)
+    } else if (col === 4) {
+      setPageSize(8)
     }
-  }, [search, dispatch, history, userInfo, pageNumber, col])
+  }, [col])
+
+  const { data: membersData = {} } = useGetFetchData(
+    'GET_MEMBERS_DATA',
+    GET_MEMBERS + currentCommunity.id + '?pageNumber=' + pageNumber + '&pageSize=' + pageSize + '&search=' + search,
+    { pageSize, pageNumber, search }
+  )
 
   return (
     <DashboardLayout title={currentCommunity.name}>
@@ -53,9 +50,9 @@ function CommunityMembers ({ history }) {
             <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
           </div>
           <div className='community-members-grid-row'>
-            {memberList.members && <CardImage follow='Follow' data={memberList.members} />}
+            {membersData?.communities_users && <CardImage follow='Follow' data={membersData?.communities_users} />}
           </div>
-          <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={memberList} />
+          <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={membersData} />
         </div>
       </div>
     </DashboardLayout>
