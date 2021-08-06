@@ -4,7 +4,7 @@
   align-items: center;
   flex-direction: column;
   margin: 2em 0;
-  color: var(--primary-white);
+  position: relative;
 
   img {
     width: 100%;
@@ -13,5 +13,12 @@
     margin-top: 1em;
     font-size: 1em;
     font-style: italic;
+  }
+  .actions {
+    position: absolute;
+    z-index: 5;
+    top: 1%;
+    right: 1%;
+    background: var(--background-color-image);
   }
 }
