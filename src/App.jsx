@@ -69,7 +69,7 @@ function App () {
             <PrivateRoute component={CalendarScreen} exact path='/calendar/my-events' />
             <PrivateRoute component={Library} exact path='/library' />
             <PrivateRoute component={Collection} exact path='/library/collection' />
-            <PrivateRoute component={UserCollection} path='/library/collection/users' exact/>
+            <PrivateRoute component={UserCollection} path='/library/collection/users' exact />
             <PrivateRoute component={SavedCollection} path='/library/collection/saved' exact />
             <PrivateRoute component={Messenger} exact path='/messenger' />
             <PrivateRoute component={MobileMessage} path='/messenger/:id' exact />
@@ -111,14 +111,16 @@ function App () {
                   <AddTest />
                 </DndProvider>
               )}
-              path='/admin/add-test/:lessonId' exact />
+              path='/admin/add-test/:lessonId' exact
+            />
             <PrivateRoute
               component={() => (
                 <DndProvider backend={HTML5Backend}>
                   <AddTest />
                 </DndProvider>
               )}
-              path='/admin/edit-test/:lessonId' />
+              path='/admin/edit-test/:lessonId'
+            />
             <PrivateRoute component={Category} path='/admin/categories' />
             <PrivateRoute component={MyProfile} exact path='/myProfile' />
             <PrivateRoute component={UserInfo} exact path='/userInfo' />
