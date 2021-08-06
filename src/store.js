@@ -61,7 +61,7 @@ import {
   communityDeleteReducer,
   communityUpdateReducer
 } from './reducers/communityReducers'
-import { memberListReducer } from './reducers/memberReducers'
+import { memberAccessReducer, memberListReducer } from './reducers/memberReducers'
 import { addEnrollReducer } from './reducers/enrollReducer'
 import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
 import {
@@ -110,6 +110,7 @@ const reducer = combineReducers({
   newsDelete: newsDeleteReducer,
   newsUpdate: newsUpdateReducer,
   listMember: memberListReducer,
+  accessMember: memberAccessReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userConfirmCode: userConfirmCodeReducer,

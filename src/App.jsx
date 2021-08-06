@@ -52,6 +52,7 @@ import AddTest from './screens/addTest/AddTest'
 import LogoutUser from './screens/logoutUser/LogoutUser'
 import Category from './screens/category/Category'
 import PageNotFound from './screens/pageNotFound/PageNotFound'
+import CommunityMemberAdmin from './screens/admin/CommunityMemberAdmin'
 
 function App () {
   return (
@@ -78,6 +79,7 @@ function App () {
             <PrivateRoute component={CommunityNewsViewPage} path='/community-page-news-view' exact />
             <PrivateRoute component={AllCommunitiesCard} path='/community-switching' exact />
             <PrivateRoute component={CommunityMembers} path='/community-members/:id' exact />
+            <PrivateRoute component={CommunityMemberAdmin} path='/admin/community-members' exact />
             <PrivateRoute component={CommunityMembersProfile} path='/community-members-profile/:id' exact />
             <PrivateRoute component={CommunityGroup} path='/community-group/:id' exact />
             <PrivateRoute component={CommunityGroup} path='/your-community-group/:id' exact />

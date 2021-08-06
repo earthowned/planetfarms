@@ -1,21 +1,6 @@
 const { Op } = require('sequelize')
 const db = require('../models')
 
-// @desc Get the community-users
-// @route GET /api/community-users
-// @access Public
-
-const getCommunityUsers = async (req, res) => {
-  try {
-    const data = await db.CommunityUser.findAll()
-    res.json({
-      data
-    })
-  } catch (error) {
-    res.status(400).json({ error })
-  }
-}
-
 // @desc follow community
 // @route POST /api/community-users/follow
 // @access Public
@@ -82,10 +67,38 @@ const followCommunity = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
   try {
-    const data = await db.CommunityUser.findAll(
+    const communityId = req.params.id
+    const member = await db.CommunityUser.findOne({ where: { userId: req.user.id, communityId }, attributes: ['role'] })
+
+    if (member.dataValues.role === 'manager') {
+      const data = await db.CommunityUser.findAll(
+        {
+          where: { communityId: req.params.id, active: true },
+          attributes: ['id', 'userId', 'role'],
+          include: [{
+            model: db.User,
+            attributes: ['firstName', 'lastName', 'email', 'phone', 'dateOfBirth']
+          }],
+          required: true
+        }
+      )
+
+      // flattening the array to show only one object
+      const newArray = data.map(item => {
+        const { userId, role, id } = item.dataValues
+        return { id, userId, role, ...item.user.dataValues }
+      })
+
+      res.json({
+        results: newArray
+      })
+      return
+    }
+
+    const newData = await db.CommunityUser.findAll(
       {
-        where: { communityId: req.params.id, active: true },
-        attributes: ['userId'],
+        where: { communityId, active: true },
+        attributes: ['userId', 'role'],
         include: [{
           model: db.User,
           attributes: ['firstName']
@@ -93,9 +106,23 @@ const getAllMembers = async (req, res) => {
         required: true
       }
     )
-    res.json({
-      data
+    return res.json({
+      results: newData
     })
+  } catch (error) {
+    res.status(400).json({ error })
+  }
+}
+
+// @desc Update the community users
+// @route PUT /api/community-users/:memberId/community/:id/
+// @access Public
+
+const updateMemberRole = async (req, res) => {
+  try {
+    const { role } = req.body
+    await db.CommunityUser.update({ role }, { where: { id: parseInt(req.params.memberId) } })
+    res.json({ message: 'Successfully role updated' })
   } catch (error) {
     res.status(400).json({ error })
   }
@@ -106,7 +133,6 @@ const getAllMembers = async (req, res) => {
 // @access  Private
 const searchMemberName = (req, res) => {
   const { name } = req.query
-  const order = req.query.order || 'ASC'
 
   db.CommunityUser.findAll(
     {
@@ -129,4 +155,4 @@ const searchMemberName = (req, res) => {
     .catch(err => res.json({ error: err }).status(400))
 }
 
-module.exports = { getCommunityUsers, followCommunity, getAllMembers, searchMemberName }
+module.exports = { followCommunity, getAllMembers, searchMemberName, updateMemberRole }

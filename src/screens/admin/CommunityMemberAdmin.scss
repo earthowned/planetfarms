@@ -1,0 +1,38 @@
+.com-member-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.com-member-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary-color);
+  padding: 12px;
+  text-align: center;
+
+  p {
+    flex: 1;
+  }
+}
+
+.com-member-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  text-align: center;
+  background: var(--dropdowns);
+
+  p {
+    flex: 1;
+  }
+}
+
+.access-btn {
+  cursor: pointer;
+}

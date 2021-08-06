@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import DropDown from '../dropDown/DropDown'
 import './Table.scss'
 
 // description:
@@ -18,7 +19,7 @@ import './Table.scss'
 // img: the path of the image you want to show as button
 // action: this holds function that is executed when the button is clicked (fn: returns id of the item)
 
-const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
+const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [], dropdown = { dropdownList: [] } }) => {
   const [property, setProperty] = useState([])
   const [header, setHeader] = useState([])
   const [tblData, setTblData] = useState([])
@@ -28,6 +29,10 @@ const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
     setTblData(tblData)
     setProperty(tblProperty || Object.keys(tblData[0]))
   }, [])
+
+  const getRole = (role, id) => {
+    dropdown.action(id, role)
+  }
 
   return (
     <div className='tbl-wrapper'>
@@ -40,7 +45,8 @@ const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
                 return <th key={index}>{propKey}</th>
               })
             }
-            {options.length && <th>Options</th>}
+            {options.length > 0 && <th>Options</th>}
+            {dropdown.dropdownList.length > 0 && <th>Options</th>}
           </tr>
         </thead>
         <tbody className='tbl__body'>
@@ -54,7 +60,7 @@ const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
                       return <td key={index}>{item[propkey]}</td>
                     })
                   }
-                  {options.length && <td>
+                  {options.length > 0 && <td>
                     <div className='tbl-options'>
                       {
                         options.map(el => {
@@ -63,6 +69,9 @@ const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
                       }
                     </div>
                   </td>}
+                  {
+                    dropdown.dropdownList.length > 0 && <td><DropDown getRole={getRole} id={item.id} title='change role' role={item.role} data={dropdown.dropdownList} /></td>
+                  }
                 </tr>
               )
             })
