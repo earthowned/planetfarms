@@ -4,18 +4,18 @@ const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 const CircularJSON = require('circular-json')
 const { changeFormat } = require('../helpers/filehelpers')
+const { paginatedResponse } = require('../utils/query')
 
 // @desc    Fetch all course
 // @route   GET /api/courses?pageNumber=${pageNumber}&category=${category}&search=${search}
 // @access  Public
 const getCourses = async (req, res) => {
   const pageSize = 6
-  const page = Number(req.query.pageNumber) || 1
-  const { category, search } = req.query
+  const { category, search, pageNumber = 1 } = req.query
   const order = req.query.order || 'ASC'
 
   const courses = await db.Courses.findAndCountAll({
-    offset: (page - 1) * pageSize,
+    offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
     include: [db.Lesson, db.Enroll, db.Category],
@@ -25,24 +25,20 @@ const getCourses = async (req, res) => {
     }
   })
 
-  courses.rows.forEach((course) => {
+  courses.rows.forEach(course => {
     course.thumbnail = changeFormat(course.thumbnail)
-    course.lessons.forEach((lesson) => {
+    course.lessons.forEach(lesson => {
       lesson.coverImg = changeFormat(lesson.coverImg)
     })
   })
 
-  const totalPages = Math.ceil(courses.count / pageSize)
-
-  res.status(200).json({
-    status: true,
-    message: 'fetched courses successfully',
-    data: courses.rows,
-    totalItems: courses.count,
-    page,
-    pageSize,
-    totalPages
-  })
+  res
+    .status(200)
+    .json({
+      status: true,
+      message: 'Fetched successfully',
+      ...paginatedResponse({ data: courses, pageSize, pageNumber })
+    })
 }
 
 // @desc    Add individual course
@@ -102,7 +98,7 @@ const getCourseById = async (req, res) => {
   if (!course) {
     throw new NotFoundError()
   }
-  course.lessons.forEach((lesson) => {
+  course.lessons.forEach(lesson => {
     lesson.coverImg = changeFormat(lesson.coverImg)
   })
   const thumbnail = changeFormat(course?.dataValues?.thumbnail)
