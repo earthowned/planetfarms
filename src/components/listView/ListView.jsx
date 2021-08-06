@@ -2,28 +2,32 @@ import { useState } from 'react'
 import CardLayout from '../../layout/cardLayout/CardLayout'
 import useSizeFinder from '../../utils/sizeFinder'
 import './ListView.scss'
+import ComponentLoadingWrapper from '../loadingWrapper/ComponentLoadingWrapper'
 
-const ListView = ({ data, title, setNewCollection, setModalActive, modalActive }) => {
+const ListView = ({ data, title, setNewCollection, setModalActive, modalActive, loadingState }) => {
   const windowWidth = useSizeFinder()
   return (
     <>
       <div className='listview-container'>
-        <h4>{title}</h4>
-        {
-          windowWidth > 1000
-            ? data && data.map(item => {
-                return (
-                  <ListViewCardComponent item={item} modalActive={modalActive} setModalActive={setModalActive} />
-                )
-              })
-            : <CardLayout data={data}>
-              {data && data.map(item => {
-                return (
-                  <ListViewCardComponent item={item} modalActive={modalActive} setModalActive={setModalActive} />
-                )
-              })}
-              </CardLayout>
-        }
+        <ComponentLoadingWrapper loadingState={loadingState}>
+          <h4>{title}</h4>
+          {
+            windowWidth > 1000
+              ? data && data.map(item => {
+                  return (
+                    <ListViewCardComponent item={item} modalActive={modalActive} setModalActive={setModalActive} />
+                  )
+                })
+              : <CardLayout data={data}>
+                {data && data.map(item => {
+                  return (
+                    <ListViewCardComponent item={item} modalActive={modalActive} setModalActive={setModalActive} />
+                  )
+                })}
+                </CardLayout>
+          }
+        </ComponentLoadingWrapper>
+
       </div>
     </>
   )
