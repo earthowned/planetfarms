@@ -48,7 +48,7 @@ const LessonBlock = ({ data, courseId, refetch }) => {
                         </div>
                       </div>
                       <LessonActions id={lesson.id} />
-                    </div>
+                    
                     <LessonActions id={lesson.id} refetch={refetch} />
                   </div>
                 </React.Fragment>
