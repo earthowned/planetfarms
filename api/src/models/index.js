@@ -43,7 +43,9 @@ const db = {
   Question: require('./questionModel')(sequelize, Sequelize.DataTypes),
   Enroll: require('./enrollModel')(sequelize, Sequelize.DataTypes),
   UserTest: require('./userTestModel')(sequelize, Sequelize.DataTypes),
-  UserTestAnswer: require('./userTestAnswerModel')(sequelize, Sequelize.DataTypes)
+  UserTestAnswer: require('./userTestAnswerModel')(sequelize, Sequelize.DataTypes),
+  Category: require('./categoryModel')(sequelize, Sequelize.DataTypes),
+  Resource: require('./resourceModel')(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach((modelName) => {
