@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Background from '../background/Background'
+import CourseSelectBtn from './CourseSelectBtn'
+import courseType from './CourseType'
 import PopupModal from '../modal/Modal'
 import './CourseCreateModal.scss'
 
@@ -15,6 +16,7 @@ const CourseCreateModal = ({
     setCreateLiveCourse(true)
     closeModal(false)
   }
+
   return (
     <PopupModal
       width='600px'
@@ -25,28 +27,17 @@ const CourseCreateModal = ({
     >
       <h4>Choose what type of course would you like to create</h4>
       <div className='course-type selected'>
-        <button
-          onClick={() => setSelectedBtn('usual')}
-          className={selectedBtn === 'usual' ? selectedBtn : ''}
-        >
-          <Background staticImg='/img/farmer.svg'>
-            <div>
-              <h3>Usual course</h3>
-              <p>Online course with lessons and tests</p>
-            </div>
-          </Background>
-        </button>
-        <button
-          onClick={() => setSelectedBtn('live')}
-          className={selectedBtn === 'live' ? selectedBtn : ''}
-        >
-          <Background staticImg='/img/live-exp.png'>
-            <div>
-              <h3>Live experience</h3>
-              <p>Live lesson session with your users</p>
-            </div>
-          </Background>
-        </button>
+        {courseType.map((type) => (
+          <CourseSelectBtn
+            key={type.id}
+            courseType={type.type}
+            courseName={type.name}
+            desc={type.desc}
+            selectedBtn={selectedBtn}
+            setSelectedBtn={setSelectedBtn}
+            img={type.img}
+          />
+        ))}
       </div>
       <div className='course-create-modal-btn'>
         <button
