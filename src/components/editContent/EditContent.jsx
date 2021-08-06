@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
-import { GET_VIDEO, VIDEO_COVER, LESSON_IMG } from '../../../utils/urlConstants'
+import { GET_VIDEO, VIDEO_COVER, LESSON_IMG } from '../../utils/urlConstants'
 import Text from '../../screens/courseManager/addLesson/Text'
 import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
-// import Image from '../../../components/lessonImage/Image'
-// import Video from '../../../components/videoPlayer/Video'
-// import Text from '../addLesson/Text'
 
 const EditContent = ({
   data,
@@ -32,60 +29,67 @@ const EditContent = ({
       return data?.videoResource?.preview
     }
   }
+  console.log(data);
   return (
-    <>
-      {data
-        .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
-        .map((data, index) => (
-          <div key={index}>
-            <Text
-              heading={data?.textHeading}
-              desc={data?.textDescription}
-              isEditable
-              setEditTextModel={setEditTextModel}
-              modelPopUp={modelPopUp}
-              id={data?.id || data?.itemId}
-              onRemove={data?.id ? removeTextItem : removeLocalData}
-            />
-            <Video
-              title={data?.videoTitle}
-              description={data?.videoDescription}
-              url={
-                data?.videoLink === '' || data?.videoLink === undefined
-                  ? video(data)
-                  : data?.videoLink
-              }
-              thumbnail={
-                typeof data?.videoCover === 'string'
-                  ? `${VIDEO_COVER}${data?.videoCover}`
-                  : data?.videoCover?.preview
-              }
-              setEditVideoModel={setEditVideoModel}
-              isEditable
-              id={data?.id || data?.itemId}
-              modelPopUp={modelPopUp}
-              onRemove={data?.id ? removeVideo : removeLocalData}
-            />
-
-            {data?.lessonImg === undefined ? (
-              ''
-            ) : (
-              <Image
+    <>{
+      data && <>
+       {
+        data?.photos && data?.photos.map(item => {
+          return  <Image
                 src={
-                  typeof data?.lessonImg === 'string'
-                    ? `${LESSON_IMG}${data?.lessonImg}`
-                    : data?.lessonImg.preview
+                  typeof item?.lessonImg === 'string'
+                    ? `${LESSON_IMG}${item?.lessonImg}`
+                    : item?.lessonImg.preview
                 }
-                id={data?.id || data?.itemId}
+                id={item?.id || item?.itemId}
                 modelPopUp={modelPopUp}
                 setEditPhotoModel={setEditPhotoModel}
                 isEditable
-                desc={data?.isImgDesc === true && data?.photoDescription}
-                onRemove={data?.id ? removePhoto : removeLocalData}
+                desc={item?.isImgDesc === true && item?.photoDescription}
+                onRemove={item?.id ? removePhoto : removeLocalData}
               />
-            )}
-          </div>
-        ))}
+        })
+      }
+
+      {
+        data?.texts && data?.texts.map(item => {
+          return  <Text
+              heading={item?.textHeading}
+              desc={item?.textDescription}
+              isEditable
+              setEditTextModel={setEditTextModel}
+              modelPopUp={modelPopUp}
+              id={item?.id || item?.itemId}
+              onRemove={item?.id ? removeTextItem : removeLocalData}
+            />
+        })
+      }
+
+      {
+        data?.videos && data?.videos.map(item => {
+          return  <Video
+              title={item?.videoTitle}
+              description={item?.videoDescription}
+              url={
+                item?.videoLink === '' || item?.videoLink === undefined
+                  ? video(item)
+                  : item?.videoLink
+              }
+              thumbnail={
+                typeof item?.videoCover === 'string'
+                  ? `${VIDEO_COVER}${item?.videoCover}`
+                  : item?.videoCover?.preview
+              }
+              setEditVideoModel={setEditVideoModel}
+              isEditable
+              id={item?.id || item?.itemId}
+              modelPopUp={modelPopUp}
+              onRemove={item?.id ? removeVideo : removeLocalData}
+            />
+        })
+      }
+      </>
+    }
     </>
   )
 }

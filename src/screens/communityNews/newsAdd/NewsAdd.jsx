@@ -152,44 +152,7 @@ console.log(newsSingleData);
       />
     
       {/* Edit component for news */}
-      {newsSingleData && <>
-       {
-        newsSingleData?.photos && newsSingleData?.photos.map(item => {
-          return <Image
-                  src={`${LESSON_IMG}${item?.lessonImg}`}
-                  desc={
-                  item?.isImgDesc === true && item?.photoDescription
-                     }
-                 />
-        })
-      }
-
-      {
-        newsSingleData?.texts && newsSingleData?.texts.map(item => {
-          return <Text
-          heading={item?.textHeading}
-          desc={item?.textDescription}
-        />
-        })
-      }
-
-      {
-        newsSingleData?.videos && newsSingleData?.videos.map(item => {
-          return <Video
-            title={item?.videoTitle}
-            description={item?.videoDescription}
-            url={
-              item?.videoLink === 'undefined'
-                ? `${GET_VIDEO}${item?.videoResource}`
-                : item?.videoLink
-              }
-            thumbnail={`${VIDEO_COVER}${item?.videoCover}`}
-          />
-        })
-      }
-      </>
-      }
-
+     
       {
         newsSingleData && <EditContent data={newsSingleData}/>
       }
