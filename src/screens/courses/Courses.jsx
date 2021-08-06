@@ -21,7 +21,7 @@ const Courses = () => {
   }
 
   function createNewCourseFunc () {
-    setCreateNewCourse(true)
+    //setCreateNewCourse(true)
     setCreateCourse(false)
   }
 
