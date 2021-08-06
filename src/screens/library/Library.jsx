@@ -12,6 +12,7 @@ import SubHeader from '../../components/subHeader/SubHeader'
 import { useHistory } from 'react-router-dom'
 import useGetFetchData from '../../utils/useGetFetchData'
 import { GET_LIBRARY } from '../../utils/urlConstants'
+import ComponentLoadingWrapper from '../../components/loadingWrapper/ComponentLoadingWrapper'
 
 const Library = () => {
   const userLogin = useSelector((state) => state.userLogin)
@@ -53,7 +54,7 @@ const Library = () => {
                 setNewCollection={setNewCollection}
                 modalActive={modalActive}
                 setModalActive={setModalActive}
-                loadingState={resourceList.loading}
+                // loadingState={resourceList.loading}
               />
             </div>
           ))}
@@ -73,20 +74,21 @@ const LibraryCategory = ({ title, search, setNewCollection, modalActive, setModa
     GET_LIBRARY + '?pageNumber=' + pageNumber + '&category=' + title.toLowerCase() + '&search=' + (search || ''),
     { title, pageNumber, search }
   )
-  if (isLoading) {
-    return (<div>Loading...</div>)
-  }
+  // if (isLoading) {
+  //   return (<div>Loading...</div>)
+  // }
   return (
     libraryData?.resources.length > 0
-      ? <>
+      ? <ComponentLoadingWrapper loadingState={isLoading}>
         <ListView
           title={title} data={libraryData?.resources}
           setNewCollection={setNewCollection}
           modalActive={modalActive}
           setModalActive={setModalActive}
+          loadingState={isLoading}
         />
         <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={libraryData} />
-      </> : <></>
+      </ComponentLoadingWrapper> : <ComponentLoadingWrapper loadingState={isLoading} />
   )
 }
 
