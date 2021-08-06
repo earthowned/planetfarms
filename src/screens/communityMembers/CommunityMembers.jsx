@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listMembers, searchMembers } from '../../actions/memberActions'
+import { listMembers } from '../../actions/memberActions'
 import CardImage from '../../components/cardImage/CardImage'
 import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
@@ -12,7 +12,7 @@ function CommunityMembers ({ history }) {
   const [col, setCol] = useState(3)
   const windowWidth = useSizeFinder()
   const dispatch = useDispatch()
-  const [search, setSearch] = useState(null)
+  const [search, setSearch] = useState('')
   const memberList = useSelector(state => state.listMember)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -23,24 +23,13 @@ function CommunityMembers ({ history }) {
     ? JSON.parse(window.localStorage.getItem('currentCommunity'))
     : null
 
-  useEffect(() => {
-    if (userInfo) {
-      if (search) {
-        if (col === 3) {
-          dispatch(searchMembers(search, { sort: '', pageNumber, pageSize: 9 }))
-        } else if (col === 4) {
-          dispatch(searchMembers(search, { sort: '', pageNumber, pageSize: 8 }))
-        }
-      }
-      if (!search) {
-        if (col === 3) {
-          dispatch(listMembers({ sort: '', pageNumber, pageSize: 9 }))
-        } else if (col === 4) {
-          dispatch(listMembers({ sort: '', pageNumber, pageSize: 8 }))
-        }
-      }
+  const pageSizeByColumn = (callbackFunc, params) => {
+    if (col === 3) {
+      return callbackFunc({ ...params, pageSize: 9 })
+    } else if (col === 4) {
+      return callbackFunc({ ...params, pageSize: 8 })
     }
-  }, [search, dispatch, history, userInfo, pageNumber, col])
+  }
 
   useEffect(() => {
     if (windowWidth < 1439 && windowWidth > 768) {
@@ -49,6 +38,12 @@ function CommunityMembers ({ history }) {
       setCol(4)
     }
   }, [windowWidth])
+
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(pageSizeByColumn(listMembers, { sort: '', pageNumber, pageSize: 8, search }))
+    }
+  }, [search, dispatch, history, userInfo, pageNumber, col])
 
   return (
     <DashboardLayout title={currentCommunity.name}>

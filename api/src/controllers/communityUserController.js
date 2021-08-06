@@ -83,6 +83,7 @@ const followCommunity = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
   try {
+    const { search } = req.query
     const pageSize = Number(req.query.pageSize) || 8
     const page = Number(req.query.pageNumber) || 1
     const order = req.query.order || 'ASC'
@@ -94,10 +95,16 @@ const getAllMembers = async (req, res) => {
         limit: pageSize,
         order: ordervalue,
         where: { communityId: req.params.id, active: true },
-        attributes: ['id'],
+        attributes: ['id', 'createdAt'],
         include: [{
           model: db.User,
-          attributes: ['email', 'firstName']
+          attributes: ['email', 'firstName'],
+          where: {
+            [Op.or]: [
+              { firstName: { [Op.iLike]: '%' + search + '%' } },
+              { email: { [Op.iLike]: '%' + search + '%' } }
+            ]
+          }
         }],
         required: true
       }
@@ -118,48 +125,4 @@ const getAllMembers = async (req, res) => {
   }
 }
 
-// @desc    Search Name
-// @route   POST /api/news/community/:id/search
-// @access  Private
-const searchMemberName = (req, res) => {
-  const { name, pageSize, pageNumber, order } = req.query
-  const page = Number(pageNumber) || 1
-  const ordervalue = [['createdAt', order || 'ASC']]
-
-  db.CommunityUser.findAndCountAll(
-    {
-      offset: (page - 1) * pageSize,
-      limit: pageSize,
-      order: ordervalue,
-      where: { communityId: req.params.id, active: true },
-      attributes: ['id', 'createdAt'],
-      include: [{
-        model: db.User,
-        attributes: ['email', 'firstName'],
-        where: {
-          [Op.or]: [
-            { firstName: { [Op.iLike]: '%' + name + '%' } },
-            { email: { [Op.iLike]: '%' + name + '%' } }
-          ]
-        }
-      }],
-      required: true
-    }
-  )
-    .then(data => {
-      const totalPages = Math.ceil(data.count / pageSize)
-      res.json({
-        communities_users: data.rows.map((rec) => ({
-          ...rec.dataValues,
-          filename: changeFormat(rec.filename)
-        })),
-        totalItems: data.count,
-        totalPages,
-        page,
-        pageSize
-      }).status(200)
-    })
-    .catch(err => res.json({ error: err.message }).status(400))
-}
-
-module.exports = { getCommunityUsers, followCommunity, getAllMembers, searchMemberName }
+module.exports = { getCommunityUsers, followCommunity, getAllMembers }
