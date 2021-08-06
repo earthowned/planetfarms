@@ -23,7 +23,6 @@ const AdminCoursePage = () => {
   if (isLoading) {
     return <span>Loading..</span>
   }
-
   const creator = data?.data?.creator
   const userId = userInfo.id
   if (userId !== creator) {
