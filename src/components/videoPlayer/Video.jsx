@@ -6,7 +6,7 @@ import './Video.scss'
 
 const Video = ({ title, description, url, thumbnail }) => {
   const [showInfo, setShowInfo] = useState(false)
-console.log(url);
+
   return (
     <>
       {url ? (

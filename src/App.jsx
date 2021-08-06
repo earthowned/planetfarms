@@ -79,6 +79,7 @@ function App () {
             <PrivateRoute component={MobileMessage} path='/messenger/:id' exact />
             <PrivateRoute component={CommunityPagenews} exact path='/community-page-news/:id' />
             <PrivateRoute component={NewsAdd} path='/community-news/:title' exact />
+            <PrivateRoute component={NewsAdd} path='/community-news/edit/:id' exact />
             <PrivateRoute component={CommunityNewsViewPage} path='/community-news-view-page/:id' exact />
             <PrivateRoute component={AllCommunitiesCard} path='/community-switching' exact />
             <PrivateRoute component={CommunityMembers} path='/community-members/:id' exact />

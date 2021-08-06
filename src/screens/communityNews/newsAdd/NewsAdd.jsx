@@ -13,9 +13,18 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
 import ContentAdd from '../../../components/contentAdd/ContentAdd'
+import { getApi } from '../../../utils/apiFunc'
+import DragDrop from '../../../components/dragDrop/DragDrop'
+import Image from '../../../components/lessonImage/Image'
+import Text from '../../courseManager/addLesson/Text'
+import Video from '../../../components/videoPlayer/Video'
+import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../../utils/urlConstants'
 
 const NewsAdd = () => {
   const { currentCommunity } = useSelector(state => state.activeCommunity)
+  // fetching category from route
+  const {state} = useLocation();
+
   const [createVideoModal, setCreateVideoModal] = useState(false)
   const [createImageModal, setCreateImageModal] = useState(false)
   const [createTextModal, setCreateTextModal] = useState(false)
@@ -23,24 +32,31 @@ const NewsAdd = () => {
   const [imageActive, setImageActive] = useState(true)
   const [textActive, setTextActive] = useState(true)
   const [newsData, setNewsData] = useState([])
+  const [newsSingleData, setNewsSingleData] = useState([])
+  const [category, setCategory] = useState(state?.category || null)
+  const [newsCover, setNewsCover] = useState(null);
 
   const news = useSelector((state) => (state.addNewNews !== {} ? state.addNewNews : ''))
   const { register, errors, handleSubmit } = useForm()
 
-  const { title} = useParams()
+  const { title, id} = useParams()
 
   const dispatch = useDispatch();
 
-  // fetching category from route
-  const {state} = useLocation();
-  const {category} = state;
-
   useEffect(() => {
-    setNewsData([{title, category}])
+    if(id) {
+      getSingleNews()
+    } else {
+      setNewsData([{title, category}])
+    }
   }, [])
 
+  async function getSingleNews () {
+    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
+    setNewsSingleData(data)
+  }
+
   const submitNewsForm = ({ title }) => {
-    
     const newData = convertArrToObject(newsData)
     newData.title = title
     newData.category = category;
@@ -48,7 +64,6 @@ const NewsAdd = () => {
   }
 
   // converting the arrray into object for submission
-
   function convertArrToObject (arr) {
     let newData = {};
     arr.map(item => {
@@ -59,12 +74,16 @@ const NewsAdd = () => {
     return newData;
   }
 
+  const editNewsForm = () => {
+    console.log(newsCover)
+  }
+
   return (
     <>
       {createVideoModal && <NewsCreateModal type='video' videoActive={videoActive} setVideoActive={setVideoActive} lessonData={newsData} setLessonData={setNewsData} />}
       {createImageModal && <NewsCreateModal type='image' imageActive={imageActive} setImageActive={setImageActive} lessonData={newsData} setLessonData={setNewsData} />}
       {createTextModal && <NewsCreateModal type='text' textActive={textActive} setTextActive={setTextActive} lessonData={newsData} setLessonData={setNewsData} />}
-      <DashboardLayout title='Add News'>
+      <DashboardLayout title={newsSingleData ? 'Edit News' : 'Add News'}>
         <BackButton location={`/community-page-news/${currentCommunity.slug}`} />
         <AddNewsContent
           setVideoModal = {setCreateVideoModal}
@@ -74,11 +93,15 @@ const NewsAdd = () => {
           errors={errors}
           setNewsData = {setNewsData}
           newsData = {newsData}
+          newsSingleData = {newsSingleData}
+          setNewsCover={setNewsCover}
         />
 
-        <NewsSaveModal
-          onClick={handleSubmit(submitNewsForm)}
-        />
+        {
+          newsSingleData 
+          ? <NewsSaveModal onClick={handleSubmit(editNewsForm)}  name="Edit" />
+          : <NewsSaveModal onClick={handleSubmit(submitNewsForm)} name="Save" />
+        }
 
       </DashboardLayout>
     </>
@@ -91,7 +114,9 @@ const AddNewsContent = ({
   setVideoModal,
   setImageModal,
   setTextModal,
-  register
+  register,
+  newsSingleData,
+  setNewsCover
 }) => {
 
   const [title, setTitle] = useState('');
@@ -100,8 +125,13 @@ const AddNewsContent = ({
     if(newsData.length) {
       setTitle(newsData[0].title)
     }
-  }, [newsData])
 
+    if(newsSingleData) {
+      setTitle(newsSingleData.title)
+    }
+  }, [newsData, newsSingleData])
+
+console.log(newsSingleData);
   return  <div className='admin-lesson-create-container'>
       <ErrorText
         className='errorMsg'
@@ -119,16 +149,55 @@ const AddNewsContent = ({
           }
         })}
       />
+    
+      {/* Edit component for news */}
+      {newsSingleData && <>
+       {
+        newsSingleData?.photos && newsSingleData?.photos.map(item => {
+          return <Image
+                  src={`${LESSON_IMG}${item?.lessonImg}`}
+                  desc={
+                  item?.isImgDesc === true && item?.photoDescription
+                     }
+                 />
+        })
+      }
+
+      {
+        newsSingleData?.texts && newsSingleData?.texts.map(item => {
+          return <Text
+          heading={item?.textHeading}
+          desc={item?.textDescription}
+        />
+        })
+      }
+
+      {
+        newsSingleData?.videos && newsSingleData?.videos.map(item => {
+          return <Video
+            title={item?.videoTitle}
+            description={item?.videoDescription}
+            url={
+              item?.videoLink === 'undefined'
+                ? `${GET_VIDEO}${item?.videoResource}`
+                : item?.videoLink
+              }
+            thumbnail={`${VIDEO_COVER}${item?.videoCover}`}
+          />
+        })
+      }
+      </>
+      }
 
       <ContentAdd data={newsData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
     </div>
 }
 
-const NewsSaveModal = ({ pathId, onClick }) => {
+const NewsSaveModal = ({ pathId, onClick, name}) => {
   const history = useHistory()
   return (
     <div className='save-lesson-modal'>
-      <h4>Do you want to save News?</h4>
+      <h4>Do you want to {name} News?</h4>
       <div>
         <button
           className='secondary-btn'
@@ -142,7 +211,7 @@ const NewsSaveModal = ({ pathId, onClick }) => {
           id='lesson-save-btn'
           onClick={onClick}
         >
-          Save News
+          {name} News
         </button>
       </div>
     </div>
