@@ -53,9 +53,7 @@ const resizeImage = (req, res, next) => {
   const { format, height, width } = { format: 'webp', ...req.body }
   try {
     // user might not send image sometimes
-    if (!req.file) {
-      return next()
-    }
+    if (!req.file) return next()
 
     const filename = path
       .basename(req.file.path)

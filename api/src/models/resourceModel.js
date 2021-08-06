@@ -1,22 +1,20 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Resources = db.define('resources',
-  {
-    title: {
-      type: Sequelize.TEXT
+module.exports = (sequelize, DataTypes) => {
+  const Resources = sequelize.define('resources',
+    {
+      title: {
+        type: DataTypes.TEXT
+      },
+      filename: {
+        type: DataTypes.STRING
+      },
+      description: {
+        type: DataTypes.TEXT
+      },
+      resourceType: {
+        type: DataTypes.STRING
+      }
     },
-    filename: {
-      type: Sequelize.STRING
-    },
-    description: {
-      type: Sequelize.TEXT
-    },
-    resourceType: {
-      type: Sequelize.STRING
-    }
-  },
-  { timestamps: true }
-)
-
-module.exports = Resources
+    { timestamps: true }
+  )
+  return Resources
+}

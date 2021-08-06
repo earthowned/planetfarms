@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT
     },
     dateOfBirth: {
-      type: DataTypes.DATE
+      type: DataTypes.DATEONLY
     },
     lastLogin: {
       type: DataTypes.DATE

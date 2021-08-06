@@ -18,7 +18,7 @@ const getCourses = async (req, res) => {
     offset: (page - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson, db.Enroll],
+    include: [db.Lesson, db.Enroll, db.Category],
     where: {
       ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
       ...(category ? { categoryId: Number(category) } : {})
@@ -123,24 +123,16 @@ const getCourseById = async (req, res) => {
 // @desc    Delete a course
 // @route   delete /api/courses/:id
 // @access  Public
-const deleteCourse = (req, res) => {
-  const id = req.params.id
-  db.Courses.findOne({
-    where: {
-      id: id
-    }
-  }).then((resource) => {
-    if (resource) {
-      const { id } = resource
-      db.Courses.destroy({ where: { id } })
-        .then(() =>
-          res.json({ message: 'Course Deleted Successfully' }).status(200)
-        )
-        .catch((err) => res.json({ error: err.message }).status(400))
-    } else {
-      res.status(404)
-      throw new Error('Course not found')
-    }
+const deleteCourse = async (req, res) => {
+  const { id } = req.params
+  const course = await db.Courses.destroy({ where: { id } })
+  if (!course) {
+    throw new NotFoundError()
+  }
+  res.status(202).json({
+    status: true,
+    message: 'course deleted successfully',
+    data: course
   })
 }
 
