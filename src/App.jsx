@@ -106,16 +106,20 @@ function App () {
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' exact />
             <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' exact />
             <PrivateRoute
-              component={() =>
+              component={() => (
                 <DndProvider backend={HTML5Backend}>
                   <AddTest />
-                </DndProvider>} path='/admin/add-test/:lessonId' exact
+                </DndProvider>
+              )}
+              path='/admin/add-test/:lessonId' exact
             />
             <PrivateRoute
-              component={() =>
+              component={() => (
                 <DndProvider backend={HTML5Backend}>
                   <AddTest />
-                </DndProvider>} path='/admin/edit-test/:lessonId'
+                </DndProvider>
+              )}
+              path='/admin/edit-test/:lessonId'
             />
             <PrivateRoute component={Category} path='/admin/categories' />
             <PrivateRoute component={MyProfile} exact path='/myProfile' />

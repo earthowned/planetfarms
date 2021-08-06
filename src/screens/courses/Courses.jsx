@@ -1,29 +1,18 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import nav from './courseNav'
-import './Courses.css'
 import useGetFetchData from '../../utils/useGetFetchData'
 import { CATEGORY } from '../../utils/urlConstants'
 
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import CoursesCard from '../../components/coursesCard/CoursesCard'
-import GroupModal from '../../components/groupModal/GroupModal'
-import SimpleModal from '../../components/simpleModal/SimpleModal'
-
-import CourseCreateModal from '../../components/courseCreateModal/CourseCreateModal'
-import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
-import { PurchaseModal } from '../../components/purchaseModal/PurchaseModal'
+import PopUpModal from './PopUpModal'
 import SubHeader from '../../components/subHeader/SubHeader'
+import './Courses.css'
 
 const Courses = () => {
-  const userLogin = useSelector((state) => state.userLogin)
-  const [active, setActive] = useState(false)
   const [modalactive, setModalActive] = useState(false)
-  const [newCollectionactive, setNewCollectionActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
-  const [createNewCourse, setCreateNewCourse] = useState(false)
   const [purchaseModal, setPurchaseModal] = useState(false)
-  const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
   const [search, setSearch] = useState(null)
 
   const { data, isLoading } = useGetFetchData('courseCategory', CATEGORY)
@@ -31,39 +20,16 @@ const Courses = () => {
     return <span>Loading...</span>
   }
 
-  function createNewCourseFunc () {
-    setCreateNewCourse(true)
-    setCreateCourse(false)
-  }
   return (
     <>
-      {purchaseModal && (
-        <PurchaseModal
-          clickHandler={setPurchaseModal}
-          setPurchaseSuccessModal={setPurchaseSuccessModal}
-        />
-      )}
-      {modalactive && (
-        <GroupModal
-          clickHandler={setModalActive}
-          setNewCollection={setNewCollectionActive}
-          name='Add to collection'
-          btnName='Add to collection'
-        />
-      )}
-      {newCollectionactive && (
-        <SimpleModal setNewCollection={setNewCollectionActive} name='Courses' />
-      )}
-      {createCourse && (
-        <CourseCreateModal
-          setNewCollection={setNewCollectionActive}
-          clickHandler={setCreateCourse}
-          collectionAdded={createNewCourseFunc}
-        />
-      )}
-      {createNewCourse && (
-        <NewCourseCreateModal clickHandler={setCreateNewCourse} />
-      )}
+      <PopUpModal
+        modalactive={modalactive}
+        setModalActive={setModalActive}
+        createCourse={createCourse}
+        setCreateCourse={setCreateCourse}
+        purchaseModal={purchaseModal}
+        setPurchaseModal={setPurchaseModal}
+      />
       <DashboardLayout title='All courses'>
         <div className='courses-main-container'>
           <SubHeader

@@ -1,43 +1,54 @@
-import React from 'react'
-import Background from '../background/Background'
+import React, { useState } from 'react'
+import CourseSelectBtn from './CourseSelectBtn'
+import courseType from './CourseType'
+import PopupModal from '../modal/Modal'
 import './CourseCreateModal.scss'
 
-const CourseCreateModal = ({ clickHandler, collectionAdded }) => {
+const CourseCreateModal = ({
+  collectionAdded,
+  openModal,
+  closeModal,
+  setCreateLiveCourse
+}) => {
+  const [selectedBtn, setSelectedBtn] = useState('')
+
+  const createLiveCourse = () => {
+    setCreateLiveCourse(true)
+    closeModal(false)
+  }
+
   return (
-    <div className='course-create-container'>
-      <div className='course-create-modal'>
-        <div className='course-create-modal-header'>
-          <h3>Add new course</h3>
-          <button onClick={() => clickHandler(false)}>
-            <img src='/img/close-outline.svg' alt='close-outline' />
-          </button>
-        </div>
-        <h4>Choose what type of course would you like to create</h4>
-        <div className='course-type'>
-          <button>
-            <Background staticImg='/img/farmer.svg'>
-              <div>
-                <h3>Usual course</h3>
-                <p>Online course with lessons and tests</p>
-              </div>
-            </Background>
-          </button>
-          <button>
-            <Background staticImg='/img/live-exp.png'>
-              <div>
-                <h3>Live experience</h3>
-                <p>Live lesson session with your users</p>
-              </div>
-            </Background>
-          </button>
-        </div>
-        <div className='course-create-modal-btn'>
-          <button className='default-btn' onClick={() => collectionAdded()}>
-            Continue
-          </button>
-        </div>
+    <PopupModal
+      width='600px'
+      height='500px'
+      title='Add new course'
+      openModal={openModal}
+      closeModal={closeModal}
+    >
+      <h4>Choose what type of course would you like to create</h4>
+      <div className='course-type selected'>
+        {courseType.map((type) => (
+          <CourseSelectBtn
+            key={type.id}
+            courseType={type.type}
+            courseName={type.name}
+            desc={type.desc}
+            selectedBtn={selectedBtn}
+            setSelectedBtn={setSelectedBtn}
+            img={type.img}
+          />
+        ))}
       </div>
-    </div>
+      <div className='course-create-modal-btn'>
+        <button
+          className='default-btn'
+          onClick={() =>
+            selectedBtn === 'usual' ? collectionAdded() : createLiveCourse()}
+        >
+          Continue
+        </button>
+      </div>
+    </PopupModal>
   )
 }
 
