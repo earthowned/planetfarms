@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import { GET_VIDEO, VIDEO_COVER, LESSON_IMG } from '../../../utils/urlConstants'
-import Image from '../../../components/lessonImage/Image'
-import Video from '../../../components/videoPlayer/Video'
-import Text from '../addLesson/Text'
+import Text from '../../screens/courseManager/addLesson/Text'
+import Image from '../lessonImage/Image'
+import Video from '../videoPlayer/Video'
+// import Image from '../../../components/lessonImage/Image'
+// import Video from '../../../components/videoPlayer/Video'
+// import Text from '../addLesson/Text'
 
 const EditContent = ({
   data,
