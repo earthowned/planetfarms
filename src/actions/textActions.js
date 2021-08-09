@@ -1,23 +1,29 @@
-import { Axios, ADD_LESSON_TEXT } from '../utils/urlConstants'
+import { Axios, GET_LESSON_TEXT, ADD_LESSON_TEXT } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
 
 import {
   LESSSON_TEXT_CREATE_REQUEST,
   LESSSON_TEXT_CREATE_SUCCESS,
-  LESSSON_TEXT_CREATE_FAIL
+  LESSSON_TEXT_CREATE_FAIL,
+  LESSSON_TEXT_UPDATE_REQUEST,
+  LESSSON_TEXT_UPDATE_SUCCESS,
+  LESSSON_TEXT_UPDATE_FAIL,
+  LESSSON_TEXT_DELETE_REQUEST,
+  LESSSON_TEXT_DELETE_SUCCESS,
+  LESSSON_TEXT_DELETE_FAIL
 } from '../constants/textConstants'
 
 export const createText =
-  (textHeading, textDescription, lessonId, newsId) => async (dispatch) => {
-    const textData = { textHeading, textDescription, lessonId, newsId }
+  (textHeading, textDescription, lessonId) => async (dispatch) => {
+    const textData = { textHeading, textDescription, lessonId }
 
     try {
       dispatch({ type: LESSSON_TEXT_CREATE_REQUEST })
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-      const { data } = await Axios.post(ADD_LESSON_TEXT, textData, config)
+      const { data } = await postApi(
+        dispatch,
+        ADD_LESSON_TEXT,
+        textData
+      )
       dispatch({ type: LESSSON_TEXT_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({
@@ -29,3 +35,51 @@ export const createText =
       })
     }
   }
+
+export const updateText =
+  (textId, textHeading, textDescription, setEditTextModel, refetch) =>
+    async (dispatch) => {
+      const textData = { textHeading, textDescription }
+
+      try {
+        dispatch({ type: LESSSON_TEXT_UPDATE_REQUEST })
+        const config = {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+        const { data } = await Axios.put(
+          GET_LESSON_TEXT + `/${textId}`,
+          textData,
+          config
+        )
+        dispatch({ type: LESSSON_TEXT_UPDATE_SUCCESS, payload: data })
+        refetch()
+        setEditTextModel(false)
+      } catch (error) {
+        dispatch({
+          type: LESSSON_TEXT_UPDATE_FAIL,
+          payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
+      }
+    }
+
+export const deleteText = (id, refetch) => async (dispatch) => {
+  try {
+    dispatch({ type: LESSSON_TEXT_DELETE_REQUEST })
+    const { data } = await Axios.delete(GET_LESSON_TEXT + `/${id}`)
+    dispatch({ type: LESSSON_TEXT_DELETE_SUCCESS, payload: data })
+    refetch()
+  } catch (error) {
+    dispatch({
+      type: LESSSON_TEXT_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
