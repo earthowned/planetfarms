@@ -58,12 +58,12 @@ const updatePhoto = async (req, res) => {
   let lessonImg = ''
 
   const singlePhoto = await db.Photo.findOne({where: {id: req.params.id}});
-  console.log(...req.body);
   if (req.file) {
     lessonImg = req.file.filename
   } else {
     lessonImg = singlePhoto.dataValues.lessonImg
   }
+  
   const photo = await db.Photo.update({ ...req.body, lessonImg }, {where: {id: req.params.id}})
   res.status(201).json({
     status: true,

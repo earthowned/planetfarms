@@ -48,16 +48,11 @@ export const createLessonImg =
 export const updatePhoto =
   (id, lessonImg, photoDescription, isImgDesc, setEditPhotoModel) =>
     async (dispatch) => {
-      let lessonImgData;
+      const lessonImgData = new FormData()
 
-      if(lessonImg) {
-        lessonImgData = new FormData()
         lessonImgData.append('img', lessonImg)
         lessonImgData.append('photoDescription', photoDescription)
         lessonImgData.append('isImgDesc', isImgDesc)
-      }
-
-      lessonImgData = {photoDescription, isImgDesc}
 
       try {
         dispatch({ type: LESSSON_PHOTO_UPDATE_REQUEST })
@@ -72,7 +67,7 @@ export const updatePhoto =
           config
         )
         dispatch({ type: LESSSON_PHOTO_UPDATE_SUCCESS, payload: data })
-        // setEditPhotoModel(false)
+        setEditPhotoModel(false)
       } catch (error) {
         dispatch({
           type: LESSSON_PHOTO_UPDATE_FAIL,
