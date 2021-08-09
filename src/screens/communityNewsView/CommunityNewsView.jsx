@@ -78,6 +78,10 @@ const NewsSingleView = ({ news }) => {
         </div>
       </div>
 
+      <Image
+          src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${news?._attachments}`}
+        />
+
     {
         news?.photos && news?.photos.map(item => {
           return <Image

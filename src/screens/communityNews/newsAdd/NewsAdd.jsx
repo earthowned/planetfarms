@@ -55,10 +55,14 @@ const NewsAdd = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if(title) {
+      setNewsData([{title, category}])
+    }
+  }, [])
+
+  useEffect(() => {
     if(id) {
       getSingleNews()
-    } else {
-      setNewsData([{title, category}])
     }
   }, [])
 
@@ -67,11 +71,16 @@ const NewsAdd = () => {
     setNewsSingleData(data)
   }
 
+  console.log(id, title)
+  console.log('news single data' + newsSingleData)
+
   const submitNewsForm = ({ title }) => {
-    const newData = convertArrToObject(newsData)
-    newData.title = title
-    newData.category = category;
-    dispatch(createNews(newsData, newData));
+    // const newData = convertArrToObject(newsData)
+    // newData.title = title
+    // newData.category = category;
+    newsData[0].title = title
+    newsData[0].category = category;
+    dispatch(createNews(newsData, newsCover));
   }
 
   // converting the arrray into object for submission
@@ -96,7 +105,7 @@ const NewsAdd = () => {
     }
   }
 
-console.log(newsData)
+// console.log(newsData)
   async function editTextFunc (id) {
     if(newsSingleData?.texts) {
       let text = newsSingleData.texts.filter(el => el.id === id);
@@ -149,7 +158,7 @@ console.log(newsData)
       {deleteVideoModal && <DeleteContent setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
       {deleteImageModal && <DeleteContent setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
       {deleteTextModal && <DeleteContent setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
-      <DashboardLayout title={newsSingleData ? 'Edit News' : 'Add News'}>
+      <DashboardLayout title={newsSingleData.length > 0 ? 'Edit News' : 'Add News'}>
         <BackButton location={`/community-page-news/${currentCommunity.slug}`} />
         <AddNewsContent
           setVideoModal = {setCreateVideoModal}
@@ -170,7 +179,7 @@ console.log(newsData)
         />
 
         {
-          newsSingleData 
+          newsSingleData.length > 0 
           ? <NewsSaveModal onClick={handleSubmit(editNewsForm)}  name="Edit" />
           : <NewsSaveModal onClick={handleSubmit(submitNewsForm)} name="Save" />
         }
@@ -229,6 +238,7 @@ const AddNewsContent = ({
     }
   }, [newsSingleData])
   
+  console.log(newsSingleData);
 
   return  <div className='admin-lesson-create-container'>
       <ErrorText
@@ -246,6 +256,12 @@ const AddNewsContent = ({
             message: 'You must enter news title'
           }
         })}
+      />
+
+      <DragDrop
+        onChange={(img) => setNewsCover(img)}
+        text='Drag & Drop photo in this area or Click Here to attach'
+        dataImg={newsSingleData?._attachments ? `${process.env.REACT_APP_CDN_BASE_URL}/news/${newsSingleData?._attachments}` : ''}
       />
 
       {

@@ -45,7 +45,7 @@ const CreateText = ({
                   placeholder='Text Heading (Optional)'
                   name='textHeading'
                   ref={register}
-                  defaultValue={data.length > 0 && data[0].textHeading}
+                  defaultValue={data.length > 0 ? data[0].textHeading : ''}
                 />
                 <TextArea
                   className={`default-input-variation text-area-variation ${
@@ -57,7 +57,7 @@ const CreateText = ({
                   cols='3'
                   rows='7'
                   name='textDescription'
-                  defaultValue={data.length > 0 && data[0].textDescription}
+                  defaultValue={data.length > 0 ? data[0].textDescription : ''}
                   ref={register({
                     required: {
                       value: true,
@@ -72,11 +72,18 @@ const CreateText = ({
                   }
                 />
               </div>
-              <Button
-                className='add'
-                name='Add Text Block'
-                onClick={handleSubmit(addText)}
-              />
+              
+              {
+                data.length > 0 
+                ? <Button
+                    className='add'
+                    name='Edit Text Block'
+                    onClick={handleSubmit(addText)} />
+                : <Button
+                    className='add'
+                    name='Add Video Block'
+                    onClick={handleSubmit(addText)} />
+              }
             </div>
           </div>
         </div>

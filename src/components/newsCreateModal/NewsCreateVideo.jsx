@@ -38,7 +38,7 @@ const CreateVideo = ({
     setLessonData(vData)
     setVideoActive(false)
   }
-  
+
   return (
     <>
       {videoActive && (
@@ -54,7 +54,7 @@ const CreateVideo = ({
                 getRootProps={getRootProps}
                 files={files}
                 text='Drag & Drop photo in this area or Click Here to attach Video Cover'
-                dataImg={data.length > 0 ? `${VIDEO_COVER}${data[0]?.videoCover}` : ''}
+                dataImg={data.length > 0 && `${VIDEO_COVER}${data[0]?.videoCover}`}
                 onChange={(img) => setVideoCover(img)}
                 fileType='image/png,image/jpeg,image/jpg'
               />
@@ -64,7 +64,7 @@ const CreateVideo = ({
                   placeholder='Video Title (Optional)'
                   name='videoTitle'
                   ref={register}
-                  defaultValue={data.length > 0 && data[0].videoTitle}
+                  defaultValue={data.length > 0 ? data[0].videoTitle : ''}
                 />
 
                 <TextArea
@@ -74,7 +74,7 @@ const CreateVideo = ({
                   rows='4'
                   name='videoDescription'
                   ref={register}
-                  defaultValue={data.length > 0 && data[0].videoDescription}
+                  defaultValue={data.length > 0 ? data[0].videoDescription : ''}
                 />
                 <div className='video-row-3'>
                   {!video && (
@@ -90,7 +90,7 @@ const CreateVideo = ({
                         }
                         placeholder='Video Link'
                         name='videoLink'
-                        defaultValue={data.length > 0 && data[0].videoLink}
+                        defaultValue={data.length > 0 ? data[0].videoLink : ""}
                         ref={register({
                           required: {
                             value: true,
@@ -123,11 +123,17 @@ const CreateVideo = ({
                   message={errors.videoLink && errors.videoLink.message}
                 />
               </div>
-              <Button
-                className='add'
-                name='Add Video Block'
-                onClick={handleSubmit(addVideo)}
-              />
+              {
+                data.length > 0 
+                ? <Button
+                    className='add'
+                    name='Edit Video Block'
+                    onClick={handleSubmit(addVideo)} />
+                : <Button
+                    className='add'
+                    name='Add Video Block'
+                    onClick={handleSubmit(addVideo)} />
+              }
             </div>
           </div>
         </div>
