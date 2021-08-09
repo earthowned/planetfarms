@@ -52,9 +52,11 @@ export const createLesson =
             await addVideo({ data: lessonData[i], lessonId, dispatch })
           }
           if (lessonData[i]?.lessonImg) {
+            console.log('hi')
             await addImage({ data: lessonData[i], lessonId, dispatch })
           }
           if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
+            console.log('hello')
             await addText({ data: lessonData[i], lessonId, dispatch })
           }
         }

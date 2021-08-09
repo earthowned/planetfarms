@@ -104,6 +104,7 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
         }
       
     dispatch({ type: NEWS_CLEAR, payload: data })
+    document.location.href = `/community-page-news/${currentCommunity.slug}`
   } catch (error) {
     const message =
       error.response && error.response.data.message

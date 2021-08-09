@@ -16,7 +16,8 @@ const CreateImage = ({
   setImageActive,
   lessonData,
   setLessonData,
-  data = []
+  data = [],
+  editFunc
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(true)
   const [lessonImg, setLessonImg] = useState(null)
@@ -34,6 +35,18 @@ const CreateImage = ({
     ]
     setLessonData(imgData)
     setImageActive(false)
+  }
+
+  const editNewsImg = ({ photoDescription }) => {
+    const imgData = [
+      ...lessonData,
+      {
+        lessonImg,
+        photoDescription,
+        isImgDesc
+      }
+    ]
+    editFunc({id: data[0].id, lessonImg, photoDescription, isImgDesc})
   }
 
   useEffect(() => {
@@ -83,7 +96,7 @@ const CreateImage = ({
                 ? <Button
                     className='add'
                     name='Edit Photo Block'
-                    onClick={handleSubmit(submitLessonImg)} />
+                    onClick={handleSubmit(editNewsImg)} />
                 : <Button
                     className='add'
                     name='Add Video Block'

@@ -10,7 +10,8 @@ const CreateText = ({
   setTextActive,
   lessonData,
   setLessonData,
-  data
+  data,
+  editFunc
 }) => {
   const { register, errors, handleSubmit } = useForm()
 
@@ -26,6 +27,21 @@ const CreateText = ({
       setLessonData(textData)
     }
     setTextActive(false)
+  }
+
+  const editText = ({textHeading, textDescription}) => {
+    if (textHeading.length !== 0 || textDescription.length !== 0) {
+    editFunc({textHeading, textDescription, id: data[0].id})
+    // const textData = [
+    //     ...lessonData,
+    //     {
+    //       textHeading,
+    //       textDescription,
+    //       id: data[0].id
+    //     }
+    //   ]
+    //   setLessonData(textData)
+    }
   }
   
   return (
@@ -78,7 +94,7 @@ const CreateText = ({
                 ? <Button
                     className='add'
                     name='Edit Text Block'
-                    onClick={handleSubmit(addText)} />
+                    onClick={handleSubmit(editText)} />
                 : <Button
                     className='add'
                     name='Add Video Block'

@@ -14,16 +14,17 @@ import {
 } from '../constants/textConstants'
 
 export const createText =
-  (textHeading, textDescription, lessonId) => async (dispatch) => {
-    const textData = { textHeading, textDescription, lessonId }
+  (textHeading, textDescription, lessonId, newsId) => async (dispatch) => {
+    const textData = { textHeading, textDescription, lessonId, newsId }
 
     try {
       dispatch({ type: LESSSON_TEXT_CREATE_REQUEST })
-      const { data } = await postApi(
-        dispatch,
-        ADD_LESSON_TEXT,
-        textData
-      )
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      const { data } = await Axios.post(ADD_LESSON_TEXT, textData, config)
       dispatch({ type: LESSSON_TEXT_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({
@@ -37,7 +38,7 @@ export const createText =
   }
 
 export const updateText =
-  (textId, textHeading, textDescription, setEditTextModel, refetch) =>
+  (textId, textHeading, textDescription, setEditTextModel) =>
     async (dispatch) => {
       const textData = { textHeading, textDescription }
 
@@ -54,7 +55,7 @@ export const updateText =
           config
         )
         dispatch({ type: LESSSON_TEXT_UPDATE_SUCCESS, payload: data })
-        refetch()
+        // refetch()
         setEditTextModel(false)
       } catch (error) {
         dispatch({

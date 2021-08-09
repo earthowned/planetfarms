@@ -18,12 +18,12 @@ import {
 } from '../constants/photoConstants'
 
 export const createLessonImg =
-  (lessonImg, photoDescription, isImgDesc, lessonId) => async (dispatch) => {
+  (lessonImg, photoDescription, isImgDesc, lessonId, newsId) => async (dispatch) => {
     const lessonImgData = new FormData()
-    lessonImgData.append('lessonImg', lessonImg)
+    lessonImgData.append('img', lessonImg)
     lessonImgData.append('photoDescription', photoDescription)
     lessonImgData.append('isImgDesc', isImgDesc)
-    lessonImgData.append('lessonId', lessonId)
+    newsId ? lessonImgData.append('newsId', newsId) : lessonImgData.append('lessonId', lessonId)
 
     try {
       dispatch({ type: LESSSON_PHOTO_CREATE_REQUEST })
@@ -32,12 +32,7 @@ export const createLessonImg =
           'Content-Type': 'multipart/form-data'
         }
       }
-      const { data } = await postApi(
-        dispatch,
-        ADD_LESSON_PHOTO,
-        lessonImgData,
-        config
-      )
+      const { data } = await Axios.post(ADD_LESSON_PHOTO, lessonImgData, config)
       dispatch({ type: LESSSON_PHOTO_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({
@@ -51,12 +46,18 @@ export const createLessonImg =
   }
 
 export const updatePhoto =
-  (id, lessonImg, photoDescription, isImgDesc, setEditPhotoModel, refetch) =>
+  (id, lessonImg, photoDescription, isImgDesc, setEditPhotoModel) =>
     async (dispatch) => {
-      const lessonImgData = new FormData()
-      lessonImgData.append('lessonImg', lessonImg)
-      lessonImgData.append('photoDescription', photoDescription)
-      lessonImgData.append('isImgDesc', isImgDesc)
+      let lessonImgData;
+
+      if(lessonImg) {
+        lessonImgData = new FormData()
+        lessonImgData.append('img', lessonImg)
+        lessonImgData.append('photoDescription', photoDescription)
+        lessonImgData.append('isImgDesc', isImgDesc)
+      }
+
+      lessonImgData = {photoDescription, isImgDesc}
 
       try {
         dispatch({ type: LESSSON_PHOTO_UPDATE_REQUEST })
@@ -71,8 +72,7 @@ export const updatePhoto =
           config
         )
         dispatch({ type: LESSSON_PHOTO_UPDATE_SUCCESS, payload: data })
-        refetch()
-        setEditPhotoModel(false)
+        // setEditPhotoModel(false)
       } catch (error) {
         dispatch({
           type: LESSSON_PHOTO_UPDATE_FAIL,

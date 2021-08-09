@@ -21,6 +21,8 @@ import Video from '../../../components/videoPlayer/Video'
 import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../../utils/urlConstants'
 import EditContent from '../../../components/editContent/EditContent'
 import axios from 'axios'
+import { updateText } from '../../../actions/textActions'
+import { updatePhoto } from '../../../actions/photoActions'
 
 const NewsAdd = () => {
   const { currentCommunity } = useSelector(state => state.activeCommunity)
@@ -58,13 +60,13 @@ const NewsAdd = () => {
     if(title) {
       setNewsData([{title, category}])
     }
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if(id) {
       getSingleNews()
     }
-  }, [])
+  }, [dispatch])
 
   async function getSingleNews () {
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
@@ -72,9 +74,6 @@ const NewsAdd = () => {
   }
 
   const submitNewsForm = ({ title }) => {
-    // const newData = convertArrToObject(newsData)
-    // newData.title = title
-    // newData.category = category;
     newsData[0].title = title
     newsData[0].category = category;
     dispatch(createNews(newsData, newsCover));
@@ -102,12 +101,22 @@ const NewsAdd = () => {
     }
   }
 
-// console.log(newsData)
+  function editImageConfirm (data) {
+    console.log(data);
+    const {id, isImgDesc, lessonImg, photoDescription} = data;
+    dispatch(updatePhoto(id, lessonImg, photoDescription, isImgDesc, setCreateImageModal ))
+  }
+
   async function editTextFunc (id) {
     if(newsSingleData?.texts) {
       let text = newsSingleData.texts.filter(el => el.id === id);
       setTextData(text)
     }
+  }
+
+  function editTextConfirm (data) {
+    const {id, textHeading, textDescription} = data;
+    dispatch(updateText(id, textHeading, textDescription, setCreateTextModal))
   }
 
   async function editVideoFunc (id) {
@@ -149,9 +158,38 @@ const NewsAdd = () => {
 
   return (
     <>
-      {createVideoModal && <NewsCreateModal type='video' videoActive={videoActive} setVideoActive={setVideoActive} lessonData={newsData} setLessonData={setNewsData} videoData={videoData} />}
-      {createImageModal && <NewsCreateModal type='image' imageActive={imageActive} setImageActive={setImageActive} lessonData={newsData} setLessonData={setNewsData} imageData={imageData} />}
-      {createTextModal && <NewsCreateModal type='text' textActive={textActive} setTextActive={setTextActive} lessonData={newsData} setLessonData={setNewsData} textData={textData} />}
+      {
+        createVideoModal && <NewsCreateModal 
+          type='video' 
+          videoActive={videoActive} 
+          setVideoActive={setVideoActive} 
+          lessonData={newsData} 
+          setLessonData={setNewsData} 
+          videoData={videoData} 
+          />
+      }
+      {
+        createImageModal && <NewsCreateModal 
+          type='image' 
+          imageActive={imageActive} 
+          setImageActive={setImageActive} 
+          lessonData={newsData} 
+          setLessonData={setNewsData} 
+          imageData={imageData}
+          editImageConfirm={editImageConfirm}
+          />
+      }
+      {
+        createTextModal && <NewsCreateModal 
+          type='text' 
+          textActive={textActive} 
+          setTextActive={setTextActive} 
+          lessonData={newsData} 
+          setLessonData={setNewsData} 
+          textData={textData}
+          editTextConfirm={editTextConfirm}
+      />
+      }
       {deleteVideoModal && <DeleteContent setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
       {deleteImageModal && <DeleteContent setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
       {deleteTextModal && <DeleteContent setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
