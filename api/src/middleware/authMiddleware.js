@@ -16,10 +16,6 @@ const responses = [
   {
     name: 'Unauthorized',
     error: 'Not authorized, token failed'
-  },
-  {
-    name: 'Unauthorized',
-    error: 'Unauthorized'
   }
 ]
 
