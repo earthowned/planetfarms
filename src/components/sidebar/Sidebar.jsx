@@ -24,16 +24,19 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
         {
           name: 'Members',
           slug: `/community-members/${currentCommunity && currentCommunity.slug}`,
+          root: 'community-members',
           initial: 'Me'
         },
         {
           name: 'Groups',
           slug: `/community-group/${currentCommunity && currentCommunity.slug}`,
+          root: 'community-group',
           initial: 'Gr'
         },
         {
           name: 'Enterprises',
           slug: `/enterprises/${currentCommunity && currentCommunity.slug}`,
+          root: 'enterprises',
           initial: 'En'
         }
       ]
@@ -120,7 +123,7 @@ function MainNav ({ dropdownActive, setDropdownActive, navMenu, toggle }) {
                   : navitem.name === 'Library'
                     ? () => history.push(`${navitem.slug}`)
                     : () => history.push(`${navitem.slug}`)}
-                className={`${pathname === `${navitem.slug}` ? ' text-menu text-active' : 'text-menu'}`}
+                className={`${'/'.concat(pathname.split('/')[1]) === `${navitem.slug}` ? ' text-menu text-active' : 'text-menu'}`}
               >
                 <div onClick={() => history.push(`${navitem.slug}`)} className='align-content'>
                   {
@@ -135,7 +138,7 @@ function MainNav ({ dropdownActive, setDropdownActive, navMenu, toggle }) {
                       {
                             navitem.dropdown.map(item => {
                               return (
-                                <div key={item.name} className={`${pathname === `${item.slug}` ? 'text-active' : ''}`}>
+                                <div key={item.name} className={`${pathname.split('/')[1] === `${item.root}` ? 'text-active' : ''}`}>
                                   <li onClick={() => history.push(`${item.slug}`)} className='dropdown-item'>
                                     <strong>{toggle ? item.name : item.initial}</strong>
                                   </li>
