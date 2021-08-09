@@ -23,12 +23,11 @@ const NewsCreateModal = ({
   addVideoData,
   lessonData,
   setLessonData,
-  imageData,
-  textData,
-  videoData
+  imageData = [],
+  textData = [],
+  videoData = []
 }) => {
   const [files, setFiles] = useState(null)
-
   switch (type) {
     case 'video':
       return (
@@ -40,7 +39,7 @@ const NewsCreateModal = ({
           setVideoActive={setVideoActive}
           lessonData={lessonData}
           setLessonData={setLessonData}
-          data={videoData}
+          data={videoData || []}
         />
       )
 
@@ -72,7 +71,7 @@ const NewsCreateModal = ({
           setImageActive={setImageActive}
           lessonData={lessonData}
           setLessonData={setLessonData}
-          data={imageData}
+          data={imageData || []}
         />
       )
 
@@ -84,7 +83,7 @@ const NewsCreateModal = ({
           setTextActive={setTextActive}
           lessonData={lessonData}
           setLessonData={setLessonData}
-          data={textData}
+          data={textData || []}
         />
       )
 

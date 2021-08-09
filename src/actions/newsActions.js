@@ -70,12 +70,13 @@ export const searchNews = (search) => async (dispatch) => {
   }
 }
 
-export const createNews = (newNews, news) => async (dispatch, getState) => {
+export const createNews = (newNews, newsCover) => async (dispatch, getState) => {
   const formData = new FormData()
-  formData.append('title', news.title)
-  formData.append('category', news.category)
-  formData.append('news', news.lessonImg)
+  formData.append('title', newNews[0].title)
+  formData.append('category', newNews[0].category)
+  formData.append('news', newsCover)
   try {
+
     const configFunc = () => {
         const userdata = window.localStorage.getItem('userInfo')
         const token = JSON.parse(userdata).token

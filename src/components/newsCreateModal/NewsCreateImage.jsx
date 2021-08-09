@@ -66,7 +66,7 @@ const CreateImage = ({
               {isImgDesc && (
                 <div className='photo-input-container'>
                   <TextArea
-                    defaultValue={data.length > 0 && data[0].photoDescription}
+                    defaultValue={data.length > 0 ? data[0].photoDescription : ''}
                     placeholder='Photo Description (Optional)'
                     className='default-input-variation text-area-variation textarea'
                     cols='3'
@@ -77,11 +77,17 @@ const CreateImage = ({
                 </div>
               )}
 
-              <Button
-                name='Add Photo Block'
-                onClick={handleSubmit(submitLessonImg)}
-                className='add'
-              />
+              {
+                data.length > 0 
+                ? <Button
+                    className='add'
+                    name='Edit Photo Block'
+                    onClick={handleSubmit(submitLessonImg)} />
+                : <Button
+                    className='add'
+                    name='Add Video Block'
+                    onClick={handleSubmit(submitLessonImg)} />
+              }
             </div>
           </div>
         </div>
