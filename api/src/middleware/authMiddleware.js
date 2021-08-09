@@ -28,7 +28,7 @@ function checkAuthorization (err) {
 }
 
 const throwError = (message) =>
-  responses.filter((response) => response.name.match(message))
+  responses.find((response) => response.name.match(message))
 
 const verifyToken = (token) => {
   const jwk = require('./jwks.json')
@@ -52,9 +52,13 @@ const decodeTokenFnc = (err, decodedToken) => {
 
 async function maintainState (req) {
   try {
-    req.user = await db.User.findOne({
-      where: { userID: coded.id ? coded.id : coded.sub }
-    })
+    process.env.AUTH_METHOD !== 'cognito'
+      ? req.user = await db.User.findOne({
+          where: { userID: coded.id }
+        })
+      : req.user = await db.User.findOne({
+        where: { userID: coded.sub }
+      })
   } catch (error) {
     throw Error('User not found')
   }
