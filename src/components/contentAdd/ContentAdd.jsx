@@ -3,7 +3,7 @@ import Text from '../../screens/courseManager/addLesson/Text'
 import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
 
-const ContentAdd = ({data, setVideoModal, setImageModal, setTextModal}) => {
+const ContentAdd = ({data, setVideoModal, setImageModal, setTextModal, textModal}) => {
   return (
     <>
       {

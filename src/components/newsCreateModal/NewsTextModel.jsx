@@ -32,15 +32,6 @@ const CreateText = ({
   const editText = ({textHeading, textDescription}) => {
     if (textHeading.length !== 0 || textDescription.length !== 0) {
     editFunc({textHeading, textDescription, id: data[0].id})
-    // const textData = [
-    //     ...lessonData,
-    //     {
-    //       textHeading,
-    //       textDescription,
-    //       id: data[0].id
-    //     }
-    //   ]
-    //   setLessonData(textData)
     }
   }
   
@@ -97,7 +88,7 @@ const CreateText = ({
                     onClick={handleSubmit(editText)} />
                 : <Button
                     className='add'
-                    name='Add Video Block'
+                    name='Add Text Block'
                     onClick={handleSubmit(addText)} />
               }
             </div>
