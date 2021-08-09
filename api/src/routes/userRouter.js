@@ -27,7 +27,7 @@ router
 router
   .route('/profile/:userID')
   .get(protect, getUserProfileByUserID)
-  .put(protect, updateUser)
+  .put(protect, upload.single('attachments'), resizeImage, updateUser)
 router.post('/login', authUser)
 router.route('/token').get(protect, sendTokenStatus)
 router.route('/search').get(searchUserName)

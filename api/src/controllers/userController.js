@@ -7,6 +7,7 @@ const Sequelize = require('sequelize')
 // const LocalAuth = require('../models/localAuthModel.js')
 const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
+const NotFoundError = require('../errors/notFoundError')
 
 function amplifyConfig () {
   Amplify.configure({
@@ -319,36 +320,27 @@ const getMyProfile = async (req, res) => {
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
   try {
-    let attachment
+    let attachments
     if (req.file) {
-      attachment = req.file.filename
+      attachments = req.file.filename
     } else {
-      attachment =
+      attachments =
         req.body.attachments === 'undefined' || req.body.attachments === 'null'
           ? null
           : req.body.attachments
     }
-    const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    db.User.findOne({ where: { userID: id } }).then((user) => {
-      if (user) {
-        db.User.update(
-          {
-            email,
-            firstName,
-            lastName,
-            phone,
-            dateOfBirth: birthday,
-            attachments: attachment || ''
-          },
-          { where: { userID: id } }
-        )
-          .then(() => res.sendStatus(200))
-          .catch((err) => res.status(403).json({ error: err.message }))
-      } else {
-        res.status(404)
-        throw new Error('User not found')
-      }
+    const user = await db.User.update(
+      { ...req.body, attachments },
+      { where: { userID: id } }
+    )
+    if (!user) {
+      throw new NotFoundError()
+    }
+    res.status(202).json({
+      status: true,
+      message: 'User updated successfully',
+      data: user
     })
   } catch (err) {
     res.status(403).json({ error: err.message })
