@@ -2,22 +2,24 @@ const jwt = require('jsonwebtoken')
 const jwkToPem = require('jwk-to-pem')
 const db = require('../models')
 
+let coded
+
 const responses = [
   {
-    'error': 'Invalid token provided.',
-    'name': 'InvalidToken'
+    error: 'Invalid token provided.',
+    name: 'InvalidToken'
   },
   {
-    'error': 'The token has been expired.',
-    'name': 'TokenExpired'
+    error: 'The token has been expired.',
+    name: 'TokenExpired'
   },
   {
-    'error': 'Not authorized, token failed',
-    'name': 'Unauthorized'
+    error: 'Not authorized, token failed',
+    name: 'Unauthorized'
   },
   {
-    'error': 'Unauthorized',
-    'name': 'Unauthorized'
+    error: 'Unauthorized',
+    name: 'Unauthorized'
   }
 ]
 
