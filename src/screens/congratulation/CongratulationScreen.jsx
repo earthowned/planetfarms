@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import moment from 'moment'
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 
 import Input from '../../components/input/Input'
+import { ErrorText } from '../../components/formUI/FormUI'
 import Button from '../../components/button/Button'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../components/backButton/BackButton'
@@ -19,10 +21,15 @@ function CongratulationScreen () {
   const history = useHistory()
   const userdetail = location?.state?.user
 
-  const image = userdetail && userdetail?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + userdetail.attachments
+  const image =
+    userdetail &&
+    userdetail?.attachments &&
+    process.env.REACT_APP_CDN_BASE_URL +
+      '/attachments/' +
+      userdetail.attachments
   const [profileImage, setProfileImage] = useState(`${userdetail.attachments}`)
 
-  const { register, errors, handleSubmit } = useForm({
+  const { register, errors, handleSubmit, control } = useForm({
     defaultValues: {
       firstName: userdetail?.firstName,
       lastName: userdetail?.lastName,
@@ -34,6 +41,7 @@ function CongratulationScreen () {
     }
   })
 
+  // const [value, setValue] = useState(userdetail?.phone)
   const userDetails = useSelector((state) => state.userDetails)
   const { user } = userDetails
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
@@ -106,19 +114,29 @@ function CongratulationScreen () {
                         noIcon='noIcon'
                       />
                     </div>
-                    <div className='row-1-col'>
-                      <Input
+                    <div className='row-1-col phoneNum'>
+                      <Controller
+                        control={control}
                         name='phone'
-                        placeholder='Phone Number (Optional)'
-                        type='text'
-                        ref={register({
-                          required: {
-                            value: false
-                          }
-                        })}
-                        errors={errors}
-                        noIcon='noIcon'
+                        rules={{
+                          required: true
+                        }}
+                        render={({ onChange, value }) => (
+                          <PhoneInput
+                            className={errors.phone ? 'block-error' : ''}
+                            value={value}
+                            onChange={onChange}
+                            defaultCountry='US'
+                            id='phone'
+                          />
+                        )}
                       />
+                      {errors.phone && (
+                        <ErrorText
+                          className='error-message'
+                          message='Enter Phone number'
+                        />
+                      )}
                     </div>
                   </div>
                   <div className='row row-last'>
@@ -147,7 +165,11 @@ function CongratulationScreen () {
                   </div>
                 </div>
                 <div className='dragAndDrop'>
-                  <DragDrop onClick={() => setProfileImage()} onChange={(img) => setProfileImage(img)} previousImageUrl={image} />
+                  <DragDrop
+                    onClick={() => setProfileImage()}
+                    onChange={(img) => setProfileImage(img)}
+                    previousImageUrl={image}
+                  />
                 </div>
               </div>
             </form>
