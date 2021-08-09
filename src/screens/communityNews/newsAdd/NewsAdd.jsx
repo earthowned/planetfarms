@@ -47,9 +47,9 @@ const NewsAdd = () => {
   const [videoId, setVideoId] = useState(null)
   const [imageId, setImageId] = useState(null)
   const [textId, setTextId] = useState(null)
-  const [videoActive, setVideoActive] = useState(true)
-  const [imageActive, setImageActive] = useState(true)
-  const [textActive, setTextActive] = useState(true)
+  // const [videoActive, setVideoActive] = useState(true)
+  // const [imageActive, setImageActive] = useState(true)
+  // const [textActive, setTextActive] = useState(true)
   const [newsData, setNewsData] = useState([])
   const [newsSingleData, setNewsSingleData] = useState([])
   const [category, setCategory] = useState(state?.category || null)
@@ -177,8 +177,8 @@ const NewsAdd = () => {
       {
         createVideoModal && <NewsCreateModal 
           type='video' 
-          videoActive={videoActive} 
-          setVideoActive={setVideoActive} 
+          videoActive={createVideoModal} 
+          setVideoActive={setCreateVideoModal} 
           lessonData={newsData} 
           setLessonData={setNewsData} 
           videoData={videoData}
@@ -188,8 +188,8 @@ const NewsAdd = () => {
       {
         createImageModal && <NewsCreateModal 
           type='image' 
-          imageActive={imageActive} 
-          setImageActive={setImageActive} 
+          imageActive={createImageModal} 
+          setImageActive={setCreateImageModal} 
           lessonData={newsData} 
           setLessonData={setNewsData} 
           imageData={imageData}
@@ -199,8 +199,8 @@ const NewsAdd = () => {
       {
         createTextModal && <NewsCreateModal 
           type='text' 
-          textActive={textActive} 
-          setTextActive={setTextActive} 
+          textActive={createTextModal} 
+          setTextActive={setCreateTextModal} 
           lessonData={newsData} 
           setLessonData={setNewsData} 
           textData={textData}
@@ -279,7 +279,6 @@ const AddNewsContent = ({
   useEffect(() => {
     if(newsData.length > 0) {
       setTitle(newsData[0].title)
-      console.log(newsData[0].title)
     }
   }, [newsData])
 
@@ -331,7 +330,7 @@ const AddNewsContent = ({
         />
       }
 
-      <ContentAdd data={newsData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
+      <ContentAdd data={newsData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal} />
     </div>
 }
 
@@ -359,125 +358,5 @@ const NewsSaveModal = ({ pathId, onClick, name}) => {
     </div>
   )
 }
-
-// function NewsAddMainContainer ({
-//   setCreateVideoModal,
-//   setCreateImageModal,
-//   setCreateTextModal,
-//   setVideoActive,
-//   setImageActive,
-//   setTextActive,
-//   news,
-//   title,
-//   category
-
-// }) {
-//   function createVideo () {
-//     setCreateVideoModal(true)
-//     setCreateImageModal(false)
-//     setCreateTextModal(false)
-//     setVideoActive(true)
-//   }
-
-//   function createImage () {
-//     setCreateVideoModal(false)
-//     setCreateImageModal(true)
-//     setCreateTextModal(false)
-//     setImageActive(true)
-//   }
-
-//   function createText () {
-//     setCreateVideoModal(false)
-//     setCreateImageModal(false)
-//     setCreateTextModal(true)
-//     setTextActive(true)
-//   }
-
-//   return (
-//     <div className='news-add-main-container'>
-//       <NewsAddContainer
-//         title={title}
-//         news={news}
-//         createVideo={createVideo}
-//         createImage={createImage}
-//         createText={createText}
-//       />
-//       <div>{Object.entries(news).length !== 0 && <PopUp news={news} title={title} category={category} />}</div>
-//     </div>
-//   )
-// }
-
-// function NewsAddContainer ({ createVideo, createImage, createText, title, news }) {
-//   return (
-//     <div className='news-add-container'>
-//       <NewContent title={title} news={news} />
-//       <div className='news-add-inner-container'>
-//         <button onClick={() => createVideo()} className='add-btn'>
-//           <img src='/img/video-outline.svg' alt='Add video' /> <span>Add video</span>
-//         </button>
-//         <button onClick={() => createImage()} className='add-btn'>
-//           <img src='/img/camera-outline.svg' alt='Add new img' /> <span>Add image</span>
-//         </button>
-//         <button onClick={() => createText()} className='add-btn'>
-//           <img src='/img/file-text-outline.svg' alt='Add text' />
-//           <span>Add text</span>
-//         </button>
-//       </div>
-//     </div>
-//   )
-// }
-
-// function NewContent ({ title, news }) {
-//   return (
-//     <>
-//       <div className='new-title-container'>
-//         <h2>{title}</h2>
-//         {news && <CommunityNewsViewPage newNews={news} />}
-//       </div>
-//     </>
-//   )
-// }
-
-// function PopUp ({ news, title, category }) {
-//   const { file } = news.imageDetail ? news.imageDetail.file && news.imageDetail : {}
-//   const newNews = { ...news, title, category, file }
-//   const [activePopup, setActivePopup] = useState(true)
-//   const { currentCommunity } = useSelector(state => state.activeCommunity)
-//   const dispatch = useDispatch()
-//   const history = useHistory()
-//   const handleOnSaveClick = (e) => {
-//     if (file) {
-//       dispatch(createNews(newNews))
-//       setActivePopup(false)
-//       history.push(`/community-page-news/${currentCommunity.slug}`)
-//     } else {
-//       dispatch(createNews(newNews))
-//       setActivePopup(false)
-//       history.push(`/community-page-news/${currentCommunity.slug}`)
-//     }
-//   }
-
-//   const handleOnCancelClick = (e) => {
-//     setActivePopup(false)
-//     history.push(`/community-page-news/${currentCommunity.slug}`)
-//   }
-//   return (
-//     <>
-//       {activePopup && (
-//         <div className='popup-box'>
-//           <h4>Do you want to save?</h4>
-//           <div className='popup-btn-wrapper'>
-//             <button onClick={handleOnCancelClick} className='secondary-btn popup-btn'>
-//               Cancel
-//             </button>
-//             <button onClick={handleOnSaveClick} className='default-btn popup-btn'>
-//               Save
-//             </button>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   )
-// }
 
 export default NewsAdd

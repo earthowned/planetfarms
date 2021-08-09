@@ -100,7 +100,7 @@ const CreateImage = ({
                     onClick={handleSubmit(editNewsImg)} />
                 : <Button
                     className='add'
-                    name='Add Video Block'
+                    name='Add Photo Block'
                     onClick={handleSubmit(submitLessonImg)} />
               }
             </div>
