@@ -16,8 +16,6 @@ import { PurchaseModal } from '../../components/purchaseModal/PurchaseModal'
 import SubHeader from '../../components/subHeader/SubHeader'
 
 const Courses = () => {
-  const userLogin = useSelector((state) => state.userLogin)
-  const [active, setActive] = useState(false)
   const [modalactive, setModalActive] = useState(false)
   const [newCollectionactive, setNewCollectionActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
@@ -35,6 +33,7 @@ const Courses = () => {
     setCreateNewCourse(true)
     setCreateCourse(false)
   }
+
   return (
     <>
       {purchaseModal && (

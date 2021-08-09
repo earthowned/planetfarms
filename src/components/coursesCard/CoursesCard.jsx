@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import useGetFetchData from '../../utils/useGetFetchData'
@@ -12,20 +12,33 @@ import './CoursesCard.scss'
 
 const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
   const userLogin = useSelector((state) => state.userLogin)
+  const community = useSelector((state) => state.activeCommunity)
+  const [communityCourseData, setCommunityCourseData] = useState([])
   const { userInfo } = userLogin
   const { data: courseData, isLoading } = useGetFetchData(
     'ALL_COURSE_DATA',
     GET_COURSE
   )
+
+  const communityId = community?.currentCommunity?.id
+  useEffect(() => {
+    setCommunityCourseData(
+      courseData?.data
+        ?.filter(
+          (data) => data?.communityId === communityId || data?.isPublic === true
+        )
+        .map((data) => data)
+    )
+  }, [courseData, communityId])
+
   if (isLoading) {
     return <span>Loading</span>
   }
-
   return (
     <div className='course-card-wrapper'>
       <div className='courses-card-container'>
-        {courseData?.data
-          .filter((cat) =>
+        {communityCourseData
+          ?.filter((cat) =>
             cat.category.toLowerCase().includes(category.toLowerCase())
           )
           .slice(0, 1)
@@ -33,8 +46,8 @@ const CoursesCard = ({ category, setModalActive, setPurchaseModal }) => {
             <h4 key={catge.id}>{catge.category}</h4>
           ))}
         <CardLayout data={courseData}>
-          {courseData?.data
-            .filter((cat) =>
+          {communityCourseData
+            ?.filter((cat) =>
               cat.category.toLowerCase().includes(category.toLowerCase())
             )
             .map((course) => {

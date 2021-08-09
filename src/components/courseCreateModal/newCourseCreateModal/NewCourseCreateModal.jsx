@@ -16,7 +16,7 @@ const NewCourseCreateModal = ({ clickHandler }) => {
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const community = useSelector((state) => state.activeCommunity)
-  console.log(community)
+
   const { userInfo } = userLogin
   const [isFree, setIsFree] = useState(true)
   const [isForCommunity, setIsForCommunity] = useState(true)

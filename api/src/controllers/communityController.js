@@ -19,7 +19,7 @@ const getCommunities = async (req, res) => {
   // const order = req.query.order || 'DESC'
   // const ordervalue = order && [['name', order]]
   try {
-    const userId = req.user.id
+    // const userId = req.user.id
     const communities = await db.Community.findAndCountAll({
       offset: (page - 1) * pageSize,
       limit: pageSize,
@@ -38,7 +38,7 @@ const getCommunities = async (req, res) => {
           ],
           [
             sequelize.literal(`
-              CASE WHEN "creatorId"=${userId} THEN 'true'
+              CASE WHEN "creatorId"=${req.user.id} THEN 'true'
                 ELSE 'false'
               END
             `),
@@ -48,7 +48,7 @@ const getCommunities = async (req, res) => {
             sequelize.literal(`(
               SELECT COUNT("userId")
               FROM communities_users
-              WHERE "communityId" = communities.id AND active = true AND "userId" = ${userId}
+              WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
             )`),
             'isFollowed'
           ]
@@ -204,7 +204,9 @@ const createCommunity = async (req, res) => {
         )
         return true
       })
-      if (followCommunity) { return res.json({ message: 'Community is Created !!!' }).status(200) }
+      if (followCommunity) {
+        return res.json({ message: 'Community is Created !!!' }).status(200)
+      }
     }
   } catch (error) {
     return res.json({ error: error.message }).status(400)
