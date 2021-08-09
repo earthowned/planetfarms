@@ -23,15 +23,19 @@ export const GET_LESSONS = BASE_URL + 'lessons'
 export const ADD_LESSONS = BASE_URL + 'lessons/add'
 
 // videos
+export const GET_VIDEOS = BASE_URL + 'videos'
 export const ADD_VIDEOS = BASE_URL + 'videos/add'
 
 // lesson photos
+export const GET_LESSON_PHOTO = BASE_URL + 'lesson-photos'
 export const ADD_LESSON_PHOTO = BASE_URL + 'lesson-photos/add'
 
 // lesson Text
+export const GET_LESSON_TEXT = BASE_URL + 'lesson-text'
 export const ADD_LESSON_TEXT = BASE_URL + 'lesson-text/add'
 
 // lesson material
+export const GET_MATERIAL = BASE_URL + 'materials'
 export const ADD_MATERIAL = BASE_URL + 'materials/add'
 
 // enroll

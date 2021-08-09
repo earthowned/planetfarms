@@ -14,6 +14,9 @@ import BackButton from '../../../components/backButton/BackButton'
 import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './AddLesson.scss'
+import EditVideo from '../editLesson/EditVideo'
+import EditText from '../editLesson/EditText'
+import EditPhoto from '../editLesson/EditPhoto'
 
 const AddLesson = () => {
   const dispatch = useDispatch()
@@ -27,10 +30,13 @@ const AddLesson = () => {
   const [lessonData, setLessonData] = useState([])
   const [lessonCover, setLessonCover] = useState(null)
   const [material, setMaterial] = useState([])
+  const [editVideoModel, setEditVideoModel] = useState(false)
+  const [editTextModel, setEditTextModel] = useState(false)
+  const [editPhotoModel, setEditPhotoModel] = useState(false)
+  const [editId, setEditId] = useState('')
   const [fetchLesson, setFetchLesson] = useState([])
 
   const { register, errors, handleSubmit } = useForm()
-
   const { data } = useGetFetchData(
     'get_course_by_id',
     GET_COURSE + `/${courseId}`
@@ -54,6 +60,19 @@ const AddLesson = () => {
         history
       })
     )
+  }
+
+  const removeItem = (id) => {
+    const newLessonData = lessonData.filter((item) => item.itemId !== id)
+    setLessonData(newLessonData)
+  }
+  const modelPopUp = (poupState, id) => {
+    setEditId(id)
+  }
+
+  const removeMaterial = (e) => {
+    const name = e.currentTarget.getAttribute('name')
+    setMaterial(material.filter((item) => item?.mData?.preview !== name))
   }
 
   return (
@@ -85,6 +104,33 @@ const AddLesson = () => {
           setLessonData={setLessonData}
         />
       )}
+      {editVideoModel && (
+        <EditVideo
+          editVideoModel={editVideoModel}
+          setEditVideoModel={setEditVideoModel}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
+          editId={editId}
+        />
+      )}
+      {editTextModel && (
+        <EditText
+          editTextModel={editTextModel}
+          setEditTextModel={setEditTextModel}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
+          editId={editId}
+        />
+      )}
+      {editPhotoModel && (
+        <EditPhoto
+          editPhotoModel={editPhotoModel}
+          setEditPhotoModel={setEditPhotoModel}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
+          editId={editId}
+        />
+      )}
       <DashboardLayout title='Add new lesson'>
         <BackButton location={`/admin/course/${courseId}`} />
         <AddContent
@@ -96,8 +142,18 @@ const AddLesson = () => {
           setLessonCover={setLessonCover}
           lessonCover={lessonCover}
           lessonData={lessonData}
+          setLessonData={setLessonData}
+          onRemove={removeItem}
+          setEditVideoModel={setEditVideoModel}
+          setEditTextModel={setEditTextModel}
+          setEditPhotoModel={setEditPhotoModel}
+          modelPopUp={modelPopUp}
         />
-        <LessonMaterial material={material} setMaterial={setMaterial} />
+        <LessonMaterial
+          material={material}
+          setMaterial={setMaterial}
+          removeLocalMaterial={removeMaterial}
+        />
         <LessonSaveModal
           pathId={courseId}
           onClick={handleSubmit(submitLessonForm)}

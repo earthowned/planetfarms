@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 import LessonActions from './LessonActions'
 
-const LessonBlock = ({ data, courseId }) => {
+const LessonBlock = ({ data, courseId, refetch }) => {
   const lessonData = data?.data?.lessons
 
   return (
@@ -48,10 +48,12 @@ const LessonBlock = ({ data, courseId }) => {
                         </div>
                       </div>
                       <LessonActions id={lesson.id} />
-                    </div>
-                  </React.Fragment>
-                )
-              })}
+                    
+                    <LessonActions id={lesson.id} refetch={refetch} />
+                  </div>
+                </React.Fragment>
+              )
+            })}
           </>
         ) : (
           ''

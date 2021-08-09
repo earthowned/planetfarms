@@ -21,9 +21,14 @@ const CreateImage = ({
   const { register, handleSubmit } = useForm()
 
   const submitLessonImg = ({ photoDescription }) => {
+    const itemId =
+      lessonData.length === 0
+        ? lessonData.length + 1
+        : lessonData[lessonData.length - 1].itemId + 1
     const imgData = [
       ...lessonData,
       {
+        itemId,
         lessonImg,
         photoDescription,
         isImgDesc

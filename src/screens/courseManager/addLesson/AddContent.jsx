@@ -1,3 +1,4 @@
+import React from 'react'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
 import Video from '../../../components/videoPlayer/Video'
@@ -6,12 +7,18 @@ import Text from './Text'
 
 const AddContent = ({
   setVideoModal,
+  videoModal,
   setImageModal,
   setTextModal,
   register,
   errors,
   setLessonCover,
-  lessonData
+  lessonData,
+  onRemove,
+  setEditVideoModel,
+  modelPopUp,
+  setEditTextModel,
+  setEditPhotoModel
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -53,9 +60,30 @@ const AddContent = ({
               description={vid.videoDescription}
               url={vid.videoLink || vid.videoResource?.preview}
               thumbnail={vid.videoCover?.preview}
+              id={vid.itemId}
+              isEditable
+              onRemove={onRemove}
+              setEditVideoModel={setEditVideoModel}
+              modelPopUp={modelPopUp}
             />
-            <Image src={vid.lessonImg?.preview} desc={vid.photoDescription} />
-            <Text heading={vid.textHeading} desc={vid.textDescription} />
+            <Image
+              src={vid.lessonImg?.preview}
+              desc={vid.photoDescription}
+              id={vid.itemId}
+              onRemove={onRemove}
+              setEditPhotoModel={setEditPhotoModel}
+              modelPopUp={modelPopUp}
+              isEditable
+            />
+            <Text
+              heading={vid.textHeading}
+              desc={vid.textDescription}
+              onRemove={onRemove}
+              id={vid.itemId}
+              setEditTextModel={setEditTextModel}
+              modelPopUp={modelPopUp}
+              isEditable
+            />
           </div>
         ))}
       <div className='admin-lesson-create-btn-wrapper'>
@@ -76,4 +104,4 @@ const AddContent = ({
   )
 }
 
-export default AddContent
+export default React.memo(AddContent)

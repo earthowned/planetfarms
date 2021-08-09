@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import './DragDrop.scss'
 const DragDrop = ({
@@ -10,7 +10,9 @@ const DragDrop = ({
   fetchImg,
   dataImg,
   editImg,
-  onClick = () => {}
+  dropFile,
+  onClick = () => {},
+  videoTitle
 }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
@@ -30,6 +32,10 @@ const DragDrop = ({
     onChange(selectedFile)
   }
 
+  useEffect(() => {
+    dropFile && setFiles(dropFile)
+  }, [dropFile])
+
   return (
     <DragDropComponent
       getInputProps={getInputProps}
@@ -44,6 +50,7 @@ const DragDrop = ({
       fetchImg={fetchImg}
       dataImg={dataImg}
       onClick={onClick}
+      videoTitle={videoTitle}
       editImg={editImg}
     />
   )
@@ -61,7 +68,8 @@ const DragDropComponent = ({
   text,
   dataImg,
   editImg,
-  onClick = () => {}
+  onClick = () => {},
+  videoTitle
 }) => {
   return (
     <div className={className ? `${className}` : 'drag-drop-container'}>
@@ -98,14 +106,14 @@ const DragDropComponent = ({
             </div>
           </>
         ) : text ? (
-          <h6 className='dragDropText'>{text}</h6>
+          <h6 className='dragDropText ddtext'>{text}</h6>
         ) : (
           <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
             Drag & Drop files in this area or Click Here to attach video cover
           </h6>
         )}
       </div>
-      {files && (
+      {files || videoTitle ? (
         <img
           src='/img/close-outline.svg'
           className='drag-drop-close'
@@ -115,6 +123,8 @@ const DragDropComponent = ({
           }}
           alt='drag_drop_img_close'
         />
+      ) : (
+        ''
       )}
     </div>
   )

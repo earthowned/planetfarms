@@ -1,7 +1,13 @@
+import { MATERIAL } from '../../../utils/urlConstants'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import Material from '../../../components/material/Material'
 
-const LessonMaterial = ({ material, setMaterial }) => {
+const LessonMaterial = ({
+  material,
+  setMaterial,
+  removeMaterial,
+  removeLocalMaterial
+}) => {
   const matData = (mData) => {
     setMaterial(() => [...material, { mData }])
   }
@@ -14,18 +20,35 @@ const LessonMaterial = ({ material, setMaterial }) => {
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
-      {material.length !== 0 ? (
+      {material?.length > 0 ? (
         <div className='material'>
           {material.map((mater, i) => {
             return (
-              <Material key={i} name={mater?.mData?.name}>
-                <a href={mater?.mData?.preview} download={mater?.mData?.name}>
+              <Material
+                key={i}
+                name={mater?.mData ? mater?.mData?.name : mater?.material}
+              >
+                <a
+                  href={
+                    mater?.mData
+                      ? mater?.mData?.preview
+                      : `${MATERIAL}${mater?.material}`
+                  }
+                  download={mater?.mData ? mater?.mData?.name : mater.name}
+                  target={mater?.mData ? '_self' : '_blank'}
+                >
                   <div>
                     <img src='/img/download-icon.svg' alt='download icon' />{' '}
                     <span>Download</span>
                   </div>
                 </a>
-                <div onClick={removeItem} name={mater?.mData?.name}>
+                <div
+                  onClick={(e) =>
+                    mater?.mData
+                      ? removeLocalMaterial(e)
+                      : removeMaterial(mater?.id)}
+                  name={mater?.mData ? mater?.mData?.preview : mater?.name}
+                >
                   <img src='/img/trash-icon.svg' alt='trash icon' />
                   <span>Delete</span>
                 </div>

@@ -1,47 +1,67 @@
 import { useForm } from 'react-hook-form'
+import { updateText } from '../../../actions/textActions'
+import { useDispatch } from 'react-redux'
 
-import Button from '../button/Button'
-import CollectionModalHeader from './CollectionModalHeader'
-import { InputFields, ErrorText, TextArea } from '../formUI/FormUI'
-import './NewsCreateModal.scss'
+import Button from '../../../components/button/Button'
+import ModelHandler from './ModelHandler'
+import {
+  InputFields,
+  ErrorText,
+  TextArea
+} from '../../../components/formUI/FormUI'
+import '../../../components/newsCreateModal//NewsCreateModal.scss'
 
-const CreateText = ({
-  textActive,
-  setTextActive,
+const EditText = ({
+  editTextModel,
+  setEditTextModel,
   lessonData,
-  setLessonData
+  setLessonData,
+  editId,
+  textData,
+  editFetchedData,
+  refetch
 }) => {
   const { register, errors, handleSubmit } = useForm()
-
+  const dispatch = useDispatch()
   const addText = ({ textHeading, textDescription }) => {
-    const itemId =
-      lessonData.length === 0
-        ? lessonData.length + 1
-        : lessonData[lessonData.length - 1].itemId + 1
+    !lessonData
+      ? dispatch(
+          updateText(
+            editId,
+            textHeading,
+            textDescription,
+            setEditTextModel,
+            refetch
+          )
+        )
+      : editUnSavedTextOnDb()
 
-    if (textHeading.length !== 0 || textDescription.length !== 0) {
-      const textData = [
-        ...lessonData,
-        {
-          itemId,
-          textHeading,
-          textDescription
-        }
-      ]
-      setLessonData(textData)
+    function editUnSavedTextOnDb () {
+      setLessonData(
+        lessonData.map((data) =>
+          data.itemId === editId
+            ? {
+                ...data,
+                textHeading,
+                textDescription
+              }
+            : data
+        )
+      )
+      setEditTextModel(false)
     }
-    setTextActive(false)
   }
+
+  const editingTextData =
+    textData?.find((text) => text.id === editId) ||
+    lessonData?.find((text) => text.itemId === editId)
   return (
     <>
-      {textActive && (
+      {editTextModel && (
         <div className='collection-modal-container addBlock addBlock__text'>
           <div className='block'>
             <div className='collection-modal-inner-container'>
-              <CollectionModalHeader
-                title='Add text'
-                clickHandler={setTextActive}
-              />
+              <ModelHandler title='Add text' clickHandler={setEditTextModel} />
               <div className='photo-input-container'>
                 <InputFields
                   type='text'
@@ -49,6 +69,7 @@ const CreateText = ({
                   placeholder='Text Heading (Optional)'
                   name='textHeading'
                   ref={register}
+                  defaultValue={editingTextData?.textHeading}
                 />
                 <TextArea
                   className={`default-input-variation text-area-variation ${
@@ -66,6 +87,7 @@ const CreateText = ({
                       message: 'Please enter a text description'
                     }
                   })}
+                  defaultValue={editingTextData?.textDescription}
                 />
                 <ErrorText
                   className='errorMsg'
@@ -76,7 +98,7 @@ const CreateText = ({
               </div>
               <Button
                 className='add'
-                name='Add Text Block'
+                name='Edit Text Block'
                 onClick={handleSubmit(addText)}
               />
             </div>
@@ -87,4 +109,4 @@ const CreateText = ({
   )
 }
 
-export default CreateText
+export default EditText

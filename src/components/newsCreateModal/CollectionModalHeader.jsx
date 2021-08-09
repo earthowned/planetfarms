@@ -1,9 +1,6 @@
 import './NewsCreateModal.scss'
 
-const CollectionModalHeader = ({
-  title,
-  clickHandler
-}) => {
+const CollectionModalHeader = ({ title, clickHandler }) => {
   return (
     <Image
       title={title}
@@ -21,9 +18,7 @@ const Image = (props) => {
     <>
       <div className='collection-modal-header'>
         <h4>{props.title}</h4>
-        <img
-          src={props.src} alt={props.alt} onClick={props.clickHandler}
-        />
+        <img src={props.src} alt={props.alt} onClick={props.clickHandler} />
       </div>
     </>
   )
