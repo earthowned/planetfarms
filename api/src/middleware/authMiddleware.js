@@ -6,20 +6,20 @@ let coded
 
 const responses = [
   {
-    'error': 'Invalid token provided.',
-    'name': 'InvalidToken'
+    name: 'InvalidToken',
+    error: 'Invalid token provided.'
   },
   {
-    'error': 'The token has been expired.',
-    'name': 'TokenExpired'
+    name: 'TokenExpired',
+    error: 'The token has been expired.'
   },
   {
-    'error': 'Not authorized, token failed',
-    'name': 'Unauthorized'
+    name: 'Unauthorized',
+    error: 'Not authorized, token failed'
   },
   {
-    'error': 'Unauthorized',
-    'name': 'Unauthorized'
+    name: 'Unauthorized',
+    error: 'Unauthorized'
   }
 ]
 
