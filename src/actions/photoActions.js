@@ -6,15 +6,15 @@ import {
 import { postApi } from '../utils/apiFunc'
 
 import {
-  LESSSON_PHOTO_CREATE_REQUEST,
-  LESSSON_PHOTO_CREATE_SUCCESS,
-  LESSSON_PHOTO_CREATE_FAIL,
-  LESSSON_PHOTO_UPDATE_REQUEST,
-  LESSSON_PHOTO_UPDATE_SUCCESS,
-  LESSSON_PHOTO_UPDATE_FAIL,
-  LESSSON_PHOTO_DELETE_REQUEST,
-  LESSSON_PHOTO_DELETE_SUCCESS,
-  LESSSON_PHOTO_DELETE_FAIL
+  PHOTO_CREATE_REQUEST,
+  PHOTO_CREATE_SUCCESS,
+  PHOTO_CREATE_FAIL,
+  PHOTO_UPDATE_REQUEST,
+  PHOTO_UPDATE_SUCCESS,
+  PHOTO_UPDATE_FAIL,
+  PHOTO_DELETE_REQUEST,
+  PHOTO_DELETE_SUCCESS,
+  PHOTO_DELETE_FAIL
 } from '../constants/photoConstants'
 
 export const createLessonImg =
@@ -26,17 +26,17 @@ export const createLessonImg =
     newsId ? lessonImgData.append('newsId', newsId) : lessonImgData.append('lessonId', lessonId)
 
     try {
-      dispatch({ type: LESSSON_PHOTO_CREATE_REQUEST })
+      dispatch({ type: PHOTO_CREATE_REQUEST })
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }
       const { data } = await Axios.post(ADD_LESSON_PHOTO, lessonImgData, config)
-      dispatch({ type: LESSSON_PHOTO_CREATE_SUCCESS, payload: data })
+      dispatch({ type: PHOTO_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({
-        type: LESSSON_PHOTO_CREATE_FAIL,
+        type: PHOTO_CREATE_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
@@ -55,7 +55,7 @@ export const updatePhoto =
         lessonImgData.append('isImgDesc', isImgDesc)
 
       try {
-        dispatch({ type: LESSSON_PHOTO_UPDATE_REQUEST })
+        dispatch({ type: PHOTO_UPDATE_REQUEST })
         const config = {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -66,11 +66,11 @@ export const updatePhoto =
           lessonImgData,
           config
         )
-        dispatch({ type: LESSSON_PHOTO_UPDATE_SUCCESS, payload: data })
+        dispatch({ type: PHOTO_UPDATE_SUCCESS, payload: data })
         setEditPhotoModel(false)
       } catch (error) {
         dispatch({
-          type: LESSSON_PHOTO_UPDATE_FAIL,
+          type: PHOTO_UPDATE_FAIL,
           payload:
           error.response && error.response.data.message
             ? error.response.data.message
@@ -81,13 +81,13 @@ export const updatePhoto =
 
 export const deletePhoto = (id, refetch) => async (dispatch) => {
   try {
-    dispatch({ type: LESSSON_PHOTO_DELETE_REQUEST })
+    dispatch({ type: PHOTO_DELETE_REQUEST })
     const { data } = await Axios.delete(GET_LESSON_PHOTO + `/${id}`)
-    dispatch({ type: LESSSON_PHOTO_DELETE_SUCCESS, payload: data })
+    dispatch({ type: PHOTO_DELETE_SUCCESS, payload: data })
     refetch()
   } catch (error) {
     dispatch({
-      type: LESSSON_PHOTO_DELETE_FAIL,
+      type: PHOTO_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

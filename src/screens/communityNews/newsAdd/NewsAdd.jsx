@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
 import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { useParams, useHistory } from 'react-router-dom'
@@ -6,7 +6,7 @@ import './NewsAdd.scss'
 import BackButton from '../../../components/backButton/BackButton'
 import CommunityNewsViewPage from '../../communityNewsView/CommunityNewsView'
 import { useDispatch, useSelector } from 'react-redux'
-import { createNews } from '../../../actions/newsActions'
+import { createNews, newsUpdate } from '../../../actions/newsActions'
 import AddContent from '../../courseManager/addLesson/AddContent'
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
@@ -21,11 +21,20 @@ import Video from '../../../components/videoPlayer/Video'
 import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../../utils/urlConstants'
 import EditContent from '../../../components/editContent/EditContent'
 import axios from 'axios'
-import { updateText } from '../../../actions/textActions'
-import { updatePhoto } from '../../../actions/photoActions'
+import { deleteText, updateText } from '../../../actions/textActions'
+import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
+import { deleteVideo, updateVideo } from '../../../actions/videoActions'
 
 const NewsAdd = () => {
   const { currentCommunity } = useSelector(state => state.activeCommunity)
+  const {success:updateVideoSuccess} = useSelector(state => state.updateVideo)
+  const {success:deleteVideoSuccess} = useSelector(state => state.deleteVideo)
+
+  const {success:updateTextSuccess} = useSelector(state => state.updateText)
+  const {success:deleteTextSuccess} = useSelector(state => state.deleteText)
+
+  const {success:updatePhotoSuccess} = useSelector(state => state.updatePhoto)
+  const {success:deletePhotoSuccess} = useSelector(state => state.deletePhoto)
   // fetching category from route
   const {state} = useLocation();
 
@@ -54,19 +63,33 @@ const NewsAdd = () => {
 
   const { title, id} = useParams()
 
+  const {pathname} = useLocation();
+
   const dispatch = useDispatch();
 
+  // for edit
   useEffect(() => {
-    if(title) {
-      setNewsData([{title, category}])
-    }
-  }, [dispatch])
-
-  useEffect(() => {
-    if(id) {
+    if(pathname.split('/')[2] === 'edit') {
       getSingleNews()
     }
-  }, [dispatch])
+  }, [
+    dispatch, 
+    newsData, 
+    updateVideoSuccess, 
+    deleteVideoSuccess, 
+    updateTextSuccess, 
+    deleteTextSuccess,
+    updatePhotoSuccess, 
+    deletePhotoSuccess
+  ])
+
+  // for creating
+  useEffect(() => {
+    if(pathname.split('/')[2] !== 'edit') {
+      setNewsData([{title, category}])
+    }
+  }, [])
+
 
   async function getSingleNews () {
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
@@ -79,19 +102,8 @@ const NewsAdd = () => {
     dispatch(createNews(newsData, newsCover));
   }
 
-  // converting the arrray into object for submission
-  function convertArrToObject (arr) {
-    let newData = {};
-    arr.map(item => {
-      let prop = Object.getOwnPropertyNames(item);
-      prop.forEach(el => newData[el] = item[el])
-    })
-
-    return newData;
-  }
-
-  const editNewsForm = () => {
-    console.log(newsCover)
+  const editNewsForm = ({title}) => {
+    dispatch(newsUpdate({id: newsSingleData.id, title, category: newsSingleData.category, newsCover}, newsData))
   }
 
   async function editImageFunc (id) {
@@ -102,7 +114,6 @@ const NewsAdd = () => {
   }
 
   function editImageConfirm (data) {
-    console.log(data);
     const {id, isImgDesc, lessonImg, photoDescription} = data;
     dispatch(updatePhoto(id, lessonImg, photoDescription, isImgDesc, setCreateImageModal ))
   }
@@ -126,13 +137,18 @@ const NewsAdd = () => {
     }
   }
 
+   function editVideoConfirm (data) {
+    const {id, videoCover, videoTitle, videoDescription, videoLink, videoResource} = data;
+    dispatch(updateVideo(id,  videoCover, videoTitle, videoDescription, videoLink, videoResource, setCreateVideoModal))
+  }
+
   function deleteImageModalFunc (id) {
     setDeleteImageModal(true)
     setImageId(id)
   }
 
   async function deleteImageConfirm () {
-    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/photos/${imageId}`)
+    dispatch(deletePhoto(imageId))
     setDeleteImageModal(false)
   }
 
@@ -142,7 +158,7 @@ const NewsAdd = () => {
   }
 
   async function deleteVideoConfirm () {
-    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/videos/${videoId}`)
+    dispatch(deleteVideo(videoId))
     setDeleteVideoModal(false)
   }
 
@@ -152,7 +168,7 @@ const NewsAdd = () => {
   }
 
   async function deleteTextConfirm () {
-    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/texts/${textId}`)
+    dispatch(deleteText(textId))
     setDeleteTextModal(false)
   }
 
@@ -165,7 +181,8 @@ const NewsAdd = () => {
           setVideoActive={setVideoActive} 
           lessonData={newsData} 
           setLessonData={setNewsData} 
-          videoData={videoData} 
+          videoData={videoData}
+          editVideoConfirm={editVideoConfirm}
           />
       }
       {
@@ -193,7 +210,7 @@ const NewsAdd = () => {
       {deleteVideoModal && <DeleteContent setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
       {deleteImageModal && <DeleteContent setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
       {deleteTextModal && <DeleteContent setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
-      <DashboardLayout title={newsSingleData.length > 0 ? 'Edit News' : 'Add News'}>
+      <DashboardLayout title={pathname.split('/')[2] === 'edit' ? 'Edit News' : 'Add News'}>
         <BackButton location={`/community-page-news/${currentCommunity.slug}`} />
         <AddNewsContent
           setVideoModal = {setCreateVideoModal}
@@ -214,7 +231,7 @@ const NewsAdd = () => {
         />
 
         {
-          newsSingleData.length > 0 
+          pathname.split('/')[2] === 'edit'
           ? <NewsSaveModal onClick={handleSubmit(editNewsForm)}  name="Edit" />
           : <NewsSaveModal onClick={handleSubmit(submitNewsForm)} name="Save" />
         }
@@ -273,7 +290,6 @@ const AddNewsContent = ({
     }
   }, [newsSingleData])
   
-  console.log(newsSingleData);
 
   return  <div className='admin-lesson-create-container'>
       <ErrorText
@@ -297,6 +313,7 @@ const AddNewsContent = ({
         onChange={(img) => setNewsCover(img)}
         text='Drag & Drop photo in this area or Click Here to attach'
         dataImg={newsSingleData?._attachments ? `${process.env.REACT_APP_CDN_BASE_URL}/news/${newsSingleData?._attachments}` : ''}
+        onClick={() => setNewsCover(null)}
       />
 
       {

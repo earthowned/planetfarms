@@ -1,5 +1,4 @@
 import { Axios, ADD_VIDEOS, GET_VIDEOS } from '../utils/urlConstants'
-import { postApi } from '../utils/apiFunc'
 
 import {
   VIDEO_CREATE_REQUEST,
@@ -80,7 +79,6 @@ export const updateVideo =
         }
         const { data } = await Axios.put(GET_VIDEOS + `/${id}`, videoData, config)
         dispatch({ type: VIDEO_UPDATE_SUCCESS, payload: data })
-        refetch()
         setEditVideoModel(false)
       } catch (error) {
         dispatch({
