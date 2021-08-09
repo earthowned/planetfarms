@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm, Controller } from 'react-hook-form'
 import moment from 'moment'
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
+import PhoneInput from 'react-phone-number-input'
 
 import Input from '../../components/input/Input'
 import { ErrorText } from '../../components/formUI/FormUI'
@@ -41,7 +41,6 @@ function CongratulationScreen () {
     }
   })
 
-  // const [value, setValue] = useState(userdetail?.phone)
   const userDetails = useSelector((state) => state.userDetails)
   const { user } = userDetails
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {

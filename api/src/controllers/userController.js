@@ -6,6 +6,7 @@ const Sequelize = require('sequelize')
 // const User = require('../models/userModel.js')
 // const LocalAuth = require('../models/localAuthModel.js')
 const Op = Sequelize.Op
+const { changeFormat } = require('../helpers/filehelpers')
 
 function amplifyConfig () {
   Amplify.configure({
@@ -83,7 +84,7 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     const user = await localAuth(name, password)
-    if (user && await subscribeCommunity(user)) {
+    if (user && (await subscribeCommunity(user))) {
       await res.json({
         token: generateToken(user.dataValues.userID),
         id: user.dataValues.userID
@@ -101,8 +102,12 @@ const authUser = async (req, res) => {
 }
 
 const localAuth = async (name, password) => {
-  const user = await db.LocalAuth.findOne({ where: { username: name, password: password } })
-  const newUser = await db.User.findOne({ where: { userID: { [Op.like]: user.dataValues.id.toString() } } })
+  const user = await db.LocalAuth.findOne({
+    where: { username: name, password: password }
+  })
+  const newUser = await db.User.findOne({
+    where: { userID: { [Op.like]: user.dataValues.id.toString() } }
+  })
   return newUser
 }
 
@@ -115,8 +120,13 @@ const registerUser = async (req, res) => {
     if (process.env.AUTH_METHOD === 'cognito') {
       const data = await db.User.findOne({ where: { userID: id } })
       if (!data) {
-        const user = await db.User.create({ userID: id, isLocalAuth: false, lastLogin: new Date(), numberOfVisit: 0 })
-        if (user && await subscribeCommunity(user)) {
+        const user = await db.User.create({
+          userID: id,
+          isLocalAuth: false,
+          lastLogin: new Date(),
+          numberOfVisit: 0
+        })
+        if (user && (await subscribeCommunity(user))) {
           res.status(201).send('SUCCESS')
         }
       } else {
@@ -133,12 +143,25 @@ const registerUser = async (req, res) => {
 const registerLocal = async (name, password, res) => {
   try {
     const userExists = await db.LocalAuth.findOne({ where: { username: name } })
-    if (userExists) { return res.json({ message: 'Users already Exists !!!' }).status(400) }
+    if (userExists) {
+      return res.json({ message: 'Users already Exists !!!' }).status(400)
+    }
     const newUser = await db.sequelize.transaction(async (t) => {
-      const user = await db.LocalAuth.create({ username: name, password: password }, { transaction: t })
-      return await db.User.create({ userID: user.id, isLocalAuth: true, lastLogin: new Date(), numberOfVisit: 0 }, { transaction: t })
+      const user = await db.LocalAuth.create(
+        { username: name, password: password },
+        { transaction: t }
+      )
+      return await db.User.create(
+        {
+          userID: user.id,
+          isLocalAuth: true,
+          lastLogin: new Date(),
+          numberOfVisit: 0
+        },
+        { transaction: t }
+      )
     })
-    if (newUser && await subscribeCommunity(newUser)) {
+    if (newUser && (await subscribeCommunity(newUser))) {
       res.status(201).json({
         id: newUser.dataValues.userID,
         userID: newUser.dataValues.userID,
@@ -155,10 +178,13 @@ const registerLocal = async (name, password, res) => {
 const subscribeCommunity = async (user) => {
   try {
     return await db.sequelize.transaction(async (t) => {
-      const communitiesArray = await db.Community.findAll({
-        attributes: ['id'], where: { auto_follow: true }
-      },
-      { transaction: t })
+      const communitiesArray = await db.Community.findAll(
+        {
+          attributes: ['id'],
+          where: { auto_follow: true }
+        },
+        { transaction: t }
+      )
       const allFollow = []
       for (let i = 0; i < communitiesArray.length; i++) {
         const followObj = {
@@ -186,7 +212,10 @@ const changePassword = async (req, res) => {
     let userWithNewPassword
     const oldUser = await db.LocalAuth.findByPk(user.userID)
     if (oldUser.dataValues.password === oldPassword) {
-      userWithNewPassword = await db.LocalAuth.update({ password: newPassword }, { where: { id: user.userID } })
+      userWithNewPassword = await db.LocalAuth.update(
+        { password: newPassword },
+        { where: { id: user.userID } }
+      )
     } else {
       // throw new Error('Incorrect old password')
       res.status(401).json({ message: 'Incorrect old password' })
@@ -201,7 +230,9 @@ const forgotPassword = async (req, res) => {
   // Send confirmation code to user's email
   const { username } = req.body
   Auth.forgotPassword(username)
-    .then((CodeDeliveryDetails) => res.json({ details: CodeDeliveryDetails }).status(200))
+    .then((CodeDeliveryDetails) =>
+      res.json({ details: CodeDeliveryDetails }).status(200)
+    )
     .catch((err) => console.log(err))
 }
 
@@ -270,8 +301,8 @@ const getUserProfileByUserID = async (req, res) => {
 // @desc    Fetch logged user profile
 // @route   GET /api/user/profile
 // @access  Public
-const getMyProfile = (req, res) => {
-  const user = req.user
+const getMyProfile = async (req, res) => {
+  const user = await req.user
   res.json({
     firstName: user.firstName,
     lastName: user.lastName,
@@ -280,7 +311,7 @@ const getMyProfile = (req, res) => {
     dateOfBirth: user.dateOfBirth,
     lastLogin: user.lastLogin,
     numberOfVisit: user.numberOfVisit,
-    attachments: user.attachments
+    attachments: changeFormat(user?.dataValues?.attachments)
   })
 }
 
@@ -292,14 +323,24 @@ const updateUser = async (req, res) => {
     if (req.file) {
       attachment = req.file.filename
     } else {
-      attachment = req.body.attachments === 'undefined' || req.body.attachments === 'null' ? null : req.body.attachments
+      attachment =
+        req.body.attachments === 'undefined' || req.body.attachments === 'null'
+          ? null
+          : req.body.attachments
     }
     const { email, firstName, lastName, phone, birthday } = req.body
     const id = req.user.dataValues.userID
-    db.User.findOne({ where: { userID: id } }).then(user => {
+    db.User.findOne({ where: { userID: id } }).then((user) => {
       if (user) {
         db.User.update(
-          { email, firstName, lastName, phone, dateOfBirth: birthday, attachments: attachment || '' },
+          {
+            email,
+            firstName,
+            lastName,
+            phone,
+            dateOfBirth: birthday,
+            attachments: attachment || ''
+          },
           { where: { userID: id } }
         )
           .then(() => res.sendStatus(200))
@@ -320,7 +361,10 @@ const updateUser = async (req, res) => {
 const searchUserName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
-  db.User.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['title', order]] })
+  db.User.findAll({
+    where: { name: { [Op.iLike]: '%' + name + '%' } },
+    order: [['title', order]]
+  })
     .then((users) => res.json({ users }).status(200))
     .catch((err) => res.json({ error: err }).status(400))
 }

@@ -14,13 +14,20 @@ const {
   searchUserName,
   sendTokenStatus
 } = require('../controllers/userController.js')
+require('express-async-errors')
 
 const protect = require('../middleware/authMiddleware')
-const { upload } = require('../helpers/filehelpers')
+const { upload, resizeImage } = require('../helpers/filehelpers')
 
 router.route('/').post(registerUser).get(protect, getUsers)
-router.route('/profile').get(protect, getMyProfile).put(protect, upload.single('attachments'), updateUser)
-router.route('/profile/:userID').get(protect, getUserProfileByUserID).put(protect, updateUser)
+router
+  .route('/profile')
+  .get(protect, getMyProfile)
+  .put(protect, upload.single('attachments'), resizeImage, updateUser)
+router
+  .route('/profile/:userID')
+  .get(protect, getUserProfileByUserID)
+  .put(protect, updateUser)
 router.post('/login', authUser)
 router.route('/token').get(protect, sendTokenStatus)
 router.route('/search').get(searchUserName)
