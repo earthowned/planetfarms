@@ -50,7 +50,7 @@ function CommunityMembers () {
             <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
           </div>
           <div className='community-members-grid-row'>
-            {membersData?.communities_users && <CardImage follow='Follow' data={membersData?.communities_users} />}
+            {membersData?.data && <CardImage follow='Follow' data={membersData?.data} />}
           </div>
           <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={membersData} />
         </div>

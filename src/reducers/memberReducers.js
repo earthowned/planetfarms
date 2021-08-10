@@ -9,7 +9,7 @@ export const memberListReducer = (state = { members: [] }, action) => {
     case MEMBER_LIST_SUCCESS:
       return {
         loading: false,
-        members: action.payload.communities_users,
+        members: action.payload.data,
         totalItems: action.payload.totalItems,
         page: action.payload.page,
         pageSize: action.payload.pageSize,

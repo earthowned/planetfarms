@@ -105,20 +105,22 @@ const getAllMembers = async (req, res) => {
       required: true,
       distinct: true
     })
-    
     res.status(200)
-    .json({
-      status: true,
-      message: 'Fetched successfully',
-      ...paginatedResponse({
-        data: {
-        communities_users: data.rows.map((rec) => ({
-          ...rec.dataValues,
-          filename: changeFormat(rec.filename)
-        }))},
-        pageSize, pageNumber
+      .json({
+        status: true,
+        message: 'Fetched successfully',
+        ...paginatedResponse({
+          data: {
+            ...data,
+            rows: data.rows.map((rec) => ({
+              ...rec.dataValues,
+              filename: changeFormat(rec.filename)
+            }))
+          },
+          pageSize,
+          pageNumber
+        })
       })
-    })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
