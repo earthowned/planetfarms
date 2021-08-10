@@ -10,8 +10,7 @@ const { paginatedResponse } = require('../utils/query')
 // @route   GET /api/courses?pageNumber=${pageNumber}&category=${category}&search=${search}
 // @access  Public
 const getCourses = async (req, res) => {
-  const pageSize = 6
-  const { category, search, pageNumber = 1 } = req.query
+  const { category, search, pageNumber = 1, pageSize = 6 } = req.query
   const order = req.query.order || 'ASC'
 
   const courses = await db.Courses.findAndCountAll({
@@ -22,16 +21,15 @@ const getCourses = async (req, res) => {
     where: {
       ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
       ...(category ? { categoryId: Number(category) } : {})
-    }
+    },
+    distinct: true
   })
-
   courses.rows.forEach(course => {
     course.thumbnail = changeFormat(course.thumbnail)
     course.lessons.forEach(lesson => {
       lesson.coverImg = changeFormat(lesson.coverImg)
     })
   })
-
   res
     .status(200)
     .json({
@@ -50,7 +48,6 @@ const addCourse = async (req, res) => {
     if (req.file) {
       thumbnail = req.file.filename
     }
-
     const course = await db.Courses.create({ ...req.body, thumbnail })
     res.status(201).json({
       status: true,
