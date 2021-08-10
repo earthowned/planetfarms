@@ -12,7 +12,6 @@ const { paginatedResponse } = require('../utils/query')
 const getCourses = async (req, res) => {
   const { category, search, pageNumber = 1, pageSize = 6 } = req.query
   const order = req.query.order || 'ASC'
-
   const courses = await db.Courses.findAndCountAll({
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
@@ -30,8 +29,7 @@ const getCourses = async (req, res) => {
       lesson.coverImg = changeFormat(lesson.coverImg)
     })
   })
-  res
-    .status(200)
+  res.status(200)
     .json({
       status: true,
       message: 'Fetched successfully',
