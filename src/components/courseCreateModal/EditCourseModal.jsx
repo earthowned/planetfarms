@@ -15,7 +15,7 @@ const EditCourseModal = ({ isEditCourse, setIsEditCourse, data, refetch }) => {
   const [courseImage, setCourseImage] = useState('')
   const [courseId, setCourseId] = useState('')
   const [selectedCategory, setSelectedCategory] = useState(
-    `${data?.data?.category}`
+    `${data?.data?.categoryId}`
   )
   const [categoryError, setCategoryError] = useState('')
   const { register, errors, handleSubmit } = useForm()
