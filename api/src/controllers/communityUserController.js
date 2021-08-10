@@ -95,12 +95,12 @@ const getAllMembers = async (req, res) => {
       include: [{
         model: db.User,
         attributes: ['email', 'firstName'],
-        where: {
+        where: search ? {
           [Op.or]: [
             { firstName: { [Op.iLike]: '%' + search + '%' } },
             { email: { [Op.iLike]: '%' + search + '%' } }
           ]
-        }
+        } : {}
       }],
       required: true,
       distinct: true
