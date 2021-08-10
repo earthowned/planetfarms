@@ -83,32 +83,28 @@ const followCommunity = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
   try {
-    const { search } = req.query
-    const pageSize = Number(req.query.pageSize) || 8
-    const page = Number(req.query.pageNumber) || 1
+    const { search, pageNumber = 1, pageSize = 8 } = req.query
     const order = req.query.order || 'ASC'
     const ordervalue = order && [['createdAt', order]]
-
-    const data = await db.CommunityUser.findAndCountAll(
-      {
-        offset: (page - 1) * pageSize,
-        limit: pageSize,
-        order: ordervalue,
-        where: { communityId: req.params.id, active: true },
-        attributes: ['id', 'createdAt'],
-        include: [{
-          model: db.User,
-          attributes: ['email', 'firstName'],
-          where: {
-            [Op.or]: [
-              { firstName: { [Op.iLike]: '%' + search + '%' } },
-              { email: { [Op.iLike]: '%' + search + '%' } }
-            ]
-          }
-        }],
-        required: true
-      }
-    )
+    const data = await db.CommunityUser.findAndCountAll({
+      offset: (pageNumber - 1) * pageSize,
+      limit: pageSize,
+      order: ordervalue,
+      where: { communityId: req.params.id, active: true },
+      attributes: ['id', 'createdAt'],
+      include: [{
+        model: db.User,
+        attributes: ['email', 'firstName'],
+        where: {
+          [Op.or]: [
+            { firstName: { [Op.iLike]: '%' + search + '%' } },
+            { email: { [Op.iLike]: '%' + search + '%' } }
+          ]
+        }
+      }],
+      required: true,
+      distinct: true
+    })
     const totalPages = Math.ceil(data.count / pageSize)
     res.json({
       communities_users: data.rows.map((rec) => ({
