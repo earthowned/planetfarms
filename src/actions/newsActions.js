@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getApi, configFunc } from '../utils/apiFunc'
+import { getApi, configFunc, postApi } from '../utils/apiFunc'
 import {
   NEWS_LIST_REQUEST,
   NEWS_LIST_SUCCESS,
@@ -76,7 +76,7 @@ export const createNews = (newNews) => async (dispatch, getState) => {
   try {
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, configFunc())
+    const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData)
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     dispatch({ type: NEWS_CLEAR, payload: data })
   } catch (error) {

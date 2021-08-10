@@ -1,5 +1,5 @@
-import { Axios, ADD_ENROLL } from '../utils/urlConstants'
-
+import { ADD_ENROLL } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
 import {
   ENROLL_CREATE_REQUEST,
   ENROLL_CREATE_SUCCESS,
@@ -15,12 +15,7 @@ export const addEnroll = (courseId, userId, history) => async (dispatch) => {
 
   try {
     dispatch({ type: ENROLL_CREATE_REQUEST })
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    const { data } = await Axios.post(ADD_ENROLL, enrollData, config)
+    const { data } = await postApi(dispatch, ADD_ENROLL, enrollData)
     dispatch({ type: ENROLL_CREATE_SUCCESS, payload: data })
     if (history) {
       history.push(`/course/${courseId}`)

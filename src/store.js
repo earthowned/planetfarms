@@ -8,7 +8,11 @@ import {
   newsUpdateReducer
 } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
-import { courseCreateReducer } from './reducers/courseReducers'
+import {
+  courseCreateReducer,
+  updateCourseReducer,
+  deleteCourseReducer
+} from './reducers/courseReducers'
 import {
   lessonCreateReducer,
   lessonUpdateReducer
@@ -17,7 +21,11 @@ import { videoCreateReducer } from './reducers/videoReducers'
 import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
-import { testCreateReducer, testQuestionEditReducer, testQuestionListReducer } from './reducers/testReducers'
+import {
+  testCreateReducer,
+  testQuestionEditReducer,
+  testQuestionListReducer
+} from './reducers/testReducers'
 
 import {
   enterpriseCreateReducer,
@@ -49,7 +57,8 @@ import {
   userAttrResendCodeReducer,
   changePasswordReducer,
   userForgotPwdConfirmCodeReducer,
-  userForgotPwdResendCodeReducer
+  userForgotPwdResendCodeReducer,
+  userForgotPwdCodeMessageReducer
 } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import {
@@ -64,6 +73,13 @@ import {
 import { memberListReducer } from './reducers/memberReducers'
 import { addEnrollReducer } from './reducers/enrollReducer'
 import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
+import {
+  categoryCreateReducer,
+  categoryDeleteReducer,
+  categoryListReducer,
+  categoryUpdateReducer,
+  categoryViewReducer
+} from './reducers/categoryReducer'
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -90,6 +106,8 @@ const reducer = combineReducers({
   communityUpdate: communityUpdateReducer,
   activeCommunity: communityVisitReducer,
   addCourse: courseCreateReducer,
+  updateCourse: updateCourseReducer,
+  deleteCourse: deleteCourseReducer,
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
   addVideo: videoCreateReducer,
@@ -112,6 +130,7 @@ const reducer = combineReducers({
   changePassword: changePasswordReducer,
   userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
   userForgotPwdResendCode: userForgotPwdResendCodeReducer,
+  userForgotPwdCodeMessage: userForgotPwdCodeMessageReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer,
@@ -119,7 +138,12 @@ const reducer = combineReducers({
   addEnroll: addEnrollReducer,
   listQuestions: questionListReducer,
   questionDelete: questionDeleteReducer,
-  questionUpdate: questionUpdateReducer
+  questionUpdate: questionUpdateReducer,
+  listCategories: categoryListReducer,
+  categoryDelete: categoryDeleteReducer,
+  categoryUpdate: categoryUpdateReducer,
+  categoryView: categoryViewReducer,
+  addCategory: categoryCreateReducer
 })
 
 const userInfoFromStorage = window.localStorage.getItem('userInfo')

@@ -49,6 +49,7 @@ const DragDrop = ({
       files={files}
       setFiles={setFiles}
       className={className}
+      fileType={fileType}
       type={type}
       text={text}
       fetchImg={fetchImg}
@@ -67,6 +68,7 @@ const DragDropComponent = ({
   setFiles,
   className,
   type,
+  fileType,
   text,
   dataImg,
   editImg,
@@ -89,7 +91,7 @@ const DragDropComponent = ({
               alt='files[0].preview'
             />
             <div className='drag-drop-icon-container'>
-              {type === 'video' ? (
+              {fileType === 'video/mp4,video/quicktime' ? (
                 <p className='videoName'>{files.name}</p>
               ) : editImg ? (
                 <p>{text}</p>

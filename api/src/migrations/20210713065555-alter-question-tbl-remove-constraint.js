@@ -1,16 +1,16 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.changeColumn('questions', "answer", {
+    await queryInterface.changeColumn('questions', 'answer', {
       type: Sequelize.TEXT,
-        allowNull: true
+      allowNull: true
     })
-    await queryInterface.changeColumn('questions', "options", {
+    await queryInterface.changeColumn('questions', 'options', {
       type: Sequelize.ARRAY(Sequelize.TEXT),
-        allowNull: true
+      allowNull: true
     })
-    await queryInterface.changeColumn('questions', "question", {
+    await queryInterface.changeColumn('questions', 'question', {
       type: Sequelize.TEXT,
       allowNull: false,
       unique: false
@@ -18,18 +18,18 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.changeColumn('questions', "answer", {
+    await queryInterface.changeColumn('questions', 'answer', {
       type: Sequelize.TEXT,
-        allowNull: false
+      allowNull: false
     })
-    await queryInterface.changeColumn('questions', "options", {
+    await queryInterface.changeColumn('questions', 'options', {
       type: Sequelize.ARRAY(Sequelize.TEXT),
-        allowNull: false
+      allowNull: false
     })
-    await queryInterface.changeColumn('questions', "question", {
+    await queryInterface.changeColumn('questions', 'question', {
       type: Sequelize.TEXT,
       allowNull: false,
       unique: true
     })
   }
-};
+}
