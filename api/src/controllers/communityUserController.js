@@ -1,6 +1,7 @@
 const { Op } = require('sequelize')
 const db = require('../models')
 const { changeFormat } = require('../helpers/filehelpers')
+const { paginatedResponse } = require('../utils/query')
 
 // @desc Get the community-users
 // @route GET /api/community-users
@@ -104,17 +105,20 @@ const getAllMembers = async (req, res) => {
       required: true,
       distinct: true
     })
-    const totalPages = Math.ceil(data.count / pageSize)
-    res.json({
-      communities_users: data.rows.map((rec) => ({
-        ...rec.dataValues,
-        filename: changeFormat(rec.filename)
-      })),
-      totalItems: data.count,
-      totalPages,
-      page,
-      pageSize
-    }).status(200)
+    
+    res.status(200)
+    .json({
+      status: true,
+      message: 'Fetched successfully',
+      ...paginatedResponse({
+        data: {
+        communities_users: data.rows.map((rec) => ({
+          ...rec.dataValues,
+          filename: changeFormat(rec.filename)
+        }))},
+        pageSize, pageNumber
+      })
+    })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
