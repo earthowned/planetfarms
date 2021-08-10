@@ -16,9 +16,12 @@ function CommunityMembers ({ history }) {
   const windowWidth = useSizeFinder()
 
   // fetching current community
-  const currentCommunity = window.localStorage.getItem('currentCommunity')
+  const currentCommunity = useSelector(
+    (state) => state.activeCommunity.currentCommunity
+  )
+  /*const currentCommunity = window.localStorage.getItem('currentCommunity')
     ? JSON.parse(window.localStorage.getItem('currentCommunity'))
-    : null
+    : null*/
 
   useEffect(() => {
     if (windowWidth < 1439 && windowWidth > 768) {
