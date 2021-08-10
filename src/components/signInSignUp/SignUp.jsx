@@ -13,6 +13,8 @@ import OAuthBtn from '../oAuthBtn/OAuthBtn'
 import Input from '../input/Input'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
+import { ReactComponent as Email } from '../../assets/images/email.svg'
+import { ReactComponent as Phone } from '../../assets/images/phone-call-outline.svg'
 import './SignInSignUp.scss'
 
 const SignIn = () => {
@@ -31,6 +33,8 @@ const SignIn = () => {
 
   const dispatch = useDispatch()
   const [showPassword, setShowPassword] = useState(false)
+  const [inputVal, setInputVal] = useState('')
+  const [checkType, setCheckType] = useState('')
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
@@ -48,7 +52,14 @@ const SignIn = () => {
   const onSubmit = ({ username, password }) => {
     return dispatch(register(username, password))
   }
-
+  useEffect(() => {
+    const rexEmail = /^\S+@\S+$/
+    rexEmail.test(inputVal)
+      ? setCheckType('email')
+      : /^\d+$/.test(inputVal)
+        ? setCheckType('number')
+        : setCheckType('username')
+  }, [inputVal])
   return (
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>
@@ -67,8 +78,15 @@ const SignIn = () => {
             }
           })}
           errors={errors}
+          onChange={(e) => setInputVal(e.target.value)}
         >
-          <UserAvatar />
+          {checkType === 'email' ? (
+            <Email />
+          ) : checkType === 'number' ? (
+            <Phone />
+          ) : (
+            <UserAvatar />
+          )}
         </Input>
         <Input
           type={showPassword ? 'text' : 'password'}
@@ -94,7 +112,9 @@ const SignIn = () => {
         <div className='remember remember-signup'>
           <div className='signupCheckBtn'>
             <Checkbox
-              label={spanText} name='terms' ref={regi({
+              label={spanText}
+              name='terms'
+              ref={regi({
                 required: {
                   value: true,
                   message: 'Please read the terms of service'

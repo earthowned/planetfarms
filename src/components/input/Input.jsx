@@ -16,7 +16,8 @@ const Input = React.forwardRef(
       showPassword,
       children,
       noIcon,
-      disabled
+      disabled,
+      onChange
     },
     ref
   ) => {
@@ -25,7 +26,11 @@ const Input = React.forwardRef(
     return (
       <>
         <div className='input-container'>
-          <div className={errors?.[`${name}`]?.message ? 'block block-error' : 'block'}>
+          <div
+            className={
+              errors?.[`${name}`]?.message ? 'block block-error' : 'block'
+            }
+          >
             {showLabel && (
               <p className={!noIcon ? 'label' : 'label label-left'}>
                 {placeholder}
@@ -33,7 +38,11 @@ const Input = React.forwardRef(
             )}
             <div className='field'>
               {!noIcon && (
-                <div className={errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon '}>
+                <div
+                  className={
+                    errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon '
+                  }
+                >
                   {children}
                 </div>
               )}
@@ -46,7 +55,10 @@ const Input = React.forwardRef(
                 id={id}
                 ref={ref}
                 type={type}
-                onChange={(e) => setShowLabel(e.target.value)}
+                onChange={(e) => {
+                  setShowLabel(e.target.value)
+                  onChange(e)
+                }}
                 disabled={disabled}
                 autoComplete='off'
               />
@@ -63,14 +75,15 @@ const Input = React.forwardRef(
               )}
             </div>
           </div>
-          {errors?.[`${name}`] &&
+          {errors?.[`${name}`] && (
             <p className='error-message'>
               <ErrorMessage
                 errors={errors}
                 name={name}
                 render={({ message }) => <span>{message}</span>}
               />
-            </p>}
+            </p>
+          )}
         </div>
       </>
     )
