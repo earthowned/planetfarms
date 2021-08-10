@@ -4,10 +4,8 @@ import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { useParams, useHistory } from 'react-router-dom'
 import './NewsAdd.scss'
 import BackButton from '../../../components/backButton/BackButton'
-import CommunityNewsViewPage from '../../communityNewsView/CommunityNewsView'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNews, newsUpdate } from '../../../actions/newsActions'
-import AddContent from '../../courseManager/addLesson/AddContent'
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
@@ -15,12 +13,7 @@ import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
 import ContentAdd from '../../../components/contentAdd/ContentAdd'
 import { configFunc, getApi } from '../../../utils/apiFunc'
 import DragDrop from '../../../components/dragDrop/DragDrop'
-import Image from '../../../components/lessonImage/Image'
-import Text from '../../courseManager/addLesson/Text'
-import Video from '../../../components/videoPlayer/Video'
-import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../../utils/urlConstants'
 import EditContent from '../../../components/editContent/EditContent'
-import axios from 'axios'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
@@ -56,7 +49,6 @@ const NewsAdd = () => {
   const [videoData, setVideoData] = useState(null)
   const [textData, setTextData] = useState(null)
 
-  const news = useSelector((state) => (state.addNewNews !== {} ? state.addNewNews : ''))
   const { register, errors, handleSubmit } = useForm()
 
   const { title, id} = useParams()
