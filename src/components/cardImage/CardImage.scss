@@ -33,11 +33,15 @@
   line-height: 24px;
   min-height: 24px;
   white-space: nowrap;
+
+  h4 {
+    text-transform: capitalize;
+  }
 }
 
 .ibmplexsans-semi-bold-quarter-spanish-white-16px {
   color: var(--primary-white);
-  font-family: "IBM Plex Sans", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -52,7 +56,7 @@
 
 .ibmplexsans-normal-monsoon-14px {
   color: var(--primary-grey);
-  font-family: "IBM Plex Sans", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -97,7 +101,7 @@
 
 .ibmplexsans-semi-bold-caribbean-green-16px {
   color: var(--primary-color);
-  font-family: "IBM Plex Sans", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -105,7 +109,7 @@
 
 .ibmplexsans-semi-bold-monsoon-16px {
   color: var(--primary-grey);
-  font-family: "IBM Plex Sans", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
