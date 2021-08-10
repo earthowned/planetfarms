@@ -14,7 +14,7 @@ export const createResource = ({
 }) => async (dispatch) => {
   const formData = new FormData()
   formData.append('title', title)
-  formData.append('category', category)
+  formData.append('categoryId', category)
   formData.append('description', description)
   formData.append('price', price)
   formData.append('thumbnail', thumbnail)
@@ -54,7 +54,7 @@ export const updateCourse = ({
 }) => async (dispatch) => {
   const formData = new FormData()
   formData.append('title', title)
-  formData.append('category', category)
+  formData.append('categoryId', category)
   formData.append('description', description)
   formData.append('price', price)
   formData.append('thumbnail', thumbnail)

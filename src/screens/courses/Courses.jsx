@@ -13,11 +13,16 @@ const Courses = () => {
   const [modalactive, setModalActive] = useState(false)
   const [createCourse, setCreateCourse] = useState(false)
   const [purchaseModal, setPurchaseModal] = useState(false)
-  const [search, setSearch] = useState(null)
-
+  const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
+  const [search, setSearch] = useState('')
   const { data, isLoading } = useGetFetchData('courseCategory', CATEGORY)
   if (isLoading) {
     return <span>Loading...</span>
+  }
+
+  function createNewCourseFunc () {
+    // setCreateNewCourse(true)
+    setCreateCourse(false)
   }
 
   return (
@@ -43,13 +48,15 @@ const Courses = () => {
         {data?.results?.map((category) => {
           return (
             <CoursesCard
-              category={category.name}
+              search={search}
+              category={category}
               setModalActive={setModalActive}
               key={category.id}
               setPurchaseModal={setPurchaseModal}
             />
           )
         })}
+
       </DashboardLayout>
     </>
   )
