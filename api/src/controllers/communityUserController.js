@@ -84,8 +84,7 @@ const followCommunity = async (req, res) => {
 const getAllMembers = async (req, res) => {
   try {
     const { search, pageNumber = 1, pageSize = 8 } = req.query
-    const order = req.query.order || 'ASC'
-    const ordervalue = order && [['createdAt', order]]
+    const ordervalue = [['createdAt', req.query.order || 'ASC']]
     const data = await db.CommunityUser.findAndCountAll({
       offset: (pageNumber - 1) * pageSize,
       limit: pageSize,
