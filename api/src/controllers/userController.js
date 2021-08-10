@@ -295,19 +295,21 @@ const getUserById = (req, res) => {
 const getUserProfileByUserID = async (req, res) => {
   try {
     const id = req.params.userID
-    let profile
-    if (id === req.user.userID) {
-      profile = await db.User.findOne({ where: { userID: id } })
-    } else {
-      profile = await db.User.findOne({
-        where: { userID: id },
-        attributes: { exclude: ['email', 'phone'] }
-      })
-    }
+    const profile = await db.User.findOne({
+      where: { userID: id },
+      attributes: { exclude: ['phone', 'dateOfBirth'] }
+    })
     if (!profile) {
-      return res.status(404).json({ error: 'Profile not found' })
+      throw new NotFoundError()
     }
-    res.json({ results: profile })
+    res.status(200).json({
+      status: true,
+      message: 'fetched user profile successfully',
+      results: {
+        ...profile.dataValues,
+        attachments: changeFormat(profile.dataValues.attachments)
+      }
+    })
   } catch (err) {
     res.json({ error: err.message }).status(400)
   }
