@@ -117,10 +117,11 @@ function Profile () {
                   <EditInformation
                     clickHandler={editUserInformation}
                     image={
-                      user?.attachments &&
-                      process.env.REACT_APP_CDN_BASE_URL +
-                        '/attachments/' +
-                        user.attachments
+                      user?.attachments
+                        ? process.env.REACT_APP_CDN_BASE_URL +
+                          '/attachments/' +
+                          user.attachments
+                        : '/img/user.svg'
                     }
                     follow={isCurrentUser}
                   />
