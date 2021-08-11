@@ -3,7 +3,6 @@ const NotFoundError = require('../errors/notFoundError')
 
 const getProgress = async (req, res) => {
   const progress = await db.LessonProgress.findAll(req.body)
-  console.log(progress)
   if (!progress) {
     throw new NotFoundError()
   }
@@ -28,7 +27,6 @@ const getProgressById = async (req, res) => {
 }
 
 const addProgress = async (req, res) => {
-  console.log(req.body)
   const progress = await db.LessonProgress.create(req.body)
   res.status(201).json({
     status: true,
