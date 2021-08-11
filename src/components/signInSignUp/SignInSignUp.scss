@@ -294,36 +294,53 @@
     margin-top: 1em;
   }
 }
-.PhoneInput {
+.signInput {
   display: flex;
   align-items: center;
+
+  .PhoneInputInput {
+    display: none;
+  }
+  .PhoneInputCountry {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    margin-right: 0.35em;
+  }
+  .PhoneInputCountrySelect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .PhoneInputCountryIcon {
+    width: calc(1em * 1.5);
+    height: 1em;
+  }
+  .PhoneInputCountry {
+    select {
+      background: var(--background-color);
+      border: none;
+      outline: none;
+      padding: 0.5em;
+      option {
+        font-family: var(--font-family);
+        font-size: 1.28em;
+        margin: 1.5em 0;
+        color: #ffff;
+        padding: 1em;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--primary-color) !important;
+        }
+      }
+    }
+  }
 }
-.PhoneInputInput {
-  display: none;
-}
-.PhoneInputCountry {
-  position: relative;
-  align-self: stretch;
-  display: flex;
-  align-items: center;
-  margin-right: 0.35em;
-}
-.PhoneInputCountrySelect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  border: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-.PhoneInputCountryIcon {
-  width: calc(1em * 1.5);
-  height: 1em;
-}
-// .PhoneInputCountryIcon--border {
-//   background-color: rgba(0, 0, 0, 0.1);
-//   box-shadow: 0 0 0 1px rgb(0 0 0 / 50%), inset 0 0 0 1px rgb(0 0 0 / 50%);
-// }
