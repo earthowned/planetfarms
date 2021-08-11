@@ -345,7 +345,7 @@ const updateUser = async (req, res) => {
       attachments = req.user.attachments
     }
     const id = req.user.dataValues.userID
-    const {email, firstName, lastName, phone, birthday} = req.body
+    const { email, firstName, lastName, phone, birthday } = req.body
     db.User.findOne({ where: { userID: id } }).then((user) => {
       if (user) {
         db.User.update(
