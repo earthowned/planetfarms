@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.removeColumn('enrolls', 'courseId', {
+    await queryInterface.removeColumn('enrolls', 'courseId', {
       type: Sequelize.INTEGER,
       unique: true,
       references: {
@@ -8,7 +8,7 @@ module.exports = {
         key: 'id'
       }
     })
-    queryInterface.addColumn('enrolls', 'courseId', {
+    await queryInterface.addColumn('enrolls', 'courseId', {
       type: Sequelize.INTEGER,
       references: {
         model: 'courses',
@@ -18,16 +18,16 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.addColumn('enrolls', 'courseId', {
+    await queryInterface.removeColumn('enrolls', 'courseId', {
       type: Sequelize.INTEGER,
-      unique: true,
       references: {
         model: 'courses',
         key: 'id'
       }
     })
-    queryInterface.removeColumn('enrolls', 'courseId', {
+    await queryInterface.addColumn('enrolls', 'courseId', {
       type: Sequelize.INTEGER,
+      unique: true,
       references: {
         model: 'courses',
         key: 'id'
