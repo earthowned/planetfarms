@@ -16,7 +16,7 @@ import { useLocation } from 'react-router-dom'
 
 function MyProfile () {
   const { id } = useParams()
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
   const [showEmailVerificationModal, setShowEmailVerificationModal] = useState(false)
   const [showPhoneVerificationModal, setShowPhoneVerificationModal] = useState(false)
   const history = useHistory()
@@ -38,7 +38,7 @@ function MyProfile () {
 
   // for myProfile
   useEffect(() => {
-    if(pathname === "/myProfile") {
+    if (pathname === '/myProfile') {
       dispatch(getMyDetails())
       if (status) {
         emailClickHandler(false)
@@ -49,9 +49,9 @@ function MyProfile () {
 
   // for community members
   useEffect(() => {
-      if (userInfo && id) {
-        dispatch(getUserDetails(id))
-      }
+    if (userInfo && id) {
+      dispatch(getUserDetails(id))
+    }
   }, [dispatch, history, id, userInfo])
 
   const editUserInformation = () => {
