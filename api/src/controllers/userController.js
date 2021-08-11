@@ -260,7 +260,14 @@ const confirmSignUpWithCode = async (req, res) => {
 const getUsers = (req, res) => {
   db.User.findAll({})
     .then((users) => {
-      res.json({ users }).status(200)
+      res
+        .json({
+          users: users.map((rec) => ({
+            ...rec.dataValues,
+            attachments: changeFormat(rec.dataValues.attachments)
+          }))
+        })
+        .status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
@@ -292,7 +299,10 @@ const getUserProfileByUserID = async (req, res) => {
     if (id === req.user.userID) {
       profile = await db.User.findOne({ where: { userID: id } })
     } else {
-      profile = await db.User.findOne({ where: { userID: id }, attributes: { exclude: ['email', 'phone'] } })
+      profile = await db.User.findOne({
+        where: { userID: id },
+        attributes: { exclude: ['email', 'phone'] }
+      })
     }
     if (!profile) {
       return res.status(404).json({ error: 'Profile not found' })
@@ -335,17 +345,26 @@ const updateUser = async (req, res) => {
           : req.body.attachments
     }
     const id = req.user.dataValues.userID
-    const user = await db.User.update(
-      { ...req.body, attachments },
-      { where: { userID: id } }
-    )
-    if (!user) {
-      throw new NotFoundError()
-    }
-    res.status(202).json({
-      status: true,
-      message: 'User updated successfully',
-      data: user
+    const {email, firstName, lastName, phone, birthday, attachment} = req.body
+    db.User.findOne({ where: { userID: id } }).then((user) => {
+      if (user) {
+        db.User.update(
+          {
+            email,
+            firstName,
+            lastName,
+            phone,
+            dateOfBirth: birthday,
+            attachments: attachment || user.dataValues.attachments
+          },
+          { where: { userID: id } }
+        )
+          .then(() => res.sendStatus(200))
+          .catch((err) => res.status(403).json({ error: err.message }))
+      } else {
+        res.status(404)
+        throw new Error('User not found')
+      }
     })
   } catch (err) {
     res.status(403).json({ error: err.message })

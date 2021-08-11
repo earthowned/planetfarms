@@ -46,24 +46,30 @@ const followCommunity = async (req, res) => {
 
       if (followedUser) {
         // unfollow the user
-        await db.CommunityUser.update({ active: false }, {
-          where: {
-            userId: req.user.id,
-            communityId
+        await db.CommunityUser.update(
+          { active: false },
+          {
+            where: {
+              userId: req.user.id,
+              communityId
+            }
           }
-        })
+        )
         return res.json({
           message: 'You have unfollowed the community.'
         })
       }
 
       // follow the community
-      await db.CommunityUser.update({ active: true }, {
-        where: {
-          userId: req.user.id,
-          communityId
+      await db.CommunityUser.update(
+        { active: true },
+        {
+          where: {
+            userId: req.user.id,
+            communityId
+          }
         }
-      })
+      )
       return res.json({
         message: 'Congratulation for following the community.'
       })
@@ -94,7 +100,7 @@ const getAllMembers = async (req, res) => {
       attributes: ['id', 'createdAt'],
       include: [{
         model: db.User,
-        attributes: ['email', 'firstName', 'userID'],
+        attributes: ['email', 'firstName', 'lastName', 'attachments', 'userID'],
         where: search ? {
           [Op.or]: [
             { firstName: { [Op.iLike]: '%' + search + '%' } },
