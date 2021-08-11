@@ -36,7 +36,7 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [inputVal, setInputVal] = useState('')
   const [checkType, setCheckType] = useState('')
-  const [value, setValue] = useState('')
+  const [countryCode, setCountryCode] = useState('+1')
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
@@ -51,21 +51,22 @@ const SignIn = () => {
     }
   }, [history, userInfo])
 
-  const onSubmit = ({ username, password }) => {
-    const phone = checkType === 'number' && value ? value + username : null
-    const email = checkType === 'email' ? username : null
-    username =
+  const onSubmit = ({ user, password }) => {
+    const phone = checkType === 'number' && countryCode ? countryCode : null
+    const email = checkType === 'email' ? user : null
+    const name =
       checkType === 'username'
-        ? username
+        ? user
         : Math.random().toString(36).substring(3, 6) + new Date().getTime()
-    return dispatch(register(username, phone, email, password))
+    return dispatch(register({ name, phone, email, password }))
   }
   useEffect(() => {
     const rexEmail =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const regexNumber = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
     rexEmail.test(inputVal)
       ? setCheckType('email')
-      : /^\d+$/.test(inputVal)
+      : regexNumber.test(inputVal)
         ? setCheckType('number')
         : setCheckType('username')
   }, [inputVal])
@@ -84,7 +85,7 @@ const SignIn = () => {
         <Input
           placeholder={inputPlaceholder}
           type='text'
-          name='username'
+          name='user'
           id='username'
           autoFocus='autoFocus'
           ref={regi({
@@ -96,11 +97,15 @@ const SignIn = () => {
           errors={errors}
           onChange={(e) => setInputVal(e.target.value)}
         >
-          {checkType === 'number' && value ? <span>{value}</span> : ''}
+          {checkType === 'number' && countryCode ? (
+            <span>{countryCode}</span>
+          ) : (
+            ''
+          )}
           {checkType === 'email' ? (
             <Email />
           ) : checkType === 'number' ? (
-            <PhoneNumber value={value} setValue={setValue} />
+            <PhoneNumber value={countryCode} setValue={setCountryCode} />
           ) : (
             <UserAvatar />
           )}
@@ -159,14 +164,3 @@ const SignIn = () => {
 }
 
 export default SignIn
-
-// const PhoneNumber = ({ value, setValue }) => {
-//   return (
-//     <PhoneInput
-//       international
-//       defaultCountry='US'
-//       value={value}
-//       onChange={setValue}
-//     />
-//   )
-// }

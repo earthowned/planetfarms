@@ -25,22 +25,28 @@ module.exports = async (req, res, next) => {
       } else {
         const jwk = require('./jwks.json')
         const pem = jwkToPem(jwk.keys[0])
-        jwt.verify(token, pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
-          if (err) {
-            if (err.message === 'jwt expired') {
-              throw Error('TokenExpired')
-            } else {
-              throw Error('InvalidToken')
+        jwt.verify(
+          token,
+          pem,
+          { algorithms: ['RS256'] },
+          function (err, decodedToken) {
+            if (err) {
+              if (err.message === 'jwt expired') {
+                throw Error('TokenExpired')
+              } else {
+                throw Error('InvalidToken')
+              }
             }
+            recoded = decodedToken
           }
-          recoded = decodedToken
-        })
+        )
       }
       /*
-      * TODO: Maintain session and check again local session
-      */
+       * TODO: Maintain session and check again local session
+       */
       if (process.env.AUTH_METHOD !== 'cognito') {
         req.user = await db.User.findOne({ where: { userID: decoded.id } })
+        console.log('user', req.user)
       } else if (recoded) {
         req.user = await db.User.findOne({ where: { userID: recoded.sub } })
       } else {

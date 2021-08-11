@@ -60,51 +60,55 @@ if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
   })
 }
 
-export const register = (name, password) => async (dispatch) => {
-  try {
-    dispatch({ type: User.USER_REGISTER_REQUEST })
-    dispatch({ type: User.USER_LOGIN_REQUEST })
-    let userdata
-    if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const { data } = await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-        { name, password }
-      )
-      userdata = data
-    } else {
-      await Auth.signUp({
-        username: name,
-        password,
-        attributes: {
-          email: null
+export const register =
+  ({ name, phone, email, password }) =>
+    async (dispatch) => {
+      try {
+        dispatch({ type: User.USER_REGISTER_REQUEST })
+        dispatch({ type: User.USER_LOGIN_REQUEST })
+        let userdata
+        if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
+          const { data } = await postApi(
+            dispatch,
+          `${process.env.REACT_APP_API_BASE_URL}/api/users`,
+          { name, phone, email, password }
+          )
+          userdata = data
+        } else {
+          await Auth.signUp({
+            username: name,
+            password,
+            attributes: {
+              email: email,
+              phone_number: phone
+            }
+          })
+          const response = await Auth.signIn(name, password)
+          userdata = {
+            token: response?.signInUserSession?.idToken?.jwtToken,
+            id: response?.attributes?.sub || ''
+          }
+
+          await postApi(
+            dispatch,
+          `${process.env.REACT_APP_API_BASE_URL}/api/users`,
+          { id: userdata.id }
+          ).catch((err) => console.log(err))
         }
-      })
-      const response = await Auth.signIn(name, password)
-      userdata = {
-        token: response?.signInUserSession?.idToken?.jwtToken,
-        id: response?.attributes?.sub || ''
+        window.localStorage.setItem('userInfo', JSON.stringify(userdata))
+        dispatch({ type: User.USER_REGISTER_SUCCESS, payload: userdata })
+        dispatch({ type: User.USER_LOGIN_SUCCESS, payload: userdata })
+        await routingCommunityNews(dispatch, false)
+      } catch (error) {
+        dispatch({
+          type: User.USER_REGISTER_FAIL,
+          payload:
+          error.response && error.response.data.error
+            ? error.response.data.error
+            : error.message
+        })
       }
-      const { data } = await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-        { id: userdata.id }
-      ).catch((err) => console.log(err))
     }
-    window.localStorage.setItem('userInfo', JSON.stringify(userdata))
-    dispatch({ type: User.USER_REGISTER_SUCCESS, payload: userdata })
-    dispatch({ type: User.USER_LOGIN_SUCCESS, payload: userdata })
-    await routingCommunityNews(dispatch, false)
-  } catch (error) {
-    dispatch({
-      type: User.USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message
-    })
-  }
-}
 
 export const login = (name, password) => async (dispatch) => {
   let data = {}
