@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT
     },
     dateOfBirth: {
-      type: DataTypes.DATE
+      type: DataTypes.DATEONLY
     },
     lastLogin: {
       type: DataTypes.DATE
@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     attachments: {
       type: DataTypes.TEXT
+    },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'user'
     }
   },
   { timestamps: true }

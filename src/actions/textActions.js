@@ -19,12 +19,11 @@ export const createText =
 
     try {
       dispatch({ type: TEXT_CREATE_REQUEST })
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-      const { data } = await Axios.post(ADD_LESSON_TEXT, textData, config)
+      const { data } = await postApi(
+        dispatch,
+        ADD_LESSON_TEXT,
+        textData
+      )
       dispatch({ type: TEXT_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({

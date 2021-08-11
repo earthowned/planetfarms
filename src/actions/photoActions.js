@@ -32,7 +32,12 @@ export const createLessonImg =
           'Content-Type': 'multipart/form-data'
         }
       }
-      const { data } = await Axios.post(ADD_LESSON_PHOTO, lessonImgData, config)
+      const { data } = await postApi(
+        dispatch,
+        ADD_LESSON_PHOTO,
+        lessonImgData,
+        config
+      )
       dispatch({ type: PHOTO_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({

@@ -1,20 +1,22 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database.js')
-
-const Category = db.define(
-  'categories',
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+module.exports = (sequelize, DataTypes) => {
+  const Category = sequelize.define(
+    'categories',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
     },
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false
-    }
-  },
-  { timestamps: true }
-)
+    { timestamps: true }
+  )
 
-module.exports = Category
+  Category.associate = (models) => {
+    Category.hasMany(models.Courses)
+  }
+  return Category
+}

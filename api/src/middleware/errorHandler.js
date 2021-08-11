@@ -1,12 +1,11 @@
-const CustomError = require('../errors/customeError')
+const CustomError = require('../errors/customError')
 
 const errorHandler = (err, _req, res, _next) => {
   if (err instanceof CustomError) {
     return res.status(err.statusCode).send({ errors: err.serializeErrors() })
   }
 
-  console.error(err)
-  res.status(400).send({
+  res.status(500).send({
     errors: [{ message: 'Something went wrong' }]
   })
 }

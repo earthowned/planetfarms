@@ -73,6 +73,7 @@ const CreateVideo = ({
                 dataImg={data.length > 0 && `${VIDEO_COVER}${data[0]?.videoCover}`}
                 onChange={(img) => setVideoCover(img)}
                 onClick={() => setVideoCover(null)}
+                fileType='image/png,image/jpeg,image/jpg'
               />
               <div className='video-input-container'>
                 <InputFields
@@ -121,7 +122,7 @@ const CreateVideo = ({
 
                   {!videoLink && (
                     <DragDrop
-                      type='video'
+                      fileType='video/mp4,video/quicktime'
                       className={
                         video
                           ? 'videoUploadBtn videoUploadBtn-full'

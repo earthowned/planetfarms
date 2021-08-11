@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import './DragDrop.scss'
 const DragDrop = ({
   onChange = () => {},
+  previousImageUrl,
   type,
   fileType,
   className,
@@ -30,6 +31,16 @@ const DragDrop = ({
     onChange(selectedFile)
   }
 
+  useEffect(() => {
+    if (previousImageUrl) {
+      const filename = previousImageUrl.split('/').pop()
+      const file = new File([new Blob()], filename)
+      const preview = { preview: previousImageUrl }
+      Object.assign(file, preview)
+      setFiles(file)
+    }
+  }, [previousImageUrl])
+
   return (
     <DragDropComponent
       getInputProps={getInputProps}
@@ -38,6 +49,7 @@ const DragDrop = ({
       files={files}
       setFiles={setFiles}
       className={className}
+      fileType={fileType}
       type={type}
       text={text}
       fetchImg={fetchImg}
@@ -56,6 +68,7 @@ const DragDropComponent = ({
   setFiles,
   className,
   type,
+  fileType,
   text,
   dataImg,
   editImg,
@@ -78,7 +91,7 @@ const DragDropComponent = ({
               alt='files[0].preview'
             />
             <div className='drag-drop-icon-container'>
-              {type === 'video' ? (
+              {fileType === 'video/mp4,video/quicktime' ? (
                 <p className='videoName'>{files.name}</p>
               ) : editImg ? (
                 <p>{text}</p>

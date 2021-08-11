@@ -39,7 +39,10 @@ const AddContent = ({
         ref={register}
       />
 
-      <DragDrop onChange={(img) => setLessonCover(img)} />
+      <DragDrop
+        onChange={(img) => setLessonCover(img)}
+        fileType='image/png,image/jpeg,image/jpg'
+      />
       <ContentAdd data={lessonData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
     </div>
   )

@@ -50,6 +50,7 @@ import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/verification/UserVerification'
 import AddTest from './screens/addTest/AddTest'
 import LogoutUser from './screens/logoutUser/LogoutUser'
+import Category from './screens/category/Category'
 import PageNotFound from './screens/pageNotFound/PageNotFound'
 
 function App () {
@@ -106,17 +107,22 @@ function App () {
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' exact />
             <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' exact />
             <PrivateRoute
-              component={() =>
+              component={() => (
                 <DndProvider backend={HTML5Backend}>
                   <AddTest />
-                </DndProvider>} path='/admin/add-test/:lessonId' exact
+                </DndProvider>
+              )}
+              path='/admin/add-test/:lessonId' exact
             />
             <PrivateRoute
-              component={() =>
+              component={() => (
                 <DndProvider backend={HTML5Backend}>
                   <AddTest />
-                </DndProvider>} path='/admin/edit-test/:lessonId'
+                </DndProvider>
+              )}
+              path='/admin/edit-test/:lessonId'
             />
+            <PrivateRoute component={Category} path='/admin/categories' />
             <PrivateRoute component={MyProfile} exact path='/myProfile' />
             <PrivateRoute component={UserInfo} exact path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />

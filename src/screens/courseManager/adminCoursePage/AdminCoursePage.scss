@@ -17,6 +17,7 @@
 .admin-course-img-wrapper {
   width: 100%;
   height: 336px;
+  position: relative;
 }
 
 .admin-course-img-wrapper img {
@@ -120,6 +121,7 @@
       width: 100%;
     }
   }
+
   &__text {
     div {
       width: 100%;
@@ -134,10 +136,12 @@
       }
     }
   }
+
   p {
     width: 100%;
   }
 }
+
 .lessonTitle {
   font-size: 1.5em;
   margin-bottom: 0.5em;
@@ -146,6 +150,7 @@
     text-transform: capitalize;
   }
 }
+
 .lessonDescText {
   margin-bottom: 0.5em;
 }
@@ -231,7 +236,6 @@
 
   ul {
     position: absolute;
-    border: 2px solid red;
     width: 7em;
     right: 110%;
     top: 1em;
@@ -249,6 +253,12 @@
       font-size: 1em;
       line-height: 1.5em;
     }
+  }
+
+  &__course {
+    position: absolute;
+    right: 1em;
+    top: 1em;
   }
 }
 
@@ -301,6 +311,7 @@
 .show {
   display: block;
 }
+
 .hide {
   display: none;
 }
