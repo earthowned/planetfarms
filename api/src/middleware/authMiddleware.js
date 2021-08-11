@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken')
 const jwkToPem = require('jwk-to-pem')
 const db = require('../models')
 
+let decoded
+
 const responses = [
   {
     error: 'Invalid token provided.',
@@ -21,7 +23,7 @@ const responses = [
   }
 ]
 
-function checkAuthorization(err) {
+function checkAuthorization (err) {
   if (err.message === 'jwt expired') {
     throw Error('TokenExpired')
   } else {
@@ -31,34 +33,24 @@ function checkAuthorization(err) {
 
 const throwError = message => responses.filter(response => response.name.match(message))
 
-function maintainState() {
-      if (process.env.AUTH_METHOD !== 'cognito') {
-        req.user = await db.User.findOne({ where: { userID: decoded.id } })
-      } else if (recoded) {
-        req.user = await db.User.findOne({ where: { userID: recoded.sub } })
-      } else {
-        throw Error('User not found')
-      }
-
-}
-
-const recode = (err, decodedToken) => {
-  if (err) {
-   checkAuthorization(err) 
+async function maintainState (req, next) {
+  if (process.env.AUTH_METHOD !== 'cognito') {
+    req.user = await db.User.findOne({ where: { userID: decoded.id } })
+  } else if (decoded) {
+    req.user = await db.User.findOne({ where: { userID: decoded.sub } })
+  } else {
+    throw Error('User not found')
   }
-  recoded = decodedToken
 }
 
 const decode = (err, decodedToken) => {
   if (err) {
-   checkAuthorization(err) 
+    checkAuthorization(err)
   }
   decoded = decodedToken
 }
 
 module.exports = async (req, res, next) => {
-  let decoded
-  let recoded
   const headers = req.headers.authorization && req.headers.authorization.startsWith('Bear')
   if (
     headers
@@ -66,19 +58,19 @@ module.exports = async (req, res, next) => {
     try {
       const token = req.headers.authorization.split(' ')[1]
       if (process.env.AUTH_METHOD !== 'cognito') {
-        jwt.verify(token, process.env.JWT_SECRET, decode(err, decodedToken))
+        jwt.verify(token, process.env.JWT_SECRET, decode)
       } else {
         const jwk = require('./jwks.json')
         const pem = jwkToPem(jwk.keys[0])
-        jwt.verify(token, pem, { algorithms: ['RS256'] }, recode(err, decodedToken))
+        jwt.verify(token, pem, { algorithms: ['RS256'] }, decode)
       }
       /*
       * TODO: Maintain session and check again local session
       */
-      maintainState()
+      await maintainState(req, next)
       next()
     } catch (error) {
-      res.status(401).json(throwError(error.message))      
+      res.status(401).json(throwError(error.message))
     }
   } else {
     res.status(401).json(throwError('Unauthorized'))

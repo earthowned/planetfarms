@@ -107,18 +107,21 @@ export const register = (name, password) => async (dispatch) => {
       const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
       userdata = data
     } else {
-      await Auth.signUp({
+      const registered = await Auth.signUp({
         username: name,
         password,
         attributes: {
           email: null
         }
       })
-      const response = await Auth.signIn(name, password)
-      userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
-      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id })
-        .catch(err => console.log(err))
+      if(registered) {
+        const response = await Auth.signIn(name, password)
+
+          userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub }
+          postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { userID: userdata.id })
+      }
     }
+    
     window.localStorage.setItem('userInfo', JSON.stringify(userdata))
     dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata })
     dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata })
