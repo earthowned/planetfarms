@@ -86,7 +86,7 @@ function DashboardComponent () {
 
   useEffect(() => {
     if (userInfo) {
-      dispatch(getUserDetails(userInfo.userID))
+      dispatch(getUserDetails(userInfo.id))
     }
   }, [dispatch, history, userInfo])
 
@@ -113,7 +113,7 @@ function DashboardComponent () {
 
             <div className='dashboard-my-profile-side-header'>
               {/* my-profile  */}
-              <Link to={{ pathname: '/myProfile', state: { user } }} className='dasboard-my-profile-box'>
+              <Link to={{ pathname: `/profile/${user.userID}`, state: { user } }} className='dasboard-my-profile-box'>
                 <HeaderContent title='My Profile' image='/img/user.svg' />
               </Link>
               {/* achivements  */}

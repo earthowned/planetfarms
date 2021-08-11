@@ -38,7 +38,7 @@ function CardImage ({ data = [], className }) {
     <>
       {data.length > 0 && data.map((profile) => {
         return (
-          <div onClick={() => history.push(`/community-members-profile/${profile.userId}`)} key={profile.userId} className='card-image-1'>
+          <div onClick={() => history.push(`/profile/${profile?.user.userID}`)} key={profile.id} className='card-image-1'>
             <div className='profile-card-image'>
               <img src={profile?.attachments || '/img/profile-image.svg'} alt='group-profile' />
             </div>

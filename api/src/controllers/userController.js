@@ -289,15 +289,15 @@ const getUserProfileByUserID = async (req, res) => {
   try {
     const id = req.params.userID
     let profile
-    if (id === req.user.id) {
-      profile = await db.User.findOne({ where: { id } })
+    if (id === req.user.userID) {
+      profile = await db.User.findOne({ where: { userID: id } })
     } else {
-      profile = await db.User.findOne({ where: { id }, attributes: { exclude: ['email', 'phone'] } })
+      profile = await db.User.findOne({ where: { userID: id }, attributes: { exclude: ['email', 'phone'] } })
     }
     if (!profile) {
       return res.status(404).json({ error: 'Profile not found' })
     }
-    res.json(profile)
+    res.json({results: profile})
   } catch (err) {
     res.json({ error: err.message }).status(400)
   }

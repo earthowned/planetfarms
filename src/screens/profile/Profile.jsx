@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './MyProfile.scss'
+import './Profile.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../components/backButton/BackButton'
 import {
@@ -14,7 +14,7 @@ import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min
 import VerificationModal from '../../components/verificationModal/VerificationModal'
 import { useLocation } from 'react-router-dom'
 
-function MyProfile () {
+function Profile () {
   const { id } = useParams()
   const { pathname } = useLocation()
   const [showEmailVerificationModal, setShowEmailVerificationModal] = useState(false)
@@ -24,9 +24,7 @@ function MyProfile () {
   const userDetails = useSelector((state) => state.userDetails)
   const { status } = useSelector((state) => state.userAttrConfirmCode)
   const { user, loading } = userDetails
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
-
+  
   const verification = {
     emailClickHandler: () => {
       emailClickHandler(true)
@@ -36,23 +34,13 @@ function MyProfile () {
     }
   }
 
-  // for myProfile
   useEffect(() => {
-    if (pathname === '/myProfile') {
-      dispatch(getMyDetails())
-      if (status) {
+      dispatch(getUserDetails(id))
+      if(status) {
         emailClickHandler(false)
         phoneClickHandler(false)
       }
-    }
   }, [dispatch, history, status])
-
-  // for community members
-  useEffect(() => {
-    if (userInfo && id) {
-      dispatch(getUserDetails(id))
-    }
-  }, [dispatch, history, id, userInfo])
 
   const editUserInformation = () => {
     history.push({
@@ -68,29 +56,39 @@ function MyProfile () {
   }
   return (
     <>
-      {showEmailVerificationModal && (
-        <VerificationModal type='email' clickHandler={emailClickHandler} />
-      )}
-      {showPhoneVerificationModal && (
-        <VerificationModal type='phone' clickHandler={phoneClickHandler} />
-      )}
-      <DashboardLayout title='My Profile'>
-        <div className='x10-4-0-my-personals'>
-          <div className='flex-col-2'>
-            <div className='frame-2923'>
-              <BackButton location='/dashboard' />
-            </div>
-
-            <div className='profile border-1px-onyx'>
-              {loading ? (
-                <span>Loading</span>
-              ) : (
-                <>
-                  <div className='profile-info'>
-                    <PersonalInformation user={user} />
-                    <ContactInformation
-                      user={user}
-                      verification={verification}
+      {
+      loading
+        ? <div><p>Loading...</p></div>
+        : (
+          <>
+            {
+            showEmailVerificationModal &&
+              <VerificationModal type='email' clickHandler={emailClickHandler} />
+            }
+            {
+            showPhoneVerificationModal &&
+              <VerificationModal type='phone' clickHandler={phoneClickHandler} />
+            }
+            <DashboardLayout
+              title='User Profile'
+            >
+              <div className='x10-4-0-my-personals'>
+                <div className='flex-col-2'>
+                  <div className='frame-2923'>
+                    <BackButton onClick={() => history.goBack()} />
+                  </div>
+                  <div className='profile border-1px-onyx'>
+                    <div className='profile-info'>
+                      {user && <>
+                        <PersonalInformation user={user} />
+                        {user?.phone === undefined || <ContactInformation user={user} />}
+                        <AdditionalInformation user={user} />
+                      </>}
+                    </div>
+                    <EditInformation
+                      clickHandler={editUserInformation}
+                      image={user?.attachments && process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments}
+                      follow={user?.phone === undefined}
                     />
                     <AdditionalInformation user={user} />
                   </div>
@@ -103,14 +101,13 @@ function MyProfile () {
                         user.attachments
                     }
                   />
+                </div>
+                </div>
+                </DashboardLayout>
                 </>
               )}
-            </div>
-          </div>
-        </div>
-      </DashboardLayout>
-    </>
+            </>          
   )
 }
 
-export default MyProfile
+export default Profile

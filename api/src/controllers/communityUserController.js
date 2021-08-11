@@ -94,7 +94,7 @@ const getAllMembers = async (req, res) => {
       attributes: ['id', 'createdAt'],
       include: [{
         model: db.User,
-        attributes: ['email', 'firstName'],
+        attributes: ['email', 'firstName', 'userID'],
         where: search ? {
           [Op.or]: [
             { firstName: { [Op.iLike]: '%' + search + '%' } },

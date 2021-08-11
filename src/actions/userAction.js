@@ -188,7 +188,7 @@ export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile/${id}`)
-    dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data.results })
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message
     dispatch({ type: USER_DETAILS_FAIL, payload: message })
