@@ -1,6 +1,6 @@
 import ProfileFormCard from './ProfileFormCard'
 
-export const AdditionalInformation = ({ user, isCurrentUser }) => {
+const AdditionalInformation = ({ user, isCurrentUser }) => {
   const AdditionalInformationdata = {
     title: 'Additional information',
     firstTitle: 'Last login',
@@ -12,3 +12,5 @@ export const AdditionalInformation = ({ user, isCurrentUser }) => {
   }
   return <ProfileFormCard data={AdditionalInformationdata} />
 }
+
+export default AdditionalInformation

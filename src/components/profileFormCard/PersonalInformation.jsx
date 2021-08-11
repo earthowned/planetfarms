@@ -1,6 +1,6 @@
 import ProfileFormCard from './ProfileFormCard'
 
-export const PersonalInformation = ({ user, isCurrentUser }) => {
+const PersonalInformation = ({ user, isCurrentUser }) => {
   const PersonalInformationdata = {
     title: 'Personal information',
     firstTitle: 'First Name',
@@ -19,3 +19,5 @@ export const PersonalInformation = ({ user, isCurrentUser }) => {
     </>
   )
 }
+
+export default PersonalInformation

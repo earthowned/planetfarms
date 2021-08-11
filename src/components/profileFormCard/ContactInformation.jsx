@@ -1,6 +1,6 @@
 import ProfileFormCard from './ProfileFormCard'
 
-export const ContactInformation = ({ user, verification, isCurrentUser }) => {
+const ContactInformation = ({ user, verification, isCurrentUser }) => {
   const ContactInformationdatadata = {
     title: 'Contact information',
     firstTitle: 'Email',
@@ -30,3 +30,5 @@ export const ContactInformation = ({ user, verification, isCurrentUser }) => {
     />
   )
 }
+
+export default ContactInformation

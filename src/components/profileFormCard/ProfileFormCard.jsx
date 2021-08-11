@@ -110,3 +110,5 @@ export const AdditionalInformation = ({ user }) => {
     <ProfileFormCard data={AdditionalInformationdata} />
   )
 }
+
+export default ProfileFormCard

@@ -311,7 +311,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
       await Auth.updateUserAttributes(currentUser, toBeUpdated)
     }
     dispatch({ type: USER_DETAILS_SUCCESS, payload: { user: data } })
-    history.push('/myProfile')
+    history.goBack();
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message
     if (message === 'Not authorized, token failed') {

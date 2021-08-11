@@ -338,16 +338,14 @@ const getMyProfile = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     let attachments
+    console.log(req.file)
     if (req.file) {
       attachments = req.file.filename
     } else {
-      attachments =
-        req.body.attachments === 'undefined' || req.body.attachments === 'null'
-          ? null
-          : req.body.attachments
+      attachments = req.user.attachments
     }
     const id = req.user.dataValues.userID
-    const {email, firstName, lastName, phone, birthday, attachment} = req.body
+    const {email, firstName, lastName, phone, birthday} = req.body
     db.User.findOne({ where: { userID: id } }).then((user) => {
       if (user) {
         db.User.update(
@@ -357,7 +355,7 @@ const updateUser = async (req, res) => {
             lastName,
             phone,
             dateOfBirth: birthday,
-            attachments: attachment || user.dataValues.attachments
+            attachments: attachments
           },
           { where: { userID: id } }
         )
