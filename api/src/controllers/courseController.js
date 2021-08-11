@@ -4,36 +4,37 @@ const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 const CircularJSON = require('circular-json')
 const { changeFormat } = require('../helpers/filehelpers')
+const { paginatedResponse } = require('../utils/query')
 
 // @desc    Fetch all course
-// @route   GET /api/courses
+// @route   GET /api/courses?pageNumber=${pageNumber}&category=${category}&search=${search}
 // @access  Public
 const getCourses = async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 0
+  const { category, search, pageNumber = 1, pageSize = 6 } = req.query
   const order = req.query.order || 'ASC'
-
-  const courses = await db.Courses.findAll({
-    offset: page,
+  const courses = await db.Courses.findAndCountAll({
+    offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson, db.Enroll]
+    include: [db.Lesson, db.Enroll, db.Category],
+    where: {
+      ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
+      ...(category ? { categoryId: Number(category) } : {})
+    },
+    distinct: true
   })
-
-  courses.forEach((course) => {
+  courses.rows.forEach(course => {
     course.thumbnail = changeFormat(course.thumbnail)
-    course.lessons.forEach((lesson) => {
+    course.lessons.forEach(lesson => {
       lesson.coverImg = changeFormat(lesson.coverImg)
     })
   })
-
-  res.status(200).json({
-    status: true,
-    message: 'fetched courses successfully',
-    data: courses,
-    page,
-    pageSize
-  })
+  res.status(200)
+    .json({
+      status: true,
+      message: 'Fetched successfully',
+      ...paginatedResponse({ data: courses, pageSize, pageNumber })
+    })
 }
 
 // @desc    Add individual course
@@ -45,7 +46,6 @@ const addCourse = async (req, res) => {
     if (req.file) {
       thumbnail = req.file.filename
     }
-
     const course = await db.Courses.create({ ...req.body, thumbnail })
     res.status(201).json({
       status: true,
@@ -93,7 +93,7 @@ const getCourseById = async (req, res) => {
   if (!course) {
     throw new NotFoundError()
   }
-  course.lessons.forEach((lesson) => {
+  course.lessons.forEach(lesson => {
     lesson.coverImg = changeFormat(lesson.coverImg)
   })
   const thumbnail = changeFormat(course?.dataValues?.thumbnail)
@@ -114,40 +114,17 @@ const getCourseById = async (req, res) => {
 // @desc    Delete a course
 // @route   delete /api/courses/:id
 // @access  Public
-const deleteCourse = (req, res) => {
-  const id = req.params.id
-  db.Courses.findOne({
-    where: {
-      id: id
-    }
-  }).then((resource) => {
-    if (resource) {
-      const { id } = resource
-      db.Courses.destroy({ where: { id } })
-        .then(() =>
-          res.json({ message: 'Course Deleted Successfully' }).status(200)
-        )
-        .catch((err) => res.json({ error: err.message }).status(400))
-    } else {
-      res.status(404)
-      throw new Error('Course not found')
-    }
+const deleteCourse = async (req, res) => {
+  const { id } = req.params
+  const course = await db.Courses.destroy({ where: { id } })
+  if (!course) {
+    throw new NotFoundError()
+  }
+  res.status(202).json({
+    status: true,
+    message: 'course deleted successfully',
+    data: course
   })
-}
-
-// @desc    Search title
-// @route   POST /api/courses/search
-// @access  Private
-const searchCoursesTitle = (req, res) => {
-  const { title } = req.query
-  const order = req.query.order || 'ASC'
-
-  db.Courses.findAll({
-    where: { title: { [Op.iLike]: '%' + title + '%' } },
-    order: [['title', order]]
-  })
-    .then((title) => res.json({ title }).status(200))
-    .catch((err) => res.json({ error: err }).status(400))
 }
 
 module.exports = {
@@ -155,6 +132,5 @@ module.exports = {
   getCourses,
   updateCourse,
   getCourseById,
-  deleteCourse,
-  searchCoursesTitle
+  deleteCourse
 }

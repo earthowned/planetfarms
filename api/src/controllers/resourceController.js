@@ -1,4 +1,4 @@
-const Resource = require('../models/resourceModel.js')
+const db = require('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
@@ -8,19 +8,18 @@ const { where } = require('sequelize')
 // @route   GET /api/resources?pageNumber=${pageNumber}&category=${category}
 // @access  Public
 const getResources = (req, res) => {
-  const pageSize = 5
-  const page = Number(req.query.pageNumber) || 1
-  const { category, search } = req.query
+  const { category, search, pageNumber = 1, pageSize = 5 } = req.query
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  Resource.findAndCountAll({
-    offset: (page - 1) * pageSize,
+  db.Resource.findAndCountAll({
+    offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     ordervalue,
     where: {
       ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
       ...(category ? { resourceType: category } : {})
-    }
+    },
+    distinct: true
   })
     .then((resources) => {
       const totalPages = Math.ceil(resources.count / pageSize)
@@ -48,7 +47,7 @@ const addResource = (req, res) => {
   if (req.file) {
     filename = req.file.filename
   }
-  Resource.create({ ...req.body, filename })
+  db.Resource.create({ ...req.body, filename })
     .then(() => res.json({ message: 'Resource Created !!!' }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
@@ -58,7 +57,7 @@ const addResource = (req, res) => {
 // @access  Public
 const getResourcesById = (req, res) => {
   const id = req.params.id
-  Resource.findByPk(id)
+  db.Resource.findByPk(id)
     .then((resource) => {
       if (resource) {
         res.json({ ...resource, filename: changeFormat(resource.filename) })
@@ -72,10 +71,10 @@ const getResourcesById = (req, res) => {
 
 const deleteResources = (req, res) => {
   const id = req.params.id
-  Resource.findByPk(id).then((resource) => {
+  db.Resource.findByPk(id).then((resource) => {
     if (resource) {
       const { id } = resource
-      Resource.destroy({ where: { id } })
+      db.Resource.destroy({ where: { id } })
         .then(() => res.json({ message: 'Resource Deleted !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     } else {
@@ -90,10 +89,10 @@ const deleteResources = (req, res) => {
 // @access  Public
 const updateResources = (req, res) => {
   const id = req.params.id
-  Resource.findByPk(id).then((resource) => {
+  db.Resource.findByPk(id).then((resource) => {
     if (resource) {
       const { id } = resource
-      Resource.update(req.body, { where: { id } })
+      db.Resource.update(req.body, { where: { id } })
         .then(() => res.json({ message: 'Resource Updated !!!' }).status(200))
         .catch((err) => res.json({ error: err.message }).status(400))
     }
@@ -108,7 +107,7 @@ const updateResources = (req, res) => {
 const searchResourcesTitle = (req, res) => {
   const { title } = req.query
   const order = req.query.order || 'ASC'
-  Resource.findAll({
+  db.Resource.findAll({
     where: { title: { [Op.iLike]: '%' + title + '%' } },
     order: [['title', order]]
   })

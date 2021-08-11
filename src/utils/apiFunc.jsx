@@ -15,3 +15,11 @@ export const getApi = async (dispatch, url, config) => {
 export const postApi = async (dispatch, url, data, config) => {
   return await axios.post(url, data, configFunc(config))
 }
+
+export const putApi = async (dispatch, url, data, config) => {
+  return await axios.put(url, data, configFunc(config))
+}
+
+export const deleteApi = async (url, config) => {
+  return await axios.delete(url, configFunc(config))
+}
