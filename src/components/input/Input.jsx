@@ -17,7 +17,7 @@ const Input = React.forwardRef(
       children,
       noIcon,
       disabled,
-      onChange
+      onChange = () => {}
     },
     ref
   ) => {

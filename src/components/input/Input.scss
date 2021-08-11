@@ -51,13 +51,20 @@
     width: 100%;
 
     .icon {
-      align-items: center;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row-reverse;
       height: 24px;
       padding: 3px 0;
-      width: 24px;
       margin-right: 0.5em;
+
+      span {
+        font-family: inherit;
+        font-size: 1.05em;
+        background-color: transparent;
+        color: var(--primary-grey);
+      }
 
       path {
         fill: var(--primary-color);

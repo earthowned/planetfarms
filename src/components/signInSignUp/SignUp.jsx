@@ -7,6 +7,7 @@ import { register } from '../../actions/userAction'
 import { USER_LOGIN_SUCCESS } from '../../constants/userConstants'
 import { SignInSignUpData } from './SignInSignUpData'
 
+import PhoneNumber from './PhoneNumber'
 import Button from '../button/Button'
 import Checkbox from '../checkbox/Checkbox'
 import OAuthBtn from '../oAuthBtn/OAuthBtn'
@@ -35,6 +36,7 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [inputVal, setInputVal] = useState('')
   const [checkType, setCheckType] = useState('')
+  const [value, setValue] = useState('')
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
@@ -50,23 +52,37 @@ const SignIn = () => {
   }, [history, userInfo])
 
   const onSubmit = ({ username, password }) => {
-    return dispatch(register(username, password))
+    const phone = checkType === 'number' && value ? value + username : null
+    const email = checkType === 'email' ? username : null
+    username =
+      checkType === 'username'
+        ? username
+        : Math.random().toString(36).substring(3, 6) + new Date().getTime()
+    return dispatch(register(username, phone, email, password))
   }
   useEffect(() => {
-    const rexEmail = /^\S+@\S+$/
+    const rexEmail =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     rexEmail.test(inputVal)
       ? setCheckType('email')
       : /^\d+$/.test(inputVal)
         ? setCheckType('number')
         : setCheckType('username')
   }, [inputVal])
+
+  const inputPlaceholder =
+    checkType === 'email'
+      ? 'Email'
+      : checkType === 'number'
+        ? 'Phone Number'
+        : 'Username'
   return (
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>
       <div className='container'>
         {error && <div className='error'>{error}</div>}
         <Input
-          placeholder='Username'
+          placeholder={inputPlaceholder}
           type='text'
           name='username'
           id='username'
@@ -80,10 +96,11 @@ const SignIn = () => {
           errors={errors}
           onChange={(e) => setInputVal(e.target.value)}
         >
+          {checkType === 'number' && value ? <span>{value}</span> : ''}
           {checkType === 'email' ? (
             <Email />
           ) : checkType === 'number' ? (
-            <Phone />
+            <PhoneNumber value={value} setValue={setValue} />
           ) : (
             <UserAvatar />
           )}
@@ -142,3 +159,14 @@ const SignIn = () => {
 }
 
 export default SignIn
+
+// const PhoneNumber = ({ value, setValue }) => {
+//   return (
+//     <PhoneInput
+//       international
+//       defaultCountry='US'
+//       value={value}
+//       onChange={setValue}
+//     />
+//   )
+// }
