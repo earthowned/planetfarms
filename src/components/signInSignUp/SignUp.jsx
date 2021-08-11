@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 import { register } from '../../actions/userAction'
-import { USER_LOGIN_SUCCESS } from '../../constants/userConstants'
 import { SignInSignUpData } from './SignInSignUpData'
 
 import PhoneNumber from './PhoneNumber'
@@ -15,19 +14,11 @@ import Input from '../input/Input'
 import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
 import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
 import { ReactComponent as Email } from '../../assets/images/email.svg'
-import { ReactComponent as Phone } from '../../assets/images/phone-call-outline.svg'
 import './SignInSignUp.scss'
 
 const SignIn = () => {
-  const {
-    welcomeBack,
-    spanText,
-    text2,
-    google,
-    facebook,
-    signIn,
-    failMessage
-  } = SignInSignUpData
+  const { welcomeBack, spanText, text2, google, facebook, signIn } =
+    SignInSignUpData
 
   const history = useHistory()
   const { register: regi, handleSubmit, errors } = useForm()
@@ -36,7 +27,6 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [inputVal, setInputVal] = useState('')
   const [checkType, setCheckType] = useState('')
-  const [countryCode, setCountryCode] = useState('+1')
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
@@ -52,7 +42,7 @@ const SignIn = () => {
   }, [history, userInfo])
 
   const onSubmit = ({ user, password }) => {
-    const phone = checkType === 'number' && countryCode ? countryCode : null
+    const phone = checkType === 'number' ? user : null
     const email = checkType === 'email' ? user : null
     const name =
       checkType === 'username'
@@ -61,10 +51,10 @@ const SignIn = () => {
     return dispatch(register({ name, phone, email, password }))
   }
   useEffect(() => {
-    const rexEmail =
+    const regexEmail =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const regexNumber = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
-    rexEmail.test(inputVal)
+    regexEmail.test(inputVal)
       ? setCheckType('email')
       : regexNumber.test(inputVal)
         ? setCheckType('number')
@@ -77,6 +67,7 @@ const SignIn = () => {
       : checkType === 'number'
         ? 'Phone Number'
         : 'Username'
+
   return (
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
       <h1 className='welcome'>{welcomeBack}</h1>
@@ -86,7 +77,6 @@ const SignIn = () => {
           placeholder={inputPlaceholder}
           type='text'
           name='user'
-          id='username'
           autoFocus='autoFocus'
           ref={regi({
             required: {
@@ -95,17 +85,13 @@ const SignIn = () => {
             }
           })}
           errors={errors}
+          value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
         >
-          {checkType === 'number' && countryCode ? (
-            <span>{countryCode}</span>
-          ) : (
-            ''
-          )}
           {checkType === 'email' ? (
             <Email />
           ) : checkType === 'number' ? (
-            <PhoneNumber value={countryCode} setValue={setCountryCode} />
+            <PhoneNumber value={inputVal} setValue={setInputVal} />
           ) : (
             <UserAvatar />
           )}
