@@ -8,7 +8,11 @@ import {
   newsUpdateReducer
 } from './reducers/newsReducers'
 import { resourceListReducer } from './reducers/resourceReducers'
-import { courseCreateReducer } from './reducers/courseReducers'
+import {
+  courseCreateReducer,
+  updateCourseReducer,
+  deleteCourseReducer
+} from './reducers/courseReducers'
 import {
   lessonCreateReducer,
   lessonUpdateReducer
@@ -54,7 +58,8 @@ import {
   userAttrResendCodeReducer,
   changePasswordReducer,
   userForgotPwdConfirmCodeReducer,
-  userForgotPwdResendCodeReducer
+  userForgotPwdResendCodeReducer,
+  userForgotPwdCodeMessageReducer
 } from './reducers/userReducers'
 import { eventListReducer } from './reducers/calendarEventReducer'
 import {
@@ -106,6 +111,8 @@ const reducer = combineReducers({
   communityUpdate: communityUpdateReducer,
   activeCommunity: communityVisitReducer,
   addCourse: courseCreateReducer,
+  updateCourse: updateCourseReducer,
+  deleteCourse: deleteCourseReducer,
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
   addVideo: videoCreateReducer,
@@ -129,6 +136,7 @@ const reducer = combineReducers({
   changePassword: changePasswordReducer,
   userForgotPwdConfirmCode: userForgotPwdConfirmCodeReducer,
   userForgotPwdResendCode: userForgotPwdResendCodeReducer,
+  userForgotPwdCodeMessage: userForgotPwdCodeMessageReducer,
   userDetails: userDetailsReducer,
   userList: userListReducer,
   userUpdate: userUpdateReducer,

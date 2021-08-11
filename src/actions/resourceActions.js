@@ -49,6 +49,7 @@ export const createResource = (newResource) => async (dispatch, getState) => {
   formData.append('title', newResource.title)
   formData.append('description', newResource.description)
   formData.append('file', newResource.file)
+  formData.append('resourceType', newResource.resourceType || 'articles')
   try {
     dispatch({ type: RESOURCE_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()

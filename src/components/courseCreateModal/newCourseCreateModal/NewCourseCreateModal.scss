@@ -11,6 +11,12 @@
   align-items: flex-start;
   overflow-y: auto;
 
+  &__editCourse {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   .container {
     width: 600px;
     background: var(--cards);

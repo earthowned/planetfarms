@@ -24,7 +24,7 @@ const Pagination = ({ pageNumber = 1, resourceList, setPageNumber }) => {
         </button>
         {
           // Pages can be replaced with resourceList.totalPages
-          pageNum && pageNum.map(num => <PageNumber num={num} pageNumber={pageNumber} setPageNumber={setPageNumber} />)
+          pageNum && pageNum.map(num => <PageNumber key={num} num={num} pageNumber={pageNumber} setPageNumber={setPageNumber} />)
         }
         <button type='button' disabled={pageNumber >= resourceList.totalPages} onClick={() => handlePagination(1, +1)}>
           Next

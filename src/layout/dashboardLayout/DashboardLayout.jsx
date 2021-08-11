@@ -11,18 +11,16 @@ import { TABLET_SIZE } from '../../constants/sizeConstants'
 
 // importing custom hooks sizefinder to calculate window width from utils
 import useSizeFinder from '../../utils/sizeFinder'
+import ProfileMenu from '../../components/header/ProfileMenu'
 
 const DashboardLayout = ({ title, children }) => {
   const dispatch = useDispatch()
   const [toggle, setToggle] = useState(true)
   const [sidebar, setSidebar] = useState(false)
-
   const [burgerActive, setBurgerActive] = useState(false)
   const [notificationActive, setNotificationActive] = useState(false)
   const [messageActive, setMessageActive] = useState(false)
   const [userActive, setUserActive] = useState(false)
-  const [modalActive, setModalActive] = useState(false)
-  const [profileSettings, setProfileSettings] = useState(false)
 
   const { pathname } = useLocation()
 
@@ -67,9 +65,6 @@ const DashboardLayout = ({ title, children }) => {
     // making the user off
     setUserActive(false)
   }
-  function SignOutModal (e) {
-    setModalActive(true)
-  }
 
   function activeUser () {
     setUserActive(!userActive)
@@ -78,17 +73,8 @@ const DashboardLayout = ({ title, children }) => {
     setBurgerActive(false)
     // making the notification off
     setNotificationActive(false)
-
     // making the message off
     setMessageActive(false)
-  }
-
-  async function signOut () {
-    try {
-      dispatch(logout())
-    } catch (error) {
-      console.log('error signing out: ', error)
-    }
   }
 
   return (
@@ -123,7 +109,8 @@ const DashboardLayout = ({ title, children }) => {
           <div className='layout-container'>
             <div className='dashboard-header'>
               <img className='mobile-logo' src='/img/logo.svg' alt='text logo of planet farm' />
-              <img src='/img/avatar-img.svg' alt='avatar-img' onClick={signOut} />
+              {/* mobile view: profie dropdown */}
+              <ProfileMenu />
             </div>
             <h1>{title}</h1>
             <div>{children}</div>
@@ -139,7 +126,7 @@ const DashboardLayout = ({ title, children }) => {
             <div onClick={() => activeNotification()} className={`mobile-tab-wrapper ${notificationActive ? 'bgactive' : ''}`}>
               <NotificationMenu activeNotification={activeNotification} />
             </div>
-            <div onClick={(e) => { activeBurger(); SignOutModal(e) }} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
+            <div onClick={(e) => { activeBurger() }} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
               <Hamburger activeBurger={activeBurger} />
             </div>
           </div>

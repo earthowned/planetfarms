@@ -1,7 +1,7 @@
-const Category = require('../models/categoryModel')
+const db = require('../models')
 
 const getCategories = async (_req, res) => {
-  const categories = await Category.findAll()
+  const categories = await db.Category.findAll()
   res.status(200).json({
     status: true,
     results: categories
@@ -9,7 +9,7 @@ const getCategories = async (_req, res) => {
 }
 
 const getSingleCategory = async (req, res) => {
-  const category = await Category.findOne({ where: { id: req.params.id } })
+  const category = await db.Category.findOne({ where: { id: req.params.id } })
   if (!category) {
     return res.status(201).json({
       status: true,
@@ -25,7 +25,7 @@ const getSingleCategory = async (req, res) => {
 
 const addCategory = async (req, res) => {
   try {
-    const category = await Category.create(req.body)
+    const category = await db.Category.create(req.body)
     res.status(201).json({
       status: true,
       message: 'Category added successfully',
@@ -39,7 +39,7 @@ const addCategory = async (req, res) => {
 const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params
-    const category = await Category.destroy({ where: { id } })
+    const category = await db.Category.destroy({ where: { id } })
     res.status(202).json({
       status: true,
       message: 'Category deleted successfully',
@@ -53,7 +53,7 @@ const deleteCategory = async (req, res) => {
 const updateCategory = async (req, res) => {
   try {
     const { id } = req.params
-    const category = await Category.update(req.body, { where: { id } })
+    const category = await db.Category.update(req.body, { where: { id } })
     res.status(202).json({
       status: true,
       message: 'Category updated successfully',
