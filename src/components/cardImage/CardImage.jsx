@@ -27,8 +27,8 @@ const CardImage = ({ data, className }) => {
               <div className='profile-card-name'>
                 <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>
                   <h4>
-                    {`${profile?.user.firstName} ${profile?.user.lastName}` ||
-                      'anonymous'}
+                    {profile?.user.firstName ? `${profile?.user.firstName} ${profile?.user.lastName}`
+                      : 'anonymous'}
                   </h4>
                 </div>
               </div>
