@@ -183,10 +183,10 @@ function checkErrorReturnMessage (error, dispatch) {
   const message = error.response && error.response.data.error ? error.response.data.error : error.message
 
   if (message === 'Not authorized, token failed') {
-      dispatch(logout())
-    }
+    dispatch(logout())
+  }
 
-    return message
+  return message
 }
 export const getUserDetails = (id) => async (dispatch) => {
   try {
