@@ -31,11 +31,10 @@ import {
   USER_PASSWORD_CHANGE_RESET,
   USER_PASSWORD_CHANGE_FAIL,
   USER_FORGOT_PWD_CONFIRM_CODE_REQUEST,
-  USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS,
-  USER_FORGOT_PWD_CONFIRM_CODE_FAIL,
+  USER_FORGOT_PWD_CODE_SUCCESS,
+  USER_FORGOT_PWD_CODE_FAIL,
+  USER_FORGOT_PWD_CODE_RESET,
   USER_FORGOT_PWD_RESEND_CODE_REQUEST,
-  USER_FORGOT_PWD_RESEND_CODE_SUCCESS,
-  USER_FORGOT_PWD_RESEND_CODE_FAIL,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -162,10 +161,6 @@ export const userForgotPwdConfirmCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_FORGOT_PWD_CONFIRM_CODE_REQUEST:
       return { loading: true }
-    case USER_FORGOT_PWD_CONFIRM_CODE_SUCCESS:
-      return { loading: false, status: true }
-    case USER_FORGOT_PWD_CONFIRM_CODE_FAIL:
-      return { loading: false, error: action.payload }
     default:
       return state
   }
@@ -175,10 +170,19 @@ export const userForgotPwdResendCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_FORGOT_PWD_RESEND_CODE_REQUEST:
       return { loading: true }
-    case USER_FORGOT_PWD_RESEND_CODE_SUCCESS:
-      return { loading: false, status: true, deliveryDetails: action.payload }
-    case USER_FORGOT_PWD_RESEND_CODE_FAIL:
-      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userForgotPwdCodeMessageReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_FORGOT_PWD_CODE_SUCCESS:
+      return { loading: false, message: { type: 'message', message: action.payload } }
+    case USER_FORGOT_PWD_CODE_FAIL:
+      return { loading: false, message: { type: 'error', message: action.payload } }
+    case USER_FORGOT_PWD_CODE_RESET:
+      return {}
     default:
       return state
   }

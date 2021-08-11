@@ -1,6 +1,18 @@
 import { useRef } from 'react'
 import './InputComponent.scss'
 
+const types = {
+  Password: 'password',
+  birthday: 'date',
+  'Choose date': 'date',
+  email: 'email',
+  'Start time': 'time'
+}
+
+function getType (getName) {
+  return types[getName] || 'text'
+}
+
 const InputComponent = ({ text, error, image, changeHandler, name, autoFocus }) => {
   const userInput = useRef()
   return (
@@ -15,13 +27,13 @@ const InputComponent = ({ text, error, image, changeHandler, name, autoFocus }) 
             {text ? <div className='overhead-text'>{name && name}</div> : <div>&nbsp;</div>}
             <input
               ref={userInput}
-              type={name === 'Password' ? 'password' : (name === 'birthday' || name === 'Choose date') ? 'date' : name === 'email' ? 'email' : name === 'Start time' ? 'time' : 'text'}
+              type={getType(name)}
               className='username ibmplexsans-regular-normal-monsoon-16px'
               placeholder={name && name}
               value={text}
               onChange={(e) => changeHandler(e.target.value)}
               id='userInput'
-              autoFocus={autoFocus === 'autoFocus' && true}
+              autoFocus={autoFocus === 'autoFocus'}
             />
           </div>
         </div>

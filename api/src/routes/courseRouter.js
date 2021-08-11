@@ -10,8 +10,7 @@ const {
   addCourse,
   updateCourse,
   getCourseById,
-  deleteCourse,
-  searchCoursesTitle
+  deleteCourse
 } = require('../controllers/courseController.js')
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
@@ -19,7 +18,10 @@ router.route('/').get(getCourses)
 
 // for upload we have just worked with images jpg|jpeg|png for other types of file we need to work.
 router.route('/add').post(upload.single('thumbnail'), resizeImage, addCourse)
-router.route('/search').get(searchCoursesTitle)
-router.route('/:id').get(getCourseById).delete(deleteCourse).put(updateCourse)
+router
+  .route('/:id')
+  .get(getCourseById)
+  .delete(deleteCourse)
+  .put(upload.single('thumbnail'), resizeImage, updateCourse)
 
 module.exports = router

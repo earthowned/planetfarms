@@ -8,8 +8,7 @@ const useGetFetchData = (uniqueKey, url, dependencies) => {
     async () => {
       const { data } = await axios.get(url, configFunc())
       return data
-    }
-  )
+    }, { keepPreviousData: true })
   return { data, error, isLoading, refetch }
 }
 

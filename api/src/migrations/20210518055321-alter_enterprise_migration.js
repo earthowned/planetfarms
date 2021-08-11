@@ -1,9 +1,9 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.addColumn('enterprises', 'filename', Sequelize.STRING)
+    await queryInterface.addColumn('enterprises', 'filename', Sequelize.STRING)
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.removeColumn('enterprises', 'filename')
+    await queryInterface.removeColumn('enterprises', 'filename')
   }
 }

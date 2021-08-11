@@ -1,35 +1,3 @@
-.course-create-container {
-  width: 100%;
-  height: 100%;
-  background: var(--background-color-modal);
-  position: fixed;
-  z-index: 5005;
-  overflow-y: auto;
-}
-
-.course-create-modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  z-index: 999;
-  background: var(--cards);
-  width: 600px;
-  height: 500px;
-  color: var(--primary-white);
-  padding: 24px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
-.course-create-modal-header {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .course-type {
   display: flex;
   align-items: center;
@@ -46,7 +14,10 @@
   cursor: pointer;
 }
 
-.course-type button:focus {
+.selected .usual {
+  border: 3px solid var(--primary-color);
+}
+.selected .live {
   border: 3px solid var(--primary-color);
 }
 
@@ -67,32 +38,11 @@
   margin-bottom: 8px;
 }
 
-.course-create-modal-header button {
-  background: none;
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
-
-.course-create-modal-header button:hover {
-  transform: scale(1.1);
-}
-
 .course-create-modal-btn {
   width: 200px;
 }
 
 @media only screen and (max-width: 600px) {
-  .course-create-modal {
-    width: 100%;
-    height: 100%;
-    justify-content: flex-start;
-  }
-
-  .course-create-modal-header {
-    margin-bottom: 40px;
-  }
-
   .course-type {
     margin-top: 34px;
     flex-direction: column;

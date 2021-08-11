@@ -34,9 +34,9 @@ const Filter = ({
         >
           <div onClick={() => setActive(!active)} className='filter-title'>
             {isCategory === false && (
-              <img src='/img/funnel-outline.svg' alt='funnel outlin' />
+              <img src='/img/funnel-outline.svg' alt='funnel outline' />
             )}
-            {selectedCategory || (isCategory ? 'Select Category' : 'Filter By')}
+            {category?.find(cat => (cat.id == selectedCategory))?.name || (isCategory ? 'Select Category' : 'Filter By')}
             <img
               className='dropdown-icon'
               src='/img/chevron-right-outline.svg'
@@ -49,7 +49,7 @@ const Filter = ({
                 category.map((cat) => (
                   <li
                     key={cat.id}
-                    value={cat.name}
+                    value={cat.id}
                     onClick={(e) => {
                       getCategory(e)
                       setActive(!active)

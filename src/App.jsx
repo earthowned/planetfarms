@@ -236,8 +236,7 @@ function App () {
                   <AddTest />
                 </DndProvider>
               )}
-              path='/admin/add-test/:lessonId'
-              exact
+              path='/admin/add-test/:lessonId' exact
             />
             <PrivateRoute
               component={() => (
