@@ -2,77 +2,81 @@ const jwt = require('jsonwebtoken')
 const jwkToPem = require('jwk-to-pem')
 const db = require('../models')
 
+let coded
+
+const responses = [
+  {
+    name: 'InvalidToken',
+    error: 'Invalid token provided.'
+  },
+  {
+    name: 'TokenExpired',
+    error: 'The token has been expired.'
+  },
+  {
+    name: 'Unauthorized',
+    error: 'Not authorized, token failed'
+  }
+]
+
+function checkAuthorization (err) {
+  if (err.message === 'jwt expired') {
+    throw Error('TokenExpired')
+  } else {
+    throw Error('InvalidToken')
+  }
+}
+
+const throwError = (message) =>
+  responses.find((response) => response.name.match(message))
+
+const verifyToken = (token) => {
+  const jwk = require('./jwks.json')
+  const pem = jwkToPem(jwk.keys[0])
+
+  process.env.AUTH_METHOD !== 'cognito'
+    ? jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+        decodeTokenFnc(err, decodedToken)
+      })
+    : jwt.verify(token, pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
+      decodeTokenFnc(err, decodedToken)
+    })
+}
+
+const decodeTokenFnc = (err, decodedToken) => {
+  if (err) {
+    checkAuthorization(err)
+  }
+  coded = decodedToken
+}
+
+async function maintainState (req) {
+  try {
+    process.env.AUTH_METHOD !== 'cognito'
+      ? req.user = await db.User.findOne({
+          where: { userID: coded.id }
+        })
+      : req.user = await db.User.findOne({
+        where: { userID: coded.sub }
+      })
+  } catch (error) {
+    throw Error('User not found')
+  }
+}
+
 module.exports = async (req, res, next) => {
-  let decoded
-  let recoded
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
+  const headers =
+    req.headers.authorization && req.headers.authorization.startsWith('Bearer')
+  if (headers) {
     try {
       const token = req.headers.authorization.split(' ')[1]
-      if (process.env.AUTH_METHOD !== 'cognito') {
-        jwt.verify(token, process.env.JWT_SECRET, function (err, decodedToken) {
-          if (err) {
-            if (err.message === 'jwt expired') {
-              throw Error('TokenExpired')
-            } else {
-              throw Error('InvalidToken')
-            }
-          }
-          decoded = decodedToken
-        })
-      } else {
-        const jwk = require('./jwks.json')
-        const pem = jwkToPem(jwk.keys[0])
-        jwt.verify(token, pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
-          if (err) {
-            if (err.message === 'jwt expired') {
-              throw Error('TokenExpired')
-            } else {
-              throw Error('InvalidToken')
-            }
-          }
-          recoded = decodedToken
-        })
-      }
-      /*
-      * TODO: Maintain session and check again local session
-      */
-      if (process.env.AUTH_METHOD !== 'cognito') {
-        req.user = await db.User.findOne({ where: { userID: decoded.id } })
-      } else if (recoded) {
-        req.user = await db.User.findOne({ where: { userID: recoded.sub } })
-      } else {
-        throw Error('User not found')
-      }
+      verifyToken(token)
+      await maintainState(req)
       next()
     } catch (error) {
-      switch (error.message) {
-        case 'InvalidToken':
-          res.status(401).json({
-            error: 'Invalid token provided.',
-            name: error.message
-          })
-          break
-        case 'TokenExpired':
-          res.status(401).json({
-            error: 'The token has been expired.',
-            name: error.message
-          })
-          break
-        default:
-          res.status(401).json({
-            error: 'Not authorized, token failed',
-            name: 'Unauthorized'
-          })
-          break
-      }
+      res.status(401).json(throwError(error.message))
     }
   } else {
-    res.status(401).json({
-      error: 'Unauthorized',
-      name: 'Unauthorized'
-    })
+    res.status(401).json(throwError('Unauthorized'))
   }
 }
