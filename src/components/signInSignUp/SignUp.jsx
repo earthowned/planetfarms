@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 
 import { register } from '../../actions/userAction'
 import { SignInSignUpData } from './SignInSignUpData'
+import useCheckInputType from './useCheckInputType'
 
 import PhoneNumber from './PhoneNumber'
 import Button from '../button/Button'
@@ -26,7 +27,6 @@ const SignIn = () => {
   const dispatch = useDispatch()
   const [showPassword, setShowPassword] = useState(false)
   const [inputVal, setInputVal] = useState('')
-  const [checkType, setCheckType] = useState('')
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
@@ -34,6 +34,7 @@ const SignIn = () => {
 
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
+  const { checkType, inputPlaceholder } = useCheckInputType(inputVal)
 
   useEffect(() => {
     if (userInfo) {
@@ -50,23 +51,6 @@ const SignIn = () => {
         : Math.random().toString(36).substring(3, 6) + new Date().getTime()
     return dispatch(register({ name, phone, email, password }))
   }
-  useEffect(() => {
-    const regexEmail =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    const regexNumber = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
-    regexEmail.test(inputVal)
-      ? setCheckType('email')
-      : regexNumber.test(inputVal)
-        ? setCheckType('number')
-        : setCheckType('username')
-  }, [inputVal])
-
-  const inputPlaceholder =
-    checkType === 'email'
-      ? 'Email'
-      : checkType === 'number'
-        ? 'Phone Number'
-        : 'Username'
 
   return (
     <form className='sign' onSubmit={handleSubmit(onSubmit)}>
