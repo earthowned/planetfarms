@@ -1,7 +1,8 @@
+import { MATERIAL } from '../../../utils/urlConstants'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import Material from '../../../components/material/Material'
 
-const LessonMaterial = ({ material, setMaterial }) => {
+const LessonMaterial = ({ material, setMaterial, removeMaterial }) => {
   const matData = (mData) => {
     setMaterial(() => [...material, { mData }])
   }
@@ -14,7 +15,7 @@ const LessonMaterial = ({ material, setMaterial }) => {
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
-      {material.length !== 0 ? (
+      {material?.length > 0 ? (
         <div className='material'>
           {material.map((mater, i) => {
             return (

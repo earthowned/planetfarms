@@ -71,6 +71,11 @@ const AddLesson = () => {
     setEditId(id)
   }
 
+  const removeMaterial = (e) => {
+    const name = e.currentTarget.getAttribute('name')
+    setMaterial(material.filter((item) => item?.mData?.name !== name))
+  }
+
   return (
     <>
       {videoModal && (
@@ -145,7 +150,11 @@ const AddLesson = () => {
           setEditPhotoModel={setEditPhotoModel}
           modelPopUp={modelPopUp}
         />
-        <LessonMaterial material={material} setMaterial={setMaterial} />
+        <LessonMaterial
+          material={material}
+          setMaterial={setMaterial}
+          removeMaterial={removeMaterial}
+        />
         <LessonSaveModal
           pathId={courseId}
           onClick={handleSubmit(submitLessonForm)}

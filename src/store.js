@@ -21,7 +21,10 @@ import {
 import { videoCreateReducer, videoDeleteReducer, videoUpdateReducer } from './reducers/videoReducers'
 import { photoCreateReducer, photoDeleteReducer, photoUpdateReducer } from './reducers/photoReducer'
 import { textCreateReducer, textDeleteReducer, textUpdateReducer } from './reducers/textReducer'
-import { materialCreateReducer } from './reducers/materiallReducer'
+import {
+  materialCreateReducer,
+  materialDeleteReducer
+} from './reducers/materiallReducer'
 import {
   lessonProgressCreateReducer,
   lessonProgressUpdateReducer
@@ -130,6 +133,7 @@ const reducer = combineReducers({
   updateText: textUpdateReducer,
   deleteText: textDeleteReducer,
   addMaterial: materialCreateReducer,
+  deleteMaterial: materialDeleteReducer,
   addTest: testCreateReducer,
   addLessonProgress: lessonProgressCreateReducer,
   updateLessonProgress: lessonProgressUpdateReducer,

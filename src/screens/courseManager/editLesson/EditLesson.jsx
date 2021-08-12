@@ -9,6 +9,7 @@ import { createLesson, updateLesson } from '../../../actions/lessonActions'
 import { deleteText } from '../../../actions/textActions'
 import { deletePhoto } from '../../../actions/photoActions'
 import { deleteVideo } from '../../../actions/videoActions'
+import { deleteMaterial } from '../../../actions/materialActions'
 
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../../components/backButton/BackButton'
@@ -99,7 +100,9 @@ const EditLesson = () => {
   const removeVideo = (id) => {
     dispatch(deleteVideo(id, refetch))
   }
-  console.log(material)
+  const removeMaterial = (id) => {
+    dispatch(deleteMaterial(id, refetch))
+  }
   return (
     <>
       {isLoading ? (
@@ -210,7 +213,11 @@ const EditLesson = () => {
                 setImageModal={setImageModal}
                 setTextModal={setTextModal}
               />
-              <LessonMaterial material={material} setMaterial={setMaterial} />
+              <LessonMaterial
+                material={material}
+                setMaterial={setMaterial}
+                removeMaterial={removeMaterial}
+              />
               <EditLessonFooter
                 onClick={handleSubmit(updateLessonForm)}
                 id={id}
