@@ -161,6 +161,16 @@
 .videoUploadBtn::-webkit-file-upload-button {
   display: none;
 }
+.videoEditBtn {
+  width: 100% !important;
+  h6 {
+    font-size: 0.8em !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 90% !important;
+  }
+}
 
 @media (max-width: 768px) {
   .video-row-3 {

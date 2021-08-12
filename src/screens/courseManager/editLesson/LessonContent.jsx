@@ -31,7 +31,7 @@ const LessonContent = ({
               title={data?.videoTitle}
               description={data?.videoDescription}
               url={
-                data?.videoLink === 'undefined'
+                data?.videoLink === ''
                   ? `${GET_VIDEO}${data?.videoResource}`
                   : data?.videoLink
               }

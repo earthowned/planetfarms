@@ -52,7 +52,16 @@ export const createVideo =
     }
 
 export const updateVideo =
-  (id, videoCover, videoTitle, videoDescription, videoLink, videoResource, setEditVideoModel) =>
+  (
+    id,
+    videoCover,
+    videoTitle,
+    videoDescription,
+    videoLink,
+    videoResource,
+    setEditVideoModel,
+    refetch
+  ) =>
     async (dispatch) => {
       const videoData = new FormData()
       videoData.append('videoCover', videoCover)
