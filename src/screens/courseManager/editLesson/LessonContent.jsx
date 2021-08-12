@@ -10,7 +10,8 @@ const LessonContent = ({
   setEditVideoModel,
   modelPopUp,
   removeTextItem,
-  removePhoto
+  removePhoto,
+  removeVideo
 }) => {
   return (
     <>
@@ -40,6 +41,7 @@ const LessonContent = ({
               isEditable
               id={data?.id}
               modelPopUp={modelPopUp}
+              onRemove={removeVideo}
             />
 
             {data?.lessonImg === undefined ? (
