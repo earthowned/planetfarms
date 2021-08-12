@@ -14,6 +14,7 @@ import BackButton from '../../../components/backButton/BackButton'
 import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './AddLesson.scss'
+import EditVideo from '../editLesson/EditVideo'
 
 const AddLesson = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,8 @@ const AddLesson = () => {
   const [lessonCover, setLessonCover] = useState(null)
   const [material, setMaterial] = useState([])
   const [fetchLesson, setFetchLesson] = useState([])
+  const [editVideoModel, setEditVideoModel] = useState(false)
+  const [editVideoId, setEditVideoId] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
 
@@ -51,15 +54,18 @@ const AddLesson = () => {
         order,
         lessonData,
         material,
-        history
+        history,
       })
     )
   }
-  console.log(lessonData)
 
   const removeItem = (id) => {
     const newLessonData = lessonData.filter((item) => item.itemId !== id)
     setLessonData(newLessonData)
+  }
+  const modelPopUp = (poupState, id) => {
+    // poupState()
+    setEditVideoId(id)
   }
 
   return (
@@ -91,6 +97,15 @@ const AddLesson = () => {
           setLessonData={setLessonData}
         />
       )}
+      {editVideoModel && (
+        <EditVideo
+          editVideoModel={editVideoModel}
+          setEditVideoModel={setEditVideoModel}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
+          editVideoId={editVideoId}
+        />
+      )}
       <DashboardLayout title='Add new lesson'>
         <BackButton location={`/admin/course/${courseId}`} />
         <AddContent
@@ -104,6 +119,8 @@ const AddLesson = () => {
           lessonData={lessonData}
           setLessonData={setLessonData}
           onRemove={removeItem}
+          setEditVideoModel={setEditVideoModel}
+          modelPopUp={modelPopUp}
         />
         <LessonMaterial material={material} setMaterial={setMaterial} />
         <LessonSaveModal

@@ -11,6 +11,7 @@ const DragDrop = ({
   fetchImg,
   dataImg,
   editImg,
+  dropFile,
   onClick = () => {}
 }) => {
   const [files, setFiles] = useState()

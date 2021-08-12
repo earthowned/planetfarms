@@ -5,14 +5,16 @@ import ContentAdd from '../../../components/contentAdd/ContentAdd'
 
 const AddContent = ({
   setVideoModal,
+  videoModal,
   setImageModal,
   setTextModal,
   register,
   errors,
   setLessonCover,
   lessonData,
-  setLessonData,
-  onRemove
+  onRemove,
+  setEditVideoModel,
+  modelPopUp
 }) => {
   return (
     <div className='admin-lesson-create-container'>
