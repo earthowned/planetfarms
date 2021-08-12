@@ -1,6 +1,6 @@
 import CardLayout from '../../layout/cardLayout/CardLayout'
 import useSizeFinder from '../../utils/sizeFinder'
-import ListViewCardComponent from './ListViewCardComponent'
+import CardView from './CardView'
 import './ListView.scss'
 
 const ListView = ({ data, title, setModalActive, modalActive }) => {
@@ -10,29 +10,18 @@ const ListView = ({ data, title, setModalActive, modalActive }) => {
       <div className='listview-container'>
         <h4>{title}</h4>
         {windowWidth > 1000 ? (
-          data &&
-          data.map((item) => {
-            return (
-              <ListViewCardComponent
-                item={item}
-                modalActive={modalActive}
-                setModalActive={setModalActive}
-              />
-            )
-          })
+          <CardView
+            data={data}
+            modalActive={modalActive}
+            setModalActive={setModalActive}
+          />
         ) : (
           <CardLayout data={data}>
-            {data &&
-              data.map((item) => {
-                return (
-                  <ListViewCardComponent
-                    item={item}
-                    modalActive={modalActive}
-                    setModalActive={setModalActive}
-                    key={item.id}
-                  />
-                )
-              })}
+            <CardView
+              data={data}
+              modalActive={modalActive}
+              setModalActive={setModalActive}
+            />
           </CardLayout>
         )}
       </div>
