@@ -87,10 +87,10 @@ module.exports = {
       openUrl: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      createdDate: {
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updatedDate: {
         type: Sequelize.DATE
       },
       attachments: {
