@@ -47,9 +47,7 @@ const NewsAdd = () => {
   const [videoId, setVideoId] = useState(null)
   const [imageId, setImageId] = useState(null)
   const [textId, setTextId] = useState(null)
-  // const [videoActive, setVideoActive] = useState(true)
-  // const [imageActive, setImageActive] = useState(true)
-  // const [textActive, setTextActive] = useState(true)
+
   const [newsData, setNewsData] = useState([])
   const [newsSingleData, setNewsSingleData] = useState([])
   const [category, setCategory] = useState(state?.category || null)

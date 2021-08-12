@@ -93,8 +93,8 @@ function App () {
             <PrivateRoute component={EditCollection} path='/courses/my-courses/:id' exact />
             <PrivateRoute component={Courses} path='/admin/courses' exact />
             <PrivateRoute component={AdminCoursePage} path='/admin/course/:courseId' exact />
-            <PrivateRoute component={AddLesson} path='/admin/add-lesson/:courseId' exact />
-            <PrivateRoute component={EditLesson} path='/admin/edit-lesson/:id' exact />
+            <PrivateRoute component={AddLesson} path='/admin/course/:courseId/add-lesson' exact />
+            <PrivateRoute component={AddLesson} path='/admin/course/:courseId/edit-lesson/:lessonId' exact />
             <PrivateRoute component={CourseUsers} path='/courses/users' exact />
             <PrivateRoute component={Enterprises} path='/enterprises/:id' exact />
             <PrivateRoute component={Enterprises} path='/your-enterprises/:id' exact />

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import useHideOnClick from '../../../utils/useHideOnClick'
 import axios from 'axios'
 
-const LessonActions = ({ id, refetch }) => {
+const LessonActions = ({ id, courseId, refetch }) => {
   const dispatch = useDispatch()
   const [actionActive, setActionActive] = useState(false)
   const [tests, setTests] = useState([])
@@ -36,7 +36,7 @@ const LessonActions = ({ id, refetch }) => {
       </button>
       {actionActive && (
         <ul className={actionActive ? 'show' : 'hide'}>
-          <Link to={`/admin/edit-lesson/${id}`}>
+          <Link to={`/admin/course/${courseId}/edit-lesson/${id}`}>
             <li>Edit</li>
           </Link>
           <li>Delete</li>

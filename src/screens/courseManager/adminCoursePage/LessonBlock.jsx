@@ -56,7 +56,7 @@ const LessonBlock = ({ data, courseId, refetch }) => {
         ) : (
           ''
         )}
-        <Link to={`/admin/add-lesson/${courseId}`}>
+        <Link to={`/admin/course/${courseId}/add-lesson`}>
           <div className='add-lesson-btn secondary-btn'>
             <img src='/img/plus.svg' alt='lesson add' />
             <span>Add new lesson for users</span>
