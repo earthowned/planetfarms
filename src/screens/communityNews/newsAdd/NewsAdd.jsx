@@ -179,9 +179,10 @@ const NewsAdd = () => {
           type='video' 
           videoActive={createVideoModal} 
           setVideoActive={setCreateVideoModal} 
-          lessonData={newsData} 
-          setLessonData={setNewsData} 
+          data={newsData} 
+          setData={setNewsData} 
           videoData={videoData}
+          setVideoData={setVideoData}
           editVideoConfirm={editVideoConfirm}
           />
       }
@@ -190,9 +191,10 @@ const NewsAdd = () => {
           type='image' 
           imageActive={createImageModal} 
           setImageActive={setCreateImageModal} 
-          lessonData={newsData} 
-          setLessonData={setNewsData} 
+          data={newsData} 
+          setData={setNewsData} 
           imageData={imageData}
+          setImageData={setImageData}
           editImageConfirm={editImageConfirm}
           />
       }
@@ -201,9 +203,10 @@ const NewsAdd = () => {
           type='text' 
           textActive={createTextModal} 
           setTextActive={setCreateTextModal} 
-          lessonData={newsData} 
-          setLessonData={setNewsData} 
+          data={newsData} 
+          setData={setNewsData} 
           textData={textData}
+          setTextData={setTextData}
           editTextConfirm={editTextConfirm}
       />
       }

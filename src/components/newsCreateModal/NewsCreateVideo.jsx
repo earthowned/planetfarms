@@ -14,9 +14,10 @@ const CreateVideo = ({
   files,
   videoActive,
   setVideoActive,
-  lessonData,
-  setLessonData,
-  data = [],
+  data,
+  setData,
+  editData = [],
+  setEditData,
   editFunc
 }) => {
   const { register, errors, handleSubmit } = useForm()
@@ -26,13 +27,13 @@ const CreateVideo = ({
 
   const addVideo = ({ videoTitle, videoDescription, videoLink }) => {
     const itemId =
-      lessonData.length === 0
-        ? lessonData.length + 1
-        : lessonData[lessonData.length - 1].itemId + 1
+      data.length === 0
+        ? data.length + 1
+        : data[data.length - 1].itemId + 1
 
     const videoResource = video
     const vData = [
-      ...lessonData,
+      ...data,
       {
         itemId,
         videoCover,
@@ -42,23 +43,19 @@ const CreateVideo = ({
         videoResource
       }
     ]
-    setLessonData(vData)
+    setData(vData)
     setVideoActive(false)
   }
 
-    const editVideo = ({ videoTitle, videoDescription, videoLink }) => {
+  const editVideo = ({ videoTitle, videoDescription, videoLink }) => {
     const videoResource = video
-    const vData = [
-      ...lessonData,
-      {
-        videoCover,
-        videoTitle,
-        videoDescription,
-        videoLink,
-        videoResource
-      }
-    ]
-    editFunc({id: data[0].id, videoTitle, videoDescription, videoLink, videoResource, videoCover : videoCover || 'videoCover'})
+    editFunc({id: editData[0].id, videoTitle, videoDescription, videoLink, videoResource, videoCover})
+    setEditData([])
+  }
+
+  const closeModal = () => {
+    setVideoActive(false)
+    setEditData([])
   }
 
   return (
@@ -69,14 +66,14 @@ const CreateVideo = ({
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add video'
-                clickHandler={setVideoActive}
+                clickHandler={closeModal}
               />
               <DragDrop
                 getInputProps={getInputProps}
                 getRootProps={getRootProps}
                 files={files}
                 text='Drag & Drop photo in this area or Click Here to attach Video Cover'
-                dataImg={data.length > 0 && `${VIDEO_COVER}${data[0]?.videoCover}`}
+                dataImg={editData.length > 0 && `${VIDEO_COVER}${editData[0]?.videoCover}`}
                 onChange={(img) => setVideoCover(img)}
                 fileType='image/png,image/jpeg,image/jpg'
                 onClick={() => setVideoCover(null)}
@@ -87,7 +84,7 @@ const CreateVideo = ({
                   placeholder='Video Title (Optional)'
                   name='videoTitle'
                   ref={register}
-                  defaultValue={data.length > 0 ? data[0].videoTitle : ''}
+                  defaultValue={editData.length > 0 ? editData[0].videoTitle : ''}
                 />
 
                 <TextArea
@@ -97,7 +94,7 @@ const CreateVideo = ({
                   rows='4'
                   name='videoDescription'
                   ref={register}
-                  defaultValue={data.length > 0 ? data[0].videoDescription : ''}
+                  defaultValue={editData.length > 0 ? editData[0].videoDescription : ''}
                 />
                 <div className='video-row-3'>
                   {!video && (
@@ -113,7 +110,7 @@ const CreateVideo = ({
                         }
                         placeholder='Video Link'
                         name='videoLink'
-                        defaultValue={data.length > 0 ? data[0].videoLink : ""}
+                        defaultValue={editData.length > 0 ? editData[0].videoLink : ""}
                         ref={register({
                           required: {
                             value: true,
@@ -147,7 +144,7 @@ const CreateVideo = ({
                 />
               </div>
               {
-                data.length > 0 
+                editData.length > 0 
                 ? <Button
                     className='add'
                     name='Edit Video Block'

@@ -14,12 +14,11 @@ import { useEffect } from 'react'
 const CreateImage = ({
   imageActive,
   setImageActive,
-  lessonData,
-  setLessonData,
-  data = [],
-  editFunc,
-  itemId,
-  setItemId
+  data,
+  setData,
+  editData = [],
+  setEditData,
+  editFunc
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(true)
   const [lessonImg, setLessonImg] = useState(null)
@@ -28,11 +27,11 @@ const CreateImage = ({
 
   const submitLessonImg = ({ photoDescription }) => {
     const itemId =
-      lessonData.length === 0
-        ? lessonData.length + 1
-        : lessonData[lessonData.length - 1].itemId + 1
+      data.length === 0
+        ? data.length + 1
+        : data[data.length - 1].itemId + 1
     const imgData = [
-      ...lessonData,
+      ...data,
       {
         itemId,
         lessonImg,
@@ -40,27 +39,25 @@ const CreateImage = ({
         isImgDesc
       }
     ]
-    setLessonData(imgData)
+    setData(imgData)
     setImageActive(false)
   }
 
   const editNewsImg = ({ photoDescription }) => {
-    const imgData = [
-      ...lessonData,
-      {
-        lessonImg,
-        photoDescription,
-        isImgDesc
-      }
-    ]
-    editFunc({id: data[0].id, lessonImg, photoDescription, isImgDesc})
+    editFunc({id: editData[0].id, lessonImg, photoDescription, isImgDesc})
+    setEditData([])
   }
 
   useEffect(() => {
-    if(data.length > 0) {
-      setIsImgDesc(data[0].isImgDesc)
+    if(editData.length > 0) {
+      setIsImgDesc(editData[0].isImgDesc)
     }
   }, [])
+
+  const closeModal = () => {
+    setImageActive(false)
+    setEditData([])
+  }
   return (
     <>
       {imageActive && (
@@ -69,13 +66,13 @@ const CreateImage = ({
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add photo'
-                clickHandler={setImageActive}
+                clickHandler={closeModal}
               />
               <DragDrop
                 onChange={(img) => setLessonImg(img)}
                 fileType='image/png,image/jpeg,image/jpg'
                 text='Drag & Drop photo in this area or Click Here to attach'
-                dataImg={data.length > 0 && `${LESSON_IMG}${data[0].lessonImg}`}
+                dataImg={editData.length > 0 && `${LESSON_IMG}${editData[0].lessonImg}`}
                 onClick={() => setLessonImg(null)}
               />
               <div className='description'>
@@ -88,7 +85,7 @@ const CreateImage = ({
               {isImgDesc && (
                 <div className='photo-input-container'>
                   <TextArea
-                    defaultValue={data.length > 0 ? data[0].photoDescription : ''}
+                    defaultValue={editData.length > 0 ? editData[0].photoDescription : ''}
                     placeholder='Photo Description (Optional)'
                     className='default-input-variation text-area-variation textarea'
                     cols='3'
@@ -100,7 +97,7 @@ const CreateImage = ({
               )}
 
               {
-                data.length > 0 
+                editData.length > 0 
                 ? <Button
                     className='add'
                     name='Edit Photo Block'

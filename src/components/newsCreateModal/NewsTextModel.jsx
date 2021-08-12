@@ -8,37 +8,44 @@ import './NewsCreateModal.scss'
 const CreateText = ({
   textActive,
   setTextActive,
-  lessonData,
-  setLessonData,
   data,
+  setData,
+  editData,
+  setEditData,
   editFunc
 }) => {
   const { register, errors, handleSubmit } = useForm()
 
   const addText = ({ textHeading, textDescription }) => {
     const itemId =
-      lessonData.length === 0
-        ? lessonData.length + 1
-        : lessonData[lessonData.length - 1].itemId + 1
+      data.length === 0
+        ? data.length + 1
+        : data[data.length - 1].itemId + 1
 
     if (textHeading.length !== 0 || textDescription.length !== 0) {
       const textData = [
-        ...lessonData,
+        ...data,
         {
           itemId,
           textHeading,
           textDescription
         }
       ]
-      setLessonData(textData)
+      setData(textData)
     }
     setTextActive(false)
   }
 
   const editText = ({textHeading, textDescription}) => {
     if (textHeading.length !== 0 || textDescription.length !== 0) {
-    editFunc({textHeading, textDescription, id: data[0].id})
+    editFunc({textHeading, textDescription, id: editData[0].id})
+    setEditData([])
     }
+  }
+
+  const closeModal = () => {
+    setTextActive(false)
+    setEditData([])
   }
   
   return (
@@ -49,7 +56,7 @@ const CreateText = ({
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add text'
-                clickHandler={setTextActive}
+                clickHandler={closeModal}
               />
               <div className='photo-input-container'>
                 <InputFields
@@ -58,7 +65,7 @@ const CreateText = ({
                   placeholder='Text Heading (Optional)'
                   name='textHeading'
                   ref={register}
-                  defaultValue={data.length > 0 ? data[0].textHeading : ''}
+                  defaultValue={editData.length > 0 ? editData[0].textHeading : ''}
                 />
                 <TextArea
                   className={`default-input-variation text-area-variation ${
@@ -70,7 +77,7 @@ const CreateText = ({
                   cols='3'
                   rows='7'
                   name='textDescription'
-                  defaultValue={data.length > 0 ? data[0].textDescription : ''}
+                  defaultValue={editData.length > 0 ? editData[0].textDescription : ''}
                   ref={register({
                     required: {
                       value: true,
@@ -87,7 +94,7 @@ const CreateText = ({
               </div>
               
               {
-                data.length > 0 
+                editData.length > 0 
                 ? <Button
                     className='add'
                     name='Edit Text Block'
