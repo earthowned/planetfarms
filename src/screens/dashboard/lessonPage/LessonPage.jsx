@@ -74,7 +74,7 @@ const LessonPage = () => {
   const nextPageWithOutTest = () => {
     dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
   }
-
+  console.log(data?.data?.test)
   return (
     <>
       {isLoading ? (
@@ -123,7 +123,9 @@ const LessonPage = () => {
             <Button
               className='nextBtn'
               name='Next'
-              disabled={isCreator ? false : !isPassed}
+              disabled={
+                isCreator || data?.data?.test === null ? false : !isPassed
+              }
               onClick={isPassed || isCompleted ? nextPage : nextPageWithOutTest}
             />
           )}
