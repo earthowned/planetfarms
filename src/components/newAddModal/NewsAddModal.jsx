@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './NewsAddModal.scss'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { newsUpdate } from '../../actions/newsActions'
 
@@ -10,6 +10,8 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
 
   const [titleError, setTitleError] = useState()
   const [categoryError, setCategoryError] = useState()
+
+  const history = useHistory();
 
   const dispatch = useDispatch()
   const titleChange = (e) => {
@@ -50,11 +52,16 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
             <option>Business</option>
           </select>
         </div>
-        {editData
+        {
+          editData
           ? <button className='default-btn-btn btn-variation' onClick={editNewsTitle}>Update</button>
-          : <Link className='nav-link' to={`/community-page-news/${title}/${category}`}>
-            <button className='default-btn-btn btn-variation'>Continue</button>
-          </Link>}
+          : <button className='default-btn-btn btn-variation' onClick = {() => history.push({
+              pathname: `/community-news/${title}`,
+              state: {
+                category
+              }
+            })}>Continue</button>
+        }
       </div>
     </div>
   )
