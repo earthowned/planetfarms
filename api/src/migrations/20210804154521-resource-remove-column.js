@@ -31,76 +31,30 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('resources', 'resourceFor', {
-      type: Sequelize.TEXT
-    })
-    await queryInterface.addColumn('resources', 'publisher', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'linkToLicense', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'uploadDate', {
-      type: Sequelize.DATE
-    })
-    await queryInterface.addColumn('resources', 'addedBy', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'openWith', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'subject', {
-      type: Sequelize.TEXT
-    })
-    await queryInterface.addColumn('resources', 'articleDate', {
-      type: Sequelize.DATE
-    })
-    await queryInterface.addColumn('resources', 'kind', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'language', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'author', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'sum', {
-      type: Sequelize.DOUBLE
-    })
-    await queryInterface.addColumn('resources', 'level', {
-      type: Sequelize.TEXT
-    })
-    await queryInterface.addColumn('resources', 'languages', {
-      type: Sequelize.TEXT
-    })
-    await queryInterface.addColumn('resources', 'timesRated', {
-      type: Sequelize.STRING
-    })
+    await queryInterface.addColumn('resources', 'resourceFor', { type: Sequelize.TEXT })
+    await queryInterface.addColumn('resources', 'publisher', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'linkToLicense', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'uploadDate', { type: Sequelize.DATE })
+    await queryInterface.addColumn('resources', 'addedBy', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'openWith', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'subject', { type: Sequelize.TEXT })
+    await queryInterface.addColumn('resources', 'articleDate', { type: Sequelize.DATE })
+    await queryInterface.addColumn('resources', 'kind', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'language', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'author', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'sum', { type: Sequelize.DOUBLE })
+    await queryInterface.addColumn('resources', 'level', { type: Sequelize.TEXT })
+    await queryInterface.addColumn('resources', 'languages', { type: Sequelize.TEXT })
+    await queryInterface.addColumn('resources', 'timesRated', { type: Sequelize.STRING })
     await queryInterface.addColumn('resources', 'tag', { type: Sequelize.TEXT })
-    await queryInterface.addColumn('resources', 'year', {
-      type: Sequelize.DATE
-    })
-    await queryInterface.addColumn('resources', 'averageRating', {
-      type: Sequelize.DOUBLE
-    })
-    await queryInterface.addColumn('resources', 'mediaType', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'tags', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'medium', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'isDownloadable', {
-      type: Sequelize.BOOLEAN
-    })
-    await queryInterface.addColumn('resources', 'openUrl', {
-      type: Sequelize.STRING
-    })
-    await queryInterface.addColumn('resources', 'attachments', {
-      type: Sequelize.TEXT
-    })
+    await queryInterface.addColumn('resources', 'year', { type: Sequelize.DATE })
+    await queryInterface.addColumn('resources', 'averageRating', { type: Sequelize.DOUBLE })
+    await queryInterface.addColumn('resources', 'mediaType', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'tags', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'medium', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'isDownloadable', { type: Sequelize.BOOLEAN })
+    await queryInterface.addColumn('resources', 'openUrl', { type: Sequelize.STRING })
+    await queryInterface.addColumn('resources', 'attachments', { type: Sequelize.TEXT })
     await queryInterface.renameColumn('resources', 'createdAt', 'createdDate')
     await queryInterface.renameColumn('resources', 'updatedAt', 'updatedDate')
   }
