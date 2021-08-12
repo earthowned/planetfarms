@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 import useGetLessonData from '../../../utils/useGetLessonData'
 import { updateLesson } from '../../../actions/lessonActions'
+import { deleteText } from '../../../actions/textActions'
 
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../../components/backButton/BackButton'
@@ -74,6 +75,10 @@ const EditLesson = () => {
   const modelPopUp = (poupState, dataId) => {
     setEditId(dataId)
   }
+
+  const removeTextItem = (id) => {
+    dispatch(deleteText(id, refetch))
+  }
   return (
     <>
       {isLoading ? (
@@ -135,6 +140,7 @@ const EditLesson = () => {
                 modelPopUp={modelPopUp}
                 setEditTextModel={setEditTextModel}
                 setEditPhotoModel={setEditPhotoModel}
+                onRemove={removeTextItem}
               />
               <AddContentBlock setTestModal={setTestModal} />
               <EditLessonFooter

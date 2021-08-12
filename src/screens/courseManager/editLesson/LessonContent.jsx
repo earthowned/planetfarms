@@ -7,7 +7,8 @@ const LessonContent = ({
   lessonData,
   setEditTextModel,
   setEditPhotoModel,
-  modelPopUp
+  modelPopUp,
+  onRemove
 }) => {
   return (
     <>
@@ -22,6 +23,7 @@ const LessonContent = ({
               setEditTextModel={setEditTextModel}
               modelPopUp={modelPopUp}
               id={data?.id}
+              onRemove={onRemove}
             />
             <Video
               title={data?.videoTitle}

@@ -8,7 +8,8 @@ const Text = ({
   id,
   setEditTextModel,
   modelPopUp,
-  isEditable
+  isEditable,
+  refetch
 }) => {
   const poopUp = () => {
     modelPopUp(id)
@@ -25,7 +26,12 @@ const Text = ({
             </p>
           </div>
           {isEditable ? (
-            <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
+            <Actions
+              onRemove={onRemove}
+              id={id}
+              poopUp={poopUp}
+              refetch={refetch}
+            />
           ) : (
             ''
           )}
