@@ -25,7 +25,7 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
   }
 }
 
-export const deleteMaterial = (id, refetch) => async (dispatch) => {
+export const deleteMaterial = (id, refetch, material) => async (dispatch) => {
   try {
     dispatch({ type: material.MATERIAL_DELETE_REQUEST })
     const { data } = await Axios.delete(GET_MATERIAL + `/${id}`)
