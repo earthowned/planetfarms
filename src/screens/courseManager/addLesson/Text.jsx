@@ -25,16 +25,7 @@ const Text = ({
               {desc} {id}
             </p>
           </div>
-          {isEditable ? (
-            <Actions
-              onRemove={onRemove}
-              id={id}
-              poopUp={poopUp}
-              refetch={refetch}
-            />
-          ) : (
-            ''
-          )}
+          <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
         </div>
       ) : (
         ''

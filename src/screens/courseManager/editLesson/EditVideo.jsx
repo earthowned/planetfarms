@@ -16,7 +16,7 @@ const EditVideo = ({
   setEditVideoModel,
   lessonData,
   setLessonData,
-  editVideoId
+  editId
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const [videoCover, setVideoCover] = useState(null)
@@ -26,7 +26,7 @@ const EditVideo = ({
     const videoResource = video
     setLessonData(
       lessonData.map((data) =>
-        data.itemId === editVideoId
+        data.itemId === editId
           ? {
               ...data,
               videoCover: videoCover,
@@ -41,14 +41,13 @@ const EditVideo = ({
     setEditVideoModel(false)
   }
 
-  const editingVideoData = lessonData.find(
-    (video) => video.itemId === editVideoId
-  )
-
+  const editingVideoData = lessonData.find((video) => video.itemId === editId)
+  console.log(editingVideoData)
   useEffect(() => {
-    editingVideoData.videoResource && setVideo(editingVideoData.videoResource)
-    editingVideoData.videoLink && setVideoLink(editingVideoData.videoLink)
-  }, [editingVideoData.videoResource, editingVideoData.videoLink])
+    editingVideoData?.videoCover && setVideoCover(editingVideoData?.videoCover)
+    editingVideoData?.videoResource && setVideo(editingVideoData?.videoResource)
+    editingVideoData?.videoLink && setVideoLink(editingVideoData?.videoLink)
+  }, [editingVideoData])
   return (
     editVideoModel && (
       <div className='collection-modal-container addBlock addBlock__video'>
@@ -66,7 +65,7 @@ const EditVideo = ({
                 placeholder='Video Title (Optional)'
                 name='videoTitle'
                 ref={register}
-                defaultValue={editingVideoData.videoTitle}
+                defaultValue={editingVideoData?.videoTitle}
               />
 
               <TextArea
@@ -76,7 +75,7 @@ const EditVideo = ({
                 rows='4'
                 name='videoDescription'
                 ref={register}
-                defaultValue={editingVideoData.videoDescription}
+                defaultValue={editingVideoData?.videoDescription}
               />
               <div className='video-row-3'>
                 {!video && (
@@ -84,7 +83,7 @@ const EditVideo = ({
                     <input
                       type='url'
                       className={
-                        videoLink || editingVideoData.videoLink
+                        videoLink || editingVideoData?.videoLink
                           ? 'default-input-variation last-input-variation full'
                           : `default-input-variation last-input-variation ${
                               errors.videoLink ? 'error' : ''
@@ -99,7 +98,7 @@ const EditVideo = ({
                         }
                       })}
                       onChange={(e) => setVideoLink(e.target.value)}
-                      defaultValue={editingVideoData.videoLink}
+                      defaultValue={editingVideoData?.videoLink}
                     />
                   </>
                 )}
@@ -117,7 +116,7 @@ const EditVideo = ({
                     setVideo={setVideo}
                     onClick={() => setVideo(null)}
                     text='Add Video'
-                    dropFile={editingVideoData.videoResource}
+                    dropFile={editingVideoData?.videoResource}
                   />
                 )}
               </div>
