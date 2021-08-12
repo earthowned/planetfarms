@@ -51,13 +51,24 @@
     width: 100%;
 
     .icon {
-      align-items: center;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row-reverse;
       height: 24px;
       padding: 3px 0;
-      width: 24px;
       margin-right: 0.5em;
+
+      span {
+        font-family: inherit;
+        font-size: 1.05em;
+        background-color: transparent;
+        color: var(--primary-grey);
+      }
+
+      path {
+        fill: var(--primary-color);
+      }
 
       img {
         width: 100%;
@@ -107,21 +118,21 @@
     text-transform: inherit;
   }
 
-  input[type="number"] {
+  input[type='number'] {
     -moz-appearance: textfield;
   }
 
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  input[type="date"] {
+  input[type='date'] {
     color: var(--primary-grey);
   }
 
-  input[type="date"]::-webkit-calendar-picker-indicator {
+  input[type='date']::-webkit-calendar-picker-indicator {
     display: none;
   }
 

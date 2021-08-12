@@ -1,6 +1,5 @@
 export const SignInSignUpData = {
   welcomeBack: 'Become a member',
-  rememberMe: 'Remember Me',
   signIn: 'Sign in',
   forgotPassword: 'Forgot Password?',
   text1: 'Sign In with services',
@@ -12,5 +11,8 @@ export const SignInSignUpData = {
   facebook: 'Facebook',
   spanText4: 'Already have an account?',
   subtract2: '',
-  failMessage: ' Please enter correct username or password.'
+  failMessage: ' Please enter correct username or password.',
+  haveAc: 'Already have an Account?',
+  noAc: 'Don\'t have an account yet?',
+  signUp: 'Become a member!'
 }

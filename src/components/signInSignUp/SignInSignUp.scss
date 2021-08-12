@@ -5,7 +5,7 @@
   height: inherit;
 
   //@media only screen and (max-width: 1440px) {
-    width: 100%;
+  width: 100%;
   //}
 
   /*@media only screen and (max-width: 375px) {
@@ -22,7 +22,7 @@
     min-height: 40px;
     white-space: nowrap;
     color: var(--primary-white);
-    font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+    font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
     font-size: 35px;
     font-style: normal;
     font-weight: 600;
@@ -129,7 +129,7 @@
       @media only screen and (min-width: 1024px) {
         flex-direction: row;
       }
-      
+
       @media only screen and (max-width: 1023px) and (min-width: 767px) {
         flex-direction: column;
         align-items: flex-start;
@@ -226,7 +226,7 @@
     @media only screen and (min-width: 1024px) {
       flex-direction: row;
     }
-    
+
     @media only screen and (max-width: 1023px) and (min-width: 767px) {
       flex-direction: column;
     }
@@ -243,7 +243,7 @@
     }
 
     .span {
-      font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
+      font-family: 'IBM Plex Sans-Regular', Helvetica, sans-serif;
       font-size: 16px;
 
       &-1 {
@@ -262,7 +262,7 @@
 
 .white16px {
   color: var(--primary-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -270,7 +270,7 @@
 
 .green16px {
   color: var(--primary-color);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans-SemiBold', Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -278,7 +278,7 @@
 
 .transparent16px {
   color: transparent;
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans-Regular', Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -292,5 +292,55 @@
   .facebook-button {
     margin-left: 0;
     margin-top: 1em;
+  }
+}
+.signInput {
+  display: flex;
+  align-items: center;
+
+  .PhoneInputInput {
+    display: none;
+  }
+  .PhoneInputCountry {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    margin-right: 0.35em;
+  }
+  .PhoneInputCountrySelect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .PhoneInputCountryIcon {
+    width: calc(1em * 1.5);
+    height: 1em;
+  }
+  .PhoneInputCountry {
+    select {
+      background: var(--background-color);
+      border: none;
+      outline: none;
+      padding: 0.5em;
+      option {
+        font-family: var(--font-family);
+        font-size: 1.28em;
+        margin: 1.5em 0;
+        color: #ffff;
+        padding: 1em;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--primary-color) !important;
+        }
+      }
+    }
   }
 }

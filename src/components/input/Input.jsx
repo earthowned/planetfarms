@@ -17,7 +17,7 @@ const Input = React.forwardRef(
       children,
       noIcon,
       disabled,
-      onChange
+      onChange = () => {}
     },
     ref
   ) => {
@@ -55,7 +55,10 @@ const Input = React.forwardRef(
                 id={id}
                 ref={ref}
                 type={type}
-                onChange={(e) => setShowLabel(e.target.value)}
+                onChange={(e) => {
+                  setShowLabel(e.target.value)
+                  onChange(e)
+                }}
                 disabled={disabled}
                 autoComplete='off'
               />
