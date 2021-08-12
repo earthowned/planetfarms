@@ -27,7 +27,8 @@ const NewsCreateModal = ({
   textData = [],
   videoData = [],
   editTextConfirm,
-  editImageConfirm
+  editImageConfirm,
+  editVideoConfirm
 }) => {
   const [files, setFiles] = useState(null)
   switch (type) {
@@ -42,6 +43,7 @@ const NewsCreateModal = ({
           lessonData={lessonData}
           setLessonData={setLessonData}
           data={videoData || []}
+          editFunc={editVideoConfirm}
         />
       )
 

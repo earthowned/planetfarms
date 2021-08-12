@@ -16,7 +16,8 @@ const CreateVideo = ({
   setVideoActive,
   lessonData,
   setLessonData,
-  data = []
+  data = [],
+  editFunc
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const [videoCover, setVideoCover] = useState(null)
@@ -39,6 +40,21 @@ const CreateVideo = ({
     setVideoActive(false)
   }
 
+    const editVideo = ({ videoTitle, videoDescription, videoLink }) => {
+    const videoResource = video
+    const vData = [
+      ...lessonData,
+      {
+        videoCover,
+        videoTitle,
+        videoDescription,
+        videoLink,
+        videoResource
+      }
+    ]
+    editFunc({id: data[0].id, videoTitle, videoDescription, videoLink, videoResource, videoCover : videoCover || 'videoCover'})
+  }
+
   return (
     <>
       {videoActive && (
@@ -57,6 +73,7 @@ const CreateVideo = ({
                 dataImg={data.length > 0 && `${VIDEO_COVER}${data[0]?.videoCover}`}
                 onChange={(img) => setVideoCover(img)}
                 fileType='image/png,image/jpeg,image/jpg'
+                onClick={() => setVideoCover(null)}
               />
               <div className='video-input-container'>
                 <InputFields
@@ -128,7 +145,7 @@ const CreateVideo = ({
                 ? <Button
                     className='add'
                     name='Edit Video Block'
-                    onClick={handleSubmit(addVideo)} />
+                    onClick={handleSubmit(editVideo)} />
                 : <Button
                     className='add'
                     name='Add Video Block'

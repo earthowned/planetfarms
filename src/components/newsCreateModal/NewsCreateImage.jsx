@@ -69,6 +69,7 @@ const CreateImage = ({
                 fileType='image/png,image/jpeg,image/jpg'
                 text='Drag & Drop photo in this area or Click Here to attach'
                 dataImg={data.length > 0 && `${LESSON_IMG}${data[0].lessonImg}`}
+                onClick={() => setLessonImg(null)}
               />
               <div className='description'>
                 <label>Add photo description ?</label>{' '}
