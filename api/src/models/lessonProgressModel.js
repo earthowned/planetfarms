@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       isCompleted: {
         type: DataTypes.BOOLEAN
       },
+      startTime: {
+        type: DataTypes.STRING
+      },
+      endTime: {
+        type: DataTypes.STRING
+      },
       createdAt: {
         type: DataTypes.DATE
       },
