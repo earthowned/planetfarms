@@ -7,6 +7,7 @@ import { GET_COVERIMG } from '../../../utils/urlConstants'
 import useGetLessonData from '../../../utils/useGetLessonData'
 import { updateLesson } from '../../../actions/lessonActions'
 import { deleteText } from '../../../actions/textActions'
+import { deletePhoto } from '../../../actions/photoActions'
 
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../../components/backButton/BackButton'
@@ -79,6 +80,9 @@ const EditLesson = () => {
   const removeTextItem = (id) => {
     dispatch(deleteText(id, refetch))
   }
+  const removePhoto = (id) => {
+    dispatch(deletePhoto(id, refetch))
+  }
   return (
     <>
       {isLoading ? (
@@ -140,7 +144,8 @@ const EditLesson = () => {
                 modelPopUp={modelPopUp}
                 setEditTextModel={setEditTextModel}
                 setEditPhotoModel={setEditPhotoModel}
-                onRemove={removeTextItem}
+                removeTextItem={removeTextItem}
+                removePhoto={removePhoto}
               />
               <AddContentBlock setTestModal={setTestModal} />
               <EditLessonFooter
