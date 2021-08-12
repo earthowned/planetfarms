@@ -1,10 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React from 'react'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
-import Video from '../../../components/videoPlayer/Video'
-import Image from '../../../components/lessonImage/Image'
-import Text from './Text'
-import BtnCollection from '../../../components/btnCollection/BtnCollection'
+import ContentAdd from '../../../components/contentAdd/ContentAdd'
 
 const AddContent = ({
   setVideoModal,
@@ -43,7 +40,7 @@ const AddContent = ({
       />
 
       <DragDrop onChange={(img) => setLessonCover(img)} />
-      <BtnCollection data={lessonData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
+      <ContentAdd data={lessonData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
     </div>
   )
 }

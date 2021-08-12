@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
-import BtnCollection from '../../../components/btnCollection/BtnCollection'
+import ContentAdd from '../../../components/contentAdd/ContentAdd'
 
 const NewsAdd = () => {
   const { currentCommunity } = useSelector(state => state.activeCommunity)
@@ -39,16 +39,23 @@ const NewsAdd = () => {
     setNewsData([{title, category}])
   }, [])
 
-    const submitNewsForm = ({ title }) => {
-      console.log(newsData);
-    // const order = fetchLesson.length + 1
-    // dispatch(
-    //   createLesson({
-    //     title,
-    //     category,
-    //     coverImg,
-    //   })
-    // )
+  const submitNewsForm = ({ title }) => {
+    const newData = convertArrToObject(newsData)
+    newData.title = title
+    newData.category = category;
+    dispatch(createNews(newData));
+  }
+
+  // converting the arrray into object for submission
+
+  function convertArrToObject (arr) {
+    let newData = {};
+    arr.map(item => {
+      let prop = Object.getOwnPropertyNames(item);
+      prop.forEach(el => newData[el] = item[el])
+    })
+
+    return newData;
   }
 
   return (
@@ -112,7 +119,7 @@ const AddNewsContent = ({
         })}
       />
 
-      <BtnCollection data={newsData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
+      <ContentAdd data={newsData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
     </div>
 }
 
@@ -125,7 +132,7 @@ const NewsSaveModal = ({ pathId, onClick }) => {
         <button
           className='secondary-btn'
           id='lesson-cancel-btn'
-          onClick={() => history.push(`/dashboard`)}
+          onClick={() => history.goBack()}
         >
           Cancel
         </button>
