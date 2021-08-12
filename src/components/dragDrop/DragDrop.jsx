@@ -14,6 +14,7 @@ const DragDrop = ({
   dropFile,
   onClick = () => {}
 }) => {
+  console.log(dropFile)
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
     accept: `${type ? `${type}/*` : fileType ? `${fileType}` : 'image/*'}`,

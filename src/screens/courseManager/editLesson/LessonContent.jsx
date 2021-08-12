@@ -7,6 +7,7 @@ const LessonContent = ({
   lessonData,
   setEditTextModel,
   setEditPhotoModel,
+  setEditVideoModel,
   modelPopUp,
   removeTextItem,
   removePhoto
@@ -35,6 +36,10 @@ const LessonContent = ({
                   : data?.videoLink
               }
               thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
+              setEditVideoModel={setEditVideoModel}
+              isEditable
+              id={data?.id}
+              modelPopUp={modelPopUp}
             />
 
             {data?.lessonImg === undefined ? (
