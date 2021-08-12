@@ -106,6 +106,7 @@ export const register = (name, password) => async (dispatch) => {
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
       const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
       userdata = data
+      window.localStorage.setItem('userInfo', JSON.stringify(userdata))
     } else {
       await Auth.signUp({
         username: name,
@@ -114,12 +115,14 @@ export const register = (name, password) => async (dispatch) => {
           email: null
         }
       })
+
       const response = await Auth.signIn(name, password)
-      userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub || '' }
-      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata.id })
-        .catch(err => console.log(err))
+
+      userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub }
+      window.localStorage.setItem('userInfo', JSON.stringify(userdata))
+      await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata?.id })
     }
-    window.localStorage.setItem('userInfo', JSON.stringify(userdata))
+
     dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata })
     dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata })
     await routingCommunityNews(dispatch, false)
@@ -496,7 +499,6 @@ export const changePassword = (oldPassword, newPassword) => async (dispatch) => 
       const user = await Auth.currentAuthenticatedUser()
       resdata = await Auth.changePassword(user, oldPassword, newPassword)
     }
-
     dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS })
   } catch (error) {
     dispatch({
