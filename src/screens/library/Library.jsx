@@ -34,18 +34,32 @@ const Library = () => {
 
   return (
     <>
-      {modalActive && <GroupModal
-        clickHandler={setModalActive}
-        data={groupCollection} btnName='add to collections'
-        setNewCollection={setNewCollection}
-                      />}
+      {modalActive && (
+        <GroupModal
+          clickHandler={setModalActive}
+          data={groupCollection}
+          btnName='add to collections'
+          setNewCollection={setNewCollection}
+        />
+      )}
       {newCollection && <SimpleModal setNewCollection={setNewCollection} />}
-      {active && <CollectionModal setActive={setActive} openAddCollection={openAddCollection} />}
+      {active && (
+        <CollectionModal
+          setActive={setActive}
+          openAddCollection={openAddCollection}
+        />
+      )}
 
       <DashboardLayout title='Library'>
         <div className='library-main-container'>
-          <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Add files' />
-          {['Articles', 'Videos'].map(type => (
+          <SubHeader
+            search={search}
+            setSearch={setSearch}
+            nav={nav}
+            setCreateActive={setActive}
+            btnName='Add files'
+          />
+          {['Articles', 'Videos'].map((type) => (
             <div className='list-container' key={type}>
               <LibraryCategory
                 search={search}
@@ -62,30 +76,48 @@ const Library = () => {
   )
 }
 
-const LibraryCategory = ({ title, search, setNewCollection, modalActive, setModalActive }) => {
+const LibraryCategory = ({
+  title,
+  search,
+  setNewCollection,
+  modalActive,
+  setModalActive
+}) => {
   const [pageNumber, setPageNumber] = useState(1)
   useEffect(() => {
     setPageNumber(1)
   }, [search])
   const { data: libraryData, isLoading } = useGetFetchData(
     'LIBRARY_CATEGORY_DATA',
-    GET_LIBRARY + '?pageNumber=' + pageNumber + '&category=' + title.toLowerCase() + '&search=' + (search || ''),
+    GET_LIBRARY +
+      '?pageNumber=' +
+      pageNumber +
+      '&category=' +
+      title.toLowerCase() +
+      '&search=' +
+      (search || ''),
     { title, pageNumber, search }
   )
   if (isLoading) {
-    return (<div>Loading...</div>)
+    return <div>Loading...</div>
   }
-  return (
-    libraryData?.resources.length > 0
-      ? <>
-        <ListView
-          title={title} data={libraryData?.resources}
-          setNewCollection={setNewCollection}
-          modalActive={modalActive}
-          setModalActive={setModalActive}
-        />
-        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={libraryData} />
-      </> : <></>
+  return libraryData?.resources?.length > 0 ? (
+    <>
+      <ListView
+        title={title}
+        data={libraryData?.resources}
+        setNewCollection={setNewCollection}
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+      />
+      <Pagination
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+        resourceList={libraryData}
+      />
+    </>
+  ) : (
+    <></>
   )
 }
 
