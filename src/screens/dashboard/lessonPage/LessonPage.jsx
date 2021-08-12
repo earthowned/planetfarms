@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { MATERIAL, GET_COURSE } from '../../../utils/urlConstants'
 import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment'
 
-import { createLessonProgress } from '../../../actions/lessonProgressActions'
+import { updateLessonProgress } from '../../../actions/lessonProgressActions'
 import useGetLessonData from '../../../utils/useGetLessonData'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import LessonDetail from './LessonDetail'
@@ -59,22 +60,30 @@ const LessonPage = () => {
     )
   }, [courseData])
 
+  const nextPageWithOutTest = () => {
+    const endTime = moment().toDate().getTime().toString()
+    const progressId = data?.data?.lesson_progresses[0]?.id
+    dispatch(
+      updateLessonProgress({
+        lessonId: cData[0]?.id,
+        userId,
+        isCompleted: true,
+        endTime,
+        progressId,
+        history
+      })
+    )
+  }
   const nextPage = () => {
-    const passedButNoProgress = () => {
-      dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
-    }
     const passedAndProgress = () => {
       history.push(`/lesson/${cData[0]?.id}`)
     }
     ;(isPassed && isCompleted) || isCreator
       ? passedAndProgress()
-      : passedButNoProgress()
+      : nextPageWithOutTest()
   }
 
-  const nextPageWithOutTest = () => {
-    dispatch(createLessonProgress(cData[0]?.id, userId, true, history))
-  }
-  console.log(data?.data?.test)
+  console.log(data?.data?.lesson_progresses[0])
   return (
     <>
       {isLoading ? (

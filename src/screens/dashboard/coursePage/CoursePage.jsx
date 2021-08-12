@@ -70,6 +70,7 @@ function MyCoursePage ({ unpaid }) {
               userInfo={userInfo}
               isEnroll={isEnroll}
               refetch={refetch}
+              enrolls={enrolls}
             />
           </DashboardLayout>
         </>
@@ -85,7 +86,8 @@ function CoursePage ({
   data,
   userInfo,
   isEnroll,
-  refetch
+  refetch,
+  enrolls
 }) {
   return (
     <div className='course-page'>
@@ -98,6 +100,7 @@ function CoursePage ({
           userInfo={userInfo}
           isEnroll={isEnroll}
           refetch={refetch}
+          enrolls={enrolls}
         />
       </div>
     </div>

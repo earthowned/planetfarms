@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../../button/Button'
 import LessonCourseSingle from './LessonCourseSingle'
 
@@ -8,10 +8,20 @@ const LessonCourse = ({
   isEnroll,
   userInfo,
   creator,
-  joinCourse
+  joinCourse,
+  enrolls
 }) => {
   const lessonLen = data?.data?.lessons.length
-
+  const [clickLessonId, setClickLessonId] = useState('')
+  const [isCompleted, setIsCompleted] = useState([])
+  useEffect(() => {
+    setIsCompleted(
+      data?.data?.lessonsss
+        ?.filter((lesson) => lesson.id === clickLessonId)
+        ?.map((completed) => completed.lesson_progresses)
+    )
+  }, [clickLessonId])
+  console.log(clickLessonId)
   return (
     <div className='lessons-container'>
       {data?.data?.isFree === false && lessonLen >= 1 ? (
@@ -47,6 +57,10 @@ const LessonCourse = ({
               creator={creator}
               isEnroll={isEnroll}
               joinCourse={joinCourse}
+              enrolls={enrolls}
+              clickLessonId={clickLessonId}
+              setClickLessonId={setClickLessonId}
+              isCompleted={isCompleted}
             />
           </React.Fragment>
         ))}
