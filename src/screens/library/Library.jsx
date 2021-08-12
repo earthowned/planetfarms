@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
-import './Library.css'
+import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
-import ListView from '../../components/listView/ListView'
 import SimpleModal from '../../components/simpleModal/SimpleModal'
 import CollectionModal from '../../components/collectionModal/CollectionModal'
 import GroupModal from '../../components/groupModal/GroupModal'
 import { groupCollection, nav } from './CollectionData'
-import { useSelector } from 'react-redux'
-import Pagination from '../../components/pagination/Pagination'
 import SubHeader from '../../components/subHeader/SubHeader'
-import { useHistory } from 'react-router-dom'
-import useGetFetchData from '../../utils/useGetFetchData'
-import { GET_LIBRARY } from '../../utils/urlConstants'
+import LibraryCategory from './LibraryCategory'
+import './Library.scss'
 
 const Library = () => {
   const userLogin = useSelector((state) => state.userLogin)
@@ -73,51 +70,6 @@ const Library = () => {
         </div>
       </DashboardLayout>
     </>
-  )
-}
-
-const LibraryCategory = ({
-  title,
-  search,
-  setNewCollection,
-  modalActive,
-  setModalActive
-}) => {
-  const [pageNumber, setPageNumber] = useState(1)
-  useEffect(() => {
-    setPageNumber(1)
-  }, [search])
-  const { data: libraryData, isLoading } = useGetFetchData(
-    'LIBRARY_CATEGORY_DATA',
-    GET_LIBRARY +
-      '?pageNumber=' +
-      pageNumber +
-      '&category=' +
-      title.toLowerCase() +
-      '&search=' +
-      (search || ''),
-    { title, pageNumber, search }
-  )
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-  return libraryData?.resources?.length > 0 ? (
-    <>
-      <ListView
-        title={title}
-        data={libraryData?.resources}
-        setNewCollection={setNewCollection}
-        modalActive={modalActive}
-        setModalActive={setModalActive}
-      />
-      <Pagination
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-        resourceList={libraryData}
-      />
-    </>
-  ) : (
-    <></>
   )
 }
 
