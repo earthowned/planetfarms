@@ -25,10 +25,16 @@ const CreateVideo = ({
   const [videoLink, setVideoLink] = useState('')
 
   const addVideo = ({ videoTitle, videoDescription, videoLink }) => {
+    const itemId =
+      lessonData.length === 0
+        ? lessonData.length + 1
+        : lessonData[lessonData.length - 1].itemId + 1
+
     const videoResource = video
     const vData = [
       ...lessonData,
       {
+        itemId,
         videoCover,
         videoTitle,
         videoDescription,

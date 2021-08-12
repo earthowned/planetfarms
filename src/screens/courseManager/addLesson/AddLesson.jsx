@@ -55,6 +55,12 @@ const AddLesson = () => {
       })
     )
   }
+  console.log(lessonData)
+
+  const removeItem = (id) => {
+    const newLessonData = lessonData.filter((item) => item.itemId !== id)
+    setLessonData(newLessonData)
+  }
 
   return (
     <>
@@ -96,6 +102,8 @@ const AddLesson = () => {
           setLessonCover={setLessonCover}
           lessonCover={lessonCover}
           lessonData={lessonData}
+          setLessonData={setLessonData}
+          onRemove={removeItem}
         />
         <LessonMaterial material={material} setMaterial={setMaterial} />
         <LessonSaveModal

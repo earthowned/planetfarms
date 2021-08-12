@@ -16,10 +16,16 @@ const CreateText = ({
   const { register, errors, handleSubmit } = useForm()
 
   const addText = ({ textHeading, textDescription }) => {
+    const itemId =
+      lessonData.length === 0
+        ? lessonData.length + 1
+        : lessonData[lessonData.length - 1].itemId + 1
+
     if (textHeading.length !== 0 || textDescription.length !== 0) {
       const textData = [
         ...lessonData,
         {
+          itemId,
           textHeading,
           textDescription
         }

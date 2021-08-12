@@ -10,7 +10,9 @@ const AddContent = ({
   register,
   errors,
   setLessonCover,
-  lessonData
+  lessonData,
+  setLessonData,
+  onRemove
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -45,4 +47,4 @@ const AddContent = ({
   )
 }
 
-export default AddContent
+export default React.memo(AddContent)

@@ -51,6 +51,7 @@ const Video = ({
             light={thumbnail}
             onClickPreview={() => setShowInfo(!showInfo)}
           />
+          <Actions />
         </div>
       ) : (
         ''
