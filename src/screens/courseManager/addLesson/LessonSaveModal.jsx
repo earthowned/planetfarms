@@ -1,10 +1,10 @@
 import { useHistory } from 'react-router-dom'
 
-const LessonSaveModal = ({ pathId, onClick }) => {
+const LessonSaveModal = ({ pathId, onClick, name }) => {
   const history = useHistory()
   return (
     <div className='save-lesson-modal'>
-      <h4>Do you want to save lesson?</h4>
+      <h4>Do you want to {name} lesson?</h4>
       <div>
         <button
           className='secondary-btn'
@@ -18,7 +18,7 @@ const LessonSaveModal = ({ pathId, onClick }) => {
           id='lesson-save-btn'
           onClick={onClick}
         >
-          Save lesson
+          {name} lesson
         </button>
       </div>
     </div>

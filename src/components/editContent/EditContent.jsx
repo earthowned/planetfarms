@@ -32,6 +32,8 @@ const EditContent = ({
     }
   }
 
+  console.log(data)
+
   return (
     <>{
       data && <>

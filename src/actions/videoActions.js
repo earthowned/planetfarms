@@ -30,7 +30,7 @@ export const createVideo =
       videoData.append('videoLink', videoLink)
       videoData.append('videoResource', videoResource)
       newsId ? videoData.append('newsId', newsId) : videoData.append('lessonId', lessonId)
-
+      console.log(videoCover, videoTitle, videoDescription, videoLink, videoResource, lessonId, newsId)
       try {
         dispatch({ type: VIDEO_CREATE_REQUEST })
         const config = {

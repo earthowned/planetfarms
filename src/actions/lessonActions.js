@@ -52,15 +52,13 @@ export const createLesson =
         const lessonId = data?.data?.id
         for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ data: lessonData[i], lessonId, dispatch })
+            await addVideo({ data: lessonData[i], lessonId, newsId : null, dispatch })
           }
           if (lessonData[i]?.lessonImg) {
-            console.log('hi')
-            await addImage({ data: lessonData[i], lessonId, dispatch })
+            await addImage({ data: lessonData[i], lessonId, newsId : null, dispatch })
           }
           if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            console.log('hello')
-            await addText({ data: lessonData[i], lessonId, dispatch })
+            await addText({ data: lessonData[i], lessonId, newsId : null, dispatch })
           }
         }
         for (let i = 0; i < material.length; i++) {
@@ -81,11 +79,12 @@ export const createLesson =
     }
 
 export const updateLesson =
-  (title, coverImg, lessonId, history, lessonData, material) =>
+  (title, coverImg, lessonId, lessonDesc, history, lessonData=[], material=[]) =>
     async (dispatch) => {
       const updateLessonFormData = new FormData()
       updateLessonFormData.append('title', title)
       updateLessonFormData.append('coverImg', coverImg)
+      updateLessonFormData.append('lessonDesc', lessonDesc)
 
       try {
         dispatch({ type: LESSON_UPDATE_REQUEST })
@@ -102,15 +101,15 @@ export const updateLesson =
         )
         dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
 
-        for (let i = 0; i < lessonData.length; i++) {
+       for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
+            await addVideo({ data: lessonData[i], lessonId, newsId : null, dispatch })
           }
           if (lessonData[i]?.lessonImg) {
-            await addImage({ lessonData: lessonData[i], lessonId, dispatch })
+            await addImage({ data: lessonData[i], lessonId, newsId : null, dispatch })
           }
           if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            await addText({ lessonData: lessonData[i], lessonId, dispatch })
+            await addText({ data: lessonData[i], lessonId, newsId : null, dispatch })
           }
         }
         for (let i = 0; i < material.length; i++) {
@@ -119,7 +118,6 @@ export const updateLesson =
           }
         }
         history.push(`/lesson/${lessonId}`)
-        return data
       } catch (error) {
         dispatch({
           type: LESSON_UPDATE_FAIL,

@@ -135,7 +135,7 @@ const NewsAdd = () => {
     }
   }
 
-   function editVideoConfirm (data) {
+  function editVideoConfirm (data) {
     const {id, videoCover, videoTitle, videoDescription, videoLink, videoResource} = data;
     dispatch(updateVideo(id,  videoCover, videoTitle, videoDescription, videoLink, videoResource, setCreateVideoModal))
   }
