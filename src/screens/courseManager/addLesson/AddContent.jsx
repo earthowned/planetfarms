@@ -15,7 +15,8 @@ const AddContent = ({
   onRemove,
   setEditVideoModel,
   modelPopUp,
-  setEditTextModel
+  setEditTextModel,
+  setEditPhotoModel
 }) => {
   return (
     <div className='admin-lesson-create-container'>

@@ -16,6 +16,7 @@ import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './AddLesson.scss'
 import EditVideo from '../editLesson/EditVideo'
 import EditText from '../editLesson/EditText'
+import EditPhoto from '../editLesson/EditPhoto'
 
 const AddLesson = () => {
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ const AddLesson = () => {
   const [fetchLesson, setFetchLesson] = useState([])
   const [editVideoModel, setEditVideoModel] = useState(false)
   const [editTextModel, setEditTextModel] = useState(false)
+  const [editPhotoModel, setEditPhotoModel] = useState(false)
   const [editId, setEditId] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
@@ -67,7 +69,6 @@ const AddLesson = () => {
   }
   const modelPopUp = (poupState, id) => {
     setEditId(id)
-    console.log(id)
   }
 
   return (
@@ -117,6 +118,15 @@ const AddLesson = () => {
           editId={editId}
         />
       )}
+      {editPhotoModel && (
+        <EditPhoto
+          editPhotoModel={editPhotoModel}
+          setEditPhotoModel={setEditPhotoModel}
+          lessonData={lessonData}
+          setLessonData={setLessonData}
+          editId={editId}
+        />
+      )}
       <DashboardLayout title='Add new lesson'>
         <BackButton location={`/admin/course/${courseId}`} />
         <AddContent
@@ -132,6 +142,7 @@ const AddLesson = () => {
           onRemove={removeItem}
           setEditVideoModel={setEditVideoModel}
           setEditTextModel={setEditTextModel}
+          setEditPhotoModel={setEditPhotoModel}
           modelPopUp={modelPopUp}
         />
         <LessonMaterial material={material} setMaterial={setMaterial} />
