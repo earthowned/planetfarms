@@ -19,7 +19,6 @@ const EditPhoto = ({
   setLessonData,
   photoData,
   editId,
-  editFetchedData,
   refetch
 }) => {
   const dispatch = useDispatch()
@@ -43,7 +42,7 @@ const EditPhoto = ({
       setEditPhotoModel(false)
     }
 
-    editFetchedData
+    !lessonData
       ? dispatch(
           updatePhoto(
             editId,
@@ -64,7 +63,7 @@ const EditPhoto = ({
   useEffect(() => {
     editingPhotoData?.lessonImg && setLessonImg(editingPhotoData?.lessonImg)
   }, [editingPhotoData])
-
+  console.log(editingPhotoData)
   return (
     <>
       {editPhotoModel && (
@@ -100,6 +99,7 @@ const EditPhoto = ({
                     rows='3'
                     name='photoDescription'
                     ref={register}
+                    defaultValue={editingPhotoData?.photoDescription}
                   />
                 </div>
               )}

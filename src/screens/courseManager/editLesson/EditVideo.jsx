@@ -22,7 +22,6 @@ const EditVideo = ({
   setLessonData,
   editId,
   videoData,
-  editFetchedData,
   refetch
 }) => {
   const dispatch = useDispatch()
@@ -55,7 +54,7 @@ const EditVideo = ({
       setEditVideoModel(false)
     }
 
-    editFetchedData
+    !lessonData
       ? dispatch(
           updateVideo(
             editId,

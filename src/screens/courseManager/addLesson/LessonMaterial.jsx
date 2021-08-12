@@ -2,7 +2,12 @@ import { MATERIAL } from '../../../utils/urlConstants'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import Material from '../../../components/material/Material'
 
-const LessonMaterial = ({ material, setMaterial, removeMaterial }) => {
+const LessonMaterial = ({
+  material,
+  setMaterial,
+  removeMaterial,
+  removeLocalMaterial
+}) => {
   const matData = (mData) => {
     setMaterial(() => [...material, { mData }])
   }

@@ -24,7 +24,7 @@ const EditText = ({
   const { register, errors, handleSubmit } = useForm()
   const dispatch = useDispatch()
   const addText = ({ textHeading, textDescription }) => {
-    editFetchedData
+    !lessonData
       ? dispatch(
           updateText(
             editId,
