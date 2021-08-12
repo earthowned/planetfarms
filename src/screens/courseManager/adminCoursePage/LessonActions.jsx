@@ -1,10 +1,13 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
-import useHideOnClick from '../../../utils/useHideOnClick'
+import { Link } from 'react-router-dom'
 
-const LessonActions = ({ id }) => {
-  const history = useHistory()
+import { deleteLesson } from '../../../actions/lessonActions'
+import { useDispatch } from 'react-redux'
+import useHideOnClick from '../../../utils/useHideOnClick'
+import axios from 'axios'
+
+const LessonActions = ({ id, refetch }) => {
+  const dispatch = useDispatch()
   const [actionActive, setActionActive] = useState(false)
   const [tests, setTests] = useState([])
   const domNode = useHideOnClick(() => {
@@ -20,6 +23,9 @@ const LessonActions = ({ id }) => {
     setTests(tests)
   }
 
+  const deleteLessonHandler = (lessonId) => {
+    dispatch(deleteLesson(lessonId, refetch))
+  }
   return (
     <div className='actions' ref={domNode}>
       <button
@@ -43,6 +49,14 @@ const LessonActions = ({ id }) => {
                 <li>Add test</li>
                 </Link>
           }
+          <li
+            onClick={() => {
+              deleteLessonHandler(id)
+              setActionActive(!actionActive)
+            }}
+          >
+            Delete
+          </li>
         </ul>
       )}
     </div>
