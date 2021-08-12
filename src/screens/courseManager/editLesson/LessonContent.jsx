@@ -3,7 +3,12 @@ import Image from '../../../components/lessonImage/Image'
 import Video from '../../../components/videoPlayer/Video'
 import Text from '../addLesson/Text'
 
-const LessonContent = ({ lessonData, setEditTextModel, modelPopUp }) => {
+const LessonContent = ({
+  lessonData,
+  setEditTextModel,
+  setEditPhotoModel,
+  modelPopUp
+}) => {
   return (
     <>
       {lessonData
@@ -34,6 +39,10 @@ const LessonContent = ({ lessonData, setEditTextModel, modelPopUp }) => {
             ) : (
               <Image
                 src={`${LESSON_IMG}${data?.lessonImg}`}
+                id={data?.id}
+                modelPopUp={modelPopUp}
+                setEditPhotoModel={setEditPhotoModel}
+                isEditable
                 desc={data?.isImgDesc === true && data?.photoDescription}
               />
             )}
