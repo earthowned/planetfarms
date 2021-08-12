@@ -13,7 +13,8 @@ const EditText = ({
   setEditTextModel,
   lessonData,
   setLessonData,
-  editId
+  editId,
+  newData
 }) => {
   const { register, errors, handleSubmit } = useForm()
   const addText = ({ textHeading, textDescription }) => {
@@ -30,7 +31,10 @@ const EditText = ({
     )
     setEditTextModel(false)
   }
-  const editingTextData = lessonData.find((text) => text.itemId === editId)
+
+  const editingTextData =
+    newData?.find((text) => text.id === editId) ||
+    lessonData?.find((text) => text.itemId === editId)
   return (
     <>
       {editTextModel && (
@@ -74,7 +78,7 @@ const EditText = ({
               </div>
               <Button
                 className='add'
-                name='Add Text Block'
+                name='Edit Text Block'
                 onClick={handleSubmit(addText)}
               />
             </div>

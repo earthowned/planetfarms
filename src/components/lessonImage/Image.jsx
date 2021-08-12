@@ -21,7 +21,11 @@ const Image = ({
         <div className='imgPreview'>
           <img src={src} alt={`lesson_${src}_img`} />
           <p>{desc && `"${desc}"`}</p>
-          <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
+          {isEditable ? (
+            <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
+          ) : (
+            ''
+          )}
         </div>
       ) : (
         ''
