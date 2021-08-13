@@ -86,7 +86,8 @@ function CoursePage ({
   data,
   userInfo,
   isEnroll,
-  enrolls
+  enrolls,
+  refetch
 }) {
   return (
     <div className='course-page'>
@@ -99,6 +100,7 @@ function CoursePage ({
           userInfo={userInfo}
           isEnroll={isEnroll}
           enrolls={enrolls}
+          refetch={refetch}
         />
       </div>
     </div>
