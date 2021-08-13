@@ -30,7 +30,6 @@ module.exports = {
       }
     })
   },
-
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('lesson_progresses')
   }

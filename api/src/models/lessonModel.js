@@ -21,14 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       order: {
         type: DataTypes.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
       }
     },
     { timestamps: true }

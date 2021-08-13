@@ -19,12 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       endTime: {
         type: DataTypes.STRING
-      },
-      createdAt: {
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        type: DataTypes.DATE
       }
     },
     { timestamps: true }
