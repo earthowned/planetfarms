@@ -327,6 +327,7 @@ const getMyProfile = async (req, res) => {
   res.json({
     ...profile.dataValues,
     ...profile.followers,
+    communities: profile.followers.length || 0,
     attachments: changeFormat(profile?.dataValues?.attachments)
   })
 }

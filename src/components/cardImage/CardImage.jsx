@@ -17,7 +17,7 @@ const CardImage = ({ data, className }) => {
             >
               <div className='profile-card-image'>
                 <img
-                  src={profile?.attachments ? ATTACHMENT + profile?.attachments : '/img/user.svg'}
+                  src={profile?.user?.attachments ? ATTACHMENT + profile.user.attachments : '/img/user.svg'}
                   alt='group-profile'
                 />
               </div>
