@@ -42,6 +42,7 @@ const CourseDescription = ({
           creator={creator}
           joinCourse={joinCourse}
           enrolls={enrolls}
+          refetch={refetch}
         />
       </div>
       <MoreCourse />

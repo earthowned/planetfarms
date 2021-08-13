@@ -3,7 +3,7 @@ import { postApi, putApi } from '../utils/apiFunc'
 import * as lessonProgress from '../constants/lessonProgressConstants'
 
 export const createLessonProgress =
-  ({ lessonId, userId, isCompleted, startTime, endTime, history }) =>
+  ({ lessonId, userId, isCompleted, startTime, endTime, history, refetch }) =>
     async (dispatch) => {
       const progressData = { lessonId, userId, isCompleted, startTime, endTime }
       try {
@@ -18,6 +18,7 @@ export const createLessonProgress =
           payload: data
         })
         history.push(`/lesson/${lessonId}`)
+        refetch()
       } catch (error) {
         dispatch({
           type: lessonProgress.LESSON_PROGRESS_CREATE_FAIL,

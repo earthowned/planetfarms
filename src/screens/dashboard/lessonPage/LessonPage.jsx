@@ -65,7 +65,7 @@ const LessonPage = () => {
     const progressId = data?.data?.lesson_progresses[0]?.id
     dispatch(
       updateLessonProgress({
-        lessonId: cData[0]?.id,
+        lessonId: id,
         userId,
         isCompleted: true,
         endTime,
@@ -82,8 +82,6 @@ const LessonPage = () => {
       ? passedAndProgress()
       : nextPageWithOutTest()
   }
-
-  console.log(data?.data?.lesson_progresses[0])
   return (
     <>
       {isLoading ? (

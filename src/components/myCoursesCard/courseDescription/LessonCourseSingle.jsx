@@ -14,21 +14,25 @@ const LessonCourseSingle = ({
   enrolls,
   clickLessonId,
   setClickLessonId,
-  isCompleted
+  progressData,
+  refetch
 }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const [isLessonCompleted, setIsLessonCompleted] = useState(false)
   const [userId, setUserId] = useState('')
+  const [progress, setProgress] = useState()
 
   useEffect(() => {
     setIsLessonCompleted(data?.lesson_progresses[0]?.isCompleted)
     setUserId(data?.lesson_progresses[0]?.userId || null)
-  }, [data])
+  }, [data, progressData])
 
   const lessonStart = async (id) => {
-    // console.log(id)
-    await setClickLessonId(id)
+    const clickLesso = data?.lesson_progresses.filter(
+      (pro) => pro.lessonId === id
+    )
+    console.log(clickLesso)
     const addProgress = () => {
       const startTime = moment().toDate().getTime().toString()
       const lessonId = id
@@ -40,13 +44,13 @@ const LessonCourseSingle = ({
           userId,
           isCompleted: comp,
           startTime,
-          history
+          history,
+          refetch
         })
       )
     }
-    // isCompleted ? history.push(`/lesson/${id}`) : addProgress()
+    clickLesso?.length > 0 ? history.push(`/lesson/${id}`) : addProgress()
   }
-  console.log(isCompleted)
   return (
     <div className='lesson-card-wrapper'>
       {data?.order !== 1 || creator === userInfo.id || joinCourse !== true ? (
