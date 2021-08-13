@@ -5,9 +5,11 @@ import { deleteLesson } from '../../../actions/lessonActions'
 import { useDispatch } from 'react-redux'
 import useHideOnClick from '../../../utils/useHideOnClick'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const LessonActions = ({ id, courseId, refetch }) => {
   const dispatch = useDispatch()
+  const history = useHistory();
   const [actionActive, setActionActive] = useState(false)
   const [tests, setTests] = useState([])
   const domNode = useHideOnClick(() => {
@@ -36,7 +38,7 @@ const LessonActions = ({ id, courseId, refetch }) => {
       </button>
       {actionActive && (
         <ul className={actionActive ? 'show' : 'hide'}>
-          <Link to={`/admin/course/${courseId}/edit-lesson/${id}`}>
+          <Link to={`/admin/lesson/edit/${id}`}>
             <li>Edit</li>
           </Link>
           <li>Delete</li>

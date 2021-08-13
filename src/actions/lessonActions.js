@@ -16,6 +16,7 @@ import {
   LESSON_DELETE_SUCCESS,
   LESSON_DELETE_FAIL
 } from '../constants/lessonConstants'
+import axios from 'axios'
 
 export const createLesson =
   ({
@@ -42,7 +43,13 @@ export const createLesson =
             'Content-Type': 'multipart/form-data'
           }
         }
-        const { data } = await postApi(
+
+    const richText = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`);
+    const richtextId = richText?.data?.richtext?.id
+
+    if(richtextId) {
+      lessonFormData.append('richtextId', richtextId)
+    const { data } = await postApi(
           dispatch,
           ADD_LESSONS,
           lessonFormData,
@@ -50,23 +57,26 @@ export const createLesson =
         )
         dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
         const lessonId = data?.data?.id
-        for (let i = 0; i < lessonData.length; i++) {
+
+         for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ data: lessonData[i], lessonId, newsId : null, dispatch })
+            await addVideo({ data: lessonData[i], richtextId, dispatch })
           }
           if (lessonData[i]?.lessonImg) {
-            await addImage({ data: lessonData[i], lessonId, newsId : null, dispatch })
+            await addImage({ data: lessonData[i], richtextId, dispatch })
           }
           if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            await addText({ data: lessonData[i], lessonId, newsId : null, dispatch })
+            await addText({ data: lessonData[i], richtextId, dispatch })
           }
         }
-        for (let i = 0; i < material.length; i++) {
+
+         for (let i = 0; i < material.length; i++) {
           if (material[i].mData) {
             await addMaterial({ material: material[i], lessonId, dispatch })
           }
         }
         history.push(`/lesson/${lessonId}`)
+    }
       } catch (error) {
         dispatch({
           type: LESSON_CREATE_FAIL,

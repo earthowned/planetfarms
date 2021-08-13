@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 import LessonActions from './LessonActions'
 
 const LessonBlock = ({ data, courseId, refetch }) => {
   const lessonData = data?.data?.lessons
+  const history = useHistory()
 
   return (
     <div className='admin-course-page-container'>
@@ -56,12 +58,14 @@ const LessonBlock = ({ data, courseId, refetch }) => {
         ) : (
           ''
         )}
-        <Link to={`/admin/course/${courseId}/add-lesson`}>
-          <div className='add-lesson-btn secondary-btn'>
+          <div className='add-lesson-btn secondary-btn' onClick={() => history.push({
+              pathname: '/admin/lesson/add',
+              state: {
+                courseId
+              }})}>
             <img src='/img/plus.svg' alt='lesson add' />
             <span>Add new lesson for users</span>
           </div>
-        </Link>
       </div>
     </div>
   )

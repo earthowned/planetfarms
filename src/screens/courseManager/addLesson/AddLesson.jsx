@@ -24,6 +24,8 @@ import { deleteVideo, updateVideo } from '../../../actions/videoActions'
 const AddLesson = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const {lessonId} = useParams()
+  const {state} = useLocation();
 
   const {success:updateVideoSuccess} = useSelector(state => state.updateVideo)
   const {success:deleteVideoSuccess} = useSelector(state => state.deleteVideo)
@@ -48,7 +50,7 @@ const AddLesson = () => {
   const [editTextModel, setEditTextModel] = useState(false)
   const [editPhotoModel, setEditPhotoModel] = useState(false)
   const [editId, setEditId] = useState('')
-
+  
   const [deleteVideoModal, setDeleteVideoModal] = useState(false)
   const [deleteImageModal, setDeleteImageModal] = useState(false)
   const [deleteTextModal, setDeleteTextModal] = useState(false)
@@ -60,41 +62,24 @@ const AddLesson = () => {
   const [imageData, setImageData] = useState(null)
   const [videoData, setVideoData] = useState(null)
   const [textData, setTextData] = useState(null)
+  const [courseId, setCourseId] = useState(state?.courseId)
 
   const { register, errors, handleSubmit } = useForm()
 
-  const { data } = useGetFetchData(
-    'get_course_by_id',
-    GET_COURSE + `/${courseId}`
-  )
-  useEffect(() => {
-    setFetchLesson(data?.data?.lessons)
-  }, [data, courseId])
+  // const { data } = useGetFetchData(
+  //   'get_course_by_id',
+  //   GET_COURSE + `/${courseId}`
+  // )
 
-  const { courseId, lessonId} = useParams()
+  // useEffect(() => {
+  //   setFetchLesson(data?.data?.lessons)
+  // }, [data, courseId])
 
-  console.log(courseId, lessonId)
   const {pathname} = useLocation();
 
   // for edit
   useEffect(() => {
     if(pathname.split('/')[2] === 'edit') {
-      getSingleLesson()
-    }
-  }, [
-    dispatch, 
-    lessonData, 
-    updateVideoSuccess, 
-    deleteVideoSuccess, 
-    updateTextSuccess, 
-    deleteTextSuccess,
-    updatePhotoSuccess, 
-    deletePhotoSuccess
-  ])
-  
-  // for edit
-  useEffect(() => {
-    if(pathname.split('/')[4] === 'edit-lesson') {
       getSingleLesson()
     }
   }, [
