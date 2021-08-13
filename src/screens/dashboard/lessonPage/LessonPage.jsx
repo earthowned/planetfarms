@@ -22,7 +22,7 @@ import './LessonPage.scss'
 const LessonPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const [isCreator, setIsCreator] = useState(false)
+  const [isCreator, setIsCreator] = useState()
   const [isCompleted, setIsCompleted] = useState(false)
   const [isPassed, setIsPassed] = useState(false)
   const [isTest, setIsTest] = useState(false)
@@ -34,19 +34,23 @@ const LessonPage = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const userId = userInfo.id
+  const [progressData, setProgress] = useState()
 
   const { isLoading, data, refetch } = useGetLessonData(
     id,
     setMaterialData,
     userId,
     setPath,
-    { id }
+    { id },
+    setProgress
   )
   useEffect(() => {
     if (data?.data?.courseId !== undefined) {
       setCourseId(data?.data?.courseId)
     }
-    setIsCompleted(data?.data?.lesson_progresses[0]?.isCompleted || false)
+    setIsCompleted(
+      (progressData !== undefined && progressData[0]?.isCompleted) || false
+    )
     setIsTest(data?.data?.test !== null)
   }, [data])
 
@@ -57,7 +61,7 @@ const LessonPage = () => {
   )
 
   useEffect(() => {
-    setIsCreator(courseData?.data?.creator === userId)
+    setIsCreator(courseData?.data?.creator === userId && true)
     const order = data?.data?.order + 1
     setCData(
       courseData?.data?.lessons?.filter((lesson) => lesson.order === order)
@@ -66,20 +70,25 @@ const LessonPage = () => {
 
   const time = moment().toDate().getTime().toString()
   useEffect(() => {
-    if (data?.data?.lesson_progresses?.length === 0) {
-      lessonProgressFnc({
-        dispatch,
-        action: createLessonProgress,
-        lessonId: id,
-        userId,
-        isCompleted: false,
-        startTime: time,
-        refetch
-      })
+    if (
+      courseData?.data?.creator !== undefined &&
+      courseData?.data?.creator !== userId
+    ) {
+      if (progressData !== undefined && progressData?.length === 0) {
+        lessonProgressFnc({
+          dispatch,
+          action: createLessonProgress,
+          lessonId: id,
+          userId,
+          isCompleted: false,
+          startTime: time,
+          refetch
+        })
+      }
     }
-  }, [data])
+  }, [courseData, progressData])
   const nextPageWithOutTest = () => {
-    const progressId = data?.data?.lesson_progresses[0]?.id
+    const progressId = progressData !== undefined && progressData[0]?.id
     lessonProgressFnc({
       dispatch,
       action: updateLessonProgress,
@@ -96,24 +105,34 @@ const LessonPage = () => {
       refetch
     })
   }
-
+  const lastLesson = courseData?.data?.lessons?.length === data?.data?.order
   const nextPage = () => {
     const passedAndProgress = () => {
+      if (
+        progressData !== undefined &&
+        progressData[0]?.isCompleted === false
+      ) {
+        nextPageWithOutTest()
+      }
       history.push(
-        courseData?.data?.lessons?.length === data?.data?.order
-          ? courseData?.data?.creator === userInfo.id
-              ? `/admin/course/${courseId}`
-              : `/course/${courseId}`
-          : `/lesson/${cData[0]?.id}`
+        lastLesson ? `/course/${courseId}` : `/lesson/${cData[0]?.id}`
       )
     }
-    ;(isPassed && isCompleted) ||
-    isCreator ||
-    data?.data?.lesson_progresses[0]?.isCompleted
-      ? passedAndProgress()
-      : nextPageWithOutTest()
-  }
 
+    if (progressData !== undefined && progressData[0]?.isCompleted === false) {
+      if (isPassed && isCompleted) {
+        passedAndProgress()
+      }
+      nextPageWithOutTest()
+    } else {
+      passedAndProgress()
+    }
+  }
+  const creatorNextLesson = () => {
+    history.push(
+      lastLesson ? `/admin/course/${courseId}` : `/lesson/${cData[0].id}`
+    )
+  }
   return (
     <>
       {isLoading ? (
@@ -162,7 +181,7 @@ const LessonPage = () => {
             disabled={
               isCreator || data?.data?.test === null ? false : !isPassed
             }
-            onClick={isPassed || isCompleted ? nextPage : nextPageWithOutTest}
+            onClick={isCreator ? creatorNextLesson : nextPage}
           />
         </DashboardLayout>
       )}
