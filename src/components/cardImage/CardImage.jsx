@@ -17,20 +17,14 @@ const CardImage = ({ data, className }) => {
             >
               <div className='profile-card-image'>
                 <img
-                  src={
-                    profile?.attachments
-                      ? ATTACHMENT + profile?.attachments
-                      : '/img/user.svg'
-                  }
+                  src={profile?.attachments ? ATTACHMENT + profile?.attachments : '/img/user.svg'}
                   alt='group-profile'
                 />
               </div>
               <div className='profile-card-name'>
                 <div className='card-name ibmplexsans-semi-bold-quarter-spanish-white-16px'>
                   <h4>
-                    {profile?.user.firstName
-                      ? `${profile?.user.firstName} ${profile?.user.lastName}`
-                      : 'anonymous'}
+                    {profile?.user.firstName ? `${profile?.user.firstName} ${profile?.user.lastName}` : 'anonymous'}
                   </h4>
                 </div>
               </div>

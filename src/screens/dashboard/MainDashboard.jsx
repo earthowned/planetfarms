@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import moment from 'moment'
 import './MainDashboard.scss'
 import { ATTACHMENT } from '../../utils/urlConstants'
 import { Link } from 'react-router-dom'
@@ -6,7 +7,7 @@ import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import useSizeFinder from '../../utils/sizeFinder'
 import useScroll from '../../utils/scrollFunc'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from '../../actions/userAction'
+import { getMyDetails } from '../../actions/userAction'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const DashboardData = [
@@ -87,7 +88,7 @@ function DashboardComponent () {
 
   useEffect(() => {
     if (userInfo) {
-      dispatch(getUserDetails(userInfo.id))
+      dispatch(getMyDetails())
     }
   }, [dispatch, history, userInfo])
   return (
@@ -106,10 +107,10 @@ function DashboardComponent () {
                   <div className='ibmplexsans-semi-bold-quarter-spanish-white-24px'>
                     {user?.name}
                   </div>
-                  <p className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Last visit: {user?.lastLogin}</p>
+                  <p className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Last visit: {moment(user?.lastLogin).format('ddd LL')}</p>
                 </div>
                 <div className='info-my-community'>
-                  <div className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Follow 8 communities</div>
+                  <div className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Follow  communities</div>
                   <div className='my-communities'>My communities</div>
                 </div>
               </div>

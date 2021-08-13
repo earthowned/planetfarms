@@ -251,17 +251,7 @@ export const getMyDetails = () => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`)
-    const userdata = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phone: data.phone,
-      email: data.email,
-      dateOfBirth: data.dateOfBirth,
-      lastLogin: data.lastLogin,
-      numberOfVisit: data.numberOfVisit,
-      attachments: data.attachments,
-      role: data.role
-    }
+    const userdata = data
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const { attributes } = await Auth.currentAuthenticatedUser({ bypassCache: true })
       userdata.phoneVerified = attributes.phone_number_verified

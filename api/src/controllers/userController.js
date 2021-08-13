@@ -320,16 +320,14 @@ const getUserProfileByUserID = async (req, res) => {
 // @access  Public
 const getMyProfile = async (req, res) => {
   const user = await req.user
+  const profile = await db.User.findOne({
+    where: { userID: user.userID },
+    include: [{ model: db.Community, as: 'followers' }]
+  })
   res.json({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    phone: user.phone,
-    email: user.email,
-    dateOfBirth: user.dateOfBirth,
-    lastLogin: user.lastLogin,
-    numberOfVisit: user.numberOfVisit,
-    attachments: changeFormat(user?.dataValues?.attachments),
-    role: user.role
+    ...profile.dataValues,
+    ...profile.followers,
+    attachments: changeFormat(profile?.dataValues?.attachments)
   })
 }
 
@@ -338,7 +336,6 @@ const getMyProfile = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     let attachments
-    console.log(req.file)
     if (req.file) {
       attachments = req.file.filename
     } else {
