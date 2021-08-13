@@ -23,6 +23,9 @@ import {
 } from '../constants/newsConstants'
 
 import { logout } from './userAction'
+import { addVideo } from '../screens/courseManager/addLesson/addVideo'
+import { addImage } from '../screens/courseManager/addLesson/addImage'
+import { addText } from '../screens/courseManager/addLesson/addText'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -67,18 +70,41 @@ export const searchNews = (search) => async (dispatch) => {
   }
 }
 
-export const createNews = (newNews) => async (dispatch, getState) => {
+export const createNews = (newNews, newsCover) => async (dispatch, getState) => {
   const formData = new FormData()
-  formData.append('news', newNews.file)
-  formData.append('title', newNews.title)
-  formData.append('category', newNews.category)
-  formData.append('imageDetail', newNews.imageDetail)
+  formData.append('title', newNews[0].title)
+  formData.append('category', newNews[0].category)
+  formData.append('news', newsCover)
   try {
+
+    const configFunc = () => {
+        const userdata = window.localStorage.getItem('userInfo')
+        const token = JSON.parse(userdata).token
+        const headers = { 'Content-Type': 'multipart/form-data' }
+        headers.Authorization = token && `Bearer ${token}`
+        return { headers }
+    }
+
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
     const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData)
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
+    
+    const newsId = data?.data?.id
+        for (let i = 0; i < newNews.length; i++) {
+          if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
+            await addVideo({ data: newNews[i], lessonId: null, newsId, dispatch })
+          }
+          if (newNews[i]?.lessonImg) {
+            await addImage({ data: newNews[i], lessonId: null, newsId, dispatch })
+          }
+          if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
+            await addText({ data: newNews[i], lessonId: null, newsId, dispatch })
+          }
+        }
+      
     dispatch({ type: NEWS_CLEAR, payload: data })
+    document.location.href = `/community-page-news/${currentCommunity.slug}`
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -130,19 +156,41 @@ export const savevideoDetail = (data) => (dispatch) => {
   })
 }
 
-export const newsUpdate = (newNews) => async (dispatch) => {
+export const newsUpdate = (news, newNews) => async (dispatch) => {
+  const formData = new FormData()
+  formData.append('title', news.title)
+  formData.append('category', news.category)
+  formData.append('news', news.newsCover)
   try {
     dispatch({ type: NEWS_UPDATE_REQUEST })
-    const { id, title, description, category, file } = newNews
+    const { id } = news
     const config = configFunc()
     const data = await axios.put(
       `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`,
-      { title, description, file, category }, config
+      formData, config
     )
+    
     dispatch({
       type: NEWS_UPDATE_SUCCESS,
       payload: data
     })
+
+    //adding new content
+        for (let i = 0; i < newNews.length; i++) {
+          if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
+            await addVideo({ data: newNews[i], lessonId: null, newsId: id, dispatch })
+          }
+          if (newNews[i]?.lessonImg) {
+            await addImage({ data: newNews[i], lessonId: null, newsId: id, dispatch })
+          }
+          if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
+            await addText({ data: newNews[i], lessonId: null, newsId: id, dispatch })
+          }
+        }
+
+     dispatch({ type: NEWS_CLEAR, payload: data })
+    document.location.href = `/community-page-news/${currentCommunity.slug}`
+
   } catch (error) {
     const message = error.response && error.response.data.message
       ? error.response.data.message

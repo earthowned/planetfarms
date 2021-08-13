@@ -3,24 +3,46 @@ import './CommunityNewsView.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../components/backButton/BackButton'
 import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { getApi } from '../../utils/apiFunc'
+import { useDispatch } from 'react-redux'
+import Text from '../courseManager/addLesson/Text'
+import Video from '../../components/videoPlayer/Video'
+import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
+import Image from '../../components/lessonImage/Image'
 
-function CommunityNewsViewPage ({ newNews }) {
+function CommunityNewsViewPage () {
   const [news, setNews] = useState({})
-  const val = useLocation()?.state?.news
+  // const val = useLocation()?.state?.news
+  
+  // fetching current community
+const currentCommunity = localStorage.getItem('currentCommunity')
+  ? JSON.parse(localStorage.getItem('currentCommunity'))
+  : null
+  const dispatch = useDispatch();
+  const {id} = useParams();
+
   useEffect(() => {
-    setNews(newNews || val)
-  }, [newNews, val])
+    getSingleNews(id);
+  }, [])
+
+  async function getSingleNews (id) {
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`
+    )
+    setNews(data)
+  }
+
+  console.log(news)
 
   return (
     <>
-      {newNews ? (
-        <NewsSingleView news={news} />
-      ) : (
         <DashboardLayout>
           <div className='x03-1-0-news-page'>
             <div className='flex-col-2'>
-              <BackButton location='/community-page-news' />
-              <NewsSingleView news={news} />
+              <BackButton location='/community-page-news' location={`/community-page-news/${currentCommunity.slug}`} />
+              {news && <NewsSingleView news={news} />}
               <div className='button-row-3'>
                 <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
                   <img className='f1' src='/img/facebook-share-icon.svg' alt='facebook-icon' />
@@ -38,7 +60,6 @@ function CommunityNewsViewPage ({ newNews }) {
             </div>
           </div>
         </DashboardLayout>
-      )}
     </>
   )
 }
@@ -56,20 +77,45 @@ const NewsSingleView = ({ news }) => {
           {news?.readTime}
         </div>
       </div>
-      <div className='news-add-img-wrapper'>
-        <img src='/img/newsbg-image.png' alt='community-single-article' />
-      </div>
-      <div className='text-container'>
-        <p>{news?.textDetail?.collectionTitle}</p>
-        <p>{news?.textDetail?.collectionDescription}</p>
-      </div>
-      <div className='text-container'>
-        <p>{news?.imageDetail?.imageDescription}</p>
-      </div>
-      <div className='text-container'>
-        <p>{news?.videoDetail?.videoTitle}</p>
-        <p>{news?.videoDetail?.videoDescription}</p>
-      </div>
+
+      <Image
+          src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${news?._attachments}`}
+        />
+
+    {
+        news?.photos && news?.photos.map(item => {
+          return <Image
+          src={`${LESSON_IMG}${item?.lessonImg}`}
+          desc={
+            item?.isImgDesc === true && item?.photoDescription
+          }
+        />
+        })
+      }
+
+      {
+        news?.texts && news?.texts.map(item => {
+          return <Text
+          heading={item?.textHeading}
+          desc={item?.textDescription}
+        />
+        })
+      }
+
+      {
+        news?.videos && news?.videos.map(item => {
+          return <Video
+            title={item?.videoTitle}
+            description={item?.videoDescription}
+            url={
+              item?.videoLink === 'undefined'
+                ? `${GET_VIDEO}${item?.videoResource}`
+                : item?.videoLink
+              }
+            thumbnail={`${VIDEO_COVER}${item?.videoCover}`}
+          />
+        })
+      }
     </>
   )
 }

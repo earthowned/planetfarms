@@ -44,11 +44,11 @@ const addNews = (req, res) => {
   if (req.file) {
     filename = req.file.filename
   }
+
   const {
     title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category
   } = req.body
   db.News.create({
-    // _attachments: 'uploads/' + req.file.filename,
     _attachments: 'news/' + filename,
     title,
     message,
@@ -62,7 +62,7 @@ const addNews = (req, res) => {
     category,
     communityId: req.params.id
   })
-    .then(() => res.json({ message: 'News Created !!!' }).status(200))
+    .then((data) => res.json({ data }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
@@ -140,7 +140,17 @@ const getNewsById = (req, res) => {
       model: db.Community,
       attributes: [],
       where: { id: req.params.id }
-    }]
+    }, 
+    {
+      model: db.Text,
+    }, 
+    {
+      model: db.Photo,
+    }, 
+    {
+      model: db.Video,
+    }
+  ]
   })
     .then(news => {
       if (news) {

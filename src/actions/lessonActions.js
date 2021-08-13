@@ -49,13 +49,15 @@ export const createLesson =
         const lessonId = data?.data?.id
         for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
+            await addVideo({ data: lessonData[i], lessonId, dispatch })
           }
           if (lessonData[i]?.lessonImg) {
-            await addImage({ lessonData: lessonData[i], lessonId, dispatch })
+            console.log('hi')
+            await addImage({ data: lessonData[i], lessonId, dispatch })
           }
           if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            await addText({ lessonData: lessonData[i], lessonId, dispatch })
+            console.log('hello')
+            await addText({ data: lessonData[i], lessonId, dispatch })
           }
         }
         for (let i = 0; i < material.length; i++) {

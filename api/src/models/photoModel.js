@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     isImgDesc: {
       type: DataTypes.BOOLEAN
     },
+    newsId: {
+      type: DataTypes.INTEGER
+    },
     createdAt: {
       type: DataTypes.DATE
     },
@@ -24,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   { timestamps: true })
   Photo.associate = (models) => {
     Photo.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
+    Photo.belongsTo(models.News, { constraints: true, foreignKey: 'newsId' })
   }
   return Photo
 }

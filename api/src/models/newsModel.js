@@ -53,6 +53,9 @@ module.exports = (sequelize, DataTypes) => {
   // association
   News.associate = (models) => {
     News.belongsTo(models.Community, { foreignKey: 'communityId' })
+    News.hasMany(models.Video, { foreignKey: 'newsId' })
+    News.hasMany(models.Text, { foreignKey: 'newsId' })
+    News.hasMany(models.Photo, { foreignKey: 'newsId' })
   }
   return News
 }

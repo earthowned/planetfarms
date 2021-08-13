@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       textDescription: {
         type: DataTypes.TEXT
       },
+      newsId: {
+        type: DataTypes.INTEGER
+      },
       createdAt: {
         type: DataTypes.DATE
       },
@@ -26,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     Text.belongsTo(models.Lesson, {
       constraints: true,
       foreignKey: 'lessonId'
+    })
+    Text.belongsTo(models.News, {
+      constraints: true,
+      foreignKey: 'newsId'
     })
   }
   return Text

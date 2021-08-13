@@ -52,7 +52,7 @@ const addVideo = async (req, res) => {
       videoResource = req.files.videoResource[0].filename
     }
   }
-  // console.log(req)
+  
   const video = await db.Video.create({
     ...req.body,
     videoCover,
@@ -78,13 +78,30 @@ const deleteVideo = async (req, res) => {
 
 const updateVideo = async (req, res) => {
   const { id } = req.params
-  const video = await db.Video.update(req.body, {
+  const video = await db.Video.findOne({
     where: { id }
   })
+    
+  let videoCover = ''
+  let videoResource = ''
+
+  if(req.files.videoCover === undefined) {
+    videoCover = video.dataValues.videoCover
+    videoResource = video.dataValues.videoResource
+  } else {
+    if (req.files.videoCover) {
+      videoCover = req.files.videoCover[0].filename
+    }
+    if (req.files.videoResource) {
+      videoResource = req.files.videoResource[0].filename
+    }
+  }
+
+  await db.Video.update({...req.body, videoCover, videoResource}, {where: {id}})
+
   res.status(202).json({
     status: true,
     message: 'Video updated successfully',
-    data: video
   })
 }
 

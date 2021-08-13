@@ -1,8 +1,7 @@
+import React from 'react'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
-import Video from '../../../components/videoPlayer/Video'
-import Image from '../../../components/lessonImage/Image'
-import Text from './Text'
+import ContentAdd from '../../../components/contentAdd/ContentAdd'
 
 const AddContent = ({
   setVideoModal,
@@ -44,34 +43,7 @@ const AddContent = ({
         onChange={(img) => setLessonCover(img)}
         fileType='image/png,image/jpeg,image/jpg'
       />
-
-      {lessonData &&
-        lessonData.map((vid, index) => (
-          <div key={index}>
-            <Video
-              title={vid.videoTitle}
-              description={vid.videoDescription}
-              url={vid.videoLink || vid.videoResource?.preview}
-              thumbnail={vid.videoCover?.preview}
-            />
-            <Image src={vid.lessonImg?.preview} desc={vid.photoDescription} />
-            <Text heading={vid.textHeading} desc={vid.textDescription} />
-          </div>
-        ))}
-      <div className='admin-lesson-create-btn-wrapper'>
-        <button className='secondary-btn' onClick={() => setVideoModal(true)}>
-          <img src='/img/video-outline.svg' alt='video icon' />{' '}
-          <span>Add video</span>
-        </button>
-        <button className='secondary-btn' onClick={() => setImageModal(true)}>
-          <img src='/img/image-outline.svg' alt='image_icon' />
-          <span>Add image</span>
-        </button>
-        <button className='secondary-btn' onClick={() => setTextModal(true)}>
-          <img src='/img/text-outline.svg' alt='text icon' />{' '}
-          <span>Add text</span>
-        </button>
-      </div>
+      <ContentAdd data={lessonData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
     </div>
   )
 }

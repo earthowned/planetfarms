@@ -37,14 +37,10 @@ const addText = async (req, res) => {
 
 const deleteText = async (req, res) => {
   const { id } = req.params
-  const text = await db.Text.destroy({ where: { id } })
-  if (!text) {
-    throw new NotFoundError()
-  }
+  await db.Text.destroy({ where: { id } })
   res.status(202).json({
     status: true,
     message: 'Lesson text deleted successfully',
-    data: text
   })
 }
 

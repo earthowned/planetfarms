@@ -54,6 +54,7 @@
 .last-input-variation {
   width: 45%;
 }
+
 .full {
   width: 100% !important;
 }
@@ -87,13 +88,16 @@
   font-size: 11px;
   width: 50%;
 }
+
 .errorMsg {
   color: var(--secondary-red);
   margin: 0.5em 0 1em 0;
   font-size: 1em;
 }
+
 .error {
   border-color: var(--secondary-red);
+
   &:focus {
     border-color: var(--secondary-red) !important;
   }
@@ -107,7 +111,6 @@
   padding: 1.4em 1em;
   border: 0.5px solid var(--primary-white);
   background: var(--background-color-light);
-  outline: none;
   cursor: pointer;
   position: relative;
 
@@ -119,14 +122,17 @@
   img.avatar {
     display: none;
   }
+
   img.drag-drop-close {
     right: 0;
     top: 0;
   }
+
   .videoName {
     color: #fff;
     z-index: 1;
   }
+
   .drag-drop-icon-container {
     width: 100%;
     height: 100%;
@@ -151,6 +157,7 @@
     }
   }
 }
+
 .videoUploadBtn::-webkit-file-upload-button {
   display: none;
 }
@@ -160,6 +167,7 @@
     flex-wrap: wrap;
     text-align: center;
   }
+
   .video-row-3 > input,
   span {
     width: 100% !important;
@@ -184,7 +192,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: var(--primary-black);
+      background-color: var(--cards);
       border-radius: 0.4em;
 
       @media (max-width: 768px) {
@@ -195,18 +203,22 @@
         .toggle-container {
           background: var(--cards);
         }
+
         .active + .toggle-container {
           background: var(--primary-color);
         }
       }
+
       .input-container {
         .block {
-          border: 1px solid var(--primary-grey);
-          background-color: var(--popups);
+          border: 1px solid var(--dropdowns);
+          background-color: var(--cards);
+
           .label {
             width: 100%;
             margin-left: 2.5em;
           }
+
           .inputField {
             padding: 1.2em 0;
             color: #fff;
@@ -217,31 +229,34 @@
           }
         }
       }
+
       .textarea {
         margin-bottom: 1.5em;
-        border: 1px solid var(--primary-grey);
+        border: 1px solid var(--dropdowns);
         outline: none;
-        background-color: var(--popups);
+        background-color: var(--cards);
         color: #ffff;
         font-size: 1.05em;
         font-family: inherit;
 
         &__error {
           border-color: var(--secondary-red);
+
           &:focus {
             border-color: var(--secondary-red) !important;
           }
         }
 
-        &:focus {
-          border-color: var(--primary-color);
-        }
-
         &::-webkit-input-placeholder {
           color: var(--primary-grey);
         }
+
+        &:focus {
+          border-color: var(--primary-color);
+        }
       }
     }
+
     .drag-drop-container {
       width: 100%;
       height: 15em;
@@ -252,6 +267,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .drag-drop {
       height: 100%;
       border: none;
@@ -280,11 +296,12 @@
         margin-bottom: 1.5em;
       }
     }
+
     .video-row-3 {
       input {
-        border: 1px solid var(--primary-grey);
+        border: 1px solid var(--dropdowns);
         outline: none;
-        background-color: var(--popups);
+        background-color: var(--cards);
         color: #ffff;
         font-size: 1.05em;
         font-family: inherit;
@@ -302,14 +319,17 @@
           margin: 0;
         }
       }
+
       .dragDropText {
         color: #ffff;
         height: auto;
       }
+
       @media (max-width: 768px) {
         span {
           margin: 0.8em 0;
         }
+
         .videoUploadBtn {
           width: 100% !important;
 
@@ -320,6 +340,7 @@
       }
     }
   }
+
   &__text {
     .input-container {
       margin-bottom: 1.5em;

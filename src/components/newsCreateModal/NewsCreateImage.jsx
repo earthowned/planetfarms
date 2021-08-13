@@ -8,12 +8,16 @@ import { TextArea } from '../formUI/FormUI'
 
 import './NewsCreateModal.scss'
 import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
+import { LESSON_IMG } from '../../utils/urlConstants'
+import { useEffect } from 'react'
 
 const CreateImage = ({
   imageActive,
   setImageActive,
   lessonData,
-  setLessonData
+  setLessonData,
+  data = [],
+  editFunc
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(true)
   const [lessonImg, setLessonImg] = useState(null)
@@ -32,6 +36,24 @@ const CreateImage = ({
     setLessonData(imgData)
     setImageActive(false)
   }
+
+  const editNewsImg = ({ photoDescription }) => {
+    const imgData = [
+      ...lessonData,
+      {
+        lessonImg,
+        photoDescription,
+        isImgDesc
+      }
+    ]
+    editFunc({id: data[0].id, lessonImg, photoDescription, isImgDesc})
+  }
+
+  useEffect(() => {
+    if(data.length > 0) {
+      setIsImgDesc(data[0].isImgDesc)
+    }
+  }, [])
   return (
     <>
       {imageActive && (
@@ -46,6 +68,8 @@ const CreateImage = ({
                 onChange={(img) => setLessonImg(img)}
                 fileType='image/png,image/jpeg,image/jpg'
                 text='Drag & Drop photo in this area or Click Here to attach'
+                dataImg={data.length > 0 && `${LESSON_IMG}${data[0].lessonImg}`}
+                onClick={() => setLessonImg(null)}
               />
               <div className='description'>
                 <label>Add photo description ?</label>{' '}
@@ -57,6 +81,7 @@ const CreateImage = ({
               {isImgDesc && (
                 <div className='photo-input-container'>
                   <TextArea
+                    defaultValue={data.length > 0 ? data[0].photoDescription : ''}
                     placeholder='Photo Description (Optional)'
                     className='default-input-variation text-area-variation textarea'
                     cols='3'
@@ -67,11 +92,17 @@ const CreateImage = ({
                 </div>
               )}
 
-              <Button
-                name='Add Photo Block'
-                onClick={handleSubmit(submitLessonImg)}
-                className='add'
-              />
+              {
+                data.length > 0 
+                ? <Button
+                    className='add'
+                    name='Edit Photo Block'
+                    onClick={handleSubmit(editNewsImg)} />
+                : <Button
+                    className='add'
+                    name='Add Photo Block'
+                    onClick={handleSubmit(submitLessonImg)} />
+              }
             </div>
           </div>
         </div>

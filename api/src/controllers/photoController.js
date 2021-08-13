@@ -54,6 +54,24 @@ const addphoto = async (req, res) => {
   })
 }
 
+const updatePhoto = async (req, res) => {
+  let lessonImg = ''
+
+  const singlePhoto = await db.Photo.findOne({where: {id: req.params.id}});
+  if (req.file) {
+    lessonImg = req.file.filename
+  } else {
+    lessonImg = singlePhoto.dataValues.lessonImg
+  }
+  
+  const photo = await db.Photo.update({ ...req.body, lessonImg }, {where: {id: req.params.id}})
+  res.status(201).json({
+    status: true,
+    message: 'photo updated successfully',
+    data: photo
+  })
+}
+
 const deletePhoto = async (req, res) => {
   const { id } = req.params
   const photo = await db.Photo.destroy({ where: { id } })
@@ -63,21 +81,6 @@ const deletePhoto = async (req, res) => {
   res.status(202).json({
     status: true,
     message: 'Lesson photo deleted successfully',
-    data: photo
-  })
-}
-
-const updatePhoto = async (req, res) => {
-  const { id } = req.params
-  const photo = await db.Photo.update(req.body, {
-    where: { id }
-  })
-  if (!photo) {
-    throw new NotFoundError()
-  }
-  res.status(202).json({
-    status: true,
-    message: 'Lesson photo updated successfully',
     data: photo
   })
 }

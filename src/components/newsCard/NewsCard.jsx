@@ -6,26 +6,21 @@ import { deleteNews } from '../../actions/newsActions'
 import Background from '../background/Background'
 import { useState } from 'react'
 
-function NewsCard ({ news, editCard }) {
+function NewsCard ({ news, editCard, deleteNewsCard }) {
   return (
     <>
       {news && news.map((news) => {
         return (
-          <NewsSingleCard news={news} editCard={editCard} />
+          <NewsSingleCard news={news} editCard={editCard} deleteNewsCard={deleteNewsCard} />
         )
       })}
     </>
   )
 }
 
-const NewsSingleCard = ({ news, editCard }) => {
+const NewsSingleCard = ({ news, editCard, deleteNewsCard }) => {
   const [dropDown, setDropDown] = useState(false)
-  const dispatch = useDispatch()
-
-  const deleteNewsCard = (id) => {
-    dispatch(deleteNews(id))
-    setDropDown(false)
-  }
+  
   const editNewsCard = (id) => {
     editCard(id)
     setDropDown(false)
@@ -53,7 +48,7 @@ const NewsSingleCard = ({ news, editCard }) => {
             </div>
           </div>
         </div>
-        <Link to={{ pathname: '/community-page-news-view', state: { news } }}>
+        <Link to={{ pathname: `/community-news-view-page/${news.id}`, state: { news } }}>
           <div key={news.id}>
             <div className='newsCard-group'>
               <div className='frame-text'>
