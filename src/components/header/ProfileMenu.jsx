@@ -15,7 +15,7 @@ const ProfileMenu = () => {
     <>
       <div>{modalActive && <SettingsActionModal setModalActive={setModalActive} settingAction={settingAction} />} </div>
       <div onClick={() => setProfileSettings(!profileSettings)} className='message'>
-        <img src='/img/avatar-img.svg' alt='avatar-img' />
+        <img src='/img/user.svg' alt='avatar-img' />
         {profileSettings && (
           <MessageDropdown
             clickHandler={setProfileSettings}

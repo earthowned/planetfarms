@@ -45,6 +45,7 @@ function CongratulationScreen () {
   const { user } = userDetails
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     const attachments = profileImage
+    if (phone !== 'null' || phone !== 'undefined') phone = ''
     dispatch(
       updateUser(
         { firstName, lastName, phone, birthday, email, attachments },
@@ -117,9 +118,6 @@ function CongratulationScreen () {
                       <Controller
                         control={control}
                         name='phone'
-                        rules={{
-                          required: true
-                        }}
                         render={({ onChange, value }) => (
                           <PhoneInput
                             className={errors.phone ? 'block-error' : ''}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import CardImage from '../../components/cardImage/CardImage'
 import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
@@ -8,7 +9,7 @@ import useSizeFinder from '../../utils/sizeFinder'
 import useGetFetchData from '../../utils/useGetFetchData'
 import { GET_MEMBERS } from '../../utils/urlConstants'
 
-function CommunityMembers () {
+function CommunityMembers ({ history }) {
   const [col, setCol] = useState(3)
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize, setPageSize] = useState(9)
@@ -16,9 +17,12 @@ function CommunityMembers () {
   const windowWidth = useSizeFinder()
 
   // fetching current community
-  const currentCommunity = window.localStorage.getItem('currentCommunity')
+  const currentCommunity = useSelector(
+    (state) => state.activeCommunity.currentCommunity
+  )
+  /* const currentCommunity = window.localStorage.getItem('currentCommunity')
     ? JSON.parse(window.localStorage.getItem('currentCommunity'))
-    : null
+    : null */
 
   useEffect(() => {
     if (windowWidth < 1439 && windowWidth > 768) {
@@ -47,7 +51,11 @@ function CommunityMembers () {
       <div className='community-members'>
         <div className='community-members-flex-col'>
           <div className='search-container'>
-            <SearchComponent className='search border-1px-onyx' search={search} setSearch={setSearch} />
+            <SearchComponent
+              className='search border-1px-onyx'
+              search={search}
+              setSearch={setSearch}
+            />
           </div>
           <div className='community-members-grid-row'>
             {membersData?.data && <CardImage follow='Follow' data={membersData?.data} />}

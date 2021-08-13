@@ -1,10 +1,8 @@
-import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
-import { getApi, postApi } from '../utils/apiFunc'
+import { getApi, postApi, putApi } from '../utils/apiFunc'
 
 import FormData from 'form-data'
 import {
-  ACCESS_TOKEN_FAIL,
   ACCESS_TOKEN_REQUEST,
   ACCESS_TOKEN_SUCCESS,
   USER_DETAILS_FAIL,
@@ -38,12 +36,10 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_UPDATE_REQUEST,
-  USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_LIST_FAIL,
   USER_LIST_SUCCESS,
   USER_LIST_REQUEST,
-  USER_DETAILS_RESET,
   USER_SEARCH_REQUEST,
   USER_SEARCH_SUCCESS,
   USER_SEARCH_FAIL
@@ -115,14 +111,12 @@ export const register = (name, password) => async (dispatch) => {
           email: null
         }
       })
-
       const response = await Auth.signIn(name, password)
-
       userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub }
       window.localStorage.setItem('userInfo', JSON.stringify(userdata))
       await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata?.id })
+        .catch(err => console.log(err))
     }
-
     dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata })
     dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata })
     await routingCommunityNews(dispatch, false)
@@ -157,21 +151,18 @@ export const login = (name, password) => async (dispatch) => {
           Authorization: 'Bearer ' + data.token
         }
       })
-
-      await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, {
+      await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, {
         firstName: response.attributes.given_name,
         lastName: response.attributes.family_name,
         birthday: response.attributes.birthdate,
         phone: response.attributes.phone_number,
         email: response.attributes.email
-      },
-      {
+      }, {
         headers: {
           Authorization: 'Bearer ' + data.token
         }
       })
     }
-    window.localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     await routingCommunityNews(dispatch, true)
   } catch (error) {
@@ -184,14 +175,21 @@ export const login = (name, password) => async (dispatch) => {
   }
 }
 
+function checkErrorReturnMessage (error, dispatch) {
+  const message = error.response && error.response.data.error ? error.response.data.error : error.message
+  if (message === 'Not authorized, token failed') {
+    dispatch(logout())
+  }
+  return message
+}
+
 export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile/${id}`)
-    dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data.results })
   } catch (error) {
-    const message = error.response && error.response.data.error ? error.response.data.error : error.message
-    dispatch({ type: USER_DETAILS_FAIL, payload: message })
+    dispatch({ type: USER_DETAILS_FAIL, payload: checkErrorReturnMessage(error, dispatch) })
   }
 }
 
@@ -253,17 +251,7 @@ export const getMyDetails = () => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`)
-    const userdata = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phone: data.phone,
-      email: data.email,
-      dateOfBirth: data.dateOfBirth,
-      lastLogin: data.lastLogin,
-      numberOfVisit: data.numberOfVisit,
-      attachments: data.attachments,
-      role: data.role
-    }
+    const userdata = data
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const { attributes } = await Auth.currentAuthenticatedUser({ bypassCache: true })
       userdata.phoneVerified = attributes.phone_number_verified
@@ -271,8 +259,7 @@ export const getMyDetails = () => async (dispatch) => {
     }
     dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
   } catch (error) {
-    const message = error.response && error.response.data.error ? error.response.data.error : error.message
-    dispatch({ type: USER_DETAILS_FAIL, payload: message })
+    dispatch({ type: USER_DETAILS_FAIL, payload: checkErrorReturnMessage(error, dispatch) })
   }
 }
 
@@ -283,7 +270,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
     const userProfileFormData = new FormData()
     userProfileFormData.append('firstName', user.firstName)
     userProfileFormData.append('lastName', user.lastName)
-    userProfileFormData.append('phone', user.phone)
+    userProfileFormData.append('phone', user?.phone)
     if (user.birthday) userProfileFormData.append('birthday', user.birthday)
     userProfileFormData.append('email', user.email)
     userProfileFormData.append('attachments', user.attachments)
@@ -299,7 +286,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
         bypassCache: true
       })
     }
-    const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
+    const { data } = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const toBeUpdated = {
         email: user.email,
@@ -311,13 +298,9 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
       await Auth.updateUserAttributes(currentUser, toBeUpdated)
     }
     dispatch({ type: USER_DETAILS_SUCCESS, payload: { user: data } })
-    history.push('/myProfile')
+    history.goBack()
   } catch (error) {
-    const message = error.response && error.response.data.error ? error.response.data.error : error.message
-    if (message === 'Not authorized, token failed') {
-      dispatch(logout())
-    }
-    dispatch({ type: USER_UPDATE_FAIL, payload: message })
+    dispatch({ type: USER_UPDATE_FAIL, payload: checkErrorReturnMessage(error, dispatch) })
   }
 }
 
@@ -327,11 +310,7 @@ export const listUsers = () => async (dispatch) => {
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`)
     dispatch({ type: USER_LIST_SUCCESS, payload: data })
   } catch (error) {
-    const message = error.response && error.response.data.error ? error.response.data.error : error.message
-    if (message === 'Not authorized, token failed') {
-      dispatch(logout())
-    }
-    dispatch({ type: USER_LIST_FAIL, payload: message })
+    dispatch({ type: USER_LIST_FAIL, payload: checkErrorReturnMessage(error, dispatch) })
   }
 }
 
@@ -381,7 +360,7 @@ export const resendCodeAction = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_RESEND_CODE_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-      const data = await Auth.resendSignUp(username)
+      await Auth.resendSignUp(username)
       dispatch({ type: USER_RESEND_CODE_SUCCESS })
     } else {
       document.location.href = '/'
@@ -401,7 +380,7 @@ export const verifyCurrentUserAttribute = (attr) => async (dispatch) => {
     dispatch({ type: USER_ATTR_RESEND_CODE_REQUEST })
     dispatch({ type: USER_ATTR_CONFIRM_CODE_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-      const data = await Auth.verifyCurrentUserAttribute(attr)
+      await Auth.verifyCurrentUserAttribute(attr)
       dispatch({ type: USER_ATTR_RESEND_CODE_SUCCESS })
     } else {
       document.location.href = '/'
@@ -499,7 +478,7 @@ export const changePassword = (oldPassword, newPassword) => async (dispatch) => 
       const user = await Auth.currentAuthenticatedUser()
       resdata = await Auth.changePassword(user, oldPassword, newPassword)
     }
-    dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS })
+    dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS, payload: resdata })
   } catch (error) {
     dispatch({
       type: USER_PASSWORD_CHANGE_FAIL,

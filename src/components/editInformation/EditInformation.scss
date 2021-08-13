@@ -11,26 +11,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #F8EBDF;
-    &-text{
-      color:#F8EBDF;
+    border: 1px solid #f8ebdf;
+    &-text {
+      color: #f8ebdf;
       text-align: center;
     }
   }
-  
+
   img {
     width: 100%;
     height: 250px;
     object-fit: cover;
     object-position: center;
     margin-bottom: 14px;
+    border: 1px solid var(--background-color-light);
+    border-radius: 4px;
   }
 
   .edit-btn {
     width: 100%;
     height: 48px;
     background: rgba(255, 255, 255, 0.16);
-    border: 0.5px solid #F8EBDF;
+    border: 0.5px solid #f8ebdf;
     box-sizing: border-box;
     border-radius: 4px;
     font-family: IBM Plex Sans;
@@ -41,22 +43,19 @@
   }
 
   & > div {
-      margin-bottom: 12px;
+    margin-bottom: 12px;
   }
-
 }
-
-
 
 @media only screen and (max-width: 1310px) {
   .edit-information-container {
     margin-bottom: 3em;
     width: 400px;
-}
+  }
 }
 
 @media only screen and (max-width: 600px) {
   .edit-information-container {
     width: 100%;
-}
+  }
 }
