@@ -3,8 +3,6 @@ const db = require('../models')
 const Amplify = require('aws-amplify').Amplify
 const Auth = require('aws-amplify').Auth
 const Sequelize = require('sequelize')
-// const User = require('../models/userModel.js')
-// const LocalAuth = require('../models/localAuthModel.js')
 const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
 const NotFoundError = require('../errors/notFoundError')
@@ -14,23 +12,17 @@ function amplifyConfig () {
     Auth: {
       // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
       // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
-
       // REQUIRED - Amazon Cognito Region
       region: process.env.COGNITO_REGION,
-
       // OPTIONAL - Amazon Cognito Federated Identity Pool Region
       // Required only if it's different from Amazon Cognito Region
       // identityPoolRegion: 'XX-XXXX-X',
-
       // OPTIONAL - Amazon Cognito User Pool ID
       userPoolId: process.env.COGNITO_POOL_ID,
-
       // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
       userPoolWebClientId: process.env.COGNITO_CLIENT_ID,
-
       // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
       mandatorySignIn: false,
-
       // OPTIONAL - Configuration for cookie storage
       // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
       /* cookieStorage: {
@@ -46,16 +38,12 @@ function amplifyConfig () {
         // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
             secure: true
         }, */
-
       // OPTIONAL - customized storage object
       // storage: MyStorage,
-
       // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
       authenticationFlowType: 'USER_PASSWORD_AUTH',
-
       // OPTIONAL - Manually set key value pairs that can be passed to Cognito Lambda Triggers
       // clientMetadata: { myCustomKey: 'myCustomValue' },
-
       // OPTIONAL - Hosted UI configuration
       oauth: {
         domain: process.env.COGNITO_DOMAIN_NAME, // domain_name
@@ -152,15 +140,12 @@ const registerLocal = async (name, password, res) => {
         { username: name, password: password },
         { transaction: t }
       )
-      return await db.User.create(
-        {
-          userID: user.id,
-          isLocalAuth: true,
-          lastLogin: new Date(),
-          numberOfVisit: 0
-        },
-        { transaction: t }
-      )
+      return await db.User.create({
+        userID: user.id,
+        isLocalAuth: true,
+        lastLogin: new Date(),
+        numberOfVisit: 0
+      }, { transaction: t })
     })
     if (newUser && (await subscribeCommunity(newUser))) {
       res.status(201).json({
@@ -208,21 +193,16 @@ const sendTokenStatus = (req, res) => {
 
 const changePassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
-  const user = req.user
+  const userID = req.user.userID
   if (process.env.AUTH_METHOD !== 'cognito') {
-    let userWithNewPassword
-    const oldUser = await db.LocalAuth.findByPk(user.userID)
+    const oldUser = await db.LocalAuth.findByPk(userID)
     if (oldUser.dataValues.password === oldPassword) {
-      userWithNewPassword = await db.LocalAuth.update(
+      await db.LocalAuth.update(
         { password: newPassword },
-        { where: { id: user.userID } }
-      )
+        { where: { id: userID } }
+      ).then(() => res.json({ message: 'The user password has been updated.' }).status(200))
     } else {
-      // throw new Error('Incorrect old password')
       res.status(401).json({ message: 'Incorrect old password' })
-    }
-    if (userWithNewPassword) {
-      res.json({ message: 'The user password has been updated.' }).status(200)
     }
   }
 }
@@ -260,14 +240,12 @@ const confirmSignUpWithCode = async (req, res) => {
 const getUsers = (req, res) => {
   db.User.findAll({})
     .then((users) => {
-      res
-        .json({
-          users: users.map((rec) => ({
-            ...rec.dataValues,
-            attachments: changeFormat(rec.dataValues.attachments)
-          }))
-        })
-        .status(200)
+      res.status(200).json({
+        users: users.map((rec) => ({
+          ...rec.dataValues,
+          attachments: changeFormat(rec.dataValues.attachments)
+        }))
+      })
     })
     .catch((err) => res.json({ err }).status(400))
 }
@@ -282,7 +260,6 @@ const getUserById = (req, res) => {
       if (user) {
         res.json(user)
       } else {
-        res.status(404)
         throw new Error('User not found')
       }
     })
@@ -299,9 +276,7 @@ const getUserProfileByUserID = async (req, res) => {
       where: { userID: id },
       attributes: { exclude: req.user.userID !== id ? ['phone', 'dateOfBirth'] : [] }
     })
-    if (!profile) {
-      throw new NotFoundError()
-    }
+    if (!profile) throw new NotFoundError()
     res.status(200).json({
       status: true,
       message: 'fetched user profile successfully',
@@ -336,27 +311,19 @@ const getMyProfile = async (req, res) => {
 // @route   PUT /api/users/:id
 const updateUser = async (req, res) => {
   try {
-    let attachments
-    if (req.file) {
-      attachments = req.file.filename
-    } else {
-      attachments = req.user.attachments
-    }
+    const attachments = req.file ? req.file.filename : req.user.attachments
     const id = req.user.dataValues.userID
     const { email, firstName, lastName, phone, birthday } = req.body
     db.User.findOne({ where: { userID: id } }).then((user) => {
       if (user) {
-        db.User.update(
-          {
-            email,
-            firstName,
-            lastName,
-            phone,
-            dateOfBirth: birthday,
-            attachments: attachments
-          },
-          { where: { userID: id } }
-        )
+        db.User.update({
+          email,
+          firstName,
+          lastName,
+          phone,
+          dateOfBirth: birthday,
+          attachments
+        }, { where: { userID: id } })
           .then(() => res.sendStatus(200))
           .catch((err) => res.status(403).json({ error: err.message }))
       } else {
