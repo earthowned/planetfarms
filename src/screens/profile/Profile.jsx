@@ -6,7 +6,7 @@ import PersonalInformation from '../../components/profileFormCard/PersonalInform
 import AdditionalInformation from '../../components/profileFormCard/AdditionalInformation'
 import ContactInformation from '../../components/profileFormCard/ContactInformation'
 import EditInformation from '../../components/editInformation/EditInformation'
-import { getUserDetails } from '../../actions/userAction'
+import { getUserDetails, getMyDetails } from '../../actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   useHistory,
@@ -31,7 +31,7 @@ function Profile () {
   const [backLocation, setBackLocation] = useState('')
 
   useEffect(() => {
-    dispatch(getUserDetails(id))
+    currentUser == id ? dispatch(getMyDetails()) : dispatch(getUserDetails(id))
     if (status) {
       emailClickHandler(false)
       phoneClickHandler(false)
