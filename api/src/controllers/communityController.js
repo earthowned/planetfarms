@@ -414,37 +414,29 @@ const searchCommunityName = (req, res) => {
 // @route POST /api/communities/user/search
 // @access Private
 const searchUserCommunityName = (req, res) => {
-  const { name } = req.query
-  const order = req.query.order || 'ASC'
-
+  const { name, order = 'ASC' } = req.query
   db.Community.findAll({
-    include: [
-      {
-        model: db.User,
-        as: 'creator' && 'followers',
-        attributes: ['id'],
-        where: { id: req.user.id },
-        through: {
-          attributes: ['active'],
-          as: 'followStatus',
-          where: {
-            active: true
-          }
-        }
+    include: [{
+      model: db.User,
+      as: 'creator' && 'followers',
+      attributes: ['id'],
+      where: { id: req.user.id },
+      through: {
+        attributes: ['active'],
+        as: 'followStatus',
+        where: { active: true }
       }
-    ],
+    }],
     where: { name: { [Op.iLike]: '%' + name + '%' } },
     order: [['name', order]]
   })
     .then((communities) =>
-      res
-        .json({
-          communities: communities.map((rec) => ({
-            ...rec.dataValues,
-            attachment: changeFormat(rec.attachment)
-          }))
-        })
-        .status(200)
+      res.status(200).json({
+        communities: communities.map((rec) => ({
+          ...rec.dataValues,
+          attachment: changeFormat(rec.attachment)
+        }))
+      })
     )
     .catch((err) => res.json({ error: err }).status(400))
 }
