@@ -4,25 +4,22 @@ const ContactInformation = ({ user, verification, isCurrentUser }) => {
   const ContactInformationdatadata = {
     title: 'Contact information',
     firstTitle: 'Email',
-    firstValue: isCurrentUser ? user?.email || 'N/A' : user?.email,
-    firstVerify:
-      user?.email && process.env.REACT_APP_AUTH_METHOD === 'cognito'
-        ? {
-            isVerified: user?.emailVerified,
-            clickHandler: verification?.emailClickHandler
-          }
-        : null,
-    secondTitle: 'Phone',
-    secondValue: isCurrentUser ? user?.phone || 'N/A' : user?.phone,
-    secondVerify:
-      user?.phone && process.env.REACT_APP_AUTH_METHOD === 'cognito'
-        ? {
-            isVerified: user?.phoneVerified,
-            clickHandler: verification?.phoneClickHandler
-          }
-        : null
+    firstValue: user?.email || 'N/A',
+    ...(isCurrentUser ? {
+      secondTitle: 'Phone',
+      secondValue: user?.phone || 'N/A'
+    } : {}),
+    ...(process.env.REACT_APP_AUTH_METHOD === 'cognito' ? {
+      firstVerify: {
+        isVerified: user?.emailVerified || false,
+        clickHandler: verification?.emailClickHandler
+      },
+      secondVerify: {
+        isVerified: user?.phoneVerified || false,
+        clickHandler: verification?.phoneClickHandler
+      }
+    } : {})
   }
-
   return (
     <ProfileFormCard
       data={ContactInformationdatadata}

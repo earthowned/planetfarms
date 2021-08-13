@@ -8,11 +8,10 @@ const PersonalInformation = ({ user, isCurrentUser }) => {
     firstValue: user?.firstName || 'N/A',
     secondTitle: 'Last Name',
     secondValue: user?.lastName || 'N/A',
-    thirdTitle: 'Date of birthday',
-    thirdValue: isCurrentUser
-      ? (user?.dateOfBirth && moment.utc(new Date(user?.dateOfBirth)).format('ddd LL')) ||
-        'N/A'
-      : user?.dateOfBirth && moment.utc(new Date(user?.dateOfBirth)).format('ddd LL')
+    ...(isCurrentUser ? {
+      thirdTitle: 'Date of birthday',
+      thirdValue: (user?.dateOfBirth && moment.utc(new Date(user?.dateOfBirth)).format('ddd LL')) || 'N/A'
+    } : {})
   }
   return (
     <>
