@@ -4,7 +4,11 @@ import { MATERIAL, GET_COURSE } from '../../../utils/urlConstants'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 
-import { updateLessonProgress } from '../../../actions/lessonProgressActions'
+import lessonProgressFnc from './lessonProgressFnc'
+import {
+  updateLessonProgress,
+  createLessonProgress
+} from '../../../actions/lessonProgressActions'
 import useGetLessonData from '../../../utils/useGetLessonData'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import LessonDetail from './LessonDetail'
@@ -31,7 +35,7 @@ const LessonPage = () => {
   const { userInfo } = userLogin
   const userId = userInfo.id
 
-  const { isLoading, data } = useGetLessonData(
+  const { isLoading, data, refetch } = useGetLessonData(
     id,
     setMaterialData,
     userId,
@@ -60,28 +64,56 @@ const LessonPage = () => {
     )
   }, [courseData])
 
-  const nextPageWithOutTest = () => {
-    const endTime = moment().toDate().getTime().toString()
-    const progressId = data?.data?.lesson_progresses[0]?.id
-    dispatch(
-      updateLessonProgress({
+  const time = moment().toDate().getTime().toString()
+  useEffect(() => {
+    if (data?.data?.lesson_progresses?.length === 0) {
+      lessonProgressFnc({
+        dispatch,
+        action: createLessonProgress,
         lessonId: id,
         userId,
-        isCompleted: true,
-        endTime,
-        progressId,
-        history
+        isCompleted: false,
+        startTime: time,
+        refetch
       })
-    )
+    }
+  }, [data])
+  const nextPageWithOutTest = () => {
+    const progressId = data?.data?.lesson_progresses[0]?.id
+    lessonProgressFnc({
+      dispatch,
+      action: updateLessonProgress,
+      lessonId: id,
+      userId,
+      isCompleted: true,
+      endTime: time,
+      progressId,
+      nextId:
+        courseData?.data?.lessons?.length === data?.data?.order
+          ? `/course/${courseId}`
+          : `/lesson/${cData[0]?.id}`,
+      history,
+      refetch
+    })
   }
+
   const nextPage = () => {
     const passedAndProgress = () => {
-      history.push(`/lesson/${cData[0]?.id}`)
+      history.push(
+        courseData?.data?.lessons?.length === data?.data?.order
+          ? courseData?.data?.creator === userInfo.id
+              ? `/admin/course/${courseId}`
+              : `/course/${courseId}`
+          : `/lesson/${cData[0]?.id}`
+      )
     }
-    ;(isPassed && isCompleted) || isCreator
+    ;(isPassed && isCompleted) ||
+    isCreator ||
+    data?.data?.lesson_progresses[0]?.isCompleted
       ? passedAndProgress()
       : nextPageWithOutTest()
   }
+
   return (
     <>
       {isLoading ? (
@@ -124,18 +156,14 @@ const LessonPage = () => {
           ) : (
             ''
           )}
-          {courseData?.data?.lessons?.length === data?.data?.order ? (
-            ''
-          ) : (
-            <Button
-              className='nextBtn'
-              name='Next'
-              disabled={
-                isCreator || data?.data?.test === null ? false : !isPassed
-              }
-              onClick={isPassed || isCompleted ? nextPage : nextPageWithOutTest}
-            />
-          )}
+          <Button
+            className='nextBtn'
+            name='Next'
+            disabled={
+              isCreator || data?.data?.test === null ? false : !isPassed
+            }
+            onClick={isPassed || isCompleted ? nextPage : nextPageWithOutTest}
+          />
         </DashboardLayout>
       )}
     </>

@@ -9,19 +9,9 @@ const LessonCourse = ({
   userInfo,
   creator,
   joinCourse,
-  enrolls,
-  refetch
+  enrolls
 }) => {
   const lessonLen = data?.data?.lessons.length
-  const [clickLessonId, setClickLessonId] = useState('')
-  const [progressData, setProgressData] = useState([])
-  useEffect(() => {
-    setProgressData(
-      data?.data?.lessons
-        ?.filter((lesson) => lesson.id === clickLessonId)
-        .map((progress) => progress.lesson_progresses)
-    )
-  }, [clickLessonId])
 
   return (
     <div className='lessons-container'>
@@ -59,10 +49,6 @@ const LessonCourse = ({
               isEnroll={isEnroll}
               joinCourse={joinCourse}
               enrolls={enrolls}
-              clickLessonId={clickLessonId}
-              setClickLessonId={setClickLessonId}
-              progressData={progressData}
-              refetch={refetch}
             />
           </React.Fragment>
         ))}

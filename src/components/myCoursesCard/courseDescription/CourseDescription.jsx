@@ -11,8 +11,7 @@ const CourseDescription = ({
   isLoading,
   userInfo,
   isEnroll,
-  refetch,
-  enrolls
+  refetch
 }) => {
   const [creator, setCreator] = useState('')
   const [joinCourse, setJoinCourse] = useState(false)
@@ -41,8 +40,6 @@ const CourseDescription = ({
           userInfo={userInfo}
           creator={creator}
           joinCourse={joinCourse}
-          enrolls={enrolls}
-          refetch={refetch}
         />
       </div>
       <MoreCourse />
