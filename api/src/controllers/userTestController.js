@@ -94,7 +94,6 @@ const endTest = async (req, res) => {
     if (!test) {
       return res.json({ message: "Test doesn't exist." })
     }
-
     const score = await db.sequelize.transaction(async (t) => {
       const solutions = await db.Question.findAll(
         {
@@ -104,17 +103,9 @@ const endTest = async (req, res) => {
         },
         { transaction: t }
       )
-      let marks = 0
-
-      // counting marks
-      solutions.forEach((item, index) => {
-        if (item.type === 'subjective') {
-          if (choices[index]) marks++
-        } else {
-          if (choices[index] === item.answer) marks++
-        }
-      })
-
+      const marks = solutions.reduce((marks, item) => {
+        return (item.type == 'subjective' && choices[index]) || (choices[index] === item.answer) ? ++marks : marks
+      }, 0)
       // addomg amswers to the user_test_answers tbl
       solutions.forEach(async (item, index) => {
         await db.UserTestAnswer.create({
@@ -123,42 +114,19 @@ const endTest = async (req, res) => {
           answer: choices[index]
         })
       })
-
-      await db.UserTest.update(
-        { marks, endTime },
-        { where: { id: req.params.id } },
-        { transaction: t }
-      )
+      await db.UserTest.update({ marks, endTime }, { where: { id: req.params.id } }, { transaction: t })
       const result = await db.UserTest.findOne(
         { where: { id: req.params.id }, attributes: ['marks', 'total_marks'] },
         { transaction: t }
       )
       return result
     })
-
-    const passMarks = Math.ceil(score.total_marks / 2)
-    if (score.marks >= passMarks) {
-      await db.UserTest.update(
-        { is_passed: true },
-        { where: { id: req.params.id } }
-      )
-      return res.json({ message: 'You have passed the test.' })
-    }
-
-    await db.UserTest.update(
-      { is_passed: false },
-      { where: { id: req.params.id } }
-    )
-    res.json({ message: 'You have failed the test.' })
+    const pass = score.marks >= Math.ceil(score.total_marks / 2)
+    await db.UserTest.update({ is_passed: pass }, { where: { id: req.params.id } })
+    return res.json({ message: 'You have ' + (pass ? 'passed' : 'failed') + ' the test.' })
   } catch (error) {
     res.json(error).status(400)
   }
 }
 
-module.exports = {
-  getUserTests,
-  takeTest,
-  endTest,
-  getSingleUserTest,
-  getUserTestAnswers
-}
+module.exports = { getUserTests, takeTest, endTest, getSingleUserTest, getUserTestAnswers }

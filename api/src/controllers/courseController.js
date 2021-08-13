@@ -85,9 +85,8 @@ const updateCourse = async (req, res) => {
 // @route   GET /api/courses/:id
 // @access  Public
 const getCourseById = async (req, res) => {
-  const { id } = req.params
   const course = await db.Courses.findOne({
-    where: { id },
+    where: { id: req.params.id },
     include: [
       { model: db.Lesson, include: [db.LessonProgress, db.Test] },
       db.Enroll
@@ -96,15 +95,13 @@ const getCourseById = async (req, res) => {
   if (!course) {
     throw new NotFoundError()
   }
-  course.lessons.forEach(lesson => {
-    lesson.coverImg = changeFormat(lesson.coverImg)
-  })
-  const thumbnail = changeFormat(course?.dataValues?.thumbnail)
-  const coverImg = changeFormat(course?.dataValues?.lessons?.coverImg)
-  const courseData = course.dataValues
   const data = Object.assign({
     ...course,
-    dataValues: { ...courseData, thumbnail, coverImg }
+    dataValues: {
+      ...course.dataValues,
+      thumbnail: changeFormat(course?.dataValues?.thumbnail),
+      coverImg: changeFormat(course?.dataValues?.lessons?.coverImg)
+    }
   })
   const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
