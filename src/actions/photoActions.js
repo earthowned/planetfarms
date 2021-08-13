@@ -83,6 +83,7 @@ export const deletePhoto = (id, refetch) => async (dispatch) => {
   try {
     dispatch({ type: PHOTO_DELETE_REQUEST })
     const { data } = await Axios.delete(GET_LESSON_PHOTO + `/${id}`)
+    console.log(data);
     dispatch({ type: PHOTO_DELETE_SUCCESS, payload: data })
     refetch()
   } catch (error) {

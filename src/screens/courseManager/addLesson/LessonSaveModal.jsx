@@ -4,7 +4,7 @@ const LessonSaveModal = ({ pathId, onClick, name }) => {
   const history = useHistory()
   return (
     <div className='save-lesson-modal'>
-      <h4>Do you want to {name} lesson?</h4>
+      <h4>Do you want to {name}?</h4>
       <div>
         <button
           className='secondary-btn'
@@ -18,7 +18,7 @@ const LessonSaveModal = ({ pathId, onClick, name }) => {
           id='lesson-save-btn'
           onClick={onClick}
         >
-          {name} lesson
+          {name}
         </button>
       </div>
     </div>

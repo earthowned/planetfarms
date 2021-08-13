@@ -20,6 +20,8 @@ import EditContent from '../../../components/editContent/EditContent'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
+import RichTextEditor from '../../../components/richTextEditor/RichTextEditor'
+import DeleteContent from '../../../components/deleteContent/DeleteContent'
 
 const AddLesson = () => {
   const dispatch = useDispatch()
@@ -46,10 +48,6 @@ const AddLesson = () => {
   const [lessonCover, setLessonCover] = useState(null)
   const [material, setMaterial] = useState([])
   const [fetchLesson, setFetchLesson] = useState([])
-  const [editVideoModel, setEditVideoModel] = useState(false)
-  const [editTextModel, setEditTextModel] = useState(false)
-  const [editPhotoModel, setEditPhotoModel] = useState(false)
-  const [editId, setEditId] = useState('')
   
   const [deleteVideoModal, setDeleteVideoModal] = useState(false)
   const [deleteImageModal, setDeleteImageModal] = useState(false)
@@ -79,7 +77,6 @@ const AddLesson = () => {
 
   // for edit
   useEffect(() => {
-    console.log(pathname.split('/'))
     if(pathname.split('/')[3] === 'edit') {
       getSingleLesson()
     }
@@ -91,7 +88,7 @@ const AddLesson = () => {
     updateTextSuccess, 
     deleteTextSuccess,
     updatePhotoSuccess, 
-    deletePhotoSuccess
+    deletePhotoSuccess,
   ])
 
 
@@ -111,7 +108,7 @@ const AddLesson = () => {
     const {id, isImgDesc, lessonImg, photoDescription} = data;
     dispatch(updatePhoto(id, lessonImg, photoDescription, isImgDesc, setImageModal ))
   }
-console.log(lessonSingleData)
+
   async function editTextFunc (id) {
     if(lessonSingleData?.rich_text?.texts) {
       let text = lessonSingleData.rich_text.texts.filter(el => el.id === id);
@@ -206,17 +203,6 @@ console.log(lessonSingleData)
     setLessonData(newLessonData)
   }
 
-
-  async function deleteTextConfirm () {
-    dispatch(deleteText(textId))
-    setDeleteTextModal(false)
-  }
-
-
-  const modelPopUp = (poupState, id) => {
-    setEditId(id)
-  }
-
   const removeMaterial = (e) => {
     const name = e.currentTarget.getAttribute('name')
     setMaterial(material.filter((item) => item?.mData?.preview !== name))
@@ -265,7 +251,35 @@ console.log(lessonSingleData)
       {deleteTextModal && <DeleteContent setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
       <DashboardLayout title={pathname.split('/')[3] === 'edit' ? 'Edit Lesson' : 'Add New Lesson'}>
         <BackButton location={`/admin/course/${courseId}`} />
-        <AddContent
+        <RichTextEditor 
+          setVideoModal = {setVideoModal}
+          setImageModal = {setImageModal}
+          setTextModal = {setTextModal}
+          setLessonCover = {setLessonCover}
+          lessonCover = {lessonCover}
+          lessonData = {lessonData}
+          setLessonData = {setLessonData}
+          lessonSingleData = {lessonSingleData}
+          setLessonSingleData = {setLessonSingleData}
+          removeItem = {removeItem}
+          editVideoFunc = {editVideoFunc}
+          editImageFunc = {editImageFunc}
+          editTextFunc ={editTextFunc}
+          deleteVideoModalFunc = {deleteVideoModalFunc}
+          deleteImageModalFunc = {deleteImageModalFunc}
+          deleteTextModalFunc = {deleteTextModalFunc}
+          courseId = {courseId}
+          editLessonForm ={editLessonForm}
+          submitLessonForm ={submitLessonForm}
+          material={material}
+          setMaterial={setMaterial}
+          removeMaterial={removeMaterial}
+          showMaterial={true}
+          edit={pathname.split('/')[3] === 'edit'}
+          saveBtnName="save lesson"
+          editBtnName="edit lesson"
+        />
+        {/* <AddContent
           setVideoModal={setVideoModal}
           setImageModal={setImageModal}
           setTextModal={setTextModal}
@@ -303,97 +317,84 @@ console.log(lessonSingleData)
           onClick={handleSubmit(submitLessonForm)}
           name="Save"
         />
-        }
+        } */}
       </DashboardLayout>
     </>
   )
 }
 
-const AddContent = ({
-  setVideoModal,
-  videoModal,
-  setImageModal,
-  setTextModal,
-  register,
-  errors,
-  setLessonCover,
-  lessonData,
-  lessonSingleData,
-  setLessonSingleData,
-  editVideoFunc,
-  editTextFunc,
-  editImageFunc,
-  setDeleteTextModal,
-  setDeleteImageModal,
-  setDeleteVideoModal
-}) => {
-  return (
-    <div className='admin-lesson-create-container'>
-      <ErrorText
-        className='errorMsg'
-        message={errors.title && errors.title.message}
-      />
-      <input
-        type='text'
-        placeholder='Write Title Here'
-        name='title'
-        ref={register({
-          required: {
-            value: true,
-            message: 'You must enter lesson title'
-          }
-        })}
-        defaultValue={lessonSingleData?.title || ''}
-      />
+// const AddContent = ({
+//   setVideoModal,
+//   videoModal,
+//   setImageModal,
+//   setTextModal,
+//   register,
+//   errors,
+//   setLessonCover,
+//   lessonData,
+//   lessonSingleData,
+//   setLessonSingleData,
+//   editVideoFunc,
+//   editTextFunc,
+//   editImageFunc,
+//   setDeleteTextModal,
+//   setDeleteImageModal,
+//   setDeleteVideoModal
+// }) => {
+//   return (
+//     <div className='admin-lesson-create-container'>
+//       <ErrorText
+//         className='errorMsg'
+//         message={errors.title && errors.title.message}
+//       />
+//       <input
+//         type='text'
+//         placeholder='Write Title Here'
+//         name='title'
+//         ref={register({
+//           required: {
+//             value: true,
+//             message: 'You must enter lesson title'
+//           }
+//         })}
+//         defaultValue={lessonSingleData?.title || ''}
+//       />
 
-      <TextArea
-        className='default-input-variation text-area-variation lessonDesc'
-        placeholder='Lesson Description'
-        cols='3'
-        rows='4'
-        name='lessonDesc'
-        ref={register}
-        defaultValue={lessonSingleData?.lessonDesc || ''}
-      />
+//       <TextArea
+//         className='default-input-variation text-area-variation lessonDesc'
+//         placeholder='Lesson Description'
+//         cols='3'
+//         rows='4'
+//         name='lessonDesc'
+//         ref={register}
+//         defaultValue={lessonSingleData?.lessonDesc || ''}
+//       />
 
-      <DragDrop
-      text='Drag & Drop photo in this area or Click Here to attach'
-      onChange={(img) => setLessonCover(img)} 
-      dataImg={lessonSingleData?.coverImg ? `${GET_COVERIMG}${lessonSingleData.coverImg}` : ''}
-      onClick={() => setLessonCover(null)}
-      />
-      {
-        lessonSingleData && <EditContent 
-        data={lessonSingleData}
-        setEditPhotoModel={setImageModal}
-        setEditTextModel={setTextModal}
-        setEditVideoModel={setVideoModal}
-        editVideoFunc={editVideoFunc}
-        editImageFunc={editImageFunc}
-        editTextFunc={editTextFunc}
-        removeTextItem={setDeleteTextModal}
-        removePhoto={setDeleteImageModal}
-        removeVideo={setDeleteVideoModal}
-        />
-      }
-      <ContentAdd data={lessonData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
-    </div>
-  )
-}
+//       <DragDrop
+//       text='Drag & Drop photo in this area or Click Here to attach'
+//       onChange={(img) => setLessonCover(img)} 
+//       dataImg={lessonSingleData?.coverImg ? `${GET_COVERIMG}${lessonSingleData.coverImg}` : ''}
+//       onClick={() => setLessonCover(null)}
+//       />
+//       {
+//         lessonSingleData && <EditContent 
+//         data={lessonSingleData}
+//         setEditPhotoModel={setImageModal}
+//         setEditTextModel={setTextModal}
+//         setEditVideoModel={setVideoModal}
+//         editVideoFunc={editVideoFunc}
+//         editImageFunc={editImageFunc}
+//         editTextFunc={editTextFunc}
+//         removeTextItem={setDeleteTextModal}
+//         removePhoto={setDeleteImageModal}
+//         removeVideo={setDeleteVideoModal}
+//         />
+//       }
+//       <ContentAdd data={lessonData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
+//     </div>
+//   )
+// }
 
-const DeleteContent = ({confirmDelete, setDeleteModal}) => {
-  return <div className='simple-modal-container'>
-        <div className='simple-modal-inner-container'>
-          <div>
-            <h4>Are you sure you want to delete?</h4>
-            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
-          </div>
-          <div>
-            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
-            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
-          </div>
-        </div>
-      </div>
-}
+
 
 export default AddLesson

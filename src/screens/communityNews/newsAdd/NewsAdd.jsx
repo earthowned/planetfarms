@@ -17,6 +17,8 @@ import EditContent from '../../../components/editContent/EditContent'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
+import RichTextEditor from '../../../components/richTextEditor/RichTextEditor'
+import DeleteContent from '../../../components/deleteContent/DeleteContent'
 
 const NewsAdd = () => {
   const { currentCommunity } = useSelector(state => state.activeCommunity)
@@ -216,7 +218,30 @@ const NewsAdd = () => {
       {deleteTextModal && <DeleteContent setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
       <DashboardLayout title={pathname.split('/')[2] === 'edit' ? 'Edit News' : 'Add News'}>
         <BackButton location='/news' />
-        <AddNewsContent
+        <RichTextEditor 
+          setVideoModal = {setCreateVideoModal}
+          setImageModal = {setCreateImageModal}
+          setTextModal = {setCreateTextModal}
+          setLessonCover = {setNewsCover}
+          lessonCover = {newsCover}
+          lessonData = {newsData}
+          setLessonData = {setNewsData}
+          lessonSingleData = {newsSingleData}
+          setLessonSingleData = {setNewsSingleData}
+          editVideoFunc = {editVideoFunc}
+          editImageFunc = {editImageFunc}
+          editTextFunc ={editTextFunc}
+          deleteVideoModalFunc = {deleteVideoModalFunc}
+          deleteImageModalFunc = {deleteImageModalFunc}
+          deleteTextModalFunc = {deleteTextModalFunc}
+          editLessonForm ={editNewsForm}
+          submitLessonForm ={submitNewsForm}
+          showMaterial={false}
+          edit={pathname.split('/')[2] === 'edit'}
+          saveBtnName="save news"
+          editBtnName="edit news"
+        />
+        {/* <AddNewsContent
           setVideoModal = {setCreateVideoModal}
           setImageModal = {setCreateImageModal}
           setTextModal = {setCreateTextModal}
@@ -238,27 +263,27 @@ const NewsAdd = () => {
           pathname.split('/')[2] === 'edit'
           ? <NewsSaveModal onClick={handleSubmit(editNewsForm)}  name="Edit" />
           : <NewsSaveModal onClick={handleSubmit(submitNewsForm)} name="Save" />
-        }
+        } */}
 
       </DashboardLayout>
     </>
   )
 }
 
-const DeleteContent = ({confirmDelete, setDeleteModal}) => {
-  return <div className='simple-modal-container'>
-        <div className='simple-modal-inner-container'>
-          <div>
-            <h4>Are you sure you want to delete?</h4>
-            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
-          </div>
-          <div>
-            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
-            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
-          </div>
-        </div>
-      </div>
-}
+// const DeleteContent = ({confirmDelete, setDeleteModal}) => {
+//   return <div className='simple-modal-container'>
+//         <div className='simple-modal-inner-container'>
+//           <div>
+//             <h4>Are you sure you want to delete?</h4>
+//             {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
+//           </div>
+//           <div>
+//             <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
+//             <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
+//           </div>
+//         </div>
+//       </div>
+// }
 
 const AddNewsContent = ({
   errors,

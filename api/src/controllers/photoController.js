@@ -74,23 +74,10 @@ const updatePhoto = async (req, res) => {
 
 const deletePhoto = async (req, res) => {
   const { id } = req.params
-  let lessonImg
-  if (req.file) {
-    lessonImg = req.file.filename
-  }
-  const photo = await db.Photo.update(
-    { ...req.body, lessonImg },
-    {
-      where: { id }
-    }
-  )
-  if (!photo) {
-    throw new NotFoundError()
-  }
+  await db.Photo.destroy({where: { id }})
   res.status(202).json({
     status: true,
     message: 'Lesson photo deleted successfully',
-    data: photo
   })
 }
 
