@@ -120,7 +120,7 @@ function App () {
               )}
               path='/admin/edit-test/:lessonId'
             />
-            <PrivateRoute component={Category} path='/admin/categories' />            
+            <PrivateRoute component={Category} path='/admin/categories' />
             <PrivateRoute component={Profile} exact path='/profile/:id' />
             <PrivateRoute component={UserInfo} exact path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />

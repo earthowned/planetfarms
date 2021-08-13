@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import './MainDashboard.scss'
+import { ATTACHMENT } from '../../utils/urlConstants'
 import { Link } from 'react-router-dom'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import useSizeFinder from '../../utils/sizeFinder'
@@ -89,14 +90,17 @@ function DashboardComponent () {
       dispatch(getUserDetails(userInfo.id))
     }
   }, [dispatch, history, userInfo])
-
   return (
     <DashboardLayout title='My Dashboard'>
       <div className='x10-1-0-my-dashboard'>
         <div className='flex-col-5'>
           <div className='dashboard-hero border-1px-onyx'>
             <div className='dashboard-info'>
-              <img className='dashboard-profile-pic' src='/img/DashboardProfilePic.png' alt='dashboard-profile' />
+              <img
+                className='dashboard-profile-pic' src={user?.attachments
+                  ? ATTACHMENT + user?.attachments
+                  : '/img/user.svg'} alt='dashboard-profile'
+              />
               <div className='flex-col-6'>
                 <div className='info-my-detail'>
                   <div className='ibmplexsans-semi-bold-quarter-spanish-white-24px'>

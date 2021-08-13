@@ -16,10 +16,8 @@ import VerificationModal from '../../components/verificationModal/VerificationMo
 
 function Profile () {
   const { id } = useParams()
-  const [showEmailVerificationModal, setShowEmailVerificationModal] =
-    useState(false)
-  const [showPhoneVerificationModal, setShowPhoneVerificationModal] =
-    useState(false)
+  const [showEmailVerificationModal, setShowEmailVerificationModal] = useState(false)
+  const [showPhoneVerificationModal, setShowPhoneVerificationModal] = useState(false)
   const history = useHistory()
   const dispatch = useDispatch()
   const userDetails = useSelector((state) => state.userDetails)
@@ -28,19 +26,9 @@ function Profile () {
   const currentCommunitySlug = useSelector(
     (state) => state.activeCommunity.currentCommunity.slug
   )
-
   const { user, loading } = userDetails
   const [isCurrentUser, setIsCurrentUser] = useState(false)
   const [backLocation, setBackLocation] = useState('')
-
-  const verification = {
-    emailClickHandler: () => {
-      emailClickHandler(true)
-    },
-    phoneClickHandler: () => {
-      phoneClickHandler(true)
-    }
-  }
 
   useEffect(() => {
     dispatch(getUserDetails(id))

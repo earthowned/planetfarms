@@ -1,7 +1,6 @@
 import { useState } from 'react'
 const Follow = () => {
   const [follow, setFollow] = useState(false)
-
   const handleOnClick = () => {
     setFollow(!follow)
   }
@@ -17,11 +16,7 @@ const Follow = () => {
         </div>
       </div>
       <div
-        className={
-          follow
-            ? 'follow ibmplexsans-semi-bold-caribbean-green-16px'
-            : 'follow ibmplexsans-semi-bold-monsoon-16px'
-        }
+        className={follow ? 'follow ibmplexsans-semi-bold-caribbean-green-16px' : 'follow ibmplexsans-semi-bold-monsoon-16px'}
         style={{ cursor: 'pointer' }}
         onClick={handleOnClick}
       >

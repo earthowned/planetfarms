@@ -1,4 +1,5 @@
 import ProfileFormCard from './ProfileFormCard'
+import moment from 'moment'
 
 const PersonalInformation = ({ user, isCurrentUser }) => {
   const PersonalInformationdata = {
@@ -9,9 +10,9 @@ const PersonalInformation = ({ user, isCurrentUser }) => {
     secondValue: user?.lastName || 'N/A',
     thirdTitle: 'Date of birthday',
     thirdValue: isCurrentUser
-      ? (user?.dateOfBirth && new Date(user?.dateOfBirth).toDateString()) ||
+      ? (user?.dateOfBirth && moment.utc(new Date(user?.dateOfBirth)).format('ddd LL')) ||
         'N/A'
-      : user?.dateOfBirth && new Date(user?.dateOfBirth).toDateString()
+      : user?.dateOfBirth && moment.utc(new Date(user?.dateOfBirth)).format('ddd LL')
   }
   return (
     <>

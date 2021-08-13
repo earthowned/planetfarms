@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import CardImage from '../../components/cardImage/CardImage'
 import SearchComponent from '../../components/searchComponent/SearchComponent'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
@@ -19,9 +20,9 @@ function CommunityMembers ({ history }) {
   const currentCommunity = useSelector(
     (state) => state.activeCommunity.currentCommunity
   )
-  /*const currentCommunity = window.localStorage.getItem('currentCommunity')
+  /* const currentCommunity = window.localStorage.getItem('currentCommunity')
     ? JSON.parse(window.localStorage.getItem('currentCommunity'))
-    : null*/
+    : null */
 
   useEffect(() => {
     if (windowWidth < 1439 && windowWidth > 768) {

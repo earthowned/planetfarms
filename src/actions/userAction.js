@@ -1,6 +1,5 @@
-import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
-import { getApi, postApi } from '../utils/apiFunc'
+import { getApi, postApi, putApi } from '../utils/apiFunc'
 
 import FormData from 'form-data'
 import {
@@ -152,21 +151,18 @@ export const login = (name, password) => async (dispatch) => {
           Authorization: 'Bearer ' + data.token
         }
       })
-
-      await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, {
+      await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, {
         firstName: response.attributes.given_name,
         lastName: response.attributes.family_name,
         birthday: response.attributes.birthdate,
         phone: response.attributes.phone_number,
         email: response.attributes.email
-      },
-      {
+      }, {
         headers: {
           Authorization: 'Bearer ' + data.token
         }
       })
     }
-    window.localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     await routingCommunityNews(dispatch, true)
   } catch (error) {
@@ -181,13 +177,12 @@ export const login = (name, password) => async (dispatch) => {
 
 function checkErrorReturnMessage (error, dispatch) {
   const message = error.response && error.response.data.error ? error.response.data.error : error.message
-
   if (message === 'Not authorized, token failed') {
     dispatch(logout())
   }
-
   return message
 }
+
 export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
@@ -301,7 +296,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
         bypassCache: true
       })
     }
-    const { data } = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
+    const { data } = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const toBeUpdated = {
         email: user.email,
