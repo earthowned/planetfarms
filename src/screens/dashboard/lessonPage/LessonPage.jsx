@@ -28,6 +28,7 @@ const LessonPage = () => {
   const [isTest, setIsTest] = useState(false)
   const [materialData, setMaterialData] = useState([])
   const [cData, setCData] = useState([])
+  const [cDataForCreator, setCDataForCreator] = useState('')
   const [courseId, setCourseId] = useState('')
   const [path, setPath] = useState('')
   const { id } = useParams()
@@ -44,6 +45,7 @@ const LessonPage = () => {
     { id },
     setProgress
   )
+
   useEffect(() => {
     if (data?.data?.courseId !== undefined) {
       setCourseId(data?.data?.courseId)
@@ -59,8 +61,31 @@ const LessonPage = () => {
     GET_COURSE + '/' + courseId,
     { courseId }
   )
-
+  const isEnroll = courseData?.data?.enrolls?.filter(
+    (enroll) => enroll?.userId === userId
+  )
   useEffect(() => {
+    setCDataForCreator(courseData?.data?.creator)
+  }, [courseData])
+  console.log(cDataForCreator)
+  useEffect(() => {
+    if (
+      courseData?.data?.creator !== undefined &&
+      courseData?.data?.creator !== userId
+    ) {
+      if (isEnroll !== undefined && !isEnroll[0]?.isEnroll) {
+        return history.push(`/course/${courseId}`)
+      } else {
+        if (data?.data?.order !== 1) {
+          if (
+            progressData !== undefined &&
+            progressData[0]?.startTime !== null
+          ) {
+            return history.push(`/course/${courseId}`)
+          }
+        }
+      }
+    }
     setIsCreator(courseData?.data?.creator === userId && true)
     const order = data?.data?.order + 1
     setCData(
@@ -69,13 +94,13 @@ const LessonPage = () => {
   }, [courseData])
 
   const time = moment().toDate().getTime().toString()
-  useEffect(() => {
+  useEffect(async () => {
     if (
       courseData?.data?.creator !== undefined &&
       courseData?.data?.creator !== userId
     ) {
       if (progressData !== undefined && progressData?.length === 0) {
-        lessonProgressFnc({
+        await lessonProgressFnc({
           dispatch,
           action: createLessonProgress,
           lessonId: id,
