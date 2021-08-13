@@ -93,12 +93,23 @@ const NewsAdd = () => {
   }
 
   const editNewsForm = ({title}) => {
-    dispatch(newsUpdate({id: newsSingleData.id, title, category: newsSingleData.category, newsCover}, newsData))
+    dispatch(
+      newsUpdate(
+        {
+          id: newsSingleData.id, 
+          title, 
+          category: newsSingleData.category, 
+          newsCover
+        }, 
+        newsData, 
+        newsSingleData.rich_text.id
+      )
+    )
   }
 
   async function editImageFunc (id) {
-    if(newsSingleData?.photos) {
-      let photo = newsSingleData.photos.filter(el => el.id === id);
+    if(newsSingleData?.rich_text?.photos) {
+      let photo = newsSingleData.rich_text.photos.filter(el => el.id === id);
       setImageData(photo)
     }
   }
@@ -109,8 +120,8 @@ const NewsAdd = () => {
   }
 
   async function editTextFunc (id) {
-    if(newsSingleData?.texts) {
-      let text = newsSingleData.texts.filter(el => el.id === id);
+    if(newsSingleData?.rich_text?.texts) {
+      let text = newsSingleData.rich_text.texts.filter(el => el.id === id);
       setTextData(text)
     }
   }
@@ -121,8 +132,8 @@ const NewsAdd = () => {
   }
 
   async function editVideoFunc (id) {
-    if(newsSingleData?.videos) {
-      let video = newsSingleData.videos.filter(el => el.id === id);
+    if(newsSingleData?.rich_text?.videos) {
+      let video = newsSingleData.rich_text.videos.filter(el => el.id === id);
       setVideoData(video)
     }
   }

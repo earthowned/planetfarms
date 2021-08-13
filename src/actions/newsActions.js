@@ -88,14 +88,13 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
     const richText = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`);
-    const richtextId = richText?.data?.richText?.id
+    const richtextId = richText?.data?.richtext?.id
+
     if(richtextId) {
       formData.append('richtextId', richtextId)
-    }
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, configFunc)
-
-    dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     
+    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, configFunc)
+    dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     
         for (let i = 0; i < newNews.length; i++) {
           if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
@@ -109,8 +108,9 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
           }
         }
       
-    dispatch({ type: NEWS_CLEAR, payload: data })
+      dispatch({ type: NEWS_CLEAR, payload: data })
     document.location.href = '/news'
+    }
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -162,7 +162,7 @@ export const savevideoDetail = (data) => (dispatch) => {
   })
 }
 
-export const newsUpdate = (news, newNews) => async (dispatch) => {
+export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
   const formData = new FormData()
   formData.append('title', news.title)
   formData.append('category', news.category)
@@ -184,13 +184,13 @@ export const newsUpdate = (news, newNews) => async (dispatch) => {
     //adding new content
         for (let i = 0; i < newNews.length; i++) {
           if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-            await addVideo({ data: newNews[i], lessonId: null, newsId: id, dispatch })
+            await addVideo({ data: newNews[i], richtextId, dispatch })
           }
           if (newNews[i]?.lessonImg) {
-            await addImage({ data: newNews[i], lessonId: null, newsId: id, dispatch })
+            await addImage({ data: newNews[i], richtextId, dispatch })
           }
           if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-            await addText({ data: newNews[i], lessonId: null, newsId: id, dispatch })
+            await addText({ data: newNews[i], richtextId, dispatch })
           }
         }
 

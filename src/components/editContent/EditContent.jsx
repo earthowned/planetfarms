@@ -36,7 +36,7 @@ const EditContent = ({
     <>{
       data && <>
        {
-        data?.photos && data?.photos.map(item => {
+        data?.rich_text?.photos && data?.rich_text?.photos.map(item => {
           return  <Image
                 src={
                   typeof item?.lessonImg === 'string'
@@ -54,7 +54,7 @@ const EditContent = ({
       }
 
       {
-        data?.texts && data?.texts.map(item => {
+        data?.rich_text?.texts && data?.rich_text?.texts.map(item => {
           return  <Text
               heading={item?.textHeading}
               desc={item?.textDescription}
@@ -68,7 +68,7 @@ const EditContent = ({
       }
 
       {
-        data?.videos && data?.videos.map(item => {
+        data?.rich_text?.videos && data?.rich_text?.videos.map(item => {
           return  <Video
               title={item?.videoTitle}
               description={item?.videoDescription}

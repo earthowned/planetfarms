@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import './CommunityNewsView.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../components/backButton/BackButton'
-import { useLocation } from 'react-router-dom'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { getApi } from '../../utils/apiFunc'
 import { useDispatch } from 'react-redux'
@@ -83,7 +82,7 @@ const NewsSingleView = ({ news }) => {
         />
 
     {
-        news?.photos && news?.photos.map(item => {
+        news?.rich_text  && news?.rich_text?.photos.map(item => {
           return <Image
           src={`${LESSON_IMG}${item?.lessonImg}`}
           desc={
@@ -94,7 +93,7 @@ const NewsSingleView = ({ news }) => {
       }
 
       {
-        news?.texts && news?.texts.map(item => {
+        news?.rich_text && news?.rich_text?.texts.map(item => {
           return <Text
           heading={item?.textHeading}
           desc={item?.textDescription}
@@ -103,7 +102,7 @@ const NewsSingleView = ({ news }) => {
       }
 
       {
-        news?.videos && news?.videos.map(item => {
+        news?.rich_text && news?.rich_text?.videos.map(item => {
           return <Video
             title={item?.videoTitle}
             description={item?.videoDescription}
