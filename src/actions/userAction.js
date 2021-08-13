@@ -270,7 +270,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
     const userProfileFormData = new FormData()
     userProfileFormData.append('firstName', user.firstName)
     userProfileFormData.append('lastName', user.lastName)
-    userProfileFormData.append('phone', user.phone)
+    userProfileFormData.append('phone', user?.phone)
     if (user.birthday) userProfileFormData.append('birthday', user.birthday)
     userProfileFormData.append('email', user.email)
     userProfileFormData.append('attachments', user.attachments)

@@ -7,7 +7,7 @@ const ContactInformation = ({ user, verification, isCurrentUser }) => {
     firstValue: user?.email || 'N/A',
     ...(isCurrentUser ? {
       secondTitle: 'Phone',
-      secondValue: user?.phone || 'N/A'
+      secondValue: user?.phone
     } : {}),
     ...(process.env.REACT_APP_AUTH_METHOD === 'cognito' ? {
       firstVerify: {

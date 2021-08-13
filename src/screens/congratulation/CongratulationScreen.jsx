@@ -34,7 +34,7 @@ function CongratulationScreen () {
       firstName: userdetail?.firstName,
       lastName: userdetail?.lastName,
       email: userdetail?.email,
-      phone: userdetail?.phone,
+      phone: userdetail?.phone || '',
       birthday: userdetail
         ? moment(userdetail.dateOfBirth).format('YYYY-MM-DD')
         : ''
@@ -117,9 +117,6 @@ function CongratulationScreen () {
                       <Controller
                         control={control}
                         name='phone'
-                        rules={{
-                          required: true
-                        }}
                         render={({ onChange, value }) => (
                           <PhoneInput
                             className={errors.phone ? 'block-error' : ''}

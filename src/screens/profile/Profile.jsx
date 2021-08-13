@@ -29,7 +29,6 @@ function Profile () {
   const { user, loading } = userDetails
   const [isCurrentUser, setIsCurrentUser] = useState(false)
   const [backLocation, setBackLocation] = useState('')
-
   useEffect(() => {
     currentUser == id ? dispatch(getMyDetails()) : dispatch(getUserDetails(id))
     if (status) {
@@ -50,7 +49,14 @@ function Profile () {
   const phoneClickHandler = (bool) => {
     setShowPhoneVerificationModal(bool)
   }
-
+  const verification = {
+    emailClickHandler: () => {
+      emailClickHandler(true)
+    },
+    phoneClickHandler: () => {
+      phoneClickHandler(true)
+    }
+  }
   useEffect(() => {
     setIsCurrentUser(user?.userID === currentUser)
   }, [currentUser, user])
@@ -87,18 +93,9 @@ function Profile () {
                   <div className='profile-info'>
                     {user && (
                       <>
-                        <PersonalInformation
-                          user={user}
-                          isCurrentUser={isCurrentUser}
-                        />
-                        <ContactInformation
-                          user={user}
-                          isCurrentUser={isCurrentUser}
-                        />
-                        <AdditionalInformation
-                          user={user}
-                          isCurrentUser={isCurrentUser}
-                        />
+                        <PersonalInformation user={user} isCurrentUser={isCurrentUser} />
+                        <ContactInformation user={user} isCurrentUser={isCurrentUser} verification={verification} />
+                        <AdditionalInformation user={user} isCurrentUser={isCurrentUser} />
                       </>
                     )}
                   </div>
@@ -106,9 +103,7 @@ function Profile () {
                     clickHandler={editUserInformation}
                     image={
                       user?.attachments
-                        ? process.env.REACT_APP_CDN_BASE_URL +
-                          '/attachments/' +
-                          user.attachments
+                        ? process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments
                         : '/img/user.svg'
                     }
                     follow={isCurrentUser}
