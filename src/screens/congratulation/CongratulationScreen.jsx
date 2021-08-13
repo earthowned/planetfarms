@@ -34,7 +34,7 @@ function CongratulationScreen () {
       firstName: userdetail?.firstName,
       lastName: userdetail?.lastName,
       email: userdetail?.email,
-      phone: userdetail?.phone || '',
+      phone: userdetail?.phone,
       birthday: userdetail
         ? moment(userdetail.dateOfBirth).format('YYYY-MM-DD')
         : ''
@@ -45,6 +45,7 @@ function CongratulationScreen () {
   const { user } = userDetails
   const onSubmit = ({ firstName, lastName, phone, birthday, email }) => {
     const attachments = profileImage
+    if (phone !== 'null' || phone !== 'undefined') phone = ''
     dispatch(
       updateUser(
         { firstName, lastName, phone, birthday, email, attachments },
