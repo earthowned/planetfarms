@@ -110,7 +110,7 @@ function DashboardComponent () {
                   <p className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Last visit: {moment(user?.lastLogin).format('ddd LL')}</p>
                 </div>
                 <div className='info-my-community'>
-                  <div className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Follow  communities</div>
+                  <div className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Follow {user?.communities} communities</div>
                   <div className='my-communities'>My communities</div>
                 </div>
               </div>
