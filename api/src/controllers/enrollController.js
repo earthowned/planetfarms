@@ -48,7 +48,8 @@ const addEnroll = async (req, res) => {
 }
 
 const leaveCourse = async (req, res) => {
-  const enroll = await db.Enroll.findOne(req.params.id)
+  const {courseId} = req.body;
+  const enroll = await db.Enroll.findOne({where: {userId: req.user.id, courseId}})
   if(enroll) {
     res.status(201).json({
     status: true,
@@ -56,7 +57,7 @@ const leaveCourse = async (req, res) => {
   })
   }
 
-  await db.Enroll.update({isEnroll: false}, {where: {id: req.params.id}})
+  await db.Enroll.update({isEnroll: false}, {where: {id: enroll.id}})
 
   res.status(201).json({
     status: true,
