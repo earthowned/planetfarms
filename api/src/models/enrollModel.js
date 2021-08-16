@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING
       },
       isEnroll: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
       },
       createdAt: {
         type: DataTypes.DATE

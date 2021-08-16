@@ -27,11 +27,40 @@ const getEnrollById = async (req, res) => {
 }
 
 const addEnroll = async (req, res) => {
-  const enroll = await db.Enroll.create(req.body)
-  res.status(201).json({
+  const {courseId} = req.body;
+
+  const user = await db.Enroll.findOne({where: {userId: req.user.id, courseId}})
+
+  if(user) {
+    res.status(201).json({
+      status: true,
+      message: 'You have already enrolled.',
+    })
+  }
+
+  const enroll = await db.Enroll.create({userId: req.user.id, courseId})
+
+  res.status(200).json({
     status: true,
     message: 'enroll created successfully',
     data: enroll
+  })
+}
+
+const leaveCourse = async (req, res) => {
+  const enroll = await db.Enroll.findOne(req.params.id)
+  if(enroll) {
+    res.status(201).json({
+    status: true,
+    message: 'You have already enrolled.',
+  })
+  }
+
+  await db.Enroll.update({isEnroll: false}, {where: {id: req.params.id}})
+
+  res.status(201).json({
+    status: true,
+    message: 'Enrolled successfully',
   })
 }
 
@@ -68,5 +97,6 @@ module.exports = {
   getEnrollById,
   addEnroll,
   deleteEnroll,
-  updateEnroll
+  updateEnroll,
+  leaveCourse
 }
