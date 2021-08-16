@@ -1,11 +1,23 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { leaveCourse } from '../../../actions/enrollActions'
 
-const DropDownCourse = ({ setFeedbackModal }) => {
+
+const DropDownCourse = ({ courseId, setFeedbackModal }) => {
   const [courseDropDown, setCourseDropDown] = useState(false)
 
   function submitFeedback () {
     setFeedbackModal(true)
     setCourseDropDown(false)
+  }
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const unsubscribeCourse = async () => {
+    dispatch(leaveCourse(courseId, history))
+    setCourseDropDown(false);
   }
 
   return (
@@ -22,7 +34,7 @@ const DropDownCourse = ({ setFeedbackModal }) => {
           <ul>
             <li>Ask a question</li>
             <li onClick={submitFeedback}>Feedback</li>
-            <li>Leave Course</li>
+            <li onClick={unsubscribeCourse}>Leave Course</li>
           </ul>
         </div>
       )}

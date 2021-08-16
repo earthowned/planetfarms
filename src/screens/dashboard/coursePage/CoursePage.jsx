@@ -40,6 +40,7 @@ function MyCoursePage ({ unpaid }) {
           })
     )
   }, [data])
+  
   useEffect(() => {
     setIsEnroll(enrolls[0]?.isEnroll)
   }, [enrolls])

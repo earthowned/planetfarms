@@ -75,6 +75,13 @@
   align-items: center;
   justify-content: space-between;
   color: #fff;
+
+  .enroll-btn-wrapper {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .join-btn {
@@ -89,6 +96,10 @@
   line-height: 24px;
   padding: 0.6em 0.8em;
   cursor: pointer;
+}
+
+.red-text {
+  color: var(--secondary-red);
 }
 
 .enroll-container h4 {

@@ -75,7 +75,7 @@ import {
   communityUpdateReducer
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
-import { addEnrollReducer } from './reducers/enrollReducer'
+import { addEnrollReducer, leaveCourseReducer } from './reducers/enrollReducer'
 import {
   questionDeleteReducer,
   questionListReducer,
@@ -146,6 +146,7 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   accessToken: accessTokenReducer,
   addEnroll: addEnrollReducer,
+  leaveCourse: leaveCourseReducer,
   listQuestions: questionListReducer,
   questionDelete: questionDeleteReducer,
   questionUpdate: questionUpdateReducer,

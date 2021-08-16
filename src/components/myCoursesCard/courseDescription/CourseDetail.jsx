@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { GET_THUMBNAIL } from '../../../utils/urlConstants'
 import { addEnroll } from '../../../actions/enrollActions'
@@ -17,6 +17,7 @@ const CourseDetail = ({
   refetch,
   joinCourse
 }) => {
+  const {success: courseLeaveSuccess} = useSelector(state => state.leaveCourse)
   const dispatch = useDispatch()
   const [isEnroll, setIsEnroll] = useState('')
   const [enrollCourseId, setEnrollCourseId] = useState('')
@@ -27,11 +28,10 @@ const CourseDetail = ({
         setIsEnroll(enroll.isEnroll)
         setEnrollCourseId(enroll.courseId)
       })
-  }, [data])
+  }, [data, dispatch, courseLeaveSuccess])
 
   const enrollFreeCourse = (courseId) => {
-    const userId = userInfo.id
-    dispatch(addEnroll(courseId, userId, false, refetch))
+    dispatch(addEnroll(courseId, false, refetch))
   }
   return (
     <div className='description-course-page'>
@@ -53,7 +53,7 @@ const CourseDetail = ({
               </div>
             ) : joinCourse ||
               (isEnroll === true && enrollCourseId === data?.data?.id) ? (
-                <DropDownCourse setFeedbackModal={setFeedbackModal} />
+                <DropDownCourse setFeedbackModal={setFeedbackModal} courseId={data?.data?.id} />
                 ) : (
                   <div className='dropdown-course-container'>
                     <Button
