@@ -28,32 +28,41 @@ const getEnrollById = async (req, res) => {
 
 const addEnroll = async (req, res) => {
   const {courseId} = req.body;
+  const enroll = await db.Enroll.findOne({where: {userId: req.user.userID, courseId}})
 
-  const user = await db.Enroll.findOne({where: {userId: req.user.id, courseId}})
+  if(enroll) {
 
-  if(user) {
-    res.status(201).json({
-      status: true,
-      message: 'You have already enrolled.',
-    })
+    if(enroll.isEnroll) {
+      return res.status(201).json({
+        status: true,
+        message: 'You have already enrolled.',
+      })
+    }
+    
+    await db.Enroll.update({isEnroll: true}, {where: {id: enroll.id}})
+
+    return  res.status(200).json({
+              status: true,
+              message: 'enroll created successfully',
+            })
   }
 
-  const enroll = await db.Enroll.create({userId: req.user.id, courseId})
+  const enrolledUser = await db.Enroll.create({userId: req.user.userID, courseId})
 
   res.status(200).json({
     status: true,
     message: 'enroll created successfully',
-    data: enroll
+    data: enrolledUser
   })
 }
 
 const leaveCourse = async (req, res) => {
   const {courseId} = req.body;
-  const enroll = await db.Enroll.findOne({where: {userId: req.user.id, courseId}})
-  if(enroll) {
-    res.status(201).json({
+  const enroll = await db.Enroll.findOne({where: {userId: req.user.userID, courseId}})
+  if(!enroll) {
+   return res.status(201).json({
     status: true,
-    message: 'You have already enrolled.',
+    message: 'You haven\'t enrolled yet.',
   })
   }
 
@@ -61,7 +70,7 @@ const leaveCourse = async (req, res) => {
 
   res.status(201).json({
     status: true,
-    message: 'Enrolled successfully',
+    message: 'Course is Un-Enrolled successfully',
   })
 }
 

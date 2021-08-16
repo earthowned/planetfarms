@@ -8,11 +8,11 @@ const {
   getEnrollById,
   addEnroll,
   deleteEnroll,
-  updateEnroll
+  leaveCourse
 } = require('../controllers/enrollController')
 
-router.route('/').get(getEnroll)
+router.route('/').get(getEnroll).put(protect, leaveCourse);
 router.route('/add').post(protect, addEnroll)
-router.route('/:id').get(getEnrollById).delete(deleteEnroll).put(updateEnroll)
+router.route('/:id').get(getEnrollById).delete(deleteEnroll);
 
 module.exports = router
