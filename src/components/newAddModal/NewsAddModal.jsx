@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { newsUpdate } from '../../actions/newsActions'
 
 const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
-  const [title, setTitle] = useState(editData ? editData.title : '')
+  const [title, setTitle] = useState()
   const [category, setCategory] = useState()
 
   const [titleError, setTitleError] = useState()
@@ -56,9 +56,10 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
           editData
           ? <button className='default-btn-btn btn-variation' onClick={editNewsTitle}>Update</button>
           : <button className='default-btn-btn btn-variation' onClick = {() => history.push({
-              pathname: `/news/add/${title}`,
+              pathname: '/news/add',
               state: {
-                category
+                category,
+                title
               }
             })}>Continue</button>
         }

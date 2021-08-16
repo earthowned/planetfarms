@@ -41,12 +41,13 @@ const NewsAdd = () => {
   const [newsData, setNewsData] = useState([])
   const [newsSingleData, setNewsSingleData] = useState([])
   const [category, setCategory] = useState(state?.category || null)
+  const [title, setTitle] = useState(state?.title || null)
   const [newsCover, setNewsCover] = useState(null);
   const [imageData, setImageData] = useState(null)
   const [videoData, setVideoData] = useState(null)
   const [textData, setTextData] = useState(null)
 
-  const { title, id} = useParams()
+  const { id} = useParams()
 
   const {pathname} = useLocation();
 
@@ -87,7 +88,7 @@ const NewsAdd = () => {
     newsData[0].category = category;
     dispatch(createNews(newsData, newsCover));
   }
-
+console.log(title, category)
   const editNewsForm = ({title}) => {
     dispatch(
       newsUpdate(
@@ -234,6 +235,7 @@ const NewsAdd = () => {
           edit={pathname.split('/')[2] === 'edit'}
           saveBtnName="save news"
           editBtnName="edit news"
+          title={title}
           cancel={() => history.push('/news')}
         />
       </DashboardLayout>

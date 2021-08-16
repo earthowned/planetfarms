@@ -38,13 +38,6 @@ const LessonActions = ({ id, courseId, refetch }) => {
       </button>
       {actionActive && (
         <ul className={actionActive ? 'show' : 'hide'}>
-            <li onClick={() => history.push({
-                pathname: `/admin/lesson/edit/${id}`,
-                state: {
-                  courseId
-                }
-              })}>Edit</li>
-          <li>Delete</li>
           {
             tests.length > 0
               ? <Link to={`/admin/edit-test/${id}`}>
@@ -54,6 +47,12 @@ const LessonActions = ({ id, courseId, refetch }) => {
                 <li>Add test</li>
                 </Link>
           }
+          <li onClick={() => history.push({
+                pathname: `/admin/lesson/edit/${id}`,
+                state: {
+                  courseId
+                }
+              })}>Edit</li>
           <li
             onClick={() => {
               deleteLessonHandler(id)

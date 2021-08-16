@@ -33,7 +33,8 @@ const RichTextEditor = ({
   edit,
   editBtnName,
   saveBtnName,
-  cancel
+  cancel,
+  title
 }) => {
   const { register, errors, handleSubmit } = useForm()
   return (
@@ -58,6 +59,7 @@ const RichTextEditor = ({
           setDeleteImageModal={deleteImageModalFunc}
           setDeleteTextModal={deleteTextModalFunc}
           saveBtnName={saveBtnName}
+          title={title}
         />
         {showMaterial && <LessonMaterial
           material={material}
@@ -97,7 +99,8 @@ const AddContent = ({
   setDeleteTextModal,
   setDeleteImageModal,
   setDeleteVideoModal,
-  saveBtnName
+  saveBtnName,
+  title
 }) => {
   // const [title, setTitle] = useState('');
 
@@ -132,7 +135,7 @@ const AddContent = ({
             message: 'You must enter lesson title'
           }
         })}
-        defaultValue={editData?.title || ''}
+        defaultValue={editData?.title ? editData?.title : title}
       />
 
         {

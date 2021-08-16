@@ -10,13 +10,8 @@ import useSizeFinder from '../../utils/sizeFinder'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchNews, listNews, deleteNews } from '../../actions/newsActions'
 import Pagination from '../../components/pagination/Pagination'
-import axios from 'axios'
 
 function CommunityNews () {
-  const currentCommunity = localStorage.getItem('currentCommunity')
-    ? JSON.parse(localStorage.getItem('currentCommunity'))
-    : null
-
   const [addModal, setAddModal] = useState(false)
   const [editData, setEditData] = useState(null)
   const [deleteModal, setDeleteModal] = useState(false)
