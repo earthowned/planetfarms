@@ -12,7 +12,7 @@ const LessonCourse = ({
   enrolls
 }) => {
   const lessonLen = data?.data?.lessons.length
-
+  console.log(data?.data?.lessons);
   return (
     <div className='lessons-container'>
       {data?.data?.isFree === false && lessonLen >= 1 ? (
@@ -37,19 +37,14 @@ const LessonCourse = ({
         .sort((a, b) => (a.order > b.order ? 1 : -1))
         .map((data) => (
           <React.Fragment key={data.id}>
-            {isEnroll === false ? (
-              <div className='purchase-course-wrapper enroll-course' />
-            ) : (
-              ''
-            )}
-            <LessonCourseSingle
-              data={data}
-              userInfo={userInfo}
-              creator={creator}
-              isEnroll={isEnroll}
-              joinCourse={joinCourse}
-              enrolls={enrolls}
-            />
+                <LessonCourseSingle
+                  data={data}
+                  userInfo={userInfo}
+                  creator={creator}
+                  isEnroll={isEnroll}
+                  joinCourse={joinCourse}
+                  enrolls={enrolls}
+                />
           </React.Fragment>
         ))}
     </div>

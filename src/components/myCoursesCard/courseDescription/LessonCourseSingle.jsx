@@ -12,6 +12,8 @@ const LessonCourseSingle = ({ data, userInfo, creator, joinCourse }) => {
     setUserId(data?.lesson_progresses[0]?.userId || null)
   }, [data])
 
+  console.log(data);
+
   return (
     <div className='lesson-card-wrapper'>
       {data?.order !== 1 || creator === userInfo.id || joinCourse !== true ? (

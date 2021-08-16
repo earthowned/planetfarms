@@ -1,5 +1,6 @@
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
+const { sequelize } = require('../models')
 
 const getEnroll = async (req, res) => {
   const enrolls = await db.Enroll.findAll()
@@ -39,15 +40,23 @@ const addEnroll = async (req, res) => {
       })
     }
     
-    await db.Enroll.update({isEnroll: true}, {where: {id: enroll.id}})
+    const result = await sequelize.transaction(async (t) => {
+      await db.Enroll.update({isEnroll: true}, {where: {id: enroll.id}}, {transaction: t})
+      const lesson = await db.Lesson.findOne({where: courseId})
+      await db.LessonProgress.create({lessonId: lesson.id, userId: req.user.userID}, {transaction: t})
+      return 'lesson enrolled.';
+    });
 
     return  res.status(200).json({
               status: true,
               message: 'enroll created successfully',
+              result
             })
   }
 
   const enrolledUser = await db.Enroll.create({userId: req.user.userID, courseId})
+  const lesson = await db.Lesson.findOne({where: courseId})
+  await db.LessonProgress.create({lessonId: lesson.id, userId: req.user.userID})
 
   res.status(200).json({
     status: true,
@@ -56,22 +65,32 @@ const addEnroll = async (req, res) => {
   })
 }
 
+const addDataLessonProgress = async (courseId, userId) => {
+  const lesson = await db.Lesson.findOne({where: courseId})
+  await db.LessonProgress.create({lessonId: lesson.id, userId})
+}
+
 const leaveCourse = async (req, res) => {
   const {courseId} = req.body;
   const enroll = await db.Enroll.findOne({where: {userId: req.user.userID, courseId}})
   if(!enroll) {
-   return res.status(201).json({
+  return res.status(201).json({
     status: true,
     message: 'You haven\'t enrolled yet.',
   })
   }
 
   await db.Enroll.update({isEnroll: false}, {where: {id: enroll.id}})
-
+  await deleteDataLessonProgress();
   res.status(201).json({
     status: true,
     message: 'Course is Un-Enrolled successfully',
   })
+}
+
+const deleteDataLessonProgress = async (courseId, userId) => {
+  const lesson = await db.Lesson.findOne({where: courseId})
+  await db.LessonProgress.destroy({where: {lessonId: lesson.id, userId}})
 }
 
 const deleteEnroll = async (req, res) => {

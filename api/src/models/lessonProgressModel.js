@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       isCompleted: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       },
       startTime: {
         type: DataTypes.STRING
