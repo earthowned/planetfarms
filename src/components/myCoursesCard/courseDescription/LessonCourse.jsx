@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Button from '../../button/Button'
 import LessonCourseSingle from './LessonCourseSingle'
 
@@ -12,7 +12,6 @@ const LessonCourse = ({
   enrolls
 }) => {
   const lessonLen = data?.data?.lessons.length
-  console.log(data?.data?.lessons);
   return (
     <div className='lessons-container'>
       {data?.data?.isFree === false && lessonLen >= 1 ? (

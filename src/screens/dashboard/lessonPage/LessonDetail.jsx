@@ -28,6 +28,7 @@ const LessonDetail = ({ data, id, setIsPassed }) => {
     setLessonData([textData, videoData, photoData])
   }, [data])
   const newData = lessonData.flat()
+  console.log(newData);
   return (
     <div className='lesson-description-wrapper'>
       <h1>{data?.title}</h1>

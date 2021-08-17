@@ -27,7 +27,7 @@ const LessonTest = React.memo(({ title, setIsPassed }) => {
     'user_test_data_data',
     `${process.env.REACT_APP_API_BASE_URL}/api/user_tests/lesson/${id}`
   )
-  const lessonName = title.replace(/\s+/g, '-').toLowerCase()
+  const lessonName = title?.replace(/\s+/g, '-').toLowerCase()
   useEffect(async () => {
     if (start) {
       history.push(`/test-${lessonName}/${id}/${start.id}`)

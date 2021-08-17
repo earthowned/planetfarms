@@ -158,6 +158,7 @@ const LessonPage = () => {
       lastLesson ? `/admin/course/${courseId}` : `/lesson/${cData[0].id}`
     )
   }
+  
   return (
     <>
       {isLoading ? (

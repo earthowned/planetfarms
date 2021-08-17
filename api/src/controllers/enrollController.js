@@ -42,7 +42,7 @@ const addEnroll = async (req, res) => {
     
     const result = await sequelize.transaction(async (t) => {
       await db.Enroll.update({isEnroll: true}, {where: {id: enroll.id}}, {transaction: t})
-      const lesson = await db.Lesson.findOne({where: courseId})
+      const lesson = await db.Lesson.findOne({where: {courseId}})
       await db.LessonProgress.create({lessonId: lesson.id, userId: req.user.userID}, {transaction: t})
       return 'lesson enrolled.';
     });
@@ -54,20 +54,18 @@ const addEnroll = async (req, res) => {
             })
   }
 
-  const enrolledUser = await db.Enroll.create({userId: req.user.userID, courseId})
-  const lesson = await db.Lesson.findOne({where: courseId})
-  await db.LessonProgress.create({lessonId: lesson.id, userId: req.user.userID})
+  const result = await sequelize.transaction(async (t) => {
+    await db.Enroll.create({userId: req.user.userID, courseId}, {transaction: t})
+    const lesson = await db.Lesson.findOne({where: {courseId}})
+    await db.LessonProgress.create({lessonId: lesson.id, userId: req.user.userID}, {transaction: t})
+    return 'lesson enrolled.';
+    });
 
   res.status(200).json({
     status: true,
     message: 'enroll created successfully',
-    data: enrolledUser
+    result
   })
-}
-
-const addDataLessonProgress = async (courseId, userId) => {
-  const lesson = await db.Lesson.findOne({where: courseId})
-  await db.LessonProgress.create({lessonId: lesson.id, userId})
 }
 
 const leaveCourse = async (req, res) => {
@@ -80,17 +78,17 @@ const leaveCourse = async (req, res) => {
   })
   }
 
-  await db.Enroll.update({isEnroll: false}, {where: {id: enroll.id}})
-  await deleteDataLessonProgress();
+  const result = await sequelize.transaction(async (t) => {
+    await db.Enroll.update({isEnroll: false}, {where: {id: enroll.id}}, {transaction: t})
+    const lesson = await db.Lesson.findOne({where: {courseId}})
+    await db.LessonProgress.destroy({where: {lessonId: lesson.id}}, {transaction: t})
+    return 'lesson enrolled.';
+    });
   res.status(201).json({
     status: true,
     message: 'Course is Un-Enrolled successfully',
+    result
   })
-}
-
-const deleteDataLessonProgress = async (courseId, userId) => {
-  const lesson = await db.Lesson.findOne({where: courseId})
-  await db.LessonProgress.destroy({where: {lessonId: lesson.id, userId}})
 }
 
 const deleteEnroll = async (req, res) => {

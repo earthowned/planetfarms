@@ -11,12 +11,9 @@ const LessonCourseSingle = ({ data, userInfo, creator, joinCourse }) => {
     setIsLessonCompleted(data?.lesson_progresses[0]?.isCompleted)
     setUserId(data?.lesson_progresses[0]?.userId || null)
   }, [data])
-
-  console.log(data);
-
   return (
     <div className='lesson-card-wrapper'>
-      {data?.order !== 1 || creator === userInfo.id || joinCourse !== true ? (
+      {/* {data?.order !== 1 || creator === userInfo.id || joinCourse !== true ? (
         userId === userInfo.id && isLessonCompleted === true ? (
           ''
         ) : (
@@ -24,8 +21,9 @@ const LessonCourseSingle = ({ data, userInfo, creator, joinCourse }) => {
         )
       ) : (
         ''
-      )}
-      <div className={data.finish ? 'lesson-card lock-active' : 'lesson-card'}>
+      )} */}
+      <div className={data?.lesson_progresses.length === 0 ? 'lesson-card lock-active' : 'lesson-card'}>
+        {data?.lesson_progresses.length === 0 && <div className="blur-lesson" />}
         <div className='lessonCoverImg'>
           {data.coverImg ? (
             <img
