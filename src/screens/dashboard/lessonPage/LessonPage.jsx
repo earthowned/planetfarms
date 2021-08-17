@@ -64,10 +64,11 @@ const LessonPage = () => {
   const isEnroll = courseData?.data?.enrolls?.filter(
     (enroll) => enroll?.userId === userId
   )
+
   useEffect(() => {
     setCDataForCreator(courseData?.data?.creator)
   }, [courseData])
-  console.log(cDataForCreator)
+
   useEffect(() => {
     if (
       courseData?.data?.creator !== undefined &&

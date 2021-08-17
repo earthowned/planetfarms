@@ -36,7 +36,7 @@ const LessonCourse = ({
         .sort((a, b) => (a.order > b.order ? 1 : -1))
         .map((data) => (
           <React.Fragment key={data.id}>
-                <LessonCourseSingle
+           <LessonCourseSingle
                   data={data}
                   userInfo={userInfo}
                   creator={creator}

@@ -23,22 +23,45 @@ const LessonCourseSingle = ({ data, userInfo, creator, joinCourse }) => {
         ''
       )} */}
       <div className={data?.lesson_progresses.length === 0 ? 'lesson-card lock-active' : 'lesson-card'}>
-        {data?.lesson_progresses.length === 0 && <div className="blur-lesson" />}
-        <div className='lessonCoverImg'>
-          {data.coverImg ? (
-            <img
-              className='lesson-card-img'
-              src={`${GET_COVERIMG}${data.coverImg}`}
-              alt='background image'
-            />
-          ) : (
-            <div className='coverImg coverImg__text lessonImg'>
-              <div>
-                <p>{data.title}</p>
-              </div>
+        { data?.lesson_progresses.length === 0
+        ? <>
+          <div className="blur-lesson" />
+          <div className='lessonCoverImg'>
+            <div className="lock-lesson-content">
+              <img className="lock-img" src="/img/lesson-lock.svg" alt="lesson image" />
+              <h4>Finish Previous Lesson</h4>
             </div>
-          )}
-        </div>
+              {data.coverImg ? (
+                <img
+                  className='lesson-card-img'
+                  src={`${GET_COVERIMG}${data.coverImg}`}
+                  alt='background image'
+                />
+              ) : (
+                <div className='coverImg coverImg__text lessonImg'>
+                  <div>
+                    <p>{data.title}</p>
+                  </div>
+                </div>
+            )}
+         </div>
+         </>
+        : <div className='lessonCoverImg'>
+            {data.coverImg ? (
+              <img
+                className='lesson-card-img'
+                src={`${GET_COVERIMG}${data.coverImg}`}
+                alt='background image'
+              />
+            ) : (
+              <div className='coverImg coverImg__text lessonImg'>
+                <div>
+                  <p>{data.title}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        }
         <div className='lesson-card-content'>
           <h3>{data.title}</h3>
           {data.lessonDesc && <p>{data.lessonDesc}</p>}
