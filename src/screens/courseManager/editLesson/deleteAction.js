@@ -13,7 +13,6 @@ export const useDeleteActions = (
   setMaterial
 ) => {
   const dispatch = useDispatch()
-
   const removeTextItem = (id) => {
     dispatch(deleteText(id, refetch))
   }
@@ -32,12 +31,5 @@ export const useDeleteActions = (
   const removeLocalMaterial = (e) => {
     setMaterial(material.filter((item) => item?.mData?.preview !== e.currentTarget.getAttribute('name')))
   }
-  return {
-    removeTextItem,
-    removePhoto,
-    removeVideo,
-    removeMaterial,
-    removeItem,
-    removeLocalMaterial
-  }
+  return { removeTextItem, removePhoto, removeVideo, removeMaterial, removeItem, removeLocalMaterial }
 }

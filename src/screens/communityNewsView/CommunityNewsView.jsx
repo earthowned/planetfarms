@@ -13,19 +13,14 @@ import RichTextView from '../../components/richTextView/RichTextView'
 
 function CommunityNewsViewPage () {
   const [news, setNews] = useState({})
-  // const val = useLocation()?.state?.news
-
-  // fetching current community
   const currentCommunity = localStorage.getItem('currentCommunity')
     ? JSON.parse(localStorage.getItem('currentCommunity'))
     : null
   const dispatch = useDispatch()
   const { id } = useParams()
-
   useEffect(() => {
     getSingleNews(id)
   }, [])
-
   async function getSingleNews (id) {
     const { data } = await getApi(
       dispatch,
@@ -33,7 +28,6 @@ function CommunityNewsViewPage () {
     )
     setNews(data)
   }
-
   return (
     <>
       <DashboardLayout>
@@ -66,7 +60,6 @@ const NewsSingleView = ({ news }) => {
   return (
     <>
       <h1 className='news-view-title'>{news?.title}</h1>
-
       <div className='title-time'>
         <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
           {news?.createdAt && new Date(news?.createdAt).toDateString()}
@@ -75,11 +68,7 @@ const NewsSingleView = ({ news }) => {
           {news?.readTime}
         </div>
       </div>
-
-      <Image
-        src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${news?._attachments}`}
-      />
-
+      <Image src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${news?._attachments}`} />
       {
         news?.rich_text && news?.rich_text?.photos.map(item => {
           return (
@@ -92,7 +81,6 @@ const NewsSingleView = ({ news }) => {
           )
         })
       }
-
       {
         news?.rich_text && news?.rich_text?.texts.map(item => {
           return (

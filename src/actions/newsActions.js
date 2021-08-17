@@ -149,15 +149,8 @@ export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
   formData.append('news', news.newsCover)
   try {
     dispatch({ type: NEWS_UPDATE_REQUEST })
-    const { id } = news
-    const data = await putApi(
-      `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`,
-      formData
-    )
-    dispatch({
-      type: NEWS_UPDATE_SUCCESS,
-      payload: data
-    })
+    const data = await putApi(`${process.env.REACT_APP_API_BASE_URL}/api/news/${news.id}/community/${currentCommunity.id}`, formData)
+    dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data })
     // adding new content
     for (let i = 0; i < newNews.length; i++) {
       if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
@@ -176,9 +169,6 @@ export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
     const message = error.response && error.response.data.message
       ? error.response.data.message
       : error.message
-    dispatch({
-      type: NEWS_UPDATE_FAIL,
-      payload: message
-    })
+    dispatch({ type: NEWS_UPDATE_FAIL, payload: message })
   }
 }
