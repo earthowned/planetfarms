@@ -31,7 +31,13 @@ module.exports = (sequelize, DataTypes) => {
   )
   Courses.associate = (models) => {
     Courses.hasMany(models.Lesson, { onDelete: 'CASCADE' })
-    Courses.hasMany(models.Enroll, { onDelete: 'CASCADE' })
+    // n:m course and user through enroll
+    Courses.belongsToMany(models.User, { 
+      through: 'enrolls', 
+      foreignKey: 'courseId',
+      as: 'enrolledUser',
+      onDelete: 'CASCADE' 
+    })
     Courses.belongsTo(models.Category, {
       foreignKey: 'categoryId',
       onDelete: 'CASCADE'

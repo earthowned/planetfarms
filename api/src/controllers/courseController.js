@@ -16,7 +16,18 @@ const getCourses = async (req, res) => {
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson, db.Enroll, db.Category],
+    include: [db.Lesson, db.Category, 
+      {
+      model: db.User,
+      as: 'enrolledUser',
+      attributes: [['id', 'userId']],
+      through: {
+        where: {userId: req.user.id},
+        attributes: ['isEnroll', 'courseId'],
+      }
+      }
+    ]
+    ,
     where: {
       ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
       ...(category ? { categoryId: Number(category) } : {})
@@ -87,10 +98,22 @@ const updateCourse = async (req, res) => {
 const getCourseById = async (req, res) => {
   const course = await db.Courses.findOne({
     where: { id: req.params.id },
-    include: [
-      { model: db.Lesson, include: [db.LessonProgress, db.Test] },
-      db.Enroll
-    ]
+      include: [
+        {
+          model: db.Lesson,
+          include: [db.Test, db.LessonProgress]
+        },
+        {
+          model: db.User,
+          attributes: ['email'],
+          as: 'enrolledUser',
+          through: {
+            where: {userId: req.user.id},
+            attributes: ['isEnroll'],
+          }
+        },
+        db.Category,
+      ]
   })
   if (!course) {
     throw new NotFoundError()

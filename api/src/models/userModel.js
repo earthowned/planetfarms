@@ -68,6 +68,14 @@ module.exports = (sequelize, DataTypes) => {
       as: 'group_followers'
     })
 
+    // n:m user and course through enrolls
+    User.belongsToMany(models.Courses, { 
+      through: 'enrolls', 
+      foreignKey: 'userId',
+      as: 'enrolledUser',
+      onDelete: 'CASCADE' 
+    })
+
     // one to many relationship with enterprise
     User.hasMany(models.Enterprise, { foreignKey: 'creatorId', as: 'enterprise_creator' })
 

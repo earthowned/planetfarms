@@ -8,21 +8,17 @@ const EnrollContainer = ({ item, userInfo, setPurchaseModal }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const [isEnroll, setIsEnroll] = useState(false)
-  const [enrollCourseId, setEnrollCourseId] = useState('')
-
   const adminCoursePath = `/admin/course/${item.id}`
 
   const enrollFreeCourse = (courseId) => {
     dispatch(addEnroll(courseId, history))
     setIsEnroll(true);
   }
+
   useEffect(() => {
-    const isEnrolled = item.enrolls
-      .filter((enroll) => enroll.userId === userInfo.id)
-      .map((enroll) => {
-        setIsEnroll(enroll.isEnroll)
-        setEnrollCourseId(enroll.courseId)
-      })
+    if(item.enrolledUser.length > 0) {
+      setIsEnroll(item.enrolledUser[0].enrolls.isEnroll)
+    }
   }, [item])
 
   const leaveCourseFunc = () => {
@@ -35,18 +31,18 @@ const EnrollContainer = ({ item, userInfo, setPurchaseModal }) => {
       <div className='enroll-container'>
         {isEnroll === true ? (
           <div className="enroll-btn-wrapper">
-          {/* <button
+          <button
             className='join-btn'
             onClick={() => history.push('/course/' + item.id)}
           >
             <span>Go to course</span>
-          </button> */}
-           <button
+          </button>
+           {/* <button
             className='join-btn red-text'
             onClick={leaveCourseFunc}
           >
             <span>Leave Course</span>
-          </button>
+          </button> */}
           </div>
         ) : (
           <button className='join-btn'>

@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true
       },
       userId: {
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
+      },
+      courseId: {
+        type: DataTypes.INTEGER
       },
       isEnroll: {
         type: DataTypes.BOOLEAN,
@@ -27,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     Enroll.belongsTo(models.Courses, {
       constraints: true,
       foreignKey: 'courseId'
+    })
+    Enroll.belongsTo(models.User, {
+      constraints: true,
+      foreignKey: 'userId'
     })
   }
   return Enroll

@@ -29,21 +29,26 @@ function MyCoursePage ({ unpaid }) {
     GET_COURSE + '/' + courseId
   )
 
-  useEffect(() => {
-    setEnrolls(
-      isLoading
-        ? 'loading'
-        : data?.data?.enrolls
-          .filter((enrolled) => enrolled.userId === userInfo.id)
-          .map((enroll) => {
-            return enroll
-          })
-    )
-  }, [data])
+  // useEffect(() => {
+  //   setEnrolls(
+  //     isLoading
+  //       ? 'loading'
+  //       : data?.data?.enrolls
+  //         .filter((enrolled) => enrolled.userId === userInfo.id)
+  //         .map((enroll) => {
+  //           return enroll
+  //         })
+  //   )
+  // }, [data])
   
-  useEffect(() => {
-    setIsEnroll(enrolls[0]?.isEnroll)
-  }, [enrolls])
+  // useEffect(() => {
+  //   setIsEnroll(enrolls[0]?.isEnroll)
+  // }, [enrolls])
+    useEffect(() => {
+    if(data?.data?.enrolledUser.length > 0) {
+      setIsEnroll(data?.data?.enrolledUser[0].enrolls.isEnroll)
+    }
+  }, [])
 
   return (
     <>

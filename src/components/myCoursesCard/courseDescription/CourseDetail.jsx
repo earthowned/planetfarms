@@ -21,14 +21,14 @@ const CourseDetail = ({
   const dispatch = useDispatch()
   const [isEnroll, setIsEnroll] = useState('')
   const [enrollCourseId, setEnrollCourseId] = useState('')
-  useEffect(() => {
-    data?.data?.enrolls
-      .filter((enroll) => enroll.userId === userInfo.id)
-      .map((enroll) => {
-        setIsEnroll(enroll.isEnroll)
-        setEnrollCourseId(enroll.courseId)
-      })
-  }, [data, dispatch, courseLeaveSuccess])
+  // useEffect(() => {
+  //   data?.data?.enrolls
+  //     .filter((enroll) => enroll.userId === userInfo.id)
+  //     .map((enroll) => {
+  //       setIsEnroll(enroll.isEnroll)
+  //       setEnrollCourseId(enroll.courseId)
+  //     })
+  // }, [data, dispatch, courseLeaveSuccess])
 
   const enrollFreeCourse = (courseId) => {
     dispatch(addEnroll(courseId, false, refetch))

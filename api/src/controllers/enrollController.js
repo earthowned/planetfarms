@@ -29,8 +29,8 @@ const getEnrollById = async (req, res) => {
 
 const addEnroll = async (req, res) => {
   const {courseId} = req.body;
-  const enroll = await db.Enroll.findOne({where: {userId: req.user.userID, courseId}})
-
+  const enroll = await db.Enroll.findOne({where: {userId: req.user.id, courseId}})
+  
   if(enroll) {
 
     if(enroll.isEnroll) {
@@ -40,37 +40,27 @@ const addEnroll = async (req, res) => {
       })
     }
     
-    const result = await sequelize.transaction(async (t) => {
-      await db.Enroll.update({isEnroll: true}, {where: {id: enroll.id}}, {transaction: t})
-      const lesson = await db.Lesson.findOne({where: {courseId}})
-      await db.LessonProgress.create({lessonId: lesson.id, userId: req.user.userID}, {transaction: t})
-      return 'lesson enrolled.';
-    });
-
+    const enrolledUser = await db.Enroll.update({isEnroll: true}, {where: {id: enroll.id}})
+  
     return  res.status(200).json({
               status: true,
               message: 'enroll created successfully',
-              result
+              enrolledUser
             })
   }
 
-  const result = await sequelize.transaction(async (t) => {
-    await db.Enroll.create({userId: req.user.userID, courseId}, {transaction: t})
-    const lesson = await db.Lesson.findOne({where: {courseId}})
-    await db.LessonProgress.create({lessonId: lesson.id, userId: req.user.userID}, {transaction: t})
-    return 'lesson enrolled.';
-    });
+  const enrolledUser = await db.Enroll.create({userId: req.user.id, courseId})
 
   res.status(200).json({
     status: true,
     message: 'enroll created successfully',
-    result
+    enrolledUser
   })
 }
 
 const leaveCourse = async (req, res) => {
   const {courseId} = req.body;
-  const enroll = await db.Enroll.findOne({where: {userId: req.user.userID, courseId}})
+  const enroll = await db.Enroll.findOne({where: {userId: req.user.id, courseId}})
   if(!enroll) {
   return res.status(201).json({
     status: true,
@@ -78,16 +68,10 @@ const leaveCourse = async (req, res) => {
   })
   }
 
-  const result = await sequelize.transaction(async (t) => {
-    await db.Enroll.update({isEnroll: false}, {where: {id: enroll.id}}, {transaction: t})
-    const lesson = await db.Lesson.findOne({where: {courseId}})
-    await db.LessonProgress.destroy({where: {lessonId: lesson.id}}, {transaction: t})
-    return 'lesson enrolled.';
-    });
+  await db.Enroll.update({isEnroll: false}, {where: {id: enroll.id}});
   res.status(201).json({
     status: true,
     message: 'Course is Un-Enrolled successfully',
-    result
   })
 }
 
