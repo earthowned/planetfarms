@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { GET_COVERIMG } from '../../../utils/urlConstants'
 import Button from '../../button/Button'
-import LessonCourseSingle from './LessonCourseSingle'
+import LessonCourseSingle, { UnbluredLessonCard } from './LessonCourseSingle'
 
 const LessonCourse = ({
   data,
@@ -12,6 +13,7 @@ const LessonCourse = ({
   enrolls
 }) => {
   const lessonLen = data?.data?.lessons.length
+
   return (
     <div className='lessons-container'>
       {data?.data?.isFree === false && lessonLen >= 1 ? (
@@ -32,8 +34,14 @@ const LessonCourse = ({
         ''
       )}
       <h3>Lessons</h3>
-      {data?.data?.lessons
+
+      {
+      isEnroll 
+      ? <>
+        <UnbluredLessonCard data={data?.data?.lessons[0]} />
+        {data?.data?.lessons
         .sort((a, b) => (a.order > b.order ? 1 : -1))
+        .slice(1)
         .map((data) => (
           <React.Fragment key={data.id}>
            <LessonCourseSingle
@@ -46,6 +54,22 @@ const LessonCourse = ({
                 />
           </React.Fragment>
         ))}
+        </>
+      : data?.data?.lessons
+        .sort((a, b) => (a.order > b.order ? 1 : -1))
+        .map((data) => (
+          <React.Fragment key={data.id}>
+           <LessonCourseSingle
+                  data={data}
+                  userInfo={userInfo}
+                  creator={creator}
+                  isEnroll={isEnroll}
+                  joinCourse={joinCourse}
+                  enrolls={enrolls}
+                />
+          </React.Fragment>
+        ))
+        }
     </div>
   )
 }

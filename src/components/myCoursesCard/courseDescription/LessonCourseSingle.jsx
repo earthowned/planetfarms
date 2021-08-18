@@ -6,7 +6,6 @@ const LessonCourseSingle = ({ data, userInfo, creator, joinCourse, isEnroll }) =
   const history = useHistory()
   const [isLessonCompleted, setIsLessonCompleted] = useState(false)
   const [userId, setUserId] = useState('')
-console.log(data)
   // useEffect(() => {
   //   setIsLessonCompleted(data?.lesson_progresses[0]?.isCompleted)
   //   setUserId(data?.lesson_progresses[0]?.userId || null)
@@ -61,6 +60,26 @@ const LessonCard = ({data}) => {
             )
     }
     </>
+  )
+}
+
+export const UnbluredLessonCard = ({data}) => {
+  const history = useHistory()
+  return (
+  <div className='lesson-card-wrapper'>
+      <div className='lesson-card'>
+    <div className='lessonCoverImg'>
+      <LessonCard data={data}/>
+    </div>
+    <div className='lesson-card-content'>
+      <h3>{data.title}</h3>
+      {data.lessonDesc && <p>{data.lessonDesc}</p>}
+      <button onClick={() => history.push(`/lesson/${data.id}`)}>
+        See Lesson
+      </button>
+    </div>
+  </div>
+  </div>
   )
 }
 export default LessonCourseSingle

@@ -20,7 +20,6 @@ const CourseDescription = ({
     setCreator(data?.data?.creator)
     setJoinCourse(isEnroll || false)
   }, [data, isEnroll])
-
   return (
     <>
       <div className='course-page-container border-1px-onyx'>
@@ -28,6 +27,7 @@ const CourseDescription = ({
           setFeedbackModal={setFeedbackModal}
           setPurchaseModal={setPurchaseModal}
           data={data}
+          isEnroll={isEnroll}
           isLoading={isLoading}
           userInfo={userInfo}
           refetch={refetch}

@@ -48,7 +48,7 @@ function MyCoursePage ({ unpaid }) {
     if(data?.data?.enrolledUser.length > 0) {
       setIsEnroll(data?.data?.enrolledUser[0].enrolls.isEnroll)
     }
-  }, [])
+  }, [data])
 
   return (
     <>

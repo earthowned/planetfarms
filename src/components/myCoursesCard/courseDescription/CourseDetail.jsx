@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { GET_THUMBNAIL } from '../../../utils/urlConstants'
@@ -11,7 +11,8 @@ import DropDownCourse from './DropDownCourse'
 const CourseDetail = ({
   setFeedbackModal,
   setPurchaseModal,
-  data,
+  data={},
+  isEnroll,
   isLoading,
   userInfo,
   refetch,
@@ -19,16 +20,18 @@ const CourseDetail = ({
 }) => {
   const {success: courseLeaveSuccess} = useSelector(state => state.leaveCourse)
   const dispatch = useDispatch()
-  const [isEnroll, setIsEnroll] = useState('')
+  // const [isEnroll, setIsEnroll] = useState(false)
+  const [enroll, setEnroll] = useState(false);
   const [enrollCourseId, setEnrollCourseId] = useState('')
-  // useEffect(() => {
-  //   data?.data?.enrolls
-  //     .filter((enroll) => enroll.userId === userInfo.id)
-  //     .map((enroll) => {
-  //       setIsEnroll(enroll.isEnroll)
-  //       setEnrollCourseId(enroll.courseId)
-  //     })
-  // }, [data, dispatch, courseLeaveSuccess])
+  
+  useLayoutEffect(() => {
+    setEnroll(isEnroll)
+  }, [isEnroll])
+  // // useEffect(() => {
+  // //   if(data?.data?.enrolledUser.length > 0) {
+  // //     setIsEnroll(data?.data?.enrolledUser[0].enrolls.isEnroll)
+  // //   }
+  // // }, [data, dispatch, courseLeaveSuccess])
 
   const enrollFreeCourse = (courseId) => {
     dispatch(addEnroll(courseId, false, refetch))
@@ -51,8 +54,8 @@ const CourseDetail = ({
                   clickHandler={() => setPurchaseModal(true)}
                 />
               </div>
-            ) : joinCourse ||
-              (isEnroll === true && enrollCourseId === data?.data?.id) ? (
+            ) : (joinCourse || isEnroll )
+              ? (
                 <DropDownCourse setFeedbackModal={setFeedbackModal} courseId={data?.data?.id} />
                 ) : (
                   <div className='dropdown-course-container'>
