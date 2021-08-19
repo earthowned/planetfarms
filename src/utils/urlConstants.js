@@ -22,6 +22,7 @@ export const COURSE = BASE_URL + 'courses'
 export const GET_LESSONS = BASE_URL + 'lessons'
 export const LESSONS = 'lessons'
 export const ADD_LESSONS = BASE_URL + 'lessons/add'
+export const GET_COURSE_LESSONS = BASE_URL + 'lessons/course/'
 
 // videos
 export const ADD_VIDEOS = BASE_URL + 'videos/add'
@@ -33,7 +34,9 @@ export const ADD_LESSON_PHOTO = BASE_URL + 'lesson-photos/add'
 export const ADD_LESSON_TEXT = BASE_URL + 'lesson-text/add'
 
 // lesson progress
-export const LESSON_PROGRESS = BASE_URL + 'lesson-progress'
+export const LESSON_PROGRESS = BASE_URL + 'lesson-progress/'
+export const ADD_LESSON_PROGRESS = BASE_URL + 'lesson-progress/add'
+
 
 // lesson material
 export const ADD_MATERIAL = BASE_URL + 'materials/add'

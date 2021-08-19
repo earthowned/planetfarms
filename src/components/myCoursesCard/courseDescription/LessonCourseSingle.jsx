@@ -1,15 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router'
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 
-const LessonCourseSingle = ({ data, userInfo, creator, joinCourse, isEnroll }) => {
-  const history = useHistory()
-  const [isLessonCompleted, setIsLessonCompleted] = useState(false)
-  const [userId, setUserId] = useState('')
-  // useEffect(() => {
-  //   setIsLessonCompleted(data?.lesson_progresses[0]?.isCompleted)
-  //   setUserId(data?.lesson_progresses[0]?.userId || null)
-  // }, [data])
+const LessonCourseSingle = ({ data, userInfo, creator, joinCourse, isEnroll, seeLessonHandler }) => {
+
   return (
     <>
     <div className='lesson-card-wrapper'>
@@ -32,7 +24,7 @@ const LessonCourseSingle = ({ data, userInfo, creator, joinCourse, isEnroll }) =
         <div className='lesson-card-content'>
           <h3>{data.title}</h3>
           {data.lessonDesc && <p>{data.lessonDesc}</p>}
-          <button onClick={() => history.push(`/lesson/${data.id}`)}>
+          <button onClick={() => seeLessonHandler(data.id)}>
             See Lesson
           </button>
         </div>
@@ -63,8 +55,7 @@ const LessonCard = ({data}) => {
   )
 }
 
-export const UnbluredLessonCard = ({data}) => {
-  const history = useHistory()
+export const UnbluredLessonCard = ({data, seeLessonHandler}) => {
   return (
   <div className='lesson-card-wrapper'>
       <div className='lesson-card'>
@@ -74,7 +65,31 @@ export const UnbluredLessonCard = ({data}) => {
     <div className='lesson-card-content'>
       <h3>{data.title}</h3>
       {data.lessonDesc && <p>{data.lessonDesc}</p>}
-      <button onClick={() => history.push(`/lesson/${data.id}`)}>
+      <button onClick={() => seeLessonHandler(data.id)}>
+        See Lesson
+      </button>
+    </div>
+  </div>
+  </div>
+  )
+}
+
+export const BluredLessonCard = ({data}) => {
+  return (
+  <div className='lesson-card-wrapper'>
+      <div className='lesson-card lock-active'>
+    <div className="blur-lesson" />
+    <div className='lessonCoverImg'>
+      <div className="lock-lesson-content">
+        <img className="lock-img" src="/img/lesson-lock.svg" alt="lesson image" />
+          <h4>Finish Previous Lesson</h4>
+        </div>
+      <LessonCard data={data}/>
+    </div>
+    <div className='lesson-card-content'>
+      <h3>{data.title}</h3>
+      {data.lessonDesc && <p>{data.lessonDesc}</p>}
+      <button>
         See Lesson
       </button>
     </div>

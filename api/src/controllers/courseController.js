@@ -12,6 +12,7 @@ const { paginatedResponse } = require('../utils/query')
 const getCourses = async (req, res) => {
   const { category, search, pageNumber = 1, pageSize = 6 } = req.query
   const order = req.query.order || 'ASC'
+  console.log(req.user.id)
   const courses = await db.Courses.findAndCountAll({
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
@@ -22,7 +23,6 @@ const getCourses = async (req, res) => {
       as: 'enrolledUser',
       attributes: [['id', 'userId']],
       through: {
-        where: {userId: req.user.id},
         attributes: ['isEnroll', 'courseId'],
       }
       }
@@ -101,14 +101,28 @@ const getCourseById = async (req, res) => {
       include: [
         {
           model: db.Lesson,
-          include: [db.Test, db.LessonProgress]
+          order: [['order', 'ASC']],
+          include: [db.Test, {
+            model: db.LessonProgress,
+            where: {
+              userId: {
+                [Op.eq]: req.user.id
+              }
+            },
+            required: false
+          }]
         },
         {
           model: db.User,
           attributes: ['email'],
+          where: {
+              id: {
+                [Op.eq]: req.user.id
+              }
+            },
+          required: false,
           as: 'enrolledUser',
           through: {
-            where: {userId: req.user.id},
             attributes: ['isEnroll'],
           }
         },
@@ -116,7 +130,7 @@ const getCourseById = async (req, res) => {
       ]
   })
   if (!course) {
-    throw new NotFoundError()
+    return res.json({message: 'course not found'})
   }
   const data = Object.assign({
     ...course,

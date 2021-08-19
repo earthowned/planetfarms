@@ -14,15 +14,6 @@ console.log(req.params.courseId)
     where: {courseId: req.params.courseId}
   })
 
-  // lessons.forEach((lesson) => {
-  //   lesson.coverImg = changeFormat(lesson.coverImg)
-  //   lesson.photos.forEach((photo) => {
-  //     photo.lessonImg = changeFormat(photo.lessonImg)
-  //   })
-  //   lesson.videos.forEach((video) => {
-  //     video.videoCover = changeFormat(video.videoCover)
-  //   })
-  // })
   const totalPages = Math.ceil(lessons.count / pageSize)
   res.status(200).json({
     status: true,
@@ -38,7 +29,7 @@ const getLessonById = async (req, res) => {
   const { id } = req.params
   const lesson = await db.Lesson.findOne({
     where: { id },
-    include: [db.Video, db.Photo, db.Text, db.Material, db.Test, db.Courses, db.LessonProgress]
+    include: [db.Video, db.Photo, db.Text, db.Material, db.Test, db.LessonProgress, db.Courses],
   })
 
   lesson.photos.forEach((photo) => {

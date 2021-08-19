@@ -1,7 +1,11 @@
+import moment from 'moment'
 import React, { useState } from 'react'
-import { GET_COVERIMG } from '../../../utils/urlConstants'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { postApi } from '../../../utils/apiFunc'
+import { ADD_LESSON_PROGRESS } from '../../../utils/urlConstants'
 import Button from '../../button/Button'
-import LessonCourseSingle, { UnbluredLessonCard } from './LessonCourseSingle'
+import LessonCourseSingle, { BluredLessonCard, UnbluredLessonCard } from './LessonCourseSingle'
 
 const LessonCourse = ({
   data,
@@ -13,7 +17,13 @@ const LessonCourse = ({
   enrolls
 }) => {
   const lessonLen = data?.data?.lessons.length
-
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const seeLessonHandler = async (lessonId) => {
+    const startTime = moment().toDate().getTime().toString()
+    postApi(dispatch, ADD_LESSON_PROGRESS, {lessonId, startTime})
+    history.push(`/lesson/${lessonId}`)
+  }
   return (
     <div className='lessons-container'>
       {data?.data?.isFree === false && lessonLen >= 1 ? (
@@ -38,9 +48,8 @@ const LessonCourse = ({
       {
       isEnroll 
       ? <>
-        <UnbluredLessonCard data={data?.data?.lessons[0]} />
+        <UnbluredLessonCard data={data?.data?.lessons[0]} seeLessonHandler={seeLessonHandler} />
         {data?.data?.lessons
-        .sort((a, b) => (a.order > b.order ? 1 : -1))
         .slice(1)
         .map((data) => (
           <React.Fragment key={data.id}>
@@ -51,22 +60,15 @@ const LessonCourse = ({
                   isEnroll={isEnroll}
                   joinCourse={joinCourse}
                   enrolls={enrolls}
+                  seeLessonHandler={seeLessonHandler}
                 />
           </React.Fragment>
         ))}
         </>
       : data?.data?.lessons
-        .sort((a, b) => (a.order > b.order ? 1 : -1))
         .map((data) => (
           <React.Fragment key={data.id}>
-           <LessonCourseSingle
-                  data={data}
-                  userInfo={userInfo}
-                  creator={creator}
-                  isEnroll={isEnroll}
-                  joinCourse={joinCourse}
-                  enrolls={enrolls}
-                />
+           <BluredLessonCard data={data} />
           </React.Fragment>
         ))
         }

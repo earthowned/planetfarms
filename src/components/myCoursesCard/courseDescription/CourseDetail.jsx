@@ -1,5 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { GET_THUMBNAIL } from '../../../utils/urlConstants'
 import { addEnroll } from '../../../actions/enrollActions'
@@ -18,20 +17,7 @@ const CourseDetail = ({
   refetch,
   joinCourse
 }) => {
-  const {success: courseLeaveSuccess} = useSelector(state => state.leaveCourse)
   const dispatch = useDispatch()
-  // const [isEnroll, setIsEnroll] = useState(false)
-  const [enroll, setEnroll] = useState(false);
-  const [enrollCourseId, setEnrollCourseId] = useState('')
-  
-  useLayoutEffect(() => {
-    setEnroll(isEnroll)
-  }, [isEnroll])
-  // // useEffect(() => {
-  // //   if(data?.data?.enrolledUser.length > 0) {
-  // //     setIsEnroll(data?.data?.enrolledUser[0].enrolls.isEnroll)
-  // //   }
-  // // }, [data, dispatch, courseLeaveSuccess])
 
   const enrollFreeCourse = (courseId) => {
     dispatch(addEnroll(courseId, false, refetch))
@@ -67,7 +53,7 @@ const CourseDetail = ({
                 )}
           </div>
           <p className='course-desc'>{data?.data?.description}</p>
-          <ProgressBar data={data} isLoading={isLoading} />
+          <ProgressBar data={data} isLoading={isLoading} isEnroll={isEnroll} />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import useSizeFinder from '../../../utils/sizeFinder'
 
-const ProgressBar = ({ data, isLoading }) => {
+const ProgressBar = ({ data = {}, isLoading, isEnroll }) => {
   const courseData = data?.data
   const lessonData = courseData?.lessons
   const lessonLength = lessonData.length
@@ -29,18 +29,23 @@ const ProgressBar = ({ data, isLoading }) => {
             <div className='lesson-progress-content' key={index}>
               <div
                 className={
-                  courseData.isFree === false
-                    ? 'circle-wrapper-active'
-                    : 'circle-wrapper'
+                  isEnroll 
+                  ? (item?.lesson_progresses.length !== 0
+                      ? 'circle-wrapper-active'
+                      : 'circle-wrapper')
+                  : 'circle-wrapper'
                 }
               >
-                {courseData.isFree === false && <div className='circle' />}
+                {
+                (isEnroll && item?.lesson_progresses.length !== 0)  && <div className='circle' />}
               </div>
               <h4
                 className={
-                  courseData.isFree === false
-                    ? 'lesson-progress-heading-active'
-                    : 'lesson-progress-heading'
+                  isEnroll 
+                  ? (item?.lesson_progresses.length !== 0 
+                      ? 'lesson-progress-heading-active'
+                      : 'lesson-progress-heading')
+                  : 'lesson-progress-heading'
                 }
               >
                 {item.title}

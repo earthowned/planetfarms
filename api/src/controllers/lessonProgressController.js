@@ -59,6 +59,7 @@ const deleteProgress = async (req, res) => {
 
 const updateProgress = async (req, res) => {
   const { id } = req.params
+  
   const progress = await db.LessonProgress.update(req.body, { where: { id } })
   if (!progress) {
     throw new NotFoundError()

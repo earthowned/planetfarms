@@ -8,7 +8,6 @@ const useGetLessonData = (
   userId,
   setPath,
   dependencies,
-  setProgress
 ) => {
   const { isLoading, data, refetch } = useQuery(
     ['lessonData', { ...dependencies }],
@@ -20,12 +19,6 @@ const useGetLessonData = (
     {
       onSuccess: (data) => {
         const id = data?.data?.courseId
-        setProgress(
-          data?.data?.lesson_progresses?.filter(
-            (progress) => progress.userId === userId
-          )
-        )
-
         Axios.get(GET_COURSE + `/${id}`).then((res) => {
           const dat = res?.data?.data.creator
           setPath(dat === userId ? `/admin/course/${id}` : `/course/${id}`)

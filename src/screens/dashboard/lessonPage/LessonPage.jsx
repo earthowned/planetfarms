@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
-import { MATERIAL, GET_COURSE } from '../../../utils/urlConstants'
+import { useHistory, useParams} from 'react-router-dom'
+import { MATERIAL, LESSON_PROGRESS, GET_COURSE_LESSONS, ADD_LESSON_PROGRESS, GET_COURSE } from '../../../utils/urlConstants'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
-
-import lessonProgressFnc from './lessonProgressFnc'
-import {
-  updateLessonProgress,
-  createLessonProgress
-} from '../../../actions/lessonProgressActions'
 import useGetLessonData from '../../../utils/useGetLessonData'
-import useGetFetchData from '../../../utils/useGetFetchData'
 import LessonDetail from './LessonDetail'
 import BackButton from '../../../components/backButton/BackButton'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
@@ -18,24 +11,30 @@ import Material from '../../../components/material/Material'
 import Button from '../../../components/button/Button'
 
 import './LessonPage.scss'
+import { configFunc, getApi, postApi, putApi } from '../../../utils/apiFunc'
+import useGetFetchData from '../../../utils/useGetFetchData'
+import axios from 'axios'
+
 
 const LessonPage = () => {
-  const history = useHistory()
   const dispatch = useDispatch()
+  const history = useHistory()
   const [isCreator, setIsCreator] = useState()
-  const [isCompleted, setIsCompleted] = useState(false)
+  const [progressId, setProgressId] = useState();
   const [isPassed, setIsPassed] = useState(false)
   const [isTest, setIsTest] = useState(false)
+  const [isEnroll, setIsEnroll] = useState(false)
   const [materialData, setMaterialData] = useState([])
-  const [cData, setCData] = useState([])
-  const [cDataForCreator, setCDataForCreator] = useState('')
   const [courseId, setCourseId] = useState('')
   const [path, setPath] = useState('')
   const { id } = useParams()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const userId = userInfo.id
-  const [progressData, setProgress] = useState()
+  const [start, setStart] = useState(false);
+  const [finish, setFinish] = useState(false);
+  const [next, setNext] = useState();
+  const [prev, setPrev] = useState();
 
   const { isLoading, data, refetch } = useGetLessonData(
     id,
@@ -43,130 +42,98 @@ const LessonPage = () => {
     userId,
     setPath,
     { id },
-    setProgress
   )
 
+  // for next and prev button
+  const getAllLessons = async () => {
+    const {data:{lessons}} = await getApi(dispatch, GET_COURSE_LESSONS + data?.data?.courseId)
+    getCourse(data?.data?.courseId)
+    // getting the position of lesson
+    const lessonPos = lessons.map(item => item.id).indexOf(data?.data?.id);
+    if(lessonPos === 0) setStart(true)
+    if(lessonPos === (lessons.length - 1)) setFinish(true)
+
+    // getting the id of the prev and next lesson
+    setNext(lessons[lessonPos + 1])
+    setPrev(lessons[lessonPos - 1])
+  }
+
   useEffect(() => {
-    if (data?.data?.courseId !== undefined) {
+    if (data?.data?.courseId) {
       setCourseId(data?.data?.courseId)
     }
-    setIsCompleted(
-      (progressData !== undefined && progressData[0]?.isCompleted) || false
-    )
+    if(data?.data?.lesson_progresses.length > 0) {
+      setProgressId(data?.data?.lesson_progresses[0].id)
+    }
     setIsTest(data?.data?.test !== null)
-  }, [data])
-
-  const { data: courseData } = useGetFetchData(
-    'fetchedSingleDataWTHOrder',
-    GET_COURSE + '/' + courseId,
-    { courseId }
-  )
-  const isEnroll = courseData?.data?.enrolls?.filter(
-    (enroll) => enroll?.userId === userId
-  )
+  }, [data, dispatch])
 
   useEffect(() => {
-    setCDataForCreator(courseData?.data?.creator)
-  }, [courseData])
+    getAllLessons()
+  }, [courseId, dispatch, courseId])
 
+  // checking creator
   useEffect(() => {
-    if (
-      courseData?.data?.creator !== undefined &&
-      courseData?.data?.creator !== userId
-    ) {
-      if (isEnroll !== undefined && !isEnroll[0]?.isEnroll) {
-        return history.push(`/course/${courseId}`)
-      } else {
-        if (data?.data?.order !== 1) {
-          if (
-            progressData !== undefined &&
-            progressData[0]?.startTime !== null
-          ) {
-            return history.push(`/course/${courseId}`)
-          }
-        }
-      }
+    if(data?.data?.course.creator) {
+      setIsCreator(data?.data?.course.creator  === userInfo.id)
     }
-    setIsCreator(courseData?.data?.creator === userId && true)
-    const order = data?.data?.order + 1
-    setCData(
-      courseData?.data?.lessons?.filter((lesson) => lesson.order === order)
-    )
-  }, [courseData])
+  }, [data, dispatch, courseId])
 
-  const time = moment().toDate().getTime().toString()
-  useEffect(async () => {
-    if (
-      courseData?.data?.creator !== undefined &&
-      courseData?.data?.creator !== userId
-    ) {
-      if (progressData !== undefined && progressData?.length === 0) {
-        await lessonProgressFnc({
-          dispatch,
-          action: createLessonProgress,
-          lessonId: id,
-          userId,
-          isCompleted: false,
-          startTime: time,
-          refetch
-        })
-      }
+  // checking the enrollment
+  // useEffect(() => {
+  //   getCourses()
+  // }, [])
+
+  const getCourse = async (id) => {
+  const { data } = await axios.get(GET_COURSE + '/' + id, configFunc())
+    // const {data} = await getApi(dispatch, GET_COURSE + '/' + id)
+    if(data?.data.enrolledUser.length > 0) {
+      setIsEnroll(data?.data.enrolledUser[0].enrolls.isEnroll)
     }
-  }, [courseData, progressData])
-  const nextPageWithOutTest = () => {
-    const progressId = progressData !== undefined && progressData[0]?.id
-    lessonProgressFnc({
-      dispatch,
-      action: updateLessonProgress,
-      lessonId: id,
-      userId,
-      isCompleted: true,
-      endTime: time,
-      progressId,
-      nextId:
-        courseData?.data?.lessons?.length === data?.data?.order
-          ? `/course/${courseId}`
-          : `/lesson/${cData[0]?.id}`,
-      history,
-      refetch
-    })
+
+    if(!isEnroll) {
+      history.push(`/course/${id}`)
+    }
   }
-  const lastLesson = courseData?.data?.lessons?.length === data?.data?.order
+
+  console.log(isEnroll);
+  const nextPageHandler = () => {
+    const endTime = moment().toDate().getTime().toString()
+    putApi(dispatch, LESSON_PROGRESS + `${progressId}`, {isCompleted: true, endTime})
+    const startTime = moment().toDate().getTime().toString()
+    postApi(dispatch, ADD_LESSON_PROGRESS, {lessonId: next.id, startTime})
+    document.location.href = `${next.id}`
+  }
+
   const nextPage = () => {
-    const passedAndProgress = () => {
-      if (
-        progressData !== undefined &&
-        progressData[0]?.isCompleted === false
-      ) {
-        nextPageWithOutTest()
-      }
-      history.push(
-        lastLesson ? `/course/${courseId}` : `/lesson/${cData[0]?.id}`
-      )
+    if(!isTest) {
+      nextPageHandler()
     }
 
-    if (progressData !== undefined && progressData[0]?.isCompleted === false) {
-      if (isPassed && isCompleted) {
-        passedAndProgress()
-      }
-      nextPageWithOutTest()
-    } else {
-      passedAndProgress()
+    if(isTest && isPassed) {
+      nextPageHandler()
     }
   }
-  const creatorNextLesson = () => {
-    history.push(
-      lastLesson ? `/admin/course/${courseId}` : `/lesson/${cData[0].id}`
-    )
+
+  const prevPage = () => {
+    document.location.href = `${prev.id}`
   }
-  
+
+  const creatorNextLesson = () => {
+    document.location.href = `${next.id}`
+  }
+
+  const creatorPrevLesson = () => {
+    document.location.href = `${prev.id}`
+  }
+  console.log(data);
   return (
     <>
       {isLoading ? (
         <span>Loading</span>
       ) : (
-        <DashboardLayout title='Course page'>
-          <BackButton location={path} />
+        <DashboardLayout title='Course page' >
+          <BackButton location={`/course/${courseId}`} />
           <LessonDetail data={data?.data} id={id} setIsPassed={setIsPassed} />
           {materialData.length !== 0 ? (
             <div className='admin-lesson-materials-container'>
@@ -202,14 +169,22 @@ const LessonPage = () => {
           ) : (
             ''
           )}
+          <div className="btn-container" style={{width: '40%'}}>
+            <Button
+            className='nextBtn'
+            name="Prev"
+            disabled={start && true}
+            onClick={isCreator ? creatorPrevLesson : prevPage}
+            />
           <Button
             className='nextBtn'
             name='Next'
             disabled={
-              isCreator || data?.data?.test === null ? false : !isPassed
+              finish ? true : (isCreator || data?.data?.test === null ? false : !isPassed) 
             }
             onClick={isCreator ? creatorNextLesson : nextPage}
           />
+          </div>
         </DashboardLayout>
       )}
     </>

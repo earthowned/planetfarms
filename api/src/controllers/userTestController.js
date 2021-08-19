@@ -103,7 +103,8 @@ const endTest = async (req, res) => {
         },
         { transaction: t }
       )
-      const marks = solutions.reduce((marks, item) => {
+      const marks = solutions.reduce((marks, item, index) => {
+        // eslint-disable-next-line no-undef
         return (item.type == 'subjective' && choices[index]) || (choices[index] === item.answer) ? ++marks : marks
       }, 0)
       // addomg amswers to the user_test_answers tbl
