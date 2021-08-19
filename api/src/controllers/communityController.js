@@ -40,11 +40,12 @@ const getCommunities = async (req, res) => {
               CASE WHEN "creatorId"=${req.user.id} THEN 'true'
                 ELSE 'false'
               END
-            `), 'isCreator'
+            `),
+            'isCreator'
           ],
           [
             sequelize.literal(`(
-              SELECT COUNT("userId") 
+              SELECT COUNT("userId")
               FROM communities_users
               WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
             )`),
@@ -55,13 +56,15 @@ const getCommunities = async (req, res) => {
       }
     })
     const totalPages = Math.ceil(communities.count / pageSize)
-    res.json({
-      communities: communities.rows.map(rec => ({ ...rec.dataValues })),
-      totalItems: communities.count,
-      totalPages,
-      page,
-      pageSize
-    }).status(200)
+    res
+      .json({
+        communities: communities.rows.map((rec) => ({ ...rec.dataValues })),
+        totalItems: communities.count,
+        totalPages,
+        page,
+        pageSize
+      })
+      .status(200)
   } catch (error) {
     res.json(error)
   }
@@ -96,11 +99,12 @@ const getUserCommunities = async (req, res) => {
             CASE WHEN "creatorId"=${req.user.id} THEN 'true'
               ELSE 'false'
             END
-          `), 'isCreator'
+          `),
+          'isCreator'
         ],
         [
           sequelize.literal(`(
-            SELECT COUNT("userId") 
+            SELECT COUNT("userId")
             FROM communities_users
             WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
           )`),
@@ -111,23 +115,30 @@ const getUserCommunities = async (req, res) => {
     },
     order: [['createdAt', 'DESC']],
     where: { deleted: false },
-    include: [{
-      model: db.User,
-      as: 'followers',
-      attributes: [],
-      where: { id: req.user.id },
-      through: { attributes: [] }
-    }]
+    include: [
+      {
+        model: db.User,
+        as: 'followers',
+        attributes: [],
+        where: { id: req.user.id },
+        through: { attributes: [] }
+      }
+    ]
   })
-    .then(communities => {
+    .then((communities) => {
       const totalPages = Math.ceil(communities.count / pageSize)
-      res.json({
-        communities: communities.rows.map(rec => ({ ...rec.dataValues, attachment: changeFormat(rec.attachment) })),
-        totalItems: communities.count,
-        totalPages,
-        page,
-        pageSize
-      }).status(200)
+      res
+        .json({
+          communities: communities.rows.map((rec) => ({
+            ...rec.dataValues,
+            attachment: changeFormat(rec.attachment)
+          })),
+          totalItems: communities.count,
+          totalPages,
+          page,
+          pageSize
+        })
+        .status(200)
     })
     .catch((err) => res.json({ err }).status(400))
 }
@@ -147,8 +158,19 @@ const createCommunity = async (req, res) => {
     // auto follow through transactions
     if (req.body.auto_follow === 'true') {
       const result = await sequelize.transaction(async (t) => {
-        const community = await db.Community.create({ ...req.body, creatorId: req.user.id, slug: '', attachment: 'community/' + filename }, { transaction: t })
-        const idArrays = await db.User.findAll({ attributes: ['id'] }, { transaction: t })
+        const community = await db.Community.create(
+          {
+            ...req.body,
+            creatorId: req.user.id,
+            slug: '',
+            attachment: 'community/' + filename
+          },
+          { transaction: t }
+        )
+        const idArrays = await db.User.findAll(
+          { attributes: ['id'] },
+          { transaction: t }
+        )
         const allFollow = []
 
         for (let i = 0; i < idArrays.length; i++) {
@@ -166,11 +188,22 @@ const createCommunity = async (req, res) => {
       return res.json({ message: result })
     } else {
       const followCommunity = await sequelize.transaction(async (t) => {
-        const community = await db.Community.create({ ...req.body, creatorId: req.user.id, slug: '', attachment: 'community/' + filename }, { transaction: t })
-        await db.CommunityUser.create({ userId: req.user.id, communityId: community.id }, { transaction: t })
+        const community = await db.Community.create(
+          {
+            ...req.body,
+            creatorId: req.user.id,
+            slug: '',
+            attachment: 'community/' + filename
+          },
+          { transaction: t }
+        )
+        await db.CommunityUser.create(
+          { userId: req.user.id, communityId: community.id },
+          { transaction: t }
+        )
         return true
       })
-      if (followCommunity) return res.json({ message: 'Community is Created !!!' }).status(200)
+      if (followCommunity) { return res.json({ message: 'Community is Created !!!' }).status(200) }
     }
   } catch (error) {
     return res.json({ error: error.message }).status(400)
@@ -184,9 +217,12 @@ const getCommunityById = async (req, res) => {
   const id = req.params.id
 
   db.Community.findByPk(id)
-    .then(communities => {
+    .then((communities) => {
       if (communities) {
-        res.json({ ...communities.dataValues, attachment: changeFormat(communities.dataValues.attachment) })
+        res.json({
+          ...communities.dataValues,
+          attachment: changeFormat(communities.dataValues.attachment)
+        })
       } else {
         res.status(404)
         throw new Error('Community not found')
@@ -214,14 +250,25 @@ const deleteCommunity = async (req, res) => {
       }
 
       const result = await sequelize.transaction(async (t) => {
-        const communityUserIds = await db.CommunityUser.findAll({ where: { communityId: id } }, { transaction: t })
+        const communityUserIds = await db.CommunityUser.findAll(
+          { where: { communityId: id } },
+          { transaction: t }
+        )
 
         communityUserIds.forEach(async function (communityId) {
           const { id } = communityId
-          await db.CommunityUser.update({ active: false }, { where: { id } }, { transaction: t })
+          await db.CommunityUser.update(
+            { active: false },
+            { where: { id } },
+            { transaction: t }
+          )
         })
 
-        await db.Community.update({ deleted: true }, { where: { id } }, { transaction: t })
+        await db.Community.update(
+          { deleted: true },
+          { where: { id } },
+          { transaction: t }
+        )
 
         return 'Community Deleted with links.'
       })
@@ -241,9 +288,7 @@ const deleteCommunity = async (req, res) => {
 // @access Private
 const updateCommunity = async (req, res) => {
   try {
-    const {
-      name, description, file, toggleActive
-    } = req.body
+    const { name, description, file, toggleActive } = req.body
 
     let filename = ''
     if (req.file) {
@@ -274,11 +319,11 @@ const updateCommunity = async (req, res) => {
 
           // converting them to the array of ids not(object with ids)
           // to check console.log(followIdArrays) and newFollowIds
-          const newFollowIds = followIdArrays.map(item => item.userId)
-          const newUserIds = userIdArrays.map(item => item.id)
+          const newFollowIds = followIdArrays.map((item) => item.userId)
+          const newUserIds = userIdArrays.map((item) => item.id)
 
           // this is removing any duplicate items between newFollowIds and newUserIds
-          const idArrays = newUserIds.filter(item => {
+          const idArrays = newUserIds.filter((item) => {
             return newFollowIds.indexOf(item) === -1
           })
 
@@ -295,33 +340,41 @@ const updateCommunity = async (req, res) => {
           await db.CommunityUser.bulkCreate(allFollow, { transaction: t })
 
           if (!req.file) {
-            await db.Community.update({ ...req.body, slug: '' },
-              { where: { id } })
+            await db.Community.update(
+              { ...req.body, slug: '' },
+              { where: { id } }
+            )
             return 'Community is updated with autoFollow'
           }
 
-          await db.Community.update({ ...req.body, slug: '', attachment: 'community/' + filename },
-            { where: { id } })
+          await db.Community.update(
+            { ...req.body, slug: '', attachment: 'community/' + filename },
+            { where: { id } }
+          )
           return 'Community is updated with autoFollow'
         })
 
         return res.json({ message: result })
       } else {
         if (!req.file) {
-          await db.Community.update({
-            name,
-            description
-          },
-          { where: { id }, returning: true, attributes: ['id'] })
+          await db.Community.update(
+            {
+              name,
+              description
+            },
+            { where: { id }, returning: true, attributes: ['id'] }
+          )
           return res.json({ message: 'Community Updated !!!' }).status(200)
         }
 
-        await db.Community.update({
-          name,
-          description,
-          attachment: 'community/' + filename
-        },
-        { where: { id }, returning: true, attributes: ['id'] })
+        await db.Community.update(
+          {
+            name,
+            description,
+            attachment: 'community/' + filename
+          },
+          { where: { id }, returning: true, attributes: ['id'] }
+        )
         return res.json({ message: 'Community Updated !!!' }).status(200)
       }
     } else {
@@ -340,20 +393,28 @@ const searchCommunityName = (req, res) => {
   const { name } = req.query
   const order = req.query.order || 'ASC'
 
-  db.Community.findAll({ where: { name: { [Op.iLike]: '%' + name + '%' } }, order: [['name', order]] })
-    .then(communities => res.json({
-      communities: communities.map(rec => ({ ...rec.dataValues, attachment: changeFormat(rec.attachment) }))
-    }).status(200))
-    .catch(err => res.json({ error: err }).status(400))
+  db.Community.findAll({
+    where: { name: { [Op.iLike]: '%' + name + '%' } },
+    order: [['name', order]]
+  })
+    .then((communities) =>
+      res
+        .json({
+          communities: communities.map((rec) => ({
+            ...rec.dataValues,
+            attachment: changeFormat(rec.attachment)
+          }))
+        })
+        .status(200)
+    )
+    .catch((err) => res.json({ error: err }).status(400))
 }
 
 // @desc Search usercommunity name
 // @route POST /api/communities/user/search
 // @access Private
 const searchUserCommunityName = (req, res) => {
-  const { name } = req.query
-  const order = req.query.order || 'ASC'
-
+  const { name, order = 'ASC' } = req.query
   db.Community.findAll({
     include: [{
       model: db.User,
@@ -363,18 +424,30 @@ const searchUserCommunityName = (req, res) => {
       through: {
         attributes: ['active'],
         as: 'followStatus',
-        where: {
-          active: true
-        }
+        where: { active: true }
       }
     }],
     where: { name: { [Op.iLike]: '%' + name + '%' } },
     order: [['name', order]]
   })
-    .then(communities => res.json({
-      communities: communities.map(rec => ({ ...rec.dataValues, attachment: changeFormat(rec.attachment) }))
-    }).status(200))
-    .catch(err => res.json({ error: err }).status(400))
+    .then((communities) =>
+      res.status(200).json({
+        communities: communities.map((rec) => ({
+          ...rec.dataValues,
+          attachment: changeFormat(rec.attachment)
+        }))
+      })
+    )
+    .catch((err) => res.json({ error: err }).status(400))
 }
 
-module.exports = { getCommunities, getUserCommunities, searchUserCommunityName, createCommunity, getCommunityById, deleteCommunity, updateCommunity, searchCommunityName }
+module.exports = {
+  getCommunities,
+  getUserCommunities,
+  searchUserCommunityName,
+  createCommunity,
+  getCommunityById,
+  deleteCommunity,
+  updateCommunity,
+  searchCommunityName
+}

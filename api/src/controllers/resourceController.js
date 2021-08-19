@@ -3,15 +3,16 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
 const { where } = require('sequelize')
+const { paginatedResponse } = require('../utils/query')
 
 // @desc    Fetch all resources
 // @route   GET /api/resources?pageNumber=${pageNumber}&category=${category}
 // @access  Public
-const getResources = (req, res) => {
+const getResources = async (req, res) => {
   const { category, search, pageNumber = 1, pageSize = 5 } = req.query
   const order = req.query.order || 'ASC'
   const ordervalue = order && [['title', order]]
-  db.Resource.findAndCountAll({
+  const resources = await db.Resource.findAndCountAll({
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     ordervalue,
@@ -21,22 +22,23 @@ const getResources = (req, res) => {
     },
     distinct: true
   })
-    .then((resources) => {
-      const totalPages = Math.ceil(resources.count / pageSize)
-      res
-        .json({
-          resources: resources.rows.map((rec) => ({
-            ...rec.dataValues,
-            filename: changeFormat(rec.filename)
-          })),
-          totalItems: resources.count,
-          totalPages,
-          page,
-          pageSize
-        })
-        .status(200)
+  res.status(200).json({
+    status: true,
+    message: 'fetched all resources successfully',
+    ...paginatedResponse({
+      data: {
+        ...resources,
+        rows: resources.rows.map((rec) => ({
+          ...rec.dataValues,
+          filename: changeFormat(rec.dataValues.filename)
+        }))
+      },
+      pageSize,
+      pageNumber
     })
-    .catch((err) => res.json({ err }).status(400))
+  })
+
+  // .catch((err) => res.json({ err }).status(400))
 }
 
 // @desc    Add individual resource

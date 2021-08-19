@@ -15,7 +15,6 @@ import './App.css'
 import DashboardComponent from './screens/dashboard/MainDashboard'
 import Achievements from './screens/dashboard/Achievements'
 import MyLibrary from './screens/dashboard/MyLibrary'
-import MyProfile from './screens/dashboard/MyProfile'
 import MySurvey from './screens/dashboard/MySurvey'
 import MyCourse from './screens/dashboard/MyCourses'
 import MyCoursePage from './screens/dashboard/coursePage/CoursePage'
@@ -27,7 +26,6 @@ import CommunityPagenews from './screens/communityNews/CommunityNews'
 import CommunityNewsViewPage from './screens/communityNewsView/CommunityNewsView'
 import NewsAdd from './screens/communityNews/newsAdd/NewsAdd'
 import CommunityMembers from './screens/communityMembers/CommunityMembers'
-import CommunityMembersProfile from './screens/communityMemberProfile/CommunityMemberProfile'
 import UserInfo from './screens/cabinetUserInfo/CabinetUserInfo'
 import CommunityGroup from './screens/communityGroup/CommunityGroup'
 import Enterprises from './screens/enterprises/Enterprises'
@@ -52,6 +50,7 @@ import AddTest from './screens/addTest/AddTest'
 import LogoutUser from './screens/logoutUser/LogoutUser'
 import Category from './screens/category/Category'
 import PageNotFound from './screens/pageNotFound/PageNotFound'
+import Profile from './screens/profile/Profile'
 
 function App () {
   return (
@@ -78,7 +77,7 @@ function App () {
             <PrivateRoute component={CommunityNewsViewPage} path='/community-page-news-view' exact />
             <PrivateRoute component={AllCommunitiesCard} path='/community-switching' exact />
             <PrivateRoute component={CommunityMembers} path='/community-members/:id' exact />
-            <PrivateRoute component={CommunityMembersProfile} path='/community-members-profile/:id' exact />
+            {/* <PrivateRoute component={Profile} path='/profile/:id' exact /> */}
             <PrivateRoute component={CommunityGroup} path='/community-group/:id' exact />
             <PrivateRoute component={CommunityGroup} path='/your-community-group/:id' exact />
             <PrivateRoute component={CommunityGroupViewPage} path='/community-group-view-page/:id' exact />
@@ -122,7 +121,7 @@ function App () {
               path='/admin/edit-test/:lessonId'
             />
             <PrivateRoute component={Category} path='/admin/categories' />
-            <PrivateRoute component={MyProfile} exact path='/myProfile' />
+            <PrivateRoute component={Profile} exact path='/profile/:id' />
             <PrivateRoute component={UserInfo} exact path='/userInfo' />
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/coursepage' />
             <PrivateRoute component={PageNotFound} />

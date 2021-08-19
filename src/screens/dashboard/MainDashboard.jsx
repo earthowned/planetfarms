@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
+import moment from 'moment'
 import './MainDashboard.scss'
+import { ATTACHMENT } from '../../utils/urlConstants'
 import { Link } from 'react-router-dom'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import useSizeFinder from '../../utils/sizeFinder'
 import useScroll from '../../utils/scrollFunc'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from '../../actions/userAction'
+import { getMyDetails } from '../../actions/userAction'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const DashboardData = [
@@ -86,26 +88,29 @@ function DashboardComponent () {
 
   useEffect(() => {
     if (userInfo) {
-      dispatch(getUserDetails(userInfo.userID))
+      dispatch(getMyDetails())
     }
   }, [dispatch, history, userInfo])
-
   return (
     <DashboardLayout title='My Dashboard'>
       <div className='x10-1-0-my-dashboard'>
         <div className='flex-col-5'>
           <div className='dashboard-hero border-1px-onyx'>
             <div className='dashboard-info'>
-              <img className='dashboard-profile-pic' src='/img/DashboardProfilePic.png' alt='dashboard-profile' />
+              <img
+                className='dashboard-profile-pic' src={user?.attachments
+                  ? ATTACHMENT + user?.attachments
+                  : '/img/user.svg'} alt='dashboard-profile'
+              />
               <div className='flex-col-6'>
                 <div className='info-my-detail'>
                   <div className='ibmplexsans-semi-bold-quarter-spanish-white-24px'>
                     {user?.name}
                   </div>
-                  <p className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Last visit: {user?.lastLogin}</p>
+                  <p className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Last visit: {moment(user?.lastLogin).format('ddd LL')}</p>
                 </div>
                 <div className='info-my-community'>
-                  <div className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Follow 8 communities</div>
+                  <div className='text-1 ibmplexsans-regular-normal-monsoon-16px'>Follow {user?.communities} communities</div>
                   <div className='my-communities'>My communities</div>
                 </div>
               </div>
@@ -113,7 +118,7 @@ function DashboardComponent () {
 
             <div className='dashboard-my-profile-side-header'>
               {/* my-profile  */}
-              <Link to={{ pathname: '/myProfile', state: { user } }} className='dasboard-my-profile-box'>
+              <Link to={{ pathname: `/profile/${user.userID}`, state: { user } }} className='dasboard-my-profile-box'>
                 <HeaderContent title='My Profile' image='/img/user.svg' />
               </Link>
               {/* achivements  */}

@@ -1,5 +1,7 @@
 const { Op } = require('sequelize')
 const db = require('../models')
+const { changeFormat } = require('../helpers/filehelpers')
+const { paginatedResponse } = require('../utils/query')
 
 // @desc Get the community-users
 // @route GET /api/community-users
@@ -44,24 +46,30 @@ const followCommunity = async (req, res) => {
 
       if (followedUser) {
         // unfollow the user
-        await db.CommunityUser.update({ active: false }, {
-          where: {
-            userId: req.user.id,
-            communityId
+        await db.CommunityUser.update(
+          { active: false },
+          {
+            where: {
+              userId: req.user.id,
+              communityId
+            }
           }
-        })
+        )
         return res.json({
           message: 'You have unfollowed the community.'
         })
       }
 
       // follow the community
-      await db.CommunityUser.update({ active: true }, {
-        where: {
-          userId: req.user.id,
-          communityId
+      await db.CommunityUser.update(
+        { active: true },
+        {
+          where: {
+            userId: req.user.id,
+            communityId
+          }
         }
-      })
+      )
       return res.json({
         message: 'Congratulation for following the community.'
       })
@@ -82,51 +90,46 @@ const followCommunity = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
   try {
-    const data = await db.CommunityUser.findAll(
-      {
-        where: { communityId: req.params.id, active: true },
-        attributes: ['userId'],
-        include: [{
-          model: db.User,
-          attributes: ['firstName']
-        }],
-        required: true
-      }
-    )
-    res.json({
-      data
+    const { search, pageNumber = 1, pageSize = 8 } = req.query
+    const ordervalue = [['createdAt', req.query.order || 'ASC']]
+    const data = await db.CommunityUser.findAndCountAll({
+      offset: (pageNumber - 1) * pageSize,
+      limit: pageSize,
+      order: ordervalue,
+      where: { communityId: req.params.id, active: true },
+      attributes: ['id', 'createdAt'],
+      include: [{
+        model: db.User,
+        attributes: ['email', 'firstName', 'lastName', 'attachments', 'userID'],
+        where: search ? {
+          [Op.or]: [
+            { firstName: { [Op.iLike]: '%' + search + '%' } },
+            { email: { [Op.iLike]: '%' + search + '%' } }
+          ]
+        } : {}
+      }],
+      required: true,
+      distinct: true
     })
+    res.status(200)
+      .json({
+        status: true,
+        message: 'Fetched successfully',
+        ...paginatedResponse({
+          data: {
+            ...data,
+            rows: data.rows.map((rec) => ({
+              ...rec.dataValues,
+              filename: changeFormat(rec.filename)
+            }))
+          },
+          pageSize,
+          pageNumber
+        })
+      })
   } catch (error) {
-    res.status(400).json({ error })
+    res.status(400).json({ error: error.message })
   }
 }
 
-// @desc    Search Name
-// @route   POST /api/news/community/:id/search
-// @access  Private
-const searchMemberName = (req, res) => {
-  const { name } = req.query
-  const order = req.query.order || 'ASC'
-
-  db.CommunityUser.findAll(
-    {
-      where: { communityId: req.params.id, active: true },
-      attributes: ['id'],
-      include: [{
-        model: db.User,
-        attributes: ['email', 'firstName'],
-        where: {
-          [Op.or]: [
-            { firstName: { [Op.iLike]: '%' + name + '%' } },
-            { email: { [Op.iLike]: '%' + name + '%' } }
-          ]
-        }
-      }],
-      required: true
-    }
-  )
-    .then(member => res.json({ member }).status(200))
-    .catch(err => res.json({ error: err }).status(400))
-}
-
-module.exports = { getCommunityUsers, followCommunity, getAllMembers, searchMemberName }
+module.exports = { getCommunityUsers, followCommunity, getAllMembers }

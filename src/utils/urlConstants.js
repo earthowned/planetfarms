@@ -45,3 +45,7 @@ export const GET_VIDEO = CDN_URL + '/videoResource/'
 export const VIDEO_COVER = CDN_URL + '/videoCover/'
 export const LESSON_IMG = CDN_URL + '/lessonImg/'
 export const MATERIAL = CDN_URL + '/material/'
+
+// members
+export const GET_MEMBERS = BASE_URL + 'communities-users/community/'
+export const ATTACHMENT = CDN_URL + '/attachments/'
