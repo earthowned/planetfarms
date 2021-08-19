@@ -85,18 +85,22 @@ const LessonPage = () => {
   // }, [])
 
   const getCourse = async (id) => {
-  const { data } = await axios.get(GET_COURSE + '/' + id, configFunc())
+    const { data } = await axios.get(GET_COURSE + '/' + id, configFunc())
+    console.log(data)
     // const {data} = await getApi(dispatch, GET_COURSE + '/' + id)
-    if(data?.data.enrolledUser.length > 0) {
-      setIsEnroll(data?.data.enrolledUser[0].enrolls.isEnroll)
+    if(data?.data.enrolledUser.length == 0 || !data?.data.enrolledUser[0].enrolls.isEnroll) {
+      history.push(`/course/${id}`)
+      // console.log(data?.data.enrolledUser[0].enrolls.isEnroll)
+      // setIsEnroll(data?.data.enrolledUser[0].enrolls.isEnroll)
+      // console.log(isEnroll)
     }
 
-    if(!isEnroll) {
-      history.push(`/course/${id}`)
-    }
+    // if(!isEnroll) {
+    //   console.log('false')
+    //   history.push(`/course/${id}`)
+    // }
   }
 
-  console.log(isEnroll);
   const nextPageHandler = () => {
     const endTime = moment().toDate().getTime().toString()
     putApi(dispatch, LESSON_PROGRESS + `${progressId}`, {isCompleted: true, endTime})
