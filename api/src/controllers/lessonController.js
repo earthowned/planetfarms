@@ -2,32 +2,43 @@ const db = require('../models')
 const { changeFormat } = require('../helpers/filehelpers')
 const CircularJSON = require('circular-json')
 
-const getLessons = async (_req, res) => {
-  const lessons = await db.Lesson.findAll({
-    include: [db.Video, db.Photo, db.Text, db.Material]
+const getLessons = async (req, res) => {
+  const pageSize = 1
+  const page = Number(req.query.pageNumber) || 1
+console.log(req.params.courseId)
+  const lessons = await db.Lesson.findAndCountAll({
+    // offset: (page - 1) * pageSize,
+    // limit: pageSize,
+    order: [['order', 'ASC']],
+    include: [db.Video, db.Photo, db.Text, db.Material],
+    where: {courseId: req.params.courseId}
   })
 
-  lessons.forEach((lesson) => {
-    lesson.coverImg = changeFormat(lesson.coverImg)
-    lesson.photos.forEach((photo) => {
-      photo.lessonImg = changeFormat(photo.lessonImg)
-    })
-    lesson.videos.forEach((video) => {
-      video.videoCover = changeFormat(video.videoCover)
-    })
-  })
-
+  // lessons.forEach((lesson) => {
+  //   lesson.coverImg = changeFormat(lesson.coverImg)
+  //   lesson.photos.forEach((photo) => {
+  //     photo.lessonImg = changeFormat(photo.lessonImg)
+  //   })
+  //   lesson.videos.forEach((video) => {
+  //     video.videoCover = changeFormat(video.videoCover)
+  //   })
+  // })
+  const totalPages = Math.ceil(lessons.count / pageSize)
   res.status(200).json({
     status: true,
     message: 'fetched all lessons successfully',
-    data: lessons
+    lessons: lessons.rows.map(rec => ({ ...rec.dataValues })),
+    totalItems: lessons.count,
+    totalPages,
+    page,
+    pageSize
   })
 }
 const getLessonById = async (req, res) => {
   const { id } = req.params
   const lesson = await db.Lesson.findOne({
     where: { id },
-    include: [db.Video, db.Photo, db.Text, db.Material]
+    include: [db.Video, db.Photo, db.Text, db.Material, db.Test, db.Courses, db.LessonProgress]
   })
 
   lesson.photos.forEach((photo) => {

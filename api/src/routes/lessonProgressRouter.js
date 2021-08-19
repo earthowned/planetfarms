@@ -10,8 +10,10 @@ const {
   updateProgress
 } = require('../controllers/lessonProgressController')
 
+const protect = require('../middleware/authMiddleware')
+
 router.route('/').get(getProgress)
-router.route('/add').post(addProgress)
+router.route('/add').post(protect, addProgress)
 router
   .route('/:id')
   .get(getProgressById)

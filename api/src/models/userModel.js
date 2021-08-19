@@ -76,6 +76,11 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE' 
     })
 
+    User.hasMany(models.LessonProgress, {
+      constraints: true,
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
+    })
     // one to many relationship with enterprise
     User.hasMany(models.Enterprise, { foreignKey: 'creatorId', as: 'enterprise_creator' })
 

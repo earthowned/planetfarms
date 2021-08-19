@@ -27,7 +27,17 @@ const getProgressById = async (req, res) => {
 }
 
 const addProgress = async (req, res) => {
-  const progress = await db.LessonProgress.create(req.body)
+  const {lessonId, startTime} = req.body
+  const prevProgress = await db.LessonProgress.findOne({where: {lessonId, userId: req.user.id}})
+
+  if(prevProgress) {
+    return res.status(201).json({
+    status: true,
+    message: 'Lesson already in progress',
+  })
+  }
+
+  const progress = await db.LessonProgress.create({lessonId, startTime, userId: req.user.id})
   res.status(201).json({
     status: true,
     message: 'added new progress successfully',

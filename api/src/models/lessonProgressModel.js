@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true
       },
+      lessonId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       userId: {
         type: DataTypes.STRING,
         allowNull: false
@@ -28,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
     LessonProgress.belongsTo(models.Lesson, {
       constraints: true,
       foreignKey: 'lessonId',
+      onDelete: 'CASCADE'
+    })
+    LessonProgress.belongsTo(models.User, {
+      constraints: true,
+      foreignKey: 'userId',
       onDelete: 'CASCADE'
     })
   }
