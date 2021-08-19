@@ -83,38 +83,6 @@ const DashboardLayout = ({ title, children }) => {
     setMessageActive(false)
   }
 
-  const UserClick = () => {
-    return (
-      <div onClick={() => activeUser()} className={`mobile-tab-wrapper ${userActive ? 'bgactive' : ''} `}>
-        <Link to='/dashboard'><UserMenu className='mobile-tab' /></Link>
-      </div>
-    )
-  }
-
-  const MessageClick = () => {
-    return (
-      <div onClick={() => activeMessage()} className={`mobile-tab-wrapper ${messageActive ? 'bgactive' : ''}`}>
-        <MessageMenu className='mobile-tab' />
-      </div>
-    )
-  }
-
-  const HamburgerClick = () => {
-    return (
-      <div onClick={(e) => { activeBurger() }} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
-        <Hamburger className='ham-tab'  />
-      </div>
-    )
-  }
-
-  const NotificationClick = () => {
-    return (
-      <div onClick={() => activeNotification()} className={`mobile-tab-wrapper ${notificationActive ? 'bgactive' : ''}`}>
-        <NotificationMenu className='mobile-tab' />
-      </div>
-    )
-  }
-
   return (
     <div>
       {windowWidth > TABLET_SIZE ? (
@@ -155,16 +123,23 @@ const DashboardLayout = ({ title, children }) => {
             <div className='space-taker' />
           </div>
           <div className='footer-nav'>
-            <UserClick />
-            <MessageClick />
-            <NotificationClick />
-            <HamburgerClick />
+            <div onClick={() => activeUser()} className={`mobile-tab-wrapper ${userActive ? 'bgactive' : ''} `}>
+              <Link to='/dashboard'><UserMenu className='mobile-tab' /></Link>
+            </div>
+            <div onClick={() => activeMessage()} className={`mobile-tab-wrapper ${messageActive ? 'bgactive' : ''}`}>
+              <MessageMenu className='mobile-tab' />
+            </div>
+            <div onClick={() => activeNotification()} className={`mobile-tab-wrapper ${notificationActive ? 'bgactive' : ''}`}>
+              <NotificationMenu className='mobile-tab' />
+            </div>
+            <div onClick={(e) => { activeBurger() }} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
+              <Hamburger className='ham-tab'  />
+            </div>
           </div>
         </>
       )}
     </div>
   )
 }
-
 
 export default DashboardLayout
