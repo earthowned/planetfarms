@@ -31,7 +31,7 @@ const LessonTestPage = () => {
 
   const submitTest = async () => {
     const currentDate = moment().toDate().getTime().toString()
-    const  data = await axios.put(
+    const data = await axios.put(
       `${process.env.REACT_APP_API_BASE_URL}/api/user_tests/${testId}`,
       { endTime: currentDate, choices }
     )

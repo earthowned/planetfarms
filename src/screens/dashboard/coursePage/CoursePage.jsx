@@ -28,8 +28,8 @@ function MyCoursePage ({ unpaid }) {
     GET_COURSE + '/' + courseId
   )
 
-    useEffect(() => {
-    if(data?.data?.enrolledUser.length > 0) {
+  useEffect(() => {
+    if (data?.data?.enrolledUser.length > 0) {
       setIsEnroll(data?.data?.enrolledUser[0].enrolls.isEnroll)
     }
   }, [data])

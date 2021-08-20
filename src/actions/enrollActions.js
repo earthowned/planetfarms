@@ -13,7 +13,7 @@ export const addEnroll =
   (courseId, history, refetch) => async (dispatch) => {
     try {
       dispatch({ type: ENROLL_CREATE_REQUEST })
-      const { data } = await postApi(dispatch, ADD_ENROLL, {courseId})
+      const { data } = await postApi(dispatch, ADD_ENROLL, { courseId })
       dispatch({ type: ENROLL_CREATE_SUCCESS, payload: data })
       refetch()
       if (history) {
@@ -30,13 +30,13 @@ export const addEnroll =
     }
   }
 
-  export const leaveCourse =
+export const leaveCourse =
   (courseId, history) => async (dispatch) => {
     try {
       dispatch({ type: ENROLL_UPDATE_REQUEST })
-      const { data } = await putApi(dispatch, GET_ENROLL, {courseId})
-      dispatch({ type: ENROLL_UPDATE_SUCCESS, payload: data })      
-      history.push(`/courses`)
+      const { data } = await putApi(dispatch, GET_ENROLL, { courseId })
+      dispatch({ type: ENROLL_UPDATE_SUCCESS, payload: data })
+      history.push('/courses')
     } catch (error) {
       dispatch({
         type: ENROLL_UPDATE_FAIL,

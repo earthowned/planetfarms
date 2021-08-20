@@ -29,23 +29,24 @@ const ProgressBar = ({ data = {}, isLoading, isEnroll }) => {
             <div className='lesson-progress-content' key={index}>
               <div
                 className={
-                  isEnroll 
-                  ? (item?.lesson_progresses.length !== 0
-                      ? 'circle-wrapper-active'
-                      : 'circle-wrapper')
-                  : 'circle-wrapper'
+                  isEnroll
+                    ? (item?.lesson_progresses.length !== 0
+                        ? 'circle-wrapper-active'
+                        : 'circle-wrapper')
+                    : 'circle-wrapper'
                 }
               >
                 {
-                (isEnroll && item?.lesson_progresses.length !== 0)  && <div className='circle' />}
+                (isEnroll && item?.lesson_progresses.length !== 0) && <div className='circle' />
+}
               </div>
               <h4
                 className={
-                  isEnroll 
-                  ? (item?.lesson_progresses.length !== 0 
-                      ? 'lesson-progress-heading-active'
-                      : 'lesson-progress-heading')
-                  : 'lesson-progress-heading'
+                  isEnroll
+                    ? (item?.lesson_progresses.length !== 0
+                        ? 'lesson-progress-heading-active'
+                        : 'lesson-progress-heading')
+                    : 'lesson-progress-heading'
                 }
               >
                 {item.title}

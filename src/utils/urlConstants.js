@@ -37,7 +37,6 @@ export const ADD_LESSON_TEXT = BASE_URL + 'lesson-text/add'
 export const LESSON_PROGRESS = BASE_URL + 'lesson-progress/'
 export const ADD_LESSON_PROGRESS = BASE_URL + 'lesson-progress/add'
 
-
 // lesson material
 export const ADD_MATERIAL = BASE_URL + 'materials/add'
 

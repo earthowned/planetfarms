@@ -18,15 +18,14 @@ const getCourses = async (req, res) => {
     order: [['title', order]],
     include: [db.Lesson, db.Category, db.CourseView,
       {
-      model: db.User,
-      as: 'enrolledUser',
-      attributes: [['id', 'userId']],
-      through: {
-        attributes: ['isEnroll', 'courseId'],
+        model: db.User,
+        as: 'enrolledUser',
+        attributes: [['id', 'userId']],
+        through: {
+          attributes: ['isEnroll', 'courseId']
+        }
       }
-      }
-    ]
-    ,
+    ],
     where: {
       ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
       ...(category ? { categoryId: Number(category) } : {})
@@ -97,39 +96,39 @@ const updateCourse = async (req, res) => {
 const getCourseById = async (req, res) => {
   const course = await db.Courses.findOne({
     where: { id: req.params.id },
-      include: [
-        {
-          model: db.Lesson,
-          order: [['order', 'ASC']],
-          include: [db.Test, {
-            model: db.LessonProgress,
-            where: {
-              userId: {
-                [Op.eq]: req.user.id
-              }
-            },
-            required: false
-          }]
-        },
-        {
-          model: db.User,
-          attributes: ['email'],
+    include: [
+      {
+        model: db.Lesson,
+        order: [['order', 'ASC']],
+        include: [db.Test, {
+          model: db.LessonProgress,
           where: {
-              id: {
-                [Op.eq]: req.user.id
-              }
-            },
-          required: false,
-          as: 'enrolledUser',
-          through: {
-            attributes: ['isEnroll'],
+            userId: {
+              [Op.eq]: req.user.id
+            }
+          },
+          required: false
+        }]
+      },
+      {
+        model: db.User,
+        attributes: ['email'],
+        where: {
+          id: {
+            [Op.eq]: req.user.id
           }
         },
-        db.Category,
-      ]
+        required: false,
+        as: 'enrolledUser',
+        through: {
+          attributes: ['isEnroll']
+        }
+      },
+      db.Category
+    ]
   })
   if (!course) {
-    return res.json({message: 'course not found'})
+    return res.json({ message: 'course not found' })
   }
   const data = Object.assign({
     ...course,

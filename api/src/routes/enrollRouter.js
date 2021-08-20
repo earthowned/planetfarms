@@ -11,8 +11,8 @@ const {
   leaveCourse
 } = require('../controllers/enrollController')
 
-router.route('/').get(getEnroll).put(protect, leaveCourse);
+router.route('/').get(getEnroll).put(protect, leaveCourse)
 router.route('/add').post(protect, addEnroll)
-router.route('/:id').get(getEnrollById).delete(deleteEnroll);
+router.route('/:id').get(getEnrollById).delete(deleteEnroll)
 
 module.exports = router

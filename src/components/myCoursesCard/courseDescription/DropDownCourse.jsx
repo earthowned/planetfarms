@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { leaveCourse } from '../../../actions/enrollActions'
 import useHideOnClick from '../../../utils/useHideOnClick'
 
-
 const DropDownCourse = ({ courseId, setFeedbackModal }) => {
   const [courseDropDown, setCourseDropDown] = useState(false)
 
@@ -13,12 +12,12 @@ const DropDownCourse = ({ courseId, setFeedbackModal }) => {
     setCourseDropDown(false)
   }
 
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   const unsubscribeCourse = async () => {
     dispatch(leaveCourse(courseId, history))
-    setCourseDropDown(false);
+    setCourseDropDown(false)
   }
 
   const domNode = useHideOnClick(() => {

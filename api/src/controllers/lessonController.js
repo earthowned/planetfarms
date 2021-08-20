@@ -5,13 +5,13 @@ const CircularJSON = require('circular-json')
 const getLessons = async (req, res) => {
   const pageSize = 1
   const page = Number(req.query.pageNumber) || 1
-console.log(req.params.courseId)
+  console.log(req.params.courseId)
   const lessons = await db.Lesson.findAndCountAll({
     // offset: (page - 1) * pageSize,
     // limit: pageSize,
     order: [['order', 'ASC']],
     include: [db.Video, db.Photo, db.Text, db.Material],
-    where: {courseId: req.params.courseId}
+    where: { courseId: req.params.courseId }
   })
 
   const totalPages = Math.ceil(lessons.count / pageSize)
@@ -29,7 +29,7 @@ const getLessonById = async (req, res) => {
   const { id } = req.params
   const lesson = await db.Lesson.findOne({
     where: { id },
-    include: [db.Video, db.Photo, db.Text, db.Material, db.Test, db.LessonProgress, db.Courses],
+    include: [db.Video, db.Photo, db.Text, db.Material, db.Test, db.LessonProgress, db.Courses]
   })
 
   lesson.photos.forEach((photo) => {
