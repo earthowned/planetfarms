@@ -81,6 +81,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       onDelete: 'CASCADE'
     })
+
+    User.hasMany(models.CourseView, {foreignKey: 'userId'})
     // one to many relationship with enterprise
     User.hasMany(models.Enterprise, { foreignKey: 'creatorId', as: 'enterprise_creator' })
 

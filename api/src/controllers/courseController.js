@@ -12,12 +12,11 @@ const { paginatedResponse } = require('../utils/query')
 const getCourses = async (req, res) => {
   const { category, search, pageNumber = 1, pageSize = 6 } = req.query
   const order = req.query.order || 'ASC'
-  console.log(req.user.id)
   const courses = await db.Courses.findAndCountAll({
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson, db.Category, 
+    include: [db.Lesson, db.Category, db.CourseView,
       {
       model: db.User,
       as: 'enrolledUser',

@@ -42,6 +42,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'categoryId',
       onDelete: 'CASCADE'
     })
+
+    Courses.hasMany(models.CourseView, {foreignKey: 'courseId'})
   }
   return Courses
 }
