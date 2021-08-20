@@ -65,26 +65,23 @@ const LessonPage = () => {
       setProgressId(data?.data?.lesson_progresses[0].id)
     }
     setIsTest(data?.data?.test !== null)
-  }, [data, dispatch])
-
-  useEffect(() => {
-    getAllLessons()
-  }, [courseId, dispatch, courseId])
-
-  // checking creator
-  useEffect(() => {
     if(data?.data?.course.creator) {
       setIsCreator(data?.data?.course.creator  === userInfo.id)
     }
-  }, [data, dispatch, courseId])
+  }, [data])
+
+  useEffect(() => {
+    getAllLessons()
+  }, [courseId])
 
   // checking the enrollment
   // useEffect(() => {
   //   getCourses()
   // }, [])
   const getCourse = async (id) => {
-    const {data} = getApi(dispatch, GET_COURSE + '/' + id)    
+    const {data} = await getApi(dispatch, GET_COURSE + '/' + id)    
     if(data?.data?.enrolledUser.length == 0 || !data?.data.enrolledUser[0].enrolls.isEnroll) {
+      console.log(data)
       history.push(`/course/${id}`)
     }
   }
