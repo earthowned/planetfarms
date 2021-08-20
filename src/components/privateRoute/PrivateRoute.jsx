@@ -9,6 +9,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     const userInfo = window.localStorage.getItem('userInfo')
     return userInfo && dispatch(checkAndUpdateToken())
   }
+
   return (
     <Route
       {...rest} render={props => (

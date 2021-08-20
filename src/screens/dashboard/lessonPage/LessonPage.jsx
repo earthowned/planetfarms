@@ -23,7 +23,6 @@ const LessonPage = () => {
   const [progressId, setProgressId] = useState();
   const [isPassed, setIsPassed] = useState(false)
   const [isTest, setIsTest] = useState(false)
-  const [isEnroll, setIsEnroll] = useState(false)
   const [materialData, setMaterialData] = useState([])
   const [courseId, setCourseId] = useState('')
   const [path, setPath] = useState('')
@@ -83,22 +82,11 @@ const LessonPage = () => {
   // useEffect(() => {
   //   getCourses()
   // }, [])
-
   const getCourse = async (id) => {
-    const { data } = await axios.get(GET_COURSE + '/' + id, configFunc())
-    console.log(data)
-    // const {data} = await getApi(dispatch, GET_COURSE + '/' + id)
-    if(data?.data.enrolledUser.length == 0 || !data?.data.enrolledUser[0].enrolls.isEnroll) {
+    const {data} = getApi(dispatch, GET_COURSE + '/' + id)    
+    if(data?.data?.enrolledUser.length == 0 || !data?.data.enrolledUser[0].enrolls.isEnroll) {
       history.push(`/course/${id}`)
-      // console.log(data?.data.enrolledUser[0].enrolls.isEnroll)
-      // setIsEnroll(data?.data.enrolledUser[0].enrolls.isEnroll)
-      // console.log(isEnroll)
     }
-
-    // if(!isEnroll) {
-    //   console.log('false')
-    //   history.push(`/course/${id}`)
-    // }
   }
 
   const nextPageHandler = () => {
@@ -130,7 +118,6 @@ const LessonPage = () => {
   const creatorPrevLesson = () => {
     document.location.href = `${prev.id}`
   }
-  console.log(data);
   return (
     <>
       {isLoading ? (

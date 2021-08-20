@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { leaveCourse } from '../../../actions/enrollActions'
+import useHideOnClick from '../../../utils/useHideOnClick'
 
 
 const DropDownCourse = ({ courseId, setFeedbackModal }) => {
@@ -20,8 +21,12 @@ const DropDownCourse = ({ courseId, setFeedbackModal }) => {
     setCourseDropDown(false);
   }
 
+  const domNode = useHideOnClick(() => {
+    setCourseDropDown(false)
+  })
+
   return (
-    <div className='dropdown-course-container'>
+    <div className='dropdown-course-container' ref={domNode}>
       <div
         className='dropdown-course-header'
         onClick={() => setCourseDropDown(!courseDropDown)}

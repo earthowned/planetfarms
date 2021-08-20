@@ -778,7 +778,7 @@
   background: #015a3e;
   position: absolute;
   z-index: -2;
-  top: 25%;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -788,15 +788,15 @@
   background: var(--primary-color);
   position: absolute;
   z-index: -1;
-  top: 25%;
+  top: 20px;
   left: 4%;
 }
 
 .lesson-progress-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  width: 80px;
 }
 
 .circle-wrapper {
@@ -834,6 +834,11 @@
 
 .lesson-progress-heading {
   color: var(--primary-grey);
+  text-align: center;
+}
+
+.lesson-progress-heading-active {
+  text-align: center;
 }
 
 @media screen and (max-width: 1400px) {
@@ -941,9 +946,8 @@
 
   .lesson-progress-content {
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    width: 120px;
+    width: auto;
     height: 40px;
   }
 
@@ -957,6 +961,16 @@
 
   .circle-wrapper-active {
     margin-bottom: 0;
+  }
+
+  .lesson-progress-heading {
+    margin-left: 20px;
+    text-align: left;
+  }
+
+  .lesson-progress-heading-active {
+    margin-left: 20px;
+    text-align: left;
   }
 
   .course-details-wrapper {
