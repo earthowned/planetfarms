@@ -20,6 +20,11 @@ const getCourses = async (req, res) => {
       {
         model: db.User,
         as: 'enrolledUser',
+        where: {
+          id: {
+            [Op.eq]: req.user.id
+          }
+        },
         attributes: [['id', 'userId']],
         through: {
           attributes: ['isEnroll', 'courseId']
