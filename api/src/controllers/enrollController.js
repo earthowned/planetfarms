@@ -28,28 +28,27 @@ const getEnrollById = async (req, res) => {
 }
 
 const addEnroll = async (req, res) => {
-  const {courseId} = req.body;
-  const enroll = await db.Enroll.findOne({where: {userId: req.user.id, courseId}})
-  
-  if(enroll) {
+  const { courseId } = req.body
+  const enroll = await db.Enroll.findOne({ where: { userId: req.user.id, courseId } })
 
-    if(enroll.isEnroll) {
+  if (enroll) {
+    if (enroll.isEnroll) {
       return res.status(201).json({
         status: true,
-        message: 'You have already enrolled.',
+        message: 'You have already enrolled.'
       })
     }
-    
-    const enrolledUser = await db.Enroll.update({isEnroll: true}, {where: {id: enroll.id}})
-  
-    return  res.status(200).json({
-              status: true,
-              message: 'enroll created successfully',
-              enrolledUser
-            })
+
+    const enrolledUser = await db.Enroll.update({ isEnroll: true }, { where: { id: enroll.id } })
+
+    return res.status(200).json({
+      status: true,
+      message: 'enroll created successfully',
+      enrolledUser
+    })
   }
 
-  const enrolledUser = await db.Enroll.create({userId: req.user.id, courseId})
+  const enrolledUser = await db.Enroll.create({ userId: req.user.id, courseId })
 
   res.status(200).json({
     status: true,
@@ -59,19 +58,19 @@ const addEnroll = async (req, res) => {
 }
 
 const leaveCourse = async (req, res) => {
-  const {courseId} = req.body;
-  const enroll = await db.Enroll.findOne({where: {userId: req.user.id, courseId}})
-  if(!enroll) {
-  return res.status(201).json({
-    status: true,
-    message: 'You haven\'t enrolled yet.',
-  })
+  const { courseId } = req.body
+  const enroll = await db.Enroll.findOne({ where: { userId: req.user.id, courseId } })
+  if (!enroll) {
+    return res.status(201).json({
+      status: true,
+      message: 'You haven\'t enrolled yet.'
+    })
   }
 
-  await db.Enroll.update({isEnroll: false}, {where: {id: enroll.id}});
+  await db.Enroll.update({ isEnroll: false }, { where: { id: enroll.id } })
   res.status(201).json({
     status: true,
-    message: 'Course is Un-Enrolled successfully',
+    message: 'Course is Un-Enrolled successfully'
   })
 }
 

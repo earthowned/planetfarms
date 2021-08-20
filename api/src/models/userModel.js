@@ -69,11 +69,11 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     // n:m user and course through enrolls
-    User.belongsToMany(models.Courses, { 
-      through: 'enrolls', 
+    User.belongsToMany(models.Courses, {
+      through: 'enrolls',
       foreignKey: 'userId',
       as: 'enrolledUser',
-      onDelete: 'CASCADE' 
+      onDelete: 'CASCADE'
     })
 
     User.hasMany(models.LessonProgress, {
@@ -82,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     })
 
-    User.hasMany(models.CourseView, {foreignKey: 'userId'})
+    User.hasMany(models.CourseView, { foreignKey: 'userId' })
     // one to many relationship with enterprise
     User.hasMany(models.Enterprise, { foreignKey: 'creatorId', as: 'enterprise_creator' })
 

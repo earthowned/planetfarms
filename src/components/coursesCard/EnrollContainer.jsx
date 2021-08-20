@@ -12,32 +12,32 @@ const EnrollContainer = ({ item, userInfo, setPurchaseModal }) => {
 
   const enrollFreeCourse = (courseId) => {
     dispatch(addEnroll(courseId, history))
-    setIsEnroll(true);
+    setIsEnroll(true)
   }
 
   useEffect(() => {
-    if(item.enrolledUser.length > 0) {
+    if (item.enrolledUser.length > 0) {
       setIsEnroll(item.enrolledUser[0].enrolls.isEnroll)
     }
   }, [item])
 
   const leaveCourseFunc = () => {
     dispatch(leaveCourse(item.id))
-    setIsEnroll(false);
+    setIsEnroll(false)
   }
-  
+
   return (
     <>
       <div className='enroll-container'>
         {isEnroll === true ? (
-          <div className="enroll-btn-wrapper">
-          <button
-            className='join-btn'
-            onClick={() => history.push('/course/' + item.id)}
-          >
-            <span>Go to course</span>
-          </button>
-           {/* <button
+          <div className='enroll-btn-wrapper'>
+            <button
+              className='join-btn'
+              onClick={() => history.push('/course/' + item.id)}
+            >
+              <span>Go to course</span>
+            </button>
+            {/* <button
             className='join-btn red-text'
             onClick={leaveCourseFunc}
           >

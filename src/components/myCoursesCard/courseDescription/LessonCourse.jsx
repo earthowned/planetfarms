@@ -17,11 +17,11 @@ const LessonCourse = ({
   enrolls
 }) => {
   const lessonLen = data?.data?.lessons.length
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useDispatch()
+  const history = useHistory()
   const seeLessonHandler = async (lessonId) => {
     const startTime = moment().toDate().getTime().toString()
-    postApi(dispatch, ADD_LESSON_PROGRESS, {lessonId, startTime})
+    postApi(dispatch, ADD_LESSON_PROGRESS, { lessonId, startTime })
     history.push(`/lesson/${lessonId}`)
   }
   return (
@@ -46,14 +46,14 @@ const LessonCourse = ({
       <h3>Lessons</h3>
 
       {
-      isEnroll 
-      ? <>
-        <UnbluredLessonCard data={data?.data?.lessons[0]} seeLessonHandler={seeLessonHandler} />
-        {data?.data?.lessons
-        .slice(1)
-        .map((data) => (
-          <React.Fragment key={data.id}>
-           <LessonCourseSingle
+      isEnroll
+        ? <>
+          <UnbluredLessonCard data={data?.data?.lessons[0]} seeLessonHandler={seeLessonHandler} />
+          {data?.data?.lessons
+            .slice(1)
+            .map((data) => (
+              <React.Fragment key={data.id}>
+                <LessonCourseSingle
                   data={data}
                   userInfo={userInfo}
                   creator={creator}
@@ -62,15 +62,15 @@ const LessonCourse = ({
                   enrolls={enrolls}
                   seeLessonHandler={seeLessonHandler}
                 />
-          </React.Fragment>
-        ))}
-        </>
-      : data?.data?.lessons
-        .map((data) => (
-          <React.Fragment key={data.id}>
-           <BluredLessonCard data={data} />
-          </React.Fragment>
-        ))
+              </React.Fragment>
+            ))}
+          </>
+        : data?.data?.lessons
+          .map((data) => (
+            <React.Fragment key={data.id}>
+              <BluredLessonCard data={data} />
+            </React.Fragment>
+          ))
         }
     </div>
   )

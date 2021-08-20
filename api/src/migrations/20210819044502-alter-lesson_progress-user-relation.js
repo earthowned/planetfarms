@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -14,10 +14,10 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-   await queryInterface.removeColumn('lesson_progresses', 'userId')
+    await queryInterface.removeColumn('lesson_progresses', 'userId')
     await queryInterface.addColumn('lesson_progresses', 'userId', {
       type: Sequelize.STRING,
       allowNull: false
     })
   }
-};
+}

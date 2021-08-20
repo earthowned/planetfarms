@@ -27,17 +27,17 @@ const getProgressById = async (req, res) => {
 }
 
 const addProgress = async (req, res) => {
-  const {lessonId, startTime} = req.body
-  const prevProgress = await db.LessonProgress.findOne({where: {lessonId, userId: req.user.id}})
+  const { lessonId, startTime } = req.body
+  const prevProgress = await db.LessonProgress.findOne({ where: { lessonId, userId: req.user.id } })
 
-  if(prevProgress) {
+  if (prevProgress) {
     return res.status(201).json({
-    status: true,
-    message: 'Lesson already in progress',
-  })
+      status: true,
+      message: 'Lesson already in progress'
+    })
   }
 
-  const progress = await db.LessonProgress.create({lessonId, startTime, userId: req.user.id})
+  const progress = await db.LessonProgress.create({ lessonId, startTime, userId: req.user.id })
   res.status(201).json({
     status: true,
     message: 'added new progress successfully',
@@ -59,7 +59,7 @@ const deleteProgress = async (req, res) => {
 
 const updateProgress = async (req, res) => {
   const { id } = req.params
-  
+
   const progress = await db.LessonProgress.update(req.body, { where: { id } })
   if (!progress) {
     throw new NotFoundError()

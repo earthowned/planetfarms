@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW
       }
     },
-    { 
+    {
       timestamps: true,
       createdAt: 'visitedAt',
       updatedAt: false

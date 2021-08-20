@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useParams} from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { MATERIAL, LESSON_PROGRESS, GET_COURSE_LESSONS, ADD_LESSON_PROGRESS, GET_COURSE } from '../../../utils/urlConstants'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
@@ -15,12 +15,11 @@ import { configFunc, getApi, postApi, putApi } from '../../../utils/apiFunc'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import axios from 'axios'
 
-
 const LessonPage = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const [isCreator, setIsCreator] = useState()
-  const [progressId, setProgressId] = useState();
+  const [progressId, setProgressId] = useState()
   const [isPassed, setIsPassed] = useState(false)
   const [isTest, setIsTest] = useState(false)
   const [materialData, setMaterialData] = useState([])
@@ -30,27 +29,27 @@ const LessonPage = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const userId = userInfo.id
-  const [start, setStart] = useState(false);
-  const [finish, setFinish] = useState(false);
-  const [next, setNext] = useState();
-  const [prev, setPrev] = useState();
+  const [start, setStart] = useState(false)
+  const [finish, setFinish] = useState(false)
+  const [next, setNext] = useState()
+  const [prev, setPrev] = useState()
 
   const { isLoading, data, refetch } = useGetLessonData(
     id,
     setMaterialData,
     userId,
     setPath,
-    { id },
+    { id }
   )
 
   // for next and prev button
   const getAllLessons = async () => {
-    const {data:{lessons}} = await getApi(dispatch, GET_COURSE_LESSONS + data?.data?.courseId)
+    const { data: { lessons } } = await getApi(dispatch, GET_COURSE_LESSONS + data?.data?.courseId)
     getCourse(data?.data?.courseId)
     // getting the position of lesson
-    const lessonPos = lessons.map(item => item.id).indexOf(data?.data?.id);
-    if(lessonPos === 0) setStart(true)
-    if(lessonPos === (lessons.length - 1)) setFinish(true)
+    const lessonPos = lessons.map(item => item.id).indexOf(data?.data?.id)
+    if (lessonPos === 0) setStart(true)
+    if (lessonPos === (lessons.length - 1)) setFinish(true)
 
     // getting the id of the prev and next lesson
     setNext(lessons[lessonPos + 1])
@@ -61,48 +60,45 @@ const LessonPage = () => {
     if (data?.data?.courseId) {
       setCourseId(data?.data?.courseId)
     }
-    if(data?.data?.lesson_progresses.length > 0) {
+    if (data?.data?.lesson_progresses.length > 0) {
       setProgressId(data?.data?.lesson_progresses[0].id)
     }
     setIsTest(data?.data?.test !== null)
-  }, [data, dispatch])
+    if (data?.data?.course.creator) {
+      setIsCreator(data?.data?.course.creator === userInfo.id)
+    }
+  }, [data])
 
   useEffect(() => {
     getAllLessons()
-  }, [courseId, dispatch, courseId])
-
-  // checking creator
-  useEffect(() => {
-    if(data?.data?.course.creator) {
-      setIsCreator(data?.data?.course.creator  === userInfo.id)
-    }
-  }, [data, dispatch, courseId])
+  }, [courseId])
 
   // checking the enrollment
   // useEffect(() => {
   //   getCourses()
   // }, [])
   const getCourse = async (id) => {
-    const {data} = getApi(dispatch, GET_COURSE + '/' + id)    
-    if(data?.data?.enrolledUser.length == 0 || !data?.data.enrolledUser[0].enrolls.isEnroll) {
+    const { data } = await getApi(dispatch, GET_COURSE + '/' + id)
+    if (data?.data?.enrolledUser.length == 0 || !data?.data.enrolledUser[0].enrolls.isEnroll) {
+      console.log(data)
       history.push(`/course/${id}`)
     }
   }
 
   const nextPageHandler = () => {
     const endTime = moment().toDate().getTime().toString()
-    putApi(dispatch, LESSON_PROGRESS + `${progressId}`, {isCompleted: true, endTime})
+    putApi(dispatch, LESSON_PROGRESS + `${progressId}`, { isCompleted: true, endTime })
     const startTime = moment().toDate().getTime().toString()
-    postApi(dispatch, ADD_LESSON_PROGRESS, {lessonId: next.id, startTime})
+    postApi(dispatch, ADD_LESSON_PROGRESS, { lessonId: next.id, startTime })
     document.location.href = `${next.id}`
   }
 
   const nextPage = () => {
-    if(!isTest) {
+    if (!isTest) {
       nextPageHandler()
     }
 
-    if(isTest && isPassed) {
+    if (isTest && isPassed) {
       nextPageHandler()
     }
   }
@@ -123,7 +119,7 @@ const LessonPage = () => {
       {isLoading ? (
         <span>Loading</span>
       ) : (
-        <DashboardLayout title='Course page' >
+        <DashboardLayout title='Course page'>
           <BackButton location={`/course/${courseId}`} />
           <LessonDetail data={data?.data} id={id} setIsPassed={setIsPassed} />
           {materialData.length !== 0 ? (
@@ -160,21 +156,21 @@ const LessonPage = () => {
           ) : (
             ''
           )}
-          <div className="btn-container" style={{width: '40%'}}>
+          <div className='btn-container' style={{ width: '40%' }}>
             <Button
-            className='nextBtn'
-            name="Prev"
-            disabled={start && true}
-            onClick={isCreator ? creatorPrevLesson : prevPage}
+              className='nextBtn'
+              name='Prev'
+              disabled={start && true}
+              onClick={isCreator ? creatorPrevLesson : prevPage}
             />
-          <Button
-            className='nextBtn'
-            name='Next'
-            disabled={
-              finish ? true : (isCreator || data?.data?.test === null ? false : !isPassed) 
+            <Button
+              className='nextBtn'
+              name='Next'
+              disabled={
+              finish ? true : (isCreator || data?.data?.test === null ? false : !isPassed)
             }
-            onClick={isCreator ? creatorNextLesson : nextPage}
-          />
+              onClick={isCreator ? creatorNextLesson : nextPage}
+            />
           </div>
         </DashboardLayout>
       )}

@@ -23,7 +23,7 @@ export const addEnrollReducer = (state = {}, action) => {
   }
 }
 
-export const leaveCourseReducer = (state = {success: false}, action) => {
+export const leaveCourseReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case ENROLL_UPDATE_REQUEST:
       return { loading: true }

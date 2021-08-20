@@ -10,7 +10,7 @@ import DropDownCourse from './DropDownCourse'
 const CourseDetail = ({
   setFeedbackModal,
   setPurchaseModal,
-  data={},
+  data = {},
   isEnroll,
   isLoading,
   userInfo,
@@ -40,7 +40,7 @@ const CourseDetail = ({
                   clickHandler={() => setPurchaseModal(true)}
                 />
               </div>
-            ) : (joinCourse || isEnroll )
+            ) : (joinCourse || isEnroll)
               ? (
                 <DropDownCourse setFeedbackModal={setFeedbackModal} courseId={data?.data?.id} />
                 ) : (

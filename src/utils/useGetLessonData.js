@@ -8,7 +8,7 @@ const useGetLessonData = (
   setMaterialData,
   userId,
   setPath,
-  dependencies,
+  dependencies
 ) => {
   const { isLoading, data, refetch } = useQuery(
     ['lessonData', { ...dependencies }],
