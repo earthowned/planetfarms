@@ -17,6 +17,7 @@ export const GET_LIBRARY = BASE_URL + 'resources'
 export const GET_COURSE = BASE_URL + 'courses'
 export const ADD_COURSE = BASE_URL + 'courses/add'
 export const COURSE = BASE_URL + 'courses'
+export const ADD_COURSE_VIEW = BASE_URL + 'course-views/add'
 
 // lesson
 export const GET_LESSONS = BASE_URL + 'lessons'

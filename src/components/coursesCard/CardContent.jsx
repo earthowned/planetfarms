@@ -7,6 +7,7 @@ const CardContent = ({ item, userInfo, setPurchaseModal }) => {
     item.creator === userInfo.id
       ? `/admin/course/${item.id}`
       : `/course/${item.id}`
+
   return (
     <div className='card-content'>
       <Link to={path}>
@@ -15,7 +16,7 @@ const CardContent = ({ item, userInfo, setPurchaseModal }) => {
       </Link>
       <div className='course-stars'>
         <Star num={item.stars} />
-        <p>({item.total} total)</p>
+        <p>({item?.course_views?.length} total)</p>
       </div>
       <EnrollContainer
         item={item}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import BackButton from '../../../components/backButton/BackButton'
 import Button from '../../../components/button/Button'
@@ -11,8 +11,9 @@ import {
 } from '../../../components/purchaseModal/PurchaseModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './CoursePage.scss'
-import { GET_COURSE } from '../../../utils/urlConstants'
+import { ADD_COURSE_VIEW, GET_COURSE } from '../../../utils/urlConstants'
 import useGetFetchData from '../../../utils/useGetFetchData'
+import { postApi } from '../../../utils/apiFunc'
 
 function MyCoursePage ({ unpaid }) {
   const userLogin = useSelector((state) => state.userLogin)
@@ -21,18 +22,30 @@ function MyCoursePage ({ unpaid }) {
   const [purchaseModal, setPurchaseModal] = useState(false)
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
   const [isEnroll, setIsEnroll] = useState(false)
-
+  const dispatch = useDispatch()
   const { courseId } = useParams()
   const { data, isLoading, refetch } = useGetFetchData(
     'singleCourse',
     GET_COURSE + '/' + courseId
   )
+  
+    // counting the views
+    useEffect(() => {
+      if(data?.data?.creator !== userInfo.id) {
+        countViews()
+      }
+    }, [])
 
     useEffect(() => {
     if(data?.data?.enrolledUser.length > 0) {
       setIsEnroll(data?.data?.enrolledUser[0].enrolls.isEnroll)
     }
   }, [data])
+
+  function countViews () {
+    postApi(dispatch, ADD_COURSE_VIEW, {courseId})
+  }
+
 
   return (
     <>
@@ -60,6 +73,7 @@ function MyCoursePage ({ unpaid }) {
               userInfo={userInfo}
               isEnroll={isEnroll}
               refetch={refetch}
+              courseId={courseId}
             />
           </DashboardLayout>
         </>
@@ -67,7 +81,7 @@ function MyCoursePage ({ unpaid }) {
     </>
   )
 }
-export default MyCoursePage
+export default React.memo(MyCoursePage)
 
 function CoursePage ({
   setFeedbackModal,
@@ -75,7 +89,8 @@ function CoursePage ({
   data,
   userInfo,
   isEnroll,
-  refetch
+  refetch,
+  courseId
 }) {
   return (
     <div className='course-page'>
@@ -88,6 +103,7 @@ function CoursePage ({
           userInfo={userInfo}
           isEnroll={isEnroll}
           refetch={refetch}
+          courseId={courseId}
         />
       </div>
     </div>
