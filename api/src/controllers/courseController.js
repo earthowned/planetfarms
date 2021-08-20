@@ -25,6 +25,7 @@ const getCourses = async (req, res) => {
             [Op.eq]: req.user.id
           }
         },
+        required: false,
         attributes: [['id', 'userId']],
         through: {
           attributes: ['isEnroll', 'courseId']
