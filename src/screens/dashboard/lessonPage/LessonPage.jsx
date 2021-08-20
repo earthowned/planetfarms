@@ -11,9 +11,7 @@ import Material from '../../../components/material/Material'
 import Button from '../../../components/button/Button'
 
 import './LessonPage.scss'
-import { configFunc, getApi, postApi, putApi } from '../../../utils/apiFunc'
-import useGetFetchData from '../../../utils/useGetFetchData'
-import axios from 'axios'
+import { getApi, postApi, putApi } from '../../../utils/apiFunc'
 
 const LessonPage = () => {
   const dispatch = useDispatch()
