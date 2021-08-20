@@ -32,14 +32,14 @@ const addProgress = async (req, res) => {
 
   if (prevProgress) {
     return res.status(201).json({
-      status: true,
+      success: true,
       message: 'Lesson already in progress'
     })
   }
 
   const progress = await db.LessonProgress.create({ lessonId, startTime, userId: req.user.id })
   res.status(201).json({
-    status: true,
+    success: true,
     message: 'added new progress successfully',
     data: progress
   })
@@ -52,7 +52,7 @@ const deleteProgress = async (req, res) => {
     throw new NotFoundError()
   }
   res.status(202).json({
-    status: true,
+    success: true,
     message: ' progress deleted successfully'
   })
 }
@@ -64,7 +64,8 @@ const updateProgress = async (req, res) => {
 
   if(oldProgress) {
     return res.status(202).json({
-      message: 'Progress already updated.'
+      message: 'Progress already updated.',
+      success: true
     })
   }
 
@@ -73,7 +74,7 @@ const updateProgress = async (req, res) => {
     throw new NotFoundError()
   }
   res.status(202).json({
-    status: true,
+    success: true,
     message: ' progress updated successfully',
     data: progress
   })

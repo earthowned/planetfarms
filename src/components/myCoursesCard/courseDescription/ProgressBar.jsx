@@ -3,7 +3,7 @@ import useSizeFinder from '../../../utils/sizeFinder'
 const ProgressBar = ({ data = {}, isLoading, isEnroll }) => {
   const courseData = data?.data
   const lessonData = courseData?.lessons
-  const lessonLength = lessonData.length
+  const lessonLength = lessonData.length - 1
   const lessonIndicator = lessonLength * (115 / lessonLength)
   const accurateIndicator = lessonIndicator === 115 ? 92 : lessonIndicator
   const windowWidth = useSizeFinder()
@@ -27,23 +27,25 @@ const ProgressBar = ({ data = {}, isLoading, isEnroll }) => {
         lessonData?.map((item, index) => {
           return (
             <div className='lesson-progress-content' key={index}>
-              <div
-                className={
-                  isEnroll
-                    ? (item?.lesson_progresses.length !== 0
-                        ? 'circle-wrapper-active'
-                        : 'circle-wrapper')
-                    : 'circle-wrapper'
-                }
-              >
-                {
-                (isEnroll && item?.lesson_progresses.length !== 0) && <div className='circle' />
-}
+              <div>
+                <div
+                  className={
+                    isEnroll
+                      ? (item?.lesson_progresses[0]?.isCompleted
+                          ? 'circle-wrapper-active'
+                          : 'circle-wrapper')
+                      : 'circle-wrapper'
+                  }
+                >
+                  {
+                    (isEnroll && item?.lesson_progresses[0]?.isCompleted) && <div className='circle' />
+                  }
+                </div>
               </div>
               <h4
                 className={
                   isEnroll
-                    ? (item?.lesson_progresses.length !== 0
+                    ? (item?.lesson_progresses[0]?.isCompleted
                         ? 'lesson-progress-heading-active'
                         : 'lesson-progress-heading')
                     : 'lesson-progress-heading'

@@ -131,11 +131,23 @@
 .download-all img {
   cursor: pointer;
 }
-.nextBtn {
-  margin-top: 1.5em;
-  width: 7em;
-  height: 3em;
-  margin-left: auto;
+
+.lesson-btn-container {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  .nextBtn {
+    margin-top: 1.5em;
+    width: 180px;
+    height: 3em;
+
+    &:first-child {
+      margin-right: 20px;
+    }
+  }
 }
 
 @media only screen and (max-width: 750px) {

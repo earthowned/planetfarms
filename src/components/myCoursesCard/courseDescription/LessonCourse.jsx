@@ -20,8 +20,6 @@ const LessonCourse = ({
   const dispatch = useDispatch()
   const history = useHistory()
   const seeLessonHandler = async (lessonId) => {
-    const startTime = moment().toDate().getTime().toString()
-    postApi(dispatch, ADD_LESSON_PROGRESS, { lessonId, startTime })
     history.push(`/lesson/${lessonId}`)
   }
   return (
