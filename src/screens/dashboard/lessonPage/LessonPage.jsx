@@ -44,9 +44,8 @@ const LessonPage = () => {
   // for next and prev button
   const getAllLessons = async () => {
     const { data: { lessons } } = await getApi(dispatch, GET_COURSE_LESSONS + data?.data?.courseId)
-    console.log(lessons)
     // getting the position of lesson
-    let lessonPos = lessons.map(item => item.id).indexOf(data?.data?.id)
+    const lessonPos = lessons.map(item => item.id).indexOf(data?.data?.id)
     if (lessonPos === 0) setStart(true)
     if (lessonPos === (lessons.length - 1)) setFinish(true)
     
@@ -63,18 +62,16 @@ const LessonPage = () => {
       setProgressId(data?.data?.lesson_progresses[0].id)
     }
     setIsTest(data?.data?.test !== null)
-    if (data?.data?.course.creator) {
-      setIsCreator(data?.data?.course.creator === userInfo.id)
-    }
+    setIsCreator(data?.data?.course?.creator === userInfo.id)
   }, [data])
 
   useEffect(() => {
     if(courseId) {
       getAllLessons()
     }
-      if(!isCreator) {
-        checkEnrolled(data?.data?.courseId)
-      }
+    if(!isCreator) {
+      checkEnrolled(data?.data?.courseId)
+    }
   }, [courseId, isCreator])
 
   const checkEnrolled = async (id) => {
@@ -89,23 +86,20 @@ const LessonPage = () => {
 
   const checkPrevLessonCompletion = async () => {
     // checking if the previous lesson is conplete or not
-      const { data: {data: lesson }} = await getApi(dispatch, GET_LESSONS + '/' + prev.id)
-        if(lesson.lesson_progresses.length === 0 || !lesson.lesson_progresses[0].isCompleted) {
-          return history.push(`/course/${data?.data?.courseId}`)
-        }
-        addLessonProgress()
+    const { data: {data: lesson }} = await getApi(dispatch, GET_LESSONS + '/' + prev.id)
+    if(lesson.lesson_progresses.length === 0 || !lesson.lesson_progresses[0].isCompleted) {
+      return history.push(`/course/${data?.data?.courseId}`)
+    }
+    addLessonProgress()
   }
   
   useEffect(() => {
-    if(!isCreator) {
-      if(isEnrolled) {
-        if(prev) {
-          checkPrevLessonCompletion()
-        }
-        if(!prev && start) {
-          addLessonProgress()
-        }
-      }
+    if(!isCreator && isEnrolled) {
+      if (start) {
+        addLessonProgress()
+      } else if(prev) {
+        checkPrevLessonCompletion()
+      } 
     }
   }, [prev, start, isEnrolled, isCreator])
 
@@ -119,13 +113,11 @@ const LessonPage = () => {
 
   const nextPageHandler = async () => {
     const endTime = moment().toDate().getTime().toString()
-    const {data:updateLesson} = await putApi(dispatch, LESSON_PROGRESS + `${progressId}`, { isCompleted: true, endTime })
-    if(updateLesson.success && finish) {
-      return history.push(`/course/${data?.data?.courseId}`)
-    }
+    const {data: updateLesson} = await putApi(dispatch, LESSON_PROGRESS + `${progressId}`, { isCompleted: true, endTime })
     if(updateLesson.success) {
+      if(finish) return history.push(`/course/${data?.data?.courseId}`)
       const startTime = moment().toDate().getTime().toString()
-      const {data:addLesson} = await postApi(dispatch, ADD_LESSON_PROGRESS, { lessonId: next.id, startTime })
+      const {data: addLesson} = await postApi(dispatch, ADD_LESSON_PROGRESS, { lessonId: next.id, startTime })
 
       if(addLesson.success) {
         document.location.href = `${next.id}`
@@ -145,10 +137,6 @@ const LessonPage = () => {
 
   const creatorNextLesson = () => {
     document.location.href = `${next.id}`
-  }
-
-  const creatorPrevLesson = () => {
-    document.location.href = `${prev.id}`
   }
 
   const creatorCompleteLesson = () => {
@@ -201,7 +189,7 @@ const LessonPage = () => {
             {!start && <Button
               className='nextBtn'
               name='Prev'
-              onClick={isCreator ? creatorPrevLesson : prevPage}
+              onClick={prevPage}
             />}
            {
               finish 
@@ -214,7 +202,7 @@ const LessonPage = () => {
                 className='nextBtn'
                 name='Next'
                 disabled={
-                  isCreator || data?.data?.test === null ? false : !isPassed
+                  (isCreator || data?.data?.test === null) ? false : !isPassed
                 }
                 onClick={isCreator ? creatorNextLesson : nextPage}
               />
