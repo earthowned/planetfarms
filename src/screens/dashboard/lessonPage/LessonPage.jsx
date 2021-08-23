@@ -44,6 +44,7 @@ const LessonPage = () => {
   // for next and prev button
   const getAllLessons = async () => {
     const { data: { lessons } } = await getApi(dispatch, GET_COURSE_LESSONS + data?.data?.courseId)
+    console.log(lessons)
     // getting the position of lesson
     let lessonPos = lessons.map(item => item.id).indexOf(data?.data?.id)
     if (lessonPos === 0) setStart(true)
@@ -68,12 +69,13 @@ const LessonPage = () => {
   }, [data])
 
   useEffect(() => {
+    if(courseId) {
       getAllLessons()
+    }
       if(!isCreator) {
         checkEnrolled(data?.data?.courseId)
       }
   }, [courseId, isCreator])
-
 
   const checkEnrolled = async (id) => {
     const { data } = await getApi(dispatch, GET_COURSE + '/' + id)
@@ -107,9 +109,12 @@ const LessonPage = () => {
     }
   }, [prev, start, isEnrolled, isCreator])
 
-  const addLessonProgress = () => {
+  const addLessonProgress = async () => {
       const startTime = moment().toDate().getTime().toString()
-      postApi(dispatch, ADD_LESSON_PROGRESS, { lessonId: id, startTime })
+      const {data} = await postApi(dispatch, ADD_LESSON_PROGRESS, { lessonId: id, startTime })
+      if(data?.data?.id) {
+        setProgressId(data?.data?.id)
+      }
   }
 
   const nextPageHandler = async () => {
