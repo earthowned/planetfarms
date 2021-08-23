@@ -129,11 +129,7 @@ const LessonPage = () => {
   }
 
   const nextPage = () => {
-    if (!isTest) {
-      nextPageHandler()
-    }
-
-    if (isTest && isPassed) {
+    if (!isTest || isPassed) {
       nextPageHandler()
     }
   }
@@ -152,10 +148,6 @@ const LessonPage = () => {
 
   const creatorCompleteLesson = () => {
     history.push(`/admin/course/${courseId}`)
-  }
-  
-  const completeLesson = () => {
-    nextPageHandler()
   }
 
   return (
@@ -211,7 +203,7 @@ const LessonPage = () => {
               ? <Button
                 className='nextBtn'
                 name='Course Complete'
-                onClick={isCreator ? creatorCompleteLesson : completeLesson}
+                onClick={isCreator ? creatorCompleteLesson : nextPage}
               />
               : <Button
                 className='nextBtn'
