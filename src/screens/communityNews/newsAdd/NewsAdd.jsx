@@ -87,7 +87,7 @@ const NewsAdd = () => {
     newsData[0].category = category
     dispatch(createNews(newsData, newsCover))
   }
-  console.log(title, category)
+
   const editNewsForm = ({ title }) => {
     dispatch(
       newsUpdate(

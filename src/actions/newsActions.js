@@ -76,11 +76,11 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
   formData.append('news', newsCover)
   try {
     dispatch({ type: NEWS_CREATE_REQUEST })
-    const richText = await postApi(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`)
+    const richText = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/richtexts`, {})
     const richtextId = richText?.data?.richtext?.id
     if (richtextId) {
       formData.append('richtextId', richtextId)
-      const { data } = await postApi(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, fileHeader)
+      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, fileHeader)
       dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
       for (let i = 0; i < newNews.length; i++) {
         if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
@@ -150,7 +150,7 @@ export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
   formData.append('news', news.newsCover)
   try {
     dispatch({ type: NEWS_UPDATE_REQUEST })
-    const data = await putApi(`${process.env.REACT_APP_API_BASE_URL}/api/news/${news.id}/community/${currentCommunity.id}`, formData)
+    const data = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${news.id}/community/${currentCommunity?.id}`, formData)
     dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data })
     // adding new content
     for (let i = 0; i < newNews.length; i++) {

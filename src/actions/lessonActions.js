@@ -49,7 +49,6 @@ export const createLesson =
 
         if (richtextId) {
           lessonFormData.append('richtextId', richtextId)
-          console.log(richtextId)
           const { data } = await postApi(
             dispatch,
             ADD_LESSONS,

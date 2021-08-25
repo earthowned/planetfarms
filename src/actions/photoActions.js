@@ -22,7 +22,7 @@ export const createLessonImg =
     lessonImgData.append('richtextId', richtextId)
     try {
       dispatch({ type: PHOTO_CREATE_REQUEST })
-      const { data } = await postApi(ADD_LESSON_PHOTO, lessonImgData, fileHeader)
+      const { data } = await postApi(dispatch, ADD_LESSON_PHOTO, lessonImgData, fileHeader)
       dispatch({ type: PHOTO_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({
@@ -44,7 +44,7 @@ export const updatePhoto =
       lessonImgData.append('isImgDesc', isImgDesc)
       try {
         dispatch({ type: PHOTO_UPDATE_REQUEST })
-        const { data } = await putApi(GET_LESSON_PHOTO + `/${id}`, lessonImgData, fileHeader)
+        const { data } = await putApi(dispatch, GET_LESSON_PHOTO + `/${id}`, lessonImgData, fileHeader)
         dispatch({ type: PHOTO_UPDATE_SUCCESS, payload: data })
         setEditPhotoModel(false)
       } catch (error) {

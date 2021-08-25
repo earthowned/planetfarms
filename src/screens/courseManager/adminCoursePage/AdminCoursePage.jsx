@@ -30,6 +30,8 @@ const AdminCoursePage = () => {
   }
   const creator = data?.data?.creator
   const userId = userInfo.id
+
+  console.log('data: ', data)
   if (userId !== creator) {
     return <Redirect to='/courses' />
   }

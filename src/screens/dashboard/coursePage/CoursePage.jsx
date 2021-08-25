@@ -28,7 +28,7 @@ function MyCoursePage ({ unpaid }) {
     'singleCourse',
     GET_COURSE + '/' + courseId
   )
-
+console.log(data)
   // counting the views
   useEffect(() => {
     if (data?.data?.creator !== userInfo.id) {

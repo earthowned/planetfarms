@@ -4,7 +4,6 @@ import { GET_COVERIMG, MATERIAL, LESSON_PROGRESS, GET_COURSE_LESSONS, ADD_LESSON
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import useGetLessonData from '../../../utils/useGetLessonData'
-import LessonDetail from './LessonDetail'
 import BackButton from '../../../components/backButton/BackButton'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import Material from '../../../components/material/Material'
@@ -14,7 +13,6 @@ import './LessonPage.scss'
 import { getApi, postApi, putApi } from '../../../utils/apiFunc'
 import LessonTest from './LessonTest'
 import RichTextView from '../../../components/richTextView/RichTextView'
-import RichText from '../../../components/richText/RichText'
 
 const LessonPage = () => {
   const dispatch = useDispatch()
@@ -162,7 +160,7 @@ const LessonPage = () => {
                 alt={`${data?.title}_img`}
               />
             </div>}
-          <RichText data={data} />
+          <RichTextView data={data} />
           <LessonTest id={id} />
           </div>
           {materialData.length !== 0 ? (

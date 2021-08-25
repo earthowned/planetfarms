@@ -12,6 +12,7 @@ import {
   VIDEO_DELETE_SUCCESS,
   VIDEO_DELETE_FAIL
 } from '../constants/videoConstants'
+import axios from 'axios'
 
 export const createVideo = (
   videoCover,
@@ -30,7 +31,7 @@ export const createVideo = (
   videoData.append('richtextId', richtextId)
   try {
     dispatch({ type: VIDEO_CREATE_REQUEST })
-    const { data } = await postApi(ADD_VIDEOS, videoData, fileHeader)
+    const { data } = await postApi(dispatch, ADD_VIDEOS, videoData, fileHeader)
     dispatch({ type: VIDEO_CREATE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
@@ -63,7 +64,7 @@ export const updateVideo =
       videoData.append('videoResource', videoResource)
       try {
         dispatch({ type: VIDEO_UPDATE_REQUEST })
-        const { data } = await putApi(GET_VIDEOS + `/${id}`, videoData, fileHeader)
+        const { data } = await putApi(dispatch, GET_VIDEOS + `/${id}`, videoData, fileHeader)
         dispatch({ type: VIDEO_UPDATE_SUCCESS, payload: data })
         setEditVideoModel(false)
       } catch (error) {
