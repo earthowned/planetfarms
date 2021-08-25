@@ -20,7 +20,8 @@ export const createVideo =
     videoDescription,
     videoLink,
     videoResource,
-    lessonId
+    lessonId,
+    newsId
   ) =>
     async (dispatch) => {
       const videoData = new FormData()
@@ -29,7 +30,7 @@ export const createVideo =
       videoData.append('videoDescription', videoDescription)
       videoData.append('videoLink', videoLink)
       videoData.append('videoResource', videoResource)
-      videoData.append('lessonId', lessonId)
+      newsId ? videoData.append('newsId', newsId) : videoData.append('lessonId', lessonId)
 
       try {
         dispatch({ type: VIDEO_CREATE_REQUEST })
@@ -38,7 +39,7 @@ export const createVideo =
             'Content-Type': 'multipart/form-data'
           }
         }
-        const { data } = await postApi(dispatch, ADD_VIDEOS, videoData, config)
+        const { data } = await Axios.post(ADD_VIDEOS, videoData, config)
         dispatch({ type: VIDEO_CREATE_SUCCESS, payload: data })
       } catch (error) {
         dispatch({

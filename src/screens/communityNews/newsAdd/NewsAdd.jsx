@@ -71,9 +71,6 @@ const NewsAdd = () => {
     setNewsSingleData(data)
   }
 
-  console.log(id, title)
-  console.log('news single data' + newsSingleData)
-
   const submitNewsForm = ({ title }) => {
     // const newData = convertArrToObject(newsData)
     // newData.title = title
@@ -126,7 +123,7 @@ const NewsAdd = () => {
   }
 
   async function deleteImageConfirm () {
-    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/lesson-photos/${imageId}`)
+    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/photos/${imageId}`)
     setDeleteImageModal(false)
   }
 
@@ -146,7 +143,7 @@ const NewsAdd = () => {
   }
 
   async function deleteTextConfirm () {
-    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/lesson-text/${textId}`)
+    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/texts/${textId}`)
     setDeleteTextModal(false)
   }
 
