@@ -49,16 +49,18 @@ export const createLesson =
 
     if(richtextId) {
       lessonFormData.append('richtextId', richtextId)
-    const { data } = await postApi(
+      console.log(richtextId)
+      const { data } = await postApi(
           dispatch,
           ADD_LESSONS,
           lessonFormData,
           config
         )
+        console.log(lessonFormData)
         dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
         const lessonId = data?.data?.id
 
-         for (let i = 0; i < lessonData.length; i++) {
+        for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
             await addVideo({ data: lessonData[i], richtextId, dispatch })
           }
@@ -70,7 +72,7 @@ export const createLesson =
           }
         }
 
-         for (let i = 0; i < material.length; i++) {
+        for (let i = 0; i < material.length; i++) {
           if (material[i].mData) {
             await addMaterial({ material: material[i], lessonId, dispatch })
           }
@@ -89,7 +91,7 @@ export const createLesson =
     }
 
 export const updateLesson =
-  (title, coverImg, lessonId, lessonDesc, history, lessonData=[], material=[]) =>
+  (title, coverImg, lessonId, lessonDesc, history, lessonData=[], material=[], richtextId) =>
     async (dispatch) => {
       const updateLessonFormData = new FormData()
       updateLessonFormData.append('title', title)
@@ -113,15 +115,16 @@ export const updateLesson =
 
        for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ data: lessonData[i], lessonId, newsId : null, dispatch })
+            await addVideo({ data: lessonData[i], richtextId, dispatch })
           }
           if (lessonData[i]?.lessonImg) {
-            await addImage({ data: lessonData[i], lessonId, newsId : null, dispatch })
+            await addImage({ data: lessonData[i], richtextId, dispatch })
           }
           if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            await addText({ data: lessonData[i], lessonId, newsId : null, dispatch })
+            await addText({ data: lessonData[i], richtextId, dispatch })
           }
         }
+
         for (let i = 0; i < material.length; i++) {
           if (material[i].mData) {
             await addMaterial({ material: material[i], lessonId, dispatch })

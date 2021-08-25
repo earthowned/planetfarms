@@ -29,27 +29,36 @@ const getLessonById = async (req, res) => {
   const { id } = req.params
   const lesson = await db.Lesson.findOne({
     where: { id },
-    include: [db.Video, db.Photo, db.Text, db.Material, db.Test, db.LessonProgress, db.Courses]
+    include: [
+      {
+        model: db.RichText,
+        include: [db.Text, db.Video, db.Photo]
+      },
+      db.Material,
+      db.Test,
+      db.LessonProgress,
+      db.Courses
+    ]
   })
 
-  lesson.photos.forEach((photo) => {
-    photo.lessonImg = changeFormat(photo.lessonImg)
-  })
-  lesson.videos.forEach((video) => {
-    video.videoCover = changeFormat(video.videoCover)
-  })
+  // lesson.photos.forEach((photo) => {
+  //   photo.lessonImg = changeFormat(photo.lessonImg)
+  // })
+  // lesson.videos.forEach((video) => {
+  //   video.videoCover = changeFormat(video.videoCover)
+  // })
 
-  const coverImg = changeFormat(lesson?.dataValues?.coverImg)
-  const lessonData = lesson.dataValues
-  const data = Object.assign({
-    ...lesson,
-    dataValues: { ...lessonData, coverImg }
-  })
-  const str = JSON.parse(CircularJSON.stringify(data))
+  // const coverImg = changeFormat(lesson?.dataValues?.coverImg)
+  // const lessonData = lesson.dataValues
+  // const data = Object.assign({
+  //   ...lesson,
+  //   dataValues: { ...lessonData, coverImg }
+  // })
+  // const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
     status: true,
     message: 'fetched lesson successfully',
-    data: str.dataValues
+    lesson
   })
 }
 

@@ -14,31 +14,31 @@ import LessonTest from './LessonTest'
 
 const LessonDetail = ({ data, id, setIsPassed }) => {
   const [lessonData, setLessonData] = useState([])
-  const textData = data?.texts?.map((text) => {
+  const textData = data?.rich_text?.texts?.map((text) => {
     return text
   })
-  const videoData = data?.videos?.map((video) => {
+  const videoData = data?.rich_text?.videos?.map((video) => {
     return video
   })
-  const photoData = data?.photos?.map((photo) => {
+  const photoData = data?.rich_text?.photos?.map((photo) => {
     return photo
   })
 
   useEffect(() => {
     setLessonData([textData, videoData, photoData])
   }, [data])
+  console.log(data);
   const newData = lessonData.flat()
   return (
     <div className='lesson-description-wrapper'>
       <h1>{data?.title}</h1>
-      {data?.coverImg && (
-        <div className='lesson-description-img-wrapper'>
-          <img
-            src={`${GET_COVERIMG}${data?.coverImg}`}
-            alt={`${data?.title}_img`}
-          />
-        </div>
-      )}
+      <p>{data?.lessonDesc}</p>
+      {data?.coverImg && <div className='lesson-description-img-wrapper'>
+        <img
+          src={`${GET_COVERIMG}${data?.coverImg}`}
+          alt={`${data?.title}_img`}
+        />
+      </div>}
       {newData
         .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
         .map((data, index) => (
