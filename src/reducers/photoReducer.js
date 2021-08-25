@@ -26,12 +26,12 @@ export const photoCreateReducer = (state = {}, action) => {
   }
 }
 
-export const photoUpdateReducer = (state = {success: false}, action) => {
+export const photoUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case PHOTO_UPDATE_REQUEST:
       return { loading: true }
     case PHOTO_UPDATE_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case PHOTO_UPDATE_FAIL:
       return { loading: false, error: action.payload }
     default:
@@ -39,12 +39,12 @@ export const photoUpdateReducer = (state = {success: false}, action) => {
   }
 }
 
-export const photoDeleteReducer = (state = {success: false}, action) => {
+export const photoDeleteReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case PHOTO_DELETE_REQUEST:
       return { loading: true }
     case PHOTO_DELETE_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case PHOTO_DELETE_FAIL:
       return { loading: false, error: action.payload }
     default:

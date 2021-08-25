@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-   await queryInterface.removeColumn('videos', 'newsId');
-   await queryInterface.removeColumn('videos', 'lessonId');
-   await queryInterface.addColumn('videos', 'richtextId', {
+    await queryInterface.removeColumn('videos', 'newsId')
+    await queryInterface.removeColumn('videos', 'lessonId')
+    await queryInterface.addColumn('videos', 'richtextId', {
       type: Sequelize.INTEGER,
       references: {
         model: 'rich_texts',
@@ -12,7 +12,6 @@ module.exports = {
       },
       onDelete: 'cascade'
     })
-    
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -22,14 +21,14 @@ module.exports = {
         model: 'news',
         key: 'id'
       }
-    });
+    })
     await queryInterface.addColumn('videos', 'lessonId', {
       type: Sequelize.INTEGER,
       references: {
         model: 'lessons',
         key: 'id'
       }
-    });
+    })
     await queryInterface.removeColumn('videos', 'richtextId')
   }
-};
+}

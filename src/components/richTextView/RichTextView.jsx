@@ -23,42 +23,41 @@ const RichTextView = ({ data, news }) => {
   const flattenData = newData.flat()
   return (
     <>
-    <div className='lesson-description-wrapper'>
-            {news 
-            ? <>
-                <h1 className='news-view-title'>{data?.title}</h1>
-                <div className='title-time'>
-                  <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-                    {data?.createdAt && new Date(data?.createdAt).toDateString()}
-                  </div>
-                  <div className='due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-                    {data?.readTime}
-                  </div>
-                </div>
-                <Image
-                  src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${data?._attachments}`}
-                />
-                </>
-              :  <>
-                  <h1 className='news-view-title'>{data?.title}</h1>
-                  <p>{data?.lessonDesc}</p>
-                  {data?.coverImg && <div className='lesson-description-img-wrapper'>
-                    <img
-                      src={`${GET_COVERIMG}${data?.coverImg}`}
-                      alt={`${data?.title}_img`}
-                    />
-                  </div>}
-                </>
-              }
-      {flattenData
-        .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
-        .map((data, index) => (
-          <div key={index}>
-            <Text heading={data?.textHeading} desc={data?.textDescription} />
-            <Video
-              title={data?.videoTitle}
-              description={data?.videoDescription}
-              url={
+      <div className='lesson-description-wrapper'>
+        {news
+          ? <>
+            <h1 className='news-view-title'>{data?.title}</h1>
+            <div className='title-time'>
+              <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
+                {data?.createdAt && new Date(data?.createdAt).toDateString()}
+              </div>
+              <div className='due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
+                {data?.readTime}
+              </div>
+            </div>
+            <Image
+              src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${data?._attachments}`}
+            />
+            </>
+          : <>
+            <h1 className='news-view-title'>{data?.title}</h1>
+            <p>{data?.lessonDesc}</p>
+            {data?.coverImg && <div className='lesson-description-img-wrapper'>
+              <img
+                src={`${GET_COVERIMG}${data?.coverImg}`}
+                alt={`${data?.title}_img`}
+              />
+            </div>}
+            </>}
+        {flattenData
+          .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
+          .map((data, index) => (
+            <div key={index}>
+              <Text heading={data?.textHeading} desc={data?.textDescription} />
+              <Video
+                title={data?.videoTitle}
+                description={data?.videoDescription}
+                url={
                 data?.videoLink === 'undefined'
                   ? `${GET_VIDEO}${data?.videoResource}`
                   : data?.videoLink

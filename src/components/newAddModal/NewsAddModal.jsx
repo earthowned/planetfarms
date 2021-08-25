@@ -11,7 +11,7 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
   const [titleError, setTitleError] = useState()
   const [categoryError, setCategoryError] = useState()
 
-  const history = useHistory();
+  const history = useHistory()
 
   const dispatch = useDispatch()
   const titleChange = (e) => {
@@ -54,14 +54,17 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
         </div>
         {
           editData
-          ? <button className='default-btn-btn btn-variation' onClick={editNewsTitle}>Update</button>
-          : <button className='default-btn-btn btn-variation' onClick = {() => history.push({
-              pathname: '/news/add',
-              state: {
-                category,
-                title
-              }
-            })}>Continue</button>
+            ? <button className='default-btn-btn btn-variation' onClick={editNewsTitle}>Update</button>
+            : <button
+                className='default-btn-btn btn-variation' onClick={() => history.push({
+                  pathname: '/news/add',
+                  state: {
+                    category,
+                    title
+                  }
+                })}
+              >Continue
+              </button>
         }
       </div>
     </div>

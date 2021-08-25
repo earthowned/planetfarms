@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const LessonActions = ({ id, courseId, refetch }) => {
   const dispatch = useDispatch()
-  const history = useHistory();
+  const history = useHistory()
   const [actionActive, setActionActive] = useState(false)
   const [tests, setTests] = useState([])
   const domNode = useHideOnClick(() => {
@@ -48,11 +48,13 @@ const LessonActions = ({ id, courseId, refetch }) => {
                 </Link>
           }
           <li onClick={() => history.push({
-                pathname: `/admin/lesson/edit/${id}`,
-                state: {
-                  courseId
-                }
-              })}>Edit</li>
+            pathname: `/admin/lesson/edit/${id}`,
+            state: {
+              courseId
+            }
+          })}
+          >Edit
+          </li>
           <li
             onClick={() => {
               deleteLessonHandler(id)

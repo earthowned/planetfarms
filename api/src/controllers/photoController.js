@@ -57,14 +57,14 @@ const addphoto = async (req, res) => {
 const updatePhoto = async (req, res) => {
   let lessonImg = ''
 
-  const singlePhoto = await db.Photo.findOne({where: {id: req.params.id}});
+  const singlePhoto = await db.Photo.findOne({ where: { id: req.params.id } })
   if (req.file) {
     lessonImg = req.file.filename
   } else {
     lessonImg = singlePhoto.dataValues.lessonImg
   }
-  
-  const photo = await db.Photo.update({ ...req.body, lessonImg }, {where: {id: req.params.id}})
+
+  const photo = await db.Photo.update({ ...req.body, lessonImg }, { where: { id: req.params.id } })
   res.status(201).json({
     status: true,
     message: 'photo updated successfully',
@@ -74,10 +74,10 @@ const updatePhoto = async (req, res) => {
 
 const deletePhoto = async (req, res) => {
   const { id } = req.params
-  await db.Photo.destroy({where: { id }})
+  await db.Photo.destroy({ where: { id } })
   res.status(202).json({
     status: true,
-    message: 'Lesson photo deleted successfully',
+    message: 'Lesson photo deleted successfully'
   })
 }
 

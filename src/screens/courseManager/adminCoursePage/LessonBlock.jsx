@@ -49,7 +49,7 @@ const LessonBlock = ({ data, courseId, refetch }) => {
                           </Link>
                         </div>
                       </div>
-                      <LessonActions id={lesson.id} courseId={courseId}/>
+                      <LessonActions id={lesson.id} courseId={courseId} />
                     </div>
                   </React.Fragment>
                 )
@@ -58,14 +58,17 @@ const LessonBlock = ({ data, courseId, refetch }) => {
         ) : (
           ''
         )}
-          <div className='add-lesson-btn secondary-btn' onClick={() => history.push({
-              pathname: '/admin/lesson/add',
-              state: {
-                courseId
-              }})}>
-            <img src='/img/plus.svg' alt='lesson add' />
-            <span>Add new lesson for users</span>
-          </div>
+        <div
+          className='add-lesson-btn secondary-btn' onClick={() => history.push({
+            pathname: '/admin/lesson/add',
+            state: {
+              courseId
+            }
+          })}
+        >
+          <img src='/img/plus.svg' alt='lesson add' />
+          <span>Add new lesson for users</span>
+        </div>
       </div>
     </div>
   )

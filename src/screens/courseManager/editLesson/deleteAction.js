@@ -27,12 +27,10 @@ export const useDeleteActions = (
     dispatch(deleteMaterial(id, refetch))
   }
   const removeItem = (id) => {
-    const newLessonData = lessonData.filter((item) => item.itemId !== id)
-    setLessonData(newLessonData)
+    setLessonData(lessonData.filter((item) => item.itemId !== id))
   }
   const removeLocalMaterial = (e) => {
-    const name = e.currentTarget.getAttribute('name')
-    setMaterial(material.filter((item) => item?.mData?.preview !== name))
+    setMaterial(material.filter((item) => item?.mData?.preview !== e.currentTarget.getAttribute('name')))
   }
   return {
     removeTextItem,

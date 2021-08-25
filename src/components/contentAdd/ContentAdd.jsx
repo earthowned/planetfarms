@@ -3,7 +3,7 @@ import Text from '../../screens/courseManager/addLesson/Text'
 import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
 
-const ContentAdd = ({data, setVideoModal, setImageModal, setTextModal, textModal}) => {
+const ContentAdd = ({ data, setVideoModal, setImageModal, setTextModal, textModal }) => {
   return (
     <>
       {
@@ -11,15 +11,15 @@ const ContentAdd = ({data, setVideoModal, setImageModal, setTextModal, textModal
           data.map((vid, index) => (
             <div key={index}>
               <Video
-              title={vid.videoTitle}
-              description={vid.videoDescription}
-              url={vid.videoLink || vid.videoResource?.preview}
-              thumbnail={vid.videoCover?.preview}
+                title={vid.videoTitle}
+                description={vid.videoDescription}
+                url={vid.videoLink || vid.videoResource?.preview}
+                thumbnail={vid.videoCover?.preview}
               />
               <Image src={vid.lessonImg?.preview} desc={vid.photoDescription} />
               <Text heading={vid.textHeading} desc={vid.textDescription} />
-          </div>
-        ))
+            </div>
+          ))
       }
       <div className='admin-lesson-create-btn-wrapper'>
         <button className='secondary-btn' onClick={() => setVideoModal(true)}>
@@ -36,7 +36,7 @@ const ContentAdd = ({data, setVideoModal, setImageModal, setTextModal, textModal
         </button>
       </div>
     </>
-    )
+  )
 }
 
 export default ContentAdd

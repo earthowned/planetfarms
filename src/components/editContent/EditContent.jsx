@@ -35,27 +35,30 @@ const EditContent = ({
   return (
     <>{
       data && <>
-       {
+        {
         data?.rich_text?.photos && data?.rich_text?.photos.map(item => {
-          return  <Image
-                src={
+          return (
+            <Image
+              src={
                   typeof item?.lessonImg === 'string'
                     ? `${LESSON_IMG}${item?.lessonImg}`
                     : item?.lessonImg.preview
                 }
-                id={item?.id || item?.itemId}
-                modelPopUp={editImageFunc}
-                setEditPhotoModel={setEditPhotoModel}
-                isEditable
-                desc={item?.isImgDesc === true && item?.photoDescription}
-                onRemove={item?.id ? removePhoto : removeLocalData}
-              />
+              id={item?.id || item?.itemId}
+              modelPopUp={editImageFunc}
+              setEditPhotoModel={setEditPhotoModel}
+              isEditable
+              desc={item?.isImgDesc === true && item?.photoDescription}
+              onRemove={item?.id ? removePhoto : removeLocalData}
+            />
+          )
         })
       }
 
-      {
+        {
         data?.rich_text?.texts && data?.rich_text?.texts.map(item => {
-          return  <Text
+          return (
+            <Text
               heading={item?.textHeading}
               desc={item?.textDescription}
               isEditable
@@ -64,12 +67,14 @@ const EditContent = ({
               id={item?.id || item?.itemId}
               onRemove={item?.id ? removeTextItem : removeLocalData}
             />
+          )
         })
       }
 
-      {
+        {
         data?.rich_text?.videos && data?.rich_text?.videos.map(item => {
-          return  <Video
+          return (
+            <Video
               title={item?.videoTitle}
               description={item?.videoDescription}
               url={
@@ -88,6 +93,7 @@ const EditContent = ({
               modelPopUp={editVideoFunc}
               onRemove={item?.id ? removeVideo : removeLocalData}
             />
+          )
         })
       }
       </>

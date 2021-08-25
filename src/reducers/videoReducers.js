@@ -26,12 +26,12 @@ export const videoCreateReducer = (state = {}, action) => {
   }
 }
 
-export const videoUpdateReducer = (state = {success: false}, action) => {
+export const videoUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case VIDEO_UPDATE_REQUEST:
       return { loading: true }
     case VIDEO_UPDATE_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case VIDEO_UPDATE_FAIL:
       return { loading: false, error: action.payload }
     default:
@@ -39,12 +39,12 @@ export const videoUpdateReducer = (state = {success: false}, action) => {
   }
 }
 
-export const videoDeleteReducer = (state = {success: false}, action) => {
+export const videoDeleteReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case VIDEO_DELETE_REQUEST:
       return { loading: true }
     case VIDEO_DELETE_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case VIDEO_DELETE_FAIL:
       return { loading: false, error: action.payload }
     default:

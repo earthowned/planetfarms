@@ -26,12 +26,12 @@ export const textCreateReducer = (state = {}, action) => {
   }
 }
 
-export const textUpdateReducer = (state = {success: false}, action) => {
+export const textUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case TEXT_UPDATE_REQUEST:
       return { loading: true }
     case TEXT_UPDATE_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case TEXT_UPDATE_FAIL:
       return { loading: false, error: action.payload }
     default:
@@ -39,12 +39,12 @@ export const textUpdateReducer = (state = {success: false}, action) => {
   }
 }
 
-export const textDeleteReducer = (state = {success: false}, action) => {
+export const textDeleteReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case TEXT_DELETE_REQUEST:
       return { loading: true }
     case TEXT_DELETE_SUCCESS:
-      return { loading: false, success: true}
+      return { loading: false, success: true }
     case TEXT_DELETE_FAIL:
       return { loading: false, error: action.payload }
     default:

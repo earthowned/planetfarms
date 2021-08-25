@@ -13,7 +13,7 @@ const {
 
 // get image file middleware
 const fileChanger = (req, _res, next) => {
-  if(req.files.videoCover === undefined) {
+  if (req.files.videoCover === undefined) {
     req.file = ''
     next()
   } else {
@@ -31,10 +31,10 @@ router
     resizeImage,
     addVideo
   )
-router.route('/:id').get(getVideosById).delete(deleteVideo).put( 
-    upload.fields([{ name: 'videoCover' }, { name: 'videoResource' }]),
-    fileChanger,
-    resizeImage,
-    updateVideo)
+router.route('/:id').get(getVideosById).delete(deleteVideo).put(
+  upload.fields([{ name: 'videoCover' }, { name: 'videoResource' }]),
+  fileChanger,
+  resizeImage,
+  updateVideo)
 
 module.exports = router

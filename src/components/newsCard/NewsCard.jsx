@@ -20,7 +20,7 @@ function NewsCard ({ news, editCard, deleteNewsCard }) {
 
 const NewsSingleCard = ({ news, editCard, deleteNewsCard }) => {
   const [dropDown, setDropDown] = useState(false)
-  
+
   const editNewsCard = (id) => {
     editCard(id)
     setDropDown(false)

@@ -14,7 +14,7 @@ const Image = ({
     modelPopUp(id)
     setEditPhotoModel(true)
   }
-  
+
   return (
     <>
       {src ? (

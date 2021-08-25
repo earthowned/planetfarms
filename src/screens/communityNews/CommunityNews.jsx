@@ -17,17 +17,17 @@ function CommunityNews () {
   const [deleteModal, setDeleteModal] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
 
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useDispatch()
+  const history = useHistory()
 
-   const deleteNewsCard = (id) => {
+  const deleteNewsCard = (id) => {
     setDeleteId(id)
-    setDeleteModal(true);
+    setDeleteModal(true)
   }
 
   const confirmDelete = () => {
     dispatch(deleteNews(deleteId))
-    setDeleteModal(false);
+    setDeleteModal(false)
   }
 
   const editCard = async (id) => {
@@ -38,7 +38,7 @@ function CommunityNews () {
   }
   return (
     <>
-    {deleteModal && <div className='simple-modal-container'>
+      {deleteModal && <div className='simple-modal-container'>
         <div className='simple-modal-inner-container'>
           <div>
             <h4>Are you sure you want to delete?</h4>
@@ -49,14 +49,14 @@ function CommunityNews () {
             <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
           </div>
         </div>
-      </div>}
-    <DashboardLayout title='Ragrarians News'>{addModal && <NewsAddModal
-      setAddModal={setAddModal}
-      editData={editData}
-      setEditData={setEditData}
-                                                          />}
-      <CommunityPagenews {...CommunityPageNewsData} setAddModal={setAddModal} editCard={editCard} deleteNewsCard={deleteNewsCard}/>
-    </DashboardLayout>
+                      </div>}
+      <DashboardLayout title='Ragrarians News'>{addModal && <NewsAddModal
+        setAddModal={setAddModal}
+        editData={editData}
+        setEditData={setEditData}
+                                                            />}
+        <CommunityPagenews {...CommunityPageNewsData} setAddModal={setAddModal} editCard={editCard} deleteNewsCard={deleteNewsCard} />
+      </DashboardLayout>
     </>
   )
 }

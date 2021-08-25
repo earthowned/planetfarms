@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Button from '../button/Button'
@@ -9,7 +9,6 @@ import { TextArea } from '../formUI/FormUI'
 import './NewsCreateModal.scss'
 import ToggleSwitch from '../toggleSwitch/ToggleSwitch'
 import { LESSON_IMG } from '../../utils/urlConstants'
-import { useEffect } from 'react'
 
 const CreateImage = ({
   imageActive,
@@ -44,12 +43,12 @@ const CreateImage = ({
   }
 
   const editNewsImg = ({ photoDescription }) => {
-    editFunc({id: editData[0].id, lessonImg, photoDescription, isImgDesc})
+    editFunc({ id: editData[0].id, lessonImg, photoDescription, isImgDesc })
     setEditData([])
   }
 
   useEffect(() => {
-    if(editData.length > 0) {
+    if (editData.length > 0) {
       setIsImgDesc(editData[0].isImgDesc)
     }
   }, [])
@@ -97,15 +96,17 @@ const CreateImage = ({
               )}
 
               {
-                editData.length > 0 
-                ? <Button
-                    className='add'
-                    name='Edit Photo Block'
-                    onClick={handleSubmit(editNewsImg)} />
-                : <Button
-                    className='add'
-                    name='Add Photo Block'
-                    onClick={handleSubmit(submitLessonImg)} />
+                editData.length > 0
+                  ? <Button
+                      className='add'
+                      name='Edit Photo Block'
+                      onClick={handleSubmit(editNewsImg)}
+                    />
+                  : <Button
+                      className='add'
+                      name='Add Photo Block'
+                      onClick={handleSubmit(submitLessonImg)}
+                    />
               }
             </div>
           </div>

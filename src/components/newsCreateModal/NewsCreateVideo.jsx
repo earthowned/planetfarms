@@ -49,7 +49,7 @@ const CreateVideo = ({
 
   const editVideo = ({ videoTitle, videoDescription, videoLink }) => {
     const videoResource = video
-    editFunc({id: editData[0].id, videoTitle, videoDescription, videoLink, videoResource, videoCover})
+    editFunc({ id: editData[0].id, videoTitle, videoDescription, videoLink, videoResource, videoCover })
     setEditData([])
   }
 
@@ -110,7 +110,7 @@ const CreateVideo = ({
                         }
                         placeholder='Video Link'
                         name='videoLink'
-                        defaultValue={editData.length > 0 ? editData[0].videoLink : ""}
+                        defaultValue={editData.length > 0 ? editData[0].videoLink : ''}
                         ref={register({
                           required: {
                             value: true,
@@ -144,15 +144,17 @@ const CreateVideo = ({
                 />
               </div>
               {
-                editData.length > 0 
-                ? <Button
-                    className='add'
-                    name='Edit Video Block'
-                    onClick={handleSubmit(editVideo)} />
-                : <Button
-                    className='add'
-                    name='Add Video Block'
-                    onClick={handleSubmit(addVideo)} />
+                editData.length > 0
+                  ? <Button
+                      className='add'
+                      name='Edit Video Block'
+                      onClick={handleSubmit(editVideo)}
+                    />
+                  : <Button
+                      className='add'
+                      name='Add Video Block'
+                      onClick={handleSubmit(addVideo)}
+                    />
               }
             </div>
           </div>

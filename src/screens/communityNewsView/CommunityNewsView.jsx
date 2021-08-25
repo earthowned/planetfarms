@@ -14,16 +14,16 @@ import RichTextView from '../../components/richTextView/RichTextView'
 function CommunityNewsViewPage () {
   const [news, setNews] = useState({})
   // const val = useLocation()?.state?.news
-  
+
   // fetching current community
-const currentCommunity = localStorage.getItem('currentCommunity')
-  ? JSON.parse(localStorage.getItem('currentCommunity'))
-  : null
-  const dispatch = useDispatch();
-  const {id} = useParams();
+  const currentCommunity = localStorage.getItem('currentCommunity')
+    ? JSON.parse(localStorage.getItem('currentCommunity'))
+    : null
+  const dispatch = useDispatch()
+  const { id } = useParams()
 
   useEffect(() => {
-    getSingleNews(id);
+    getSingleNews(id)
   }, [])
 
   async function getSingleNews (id) {
@@ -36,28 +36,28 @@ const currentCommunity = localStorage.getItem('currentCommunity')
 
   return (
     <>
-        <DashboardLayout>
-          <div className='x03-1-0-news-page'>
-            <div className='flex-col-2'>
-              <BackButton location='/news' />
-                <RichTextView data={news} news={true}/>
-              <div className='button-row-3'>
-                <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
-                  <img className='f1' src='/img/facebook-share-icon.svg' alt='facebook-icon' />
-                  <div className='your-business-goals valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px'>
-                    Repost
-                  </div>
+      <DashboardLayout>
+        <div className='x03-1-0-news-page'>
+          <div className='flex-col-2'>
+            <BackButton location='/news' />
+            <RichTextView data={news} news />
+            <div className='button-row-3'>
+              <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
+                <img className='f1' src='/img/facebook-share-icon.svg' alt='facebook-icon' />
+                <div className='your-business-goals valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px'>
+                  Repost
                 </div>
-                <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
-                  <img className='shape' src='/img/twitter-shape-icon.svg' alt='twitter-icon' />
-                  <div className='your-business-goals-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px'>
-                    Tweet
-                  </div>
+              </div>
+              <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
+                <img className='shape' src='/img/twitter-shape-icon.svg' alt='twitter-icon' />
+                <div className='your-business-goals-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px'>
+                  Tweet
                 </div>
               </div>
             </div>
           </div>
-        </DashboardLayout>
+        </div>
+      </DashboardLayout>
     </>
   )
 }
@@ -77,41 +77,47 @@ const NewsSingleView = ({ news }) => {
       </div>
 
       <Image
-          src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${news?._attachments}`}
-        />
+        src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${news?._attachments}`}
+      />
 
-    {
-        news?.rich_text  && news?.rich_text?.photos.map(item => {
-          return <Image
-          src={`${LESSON_IMG}${item?.lessonImg}`}
-          desc={
+      {
+        news?.rich_text && news?.rich_text?.photos.map(item => {
+          return (
+            <Image
+              src={`${LESSON_IMG}${item?.lessonImg}`}
+              desc={
             item?.isImgDesc === true && item?.photoDescription
           }
-        />
+            />
+          )
         })
       }
 
       {
         news?.rich_text && news?.rich_text?.texts.map(item => {
-          return <Text
-          heading={item?.textHeading}
-          desc={item?.textDescription}
-        />
+          return (
+            <Text
+              heading={item?.textHeading}
+              desc={item?.textDescription}
+            />
+          )
         })
       }
 
       {
         news?.rich_text && news?.rich_text?.videos.map(item => {
-          return <Video
-            title={item?.videoTitle}
-            description={item?.videoDescription}
-            url={
+          return (
+            <Video
+              title={item?.videoTitle}
+              description={item?.videoDescription}
+              url={
               item?.videoLink === 'undefined'
                 ? `${GET_VIDEO}${item?.videoResource}`
                 : item?.videoLink
               }
-            thumbnail={`${VIDEO_COVER}${item?.videoCover}`}
-          />
+              thumbnail={`${VIDEO_COVER}${item?.videoCover}`}
+            />
+          )
         })
       }
     </>

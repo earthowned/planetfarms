@@ -1,4 +1,5 @@
-import { Axios, ADD_VIDEOS, GET_VIDEOS } from '../utils/urlConstants'
+import { ADD_VIDEOS, GET_VIDEOS } from '../utils/urlConstants'
+import { postApi, putApi, deleteApi, fileHeader } from '../utils/apiFunc'
 
 import {
   VIDEO_CREATE_REQUEST,
@@ -12,43 +13,35 @@ import {
   VIDEO_DELETE_FAIL
 } from '../constants/videoConstants'
 
-export const createVideo =
-  (
-    videoCover,
-    videoTitle,
-    videoDescription,
-    videoLink,
-    videoResource,
-    richtextId
-  ) =>
-    async (dispatch) => {
-      const videoData = new FormData()
-      videoData.append('videoCover', videoCover)
-      videoData.append('videoTitle', videoTitle)
-      videoData.append('videoDescription', videoDescription)
-      videoData.append('videoLink', videoLink)
-      videoData.append('videoResource', videoResource)
-      videoData.append('richtextId', richtextId)
-      console.log(videoCover, videoTitle, videoDescription, videoLink, videoResource, richtextId)
-      try {
-        dispatch({ type: VIDEO_CREATE_REQUEST })
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-        const { data } = await Axios.post(ADD_VIDEOS, videoData, config)
-        dispatch({ type: VIDEO_CREATE_SUCCESS, payload: data })
-      } catch (error) {
-        dispatch({
-          type: VIDEO_CREATE_FAIL,
-          payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
-        })
-      }
-    }
+export const createVideo = (
+  videoCover,
+  videoTitle,
+  videoDescription,
+  videoLink,
+  videoResource,
+  richtextId
+) => async (dispatch) => {
+  const videoData = new FormData()
+  videoData.append('videoCover', videoCover)
+  videoData.append('videoTitle', videoTitle)
+  videoData.append('videoDescription', videoDescription)
+  videoData.append('videoLink', videoLink)
+  videoData.append('videoResource', videoResource)
+  videoData.append('richtextId', richtextId)
+  try {
+    dispatch({ type: VIDEO_CREATE_REQUEST })
+    const { data } = await postApi(ADD_VIDEOS, videoData, fileHeader)
+    dispatch({ type: VIDEO_CREATE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: VIDEO_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
 
 export const updateVideo =
   (
@@ -68,15 +61,9 @@ export const updateVideo =
       videoData.append('videoDescription', videoDescription)
       videoData.append('videoLink', videoLink)
       videoData.append('videoResource', videoResource)
-
       try {
         dispatch({ type: VIDEO_UPDATE_REQUEST })
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-        const { data } = await Axios.put(GET_VIDEOS + `/${id}`, videoData, config)
+        const { data } = await putApi(GET_VIDEOS + `/${id}`, videoData, fileHeader)
         dispatch({ type: VIDEO_UPDATE_SUCCESS, payload: data })
         setEditVideoModel(false)
       } catch (error) {
@@ -93,7 +80,7 @@ export const updateVideo =
 export const deleteVideo = (id, refetch) => async (dispatch) => {
   try {
     dispatch({ type: VIDEO_DELETE_REQUEST })
-    const { data } = await Axios.delete(GET_VIDEOS + `/${id}`)
+    const { data } = await deleteApi(GET_VIDEOS + `/${id}`)
     dispatch({ type: VIDEO_DELETE_SUCCESS, payload: data })
     refetch()
   } catch (error) {

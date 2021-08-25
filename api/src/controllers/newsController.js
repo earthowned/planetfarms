@@ -141,12 +141,12 @@ const getNewsById = (req, res) => {
       model: db.Community,
       attributes: [],
       where: { id: req.params.id }
-    }, 
+    },
     {
       model: db.RichText,
       include: [db.Photo, db.Text, db.Video]
-    }, 
-  ]
+    }
+    ]
   })
     .then(news => {
       if (news) {

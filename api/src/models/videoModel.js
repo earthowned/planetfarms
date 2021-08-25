@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE
       }
     },
-  { timestamps: true })
+    { timestamps: true })
 
   Video.associate = (models) => {
     Video.belongsTo(models.RichText, {

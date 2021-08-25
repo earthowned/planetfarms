@@ -44,41 +44,41 @@ export const createLesson =
           }
         }
 
-    const richText = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`);
-    const richtextId = richText?.data?.richtext?.id
+        const richText = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`)
+        const richtextId = richText?.data?.richtext?.id
 
-    if(richtextId) {
-      lessonFormData.append('richtextId', richtextId)
-      console.log(richtextId)
-      const { data } = await postApi(
-          dispatch,
-          ADD_LESSONS,
-          lessonFormData,
-          config
-        )
-        console.log(lessonFormData)
-        dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
-        const lessonId = data?.data?.id
+        if (richtextId) {
+          lessonFormData.append('richtextId', richtextId)
+          console.log(richtextId)
+          const { data } = await postApi(
+            dispatch,
+            ADD_LESSONS,
+            lessonFormData,
+            config
+          )
+          console.log(lessonFormData)
+          dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
+          const lessonId = data?.data?.id
 
-        for (let i = 0; i < lessonData.length; i++) {
-          if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ data: lessonData[i], richtextId, dispatch })
+          for (let i = 0; i < lessonData.length; i++) {
+            if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
+              await addVideo({ data: lessonData[i], richtextId, dispatch })
+            }
+            if (lessonData[i]?.lessonImg) {
+              await addImage({ data: lessonData[i], richtextId, dispatch })
+            }
+            if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
+              await addText({ data: lessonData[i], richtextId, dispatch })
+            }
           }
-          if (lessonData[i]?.lessonImg) {
-            await addImage({ data: lessonData[i], richtextId, dispatch })
+
+          for (let i = 0; i < material.length; i++) {
+            if (material[i].mData) {
+              await addMaterial({ material: material[i], lessonId, dispatch })
+            }
           }
-          if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            await addText({ data: lessonData[i], richtextId, dispatch })
-          }
+          history.push(`/lesson/${lessonId}`)
         }
-
-        for (let i = 0; i < material.length; i++) {
-          if (material[i].mData) {
-            await addMaterial({ material: material[i], lessonId, dispatch })
-          }
-        }
-        history.push(`/lesson/${lessonId}`)
-    }
       } catch (error) {
         dispatch({
           type: LESSON_CREATE_FAIL,
@@ -91,7 +91,7 @@ export const createLesson =
     }
 
 export const updateLesson =
-  (title, coverImg, lessonId, lessonDesc, history, lessonData=[], material=[], richtextId) =>
+  (title, coverImg, lessonId, lessonDesc, history, lessonData = [], material = [], richtextId) =>
     async (dispatch) => {
       const updateLessonFormData = new FormData()
       updateLessonFormData.append('title', title)
@@ -113,7 +113,7 @@ export const updateLesson =
         )
         dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
 
-       for (let i = 0; i < lessonData.length; i++) {
+        for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
             await addVideo({ data: lessonData[i], richtextId, dispatch })
           }

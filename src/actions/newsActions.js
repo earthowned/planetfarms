@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { getApi, configFunc, postApi } from '../utils/apiFunc'
+import { getApi, putApi, postApi, fileHeader } from '../utils/apiFunc'
 import {
   NEWS_LIST_REQUEST,
   NEWS_LIST_SUCCESS,
@@ -76,40 +75,26 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
   formData.append('category', newNews[0].category)
   formData.append('news', newsCover)
   try {
-
-    const configFunc = () => {
-        const userdata = window.localStorage.getItem('userInfo')
-        const token = JSON.parse(userdata).token
-        const headers = { 'Content-Type': 'multipart/form-data' }
-        headers.Authorization = token && `Bearer ${token}`
-        return { headers }
-    }
-
     dispatch({ type: NEWS_CREATE_REQUEST })
-    const { userLogin: { userInfo } } = getState()
-    const richText = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`);
+    const richText = await postApi(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`)
     const richtextId = richText?.data?.richtext?.id
-
-    if(richtextId) {
+    if (richtextId) {
       formData.append('richtextId', richtextId)
-    
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, configFunc)
-    dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
-    
-        for (let i = 0; i < newNews.length; i++) {
-          if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-            await addVideo({ data: newNews[i], richtextId, dispatch })
-          }
-          if (newNews[i]?.lessonImg) {
-            await addImage({ data: newNews[i], richtextId, dispatch })
-          }
-          if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-            await addText({ data: newNews[i], richtextId, dispatch })
-          }
+      const { data } = await postApi(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, fileHeader)
+      dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
+      for (let i = 0; i < newNews.length; i++) {
+        if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
+          await addVideo({ data: newNews[i], richtextId, dispatch })
         }
-      
+        if (newNews[i]?.lessonImg) {
+          await addImage({ data: newNews[i], richtextId, dispatch })
+        }
+        if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
+          await addText({ data: newNews[i], richtextId, dispatch })
+        }
+      }
       dispatch({ type: NEWS_CLEAR, payload: data })
-    document.location.href = '/news'
+      document.location.href = '/news'
     }
   } catch (error) {
     const message =
@@ -123,17 +108,12 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
 export const deleteNews = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: NEWS_DELETE_REQUEST })
-    const config = configFunc()
-    const data = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`, config)
-    dispatch({
-      type: NEWS_DELETE_SUCCESS,
-      payload: data
-    })
+    const data = await deleteApi(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
+    dispatch({ type: NEWS_DELETE_SUCCESS, payload: data })
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
     }
@@ -170,33 +150,28 @@ export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
   try {
     dispatch({ type: NEWS_UPDATE_REQUEST })
     const { id } = news
-    const config = configFunc()
-    const data = await axios.put(
+    const data = await putApi(
       `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`,
-      formData, config
+      formData
     )
-    
     dispatch({
       type: NEWS_UPDATE_SUCCESS,
       payload: data
     })
-
-    //adding new content
-        for (let i = 0; i < newNews.length; i++) {
-          if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-            await addVideo({ data: newNews[i], richtextId, dispatch })
-          }
-          if (newNews[i]?.lessonImg) {
-            await addImage({ data: newNews[i], richtextId, dispatch })
-          }
-          if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-            await addText({ data: newNews[i], richtextId, dispatch })
-          }
-        }
-
-     dispatch({ type: NEWS_CLEAR, payload: data })
+    // adding new content
+    for (let i = 0; i < newNews.length; i++) {
+      if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
+        await addVideo({ data: newNews[i], richtextId, dispatch })
+      }
+      if (newNews[i]?.lessonImg) {
+        await addImage({ data: newNews[i], richtextId, dispatch })
+      }
+      if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
+        await addText({ data: newNews[i], richtextId, dispatch })
+      }
+    }
+    dispatch({ type: NEWS_CLEAR, payload: data })
     document.location.href = '/news'
-
   } catch (error) {
     const message = error.response && error.response.data.message
       ? error.response.data.message

@@ -27,8 +27,8 @@ const getTextById = async (req, res) => {
 }
 
 const addText = async (req, res) => {
-  const {textHeading, textDescription, richtextId} = req.body
-  const text = await db.Text.create({textHeading, textDescription, richtextId})
+  const { textHeading, textDescription, richtextId } = req.body
+  const text = await db.Text.create({ textHeading, textDescription, richtextId })
   res.status(201).json({
     status: true,
     message: 'added new lesson text successfully',
@@ -41,7 +41,7 @@ const deleteText = async (req, res) => {
   await db.Text.destroy({ where: { id } })
   res.status(202).json({
     status: true,
-    message: 'Lesson text deleted successfully',
+    message: 'Lesson text deleted successfully'
   })
 }
 

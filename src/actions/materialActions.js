@@ -1,5 +1,6 @@
-import { Axios, ADD_MATERIAL, GET_MATERIAL } from '../utils/urlConstants'
+import { ADD_MATERIAL, GET_MATERIAL } from '../utils/urlConstants'
 import * as material from '../constants/materialConstants'
+import { postApi, deleteApi, fileHeader } from '../utils/apiFunc'
 
 export const createMaterial = (material, lessonId) => async (dispatch) => {
   const materialData = new FormData()
@@ -7,12 +8,7 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
   materialData.append('lessonId', lessonId)
   try {
     dispatch({ type: material.MATERIAL_CREATE_REQUEST })
-    const config = {
-      Headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }
-    const { data } = await Axios.post(ADD_MATERIAL, materialData, config)
+    const { data } = await postApi(ADD_MATERIAL, materialData, fileHeader)
     dispatch({ type: material.MATERIAL_CREATE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
@@ -28,7 +24,7 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
 export const deleteMaterial = (id, refetch, material) => async (dispatch) => {
   try {
     dispatch({ type: material.MATERIAL_DELETE_REQUEST })
-    const { data } = await Axios.delete(GET_MATERIAL + `/${id}`)
+    const { data } = await deleteApi(GET_MATERIAL + `/${id}`)
     dispatch({ type: material.MATERIAL_DELETE_SUCCESS, payload: data })
     refetch()
   } catch (error) {

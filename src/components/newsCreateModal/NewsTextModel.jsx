@@ -36,10 +36,10 @@ const CreateText = ({
     setTextActive(false)
   }
 
-  const editText = ({textHeading, textDescription}) => {
+  const editText = ({ textHeading, textDescription }) => {
     if (textHeading.length !== 0 || textDescription.length !== 0) {
-    editFunc({textHeading, textDescription, id: editData[0].id})
-    setEditData([])
+      editFunc({ textHeading, textDescription, id: editData[0].id })
+      setEditData([])
     }
   }
 
@@ -47,7 +47,7 @@ const CreateText = ({
     setTextActive(false)
     setEditData([])
   }
-  
+
   return (
     <>
       {textActive && (
@@ -92,17 +92,19 @@ const CreateText = ({
                   }
                 />
               </div>
-              
+
               {
-                editData.length > 0 
-                ? <Button
-                    className='add'
-                    name='Edit Text Block'
-                    onClick={handleSubmit(editText)} />
-                : <Button
-                    className='add'
-                    name='Add Text Block'
-                    onClick={handleSubmit(addText)} />
+                editData.length > 0
+                  ? <Button
+                      className='add'
+                      name='Edit Text Block'
+                      onClick={handleSubmit(editText)}
+                    />
+                  : <Button
+                      className='add'
+                      name='Add Text Block'
+                      onClick={handleSubmit(addText)}
+                    />
               }
             </div>
           </div>

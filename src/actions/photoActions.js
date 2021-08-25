@@ -1,9 +1,5 @@
-import {
-  Axios,
-  ADD_LESSON_PHOTO,
-  GET_LESSON_PHOTO
-} from '../utils/urlConstants'
-import { postApi } from '../utils/apiFunc'
+import { ADD_LESSON_PHOTO, GET_LESSON_PHOTO } from '../utils/urlConstants'
+import { postApi, putApi, deleteApi, fileHeader } from '../utils/apiFunc'
 
 import {
   PHOTO_CREATE_REQUEST,
@@ -24,15 +20,9 @@ export const createLessonImg =
     lessonImgData.append('photoDescription', photoDescription)
     lessonImgData.append('isImgDesc', isImgDesc)
     lessonImgData.append('richtextId', richtextId)
-
     try {
       dispatch({ type: PHOTO_CREATE_REQUEST })
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-      const { data } = await Axios.post(ADD_LESSON_PHOTO, lessonImgData, config)
+      const { data } = await postApi(ADD_LESSON_PHOTO, lessonImgData, fileHeader)
       dispatch({ type: PHOTO_CREATE_SUCCESS, payload: data })
     } catch (error) {
       dispatch({
@@ -49,23 +39,12 @@ export const updatePhoto =
   (id, lessonImg, photoDescription, isImgDesc, setEditPhotoModel) =>
     async (dispatch) => {
       const lessonImgData = new FormData()
-
-        lessonImgData.append('img', lessonImg)
-        lessonImgData.append('photoDescription', photoDescription)
-        lessonImgData.append('isImgDesc', isImgDesc)
-
+      lessonImgData.append('img', lessonImg)
+      lessonImgData.append('photoDescription', photoDescription)
+      lessonImgData.append('isImgDesc', isImgDesc)
       try {
         dispatch({ type: PHOTO_UPDATE_REQUEST })
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-        const { data } = await Axios.put(
-          GET_LESSON_PHOTO + `/${id}`,
-          lessonImgData,
-          config
-        )
+        const { data } = await putApi(GET_LESSON_PHOTO + `/${id}`, lessonImgData, fileHeader)
         dispatch({ type: PHOTO_UPDATE_SUCCESS, payload: data })
         setEditPhotoModel(false)
       } catch (error) {
@@ -82,8 +61,7 @@ export const updatePhoto =
 export const deletePhoto = (id, refetch) => async (dispatch) => {
   try {
     dispatch({ type: PHOTO_DELETE_REQUEST })
-    const { data } = await Axios.delete(GET_LESSON_PHOTO + `/${id}`)
-    console.log(data);
+    const { data } = await deleteApi(GET_LESSON_PHOTO + `/${id}`)
     dispatch({ type: PHOTO_DELETE_SUCCESS, payload: data })
     refetch()
   } catch (error) {
