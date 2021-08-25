@@ -48,7 +48,7 @@ const NewsSingleCard = ({ news, editCard, deleteNewsCard }) => {
             </div>
           </div>
         </div>
-        <Link to={{ pathname: `/community-news-view-page/${news.id}`, state: { news } }}>
+        <Link to={{ pathname: `/news/${news.id}`, state: { news } }}>
           <div key={news.id}>
             <div className='newsCard-group'>
               <div className='frame-text'>

@@ -23,11 +23,11 @@ const CommunityGroup = () => {
   const nav = [
     {
       label: 'All Groups',
-      link: `/community-group/${currentCommunity.slug}`
+      link: '/groups'
     },
     {
       label: 'Your Groups',
-      link: `/your-community-group/${currentCommunity.slug}`
+      link: '/your-groups'
     }
   ]
 
@@ -96,16 +96,16 @@ const CommunityGroup = () => {
             <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Create Group' />
             <div className='community-group-container'>
               {
-          pathname === `/community-group/${currentCommunity.slug}`
+          pathname === '/groups'
             ? <CommunityGroupCard
-                location='/community-group-view-page/:id'
+                location='/groups/:id'
                 data={groups}
                 editCard={editCard}
                 setActive={setActive}
                 deleteCard={deleteCard}
               />
             : <CommunityGroupCard
-                location='/community-group-view-page/:id'
+                location='/groups/:id'
                 data={userGroups}
                 editCard={editCard}
                 setActive={setActive}
@@ -114,7 +114,7 @@ const CommunityGroup = () => {
         }
             </div>
             {
-             pathname === `/community-group/${currentCommunity.slug}`
+             pathname === '/groups'
                ? <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} resourceList={data} />
                : <Pagination pageNumber={userPageNumber} setPageNumber={setUserPageNumber} resourceList={dataUser} />
             }

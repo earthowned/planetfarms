@@ -204,7 +204,7 @@ const NewsAdd = () => {
       {deleteImageModal && <DeleteContent setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
       {deleteTextModal && <DeleteContent setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
       <DashboardLayout title={pathname.split('/')[2] === 'edit' ? 'Edit News' : 'Add News'}>
-        <BackButton location={`/community-page-news/${currentCommunity.slug}`} />
+        <BackButton location='/news' />
         <AddNewsContent
           setVideoModal = {setCreateVideoModal}
           setImageModal = {setCreateImageModal}

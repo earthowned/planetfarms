@@ -41,7 +41,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
         <DashboardLayout>
           <div className='x03-1-0-news-page'>
             <div className='flex-col-2'>
-              <BackButton location='/community-page-news' location={`/community-page-news/${currentCommunity.slug}`} />
+              <BackButton location='/news' />
               {news && <NewsSingleView news={news} />}
               <div className='button-row-3'>
                 <div className='button-secondary-default border-0-5px-quarter-spanish-white'>

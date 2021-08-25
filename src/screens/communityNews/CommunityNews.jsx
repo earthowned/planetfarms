@@ -39,7 +39,7 @@ function CommunityNews () {
     // const { data } = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
     // setEditData(data)
     // setAddModal(true)
-    history.push(`/community-news/edit/${id}`)
+    history.push(`/news/edit/${id}`)
   }
   return (
     <>

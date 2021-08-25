@@ -63,60 +63,34 @@ const AddLesson = () => {
 
   const { register, errors, handleSubmit } = useForm()
 
-  // const { data } = useGetFetchData(
-  //   'get_course_by_id',
-  //   GET_COURSE + `/${courseId}`
-  // )
-  // useEffect(() => {
-  //   setFetchLesson(data?.data?.lessons)
-  // }, [data, courseId])
+  const { data } = useGetFetchData(
+    'get_course_by_id',
+    GET_COURSE + `/${courseId}`
+  )
+  useEffect(() => {
+    setFetchLesson(data?.data?.lessons)
+  }, [data, courseId])
 
-  const submitLessonForm = ({ title, lessonDesc }) => {
-    const coverImg = lessonCover
-    const order = fetchLesson.length + 1
-    dispatch(
-      createLesson({
-        title,
-        courseId,
-        coverImg,
-        lessonDesc,
-        order,
-        lessonData,
-        material,
-        history
-      })
-    )
-  // const { courseId, lessonId} = useParams()
+  const { courseId, lessonId} = useParams()
 
-  // console.log(courseId, lessonId)
-  // const {pathname} = useLocation();
-
-  // // for edit
-  // // useEffect(() => {
-  // //   if(pathname.split('/')[2] === 'edit') {
-  // //     getSingleLesson()
-  // //   }
-  // // }, [
-  // //   dispatch, 
-  // //   // newsData, 
-  // //   // updateVideoSuccess, 
-  // //   // deleteVideoSuccess, 
-  // //   // updateTextSuccess, 
-  // //   // deleteTextSuccess,
-  // //   // updatePhotoSuccess, 
-  // //   // deletePhotoSuccess
-  // // ])
-
-
-  // // async function getSingleLesson () {
-  // //   const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/lessons/${id}/community/${currentCommunity.id}`)
-  // //   setLessonSingleData(data)
-  // // }
-
-  // const editLessonForm = ({title}) => {
-  // }
-
+  console.log(courseId, lessonId)
   const {pathname} = useLocation();
+
+  // for edit
+  useEffect(() => {
+    if(pathname.split('/')[2] === 'edit') {
+      getSingleLesson()
+    }
+  }, [
+    dispatch, 
+    lessonData, 
+    updateVideoSuccess, 
+    deleteVideoSuccess, 
+    updateTextSuccess, 
+    deleteTextSuccess,
+    updatePhotoSuccess, 
+    deletePhotoSuccess
+  ])
   
   // for edit
   useEffect(() => {
@@ -246,40 +220,20 @@ const AddLesson = () => {
   }
 
 
-  // async function deleteTextConfirm () {
-  //   // dispatch(deleteText(textId))
-  //   // setDeleteTextModal(false)
-  // }
+  async function deleteTextConfirm () {
+    dispatch(deleteText(textId))
+    setDeleteTextModal(false)
+  }
 
-  // // const submitLessonForm = ({ title, lessonDesc }) => {
-  // //   const coverImg = lessonCover
-  // //   const order = fetchLesson.length + 1
-  // //   dispatch(
-  // //     createLesson({
-  // //       title,
-  // //       courseId,
-  // //       coverImg,
-  // //       lessonDesc,
-  // //       order,
-  // //       lessonData,
-  // //       material,
-  // //       history
-  // //     })
-  // //   )
-  // // }
 
-  // const removeItem = (id) => {
-  //   const newLessonData = lessonData.filter((item) => item.itemId !== id)
-  //   setLessonData(newLessonData)
-  // }
-  // const modelPopUp = (poupState, id) => {
-  //   setEditId(id)
-  // }
+  const modelPopUp = (poupState, id) => {
+    setEditId(id)
+  }
 
-  // const removeMaterial = (e) => {
-  //   const name = e.currentTarget.getAttribute('name')
-  //   setMaterial(material.filter((item) => item?.mData?.preview !== name))
-  // }
+  const removeMaterial = (e) => {
+    const name = e.currentTarget.getAttribute('name')
+    setMaterial(material.filter((item) => item?.mData?.preview !== name))
+  }
 
   return (
     <>
@@ -367,8 +321,6 @@ const AddLesson = () => {
     </>
   )
 }
-
-export default AddLessonComponent
 
 const AddContent = ({
   setVideoModal,

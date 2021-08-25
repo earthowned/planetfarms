@@ -76,16 +76,16 @@ function App () {
             <PrivateRoute component={SavedCollection} path='/library/collection/saved' exact />
             <PrivateRoute component={Messenger} exact path='/messenger' />
             <PrivateRoute component={MobileMessage} path='/messenger/:id' exact />
-            <PrivateRoute component={CommunityPagenews} exact path='/community-page-news/:id' />
-            <PrivateRoute component={NewsAdd} path='/community-news/:title' exact />
-            <PrivateRoute component={NewsAdd} path='/community-news/edit/:id' exact />
-            <PrivateRoute component={CommunityNewsViewPage} path='/community-news-view-page/:id' exact />
+            <PrivateRoute component={CommunityPagenews} exact path='/news' />
+            <PrivateRoute component={NewsAdd} path='/news/add/:title' exact />
+            <PrivateRoute component={NewsAdd} path='/news/edit/:id' exact />
+            <PrivateRoute component={CommunityNewsViewPage} path='/news/:id' exact />
             <PrivateRoute component={AllCommunitiesCard} path='/community-switching' exact />
-            <PrivateRoute component={CommunityMembers} path='/community-members/:id' exact />
-            {/* <PrivateRoute component={Profile} path='/profile/:id' exact /> */}
-            <PrivateRoute component={CommunityGroup} path='/community-group/:id' exact />
-            <PrivateRoute component={CommunityGroup} path='/your-community-group/:id' exact />
-            <PrivateRoute component={CommunityGroupViewPage} path='/community-group-view-page/:id' exact />
+            <PrivateRoute component={CommunityMembers} path='/members' exact />
+            {/* <PrivateRoute component={CommunityMembersProfile} path='/members/profile/:id' exact /> */}
+            <PrivateRoute component={CommunityGroup} path='/groups' exact />
+            <PrivateRoute component={CommunityGroup} path='/your-groups/:id' exact />
+            <PrivateRoute component={CommunityGroupViewPage} path='/groups/:id' exact />
             <PrivateRoute component={Courses} exact path='/courses' />
             <PrivateRoute component={CourseCollection} exact path='/courses/my-courses' />
             <PrivateRoute component={CourseCollection} exact path='/courses/saved-collection' />
@@ -95,7 +95,7 @@ function App () {
             <PrivateRoute component={AddLesson} path='/admin/course/:courseId/add-lesson' exact />
             <PrivateRoute component={AddLesson} path='/admin/course/:courseId/edit-lesson/:lessonId' exact />
             <PrivateRoute component={CourseUsers} path='/courses/users' exact />
-            <PrivateRoute component={Enterprises} path='/enterprises/:id' exact />
+            <PrivateRoute component={Enterprises} path='/enterprises' exact />
             <PrivateRoute component={Enterprises} path='/your-enterprises/:id' exact />
             <PrivateRoute component={EnterprisesViewPage} path='/enterprises-view' exact />
             <PrivateRoute component={MyGroupViewPage} path='/my-group-view-page/:id' exact />

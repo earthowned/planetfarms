@@ -37,11 +37,11 @@ const Enterprise = () => {
   const nav = [
     {
       label: 'All enterprises',
-      link: `/enterprises/${currentCommunity.slug}`
+      link: '/enterprises'
     },
     {
       label: 'Your Enterprises',
-      link: `/your-enterprises/${currentCommunity.slug}`
+      link: '/your-enterprises'
     }
   ]
 
@@ -49,7 +49,7 @@ const Enterprise = () => {
     if (search) dispatch(searchEnterprises(search))
     if (!search) dispatch(listEnterprises({ pageNumber }))
 
-    if (pathname === `/your-enterprises/${currentCommunity.slug}`) {
+    if (pathname === '/your-enterprises') {
       // if (search) dispatch(searchGroups(search))
       if (!search) dispatch(listUserEnterprises({ communityId: currentCommunity.id, pageNumber: userPageNumber }))
     }
@@ -91,10 +91,10 @@ const Enterprise = () => {
           <div className='enterprises-col'>
             <SubHeader search={search} setSearch={setSearch} nav={nav} setCreateActive={setActive} btnName='Create Enterprise' />
             <div className='enterpriseCard'>
-              {pathname === `/enterprises/${currentCommunity.slug}`
+              {pathname === '/enterprises'
                 ? <CommunityGroupCard
                     type='enterprise'
-                    location='/community-group-view-page/:id'
+                    location='/enterprises'
                     data={enterprises}
                     editCard={editCard}
                     setActive={setActive}
@@ -102,7 +102,7 @@ const Enterprise = () => {
                   />
                 : <CommunityGroupCard
                     type='enterprise'
-                    location='/community-group-view-page/:id'
+                    location='/enterprises'
                     data={userEnterprises}
                     editCard={editCard}
                     setActive={setActive}

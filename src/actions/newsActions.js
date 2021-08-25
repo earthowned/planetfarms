@@ -104,7 +104,7 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
         }
       
     dispatch({ type: NEWS_CLEAR, payload: data })
-    document.location.href = `/community-page-news/${currentCommunity.slug}`
+    document.location.href = '/news'
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -189,7 +189,7 @@ export const newsUpdate = (news, newNews) => async (dispatch) => {
         }
 
      dispatch({ type: NEWS_CLEAR, payload: data })
-    document.location.href = `/community-page-news/${currentCommunity.slug}`
+    document.location.href = '/news'
 
   } catch (error) {
     const message = error.response && error.response.data.message

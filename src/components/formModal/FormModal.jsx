@@ -1,20 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './FormModal.scss'
 import '../enterprisesCollection/EnterprisesCollection.scss'
-import { useLocation, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { createGroup, groupUpdate } from '../../actions/communityGroupActions'
 import { createEnterprise, enterpriseUpdate } from '../../actions/enterpriseAction'
 import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
 import { InputFields, SelectFields, ErrorText, SubmitButton } from '../formUI/FormUI'
 import DragDrop from '../dragDrop/DragDrop'
-import axios from 'axios'
 import { useForm } from 'react-hook-form'
 
 const FromModal = ({ setActive, openAddCollection, data, setData }) => {
   const [files, setFiles] = useState()
 
-  const { id } = useParams()
   const dispatch = useDispatch()
   const { pathname } = useLocation()
 
@@ -86,8 +84,8 @@ const FromModal = ({ setActive, openAddCollection, data, setData }) => {
       <div className='collection-modal-container'>
         <div>
           <div className='collection-modal-inner-container'>
-            {(pathname === `/community-group/${id}` ||
-            pathname === `/your-community-group/${id}`) && (
+            {(pathname === '/groups' ||
+            pathname === '/your-groups') && (
               <form onSubmit={data ? handleSubmit(handleEditGroup) : handleSubmit(handleAddGroup)}>
                 <CollectionModalHeader
                   title={data ? 'Edit Group' : 'Create Group'}
@@ -139,12 +137,12 @@ const FromModal = ({ setActive, openAddCollection, data, setData }) => {
             )}
 
             {(
-              pathname === `/enterprises/${id}` ||
-            pathname === `/your-enterprises/${id}`
+              pathname === '/enterprises' ||
+            pathname === '/your-enterprises'
             ) && (
               <form onSubmit={data ? handleSubmit(handleEditEnterprise) : handleSubmit(handleAddEnterprise)}>
                 <CollectionModalHeader
-                  title={data ? 'Edit Group' : 'Create Group'}
+                  title={data ? 'Edit Enterprise' : 'Create Enterprise'}
                   clickHandler={clearData}
                 />
                 <DragDrop files={files} onChange={setFiles} dataImg={data && data.filename} tag='enterprise' />

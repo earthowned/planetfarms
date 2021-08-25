@@ -56,7 +56,7 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
           editData
           ? <button className='default-btn-btn btn-variation' onClick={editNewsTitle}>Update</button>
           : <button className='default-btn-btn btn-variation' onClick = {() => history.push({
-              pathname: `/community-news/${title}`,
+              pathname: `/news/add/${title}`,
               state: {
                 category
               }
