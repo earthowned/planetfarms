@@ -49,6 +49,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'courseId'
     })
     Lesson.belongsTo(models.RichText, { foreignKey: 'richtextId', constraints: true, onDelete: 'CASCADE' })
+    Lesson.hasMany(models.LessonProgress, {
+      constraints: true,
+      foreignKey: 'lessonId',
+      onDelete: 'CASCADE'
+    })
   }
 
   return Lesson

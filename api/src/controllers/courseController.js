@@ -106,7 +106,7 @@ const getCourseById = async (req, res) => {
       {
         model: db.Lesson,
         order: [['order', 'ASC']],
-        include: [db.Test, {
+        include: [db.Test, db.RichText, {
           model: db.LessonProgress,
           where: {
             userId: {
