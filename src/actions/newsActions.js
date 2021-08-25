@@ -1,4 +1,4 @@
-import { getApi, putApi, postApi, fileHeader } from '../utils/apiFunc'
+import { getApi, putApi, postApi, deleteApi, fileHeader } from '../utils/apiFunc'
 import {
   NEWS_LIST_REQUEST,
   NEWS_LIST_SUCCESS,
@@ -108,6 +108,7 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
 export const deleteNews = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: NEWS_DELETE_REQUEST })
+    // eslint-disable-next-line no-undef
     const data = await deleteApi(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
     dispatch({ type: NEWS_DELETE_SUCCESS, payload: data })
   } catch (error) {
