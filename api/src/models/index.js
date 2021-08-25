@@ -34,6 +34,7 @@ const db = {
   ),
   LocalAuth: require('./localAuthModel')(sequelize, Sequelize.DataTypes),
   Courses: require('./courseModel')(sequelize, Sequelize.DataTypes),
+  CourseView: require('./courseViewModel')(sequelize, Sequelize.DataTypes),
   Lesson: require('./lessonModel')(sequelize, Sequelize.DataTypes),
   Video: require('./videoModel')(sequelize, Sequelize.DataTypes),
   Text: require('./textModel')(sequelize, Sequelize.DataTypes),
@@ -42,6 +43,10 @@ const db = {
   Test: require('./testModel')(sequelize, Sequelize.DataTypes),
   Question: require('./questionModel')(sequelize, Sequelize.DataTypes),
   Enroll: require('./enrollModel')(sequelize, Sequelize.DataTypes),
+  LessonProgress: require('./lessonProgressModel')(
+    sequelize,
+    Sequelize.DataTypes
+  ),
   UserTest: require('./userTestModel')(sequelize, Sequelize.DataTypes),
   UserTestAnswer: require('./userTestAnswerModel')(sequelize, Sequelize.DataTypes),
   Category: require('./categoryModel')(sequelize, Sequelize.DataTypes),

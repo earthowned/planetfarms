@@ -21,14 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       order: {
         type: DataTypes.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
       }
     },
     { timestamps: true }
@@ -42,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
     Lesson.hasMany(models.Photo)
     Lesson.hasMany(models.Text)
     Lesson.hasMany(models.Material)
+    Lesson.hasMany(models.LessonProgress, {
+      constraints: true,
+      foreignKey: 'lessonId',
+      onDelete: 'CASCADE'
+    })
     Lesson.belongsTo(models.Courses, {
       constraints: true,
       foreignKey: 'courseId'

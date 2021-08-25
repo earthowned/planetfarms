@@ -22,6 +22,10 @@ import { photoCreateReducer } from './reducers/photoReducer'
 import { textCreateReducer } from './reducers/textReducer'
 import { materialCreateReducer } from './reducers/materiallReducer'
 import {
+  lessonProgressCreateReducer,
+  lessonProgressUpdateReducer
+} from './reducers/lessonProgressReducer'
+import {
   testCreateReducer,
   testQuestionEditReducer,
   testQuestionListReducer
@@ -71,8 +75,12 @@ import {
   communityUpdateReducer
 } from './reducers/communityReducers'
 import { memberListReducer } from './reducers/memberReducers'
-import { addEnrollReducer } from './reducers/enrollReducer'
-import { questionDeleteReducer, questionListReducer, questionUpdateReducer } from './reducers/questionReducers'
+import { addEnrollReducer, leaveCourseReducer } from './reducers/enrollReducer'
+import {
+  questionDeleteReducer,
+  questionListReducer,
+  questionUpdateReducer
+} from './reducers/questionReducers'
 import {
   categoryCreateReducer,
   categoryDeleteReducer,
@@ -115,6 +123,8 @@ const reducer = combineReducers({
   addText: textCreateReducer,
   addMaterial: materialCreateReducer,
   addTest: testCreateReducer,
+  addLessonProgress: lessonProgressCreateReducer,
+  updateLessonProgress: lessonProgressUpdateReducer,
   listTestQuestions: testQuestionListReducer,
   editTestQuestions: testQuestionEditReducer,
   addNewNews: newsCreateReducer,
@@ -136,6 +146,7 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   accessToken: accessTokenReducer,
   addEnroll: addEnrollReducer,
+  leaveCourse: leaveCourseReducer,
   listQuestions: questionListReducer,
   questionDelete: questionDeleteReducer,
   questionUpdate: questionUpdateReducer,

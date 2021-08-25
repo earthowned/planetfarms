@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { GET_THUMBNAIL } from '../../../utils/urlConstants'
@@ -11,30 +10,18 @@ import DropDownCourse from './DropDownCourse'
 const CourseDetail = ({
   setFeedbackModal,
   setPurchaseModal,
-  data,
+  data = {},
+  isEnroll,
   isLoading,
-  userInfo
+  userInfo,
+  refetch,
+  joinCourse
 }) => {
   const dispatch = useDispatch()
-  const [isEnroll, setIsEnroll] = useState('')
-  const [joinCourse, setJoinCourse] = useState(false)
-  const [enrollCourseId, setEnrollCourseId] = useState('')
-
-  useEffect(() => {
-    const isEnrolled = data?.data?.enrolls
-      .filter((enroll) => enroll.userId === userInfo.id)
-      .map((enroll) => {
-        setIsEnroll(enroll.isEnroll)
-        setEnrollCourseId(enroll.courseId)
-      })
-  }, [data])
 
   const enrollFreeCourse = (courseId) => {
-    setJoinCourse(!joinCourse)
-    const userId = userInfo.id
-    dispatch(addEnroll(courseId, userId))
+    dispatch(addEnroll(courseId, false, refetch))
   }
-
   return (
     <div className='description-course-page'>
       <img
@@ -53,9 +40,9 @@ const CourseDetail = ({
                   clickHandler={() => setPurchaseModal(true)}
                 />
               </div>
-            ) : joinCourse ||
-              (isEnroll === true && enrollCourseId === data?.data?.id) ? (
-                <DropDownCourse setFeedbackModal={setFeedbackModal} />
+            ) : (joinCourse || isEnroll)
+              ? (
+                <DropDownCourse setFeedbackModal={setFeedbackModal} courseId={data?.data?.id} />
                 ) : (
                   <div className='dropdown-course-container'>
                     <Button
@@ -66,7 +53,7 @@ const CourseDetail = ({
                 )}
           </div>
           <p className='course-desc'>{data?.data?.description}</p>
-          <ProgressBar data={data} isLoading={isLoading} />
+          <ProgressBar data={data} isLoading={isLoading} isEnroll={isEnroll} />
         </div>
       </div>
     </div>

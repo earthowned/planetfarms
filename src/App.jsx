@@ -1,5 +1,10 @@
 import React from 'react'
-import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import {
+  Switch,
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from 'react-router-dom'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from './reactQuery'
 import PrivateRoute from './components/privateRoute/PrivateRoute'
@@ -103,7 +108,7 @@ function App () {
             <PrivateRoute component={LessonPage} path='/lesson/:id' exact />
             {/* <PrivateRoute component={LessonTestPage} exact path='/lesson/:id/testpage' /> */}
             <PrivateRoute component={() => <MyCoursePage unpaid='unpaid' />} path='/course/:courseId' exact />
-            <PrivateRoute component={LessonTestPage} path='/lesson-test-page/:testId' exact />
+            <PrivateRoute component={LessonTestPage} path='/test-:title/:id/:testId' exact />
             <PrivateRoute
               component={() => (
                 <DndProvider backend={HTML5Backend}>

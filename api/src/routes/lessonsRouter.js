@@ -10,7 +10,7 @@ const {
 } = require('../controllers/lessonController')
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
-router.route('/').get(getLessons)
+router.route('/course/:courseId').get(getLessons)
 router.route('/add').post(upload.single('coverImg'), resizeImage, addLesson)
 router
   .route('/:id')

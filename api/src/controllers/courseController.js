@@ -16,7 +16,22 @@ const getCourses = async (req, res) => {
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson, db.Enroll, db.Category],
+    include: [db.Lesson, db.Category, db.CourseView,
+      {
+        model: db.User,
+        as: 'enrolledUser',
+        where: {
+          id: {
+            [Op.eq]: req.user.id
+          }
+        },
+        required: false,
+        attributes: [['id', 'userId']],
+        through: {
+          attributes: ['isEnroll', 'courseId']
+        }
+      }
+    ],
     where: {
       ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
       ...(category ? { categoryId: Number(category) } : {})
@@ -85,23 +100,49 @@ const updateCourse = async (req, res) => {
 // @route   GET /api/courses/:id
 // @access  Public
 const getCourseById = async (req, res) => {
-  const { id } = req.params
   const course = await db.Courses.findOne({
-    where: { id },
-    include: [db.Lesson, db.Enroll]
+    where: { id: req.params.id },
+    include: [
+      {
+        model: db.Lesson,
+        order: [['order', 'ASC']],
+        include: [db.Test, {
+          model: db.LessonProgress,
+          where: {
+            userId: {
+              [Op.eq]: req.user.id
+            }
+          },
+          required: false
+        }]
+      },
+      {
+        model: db.User,
+        attributes: ['email'],
+        where: {
+          id: {
+            [Op.eq]: req.user.id
+          }
+        },
+        required: false,
+        as: 'enrolledUser',
+        through: {
+          attributes: ['isEnroll']
+        }
+      },
+      db.Category
+    ]
   })
   if (!course) {
-    throw new NotFoundError()
+    return res.json({ message: 'course not found' })
   }
-  course.lessons.forEach(lesson => {
-    lesson.coverImg = changeFormat(lesson.coverImg)
-  })
-  const thumbnail = changeFormat(course?.dataValues?.thumbnail)
-  const coverImg = changeFormat(course?.dataValues?.lessons?.coverImg)
-  const courseData = course.dataValues
   const data = Object.assign({
     ...course,
-    dataValues: { ...courseData, thumbnail, coverImg }
+    dataValues: {
+      ...course.dataValues,
+      thumbnail: changeFormat(course?.dataValues?.thumbnail),
+      coverImg: changeFormat(course?.dataValues?.lessons?.coverImg)
+    }
   })
   const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({

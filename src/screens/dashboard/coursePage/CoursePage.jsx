@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import BackButton from '../../../components/backButton/BackButton'
 import Button from '../../../components/button/Button'
@@ -11,8 +11,9 @@ import {
 } from '../../../components/purchaseModal/PurchaseModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './CoursePage.scss'
-import { GET_COURSE } from '../../../utils/urlConstants'
+import { ADD_COURSE_VIEW, GET_COURSE } from '../../../utils/urlConstants'
 import useGetFetchData from '../../../utils/useGetFetchData'
+import { postApi } from '../../../utils/apiFunc'
 
 function MyCoursePage ({ unpaid }) {
   const userLogin = useSelector((state) => state.userLogin)
@@ -20,42 +21,76 @@ function MyCoursePage ({ unpaid }) {
   const [feedbackModal, setFeedbackModal] = useState(false)
   const [purchaseModal, setPurchaseModal] = useState(false)
   const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
-
+  const [isEnroll, setIsEnroll] = useState(false)
+  const dispatch = useDispatch()
   const { courseId } = useParams()
-  const { data, isLoading } = useGetFetchData(
+  const { data, isLoading, refetch } = useGetFetchData(
     'singleCourse',
     GET_COURSE + '/' + courseId
   )
-  if (isLoading) {
-    return <span>Loading...</span>
+
+  // counting the views
+  useEffect(() => {
+    if (data?.data?.creator !== userInfo.id) {
+      countViews()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (data?.data?.enrolledUser.length > 0) {
+      setIsEnroll(data?.data?.enrolledUser[0].enrolls.isEnroll)
+    }
+  }, [data])
+
+  function countViews () {
+    postApi(dispatch, ADD_COURSE_VIEW, { courseId })
   }
 
   return (
     <>
-      {feedbackModal && <FeedbackModal setFeedbackModal={setFeedbackModal} />}
-      {purchaseModal && (
-        <PurchaseModal
-          clickHandler={setPurchaseModal}
-          setPurchaseSuccessModal={setPurchaseSuccessModal}
-        />
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : (
+        <>
+          {feedbackModal && (
+            <FeedbackModal setFeedbackModal={setFeedbackModal} />
+          )}
+          {purchaseModal && (
+            <PurchaseModal
+              clickHandler={setPurchaseModal}
+              setPurchaseSuccessModal={setPurchaseSuccessModal}
+            />
+          )}
+          {purchaseSuccessModal && (
+            <PurchaseSuccessModal clickHandler={setPurchaseSuccessModal} />
+          )}
+          <DashboardLayout title='Course Page'>
+            <CoursePage
+              setFeedbackModal={setFeedbackModal}
+              setPurchaseModal={setPurchaseModal}
+              data={data}
+              userInfo={userInfo}
+              isEnroll={isEnroll}
+              refetch={refetch}
+              courseId={courseId}
+            />
+          </DashboardLayout>
+        </>
       )}
-      {purchaseSuccessModal && (
-        <PurchaseSuccessModal clickHandler={setPurchaseSuccessModal} />
-      )}
-      <DashboardLayout title='Course Page'>
-        <CoursePage
-          setFeedbackModal={setFeedbackModal}
-          setPurchaseModal={setPurchaseModal}
-          data={data}
-          userInfo={userInfo}
-        />
-      </DashboardLayout>
     </>
   )
 }
-export default MyCoursePage
+export default React.memo(MyCoursePage)
 
-function CoursePage ({ setFeedbackModal, setPurchaseModal, data, userInfo }) {
+function CoursePage ({
+  setFeedbackModal,
+  setPurchaseModal,
+  data,
+  userInfo,
+  isEnroll,
+  refetch,
+  courseId
+}) {
   return (
     <div className='course-page'>
       <div className='course-page-flex-col-4'>
@@ -65,6 +100,9 @@ function CoursePage ({ setFeedbackModal, setPurchaseModal, data, userInfo }) {
           setPurchaseModal={setPurchaseModal}
           data={data}
           userInfo={userInfo}
+          isEnroll={isEnroll}
+          refetch={refetch}
+          courseId={courseId}
         />
       </div>
     </div>
