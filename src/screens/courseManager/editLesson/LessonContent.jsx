@@ -3,10 +3,10 @@ import Image from '../../../components/lessonImage/Image'
 import Video from '../../../components/videoPlayer/Video'
 import Text from '../addLesson/Text'
 
-const LessonContent = ({ newData, setEditTextModel, modelPopUp }) => {
+const LessonContent = ({ lessonData, setEditTextModel, modelPopUp }) => {
   return (
     <>
-      {newData
+      {lessonData
         .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
         .map((data, index) => (
           <div key={index}>

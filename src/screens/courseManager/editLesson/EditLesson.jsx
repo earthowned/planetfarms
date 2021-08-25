@@ -37,7 +37,7 @@ const EditLesson = () => {
 
   const { register, errors, handleSubmit } = useForm()
 
-  const { isLoading, data } = useGetLessonData(
+  const { isLoading, data, refetch } = useGetLessonData(
     id,
     setMaterialData,
     userId,
@@ -61,24 +61,19 @@ const EditLesson = () => {
   })
 
   useEffect(() => {
-    setLessonData([textData, videoData, photoData])
+    setLessonData([textData, videoData, photoData].flat())
   }, [data])
-
-  let newData
-  if (lessonData) {
-    newData = lessonData.flat()
-  }
 
   const lessonId = data?.data?.id
   const updateLessonForm = ({ title }) => {
     const coverImg = lessonCover
     dispatch(updateLesson(title, coverImg, lessonId))
   }
-  // console.log(newData)
+
   const modelPopUp = (poupState, dataId) => {
     setEditId(dataId)
-    console.log(dataId)
   }
+  console.log(lessonData)
   return (
     <>
       {isLoading ? (
@@ -91,7 +86,9 @@ const EditLesson = () => {
               editTextModel={editTextModel}
               setEditTextModel={setEditTextModel}
               editId={editId}
-              newData={newData}
+              textData={lessonData}
+              editFetchedData
+              refetch={refetch}
             />
           )}
           <DashboardLayout title='Edit lesson'>
@@ -124,7 +121,7 @@ const EditLesson = () => {
               />
 
               <LessonContent
-                newData={newData}
+                lessonData={lessonData}
                 modelPopUp={modelPopUp}
                 setEditTextModel={setEditTextModel}
               />
