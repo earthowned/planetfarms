@@ -24,11 +24,10 @@ const CoursesCard = ({ category, setModalActive, setPurchaseModal, search }) => 
   if (isLoading) {
     return <span>Loading</span>
   }
-
   return (
     <div className='course-card-wrapper'>
       {
-        courseData?.data.length !== 0 &&
+        courseData?.data.length &&
         (
           <div className='courses-card-container'>
             <h4>{category?.name}</h4>
