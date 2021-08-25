@@ -6,14 +6,9 @@ import './NewsAdd.scss'
 import BackButton from '../../../components/backButton/BackButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNews, newsUpdate } from '../../../actions/newsActions'
-import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
-import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
-import ContentAdd from '../../../components/contentAdd/ContentAdd'
-import { configFunc, getApi } from '../../../utils/apiFunc'
-import DragDrop from '../../../components/dragDrop/DragDrop'
-import EditContent from '../../../components/editContent/EditContent'
+import { getApi } from '../../../utils/apiFunc'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
@@ -51,13 +46,12 @@ const NewsAdd = () => {
   const [videoData, setVideoData] = useState(null)
   const [textData, setTextData] = useState(null)
 
-  const { register, errors, handleSubmit } = useForm()
-
   const { title, id} = useParams()
 
   const {pathname} = useLocation();
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // for edit
   useEffect(() => {
@@ -222,169 +216,28 @@ const NewsAdd = () => {
           setVideoModal = {setCreateVideoModal}
           setImageModal = {setCreateImageModal}
           setTextModal = {setCreateTextModal}
-          setLessonCover = {setNewsCover}
-          lessonCover = {newsCover}
-          lessonData = {newsData}
-          setLessonData = {setNewsData}
-          lessonSingleData = {newsSingleData}
-          setLessonSingleData = {setNewsSingleData}
+          setCoverImage = {setNewsCover}
+          coverImage = {newsCover}
+          formData = {newsData}
+          setFormData = {setNewsData}
+          editData = {newsSingleData}
+          setEditData = {setNewsSingleData}
           editVideoFunc = {editVideoFunc}
           editImageFunc = {editImageFunc}
           editTextFunc ={editTextFunc}
           deleteVideoModalFunc = {deleteVideoModalFunc}
           deleteImageModalFunc = {deleteImageModalFunc}
           deleteTextModalFunc = {deleteTextModalFunc}
-          editLessonForm ={editNewsForm}
-          submitLessonForm ={submitNewsForm}
+          editForm ={editNewsForm}
+          submitForm ={submitNewsForm}
           showMaterial={false}
           edit={pathname.split('/')[2] === 'edit'}
           saveBtnName="save news"
           editBtnName="edit news"
+          cancel={() => history.push('/news')}
         />
-        {/* <AddNewsContent
-          setVideoModal = {setCreateVideoModal}
-          setImageModal = {setCreateImageModal}
-          setTextModal = {setCreateTextModal}
-          register={register}
-          errors={errors}
-          setNewsData = {setNewsData}
-          newsData = {newsData}
-          newsSingleData = {newsSingleData}
-          setNewsCover={setNewsCover}
-          editVideoFunc={editVideoFunc}
-          editImageFunc={editImageFunc}
-          editTextFunc={editTextFunc}
-          setDeleteVideoModal={deleteVideoModalFunc}
-          setDeleteImageModal={deleteImageModalFunc}
-          setDeleteTextModal={deleteTextModalFunc}
-        />
-
-        {
-          pathname.split('/')[2] === 'edit'
-          ? <NewsSaveModal onClick={handleSubmit(editNewsForm)}  name="Edit" />
-          : <NewsSaveModal onClick={handleSubmit(submitNewsForm)} name="Save" />
-        } */}
-
       </DashboardLayout>
     </>
-  )
-}
-
-// const DeleteContent = ({confirmDelete, setDeleteModal}) => {
-//   return <div className='simple-modal-container'>
-//         <div className='simple-modal-inner-container'>
-//           <div>
-//             <h4>Are you sure you want to delete?</h4>
-//             {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
-//           </div>
-//           <div>
-//             <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
-//             <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
-//           </div>
-//         </div>
-//       </div>
-// }
-
-const AddNewsContent = ({
-  errors,
-  newsData,
-  setVideoModal,
-  setImageModal,
-  setTextModal,
-  register,
-  newsSingleData,
-  setNewsCover,
-  editImageFunc,
-  editVideoFunc,
-  editTextFunc,
-  setDeleteVideoModal,
-  setDeleteImageModal,
-  setDeleteTextModal
-}) => {
-
-  const [title, setTitle] = useState('');
-  
-  // for creation
-  useEffect(() => {
-    if(newsData.length > 0) {
-      setTitle(newsData[0].title)
-    }
-  }, [newsData])
-
-  // for Edit
-  useEffect(() => {
-    if(newsSingleData) {
-      setTitle(newsSingleData.title)
-    }
-  }, [newsSingleData])
-  
-
-  return  <div className='admin-lesson-create-container'>
-      <ErrorText
-        className='errorMsg'
-        message={errors.title && errors.title.message}
-      />
-      <input
-        type='text'
-        placeholder='Write Title Here'
-        name='title'
-        defaultValue={title}
-        ref={register({
-          required: {
-            value: true,
-            message: 'You must enter news title'
-          }
-        })}
-      />
-
-      <DragDrop
-        onChange={(img) => setNewsCover(img)}
-        text='Drag & Drop photo in this area or Click Here to attach'
-        dataImg={newsSingleData?._attachments ? `${process.env.REACT_APP_CDN_BASE_URL}/news/${newsSingleData?._attachments}` : ''}
-        onClick={() => setNewsCover(null)}
-      />
-
-      {
-        newsSingleData && <EditContent 
-        data={newsSingleData}
-        setEditPhotoModel={setImageModal}
-        setEditTextModel={setTextModal}
-        setEditVideoModel={setVideoModal}
-        editVideoFunc={editVideoFunc}
-        editImageFunc={editImageFunc}
-        editTextFunc={editTextFunc}
-        removeTextItem={setDeleteTextModal}
-        removePhoto={setDeleteImageModal}
-        removeVideo={setDeleteVideoModal}
-        />
-      }
-
-      <ContentAdd data={newsData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal} />
-    </div>
-}
-
-const NewsSaveModal = ({ pathId, onClick, name}) => {
-  const history = useHistory()
-  return (
-    <div className='save-lesson-modal'>
-      <h4>Do you want to {name} News?</h4>
-      <div>
-        <button
-          className='secondary-btn'
-          id='lesson-cancel-btn'
-          onClick={() => history.goBack()}
-        >
-          Cancel
-        </button>
-        <button
-          className='primary-btn secondary-btn'
-          id='lesson-save-btn'
-          onClick={onClick}
-        >
-          {name} News
-        </button>
-      </div>
-    </div>
   )
 }
 

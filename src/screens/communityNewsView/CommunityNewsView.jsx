@@ -9,7 +9,7 @@ import Text from '../courseManager/addLesson/Text'
 import Video from '../../components/videoPlayer/Video'
 import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
 import Image from '../../components/lessonImage/Image'
-import RichText from '../../components/richText/RichText'
+import RichTextView from '../../components/richTextView/RichTextView'
 
 function CommunityNewsViewPage () {
   const [news, setNews] = useState({})
@@ -40,7 +40,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
           <div className='x03-1-0-news-page'>
             <div className='flex-col-2'>
               <BackButton location='/news' />
-                <RichText data={news} news={true}/>
+                <RichTextView data={news} news={true}/>
               <div className='button-row-3'>
                 <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
                   <img className='f1' src='/img/facebook-share-icon.svg' alt='facebook-icon' />

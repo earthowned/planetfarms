@@ -13,6 +13,7 @@ import Button from '../../../components/button/Button'
 import './LessonPage.scss'
 import { getApi, postApi, putApi } from '../../../utils/apiFunc'
 import LessonTest from './LessonTest'
+import RichTextView from '../../../components/richTextView/RichTextView'
 import RichText from '../../../components/richText/RichText'
 
 const LessonPage = () => {

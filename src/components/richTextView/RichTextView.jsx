@@ -5,7 +5,7 @@ import { GET_COVERIMG, GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/ur
 import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
 
-const RichText = ({ data, news }) => {
+const RichTextView = ({ data, news }) => {
   const [newData, setNewData] = useState([])
   const textData = data?.rich_text?.texts?.map((text) => {
     return text
@@ -78,4 +78,4 @@ const RichText = ({ data, news }) => {
   )
 }
 
-export default RichText
+export default RichTextView

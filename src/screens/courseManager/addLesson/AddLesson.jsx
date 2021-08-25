@@ -62,8 +62,6 @@ const AddLesson = () => {
   const [textData, setTextData] = useState(null)
   const [courseId, setCourseId] = useState(state?.courseId)
 
-  const { register, errors, handleSubmit } = useForm()
-
   // const { data } = useGetFetchData(
   //   'get_course_by_id',
   //   GET_COURSE + `/${courseId}`
@@ -255,12 +253,12 @@ const AddLesson = () => {
           setVideoModal = {setVideoModal}
           setImageModal = {setImageModal}
           setTextModal = {setTextModal}
-          setLessonCover = {setLessonCover}
-          lessonCover = {lessonCover}
-          lessonData = {lessonData}
-          setLessonData = {setLessonData}
-          lessonSingleData = {lessonSingleData}
-          setLessonSingleData = {setLessonSingleData}
+          setCoverImage = {setLessonCover}
+          coverImage = {lessonCover}
+          formData = {lessonData}
+          setFormData = {setLessonData}
+          editData = {lessonSingleData}
+          setEditData = {setLessonSingleData}
           removeItem = {removeItem}
           editVideoFunc = {editVideoFunc}
           editImageFunc = {editImageFunc}
@@ -268,9 +266,8 @@ const AddLesson = () => {
           deleteVideoModalFunc = {deleteVideoModalFunc}
           deleteImageModalFunc = {deleteImageModalFunc}
           deleteTextModalFunc = {deleteTextModalFunc}
-          courseId = {courseId}
-          editLessonForm ={editLessonForm}
-          submitLessonForm ={submitLessonForm}
+          editForm ={editLessonForm}
+          submitForm ={submitLessonForm}
           material={material}
           setMaterial={setMaterial}
           removeMaterial={removeMaterial}
@@ -278,123 +275,12 @@ const AddLesson = () => {
           edit={pathname.split('/')[3] === 'edit'}
           saveBtnName="save lesson"
           editBtnName="edit lesson"
+          cancel={() => history.push(`/admin/course/${courseId}`)}
         />
-        {/* <AddContent
-          setVideoModal={setVideoModal}
-          setImageModal={setImageModal}
-          setTextModal={setTextModal}
-          register={register}
-          errors={errors}
-          setLessonCover={setLessonCover}
-          lessonCover={lessonCover}
-          lessonData={lessonData}
-          setLessonData={setLessonData}
-          lessonSingleData={lessonSingleData}
-          setLessonSingleData={setLessonSingleData}
-          onRemove={removeItem}
-          editVideoFunc={editVideoFunc}
-          editImageFunc={editImageFunc}
-          editTextFunc={editTextFunc}
-          setDeleteVideoModal={deleteVideoModalFunc}
-          setDeleteImageModal={deleteImageModalFunc}
-          setDeleteTextModal={deleteTextModalFunc}
-        />
-        <LessonMaterial
-          material={material}
-          setMaterial={setMaterial}
-          removeLocalMaterial={removeMaterial}
-        />
-
-          {
-          pathname.split('/')[3] === 'edit'
-          ? <LessonSaveModal
-          pathId={courseId}
-          onClick={handleSubmit(editLessonForm)}
-          name="Edit"
-        />
-          : <LessonSaveModal
-          pathId={courseId}
-          onClick={handleSubmit(submitLessonForm)}
-          name="Save"
-        />
-        } */}
       </DashboardLayout>
     </>
   )
 }
-
-// const AddContent = ({
-//   setVideoModal,
-//   videoModal,
-//   setImageModal,
-//   setTextModal,
-//   register,
-//   errors,
-//   setLessonCover,
-//   lessonData,
-//   lessonSingleData,
-//   setLessonSingleData,
-//   editVideoFunc,
-//   editTextFunc,
-//   editImageFunc,
-//   setDeleteTextModal,
-//   setDeleteImageModal,
-//   setDeleteVideoModal
-// }) => {
-//   return (
-//     <div className='admin-lesson-create-container'>
-//       <ErrorText
-//         className='errorMsg'
-//         message={errors.title && errors.title.message}
-//       />
-//       <input
-//         type='text'
-//         placeholder='Write Title Here'
-//         name='title'
-//         ref={register({
-//           required: {
-//             value: true,
-//             message: 'You must enter lesson title'
-//           }
-//         })}
-//         defaultValue={lessonSingleData?.title || ''}
-//       />
-
-//       <TextArea
-//         className='default-input-variation text-area-variation lessonDesc'
-//         placeholder='Lesson Description'
-//         cols='3'
-//         rows='4'
-//         name='lessonDesc'
-//         ref={register}
-//         defaultValue={lessonSingleData?.lessonDesc || ''}
-//       />
-
-//       <DragDrop
-//       text='Drag & Drop photo in this area or Click Here to attach'
-//       onChange={(img) => setLessonCover(img)} 
-//       dataImg={lessonSingleData?.coverImg ? `${GET_COVERIMG}${lessonSingleData.coverImg}` : ''}
-//       onClick={() => setLessonCover(null)}
-//       />
-//       {
-//         lessonSingleData && <EditContent 
-//         data={lessonSingleData}
-//         setEditPhotoModel={setImageModal}
-//         setEditTextModel={setTextModal}
-//         setEditVideoModel={setVideoModal}
-//         editVideoFunc={editVideoFunc}
-//         editImageFunc={editImageFunc}
-//         editTextFunc={editTextFunc}
-//         removeTextItem={setDeleteTextModal}
-//         removePhoto={setDeleteImageModal}
-//         removeVideo={setDeleteVideoModal}
-//         />
-//       }
-//       <ContentAdd data={lessonData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
-//     </div>
-//   )
-// }
-
 
 
 export default AddLesson

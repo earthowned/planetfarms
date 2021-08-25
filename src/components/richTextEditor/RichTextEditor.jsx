@@ -1,25 +1,22 @@
-import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import LessonSaveModal from '../../screens/courseManager/addLesson/LessonSaveModal'
 import { ErrorText, TextArea } from '../formUI/FormUI'
 import DragDrop from '../dragDrop/DragDrop'
 import EditContent from '../editContent/EditContent'
 import { GET_COVERIMG } from '../../utils/urlConstants'
 import ContentAdd from '../contentAdd/ContentAdd'
 import LessonMaterial from '../../screens/courseManager/addLesson/LessonMaterial'
-import { useEffect, useState } from 'react'
-
+import SaveModal from '../saveModal/SaveModal'
 
 const RichTextEditor = ({
   setVideoModal,
   setImageModal,
   setTextModal,
-  setLessonCover,
-  lessonCover,
-  lessonData,
-  setLessonData,
-  lessonSingleData,
-  setLessonSingleData,
+  setCoverImage,
+  coverImage,
+  formData,
+  setFormData,
+  editData,
+  setEditData,
   removeItem,
   editVideoFunc,
   editImageFunc,
@@ -27,16 +24,16 @@ const RichTextEditor = ({
   deleteVideoModalFunc,
   deleteImageModalFunc,
   deleteTextModalFunc,
-  courseId,
-  editLessonForm,
-  submitLessonForm,
+  editForm,
+  submitForm,
   showMaterial,
   material,
   setMaterial,
   removeMaterial,
   edit,
   editBtnName,
-  saveBtnName
+  saveBtnName,
+  cancel
 }) => {
   const { register, errors, handleSubmit } = useForm()
   return (
@@ -47,12 +44,12 @@ const RichTextEditor = ({
           setTextModal={setTextModal}
           register={register}
           errors={errors}
-          setLessonCover={setLessonCover}
-          lessonCover={lessonCover}
-          lessonData={lessonData}
-          setLessonData={setLessonData}
-          lessonSingleData={lessonSingleData}
-          setLessonSingleData={setLessonSingleData}
+          setCoverImage={setCoverImage}
+          coverImage={coverImage}
+          formData={formData}
+          setFormData={setFormData}
+          editData={editData}
+          setEditData={setEditData}
           onRemove={removeItem}
           editVideoFunc={editVideoFunc}
           editImageFunc={editImageFunc}
@@ -70,15 +67,15 @@ const RichTextEditor = ({
 
           {
           edit
-          ? <LessonSaveModal
-          pathId={courseId}
-          onClick={handleSubmit(editLessonForm)}
+          ? <SaveModal
+          onClick={handleSubmit(editForm)}
           name={editBtnName}
+          cancel={cancel}
         />
-          : <LessonSaveModal
-          pathId={courseId}
-          onClick={handleSubmit(submitLessonForm)}
+          : <SaveModal
+          onClick={handleSubmit(submitForm)}
           name={saveBtnName}
+          cancel={cancel}
         />
         }
     </>
@@ -91,9 +88,9 @@ const AddContent = ({
   setTextModal,
   register,
   errors,
-  setLessonCover,
-  lessonData,
-  lessonSingleData,
+  setCoverImage,
+  formData,
+  editData,
   editVideoFunc,
   editTextFunc,
   editImageFunc,
@@ -135,7 +132,7 @@ const AddContent = ({
             message: 'You must enter lesson title'
           }
         })}
-        defaultValue={lessonSingleData?.title || ''}
+        defaultValue={editData?.title || ''}
       />
 
         {
@@ -146,7 +143,7 @@ const AddContent = ({
             rows='4'
             name='lessonDesc'
             ref={register}
-            defaultValue={lessonSingleData?.lessonDesc || ''}
+            defaultValue={editData?.lessonDesc || ''}
           />
         }
 
@@ -154,20 +151,20 @@ const AddContent = ({
       saveBtnName === "save lesson" 
       ? <DragDrop
         text='Drag & Drop photo in this area or Click Here to attach'
-        onChange={(img) => setLessonCover(img)} 
-        dataImg={lessonSingleData?.coverImg ? `${GET_COVERIMG}${lessonSingleData.coverImg}` : ''}
-        onClick={() => setLessonCover(null)}
+        onChange={(img) => setCoverImage(img)} 
+        dataImg={editData?.coverImg ? `${GET_COVERIMG}${editData.coverImg}` : ''}
+        onClick={() => setCoverImage(null)}
         />
       : <DragDrop
-        onChange={(img) => setLessonCover(img)} 
+        onChange={(img) => setCoverImage(img)} 
         text='Drag & Drop photo in this area or Click Here to attach'
-        dataImg={lessonSingleData?._attachments ? `${process.env.REACT_APP_CDN_BASE_URL}/news/${lessonSingleData?._attachments}` : ''}
-        onClick={() => setLessonCover(null)}
+        dataImg={editData?._attachments ? `${process.env.REACT_APP_CDN_BASE_URL}/news/${editData?._attachments}` : ''}
+        onClick={() => setCoverImage(null)}
       />
       }
       {
-        lessonSingleData && <EditContent 
-        data={lessonSingleData}
+        editData && <EditContent 
+        data={editData}
         setEditPhotoModel={setImageModal}
         setEditTextModel={setTextModal}
         setEditVideoModel={setVideoModal}
@@ -179,7 +176,7 @@ const AddContent = ({
         removeVideo={setDeleteVideoModal}
         />
       }
-      <ContentAdd data={lessonData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
+      <ContentAdd data={formData}  setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal}/>
     </div>
   )
 }
