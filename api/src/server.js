@@ -32,6 +32,7 @@ const materialRouter = require('./routes/materialRouter')
 const testRouter = require('./routes/testRouter')
 const questionRouter = require('./routes/questionRouter')
 const userTestRouter = require('./routes/userTestRouter')
+const richtextRouter = require('./routes/richtextRouter')
 
 const PORT = process.env.port || 5000
 
@@ -67,6 +68,7 @@ app.use('/api/tests', testRouter)
 app.use('/api/questions', questionRouter)
 app.use('/api/user_tests', userTestRouter)
 app.use('/api/enrolls', enrollRouter)
+app.use('/api/richtexts', richtextRouter)
 
 // home page response
 app.get('/', (request, response) => {

@@ -36,6 +36,7 @@ const db = {
   Courses: require('./courseModel')(sequelize, Sequelize.DataTypes),
   CourseView: require('./courseViewModel')(sequelize, Sequelize.DataTypes),
   Lesson: require('./lessonModel')(sequelize, Sequelize.DataTypes),
+  RichText: require('./richTextModel')(sequelize, Sequelize.DataTypes),
   Video: require('./videoModel')(sequelize, Sequelize.DataTypes),
   Text: require('./textModel')(sequelize, Sequelize.DataTypes),
   Photo: require('./photoModel')(sequelize, Sequelize.DataTypes),

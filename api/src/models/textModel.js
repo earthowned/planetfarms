@@ -13,8 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       textDescription: {
         type: DataTypes.TEXT
       },
-      newsId: {
-        type: DataTypes.INTEGER
+      richtextId: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: false
       },
       createdAt: {
         type: DataTypes.DATE

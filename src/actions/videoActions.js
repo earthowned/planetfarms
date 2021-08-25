@@ -19,8 +19,7 @@ export const createVideo =
     videoDescription,
     videoLink,
     videoResource,
-    lessonId,
-    newsId
+    richtextId
   ) =>
     async (dispatch) => {
       const videoData = new FormData()
@@ -29,8 +28,8 @@ export const createVideo =
       videoData.append('videoDescription', videoDescription)
       videoData.append('videoLink', videoLink)
       videoData.append('videoResource', videoResource)
-      newsId ? videoData.append('newsId', newsId) : videoData.append('lessonId', lessonId)
-      console.log(videoCover, videoTitle, videoDescription, videoLink, videoResource, lessonId, newsId)
+      videoData.append('richtextId', richtextId)
+      console.log(videoCover, videoTitle, videoDescription, videoLink, videoResource, richtextId)
       try {
         dispatch({ type: VIDEO_CREATE_REQUEST })
         const config = {

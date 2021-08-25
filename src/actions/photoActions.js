@@ -18,12 +18,12 @@ import {
 } from '../constants/photoConstants'
 
 export const createLessonImg =
-  (lessonImg, photoDescription, isImgDesc, lessonId, newsId) => async (dispatch) => {
+  (lessonImg, photoDescription, isImgDesc, richtextId) => async (dispatch) => {
     const lessonImgData = new FormData()
     lessonImgData.append('img', lessonImg)
     lessonImgData.append('photoDescription', photoDescription)
     lessonImgData.append('isImgDesc', isImgDesc)
-    newsId ? lessonImgData.append('newsId', newsId) : lessonImgData.append('lessonId', lessonId)
+    lessonImgData.append('richtextId', richtextId)
 
     try {
       dispatch({ type: PHOTO_CREATE_REQUEST })

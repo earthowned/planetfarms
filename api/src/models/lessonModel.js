@@ -21,6 +21,19 @@ module.exports = (sequelize, DataTypes) => {
       },
       order: {
         type: DataTypes.INTEGER
+      },
+      richtextId: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: false
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE
       }
     },
     { timestamps: true }
@@ -43,6 +56,7 @@ module.exports = (sequelize, DataTypes) => {
       constraints: true,
       foreignKey: 'courseId'
     })
+    Lesson.belongsTo(models.RichText, {foreignKey: 'richtextId', constraints: true})
   }
 
   return Lesson

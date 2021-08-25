@@ -1,6 +1,6 @@
 import { createVideo } from '../../../actions/videoActions'
 
-export const addVideo = function ({ data, lessonId, newsId, dispatch }) {
+export const addVideo = function ({ data, richtextId, dispatch }) {
   const videoCover = data.videoCover
   const videoTitle = data.videoTitle
   const videoDescription = data.videoDescription
@@ -13,8 +13,7 @@ export const addVideo = function ({ data, lessonId, newsId, dispatch }) {
       videoDescription,
       videoLink,
       videoResource,
-      lessonId,
-      newsId
+      richtextId
     )
   )
 }

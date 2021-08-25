@@ -14,8 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     isImgDesc: {
       type: DataTypes.BOOLEAN
     },
-    newsId: {
-      type: DataTypes.INTEGER
+    richtextId: {
+      type: DataTypes.INTEGER,
+      unique: true,
+      allowNull: false
     },
     createdAt: {
       type: DataTypes.DATE

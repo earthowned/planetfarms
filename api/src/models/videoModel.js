@@ -19,11 +19,13 @@ module.exports = (sequelize, DataTypes) => {
       videoLink: {
         type: DataTypes.STRING
       },
-      newsId: {
-        type: DataTypes.INTEGER
-      },
       videoResource: {
         type: DataTypes.STRING
+      },
+      richtextId: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: false
       },
       createdAt: {
         type: DataTypes.DATE

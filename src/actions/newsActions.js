@@ -87,19 +87,25 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
 
     dispatch({ type: NEWS_CREATE_REQUEST })
     const { userLogin: { userInfo } } = getState()
+    const richText = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`);
+    const richtextId = richText?.data?.richText?.id
+    if(richtextId) {
+      formData.append('richtextId', richtextId)
+    }
     const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, configFunc)
+
     dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
     
-    const newsId = data?.data?.id
+    
         for (let i = 0; i < newNews.length; i++) {
           if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-            await addVideo({ data: newNews[i], lessonId: null, newsId, dispatch })
+            await addVideo({ data: newNews[i], richtextId, dispatch })
           }
           if (newNews[i]?.lessonImg) {
-            await addImage({ data: newNews[i], lessonId: null, newsId, dispatch })
+            await addImage({ data: newNews[i], richtextId, dispatch })
           }
           if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-            await addText({ data: newNews[i], lessonId: null, newsId, dispatch })
+            await addText({ data: newNews[i], richtextId, dispatch })
           }
         }
       
