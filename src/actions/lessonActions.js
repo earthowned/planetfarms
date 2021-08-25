@@ -81,37 +81,55 @@ export const createLesson =
     }
 
 export const updateLesson =
-  (title, coverImg, lessonId, history) => async (dispatch) => {
-    const updateLessonFormData = new FormData()
-    updateLessonFormData.append('title', title)
-    updateLessonFormData.append('coverImg', coverImg)
+  (title, coverImg, lessonId, history, lessonData, material) =>
+    async (dispatch) => {
+      const updateLessonFormData = new FormData()
+      updateLessonFormData.append('title', title)
+      updateLessonFormData.append('coverImg', coverImg)
 
-    try {
-      dispatch({ type: LESSON_UPDATE_REQUEST })
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      try {
+        dispatch({ type: LESSON_UPDATE_REQUEST })
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         }
-      }
 
-      const { data } = await Axios.put(
-        GET_LESSONS + '/' + lessonId,
-        updateLessonFormData,
-        config
-      )
-      dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
-      history.push(`/lesson/${lessonId}`)
-      return data
-    } catch (error) {
-      dispatch({
-        type: LESSON_UPDATE_FAIL,
-        payload:
+        const { data } = await Axios.put(
+          GET_LESSONS + '/' + lessonId,
+          updateLessonFormData,
+          config
+        )
+        dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
+
+        for (let i = 0; i < lessonData.length; i++) {
+          if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
+            await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
+          }
+          if (lessonData[i]?.lessonImg) {
+            await addImage({ lessonData: lessonData[i], lessonId, dispatch })
+          }
+          if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
+            await addText({ lessonData: lessonData[i], lessonId, dispatch })
+          }
+        }
+        for (let i = 0; i < material.length; i++) {
+          if (material[i].mData) {
+            await addMaterial({ material: material[i], lessonId, dispatch })
+          }
+        }
+        history.push(`/lesson/${lessonId}`)
+        return data
+      } catch (error) {
+        dispatch({
+          type: LESSON_UPDATE_FAIL,
+          payload:
           error.response && error.response.data.message
             ? error.response.data.message
             : error.message
-      })
+        })
+      }
     }
-  }
 
 export const deleteLesson = (id, refetch) => async (dispatch) => {
   try {
