@@ -5,11 +5,15 @@ module.exports = {
     await queryInterface.addColumn('news', 'richtextId', {
       type: Sequelize.INTEGER,
       unique: true,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'rich_texts',
+        key: 'id'
+      }
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.removeColumn('news', 'richtextId')
+    await queryInterface.removeColumn('news', 'richtextId')
   }
 };

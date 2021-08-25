@@ -15,26 +15,15 @@ module.exports = (sequelize, DataTypes) => {
       },
       richtextId: {
         type: DataTypes.INTEGER,
-        unique: true,
         allowNull: false
-      },
-      createdAt: {
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        type: DataTypes.DATE
       }
     },
     { timestamps: true }
   )
   Text.associate = (models) => {
-    Text.belongsTo(models.Lesson, {
-      constraints: true,
-      foreignKey: 'lessonId'
-    })
-    Text.belongsTo(models.News, {
-      constraints: true,
-      foreignKey: 'newsId'
+    Text.belongsTo(models.RichText, {
+      foreignKey: 'richtextId',
+      onDelete: 'CASCADE'
     })
   }
   return Text

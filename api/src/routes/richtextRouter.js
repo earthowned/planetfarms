@@ -2,7 +2,6 @@ const express = require('express');
 const db = require('../models')
 const router = express.Router()
 
-// router.route('/add').post(protect, upload.single('avatar'), addResource)
 router.route('/').post(async (req, res) => {
   try {
    const richtext =  await db.RichText.create();

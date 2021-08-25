@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       richtextId: {
         type: DataTypes.INTEGER,
-        unique: true,
         allowNull: false
       },
       createdAt: {
@@ -37,12 +36,11 @@ module.exports = (sequelize, DataTypes) => {
   { timestamps: true })
 
   Video.associate = (models) => {
-    Video.belongsTo(models.Lesson, {
+    Video.belongsTo(models.RichText, {
       constraints: true,
-      foreignKey: 'lessonId',
+      foreignKey: 'richtextId',
       onDelete: 'CASCADE'
     })
-    Video.belongsTo(models.News, { constraints: true, foreignKey: 'newsId' })
   }
 
   return Video

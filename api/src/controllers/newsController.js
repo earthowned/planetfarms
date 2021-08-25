@@ -46,7 +46,7 @@ const addNews = (req, res) => {
   }
 
   const {
-    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category
+    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category, richtextId
   } = req.body
   db.News.create({
     _attachments: 'news/' + filename,
@@ -60,6 +60,7 @@ const addNews = (req, res) => {
     imageDetail,
     videoDetail,
     category,
+    richtextId,
     communityId: req.params.id
   })
     .then((data) => res.json({ data }).status(200))
@@ -142,14 +143,9 @@ const getNewsById = (req, res) => {
       where: { id: req.params.id }
     }, 
     {
-      model: db.Text,
+      model: db.RichText,
+      include: [db.Photo, db.Text, db.Video]
     }, 
-    {
-      model: db.Photo,
-    }, 
-    {
-      model: db.Video,
-    }
   ]
   })
     .then(news => {

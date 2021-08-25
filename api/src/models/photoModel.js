@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     richtextId: {
       type: DataTypes.INTEGER,
-      unique: true,
       allowNull: false
     },
     createdAt: {
@@ -28,8 +27,11 @@ module.exports = (sequelize, DataTypes) => {
   },
   { timestamps: true })
   Photo.associate = (models) => {
-    Photo.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
-    Photo.belongsTo(models.News, { constraints: true, foreignKey: 'newsId' })
+    Photo.belongsTo(models.RichText, {
+      constraints: true,
+      foreignKey: 'richtextId',
+      onDelete: 'CASCADE'
+    })
   }
   return Photo
 }

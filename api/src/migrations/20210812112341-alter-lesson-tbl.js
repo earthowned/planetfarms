@@ -5,7 +5,11 @@ module.exports = {
     await queryInterface.addColumn('lessons', 'richtextId', {
       type: Sequelize.INTEGER,
       unique: true,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'rich_texts',
+        key: 'id'
+      }
     })
   },
 

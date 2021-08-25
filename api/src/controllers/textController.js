@@ -27,7 +27,8 @@ const getTextById = async (req, res) => {
 }
 
 const addText = async (req, res) => {
-  const text = await db.Text.create(req.body)
+  const {textHeading, textDescription, richtextId} = req.body
+  const text = await db.Text.create({textHeading, textDescription, richtextId})
   res.status(201).json({
     status: true,
     message: 'added new lesson text successfully',

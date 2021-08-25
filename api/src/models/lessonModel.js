@@ -43,20 +43,12 @@ module.exports = (sequelize, DataTypes) => {
     Lesson.hasOne(models.Test, {
       foreignKey: 'lessonId'
     })
-    Lesson.hasMany(models.Video)
-    Lesson.hasMany(models.Photo)
-    Lesson.hasMany(models.Text)
-    Lesson.hasMany(models.Material)
-    Lesson.hasMany(models.LessonProgress, {
-      constraints: true,
-      foreignKey: 'lessonId',
-      onDelete: 'CASCADE'
-    })
+    Lesson.hasMany(models.Material, { onDelete: 'CASCADE' })
     Lesson.belongsTo(models.Courses, {
       constraints: true,
       foreignKey: 'courseId'
     })
-    Lesson.belongsTo(models.RichText, {foreignKey: 'richtextId', constraints: true})
+    Lesson.belongsTo(models.RichText, {foreignKey: 'richtextId', constraints: true, onDelete: 'CASCADE'})
   }
 
   return Lesson
