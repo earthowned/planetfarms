@@ -15,7 +15,8 @@ import {
 } from './reducers/courseReducers'
 import {
   lessonCreateReducer,
-  lessonUpdateReducer
+  lessonUpdateReducer,
+  lessonDeleteReducer
 } from './reducers/lessonReducers'
 import { videoCreateReducer, videoDeleteReducer, videoUpdateReducer } from './reducers/videoReducers'
 import { photoCreateReducer, photoDeleteReducer, photoUpdateReducer } from './reducers/photoReducer'
@@ -118,6 +119,7 @@ const reducer = combineReducers({
   deleteCourse: deleteCourseReducer,
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
+  deleteLesson: lessonDeleteReducer,
   addVideo: videoCreateReducer,
   updateVideo: videoUpdateReducer,
   deleteVideo: videoDeleteReducer,
