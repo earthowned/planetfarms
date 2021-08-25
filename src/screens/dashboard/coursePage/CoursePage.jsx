@@ -28,13 +28,13 @@ function MyCoursePage ({ unpaid }) {
     'singleCourse',
     GET_COURSE + '/' + courseId
   )
-  
-    // counting the views
-    useEffect(() => {
-      if(data?.data?.creator !== userInfo.id) {
-        countViews()
-      }
-    }, [])
+
+  // counting the views
+  useEffect(() => {
+    if (data?.data?.creator !== userInfo.id) {
+      countViews()
+    }
+  }, [])
 
   useEffect(() => {
     if (data?.data?.enrolledUser.length > 0) {
@@ -43,9 +43,8 @@ function MyCoursePage ({ unpaid }) {
   }, [data])
 
   function countViews () {
-    postApi(dispatch, ADD_COURSE_VIEW, {courseId})
+    postApi(dispatch, ADD_COURSE_VIEW, { courseId })
   }
-
 
   return (
     <>

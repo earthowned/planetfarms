@@ -60,9 +60,9 @@ const deleteProgress = async (req, res) => {
 const updateProgress = async (req, res) => {
   const { id } = req.params
 
-  const oldProgress = await db.LessonProgress.findOne({where: {id, isCompleted: true}});
+  const oldProgress = await db.LessonProgress.findOne({ where: { id, isCompleted: true } })
 
-  if(oldProgress) {
+  if (oldProgress) {
     return res.status(202).json({
       message: 'Progress already updated.',
       success: true
