@@ -11,7 +11,7 @@ const ProgressBar = ({ data = {}, isLoading, isEnroll }) => {
     return <span>Loading...</span>
   }
   return (
-    <div className={lessonData.length ? 'lesson-bar' : 'no-lesson-bar'}>
+    <div className={lessonData.length > 1 ? 'lesson-bar' : 'no-lesson-bar'}>
       {windowWidth > 600 ? (
         <div
           style={{ width: `${accurateIndicator}%` }}
