@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 import Text from '../../screens/courseManager/addLesson/Text'
-import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
+import { GET_COVERIMG, GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
 import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
 
-const RichText = ({ data }) => {
+const RichText = ({ data, news }) => {
   const [newData, setNewData] = useState([])
   const textData = data?.rich_text?.texts?.map((text) => {
     return text
@@ -23,6 +23,33 @@ const RichText = ({ data }) => {
   const flattenData = newData.flat()
   return (
     <>
+    <div className='lesson-description-wrapper'>
+            {news 
+            ? <>
+                <h1 className='news-view-title'>{data?.title}</h1>
+                <div className='title-time'>
+                  <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
+                    {data?.createdAt && new Date(data?.createdAt).toDateString()}
+                  </div>
+                  <div className='due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
+                    {data?.readTime}
+                  </div>
+                </div>
+                <Image
+                  src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${data?._attachments}`}
+                />
+                </>
+              :  <>
+                  <h1 className='news-view-title'>{data?.title}</h1>
+                  <p>{data?.lessonDesc}</p>
+                  {data?.coverImg && <div className='lesson-description-img-wrapper'>
+                    <img
+                      src={`${GET_COVERIMG}${data?.coverImg}`}
+                      alt={`${data?.title}_img`}
+                    />
+                  </div>}
+                </>
+              }
       {flattenData
         .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
         .map((data, index) => (
@@ -46,6 +73,7 @@ const RichText = ({ data }) => {
             )}
           </div>
         ))}
+        </div>
     </>
   )
 }

@@ -40,21 +40,7 @@ const currentCommunity = localStorage.getItem('currentCommunity')
           <div className='x03-1-0-news-page'>
             <div className='flex-col-2'>
               <BackButton location='/news' />
-              <div className='lesson-description-wrapper'>
-                <h1 className='news-view-title'>{news?.title}</h1>
-                <div className='title-time'>
-                  <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-                    {news?.createdAt && new Date(news?.createdAt).toDateString()}
-                  </div>
-                  <div className='due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-                    {news?.readTime}
-                  </div>
-                </div>
-                <Image
-                  src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${news?._attachments}`}
-                />
-                <RichText data={news} />
-              </div>
+                <RichText data={news} news={true}/>
               <div className='button-row-3'>
                 <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
                   <img className='f1' src='/img/facebook-share-icon.svg' alt='facebook-icon' />
