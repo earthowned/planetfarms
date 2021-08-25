@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { MATERIAL, LESSON_PROGRESS, GET_COURSE_LESSONS, ADD_LESSON_PROGRESS, GET_COURSE, GET_LESSONS } from '../../../utils/urlConstants'
+import { GET_COVERIMG, MATERIAL, LESSON_PROGRESS, GET_COURSE_LESSONS, ADD_LESSON_PROGRESS, GET_COURSE, GET_LESSONS } from '../../../utils/urlConstants'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import useGetLessonData from '../../../utils/useGetLessonData'
@@ -12,6 +12,8 @@ import Button from '../../../components/button/Button'
 
 import './LessonPage.scss'
 import { getApi, postApi, putApi } from '../../../utils/apiFunc'
+import LessonTest from './LessonTest'
+import RichText from '../../../components/richText/RichText'
 
 const LessonPage = () => {
   const dispatch = useDispatch()
@@ -150,33 +152,44 @@ const LessonPage = () => {
       ) : (
         <DashboardLayout title='Course page'>
           <BackButton location={isCreator ? `/admin/course/${courseId}` : `/course/${courseId}`} />
-          <LessonDetail data={data?.data} id={id} setIsPassed={setIsPassed} />
+          <div className='lesson-description-wrapper'>
+            <h1>{data?.title}</h1>
+            <p>{data?.lessonDesc}</p>
+            {data?.coverImg && <div className='lesson-description-img-wrapper'>
+              <img
+                src={`${GET_COVERIMG}${data?.coverImg}`}
+                alt={`${data?.title}_img`}
+              />
+            </div>}
+          <RichText data={data} />
+          <LessonTest id={id} />
+          </div>
           {materialData.length !== 0 ? (
-            <div className='admin-lesson-materials-container'>
-              <h1>Materials</h1>
-              <div className='material'>
-                {materialData.map((mater) => {
-                  return (
-                    <Material key={mater.id} name={mater?.name}>
-                      <a
-                        href={`${MATERIAL}${mater?.material}`}
-                        download={mater.name}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                      >
-                        <div>
+          <div className='admin-lesson-materials-container'>
+            <h1>Materials</h1>
+            <div className='material'>
+              {materialData.map((mater) => {
+                return (
+                  <Material key={mater.id} name={mater?.name}>
+                    <a
+                      href={`${MATERIAL}${mater?.material}`}
+                      download={mater.name}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      <div>
+                        <img src='/img/book-outlined.svg' alt='library icon' />{' '}
+                        <span>Add to my library</span>
+                      </div>
+                      </a>
+                       {/* <div>
                           <img
                             src='/img/download-icon.svg'
                             alt='download icon'
                           />{' '}
                           <span>Download</span>
                         </div>
-                      </a>
-
-                      <div>
-                        <img src='/img/book-outlined.svg' alt='library icon' />{' '}
-                        <span>Add to my library</span>
-                      </div>
+                      </a> */}
                     </Material>
                   )
                 })}

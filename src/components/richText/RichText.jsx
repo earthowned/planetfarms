@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-import {
-  GET_COVERIMG,
-  GET_VIDEO,
-  VIDEO_COVER,
-  LESSON_IMG
-} from '../../../utils/urlConstants'
+import Text from '../../screens/courseManager/addLesson/Text'
+import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
+import Image from '../lessonImage/Image'
+import Video from '../videoPlayer/Video'
 
-import Video from '../../../components/videoPlayer/Video'
-import Text from '../../courseManager/addLesson/Text'
-import Image from '../../../components/lessonImage/Image'
-import LessonTest from './LessonTest'
-
-const LessonDetail = ({ data, id, setIsPassed }) => {
-  const [lessonData, setLessonData] = useState([])
+const RichText = ({ data }) => {
+  const [newData, setNewData] = useState([])
   const textData = data?.rich_text?.texts?.map((text) => {
     return text
   })
@@ -25,21 +18,12 @@ const LessonDetail = ({ data, id, setIsPassed }) => {
   })
 
   useEffect(() => {
-    setLessonData([textData, videoData, photoData])
+    setNewData([textData, videoData, photoData])
   }, [data])
-  console.log(data);
-  const newData = lessonData.flat()
+  const flattenData = newData.flat()
   return (
-    <div className='lesson-description-wrapper'>
-      <h1>{data?.title}</h1>
-      <p>{data?.lessonDesc}</p>
-      {data?.coverImg && <div className='lesson-description-img-wrapper'>
-        <img
-          src={`${GET_COVERIMG}${data?.coverImg}`}
-          alt={`${data?.title}_img`}
-        />
-      </div>}
-      {newData
+    <>
+      {flattenData
         .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
         .map((data, index) => (
           <div key={index}>
@@ -62,9 +46,8 @@ const LessonDetail = ({ data, id, setIsPassed }) => {
             )}
           </div>
         ))}
-      <LessonTest title={data?.title} id={id} setIsPassed={setIsPassed} />
-    </div>
+    </>
   )
 }
 
-export default LessonDetail
+export default RichText
