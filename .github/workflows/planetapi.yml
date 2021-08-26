@@ -1,4 +1,4 @@
-name: build api image
+name: build planetapi image
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
         required: true
         default: 'force'
   repository_dispatch:
-    types: api
+    types: planetapi
 
 jobs:
 
@@ -36,7 +36,7 @@ jobs:
         id: set-flag
         run: |
           export DOCKER_CLI_EXPERIMENTAL=enabled
-          repo="earthowned/api-tags:${{ matrix.arch }}"
+          repo="earthowned/planetapi-tags:${{ matrix.arch }}"
           base="treehouses/pm2-tags:${{ matrix.arch }}"
           docker pull -q $base &>/dev/null
           docker pull -q $repo &>/dev/null
@@ -68,7 +68,7 @@ jobs:
         run: |
           export DOCKER_CLI_EXPERIMENTAL=enabled
           base="treehouses/pm2-tags:${{ matrix.arch }}"
-          repo="earthowned/api-tags"
+          repo="earthowned/planetapi-tags"
           dest="$repo:${{ matrix.arch }}"
           date="$(date +%Y%m%d%H%M)"
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
@@ -99,7 +99,7 @@ jobs:
         if: ${{ needs.images.outputs.build }}
         id: set-send
         run: |
-          repo="${{ matrix.registry }}/earthowned/api"
+          repo="${{ matrix.registry }}/earthowned/planetapi"
           date="$(date +%Y%m%d%H%M)"
           docker manifest create $repo:latest $repo-tags:amd64 $repo-tags:arm $repo-tags:arm64
           docker manifest create $repo:$date $repo-tags:amd64 $repo-tags:arm $repo-tags:arm64
@@ -119,6 +119,6 @@ jobs:
         run: |
           sudo npm install -g @treehouses/cli
           export gitter_channel="${{ secrets.CHANNEL }}"
-          echo "https://hub.docker.com/r/earthowned/api/tags"
-          echo "https://github.com/earthowned/planetfarms/pkgs/container/api"
-          treehouses feedback "new treehouses/node check https://hub.docker.com/r/earthowned/api/tags or https://github.com/earthowned/planetfarms/pkgs/container/api"
+          echo "https://hub.docker.com/r/earthowned/planetapi/tags"
+          echo "https://github.com/earthowned/planetfarms/pkgs/container/planetapi"
+          treehouses feedback "new treehouses/node check https://hub.docker.com/r/earthowned/planetapi/tags or https://github.com/earthowned/planetfarms/pkgs/container/planetapi"
