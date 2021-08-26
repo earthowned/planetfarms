@@ -61,15 +61,15 @@ export const createLesson =
           for (let i = 0; i < lessonData.length; i++) {
             if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
               console.log('video', i)
-              await addVideo({ data: lessonData[i], order:i + 1, richtextId, dispatch })
+              await addVideo({ data: lessonData[i], order: i + 1, richtextId, dispatch })
             }
             if (lessonData[i]?.lessonImg) {
               console.log('image', i)
-              await addImage({ data: lessonData[i], order:i + 1, richtextId, dispatch })
+              await addImage({ data: lessonData[i], order: i + 1, richtextId, dispatch })
             }
             if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
               console.log('text', i)
-              await addText({ data: lessonData[i], order:i + 1, richtextId, dispatch })
+              await addText({ data: lessonData[i], order: i + 1, richtextId, dispatch })
             }
           }
 
@@ -116,22 +116,22 @@ export const updateLesson =
 
         for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            if(lessonData[i].id) {
-              await editVideo({id: lessonData[i].id, data: lessonData[i], order: i+1, dispatch})
+            if (lessonData[i].id) {
+              await editVideo({ id: lessonData[i].id, data: lessonData[i], order: i + 1, dispatch })
             } else {
               await addVideo({ data: lessonData[i], richtextId, order: i + 1, dispatch })
             }
           }
           if (lessonData[i]?.lessonImg) {
-            if(lessonData[i].id) {
-              await putApi(dispatch, GET_LESSON_PHOTO + `/${lessonData[i].id}`, {order: i + 1});
+            if (lessonData[i].id) {
+              await putApi(dispatch, GET_LESSON_PHOTO + `/${lessonData[i].id}`, { order: i + 1 })
             } else {
               await addImage({ data: lessonData[i], richtextId, order: i + 1, dispatch })
             }
           }
           if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            if(lessonData[i].id) {
-              await putApi(dispatch, GET_LESSON_TEXT + `/${lessonData[i].id}`, {order: i + 1});
+            if (lessonData[i].id) {
+              await putApi(dispatch, GET_LESSON_TEXT + `/${lessonData[i].id}`, { order: i + 1 })
             } else {
               await addText({ data: lessonData[i], richtextId, order: i + 1, dispatch })
             }

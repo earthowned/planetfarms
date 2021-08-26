@@ -20,7 +20,7 @@ const EditContent = ({
   setOldData
 }) => {
   const [allLessonData, setAllLessonData] = useState([])
-   const [newData, setNewData] = useState([])
+  const [newData, setNewData] = useState([])
   const textData = data?.rich_text?.texts?.map((text) => {
     return text
   })
@@ -33,15 +33,14 @@ const EditContent = ({
 
   useEffect(() => {
     setNewData([textData, videoData, photoData])
-    setOldData([textData, videoData, photoData].flat().sort((a,b) => a.order - b.order))
+    setOldData([textData, videoData, photoData].flat().sort((a, b) => a.order - b.order))
   }, [data])
 
   const flattenData = newData.flat()
-  
+
   useEffect(() => {
     setAllLessonData(data, newLessonData)
   }, [data, newLessonData])
-
 
   function video (data) {
     if (typeof data?.videoResource === 'string') {
@@ -53,40 +52,40 @@ const EditContent = ({
 
   return (
     <>
-    {flattenData
-          .sort((a, b) => a.order - b.order)
-          .map((data, index) => (
-            <div key={index}>
-              <Text 
-                heading={data?.textHeading} 
-                desc={data?.textDescription} 
-                heading={data?.textHeading}
-                desc={data?.textDescription}
-                isEditable
-                setEditTextModel={setEditTextModel}
-                modelPopUp={editTextFunc}
-                id={data?.id || data?.itemId}
-                onRemove={data?.id ? removeTextItem : removeLocalData}
-              />
-              <Video
-                title={data?.videoTitle}
-                description={data?.videoDescription}
-                url={
+      {flattenData
+        .sort((a, b) => a.order - b.order)
+        .map((data, index) => (
+          <div key={index}>
+            <Text
+              heading={data?.textHeading}
+              desc={data?.textDescription}
+              heading={data?.textHeading}
+              desc={data?.textDescription}
+              isEditable
+              setEditTextModel={setEditTextModel}
+              modelPopUp={editTextFunc}
+              id={data?.id || data?.itemId}
+              onRemove={data?.id ? removeTextItem : removeLocalData}
+            />
+            <Video
+              title={data?.videoTitle}
+              description={data?.videoDescription}
+              url={
                   data?.videoLink === '' || data?.videoLink === undefined
                     ? video(data)
                     : data?.videoLink
                 }
-                thumbnail={
+              thumbnail={
                 typeof data?.videoCover === 'string'
                   ? `${VIDEO_COVER}${data?.videoCover}`
                   : data?.videoCover?.preview
                 }
-                setEditVideoModel={setEditVideoModel}
-                isEditable
-                id={data?.id || data?.itemId}
-                modelPopUp={editVideoFunc}
-                onRemove={data?.id ? removeVideo : removeLocalData}
-              />
+              setEditVideoModel={setEditVideoModel}
+              isEditable
+              id={data?.id || data?.itemId}
+              modelPopUp={editVideoFunc}
+              onRemove={data?.id ? removeVideo : removeLocalData}
+            />
             {data?.lessonImg && (
               <Image
                 src={
@@ -101,13 +100,12 @@ const EditContent = ({
                 isEditable
                 desc={data?.isImgDesc === true && data?.photoDescription}
                 onRemove={data?.id ? removePhoto : removeLocalData}
-              /> 
+              />
             )}
-            
+
           </div>
-        ))
-      }
-    {/* {
+        ))}
+      {/* {
       data && <>
         {
         data?.rich_text?.photos && data?.rich_text?.photos.map(item => {

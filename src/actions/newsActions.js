@@ -156,22 +156,22 @@ export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
     // adding new content
     for (let i = 0; i < newNews.length; i++) {
       if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-        if(newNews[i].id) {
-          await editVideo({id: newNews[i].id, data: newNews[i], order: i + 1, dispatch})
+        if (newNews[i].id) {
+          await editVideo({ id: newNews[i].id, data: newNews[i], order: i + 1, dispatch })
         } else {
           await addVideo({ data: newNews[i], richtextId, order: i + 1, dispatch })
         }
       }
       if (newNews[i]?.lessonImg) {
-        if(newNews[i].id) {
-          await putApi(dispatch, GET_LESSON_PHOTO + `/${newNews[i].id}`, {order: i + 1});
+        if (newNews[i].id) {
+          await putApi(dispatch, GET_LESSON_PHOTO + `/${newNews[i].id}`, { order: i + 1 })
         } else {
           await addImage({ data: newNews[i], richtextId, order: i + 1, dispatch })
         }
       }
       if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-        if(newNews[i].id) {
-          await putApi(dispatch, GET_LESSON_TEXT + `/${newNews[i].id}`, {order: i + 1});
+        if (newNews[i].id) {
+          await putApi(dispatch, GET_LESSON_TEXT + `/${newNews[i].id}`, { order: i + 1 })
         } else {
           await addText({ data: newNews[i], richtextId, order: i + 1, dispatch })
         }
