@@ -55,19 +55,18 @@ export const createLesson =
             lessonFormData,
             config
           )
-          console.log(lessonFormData)
           dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
           const lessonId = data?.data?.id
 
           for (let i = 0; i < lessonData.length; i++) {
             if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-              await addVideo({ data: lessonData[i], richtextId, dispatch })
+              await addVideo({ data: lessonData[i], order:i, richtextId, dispatch })
             }
             if (lessonData[i]?.lessonImg) {
-              await addImage({ data: lessonData[i], richtextId, dispatch })
+              await addImage({ data: lessonData[i], order:i, richtextId, dispatch })
             }
             if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-              await addText({ data: lessonData[i], richtextId, dispatch })
+              await addText({ data: lessonData[i], order:i, richtextId, dispatch })
             }
           }
 

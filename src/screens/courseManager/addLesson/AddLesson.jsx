@@ -62,15 +62,6 @@ const AddLesson = () => {
   const [textData, setTextData] = useState(null)
   const [courseId, setCourseId] = useState(state?.courseId)
 
-  // const { data } = useGetFetchData(
-  //   'get_course_by_id',
-  //   GET_COURSE + `/${courseId}`
-  // )
-
-  // useEffect(() => {
-  //   setFetchLesson(data?.data?.lessons)
-  // }, [data, courseId])
-
   const { pathname } = useLocation()
 
   // for edit
@@ -91,7 +82,8 @@ const AddLesson = () => {
 
   async function getSingleLesson () {
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/lessons/${lessonId}`)
-    setLessonSingleData(data?.lesson)
+    setLessonSingleData(data?.data)
+
   }
 
   async function editImageFunc (id) {

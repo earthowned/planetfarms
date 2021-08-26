@@ -84,13 +84,16 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
       dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
       for (let i = 0; i < newNews.length; i++) {
         if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-          await addVideo({ data: newNews[i], richtextId, dispatch })
+          console.log('video', i)
+          await addVideo({ data: newNews[i], richtextId, order: i, dispatch })
         }
         if (newNews[i]?.lessonImg) {
-          await addImage({ data: newNews[i], richtextId, dispatch })
+          console.log('image', i)
+          await addImage({ data: newNews[i], richtextId, order: i, dispatch })
         }
         if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-          await addText({ data: newNews[i], richtextId, dispatch })
+          console.log('text', i)
+          await addText({ data: newNews[i], richtextId, order: i, dispatch })
         }
       }
       dispatch({ type: NEWS_CLEAR, payload: data })

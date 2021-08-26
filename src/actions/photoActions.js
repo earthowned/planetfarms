@@ -14,12 +14,13 @@ import {
 } from '../constants/photoConstants'
 
 export const createLessonImg =
-  (lessonImg, photoDescription, isImgDesc, richtextId) => async (dispatch) => {
+  (lessonImg, photoDescription, isImgDesc, richtextId, order) => async (dispatch) => {
     const lessonImgData = new FormData()
     lessonImgData.append('img', lessonImg)
     lessonImgData.append('photoDescription', photoDescription)
     lessonImgData.append('isImgDesc', isImgDesc)
     lessonImgData.append('richtextId', richtextId)
+    lessonImgData.append('order', order)
     try {
       dispatch({ type: PHOTO_CREATE_REQUEST })
       const { data } = await postApi(dispatch, ADD_LESSON_PHOTO, lessonImgData, fileHeader)

@@ -17,7 +17,7 @@ import RichTextView from '../../../components/richTextView/RichTextView'
 const LessonPage = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const [isCreator, setIsCreator] = useState()
+  const [isCreator, setIsCreator] = useState(true)
   const [isEnrolled, setIsEnrolled] = useState(false)
   const [progressId, setProgressId] = useState()
   const [isPassed, setIsPassed] = useState(false)
@@ -44,7 +44,7 @@ const LessonPage = () => {
 
   // for next and prev button
   const getAllLessons = async () => {
-    const { data: { lessons } } = await getApi(dispatch, GET_COURSE_LESSONS + data?.data?.courseId)
+    const { data: { lessons } } = await getApi(dispatch, GET_COURSE_LESSONS + courseId)
     // getting the position of lesson
     const lessonPos = lessons.map(item => item.id).indexOf(data?.data?.id)
     if (lessonPos === 0) setStart(true)
@@ -56,8 +56,8 @@ const LessonPage = () => {
   }
 
   useEffect(() => {
-    if (data?.data?.courseId) {
-      setCourseId(data?.data?.courseId)
+  if (data?.data?.courseId) {
+    setCourseId(data?.data?.courseId)
     }
     if (data?.data?.lesson_progresses.length > 0) {
       setProgressId(data?.data?.lesson_progresses[0].id)
@@ -143,7 +143,6 @@ const LessonPage = () => {
   const creatorCompleteLesson = () => {
     history.push(`/admin/course/${courseId}`)
   }
-
   return (
     <>
       {isLoading ? (
@@ -151,18 +150,8 @@ const LessonPage = () => {
       ) : (
         <DashboardLayout title='Course page'>
           <BackButton location={isCreator ? `/admin/course/${courseId}` : `/course/${courseId}`} />
-          <div className='lesson-description-wrapper'>
-            <h1>{data?.title}</h1>
-            <p>{data?.lessonDesc}</p>
-            {data?.coverImg && <div className='lesson-description-img-wrapper'>
-              <img
-                src={`${GET_COVERIMG}${data?.coverImg}`}
-                alt={`${data?.title}_img`}
-              />
-            </div>}
-          <RichTextView data={data} />
-          <LessonTest id={id} />
-          </div>
+          <RichTextView data={data?.data} />
+          <LessonTest setIsPassed={setIsPassed} />
           {materialData.length !== 0 ? (
           <div className='admin-lesson-materials-container'>
             <h1>Materials</h1>

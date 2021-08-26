@@ -14,8 +14,8 @@ import {
 } from '../constants/textConstants'
 
 export const createText =
-  (textHeading, textDescription, richtextId) => async (dispatch) => {
-    const textData = { textHeading, textDescription, richtextId }
+  (textHeading, textDescription, richtextId, order) => async (dispatch) => {
+    const textData = { textHeading, textDescription, richtextId, order }
 
     try {
       dispatch({ type: TEXT_CREATE_REQUEST })

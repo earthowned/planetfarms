@@ -12,7 +12,6 @@ import {
   VIDEO_DELETE_SUCCESS,
   VIDEO_DELETE_FAIL
 } from '../constants/videoConstants'
-import axios from 'axios'
 
 export const createVideo = (
   videoCover,
@@ -20,7 +19,8 @@ export const createVideo = (
   videoDescription,
   videoLink,
   videoResource,
-  richtextId
+  richtextId,
+  order
 ) => async (dispatch) => {
   const videoData = new FormData()
   videoData.append('videoCover', videoCover)
@@ -29,6 +29,7 @@ export const createVideo = (
   videoData.append('videoLink', videoLink)
   videoData.append('videoResource', videoResource)
   videoData.append('richtextId', richtextId)
+  videoData.append('order', order)
   try {
     dispatch({ type: VIDEO_CREATE_REQUEST })
     const { data } = await postApi(dispatch, ADD_VIDEOS, videoData, fileHeader)

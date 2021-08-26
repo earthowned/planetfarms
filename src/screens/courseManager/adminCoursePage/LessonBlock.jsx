@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
@@ -7,8 +8,13 @@ import LessonActions from './LessonActions'
 
 const LessonBlock = ({ data, courseId, refetch }) => {
   const lessonData = data?.data?.lessons
+  // const [lessonData, setLessonData] = useState([])
   const history = useHistory()
-
+  // useEffect(() => {
+  //   if(data?.data?.lessons) {
+  //     setLessonData(data?.data?.lessons)
+  //   }
+  // }, [data, dispatch ])
   return (
     <div className='admin-course-page-container'>
       <div className='admin-lesson-lists-container'>
@@ -49,7 +55,7 @@ const LessonBlock = ({ data, courseId, refetch }) => {
                           </Link>
                         </div>
                       </div>
-                      <LessonActions id={lesson.id} courseId={courseId} />
+                      <LessonActions id={lesson.id} courseId={courseId} refetch={refetch} />
                     </div>
                   </React.Fragment>
                 )

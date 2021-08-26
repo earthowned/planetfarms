@@ -31,7 +31,6 @@ const AdminCoursePage = () => {
   const creator = data?.data?.creator
   const userId = userInfo.id
 
-  console.log('data: ', data)
   if (userId !== creator) {
     return <Redirect to='/courses' />
   }
@@ -56,7 +55,7 @@ const AdminCoursePage = () => {
           refetch={refetch}
         />
       )}
-      <LessonBlock courseId={courseId} data={data} />
+      <LessonBlock courseId={courseId} data={data} refetch={refetch} />
       <div className='study-course-wrapper'>
         <h3>Also study this course</h3>
         <p>

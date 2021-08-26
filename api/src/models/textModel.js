@@ -16,7 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       richtextId: {
         type: DataTypes.INTEGER,
         allowNull: false
-      }
+      },
+      order: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
     },
     { timestamps: true }
   )

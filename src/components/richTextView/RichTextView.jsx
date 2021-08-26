@@ -50,7 +50,7 @@ const RichTextView = ({ data, news }) => {
             </div>}
             </>}
         {flattenData
-          .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
+          .sort((a, b) => a.order - b.order)
           .map((data, index) => (
             <div key={index}>
               <Text heading={data?.textHeading} desc={data?.textDescription} />
