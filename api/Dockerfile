@@ -1,4 +1,4 @@
-FROM keymetrics/pm2:latest-alpine
+FROM treehouses/pm2:latest
 
 # Bundle APP files
 COPY src src
