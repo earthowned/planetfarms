@@ -14,9 +14,7 @@ import BackButton from '../../../components/backButton/BackButton'
 import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './AddLesson.scss'
-import ContentAdd from '../../../components/contentAdd/ContentAdd'
 import { getApi } from '../../../utils/apiFunc'
-import EditContent from '../../../components/editContent/EditContent'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
@@ -41,7 +39,6 @@ const AddLesson = () => {
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
   const [textModal, setTextModal] = useState(false)
-  const [testModal, setTestModal] = useState(false)
 
   const [lessonData, setLessonData] = useState([])
   const [lessonSingleData, setLessonSingleData] = useState([])
@@ -61,6 +58,7 @@ const AddLesson = () => {
   const [videoData, setVideoData] = useState(null)
   const [textData, setTextData] = useState(null)
   const [courseId, setCourseId] = useState(state?.courseId)
+  const [oldData, setOldData] = useState(null);
 
   const { pathname } = useLocation()
 
@@ -83,7 +81,6 @@ const AddLesson = () => {
   async function getSingleLesson () {
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/lessons/${lessonId}`)
     setLessonSingleData(data?.data)
-
   }
 
   async function editImageFunc (id) {
@@ -180,9 +177,9 @@ const AddLesson = () => {
         lessonId,
         lessonDesc,
         history,
-        lessonData,
+        [oldData, lessonData].flat(),
         material,
-        lessonSingleData.rich_text.id
+        lessonSingleData.rich_text.id,
       )
     )
   }
@@ -267,6 +264,7 @@ const AddLesson = () => {
           saveBtnName='save lesson'
           editBtnName='edit lesson'
           cancel={() => history.push(`/admin/course/${courseId}`)}
+          setOldData={setOldData}
         />
       </DashboardLayout>
     </>

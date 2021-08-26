@@ -63,6 +63,7 @@ const updatePhoto = async (req, res) => {
   } else {
     lessonImg = singlePhoto.dataValues.lessonImg
   }
+  console.log(req.body)
 
   const photo = await db.Photo.update({ ...req.body, lessonImg }, { where: { id: req.params.id } })
   res.status(201).json({

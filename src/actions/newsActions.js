@@ -22,9 +22,10 @@ import {
 } from '../constants/newsConstants'
 
 import { logout } from './userAction'
-import { addVideo } from '../screens/courseManager/addLesson/addVideo'
+import { addVideo, editVideo } from '../screens/courseManager/addLesson/addVideo'
 import { addImage } from '../screens/courseManager/addLesson/addImage'
 import { addText } from '../screens/courseManager/addLesson/addText'
+import { GET_LESSON_PHOTO, GET_LESSON_TEXT } from '../utils/urlConstants'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -84,15 +85,12 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
       dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
       for (let i = 0; i < newNews.length; i++) {
         if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-          console.log('video', i)
           await addVideo({ data: newNews[i], richtextId, order: i, dispatch })
         }
         if (newNews[i]?.lessonImg) {
-          console.log('image', i)
           await addImage({ data: newNews[i], richtextId, order: i, dispatch })
         }
         if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-          console.log('text', i)
           await addText({ data: newNews[i], richtextId, order: i, dispatch })
         }
       }
@@ -158,13 +156,25 @@ export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
     // adding new content
     for (let i = 0; i < newNews.length; i++) {
       if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-        await addVideo({ data: newNews[i], richtextId, dispatch })
+        if(newNews[i].id) {
+          await editVideo({id: newNews[i].id, data: newNews[i], order: i + 1, dispatch})
+        } else {
+          await addVideo({ data: newNews[i], richtextId, order: i + 1, dispatch })
+        }
       }
       if (newNews[i]?.lessonImg) {
-        await addImage({ data: newNews[i], richtextId, dispatch })
+        if(newNews[i].id) {
+          await putApi(dispatch, GET_LESSON_PHOTO + `/${newNews[i].id}`, {order: i + 1});
+        } else {
+          await addImage({ data: newNews[i], richtextId, order: i + 1, dispatch })
+        }
       }
       if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-        await addText({ data: newNews[i], richtextId, dispatch })
+        if(newNews[i].id) {
+          await putApi(dispatch, GET_LESSON_TEXT + `/${newNews[i].id}`, {order: i + 1});
+        } else {
+          await addText({ data: newNews[i], richtextId, order: i + 1, dispatch })
+        }
       }
     }
     dispatch({ type: NEWS_CLEAR, payload: data })

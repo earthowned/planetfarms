@@ -1,7 +1,7 @@
-import { Axios, ADD_LESSONS, GET_LESSONS } from '../utils/urlConstants'
-import { postApi } from '../utils/apiFunc'
+import { Axios, ADD_LESSONS, GET_LESSONS, GET_VIDEOS, GET_LESSON_PHOTO, GET_LESSON_TEXT } from '../utils/urlConstants'
+import { fileHeader, postApi, putApi } from '../utils/apiFunc'
 import { addText } from '../screens/courseManager/addLesson/addText'
-import { addVideo } from '../screens/courseManager/addLesson/addVideo'
+import { addVideo, editVideo } from '../screens/courseManager/addLesson/addVideo'
 import { addImage } from '../screens/courseManager/addLesson/addImage'
 import { addMaterial } from '../screens/courseManager/addLesson/addMaterial'
 
@@ -60,13 +60,16 @@ export const createLesson =
 
           for (let i = 0; i < lessonData.length; i++) {
             if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-              await addVideo({ data: lessonData[i], order:i, richtextId, dispatch })
+              console.log('video', i)
+              await addVideo({ data: lessonData[i], order:i + 1, richtextId, dispatch })
             }
             if (lessonData[i]?.lessonImg) {
-              await addImage({ data: lessonData[i], order:i, richtextId, dispatch })
+              console.log('image', i)
+              await addImage({ data: lessonData[i], order:i + 1, richtextId, dispatch })
             }
             if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-              await addText({ data: lessonData[i], order:i, richtextId, dispatch })
+              console.log('text', i)
+              await addText({ data: lessonData[i], order:i + 1, richtextId, dispatch })
             }
           }
 
@@ -113,13 +116,25 @@ export const updateLesson =
 
         for (let i = 0; i < lessonData.length; i++) {
           if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ data: lessonData[i], richtextId, dispatch })
+            if(lessonData[i].id) {
+              await editVideo({id: lessonData[i].id, data: lessonData[i], order: i+1, dispatch})
+            } else {
+              await addVideo({ data: lessonData[i], richtextId, order: i + 1, dispatch })
+            }
           }
           if (lessonData[i]?.lessonImg) {
-            await addImage({ data: lessonData[i], richtextId, dispatch })
+            if(lessonData[i].id) {
+              await putApi(dispatch, GET_LESSON_PHOTO + `/${lessonData[i].id}`, {order: i + 1});
+            } else {
+              await addImage({ data: lessonData[i], richtextId, order: i + 1, dispatch })
+            }
           }
           if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            await addText({ data: lessonData[i], richtextId, dispatch })
+            if(lessonData[i].id) {
+              await putApi(dispatch, GET_LESSON_TEXT + `/${lessonData[i].id}`, {order: i + 1});
+            } else {
+              await addText({ data: lessonData[i], richtextId, order: i + 1, dispatch })
+            }
           }
         }
 

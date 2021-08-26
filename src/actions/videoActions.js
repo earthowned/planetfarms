@@ -54,7 +54,7 @@ export const updateVideo =
     videoLink,
     videoResource,
     setEditVideoModel,
-    refetch
+    order
   ) =>
     async (dispatch) => {
       const videoData = new FormData()
@@ -63,6 +63,7 @@ export const updateVideo =
       videoData.append('videoDescription', videoDescription)
       videoData.append('videoLink', videoLink)
       videoData.append('videoResource', videoResource)
+      videoData.append('order', order)
       try {
         dispatch({ type: VIDEO_UPDATE_REQUEST })
         const { data } = await putApi(dispatch, GET_VIDEOS + `/${id}`, videoData, fileHeader)

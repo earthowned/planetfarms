@@ -46,6 +46,7 @@ const NewsAdd = () => {
   const [imageData, setImageData] = useState(null)
   const [videoData, setVideoData] = useState(null)
   const [textData, setTextData] = useState(null)
+  const [oldData, setOldData] = useState(null);
 
   const { id } = useParams()
 
@@ -97,7 +98,7 @@ const NewsAdd = () => {
           category: newsSingleData.category,
           newsCover
         },
-        newsData,
+        [oldData, newsData].flat(),
         newsSingleData.rich_text.id
       )
     )
@@ -236,6 +237,7 @@ const NewsAdd = () => {
           editBtnName='edit news'
           title={title}
           cancel={() => history.push('/news')}
+          setOldData={setOldData}
         />
       </DashboardLayout>
     </>

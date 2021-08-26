@@ -34,7 +34,8 @@ const RichTextEditor = ({
   editBtnName,
   saveBtnName,
   cancel,
-  title
+  title,
+  setOldData
 }) => {
   const { register, errors, handleSubmit } = useForm()
   return (
@@ -60,6 +61,7 @@ const RichTextEditor = ({
         setDeleteTextModal={deleteTextModalFunc}
         saveBtnName={saveBtnName}
         title={title}
+        setOldData={setOldData}
       />
       {showMaterial && <LessonMaterial
         material={material}
@@ -100,7 +102,8 @@ const AddContent = ({
   setDeleteImageModal,
   setDeleteVideoModal,
   saveBtnName,
-  title
+  title,
+  setOldData
 }) => {
   // const [title, setTitle] = useState('');
 
@@ -176,6 +179,7 @@ const AddContent = ({
           removeTextItem={setDeleteTextModal}
           removePhoto={setDeleteImageModal}
           removeVideo={setDeleteVideoModal}
+          setOldData={setOldData}
                     />
       }
       <ContentAdd data={formData} setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal} />
