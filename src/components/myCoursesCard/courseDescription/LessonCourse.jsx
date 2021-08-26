@@ -22,9 +22,10 @@ const LessonCourse = ({
   const seeLessonHandler = async (lessonId) => {
     history.push(`/lesson/${lessonId}`)
   }
-  return (
+  return lessonLen < 1 ? 
+    <></> :
     <div className='lessons-container'>
-      {data?.data?.isFree === false && lessonLen >= 1 ? (
+      {data?.data?.isFree === false ? (
         <div className='purchase-course-wrapper'>
           <div className='purchase-course'>
             <h4>
@@ -42,7 +43,6 @@ const LessonCourse = ({
         ''
       )}
       <h3>Lessons</h3>
-
       {
       isEnroll
         ? <>
@@ -71,6 +71,5 @@ const LessonCourse = ({
           ))
         }
     </div>
-  )
 }
 export default LessonCourse
