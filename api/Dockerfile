@@ -1,4 +1,5 @@
-FROM keymetrics/pm2:latest-alpine
+ARG BASE=
+FROM ${BASE}
 
 # Bundle APP files
 COPY src src
