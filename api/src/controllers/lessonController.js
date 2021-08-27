@@ -8,7 +8,7 @@ const getLessons = async (req, res) => {
   const lessons = await db.Lesson.findAndCountAll({
     // offset: (page - 1) * pageSize,
     // limit: pageSize,
-    order: [['order', 'ASC']],
+    order: [['createdAt', 'ASC']],
     include: [db.Material],
     where: { courseId: req.params.courseId }
   })
@@ -66,7 +66,8 @@ const addLesson = async (req, res) => {
   if (req.file) {
     coverImg = req.file.filename
   }
-  const lesson = await db.Lesson.create({ ...req.body, coverImg })
+  const {courseId, title, lessonDesc, richtextId} = req.body
+  const lesson = await db.Lesson.create({ courseId, title, lessonDesc, richtextId, coverImg })
   res.status(201).json({
     status: true,
     message: 'added new lesson successfully',

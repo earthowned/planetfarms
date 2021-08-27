@@ -8,13 +8,7 @@ import LessonActions from './LessonActions'
 
 const LessonBlock = ({ data, courseId, refetch }) => {
   const lessonData = data?.data?.lessons
-  // const [lessonData, setLessonData] = useState([])
   const history = useHistory()
-  // useEffect(() => {
-  //   if(data?.data?.lessons) {
-  //     setLessonData(data?.data?.lessons)
-  //   }
-  // }, [data, dispatch ])
   return (
     <div className='admin-course-page-container'>
       <div className='admin-lesson-lists-container'>
@@ -22,7 +16,6 @@ const LessonBlock = ({ data, courseId, refetch }) => {
           <>
             <h3 className='lessonHead'>Lessons</h3>
             {lessonData
-              .sort((a, b) => (a.order > b.order ? 1 : -1))
               .map((lesson) => {
                 return (
                   <React.Fragment key={lesson.id}>

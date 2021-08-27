@@ -37,12 +37,13 @@ export const createLessonImg =
   }
 
 export const updatePhoto =
-  (id, lessonImg, photoDescription, isImgDesc, setEditPhotoModel) =>
+  (id, lessonImg, photoDescription, isImgDesc, order, setEditPhotoModel) =>
     async (dispatch) => {
       const lessonImgData = new FormData()
       lessonImgData.append('img', lessonImg)
       lessonImgData.append('photoDescription', photoDescription)
       lessonImgData.append('isImgDesc', isImgDesc)
+      lessonImgData.append('order', order)
       try {
         dispatch({ type: PHOTO_UPDATE_REQUEST })
         const { data } = await putApi(dispatch, GET_LESSON_PHOTO + `/${id}`, lessonImgData, fileHeader)

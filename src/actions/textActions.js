@@ -38,9 +38,9 @@ export const createText =
   }
 
 export const updateText =
-  (textId, textHeading, textDescription, setEditTextModel) =>
+  (textId, textHeading, textDescription, order, setEditTextModel) =>
     async (dispatch) => {
-      const textData = { textHeading, textDescription }
+      const textData = { textHeading, textDescription, order }
 
       try {
         dispatch({ type: TEXT_UPDATE_REQUEST })

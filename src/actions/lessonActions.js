@@ -17,13 +17,13 @@ import {
   LESSON_DELETE_FAIL
 } from '../constants/lessonConstants'
 import axios from 'axios'
+import { createRichText, updateRichText } from '../utils/createUpdateRichText'
 
 export const createLesson =
   ({
     courseId,
     title,
     lessonDesc,
-    order,
     coverImg,
     lessonData,
     material,
@@ -35,7 +35,7 @@ export const createLesson =
       lessonFormData.append('title', title)
       lessonFormData.append('lessonDesc', lessonDesc)
       lessonFormData.append('coverImg', coverImg)
-      lessonFormData.append('order', order)
+      // lessonFormData.append('order', order)
       try {
         dispatch({ type: LESSON_CREATE_REQUEST })
         const config = {
@@ -57,22 +57,8 @@ export const createLesson =
           )
           dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
           const lessonId = data?.data?.id
-
-          for (let i = 0; i < lessonData.length; i++) {
-            if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-              console.log('video', i)
-              await addVideo({ data: lessonData[i], order:i + 1, richtextId, dispatch })
-            }
-            if (lessonData[i]?.lessonImg) {
-              console.log('image', i)
-              await addImage({ data: lessonData[i], order:i + 1, richtextId, dispatch })
-            }
-            if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-              console.log('text', i)
-              await addText({ data: lessonData[i], order:i + 1, richtextId, dispatch })
-            }
-          }
-
+          //creating rich text
+          await createRichText(lessonData, richtextId, dispatch)
           for (let i = 0; i < material.length; i++) {
             if (material[i].mData) {
               await addMaterial({ material: material[i], lessonId, dispatch })
@@ -113,31 +99,8 @@ export const updateLesson =
           config
         )
         dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
-
-        for (let i = 0; i < lessonData.length; i++) {
-          if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            if(lessonData[i].id) {
-              await editVideo({id: lessonData[i].id, data: lessonData[i], order: i+1, dispatch})
-            } else {
-              await addVideo({ data: lessonData[i], richtextId, order: i + 1, dispatch })
-            }
-          }
-          if (lessonData[i]?.lessonImg) {
-            if(lessonData[i].id) {
-              await putApi(dispatch, GET_LESSON_PHOTO + `/${lessonData[i].id}`, {order: i + 1});
-            } else {
-              await addImage({ data: lessonData[i], richtextId, order: i + 1, dispatch })
-            }
-          }
-          if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            if(lessonData[i].id) {
-              await putApi(dispatch, GET_LESSON_TEXT + `/${lessonData[i].id}`, {order: i + 1});
-            } else {
-              await addText({ data: lessonData[i], richtextId, order: i + 1, dispatch })
-            }
-          }
-        }
-
+        // updating rich text
+        await updateRichText(lessonData, richtextId, dispatch);
         for (let i = 0; i < material.length; i++) {
           if (material[i].mData) {
             await addMaterial({ material: material[i], lessonId, dispatch })

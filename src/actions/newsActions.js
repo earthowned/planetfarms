@@ -23,9 +23,10 @@ import {
 
 import { logout } from './userAction'
 import { addVideo, editVideo } from '../screens/courseManager/addLesson/addVideo'
-import { addImage } from '../screens/courseManager/addLesson/addImage'
-import { addText } from '../screens/courseManager/addLesson/addText'
+import { addImage, editImage } from '../screens/courseManager/addLesson/addImage'
+import { addText, editText } from '../screens/courseManager/addLesson/addText'
 import { GET_LESSON_PHOTO, GET_LESSON_TEXT } from '../utils/urlConstants'
+import { createRichText, updateRichText } from '../utils/createUpdateRichText'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -83,17 +84,8 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
       formData.append('richtextId', richtextId)
       const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, fileHeader)
       dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
-      for (let i = 0; i < newNews.length; i++) {
-        if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-          await addVideo({ data: newNews[i], richtextId, order: i, dispatch })
-        }
-        if (newNews[i]?.lessonImg) {
-          await addImage({ data: newNews[i], richtextId, order: i, dispatch })
-        }
-        if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-          await addText({ data: newNews[i], richtextId, order: i, dispatch })
-        }
-      }
+      //creating rich text
+      await createRichText(newNews.splice(1), richtextId, dispatch)
       dispatch({ type: NEWS_CLEAR, payload: data })
       document.location.href = '/news'
     }
@@ -153,30 +145,8 @@ export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
     dispatch({ type: NEWS_UPDATE_REQUEST })
     const data = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${news.id}/community/${currentCommunity?.id}`, formData)
     dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data })
-    // adding new content
-    for (let i = 0; i < newNews.length; i++) {
-      if (newNews[i]?.videoLink || newNews[i]?.videoResource) {
-        if(newNews[i].id) {
-          await editVideo({id: newNews[i].id, data: newNews[i], order: i + 1, dispatch})
-        } else {
-          await addVideo({ data: newNews[i], richtextId, order: i + 1, dispatch })
-        }
-      }
-      if (newNews[i]?.lessonImg) {
-        if(newNews[i].id) {
-          await putApi(dispatch, GET_LESSON_PHOTO + `/${newNews[i].id}`, {order: i + 1});
-        } else {
-          await addImage({ data: newNews[i], richtextId, order: i + 1, dispatch })
-        }
-      }
-      if (newNews[i]?.textHeading || newNews[i]?.textDescription) {
-        if(newNews[i].id) {
-          await putApi(dispatch, GET_LESSON_TEXT + `/${newNews[i].id}`, {order: i + 1});
-        } else {
-          await addText({ data: newNews[i], richtextId, order: i + 1, dispatch })
-        }
-      }
-    }
+    // updating rich text
+    await updateRichText(newNews, richtextId, dispatch);
     dispatch({ type: NEWS_CLEAR, payload: data })
     document.location.href = '/news'
   } catch (error) {
