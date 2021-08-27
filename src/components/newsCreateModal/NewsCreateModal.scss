@@ -161,8 +161,10 @@
 .videoUploadBtn::-webkit-file-upload-button {
   display: none;
 }
+
 .videoEditBtn {
   width: 100% !important;
+
   h6 {
     font-size: 0.8em !important;
     white-space: nowrap;
@@ -230,57 +232,57 @@
           height: 100%;
         }
 
-      .block {
-        .collection-modal-header,
-        .drag-drop-container,
-        .input-container {
-          margin-bottom: 1.5em;
+        .block {
+          .collection-modal-header,
+          .drag-drop-container,
+          .input-container {
+            margin-bottom: 1.5em;
+          } 
         }
-      }
 
-      .video-row-3 {
-        input {
-          border: 1px solid var(--dropdowns);
-          outline: none;
-          background-color: var(--cards);
-          color: #ffff;
-          font-size: 1.05em;
-          font-family: inherit;
-          width: 50%;
+        .video-row-3 {
+          input {
+            border: 1px solid var(--dropdowns);
+            outline: none;
+            background-color: var(--cards);
+            color: #ffff;
+            font-size: 1.05em;
+            font-family: inherit;
+            width: 50%;
 
-          &::-webkit-input-placeholder {
-            color: var(--primary-grey);
+            &::-webkit-input-placeholder {
+              color: var(--primary-grey);
+            }
+
+            &:focus {
+              border-color: var(--primary-color);
+            }
+
+            @media (max-width: 768px) {
+              margin: 0;
+            }
           }
 
-          &:focus {
-            border-color: var(--primary-color);
+          .dragDropText {
+            color: #ffff;
+            height: auto;
           }
 
           @media (max-width: 768px) {
-            margin: 0;
-          }
-        }
+            span {
+              margin: 0.8em 0;
+            }
 
-        .dragDropText {
-          color: #ffff;
-          height: auto;
-        }
-
-        @media (max-width: 768px) {
-          span {
-            margin: 0.8em 0;
-          }
-
-          .videoUploadBtn {
-            width: 100% !important;
-
-            .drag-drop {
+            .videoUploadBtn {
               width: 100% !important;
+
+              .drag-drop {
+                width: 100% !important;
+              }
             }
           }
         }
       }
-    }
 
       .input-container {
         .block {
