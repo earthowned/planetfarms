@@ -33,7 +33,7 @@ jobs:
           docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
           docker login docker.io -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
       - name: docker image
-        if: ${{ github.event.inputs.buildtype  == 'force' }}
+        # if: ${{ github.event.inputs.buildtype  == 'force' }}
         id: set-build
         run: |
           export DOCKER_CLI_EXPERIMENTAL=enabled
