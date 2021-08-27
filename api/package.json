@@ -29,7 +29,7 @@
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
-    "sharp": "^0.29.0",
+    "sharp": "^0.25.4",
     "shortid": "^2.2.16"
   },
   "devDependencies": {
