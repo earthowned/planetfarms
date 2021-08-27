@@ -8,7 +8,7 @@ COPY pm2.json .
 COPY .sequelizerc .
 COPY .env.example .env
 
-RUN apk --update add --no-cache python3 make gcc g++
+RUN apk --update add --no-cache python3 make gcc g++ vips-dev
 # Install app dependencies
 ENV NPM_CONFIG_LOGLEVEL warn
 # RUN npm install --production
