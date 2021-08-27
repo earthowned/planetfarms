@@ -57,7 +57,7 @@ export const createLesson =
           )
           dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
           const lessonId = data?.data?.id
-          //creating rich text
+          // creating rich text
           await createRichText(lessonData, richtextId, dispatch)
           for (let i = 0; i < material.length; i++) {
             if (material[i].mData) {
@@ -100,7 +100,7 @@ export const updateLesson =
         )
         dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
         // updating rich text
-        await updateRichText(lessonData, richtextId, dispatch);
+        await updateRichText(lessonData, richtextId, dispatch)
         for (let i = 0; i < material.length; i++) {
           if (material[i].mData) {
             await addMaterial({ material: material[i], lessonId, dispatch })

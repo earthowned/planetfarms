@@ -21,11 +21,13 @@
       text-align: center;
       line-height: 25px;
     }
+  
     .drag-drop-icon-container .dragDropText {
       width: auto;
       margin: 0 1em;
     }
   }
+
   .autoWidth {
     width: 12em;
   }
@@ -38,7 +40,6 @@
   height: 48px;
   width: 100%;
   font-size: 40px;
-  /* margin-bottom: 40px; */
   color: var(--primary-white);
 
   &::first-letter {
@@ -56,6 +57,7 @@
   width: 100%;
   height: 452px;
 }
+
 .editimg {
   z-index: 2;
   position: absolute;
@@ -95,6 +97,10 @@
   flex-direction: column;
   align-items: center;
 }
+
+.addMaterial img {
+    display: none;
+  }
 
 .admin-lesson-create-btn-wrapper button img {
   margin-bottom: 8px;
@@ -142,6 +148,7 @@
       padding-right: 3em;
     }
   }
+
   @media (max-width: 730px) {
     flex-direction: column;
     height: auto;
@@ -176,9 +183,7 @@
   @media only screen and (max-width: 660px) {
     width: 100%;
   }
-  img {
-    display: none;
-  }
+
   .drag-drop-icon-container {
     width: 100%;
     height: 100%;
@@ -186,6 +191,7 @@
     color: var(--primary-white);
     font-size: 1em;
   }
+
   .drag-drop {
     position: absolute;
     top: 0;
@@ -214,12 +220,12 @@
     padding: 24px;
   }
 
-  .admin-lesson-create-btn-wrapper button:not(:last-child) {
-    margin-right: 14px;
-  }
-
   .admin-lesson-create-btn-wrapper button {
     margin-bottom: 14px;
+  }
+
+  .admin-lesson-create-btn-wrapper button:not(:last-child) {
+    margin-right: 14px;
   }
 
   #lesson-save-btn {
@@ -275,9 +281,11 @@
     font-size: 26px;
   }
 }
+
 .test {
   color: #fff;
 }
+
 .errorMsg {
   margin-top: 1.5em;
 
@@ -295,12 +303,12 @@
   font-size: 1.05em;
   font-family: inherit;
 
-  &:focus {
-    border-color: var(--primary-color);
-  }
-
   &::-webkit-input-placeholder {
     color: var(--primary-grey);
+  }
+
+  &:focus {
+    border-color: var(--primary-color);
   }
 }
 

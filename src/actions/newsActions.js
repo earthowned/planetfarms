@@ -84,7 +84,7 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
       formData.append('richtextId', richtextId)
       const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, fileHeader)
       dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
-      //creating rich text
+      // creating rich text
       await createRichText(newNews.splice(1), richtextId, dispatch)
       dispatch({ type: NEWS_CLEAR, payload: data })
       document.location.href = '/news'
@@ -146,7 +146,7 @@ export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
     const data = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${news.id}/community/${currentCommunity?.id}`, formData)
     dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data })
     // updating rich text
-    await updateRichText(newNews, richtextId, dispatch);
+    await updateRichText(newNews, richtextId, dispatch)
     dispatch({ type: NEWS_CLEAR, payload: data })
     document.location.href = '/news'
   } catch (error) {

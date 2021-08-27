@@ -66,7 +66,7 @@ const addLesson = async (req, res) => {
   if (req.file) {
     coverImg = req.file.filename
   }
-  const {courseId, title, lessonDesc, richtextId} = req.body
+  const { courseId, title, lessonDesc, richtextId } = req.body
   const lesson = await db.Lesson.create({ courseId, title, lessonDesc, richtextId, coverImg })
   res.status(201).json({
     status: true,
