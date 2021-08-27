@@ -227,6 +227,12 @@
         }
       }
 
+      &__video {
+        .block {
+          height: 100%;
+        }
+      }
+
       .input-container {
         .block {
           border: 1px solid var(--dropdowns);
@@ -261,13 +267,11 @@
 
       &__video {
         .block {
-          height: 100%;
-
           .collection-modal-header,
           .drag-drop-container,
           .input-container {
             margin-bottom: 1.5em;
-          } 
+          }
         }
 
         .video-row-3 {
