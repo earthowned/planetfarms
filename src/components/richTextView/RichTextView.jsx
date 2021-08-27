@@ -62,17 +62,17 @@ const RichTextView = ({ data, news }) => {
                   ? `${GET_VIDEO}${data?.videoResource}`
                   : data?.videoLink
               }
-              thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
-            />
-            {data?.lessonImg && (
-              <Image
-                src={`${LESSON_IMG}${data?.lessonImg}`}
-                desc={data?.isImgDesc === true && data?.photoDescription}
+                thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
               />
-            )}
-          </div>
-        ))}
-        </div>
+              {data?.lessonImg && (
+                <Image
+                  src={`${LESSON_IMG}${data?.lessonImg}`}
+                  desc={data?.isImgDesc === true && data?.photoDescription}
+                />
+              )}
+            </div>
+          ))}
+      </div>
     </>
   )
 }

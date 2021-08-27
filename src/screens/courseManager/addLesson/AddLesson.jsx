@@ -58,7 +58,7 @@ const AddLesson = () => {
   const [videoData, setVideoData] = useState(null)
   const [textData, setTextData] = useState(null)
   const [courseId, setCourseId] = useState(state?.courseId)
-  const [oldData, setOldData] = useState(null);
+  const [oldData, setOldData] = useState(null)
 
   const { pathname } = useLocation()
 
@@ -179,7 +179,7 @@ const AddLesson = () => {
         history,
         [oldData, lessonData].flat(),
         material,
-        lessonSingleData.rich_text.id,
+        lessonSingleData.rich_text.id
       )
     )
   }

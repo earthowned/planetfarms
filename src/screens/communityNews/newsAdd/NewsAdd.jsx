@@ -46,7 +46,7 @@ const NewsAdd = () => {
   const [imageData, setImageData] = useState(null)
   const [videoData, setVideoData] = useState(null)
   const [textData, setTextData] = useState(null)
-  const [oldData, setOldData] = useState(null);
+  const [oldData, setOldData] = useState(null)
 
   const { id } = useParams()
 

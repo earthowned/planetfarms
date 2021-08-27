@@ -761,7 +761,7 @@
 }
 
 /* lessons bar css */
-.lesson-bar {
+.no-lesson-bar, .lesson-bar {
   width: 60%;
   display: flex;
   justify-content: space-between;
@@ -785,11 +785,14 @@
 
 .lesson-progress-indicator {
   height: 1px;
-  background: var(--primary-color);
   position: absolute;
   z-index: -1;
   top: 20px;
   left: 4%;
+}
+
+.lesson-bar .lesson-progress-indicator {
+  background: var(--primary-color);
 }
 
 .lesson-progress-content {
@@ -842,7 +845,7 @@
 }
 
 @media screen and (max-width: 1400px) {
-  .lesson-bar {
+  .no-lesson-bar, .lesson-bar {
     width: 80%;
   }
 }
@@ -896,7 +899,7 @@
     margin-bottom: 20px;
   }
 
-  .lesson-bar {
+  .no-lesson-bar, .lesson-bar {
     width: 100%;
   }
 
@@ -925,7 +928,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .lesson-bar {
+  .no-lesson-bar, .lesson-bar {
     flex-direction: column;
     align-items: flex-start;
   }
