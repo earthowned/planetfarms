@@ -7,12 +7,6 @@ on:
       - main
       - earthownedapi
       - earthownedapi-remove-compare
-  workflow_dispatch:
-    inputs:
-      buildtype:
-        description: 'Build by "force" or on "change"'
-        required: true
-        default: 'force'
   repository_dispatch:
     types: planetapi
 
@@ -33,7 +27,6 @@ jobs:
           docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
           docker login docker.io -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
       - name: docker image
-        # if: ${{ github.event.inputs.buildtype  == 'force' }}
         id: set-build
         run: |
           export DOCKER_CLI_EXPERIMENTAL=enabled
