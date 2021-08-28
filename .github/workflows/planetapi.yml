@@ -33,13 +33,13 @@ jobs:
           base="treehouses/pm2-tags:${{ matrix.arch }}"
           repo="earthowned/planetapi-tags"
           dest="$repo:${{ matrix.arch }}"
-          date="$(date +%Y%m%d%H%M)"
+          version=0.0.1
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           cd api
           docker build -t ghcr.io/$dest --build-arg BASE=$base .
           docker tag ghcr.io/$dest docker.io/$dest
-          docker tag ghcr.io/$dest ghcr.io/$dest-$date
-          docker tag docker.io/$dest docker.io/$dest-$date
+          docker tag ghcr.io/$dest ghcr.io/$dest-$version
+          docker tag docker.io/$dest docker.io/$dest-$version
           docker push --all-tags ghcr.io/$repo
           docker push --all-tags docker.io/$repo
           docker images
@@ -64,14 +64,14 @@ jobs:
         id: set-send
         run: |
           repo="${{ matrix.registry }}/earthowned/planetapi"
-          date="$(date +%Y%m%d%H%M)"
+          version=0.0.1
           docker manifest create $repo:latest $repo-tags:amd64 $repo-tags:arm $repo-tags:arm64
-          docker manifest create $repo:$date $repo-tags:amd64 $repo-tags:arm $repo-tags:arm64
+          docker manifest create $repo:$version $repo-tags:amd64 $repo-tags:arm $repo-tags:arm64
           docker manifest annotate $repo:latest $repo-tags:arm --os linux --arch arm
-          docker manifest annotate $repo:$date $repo-tags:arm --os linux --arch arm
+          docker manifest annotate $repo:$version $repo-tags:arm --os linux --arch arm
           docker manifest inspect $repo:latest
           docker manifest push $repo:latest
-          docker manifest push $repo:$date
+          docker manifest push $repo:$version
           echo "::set-output name=send::true"
 
   message:
