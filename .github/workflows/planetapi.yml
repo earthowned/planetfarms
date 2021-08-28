@@ -34,12 +34,16 @@ jobs:
           repo="earthowned/planetapi-tags"
           dest="$repo:${{ matrix.arch }}"
           version=0.0.1
+          branch="${GITHUB_REF#refs/heads/}"
+          date="$(date +%Y%m%d%H%M)"
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           cd api
           docker build -t ghcr.io/$dest --build-arg BASE=$base .
           docker tag ghcr.io/$dest docker.io/$dest
           docker tag ghcr.io/$dest ghcr.io/$dest-$version
+          docker tag ghcr.io/$dest ghcr.io/$dest-$branch-$date
           docker tag docker.io/$dest docker.io/$dest-$version
+          docker tag docker.io/$dest ghcr.io/$dest-$branch-$date
           docker push --all-tags ghcr.io/$repo
           docker push --all-tags docker.io/$repo
           docker images
