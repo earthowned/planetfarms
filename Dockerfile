@@ -4,6 +4,7 @@ RUN apk --update add --no-cache git
 # Bundle APP files
 RUN git clone https://github.com/earthowned/planetfarms  
 RUN cd planetfarms && \
+	npm install && \
 	npm run build
 
 ARG BASE=
