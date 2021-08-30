@@ -1,9 +1,12 @@
 FROM treehouses/node-tags:amd64 as builder
 
+RUN apk --update add --no-cache git
 # Bundle APP files
-RUN npm run build
+RUN git clone https://github.com/earthowned/planetfarms  
+RUN cd planetfarms && \
+	npm run build
 
 ARG BASE=
 FROM ${BASE}
 
-COPY --from=builder ./build /usr/share/nginx/html
+COPY --from=builder ./planetfarms/build /usr/share/nginx/html
