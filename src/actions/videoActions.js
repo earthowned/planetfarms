@@ -12,24 +12,12 @@ import {
   VIDEO_DELETE_SUCCESS,
   VIDEO_DELETE_FAIL
 } from '../constants/videoConstants'
+import { getFormData } from '../utils/getFormData'
 
 export const createVideo = (
-  videoCover,
-  videoTitle,
-  videoDescription,
-  videoLink,
-  videoResource,
-  richtextId,
-  order
+  vData
 ) => async (dispatch) => {
-  const videoData = new FormData()
-  videoData.append('videoCover', videoCover)
-  videoData.append('videoTitle', videoTitle)
-  videoData.append('videoDescription', videoDescription)
-  videoData.append('videoLink', videoLink)
-  videoData.append('videoResource', videoResource)
-  videoData.append('richtextId', richtextId)
-  videoData.append('order', order)
+  const videoData = getFormData(vData)
   try {
     dispatch({ type: VIDEO_CREATE_REQUEST })
     const { data } = await postApi(dispatch, ADD_VIDEOS, videoData, fileHeader)
@@ -46,24 +34,13 @@ export const createVideo = (
 }
 
 export const updateVideo =
-  (
+  ({
     id,
-    videoCover,
-    videoTitle,
-    videoDescription,
-    videoLink,
-    videoResource,
-    setEditVideoModel,
-    order
-  ) =>
+    vData,
+    setEditVideoModel
+  }) =>
     async (dispatch) => {
-      const videoData = new FormData()
-      videoData.append('videoCover', videoCover)
-      videoData.append('videoTitle', videoTitle)
-      videoData.append('videoDescription', videoDescription)
-      videoData.append('videoLink', videoLink)
-      videoData.append('videoResource', videoResource)
-      videoData.append('order', order)
+      const videoData = getFormData(vData)
       try {
         dispatch({ type: VIDEO_UPDATE_REQUEST })
         const { data } = await putApi(dispatch, GET_VIDEOS + `/${id}`, videoData, fileHeader)

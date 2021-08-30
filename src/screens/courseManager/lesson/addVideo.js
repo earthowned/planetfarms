@@ -1,13 +1,9 @@
 import { createVideo, updateVideo } from '../../../actions/videoActions'
 
 export const addVideo = function ({ data, richtextId, order, dispatch }) {
-  const videoCover = data.videoCover
-  const videoTitle = data.videoTitle
-  const videoDescription = data.videoDescription
-  const videoLink = data.videoLink
-  const videoResource = data.videoResource
+  const { videoCover, videoTitle, videoDescription, videoLink, videoResource } = data
   return dispatch(
-    createVideo(
+    createVideo({
       videoCover,
       videoTitle,
       videoDescription,
@@ -15,26 +11,27 @@ export const addVideo = function ({ data, richtextId, order, dispatch }) {
       videoResource,
       richtextId,
       order
+    }
     )
   )
 }
 
 export const editVideo = function ({ data, order, setEditVideoModel, id, dispatch }) {
-  const videoCover = data.videoCover
-  const videoTitle = data.videoTitle
-  const videoDescription = data.videoDescription
-  const videoLink = data.videoLink
-  const videoResource = data.videoResource
+  const { videoCover, videoTitle, videoDescription, videoLink, videoResource } = data
   return dispatch(
     updateVideo(
-      id,
-      videoCover,
-      videoTitle,
-      videoDescription,
-      videoLink,
-      videoResource,
-      setEditVideoModel,
-      order
+      {
+        vData: {
+          videoCover,
+          videoTitle,
+          videoDescription,
+          videoLink,
+          videoResource,
+          order
+        },
+        id,
+        setEditVideoModel
+      }
     )
   )
 }
