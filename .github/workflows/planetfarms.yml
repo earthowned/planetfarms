@@ -1,0 +1,90 @@
+name: build planetfarms image
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - earthownedapi-remove-compare
+  repository_dispatch:
+    types: planetfarms
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.set-build.outputs.build }}
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [amd64, arm, arm64]
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+      - name: container registries
+        run: |
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+          docker login docker.io -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
+      - name: docker image
+        id: set-build
+        run: |
+          export DOCKER_CLI_EXPERIMENTAL=enabled
+          base="treehouses/nginx-tags:${{ matrix.arch }}"
+          repo="earthowned/planetfarms-tags"
+          dest="$repo:${{ matrix.arch }}"
+          version=0.0.1
+          branch="${GITHUB_REF#refs/heads/}"
+          date="$(date +%Y%m%d%H%M)"
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker build -t ghcr.io/$dest --build-arg BASE=$base .
+          docker tag ghcr.io/$dest docker.io/$dest
+          docker tag ghcr.io/$dest ghcr.io/$dest-$version
+          docker tag ghcr.io/$dest ghcr.io/$dest-$branch-$date
+          docker tag docker.io/$dest docker.io/$dest-$version
+          docker tag docker.io/$dest ghcr.io/$dest-$branch-$date
+          docker push --all-tags ghcr.io/$repo
+          docker push --all-tags docker.io/$repo
+          docker images
+          echo "::set-output name=build::true"
+
+  manifests:
+    needs: images
+    strategy:
+      fail-fast: false
+      matrix:
+        registry: [docker.io, ghcr.io]
+    runs-on: ubuntu-latest
+    outputs:
+      send: ${{ steps.set-send.outputs.send }}
+    steps:
+      - name: container registries
+        run: |
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+          docker login docker.io -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
+      - name: create manifests
+        if: ${{ needs.images.outputs.build }}
+        id: set-send
+        run: |
+          repo="${{ matrix.registry }}/earthowned/planetfarms"
+          version=0.0.1
+          docker manifest create $repo:latest $repo-tags:amd64 $repo-tags:arm $repo-tags:arm64
+          docker manifest create $repo:$version $repo-tags:amd64 $repo-tags:arm $repo-tags:arm64
+          docker manifest annotate $repo:latest $repo-tags:arm --os linux --arch arm
+          docker manifest annotate $repo:$version $repo-tags:arm --os linux --arch arm
+          docker manifest inspect $repo:latest
+          docker manifest push $repo:latest
+          docker manifest push $repo:$version
+          echo "::set-output name=send::true"
+
+  message:
+    needs: manifests
+    runs-on: ubuntu-latest
+    steps:
+      - name: message chat of new image
+        if: ${{ needs.manifests.outputs.send }}
+        run: |
+          sudo npm install -g @treehouses/cli
+          export gitter_channel="${{ secrets.CHANNEL }}"
+          echo "https://hub.docker.com/r/earthowned/planetfarms/tags"
+          echo "https://github.com/earthowned/planetfarms/pkgs/container/planetfarms"
+          treehouses feedback "new treehouses/node check https://hub.docker.com/r/earthowned/planetfarms/tags or https://github.com/earthowned/planetfarms/pkgs/container/planetfarms"
