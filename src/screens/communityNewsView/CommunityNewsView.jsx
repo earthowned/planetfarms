@@ -5,10 +5,6 @@ import BackButton from '../../components/backButton/BackButton'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { getApi } from '../../utils/apiFunc'
 import { useDispatch } from 'react-redux'
-import Text from '../courseManager/lesson/Text'
-import Video from '../../components/videoPlayer/Video'
-import { GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
-import Image from '../../components/lessonImage/Image'
 import RichTextView from '../../components/richTextView/RichTextView'
 
 function CommunityNewsViewPage () {
@@ -52,62 +48,6 @@ function CommunityNewsViewPage () {
           </div>
         </div>
       </DashboardLayout>
-    </>
-  )
-}
-
-const NewsSingleView = ({ news }) => {
-  return (
-    <>
-      <h1 className='news-view-title'>{news?.title}</h1>
-      <div className='title-time'>
-        <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-          {news?.createdAt && new Date(news?.createdAt).toDateString()}
-        </div>
-        <div className='due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-          {news?.readTime}
-        </div>
-      </div>
-      <Image src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${news?._attachments}`} />
-      {
-        news?.rich_text && news?.rich_text?.photos.map(item => {
-          return (
-            <Image
-              src={`${LESSON_IMG}${item?.lessonImg}`}
-              desc={
-            item?.isImgDesc === true && item?.photoDescription
-          }
-            />
-          )
-        })
-      }
-      {
-        news?.rich_text && news?.rich_text?.texts.map(item => {
-          return (
-            <Text
-              heading={item?.textHeading}
-              desc={item?.textDescription}
-            />
-          )
-        })
-      }
-
-      {
-        news?.rich_text && news?.rich_text?.videos.map(item => {
-          return (
-            <Video
-              title={item?.videoTitle}
-              description={item?.videoDescription}
-              url={
-              item?.videoLink === 'undefined'
-                ? `${GET_VIDEO}${item?.videoResource}`
-                : item?.videoLink
-              }
-              thumbnail={`${VIDEO_COVER}${item?.videoCover}`}
-            />
-          )
-        })
-      }
     </>
   )
 }
