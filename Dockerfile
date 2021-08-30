@@ -1,4 +1,9 @@
-FROM nginx:alpine
+FROM treehouses/node-tags:amd64 as builder
 
 # Bundle APP files
-COPY ./build /usr/share/nginx/html
+RUN npm run build
+
+ARG BASE=
+FROM ${BASE}
+
+COPY --from=builder ./build /usr/share/nginx/html
