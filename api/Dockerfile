@@ -22,5 +22,6 @@ COPY pm2.json .
 COPY .sequelizerc .
 COPY .env.example .env
 COPY --from=builder node_modules node_modules
+RUN apk --update add --no-cache vips-dev
 
 CMD [ "pm2-runtime", "start", "pm2.json" ]
