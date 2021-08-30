@@ -1,19 +1,15 @@
 import { createLessonImg, updatePhoto } from '../../../actions/photoActions'
 
 export const addImage = function ({ data, richtextId, order, dispatch }) {
-  const lessonImg = data.lessonImg
-  const photoDescription = data.photoDescription
-  const isImgDesc = data.isImgDesc
+  const { lessonImg, photoDescription, isImgDesc } = data
   return dispatch(
-    createLessonImg(lessonImg, photoDescription, isImgDesc, richtextId, order)
+    createLessonImg({ img: lessonImg, photoDescription, isImgDesc, order, richtextId })
   )
 }
 
 export const editImage = function ({ id, data, order, setEditPhotoModel, dispatch }) {
-  const lessonImg = data.lessonImg
-  const photoDescription = data.photoDescription
-  const isImgDesc = data.isImgDesc
+  const { lessonImg, photoDescription, isImgDesc } = data
   return dispatch(
-    updatePhoto(id, lessonImg, photoDescription, isImgDesc, order, setEditPhotoModel)
+    updatePhoto({ iData: { img: lessonImg, photoDescription, isImgDesc, order }, id, setEditPhotoModel })
   )
 }

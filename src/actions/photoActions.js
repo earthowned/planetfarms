@@ -12,15 +12,11 @@ import {
   PHOTO_DELETE_SUCCESS,
   PHOTO_DELETE_FAIL
 } from '../constants/photoConstants'
+import { getFormData } from '../utils/getFormData'
 
 export const createLessonImg =
-  (lessonImg, photoDescription, isImgDesc, richtextId, order) => async (dispatch) => {
-    const lessonImgData = new FormData()
-    lessonImgData.append('img', lessonImg)
-    lessonImgData.append('photoDescription', photoDescription)
-    lessonImgData.append('isImgDesc', isImgDesc)
-    lessonImgData.append('richtextId', richtextId)
-    lessonImgData.append('order', order)
+  (iData) => async (dispatch) => {
+    const lessonImgData = getFormData(iData)
     try {
       dispatch({ type: PHOTO_CREATE_REQUEST })
       const { data } = await postApi(dispatch, ADD_LESSON_PHOTO, lessonImgData, fileHeader)
@@ -37,13 +33,9 @@ export const createLessonImg =
   }
 
 export const updatePhoto =
-  (id, lessonImg, photoDescription, isImgDesc, order, setEditPhotoModel) =>
+  ({ iData, id, setEditPhotoModel }) =>
     async (dispatch) => {
-      const lessonImgData = new FormData()
-      lessonImgData.append('img', lessonImg)
-      lessonImgData.append('photoDescription', photoDescription)
-      lessonImgData.append('isImgDesc', isImgDesc)
-      lessonImgData.append('order', order)
+      const lessonImgData = getFormData(iData)
       try {
         dispatch({ type: PHOTO_UPDATE_REQUEST })
         const { data } = await putApi(dispatch, GET_LESSON_PHOTO + `/${id}`, lessonImgData, fileHeader)
