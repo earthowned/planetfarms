@@ -1,6 +1,6 @@
 FROM treehouses/node-tags:amd64 as builder
 
-RUN apk --update add --no-cache git python3
+RUN apk --update add --no-cache git python3 gcc
 # Bundle APP files
 RUN git clone https://github.com/earthowned/planetfarms  
 RUN cd planetfarms && \
