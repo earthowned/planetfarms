@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     return Promise.all([
       await queryInterface.changeColumn('users', 'dateOfBirth', {
         type: Sequelize.DATEONLY,
@@ -8,7 +8,7 @@ module.exports = {
     ])
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: async (queryInterface, Sequelize) => {
     return Promise.all([
       await queryInterface.changeColumn('users', 'dateOfBirth', {
         type: Sequelize.DATE,
