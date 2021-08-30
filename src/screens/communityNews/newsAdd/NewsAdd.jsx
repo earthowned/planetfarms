@@ -84,23 +84,24 @@ const NewsAdd = () => {
   }
 
   const submitNewsForm = ({ title }) => {
-    newsData[0].title = title
-    newsData[0].category = category
-    dispatch(createNews(newsData, newsCover))
+    dispatch(createNews({
+      newsDetail: {title, category, news: newsCover},
+      newNews: newsData.splice(1)
+    }))
   }
 
   const editNewsForm = ({ title }) => {
     dispatch(
-      newsUpdate(
-        {
-          id: newsSingleData.id,
+      newsUpdate({
+        newsDetail: {
           title,
           category: newsSingleData.category,
-          newsCover
+          news: newsCover
         },
-        [oldData, newsData].flat(),
-        newsSingleData.rich_text.id
-      )
+        newNews: [oldData, newsData].flat(),
+        id: newsSingleData.id,
+        richtextId: newsSingleData.rich_text.id
+      })
     )
   }
 

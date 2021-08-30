@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ReactPlayer from 'react-player'
 
-import Actions from '../../screens/courseManager/addLesson/Actions'
+import Actions from '../../screens/courseManager/lesson/Actions'
 import { ReactComponent as Play } from '../../assets/images/play.svg'
 import { ReactComponent as BookMark } from '../../assets/images/book-outlined.svg'
 import './Video.scss'

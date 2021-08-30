@@ -1,5 +1,4 @@
 import { ADD_MATERIAL, GET_MATERIAL } from '../utils/urlConstants'
-import * as material from '../constants/materialConstants'
 import { postApi, deleteApi, fileHeader } from '../utils/apiFunc'
 
 export const createMaterial = (material, lessonId) => async (dispatch) => {

@@ -22,11 +22,8 @@ import {
 } from '../constants/newsConstants'
 
 import { logout } from './userAction'
-import { addVideo, editVideo } from '../screens/courseManager/addLesson/addVideo'
-import { addImage, editImage } from '../screens/courseManager/addLesson/addImage'
-import { addText, editText } from '../screens/courseManager/addLesson/addText'
-import { GET_LESSON_PHOTO, GET_LESSON_TEXT } from '../utils/urlConstants'
 import { createRichText, updateRichText } from '../utils/createUpdateRichText'
+import { getFormData } from '../utils/getFormData'
 
 // fetching current community
 const currentCommunity = localStorage.getItem('currentCommunity')
@@ -71,11 +68,8 @@ export const searchNews = (search) => async (dispatch) => {
   }
 }
 
-export const createNews = (newNews, newsCover) => async (dispatch, getState) => {
-  const formData = new FormData()
-  formData.append('title', newNews[0].title)
-  formData.append('category', newNews[0].category)
-  formData.append('news', newsCover)
+export const createNews = ({newsDetail, newNews}) => async (dispatch, getState) => {
+  const formData = getFormData(newsDetail)
   try {
     dispatch({ type: NEWS_CREATE_REQUEST })
     const richText = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/richtexts`, {})
@@ -85,7 +79,7 @@ export const createNews = (newNews, newsCover) => async (dispatch, getState) => 
       const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, fileHeader)
       dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
       // creating rich text
-      await createRichText(newNews.splice(1), richtextId, dispatch)
+      await createRichText(newNews, richtextId, dispatch)
       dispatch({ type: NEWS_CLEAR, payload: data })
       document.location.href = '/news'
     }
@@ -136,14 +130,11 @@ export const savevideoDetail = (data) => (dispatch) => {
   })
 }
 
-export const newsUpdate = (news, newNews, richtextId) => async (dispatch) => {
-  const formData = new FormData()
-  formData.append('title', news.title)
-  formData.append('category', news.category)
-  formData.append('news', news.newsCover)
+export const newsUpdate = ({newsDetail, newNews, richtextId, id}) => async (dispatch) => {
+  const formData = getFormData(newsDetail)
   try {
     dispatch({ type: NEWS_UPDATE_REQUEST })
-    const data = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${news.id}/community/${currentCommunity?.id}`, formData)
+    const data = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity?.id}`, formData)
     dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data })
     // updating rich text
     await updateRichText(newNews, richtextId, dispatch)

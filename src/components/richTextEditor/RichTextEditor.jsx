@@ -4,7 +4,7 @@ import DragDrop from '../dragDrop/DragDrop'
 import EditContent from '../editContent/EditContent'
 import { GET_COVERIMG } from '../../utils/urlConstants'
 import ContentAdd from '../contentAdd/ContentAdd'
-import LessonMaterial from '../../screens/courseManager/addLesson/LessonMaterial'
+import LessonMaterial from '../../screens/courseManager/lesson/LessonMaterial'
 import SaveModal from '../saveModal/SaveModal'
 
 const RichTextEditor = ({
@@ -105,22 +105,6 @@ const AddContent = ({
   title,
   setOldData
 }) => {
-  // const [title, setTitle] = useState('');
-
-  //  // for creation
-  // useEffect(() => {
-  //   if(lessonData.length > 0) {
-  //     setTitle(lessonData[0].title)
-  //   }
-  // }, [lessonData])
-
-  // // for Edit
-  // useEffect(() => {
-  //   if(lessonSingleData) {
-  //     setTitle(lessonSingleData.title)
-  //   }
-  // }, [lessonSingleData])
-
   return (
     <div className='admin-lesson-create-container'>
       <ErrorText

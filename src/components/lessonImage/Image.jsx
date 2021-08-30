@@ -1,4 +1,4 @@
-import Actions from '../../screens/courseManager/addLesson/Actions'
+import Actions from '../../screens/courseManager/lesson/Actions'
 import './Image.scss'
 
 const Image = ({

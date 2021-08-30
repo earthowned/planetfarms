@@ -1,15 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import DragDrop from '../../../components/dragDrop/DragDrop'
-import { ErrorText, TextArea } from '../../../components/formUI/FormUI'
 import { createLesson, updateLesson } from '../../../actions/lessonActions'
-import useGetFetchData from '../../../utils/useGetFetchData'
-import { GET_COURSE, GET_COVERIMG } from '../../../utils/urlConstants'
-import LessonMaterial from './LessonMaterial'
-import LessonSaveModal from './LessonSaveModal'
-import AddTestModal from '../../../components/addTestModal/AddTestModal'
 import BackButton from '../../../components/backButton/BackButton'
 import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
@@ -155,10 +147,12 @@ const AddLesson = () => {
     const order = fetchLesson.length + 1
     dispatch(
       createLesson({
-        title,
-        courseId,
-        coverImg,
-        lessonDesc,
+        lessonDetail: {
+          title,
+          courseId,
+          coverImg,
+          lessonDesc,
+        },
         order,
         lessonData,
         material,
@@ -171,16 +165,18 @@ const AddLesson = () => {
   const editLessonForm = ({ title, lessonDesc }) => {
     const coverImg = lessonCover
     dispatch(
-      updateLesson(
-        title,
-        coverImg,
+      updateLesson({
+        lessonDetail: {
+          title,
+          coverImg,
+          lessonDesc,
+        },
         lessonId,
-        lessonDesc,
         history,
-        [oldData, lessonData].flat(),
+        lessonData: [oldData, lessonData].flat(),
         material,
-        lessonSingleData.rich_text.id
-      )
+        richtextId: lessonSingleData.rich_text.id
+      })
     )
   }
 

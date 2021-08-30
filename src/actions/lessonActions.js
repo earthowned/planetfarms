@@ -1,9 +1,6 @@
-import { Axios, ADD_LESSONS, GET_LESSONS, GET_VIDEOS, GET_LESSON_PHOTO, GET_LESSON_TEXT } from '../utils/urlConstants'
-import { fileHeader, postApi, putApi } from '../utils/apiFunc'
-import { addText } from '../screens/courseManager/addLesson/addText'
-import { addVideo, editVideo } from '../screens/courseManager/addLesson/addVideo'
-import { addImage } from '../screens/courseManager/addLesson/addImage'
-import { addMaterial } from '../screens/courseManager/addLesson/addMaterial'
+import { Axios, ADD_LESSONS, GET_LESSONS } from '../utils/urlConstants'
+import { postApi } from '../utils/apiFunc'
+import { addMaterial } from '../screens/courseManager/lesson/addMaterial'
 
 import {
   LESSON_CREATE_REQUEST,
@@ -18,24 +15,17 @@ import {
 } from '../constants/lessonConstants'
 import axios from 'axios'
 import { createRichText, updateRichText } from '../utils/createUpdateRichText'
+import { getFormData } from '../utils/getFormData'
 
 export const createLesson =
   ({
-    courseId,
-    title,
-    lessonDesc,
-    coverImg,
+    lessonDetail,
     lessonData,
     material,
     history
   }) =>
     async (dispatch) => {
-      const lessonFormData = new FormData()
-      lessonFormData.append('courseId', courseId)
-      lessonFormData.append('title', title)
-      lessonFormData.append('lessonDesc', lessonDesc)
-      lessonFormData.append('coverImg', coverImg)
-      // lessonFormData.append('order', order)
+      const lessonFormData = getFormData(lessonDetail)
       try {
         dispatch({ type: LESSON_CREATE_REQUEST })
         const config = {
@@ -78,13 +68,9 @@ export const createLesson =
     }
 
 export const updateLesson =
-  (title, coverImg, lessonId, lessonDesc, history, lessonData = [], material = [], richtextId) =>
+  ({lessonDetail, lessonId, history, lessonData = [], material = [], richtextId}) =>
     async (dispatch) => {
-      const updateLessonFormData = new FormData()
-      updateLessonFormData.append('title', title)
-      updateLessonFormData.append('coverImg', coverImg)
-      updateLessonFormData.append('lessonDesc', lessonDesc)
-
+      const updateLessonFormData = getFormData(lessonDetail)
       try {
         dispatch({ type: LESSON_UPDATE_REQUEST })
         const config = {

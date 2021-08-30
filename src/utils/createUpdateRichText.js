@@ -1,6 +1,6 @@
-import { addImage, editImage } from '../screens/courseManager/addLesson/addImage'
-import { addText, editText } from '../screens/courseManager/addLesson/addText'
-import { addVideo, editVideo } from '../screens/courseManager/addLesson/addVideo'
+import { addImage, editImage } from '../screens/courseManager/lesson/addImage'
+import { addText, editText } from '../screens/courseManager/lesson/addText'
+import { addVideo, editVideo } from '../screens/courseManager/lesson/addVideo'
 
 export const updateRichText = async (data, richtextId, dispatch) => {
   for (let i = 0; i < data.length; i++) {
@@ -18,7 +18,7 @@ export const updateRichText = async (data, richtextId, dispatch) => {
         await addImage({ data: data[i], richtextId, order: i + 1, dispatch })
       }
     }
-    if (data[i]?.textHeading || data[i]?.textDescription) {
+  if (data[i]?.textHeading || data[i]?.textDescription) {
       if (data[i].id) {
         await editText({ textId: data[i].id, data, order: i + 1, dispatch })
       } else {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import Text from '../../screens/courseManager/addLesson/Text'
+import Text from '../../screens/courseManager/lesson/Text'
 import { GET_COVERIMG, GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
 import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
