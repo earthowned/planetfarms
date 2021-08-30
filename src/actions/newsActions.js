@@ -68,7 +68,7 @@ export const searchNews = (search) => async (dispatch) => {
   }
 }
 
-export const createNews = ({newsDetail, newNews}) => async (dispatch, getState) => {
+export const createNews = ({ newsDetail, newNews }) => async (dispatch, getState) => {
   const formData = getFormData(newsDetail)
   try {
     dispatch({ type: NEWS_CREATE_REQUEST })
@@ -130,7 +130,7 @@ export const savevideoDetail = (data) => (dispatch) => {
   })
 }
 
-export const newsUpdate = ({newsDetail, newNews, richtextId, id}) => async (dispatch) => {
+export const newsUpdate = ({ newsDetail, newNews, richtextId, id }) => async (dispatch) => {
   const formData = getFormData(newsDetail)
   try {
     dispatch({ type: NEWS_UPDATE_REQUEST })

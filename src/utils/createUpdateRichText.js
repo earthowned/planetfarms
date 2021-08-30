@@ -18,7 +18,7 @@ export const updateRichText = async (data, richtextId, dispatch) => {
         await addImage({ data: data[i], richtextId, order: i + 1, dispatch })
       }
     }
-  if (data[i]?.textHeading || data[i]?.textDescription) {
+    if (data[i]?.textHeading || data[i]?.textDescription) {
       if (data[i].id) {
         await editText({ textId: data[i].id, data, order: i + 1, dispatch })
       } else {

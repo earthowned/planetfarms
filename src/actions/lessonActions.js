@@ -68,7 +68,7 @@ export const createLesson =
     }
 
 export const updateLesson =
-  ({lessonDetail, lessonId, history, lessonData = [], material = [], richtextId}) =>
+  ({ lessonDetail, lessonId, history, lessonData = [], material = [], richtextId }) =>
     async (dispatch) => {
       const updateLessonFormData = getFormData(lessonDetail)
       try {
