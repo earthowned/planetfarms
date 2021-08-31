@@ -54,7 +54,6 @@
 .last-input-variation {
   width: 45%;
 }
-
 .full {
   width: 100% !important;
 }
@@ -88,16 +87,13 @@
   font-size: 11px;
   width: 50%;
 }
-
 .errorMsg {
   color: var(--secondary-red);
   margin: 0.5em 0 1em 0;
   font-size: 1em;
 }
-
 .error {
   border-color: var(--secondary-red);
-
   &:focus {
     border-color: var(--secondary-red) !important;
   }
@@ -111,6 +107,7 @@
   padding: 1.4em 1em;
   border: 0.5px solid var(--primary-white);
   background: var(--background-color-light);
+  outline: none;
   cursor: pointer;
   position: relative;
 
@@ -122,17 +119,14 @@
   img.avatar {
     display: none;
   }
-
   img.drag-drop-close {
     right: 0;
     top: 0;
   }
-
   .videoName {
     color: #fff;
     z-index: 1;
   }
-
   .drag-drop-icon-container {
     width: 100%;
     height: 100%;
@@ -157,21 +151,8 @@
     }
   }
 }
-
 .videoUploadBtn::-webkit-file-upload-button {
   display: none;
-}
-
-.videoEditBtn {
-  width: 100% !important;
-
-  h6 {
-    font-size: 0.8em !important;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 90% !important;
-  }
 }
 
 @media (max-width: 768px) {
@@ -179,7 +160,6 @@
     flex-wrap: wrap;
     text-align: center;
   }
-
   .video-row-3 > input,
   span {
     width: 100% !important;
@@ -215,92 +195,18 @@
         .toggle-container {
           background: var(--cards);
         }
-
         .active + .toggle-container {
           background: var(--primary-color);
         }
       }
-
-      &__text {
-        .input-container {
-          margin-bottom: 1.5em;
-        }
-      }
-
-      .drag-drop-container {
-        width: 100%;
-        height: 15em;
-        border: 2px dashed #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      &__video {
-        .block {
-          height: 100%;
-
-          .collection-modal-header {
-            margin-bottom: 1.5em;
-          }
-        }
-
-        .video-row-3 {
-          input {
-            border: 1px solid var(--dropdowns);
-            outline: none;
-            background-color: var(--cards);
-            color: #ffff;
-            font-size: 1.05em;
-            font-family: inherit;
-            width: 50%;
-
-            &::-webkit-input-placeholder {
-              color: var(--primary-grey);
-            }
-
-            &:focus {
-              border-color: var(--primary-color);
-            }
-
-            @media (max-width: 768px) {
-              margin: 0;
-            }
-          }
-
-          .dragDropText {
-            color: #ffff;
-            height: auto;
-          }
-
-          @media (max-width: 768px) {
-            span {
-              margin: 0.8em 0;
-            }
-
-            .videoUploadBtn {
-              width: 100% !important;
-
-              .drag-drop {
-                width: 100% !important;
-              }
-            }
-          }
-        }
-      }
-
       .input-container {
         .block {
           border: 1px solid var(--dropdowns);
           background-color: var(--cards);
-
           .label {
             width: 100%;
             margin-left: 2.5em;
           }
-
           .inputField {
             padding: 1.2em 0;
             color: #fff;
@@ -311,7 +217,6 @@
           }
         }
       }
-
       .textarea {
         margin-bottom: 1.5em;
         border: 1px solid var(--dropdowns);
@@ -323,22 +228,30 @@
 
         &__error {
           border-color: var(--secondary-red);
-
           &:focus {
             border-color: var(--secondary-red) !important;
           }
         }
 
-        &::-webkit-input-placeholder {
-          color: var(--primary-grey);
-        }
-
         &:focus {
           border-color: var(--primary-color);
         }
+
+        &::-webkit-input-placeholder {
+          color: var(--primary-grey);
+        }
       }
     }
-
+    .drag-drop-container {
+      width: 100%;
+      height: 15em;
+      border: 2px dashed #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
     .drag-drop {
       height: 100%;
       border: none;
@@ -354,14 +267,72 @@
       }
     }
   }
-}
 
+  &__video {
+    .block {
+      height: 100%;
+    }
+
+    .block {
+      .collection-modal-header,
+      .drag-drop-container,
+      .input-container {
+        margin-bottom: 1.5em;
+      }
+    }
+    .video-row-3 {
+      input {
+        border: 1px solid var(--dropdowns);
+        outline: none;
+        background-color: var(--cards);
+        color: #ffff;
+        font-size: 1.05em;
+        font-family: inherit;
+        width: 50%;
+
+        &:focus {
+          border-color: var(--primary-color);
+        }
+
+        &::-webkit-input-placeholder {
+          color: var(--primary-grey);
+        }
+
+        @media (max-width: 768px) {
+          margin: 0;
+        }
+      }
+      .dragDropText {
+        color: #ffff;
+        height: auto;
+      }
+      @media (max-width: 768px) {
+        span {
+          margin: 0.8em 0;
+        }
+        .videoUploadBtn {
+          width: 100% !important;
+
+          .drag-drop {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+  &__text {
+    .input-container {
+      margin-bottom: 1.5em;
+    }
+  }
+}
 .collection-modal-container.addBlock__video {
   height: 100%;
   z-index: 5001 !important;
 
   @media (max-width: 768px) {
     .block {
+      margin-top: 5em;
       position: relative;
       overflow-y: scroll;
       margin-top: 0;

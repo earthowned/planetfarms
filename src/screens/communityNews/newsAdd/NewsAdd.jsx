@@ -114,7 +114,7 @@ const NewsAdd = () => {
 
   function editImageConfirm (data) {
     const { id, isImgDesc, lessonImg, photoDescription } = data
-    dispatch(updatePhoto(id, lessonImg, photoDescription, isImgDesc, setCreateImageModal))
+    dispatch(updatePhoto({ iData: { img: lessonImg, photoDescription, isImgDesc }, id, setEditPhotoModel: setCreateImageModal }))
   }
 
   async function editTextFunc (id) {
@@ -126,7 +126,7 @@ const NewsAdd = () => {
 
   function editTextConfirm (data) {
     const { id, textHeading, textDescription } = data
-    dispatch(updateText(id, textHeading, textDescription, setCreateTextModal))
+    dispatch(updateText({textId: id, textHeading, textDescription, setEditTextModel: setCreateTextModal}))
   }
 
   async function editVideoFunc (id) {
@@ -138,7 +138,7 @@ const NewsAdd = () => {
 
   function editVideoConfirm (data) {
     const { id, videoCover, videoTitle, videoDescription, videoLink, videoResource } = data
-    dispatch(updateVideo(id, videoCover, videoTitle, videoDescription, videoLink, videoResource, setCreateVideoModal))
+    dispatch(updateVideo({id, vData: {videoCover, videoTitle, videoDescription, videoLink, videoResource}, setEditVideoModel: setCreateVideoModal}))
   }
 
   function deleteImageModalFunc (id) {

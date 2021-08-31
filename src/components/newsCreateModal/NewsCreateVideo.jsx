@@ -6,7 +6,7 @@ import DragDrop from '../dragDrop/DragDrop'
 import CollectionModalHeader from './CollectionModalHeader'
 import { InputFields, ErrorText, TextArea } from '../formUI/FormUI'
 import './NewsCreateModal.scss'
-import { LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
+import { VIDEO_COVER } from '../../utils/urlConstants'
 
 const CreateVideo = ({
   getRootProps,

@@ -14,7 +14,7 @@ import {
 } from '../constants/textConstants'
 
 export const createText =
-  (textHeading, textDescription, richtextId, order) => async (dispatch) => {
+  ({textHeading, textDescription, richtextId, order}) => async (dispatch) => {
     const textData = { textHeading, textDescription, richtextId, order }
 
     try {
@@ -38,7 +38,7 @@ export const createText =
   }
 
 export const updateText =
-  (textId, textHeading, textDescription, order, setEditTextModel) =>
+  ({textId, textHeading, textDescription, order, setEditTextModel}) =>
     async (dispatch) => {
       const textData = { textHeading, textDescription, order }
 
