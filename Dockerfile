@@ -1,7 +1,7 @@
 ARG BASE=
 FROM treehouses/node-tags:amd64 as builder
 
-COPY * .
+COPY * /
 RUN apk --update add --no-cache gcc make gcc g++ python3 && \
     cp .env.example .env && \
     npm install && \
