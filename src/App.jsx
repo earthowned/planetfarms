@@ -16,6 +16,7 @@ import SignupScreen from './screens/signUp/SignupScreen'
 import CongratulationScreen from './screens/congratulation/CongratulationScreen'
 import Messenger from './screens/messenger/Messenger'
 import Library from './screens/library/Library'
+import LoginRedirect from './components/loginRedirect/LoginRedirect'
 import './App.css'
 import DashboardComponent from './screens/dashboard/MainDashboard'
 import Achievements from './screens/dashboard/Achievements'
@@ -63,11 +64,12 @@ function App () {
       <Router>
         <ScrollToTop>
           <Switch>
+            <Route component={LoginRedirect} path='/redirect' exact />
             <Route component={LoginScreen} path='/login' exact />
             <Route component={SignupScreen} path='/register' exact />
             <Route component={ForgotPassword} path='/forgot-password' />
+            <Route component={() => <Redirect to='/login' />} path='/' exact />
             <PrivateRoute component={UserVerification} path='/verification' exact />
-            <PrivateRoute component={() => <Redirect to='/login' />} path='/' exact />
             <PrivateRoute component={LogoutUser} path='/logout' exact />
             <PrivateRoute component={CongratulationScreen} path='/edit-information' exact />
             <PrivateRoute component={CalendarScreen} exact path='/calendar/my-events' />

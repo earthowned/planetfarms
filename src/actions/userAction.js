@@ -86,8 +86,8 @@ if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       oauth: {
         domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
         scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-        redirectSignIn: process.env.FRONTEND_URL,
-        redirectSignOut: process.env.FRONTEND_URL,
+        redirectSignIn: process.env.REACT_APP_FRONTEND_URL,
+        redirectSignOut: process.env.REACT_APP_FRONTEND_URL,
         responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
       }
     }
@@ -124,6 +124,64 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({
       type: USER_REGISTER_FAIL,
       payload: error.response && error.response.data.error ? error.response.data.error : error.message
+    })
+  }
+}
+
+export const socialSignIn = (provider) => (dispatch) => {
+  try {
+    Auth.federatedSignIn({ provider })
+  } catch (error) {
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload: error.response && error.response.data.error ? error.response.data.error : error.message
+    })
+  }
+}
+
+export const socialSignInRedirect = (provider) => async (dispatch) => {
+  let data = {}
+  try {
+    dispatch({ type: USER_LOGIN_REQUEST })
+    const response = await Auth.currentAuthenticatedUser()
+    if (response) {
+      data = {
+        token: response?.signInUserSession?.idToken?.jwtToken || '',
+        id: response?.attributes?.sub || ''
+      }
+      window.localStorage.setItem('userInfo', JSON.stringify(data))
+      await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: data.id }, {
+        headers: {
+          Authorization: 'Bearer ' + data.token
+        }
+      })
+
+      await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, {
+        firstName: response.attributes.given_name,
+        lastName: response.attributes.family_name,
+        birthday: response.attributes.birthdate,
+        phone: response.attributes.phone_number,
+        email: response.attributes.email
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + data.token
+        }
+      })
+
+      window.localStorage.setItem('userInfo', JSON.stringify(data))
+      dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
+      await routingCommunityNews(dispatch, true)
+    } else {
+      window.location.href = '/login'
+      console.log('Not logged in')
+    }
+  } catch (error) {
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload: error.response && error.response.data.error
+        ? error.response.data.error
+        : error.message
     })
   }
 }
@@ -249,6 +307,8 @@ const tokenFailure = (dispatch, message) => {
 
 export const getMyDetails = () => async (dispatch) => {
   try {
+    const response = await Auth.currentAuthenticatedUser()
+    console.log(response)
     dispatch({ type: USER_DETAILS_REQUEST })
     const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`)
     const userdata = data
@@ -330,11 +390,9 @@ export const searchUsers = (search) => async (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
-  Auth.signOut().then(() => {
-    window.localStorage.clear()
-    dispatch({ type: USER_LOGOUT })
-    document.location.href = '/login'
-  }).catch(err => console.log(err))
+  window.localStorage.clear()
+  dispatch({ type: USER_LOGOUT })
+  document.location.href = '/login'
 }
 
 export const confirmPin = (username, code) => async (dispatch) => {
