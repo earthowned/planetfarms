@@ -38,9 +38,17 @@ services:
     depends_on:
       - db
   planetfarms:
-    build: .
-    image: planetfarms-tags:amd64
+    #build: .
+    image: earthowned/planetfarms
     volumes:
       - ./frontend.default.conf:/etc/nginx/conf.d/default.conf
     ports:
-     - 3000:80    
+     - 3000:80
+    environment:
+      REACT_APP_API_BASE_URL: 'http://localhost:5000'
+      REACT_APP_CDN_BASE_URL: 'http://localhost:8080'
+      REACT_APP_AUTH_METHOD: local
+      REACT_APP_COGNITO_REGION:
+      REACT_APP_COGNITO_POOL_ID:
+      REACT_APP_COGNITO_CLIENT_ID:
+      REACT_APP_COGNITO_DOMAIN_NAME:
