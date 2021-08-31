@@ -10,6 +10,7 @@ import { searchGroups, listGroups, groupDelete, listUserGroups } from '../../act
 import Pagination from '../../components/pagination/Pagination'
 import { getApi } from '../../utils/apiFunc'
 import SubHeader from '../../components/subHeader/SubHeader'
+import DeleteContent from '../../components/deleteContent/DeleteContent'
 
 const CommunityGroup = () => {
   // fetching current community
@@ -78,18 +79,7 @@ const CommunityGroup = () => {
   return (
     <>
       {active && <FormModal setActive={setActive} data={editData} setData={setEditData} />}
-      {deleteModal && <div className='simple-modal-container'>
-        <div className='simple-modal-inner-container'>
-          <div>
-            <h4>Are you sure you want to delete?</h4>
-            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
-          </div>
-          <div>
-            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
-            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
-          </div>
-        </div>
-      </div>}
+      {deleteModal && <DeleteContent heading="Delete" message="Are you sure you want to delete?" setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>

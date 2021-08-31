@@ -228,9 +228,9 @@ const AddLesson = () => {
           editTextConfirm={editTextConfirm}
         />
       )}
-      {deleteVideoModal && <DeleteContent setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
-      {deleteImageModal && <DeleteContent setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
-      {deleteTextModal && <DeleteContent setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
+      {deleteVideoModal && <DeleteContent heading="Delete" message="Do you want to delete the video?" setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
+      {deleteImageModal && <DeleteContent heading="Delete" message="Do you want to delete the image?" setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
+      {deleteTextModal && <DeleteContent heading="Delete" message="Do you want to delete the text?" setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
       <DashboardLayout title={pathname.split('/')[3] === 'edit' ? 'Edit Lesson' : 'Add New Lesson'}>
         <BackButton location={`/admin/course/${courseId}`} />
         <RichTextEditor

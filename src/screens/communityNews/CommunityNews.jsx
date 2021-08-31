@@ -10,6 +10,7 @@ import useSizeFinder from '../../utils/sizeFinder'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchNews, listNews, deleteNews } from '../../actions/newsActions'
 import Pagination from '../../components/pagination/Pagination'
+import DeleteContent from '../../components/deleteContent/DeleteContent'
 
 function CommunityNews () {
   const [addModal, setAddModal] = useState(false)
@@ -38,18 +39,7 @@ function CommunityNews () {
   }
   return (
     <>
-      {deleteModal && <div className='simple-modal-container'>
-        <div className='simple-modal-inner-container'>
-          <div>
-            <h4>Are you sure you want to delete?</h4>
-            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
-          </div>
-          <div>
-            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
-            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
-          </div>
-        </div>
-                      </div>}
+    {deleteModal && <DeleteContent heading="Delete" message="Are you sure you want to delete?" setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
       <DashboardLayout title='Ragrarians News'>{addModal && <NewsAddModal
         setAddModal={setAddModal}
         editData={editData}

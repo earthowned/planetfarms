@@ -1,10 +1,9 @@
 import './NewsCard.scss'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { deleteNews } from '../../actions/newsActions'
 import Background from '../background/Background'
 import { useState } from 'react'
+import useHideOnClick from '../../utils/useHideOnClick'
 
 function NewsCard ({ news, editCard, deleteNewsCard }) {
   return (
@@ -25,12 +24,22 @@ const NewsSingleCard = ({ news, editCard, deleteNewsCard }) => {
     editCard(id)
     setDropDown(false)
   }
+
+  const deleteCard = () => {
+    deleteNewsCard(news.id)
+    setDropDown(false)
+  }
+
+  const domNode = useHideOnClick(() => {
+    setDropDown(false)
+  })
+
   return (
     <Background tag='/news/' image={news._attachments}>
       <div className='news-card'>
         <div className='news-card-header'>
           <div className='news-show-date'>{moment(news.createdAt).fromNow()}</div>
-          <div className='card-edit'>
+          <div className='card-edit' ref={domNode} >
             <div>
               <div onClick={() => setDropDown(!dropDown)} className='card-edit-button'>
                 <img src='/img/more-horizontal.svg' alt='burger icon' />
@@ -40,7 +49,7 @@ const NewsSingleCard = ({ news, editCard, deleteNewsCard }) => {
                   <li onClick={() => editNewsCard(news.id)}>
                     <img src='/img/edit-icon.svg' alt='burger icon' /> <span>Edit</span>
                   </li>
-                  <li onClick={() => deleteNewsCard(news.id)}>
+                  <li onClick={() => deleteCard()}>
                     <img src='/img/trash-icon.svg' alt='burger icon' /> <span>Delete</span>
                   </li>
                 </ul>

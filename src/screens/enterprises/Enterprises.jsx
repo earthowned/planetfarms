@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import Pagination from '../../components/pagination/Pagination'
 import SubHeader from '../../components/subHeader/SubHeader'
+import DeleteContent from '../../components/deleteContent/DeleteContent'
 
 const Enterprise = () => {
   // fetching current community
@@ -74,18 +75,7 @@ const Enterprise = () => {
   return (
     <>
       {active && <FormModal setActive={setActive} data={editData} setData={setEditData} />}
-      {deleteModal && <div className='simple-modal-container'>
-        <div className='simple-modal-inner-container'>
-          <div>
-            <h4>Are you sure you want to delete?</h4>
-            {/* <button onClick={() => confirmDelete}><img src='/img/close-outline.svg' alt='close-outline' /></button> */}
-          </div>
-          <div>
-            <button className='secondary-btn' onClick={confirmDelete}>Confirm</button>
-            <button className='secondary-btn' onClick={() => setDeleteModal(false)}>Cancel</button>
-          </div>
-        </div>
-      </div>}
+      {deleteModal && <DeleteContent heading="Delete" message="Are you sure you want to delete?" setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>
