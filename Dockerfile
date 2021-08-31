@@ -4,6 +4,7 @@ RUN apk --update add --no-cache git gcc make gcc g++ python3
 
 RUN git clone https://github.com/earthowned/planetfarms
 RUN cd planetfarms && \
+    git checkout ${GITHUB_REF##*/} && \
     cp .env.example .env && \
     npm install && \
     npm run build
