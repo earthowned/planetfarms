@@ -7,7 +7,7 @@ const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
 const NotFoundError = require('../errors/notFoundError')
 
-function amplifyConfig() {
+function amplifyConfig () {
   Amplify.configure({
     Auth: {
       // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
