@@ -7,7 +7,7 @@ const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
 const NotFoundError = require('../errors/notFoundError')
 
-function amplifyConfig () {
+function amplifyConfig() {
   Amplify.configure({
     Auth: {
       // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
@@ -174,6 +174,9 @@ const subscribeCommunity = async (user) => {
         },
         { transaction: t }
       )
+      const communityUser = await db.CommunityUser.findOne({
+        where: { userId: user.dataValues.id }
+      })
       const allFollow = []
       for (let i = 0; i < communitiesArray.length; i++) {
         const followObj = {
@@ -181,6 +184,13 @@ const subscribeCommunity = async (user) => {
           communityId: parseInt(communitiesArray[i].id)
         }
         allFollow.push(followObj)
+      }
+      if (
+        communityUser !== null &&
+        allFollow[0].userId === communityUser.dataValues.userId &&
+        allFollow[0].communityId === communityUser.dataValues.communityId
+      ) {
+        return true
       }
       await db.CommunityUser.bulkCreate(allFollow)
       return true
