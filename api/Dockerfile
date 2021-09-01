@@ -1,4 +1,4 @@
-ARG BASE=
+ARG BASE=treehouses/pm2
 FROM ${BASE} as builder
 
 # Bundle APP files

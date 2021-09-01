@@ -1,4 +1,4 @@
-ARG BASE=
+ARG BASE=treehouses/nginx
 FROM treehouses/node-tags:amd64 as builder
 
 #COPY * /

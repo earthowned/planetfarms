@@ -5,8 +5,7 @@ on:
     branches:
       - master
       - main
-      - earthownedapi
-      - earthownedapi-remove-compare
+      - earthownedapi*
   repository_dispatch:
     types: planetapi
 
