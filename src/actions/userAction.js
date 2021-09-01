@@ -594,7 +594,6 @@ export const changePassword =
 export const routingCommunityNews = async (dispatch, route = false) => {
   const data = window.localStorage.getItem('userInfo')
   const token = data && JSON.parse(data).token
-  console.log('token', token)
   const communityData = await getApi(
     dispatch,
     `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`,

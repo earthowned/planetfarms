@@ -79,8 +79,8 @@ const getUserCommunities = async (req, res) => {
   const page = Number(req.query.pageNumber) || 1
   // const order = req.query.order || 'DESC'
   // const ordervalue = order && [['name', order]]
-
-  db.Community.findAndCountAll({
+  const userId = req.user.id
+  const communities = await db.Community.findAndCountAll({
     offset: (page - 1) * pageSize,
     limit: pageSize,
     // ordervalue,
@@ -96,7 +96,7 @@ const getUserCommunities = async (req, res) => {
         ],
         [
           sequelize.literal(`
-            CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+            CASE WHEN "creatorId"=${userId} THEN 'true'
               ELSE 'false'
             END
           `),
@@ -106,7 +106,7 @@ const getUserCommunities = async (req, res) => {
           sequelize.literal(`(
             SELECT COUNT("userId")
             FROM communities_users
-            WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
+            WHERE "communityId" = communities.id AND active = true AND "userId" = ${userId}
           )`),
           'isFollowed'
         ]
@@ -120,27 +120,25 @@ const getUserCommunities = async (req, res) => {
         model: db.User,
         as: 'followers',
         attributes: [],
-        where: { id: req.user.id },
+        where: { id: userId },
         through: { attributes: [] }
       }
     ]
   })
-    .then((communities) => {
-      const totalPages = Math.ceil(communities.count / pageSize)
-      res
-        .json({
-          communities: communities.rows.map((rec) => ({
-            ...rec.dataValues,
-            attachment: changeFormat(rec.attachment)
-          })),
-          totalItems: communities.count,
-          totalPages,
-          page,
-          pageSize
-        })
-        .status(200)
-    })
-    .catch((err) => res.json({ err }).status(400))
+
+  const totalPages = Math.ceil(communities.count / pageSize)
+  res.status(200).json({
+    communities: communities.rows.map((rec) => ({
+      ...rec.dataValues,
+      attachment: changeFormat(rec.attachment)
+    })),
+    totalItems: communities.count,
+    totalPages,
+    page,
+    pageSize
+  })
+
+  // .catch((err) => res.json({ err }).status(400))
 }
 
 // @desc Add individual communities
