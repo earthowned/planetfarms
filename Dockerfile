@@ -20,8 +20,8 @@ FROM treehouses/node-tags:amd64 as builder
 RUN apk --update add --no-cache git gcc make gcc g++ python3
 
 RUN git clone https://github.com/earthowned/planetfarms
+COPY .env.example planetfarms/.env
 RUN cd planetfarms && \
-    cp .env.example .env && \
     npm install && \
     npm run build
 
