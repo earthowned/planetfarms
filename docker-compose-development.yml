@@ -32,9 +32,16 @@ services:
     ports:
      - 5000:5000
     volumes:
-    - ./api/.env:/.env
     - ./api/src/middleware/jwks.json:/src/middleware/jwks.json
     - ./api/files:/files
+    environment:
+      JWT_SECRET: sercet
+      DATABASE_NAME: planetfarms
+      DATABASE_USERNAME: test
+      DATABASE_PASSWORD: pass
+      DATABASE_HOST: db
+      FRONTEND_URL: http://localhost:3000/
+      AUTH_METHOD: local
     depends_on:
       - db
   planetfarms:
@@ -48,7 +55,3 @@ services:
       REACT_APP_API_BASE_URL: 'http://localhost:5000'
       REACT_APP_CDN_BASE_URL: 'http://localhost:8080'
       REACT_APP_AUTH_METHOD: local
-      REACT_APP_COGNITO_REGION:
-      REACT_APP_COGNITO_POOL_ID:
-      REACT_APP_COGNITO_CLIENT_ID:
-      REACT_APP_COGNITO_DOMAIN_NAME:
