@@ -16,7 +16,10 @@ const getCourses = async (req, res) => {
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     order: [['title', order]],
-    include: [db.Lesson, db.Category, db.CourseView,
+    include: [
+      db.Lesson,
+      db.Category,
+      db.CourseView,
       {
         model: db.User,
         as: 'enrolledUser',
@@ -38,18 +41,18 @@ const getCourses = async (req, res) => {
     },
     distinct: true
   })
-  courses.rows.forEach(course => {
+  console.log(courses)
+  courses.rows.forEach((course) => {
     course.thumbnail = changeFormat(course.thumbnail)
-    course.lessons.forEach(lesson => {
+    course.lessons.forEach((lesson) => {
       lesson.coverImg = changeFormat(lesson.coverImg)
     })
   })
-  res.status(200)
-    .json({
-      status: true,
-      message: 'Fetched successfully',
-      ...paginatedResponse({ data: courses, pageSize, pageNumber })
-    })
+  res.status(200).json({
+    status: true,
+    message: 'Fetched successfully',
+    ...paginatedResponse({ data: courses, pageSize, pageNumber })
+  })
 }
 
 // @desc    Add individual course
@@ -106,15 +109,18 @@ const getCourseById = async (req, res) => {
       {
         model: db.Lesson,
         order: [['order', 'ASC']],
-        include: [db.Test, {
-          model: db.LessonProgress,
-          where: {
-            userId: {
-              [Op.eq]: req.user.id
-            }
-          },
-          required: false
-        }]
+        include: [
+          db.Test,
+          {
+            model: db.LessonProgress,
+            where: {
+              userId: {
+                [Op.eq]: req.user.id
+              }
+            },
+            required: false
+          }
+        ]
       },
       {
         model: db.User,

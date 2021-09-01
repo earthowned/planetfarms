@@ -74,8 +74,8 @@ const authUser = async (req, res) => {
     const { name, password } = req.body
     const user = await localAuth(name, password)
     if (user && (await subscribeCommunity(user))) {
-      await res.json({
-        token: generateToken(user.dataValues.userID),
+      res.json({
+        data: generateToken(user.dataValues.userID),
         id: user.dataValues.userID
       })
     } else {
@@ -140,12 +140,15 @@ const registerLocal = async (name, password, res) => {
         { username: name, password: password },
         { transaction: t }
       )
-      return await db.User.create({
-        userID: user.id,
-        isLocalAuth: true,
-        lastLogin: new Date(),
-        numberOfVisit: 0
-      }, { transaction: t })
+      return await db.User.create(
+        {
+          userID: user.id,
+          isLocalAuth: true,
+          lastLogin: new Date(),
+          numberOfVisit: 0
+        },
+        { transaction: t }
+      )
     })
     if (newUser && (await subscribeCommunity(newUser))) {
       res.status(201).json({
@@ -179,11 +182,11 @@ const subscribeCommunity = async (user) => {
         }
         allFollow.push(followObj)
       }
-      await db.CommunityUser.bulkCreate(allFollow, { transaction: t })
+      await db.CommunityUser.bulkCreate(allFollow)
       return true
     })
   } catch (error) {
-    return false
+    console.log(error)
   }
 }
 
@@ -200,7 +203,9 @@ const changePassword = async (req, res) => {
       await db.LocalAuth.update(
         { password: newPassword },
         { where: { id: userID } }
-      ).then(() => res.json({ message: 'The user password has been updated.' }).status(200))
+      ).then(() =>
+        res.json({ message: 'The user password has been updated.' }).status(200)
+      )
     } else {
       res.status(401).json({ message: 'Incorrect old password' })
     }
@@ -274,7 +279,9 @@ const getUserProfileByUserID = async (req, res) => {
     const id = req.params.userID
     const profile = await db.User.findOne({
       where: { userID: id },
-      attributes: { exclude: req.user.userID !== id ? ['phone', 'dateOfBirth'] : [] }
+      attributes: {
+        exclude: req.user.userID !== id ? ['phone', 'dateOfBirth'] : []
+      }
     })
     if (!profile) throw new NotFoundError()
     res.status(200).json({
@@ -316,14 +323,17 @@ const updateUser = async (req, res) => {
     const { email, firstName, lastName, phone, birthday } = req.body
     db.User.findOne({ where: { userID: id } }).then((user) => {
       if (user) {
-        db.User.update({
-          email,
-          firstName,
-          lastName,
-          phone,
-          dateOfBirth: birthday,
-          attachments
-        }, { where: { userID: id } })
+        db.User.update(
+          {
+            email,
+            firstName,
+            lastName,
+            phone,
+            dateOfBirth: birthday,
+            attachments
+          },
+          { where: { userID: id } }
+        )
           .then(() => res.sendStatus(200))
           .catch((err) => res.status(403).json({ error: err.message }))
       } else {

@@ -1,5 +1,5 @@
 import Amplify, { Auth } from 'aws-amplify'
-import { getApi, postApi, putApi } from '../utils/apiFunc'
+import { getApi, postApi, putApi, postApiCb } from '../utils/apiFunc'
 
 import FormData from 'form-data'
 import {
@@ -152,15 +152,20 @@ export const login = (name, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      console.log('local')
-      const { data } = await postApi(
+      const { data: userData } = await postApi(
         dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
-        { name, password }
+        {
+          name,
+          password
+        }
       )
-      console.log(data)
-      window.localStorage.setItem('userInfo', JSON.stringify(data))
-      data = data
+      const localAuthData = {
+        token: userData.data,
+        id: userData.id
+      }
+      window.localStorage.setItem('userInfo', JSON.stringify(localAuthData))
+      data = localAuthData
     } else {
       const response = await Auth.signIn(name, password)
       data = {
@@ -201,14 +206,14 @@ export const login = (name, password) => async (dispatch) => {
     dispatch({
       type: USER_LOGIN_FAIL,
       payload:
-        error.response && error.response.data.error
+        +error.response && error.response.data.error
           ? error.response.data.error
           : error.message
     })
   }
 }
 
-function checkErrorReturnMessage(error, dispatch) {
+function checkErrorReturnMessage (error, dispatch) {
   const message =
     error.response && error.response.data.error
       ? error.response.data.error
@@ -579,19 +584,26 @@ export const changePassword =
         payload:
           error.response && error.response.data.message
             ? error.response.data.__type === 'NotAuthorizedException'
-              ? 'Incorrect old password.'
-              : error.response.data.message
+                ? 'Incorrect old password.'
+                : error.response.data.message
             : error.message
       })
     }
   }
 
 export const routingCommunityNews = async (dispatch, route = false) => {
+  const data = window.localStorage.getItem('userInfo')
+  const token = data && JSON.parse(data).token
+  console.log('token', token)
   const communityData = await getApi(
     dispatch,
-    `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`
+    `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`,
+    {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
   )
-  console.log(communityData)
   window.localStorage.setItem(
     'currentCommunity',
     JSON.stringify(communityData.data.communities[0])

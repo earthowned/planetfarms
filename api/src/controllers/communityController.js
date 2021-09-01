@@ -203,7 +203,9 @@ const createCommunity = async (req, res) => {
         )
         return true
       })
-      if (followCommunity) { return res.json({ message: 'Community is Created !!!' }).status(200) }
+      if (followCommunity) {
+        return res.json({ message: 'Community is Created !!!' }).status(200)
+      }
     }
   } catch (error) {
     return res.json({ error: error.message }).status(400)
@@ -416,17 +418,19 @@ const searchCommunityName = (req, res) => {
 const searchUserCommunityName = (req, res) => {
   const { name, order = 'ASC' } = req.query
   db.Community.findAll({
-    include: [{
-      model: db.User,
-      as: 'creator' && 'followers',
-      attributes: ['id'],
-      where: { id: req.user.id },
-      through: {
-        attributes: ['active'],
-        as: 'followStatus',
-        where: { active: true }
+    include: [
+      {
+        model: db.User,
+        as: 'creator' && 'followers',
+        attributes: ['id'],
+        where: { id: req.user.id },
+        through: {
+          attributes: ['active'],
+          as: 'followStatus',
+          where: { active: true }
+        }
       }
-    }],
+    ],
     where: { name: { [Op.iLike]: '%' + name + '%' } },
     order: [['name', order]]
   })

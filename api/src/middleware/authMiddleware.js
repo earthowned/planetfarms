@@ -2,24 +2,20 @@ const jwt = require('jsonwebtoken')
 const jwkToPem = require('jwk-to-pem')
 const db = require('../models')
 
-let decoded
+let coded
 
 const responses = [
   {
-    error: 'Invalid token provided.',
-    name: 'InvalidToken'
+    name: 'InvalidToken',
+    error: 'Invalid token provided.'
   },
   {
-    error: 'The token has been expired.',
-    name: 'TokenExpired'
+    name: 'TokenExpired',
+    error: 'The token has been expired.'
   },
   {
-    error: 'Not authorized, token failed',
-    name: 'Unauthorized'
-  },
-  {
-    error: 'Unauthorized',
-    name: 'Unauthorized'
+    name: 'Unauthorized',
+    error: 'Not authorized, token failed'
   }
 ]
 
@@ -31,48 +27,58 @@ function checkAuthorization (err) {
   }
 }
 
-const throwError = message => responses.filter(response => response.name.match(message))
+const throwError = (message) =>
+  responses.find((response) => response.name.match(message))
 
-async function maintainState (req, next) {
-  if (process.env.AUTH_METHOD !== 'cognito') {
-    req.user = await db.User.findOne({ where: { userID: decoded.id } })
-  } else if (decoded) {
-    req.user = await db.User.findOne({ where: { userID: decoded.sub } })
-  } else {
+const verifyToken = (token) => {
+  const jwk = require('./jwks.json')
+  const pem = jwkToPem(jwk.keys[0])
+
+  process.env.AUTH_METHOD !== 'cognito'
+    ? jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+        decodeTokenFnc(err, decodedToken)
+      })
+    : jwt.verify(token, pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
+      decodeTokenFnc(err, decodedToken)
+    })
+}
+
+const decodeTokenFnc = (err, decodedToken) => {
+  if (err) {
+    checkAuthorization(err)
+  }
+  coded = decodedToken
+}
+
+async function maintainState (req) {
+  try {
+    process.env.AUTH_METHOD !== 'cognito'
+      ? (req.user = await db.User.findOne({
+          where: { userID: coded.id }
+        }))
+      : (req.user = await db.User.findOne({
+          where: { userID: coded.sub }
+        }))
+  } catch (error) {
     throw Error('User not found')
   }
 }
 
-const decode = (err, decodedToken) => {
-  if (err) {
-    checkAuthorization(err)
-  }
-  decoded = decodedToken
-}
-
 module.exports = async (req, res, next) => {
-  const headers = req.headers.authorization && req.headers.authorization.startsWith('Bear')
-  if (
-    headers
-  ) {
+  const headers =
+    req.headers.authorization && req.headers.authorization.startsWith('Bearer')
+  if (headers) {
     try {
       const token = req.headers.authorization.split(' ')[1]
-      if (process.env.AUTH_METHOD !== 'cognito') {
-        jwt.verify(token, process.env.JWT_SECRET, decode)
-      } else {
-        const jwk = require('./jwks.json')
-        const pem = jwkToPem(jwk.keys[0])
-        jwt.verify(token, pem, { algorithms: ['RS256'] }, decode)
-      }
-      /*
-      * TODO: Maintain session and check again local session
-      */
-      await maintainState(req, next)
+      verifyToken(token)
+      await maintainState(req)
       next()
     } catch (error) {
+      console.error('error1')
       res.status(401).json(throwError(error.message))
     }
   } else {
+    console.error('error2')
     res.status(401).json(throwError('Unauthorized'))
   }
 }

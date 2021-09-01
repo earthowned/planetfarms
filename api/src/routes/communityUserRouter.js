@@ -1,4 +1,8 @@
-const { getCommunityUsers, followCommunity, getAllMembers } = require('../controllers/communityUserController')
+const {
+  getCommunityUsers,
+  followCommunity,
+  getAllMembers
+} = require('../controllers/communityUserController')
 const protect = require('../middleware/authMiddleware')
 const router = require('express').Router()
 
