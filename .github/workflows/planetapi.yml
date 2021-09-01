@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - main
-      - earthownedapi*
+      - earthownedapi**
   repository_dispatch:
     types: planetapi
 
