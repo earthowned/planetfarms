@@ -1,11 +1,11 @@
 ARG BASE=
 FROM treehouses/node-tags:amd64 as builder
 
-COPY * /
-RUN apk --update add --no-cache gcc make gcc g++ python3 && \
-    cp .env.example .env && \
-    npm install && \
-    npm run build
+#COPY * /
+#RUN apk --update add --no-cache gcc make gcc g++ python3 && \
+#    cp .env.example .env && \
+#    npm install && \
+#    npm run build
 
 #RUN apk --update add --no-cache git gcc make gcc g++ python3
 #
@@ -17,9 +17,19 @@ RUN apk --update add --no-cache gcc make gcc g++ python3 && \
 #    npm install && \
 #    npm run build
 
+RUN apk --update add --no-cache git gcc make gcc g++ python3
+
+RUN git clone https://github.com/earthowned/planetfarms
+RUN cd planetfarms && \
+    cp .env.example .env && \
+    npm install && \
+    npm run build
+
+
 FROM ${BASE}
 
 COPY --from=builder ./planetfarms/build /usr/share/nginx/html
-COPY --from=builder ./planetfarms/docker-entrypoint.sh .
+#COPY --from=builder ./planetfarms/docker-entrypoint.sh .
+COPY docker-entrypoint.sh .
 
 CMD ./docker-entrypoint.sh
