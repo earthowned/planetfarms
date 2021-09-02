@@ -31,16 +31,19 @@ const throwError = (message) =>
   responses.find((response) => response.name.match(message))
 
 const verifyToken = (token) => {
-  const jwk = require('./jwks.json')
-  const pem = jwkToPem(jwk.keys[0])
-
   process.env.AUTH_METHOD !== 'cognito'
     ? jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
         decodeTokenFnc(err, decodedToken)
       })
-    : jwt.verify(token, pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
-      decodeTokenFnc(err, decodedToken)
-    })
+    : cognitoJwkPem(token)
+}
+
+const cognitoJwkPem = (token) => {
+  const jwk = require('./jwks.json')
+  const pem = jwkToPem(jwk.keys[0])
+  jwt.verify(token, pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
+    decodeTokenFnc(err, decodedToken)
+  })
 }
 
 const decodeTokenFnc = (err, decodedToken) => {
