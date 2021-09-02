@@ -190,8 +190,6 @@ const subscribeCommunity = async (user, register) => {
           followObj.communityId !== communityUser.dataValues.communityId
         ) {
           allFollow.push(followObj)
-        } else {
-          return
         }
       }
       await db.CommunityUser.bulkCreate(allFollow)

@@ -3,7 +3,6 @@ const jwkToPem = require('jwk-to-pem')
 const db = require('../models')
 
 let coded
-
 const responses = [
   {
     name: 'InvalidToken',
@@ -77,11 +76,9 @@ module.exports = async (req, res, next) => {
       await maintainState(req)
       next()
     } catch (error) {
-      console.error('error1')
       res.status(401).json(throwError(error.message))
     }
   } else {
-    console.error('error2')
     res.status(401).json(throwError('Unauthorized'))
   }
 }
