@@ -148,7 +148,7 @@ export const register = (name, password) => async (dispatch) => {
 }
 
 export const login = (name, password) => async (dispatch) => {
-  const data = {}
+  let data = {}
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
@@ -160,10 +160,10 @@ export const login = (name, password) => async (dispatch) => {
           password
         }
       )
-      getTokenAndSetToLocalStorage(data, userData.data, userData.id)
+      data = getTokenAndSetToLocalStorage(data, userData.data, userData.id)
     } else {
       const response = await Auth.signIn(name, password)
-      getTokenAndSetToLocalStorage(
+      data = getTokenAndSetToLocalStorage(
         data,
         response?.signInUserSession?.idToken?.jwtToken || '',
         response?.attributes?.sub || ''
@@ -214,6 +214,7 @@ function getTokenAndSetToLocalStorage (data, token, id) {
     id
   }
   window.localStorage.setItem('userInfo', JSON.stringify(data))
+  return data
 }
 
 function checkErrorReturnMessage (error, dispatch) {
