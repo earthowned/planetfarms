@@ -22,9 +22,9 @@ const LessonCourse = ({
   const seeLessonHandler = async (lessonId) => {
     history.push(`/lesson/${lessonId}`)
   }
-  return lessonLen < 1 ? 
-    <></> :
-    <div className='lessons-container'>
+  return lessonLen < 1
+    ? <></>
+    : <div className='lessons-container'>
       {data?.data?.isFree === false ? (
         <div className='purchase-course-wrapper'>
           <div className='purchase-course'>
@@ -70,6 +70,6 @@ const LessonCourse = ({
             </React.Fragment>
           ))
         }
-    </div>
+      </div>
 }
 export default LessonCourse

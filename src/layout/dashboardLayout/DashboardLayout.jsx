@@ -133,7 +133,7 @@ const DashboardLayout = ({ title, children }) => {
               <NotificationMenu className='mobile-tab' />
             </div>
             <div onClick={(e) => { activeBurger() }} className={`mobile-tab-wrapper ${burgerActive ? 'bgactive' : ''}`}>
-              <Hamburger className='ham-tab'  />
+              <Hamburger className='ham-tab' />
             </div>
           </div>
         </>
