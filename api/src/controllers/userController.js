@@ -73,7 +73,7 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     const user = await localAuth(name, password)
-    if (user && (await subscribeCommunity(user))) {
+    if (user && (await subscribeCommunity(user, false))) {
       res.json({
         data: generateToken(user.dataValues.userID),
         id: user.dataValues.userID
@@ -115,7 +115,7 @@ const registerUser = async (req, res) => {
           lastLogin: new Date(),
           numberOfVisit: 0
         })
-        if (user && (await subscribeCommunity(user))) {
+        if (user && (await subscribeCommunity(user, true))) {
           res.status(201).send('SUCCESS')
         }
       } else {
@@ -150,7 +150,7 @@ const registerLocal = async (name, password, res) => {
         { transaction: t }
       )
     })
-    if (newUser && (await subscribeCommunity(newUser))) {
+    if (newUser && (await subscribeCommunity(newUser, true))) {
       res.status(201).json({
         id: newUser.dataValues.userID,
         userID: newUser.dataValues.userID,
@@ -164,7 +164,7 @@ const registerLocal = async (name, password, res) => {
   }
 }
 
-const subscribeCommunity = async (user) => {
+const subscribeCommunity = async (user, register) => {
   try {
     return await db.sequelize.transaction(async (t) => {
       const communitiesArray = await db.Community.findAll(
@@ -183,23 +183,23 @@ const subscribeCommunity = async (user) => {
           userId: user.dataValues.id,
           communityId: parseInt(communitiesArray[i].id)
         }
-        allFollow.push(followObj)
-      }
-
-      for (let i = 0; i < allFollow.length; i++) {
-        if (
-          communityUser !== null &&
-          allFollow[i].userId === communityUser.dataValues.userId &&
-          allFollow[i].communityId === communityUser.dataValues.communityId
+        if (register) {
+          allFollow.push(followObj)
+        } else if (
+          followObj.userId !== communityUser.dataValues.userId &&
+          followObj.communityId !== communityUser.dataValues.communityId
         ) {
+          allFollow.push(followObj)
+        } else {
           return true
         }
       }
+
       await db.CommunityUser.bulkCreate(allFollow)
       return true
     })
   } catch (error) {
-    console.log(error)
+    return false
   }
 }
 

@@ -77,68 +77,67 @@ const getCommunities = async (req, res) => {
 const getUserCommunities = async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
-  // const order = req.query.order || 'DESC'
-  // const ordervalue = order && [['name', order]]
   const userId = req.user.id
-  const communities = await db.Community.findAndCountAll({
-    offset: (page - 1) * pageSize,
-    limit: pageSize,
-    // ordervalue,
-    attributes: {
-      include: [
-        [
-          sequelize.literal(`(
+  try {
+    const communities = await db.Community.findAndCountAll({
+      offset: (page - 1) * pageSize,
+      limit: pageSize,
+      // ordervalue,
+      attributes: {
+        include: [
+          [
+            sequelize.literal(`(
             SELECT COUNT("userId")
             FROM communities_users
             WHERE "communityId" = communities.id AND active = true
           )`),
-          'followersCount'
-        ],
-        [
-          sequelize.literal(`
+            'followersCount'
+          ],
+          [
+            sequelize.literal(`
             CASE WHEN "creatorId"=${userId} THEN 'true'
               ELSE 'false'
             END
           `),
-          'isCreator'
-        ],
-        [
-          sequelize.literal(`(
+            'isCreator'
+          ],
+          [
+            sequelize.literal(`(
             SELECT COUNT("userId")
             FROM communities_users
             WHERE "communityId" = communities.id AND active = true AND "userId" = ${userId}
           )`),
-          'isFollowed'
-        ]
-      ],
-      exclude: ['deleted']
-    },
-    order: [['createdAt', 'DESC']],
-    where: { deleted: false },
-    include: [
-      {
-        model: db.User,
-        as: 'followers',
-        attributes: [],
-        where: { id: userId },
-        through: { attributes: [] }
-      }
-    ]
-  })
-
-  const totalPages = Math.ceil(communities.count / pageSize)
-  res.status(200).json({
-    communities: communities.rows.map((rec) => ({
-      ...rec.dataValues,
-      attachment: changeFormat(rec.attachment)
-    })),
-    totalItems: communities.count,
-    totalPages,
-    page,
-    pageSize
-  })
-
-  // .catch((err) => res.json({ err }).status(400))
+            'isFollowed'
+          ]
+        ],
+        exclude: ['deleted']
+      },
+      order: [['createdAt', 'DESC']],
+      where: { deleted: false },
+      include: [
+        {
+          model: db.User,
+          as: 'followers',
+          attributes: [],
+          where: { id: userId },
+          through: { attributes: [] }
+        }
+      ]
+    })
+    const totalPages = Math.ceil(communities.count / pageSize)
+    res.status(200).json({
+      communities: communities.rows.map((rec) => ({
+        ...rec.dataValues,
+        attachment: changeFormat(rec.attachment)
+      })),
+      totalItems: communities.count,
+      totalPages,
+      page,
+      pageSize
+    })
+  } catch (error) {
+    res.json({ err }).status(400)
+  }
 }
 
 // @desc Add individual communities
