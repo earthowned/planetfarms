@@ -1,5 +1,5 @@
 import Amplify, { Auth } from 'aws-amplify'
-import { getApi, postApi, putApi, postApiCb } from '../utils/apiFunc'
+import { getApi, postApi, putApi } from '../utils/apiFunc'
 
 import FormData from 'form-data'
 import {
@@ -148,7 +148,7 @@ export const register = (name, password) => async (dispatch) => {
 }
 
 export const login = (name, password) => async (dispatch) => {
-  let data = {}
+  const data = {}
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
@@ -160,19 +160,14 @@ export const login = (name, password) => async (dispatch) => {
           password
         }
       )
-      const localAuthData = {
-        token: userData.data,
-        id: userData.id
-      }
-      window.localStorage.setItem('userInfo', JSON.stringify(localAuthData))
-      data = localAuthData
+      getTokenAndSetToLocalStorage(data, userData.data, userData.id)
     } else {
       const response = await Auth.signIn(name, password)
-      data = {
-        token: response?.signInUserSession?.idToken?.jwtToken || '',
-        id: response?.attributes?.sub || ''
-      }
-      window.localStorage.setItem('userInfo', JSON.stringify(data))
+      getTokenAndSetToLocalStorage(
+        data,
+        response?.signInUserSession?.idToken?.jwtToken || '',
+        response?.attributes?.sub || ''
+      )
       await postApi(
         dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users`,
@@ -211,6 +206,14 @@ export const login = (name, password) => async (dispatch) => {
           : error.message
     })
   }
+}
+
+function getTokenAndSetToLocalStorage (data, token, id) {
+  data = {
+    token,
+    id
+  }
+  window.localStorage.setItem('userInfo', JSON.stringify(data))
 }
 
 function checkErrorReturnMessage (error, dispatch) {
@@ -608,6 +611,6 @@ export const routingCommunityNews = async (dispatch, route = false) => {
     JSON.stringify(communityData.data.communities[0])
   )
   if (route) {
-    document.location.href = `/community-page-news/${communityData.data.communities[0].slug}`
+    document.location.href = `/community-page-news/${communityData.data.communities[0]?.slug}`
   }
 }

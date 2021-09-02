@@ -41,7 +41,6 @@ const getCourses = async (req, res) => {
     },
     distinct: true
   })
-  console.log(courses)
   courses.rows.forEach((course) => {
     course.thumbnail = changeFormat(course.thumbnail)
     course.lessons.forEach((lesson) => {

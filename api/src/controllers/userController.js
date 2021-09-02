@@ -191,10 +191,9 @@ const subscribeCommunity = async (user, register) => {
         ) {
           allFollow.push(followObj)
         } else {
-          return true
+          return
         }
       }
-
       await db.CommunityUser.bulkCreate(allFollow)
       return true
     })
