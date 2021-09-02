@@ -185,12 +185,15 @@ const subscribeCommunity = async (user) => {
         }
         allFollow.push(followObj)
       }
-      if (
-        communityUser !== null &&
-        allFollow[0].userId === communityUser.dataValues.userId &&
-        allFollow[0].communityId === communityUser.dataValues.communityId
-      ) {
-        return true
+
+      for (let i = 0; i < allFollow.length; i++) {
+        if (
+          communityUser !== null &&
+          allFollow[i].userId === communityUser.dataValues.userId &&
+          allFollow[i].communityId === communityUser.dataValues.communityId
+        ) {
+          return true
+        }
       }
       await db.CommunityUser.bulkCreate(allFollow)
       return true
