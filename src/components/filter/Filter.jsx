@@ -36,7 +36,8 @@ const Filter = ({
             {isCategory === false && (
               <img src='/img/funnel-outline.svg' alt='funnel outline' />
             )}
-            {category?.find(cat => (cat.id == selectedCategory))?.name || (isCategory ? 'Select Category' : 'Filter By')}
+            {category?.find((cat) => cat.id == selectedCategory)?.name ||
+              (isCategory ? 'Select Category' : 'Filter By')}
             <img
               className='dropdown-icon'
               src='/img/chevron-right-outline.svg'
