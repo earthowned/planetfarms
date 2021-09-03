@@ -77,70 +77,67 @@ const getCommunities = async (req, res) => {
 const getUserCommunities = async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
-  // const order = req.query.order || 'DESC'
-  // const ordervalue = order && [['name', order]]
-
-  db.Community.findAndCountAll({
-    offset: (page - 1) * pageSize,
-    limit: pageSize,
-    // ordervalue,
-    attributes: {
-      include: [
-        [
-          sequelize.literal(`(
+  const userId = req.user.id
+  try {
+    const communities = await db.Community.findAndCountAll({
+      offset: (page - 1) * pageSize,
+      limit: pageSize,
+      // ordervalue,
+      attributes: {
+        include: [
+          [
+            sequelize.literal(`(
             SELECT COUNT("userId")
             FROM communities_users
             WHERE "communityId" = communities.id AND active = true
           )`),
-          'followersCount'
-        ],
-        [
-          sequelize.literal(`
-            CASE WHEN "creatorId"=${req.user.id} THEN 'true'
+            'followersCount'
+          ],
+          [
+            sequelize.literal(`
+            CASE WHEN "creatorId"=${userId} THEN 'true'
               ELSE 'false'
             END
           `),
-          'isCreator'
-        ],
-        [
-          sequelize.literal(`(
+            'isCreator'
+          ],
+          [
+            sequelize.literal(`(
             SELECT COUNT("userId")
             FROM communities_users
-            WHERE "communityId" = communities.id AND active = true AND "userId" = ${req.user.id}
+            WHERE "communityId" = communities.id AND active = true AND "userId" = ${userId}
           )`),
-          'isFollowed'
-        ]
-      ],
-      exclude: ['deleted']
-    },
-    order: [['createdAt', 'DESC']],
-    where: { deleted: false },
-    include: [
-      {
-        model: db.User,
-        as: 'followers',
-        attributes: [],
-        where: { id: req.user.id },
-        through: { attributes: [] }
-      }
-    ]
-  })
-    .then((communities) => {
-      const totalPages = Math.ceil(communities.count / pageSize)
-      res
-        .json({
-          communities: communities.rows.map((rec) => ({
-            ...rec.dataValues,
-            attachment: changeFormat(rec.attachment)
-          })),
-          totalItems: communities.count,
-          totalPages,
-          page,
-          pageSize
-        })
-        .status(200)
+            'isFollowed'
+          ]
+        ],
+        exclude: ['deleted']
+      },
+      order: [['createdAt', 'DESC']],
+      where: { deleted: false },
+      include: [
+        {
+          model: db.User,
+          as: 'followers',
+          attributes: [],
+          where: { id: userId },
+          through: { attributes: [] }
+        }
+      ]
     })
-    .catch((err) => res.json({ err }).status(400))
+    const totalPages = Math.ceil(communities.count / pageSize)
+    res.status(200).json({
+      communities: communities.rows.map((rec) => ({
+        ...rec.dataValues,
+        attachment: changeFormat(rec.attachment)
+      })),
+      totalItems: communities.count,
+      totalPages,
+      page,
+      pageSize
+    })
+  } catch (error) {
+    res.json({ err }).status(400)
+  }
 }
 
 // @desc Add individual communities
@@ -203,7 +200,9 @@ const createCommunity = async (req, res) => {
         )
         return true
       })
-      if (followCommunity) { return res.json({ message: 'Community is Created !!!' }).status(200) }
+      if (followCommunity) {
+        return res.json({ message: 'Community is Created !!!' }).status(200)
+      }
     }
   } catch (error) {
     return res.json({ error: error.message }).status(400)
@@ -416,17 +415,19 @@ const searchCommunityName = (req, res) => {
 const searchUserCommunityName = (req, res) => {
   const { name, order = 'ASC' } = req.query
   db.Community.findAll({
-    include: [{
-      model: db.User,
-      as: 'creator' && 'followers',
-      attributes: ['id'],
-      where: { id: req.user.id },
-      through: {
-        attributes: ['active'],
-        as: 'followStatus',
-        where: { active: true }
+    include: [
+      {
+        model: db.User,
+        as: 'creator' && 'followers',
+        attributes: ['id'],
+        where: { id: req.user.id },
+        through: {
+          attributes: ['active'],
+          as: 'followStatus',
+          where: { active: true }
+        }
       }
-    }],
+    ],
     where: { name: { [Op.iLike]: '%' + name + '%' } },
     order: [['name', order]]
   })

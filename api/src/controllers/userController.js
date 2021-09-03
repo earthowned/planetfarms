@@ -73,9 +73,9 @@ const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
     const user = await localAuth(name, password)
-    if (user && (await subscribeCommunity(user))) {
-      await res.json({
-        token: generateToken(user.dataValues.userID),
+    if (user && (await subscribeCommunity(user, false))) {
+      res.json({
+        data: generateToken(user.dataValues.userID),
         id: user.dataValues.userID
       })
     } else {
@@ -115,7 +115,7 @@ const registerUser = async (req, res) => {
           lastLogin: new Date(),
           numberOfVisit: 0
         })
-        if (user && (await subscribeCommunity(user))) {
+        if (user && (await subscribeCommunity(user, true))) {
           res.status(201).send('SUCCESS')
         }
       } else {
@@ -140,14 +140,17 @@ const registerLocal = async (name, password, res) => {
         { username: name, password: password },
         { transaction: t }
       )
-      return await db.User.create({
-        userID: user.id,
-        isLocalAuth: true,
-        lastLogin: new Date(),
-        numberOfVisit: 0
-      }, { transaction: t })
+      return await db.User.create(
+        {
+          userID: user.id,
+          isLocalAuth: true,
+          lastLogin: new Date(),
+          numberOfVisit: 0
+        },
+        { transaction: t }
+      )
     })
-    if (newUser && (await subscribeCommunity(newUser))) {
+    if (newUser && (await subscribeCommunity(newUser, true))) {
       res.status(201).json({
         id: newUser.dataValues.userID,
         userID: newUser.dataValues.userID,
@@ -161,7 +164,7 @@ const registerLocal = async (name, password, res) => {
   }
 }
 
-const subscribeCommunity = async (user) => {
+const subscribeCommunity = async (user, register) => {
   try {
     return await db.sequelize.transaction(async (t) => {
       const communitiesArray = await db.Community.findAll(
@@ -171,15 +174,25 @@ const subscribeCommunity = async (user) => {
         },
         { transaction: t }
       )
+      const communityUser = await db.CommunityUser.findOne({
+        where: { userId: user.dataValues.id }
+      })
       const allFollow = []
       for (let i = 0; i < communitiesArray.length; i++) {
         const followObj = {
           userId: user.dataValues.id,
           communityId: parseInt(communitiesArray[i].id)
         }
-        allFollow.push(followObj)
+        if (register) {
+          allFollow.push(followObj)
+        } else if (
+          followObj.userId !== communityUser.dataValues.userId &&
+          followObj.communityId !== communityUser.dataValues.communityId
+        ) {
+          allFollow.push(followObj)
+        }
       }
-      await db.CommunityUser.bulkCreate(allFollow, { transaction: t })
+      await db.CommunityUser.bulkCreate(allFollow)
       return true
     })
   } catch (error) {
@@ -200,7 +213,9 @@ const changePassword = async (req, res) => {
       await db.LocalAuth.update(
         { password: newPassword },
         { where: { id: userID } }
-      ).then(() => res.json({ message: 'The user password has been updated.' }).status(200))
+      ).then(() =>
+        res.json({ message: 'The user password has been updated.' }).status(200)
+      )
     } else {
       res.status(401).json({ message: 'Incorrect old password' })
     }
@@ -274,7 +289,9 @@ const getUserProfileByUserID = async (req, res) => {
     const id = req.params.userID
     const profile = await db.User.findOne({
       where: { userID: id },
-      attributes: { exclude: req.user.userID !== id ? ['phone', 'dateOfBirth'] : [] }
+      attributes: {
+        exclude: req.user.userID !== id ? ['phone', 'dateOfBirth'] : []
+      }
     })
     if (!profile) throw new NotFoundError()
     res.status(200).json({
@@ -316,14 +333,17 @@ const updateUser = async (req, res) => {
     const { email, firstName, lastName, phone, birthday } = req.body
     db.User.findOne({ where: { userID: id } }).then((user) => {
       if (user) {
-        db.User.update({
-          email,
-          firstName,
-          lastName,
-          phone,
-          dateOfBirth: birthday,
-          attachments
-        }, { where: { userID: id } })
+        db.User.update(
+          {
+            email,
+            firstName,
+            lastName,
+            phone,
+            dateOfBirth: birthday,
+            attachments
+          },
+          { where: { userID: id } }
+        )
           .then(() => res.sendStatus(200))
           .catch((err) => res.status(403).json({ error: err.message }))
       } else {
