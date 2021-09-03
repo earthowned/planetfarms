@@ -1,4 +1,10 @@
-import { getApi, putApi, postApi, deleteApi, fileHeader } from '../utils/apiFunc'
+import {
+  getApi,
+  putApi,
+  postApi,
+  deleteApi,
+  fileHeader
+} from '../utils/apiFunc'
 import {
   NEWS_LIST_REQUEST,
   NEWS_LIST_SUCCESS,
@@ -30,24 +36,26 @@ const currentCommunity = localStorage.getItem('currentCommunity')
   ? JSON.parse(localStorage.getItem('currentCommunity'))
   : null
 
-export const listNews = ({ sort = '', pageNumber = '' }) => async (dispatch) => {
-  try {
-    dispatch({ type: NEWS_LIST_REQUEST })
-    const { data } = await getApi(
-      dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}?pageNumber=${pageNumber}`
-    )
-    dispatch({ type: NEWS_LIST_SUCCESS, payload: data })
-  } catch (error) {
-    dispatch({
-      type: NEWS_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
-  }
-}
+export const listNews =
+  ({ sort = '', pageNumber = '' }) =>
+    async (dispatch) => {
+      try {
+        dispatch({ type: NEWS_LIST_REQUEST })
+        const { data } = await getApi(
+          dispatch,
+        `${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}?pageNumber=${pageNumber}`
+        )
+        dispatch({ type: NEWS_LIST_SUCCESS, payload: data })
+      } catch (error) {
+        dispatch({
+          type: NEWS_LIST_FAIL,
+          payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
+      }
+    }
 
 export const searchNews = (search) => async (dispatch) => {
   try {
@@ -68,40 +76,54 @@ export const searchNews = (search) => async (dispatch) => {
   }
 }
 
-export const createNews = ({ newsDetail, newNews }) => async (dispatch, getState) => {
-  const formData = getFormData(newsDetail)
-  try {
-    dispatch({ type: NEWS_CREATE_REQUEST })
-    const richText = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/richtexts`, {})
-    const richtextId = richText?.data?.richtext?.id
-    if (richtextId) {
-      formData.append('richtextId', richtextId)
-      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`, formData, fileHeader)
-      dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
-      // creating rich text
-      await createRichText(newNews, richtextId, dispatch)
-      dispatch({ type: NEWS_CLEAR, payload: data })
-      document.location.href = '/news'
+export const createNews =
+  ({ newsDetail, newNews, history }) =>
+    async (dispatch, getState) => {
+      const formData = getFormData(newsDetail)
+      try {
+        dispatch({ type: NEWS_CREATE_REQUEST })
+        const richText = await postApi(
+          dispatch,
+        `${process.env.REACT_APP_API_BASE_URL}/api/richtexts`,
+        {}
+        )
+        const richtextId = richText?.data?.richtext?.id
+        if (richtextId) {
+          formData.append('richtextId', richtextId)
+          const { data } = await postApi(
+            dispatch,
+          `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`,
+          formData,
+          fileHeader
+          )
+          dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
+          // creating rich text
+          await createRichText(newNews, richtextId, dispatch)
+          dispatch({ type: NEWS_CLEAR, payload: data })
+          history.push(`/news/${data?.data?.id}`)
+        }
+      } catch (error) {
+        const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+        dispatch({ type: NEWS_CREATE_FAIL, payload: message })
+      }
     }
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-    dispatch({ type: NEWS_CREATE_FAIL, payload: message })
-  }
-}
 
 export const deleteNews = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: NEWS_DELETE_REQUEST })
     // eslint-disable-next-line no-undef
-    const data = await deleteApi(`${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
+    const data = await deleteApi(
+      `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`
+    )
     dispatch({ type: NEWS_DELETE_SUCCESS, payload: data })
   } catch (error) {
-    const message = error.response && error.response.data.message
-      ? error.response.data.message
-      : error.message
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
     }
@@ -130,20 +152,27 @@ export const savevideoDetail = (data) => (dispatch) => {
   })
 }
 
-export const newsUpdate = ({ newsDetail, newNews, richtextId, id }) => async (dispatch) => {
-  const formData = getFormData(newsDetail)
-  try {
-    dispatch({ type: NEWS_UPDATE_REQUEST })
-    const data = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity?.id}`, formData)
-    dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data })
-    // updating rich text
-    await updateRichText(newNews, richtextId, dispatch)
-    dispatch({ type: NEWS_CLEAR, payload: data })
-    document.location.href = '/news'
-  } catch (error) {
-    const message = error.response && error.response.data.message
-      ? error.response.data.message
-      : error.message
-    dispatch({ type: NEWS_UPDATE_FAIL, payload: message })
-  }
-}
+export const newsUpdate =
+  ({ newsDetail, newNews, richtextId, id }) =>
+    async (dispatch) => {
+      const formData = getFormData(newsDetail)
+      try {
+        dispatch({ type: NEWS_UPDATE_REQUEST })
+        const data = await putApi(
+          dispatch,
+        `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity?.id}`,
+        formData
+        )
+        dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data })
+        // updating rich text
+        await updateRichText(newNews, richtextId, dispatch)
+        dispatch({ type: NEWS_CLEAR, payload: data })
+        document.location.href = '/news'
+      } catch (error) {
+        const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+        dispatch({ type: NEWS_UPDATE_FAIL, payload: message })
+      }
+    }
