@@ -75,7 +75,7 @@ const Enterprise = () => {
   return (
     <>
       {active && <FormModal setActive={setActive} data={editData} setData={setEditData} />}
-      {deleteModal && <DeleteContent heading="Delete" message="Are you sure you want to delete?" setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
+      {deleteModal && <DeleteContent heading='Delete' message='Are you sure you want to delete?' setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
       <DashboardLayout title='Enterprises'>
         <div className='all-enterprises'>
           <div className='enterprises-col'>

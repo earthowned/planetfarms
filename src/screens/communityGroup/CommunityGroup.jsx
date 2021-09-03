@@ -79,7 +79,7 @@ const CommunityGroup = () => {
   return (
     <>
       {active && <FormModal setActive={setActive} data={editData} setData={setEditData} />}
-      {deleteModal && <DeleteContent heading="Delete" message="Are you sure you want to delete?" setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
+      {deleteModal && <DeleteContent heading='Delete' message='Are you sure you want to delete?' setDeleteModal={setDeleteModal} confirmDelete={confirmDelete} />}
       <DashboardLayout title='Community Group'>
         <div className='x05-0-0-all-groups'>
           <div className='group-flex-col-4'>

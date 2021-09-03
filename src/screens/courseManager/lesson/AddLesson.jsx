@@ -96,7 +96,7 @@ const AddLesson = () => {
 
   function editTextConfirm (data) {
     const { id, textHeading, textDescription } = data
-    dispatch(updateText({textId: id, textHeading, textDescription, setEditTextModel: setTextModal}))
+    dispatch(updateText({ textId: id, textHeading, textDescription, setEditTextModel: setTextModal }))
   }
 
   async function editVideoFunc (id) {
@@ -108,7 +108,7 @@ const AddLesson = () => {
 
   function editVideoConfirm (data) {
     const { id, videoCover, videoTitle, videoDescription, videoLink, videoResource } = data
-    dispatch(updateVideo({id, vData: {videoCover, videoTitle, videoDescription, videoLink, videoResource}, setEditVideoModel: setVideoModal}))
+    dispatch(updateVideo({ id, vData: { videoCover, videoTitle, videoDescription, videoLink, videoResource }, setEditVideoModel: setVideoModal }))
   }
 
   function deleteImageModalFunc (id) {
@@ -151,7 +151,7 @@ const AddLesson = () => {
           title,
           courseId,
           coverImg,
-          lessonDesc,
+          lessonDesc
         },
         order,
         lessonData,
@@ -169,7 +169,7 @@ const AddLesson = () => {
         lessonDetail: {
           title,
           coverImg,
-          lessonDesc,
+          lessonDesc
         },
         lessonId,
         history,
@@ -228,9 +228,9 @@ const AddLesson = () => {
           editTextConfirm={editTextConfirm}
         />
       )}
-      {deleteVideoModal && <DeleteContent heading="Delete" message="Do you want to delete the video?" setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
-      {deleteImageModal && <DeleteContent heading="Delete" message="Do you want to delete the image?" setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
-      {deleteTextModal && <DeleteContent heading="Delete" message="Do you want to delete the text?" setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
+      {deleteVideoModal && <DeleteContent heading='Delete' message='Do you want to delete the video?' setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
+      {deleteImageModal && <DeleteContent heading='Delete' message='Do you want to delete the image?' setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
+      {deleteTextModal && <DeleteContent heading='Delete' message='Do you want to delete the text?' setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
       <DashboardLayout title={pathname.split('/')[3] === 'edit' ? 'Edit Lesson' : 'Add New Lesson'}>
         <BackButton location={`/admin/course/${courseId}`} />
         <RichTextEditor

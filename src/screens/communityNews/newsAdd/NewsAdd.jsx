@@ -1,30 +1,44 @@
 import { useState, useEffect } from 'react'
 import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
-import { useParams, useHistory } from 'react-router-dom'
-import './NewsAdd.scss'
-import BackButton from '../../../components/backButton/BackButton'
+import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { createNews, newsUpdate } from '../../../actions/newsActions'
 
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
+import BackButton from '../../../components/backButton/BackButton'
+import { createNews, newsUpdate } from '../../../actions/newsActions'
 import { getApi } from '../../../utils/apiFunc'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
 import RichTextEditor from '../../../components/richTextEditor/RichTextEditor'
 import DeleteContent from '../../../components/deleteContent/DeleteContent'
+import './NewsAdd.scss'
 
 const NewsAdd = () => {
-  const { currentCommunity } = useSelector(state => state.activeCommunity)
-  const { success: updateVideoSuccess } = useSelector(state => state.updateVideo)
-  const { success: deleteVideoSuccess } = useSelector(state => state.deleteVideo)
+  const { currentCommunity } = useSelector((state) => state.activeCommunity)
 
-  const { success: updateTextSuccess } = useSelector(state => state.updateText)
-  const { success: deleteTextSuccess } = useSelector(state => state.deleteText)
+  const { success: updateVideoSuccess } = useSelector(
+    (state) => state.updateVideo
+  )
+  const { success: deleteVideoSuccess } = useSelector(
+    (state) => state.deleteVideo
+  )
 
-  const { success: updatePhotoSuccess } = useSelector(state => state.updatePhoto)
-  const { success: deletePhotoSuccess } = useSelector(state => state.deletePhoto)
+  const { success: updateTextSuccess } = useSelector(
+    (state) => state.updateText
+  )
+  const { success: deleteTextSuccess } = useSelector(
+    (state) => state.deleteText
+  )
+
+  const { success: updatePhotoSuccess } = useSelector(
+    (state) => state.updatePhoto
+  )
+  const { success: deletePhotoSuccess } = useSelector(
+    (state) => state.deletePhoto
+  )
+  const loggedUser = useSelector((state) => state?.userLogin)
+  const { userInfo } = loggedUser
   // fetching category from route
   const { state } = useLocation()
 
@@ -79,15 +93,21 @@ const NewsAdd = () => {
   }, [])
 
   async function getSingleNews () {
-    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`)
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`
+    )
     setNewsSingleData(data)
   }
 
   const submitNewsForm = ({ title }) => {
-    dispatch(createNews({
-      newsDetail: {title, category, news: newsCover},
-      newNews: newsData.splice(1)
-    }))
+    const creator = userInfo.id
+    dispatch(
+      createNews({
+        newsDetail: { title, category, news: newsCover, creator },
+        newNews: newsData.splice(1)
+      })
+    )
   }
 
   const editNewsForm = ({ title }) => {
@@ -107,38 +127,70 @@ const NewsAdd = () => {
 
   async function editImageFunc (id) {
     if (newsSingleData?.rich_text?.photos) {
-      const photo = newsSingleData.rich_text.photos.filter(el => el.id === id)
+      const photo = newsSingleData.rich_text.photos.filter((el) => el.id === id)
       setImageData(photo)
     }
   }
 
   function editImageConfirm (data) {
     const { id, isImgDesc, lessonImg, photoDescription } = data
-    dispatch(updatePhoto({ iData: { img: lessonImg, photoDescription, isImgDesc }, id, setEditPhotoModel: setCreateImageModal }))
+    dispatch(
+      updatePhoto({
+        iData: { img: lessonImg, photoDescription, isImgDesc },
+        id,
+        setEditPhotoModel: setCreateImageModal
+      })
+    )
   }
 
   async function editTextFunc (id) {
     if (newsSingleData?.rich_text?.texts) {
-      const text = newsSingleData.rich_text.texts.filter(el => el.id === id)
+      const text = newsSingleData.rich_text.texts.filter((el) => el.id === id)
       setTextData(text)
     }
   }
 
   function editTextConfirm (data) {
     const { id, textHeading, textDescription } = data
-    dispatch(updateText({textId: id, textHeading, textDescription, setEditTextModel: setCreateTextModal}))
+    dispatch(
+      updateText({
+        textId: id,
+        textHeading,
+        textDescription,
+        setEditTextModel: setCreateTextModal
+      })
+    )
   }
 
   async function editVideoFunc (id) {
     if (newsSingleData?.rich_text?.videos) {
-      const video = newsSingleData.rich_text.videos.filter(el => el.id === id)
+      const video = newsSingleData.rich_text.videos.filter((el) => el.id === id)
       setVideoData(video)
     }
   }
 
   function editVideoConfirm (data) {
-    const { id, videoCover, videoTitle, videoDescription, videoLink, videoResource } = data
-    dispatch(updateVideo({id, vData: {videoCover, videoTitle, videoDescription, videoLink, videoResource}, setEditVideoModel: setCreateVideoModal}))
+    const {
+      id,
+      videoCover,
+      videoTitle,
+      videoDescription,
+      videoLink,
+      videoResource
+    } = data
+    dispatch(
+      updateVideo({
+        id,
+        vData: {
+          videoCover,
+          videoTitle,
+          videoDescription,
+          videoLink,
+          videoResource
+        },
+        setEditVideoModel: setCreateVideoModal
+      })
+    )
   }
 
   function deleteImageModalFunc (id) {
@@ -173,8 +225,8 @@ const NewsAdd = () => {
 
   return (
     <>
-      {
-        createVideoModal && <NewsCreateModal
+      {createVideoModal && (
+        <NewsCreateModal
           type='video'
           videoActive={createVideoModal}
           setVideoActive={setCreateVideoModal}
@@ -183,10 +235,10 @@ const NewsAdd = () => {
           videoData={videoData}
           setVideoData={setVideoData}
           editVideoConfirm={editVideoConfirm}
-                            />
-      }
-      {
-        createImageModal && <NewsCreateModal
+        />
+      )}
+      {createImageModal && (
+        <NewsCreateModal
           type='image'
           imageActive={createImageModal}
           setImageActive={setCreateImageModal}
@@ -195,10 +247,10 @@ const NewsAdd = () => {
           imageData={imageData}
           setImageData={setImageData}
           editImageConfirm={editImageConfirm}
-                            />
-      }
-      {
-        createTextModal && <NewsCreateModal
+        />
+      )}
+      {createTextModal && (
+        <NewsCreateModal
           type='text'
           textActive={createTextModal}
           setTextActive={setCreateTextModal}
@@ -207,12 +259,35 @@ const NewsAdd = () => {
           textData={textData}
           setTextData={setTextData}
           editTextConfirm={editTextConfirm}
-                           />
-      }
-      {deleteVideoModal && <DeleteContent heading="Delete" message="Do you want to delete the video?" setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
-      {deleteImageModal && <DeleteContent heading="Delete" message="Do you want to delete the image?" setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
-      {deleteTextModal && <DeleteContent heading="Delete" message="Do you want to delete the text?" setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
-      <DashboardLayout title={pathname.split('/')[2] === 'edit' ? 'Edit News' : 'Add News'}>
+        />
+      )}
+      {deleteVideoModal && (
+        <DeleteContent
+          heading='Delete'
+          message='Do you want to delete the video?'
+          setDeleteModal={setDeleteVideoModal}
+          confirmDelete={deleteVideoConfirm}
+        />
+      )}
+      {deleteImageModal && (
+        <DeleteContent
+          heading='Delete'
+          message='Do you want to delete the image?'
+          setDeleteModal={setDeleteImageModal}
+          confirmDelete={deleteImageConfirm}
+        />
+      )}
+      {deleteTextModal && (
+        <DeleteContent
+          heading='Delete'
+          message='Do you want to delete the text?'
+          setDeleteModal={setDeleteTextModal}
+          confirmDelete={deleteTextConfirm}
+        />
+      )}
+      <DashboardLayout
+        title={pathname.split('/')[2] === 'edit' ? 'Edit News' : 'Add News'}
+      >
         <BackButton location='/news' />
         <RichTextEditor
           setVideoModal={setCreateVideoModal}
