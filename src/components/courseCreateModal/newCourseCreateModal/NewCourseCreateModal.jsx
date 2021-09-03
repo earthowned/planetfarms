@@ -2,14 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { CATEGORY } from '../../../utils/urlConstants'
-
 import { createResource } from '../../../actions/courseActions'
-import useGetFetchData from '../../../utils/useGetFetchData'
 import DragDrop from '../../dragDrop/DragDrop'
 import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
 import './NewCourseCreateModal.scss'
-import Filter from '../../filter/Filter'
 import CategoryFilter from '../../categoryFilter/CategoryFilter'
 
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
