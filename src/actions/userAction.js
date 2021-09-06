@@ -48,9 +48,9 @@ import {
 if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
   Amplify.configure({
     Auth: {
-    // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-    // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
-    // REQUIRED - Amazon Cognito Region
+      // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
+      // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
+      // REQUIRED - Amazon Cognito Region
       region: process.env.REACT_APP_COGNITO_REGION,
       // OPTIONAL - Amazon Cognito Federated Identity Pool Region
       // Required only if it's different from Amazon Cognito Region
@@ -85,7 +85,13 @@ if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       // OPTIONAL - Hosted UI configuration
       oauth: {
         domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
-        scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+        scope: [
+          'phone',
+          'email',
+          'profile',
+          'openid',
+          'aws.cognito.signin.user.admin'
+        ],
         redirectSignIn: process.env.FRONTEND_URL,
         redirectSignOut: process.env.FRONTEND_URL,
         responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
@@ -100,7 +106,11 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     let userdata
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const { data } = await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { name, password })
+      const { data } = await postApi(
+        dispatch,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
+        { name, password }
+      )
       userdata = data
       window.localStorage.setItem('userInfo', JSON.stringify(userdata))
     } else {
@@ -112,10 +122,16 @@ export const register = (name, password) => async (dispatch) => {
         }
       })
       const response = await Auth.signIn(name, password)
-      userdata = { token: response?.signInUserSession?.idToken?.jwtToken, id: response?.attributes?.sub }
+      userdata = {
+        token: response?.signInUserSession?.idToken?.jwtToken,
+        id: response?.attributes?.sub
+      }
       window.localStorage.setItem('userInfo', JSON.stringify(userdata))
-      await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: userdata?.id })
-        .catch(err => console.log(err))
+      await postApi(
+        dispatch,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
+        { id: userdata?.id }
+      ).catch((err) => console.log(err))
     }
     dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata })
     dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata })
@@ -123,7 +139,10 @@ export const register = (name, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload: error.response && error.response.data.error ? error.response.data.error : error.message
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
     })
   }
 }
@@ -133,50 +152,76 @@ export const login = (name, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const { data: tokendata } = await postApi(
+      const { data: userData } = await postApi(
         dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
-        { name, password }
+        {
+          name,
+          password
+        }
       )
-      data = tokendata
+      data = getTokenAndSetToLocalStorage(data, userData.data, userData.id)
     } else {
       const response = await Auth.signIn(name, password)
-      data = {
-        token: response?.signInUserSession?.idToken?.jwtToken || '',
-        id: response?.attributes?.sub || ''
-      }
-      window.localStorage.setItem('userInfo', JSON.stringify(data))
-      await postApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`, { id: data.id }, {
-        headers: {
-          Authorization: 'Bearer ' + data.token
+      data = getTokenAndSetToLocalStorage(
+        data,
+        response?.signInUserSession?.idToken?.jwtToken || '',
+        response?.attributes?.sub || ''
+      )
+      await postApi(
+        dispatch,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
+        { id: data.id },
+        {
+          headers: {
+            Authorization: 'Bearer ' + data.token
+          }
         }
-      })
-      await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, {
-        firstName: response.attributes.given_name,
-        lastName: response.attributes.family_name,
-        birthday: response.attributes.birthdate,
-        phone: response.attributes.phone_number,
-        email: response.attributes.email
-      }, {
-        headers: {
-          Authorization: 'Bearer ' + data.token
+      )
+      await putApi(
+        dispatch,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`,
+        {
+          firstName: response.attributes.given_name,
+          lastName: response.attributes.family_name,
+          birthday: response.attributes.birthdate,
+          phone: response.attributes.phone_number,
+          email: response.attributes.email
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + data.token
+          }
         }
-      })
+      )
     }
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     await routingCommunityNews(dispatch, true)
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload: error.response && error.response.data.error
-        ? error.response.data.error
-        : error.message
+      payload:
+        +error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
     })
   }
 }
 
+function getTokenAndSetToLocalStorage (data, token, id) {
+  data = {
+    token,
+    id
+  }
+  window.localStorage.setItem('userInfo', JSON.stringify(data))
+  return data
+}
+
 function checkErrorReturnMessage (error, dispatch) {
-  const message = error.response && error.response.data.error ? error.response.data.error : error.message
+  const message =
+    error.response && error.response.data.error
+      ? error.response.data.error
+      : error.message
   if (message === 'Not authorized, token failed') {
     dispatch(logout())
   }
@@ -186,27 +231,35 @@ function checkErrorReturnMessage (error, dispatch) {
 export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
-    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile/${id}`)
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/profile/${id}`
+    )
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data.results })
   } catch (error) {
-    dispatch({ type: USER_DETAILS_FAIL, payload: checkErrorReturnMessage(error, dispatch) })
+    dispatch({
+      type: USER_DETAILS_FAIL,
+      payload: checkErrorReturnMessage(error, dispatch)
+    })
   }
 }
 
 export const checkAndUpdateToken = () => async (dispatch) => {
   dispatch({ type: ACCESS_TOKEN_REQUEST })
-  getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`).then((data) => {
-    if (data) {
-      if (data?.response?.status === 201) {
-        dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
-        return true
+  getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/token`)
+    .then((data) => {
+      if (data) {
+        if (data?.response?.status === 201) {
+          dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true })
+          return true
+        }
+      } else {
+        return tokenFailure(dispatch, 'Unauthorized')
       }
-    } else {
+    })
+    .catch((data) => {
       return tokenFailure(dispatch, 'Unauthorized')
-    }
-  }).catch((data) => {
-    return tokenFailure(dispatch, 'Unauthorized')
-    /* const message = data.response && data.response.data.name ? data.response.data.name : data.message
+      /* const message = data.response && data.response.data.name ? data.response.data.name : data.message
     if (message === 'TokenExpired') {
       if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
         Auth.currentSession().then((res) => {
@@ -236,7 +289,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
     } else {
       return tokenFailure(dispatch, 'Unauthorized')
     } */
-  })
+    })
 }
 
 const tokenFailure = (dispatch, message) => {
@@ -250,23 +303,33 @@ const tokenFailure = (dispatch, message) => {
 export const getMyDetails = () => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
-    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`)
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`
+    )
     const userdata = data
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-      const { attributes } = await Auth.currentAuthenticatedUser({ bypassCache: true })
+      const { attributes } = await Auth.currentAuthenticatedUser({
+        bypassCache: true
+      })
       userdata.phoneVerified = attributes.phone_number_verified
       userdata.emailVerified = attributes.email_verified
     }
     dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
   } catch (error) {
-    dispatch({ type: USER_DETAILS_FAIL, payload: checkErrorReturnMessage(error, dispatch) })
+    dispatch({
+      type: USER_DETAILS_FAIL,
+      payload: checkErrorReturnMessage(error, dispatch)
+    })
   }
 }
 
 export const updateUser = (user, history) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST })
-    const { userLogin: { userInfo } } = getState()
+    const {
+      userLogin: { userInfo }
+    } = getState()
     const userProfileFormData = new FormData()
     userProfileFormData.append('firstName', user.firstName)
     userProfileFormData.append('lastName', user.lastName)
@@ -286,7 +349,12 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
         bypassCache: true
       })
     }
-    const { data } = await putApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userProfileFormData, config)
+    const { data } = await putApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`,
+      userProfileFormData,
+      config
+    )
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const toBeUpdated = {
         email: user.email,
@@ -300,41 +368,56 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
     dispatch({ type: USER_DETAILS_SUCCESS, payload: { user: data } })
     history.goBack()
   } catch (error) {
-    dispatch({ type: USER_UPDATE_FAIL, payload: checkErrorReturnMessage(error, dispatch) })
+    dispatch({
+      type: USER_UPDATE_FAIL,
+      payload: checkErrorReturnMessage(error, dispatch)
+    })
   }
 }
 
 export const listUsers = () => async (dispatch) => {
   try {
     dispatch({ type: USER_LIST_REQUEST })
-    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users`)
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/users`
+    )
     dispatch({ type: USER_LIST_SUCCESS, payload: data })
   } catch (error) {
-    dispatch({ type: USER_LIST_FAIL, payload: checkErrorReturnMessage(error, dispatch) })
+    dispatch({
+      type: USER_LIST_FAIL,
+      payload: checkErrorReturnMessage(error, dispatch)
+    })
   }
 }
 
 export const searchUsers = (search) => async (dispatch) => {
   try {
     dispatch({ type: USER_SEARCH_REQUEST })
-    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/users/search?name=${search}`)
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/search?name=${search}`
+    )
     dispatch({ type: USER_SEARCH_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: USER_SEARCH_FAIL,
-      payload: error.response && error.response.data.error
-        ? error.response.data.error
-        : error.message
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
     })
   }
 }
 
 export const logout = () => (dispatch) => {
-  Auth.signOut().then(() => {
-    window.localStorage.clear()
-    dispatch({ type: USER_LOGOUT })
-    document.location.href = '/login'
-  }).catch(err => console.log(err))
+  Auth.signOut()
+    .then(() => {
+      window.localStorage.clear()
+      dispatch({ type: USER_LOGOUT })
+      document.location.href = '/login'
+    })
+    .catch((err) => console.log(err))
 }
 
 export const confirmPin = (username, code) => async (dispatch) => {
@@ -349,9 +432,10 @@ export const confirmPin = (username, code) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_CONFIRM_CODE_FAIL,
-      payload: error.response && error.response.data.error
-        ? error.response.data.error
-        : error.message
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
     })
   }
 }
@@ -368,9 +452,10 @@ export const resendCodeAction = (username) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_RESEND_CODE_FAIL,
-      payload: error.response && error.response.data.error
-        ? error.response.data.error
-        : error.message
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
     })
   }
 }
@@ -388,47 +473,57 @@ export const verifyCurrentUserAttribute = (attr) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_ATTR_RESEND_CODE_FAIL,
-      payload: error.response && error.response.data.error
-        ? error.response.data.error
-        : error.message
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
     })
   }
 }
 
-export const verifyCurrentUserAttributeSubmit = (attr, code) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: USER_ATTR_CONFIRM_CODE_REQUEST })
-    dispatch({ type: USER_ATTR_RESEND_CODE_REQUEST })
-    const { userDetails: { user } } = getState()
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-      await Auth.verifyCurrentUserAttributeSubmit(attr, code)
-      const userdata = user
-      const { attributes } = await Auth.currentAuthenticatedUser({
-        bypassCache: true
+export const verifyCurrentUserAttributeSubmit =
+  (attr, code) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: USER_ATTR_CONFIRM_CODE_REQUEST })
+      dispatch({ type: USER_ATTR_RESEND_CODE_REQUEST })
+      const {
+        userDetails: { user }
+      } = getState()
+      if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+        await Auth.verifyCurrentUserAttributeSubmit(attr, code)
+        const userdata = user
+        const { attributes } = await Auth.currentAuthenticatedUser({
+          bypassCache: true
+        })
+        userdata.phoneVerified = attributes.phone_number_verified
+        userdata.emailVerified = attributes.email_verified
+        dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
+        dispatch({ type: USER_ATTR_CONFIRM_CODE_SUCCESS })
+      } else {
+        document.location.href = '/myProfile'
+      }
+    } catch (error) {
+      dispatch({
+        type: USER_ATTR_CONFIRM_CODE_FAIL,
+        payload:
+          error.response && error.response.data.error
+            ? error.response.data.error
+            : error.message
       })
-      userdata.phoneVerified = attributes.phone_number_verified
-      userdata.emailVerified = attributes.email_verified
-      dispatch({ type: USER_DETAILS_SUCCESS, payload: userdata })
-      dispatch({ type: USER_ATTR_CONFIRM_CODE_SUCCESS })
-    } else {
-      document.location.href = '/myProfile'
     }
-  } catch (error) {
-    dispatch({
-      type: USER_ATTR_CONFIRM_CODE_FAIL,
-      payload: error.response && error.response.data.error
-        ? error.response.data.error
-        : error.message
-    })
   }
-}
 
 export const forgotPassword = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_REQUEST })
     if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const data = await Auth.forgotPassword(username)
-      dispatch({ type: USER_FORGOT_PWD_CODE_SUCCESS, payload: `Code has been sent to your ${data.CodeDeliveryDetails.AttributeName.split('_').join(' ')}.` })
+      dispatch({
+        type: USER_FORGOT_PWD_CODE_SUCCESS,
+        payload: `Code has been sent to your ${data.CodeDeliveryDetails.AttributeName.split(
+          '_'
+        ).join(' ')}.`
+      })
       return data
     } else {
       document.location.href = '/'
@@ -436,62 +531,86 @@ export const forgotPassword = (username) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_FORGOT_PWD_CODE_FAIL,
-      payload: error.response && error.response.data.error
-        ? error.response.data.error
-        : error.message
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message
     })
   }
 }
 
-export const forgotPasswordSubmit = (username, code, confirmPassword, history) => async (dispatch) => {
-  try {
-    dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_REQUEST })
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
-      await Auth.forgotPasswordSubmit(username, code, confirmPassword)
-      dispatch({ type: USER_FORGOT_PWD_CODE_SUCCESS, payload: 'Password has been changed successfully.' })
-      dispatch({ type: USER_FORGOT_PWD_CODE_RESET })
-      history.push('/login')
-    } else {
-      document.location.href = '/'
+export const forgotPasswordSubmit =
+  (username, code, confirmPassword, history) => async (dispatch) => {
+    try {
+      dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_REQUEST })
+      if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+        await Auth.forgotPasswordSubmit(username, code, confirmPassword)
+        dispatch({
+          type: USER_FORGOT_PWD_CODE_SUCCESS,
+          payload: 'Password has been changed successfully.'
+        })
+        dispatch({ type: USER_FORGOT_PWD_CODE_RESET })
+        history.push('/login')
+      } else {
+        document.location.href = '/'
+      }
+    } catch (error) {
+      dispatch({
+        type: USER_FORGOT_PWD_CODE_FAIL,
+        payload:
+          error?.response && error.response.data.error
+            ? error.response.data.error
+            : error.message
+      })
     }
-  } catch (error) {
-    dispatch({
-      type: USER_FORGOT_PWD_CODE_FAIL,
-      payload: error?.response && error.response.data.error
-        ? error.response.data.error
-        : error.message
-    })
   }
-}
 
-export const changePassword = (oldPassword, newPassword) => async (dispatch) => {
-  let resdata
-  try {
-    dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
-    if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
-      const { data } = await postApi(dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
-        { oldPassword, newPassword }
-      )
-      resdata = data
-    } else {
-      const user = await Auth.currentAuthenticatedUser()
-      resdata = await Auth.changePassword(user, oldPassword, newPassword)
+export const changePassword =
+  (oldPassword, newPassword) => async (dispatch) => {
+    let resdata
+    try {
+      dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
+      if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
+        const { data } = await postApi(
+          dispatch,
+          `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
+          { oldPassword, newPassword }
+        )
+        resdata = data
+      } else {
+        const user = await Auth.currentAuthenticatedUser()
+        resdata = await Auth.changePassword(user, oldPassword, newPassword)
+      }
+      dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS, payload: resdata })
+    } catch (error) {
+      dispatch({
+        type: USER_PASSWORD_CHANGE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.__type === 'NotAuthorizedException'
+                ? 'Incorrect old password.'
+                : error.response.data.message
+            : error.message
+      })
     }
-    dispatch({ type: USER_PASSWORD_CHANGE_SUCCESS, payload: resdata })
-  } catch (error) {
-    dispatch({
-      type: USER_PASSWORD_CHANGE_FAIL,
-      payload: error.response && error.response.data.message
-        ? (error.response.data.__type === 'NotAuthorizedException' ? 'Incorrect old password.' : error.response.data.message)
-        : error.message
-    })
   }
-}
 
 export const routingCommunityNews = async (dispatch, route = false) => {
-  const communityData = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`)
-  window.localStorage.setItem('currentCommunity', JSON.stringify(communityData.data.communities[0]))
+  const data = window.localStorage.getItem('userInfo')
+  const token = data && JSON.parse(data).token
+  const communityData = await getApi(
+    dispatch,
+    `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`,
+    {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
+  )
+  window.localStorage.setItem(
+    'currentCommunity',
+    JSON.stringify(communityData.data.communities[0])
+  )
   if (route) {
     document.location.href = '/news'
   }
