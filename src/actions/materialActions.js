@@ -26,7 +26,7 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
   }
 }
 
-export const deleteMaterial = (id, refetch, material) => async (dispatch) => {
+export const deleteMaterial = (id, refetch) => async (dispatch) => {
   try {
     dispatch({ type: MATERIAL.MATERIAL_DELETE_REQUEST })
     const { data } = await deleteApi(GET_MATERIAL + `/${id}`)

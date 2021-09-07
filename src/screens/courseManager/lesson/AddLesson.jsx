@@ -6,7 +6,7 @@ import BackButton from '../../../components/backButton/BackButton'
 import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import './AddLesson.scss'
-import { getApi } from '../../../utils/apiFunc'
+import useGetFetchData from '../../../utils/useGetFetchData'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
@@ -65,6 +65,12 @@ const AddLesson = () => {
   const [oldData, setOldData] = useState(null)
 
   const { pathname } = useLocation()
+  const { data, loading, error, refetch } = useGetFetchData(
+    'LESSON_DATA',
+    `${process.env.REACT_APP_API_BASE_URL}/api/lessons/${lessonId}`,
+    null,
+    pathname.split('/')[3] === 'edit'
+  )
 
   // for edit
   useEffect(() => {
@@ -72,6 +78,7 @@ const AddLesson = () => {
       getSingleLesson()
     }
   }, [
+    data,
     dispatch,
     lessonData,
     updateVideoSuccess,
@@ -82,14 +89,9 @@ const AddLesson = () => {
     deletePhotoSuccess
   ])
 
-  async function getSingleLesson () {
-    const { data } = await getApi(
-      dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/lessons/${lessonId}`
-    )
+  function getSingleLesson () {
     setLessonSingleData(data?.data)
   }
-
   async function editImageFunc (id) {
     if (lessonSingleData?.rich_text?.photos) {
       const photo = lessonSingleData.rich_text.photos.filter(
@@ -98,7 +100,6 @@ const AddLesson = () => {
       setImageData(photo)
     }
   }
-
   function editImageConfirm (data) {
     const { id, isImgDesc, lessonImg, photoDescription } = data
     dispatch(
@@ -329,6 +330,7 @@ const AddLesson = () => {
           editForm={editLessonForm}
           submitForm={submitLessonForm}
           material={material}
+          materialData={lessonSingleData?.materials}
           setMaterial={setMaterial}
           removeMaterial={removeMaterial}
           showMaterial
@@ -337,6 +339,8 @@ const AddLesson = () => {
           editBtnName='edit lesson'
           cancel={() => history.push(`/admin/course/${courseId}`)}
           setOldData={setOldData}
+          dispatch={dispatch}
+          refetch={refetch}
         />
       </DashboardLayout>
     </>

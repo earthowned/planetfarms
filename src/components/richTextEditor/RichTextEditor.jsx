@@ -28,6 +28,7 @@ const RichTextEditor = ({
   submitForm,
   showMaterial,
   material,
+  materialData,
   setMaterial,
   removeMaterial,
   edit,
@@ -35,7 +36,9 @@ const RichTextEditor = ({
   saveBtnName,
   cancel,
   title,
-  setOldData
+  setOldData,
+  dispatch,
+  refetch
 }) => {
   const { register, errors, handleSubmit } = useForm()
   return (
@@ -63,25 +66,30 @@ const RichTextEditor = ({
         title={title}
         setOldData={setOldData}
       />
-      {showMaterial && <LessonMaterial
-        material={material}
-        setMaterial={setMaterial}
-        removeLocalMaterial={removeMaterial}
-                       />}
+      {showMaterial && (
+        <LessonMaterial
+          material={material}
+          setMaterial={setMaterial}
+          materialData={materialData}
+          removeLocalMaterial={removeMaterial}
+          dispatch={dispatch}
+          refetch={refetch}
+        />
+      )}
 
-      {
-          edit
-            ? <SaveModal
-                onClick={handleSubmit(editForm)}
-                name={editBtnName}
-                cancel={cancel}
-              />
-            : <SaveModal
-                onClick={handleSubmit(submitForm)}
-                name={saveBtnName}
-                cancel={cancel}
-              />
-        }
+      {edit ? (
+        <SaveModal
+          onClick={handleSubmit(editForm)}
+          name={editBtnName}
+          cancel={cancel}
+        />
+      ) : (
+        <SaveModal
+          onClick={handleSubmit(submitForm)}
+          name={saveBtnName}
+          cancel={cancel}
+        />
+      )}
     </>
   )
 }
@@ -124,8 +132,8 @@ const AddContent = ({
         defaultValue={editData?.title ? editData?.title : title}
       />
 
-      {
-        saveBtnName === 'save lesson' && <TextArea
+      {saveBtnName === 'save lesson' && (
+        <TextArea
           className='default-input-variation text-area-variation lessonDesc'
           placeholder='Lesson Description'
           cols='3'
@@ -133,26 +141,32 @@ const AddContent = ({
           name='lessonDesc'
           ref={register}
           defaultValue={editData?.lessonDesc || ''}
-                                         />
-        }
+        />
+      )}
 
-      {
-      saveBtnName === 'save lesson'
-        ? <DragDrop
-            text='Drag & Drop photo in this area or Click Here to attach'
-            onChange={(img) => setCoverImage(img)}
-            dataImg={editData?.coverImg ? `${GET_COVERIMG}${editData.coverImg}` : ''}
-            onClick={() => setCoverImage(null)}
-          />
-        : <DragDrop
-            onChange={(img) => setCoverImage(img)}
-            text='Drag & Drop photo in this area or Click Here to attach'
-            dataImg={editData?._attachments ? `${process.env.REACT_APP_CDN_BASE_URL}/news/${editData?._attachments}` : ''}
-            onClick={() => setCoverImage(null)}
-          />
-      }
-      {
-        editData && <EditContent
+      {saveBtnName === 'save lesson' ? (
+        <DragDrop
+          text='Drag & Drop photo in this area or Click Here to attach'
+          onChange={(img) => setCoverImage(img)}
+          dataImg={
+            editData?.coverImg ? `${GET_COVERIMG}${editData.coverImg}` : ''
+          }
+          onClick={() => setCoverImage(null)}
+        />
+      ) : (
+        <DragDrop
+          onChange={(img) => setCoverImage(img)}
+          text='Drag & Drop photo in this area or Click Here to attach'
+          dataImg={
+            editData?._attachments
+              ? `${process.env.REACT_APP_CDN_BASE_URL}/news/${editData?._attachments}`
+              : ''
+          }
+          onClick={() => setCoverImage(null)}
+        />
+      )}
+      {editData && (
+        <EditContent
           data={editData}
           setEditPhotoModel={setImageModal}
           setEditTextModel={setTextModal}
@@ -164,9 +178,14 @@ const AddContent = ({
           removePhoto={setDeleteImageModal}
           removeVideo={setDeleteVideoModal}
           setOldData={setOldData}
-                    />
-      }
-      <ContentAdd data={formData} setVideoModal={setVideoModal} setImageModal={setImageModal} setTextModal={setTextModal} />
+        />
+      )}
+      <ContentAdd
+        data={formData}
+        setVideoModal={setVideoModal}
+        setImageModal={setImageModal}
+        setTextModal={setTextModal}
+      />
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { deleteMaterial } from '../../../actions/materialActions'
 import { MATERIAL } from '../../../utils/urlConstants'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import Material from '../../../components/material/Material'
@@ -6,7 +7,10 @@ const LessonMaterial = ({
   material,
   setMaterial,
   removeMaterial,
-  removeLocalMaterial
+  removeLocalMaterial,
+  materialData,
+  dispatch,
+  refetch
 }) => {
   const matData = (mData) => {
     setMaterial(() => [...material, { mData }])
@@ -16,22 +20,42 @@ const LessonMaterial = ({
     const name = e.currentTarget.getAttribute('name')
     setMaterial(material.filter((item) => item?.mData?.name !== name))
   }
+  const removeRemoteMaterial = (id) => {
+    console.log(id)
+    dispatch(deleteMaterial(id, refetch))
+  }
+  const materialList = materialData || material
 
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
-      {material?.length > 0 ? (
+      {materialList?.length > 0 ? (
         <div className='material'>
-          {material.map((mater, i) => {
+          {materialList.map((mater, i) => {
             return (
-              <Material key={i} name={mater?.mData?.name}>
-                <a href={mater?.mData?.preview} download={mater?.mData?.name}>
+              <Material
+                key={i}
+                name={mater?.mData ? mater?.mData?.name : mater?.name}
+              >
+                <a
+                  href={
+                    mater?.mData
+                      ? mater?.mData?.preview
+                      : `${MATERIAL}${mater?.material}`
+                  }
+                  download={mater?.mData ? mater?.mData?.name : mater?.name}
+                  target={mater?.mData ? '' : '_blank'}
+                >
                   <div>
                     <img src='/img/download-icon.svg' alt='download icon' />{' '}
                     <span>Download</span>
                   </div>
                 </a>
-                <div onClick={removeItem} name={mater?.mData?.name}>
+                <div
+                  onClick={() =>
+                    mater?.mData ? removeItem : removeRemoteMaterial(mater?.id)}
+                  name={mater?.mData?.name}
+                >
                   <img src='/img/trash-icon.svg' alt='trash icon' />
                   <span>Delete</span>
                 </div>
