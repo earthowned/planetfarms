@@ -100,6 +100,7 @@ const AddLesson = () => {
       setImageData(photo)
     }
   }
+
   function editImageConfirm (data) {
     const { id, isImgDesc, lessonImg, photoDescription } = data
     dispatch(
@@ -118,7 +119,6 @@ const AddLesson = () => {
       setTextData(text)
     }
   }
-
   function editTextConfirm (data) {
     const { id, textHeading, textDescription } = data
     dispatch(
@@ -215,7 +215,6 @@ const AddLesson = () => {
       })
     )
   }
-
   // edit lesson
   const editLessonForm = ({ title, lessonDesc }) => {
     const coverImg = lessonCover
@@ -344,6 +343,8 @@ const AddLesson = () => {
           setOldData={setOldData}
           dispatch={dispatch}
           refetch={refetch}
+          setTextData={setTextData}
+          setImageData={setImageData}
         />
       </DashboardLayout>
     </>

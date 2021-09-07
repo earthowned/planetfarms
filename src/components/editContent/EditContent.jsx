@@ -17,7 +17,8 @@ const EditContent = ({
   editImageFunc,
   editVideoFunc,
   editTextFunc,
-  setOldData
+  setOldData,
+  formData
 }) => {
   const [allLessonData, setAllLessonData] = useState([])
   const [newData, setNewData] = useState([])
@@ -32,8 +33,10 @@ const EditContent = ({
   })
 
   useEffect(() => {
-    setNewData([textData, videoData, photoData])
-    setOldData([textData, videoData, photoData].flat().sort((a, b) => a.order - b.order))
+    setNewData([textData, videoData, photoData, formData])
+    setOldData(
+      [textData, videoData, photoData].flat().sort((a, b) => a.order - b.order)
+    )
   }, [data])
 
   const flattenData = newData.flat()
@@ -49,7 +52,6 @@ const EditContent = ({
       return data?.videoResource?.preview
     }
   }
-
   return (
     <>
       {flattenData
@@ -71,15 +73,15 @@ const EditContent = ({
               title={data?.videoTitle}
               description={data?.videoDescription}
               url={
-                  data?.videoLink === '' || data?.videoLink === undefined
-                    ? video(data)
-                    : data?.videoLink
-                }
+                data?.videoLink === '' || data?.videoLink === undefined
+                  ? video(data)
+                  : data?.videoLink
+              }
               thumbnail={
                 typeof data?.videoCover === 'string'
                   ? `${VIDEO_COVER}${data?.videoCover}`
                   : data?.videoCover?.preview
-                }
+              }
               setEditVideoModel={setEditVideoModel}
               isEditable
               id={data?.id || data?.itemId}
@@ -102,7 +104,6 @@ const EditContent = ({
                 onRemove={data?.id ? removePhoto : removeLocalData}
               />
             )}
-
           </div>
         ))}
       {/* {

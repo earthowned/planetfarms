@@ -15,20 +15,23 @@ const CreateImage = ({
   setImageActive,
   data,
   setData,
-  editData = [],
+  editData,
   setEditData,
   editFunc
 }) => {
   const [isImgDesc, setIsImgDesc] = useState(true)
-  const [lessonImg, setLessonImg] = useState(null)
-
+  const [lessonImg, setLessonImg] = useState(
+    editData.length > 0
+      ? editData[0]?.itemId
+          ? editData[0]?.lessonImg
+          : `${LESSON_IMG}${editData[0].lessonImg}`
+      : ''
+  )
   const { register, handleSubmit } = useForm()
 
   const submitLessonImg = ({ photoDescription }) => {
     const itemId =
-      data.length === 0
-        ? data.length + 1
-        : data[data.length - 1].itemId + 1
+      data.length === 0 ? data.length + 1 : data[data.length - 1].itemId + 1
     const imgData = [
       ...data,
       {
@@ -57,6 +60,15 @@ const CreateImage = ({
     setImageActive(false)
     setEditData([])
   }
+  const editLocal = ({ photoDescription }) => {
+    if (editData.length !== 0) {
+      editData[0].lessonImg = lessonImg
+      editData[0].photoDescription = photoDescription
+      editData[0].isImgDesc = isImgDesc
+    }
+    setImageActive(false)
+    setEditData([])
+  }
   return (
     <>
       {imageActive && (
@@ -71,7 +83,13 @@ const CreateImage = ({
                 onChange={(img) => setLessonImg(img)}
                 fileType='image/png,image/jpeg,image/jpg'
                 text='Drag & Drop photo in this area or Click Here to attach'
-                dataImg={editData.length > 0 && `${LESSON_IMG}${editData[0].lessonImg}`}
+                dataImg={
+                  editData.length > 0
+                    ? editData[0]?.itemId
+                        ? editData[0]?.lessonImg?.preview
+                        : `${LESSON_IMG}${editData[0].lessonImg}`
+                    : ''
+                }
                 onClick={() => setLessonImg(null)}
               />
               <div className='description'>
@@ -84,7 +102,9 @@ const CreateImage = ({
               {isImgDesc && (
                 <div className='photo-input-container'>
                   <TextArea
-                    defaultValue={editData.length > 0 ? editData[0].photoDescription : ''}
+                    defaultValue={
+                      editData.length > 0 ? editData[0].photoDescription : ''
+                    }
                     placeholder='Photo Description (Optional)'
                     className='default-input-variation text-area-variation textarea'
                     cols='3'
@@ -95,19 +115,21 @@ const CreateImage = ({
                 </div>
               )}
 
-              {
-                editData.length > 0
-                  ? <Button
-                      className='add'
-                      name='Edit Photo Block'
-                      onClick={handleSubmit(editNewsImg)}
-                    />
-                  : <Button
-                      className='add'
-                      name='Add Photo Block'
-                      onClick={handleSubmit(submitLessonImg)}
-                    />
-              }
+              {editData.length > 0 ? (
+                <Button
+                  className='add'
+                  name='Edit Photo Block'
+                  onClick={handleSubmit(
+                    editData[0]?.itemId ? editLocal : editNewsImg
+                  )}
+                />
+              ) : (
+                <Button
+                  className='add'
+                  name='Add Photo Block'
+                  onClick={handleSubmit(submitLessonImg)}
+                />
+              )}
             </div>
           </div>
         </div>

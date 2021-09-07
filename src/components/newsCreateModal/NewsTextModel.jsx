@@ -15,12 +15,9 @@ const CreateText = ({
   editFunc
 }) => {
   const { register, errors, handleSubmit } = useForm()
-
   const addText = ({ textHeading, textDescription }) => {
     const itemId =
-      data.length === 0
-        ? data.length + 1
-        : data[data.length - 1].itemId + 1
+      data.length === 0 ? data.length + 1 : data[data.length - 1].itemId + 1
 
     if (textHeading.length !== 0 || textDescription.length !== 0) {
       const textData = [
@@ -48,6 +45,14 @@ const CreateText = ({
     setEditData([])
   }
 
+  const editLocalData = ({ textHeading, textDescription }) => {
+    if (editData.length !== 0) {
+      editData[0].textHeading = textHeading
+      editData[0].textDescription = textDescription
+    }
+    setTextActive(false)
+    setEditData([])
+  }
   return (
     <>
       {textActive && (
@@ -65,7 +70,9 @@ const CreateText = ({
                   placeholder='Text Heading (Optional)'
                   name='textHeading'
                   ref={register}
-                  defaultValue={editData.length > 0 ? editData[0].textHeading : ''}
+                  defaultValue={
+                    editData.length > 0 ? editData[0].textHeading : ''
+                  }
                 />
                 <TextArea
                   className={`default-input-variation text-area-variation ${
@@ -77,7 +84,9 @@ const CreateText = ({
                   cols='3'
                   rows='7'
                   name='textDescription'
-                  defaultValue={editData.length > 0 ? editData[0].textDescription : ''}
+                  defaultValue={
+                    editData.length > 0 ? editData[0].textDescription : ''
+                  }
                   ref={register({
                     required: {
                       value: true,
@@ -93,19 +102,21 @@ const CreateText = ({
                 />
               </div>
 
-              {
-                editData.length > 0
-                  ? <Button
-                      className='add'
-                      name='Edit Text Block'
-                      onClick={handleSubmit(editText)}
-                    />
-                  : <Button
-                      className='add'
-                      name='Add Text Block'
-                      onClick={handleSubmit(addText)}
-                    />
-              }
+              {editData.length > 0 ? (
+                <Button
+                  className='add'
+                  name='Edit Text Block'
+                  onClick={handleSubmit(
+                    editData[0]?.itemId ? editLocalData : editText
+                  )}
+                />
+              ) : (
+                <Button
+                  className='add'
+                  name='Add Text Block'
+                  onClick={handleSubmit(addText)}
+                />
+              )}
             </div>
           </div>
         </div>

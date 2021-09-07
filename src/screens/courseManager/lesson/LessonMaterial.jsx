@@ -21,7 +21,6 @@ const LessonMaterial = ({
     setMaterial(material.filter((item) => item?.mData?.name !== name))
   }
   const removeRemoteMaterial = (id) => {
-    console.log(id)
     dispatch(deleteMaterial(id, refetch))
   }
   const materialList = materialData || material

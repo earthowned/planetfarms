@@ -3,24 +3,58 @@ import Text from '../../screens/courseManager/lesson/Text'
 import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
 
-const ContentAdd = ({ data, setVideoModal, setImageModal, setTextModal, textModal }) => {
+const ContentAdd = ({
+  data,
+  setVideoModal,
+  setImageModal,
+  setTextModal,
+  setTextData,
+  setImgData,
+  setData
+}) => {
+  const editLocalTextData = (id) => {
+    const localData = data.find((item) => item.itemId === id)
+    setTextData([localData])
+  }
+  const editLocalImgData = (id) => {
+    const localData = data.find((item) => item.itemId === id)
+    setImgData([localData])
+  }
+  const deleteLocal = (id) => {
+    const dataAfterDelete = data.filter((item) => item.itemId !== id)
+    setData(dataAfterDelete)
+  }
   return (
     <>
-      {
-        data.length > 0 &&
-          data.map((vid, index) => (
-            <div key={index}>
-              <Video
-                title={vid.videoTitle}
-                description={vid.videoDescription}
-                url={vid.videoLink || vid.videoResource?.preview}
-                thumbnail={vid.videoCover?.preview}
-              />
-              <Image src={vid.lessonImg?.preview} desc={vid.photoDescription} />
-              <Text heading={vid.textHeading} desc={vid.textDescription} />
-            </div>
-          ))
-      }
+      {data.length > 0 &&
+        data.map((vid, index) => (
+          <div key={index}>
+            <Video
+              title={vid.videoTitle}
+              description={vid.videoDescription}
+              url={vid.videoLink || vid.videoResource?.preview}
+              thumbnail={vid.videoCover?.preview}
+            />
+            <Image
+              src={vid.lessonImg?.preview}
+              desc={vid.photoDescription}
+              isEditable
+              modelPopUp={editLocalImgData}
+              setEditPhotoModel={setImageModal}
+              id={vid.itemId}
+              onRemove={deleteLocal}
+            />
+            <Text
+              heading={vid.textHeading}
+              desc={vid.textDescription}
+              isEditable
+              modelPopUp={editLocalTextData}
+              setEditTextModel={setTextModal}
+              id={vid.itemId}
+              onRemove={deleteLocal}
+            />
+          </div>
+        ))}
       <div className='admin-lesson-create-btn-wrapper'>
         <button className='secondary-btn' onClick={() => setVideoModal(true)}>
           <img src='/img/video-outline.svg' alt='video icon' />{' '}
