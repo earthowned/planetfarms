@@ -45,7 +45,7 @@ import {
   USER_SEARCH_FAIL
 } from '../constants/userConstants'
 
-if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+if (process.env.REACT_APP_AUTH_METHOD === 'cognito' || process.env.REACT_APP_AUTH_METHOD === 'planetfarm-auth-method') {
   Amplify.configure({
     Auth: {
       // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID

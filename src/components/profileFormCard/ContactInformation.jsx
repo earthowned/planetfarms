@@ -9,7 +9,7 @@ const ContactInformation = ({ user, verification, isCurrentUser }) => {
       secondTitle: 'Phone',
       secondValue: user?.phone
     } : {}),
-    ...(process.env.REACT_APP_AUTH_METHOD === 'cognito' ? {
+    ...((process.env.REACT_APP_AUTH_METHOD === 'cognito' || process.env.REACT_APP_AUTH_METHOD === 'planetfarm-auth-method') ? {
       firstVerify: {
         isVerified: user?.emailVerified || false,
         clickHandler: verification?.emailClickHandler
