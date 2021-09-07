@@ -125,7 +125,8 @@ const AddLesson = () => {
         textId: id,
         textHeading,
         textDescription,
-        setEditTextModel: setTextModal
+        setEditTextModel: setTextModal,
+        refetch
       })
     )
   }
@@ -188,8 +189,8 @@ const AddLesson = () => {
     setTextId(id)
   }
 
-  async function deleteTextConfirm () {
-    dispatch(deleteText(textId))
+  function deleteTextConfirm () {
+    dispatch(deleteText(textId, refetch))
     setDeleteTextModal(false)
   }
 

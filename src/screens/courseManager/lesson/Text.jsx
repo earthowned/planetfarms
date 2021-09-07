@@ -21,9 +21,7 @@ const Text = ({
         <div className='text'>
           <div className='block'>
             <h1>{heading}</h1>
-            <p>
-              {desc} {id}
-            </p>
+            <p>{desc}</p>
           </div>
           {isEditable ? (
             <Actions

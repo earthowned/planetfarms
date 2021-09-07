@@ -14,31 +14,39 @@ import {
 } from '../constants/textConstants'
 
 export const createText =
-  ({ textHeading, textDescription, richtextId, order }) => async (dispatch) => {
-    const textData = { textHeading, textDescription, richtextId, order }
+  ({ textHeading, textDescription, richtextId, order }) =>
+    async (dispatch) => {
+      const textData = { textHeading, textDescription, richtextId, order }
 
-    try {
-      dispatch({ type: TEXT_CREATE_REQUEST })
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
+      try {
+        dispatch({ type: TEXT_CREATE_REQUEST })
+        const config = {
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      }
-      const { data } = await Axios.post(ADD_LESSON_TEXT, textData, config)
-      dispatch({ type: TEXT_CREATE_SUCCESS, payload: data })
-    } catch (error) {
-      dispatch({
-        type: TEXT_CREATE_FAIL,
-        payload:
+        const { data } = await Axios.post(ADD_LESSON_TEXT, textData, config)
+        dispatch({ type: TEXT_CREATE_SUCCESS, payload: data })
+      } catch (error) {
+        dispatch({
+          type: TEXT_CREATE_FAIL,
+          payload:
           error.response && error.response.data.message
             ? error.response.data.message
             : error.message
-      })
+        })
+      }
     }
-  }
 
 export const updateText =
-  ({ textId, textHeading, textDescription, order, setEditTextModel }) =>
+  ({
+    textId,
+    textHeading,
+    textDescription,
+    order,
+    setEditTextModel,
+    refetch
+  }) =>
     async (dispatch) => {
       const textData = { textHeading, textDescription, order }
 
@@ -55,7 +63,7 @@ export const updateText =
           config
         )
         dispatch({ type: TEXT_UPDATE_SUCCESS, payload: data })
-        // refetch()
+        refetch()
         setEditTextModel(false)
       } catch (error) {
         dispatch({
