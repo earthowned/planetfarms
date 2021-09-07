@@ -47,6 +47,7 @@ const LessonMaterial = ({
         className='secondary-btn addMaterial'
         text='Add Materials'
         onChange={(mat) => matData(mat)}
+        editImg
       />
     </div>
   )

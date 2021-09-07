@@ -19,14 +19,26 @@ const AddLesson = () => {
   const { lessonId } = useParams()
   const { state } = useLocation()
 
-  const { success: updateVideoSuccess } = useSelector(state => state.updateVideo)
-  const { success: deleteVideoSuccess } = useSelector(state => state.deleteVideo)
+  const { success: updateVideoSuccess } = useSelector(
+    (state) => state.updateVideo
+  )
+  const { success: deleteVideoSuccess } = useSelector(
+    (state) => state.deleteVideo
+  )
 
-  const { success: updateTextSuccess } = useSelector(state => state.updateText)
-  const { success: deleteTextSuccess } = useSelector(state => state.deleteText)
+  const { success: updateTextSuccess } = useSelector(
+    (state) => state.updateText
+  )
+  const { success: deleteTextSuccess } = useSelector(
+    (state) => state.deleteText
+  )
 
-  const { success: updatePhotoSuccess } = useSelector(state => state.updatePhoto)
-  const { success: deletePhotoSuccess } = useSelector(state => state.deletePhoto)
+  const { success: updatePhotoSuccess } = useSelector(
+    (state) => state.updatePhoto
+  )
+  const { success: deletePhotoSuccess } = useSelector(
+    (state) => state.deletePhoto
+  )
 
   const [videoModal, setVideoModal] = useState(false)
   const [imageModal, setImageModal] = useState(false)
@@ -71,44 +83,83 @@ const AddLesson = () => {
   ])
 
   async function getSingleLesson () {
-    const { data } = await getApi(dispatch, `${process.env.REACT_APP_API_BASE_URL}/api/lessons/${lessonId}`)
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/lessons/${lessonId}`
+    )
     setLessonSingleData(data?.data)
   }
 
   async function editImageFunc (id) {
     if (lessonSingleData?.rich_text?.photos) {
-      const photo = lessonSingleData.rich_text.photos.filter(el => el.id === id)
+      const photo = lessonSingleData.rich_text.photos.filter(
+        (el) => el.id === id
+      )
       setImageData(photo)
     }
   }
 
   function editImageConfirm (data) {
     const { id, isImgDesc, lessonImg, photoDescription } = data
-    dispatch(updatePhoto({ iData: { img: lessonImg, photoDescription, isImgDesc }, id, setEditPhotoModel: setImageModal }))
+    dispatch(
+      updatePhoto({
+        iData: { img: lessonImg, photoDescription, isImgDesc },
+        id,
+        setEditPhotoModel: setImageModal
+      })
+    )
   }
 
   async function editTextFunc (id) {
     if (lessonSingleData?.rich_text?.texts) {
-      const text = lessonSingleData.rich_text.texts.filter(el => el.id === id)
+      const text = lessonSingleData.rich_text.texts.filter((el) => el.id === id)
       setTextData(text)
     }
   }
 
   function editTextConfirm (data) {
     const { id, textHeading, textDescription } = data
-    dispatch(updateText({ textId: id, textHeading, textDescription, setEditTextModel: setTextModal }))
+    dispatch(
+      updateText({
+        textId: id,
+        textHeading,
+        textDescription,
+        setEditTextModel: setTextModal
+      })
+    )
   }
 
   async function editVideoFunc (id) {
     if (lessonSingleData?.rich_text?.videos) {
-      const video = lessonSingleData.rich_text.videos.filter(el => el.id === id)
+      const video = lessonSingleData.rich_text.videos.filter(
+        (el) => el.id === id
+      )
       setVideoData(video)
     }
   }
 
   function editVideoConfirm (data) {
-    const { id, videoCover, videoTitle, videoDescription, videoLink, videoResource } = data
-    dispatch(updateVideo({ id, vData: { videoCover, videoTitle, videoDescription, videoLink, videoResource }, setEditVideoModel: setVideoModal }))
+    const {
+      id,
+      videoCover,
+      videoTitle,
+      videoDescription,
+      videoLink,
+      videoResource
+    } = data
+    dispatch(
+      updateVideo({
+        id,
+        vData: {
+          videoCover,
+          videoTitle,
+          videoDescription,
+          videoLink,
+          videoResource
+        },
+        setEditVideoModel: setVideoModal
+      })
+    )
   }
 
   function deleteImageModalFunc (id) {
@@ -228,10 +279,35 @@ const AddLesson = () => {
           editTextConfirm={editTextConfirm}
         />
       )}
-      {deleteVideoModal && <DeleteContent heading='Delete' message='Do you want to delete the video?' setDeleteModal={setDeleteVideoModal} confirmDelete={deleteVideoConfirm} />}
-      {deleteImageModal && <DeleteContent heading='Delete' message='Do you want to delete the image?' setDeleteModal={setDeleteImageModal} confirmDelete={deleteImageConfirm} />}
-      {deleteTextModal && <DeleteContent heading='Delete' message='Do you want to delete the text?' setDeleteModal={setDeleteTextModal} confirmDelete={deleteTextConfirm} />}
-      <DashboardLayout title={pathname.split('/')[3] === 'edit' ? 'Edit Lesson' : 'Add New Lesson'}>
+      {deleteVideoModal && (
+        <DeleteContent
+          heading='Delete'
+          message='Do you want to delete the video?'
+          setDeleteModal={setDeleteVideoModal}
+          confirmDelete={deleteVideoConfirm}
+        />
+      )}
+      {deleteImageModal && (
+        <DeleteContent
+          heading='Delete'
+          message='Do you want to delete the image?'
+          setDeleteModal={setDeleteImageModal}
+          confirmDelete={deleteImageConfirm}
+        />
+      )}
+      {deleteTextModal && (
+        <DeleteContent
+          heading='Delete'
+          message='Do you want to delete the text?'
+          setDeleteModal={setDeleteTextModal}
+          confirmDelete={deleteTextConfirm}
+        />
+      )}
+      <DashboardLayout
+        title={
+          pathname.split('/')[3] === 'edit' ? 'Edit Lesson' : 'Add New Lesson'
+        }
+      >
         <BackButton location={`/admin/course/${courseId}`} />
         <RichTextEditor
           setVideoModal={setVideoModal}

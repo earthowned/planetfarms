@@ -18,12 +18,7 @@ import { createRichText, updateRichText } from '../utils/createUpdateRichText'
 import { getFormData } from '../utils/getFormData'
 
 export const createLesson =
-  ({
-    lessonDetail,
-    lessonData,
-    material,
-    history
-  }) =>
+  ({ lessonDetail, lessonData, material, history }) =>
     async (dispatch) => {
       const lessonFormData = getFormData(lessonDetail)
       try {
@@ -34,7 +29,9 @@ export const createLesson =
           }
         }
 
-        const richText = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/richtexts`)
+        const richText = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/richtexts`
+        )
         const richtextId = richText?.data?.richtext?.id
 
         if (richtextId) {
@@ -49,7 +46,7 @@ export const createLesson =
           const lessonId = data?.data?.id
           // creating rich text
           await createRichText(lessonData, richtextId, dispatch)
-          await addMaterialFunc(material, lessonId, dispatch)
+          const mat = await addMaterialFunc(material, lessonId, dispatch)
           history.push(`/lesson/${lessonId}`)
         }
       } catch (error) {
@@ -64,7 +61,14 @@ export const createLesson =
     }
 
 export const updateLesson =
-  ({ lessonDetail, lessonId, history, lessonData = [], material = [], richtextId }) =>
+  ({
+    lessonDetail,
+    lessonId,
+    history,
+    lessonData = [],
+    material = [],
+    richtextId
+  }) =>
     async (dispatch) => {
       const updateLessonFormData = getFormData(lessonDetail)
       try {

@@ -1,17 +1,23 @@
 import { ADD_MATERIAL, GET_MATERIAL } from '../utils/urlConstants'
 import { postApi, deleteApi, fileHeader } from '../utils/apiFunc'
+import { getFormData } from '../utils/getFormData'
+import * as MATERIAL from '../constants/materialConstants'
 
 export const createMaterial = (material, lessonId) => async (dispatch) => {
-  const materialData = new FormData()
-  materialData.append('material', material)
-  materialData.append('lessonId', lessonId)
+  const data = { material, lessonId }
+  const materialData = getFormData(data)
   try {
-    dispatch({ type: material.MATERIAL_CREATE_REQUEST })
-    const { data } = await postApi(ADD_MATERIAL, materialData, fileHeader)
-    dispatch({ type: material.MATERIAL_CREATE_SUCCESS, payload: data })
+    dispatch({ type: MATERIAL.MATERIAL_CREATE_REQUEST })
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+    const { data } = await postApi(dispatch, ADD_MATERIAL, materialData, config)
+    dispatch({ type: MATERIAL.MATERIAL_CREATE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
-      type: material.MATERIAL_CREATE_FAIL,
+      type: MATERIAL.MATERIAL_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -22,13 +28,13 @@ export const createMaterial = (material, lessonId) => async (dispatch) => {
 
 export const deleteMaterial = (id, refetch, material) => async (dispatch) => {
   try {
-    dispatch({ type: material.MATERIAL_DELETE_REQUEST })
+    dispatch({ type: MATERIAL.MATERIAL_DELETE_REQUEST })
     const { data } = await deleteApi(GET_MATERIAL + `/${id}`)
-    dispatch({ type: material.MATERIAL_DELETE_SUCCESS, payload: data })
+    dispatch({ type: MATERIAL.MATERIAL_DELETE_SUCCESS, payload: data })
     refetch()
   } catch (error) {
     dispatch({
-      type: material.MATERIAL_DELETE_FAIL,
+      type: MATERIAL.MATERIAL_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
