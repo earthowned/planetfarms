@@ -15,6 +15,7 @@ sed -i -e "s#planetfarm-cognito-region#$COGNITO_REGION#g" /usr/share/nginx/html/
 sed -i -e "s#planetfarm-cognito-pool#$COGNITO_POOL_ID#g" /usr/share/nginx/html/static/js/main*
 sed -i -e "s#planetfarm-cognito-client#$COGNITO_CLIENT_ID#g" /usr/share/nginx/html/static/js/main*
 sed -i -e "s#planetfarm-cognito-domain#$COGNITO_DOMAIN_NAME#g" /usr/share/nginx/html/static/js/main*
+sed -i -e "s#REACT_APP_BUILD:\"true\"#REACT_APP_BUILD:\"false\"#g" /usr/share/nginx/html/static/js/main*
 
 #spawn-fcgi -s /run/fcgi.sock -U nginx -G nginx /usr/bin/fcgiwrap
 nginx -g "daemon off;"

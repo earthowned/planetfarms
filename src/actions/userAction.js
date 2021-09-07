@@ -45,7 +45,7 @@ import {
   USER_SEARCH_FAIL
 } from '../constants/userConstants'
 
-if (process.env.REACT_APP_AUTH_METHOD === 'cognito' || process.env.REACT_APP_AUTH_METHOD === 'planetfarm-auth-method') {
+if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
   Amplify.configure({
     Auth: {
       // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
@@ -105,7 +105,7 @@ export const register = (name, password) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST })
     dispatch({ type: USER_LOGIN_REQUEST })
     let userdata
-    if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
       const { data } = await postApi(
         dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users`,
@@ -151,7 +151,7 @@ export const login = (name, password) => async (dispatch) => {
   let data = {}
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
-    if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
       const { data: userData } = await postApi(
         dispatch,
         `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
@@ -261,7 +261,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
       return tokenFailure(dispatch, 'Unauthorized')
       /* const message = data.response && data.response.data.name ? data.response.data.name : data.message
     if (message === 'TokenExpired') {
-      if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+      if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
         Auth.currentSession().then((res) => {
           const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
           userInfo.token = res?.idToken?.jwtToken || ''
@@ -308,7 +308,7 @@ export const getMyDetails = () => async (dispatch) => {
       `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`
     )
     const userdata = data
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const { attributes } = await Auth.currentAuthenticatedUser({
         bypassCache: true
       })
@@ -344,7 +344,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
       }
     }
     let currentUser
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       currentUser = await Auth.currentAuthenticatedUser({
         bypassCache: true
       })
@@ -355,7 +355,7 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
       userProfileFormData,
       config
     )
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const toBeUpdated = {
         email: user.email,
         given_name: user.firstName,
@@ -423,7 +423,7 @@ export const logout = () => (dispatch) => {
 export const confirmPin = (username, code) => async (dispatch) => {
   try {
     dispatch({ type: USER_CONFIRM_CODE_REQUEST })
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const { data } = await Auth.confirmSignUp(username, code)
       dispatch({ type: USER_CONFIRM_CODE_SUCCESS, payload: data })
     } else {
@@ -443,7 +443,7 @@ export const confirmPin = (username, code) => async (dispatch) => {
 export const resendCodeAction = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_RESEND_CODE_REQUEST })
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       await Auth.resendSignUp(username)
       dispatch({ type: USER_RESEND_CODE_SUCCESS })
     } else {
@@ -464,7 +464,7 @@ export const verifyCurrentUserAttribute = (attr) => async (dispatch) => {
   try {
     dispatch({ type: USER_ATTR_RESEND_CODE_REQUEST })
     dispatch({ type: USER_ATTR_CONFIRM_CODE_REQUEST })
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       await Auth.verifyCurrentUserAttribute(attr)
       dispatch({ type: USER_ATTR_RESEND_CODE_SUCCESS })
     } else {
@@ -489,7 +489,7 @@ export const verifyCurrentUserAttributeSubmit =
       const {
         userDetails: { user }
       } = getState()
-      if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+      if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
         await Auth.verifyCurrentUserAttributeSubmit(attr, code)
         const userdata = user
         const { attributes } = await Auth.currentAuthenticatedUser({
@@ -516,7 +516,7 @@ export const verifyCurrentUserAttributeSubmit =
 export const forgotPassword = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_REQUEST })
-    if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+    if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
       const data = await Auth.forgotPassword(username)
       dispatch({
         type: USER_FORGOT_PWD_CODE_SUCCESS,
@@ -543,7 +543,7 @@ export const forgotPasswordSubmit =
   (username, code, confirmPassword, history) => async (dispatch) => {
     try {
       dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_REQUEST })
-      if (process.env.REACT_APP_AUTH_METHOD === 'cognito') {
+      if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD === 'cognito') {
         await Auth.forgotPasswordSubmit(username, code, confirmPassword)
         dispatch({
           type: USER_FORGOT_PWD_CODE_SUCCESS,
@@ -570,7 +570,7 @@ export const changePassword =
     let resdata
     try {
       dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
-      if (process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
+      if (process.env.REACT_APP_BUILD === 'true' || process.env.REACT_APP_AUTH_METHOD !== 'cognito') {
         const { data } = await postApi(
           dispatch,
           `${process.env.REACT_APP_API_BASE_URL}/api/users/changePassword`,
