@@ -14,33 +14,43 @@ import {
 } from '../constants/photoConstants'
 import { getFormData } from '../utils/getFormData'
 
-export const createLessonImg =
-  (iData) => async (dispatch) => {
-    const lessonImgData = getFormData(iData)
-    try {
-      dispatch({ type: PHOTO_CREATE_REQUEST })
-      const { data } = await postApi(dispatch, ADD_LESSON_PHOTO, lessonImgData, fileHeader)
-      dispatch({ type: PHOTO_CREATE_SUCCESS, payload: data })
-    } catch (error) {
-      dispatch({
-        type: PHOTO_CREATE_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
-      })
-    }
+export const createLessonImg = (iData) => async (dispatch) => {
+  const lessonImgData = getFormData(iData)
+  try {
+    dispatch({ type: PHOTO_CREATE_REQUEST })
+    const { data } = await postApi(
+      dispatch,
+      ADD_LESSON_PHOTO,
+      lessonImgData,
+      fileHeader
+    )
+    dispatch({ type: PHOTO_CREATE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: PHOTO_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
   }
+}
 
 export const updatePhoto =
-  ({ iData, id, setEditPhotoModel }) =>
+  ({ iData, id, setEditPhotoModel, refetch }) =>
     async (dispatch) => {
       const lessonImgData = getFormData(iData)
       try {
         dispatch({ type: PHOTO_UPDATE_REQUEST })
-        const { data } = await putApi(dispatch, GET_LESSON_PHOTO + `/${id}`, lessonImgData, fileHeader)
+        const { data } = await putApi(
+          dispatch,
+          GET_LESSON_PHOTO + `/${id}`,
+          lessonImgData,
+          fileHeader
+        )
         dispatch({ type: PHOTO_UPDATE_SUCCESS, payload: data })
         setEditPhotoModel(false)
+        refetch()
       } catch (error) {
         dispatch({
           type: PHOTO_UPDATE_FAIL,

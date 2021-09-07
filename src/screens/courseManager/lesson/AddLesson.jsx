@@ -106,7 +106,8 @@ const AddLesson = () => {
       updatePhoto({
         iData: { img: lessonImg, photoDescription, isImgDesc },
         id,
-        setEditPhotoModel: setImageModal
+        setEditPhotoModel: setImageModal,
+        refetch
       })
     )
   }
@@ -159,7 +160,8 @@ const AddLesson = () => {
           videoLink,
           videoResource
         },
-        setEditVideoModel: setVideoModal
+        setEditVideoModel: setVideoModal,
+        refetch
       })
     )
   }
@@ -170,7 +172,7 @@ const AddLesson = () => {
   }
 
   async function deleteImageConfirm () {
-    dispatch(deletePhoto(imageId))
+    dispatch(deletePhoto(imageId, refetch))
     setDeleteImageModal(false)
   }
 
@@ -180,7 +182,7 @@ const AddLesson = () => {
   }
 
   async function deleteVideoConfirm () {
-    dispatch(deleteVideo(videoId))
+    dispatch(deleteVideo(videoId, refetch))
     setDeleteVideoModal(false)
   }
 

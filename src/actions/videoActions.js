@@ -14,9 +14,7 @@ import {
 } from '../constants/videoConstants'
 import { getFormData } from '../utils/getFormData'
 
-export const createVideo = (
-  vData
-) => async (dispatch) => {
+export const createVideo = (vData) => async (dispatch) => {
   const videoData = getFormData(vData)
   try {
     dispatch({ type: VIDEO_CREATE_REQUEST })
@@ -34,18 +32,20 @@ export const createVideo = (
 }
 
 export const updateVideo =
-  ({
-    id,
-    vData,
-    setEditVideoModel
-  }) =>
+  ({ id, vData, setEditVideoModel, refetch }) =>
     async (dispatch) => {
       const videoData = getFormData(vData)
       try {
         dispatch({ type: VIDEO_UPDATE_REQUEST })
-        const { data } = await putApi(dispatch, GET_VIDEOS + `/${id}`, videoData, fileHeader)
+        const { data } = await putApi(
+          dispatch,
+          GET_VIDEOS + `/${id}`,
+          videoData,
+          fileHeader
+        )
         dispatch({ type: VIDEO_UPDATE_SUCCESS, payload: data })
         setEditVideoModel(false)
+        refetch()
       } catch (error) {
         dispatch({
           type: VIDEO_UPDATE_FAIL,
