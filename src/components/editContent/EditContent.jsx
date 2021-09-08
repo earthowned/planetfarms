@@ -45,13 +45,6 @@ const EditContent = ({
     setAllLessonData(data, newLessonData)
   }, [data, newLessonData])
 
-  function video (data) {
-    if (typeof data?.videoResource === 'string') {
-      return `${GET_VIDEO}${data?.videoResource}`
-    } else {
-      return data?.videoResource?.preview
-    }
-  }
   return (
     <>
       {flattenData
@@ -73,8 +66,10 @@ const EditContent = ({
               title={data?.videoTitle}
               description={data?.videoDescription}
               url={
-                data?.videoLink === '' || data?.videoLink === undefined
-                  ? video(data)
+                data?.videoLink === '' || data?.videoLink === 'undefined'
+                  ? typeof data?.videoResource === 'string'
+                      ? `${GET_VIDEO}${data?.videoResource}`
+                      : data?.videoResource?.preview
                   : data?.videoLink
               }
               thumbnail={

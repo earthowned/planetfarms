@@ -21,15 +21,20 @@ const CreateVideo = ({
   editFunc
 }) => {
   const { register, errors, handleSubmit } = useForm()
-  const [videoCover, setVideoCover] = useState(null)
-  const [video, setVideo] = useState()
+  const [videoCover, setVideoCover] = useState(
+    editData.length > 0
+      ? editData[0]?.itemId
+          ? editData[0]?.videoCover
+          : `${VIDEO_COVER}${editData[0].videoCover}`
+      : ''
+  )
+  const [video, setVideo] = useState(
+    editData.length > 0 ? editData[0]?.videoResource : ''
+  )
   const [videoLink, setVideoLink] = useState('')
-
   const addVideo = ({ videoTitle, videoDescription, videoLink }) => {
     const itemId =
-      data.length === 0
-        ? data.length + 1
-        : data[data.length - 1].itemId + 1
+      data.length === 0 ? data.length + 1 : data[data.length - 1].itemId + 1
 
     const videoResource = video
     const vData = [
@@ -49,7 +54,14 @@ const CreateVideo = ({
 
   const editVideo = ({ videoTitle, videoDescription, videoLink }) => {
     const videoResource = video
-    editFunc({ id: editData[0].id, videoTitle, videoDescription, videoLink, videoResource, videoCover })
+    editFunc({
+      id: editData[0].id,
+      videoTitle,
+      videoDescription,
+      videoLink,
+      videoResource,
+      videoCover
+    })
     setEditData([])
   }
 
@@ -57,7 +69,17 @@ const CreateVideo = ({
     setVideoActive(false)
     setEditData([])
   }
-
+  const editLocal = ({ videoTitle, videoDescription, videoLink }) => {
+    if (editData.length !== 0) {
+      editData[0].videoTitle = videoTitle
+      editData[0].videoDescription = videoDescription
+      editData[0].videoLink = videoLink
+      editData[0].videoResource = video
+      editData[0].videoCover = videoCover
+    }
+    setVideoActive(false)
+    setEditData([])
+  }
   return (
     <>
       {videoActive && (
@@ -73,7 +95,13 @@ const CreateVideo = ({
                 getRootProps={getRootProps}
                 files={files}
                 text='Drag & Drop photo in this area or Click Here to attach Video Cover'
-                dataImg={editData.length > 0 && `${VIDEO_COVER}${editData[0]?.videoCover}`}
+                dataImg={
+                  editData.length > 0
+                    ? editData[0]?.itemId
+                        ? editData[0]?.videoCover?.preview
+                        : `${VIDEO_COVER}${editData[0].videoCover}`
+                    : ''
+                }
                 onChange={(img) => setVideoCover(img)}
                 fileType='image/png,image/jpeg,image/jpg'
                 onClick={() => setVideoCover(null)}
@@ -84,7 +112,9 @@ const CreateVideo = ({
                   placeholder='Video Title (Optional)'
                   name='videoTitle'
                   ref={register}
-                  defaultValue={editData.length > 0 ? editData[0].videoTitle : ''}
+                  defaultValue={
+                    editData.length > 0 ? editData[0].videoTitle : ''
+                  }
                 />
 
                 <TextArea
@@ -94,7 +124,9 @@ const CreateVideo = ({
                   rows='4'
                   name='videoDescription'
                   ref={register}
-                  defaultValue={editData.length > 0 ? editData[0].videoDescription : ''}
+                  defaultValue={
+                    editData.length > 0 ? editData[0].videoDescription : ''
+                  }
                 />
                 <div className='video-row-3'>
                   {!video && (
@@ -110,7 +142,9 @@ const CreateVideo = ({
                         }
                         placeholder='Video Link'
                         name='videoLink'
-                        defaultValue={editData.length > 0 ? editData[0].videoLink : ''}
+                        defaultValue={
+                          editData.length > 0 ? editData[0].videoLink : ''
+                        }
                         ref={register({
                           required: {
                             value: true,
@@ -122,7 +156,6 @@ const CreateVideo = ({
                     </>
                   )}
                   {!video && !videoLink ? <span>OR</span> : ''}
-
                   {!videoLink && (
                     <DragDrop
                       fileType='video/mp4,video/quicktime'
@@ -134,7 +167,15 @@ const CreateVideo = ({
                       onChange={(vid) => setVideo(vid)}
                       setVideo={setVideo}
                       onClick={() => setVideo(null)}
-                      text='Add Video'
+                      text={
+                        !video
+                          ? 'Add Video'
+                          : typeof video === 'string'
+                            ? video
+                            : editData[0]?.itemId
+                              ? video?.name
+                              : 'Add Video'
+                      }
                     />
                   )}
                 </div>
@@ -143,19 +184,21 @@ const CreateVideo = ({
                   message={errors.videoLink && errors.videoLink.message}
                 />
               </div>
-              {
-                editData.length > 0
-                  ? <Button
-                      className='add'
-                      name='Edit Video Block'
-                      onClick={handleSubmit(editVideo)}
-                    />
-                  : <Button
-                      className='add'
-                      name='Add Video Block'
-                      onClick={handleSubmit(addVideo)}
-                    />
-              }
+              {editData.length > 0 ? (
+                <Button
+                  className='add'
+                  name='Edit Video Block'
+                  onClick={handleSubmit(
+                    editData[0]?.itemId ? editLocal : editVideo
+                  )}
+                />
+              ) : (
+                <Button
+                  className='add'
+                  name='Add Video Block'
+                  onClick={handleSubmit(addVideo)}
+                />
+              )}
             </div>
           </div>
         </div>

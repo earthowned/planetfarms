@@ -40,7 +40,8 @@ const RichTextEditor = ({
   dispatch,
   refetch,
   setTextData,
-  setImageData
+  setImageData,
+  setVideoData
 }) => {
   const { register, errors, handleSubmit } = useForm()
   return (
@@ -69,6 +70,7 @@ const RichTextEditor = ({
         setOldData={setOldData}
         setTextData={setTextData}
         setImageData={setImageData}
+        setVideoData={setVideoData}
       />
       {showMaterial && (
         <LessonMaterial
@@ -118,7 +120,8 @@ const AddContent = ({
   title,
   setOldData,
   setTextData,
-  setImageData
+  setImageData,
+  setVideoData
 }) => {
   return (
     <div className='admin-lesson-create-container'>
@@ -197,6 +200,7 @@ const AddContent = ({
         setEditTextModel={setTextModal}
         setTextData={setTextData}
         setImgData={setImageData}
+        setVideoData={setVideoData}
       />
     </div>
   )

@@ -345,6 +345,7 @@ const AddLesson = () => {
           refetch={refetch}
           setTextData={setTextData}
           setImageData={setImageData}
+          setVideoData={setVideoData}
         />
       </DashboardLayout>
     </>

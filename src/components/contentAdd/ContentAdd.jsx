@@ -10,6 +10,7 @@ const ContentAdd = ({
   setTextModal,
   setTextData,
   setImgData,
+  setVideoData,
   setData
 }) => {
   const editLocalTextData = (id) => {
@@ -19,6 +20,10 @@ const ContentAdd = ({
   const editLocalImgData = (id) => {
     const localData = data.find((item) => item.itemId === id)
     setImgData([localData])
+  }
+  const editLocalVideoData = (id) => {
+    const localData = data.find((item) => item.itemId === id)
+    setVideoData([localData])
   }
   const deleteLocal = (id) => {
     const dataAfterDelete = data.filter((item) => item.itemId !== id)
@@ -34,6 +39,11 @@ const ContentAdd = ({
               description={vid.videoDescription}
               url={vid.videoLink || vid.videoResource?.preview}
               thumbnail={vid.videoCover?.preview}
+              isEditable
+              modelPopUp={editLocalVideoData}
+              setEditVideoModel={setVideoModal}
+              id={vid.itemId}
+              onRemove={deleteLocal}
             />
             <Image
               src={vid.lessonImg?.preview}
