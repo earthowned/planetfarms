@@ -3,7 +3,7 @@ import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal
 import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-
+import useGetFetchData from '../../../utils/useGetFetchData'
 import BackButton from '../../../components/backButton/BackButton'
 import { createNews, newsUpdate } from '../../../actions/newsActions'
 import { getApi } from '../../../utils/apiFunc'
@@ -39,7 +39,7 @@ const NewsAdd = () => {
   )
   const loggedUser = useSelector((state) => state?.userLogin)
   const { userInfo } = loggedUser
-  // fetching category from route
+
   const { state } = useLocation()
 
   const [createVideoModal, setCreateVideoModal] = useState(false)
@@ -69,12 +69,19 @@ const NewsAdd = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  // for edit
+  const { data, loading, error, refetch } = useGetFetchData(
+    'LESSON_DATA',
+    `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`,
+    null,
+    pathname.split('/')[2] === 'edit'
+  )
+
   useEffect(() => {
     if (pathname.split('/')[2] === 'edit') {
       getSingleNews()
     }
   }, [
+    data,
     dispatch,
     newsData,
     updateVideoSuccess,
@@ -85,7 +92,6 @@ const NewsAdd = () => {
     deletePhotoSuccess
   ])
 
-  // for creating
   useEffect(() => {
     if (pathname.split('/')[2] !== 'edit') {
       setNewsData([{ title, category }])
@@ -93,10 +99,6 @@ const NewsAdd = () => {
   }, [])
 
   async function getSingleNews () {
-    const { data } = await getApi(
-      dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`
-    )
     setNewsSingleData(data)
   }
 
@@ -121,7 +123,8 @@ const NewsAdd = () => {
         },
         newNews: [oldData, newsData].flat(),
         id: newsSingleData.id,
-        richtextId: newsSingleData.rich_text.id
+        richtextId: newsSingleData.rich_text.id,
+        history
       })
     )
   }
@@ -139,7 +142,8 @@ const NewsAdd = () => {
       updatePhoto({
         iData: { img: lessonImg, photoDescription, isImgDesc },
         id,
-        setEditPhotoModel: setCreateImageModal
+        setEditPhotoModel: setCreateImageModal,
+        refetch
       })
     )
   }
@@ -158,7 +162,8 @@ const NewsAdd = () => {
         textId: id,
         textHeading,
         textDescription,
-        setEditTextModel: setCreateTextModal
+        setEditTextModel: setCreateTextModal,
+        refetch
       })
     )
   }
@@ -189,7 +194,8 @@ const NewsAdd = () => {
           videoLink,
           videoResource
         },
-        setEditVideoModel: setCreateVideoModal
+        setEditVideoModel: setCreateVideoModal,
+        refetch
       })
     )
   }
@@ -200,7 +206,7 @@ const NewsAdd = () => {
   }
 
   async function deleteImageConfirm () {
-    dispatch(deletePhoto(imageId))
+    dispatch(deletePhoto(imageId, refetch))
     setDeleteImageModal(false)
   }
 
@@ -210,7 +216,7 @@ const NewsAdd = () => {
   }
 
   async function deleteVideoConfirm () {
-    dispatch(deleteVideo(videoId))
+    dispatch(deleteVideo(videoId, refetch))
     setDeleteVideoModal(false)
   }
 
@@ -220,7 +226,7 @@ const NewsAdd = () => {
   }
 
   async function deleteTextConfirm () {
-    dispatch(deleteText(textId))
+    dispatch(deleteText(textId, refetch))
     setDeleteTextModal(false)
   }
 

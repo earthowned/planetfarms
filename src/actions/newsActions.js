@@ -153,7 +153,7 @@ export const savevideoDetail = (data) => (dispatch) => {
 }
 
 export const newsUpdate =
-  ({ newsDetail, newNews, richtextId, id }) =>
+  ({ newsDetail, newNews, richtextId, id, history }) =>
     async (dispatch) => {
       const formData = getFormData(newsDetail)
       try {
@@ -167,7 +167,7 @@ export const newsUpdate =
         // updating rich text
         await updateRichText(newNews, richtextId, dispatch)
         dispatch({ type: NEWS_CLEAR, payload: data })
-        document.location.href = '/news'
+        history.push(`/news/${id}`)
       } catch (error) {
         const message =
         error.response && error.response.data.message
