@@ -17,7 +17,9 @@ const CreateText = ({
   const { register, errors, handleSubmit } = useForm()
   const addText = ({ textHeading, textDescription }) => {
     const itemId =
-      data.length === 0 ? data.length + 1 : data[data.length - 1].itemId + 1
+      data.length === 0 || !data.hasOwnProperty('itemId')
+        ? data.length + 1
+        : data[data.length - 1].itemId + 1
 
     if (textHeading.length !== 0 || textDescription.length !== 0) {
       const textData = [
@@ -71,7 +73,7 @@ const CreateText = ({
                   name='textHeading'
                   ref={register}
                   defaultValue={
-                    editData.length > 0 ? editData[0].textHeading : ''
+                    editData.length > 0 ? editData[0]?.textHeading : ''
                   }
                 />
                 <TextArea
@@ -85,7 +87,7 @@ const CreateText = ({
                   rows='7'
                   name='textDescription'
                   defaultValue={
-                    editData.length > 0 ? editData[0].textDescription : ''
+                    editData.length > 0 ? editData[0]?.textDescription : ''
                   }
                   ref={register({
                     required: {

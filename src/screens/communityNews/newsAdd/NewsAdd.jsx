@@ -315,6 +315,9 @@ const NewsAdd = () => {
           title={title}
           cancel={() => history.push('/news')}
           setOldData={setOldData}
+          setTextData={setTextData}
+          setImageData={setImageData}
+          setVideoData={setVideoData}
         />
       </DashboardLayout>
     </>
