@@ -16,15 +16,15 @@ const LessonMaterial = ({
     setMaterial(() => [...material, { mData }])
   }
 
-  const removeItem = (e) => {
-    const name = e.currentTarget.getAttribute('name')
-    setMaterial(material.filter((item) => item?.mData?.name !== name))
+  const removeItem = (lastModified) => {
+    setMaterial(
+      material.filter((item) => item?.mData?.lastModified !== lastModified)
+    )
   }
   const removeRemoteMaterial = (id) => {
     dispatch(deleteMaterial(id, refetch))
   }
-  const materialList = materialData || material
-
+  const materialList = [materialData, material].flat()
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
@@ -52,7 +52,9 @@ const LessonMaterial = ({
                 </a>
                 <div
                   onClick={() =>
-                    mater?.mData ? removeItem : removeRemoteMaterial(mater?.id)}
+                    mater?.mData
+                      ? removeItem(mater?.mData?.lastModified)
+                      : removeRemoteMaterial(mater?.id)}
                   name={mater?.mData?.name}
                 >
                   <img src='/img/trash-icon.svg' alt='trash icon' />
