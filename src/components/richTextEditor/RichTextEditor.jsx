@@ -188,7 +188,6 @@ const AddContent = ({
           removePhoto={setDeleteImageModal}
           removeVideo={setDeleteVideoModal}
           setOldData={setOldData}
-          formData={formData}
         />
       )}
       <ContentAdd

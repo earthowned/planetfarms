@@ -17,8 +17,7 @@ const EditContent = ({
   editImageFunc,
   editVideoFunc,
   editTextFunc,
-  setOldData,
-  formData
+  setOldData
 }) => {
   const [allLessonData, setAllLessonData] = useState([])
   const [newData, setNewData] = useState([])
@@ -33,7 +32,7 @@ const EditContent = ({
   })
 
   useEffect(() => {
-    setNewData([textData, videoData, photoData, formData])
+    setNewData([textData, videoData, photoData])
     setOldData(
       [textData, videoData, photoData].flat().sort((a, b) => a.order - b.order)
     )
@@ -101,71 +100,6 @@ const EditContent = ({
             )}
           </div>
         ))}
-      {/* {
-      data && <>
-        {
-        data?.rich_text?.photos && data?.rich_text?.photos.map(item => {
-          return (
-            <Image
-              src={
-                  typeof item?.lessonImg === 'string'
-                    ? `${LESSON_IMG}${item?.lessonImg}`
-                    : item?.lessonImg.preview
-                }
-              id={item?.id || item?.itemId}
-              modelPopUp={editImageFunc}
-              setEditPhotoModel={setEditPhotoModel}
-              isEditable
-              desc={item?.isImgDesc === true && item?.photoDescription}
-              onRemove={item?.id ? removePhoto : removeLocalData}
-            />
-          )
-        })
-      }
-
-        {
-        data?.rich_text?.texts && data?.rich_text?.texts.map(item => {
-          return (
-            <Text
-              heading={item?.textHeading}
-              desc={item?.textDescription}
-              isEditable
-              setEditTextModel={setEditTextModel}
-              modelPopUp={editTextFunc}
-              id={item?.id || item?.itemId}
-              onRemove={item?.id ? removeTextItem : removeLocalData}
-            />
-          )
-        })
-      }
-
-        {
-        data?.rich_text?.videos && data?.rich_text?.videos.map(item => {
-          return (
-            <Video
-              title={item?.videoTitle}
-              description={item?.videoDescription}
-              url={
-                item?.videoLink === '' || item?.videoLink === undefined
-                  ? video(item)
-                  : item?.videoLink
-              }
-              thumbnail={
-                typeof item?.videoCover === 'string'
-                  ? `${VIDEO_COVER}${item?.videoCover}`
-                  : item?.videoCover?.preview
-              }
-              setEditVideoModel={setEditVideoModel}
-              isEditable
-              id={item?.id || item?.itemId}
-              modelPopUp={editVideoFunc}
-              onRemove={item?.id ? removeVideo : removeLocalData}
-            />
-          )
-        })
-      }
-      </>
-    } */}
     </>
   )
 }
