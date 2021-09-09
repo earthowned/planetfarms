@@ -5,13 +5,7 @@ import Material from '../../../components/material/Material'
 const LessonMaterial = ({
   material,
   setMaterial,
-  removeMaterial,
-  removeLocalMaterial,
   materialData,
-  dispatch,
-  refetch,
-  deleteMaterialModal,
-  setDeleteMaterialModal,
   removeMaterialModal
 }) => {
   const matData = (mData) => {
@@ -24,7 +18,8 @@ const LessonMaterial = ({
     )
   }
 
-  const materialList = [materialData, material].flat()
+  const materialList = [materialData, material].flat().filter(Boolean)
+  console.log('materialList', materialList)
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>

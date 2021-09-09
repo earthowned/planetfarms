@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
 import Text from '../../screens/courseManager/lesson/Text'
-import { GET_COVERIMG, GET_VIDEO, LESSON_IMG, VIDEO_COVER } from '../../utils/urlConstants'
+import {
+  GET_COVERIMG,
+  GET_VIDEO,
+  LESSON_IMG,
+  VIDEO_COVER
+} from '../../utils/urlConstants'
 import Image from '../lessonImage/Image'
 import Video from '../videoPlayer/Video'
 
@@ -20,12 +25,12 @@ const RichTextView = ({ data, news }) => {
   useEffect(() => {
     setNewData([textData, videoData, photoData])
   }, [data])
-  const flattenData = newData.flat()
+  const flattenData = newData.flat().filter(Boolean)
   return (
     <>
       <div className='lesson-description-wrapper'>
-        {news
-          ? <>
+        {news ? (
+          <>
             <h1 className='news-view-title'>{data?.title}</h1>
             <div className='title-time'>
               <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
@@ -38,17 +43,21 @@ const RichTextView = ({ data, news }) => {
             <Image
               src={`${process.env.REACT_APP_CDN_BASE_URL}/news/${data?._attachments}`}
             />
-            </>
-          : <>
+          </>
+        ) : (
+          <>
             <h1 className='news-view-title'>{data?.title}</h1>
-            <p>{data?.lessonDesc}</p>
-            {data?.coverImg && <div className='lesson-description-img-wrapper'>
-              <img
-                src={`${GET_COVERIMG}${data?.coverImg}`}
-                alt={`${data?.title}_img`}
-              />
-            </div>}
-            </>}
+            {data?.lessonDesc !== 'undefined' && <p>{data?.lessonDesc}</p>}
+            {data?.coverImg && (
+              <div className='lesson-description-img-wrapper'>
+                <img
+                  src={`${GET_COVERIMG}${data?.coverImg}`}
+                  alt={`${data?.title}_img`}
+                />
+              </div>
+            )}
+          </>
+        )}
         {flattenData
           .sort((a, b) => a.order - b.order)
           .map((data, index) => (
@@ -58,10 +67,10 @@ const RichTextView = ({ data, news }) => {
                 title={data?.videoTitle}
                 description={data?.videoDescription}
                 url={
-                data?.videoLink === 'undefined'
-                  ? `${GET_VIDEO}${data?.videoResource}`
-                  : data?.videoLink
-              }
+                  data?.videoLink === 'undefined'
+                    ? `${GET_VIDEO}${data?.videoResource}`
+                    : data?.videoLink
+                }
                 thumbnail={`${VIDEO_COVER}${data?.videoCover}`}
               />
               {data?.lessonImg && (
