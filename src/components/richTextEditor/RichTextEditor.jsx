@@ -41,7 +41,8 @@ const RichTextEditor = ({
   refetch,
   setTextData,
   setImageData,
-  setVideoData
+  setVideoData,
+  removeMaterialModal
 }) => {
   const { register, errors, handleSubmit } = useForm()
   return (
@@ -80,6 +81,7 @@ const RichTextEditor = ({
           removeLocalMaterial={removeMaterial}
           dispatch={dispatch}
           refetch={refetch}
+          removeMaterialModal={removeMaterialModal}
         />
       )}
 

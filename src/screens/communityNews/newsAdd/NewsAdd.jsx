@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import useGetFetchData from '../../../utils/useGetFetchData'
 import BackButton from '../../../components/backButton/BackButton'
 import { createNews, newsUpdate } from '../../../actions/newsActions'
-import { getApi } from '../../../utils/apiFunc'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
@@ -316,8 +315,8 @@ const NewsAdd = () => {
           submitForm={submitNewsForm}
           showMaterial={false}
           edit={pathname.split('/')[2] === 'edit'}
-          saveBtnName='save news'
-          editBtnName='edit news'
+          saveBtnName='save'
+          editBtnName='save'
           title={title}
           cancel={() => history.push('/news')}
           setOldData={setOldData}

@@ -1,4 +1,3 @@
-import { deleteMaterial } from '../../../actions/materialActions'
 import { MATERIAL } from '../../../utils/urlConstants'
 import DragDrop from '../../../components/dragDrop/DragDrop'
 import Material from '../../../components/material/Material'
@@ -10,7 +9,10 @@ const LessonMaterial = ({
   removeLocalMaterial,
   materialData,
   dispatch,
-  refetch
+  refetch,
+  deleteMaterialModal,
+  setDeleteMaterialModal,
+  removeMaterialModal
 }) => {
   const matData = (mData) => {
     setMaterial(() => [...material, { mData }])
@@ -21,9 +23,7 @@ const LessonMaterial = ({
       material.filter((item) => item?.mData?.lastModified !== lastModified)
     )
   }
-  const removeRemoteMaterial = (id) => {
-    dispatch(deleteMaterial(id, refetch))
-  }
+
   const materialList = [materialData, material].flat()
   return (
     <div className='admin-lesson-materials-container'>
@@ -54,7 +54,7 @@ const LessonMaterial = ({
                   onClick={() =>
                     mater?.mData
                       ? removeItem(mater?.mData?.lastModified)
-                      : removeRemoteMaterial(mater?.id)}
+                      : removeMaterialModal(mater?.id)}
                   name={mater?.mData?.name}
                 >
                   <img src='/img/trash-icon.svg' alt='trash icon' />

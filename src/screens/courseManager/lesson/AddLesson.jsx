@@ -10,6 +10,7 @@ import useGetFetchData from '../../../utils/useGetFetchData'
 import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
 import { deleteText, updateText } from '../../../actions/textActions'
 import { deleteVideo, updateVideo } from '../../../actions/videoActions'
+import { deleteMaterial } from '../../../actions/materialActions'
 import RichTextEditor from '../../../components/richTextEditor/RichTextEditor'
 import DeleteContent from '../../../components/deleteContent/DeleteContent'
 
@@ -53,10 +54,12 @@ const AddLesson = () => {
   const [deleteVideoModal, setDeleteVideoModal] = useState(false)
   const [deleteImageModal, setDeleteImageModal] = useState(false)
   const [deleteTextModal, setDeleteTextModal] = useState(false)
+  const [deleteMaterialModal, setDeleteMaterialModal] = useState(false)
 
   const [videoId, setVideoId] = useState(null)
   const [imageId, setImageId] = useState(null)
   const [textId, setTextId] = useState(null)
+  const [materialId, setMaterialId] = useState(null)
 
   const [imageData, setImageData] = useState(null)
   const [videoData, setVideoData] = useState(null)
@@ -244,6 +247,15 @@ const AddLesson = () => {
     setMaterial(material.filter((item) => item?.mData?.preview !== name))
   }
 
+  const removeMaterialModal = (id) => {
+    setDeleteMaterialModal(true)
+    setMaterialId(id)
+  }
+  const removeRemoteMaterial = () => {
+    dispatch(deleteMaterial(materialId, refetch))
+    setDeleteMaterialModal(false)
+  }
+
   return (
     <>
       {videoModal && (
@@ -306,6 +318,14 @@ const AddLesson = () => {
           confirmDelete={deleteTextConfirm}
         />
       )}
+      {deleteMaterialModal && (
+        <DeleteContent
+          heading='Delete'
+          message='Do you want to delete the material?'
+          setDeleteModal={setDeleteMaterialModal}
+          confirmDelete={removeRemoteMaterial}
+        />
+      )}
       <DashboardLayout
         title={
           pathname.split('/')[3] === 'edit' ? 'Edit Lesson' : 'Add New Lesson'
@@ -337,8 +357,8 @@ const AddLesson = () => {
           removeMaterial={removeMaterial}
           showMaterial
           edit={pathname.split('/')[3] === 'edit'}
-          saveBtnName='save lesson'
-          editBtnName='edit lesson'
+          saveBtnName='save'
+          editBtnName='save'
           cancel={() => history.push(`/admin/course/${courseId}`)}
           setOldData={setOldData}
           dispatch={dispatch}
@@ -346,6 +366,7 @@ const AddLesson = () => {
           setTextData={setTextData}
           setImageData={setImageData}
           setVideoData={setVideoData}
+          removeMaterialModal={removeMaterialModal}
         />
       </DashboardLayout>
     </>
