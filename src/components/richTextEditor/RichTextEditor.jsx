@@ -125,7 +125,6 @@ const AddContent = ({
   setImageData,
   setVideoData
 }) => {
-  console.log(editData?.coverImg)
   return (
     <div className='admin-lesson-create-container'>
       <ErrorText

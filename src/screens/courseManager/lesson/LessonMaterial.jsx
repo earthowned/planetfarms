@@ -19,7 +19,6 @@ const LessonMaterial = ({
   }
 
   const materialList = [materialData, material].flat().filter(Boolean)
-  console.log('materialList', materialList)
   return (
     <div className='admin-lesson-materials-container'>
       <h1>Materials</h1>
