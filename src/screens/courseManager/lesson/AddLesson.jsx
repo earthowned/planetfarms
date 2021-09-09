@@ -357,7 +357,7 @@ const AddLesson = () => {
           removeMaterial={removeMaterial}
           showMaterial
           edit={pathname.split('/')[3] === 'edit'}
-          saveBtnName='save'
+          saveBtnName='save lesson'
           editBtnName='save'
           cancel={() => history.push(`/admin/course/${courseId}`)}
           setOldData={setOldData}

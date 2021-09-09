@@ -125,6 +125,7 @@ const AddContent = ({
   setImageData,
   setVideoData
 }) => {
+  console.log(editData?.coverImg)
   return (
     <div className='admin-lesson-create-container'>
       <ErrorText
@@ -161,7 +162,7 @@ const AddContent = ({
           text='Drag & Drop photo in this area or Click Here to attach'
           onChange={(img) => setCoverImage(img)}
           dataImg={
-            editData?.coverImg ? `${GET_COVERIMG}${editData.coverImg}` : ''
+            editData?.coverImg ? `${GET_COVERIMG}${editData?.coverImg}` : ''
           }
           onClick={() => setCoverImage(null)}
         />

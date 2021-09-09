@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams, useHistory } from 'react-router-dom'
 import { createTest, updateTestQuestion } from '../../actions/testActions'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import './AddTest.scss'
-import { useHistory } from 'react-router-dom'
+
 import { checkArrayForFilledValue } from '../../utils/checkFilledArray'
 import { v4 as uuidv4 } from 'uuid'
 import update from 'immutability-helper'
@@ -31,7 +31,7 @@ const AddTest = () => {
     if (pathname === `/admin/edit-test/${lessonId}`) getLessonQuestions()
   }, [])
 
-  async function getLessonQuestions() {
+  async function getLessonQuestions () {
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}/api/questions/lesson/${lessonId}`
@@ -46,7 +46,7 @@ const AddTest = () => {
     }
   }
 
-  function addMCQQuestion() {
+  function addMCQQuestion () {
     const id = uuidv4()
     setQuestions((cur) => [
       ...cur,
@@ -55,13 +55,13 @@ const AddTest = () => {
     setCards((cur) => [...cur, { id, type: 'mcq' }])
   }
 
-  function addSubjectiveQuestion() {
+  function addSubjectiveQuestion () {
     const id = uuidv4()
     setQuestions((cur) => [...cur, { id, type: 'subjective', question: '' }])
     setCards((cur) => [...cur, { id, type: 'subjective' }])
   }
 
-  function resetQuestion() {
+  function resetQuestion () {
     if (pathname === `/admin/edit-test/${lessonId}`) {
       setQuestions(newQuestions)
       setCards(newQuestions)
@@ -72,7 +72,7 @@ const AddTest = () => {
     setFormError(false)
   }
 
-  function submitQuestion() {
+  function submitQuestion () {
     if (questions.length > 0) {
       if (checkArrayForFilledValue(questions)) {
         const newQuestions = orderQuestions()
@@ -94,7 +94,7 @@ const AddTest = () => {
     setDeleteModal(true)
   }
 
-  async function editTest() {
+  async function editTest () {
     if (questions.length > 0) {
       if (checkArrayForFilledValue(questions)) {
         const editQuestions = orderQuestions()
@@ -108,7 +108,7 @@ const AddTest = () => {
     setFormError(true)
   }
 
-  function orderQuestions() {
+  function orderQuestions () {
     const newQuestions = []
 
     cards.forEach((el) => {
