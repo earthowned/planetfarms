@@ -137,6 +137,7 @@ function MCQQuestion ({
           {options.length > 0 &&
             options.map((item, index) => (
               <InputComponent
+                key={index}
                 index={index}
                 questions={questions}
                 id={id}

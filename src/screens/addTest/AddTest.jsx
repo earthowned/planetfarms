@@ -189,7 +189,7 @@ const AddTest = () => {
       />
       <DashboardLayout title='Add Test'>
         <BackButton onClick={() => history.goBack()} />
-        <div div className='add-test-container'>
+        <div className='add-test-container'>
           {cards.map((card, i) => renderCard(card, i))}
         </div>
         <div className='questions-btn-container'>
