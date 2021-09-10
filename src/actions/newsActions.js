@@ -160,8 +160,8 @@ export const newsUpdate =
         dispatch({ type: NEWS_UPDATE_REQUEST })
         const data = await putApi(
           dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity?.id}`,
-        formData
+          `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity?.id}`,
+          formData
         )
         dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data })
         // updating rich text
