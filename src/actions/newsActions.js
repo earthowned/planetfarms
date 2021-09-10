@@ -43,7 +43,7 @@ export const listNews =
         dispatch({ type: NEWS_LIST_REQUEST })
         const { data } = await getApi(
           dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}?pageNumber=${pageNumber}`
+          `${process.env.REACT_APP_API_BASE_URL}/api/news/community/${currentCommunity.id}?pageNumber=${pageNumber}`
         )
         dispatch({ type: NEWS_LIST_SUCCESS, payload: data })
       } catch (error) {
@@ -84,17 +84,17 @@ export const createNews =
         dispatch({ type: NEWS_CREATE_REQUEST })
         const richText = await postApi(
           dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/richtexts`,
-        {}
+          `${process.env.REACT_APP_API_BASE_URL}/api/richtexts`,
+          {}
         )
         const richtextId = richText?.data?.richtext?.id
         if (richtextId) {
           formData.append('richtextId', richtextId)
           const { data } = await postApi(
             dispatch,
-          `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`,
-          formData,
-          fileHeader
+            `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`,
+            formData,
+            fileHeader
           )
           dispatch({ type: NEWS_CREATE_SUCCESS, payload: data })
           // creating rich text
