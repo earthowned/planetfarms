@@ -15,12 +15,16 @@ import {
 } from './reducers/courseReducers'
 import {
   lessonCreateReducer,
-  lessonUpdateReducer
+  lessonUpdateReducer,
+  lessonDeleteReducer
 } from './reducers/lessonReducers'
-import { videoCreateReducer } from './reducers/videoReducers'
-import { photoCreateReducer } from './reducers/photoReducer'
-import { textCreateReducer } from './reducers/textReducer'
-import { materialCreateReducer } from './reducers/materiallReducer'
+import { videoCreateReducer, videoDeleteReducer, videoUpdateReducer } from './reducers/videoReducers'
+import { photoCreateReducer, photoDeleteReducer, photoUpdateReducer } from './reducers/photoReducer'
+import { textCreateReducer, textDeleteReducer, textUpdateReducer } from './reducers/textReducer'
+import {
+  materialCreateReducer,
+  materialDeleteReducer
+} from './reducers/materiallReducer'
 import {
   lessonProgressCreateReducer,
   lessonProgressUpdateReducer
@@ -118,10 +122,18 @@ const reducer = combineReducers({
   deleteCourse: deleteCourseReducer,
   addLesson: lessonCreateReducer,
   updateLesson: lessonUpdateReducer,
+  deleteLesson: lessonDeleteReducer,
   addVideo: videoCreateReducer,
+  updateVideo: videoUpdateReducer,
+  deleteVideo: videoDeleteReducer,
   addPhoto: photoCreateReducer,
+  updatePhoto: photoUpdateReducer,
+  deletePhoto: photoDeleteReducer,
   addText: textCreateReducer,
+  updateText: textUpdateReducer,
+  deleteText: textDeleteReducer,
   addMaterial: materialCreateReducer,
+  deleteMaterial: materialDeleteReducer,
   addTest: testCreateReducer,
   addLessonProgress: lessonProgressCreateReducer,
   updateLessonProgress: lessonProgressUpdateReducer,

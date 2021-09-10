@@ -99,7 +99,7 @@ const CommunityGroupSingleCard = ({ item, type, editCard, deleteCard }) => {
         }}
       />
       <div className='community-group-card-inner-content'>
-        <div onClick={() => history.push(`/community-group-view-page/${item.id}`)} className='card-text-container'>
+        <div onClick={() => history.push(`/groups/${item.id}`)} className='card-text-container'>
           <div className='farmers ibmplexsans-semi-bold-caribbean-green-14px'>
             {item.category}
           </div>

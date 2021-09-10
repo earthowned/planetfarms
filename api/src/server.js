@@ -32,6 +32,7 @@ const materialRouter = require('./routes/materialRouter')
 const testRouter = require('./routes/testRouter')
 const questionRouter = require('./routes/questionRouter')
 const userTestRouter = require('./routes/userTestRouter')
+const richtextRouter = require('./routes/richtextRouter')
 
 const PORT = process.env.port || 5000
 
@@ -59,14 +60,15 @@ app.use('/api/groups-users', groupUsersRoutes)
 app.use('/api/enterprises-users', enterpriseUsersRoutes)
 app.use('/api/resizer', resizerRoutes)
 app.use('/api/videos', videoRouter)
-app.use('/api/lesson-photos', photoRouter)
-app.use('/api/lesson-text', textRouter)
 app.use('/api/lesson-progress', lessonProgressRouter)
+app.use('/api/photos', photoRouter)
+app.use('/api/texts', textRouter)
 app.use('/api/materials', materialRouter)
 app.use('/api/tests', testRouter)
 app.use('/api/questions', questionRouter)
 app.use('/api/user_tests', userTestRouter)
 app.use('/api/enrolls', enrollRouter)
+app.use('/api/richtexts', richtextRouter)
 
 // home page response
 app.get('/', (request, response) => {

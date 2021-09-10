@@ -1,9 +1,6 @@
 import { Axios, ADD_LESSONS, GET_LESSONS } from '../utils/urlConstants'
 import { postApi } from '../utils/apiFunc'
-import { addText } from '../screens/courseManager/addLesson/addText'
-import { addVideo } from '../screens/courseManager/addLesson/addVideo'
-import { addImage } from '../screens/courseManager/addLesson/addImage'
-import { addMaterial } from '../screens/courseManager/addLesson/addMaterial'
+import { addMaterial } from '../screens/courseManager/lesson/addMaterial'
 
 import {
   LESSON_CREATE_REQUEST,
@@ -11,27 +8,19 @@ import {
   LESSON_CREATE_FAIL,
   LESSON_UPDATE_REQUEST,
   LESSON_UPDATE_SUCCESS,
-  LESSON_UPDATE_FAIL
+  LESSON_UPDATE_FAIL,
+  LESSON_DELETE_REQUEST,
+  LESSON_DELETE_SUCCESS,
+  LESSON_DELETE_FAIL
 } from '../constants/lessonConstants'
+import axios from 'axios'
+import { createRichText, updateRichText } from '../utils/createUpdateRichText'
+import { getFormData } from '../utils/getFormData'
 
 export const createLesson =
-  ({
-    courseId,
-    title,
-    lessonDesc,
-    order,
-    coverImg,
-    lessonData,
-    material,
-    history
-  }) =>
+  ({ lessonDetail, lessonData, material, history }) =>
     async (dispatch) => {
-      const lessonFormData = new FormData()
-      lessonFormData.append('courseId', courseId)
-      lessonFormData.append('title', title)
-      lessonFormData.append('lessonDesc', lessonDesc)
-      lessonFormData.append('coverImg', coverImg)
-      lessonFormData.append('order', order)
+      const lessonFormData = getFormData(lessonDetail)
       try {
         dispatch({ type: LESSON_CREATE_REQUEST })
         const config = {
@@ -39,31 +28,27 @@ export const createLesson =
             'Content-Type': 'multipart/form-data'
           }
         }
-        const { data } = await postApi(
-          dispatch,
-          ADD_LESSONS,
-          lessonFormData,
-          config
+
+        const richText = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/richtexts`
         )
-        dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
-        const lessonId = data?.data?.id
-        for (let i = 0; i < lessonData.length; i++) {
-          if (lessonData[i]?.videoLink || lessonData[i]?.videoResource) {
-            await addVideo({ lessonData: lessonData[i], lessonId, dispatch })
-          }
-          if (lessonData[i]?.lessonImg) {
-            await addImage({ lessonData: lessonData[i], lessonId, dispatch })
-          }
-          if (lessonData[i]?.textHeading || lessonData[i]?.textDescription) {
-            await addText({ lessonData: lessonData[i], lessonId, dispatch })
-          }
+        const richtextId = richText?.data?.richtext?.id
+
+        if (richtextId) {
+          lessonFormData.append('richtextId', richtextId)
+          const { data } = await postApi(
+            dispatch,
+            ADD_LESSONS,
+            lessonFormData,
+            config
+          )
+          dispatch({ type: LESSON_CREATE_SUCCESS, payload: data })
+          const lessonId = data?.data?.id
+          // creating rich text
+          await createRichText(lessonData, richtextId, dispatch)
+          const mat = await addMaterialFunc(material, lessonId, dispatch)
+          history.push(`/lesson/${lessonId}`)
         }
-        for (let i = 0; i < material.length; i++) {
-          if (material[i].mData) {
-            await addMaterial({ material: material[i], lessonId, dispatch })
-          }
-        }
-        history.push(`/lesson/${lessonId}`)
       } catch (error) {
         dispatch({
           type: LESSON_CREATE_FAIL,
@@ -75,33 +60,67 @@ export const createLesson =
       }
     }
 
-export const updateLesson = (title, coverImg, lessonId) => async (dispatch) => {
-  const updateLessonFormData = new FormData()
-  updateLessonFormData.append('title', title)
-  updateLessonFormData.append('coverImg', coverImg)
+export const updateLesson =
+  ({
+    lessonDetail,
+    lessonId,
+    history,
+    lessonData = [],
+    material = [],
+    richtextId
+  }) =>
+    async (dispatch) => {
+      const updateLessonFormData = getFormData(lessonDetail)
+      try {
+        dispatch({ type: LESSON_UPDATE_REQUEST })
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
 
-  try {
-    dispatch({ type: LESSON_UPDATE_REQUEST })
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data'
+        const { data } = await Axios.put(
+          GET_LESSONS + '/' + lessonId,
+          updateLessonFormData,
+          config
+        )
+        dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
+        // updating rich text
+        await updateRichText(lessonData, richtextId, dispatch)
+        await addMaterialFunc(material, lessonId, dispatch)
+        history.push(`/lesson/${lessonId}`)
+      } catch (error) {
+        dispatch({
+          type: LESSON_UPDATE_FAIL,
+          payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
       }
     }
 
-    const { data } = await Axios.put(
-      GET_LESSONS + '/' + lessonId,
-      updateLessonFormData,
-      config
-    )
-    dispatch({ type: LESSON_UPDATE_SUCCESS, payload: data })
-    return data
+export const deleteLesson = (id, refetch) => async (dispatch) => {
+  try {
+    dispatch({ type: LESSON_DELETE_REQUEST })
+    const { data } = await Axios.delete(GET_LESSONS + `/${id}`)
+    dispatch({ type: LESSON_DELETE_SUCCESS, payload: data })
+    refetch()
   } catch (error) {
     dispatch({
-      type: LESSON_UPDATE_FAIL,
+      type: LESSON_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
     })
+  }
+}
+
+const addMaterialFunc = async (material, lessonId, dispatch) => {
+  for (let i = 0; i < material.length; i++) {
+    if (material[i].mData) {
+      await addMaterial({ material: material[i], lessonId, dispatch })
+    }
   }
 }

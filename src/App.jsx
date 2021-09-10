@@ -44,12 +44,11 @@ import LessonTestPage from './screens/lessonTestPage/LessonTestPage'
 import CourseCollection from './screens/courses/courseCollection/CourseCollection'
 import EditCollection from './screens/courses/editCollection/EditCollection'
 import AdminCoursePage from './screens/courseManager/adminCoursePage/AdminCoursePage'
-import AddLesson from './screens/courseManager/addLesson/AddLesson'
+import AddLesson from './screens/courseManager/lesson/AddLesson'
 import CourseUsers from './screens/courses/courseUsers/CourseUsers'
 import ScrollToTop from './utils/scrollToTop'
 import CalendarScreen from './screens/calendarScreen/CalendarScreen'
 import ForgotPassword from './screens/forgotPassword/ForgotPassword'
-import EditLesson from './screens/courseManager/editLesson/EditLesson'
 import UserVerification from './screens/verification/UserVerification'
 import AddTest from './screens/addTest/AddTest'
 import LogoutUser from './screens/logoutUser/LogoutUser'
@@ -77,25 +76,26 @@ function App () {
             <PrivateRoute component={SavedCollection} path='/library/collection/saved' exact />
             <PrivateRoute component={Messenger} exact path='/messenger' />
             <PrivateRoute component={MobileMessage} path='/messenger/:id' exact />
-            <PrivateRoute component={CommunityPagenews} exact path='/community-page-news/:id' />
-            <PrivateRoute component={NewsAdd} path='/community-page-news/:title/:category' exact />
-            <PrivateRoute component={CommunityNewsViewPage} path='/community-page-news-view' exact />
+            <PrivateRoute component={CommunityPagenews} exact path='/news' />
+            <PrivateRoute component={NewsAdd} path='/news/add' exact />
+            <PrivateRoute component={NewsAdd} path='/news/edit/:id' exact />
+            <PrivateRoute component={CommunityNewsViewPage} path='/news/:id' exact />
             <PrivateRoute component={AllCommunitiesCard} path='/community-switching' exact />
-            <PrivateRoute component={CommunityMembers} path='/community-members/:id' exact />
-            {/* <PrivateRoute component={Profile} path='/profile/:id' exact /> */}
-            <PrivateRoute component={CommunityGroup} path='/community-group/:id' exact />
-            <PrivateRoute component={CommunityGroup} path='/your-community-group/:id' exact />
-            <PrivateRoute component={CommunityGroupViewPage} path='/community-group-view-page/:id' exact />
+            <PrivateRoute component={CommunityMembers} path='/members' exact />
+            {/* <PrivateRoute component={CommunityMembersProfile} path='/members/profile/:id' exact /> */}
+            <PrivateRoute component={CommunityGroup} path='/groups' exact />
+            <PrivateRoute component={CommunityGroup} path='/your-groups/:id' exact />
+            <PrivateRoute component={CommunityGroupViewPage} path='/groups/:id' exact />
             <PrivateRoute component={Courses} exact path='/courses' />
             <PrivateRoute component={CourseCollection} exact path='/courses/my-courses' />
             <PrivateRoute component={CourseCollection} exact path='/courses/saved-collection' />
             <PrivateRoute component={EditCollection} path='/courses/my-courses/:id' exact />
             <PrivateRoute component={Courses} path='/admin/courses' exact />
             <PrivateRoute component={AdminCoursePage} path='/admin/course/:courseId' exact />
-            <PrivateRoute component={AddLesson} path='/admin/add-lesson/:courseId' exact />
-            <PrivateRoute component={EditLesson} path='/admin/edit-lesson/:id' exact />
+            <PrivateRoute component={AddLesson} path='/admin/lesson/add' exact />
+            <PrivateRoute component={AddLesson} path='/admin/lesson/edit/:lessonId' exact />
             <PrivateRoute component={CourseUsers} path='/courses/users' exact />
-            <PrivateRoute component={Enterprises} path='/enterprises/:id' exact />
+            <PrivateRoute component={Enterprises} path='/enterprises' exact />
             <PrivateRoute component={Enterprises} path='/your-enterprises/:id' exact />
             <PrivateRoute component={EnterprisesViewPage} path='/enterprises-view' exact />
             <PrivateRoute component={MyGroupViewPage} path='/my-group-view-page/:id' exact />

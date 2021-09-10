@@ -27,7 +27,8 @@ const getTextById = async (req, res) => {
 }
 
 const addText = async (req, res) => {
-  const text = await db.Text.create(req.body)
+  const { textHeading, textDescription, richtextId, order } = req.body
+  const text = await db.Text.create({ textHeading, textDescription, richtextId, order })
   res.status(201).json({
     status: true,
     message: 'added new lesson text successfully',
@@ -37,14 +38,10 @@ const addText = async (req, res) => {
 
 const deleteText = async (req, res) => {
   const { id } = req.params
-  const text = await db.Text.destroy({ where: { id } })
-  if (!text) {
-    throw new NotFoundError()
-  }
+  await db.Text.destroy({ where: { id } })
   res.status(202).json({
     status: true,
-    message: 'Lesson text deleted successfully',
-    data: text
+    message: 'Lesson text deleted successfully'
   })
 }
 

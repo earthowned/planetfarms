@@ -11,7 +11,7 @@ const CardImage = ({ data, className }) => {
         data.map((profile) => {
           return (
             <div
-              onClick={() => history.push(`/profile/${profile?.user.userID}`)}
+              onClick={() => history.push(`/members/profile/${profile.userId}`)}
               key={profile.id}
               className='card-image-1'
             >

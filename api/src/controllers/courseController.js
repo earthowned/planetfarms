@@ -104,22 +104,20 @@ const updateCourse = async (req, res) => {
 const getCourseById = async (req, res) => {
   const course = await db.Courses.findOne({
     where: { id: req.params.id },
+    order: [[db.Lesson, 'createdAt', 'ASC']],
     include: [
       {
         model: db.Lesson,
         order: [['order', 'ASC']],
-        include: [
-          db.Test,
-          {
-            model: db.LessonProgress,
-            where: {
-              userId: {
-                [Op.eq]: req.user.id
-              }
-            },
-            required: false
-          }
-        ]
+        include: [db.Test, db.RichText, {
+          model: db.LessonProgress,
+          where: {
+            userId: {
+              [Op.eq]: req.user.id
+            }
+          },
+          required: false
+        }]
       },
       {
         model: db.User,

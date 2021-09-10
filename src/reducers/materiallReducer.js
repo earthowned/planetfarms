@@ -1,20 +1,28 @@
-import {
-  MATERIAL_CREATE_REQUEST,
-  MATERIAL_CREATE_SUCCESS,
-  MATERIAL_CREATE_FAIL,
-  MATERIAL_CREATE_RESET
-} from '../constants/materialConstants'
+import * as material from '../constants/materialConstants'
 
 export const materialCreateReducer = (state = {}, action) => {
   switch (action.type) {
-    case MATERIAL_CREATE_REQUEST:
+    case material.MATERIAL_CREATE_REQUEST:
       return { loading: true }
-    case MATERIAL_CREATE_SUCCESS:
+    case material.MATERIAL_CREATE_SUCCESS:
       return { loading: false, success: true, data: action.payload }
-    case MATERIAL_CREATE_FAIL:
+    case material.MATERIAL_CREATE_FAIL:
       return { loading: false, error: action.payload }
-    case MATERIAL_CREATE_RESET:
+    case material.MATERIAL_CREATE_RESET:
       return {}
+    default:
+      return state
+  }
+}
+
+export const materialDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case material.MATERIAL_DELETE_REQUEST:
+      return { loading: true }
+    case material.MATERIAL_DELETE_SUCCESS:
+      return { loading: false, success: true, data: action.payload }
+    case material.MATERIAL_DELETE_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

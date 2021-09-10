@@ -11,7 +11,9 @@ const DragDrop = ({
   fetchImg,
   dataImg,
   editImg,
-  onClick = () => {}
+  dropFile,
+  onClick = () => {},
+  videoTitle
 }) => {
   const [files, setFiles] = useState()
   const { getRootProps, getInputProps } = useDropzone({
@@ -56,6 +58,7 @@ const DragDrop = ({
       dataImg={dataImg}
       onClick={onClick}
       editImg={editImg}
+      videoTitle={videoTitle}
     />
   )
 }
@@ -72,6 +75,7 @@ const DragDropComponent = ({
   text,
   dataImg,
   editImg,
+  videoTitle,
   onClick = () => {}
 }) => {
   return (
@@ -109,14 +113,14 @@ const DragDropComponent = ({
             </div>
           </>
         ) : text ? (
-          <h6 className='dragDropText'>{text}</h6>
+          <h6 className='dragDropText ddtext'>{text}</h6>
         ) : (
           <h6 className='text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px'>
             Drag & Drop files in this area or Click Here to attach video cover
           </h6>
         )}
       </div>
-      {files && (
+      {files || videoTitle ? (
         <img
           src='/img/close-outline.svg'
           className='drag-drop-close'
@@ -126,6 +130,8 @@ const DragDropComponent = ({
           }}
           alt='drag_drop_img_close'
         />
+      ) : (
+        ''
       )}
     </div>
   )

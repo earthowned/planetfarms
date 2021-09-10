@@ -184,7 +184,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: var(--primary-black);
+      background-color: var(--cards);
       border-radius: 0.4em;
 
       @media (max-width: 768px) {
@@ -201,8 +201,8 @@
       }
       .input-container {
         .block {
-          border: 1px solid var(--primary-grey);
-          background-color: var(--popups);
+          border: 1px solid var(--dropdowns);
+          background-color: var(--cards);
           .label {
             width: 100%;
             margin-left: 2.5em;
@@ -219,9 +219,9 @@
       }
       .textarea {
         margin-bottom: 1.5em;
-        border: 1px solid var(--primary-grey);
+        border: 1px solid var(--dropdowns);
         outline: none;
-        background-color: var(--popups);
+        background-color: var(--cards);
         color: #ffff;
         font-size: 1.05em;
         font-family: inherit;
@@ -282,9 +282,9 @@
     }
     .video-row-3 {
       input {
-        border: 1px solid var(--primary-grey);
+        border: 1px solid var(--dropdowns);
         outline: none;
-        background-color: var(--popups);
+        background-color: var(--cards);
         color: #ffff;
         font-size: 1.05em;
         font-family: inherit;

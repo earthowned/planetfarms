@@ -1,16 +1,12 @@
 const db = require('../models')
-const { changeFormat } = require('../helpers/filehelpers')
-const CircularJSON = require('circular-json')
 
 const getLessons = async (req, res) => {
   const pageSize = 1
   const page = Number(req.query.pageNumber) || 1
-  console.log(req.params.courseId)
   const lessons = await db.Lesson.findAndCountAll({
     // offset: (page - 1) * pageSize,
     // limit: pageSize,
-    order: [['order', 'ASC']],
-    include: [db.Video, db.Photo, db.Text, db.Material],
+    order: [['createdAt', 'ASC']],
     where: { courseId: req.params.courseId }
   })
 
@@ -29,27 +25,22 @@ const getLessonById = async (req, res) => {
   const { id } = req.params
   const lesson = await db.Lesson.findOne({
     where: { id },
-    include: [db.Video, db.Photo, db.Text, db.Material, db.Test, db.LessonProgress, db.Courses]
+    include: [
+      {
+        model: db.RichText,
+        include: [db.Text, db.Video, db.Photo]
+      },
+      db.Material,
+      db.Test,
+      db.LessonProgress,
+      db.Courses
+    ]
   })
 
-  lesson.photos.forEach((photo) => {
-    photo.lessonImg = changeFormat(photo.lessonImg)
-  })
-  lesson.videos.forEach((video) => {
-    video.videoCover = changeFormat(video.videoCover)
-  })
-
-  const coverImg = changeFormat(lesson?.dataValues?.coverImg)
-  const lessonData = lesson.dataValues
-  const data = Object.assign({
-    ...lesson,
-    dataValues: { ...lessonData, coverImg }
-  })
-  const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
     status: true,
     message: 'fetched lesson successfully',
-    data: str.dataValues
+    data: lesson
   })
 }
 
@@ -58,7 +49,8 @@ const addLesson = async (req, res) => {
   if (req.file) {
     coverImg = req.file.filename
   }
-  const lesson = await db.Lesson.create({ ...req.body, coverImg })
+  const { courseId, title, lessonDesc, richtextId } = req.body
+  const lesson = await db.Lesson.create({ courseId, title, lessonDesc, richtextId, coverImg })
   res.status(201).json({
     status: true,
     message: 'added new lesson successfully',
@@ -68,7 +60,10 @@ const addLesson = async (req, res) => {
 
 const deleteLesson = async (req, res) => {
   const { id } = req.params
-  const lesson = await db.Lesson.destroy({ where: { id } })
+  const lesson = await db.Lesson.destroy({
+    where: { id },
+    include: [db.Video, db.Photo, db.Text, db.Material]
+  })
   res.status(202).json({
     status: true,
     message: 'deleted lesson successfully',

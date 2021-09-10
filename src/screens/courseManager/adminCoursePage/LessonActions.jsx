@@ -1,9 +1,14 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
-import useHideOnClick from '../../../utils/useHideOnClick'
+import { Link } from 'react-router-dom'
 
-const LessonActions = ({ id }) => {
+import { deleteLesson } from '../../../actions/lessonActions'
+import { useDispatch } from 'react-redux'
+import useHideOnClick from '../../../utils/useHideOnClick'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+
+const LessonActions = ({ id, courseId, refetch }) => {
+  const dispatch = useDispatch()
   const history = useHistory()
   const [actionActive, setActionActive] = useState(false)
   const [tests, setTests] = useState([])
@@ -20,6 +25,9 @@ const LessonActions = ({ id }) => {
     setTests(tests)
   }
 
+  const deleteLessonHandler = (lessonId) => {
+    dispatch(deleteLesson(lessonId, refetch))
+  }
   return (
     <div className='actions' ref={domNode}>
       <button
@@ -30,10 +38,6 @@ const LessonActions = ({ id }) => {
       </button>
       {actionActive && (
         <ul className={actionActive ? 'show' : 'hide'}>
-          <Link to={`/admin/edit-lesson/${id}`}>
-            <li>Edit</li>
-          </Link>
-          <li>Delete</li>
           {
             tests.length > 0
               ? <Link to={`/admin/edit-test/${id}`}>
@@ -43,6 +47,22 @@ const LessonActions = ({ id }) => {
                 <li>Add test</li>
                 </Link>
           }
+          <li onClick={() => history.push({
+            pathname: `/admin/lesson/edit/${id}`,
+            state: {
+              courseId
+            }
+          })}
+          >Edit
+          </li>
+          <li
+            onClick={() => {
+              deleteLessonHandler(id)
+              setActionActive(!actionActive)
+            }}
+          >
+            Delete
+          </li>
         </ul>
       )}
     </div>

@@ -53,38 +53,40 @@ const resizeImage = (req, res, next) => {
   const { format, height, width } = { format: 'webp', ...req.body }
   try {
     // user might not send image sometimes
-    if (!req.file) return next()
-
-    const filename = path
-      .basename(req.file.path)
-      .split('.')
-      .slice(0, -1)
-      .join('.')
-    let dir = path.join(
-      path.dirname(__dirname),
-      '..',
-      'files',
-      `${req.file.fieldname}`,
-      filename
-    )
-    let newImage = sharp(req.file.path)
-    if (width) {
-      newImage = newImage.resize(parseInt(width))
-      dir = dir + '-' + width + 'x' + height
-    }
-    if (req.body.render) {
-      newImage.toBuffer().then((data) => {
-        // To display the image
-        res.writeHead(200, {
-          'Content-Type': 'image/webp',
-          'Content-Length': data.length
-        })
-        return res.end(data)
-      })
+    if (!req.file) {
+      return next()
     } else {
-      const savePath = dir + '.' + format
-      newImage = newImage.toFile(savePath)
-      return next(null, true)
+      const filename = path
+        .basename(req.file.path)
+        .split('.')
+        .slice(0, -1)
+        .join('.')
+      let dir = path.join(
+        path.dirname(__dirname),
+        '..',
+        'files',
+          `${req.file.fieldname}`,
+          filename
+      )
+      let newImage = sharp(req.file.path)
+      if (width) {
+        newImage = newImage.resize(parseInt(width))
+        dir = dir + '-' + width + 'x' + height
+      }
+      if (req.body.render) {
+        newImage.toBuffer().then((data) => {
+          // To display the image
+          res.writeHead(200, {
+            'Content-Type': 'image/webp',
+            'Content-Length': data.length
+          })
+          return res.end(data)
+        })
+      } else {
+        const savePath = dir + '.' + format
+        newImage = newImage.toFile(savePath)
+        return next(null, true)
+      }
     }
   } catch (error) {
     throw error

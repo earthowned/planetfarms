@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+export const fileHeader = {
+  headers: { 'Content-Type': 'multipart/form-data' }
+}
+
 export const configFunc = (options = { headers: {} }) => {
   const userdata = window.localStorage.getItem('userInfo')
   const headers = { 'Content-Type': 'application/json' }

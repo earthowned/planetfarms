@@ -14,6 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     isImgDesc: {
       type: DataTypes.BOOLEAN
     },
+    richtextId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    order: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     createdAt: {
       type: DataTypes.DATE
     },
@@ -23,7 +31,11 @@ module.exports = (sequelize, DataTypes) => {
   },
   { timestamps: true })
   Photo.associate = (models) => {
-    Photo.belongsTo(models.Lesson, { constraints: true, foreignKey: 'lessonId' })
+    Photo.belongsTo(models.RichText, {
+      constraints: true,
+      foreignKey: 'richtextId',
+      onDelete: 'CASCADE'
+    })
   }
   return Photo
 }

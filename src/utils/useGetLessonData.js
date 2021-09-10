@@ -1,26 +1,18 @@
-import { useState } from 'react'
 import { useQuery } from 'react-query'
-import { LESSONS, Axios, GET_COURSE } from './urlConstants'
-import { configFunc } from './apiFunc'
+import { Axios, GET_COURSE, GET_LESSONS } from './urlConstants'
 
-const useGetLessonData = (
-  id,
-  setMaterialData,
-  userId,
-  setPath,
-  dependencies
-) => {
+const useGetLessonData = (id, setMaterialData, userId, setPath) => {
   const { isLoading, data, refetch } = useQuery(
-    ['lessonData', { ...dependencies }],
+    'lessonData',
     async () => {
-      const { data } = await Axios.get(LESSONS + `/${id}`, configFunc())
+      const { data } = await Axios.get(GET_LESSONS + `/${id}`)
       setMaterialData(data?.data?.materials)
       return data
     },
     {
       onSuccess: (data) => {
-        const id = data?.data?.courseId
-        Axios.get(GET_COURSE + `/${id}`, configFunc()).then((res) => {
+        const id = data?.courseId
+        Axios.get(GET_COURSE + `/${id}`).then((res) => {
           const dat = res?.data?.data.creator
           setPath(dat === userId ? `/admin/course/${id}` : `/course/${id}`)
         })

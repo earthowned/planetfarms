@@ -1,0 +1,324 @@
+.admin-lesson-create-container {
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+  padding: 40px;
+  background: var(--cards);
+  border: 1px solid var(--dropdowns);
+  border-radius: 4px;
+  color: var(--primary-white);
+
+  .drag-drop-container {
+    margin: 2em 0;
+    height: 23em !important;
+    width: 100%;
+    border: 2px dashed #f8ebdf;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .drag-drop .ddtext {
+      width: 50%;
+      text-align: center;
+      line-height: 25px;
+    }
+
+    .drag-drop-icon-container .dragDropText {
+      width: auto;
+      margin: 0 1em;
+    }
+  }
+
+  .autoWidth {
+    width: 12em;
+  }
+}
+
+.admin-lesson-create-container input {
+  background: none;
+  outline: none;
+  border: none;
+  height: 48px;
+  width: 100%;
+  font-size: 40px;
+  color: var(--primary-white);
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.add-lesson-drag {
+  width: 100%;
+  height: 456px;
+  border: 2px dashed #f8ebdf;
+}
+
+.add-lesson-drag .avatar {
+  width: 100%;
+  height: 452px;
+}
+
+.editimg {
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1em;
+
+  p {
+    font-size: 1.25em;
+    padding: 1em;
+  }
+}
+
+.dropzone-container > div {
+  width: 100%;
+  height: 456px;
+}
+
+.admin-lesson-create-btn-wrapper {
+  margin-top: 80px;
+  background: #212225;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  height: 136px;
+}
+
+.admin-lesson-create-btn-wrapper button {
+  width: 120px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addMaterial img {
+  display: none;
+}
+
+.admin-lesson-create-btn-wrapper button img {
+  margin-bottom: 8px;
+}
+
+.admin-lesson-create-btn-wrapper button:not(:last-child) {
+  margin-right: 40px;
+}
+
+.admin-lesson-materials-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  background: var(--cards);
+  border: 1px solid var(--dropdowns);
+  border-radius: 4px;
+  color: var(--primary-white);
+  margin-top: 40px;
+}
+
+.admin-lesson-materials-container p {
+  color: var(--primary-grey);
+  width: 270px;
+  line-height: 24px;
+}
+
+.save-lesson-modal {
+  background: #191b1d;
+  margin-top: 40px;
+  display: flex;
+  height: 88px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  border-radius: 4px;
+  color: var(--primary-white);
+
+  @media (max-width: 800px) {
+    #lesson-cancel-btn {
+      width: auto;
+      padding-left: 3em;
+      padding-right: 3em;
+    }
+  }
+
+  @media (max-width: 730px) {
+    flex-direction: column;
+    height: auto;
+    padding: 1em;
+
+    div {
+      margin-top: 1.5em;
+    }
+  }
+}
+
+.primary-btn {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: #000;
+  margin-left: 20px;
+}
+
+.addMaterial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 1.3em 1em;
+  width: 31%;
+  margin-top: 1em;
+
+  @media only screen and (max-width: 900px) {
+    width: 45%;
+  }
+
+  @media only screen and (max-width: 660px) {
+    width: 100%;
+  }
+
+  .drag-drop-icon-container {
+    width: 100%;
+    height: 100%;
+    background: var(--background-color-light);
+    color: var(--primary-white);
+    font-size: 1em;
+  }
+
+  .drag-drop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      width: 100%;
+      font-size: 1em;
+      color: var(--primary-white);
+      display: block !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .admin-lesson-create-btn-wrapper {
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 24px;
+  }
+
+  .admin-lesson-create-btn-wrapper button {
+    margin-bottom: 14px;
+  }
+
+  .admin-lesson-create-btn-wrapper button:not(:last-child) {
+    margin-right: 14px;
+  }
+
+  #lesson-save-btn {
+    width: 110px;
+  }
+}
+
+@media only screen and (max-width: 635px) {
+  .admin-lesson-create-btn-wrapper {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .admin-lesson-materials-container p {
+    width: 100%;
+  }
+
+  .admin-lesson-create-btn-wrapper button {
+    width: 100%;
+  }
+
+  .admin-lesson-create-btn-wrapper button:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .save-lesson-modal {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 0;
+    width: 100%;
+  }
+
+  .save-lesson-modal > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 1em;
+  }
+
+  #lesson-save-btn {
+    margin-top: 1.5em;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .admin-lesson-create-container {
+    padding: 20px;
+  }
+
+  .admin-lesson-create-container input {
+    font-size: 26px;
+  }
+}
+
+.test {
+  color: #fff;
+}
+
+.errorMsg {
+  margin-top: 1.5em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.lessonDesc {
+  margin: 2em 0;
+  border: 1px solid var(--primary-grey);
+  outline: none;
+  background-color: var(--popups);
+  color: #ffff;
+  font-size: 1.05em;
+  font-family: inherit;
+
+  &::-webkit-input-placeholder {
+    color: var(--primary-grey);
+  }
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+}
+
+.material {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 1085px) {
+    justify-content: space-between;
+  }
+}

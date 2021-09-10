@@ -45,6 +45,11 @@ module.exports = (sequelize, DataTypes) => {
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    richtextId: {
+      type: DataTypes.INTEGER,
+      unique: true,
+      allowNull: false
     }
   },
   { timestamps: true }
@@ -53,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
   // association
   News.associate = (models) => {
     News.belongsTo(models.Community, { foreignKey: 'communityId' })
+    News.belongsTo(models.RichText, { foreignKey: 'richtextId', constraints: true })
   }
   return News
 }

@@ -8,23 +8,52 @@ import './NewsCreateModal.scss'
 const CreateText = ({
   textActive,
   setTextActive,
-  lessonData,
-  setLessonData
+  data,
+  setData,
+  editData,
+  setEditData,
+  editFunc
 }) => {
   const { register, errors, handleSubmit } = useForm()
-
   const addText = ({ textHeading, textDescription }) => {
+    const itemId =
+      data.length === 0 || !data.hasOwnProperty('itemId')
+        ? data.length + 1
+        : data[data.length - 1].itemId + 1
+
     if (textHeading.length !== 0 || textDescription.length !== 0) {
       const textData = [
-        ...lessonData,
+        ...data,
         {
+          itemId,
           textHeading,
           textDescription
         }
       ]
-      setLessonData(textData)
+      setData(textData)
     }
     setTextActive(false)
+  }
+
+  const editText = ({ textHeading, textDescription }) => {
+    if (textHeading.length !== 0 || textDescription.length !== 0) {
+      editFunc({ textHeading, textDescription, id: editData[0].id })
+      setEditData([])
+    }
+  }
+
+  const closeModal = () => {
+    setTextActive(false)
+    setEditData([])
+  }
+
+  const editLocalData = ({ textHeading, textDescription }) => {
+    if (editData.length !== 0) {
+      editData[0].textHeading = textHeading
+      editData[0].textDescription = textDescription
+    }
+    setTextActive(false)
+    setEditData([])
   }
   return (
     <>
@@ -34,7 +63,7 @@ const CreateText = ({
             <div className='collection-modal-inner-container'>
               <CollectionModalHeader
                 title='Add text'
-                clickHandler={setTextActive}
+                clickHandler={closeModal}
               />
               <div className='photo-input-container'>
                 <InputFields
@@ -43,6 +72,9 @@ const CreateText = ({
                   placeholder='Text Heading (Optional)'
                   name='textHeading'
                   ref={register}
+                  defaultValue={
+                    editData.length > 0 ? editData[0]?.textHeading : ''
+                  }
                 />
                 <TextArea
                   className={`default-input-variation text-area-variation ${
@@ -54,6 +86,9 @@ const CreateText = ({
                   cols='3'
                   rows='7'
                   name='textDescription'
+                  defaultValue={
+                    editData.length > 0 ? editData[0]?.textDescription : ''
+                  }
                   ref={register({
                     required: {
                       value: true,
@@ -68,11 +103,22 @@ const CreateText = ({
                   }
                 />
               </div>
-              <Button
-                className='add'
-                name='Add Text Block'
-                onClick={handleSubmit(addText)}
-              />
+
+              {editData.length > 0 ? (
+                <Button
+                  className='add'
+                  name='Edit Text Block'
+                  onClick={handleSubmit(
+                    editData[0]?.itemId ? editLocalData : editText
+                  )}
+                />
+              ) : (
+                <Button
+                  className='add'
+                  name='Add Text Block'
+                  onClick={handleSubmit(addText)}
+                />
+              )}
             </div>
           </div>
         </div>

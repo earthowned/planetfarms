@@ -104,6 +104,12 @@
   display: flex;
 }
 
+.study-course-wrapper p {
+  color: var(--primary-grey);
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
 .coverImg {
   width: 30%;
   height: 10em;
@@ -122,6 +128,10 @@
     }
   }
 
+  p {
+    width: 100%;
+  }
+
   &__text {
     div {
       width: 100%;
@@ -135,10 +145,6 @@
         font-size: 2em;
       }
     }
-  }
-
-  p {
-    width: 100%;
   }
 }
 
@@ -207,12 +213,6 @@
   padding: 40px;
 }
 
-.study-course-wrapper p {
-  color: var(--primary-grey);
-  margin-top: 40px;
-  margin-bottom: 24px;
-}
-
 .actions {
   position: relative;
 
@@ -243,7 +243,7 @@
     color: var(--primary-white);
     border: 0.5px solid var(--primary-white);
     padding: 0.5em 1em;
-    z-index: 99999;
+    z-index: 500;
     border-radius: 0.2em;
 
     li {

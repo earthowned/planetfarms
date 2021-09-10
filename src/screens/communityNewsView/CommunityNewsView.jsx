@@ -2,74 +2,52 @@ import React, { useState, useEffect } from 'react'
 import './CommunityNewsView.scss'
 import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
 import BackButton from '../../components/backButton/BackButton'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { getApi } from '../../utils/apiFunc'
+import { useDispatch } from 'react-redux'
+import RichTextView from '../../components/richTextView/RichTextView'
 
-function CommunityNewsViewPage ({ newNews }) {
+function CommunityNewsViewPage () {
   const [news, setNews] = useState({})
-  const val = useLocation()?.state?.news
+  const currentCommunity = localStorage.getItem('currentCommunity')
+    ? JSON.parse(localStorage.getItem('currentCommunity'))
+    : null
+  const dispatch = useDispatch()
+  const { id } = useParams()
   useEffect(() => {
-    setNews(newNews || val)
-  }, [newNews, val])
-
+    getSingleNews(id)
+  }, [])
+  async function getSingleNews (id) {
+    const { data } = await getApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/news/${id}/community/${currentCommunity.id}`
+    )
+    setNews(data)
+  }
   return (
     <>
-      {newNews ? (
-        <NewsSingleView news={news} />
-      ) : (
-        <DashboardLayout>
-          <div className='x03-1-0-news-page'>
-            <div className='flex-col-2'>
-              <BackButton location='/community-page-news' />
-              <NewsSingleView news={news} />
-              <div className='button-row-3'>
-                <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
-                  <img className='f1' src='/img/facebook-share-icon.svg' alt='facebook-icon' />
-                  <div className='your-business-goals valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px'>
-                    Repost
-                  </div>
+      <DashboardLayout>
+        <div className='x03-1-0-news-page'>
+          <div className='flex-col-2'>
+            <BackButton location='/news' />
+            <RichTextView data={news} news />
+            <div className='button-row-3'>
+              <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
+                <img className='f1' src='/img/facebook-share-icon.svg' alt='facebook-icon' />
+                <div className='your-business-goals valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px'>
+                  Repost
                 </div>
-                <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
-                  <img className='shape' src='/img/twitter-shape-icon.svg' alt='twitter-icon' />
-                  <div className='your-business-goals-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px'>
-                    Tweet
-                  </div>
+              </div>
+              <div className='button-secondary-default border-0-5px-quarter-spanish-white'>
+                <img className='shape' src='/img/twitter-shape-icon.svg' alt='twitter-icon' />
+                <div className='your-business-goals-1 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-18px'>
+                  Tweet
                 </div>
               </div>
             </div>
           </div>
-        </DashboardLayout>
-      )}
-    </>
-  )
-}
-
-const NewsSingleView = ({ news }) => {
-  return (
-    <>
-      <h1 className='news-view-title'>{news?.title}</h1>
-
-      <div className='title-time'>
-        <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-          {news?.createdAt && new Date(news?.createdAt).toDateString()}
         </div>
-        <div className='due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
-          {news?.readTime}
-        </div>
-      </div>
-      <div className='news-add-img-wrapper'>
-        <img src='/img/newsbg-image.png' alt='community-single-article' />
-      </div>
-      <div className='text-container'>
-        <p>{news?.textDetail?.collectionTitle}</p>
-        <p>{news?.textDetail?.collectionDescription}</p>
-      </div>
-      <div className='text-container'>
-        <p>{news?.imageDetail?.imageDescription}</p>
-      </div>
-      <div className='text-container'>
-        <p>{news?.videoDetail?.videoTitle}</p>
-        <p>{news?.videoDetail?.videoDescription}</p>
-      </div>
+      </DashboardLayout>
     </>
   )
 }

@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 import { GET_COVERIMG } from '../../../utils/urlConstants'
 import LessonActions from './LessonActions'
 
-const LessonBlock = ({ data, courseId }) => {
+const LessonBlock = ({ data, courseId, refetch }) => {
   const lessonData = data?.data?.lessons
-
+  const history = useHistory()
   return (
     <div className='admin-course-page-container'>
       <div className='admin-lesson-lists-container'>
@@ -14,7 +16,6 @@ const LessonBlock = ({ data, courseId }) => {
           <>
             <h3 className='lessonHead'>Lessons</h3>
             {lessonData
-              .sort((a, b) => (a.order > b.order ? 1 : -1))
               .map((lesson) => {
                 return (
                   <React.Fragment key={lesson.id}>
@@ -47,7 +48,7 @@ const LessonBlock = ({ data, courseId }) => {
                           </Link>
                         </div>
                       </div>
-                      <LessonActions id={lesson.id} />
+                      <LessonActions id={lesson.id} courseId={courseId} refetch={refetch} />
                     </div>
                   </React.Fragment>
                 )
@@ -56,12 +57,17 @@ const LessonBlock = ({ data, courseId }) => {
         ) : (
           ''
         )}
-        <Link to={`/admin/add-lesson/${courseId}`}>
-          <div className='add-lesson-btn secondary-btn'>
-            <img src='/img/plus.svg' alt='lesson add' />
-            <span>Add new lesson for users</span>
-          </div>
-        </Link>
+        <div
+          className='add-lesson-btn secondary-btn' onClick={() => history.push({
+            pathname: '/admin/lesson/add',
+            state: {
+              courseId
+            }
+          })}
+        >
+          <img src='/img/plus.svg' alt='lesson add' />
+          <span>Add new lesson for users</span>
+        </div>
       </div>
     </div>
   )

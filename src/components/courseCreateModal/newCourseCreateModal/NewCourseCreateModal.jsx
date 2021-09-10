@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { CATEGORY } from '../../../utils/urlConstants'
-
 import { createResource } from '../../../actions/courseActions'
-import useGetFetchData from '../../../utils/useGetFetchData'
 import DragDrop from '../../dragDrop/DragDrop'
 import ToggleSwitch from '../../toggleSwitch/ToggleSwitch'
 import './NewCourseCreateModal.scss'
-import Filter from '../../filter/Filter'
+import CategoryFilter from '../../categoryFilter/CategoryFilter'
 
 const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const history = useHistory()
@@ -22,8 +19,6 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
   const [categoryError, setCategoryError] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
-
-  const { data: res } = useGetFetchData('category', CATEGORY)
 
   useEffect(() => {
     if (selectedCategory.length !== 0) {
@@ -82,15 +77,11 @@ const NewCourseCreateModal = ({ collectionAdded, clickHandler }) => {
             })}
           />
           {errors.title && <p className='error'>{errors.title.message}</p>}
-          <Filter
-            isCategory
-            category={res?.results}
-            className='categoryFilter'
+          <CategoryFilter
             setSelectedCategory={setSelectedCategory}
             selectedCategory={selectedCategory}
           />
           {categoryError && <p className='error'>{categoryError}</p>}
-
           <textarea
             className={errors.description ? 'errorBox' : ''}
             placeholder='Course description'

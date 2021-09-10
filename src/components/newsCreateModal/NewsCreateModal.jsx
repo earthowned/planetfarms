@@ -21,11 +21,19 @@ const NewsCreateModal = ({
   groupEditActive,
   setGroupEditActive,
   addVideoData,
-  lessonData,
-  setLessonData
+  data,
+  setData,
+  imageData = [],
+  setImageData,
+  textData = [],
+  setTextData,
+  videoData = [],
+  setVideoData,
+  editTextConfirm,
+  editImageConfirm,
+  editVideoConfirm
 }) => {
   const [files, setFiles] = useState(null)
-
   switch (type) {
     case 'video':
       return (
@@ -35,8 +43,11 @@ const NewsCreateModal = ({
           setFiles={setFiles}
           videoActive={videoActive}
           setVideoActive={setVideoActive}
-          lessonData={lessonData}
-          setLessonData={setLessonData}
+          data={data}
+          setData={setData}
+          editData={videoData || []}
+          setEditData={setVideoData}
+          editFunc={editVideoConfirm}
         />
       )
 
@@ -66,8 +77,11 @@ const NewsCreateModal = ({
           setFiles={setFiles}
           imageActive={imageActive}
           setImageActive={setImageActive}
-          lessonData={lessonData}
-          setLessonData={setLessonData}
+          data={data}
+          setData={setData}
+          editData={imageData || []}
+          setEditData={setImageData}
+          editFunc={editImageConfirm}
         />
       )
 
@@ -77,8 +91,11 @@ const NewsCreateModal = ({
           files={files}
           textActive={textActive}
           setTextActive={setTextActive}
-          lessonData={lessonData}
-          setLessonData={setLessonData}
+          data={data}
+          setData={setData}
+          editData={textData || []}
+          setEditData={setTextData}
+          editFunc={editTextConfirm}
         />
       )
 
