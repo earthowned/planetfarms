@@ -157,10 +157,6 @@
   height: 1.5em;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  &::first-letter {
-    text-transform: capitalize;
-  }
 }
 
 .lessonDescText {
