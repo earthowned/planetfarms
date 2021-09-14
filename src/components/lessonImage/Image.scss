@@ -13,8 +13,9 @@
 
   p {
     margin-top: 1em;
-    font-size: 1em;
-    font-style: italic;
+    font-size: 14px !important;
+    font-weight: 400;
+    color: var(--primary-white);
   }
 
   .actions {

@@ -30,20 +30,12 @@
       line-height: 2em;
       margin-bottom: 0.5em;
       font-weight: 600;
-
-      &::first-letter {
-        text-transform: uppercase;
-      }
     }
 
     p.videoDesc {
       font-size: 1em;
       line-height: 1.5em;
       width: 80%;
-
-      &::first-letter {
-        text-transform: uppercase;
-      }
     }
   }
 

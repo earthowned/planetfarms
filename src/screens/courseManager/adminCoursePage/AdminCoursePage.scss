@@ -93,6 +93,7 @@
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 40px;
+  position: relative;
 
   .lessonBlock {
     width: 100%;
@@ -134,6 +135,7 @@
 
   &__text {
     div {
+      padding: 12px;
       width: 100%;
       height: 100%;
       display: flex;
@@ -151,23 +153,29 @@
 .lessonTitle {
   font-size: 1.5em;
   margin-bottom: 0.5em;
-
-  &::first-letter {
-    text-transform: capitalize;
-  }
+  width: 100%;
+  height: 1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .lessonDescText {
   margin-bottom: 0.5em;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .admin-lesson .lessonInfo {
-  width: 70%;
+  width: 55%;
+  height: 160px;
   display: flex;
   flex-direction: column;
   text-align: justify;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: flex-start;
+  overflow: hidden;
 }
 
 .text-btn {
@@ -214,7 +222,8 @@
 }
 
 .actions {
-  position: relative;
+  position: absolute;
+  right: 0;
 
   @media (max-width: 850px) {
     position: absolute;
