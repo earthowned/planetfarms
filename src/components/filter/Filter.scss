@@ -2,6 +2,7 @@
   width: 200px;
   position: relative;
 }
+
 .categoryFilter {
   width: 100%;
   margin-top: 2em;
@@ -11,10 +12,8 @@
     padding: 1em;
     font-size: 0.9em;
   }
-  .filter-dropdown {
-    top: 3.5em;
-  }
 }
+
 .filter-title {
   color: var(--primary-white);
   display: flex;
@@ -50,4 +49,8 @@
 
 .filter-dropdown li:hover {
   background: var(--primary-color);
+}
+
+.categoryFilter .filter-dropdown {
+  top: 3.5em;
 }
