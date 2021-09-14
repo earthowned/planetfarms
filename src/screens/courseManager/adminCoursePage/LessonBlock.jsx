@@ -32,7 +32,7 @@ const LessonBlock = ({ data, courseId, refetch }) => {
                         ) : (
                           <div className='coverImg coverImg__text'>
                             <div>
-                              <p>{lesson.title}</p>
+                              <p className="lessonTitle">{lesson.title}</p>
                             </div>
                           </div>
                         )}
