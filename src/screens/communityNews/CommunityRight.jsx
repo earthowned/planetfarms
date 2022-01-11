@@ -1,33 +1,25 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-const CommunityRight = ({
-  text,
-  farming,
-  people,
-  nature,
-  carsIndustry,
-  mediaNews,
-  seeAllTopics
-}) => {
+const tags = ["Farming", "People", "Nature", "Cars industry", "Media news"];
+
+const CommunityRight = () => {
   return (
-    <>
-      <div className='community-news-right-bar'>
-        <div className='community-news-right-bar-inner-container'>
-          <h4>{text}</h4>
-          <div className='community-news-filter-container'>
-            <h6>{farming}</h6>
-            <h6>{people}</h6>
-            <h6>{nature}</h6>
-            <h6>{carsIndustry}</h6>
-            <h6>{mediaNews}</h6>
-          </div>
-          <Link to='/community-switching' className='nav-link'>
-            {seeAllTopics}
-          </Link>
-        </div>
-      </div>
-    </>
-  )
-}
+    <div className="community-news-right-bar">
+      <h4>Discover more of what matters to you</h4>
 
-export default CommunityRight
+      <div className="community-news-filter-container">
+        {tags.map((tag) => (
+          <div key={tag} className="news-container">
+            <h4>{tag}</h4>
+          </div>
+        ))}
+      </div>
+
+      <Link to="/community-switching" className="nav-link">
+        See all topics
+      </Link>
+    </div>
+  );
+};
+
+export default CommunityRight;

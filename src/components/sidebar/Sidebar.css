@@ -145,7 +145,7 @@
 }
 
 .list-container .text-active {
-  color: var(--background-color);
+  color: var(--primary-black);
   background: var(--primary-color);
   fill: var(--background-color);
 }

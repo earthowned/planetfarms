@@ -1,17 +1,24 @@
-import React from 'react'
-import './Button.scss'
+// @ts-nocheck
+import React from "react";
+import "./Button.scss";
 
-const Button = ({ name, onClick, disabled = false, className }) => {
+const Button = ({
+  name,
+  onClick,
+  className = "",
+  type = "submit",
+  disabled = false,
+}) => {
   return (
     <button
-      type='submit'
-      className={`btn-default ${className}`}
+      type={type}
       onClick={onClick}
       disabled={disabled}
+      className={`btn-default ${className}`}
     >
       {name}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;
