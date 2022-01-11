@@ -1,26 +1,31 @@
 .btn-default {
-  align-items: center;
-  justify-content: center;
-  background-color: var(--primary-color);
-  border-radius: 4px;
-  display: flex;
-  color: var(--background-color);
-  overflow: hidden;
-  padding: 0.9em 2.5em;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  text-align: center;
   width: 100%;
   height: 100%;
+  border-radius: 4px;
+  padding: 0.9em 2.5em;
+  background-color: var(--primary-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
+  line-height: 24px;
+  font-style: normal;
+  text-align: center;
+  color: var(--background-color);
+  font-family: var(--font-family);
 
   &:disabled {
     cursor: default;
-    background-color: var(--primary-grey);
     color: var(--primary-white);
+    background-color: var(--primary-grey);
   }
 }
 

@@ -8,10 +8,11 @@
 }
 
 .oauth-wrapper h4 {
-  color: var(--primary-white);
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+  color: var(--primary-white);
+  font-family: var(--font-family);
 }
 
 .o-auth-btn-wrapper {
@@ -34,8 +35,12 @@
 }
 
 .o-auth-btn-wrapper h4 {
+  font-size: 16px;
   font-weight: 600;
   margin-left: 14px;
+  line-height: 24px;
+  color: var(--primary-white);
+  font-family: var(--font-family);
 }
 
 @media only screen and (max-width: 520px) {

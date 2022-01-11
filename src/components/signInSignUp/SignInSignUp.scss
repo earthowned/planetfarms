@@ -3,36 +3,12 @@
   align-items: flex-start;
   flex-direction: column;
   height: inherit;
-
-  //@media only screen and (max-width: 1440px) {
-    width: 100%;
-  //}
-
-  /*@media only screen and (max-width: 375px) {
-    width: 300px;
-  }
-
-  @media only screen and (max-width: 320px) {
-    width: 280px;
-  }*/
+  width: 100%;
 
   .welcome {
-    letter-spacing: 0;
-    line-height: 40px;
-    min-height: 40px;
-    white-space: nowrap;
-    color: var(--primary-white);
-    font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-    font-size: 35px;
-    font-style: normal;
-    font-weight: 600;
-
-    @media only screen and (max-width: 320px) {
-      font-size: 1.5em;
-    }
-
-    @media only screen and (max-width: 375px) {
-      font-size: 1.6em;
+    @media only screen and (max-width: 576px) {
+      font-size: 24px;
+      line-height: 32px;
     }
   }
 
@@ -43,23 +19,6 @@
     margin-top: 2em;
     min-height: 488px;
     width: 100%;
-    /*width: 503px;
-
-    @media only screen and (max-width: 1200px) {
-      width: 460px;
-    }
-
-    @media only screen and (max-width: 1024px) {
-      width: 504px;
-    }
-
-    @media only screen and (max-width: 520px) {
-      width: 100%;
-    }
-
-    @media only screen and (max-width: 360px) {
-      width: 100%;
-    }*/
 
     .error {
       background: rgba(58, 58, 58, 0.7);
@@ -129,7 +88,7 @@
       @media only screen and (min-width: 1024px) {
         flex-direction: row;
       }
-      
+
       @media only screen and (max-width: 1023px) and (min-width: 767px) {
         flex-direction: column;
         align-items: flex-start;
@@ -226,7 +185,7 @@
     @media only screen and (min-width: 1024px) {
       flex-direction: row;
     }
-    
+
     @media only screen and (max-width: 1023px) and (min-width: 767px) {
       flex-direction: column;
     }
@@ -243,16 +202,19 @@
     }
 
     .span {
-      font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
+      font-family: var(--font-family);
       font-size: 16px;
 
       &-1 {
+        font-weight: 400;
         color: var(--primary-white);
       }
 
       &-2 {
         color: var(--primary-color);
         font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
         text-decoration: underline;
         margin-left: 0.5em;
       }
@@ -260,25 +222,18 @@
   }
 }
 
-.white16px {
-  color: var(--primary-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-}
-
 .green16px {
-  color: var(--primary-color);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
+  line-height: 24px;
+  font-style: normal;
+  color: var(--primary-color);
+  font-family: var(--font-family);
 }
 
 .transparent16px {
   color: transparent;
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
+  font-family: var(--font-family);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

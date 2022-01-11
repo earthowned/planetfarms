@@ -15,3 +15,11 @@
   background: var(--primary-color);
   border: none;
 }
+
+.checkbox-label {
+  font-weight: 600;
+  line-height: 24px;
+  font-style: normal;
+  color: var(--primary-white);
+  font-family: var(--font-family);
+}

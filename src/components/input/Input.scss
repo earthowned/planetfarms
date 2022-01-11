@@ -74,13 +74,18 @@
     .inputField {
       border: none;
       outline: none;
-      font-family: inherit;
-      font-size: 1.05em;
+      // font-family: inherit;
+      // font-size: 1.05em;
       background-color: transparent;
       color: var(--primary-grey);
       padding: 1em 0;
       min-width: 76px;
       width: 100%;
+
+      font-family: "IBM Plex Sans";
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
     }
 
     .pwShowHide {
