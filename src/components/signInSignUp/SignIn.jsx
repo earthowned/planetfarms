@@ -166,11 +166,11 @@ const SignIn = () => {
 
         <div className="oauth">
           <OAuthBtn
-            loginWithFacebook={loginWithFacebook}
-            loginWithGoogle={loginWithGoogle}
+            name={text1}
             google={google}
             facebook={facebook}
-            name={text1}
+            loginWithGoogle={loginWithGoogle}
+            loginWithFacebook={loginWithFacebook}
           />
         </div>
 

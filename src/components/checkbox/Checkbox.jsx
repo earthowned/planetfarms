@@ -4,7 +4,7 @@ import { ReactComponent as Tick } from "../../assets/images/tick.svg";
 import { ErrorMessage } from "@hookform/error-message";
 
 const Checkbox = React.forwardRef(
-  ({ label, name, value, errors, onChange }, ref) => {
+  ({ label, name, value, errors, onChange, children }, ref) => {
     const [checked, setChecked] = useState(false);
 
     function changeCheckbox() {
@@ -15,7 +15,7 @@ const Checkbox = React.forwardRef(
       if (onChange) {
         onChange(checked);
       }
-    }, [checked]);
+    }, [checked, onChange]);
 
     return (
       <div className="checkboxAndError">
@@ -38,8 +38,10 @@ const Checkbox = React.forwardRef(
             {checked && <Tick alt="checkbox-for-terms" />}
           </div>
 
-          <p className="checkbox-label">{label}</p>
+          {children && children}
+          {!children && label && <p className="checkbox-label">{label}</p>}
         </div>
+
         {errors?.[`${name}`] && (
           <p className="error-message">
             <ErrorMessage

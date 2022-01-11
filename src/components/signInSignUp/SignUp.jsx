@@ -15,17 +15,10 @@ import { ReactComponent as UserAvatar } from "../../assets/images/user-green-out
 import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
 import "./SignInSignUp.scss";
 
-const SignIn = () => {
-  const {
-    welcomeBack,
-    spanText,
-    text2,
-    google,
-    facebook,
-    signIn,
-    failMessage,
-  } = SignInSignUpData;
+const { welcomeBack, spanText, text2, google, facebook, signIn } =
+  SignInSignUpData;
 
+const SignIn = () => {
   const history = useHistory();
   const { register: regi, handleSubmit, errors } = useForm();
 
@@ -94,7 +87,6 @@ const SignIn = () => {
         <div className="remember remember-signup">
           <div className="signupCheckBtn">
             <Checkbox
-              label={spanText}
               name="terms"
               ref={regi({
                 required: {
@@ -103,15 +95,23 @@ const SignIn = () => {
                 },
               })}
               errors={errors}
-            />
+            >
+              <div className="terms-of-service-link-container">
+                <h4>I agree with</h4>
+                <h4 className="link">Terms of Service</h4>
+              </div>
+            </Checkbox>
+
             <div className="btnSignUp">
               <Button name="Sign Up" />
             </div>
           </div>
         </div>
+
         <div className="oauth">
           <OAuthBtn google={google} facebook={facebook} name={text2} />
         </div>
+
         <div className="option">
           <p className="span span-1">Already have an Account?</p>
           <Link className="span span-2" to="/">

@@ -220,6 +220,22 @@
       }
     }
   }
+
+  .terms-of-service-link-container {
+    display: flex;
+
+    h4 {
+      font-weight: 400;
+      margin-right: 4px;
+      color: var(--primary-white);
+    }
+
+    .link {
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
 }
 
 .green16px {
