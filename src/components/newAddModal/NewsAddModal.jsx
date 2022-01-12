@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
-import Button from "../button/Button";
+import { ActionButton } from "../../common/action-button";
 import CategoryFilter from "../categoryFilter/CategoryFilter";
 
 import { CATEGORY } from "../../utils/urlConstants";
@@ -91,10 +91,11 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
           {categoryError && <p className="error">{categoryError}</p>}
         </div>
 
-        <Button
+        <ActionButton
           type="submit"
+          variant="primary"
           className="action-btn"
-          name={editData ? "Update" : "Continue"}
+          title={editData ? "Update" : "Continue"}
           onClick={
             editData ? handleSubmit(editNewsTitle) : handleSubmit(AddNews)
           }

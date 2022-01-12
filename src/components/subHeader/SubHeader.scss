@@ -31,11 +31,16 @@
     .sub-header-list-container {
       color: var(--primary-white);
       list-style: none;
+
       display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+
+      gap: 16px;
       margin: 0;
 
       li {
-        margin-right: 0.5em;
+        // margin-right: 0.5em;
         margin-left: 0;
       }
 
@@ -116,7 +121,7 @@
 
     .row-2 {
       width: 100%;
-      margin-top: 40px;
+      margin-top: 24px;
 
       @media only screen and (max-width: 840px) {
         width: 100%;
@@ -177,5 +182,4 @@
     flex-direction: column;
     height: auto;
   }
-
 }
