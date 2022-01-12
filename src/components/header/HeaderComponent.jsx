@@ -18,9 +18,9 @@ const ListContainer = ({ onSwitchCommunity, children }) => {
 };
 
 const ListItem = ({
-  onClick,
   title = "",
   badge = undefined,
+  onClick = undefined,
   iconName = undefined,
   children = undefined,
 }) => {

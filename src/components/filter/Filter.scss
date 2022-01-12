@@ -16,7 +16,9 @@
   }
 }
 .filter-title {
+  font-style: var(--font-family);
   color: var(--primary-white);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
