@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap");
 
 body {
   background: black;
@@ -78,6 +78,8 @@ h5 {
 }
 
 h6 {
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 24px;
 }

@@ -10,6 +10,7 @@ export const ActionButton = ({
   onClick,
   className = "",
   type = "button",
+  icon = undefined,
   disabled = false,
   variant = Variant.primary,
 }) => {
@@ -20,6 +21,7 @@ export const ActionButton = ({
       disabled={disabled}
       className={`common-button ${variant} ${className}`}
     >
+      {icon && <img src={`/img/${icon}.svg`} alt={`${icon}-icon`} />}
       <h4>{title}</h4>
     </button>
   );

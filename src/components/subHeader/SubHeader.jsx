@@ -6,6 +6,7 @@ import Filter from "../filter/Filter";
 import SearchComponent from "../searchComponent/SearchComponent";
 
 import { NavLinkTab } from "../../common/nav-link-tab";
+import { ActionButton } from "../../common/action-button";
 
 import "./SubHeader.scss";
 
@@ -63,15 +64,15 @@ const SubHeader = ({ search, setSearch, nav, setCreateActive, btnName }) => {
           </>
         )}
       </div>
+
       <div className="sub-header-right-container">
         <div className="row-1">
           <div className="sub-header-btn-container">
-            <button
-              className="default-btn"
+            <ActionButton
+              title="Add new course"
+              variant="primary"
               onClick={() => setCreateActive(true)}
-            >
-              {btnName}
-            </button>
+            />
           </div>
         </div>
 

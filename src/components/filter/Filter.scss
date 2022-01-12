@@ -16,8 +16,10 @@
   }
 }
 .filter-title {
-  font-style: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
   color: var(--primary-white);
+  font-style: var(--font-family);
 
   display: flex;
   justify-content: space-between;
@@ -48,7 +50,11 @@
   width: 100%;
   cursor: pointer;
   background: var(--background-color);
-  color: #ffff;
+
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--primary-white);
+  font-style: var(--font-family);
 }
 
 .filter-dropdown li:hover {

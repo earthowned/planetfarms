@@ -94,6 +94,11 @@
   width: 100%;
 }
 
+.calendar-nav-link {
+  width: auto;
+  margin-right: 10px;
+}
+
 .calendar-top-header ul {
   display: flex;
   align-items: center;
@@ -295,8 +300,12 @@
   margin-left: 16px;
 }
 
-.main-cal-btn {
+.calendar-today-btn {
   width: 120px;
+}
+
+.calendar-new-event-btn {
+  width: 200px;
 }
 
 /* calendar design starts here */

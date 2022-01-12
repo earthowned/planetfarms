@@ -13,14 +13,6 @@
   border-radius: 4px;
 }
 
-.courses-users-content h3 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 32px;
-  color: var(--primary-white);
-}
-
 .courses-users-btn {
   display: flex;
   align-items: center;
