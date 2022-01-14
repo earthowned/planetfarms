@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { useState, useEffect } from "react";
-import { useLocation, useHistory } from "react-router";
+// import { useLocation, useHistory } from "react-router";
 import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import {
   prevMonth,
@@ -10,7 +10,6 @@ import {
 } from "../../components/calendar/DateFunctions";
 
 import "./CalendarScreen.css";
-import Button from "../../components/button/Button";
 import Input from "../../components/input/InputComponent";
 import buildCalendar from "../../components/calendar/Build";
 import dayStyles from "../../components/calendar/Styles";
@@ -126,20 +125,20 @@ const AddModal = ({ addHandler, showModal }) => {
   );
 };
 
-const NavItem = ({ item }) => {
-  const { pathname } = useLocation();
-  const history = useHistory();
-  const [active, setActive] = useState(pathname === item.link);
-  return (
-    <li
-      className={active ? "calendar-nav-item active" : "calendar-nav-item"}
-      key={item.label}
-      onClick={() => history.push(item.link)}
-    >
-      {item.label}
-    </li>
-  );
-};
+// const NavItem = ({ item }) => {
+//   const { pathname } = useLocation();
+//   const history = useHistory();
+//   const [active, setActive] = useState(pathname === item.link);
+//   return (
+//     <li
+//       className={active ? "calendar-nav-item active" : "calendar-nav-item"}
+//       key={item.label}
+//       onClick={() => history.push(item.link)}
+//     >
+//       {item.label}
+//     </li>
+//   );
+// };
 
 const CalendarHeader = ({ value, changeValue, showModal }) => {
   const windowWidth = useSizeFinder();
@@ -275,46 +274,46 @@ const DayComponent = ({ day, events, value, setValue }) => {
   );
 };
 
-const ToolTip = ({ checkEvents, day }) => {
-  return (
-    <div className="tooltip">
-      <h2>{day.format("dddd")}</h2>
-      <h3>{day.format("MMMM d, YYYY")}</h3>
-      <p>My events:</p>
-      <ul>
-        {checkEvents(day).map((item) => (
-          <ToolTipLink item={item} />
-        ))}
-      </ul>
-    </div>
-  );
-};
+// const ToolTip = ({ checkEvents, day }) => {
+//   return (
+//     <div className="tooltip">
+//       <h2>{day.format("dddd")}</h2>
+//       <h3>{day.format("MMMM d, YYYY")}</h3>
+//       <p>My events:</p>
+//       <ul>
+//         {checkEvents(day).map((item) => (
+//           <ToolTipLink item={item} />
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
 
-const ToolTipLink = ({ item }) => {
-  return (
-    <>
-      <li key={item.task}>
-        <span>
-          {item.time} {item.task}
-        </span>
-      </li>
-      <div className="task-edit-option">
-        <ul>
-          <li>
-            <img src="/img/follow-icon.svg" alt="add members" />{" "}
-            <p>Add members</p>
-          </li>
-          <li>
-            <img src="/img/edit-icon.svg" alt="edit events" /> <p>Edit event</p>
-          </li>
-          <li>
-            <img src="/img/trash-icon.svg" alt="delete events" />{" "}
-            <p>Delete event</p>
-          </li>
-        </ul>
-      </div>
-    </>
-  );
-};
+// const ToolTipLink = ({ item }) => {
+//   return (
+//     <>
+//       <li key={item.task}>
+//         <span>
+//           {item.time} {item.task}
+//         </span>
+//       </li>
+//       <div className="task-edit-option">
+//         <ul>
+//           <li>
+//             <img src="/img/follow-icon.svg" alt="add members" />{" "}
+//             <p>Add members</p>
+//           </li>
+//           <li>
+//             <img src="/img/edit-icon.svg" alt="edit events" /> <p>Edit event</p>
+//           </li>
+//           <li>
+//             <img src="/img/trash-icon.svg" alt="delete events" />{" "}
+//             <p>Delete event</p>
+//           </li>
+//         </ul>
+//       </div>
+//     </>
+//   );
+// };
 
 export default CalendarScreen;

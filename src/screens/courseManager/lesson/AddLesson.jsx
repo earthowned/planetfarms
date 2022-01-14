@@ -1,85 +1,86 @@
-import { useState, useEffect } from 'react'
-import { useParams, useHistory, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { createLesson, updateLesson } from '../../../actions/lessonActions'
-import BackButton from '../../../components/backButton/BackButton'
-import NewsCreateModal from '../../../components/newsCreateModal/NewsCreateModal'
-import DashboardLayout from '../../../layout/dashboardLayout/DashboardLayout'
-import './AddLesson.scss'
-import useGetFetchData from '../../../utils/useGetFetchData'
-import { deletePhoto, updatePhoto } from '../../../actions/photoActions'
-import { deleteText, updateText } from '../../../actions/textActions'
-import { deleteVideo, updateVideo } from '../../../actions/videoActions'
-import { deleteMaterial } from '../../../actions/materialActions'
-import RichTextEditor from '../../../components/richTextEditor/RichTextEditor'
-import DeleteContent from '../../../components/deleteContent/DeleteContent'
+import { useState, useEffect } from "react";
+import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createLesson, updateLesson } from "../../../actions/lessonActions";
+import BackButton from "../../../components/backButton/BackButton";
+import NewsCreateModal from "../../../components/newsCreateModal/NewsCreateModal";
+import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
+import "./AddLesson.scss";
+import useGetFetchData from "../../../utils/useGetFetchData";
+import { deletePhoto, updatePhoto } from "../../../actions/photoActions";
+import { deleteText, updateText } from "../../../actions/textActions";
+import { deleteVideo, updateVideo } from "../../../actions/videoActions";
+import { deleteMaterial } from "../../../actions/materialActions";
+import RichTextEditor from "../../../components/richTextEditor/RichTextEditor";
+import DeleteContent from "../../../components/deleteContent/DeleteContent";
 
 const AddLesson = () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const { lessonId } = useParams()
-  const { state } = useLocation()
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { lessonId } = useParams();
+  const { state } = useLocation();
 
   const { success: updateVideoSuccess } = useSelector(
     (state) => state.updateVideo
-  )
+  );
   const { success: deleteVideoSuccess } = useSelector(
     (state) => state.deleteVideo
-  )
+  );
 
   const { success: updateTextSuccess } = useSelector(
     (state) => state.updateText
-  )
+  );
   const { success: deleteTextSuccess } = useSelector(
     (state) => state.deleteText
-  )
+  );
 
   const { success: updatePhotoSuccess } = useSelector(
     (state) => state.updatePhoto
-  )
+  );
   const { success: deletePhotoSuccess } = useSelector(
     (state) => state.deletePhoto
-  )
+  );
 
-  const [videoModal, setVideoModal] = useState(false)
-  const [imageModal, setImageModal] = useState(false)
-  const [textModal, setTextModal] = useState(false)
+  const [videoModal, setVideoModal] = useState(false);
+  const [imageModal, setImageModal] = useState(false);
+  const [textModal, setTextModal] = useState(false);
 
-  const [lessonData, setLessonData] = useState([])
-  const [lessonSingleData, setLessonSingleData] = useState([])
-  const [lessonCover, setLessonCover] = useState(null)
-  const [material, setMaterial] = useState([])
-  const [fetchLesson, setFetchLesson] = useState([])
+  const [lessonData, setLessonData] = useState([]);
+  const [lessonSingleData, setLessonSingleData] = useState([]);
+  const [lessonCover, setLessonCover] = useState(null);
+  const [material, setMaterial] = useState([]);
+  const [fetchLesson] = useState([]);
 
-  const [deleteVideoModal, setDeleteVideoModal] = useState(false)
-  const [deleteImageModal, setDeleteImageModal] = useState(false)
-  const [deleteTextModal, setDeleteTextModal] = useState(false)
-  const [deleteMaterialModal, setDeleteMaterialModal] = useState(false)
+  const [deleteVideoModal, setDeleteVideoModal] = useState(false);
+  const [deleteImageModal, setDeleteImageModal] = useState(false);
+  const [deleteTextModal, setDeleteTextModal] = useState(false);
+  const [deleteMaterialModal, setDeleteMaterialModal] = useState(false);
 
-  const [videoId, setVideoId] = useState(null)
-  const [imageId, setImageId] = useState(null)
-  const [textId, setTextId] = useState(null)
-  const [materialId, setMaterialId] = useState(null)
+  const [videoId, setVideoId] = useState(null);
+  const [imageId, setImageId] = useState(null);
+  const [textId, setTextId] = useState(null);
+  const [materialId, setMaterialId] = useState(null);
 
-  const [imageData, setImageData] = useState(null)
-  const [videoData, setVideoData] = useState(null)
-  const [textData, setTextData] = useState(null)
-  const [courseId, setCourseId] = useState(state?.courseId)
-  const [oldData, setOldData] = useState(null)
+  const [imageData, setImageData] = useState(null);
+  const [videoData, setVideoData] = useState(null);
+  const [textData, setTextData] = useState(null);
+  const [courseId] = useState(state?.courseId);
+  const [oldData, setOldData] = useState(null);
 
-  const { pathname } = useLocation()
-  const { data, loading, error, refetch } = useGetFetchData(
-    'LESSON_DATA',
+  const { pathname } = useLocation();
+  const { data, refetch } = useGetFetchData(
+    "LESSON_DATA",
     `${process.env.REACT_APP_API_BASE_URL}/api/lessons/${lessonId}`,
     null,
-    pathname.split('/')[3] === 'edit'
-  )
+    pathname.split("/")[3] === "edit"
+  );
 
   // for edit
   useEffect(() => {
-    if (pathname.split('/')[3] === 'edit') {
-      getSingleLesson()
+    if (pathname.split("/")[3] === "edit") {
+      getSingleLesson();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     data,
     dispatch,
@@ -89,70 +90,72 @@ const AddLesson = () => {
     updateTextSuccess,
     deleteTextSuccess,
     updatePhotoSuccess,
-    deletePhotoSuccess
-  ])
+    deletePhotoSuccess,
+  ]);
 
-  function getSingleLesson () {
-    setLessonSingleData(data?.data)
+  function getSingleLesson() {
+    setLessonSingleData(data?.data);
   }
-  async function editImageFunc (id) {
+  async function editImageFunc(id) {
     if (lessonSingleData?.rich_text?.photos) {
       const photo = lessonSingleData.rich_text.photos.filter(
         (el) => el.id === id
-      )
-      setImageData(photo)
+      );
+      setImageData(photo);
     }
   }
 
-  function editImageConfirm (data) {
-    const { id, isImgDesc, lessonImg, photoDescription } = data
+  function editImageConfirm(data) {
+    const { id, isImgDesc, lessonImg, photoDescription } = data;
     dispatch(
       updatePhoto({
         iData: { img: lessonImg, photoDescription, isImgDesc },
         id,
         setEditPhotoModel: setImageModal,
-        refetch
+        refetch,
       })
-    )
+    );
   }
 
-  async function editTextFunc (id) {
+  async function editTextFunc(id) {
     if (lessonSingleData?.rich_text?.texts) {
-      const text = lessonSingleData.rich_text.texts.filter((el) => el.id === id)
-      setTextData(text)
+      const text = lessonSingleData.rich_text.texts.filter(
+        (el) => el.id === id
+      );
+      setTextData(text);
     }
   }
-  function editTextConfirm (data) {
-    const { id, textHeading, textDescription } = data
+  function editTextConfirm(data) {
+    const { id, textHeading, textDescription } = data;
     dispatch(
       updateText({
         textId: id,
         textHeading,
         textDescription,
         setEditTextModel: setTextModal,
-        refetch
+        refetch,
       })
-    )
+    );
   }
 
-  async function editVideoFunc (id) {
+  async function editVideoFunc(id) {
     if (lessonSingleData?.rich_text?.videos) {
       const video = lessonSingleData.rich_text.videos.filter(
         (el) => el.id === id
-      )
-      setVideoData(video)
+      );
+      setVideoData(video);
     }
   }
 
-  function editVideoConfirm (data) {
+  function editVideoConfirm(data) {
     const {
       id,
       videoCover,
       videoTitle,
       videoDescription,
       videoLink,
-      videoResource
-    } = data
+      videoResource,
+    } = data;
     dispatch(
       updateVideo({
         id,
@@ -161,106 +164,106 @@ const AddLesson = () => {
           videoTitle,
           videoDescription,
           videoLink,
-          videoResource
+          videoResource,
         },
         setEditVideoModel: setVideoModal,
-        refetch
+        refetch,
       })
-    )
+    );
   }
 
-  function deleteImageModalFunc (id) {
-    setDeleteImageModal(true)
-    setImageId(id)
+  function deleteImageModalFunc(id) {
+    setDeleteImageModal(true);
+    setImageId(id);
   }
 
-  async function deleteImageConfirm () {
-    dispatch(deletePhoto(imageId, refetch))
-    setDeleteImageModal(false)
+  async function deleteImageConfirm() {
+    dispatch(deletePhoto(imageId, refetch));
+    setDeleteImageModal(false);
   }
 
-  function deleteVideoModalFunc (id) {
-    setDeleteVideoModal(true)
-    setVideoId(id)
+  function deleteVideoModalFunc(id) {
+    setDeleteVideoModal(true);
+    setVideoId(id);
   }
 
-  async function deleteVideoConfirm () {
-    dispatch(deleteVideo(videoId, refetch))
-    setDeleteVideoModal(false)
+  async function deleteVideoConfirm() {
+    dispatch(deleteVideo(videoId, refetch));
+    setDeleteVideoModal(false);
   }
 
-  function deleteTextModalFunc (id) {
-    setDeleteTextModal(true)
-    setTextId(id)
+  function deleteTextModalFunc(id) {
+    setDeleteTextModal(true);
+    setTextId(id);
   }
 
-  function deleteTextConfirm () {
-    dispatch(deleteText(textId, refetch))
-    setDeleteTextModal(false)
+  function deleteTextConfirm() {
+    dispatch(deleteText(textId, refetch));
+    setDeleteTextModal(false);
   }
 
   // create lesson
   const submitLessonForm = ({ title, lessonDesc }) => {
-    const coverImg = lessonCover
-    const order = fetchLesson.length + 1
+    const coverImg = lessonCover;
+    const order = fetchLesson.length + 1;
     dispatch(
       createLesson({
         lessonDetail: {
           title,
           courseId,
           coverImg,
-          lessonDesc
+          lessonDesc,
         },
         order,
         lessonData,
         material,
-        history
+        history,
       })
-    )
-  }
+    );
+  };
   // edit lesson
   const editLessonForm = ({ title, lessonDesc }) => {
-    const coverImg = lessonCover
+    const coverImg = lessonCover;
     dispatch(
       updateLesson({
         lessonDetail: {
           title,
           coverImg,
-          lessonDesc
+          lessonDesc,
         },
         lessonId,
         history,
         lessonData: [oldData, lessonData].flat(),
         material,
-        richtextId: lessonSingleData.rich_text.id
+        richtextId: lessonSingleData.rich_text.id,
       })
-    )
-  }
+    );
+  };
 
   const removeItem = (id) => {
-    const newLessonData = lessonData.filter((item) => item.itemId !== id)
-    setLessonData(newLessonData)
-  }
+    const newLessonData = lessonData.filter((item) => item.itemId !== id);
+    setLessonData(newLessonData);
+  };
 
   const removeMaterial = (e) => {
-    const name = e.currentTarget.getAttribute('name')
-    setMaterial(material.filter((item) => item?.mData?.preview !== name))
-  }
+    const name = e.currentTarget.getAttribute("name");
+    setMaterial(material.filter((item) => item?.mData?.preview !== name));
+  };
 
   const removeMaterialModal = (id) => {
-    setDeleteMaterialModal(true)
-    setMaterialId(id)
-  }
+    setDeleteMaterialModal(true);
+    setMaterialId(id);
+  };
   const removeRemoteMaterial = () => {
-    dispatch(deleteMaterial(materialId, refetch))
-    setDeleteMaterialModal(false)
-  }
+    dispatch(deleteMaterial(materialId, refetch));
+    setDeleteMaterialModal(false);
+  };
 
   return (
     <>
       {videoModal && (
         <NewsCreateModal
-          type='video'
+          type="video"
           videoActive={videoModal}
           setVideoActive={setVideoModal}
           data={lessonData}
@@ -272,7 +275,7 @@ const AddLesson = () => {
       )}
       {imageModal && (
         <NewsCreateModal
-          type='image'
+          type="image"
           imageActive={imageModal}
           setImageActive={setImageModal}
           data={lessonData}
@@ -284,7 +287,7 @@ const AddLesson = () => {
       )}
       {textModal && (
         <NewsCreateModal
-          type='text'
+          type="text"
           textActive={textModal}
           setTextActive={setTextModal}
           data={lessonData}
@@ -296,39 +299,39 @@ const AddLesson = () => {
       )}
       {deleteVideoModal && (
         <DeleteContent
-          heading='Delete'
-          message='Do you want to delete the video?'
+          heading="Delete"
+          message="Do you want to delete the video?"
           setDeleteModal={setDeleteVideoModal}
           confirmDelete={deleteVideoConfirm}
         />
       )}
       {deleteImageModal && (
         <DeleteContent
-          heading='Delete'
-          message='Do you want to delete the image?'
+          heading="Delete"
+          message="Do you want to delete the image?"
           setDeleteModal={setDeleteImageModal}
           confirmDelete={deleteImageConfirm}
         />
       )}
       {deleteTextModal && (
         <DeleteContent
-          heading='Delete'
-          message='Do you want to delete the text?'
+          heading="Delete"
+          message="Do you want to delete the text?"
           setDeleteModal={setDeleteTextModal}
           confirmDelete={deleteTextConfirm}
         />
       )}
       {deleteMaterialModal && (
         <DeleteContent
-          heading='Delete'
-          message='Do you want to delete the material?'
+          heading="Delete"
+          message="Do you want to delete the material?"
           setDeleteModal={setDeleteMaterialModal}
           confirmDelete={removeRemoteMaterial}
         />
       )}
       <DashboardLayout
         title={
-          pathname.split('/')[3] === 'edit' ? 'Edit Lesson' : 'Add New Lesson'
+          pathname.split("/")[3] === "edit" ? "Edit Lesson" : "Add New Lesson"
         }
       >
         <BackButton location={`/admin/course/${courseId}`} />
@@ -356,9 +359,9 @@ const AddLesson = () => {
           setMaterial={setMaterial}
           removeMaterial={removeMaterial}
           showMaterial
-          edit={pathname.split('/')[3] === 'edit'}
-          saveBtnName='save lesson'
-          editBtnName='save'
+          edit={pathname.split("/")[3] === "edit"}
+          saveBtnName="save lesson"
+          editBtnName="save"
           cancel={() => history.push(`/admin/course/${courseId}`)}
           setOldData={setOldData}
           dispatch={dispatch}
@@ -370,7 +373,7 @@ const AddLesson = () => {
         />
       </DashboardLayout>
     </>
-  )
-}
+  );
+};
 
-export default AddLesson
+export default AddLesson;

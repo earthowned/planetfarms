@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import { login } from "../../actions/userAction";
-import { USER_LOGIN_SUCCESS } from "../../constants/userConstants";
 import { SignInSignUpData } from "./SignInSignUpData";
 
 import Button from "../button/Button";
@@ -14,25 +13,19 @@ import OAuthBtn from "../oAuthBtn/OAuthBtn";
 import { ReactComponent as UserAvatar } from "../../assets/images/user-green-outline.svg";
 import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
 import "./SignInSignUp.scss";
-import {
-  listUserCommunities,
-  visitCommunity,
-} from "../../actions/communityActions";
+import { visitCommunity } from "../../actions/communityActions";
 
 const { rememberMe, text1, google, facebook } = SignInSignUpData;
 
 const SignIn = () => {
-  const [user, setUser] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { currentCommunity } = useSelector((state) => state.activeCommunity);
 
-  const { loading, error, userInfo } = userLogin;
+  const { error, userInfo } = userLogin;
   const { register: regi, errors, handleSubmit } = useForm();
 
-  const [terms, setTerms] = useState(false);
-  const [termsError, setTermsError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -66,13 +59,14 @@ const SignIn = () => {
     }
 
     // getUser().then((userData) => setUser(userData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history, userInfo, dispatch]);
 
-  function getUser() {
-    /* return Auth.currentAuthenticatedUser()
+  // function getUser() {
+  /* return Auth.currentAuthenticatedUser()
       .then((userData) => userData)
       .catch(() => console.log("Not signed in")); */
-  }
+  // }
 
   // async function signIn(username, password) {
   //   try {

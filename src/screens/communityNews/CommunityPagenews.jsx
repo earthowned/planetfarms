@@ -14,18 +14,7 @@ import useSizeFinder from "../../utils/sizeFinder";
 import { searchNews, listNews } from "../../actions/newsActions";
 
 const CommunityPagenews = (props) => {
-  const {
-    addNews,
-    text22,
-    farming,
-    people,
-    nature,
-    carsIndustry,
-    mediaNews,
-    seeAllTopics,
-    setAddModal,
-    deleteNewsCard,
-  } = props;
+  const { addNews, setAddModal, deleteNewsCard } = props;
 
   const windowWidth = useSizeFinder();
 

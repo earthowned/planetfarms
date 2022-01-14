@@ -70,6 +70,7 @@ const Sidebar = ({ setToggle, toggle, mobileView, burgerActive }) => {
       : null;
 
     if (!currentCommunity) dispatch(visitCommunity(3));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

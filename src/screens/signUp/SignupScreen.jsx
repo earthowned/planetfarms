@@ -1,20 +1,23 @@
-import SignUp from '../../components/signInSignUp/SignUp'
-import SignLayout from '../../layout/signLayout/SignLayout'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import { useEffect, useState } from 'react'
+import SignUp from "../../components/signInSignUp/SignUp";
+import SignLayout from "../../layout/signLayout/SignLayout";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect, useState } from "react";
 
 const SignUpScreen = () => {
-  const history = useHistory()
-  const [loggedIn, setLoggedIn] = useState(true)
+  const history = useHistory();
+  const [loggedIn, setLoggedIn] = useState(true);
+
   useEffect(() => {
-    const userInfo = window.localStorage.getItem('userInfo')
+    const userInfo = window.localStorage.getItem("userInfo");
     if (userInfo) {
-      setLoggedIn(true)
-      history.push('/')
+      setLoggedIn(true);
+      history.push("/");
     } else {
-      setLoggedIn(false)
+      setLoggedIn(false);
     }
-  }, [loggedIn])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
+
   return (
     <>
       {!loggedIn && (
@@ -23,7 +26,7 @@ const SignUpScreen = () => {
         </SignLayout>
       )}
     </>
-  )
-}
+  );
+};
 
-export default SignUpScreen
+export default SignUpScreen;

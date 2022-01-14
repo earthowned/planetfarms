@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import useSizeFinder from "../../utils/sizeFinder";
-import Filter from "../filter/Filter";
-import SearchComponent from "../searchComponent/SearchComponent";
 
+import Filter from "../filter/Filter";
+import useSizeFinder from "../../utils/sizeFinder";
 import { NavLinkTab } from "../../common/nav-link-tab";
 import { ActionButton } from "../../common/action-button";
+import SearchComponent from "../searchComponent/SearchComponent";
 
 import "./SubHeader.scss";
 
 const SubHeader = ({ search, setSearch, nav, setCreateActive, btnName }) => {
   const windowWidth = useSizeFinder();
-  const { pathname } = useLocation();
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const history = useHistory();

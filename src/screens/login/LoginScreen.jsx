@@ -1,30 +1,35 @@
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import SignIn from '../../components/signInSignUp/SignIn'
-import SignLayout from '../../layout/signLayout/SignLayout'
-import { checkAndUpdateToken, routingCommunityNews } from '../../actions/userAction'
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import SignIn from "../../components/signInSignUp/SignIn";
+import SignLayout from "../../layout/signLayout/SignLayout";
+import {
+  checkAndUpdateToken,
+  routingCommunityNews,
+} from "../../actions/userAction";
 
 const LoginScreen = () => {
-  const dispatch = useDispatch()
-  const [loggedIn, setLoggedIn] = useState(true)
+  const dispatch = useDispatch();
+  const [loggedIn, setLoggedIn] = useState(true);
 
   // fetching current community
-  const currentCommunity = localStorage.getItem('currentCommunity')
-    ? JSON.parse(localStorage.getItem('currentCommunity'))
-    : null
+  // const currentCommunity = localStorage.getItem('currentCommunity')
+  //   ? JSON.parse(localStorage.getItem('currentCommunity'))
+  //   : null
 
   useEffect(() => {
-    const userInfo = window.localStorage.getItem('userInfo')
+    const userInfo = window.localStorage.getItem("userInfo");
     if (userInfo) {
-      setLoggedIn(true)
-      const route = dispatch(checkAndUpdateToken())
+      setLoggedIn(true);
+      const route = dispatch(checkAndUpdateToken());
       if (route) {
-        routingCommunityNews(dispatch, true)
+        routingCommunityNews(dispatch, true);
       }
     } else {
-      setLoggedIn(false)
+      setLoggedIn(false);
     }
-  }, [loggedIn])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
+
   return (
     <>
       {!loggedIn && (
@@ -33,7 +38,7 @@ const LoginScreen = () => {
         </SignLayout>
       )}
     </>
-  )
-}
+  );
+};
 
-export default LoginScreen
+export default LoginScreen;

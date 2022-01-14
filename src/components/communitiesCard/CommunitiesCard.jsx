@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// import { useHistory } from "react-router-dom";
 import { joinCommunity, visitCommunity } from "../../actions/communityActions";
 import "./CommunitiesCard.scss";
 import Background from "../background/Background";
@@ -35,16 +35,17 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
   const [followCount, setFollowCount] = useState(0);
   const [dropDown, setDropDown] = useState(false);
 
-  const { success } = useSelector((state) => state.joinCommunity);
-  const { currentCommunity } = useSelector((state) => state.activeCommunity);
+  // const { success } = useSelector((state) => state.joinCommunity);
+  // const { currentCommunity } = useSelector((state) => state.activeCommunity);
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   // choose userid according to the user data in your database
 
   useEffect(() => {
     if (community.isFollowed === "1") setFollower(false);
     if (community.isCreator === "true") setCreator(true);
     setFollowCount(parseInt(community.followersCount));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const followCommunity = () => {
@@ -145,13 +146,13 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
   );
 };
 
-function Button(props) {
-  const { children } = props;
-  return (
-    <div className="button-card border-0-5px-quarter-spanish-white">
-      <div className="default-i905516988 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
-        {children}
-      </div>
-    </div>
-  );
-}
+// function Button(props) {
+//   const { children } = props;
+//   return (
+//     <div className="button-card border-0-5px-quarter-spanish-white">
+//       <div className="default-i905516988 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+//         {children}
+//       </div>
+//     </div>
+//   );
+// }

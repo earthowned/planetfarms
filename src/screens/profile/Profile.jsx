@@ -1,73 +1,78 @@
-import React, { useEffect, useState } from 'react'
-import './Profile.scss'
-import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
-import BackButton from '../../components/backButton/BackButton'
-import PersonalInformation from '../../components/profileFormCard/PersonalInformation'
-import AdditionalInformation from '../../components/profileFormCard/AdditionalInformation'
-import ContactInformation from '../../components/profileFormCard/ContactInformation'
-import EditInformation from '../../components/editInformation/EditInformation'
-import { getUserDetails, getMyDetails } from '../../actions/userAction'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import "./Profile.scss";
+import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+import BackButton from "../../components/backButton/BackButton";
+import PersonalInformation from "../../components/profileFormCard/PersonalInformation";
+import AdditionalInformation from "../../components/profileFormCard/AdditionalInformation";
+import ContactInformation from "../../components/profileFormCard/ContactInformation";
+import EditInformation from "../../components/editInformation/EditInformation";
+import { getUserDetails, getMyDetails } from "../../actions/userAction";
+import { useDispatch, useSelector } from "react-redux";
 import {
   useHistory,
-  useParams
-} from 'react-router-dom/cjs/react-router-dom.min'
-import VerificationModal from '../../components/verificationModal/VerificationModal'
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
+import VerificationModal from "../../components/verificationModal/VerificationModal";
 
-function Profile () {
-  const { id } = useParams()
-  const [showEmailVerificationModal, setShowEmailVerificationModal] = useState(false)
-  const [showPhoneVerificationModal, setShowPhoneVerificationModal] = useState(false)
-  const history = useHistory()
-  const dispatch = useDispatch()
-  const userDetails = useSelector((state) => state.userDetails)
-  const { status } = useSelector((state) => state.userAttrConfirmCode)
-  const currentUser = useSelector((state) => state.userLogin.userInfo.id)
+function Profile() {
+  const { id } = useParams();
+  const [showEmailVerificationModal, setShowEmailVerificationModal] =
+    useState(false);
+  const [showPhoneVerificationModal, setShowPhoneVerificationModal] =
+    useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const userDetails = useSelector((state) => state.userDetails);
+  const { status } = useSelector((state) => state.userAttrConfirmCode);
+  const currentUser = useSelector((state) => state.userLogin.userInfo.id);
   const currentCommunitySlug = useSelector(
     (state) => state.activeCommunity.currentCommunity.slug
-  )
-  const { user, loading } = userDetails
-  const [isCurrentUser, setIsCurrentUser] = useState(false)
-  const [backLocation, setBackLocation] = useState('')
+  );
+  const { user, loading } = userDetails;
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
+  const [backLocation, setBackLocation] = useState("");
   useEffect(() => {
-    currentUser == id ? dispatch(getMyDetails()) : dispatch(getUserDetails(id))
+    currentUser === id
+      ? dispatch(getMyDetails())
+      : dispatch(getUserDetails(id));
     if (status) {
-      emailClickHandler(false)
-      phoneClickHandler(false)
+      emailClickHandler(false);
+      phoneClickHandler(false);
     }
-  }, [dispatch, history, status])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, history, status]);
 
   const editUserInformation = () => {
     history.push({
-      pathname: '/edit-information',
-      state: { editInformations: true, user }
-    })
-  }
+      pathname: "/edit-information",
+      state: { editInformations: true, user },
+    });
+  };
   const emailClickHandler = (bool) => {
-    setShowEmailVerificationModal(bool)
-  }
+    setShowEmailVerificationModal(bool);
+  };
   const phoneClickHandler = (bool) => {
-    setShowPhoneVerificationModal(bool)
-  }
+    setShowPhoneVerificationModal(bool);
+  };
   const verification = {
     emailClickHandler: () => {
-      emailClickHandler(true)
+      emailClickHandler(true);
     },
     phoneClickHandler: () => {
-      phoneClickHandler(true)
-    }
-  }
+      phoneClickHandler(true);
+    },
+  };
   useEffect(() => {
-    setIsCurrentUser(user?.userID === currentUser)
-  }, [currentUser, user])
+    setIsCurrentUser(user?.userID === currentUser);
+  }, [currentUser, user]);
 
   useEffect(() => {
     setBackLocation(
       isCurrentUser
-        ? '/dashboard'
+        ? "/dashboard"
         : `/community-members/${currentCommunitySlug}`
-    )
-  }, [currentCommunitySlug, isCurrentUser])
+    );
+  }, [currentCommunitySlug, isCurrentUser]);
 
   return (
     <>
@@ -78,24 +83,34 @@ function Profile () {
       ) : (
         <>
           {showEmailVerificationModal && (
-            <VerificationModal type='email' clickHandler={emailClickHandler} />
+            <VerificationModal type="email" clickHandler={emailClickHandler} />
           )}
           {showPhoneVerificationModal && (
-            <VerificationModal type='phone' clickHandler={phoneClickHandler} />
+            <VerificationModal type="phone" clickHandler={phoneClickHandler} />
           )}
-          <DashboardLayout title='User Profile'>
-            <div className='x10-4-0-my-personals'>
-              <div className='flex-col-2'>
-                <div className='frame-2923'>
+          <DashboardLayout title="User Profile">
+            <div className="x10-4-0-my-personals">
+              <div className="flex-col-2">
+                <div className="frame-2923">
                   <BackButton location={backLocation} />
                 </div>
-                <div className='profile border-1px-onyx'>
-                  <div className='profile-info'>
+                <div className="profile border-1px-onyx">
+                  <div className="profile-info">
                     {user && (
                       <>
-                        <PersonalInformation user={user} isCurrentUser={isCurrentUser} />
-                        <ContactInformation user={user} isCurrentUser={isCurrentUser} verification={verification} />
-                        <AdditionalInformation user={user} isCurrentUser={isCurrentUser} />
+                        <PersonalInformation
+                          user={user}
+                          isCurrentUser={isCurrentUser}
+                        />
+                        <ContactInformation
+                          user={user}
+                          isCurrentUser={isCurrentUser}
+                          verification={verification}
+                        />
+                        <AdditionalInformation
+                          user={user}
+                          isCurrentUser={isCurrentUser}
+                        />
                       </>
                     )}
                   </div>
@@ -103,8 +118,10 @@ function Profile () {
                     clickHandler={editUserInformation}
                     image={
                       user?.attachments
-                        ? process.env.REACT_APP_CDN_BASE_URL + '/attachments/' + user.attachments
-                        : '/img/user.svg'
+                        ? process.env.REACT_APP_CDN_BASE_URL +
+                          "/attachments/" +
+                          user.attachments
+                        : "/img/user.svg"
                     }
                     follow={isCurrentUser}
                   />
@@ -115,7 +132,7 @@ function Profile () {
         </>
       )}
     </>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

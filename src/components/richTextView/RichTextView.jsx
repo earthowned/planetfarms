@@ -1,42 +1,43 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
-import Text from '../../screens/courseManager/lesson/Text'
+import Text from "../../screens/courseManager/lesson/Text";
 import {
   GET_COVERIMG,
   GET_VIDEO,
   LESSON_IMG,
-  VIDEO_COVER
-} from '../../utils/urlConstants'
-import Image from '../lessonImage/Image'
-import Video from '../videoPlayer/Video'
+  VIDEO_COVER,
+} from "../../utils/urlConstants";
+import Image from "../lessonImage/Image";
+import Video from "../videoPlayer/Video";
 
 const RichTextView = ({ data, news }) => {
-  const [newData, setNewData] = useState([])
+  const [newData, setNewData] = useState([]);
   const textData = data?.rich_text?.texts?.map((text) => {
-    return text
-  })
+    return text;
+  });
   const videoData = data?.rich_text?.videos?.map((video) => {
-    return video
-  })
+    return video;
+  });
   const photoData = data?.rich_text?.photos?.map((photo) => {
-    return photo
-  })
+    return photo;
+  });
 
   useEffect(() => {
-    setNewData([textData, videoData, photoData])
-  }, [data])
-  const flattenData = newData.flat().filter(Boolean)
+    setNewData([textData, videoData, photoData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+  const flattenData = newData.flat().filter(Boolean);
   return (
     <>
-      <div className='lesson-description-wrapper'>
+      <div className="lesson-description-wrapper">
         {news ? (
           <>
-            <h1 className='news-view-title'>{data?.title}</h1>
-            <div className='title-time'>
-              <div className='due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
+            <h1 className="news-view-title">{data?.title}</h1>
+            <div className="title-time">
+              <div className="due-to-the-advantage valign-text-middle ibmplexsans-semi-bold-monsoon-16px">
                 {data?.createdAt && new Date(data?.createdAt).toDateString()}
               </div>
-              <div className='due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px'>
+              <div className="due-to-the-advantage-1 valign-text-middle ibmplexsans-semi-bold-monsoon-16px">
                 {data?.readTime}
               </div>
             </div>
@@ -46,10 +47,10 @@ const RichTextView = ({ data, news }) => {
           </>
         ) : (
           <>
-            <h1 className='news-view-title'>{data?.title}</h1>
-            {data?.lessonDesc !== 'undefined' && <p>{data?.lessonDesc}</p>}
+            <h1 className="news-view-title">{data?.title}</h1>
+            {data?.lessonDesc !== "undefined" && <p>{data?.lessonDesc}</p>}
             {data?.coverImg && (
-              <div className='lesson-description-img-wrapper'>
+              <div className="lesson-description-img-wrapper">
                 <img
                   src={`${GET_COVERIMG}${data?.coverImg}`}
                   alt={`${data?.title}_img`}
@@ -67,7 +68,7 @@ const RichTextView = ({ data, news }) => {
                 title={data?.videoTitle}
                 description={data?.videoDescription}
                 url={
-                  data?.videoLink === 'undefined'
+                  data?.videoLink === "undefined"
                     ? `${GET_VIDEO}${data?.videoResource}`
                     : data?.videoLink
                 }
@@ -83,7 +84,7 @@ const RichTextView = ({ data, news }) => {
           ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default RichTextView
+export default RichTextView;

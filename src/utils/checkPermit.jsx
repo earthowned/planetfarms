@@ -1,7 +1,7 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
-import { getApi } from './apiFunc'
-const { useDispatch } = require('react-redux')
+import React, { useLayoutEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import { getApi } from "./apiFunc";
+const { useDispatch } = require("react-redux");
 
 // this is higer order component
 // wrap this to the component to check the role of user
@@ -9,21 +9,24 @@ const { useDispatch } = require('react-redux')
 
 const CheckPermit = (OriginalComponent, url) => {
   const NewComponent = () => {
-    const [data, setData] = useState('')
+    const [data, setData] = useState("");
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
     useLayoutEffect(() => {
-      fetchData()
-    }, [])
+      fetchData();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const fetchData = async () => {
-      const { data } = await getApi(dispatch, url)
-      setData(data)
-    }
+      const { data } = await getApi(dispatch, url);
+      setData(data);
+    };
 
-    if (data?.error) return <Redirect to='/dashboard' />
-    return <>{data?.results && <OriginalComponent />}</>
-  }
-  return NewComponent
-}
+    if (data?.error) return <Redirect to="/dashboard" />;
+    return <>{data?.results && <OriginalComponent />}</>;
+  };
+  return NewComponent;
+};
 
-export default CheckPermit
+export default CheckPermit;

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Background from "../../../components/background/Background";
-import CoursesHeader from "../../../components/coursesHeader/CoursesHeader";
-import SubHeader from "../../../components/subHeader/SubHeader";
-import CardLayout from "../../../layout/cardLayout/CardLayout";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
+
 import nav from "../courseNav";
+import CardLayout from "../../../layout/cardLayout/CardLayout";
+import SubHeader from "../../../components/subHeader/SubHeader";
+import Background from "../../../components/background/Background";
+import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
+
 import "./CourseUsers.css";
 
 export const farming = [
@@ -15,6 +16,7 @@ export const farming = [
 ];
 
 const CourseUsers = () => {
+  // eslint-disable-next-line no-unused-vars
   const [active, setActive] = useState(false);
   const [search, setSearch] = useState(null);
 

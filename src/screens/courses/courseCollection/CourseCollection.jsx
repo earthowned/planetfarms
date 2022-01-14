@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import Background from "../../../components/background/Background";
-import CoursesHeader from "../../../components/coursesHeader/CoursesHeader";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import { Link } from "react-router-dom";
+
 import nav from "../courseNav";
-import "./CourseCollection.css";
 import CardLayout from "../../../layout/cardLayout/CardLayout";
 import SubHeader from "../../../components/subHeader/SubHeader";
+import Background from "../../../components/background/Background";
+import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
+
+import "./CourseCollection.css";
 
 const farming = Array(6).fill({
   title: "Farm 2020 courses collection",
@@ -28,6 +29,7 @@ const mycollection = [
 ];
 
 const CourseCollection = () => {
+  // eslint-disable-next-line no-unused-vars
   const [active, setActive] = useState(false);
   const [search, setSearch] = useState(null);
 

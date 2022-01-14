@@ -1,36 +1,36 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
 
-import { register } from "../../actions/userAction";
-import { USER_LOGIN_SUCCESS } from "../../constants/userConstants";
-import { SignInSignUpData } from "./SignInSignUpData";
-
+import Input from "../input/Input";
 import Button from "../button/Button";
 import Checkbox from "../checkbox/Checkbox";
 import OAuthBtn from "../oAuthBtn/OAuthBtn";
-import Input from "../input/Input";
+import { SignInSignUpData } from "./SignInSignUpData";
+
+import { register } from "../../actions/userAction";
+
 import { ReactComponent as UserAvatar } from "../../assets/images/user-green-outline.svg";
 import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
+
 import "./SignInSignUp.scss";
 
-const { welcomeBack, spanText, text2, google, facebook, signIn } =
-  SignInSignUpData;
+const { welcomeBack, text2, google, facebook, signIn } = SignInSignUpData;
 
 const SignIn = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [showPassword, setShowPassword] = useState(false);
   const { register: regi, handleSubmit, errors } = useForm();
 
-  const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
+  const userRegister = useSelector((state) => state.userRegister);
+  const { error, userInfo } = userRegister;
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
-  const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
 
   useEffect(() => {
     if (userInfo) {

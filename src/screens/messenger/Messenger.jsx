@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
-import './Messenger.scss'
-import HeaderComponent from '../../components/header/HeaderComponent'
-import MessengerMain from '../../components/messengerMain/MessengerMain'
-import DashboardLayout from '../../layout/dashboardLayout/DashboardLayout'
+import React from "react";
+
+import MessengerMain from "../../components/messengerMain/MessengerMain";
+import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+
+import "./Messenger.scss";
 
 const Messenger = () => {
   return (
     <>
-      <DashboardLayout title='Messenger'>
+      <DashboardLayout title="Messenger">
         <MessengerMain />
       </DashboardLayout>
     </>
-  )
-}
+  );
+};
 
-export default Messenger
+export default Messenger;
