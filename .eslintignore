@@ -1,0 +1,6 @@
+/build
+/node_modules
+/pgdata
+/api
+/.vscode
+/.github

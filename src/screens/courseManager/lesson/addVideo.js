@@ -1,7 +1,8 @@
-import { createVideo, updateVideo } from '../../../actions/videoActions'
+import { createVideo, updateVideo } from "../../../actions/videoActions";
 
 export const addVideo = function ({ data, richtextId, order, dispatch }) {
-  const { videoCover, videoTitle, videoDescription, videoLink, videoResource } = data
+  const { videoCover, videoTitle, videoDescription, videoLink, videoResource } =
+    data;
   return dispatch(
     createVideo({
       videoCover,
@@ -10,28 +11,32 @@ export const addVideo = function ({ data, richtextId, order, dispatch }) {
       videoLink,
       videoResource,
       richtextId,
-      order
-    }
-    )
-  )
-}
+      order,
+    })
+  );
+};
 
-export const editVideo = function ({ data, order, setEditVideoModel, id, dispatch }) {
-  const { videoCover, videoTitle, videoDescription, videoLink, videoResource } = data
+export const editVideo = function ({
+  data,
+  order,
+  setEditVideoModel,
+  id,
+  dispatch,
+}) {
+  const { videoCover, videoTitle, videoDescription, videoLink, videoResource } =
+    data;
   return dispatch(
-    updateVideo(
-      {
-        vData: {
-          videoCover,
-          videoTitle,
-          videoDescription,
-          videoLink,
-          videoResource,
-          order
-        },
-        id,
-        setEditVideoModel
-      }
-    )
-  )
-}
+    updateVideo({
+      vData: {
+        videoCover,
+        videoTitle,
+        videoDescription,
+        videoLink,
+        videoResource,
+        order,
+      },
+      id,
+      setEditVideoModel,
+    })
+  );
+};

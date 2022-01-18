@@ -23,119 +23,121 @@ import {
   USER_ENTERPRISE_LIST_FAIL,
   USER_ENTERPRISE_SEARCH_REQUEST,
   USER_ENTERPRISE_SEARCH_SUCCESS,
-  USER_ENTERPRISE_SEARCH_FAIL
-
-} from '../constants/enterpriseConstants'
+  USER_ENTERPRISE_SEARCH_FAIL,
+} from "../constants/enterpriseConstants";
 
 export const enterpriseListReducer = (state = { enterprises: [] }, action) => {
   switch (action.type) {
     case ENTERPRISE_LIST_REQUEST:
-      return { loading: true, enterprises: [] }
+      return { loading: true, enterprises: [] };
     case ENTERPRISE_LIST_SUCCESS:
       return {
         loading: false,
         enterprises: action.payload.enterprises,
         pages: action.payload.pages,
         page: action.payload.page,
-        totalPages: action.payload.totalPages
-      }
+        totalPages: action.payload.totalPages,
+      };
 
     case ENTERPRISE_LIST_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case ENTERPRISE_SEARCH_REQUEST:
-      return { loading: true, enterprises: [] }
+      return { loading: true, enterprises: [] };
     case ENTERPRISE_SEARCH_SUCCESS:
       return {
         loading: false,
         enterprises: action.payload,
-        order: action.payload.order
-      }
+        order: action.payload.order,
+      };
     case ENTERPRISE_SEARCH_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const enterpriseCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case ENTERPRISE_CREATE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case ENTERPRISE_CREATE_SUCCESS:
-      return { loading: false, success: action.payload }
+      return { loading: false, success: action.payload };
     case ENTERPRISE_CREATE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case ENTERPRISE_CREATE_RESET:
-      return {}
+      return {};
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const enterpriseUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case ENTERPRISE_UPDATE_REQUEST:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case ENTERPRISE_UPDATE_SUCCESS:
-      return { loading: false, success: action.payload }
+      return { loading: false, success: action.payload };
     case ENTERPRISE_UPDATE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const enterpriseDeleteReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case ENTERPRISE_DELETE_REQUEST:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case ENTERPRISE_DELETE_SUCCESS:
-      return { loading: false, success: action.payload }
+      return { loading: false, success: action.payload };
     case ENTERPRISE_DELETE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const enterpriseFollowReducer = (state = {}, action) => {
   switch (action.type) {
     case ENTERPRISE_FOLLOW_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case ENTERPRISE_FOLLOW_SUCCESS:
-      return { loading: false, success: true }
+      return { loading: false, success: true };
     case ENTERPRISE_FOLLOW_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export const userEnterpriseListReducer = (state = { userEnterprises: [] }, action) => {
+export const userEnterpriseListReducer = (
+  state = { userEnterprises: [] },
+  action
+) => {
   switch (action.type) {
     case USER_ENTERPRISE_LIST_REQUEST:
-      return { loading: true, userEnterprises: [] }
+      return { loading: true, userEnterprises: [] };
     case USER_ENTERPRISE_LIST_SUCCESS:
       return {
         loading: false,
         userEnterprises: action.payload.enterprises,
         pages: action.payload.pages,
         page: action.payload.page,
-        totalPages: action.payload.totalPages
-      }
+        totalPages: action.payload.totalPages,
+      };
     case USER_ENTERPRISE_LIST_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case USER_ENTERPRISE_SEARCH_REQUEST:
-      return { loading: true, userEnterprises: [] }
+      return { loading: true, userEnterprises: [] };
     case USER_ENTERPRISE_SEARCH_SUCCESS:
       return {
         loading: false,
         userEnterprises: action.payload.communities,
-        order: action.payload.order
-      }
+        order: action.payload.order,
+      };
     case USER_ENTERPRISE_SEARCH_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};

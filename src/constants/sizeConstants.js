@@ -1,1 +1,1 @@
-export const TABLET_SIZE = 1023
+export const TABLET_SIZE = 1023;

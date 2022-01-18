@@ -1,20 +1,20 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react";
 
 const useHideOnClick = (handler) => {
-  const domNode = useRef()
+  const domNode = useRef();
   useEffect(() => {
     const hideShowHandler = (event) => {
       if (!domNode.current.contains(event.target)) {
-        handler()
+        handler();
       }
-    }
-    document.addEventListener('mousedown', hideShowHandler)
+    };
+    document.addEventListener("mousedown", hideShowHandler);
 
     return () => {
-      document.removeEventListener('mousedown', hideShowHandler)
-    }
-  })
-  return domNode
-}
+      document.removeEventListener("mousedown", hideShowHandler);
+    };
+  });
+  return domNode;
+};
 
-export default useHideOnClick
+export default useHideOnClick;
