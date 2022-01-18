@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import * as lessonProgress from "../constants/lessonProgressConstants";
 
 export const lessonProgressCreateReducer = (state = {}, action) => {

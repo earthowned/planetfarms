@@ -1,20 +1,21 @@
-import React, { useState } from 'react'
-import { ErrorMessage } from '@hookform/error-message'
+/* eslint-disable react/display-name */
+import React, { useState } from "react";
+import { ErrorMessage } from "@hookform/error-message";
 
 export const InputFields = React.forwardRef(
   ({ name, value, placeholder, id, type, errors, defaultValue }, ref) => {
-    const [showLabel, setShowLabel] = useState('')
+    const [showLabel, setShowLabel] = useState("");
     return (
-      <div className='input-container'>
+      <div className="input-container">
         <div
           className={
-            errors?.[`${name}`]?.message ? 'block block-error' : 'block'
+            errors?.[`${name}`]?.message ? "block block-error" : "block"
           }
         >
-          {showLabel && <p className='label label-left'>{placeholder}</p>}
-          <div className='field'>
+          {showLabel && <p className="label label-left">{placeholder}</p>}
+          <div className="field">
             <input
-              className='inputField'
+              className="inputField"
               name={name}
               type={type}
               id={id}
@@ -27,7 +28,7 @@ export const InputFields = React.forwardRef(
           </div>
         </div>
         {errors?.[`${name}`] && (
-          <p className='error-message'>
+          <p className="error-message">
             <ErrorMessage
               errors={errors}
               name={name}
@@ -36,24 +37,24 @@ export const InputFields = React.forwardRef(
           </p>
         )}
       </div>
-    )
+    );
   }
-)
+);
 
 export const SelectFields = React.forwardRef(
-  ({ name, errors, onChange, option }, ref) => {
+  ({ name, onChange, option }, ref) => {
     return (
-      <div className='input-container'>
+      <div className="input-container">
         <select
           name={name}
           ref={ref}
-          className='default-input-variation'
+          className="default-input-variation"
           onChange={onChange}
         >
           {option.map((x, i) => (
-            <React.Fragment key={i}>
-              {x === 'Select Category' ? (
-                <option value='' disabled selected hidden>
+            <React.Fragment key={i.toString()}>
+              {x === "Select Category" ? (
+                <option value="" disabled selected hidden>
                   Select Category
                 </option>
               ) : (
@@ -63,30 +64,42 @@ export const SelectFields = React.forwardRef(
           ))}
         </select>
       </div>
-    )
+    );
   }
-)
+);
 
 export const ErrorText = ({ className, message }) => {
   return (
     <>
       <p className={className}>{message}</p>
     </>
-  )
-}
+  );
+};
 
-export const SubmitButton = (props) => {
+export const SubmitButton = ({ className, onClick, title }) => {
   return (
     <>
-      <button className={props.className} onClick={props.onClick}>
-        {props.title}
+      <button type="button" className={className} onClick={onClick}>
+        {title}
       </button>
     </>
-  )
-}
+  );
+};
 
 export const TextArea = React.forwardRef(
-  ({ className, placeholder, name, rows, cols, onChange, disabled, defaultValue }, ref) => {
+  (
+    {
+      className,
+      placeholder,
+      name,
+      rows,
+      cols,
+      onChange,
+      disabled,
+      defaultValue,
+    },
+    ref
+  ) => {
     return (
       <>
         <textarea
@@ -101,6 +114,6 @@ export const TextArea = React.forwardRef(
           disabled={disabled}
         />
       </>
-    )
+    );
   }
-)
+);

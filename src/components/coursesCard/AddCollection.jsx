@@ -1,19 +1,23 @@
 const AddCollection = ({ item, setModalActive }) => {
   return (
-    <button className='collection-btn' onClick={() => setModalActive(true)}>
+    <button
+      type="button"
+      className="collection-btn"
+      onClick={() => setModalActive(true)}
+    >
       {item.added ? (
         <>
-          <img src='/img/close-outline.svg' alt='close icon' />
+          <img src="/img/close-outline.svg" alt="close icon" />
           <span>Remove from collection</span>
         </>
       ) : (
         <>
-          <img src='/img/plus.svg' alt='add icon' />
+          <img src="/img/plus.svg" alt="add icon" />
           <span>Add to collection</span>
         </>
       )}
     </button>
-  )
-}
+  );
+};
 
-export default AddCollection
+export default AddCollection;

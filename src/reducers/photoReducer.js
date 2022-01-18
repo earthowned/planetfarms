@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   PHOTO_CREATE_REQUEST,
   PHOTO_CREATE_SUCCESS,

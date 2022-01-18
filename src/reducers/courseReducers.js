@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import * as course from "../constants/courseConstants";
 
 export const courseCreateReducer = (state = {}, action) => {

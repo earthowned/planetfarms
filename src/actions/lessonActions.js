@@ -17,6 +17,16 @@ import {
 import { createRichText, updateRichText } from "../utils/createUpdateRichText";
 import { getFormData } from "../utils/getFormData";
 
+const addMaterialFunc = async (material, lessonId, dispatch) => {
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < material.length; i++) {
+    if (material[i].mData) {
+      // eslint-disable-next-line no-await-in-loop
+      await addMaterial({ material: material[i], lessonId, dispatch });
+    }
+  }
+};
+
 export const createLesson =
   ({ lessonDetail, lessonData, material, history }) =>
   async (dispatch) => {
@@ -114,13 +124,5 @@ export const deleteLesson = (id, refetch) => async (dispatch) => {
           ? error.response.data.message
           : error.message,
     });
-  }
-};
-
-const addMaterialFunc = async (material, lessonId, dispatch) => {
-  for (let i = 0; i < material.length; i++) {
-    if (material[i].mData) {
-      await addMaterial({ material: material[i], lessonId, dispatch });
-    }
   }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import * as material from "../constants/materialConstants";
 
 export const materialCreateReducer = (state = {}, action) => {

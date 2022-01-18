@@ -1,3 +1,11 @@
+function buildDates(calendar, startDay) {
+  calendar.push(
+    Array(7)
+      .fill(0)
+      .map(() => startDay.add(1, "day").clone())
+  );
+}
+
 export default function buildCalendar(value) {
   const startDay = value.clone().startOf("month").startOf("week");
   const endDay = value.clone().endOf("month").endOf("week");
@@ -9,12 +17,4 @@ export default function buildCalendar(value) {
     buildDates(calendar, startDay);
   }
   return calendar;
-}
-
-function buildDates(calendar, startDay) {
-  calendar.push(
-    Array(7)
-      .fill(0)
-      .map(() => startDay.add(1, "day").clone())
-  );
 }

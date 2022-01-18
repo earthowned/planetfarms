@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   RESOURCE_LIST_REQUEST,
   RESOURCE_LIST_SUCCESS,

@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   MEMBER_LIST_FAIL,
   MEMBER_LIST_REQUEST,

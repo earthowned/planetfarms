@@ -1,8 +1,10 @@
+/* eslint-disable no-await-in-loop */
 import { addImage, editImage } from "../screens/courseManager/lesson/addImage";
 import { addText, editText } from "../screens/courseManager/lesson/addText";
 import { addVideo, editVideo } from "../screens/courseManager/lesson/addVideo";
 
 export const updateRichText = async (data, richtextId, dispatch) => {
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < data.length; i++) {
     if (data[i]?.videoLink || data[i]?.videoResource) {
       if (data[i].id) {
@@ -39,6 +41,7 @@ export const updateRichText = async (data, richtextId, dispatch) => {
 };
 
 export const createRichText = async (data, richtextId, dispatch) => {
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < data.length; i++) {
     if (data[i]?.videoLink || data[i]?.videoResource) {
       await addVideo({ data: data[i], order: i + 1, richtextId, dispatch });

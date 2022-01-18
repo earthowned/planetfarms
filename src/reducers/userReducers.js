@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   ACCESS_TOKEN_FAIL,
   ACCESS_TOKEN_REQUEST,

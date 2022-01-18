@@ -1,4 +1,5 @@
-import Secondarybtn from '../secondaryBtn/Secondarybtn'
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import Secondarybtn from "../secondaryBtn/Secondarybtn";
 
 const ProfileInfo = ({
   title,
@@ -6,26 +7,27 @@ const ProfileInfo = ({
   verify,
   MinusCircle,
   CheckCircle,
-  isCurrentUser
+  isCurrentUser,
 }) => {
   return (
-    <div className='form-group'>
+    <div className="form-group">
       <label>{title}</label>
-      <p>{value || 'N/A'}</p>
-      {isCurrentUser && (
-        !verify?.isVerified
-          ? <p className='verified-txt'>
-            <img className='verified-img' src={MinusCircle} alt='logo' />
-            Not verified{' '}
-            <Secondarybtn name='Verify' clickHandler={verify?.clickHandler} />
-            </p>
-          : <p className='verified-txt'>
-            <img className='verified-img' src={CheckCircle} alt='logo' />
+      <p>{value || "N/A"}</p>
+      {isCurrentUser &&
+        (!verify?.isVerified ? (
+          <p className="verified-txt">
+            <img className="verified-img" src={MinusCircle} alt="logo" />
+            Not verified{" "}
+            <Secondarybtn name="Verify" clickHandler={verify?.clickHandler} />
+          </p>
+        ) : (
+          <p className="verified-txt">
+            <img className="verified-img" src={CheckCircle} alt="logo" />
             Verified
-            </p>
-      )}
+          </p>
+        ))}
     </div>
-  )
-}
+  );
+};
 
-export default ProfileInfo
+export default ProfileInfo;

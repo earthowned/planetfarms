@@ -1,22 +1,22 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import useHideOnClick from '../../utils//useHideOnClick'
+import useHideOnClick from "../../utils/useHideOnClick";
 
-import './Material.scss'
+import "./Material.scss";
 
 const Material = ({ name, children }) => {
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState(false);
   const domNode = useHideOnClick(() => {
-    setIsActive(false)
-  })
+    setIsActive(false);
+  });
   return (
-    <div className='document-wrapper'>
-      <div className='document' ref={domNode}>
-        <img src='/img/pdf.svg' alt='document type' />
+    <div className="document-wrapper">
+      <div className="document" ref={domNode}>
+        <img src="/img/pdf.svg" alt="document type" />
         <h4>{name}</h4>
         <img
-          src='/img/more-horizontal.svg'
-          alt='horizontal icon'
+          src="/img/more-horizontal.svg"
+          alt="horizontal icon"
           onClick={() => setIsActive(!isActive)}
         />
 
@@ -24,8 +24,8 @@ const Material = ({ name, children }) => {
           <div
             className={
               isActive
-                ? 'document-download-toggle'
-                : 'document-download-toggle hide'
+                ? "document-download-toggle"
+                : "document-download-toggle hide"
             }
           >
             {children}
@@ -33,7 +33,7 @@ const Material = ({ name, children }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Material
+export default Material;

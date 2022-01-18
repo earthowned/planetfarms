@@ -1,11 +1,12 @@
-import { useForm } from 'react-hook-form'
-import { ErrorText, TextArea } from '../formUI/FormUI'
-import DragDrop from '../dragDrop/DragDrop'
-import EditContent from '../editContent/EditContent'
-import { GET_COVERIMG } from '../../utils/urlConstants'
-import ContentAdd from '../contentAdd/ContentAdd'
-import LessonMaterial from '../../screens/courseManager/lesson/LessonMaterial'
-import SaveModal from '../saveModal/SaveModal'
+/* eslint-disable no-underscore-dangle */
+import { useForm } from "react-hook-form";
+import { ErrorText, TextArea } from "../formUI/FormUI";
+import DragDrop from "../dragDrop/DragDrop";
+import EditContent from "../editContent/EditContent";
+import { GET_COVERIMG } from "../../utils/urlConstants";
+import ContentAdd from "../contentAdd/ContentAdd";
+import LessonMaterial from "../../screens/courseManager/lesson/LessonMaterial";
+import SaveModal from "../saveModal/SaveModal";
 
 const RichTextEditor = ({
   setVideoModal,
@@ -42,9 +43,9 @@ const RichTextEditor = ({
   setTextData,
   setImageData,
   setVideoData,
-  removeMaterialModal
+  removeMaterialModal,
 }) => {
-  const { register, errors, handleSubmit } = useForm()
+  const { register, errors, handleSubmit } = useForm();
   return (
     <>
       <AddContent
@@ -99,8 +100,8 @@ const RichTextEditor = ({
         />
       )}
     </>
-  )
-}
+  );
+};
 
 const AddContent = ({
   setVideoModal,
@@ -123,56 +124,56 @@ const AddContent = ({
   setOldData,
   setTextData,
   setImageData,
-  setVideoData
+  setVideoData,
 }) => {
   return (
-    <div className='admin-lesson-create-container'>
+    <div className="admin-lesson-create-container">
       <ErrorText
-        className='errorMsg'
+        className="errorMsg"
         message={errors.title && errors.title.message}
       />
       <input
-        type='text'
-        placeholder='Write Title Here'
-        name='title'
+        type="text"
+        placeholder="Write Title Here"
+        name="title"
         ref={register({
           required: {
             value: true,
-            message: 'You must enter lesson title'
-          }
+            message: "You must enter lesson title",
+          },
         })}
         defaultValue={editData?.title ? editData?.title : title}
       />
 
-      {saveBtnName === 'save lesson' && (
+      {saveBtnName === "save lesson" && (
         <TextArea
-          className='default-input-variation text-area-variation lessonDesc'
-          placeholder='Lesson Description'
-          cols='3'
-          rows='4'
-          name='lessonDesc'
+          className="default-input-variation text-area-variation lessonDesc"
+          placeholder="Lesson Description"
+          cols="3"
+          rows="4"
+          name="lessonDesc"
           ref={register}
-          defaultValue={editData?.lessonDesc || ''}
+          defaultValue={editData?.lessonDesc || ""}
         />
       )}
 
-      {saveBtnName === 'save lesson' ? (
+      {saveBtnName === "save lesson" ? (
         <DragDrop
-          text='Drag & Drop photo in this area or Click Here to attach'
+          text="Drag & Drop photo in this area or Click Here to attach"
           onChange={(img) => setCoverImage(img)}
           dataImg={
-            editData?.coverImg ? `${GET_COVERIMG}${editData?.coverImg}` : ''
+            editData?.coverImg ? `${GET_COVERIMG}${editData?.coverImg}` : ""
           }
           onClick={() => setCoverImage(null)}
         />
       ) : (
         <DragDrop
           onChange={(img) => setCoverImage(img)}
-          text='Drag & Drop photo in this area or Click Here to attach'
+          text="Drag & Drop photo in this area or Click Here to attach"
           dataImg={
             editData?._attachments
               ? `${process.env.REACT_APP_CDN_BASE_URL}/news/${editData?._attachments}`
-              : ''
+              : ""
           }
           onClick={() => setCoverImage(null)}
         />
@@ -204,7 +205,7 @@ const AddContent = ({
         setVideoData={setVideoData}
       />
     </div>
-  )
-}
+  );
+};
 
-export default RichTextEditor
+export default RichTextEditor;

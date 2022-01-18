@@ -1,3 +1,8 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-console */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-nested-ternary */
 import Amplify, { Auth } from "aws-amplify";
 import FormData from "form-data";
 import { getApi, postApi, putApi } from "../utils/apiFunc";
@@ -99,6 +104,54 @@ if (process.env.REACT_APP_AUTH_METHOD === "cognito") {
     },
   });
 }
+
+export const routingCommunityNews = async (dispatch, route = false) => {
+  const data = window.localStorage.getItem("userInfo");
+  const token = data && JSON.parse(data).token;
+  const communityData = await getApi(
+    dispatch,
+    `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  window.localStorage.setItem(
+    "currentCommunity",
+    JSON.stringify(communityData.data.communities[0])
+  );
+  if (route) {
+    document.location.href = "/news";
+  }
+};
+
+function getTokenAndSetToLocalStorage(data, token, id) {
+  data = {
+    token,
+    id,
+  };
+  window.localStorage.setItem("userInfo", JSON.stringify(data));
+  return data;
+}
+
+const tokenFailure = (dispatch, message) => {
+  dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  window.localStorage.clear();
+  dispatch({ type: USER_LOGOUT });
+  window.location.href = "/login";
+  return false;
+};
+
+export const logout = () => (dispatch) => {
+  Auth.signOut()
+    .then(() => {
+      window.localStorage.clear();
+      dispatch({ type: USER_LOGOUT });
+      document.location.href = "/login";
+    })
+    .catch((err) => console.log(err));
+};
 
 export const register = (name, password) => async (dispatch) => {
   try {
@@ -208,15 +261,6 @@ export const login = (name, password) => async (dispatch) => {
   }
 };
 
-function getTokenAndSetToLocalStorage(data, token, id) {
-  data = {
-    token,
-    id,
-  };
-  window.localStorage.setItem("userInfo", JSON.stringify(data));
-  return data;
-}
-
 function checkErrorReturnMessage(error, dispatch) {
   const message =
     error.response && error.response.data.error
@@ -257,7 +301,7 @@ export const checkAndUpdateToken = () => async (dispatch) => {
         return tokenFailure(dispatch, "Unauthorized");
       }
     })
-    .catch((data) => {
+    .catch(() => {
       return tokenFailure(dispatch, "Unauthorized");
       /* const message = data.response && data.response.data.name ? data.response.data.name : data.message
     if (message === 'TokenExpired') {
@@ -290,14 +334,6 @@ export const checkAndUpdateToken = () => async (dispatch) => {
       return tokenFailure(dispatch, 'Unauthorized')
     } */
     });
-};
-
-const tokenFailure = (dispatch, message) => {
-  dispatch({ type: USER_DETAILS_FAIL, payload: message });
-  window.localStorage.clear();
-  dispatch({ type: USER_LOGOUT });
-  window.location.href = "/login";
-  return false;
 };
 
 export const getMyDetails = () => async (dispatch) => {
@@ -408,16 +444,6 @@ export const searchUsers = (search) => async (dispatch) => {
           : error.message,
     });
   }
-};
-
-export const logout = () => (dispatch) => {
-  Auth.signOut()
-    .then(() => {
-      window.localStorage.clear();
-      dispatch({ type: USER_LOGOUT });
-      document.location.href = "/login";
-    })
-    .catch((err) => console.log(err));
 };
 
 export const confirmPin = (username, code) => async (dispatch) => {
@@ -593,24 +619,3 @@ export const changePassword =
       });
     }
   };
-
-export const routingCommunityNews = async (dispatch, route = false) => {
-  const data = window.localStorage.getItem("userInfo");
-  const token = data && JSON.parse(data).token;
-  const communityData = await getApi(
-    dispatch,
-    `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  window.localStorage.setItem(
-    "currentCommunity",
-    JSON.stringify(communityData.data.communities[0])
-  );
-  if (route) {
-    document.location.href = "/news";
-  }
-};

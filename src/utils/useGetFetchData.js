@@ -6,8 +6,8 @@ const useGetFetchData = (uniqueKey, url, dependencies, enable) => {
   const { error, isLoading, data, refetch } = useQuery(
     [uniqueKey, { ...dependencies }],
     async () => {
-      const { data } = await axios.get(url, configFunc());
-      return data;
+      const { data: response } = await axios.get(url, configFunc());
+      return response;
     },
     { keepPreviousData: true, enabled: enable }
   );

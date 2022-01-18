@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   COMMUNITY_LIST_FAIL,
   COMMUNITY_LIST_REQUEST,

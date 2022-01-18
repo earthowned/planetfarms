@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   GROUP_LIST_REQUEST,
   GROUP_LIST_SUCCESS,

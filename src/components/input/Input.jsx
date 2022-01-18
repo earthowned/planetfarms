@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
-import './Input.scss'
-import { ErrorMessage } from '@hookform/error-message'
-import { ReactComponent as EyeCloseIcon } from '../../assets/images/eye-close-icon.svg'
-import { ReactComponent as EyeOpenIcon } from '../../assets/images/eye-open-icon.svg'
+/* eslint-disable react/display-name */
+import React, { useState } from "react";
+
+import { ErrorMessage } from "@hookform/error-message";
+import { ReactComponent as EyeCloseIcon } from "../../assets/images/eye-close-icon.svg";
+import { ReactComponent as EyeOpenIcon } from "../../assets/images/eye-open-icon.svg";
+import "./Input.scss";
+
 const Input = React.forwardRef(
   (
     {
@@ -17,74 +20,71 @@ const Input = React.forwardRef(
       children,
       noIcon,
       disabled,
-      onChange
     },
     ref
   ) => {
-    const [showLabel, setShowLabel] = useState('')
+    const [showLabel, setShowLabel] = useState("");
 
     return (
-      <>
-        <div className='input-container'>
-          <div
-            className={
-              errors?.[`${name}`]?.message ? 'block block-error' : 'block'
-            }
-          >
-            {showLabel && (
-              <p className={!noIcon ? 'label' : 'label label-left'}>
-                {placeholder}
-              </p>
-            )}
-            <div className='field'>
-              {!noIcon && (
-                <div
-                  className={
-                    errors?.[`${name}`]?.message ? 'icon icon-error' : 'icon '
-                  }
-                >
-                  {children}
-                </div>
-              )}
-
-              <input
-                className='inputField'
-                placeholder={placeholder}
-                value={value}
-                name={name}
-                id={id}
-                ref={ref}
-                type={type}
-                onChange={(e) => setShowLabel(e.target.value)}
-                disabled={disabled}
-                autoComplete='off'
-              />
-              {togglePasswordVisibility && (
-                <div className='pwShowHide' onClick={togglePasswordVisibility}>
-                  <span>
-                    {showPassword ? (
-                      <EyeOpenIcon className=' pwShowHide-show' />
-                    ) : (
-                      <EyeCloseIcon className=' pwShowHide-hide' />
-                    )}
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-          {errors?.[`${name}`] && (
-            <p className='error-message'>
-              <ErrorMessage
-                errors={errors}
-                name={name}
-                render={({ message }) => <span>{message}</span>}
-              />
+      <div className="input-container">
+        <div
+          className={
+            errors?.[`${name}`]?.message ? "block block-error" : "block"
+          }
+        >
+          {showLabel && (
+            <p className={!noIcon ? "label" : "label label-left"}>
+              {placeholder}
             </p>
           )}
-        </div>
-      </>
-    )
-  }
-)
+          <div className="field">
+            {!noIcon && (
+              <div
+                className={
+                  errors?.[`${name}`]?.message ? "icon icon-error" : "icon "
+                }
+              >
+                {children}
+              </div>
+            )}
 
-export default Input
+            <input
+              className="inputField"
+              placeholder={placeholder}
+              value={value}
+              name={name}
+              id={id}
+              ref={ref}
+              type={type}
+              onChange={(e) => setShowLabel(e.target.value)}
+              disabled={disabled}
+              autoComplete="off"
+            />
+            {togglePasswordVisibility && (
+              <div className="pwShowHide" onClick={togglePasswordVisibility}>
+                <span>
+                  {showPassword ? (
+                    <EyeOpenIcon className=" pwShowHide-show" />
+                  ) : (
+                    <EyeCloseIcon className=" pwShowHide-hide" />
+                  )}
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+        {errors?.[`${name}`] && (
+          <p className="error-message">
+            <ErrorMessage
+              errors={errors}
+              name={name}
+              render={({ message }) => <span>{message}</span>}
+            />
+          </p>
+        )}
+      </div>
+    );
+  }
+);
+
+export default Input;

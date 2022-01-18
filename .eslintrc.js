@@ -21,8 +21,13 @@ module.exports = {
     ecmaVersion: 2021,
     sourceType: "module",
     requireConfigFile: false,
+    babelOptions: {
+      presets: ["@babel/preset-react"],
+    },
   },
-  plugins: ["only-warn", "react", "prettier"],
+  // plugins: ["only-warn", "react", "prettier"],
+  plugins: ["react", "prettier"],
+
   // ignorePatterns: ["styles.js"],
   rules: {
     "prettier/prettier": ["warn"],
@@ -43,5 +48,11 @@ module.exports = {
     "no-unused-vars": ["warn"],
     "ban-ts-comment": "off",
     "react/prop-types": "off",
+    "no-plusplus": ["error"],
+    "react/jsx-no-bind": "off",
+    "jsx-a11y/no-static-element-interactions": "off", // need to remove this rule
+    "jsx-a11y/click-events-have-key-events": "off", // need to remove this rule
+    "jsx-a11y/no-noninteractive-element-interactions": "off", // need to remove this rule
+    "react/jsx-no-useless-fragment": "off", // need to remove this rule
   },
 };

@@ -1,17 +1,18 @@
-import { useRef } from 'react'
-import { useDrag, useDrop } from 'react-dnd'
-import SubjectiveQuestion from './SubjectiveQuestion'
-import MCQQuestion from './MCQQuestion'
+import { useRef } from "react";
+import { useDrag, useDrop } from "react-dnd";
+import SubjectiveQuestion from "./SubjectiveQuestion";
+import MCQQuestion from "./MCQQuestion";
+
 const ItemTypes = {
-  CARD: 'card'
-}
+  CARD: "card",
+};
 const style2 = {
-  border: '.5px dashed gray',
-  padding: '0.5rem 1rem',
-  marginBottom: '.5rem',
-  borderRadius: '4px',
-  cursor: 'move'
-}
+  border: ".5px dashed gray",
+  padding: "0.5rem 1rem",
+  marginBottom: ".5rem",
+  borderRadius: "4px",
+  cursor: "move",
+};
 const Card = ({
   id,
   type,
@@ -26,69 +27,69 @@ const Card = ({
   cards,
   setCards,
   deleteQuestion,
-  newQuestions
+  newQuestions,
 }) => {
-  const ref = useRef(null)
+  const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
-    collect (monitor) {
+    collect(monitor) {
       return {
-        handlerId: monitor.getHandlerId()
-      }
+        handlerId: monitor.getHandlerId(),
+      };
     },
-    hover (item, monitor) {
+    hover(item, monitor) {
       if (!ref.current) {
-        return
+        return;
       }
-      const dragIndex = item.index
-      const hoverIndex = index
+      const dragIndex = item.index;
+      const hoverIndex = index;
 
       if (dragIndex === hoverIndex) {
-        return
+        return;
       }
 
-      const hoverBoundingRect = ref.current?.getBoundingClientRect()
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
 
       const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
-      const clientOffset = monitor.getClientOffset()
+      const clientOffset = monitor.getClientOffset();
 
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return
+        return;
       }
 
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return
+        return;
       }
 
-      moveCard(dragIndex, hoverIndex)
+      moveCard(dragIndex, hoverIndex);
 
-      item.index = hoverIndex
-    }
-  })
+      item.index = hoverIndex;
+    },
+  });
   const [{ isDragging }, drag] = useDrag({
     type: ItemTypes.CARD,
     item: () => {
-      return { id, index }
+      return { id, index };
     },
     collect: (monitor) => ({
-      isDragging: monitor.isDragging()
-    })
-  })
+      isDragging: monitor.isDragging(),
+    }),
+  });
 
-  const background = isDragging ? '#00C688' : ''
-  drag(drop(ref))
+  const background = isDragging ? "#00C688" : "";
+  drag(drop(ref));
   return (
     <div
       ref={ref}
       style={{ ...style2, background }}
       data-handler-id={handlerId}
     >
-      <div className='question-answer-container'>
-        {type === 'mcq' ? (
+      <div className="question-answer-container">
+        {type === "mcq" ? (
           <MCQQuestion
             questions={questions}
             setQuestions={setQuestions}
@@ -117,7 +118,7 @@ const Card = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

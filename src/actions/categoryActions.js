@@ -55,12 +55,14 @@ export const createCategory = (newCategory) => async (dispatch, getState) => {
       return dispatch({ type: CATEGORY_CREATE_FAIL, payload: data.error });
     }
     dispatch({ type: CATEGORY_CREATE_SUCCESS, payload: data });
+    return Promise.resolve();
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
     dispatch({ type: CATEGORY_CREATE_FAIL, payload: message });
+    return Promise.reject(error);
   }
 };
 
@@ -95,12 +97,14 @@ export const categoryUpdate = (newCategory) => async (dispatch) => {
       return dispatch({ type: CATEGORY_UPDATE_FAIL, payload: data.error });
     }
     dispatch({ type: CATEGORY_UPDATE_SUCCESS, payload: true });
+    return Promise.resolve();
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
     dispatch({ type: CATEGORY_UPDATE_FAIL, payload: message });
+    return Promise.reject(error);
   }
 };
 

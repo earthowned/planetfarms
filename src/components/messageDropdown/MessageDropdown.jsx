@@ -1,52 +1,52 @@
-import React from 'react'
-import './MessageDropdown.scss'
-import { Link } from 'react-router-dom'
+import React from "react";
+import "./MessageDropdown.scss";
+import { Link } from "react-router-dom";
 
-import MessageCard from '../messageCard/MessageCard'
+import MessageCard from "../messageCard/MessageCard";
 
 const contacts = [
   {
-    name: 'Bessie Cooper',
-    img: '/img/avatar-img.svg',
-    message: 'Hi there! Can you help with co..',
-    date: '08/12/2020',
-    notfication: 2
+    name: "Bessie Cooper",
+    img: "/img/avatar-img.svg",
+    message: "Hi there! Can you help with co..",
+    date: "08/12/2020",
+    notfication: 2,
   },
   {
-    name: 'Bessie Cooper',
-    img: '/img/avatar-msg.svg',
-    message: 'Hi there! Can you help with co..',
-    date: '18/1/2020',
-    notfication: 12
+    name: "Bessie Cooper",
+    img: "/img/avatar-msg.svg",
+    message: "Hi there! Can you help with co..",
+    date: "18/1/2020",
+    notfication: 12,
   },
   {
-    name: 'Bessie Cooper',
-    img: '/img/avatar-img.svg',
-    message: 'Hi there! Can you help with co..',
-    date: '08/8/2019',
-    notfication: 5
+    name: "Bessie Cooper",
+    img: "/img/avatar-img.svg",
+    message: "Hi there! Can you help with co..",
+    date: "08/8/2019",
+    notfication: 5,
   },
   {
-    name: 'Bessie Cooper',
-    img: '/img/avatar-msg.svg',
-    message: 'Hi there! Can you help with co..',
-    date: '08/4/2020'
-  }
-]
+    name: "Bessie Cooper",
+    img: "/img/avatar-msg.svg",
+    message: "Hi there! Can you help with co..",
+    date: "08/4/2020",
+  },
+];
 const settings = [
   {
-    name: 'Logout',
-    message: 'Do you want to logout?',
-    id: 'logout',
-    inputText: ''
+    name: "Logout",
+    message: "Do you want to logout?",
+    id: "logout",
+    inputText: "",
   },
   {
-    name: 'Change Password',
-    message: 'Do you want to Change Password?',
-    id: 'changePassword',
-    inputText: 'Please enter your User Old Password'
-  }
-]
+    name: "Change Password",
+    message: "Do you want to Change Password?",
+    id: "changePassword",
+    inputText: "Please enter your User Old Password",
+  },
+];
 
 const MessageDropdown = ({
   clickHandler,
@@ -57,16 +57,16 @@ const MessageDropdown = ({
   messageActive,
   notificationActive,
   profileSettings,
-  clickProfileHandler
+  clickProfileHandler,
 }) => {
   return (
     <>
       {!mobileView ? (
-        <div className='message-dropdown'>
-          <div className='message-dropdown-header'>
+        <div className="message-dropdown">
+          <div className="message-dropdown-header">
             <h4>{message}</h4>
             <div onClick={() => clickHandler(false)}>
-              <img src='/img/close-outline.svg' alt='close-outline' />
+              <img src="/img/close-outline.svg" alt="close-outline" />
             </div>
           </div>
           {profileSettings ? (
@@ -81,37 +81,38 @@ const MessageDropdown = ({
           ) : (
             <>
               {contacts.map((contact, index) => (
-                <MessageCard contact={contact} key={index} />
+                <MessageCard contact={contact} key={index.toString()} />
               ))}
               <button
+                type="button"
                 onClick={() => handleClick()}
-                className='messenger-btn-container secondary-btn'
+                className="messenger-btn-container secondary-btn"
               >
                 {btnName}
-              </button>{' '}
+              </button>{" "}
             </>
           )}
         </div>
       ) : (
         <div
-          className={`message-dropdown-mobile ${messageActive && 'slide'} ${
-            notificationActive && 'slide'
+          className={`message-dropdown-mobile ${messageActive && "slide"} ${
+            notificationActive && "slide"
           }`}
         >
-          <div className='message-dropdown-mobile-inner-container'>
-            <div className='message-dropdown-mobile-header'>
+          <div className="message-dropdown-mobile-inner-container">
+            <div className="message-dropdown-mobile-header">
               <h4>{message}</h4>
-              <div className='close-btn' onClick={() => clickHandler(false)}>
-                <img src='/img/close-outline.svg' alt='close-outline' />
+              <div className="close-btn" onClick={() => clickHandler(false)}>
+                <img src="/img/close-outline.svg" alt="close-outline" />
               </div>
             </div>
             {contacts.map((contact, index) => (
-              <MessageCard contact={contact} key={index} />
+              <MessageCard contact={contact} key={index.toString()} />
             ))}
             <Link
-              to='/messenger'
+              to="/messenger"
               onClick={() => clickHandler(false)}
-              className='mobile-btn messenger-btn-container secondary-btn nav-link'
+              className="mobile-btn messenger-btn-container secondary-btn nav-link"
             >
               {btnName}
             </Link>
@@ -119,7 +120,7 @@ const MessageDropdown = ({
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default MessageDropdown
+export default MessageDropdown;

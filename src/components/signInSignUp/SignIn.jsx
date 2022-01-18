@@ -1,41 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useForm } from 'react-hook-form'
+/* eslint-disable consistent-return */
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 
-import { login } from '../../actions/userAction'
-import { USER_LOGIN_SUCCESS } from '../../constants/userConstants'
-import { SignInSignUpData } from './SignInSignUpData'
+import { login } from "../../actions/userAction";
+import { SignInSignUpData } from "./SignInSignUpData";
 
-import Button from '../button/Button'
-import Checkbox from '../checkbox/Checkbox'
-import Input from '../input/Input'
-import OAuthBtn from '../oAuthBtn/OAuthBtn'
-import { ReactComponent as UserAvatar } from '../../assets/images/user-green-outline.svg'
-import { ReactComponent as Lock } from '../../assets/images/lock-outline.svg'
-import './SignInSignUp.scss'
-import { listUserCommunities, visitCommunity } from '../../actions/communityActions'
+import Button from "../button/Button";
+import Checkbox from "../checkbox/Checkbox";
+import Input from "../input/Input";
+import OAuthBtn from "../oAuthBtn/OAuthBtn";
+import { ReactComponent as UserAvatar } from "../../assets/images/user-green-outline.svg";
+import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
+import "./SignInSignUp.scss";
+import { visitCommunity } from "../../actions/communityActions";
 
 const SignIn = () => {
-  const { welcomeBack, rememberMe, text1, google, facebook, failMessage } =
-    SignInSignUpData
+  const { rememberMe, text1, google, facebook } = SignInSignUpData;
 
-  const [user, setUser] = useState(null)
-  const history = useHistory()
-  const dispatch = useDispatch()
-  const userLogin = useSelector((state) => state.userLogin)
-  const { currentCommunity } = useSelector((state) => state.activeCommunity)
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { currentCommunity } = useSelector((state) => state.activeCommunity);
 
-  const { loading, error, userInfo } = userLogin
-  const { register: regi, errors, handleSubmit } = useForm()
+  const { error, userInfo } = userLogin;
+  const { register: regi, errors, handleSubmit } = useForm();
 
-  const [terms, setTerms] = useState(false)
-  const [termsError, setTermsError] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     /* Hub.listen("auth", ({ payload: { event, data } }) => {
@@ -59,18 +55,18 @@ const SignIn = () => {
 
     if (userInfo) {
       if (currentCommunity) {
-        return dispatch(visitCommunity(currentCommunity.id))
+        return dispatch(visitCommunity(currentCommunity.id));
       }
     }
 
     // getUser().then((userData) => setUser(userData));
-  }, [history, userInfo, dispatch])
+  }, [history, userInfo, dispatch]);
 
-  function getUser () {
-    /* return Auth.currentAuthenticatedUser()
+  // function getUser() {
+  /* return Auth.currentAuthenticatedUser()
       .then((userData) => userData)
       .catch(() => console.log("Not signed in")); */
-  }
+  // }
 
   // async function signIn(username, password) {
   //   try {
@@ -97,35 +93,35 @@ const SignIn = () => {
   // }
 
   const loginWithFacebook = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Auth.federatedSignIn({ provider: "Facebook" });
-  }
+  };
 
   const loginWithGoogle = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Auth.federatedSignIn({ provider: "Google" });
-  }
+  };
 
   const onSubmit = ({ username, password }) => {
-    dispatch(login(username, password))
-  }
+    dispatch(login(username, password));
+  };
 
   return (
-    <form className='sign' onSubmit={handleSubmit(onSubmit)}>
-      <h1 className='welcome'>Sign In</h1>
-      <div className='container'>
-        {error && <div className='error'>{error}</div>}
+    <form className="sign" onSubmit={handleSubmit(onSubmit)}>
+      <h1 className="welcome">Sign In</h1>
+      <div className="container">
+        {error && <div className="error">{error}</div>}
 
         <Input
-          placeholder='Username'
-          type='text'
-          name='username'
-          id='username'
+          placeholder="Username"
+          type="text"
+          name="username"
+          id="username"
           ref={regi({
             required: {
               value: true,
-              message: 'You must enter username'
-            }
+              message: "You must enter username",
+            },
           })}
           errors={errors}
         >
@@ -133,37 +129,35 @@ const SignIn = () => {
         </Input>
 
         <Input
-          type={showPassword ? 'text' : 'password'}
-          placeholder='Password'
-          name='password'
-          id='password'
+          type={showPassword ? "text" : "password"}
+          placeholder="Password"
+          name="password"
+          id="password"
           ref={regi({
             required: {
               value: true,
-              message: 'You must enter password'
-            }
+              message: "You must enter password",
+            },
           })}
           errors={errors}
           togglePasswordVisibility={togglePasswordVisibility}
           showPassword={showPassword}
         >
-          <Lock className='error-icon' />
+          <Lock className="error-icon" />
         </Input>
 
-        <div className='remember'>
-          <Checkbox
-            label={rememberMe}
-          />
+        <div className="remember">
+          <Checkbox label={rememberMe} />
         </div>
 
-        <div className='btnWrapper'>
-          <Button name='Sign In' />
-          <Link to='/forgot-password' className='fPassword green16px'>
+        <div className="btnWrapper">
+          <Button name="Sign In" />
+          <Link to="/forgot-password" className="fPassword green16px">
             Forgot Password?
           </Link>
         </div>
 
-        <div className='oauth'>
+        <div className="oauth">
           <OAuthBtn
             loginWithFacebook={loginWithFacebook}
             loginWithGoogle={loginWithGoogle}
@@ -173,17 +167,19 @@ const SignIn = () => {
           />
         </div>
 
-        <div className='option'>
-          <p className='transparent16px'>
-            <span className='span span-1'>Don't have an account yet? </span>
+        <div className="option">
+          <p className="transparent16px">
+            <span className="span span-1">
+              Don&apos;t have an account yet?{" "}
+            </span>
           </p>
-          <Link to='/register' className='span span-2'>
+          <Link to="/register" className="span span-2">
             Become a member!
           </Link>
         </div>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

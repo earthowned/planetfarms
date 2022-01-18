@@ -1,5 +1,6 @@
+/* eslint-disable no-shadow */
 import { ADD_MATERIAL, GET_MATERIAL } from "../utils/urlConstants";
-import { postApi, deleteApi, fileHeader } from "../utils/apiFunc";
+import { postApi, deleteApi } from "../utils/apiFunc";
 import { getFormData } from "../utils/getFormData";
 import * as MATERIAL from "../constants/materialConstants";
 

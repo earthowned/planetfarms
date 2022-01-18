@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
-import { GET_VIDEO, VIDEO_COVER, LESSON_IMG } from '../../utils/urlConstants'
-import Text from '../../screens/courseManager/lesson/Text'
-import Image from '../lessonImage/Image'
-import Video from '../videoPlayer/Video'
+/* eslint-disable no-shadow */
+/* eslint-disable no-nested-ternary */
+import { useState, useEffect } from "react";
+import { GET_VIDEO, VIDEO_COVER, LESSON_IMG } from "../../utils/urlConstants";
+import Text from "../../screens/courseManager/lesson/Text";
+import Image from "../lessonImage/Image";
+import Video from "../videoPlayer/Video";
 
 const EditContent = ({
   data,
@@ -17,42 +19,41 @@ const EditContent = ({
   editImageFunc,
   editVideoFunc,
   editTextFunc,
-  setOldData
+  setOldData,
 }) => {
-  const [allLessonData, setAllLessonData] = useState([])
-  const [newData, setNewData] = useState([])
+  // eslint-disable-next-line no-unused-vars
+  const [allLessonData, setAllLessonData] = useState([]);
+  const [newData, setNewData] = useState([]);
   const textData = data?.rich_text?.texts?.map((text) => {
-    return text
-  })
+    return text;
+  });
   const videoData = data?.rich_text?.videos?.map((video) => {
-    return video
-  })
+    return video;
+  });
   const photoData = data?.rich_text?.photos?.map((photo) => {
-    return photo
-  })
+    return photo;
+  });
 
   useEffect(() => {
-    setNewData([textData, videoData, photoData])
+    setNewData([textData, videoData, photoData]);
     setOldData(
       [textData, videoData, photoData].flat().sort((a, b) => a.order - b.order)
-    )
-  }, [data])
+    );
+  }, [data]);
 
-  const flattenData = newData.flat()
+  const flattenData = newData.flat();
 
   useEffect(() => {
-    setAllLessonData(data, newLessonData)
-  }, [data, newLessonData])
+    setAllLessonData(data, newLessonData);
+  }, [data, newLessonData]);
 
   return (
     <>
       {flattenData
         .sort((a, b) => a.order - b.order)
         .map((data, index) => (
-          <div key={index}>
+          <div key={index.toString()}>
             <Text
-              heading={data?.textHeading}
-              desc={data?.textDescription}
               heading={data?.textHeading}
               desc={data?.textDescription}
               isEditable
@@ -65,14 +66,14 @@ const EditContent = ({
               title={data?.videoTitle}
               description={data?.videoDescription}
               url={
-                data?.videoLink === '' || data?.videoLink === 'undefined'
-                  ? typeof data?.videoResource === 'string'
-                      ? `${GET_VIDEO}${data?.videoResource}`
-                      : data?.videoResource?.preview
+                data?.videoLink === "" || data?.videoLink === "undefined"
+                  ? typeof data?.videoResource === "string"
+                    ? `${GET_VIDEO}${data?.videoResource}`
+                    : data?.videoResource?.preview
                   : data?.videoLink
               }
               thumbnail={
-                typeof data?.videoCover === 'string'
+                typeof data?.videoCover === "string"
                   ? `${VIDEO_COVER}${data?.videoCover}`
                   : data?.videoCover?.preview
               }
@@ -85,11 +86,10 @@ const EditContent = ({
             {data?.lessonImg && (
               <Image
                 src={
-                  typeof data?.lessonImg === 'string'
+                  typeof data?.lessonImg === "string"
                     ? `${LESSON_IMG}${data?.lessonImg}`
                     : data?.lessonImg.preview
                 }
-                desc={data?.isImgDesc === true && data?.photoDescription}
                 id={data?.id || data?.itemId}
                 modelPopUp={editImageFunc}
                 setEditPhotoModel={setEditPhotoModel}
@@ -101,7 +101,7 @@ const EditContent = ({
           </div>
         ))}
     </>
-  )
-}
+  );
+};
 
-export default EditContent
+export default EditContent;

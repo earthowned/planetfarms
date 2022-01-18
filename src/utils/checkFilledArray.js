@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 export function checkArrayForFilledValue(arr) {
   let empty = 0;
   arr.forEach((el) => {
@@ -6,11 +7,9 @@ export function checkArrayForFilledValue(arr) {
     }
 
     if (el.type === "mcq") {
-      console.log(el.type);
       if (!el.question || !el.answer || el.options.includes("")) empty++;
     }
   });
-  console.log(empty);
   if (empty === 0) {
     return true;
   }
