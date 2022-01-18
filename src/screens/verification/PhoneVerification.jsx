@@ -1,9 +1,7 @@
-import Verification from '../../components/verification/Verification'
+import Verification from "../../components/verification/Verification";
 
 const EmailVerification = () => {
-  return (
-    <Verification attr='phone_number' title='Phone Verification' />
-  )
-}
+  return <Verification attr="phone_number" title="Phone Verification" />;
+};
 
-export default EmailVerification
+export default EmailVerification;

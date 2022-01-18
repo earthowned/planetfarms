@@ -1,12 +1,15 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable no-shadow */
+/* eslint-disable no-nested-ternary */
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-import Button from '../button/Button'
-import DragDrop from '../dragDrop/DragDrop'
-import CollectionModalHeader from './CollectionModalHeader'
-import { InputFields, ErrorText, TextArea } from '../formUI/FormUI'
-import './NewsCreateModal.scss'
-import { VIDEO_COVER } from '../../utils/urlConstants'
+import Button from "../button/Button";
+import DragDrop from "../dragDrop/DragDrop";
+import CollectionModalHeader from "./CollectionModalHeader";
+import { InputFields, ErrorText, TextArea } from "../formUI/FormUI";
+import "./NewsCreateModal.scss";
+import { VIDEO_COVER } from "../../utils/urlConstants";
 
 const CreateVideo = ({
   getRootProps,
@@ -18,25 +21,25 @@ const CreateVideo = ({
   setData,
   editData = [],
   setEditData,
-  editFunc
+  editFunc,
 }) => {
-  const { register, errors, handleSubmit } = useForm()
+  const { register, errors, handleSubmit } = useForm();
   const [videoCover, setVideoCover] = useState(
     editData.length > 0
       ? editData[0]?.itemId
-          ? editData[0]?.videoCover
-          : `${VIDEO_COVER}${editData[0].videoCover}`
-      : ''
-  )
+        ? editData[0]?.videoCover
+        : `${VIDEO_COVER}${editData[0].videoCover}`
+      : ""
+  );
   const [video, setVideo] = useState(
-    editData.length > 0 ? editData[0]?.videoResource : ''
-  )
-  const [videoLink, setVideoLink] = useState('')
+    editData.length > 0 ? editData[0]?.videoResource : ""
+  );
+  const [videoLink, setVideoLink] = useState("");
   const addVideo = ({ videoTitle, videoDescription, videoLink }) => {
     const itemId =
-      data.length === 0 ? data.length + 1 : data[data.length - 1].itemId + 1
+      data.length === 0 ? data.length + 1 : data[data.length - 1].itemId + 1;
 
-    const videoResource = video
+    const videoResource = video;
     const vData = [
       ...data,
       {
@@ -45,157 +48,155 @@ const CreateVideo = ({
         videoTitle,
         videoDescription,
         videoLink,
-        videoResource
-      }
-    ]
-    setData(vData)
-    setVideoActive(false)
-  }
+        videoResource,
+      },
+    ];
+    setData(vData);
+    setVideoActive(false);
+  };
 
   const editVideo = ({ videoTitle, videoDescription, videoLink }) => {
-    const videoResource = video
+    const videoResource = video;
     editFunc({
       id: editData[0].id,
       videoTitle,
       videoDescription,
       videoLink,
       videoResource,
-      videoCover
-    })
-    setEditData([])
-  }
+      videoCover,
+    });
+    setEditData([]);
+  };
 
   const closeModal = () => {
-    setVideoActive(false)
-    setEditData([])
-  }
+    setVideoActive(false);
+    setEditData([]);
+  };
   const editLocal = ({ videoTitle, videoDescription, videoLink }) => {
     if (editData.length !== 0) {
-      editData[0].videoTitle = videoTitle
-      editData[0].videoDescription = videoDescription
-      editData[0].videoLink = videoLink
-      editData[0].videoResource = video
-      editData[0].videoCover = videoCover
+      editData[0].videoTitle = videoTitle;
+      editData[0].videoDescription = videoDescription;
+      editData[0].videoLink = videoLink;
+      editData[0].videoResource = video;
+      editData[0].videoCover = videoCover;
     }
-    setVideoActive(false)
-    setEditData([])
-  }
+    setVideoActive(false);
+    setEditData([]);
+  };
   return (
     <>
       {videoActive && (
-        <div className='collection-modal-container addBlock addBlock__video'>
-          <div className='block'>
-            <div className='collection-modal-inner-container'>
+        <div className="collection-modal-container addBlock addBlock__video">
+          <div className="block">
+            <div className="collection-modal-inner-container">
               <CollectionModalHeader
-                title='Add video'
+                title="Add video"
                 clickHandler={closeModal}
               />
               <DragDrop
                 getInputProps={getInputProps}
                 getRootProps={getRootProps}
                 files={files}
-                text='Drag & Drop photo in this area or Click Here to attach Video Cover'
+                text="Drag & Drop photo in this area or Click Here to attach Video Cover"
                 dataImg={
                   editData.length > 0
                     ? editData[0]?.itemId
-                        ? editData[0]?.videoCover?.preview
-                        : `${VIDEO_COVER}${editData[0].videoCover}`
-                    : ''
+                      ? editData[0]?.videoCover?.preview
+                      : `${VIDEO_COVER}${editData[0].videoCover}`
+                    : ""
                 }
                 onChange={(img) => setVideoCover(img)}
-                fileType='image/png,image/jpeg,image/jpg'
+                fileType="image/png,image/jpeg,image/jpg"
                 onClick={() => setVideoCover(null)}
               />
-              <div className='video-input-container'>
+              <div className="video-input-container">
                 <InputFields
-                  className='default-input-variation'
-                  placeholder='Video Title (Optional)'
-                  name='videoTitle'
+                  className="default-input-variation"
+                  placeholder="Video Title (Optional)"
+                  name="videoTitle"
                   ref={register}
                   defaultValue={
-                    editData.length > 0 ? editData[0].videoTitle : ''
+                    editData.length > 0 ? editData[0].videoTitle : ""
                   }
                 />
 
                 <TextArea
-                  className='default-input-variation text-area-variation textarea'
-                  placeholder='Video Description (Optional)'
-                  cols='3'
-                  rows='4'
-                  name='videoDescription'
+                  className="default-input-variation text-area-variation textarea"
+                  placeholder="Video Description (Optional)"
+                  cols="3"
+                  rows="4"
+                  name="videoDescription"
                   ref={register}
                   defaultValue={
-                    editData.length > 0 ? editData[0].videoDescription : ''
+                    editData.length > 0 ? editData[0].videoDescription : ""
                   }
                 />
-                <div className='video-row-3'>
+                <div className="video-row-3">
                   {!video && (
-                    <>
-                      <input
-                        type='url'
-                        className={
-                          videoLink
-                            ? 'default-input-variation last-input-variation full'
-                            : `default-input-variation last-input-variation ${
-                                errors.videoLink ? 'error' : ''
-                              }`
-                        }
-                        placeholder='Video Link'
-                        name='videoLink'
-                        defaultValue={
-                          editData.length > 0 ? editData[0].videoLink : ''
-                        }
-                        ref={register({
-                          required: {
-                            value: true,
-                            message: 'Please enter a video Link or Video File'
-                          }
-                        })}
-                        onChange={(e) => setVideoLink(e.target.value)}
-                      />
-                    </>
+                    <input
+                      type="url"
+                      className={
+                        videoLink
+                          ? "default-input-variation last-input-variation full"
+                          : `default-input-variation last-input-variation ${
+                              errors.videoLink ? "error" : ""
+                            }`
+                      }
+                      placeholder="Video Link"
+                      name="videoLink"
+                      defaultValue={
+                        editData.length > 0 ? editData[0].videoLink : ""
+                      }
+                      ref={register({
+                        required: {
+                          value: true,
+                          message: "Please enter a video Link or Video File",
+                        },
+                      })}
+                      onChange={(e) => setVideoLink(e.target.value)}
+                    />
                   )}
-                  {!video && !videoLink ? <span>OR</span> : ''}
+                  {!video && !videoLink ? <span>OR</span> : ""}
                   {!videoLink && (
                     <DragDrop
-                      fileType='video/mp4,video/quicktime'
+                      fileType="video/mp4,video/quicktime"
                       className={
                         video
-                          ? 'videoUploadBtn videoUploadBtn-full'
-                          : 'videoUploadBtn'
+                          ? "videoUploadBtn videoUploadBtn-full"
+                          : "videoUploadBtn"
                       }
                       onChange={(vid) => setVideo(vid)}
                       setVideo={setVideo}
                       onClick={() => setVideo(null)}
                       text={
                         !video
-                          ? 'Add Video'
-                          : typeof video === 'string'
-                            ? video
-                            : editData[0]?.itemId
-                              ? video?.name
-                              : 'Add Video'
+                          ? "Add Video"
+                          : typeof video === "string"
+                          ? video
+                          : editData[0]?.itemId
+                          ? video?.name
+                          : "Add Video"
                       }
                     />
                   )}
                 </div>
                 <ErrorText
-                  className='errorMsg'
+                  className="errorMsg"
                   message={errors.videoLink && errors.videoLink.message}
                 />
               </div>
               {editData.length > 0 ? (
                 <Button
-                  className='add'
-                  name='Edit Video Block'
+                  className="add"
+                  name="Edit Video Block"
                   onClick={handleSubmit(
                     editData[0]?.itemId ? editLocal : editVideo
                   )}
                 />
               ) : (
                 <Button
-                  className='add'
-                  name='Add Video Block'
+                  className="add"
+                  name="Add Video Block"
                   onClick={handleSubmit(addVideo)}
                 />
               )}
@@ -204,7 +205,7 @@ const CreateVideo = ({
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default CreateVideo
+export default CreateVideo;

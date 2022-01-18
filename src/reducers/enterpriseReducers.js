@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   ENTERPRISE_LIST_REQUEST,
   ENTERPRISE_LIST_SUCCESS,

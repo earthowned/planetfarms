@@ -1,13 +1,13 @@
-import useGetFetchData from '../../utils/useGetFetchData'
-import { CATEGORY } from '../../utils/urlConstants'
-import Filter from '../filter/Filter'
+import useGetFetchData from "../../utils/useGetFetchData";
+import { CATEGORY } from "../../utils/urlConstants";
+import Filter from "../filter/Filter";
 
 const CategoryFilter = ({
   selectedCategory,
   setSelectedCategory,
-  classname
+  classname,
 }) => {
-  const { data: categoryData } = useGetFetchData('CATEGORIES_FILTER', CATEGORY)
+  const { data: categoryData } = useGetFetchData("CATEGORIES_FILTER", CATEGORY);
 
   return (
     <Filter
@@ -17,7 +17,7 @@ const CategoryFilter = ({
       setSelectedCategory={setSelectedCategory}
       selectedCategory={selectedCategory}
     />
-  )
-}
+  );
+};
 
-export default CategoryFilter
+export default CategoryFilter;

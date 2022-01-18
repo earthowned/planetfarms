@@ -156,7 +156,7 @@
 }
 
 .achivement-level-content {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-size: 16px;
   color: var(--primary-white);
@@ -325,7 +325,7 @@
 }
 
 .achievements-progressbar--header {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;

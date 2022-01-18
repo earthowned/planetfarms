@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   LESSON_CREATE_REQUEST,
   LESSON_CREATE_SUCCESS,

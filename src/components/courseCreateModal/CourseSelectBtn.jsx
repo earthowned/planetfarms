@@ -1,4 +1,4 @@
-import Background from '../background/Background'
+import Background from "../background/Background";
 
 const CourseSelectBtn = ({
   courseType,
@@ -6,12 +6,13 @@ const CourseSelectBtn = ({
   desc,
   img,
   setSelectedBtn,
-  selectedBtn
+  selectedBtn,
 }) => {
   return (
     <button
+      type="button"
       onClick={() => setSelectedBtn(`${courseType}`)}
-      className={selectedBtn === courseType ? selectedBtn : ''}
+      className={selectedBtn === courseType ? selectedBtn : ""}
     >
       <Background staticImg={`/img/${img}`}>
         <div>
@@ -20,7 +21,7 @@ const CourseSelectBtn = ({
         </div>
       </Background>
     </button>
-  )
-}
+  );
+};
 
-export default CourseSelectBtn
+export default CourseSelectBtn;

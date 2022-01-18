@@ -72,7 +72,7 @@ export const searchGroups = (search) => async (dispatch) => {
   }
 };
 
-export const createGroup = (newGroup) => async (dispatch, getState) => {
+export const createGroup = (newGroup) => async (dispatch) => {
   const formData = new FormData();
   formData.append("title", newGroup.title);
   formData.append("description", newGroup.description);
@@ -155,7 +155,7 @@ export const groupDelete = (id) => async (dispatch) => {
   }
 };
 
-export const followGroup = (groupId) => async (dispatch, getState) => {
+export const followGroup = (groupId) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_FOLLOW_REQUEST });
     await postApi(

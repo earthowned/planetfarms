@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   ENROLL_CREATE_REQUEST,
   ENROLL_CREATE_SUCCESS,

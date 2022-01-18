@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,

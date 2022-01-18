@@ -1,7 +1,7 @@
-import ProfileInfo from './ProfileInfo'
-import CheckCircle from '../../assets/images/check-circle.svg'
-import MinusCircle from '../../assets/images/minus-circle-outline.svg'
-import './ProfileFormCard.scss'
+import ProfileInfo from "./ProfileInfo";
+import CheckCircle from "../../assets/images/check-circle.svg";
+import MinusCircle from "../../assets/images/minus-circle-outline.svg";
+import "./ProfileFormCard.scss";
 
 const ProfileFormCard = ({
   data: {
@@ -14,14 +14,14 @@ const ProfileFormCard = ({
     secondVerify,
     thirdTitle,
     thirdValue,
-    thirdVerify
+    thirdVerify,
   },
-  isCurrentUser
+  isCurrentUser,
 }) => {
   return (
-    <div className='myProfile-container'>
-      <h2 className='myProfile-container-row-title'>{title}</h2>
-      <div className='myProfile-container-row'>
+    <div className="myProfile-container">
+      <h2 className="myProfile-container-row-title">{title}</h2>
+      <div className="myProfile-container-row">
         <ProfileInfo
           title={firstTitle}
           value={firstValue}
@@ -40,23 +40,23 @@ const ProfileFormCard = ({
             isCurrentUser={isCurrentUser}
           />
         ) : (
-          ''
+          ""
         )}
         {thirdValue
           ? thirdTitle && (
-            <ProfileInfo
-              title={thirdTitle}
-              value={thirdValue}
-              verify={thirdVerify}
-              MinusCircle={MinusCircle}
-              CheckCircle={CheckCircle}
-              isCurrentUser={isCurrentUser}
-            />
+              <ProfileInfo
+                title={thirdTitle}
+                value={thirdValue}
+                verify={thirdVerify}
+                MinusCircle={MinusCircle}
+                CheckCircle={CheckCircle}
+                isCurrentUser={isCurrentUser}
+              />
             )
-          : ''}
+          : ""}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileFormCard
+export default ProfileFormCard;

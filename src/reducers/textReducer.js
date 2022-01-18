@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   TEXT_CREATE_REQUEST,
   TEXT_CREATE_SUCCESS,

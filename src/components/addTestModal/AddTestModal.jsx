@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { createTest } from '../../actions/testActions'
-import CollectionModalHeader from '../newsCreateModal/CollectionModalHeader'
+/* eslint-disable react/jsx-key */
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { createTest } from "../../actions/testActions";
+import CollectionModalHeader from "../newsCreateModal/CollectionModalHeader";
 
-import './AddTestModal.scss'
+import "./AddTestModal.scss";
 
 const AddTestModal = ({ setTestModal }) => {
-  const { id } = useParams()
+  const { id } = useParams();
   const [questions, setQuestions] = useState([
     // data structure
     // {
@@ -15,44 +16,44 @@ const AddTestModal = ({ setTestModal }) => {
     //   answer: "",
     //   options: []
     // }
-  ])
+  ]);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  function addQuestion () {
+  function addQuestion() {
     // questions.push({
     //   question: '',
     //   correctanswer: ''
     // })
     setQuestions((prev) => [
       ...prev,
-      { question: '', answer: '', options: [] }
-    ])
+      { question: "", answer: "", options: [] },
+    ]);
   }
 
-  function resetQuestion () {
-    setQuestions([])
+  function resetQuestion() {
+    setQuestions([]);
   }
   // useEffect(() => {
   //   console.log(questions)
   // }, [questions])
 
-  function addTest () {
-    dispatch(createTest(id, questions))
-    setTestModal(false)
+  function addTest() {
+    dispatch(createTest(id, questions));
+    setTestModal(false);
   }
 
   return (
     <div>
-      <div className='collection-modal-container addBlock'>
-        <div className='block'>
-          <div className='collection-modal-inner-container'>
+      <div className="collection-modal-container addBlock">
+        <div className="block">
+          <div className="collection-modal-inner-container">
             <CollectionModalHeader
-              title='Add test'
+              title="Add test"
               clickHandler={setTestModal}
             />
             {questions.length > 0 &&
-              questions.map((index, item) => (
+              questions.map((index) => (
                 <QuestionAnswerComponent
                   pos={questions.length - 1}
                   index={index}
@@ -60,20 +61,26 @@ const AddTestModal = ({ setTestModal }) => {
                 />
               ))}
             <button
+              type="button"
               onClick={() => addQuestion()}
-              className='secondary-btn add-question-btn'
+              className="secondary-btn add-question-btn"
             >
-              <img src='/img/plus.svg' alt='add icon' />
+              <img src="/img/plus.svg" alt="add icon" />
               <span>Add question</span>
             </button>
-            <div className='btn-container'>
+            <div className="btn-container">
               <button
-                className='secondary-btn reset-test-btn'
+                type="button"
+                className="secondary-btn reset-test-btn"
                 onClick={resetQuestion}
               >
                 Reset test
               </button>
-              <button className='secondary-btn color-primary' onClick={addTest}>
+              <button
+                type="button"
+                className="secondary-btn color-primary"
+                onClick={addTest}
+              >
                 Add test
               </button>
             </div>
@@ -81,92 +88,91 @@ const AddTestModal = ({ setTestModal }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-function QuestionAnswerComponent ({ pos, questions, index }) {
-  const [question, setQuestion] = useState('')
-  const [answer, setAnswer] = useState('')
-  const [options, setOptions] = useState([''])
+function QuestionAnswerComponent({ pos, questions, index }) {
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [options, setOptions] = useState([""]);
 
-  function onQuestionChange (e) {
-    setQuestion(e.target.value)
+  function onQuestionChange(e) {
+    setQuestion(e.target.value);
   }
 
-  function onAnswerChange (e) {
-    setAnswer(e.target.value)
+  function onAnswerChange(e) {
+    setAnswer(e.target.value);
   }
 
-  function addOption () {
+  function addOption() {
     setOptions((prev) => {
-      return [...prev, '']
-    })
+      return [...prev, ""];
+    });
   }
 
-  questions[pos].question = question
-  questions[pos].answer = answer
-  questions[pos].options = options
+  questions[pos].question = question;
+  questions[pos].answer = answer;
+  questions[pos].options = options;
   return (
-    <div className='question-answer-container' key={index}>
-      <div className='question-container'>
+    <div className="question-answer-container" key={index}>
+      <div className="question-container">
         <div>
           <input
-            className='default-input-variation'
-            placeholder='Question'
+            className="default-input-variation"
+            placeholder="Question"
             value={question}
             onChange={(e) => onQuestionChange(e)}
           />
         </div>
-        <button>
-          <img src='/img/green-camera.svg' alt='photo icon' />{' '}
-          <h4>Add photo</h4>
+        <button type="button">
+          <img src="/img/green-camera.svg" alt="" /> <h4>Add photo</h4>
         </button>
       </div>
-      <div className='test-answers-wrapper'>
-        <div className='test-correct-answer'>
+      <div className="test-answers-wrapper">
+        <div className="test-correct-answer">
           <h4>Write correct answer in this field</h4>
-          <div className='test-answer-input-field'>
+          <div className="test-answer-input-field">
             <input
-              className='default-input-variation'
-              placeholder='Correct answer'
+              className="default-input-variation"
+              placeholder="Correct answer"
               value={answer}
               onChange={(e) => onAnswerChange(e)}
             />
             <img
-              src='/img/minus-circle-outline.svg'
-              alt='minus image'
-              onClick={() => setAnswer('')}
+              src="/img/minus-circle-outline.svg"
+              alt="minus"
+              onClick={() => setAnswer("")}
             />
           </div>
           <span>Answer will be mixed for users</span>
         </div>
-        <div className='option-answers'>
+        <div className="option-answers">
           {options.length > 0 &&
-            options.map((item, index) => (
+            options.map((item, posIndex) => (
               <OptionAnswer
                 options={options}
-                pos={index}
+                pos={posIndex.toString()}
                 setOptions={setOptions}
                 item={item}
               />
             ))}
-          <button onClick={addOption}>
-            <img src='/img/plus.svg' alt='add icon' />{' '}
+          <button type="button" onClick={addOption}>
+            <img src="/img/plus.svg" alt="add icon" />{" "}
             <span>Add new answer</span>
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-function OptionAnswer ({ options, setOptions, item, pos }) {
-  const [answer, setAnswer] = useState('')
+function OptionAnswer({ options, setOptions, item, pos }) {
+  const [answer, setAnswer] = useState("");
 
-  function onAnswerChange (e) {
-    setAnswer(e.target.value)
+  function onAnswerChange(e) {
+    setAnswer(e.target.value);
   }
-  options[pos] = answer
+  options[pos] = answer;
 
   //  function addOption() {
   //     setOptions(prev => {
@@ -184,32 +190,32 @@ function OptionAnswer ({ options, setOptions, item, pos }) {
     // if(answer.length ) {
     //   addOption()
     // }
-  }, [])
+  }, []);
 
-  function removeItem (id) {
-    const newOptions = [...options]
-    const index = newOptions.indexOf(id)
-    console.log(index)
+  function removeItem(id) {
+    const newOptions = [...options];
+    const index = newOptions.indexOf(id);
+
     if (index !== -1) {
-      newOptions.splice(index, 1)
-      setOptions(newOptions)
+      newOptions.splice(index, 1);
+      setOptions(newOptions);
     }
   }
 
   return (
-    <div className='test-answer-input-field' key={pos}>
+    <div className="test-answer-input-field" key={pos}>
       <input
-        className='default-input-variation incorrect-option'
-        placeholder='Incorrect answer'
+        className="default-input-variation incorrect-option"
+        placeholder="Incorrect answer"
         value={answer}
         onChange={(e) => onAnswerChange(e)}
       />
       <img
-        src='/img/minus-circle-outline.svg'
-        alt='minus image'
+        src="/img/minus-circle-outline.svg"
+        alt="minus"
         onClick={() => removeItem(item)}
       />
     </div>
-  )
+  );
 }
-export default AddTestModal
+export default AddTestModal;

@@ -1,24 +1,23 @@
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import { checkAndUpdateToken } from '../../actions/userAction'
-import { useDispatch } from 'react-redux'
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { checkAndUpdateToken } from "../../actions/userAction";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const hasAccess = () => {
-    const userInfo = window.localStorage.getItem('userInfo')
-    return userInfo && dispatch(checkAndUpdateToken())
-  }
+    const userInfo = window.localStorage.getItem("userInfo");
+    return userInfo && dispatch(checkAndUpdateToken());
+  };
 
   return (
     <Route
-      {...rest} render={props => (
-        hasAccess()
-          ? <Component {...props} />
-          : <Redirect to='/login' />
-      )}
+      {...rest}
+      render={(props) =>
+        hasAccess() ? <Component {...props} /> : <Redirect to="/login" />
+      }
     />
-  )
-}
+  );
+};
 
-export default PrivateRoute
+export default PrivateRoute;

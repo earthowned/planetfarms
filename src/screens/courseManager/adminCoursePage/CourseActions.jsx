@@ -1,44 +1,47 @@
-import { useState } from 'react'
-import useHideOnClick from '../../../utils/useHideOnClick'
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useState } from "react";
+import useHideOnClick from "../../../utils/useHideOnClick";
 
 const CourseActions = ({
   setIsEditCourse,
   courseId,
   deleteCourse,
   history,
-  dispatch
+  dispatch,
 }) => {
-  const [actionActive, setActionActive] = useState(false)
+  const [actionActive, setActionActive] = useState(false);
   const domNode = useHideOnClick(() => {
-    setActionActive(false)
-  })
+    setActionActive(false);
+  });
 
   const destroyCourse = async () => {
-    dispatch(deleteCourse(courseId, history))
-  }
+    dispatch(deleteCourse(courseId, history));
+  };
 
   return (
-    <div className='actions actions__course' ref={domNode}>
+    <div className="actions actions__course" ref={domNode}>
       <button
-        className='secondary-btn lesson-btn'
+        type="button"
+        className="secondary-btn lesson-btn"
         onClick={() => setActionActive(!actionActive)}
       >
-        <img src='/img/more-horizontal.svg' alt='horizontal icon' />
+        <img src="/img/more-horizontal.svg" alt="horizontal icon" />
       </button>
       {actionActive && (
-        <ul className={actionActive ? 'show' : 'hide'}>
+        <ul className={actionActive ? "show" : "hide"}>
           <li
             onClick={() => {
-              setIsEditCourse(true)
-              setActionActive(!actionActive)
+              setIsEditCourse(true);
+              setActionActive(!actionActive);
             }}
           >
             Edit
           </li>
           <li
             onClick={() => {
-              destroyCourse()
-              setActionActive(!actionActive)
+              destroyCourse();
+              setActionActive(!actionActive);
             }}
           >
             Delete
@@ -46,7 +49,7 @@ const CourseActions = ({
         </ul>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default CourseActions
+export default CourseActions;

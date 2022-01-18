@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react'
-import MoreCourse from './MoreCourse'
-import CourseDetail from './CourseDetail'
-import LessonCourse from './LessonCourse'
-import './CourseDescription.scss'
-import { postApi } from '../../../utils/apiFunc'
-import { useDispatch } from 'react-redux'
-import { ADD_COURSE_VIEW } from '../../../utils/urlConstants'
+import { useState, useEffect } from "react";
+
+import MoreCourse from "./MoreCourse";
+import CourseDetail from "./CourseDetail";
+import LessonCourse from "./LessonCourse";
+import "./CourseDescription.scss";
 
 const CourseDescription = ({
   setFeedbackModal,
@@ -15,15 +13,14 @@ const CourseDescription = ({
   userInfo,
   isEnroll,
   refetch,
-  courseId
 }) => {
-  const [creator, setCreator] = useState('')
-  const [joinCourse, setJoinCourse] = useState(false)
-  const dispatch = useDispatch()
+  const [creator, setCreator] = useState("");
+  const [joinCourse, setJoinCourse] = useState(false);
+
   useEffect(() => {
-    setCreator(data?.data?.creator)
-    setJoinCourse(isEnroll || false)
-  }, [data, isEnroll])
+    setCreator(data?.data?.creator);
+    setJoinCourse(isEnroll || false);
+  }, [data, isEnroll]);
 
   // useEffect(() => {
   //   if(!creator) {
@@ -34,7 +31,7 @@ const CourseDescription = ({
 
   return (
     <>
-      <div className='course-page-container border-1px-onyx'>
+      <div className="course-page-container border-1px-onyx">
         <CourseDetail
           setFeedbackModal={setFeedbackModal}
           setPurchaseModal={setPurchaseModal}
@@ -56,7 +53,7 @@ const CourseDescription = ({
       </div>
       <MoreCourse />
     </>
-  )
-}
+  );
+};
 
-export default CourseDescription
+export default CourseDescription;

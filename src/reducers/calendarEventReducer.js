@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   CALENDAR_EVENT_LIST_REQUEST,
   CALENDAR_EVENT_LIST_SUCCESS,

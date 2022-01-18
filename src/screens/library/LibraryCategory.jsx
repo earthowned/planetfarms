@@ -1,33 +1,29 @@
-import { useState, useEffect } from 'react'
-import useGetFetchData from '../../utils/useGetFetchData'
-import { GET_LIBRARY } from '../../utils/urlConstants'
-import Pagination from '../../components/pagination/Pagination'
-import ListView from '../../components/listView/ListView'
+import { useState, useEffect } from "react";
+import useGetFetchData from "../../utils/useGetFetchData";
+import { GET_LIBRARY } from "../../utils/urlConstants";
+import Pagination from "../../components/pagination/Pagination";
+import ListView from "../../components/listView/ListView";
 
 const LibraryCategory = ({
   title,
   search,
   setNewCollection,
   modalActive,
-  setModalActive
+  setModalActive,
 }) => {
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber, setPageNumber] = useState(1);
   useEffect(() => {
-    setPageNumber(1)
-  }, [search])
+    setPageNumber(1);
+  }, [search]);
   const { data: libraryData, isLoading } = useGetFetchData(
-    'LIBRARY_CATEGORY_DATA',
-    GET_LIBRARY +
-      '?pageNumber=' +
-      pageNumber +
-      '&category=' +
-      title.toLowerCase() +
-      '&search=' +
-      (search || ''),
+    "LIBRARY_CATEGORY_DATA",
+    `${GET_LIBRARY}?pageNumber=${pageNumber}&category=${title.toLowerCase()}&search=${
+      search || ""
+    }`,
     { title, pageNumber, search }
-  )
+  );
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
   return libraryData?.data?.length > 0 ? (
     <>
@@ -44,9 +40,7 @@ const LibraryCategory = ({
         resourceList={libraryData}
       />
     </>
-  ) : (
-    <></>
-  )
-}
+  ) : null;
+};
 
-export default LibraryCategory
+export default LibraryCategory;

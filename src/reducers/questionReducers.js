@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   QUESTION_DELETE_FAIL,
   QUESTION_DELETE_REQUEST,

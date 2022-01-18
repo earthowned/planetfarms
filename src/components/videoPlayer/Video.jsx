@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import ReactPlayer from 'react-player'
+import { useState } from "react";
+import ReactPlayer from "react-player";
 
-import Actions from '../../screens/courseManager/lesson/Actions'
-import { ReactComponent as Play } from '../../assets/images/play.svg'
-import { ReactComponent as BookMark } from '../../assets/images/book-outlined.svg'
-import './Video.scss'
+import Actions from "../../screens/courseManager/lesson/Actions";
+import { ReactComponent as Play } from "../../assets/images/play.svg";
+import { ReactComponent as BookMark } from "../../assets/images/book-outlined.svg";
+import "./Video.scss";
 
 const Video = ({
   title,
@@ -16,47 +16,48 @@ const Video = ({
   onRemove,
   id,
   setEditVideoModel,
-  modelPopUp
+  modelPopUp,
 }) => {
-  const [showInfo, setShowInfo] = useState(false)
+  const [showInfo, setShowInfo] = useState(false);
   const poopUp = () => {
-    modelPopUp(id)
-    setEditVideoModel(true)
-  }
+    modelPopUp(id);
+    setEditVideoModel(true);
+  };
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {url ? (
-        <div className='player'>
-          <div className={showInfo ? 'info hide' : 'info'}>
-            <h1 className='videoTitle'>{title}</h1>
-            <p className='videoDesc'>{description}</p>
-            <p className='videoDesc'>{itemId}</p>
+        <div className="player">
+          <div className={showInfo ? "info hide" : "info"}>
+            <h1 className="videoTitle">{title}</h1>
+            <p className="videoDesc">{description}</p>
+            <p className="videoDesc">{itemId}</p>
           </div>
           {isEditable ? (
             <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
           ) : (
-            <div className='addToLibrary'>
+            <div className="addToLibrary">
               <BookMark />
             </div>
           )}
 
           <ReactPlayer
-            className='video'
+            className="video"
             url={url}
-            width='100%'
-            height='100%'
+            width="100%"
+            height="100%"
             controls
-            playIcon={<Play className='play' />}
+            playIcon={<Play className="play" />}
             playing
             light={thumbnail}
             onClickPreview={() => setShowInfo(!showInfo)}
           />
         </div>
       ) : (
-        ''
+        ""
       )}
     </>
-  )
-}
+  );
+};
 
-export default Video
+export default Video;

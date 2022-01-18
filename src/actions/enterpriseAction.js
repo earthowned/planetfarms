@@ -69,30 +69,29 @@ export const searchEnterprises = (search) => async (dispatch) => {
   }
 };
 
-export const createEnterprise =
-  (newEnterprise) => async (dispatch, getState) => {
-    const formData = new FormData();
-    formData.append("title", newEnterprise.title);
-    formData.append("description", newEnterprise.description);
-    formData.append("enterprise", newEnterprise.file);
-    formData.append("category", newEnterprise.category);
-    formData.append("roles", newEnterprise.roles);
-    try {
-      dispatch({ type: ENTERPRISE_CREATE_REQUEST });
-      await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`,
-        formData
-      );
-      dispatch({ type: ENTERPRISE_CREATE_SUCCESS, payload: true });
-    } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      dispatch({ type: ENTERPRISE_CREATE_FAIL, payload: message });
-    }
-  };
+export const createEnterprise = (newEnterprise) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append("title", newEnterprise.title);
+  formData.append("description", newEnterprise.description);
+  formData.append("enterprise", newEnterprise.file);
+  formData.append("category", newEnterprise.category);
+  formData.append("roles", newEnterprise.roles);
+  try {
+    dispatch({ type: ENTERPRISE_CREATE_REQUEST });
+    await postApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises/add/community/${currentCommunity.id}`,
+      formData
+    );
+    dispatch({ type: ENTERPRISE_CREATE_SUCCESS, payload: true });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: ENTERPRISE_CREATE_FAIL, payload: message });
+  }
+};
 
 export const enterpriseUpdate = (newEnterprise) => async (dispatch) => {
   try {
@@ -138,27 +137,26 @@ export const enterpriseDelete = (id) => async (dispatch) => {
   }
 };
 
-export const followEnterprise =
-  (enterpriseId) => async (dispatch, getState) => {
-    try {
-      dispatch({ type: ENTERPRISE_FOLLOW_REQUEST });
-      await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/enterprises-users/follow`,
-        { enterpriseId }
-      );
-      dispatch({ type: ENTERPRISE_FOLLOW_SUCCESS });
-    } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      dispatch({
-        type: ENTERPRISE_FOLLOW_FAIL,
-        payload: message,
-      });
-    }
-  };
+export const followEnterprise = (enterpriseId) => async (dispatch) => {
+  try {
+    dispatch({ type: ENTERPRISE_FOLLOW_REQUEST });
+    await postApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/enterprises-users/follow`,
+      { enterpriseId }
+    );
+    dispatch({ type: ENTERPRISE_FOLLOW_SUCCESS });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: ENTERPRISE_FOLLOW_FAIL,
+      payload: message,
+    });
+  }
+};
 
 export const listUserEnterprises =
   ({ communityId, pageNumber = "" }) =>

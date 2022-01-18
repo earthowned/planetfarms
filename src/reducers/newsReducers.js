@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   NEWS_LIST_REQUEST,
   NEWS_LIST_SUCCESS,

@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import './Table.scss'
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-shadow */
+import React, { useEffect, useState } from "react";
+import "./Table.scss";
 
 // description:
 // you can design tbl in two ways:
@@ -19,58 +22,62 @@ import './Table.scss'
 // action: this holds function that is executed when the button is clicked (fn: returns id of the item)
 
 const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
-  const [property, setProperty] = useState([])
-  const [header, setHeader] = useState([])
-  const [tblData, setTblData] = useState([])
+  const [property, setProperty] = useState([]);
+  const [header, setHeader] = useState([]);
+  const [tblData, setTblData] = useState([]);
   useEffect(() => {
-    const { tblHeader, tblData, tblProperty } = data
-    setHeader(tblHeader || Object.keys(tblData[0]))
-    setTblData(tblData)
-    setProperty(tblProperty || Object.keys(tblData[0]))
-  }, [])
+    const { tblHeader, tblData, tblProperty } = data;
+    setHeader(tblHeader || Object.keys(tblData[0]));
+    setTblData(tblData);
+    setProperty(tblProperty || Object.keys(tblData[0]));
+  }, []);
 
   return (
-    <div className='tbl-wrapper'>
-      <table className='tbl'>
-        <thead className='tbl__heading'>
+    <div className="tbl-wrapper">
+      <table className="tbl">
+        <thead className="tbl__heading">
           <tr>
             {addSymbolNumber && <th>S.N.</th>}
-            {
-              header.map((propKey, index) => {
-                return <th key={index}>{propKey}</th>
-              })
-            }
+            {header.map((propKey, index) => {
+              return <th key={index.toString()}>{propKey}</th>;
+            })}
             {options.length && <th>Options</th>}
           </tr>
         </thead>
-        <tbody className='tbl__body'>
-          {
-            tblData.length && tblData.map((item, index) => {
+        <tbody className="tbl__body">
+          {tblData.length &&
+            tblData.map((item, index) => {
               return (
-                <tr key={index}>
+                <tr key={index.toString()}>
                   {addSymbolNumber && <td>{index + 1}</td>}
-                  {
-                    property.map((propkey, index) => {
-                      return <td key={index}>{item[propkey]}</td>
-                    })
-                  }
-                  {options.length && <td>
-                    <div className='tbl-options'>
-                      {
-                        options.map(el => {
-                          return <img src={el.img} alt='edit-btn' onClick={async () => await el.action(item.id)} />
-                        })
-                      }
-                    </div>
-                  </td>}
+                  {property.map((propkey, index) => {
+                    return <td key={index.toString()}>{item[propkey]}</td>;
+                  })}
+                  {options.length && (
+                    <td>
+                      <div className="tbl-options">
+                        {options.map((el) => {
+                          return (
+                            <img
+                              key={el.img}
+                              src={el.img}
+                              alt="edit-btn"
+                              onClick={async () => {
+                                await el.action(item.id);
+                              }}
+                            />
+                          );
+                        })}
+                      </div>
+                    </td>
+                  )}
                 </tr>
-              )
-            })
-          }
+              );
+            })}
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;

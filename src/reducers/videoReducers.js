@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   VIDEO_CREATE_REQUEST,
   VIDEO_CREATE_SUCCESS,

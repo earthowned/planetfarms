@@ -1,25 +1,23 @@
-import './NewsCreateModal.scss'
+import "./NewsCreateModal.scss";
 
 const CollectionModalHeader = ({ title, clickHandler }) => {
   return (
     <Image
       title={title}
-      src='/img/close-outline.svg'
-      alt='close-icon'
+      src="/img/close-outline.svg"
+      alt="close-icon"
       clickHandler={() => clickHandler()}
     />
-  )
-}
+  );
+};
 
-export default CollectionModalHeader
+export default CollectionModalHeader;
 
-const Image = (props) => {
+const Image = ({ title, src, alt, clickHandler }) => {
   return (
-    <>
-      <div className='collection-modal-header'>
-        <h4>{props.title}</h4>
-        <img src={props.src} alt={props.alt} onClick={props.clickHandler} />
-      </div>
-    </>
-  )
-}
+    <div className="collection-modal-header">
+      <h4>{title}</h4>
+      <img src={src} alt={alt} onClick={clickHandler} />
+    </div>
+  );
+};

@@ -1,4 +1,5 @@
-import ListViewCardComponent from './ListViewCardComponent'
+import ListViewCardComponent from "./ListViewCardComponent";
+
 const CardView = ({ data, setModalActive, modalActive }) => {
   return (
     <>
@@ -11,9 +12,10 @@ const CardView = ({ data, setModalActive, modalActive }) => {
               setModalActive={setModalActive}
               key={item.id}
             />
-          )
+          );
         })}
     </>
-  )
-}
-export default CardView
+  );
+};
+
+export default CardView;

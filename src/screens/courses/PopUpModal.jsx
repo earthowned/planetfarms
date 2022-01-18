@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import GroupModal from '../../components/groupModal/GroupModal'
-import SimpleModal from '../../components/simpleModal/SimpleModal'
-import CourseCreateModal from '../../components/courseCreateModal/CourseCreateModal'
-import LiveCourseModal from '../../components/courseCreateModal/liveCourse/LiveCourseModal'
-import NewCourseCreateModal from '../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal'
-import { PurchaseModal } from '../../components/purchaseModal/PurchaseModal'
+import GroupModal from "../../components/groupModal/GroupModal";
+import SimpleModal from "../../components/simpleModal/SimpleModal";
+import CourseCreateModal from "../../components/courseCreateModal/CourseCreateModal";
+import LiveCourseModal from "../../components/courseCreateModal/liveCourse/LiveCourseModal";
+import NewCourseCreateModal from "../../components/courseCreateModal/newCourseCreateModal/NewCourseCreateModal";
+import { PurchaseModal } from "../../components/purchaseModal/PurchaseModal";
 
 const PopUpModal = ({
   modalactive,
@@ -13,16 +13,17 @@ const PopUpModal = ({
   createCourse,
   setCreateCourse,
   purchaseModal,
-  setPurchaseModal
+  setPurchaseModal,
 }) => {
-  const [newCollectionactive, setNewCollectionActive] = useState(false)
-  const [createLiveCourse, setCreateLiveCourse] = useState(false)
-  const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false)
-  const [createNewCourse, setCreateNewCourse] = useState(false)
+  const [newCollectionactive, setNewCollectionActive] = useState(false);
+  const [createLiveCourse, setCreateLiveCourse] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [purchaseSuccessModal, setPurchaseSuccessModal] = useState(false);
+  const [createNewCourse, setCreateNewCourse] = useState(false);
 
-  function createNewCourseFunc () {
-    setCreateNewCourse(true)
-    setCreateCourse(false)
+  function createNewCourseFunc() {
+    setCreateNewCourse(true);
+    setCreateCourse(false);
   }
   return (
     <>
@@ -36,18 +37,19 @@ const PopUpModal = ({
         <GroupModal
           clickHandler={setModalActive}
           setNewCollection={setNewCollectionActive}
-          name='Add to collection'
-          btnName='Add to collection'
+          name="Add to collection"
+          btnName="Add to collection"
         />
       )}
       {newCollectionactive && (
-        <SimpleModal setNewCollection={setNewCollectionActive} name='Courses' />
+        <SimpleModal setNewCollection={setNewCollectionActive} name="Courses" />
       )}
       {createCourse && (
         <CourseCreateModal
           setNewCollection={setNewCollectionActive}
           openModal={createCourse}
           closeModal={setCreateCourse}
+          // eslint-disable-next-line react/jsx-no-bind
           collectionAdded={createNewCourseFunc}
           setCreateLiveCourse={setCreateLiveCourse}
         />
@@ -62,7 +64,7 @@ const PopUpModal = ({
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export default PopUpModal
+export default PopUpModal;
