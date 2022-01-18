@@ -1,7 +1,7 @@
 import moment from "moment";
 import ProfileFormCard from "./ProfileFormCard";
 
-const AdditionalInformation = ({ user, isCurrentUser }) => {
+const AdditionalInformation = ({ user }) => {
   const AdditionalInformationdata = {
     title: "Additional information",
     firstTitle: "Last login",

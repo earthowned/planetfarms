@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { addEnroll, leaveCourse } from "../../actions/enrollActions";
+import { addEnroll } from "../../actions/enrollActions";
 
 const EnrollContainer = ({ item, userInfo, setPurchaseModal }) => {
   const history = useHistory();

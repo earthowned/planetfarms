@@ -62,8 +62,8 @@
     "eject": "react-scripts eject",
     "api": "npm start --prefix api",
     "dev": "concurrently \"npm run start\" \"npm run api\"",
-    "pretty": "npx pretty-quick .",
-    "lint": "npx eslint --fix --color ."
+    "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json}\"",
+    "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix --color ."
   },
   "eslintConfig": {
     "extends": "react-app"

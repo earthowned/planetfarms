@@ -1,6 +1,6 @@
-import Logo from '../../components/logo/Logo'
-import Banner from '../../components/signInSignUp/Banner'
-import SignIn from '../../components/signInSignUp/SignIn'
+import Logo from "../../components/logo/Logo";
+import Banner from "../../components/signInSignUp/Banner";
+import SignIn from "../../components/signInSignUp/SignIn";
 
 const LoginSignUp = () => {
   return (
@@ -9,7 +9,7 @@ const LoginSignUp = () => {
       <SignIn />
       <Banner />
     </>
-  )
-}
+  );
+};
 
-export default LoginSignUp
+export default LoginSignUp;

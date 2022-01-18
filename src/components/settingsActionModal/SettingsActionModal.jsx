@@ -79,13 +79,13 @@ const SettingInput = ({
   const newPassword = useRef({});
   newPassword.current = watch("newPassword", "");
   const dispatch = useDispatch();
-  const toggleOldPasswordVisibility = (e) => {
+  const toggleOldPasswordVisibility = () => {
     setShowOldPassword(!showOldPassword);
   };
-  const toggleNewPasswordVisibility = (e) => {
+  const toggleNewPasswordVisibility = () => {
     setShowNewPassword(!showNewPassword);
   };
-  const toggleConfirmPasswordVisibility = (e) => {
+  const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
   const changeInput = (e) => {

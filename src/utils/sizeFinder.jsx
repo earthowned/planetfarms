@@ -1,21 +1,22 @@
-import { useState, useEffect } from 'react'
+/* eslint-disable func-names */
+import { useState, useEffect } from "react";
 
 const useSizeFinder = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    window.addEventListener('resize', function () {
-      setWindowWidth(window.innerWidth)
-    })
+    window.addEventListener("resize", function () {
+      setWindowWidth(window.innerWidth);
+    });
 
     return () => {
-      window.removeEventListener('resize', function () {
-        setWindowWidth(window.innerWidth)
-      })
-    }
-  }, [windowWidth])
+      window.removeEventListener("resize", function () {
+        setWindowWidth(window.innerWidth);
+      });
+    };
+  }, [windowWidth]);
 
-  return windowWidth
-}
+  return windowWidth;
+};
 
-export default useSizeFinder
+export default useSizeFinder;

@@ -27,8 +27,7 @@ module.exports = {
   },
   // plugins: ["only-warn", "react", "prettier"],
   plugins: ["react", "prettier"],
-
-  // ignorePatterns: ["styles.js"],
+  ignorePatterns: ["styles.js"],
   rules: {
     "prettier/prettier": ["warn"],
     "arrow-parens": [2, "always"],

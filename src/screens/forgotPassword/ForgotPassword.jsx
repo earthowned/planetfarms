@@ -44,11 +44,11 @@ const ForgotPassword = () => {
     );
   };
 
-  const toggleNewPasswordVisibility = (e) => {
+  const toggleNewPasswordVisibility = () => {
     setShowNewPassword(!showNewPassword);
   };
 
-  const toggleConfirmPasswordVisibility = (e) => {
+  const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 

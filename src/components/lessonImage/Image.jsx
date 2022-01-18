@@ -1,5 +1,5 @@
-import Actions from '../../screens/courseManager/lesson/Actions'
-import './Image.scss'
+import Actions from "../../screens/courseManager/lesson/Actions";
+import "./Image.scss";
 
 const Image = ({
   src,
@@ -8,30 +8,30 @@ const Image = ({
   id,
   modelPopUp,
   setEditPhotoModel,
-  isEditable
+  isEditable,
 }) => {
   const poopUp = () => {
-    modelPopUp(id)
-    setEditPhotoModel(true)
-  }
+    modelPopUp(id);
+    setEditPhotoModel(true);
+  };
 
   return (
     <>
       {src ? (
-        <div className='imgPreview'>
+        <div className="imgPreview">
           <img src={src} alt={`lesson_${src}_img`} />
           <p>{desc && `"${desc}"`}</p>
           {isEditable ? (
             <Actions onRemove={onRemove} id={id} poopUp={poopUp} />
           ) : (
-            ''
+            ""
           )}
         </div>
       ) : (
-        ''
+        ""
       )}
     </>
-  )
-}
+  );
+};
 
-export default Image
+export default Image;

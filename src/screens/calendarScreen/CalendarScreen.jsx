@@ -271,46 +271,46 @@ const DayComponent = ({ day, events, value, setValue }) => {
   );
 };
 
-const ToolTip = ({ checkEvents, day }) => {
-  return (
-    <div className="tooltip">
-      <h2>{day.format("dddd")}</h2>
-      <h3>{day.format("MMMM d, YYYY")}</h3>
-      <p>My events:</p>
-      <ul>
-        {checkEvents(day).map((item, index) => (
-          <ToolTipLink key={index.toString()} item={item} />
-        ))}
-      </ul>
-    </div>
-  );
-};
+// const ToolTip = ({ checkEvents, day }) => {
+//   return (
+//     <div className="tooltip">
+//       <h2>{day.format("dddd")}</h2>
+//       <h3>{day.format("MMMM d, YYYY")}</h3>
+//       <p>My events:</p>
+//       <ul>
+//         {checkEvents(day).map((item, index) => (
+//           <ToolTipLink key={index.toString()} item={item} />
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
 
-const ToolTipLink = ({ item }) => {
-  return (
-    <>
-      <li key={item.task}>
-        <span>
-          {item.time} {item.task}
-        </span>
-      </li>
-      <div className="task-edit-option">
-        <ul>
-          <li>
-            <img src="/img/follow-icon.svg" alt="add members" />{" "}
-            <p>Add members</p>
-          </li>
-          <li>
-            <img src="/img/edit-icon.svg" alt="edit events" /> <p>Edit event</p>
-          </li>
-          <li>
-            <img src="/img/trash-icon.svg" alt="delete events" />{" "}
-            <p>Delete event</p>
-          </li>
-        </ul>
-      </div>
-    </>
-  );
-};
+// const ToolTipLink = ({ item }) => {
+//   return (
+//     <>
+//       <li key={item.task}>
+//         <span>
+//           {item.time} {item.task}
+//         </span>
+//       </li>
+//       <div className="task-edit-option">
+//         <ul>
+//           <li>
+//             <img src="/img/follow-icon.svg" alt="add members" />{" "}
+//             <p>Add members</p>
+//           </li>
+//           <li>
+//             <img src="/img/edit-icon.svg" alt="edit events" /> <p>Edit event</p>
+//           </li>
+//           <li>
+//             <img src="/img/trash-icon.svg" alt="delete events" />{" "}
+//             <p>Delete event</p>
+//           </li>
+//         </ul>
+//       </div>
+//     </>
+//   );
+// };
 
 export default CalendarScreen;

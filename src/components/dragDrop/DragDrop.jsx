@@ -71,7 +71,6 @@ const DragDropComponent = ({
   files,
   setFiles,
   className,
-  type,
   fileType,
   text,
   dataImg,
