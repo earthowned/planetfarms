@@ -26,42 +26,45 @@ import {
   COMMUNITY_UPDATE_FAIL,
   COMMUNITY_DELETE_REQUEST,
   COMMUNITY_DELETE_SUCCESS,
-  COMMUNITY_DELETE_FAIL
-} from '../constants/communityConstants'
+  COMMUNITY_DELETE_FAIL,
+} from "../constants/communityConstants";
 
 export const communityListReducer = (state = { communities: [] }, action) => {
   switch (action.type) {
     case COMMUNITY_LIST_REQUEST:
-      return { loading: true, communities: [] }
+      return { loading: true, communities: [] };
     case COMMUNITY_LIST_SUCCESS:
       return {
         loading: false,
         communities: action.payload.communities,
         pages: action.payload.pages,
         page: action.payload.page,
-        totalPages: action.payload.totalPages
-      }
+        totalPages: action.payload.totalPages,
+      };
     case COMMUNITY_LIST_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case COMMUNITY_SEARCH_REQUEST:
-      return { loading: true, communities: [] }
+      return { loading: true, communities: [] };
     case COMMUNITY_SEARCH_SUCCESS:
       return {
         loading: false,
         communities: action.payload.communities,
-        order: action.payload.order
-      }
+        order: action.payload.order,
+      };
     case COMMUNITY_SEARCH_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export const userCommunityListReducer = (state = { userCommunities: [] }, action) => {
+export const userCommunityListReducer = (
+  state = { userCommunities: [] },
+  action
+) => {
   switch (action.type) {
     case USER_COMMUNITY_LIST_REQUEST:
-      return { loading: true, userCommunities: [] }
+      return { loading: true, userCommunities: [] };
     case USER_COMMUNITY_LIST_SUCCESS:
       return {
         loading: false,
@@ -69,88 +72,91 @@ export const userCommunityListReducer = (state = { userCommunities: [] }, action
         userCommunities: action.payload.communities,
         pages: action.payload.pages,
         page: action.payload.page,
-        totalPages: action.payload.totalPages
-      }
+        totalPages: action.payload.totalPages,
+      };
     case USER_COMMUNITY_LIST_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case USER_COMMUNITY_SEARCH_REQUEST:
-      return { loading: true, userCommunities: [] }
+      return { loading: true, userCommunities: [] };
     case USER_COMMUNITY_SEARCH_SUCCESS:
       return {
         loading: false,
         userCommunities: action.payload.communities,
-        order: action.payload.order
-      }
+        order: action.payload.order,
+      };
     case USER_COMMUNITY_SEARCH_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const communityCreateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case COMMUNITY_CREATE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case COMMUNITY_CREATE_SUCCESS:
-      return { loading: false, success: true }
+      return { loading: false, success: true };
     case COMMUNITY_CREATE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case COMMUNITY_CREATE_RESET:
-      return {}
+      return {};
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const communityJoinReducer = (state = {}, action) => {
   switch (action.type) {
     case COMMUNITY_JOIN_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case COMMUNITY_JOIN_SUCCESS:
-      return { loading: false, success: true }
+      return { loading: false, success: true };
     case COMMUNITY_JOIN_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export const communityVisitReducer = (state = { currentCommunity: {} }, action) => {
+export const communityVisitReducer = (
+  state = { currentCommunity: {} },
+  action
+) => {
   switch (action.type) {
     case COMMUNITY_VISIT_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case COMMUNITY_VISIT_SUCCESS:
-      return { loading: false, currentCommunity: action.payload }
+      return { loading: false, currentCommunity: action.payload };
     case COMMUNITY_VISIT_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const communityUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case COMMUNITY_UPDATE_REQUEST:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case COMMUNITY_UPDATE_SUCCESS:
-      return { loading: false, success: action.payload }
+      return { loading: false, success: action.payload };
     case COMMUNITY_UPDATE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const communityDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case COMMUNITY_DELETE_REQUEST:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case COMMUNITY_DELETE_SUCCESS:
-      return { loading: false, success: action.payload }
+      return { loading: false, success: action.payload };
     case COMMUNITY_DELETE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};

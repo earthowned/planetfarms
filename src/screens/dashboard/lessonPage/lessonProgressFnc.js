@@ -1,4 +1,4 @@
-export default function addUpdateLesson ({
+export default function addUpdateLesson({
   dispatch,
   action,
   lessonId,
@@ -9,7 +9,7 @@ export default function addUpdateLesson ({
   progressId,
   nextId,
   history,
-  refetch
+  refetch,
 }) {
   return dispatch(
     action({
@@ -21,7 +21,7 @@ export default function addUpdateLesson ({
       progressId,
       nextId,
       history,
-      refetch
+      refetch,
     })
-  )
+  );
 }
