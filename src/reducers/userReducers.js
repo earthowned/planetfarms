@@ -44,203 +44,209 @@ import {
   USER_UPDATE_FAIL,
   USER_SEARCH_REQUEST,
   USER_SEARCH_SUCCESS,
-  USER_SEARCH_FAIL
-} from '../constants/userConstants'
+  USER_SEARCH_FAIL,
+} from "../constants/userConstants";
 
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REGISTER_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_REGISTER_SUCCESS:
-      return { loading: false, userInfo: action.payload }
+      return { loading: false, userInfo: action.payload };
     case USER_REGISTER_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case USER_LOGOUT:
-      return {}
+      return {};
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const accessTokenReducer = (state = {}, action) => {
   switch (action.type) {
     case ACCESS_TOKEN_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case ACCESS_TOKEN_SUCCESS:
-      return { loading: false, status: action.payload }
+      return { loading: false, status: action.payload };
     case ACCESS_TOKEN_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_LOGIN_SUCCESS:
-      return { loading: false, userInfo: action.payload }
+      return { loading: false, userInfo: action.payload };
     case USER_LOGIN_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case USER_LOGOUT:
-      return {}
+      return {};
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userConfirmCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_CONFIRM_CODE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_CONFIRM_CODE_SUCCESS:
-      return { loading: false, status: true }
+      return { loading: false, status: true };
     case USER_CONFIRM_CODE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userResendCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_RESEND_CODE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_RESEND_CODE_SUCCESS:
-      return { loading: false, status: true }
+      return { loading: false, status: true };
     case USER_RESEND_CODE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userAttrConfirmCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_ATTR_CONFIRM_CODE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_ATTR_CONFIRM_CODE_SUCCESS:
-      return { loading: false, status: true }
+      return { loading: false, status: true };
     case USER_ATTR_CONFIRM_CODE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userAttrResendCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_ATTR_RESEND_CODE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_ATTR_RESEND_CODE_SUCCESS:
-      return { loading: false, status: true }
+      return { loading: false, status: true };
     case USER_ATTR_RESEND_CODE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const changePasswordReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_PASSWORD_CHANGE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_PASSWORD_CHANGE_SUCCESS:
-      return { loading: false, status: true }
+      return { loading: false, status: true };
     case USER_PASSWORD_CHANGE_RESET:
-      return { loading: false }
+      return { loading: false };
     case USER_PASSWORD_CHANGE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userForgotPwdConfirmCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_FORGOT_PWD_CONFIRM_CODE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userForgotPwdResendCodeReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_FORGOT_PWD_RESEND_CODE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userForgotPwdCodeMessageReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_FORGOT_PWD_CODE_SUCCESS:
-      return { loading: false, message: { type: 'message', message: action.payload } }
+      return {
+        loading: false,
+        message: { type: "message", message: action.payload },
+      };
     case USER_FORGOT_PWD_CODE_FAIL:
-      return { loading: false, message: { type: 'error', message: action.payload } }
+      return {
+        loading: false,
+        message: { type: "error", message: action.payload },
+      };
     case USER_FORGOT_PWD_CODE_RESET:
-      return {}
+      return {};
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userDetailsReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case USER_DETAILS_SUCCESS:
-      return { loading: false, user: action.payload }
+      return { loading: false, user: action.payload };
     case USER_DETAILS_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case USER_DETAILS_RESET:
-      return { user: {} }
+      return { user: {} };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userListReducer = (state = { users: [] }, action) => {
   switch (action.type) {
     case USER_LIST_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_LIST_SUCCESS:
-      return { loading: false, users: action.payload.users }
+      return { loading: false, users: action.payload.users };
     case USER_LIST_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case USER_LIST_RESET:
-      return { users: [] }
+      return { users: [] };
     case USER_SEARCH_REQUEST:
-      return { loading: true, users: [] }
+      return { loading: true, users: [] };
     case USER_SEARCH_SUCCESS:
       return {
         loading: false,
         searchUsers: action.payload.users,
-        order: action.payload.order
-      }
+        order: action.payload.order,
+      };
     case USER_SEARCH_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userUpdateReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_UPDATE_REQUEST:
-      return { loading: true }
+      return { loading: true };
     case USER_UPDATE_SUCCESS:
-      return { loading: false, success: true }
+      return { loading: false, success: true };
     case USER_UPDATE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
     case USER_UPDATE_RESET:
       return {
-        user: {}
-      }
+        user: {},
+      };
     default:
-      return state
+      return state;
   }
-}
+};
