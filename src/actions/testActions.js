@@ -12,24 +12,23 @@ import {
 } from "../constants/testConstants";
 import { getApi, postApi } from "../utils/apiFunc";
 
-export const createTest =
-  (lessonId, questions) => async (dispatch, getState) => {
-    try {
-      dispatch({ type: TEST_CREATE_REQUEST });
-      const { data } = await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/tests/add`,
-        { lessonId, questions }
-      );
-      dispatch({ type: TEST_CREATE_SUCCESS, payload: data });
-    } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      dispatch({ type: TEST_CREATE_FAIL, payload: message });
-    }
-  };
+export const createTest = (lessonId, questions) => async (dispatch) => {
+  try {
+    dispatch({ type: TEST_CREATE_REQUEST });
+    const { data } = await postApi(
+      dispatch,
+      `${process.env.REACT_APP_API_BASE_URL}/api/tests/add`,
+      { lessonId, questions }
+    );
+    dispatch({ type: TEST_CREATE_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: TEST_CREATE_FAIL, payload: message });
+  }
+};
 
 export const listTestQuestions = (testId) => async (dispatch) => {
   try {

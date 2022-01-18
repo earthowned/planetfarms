@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import { createVideo, updateVideo } from "../../../actions/videoActions";
 
 export const addVideo = function ({ data, richtextId, order, dispatch }) {

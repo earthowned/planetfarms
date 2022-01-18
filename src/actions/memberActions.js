@@ -11,7 +11,7 @@ const currentCommunity = window.localStorage.getItem("currentCommunity")
   : null;
 
 export const listMembers =
-  ({ sort, pageNumber, pageSize, search }) =>
+  ({ pageNumber, pageSize, search }) =>
   async (dispatch) => {
     try {
       dispatch({ type: MEMBER_LIST_REQUEST });

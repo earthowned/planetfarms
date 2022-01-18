@@ -19,9 +19,9 @@ import {
 } from "../constants/categoryConstants";
 
 // fetching current community
-const currentCommunity = localStorage.getItem("currentCommunity")
-  ? JSON.parse(localStorage.getItem("currentCommunity"))
-  : null;
+// const currentCommunity = localStorage.getItem("currentCommunity")
+//   ? JSON.parse(localStorage.getItem("currentCommunity"))
+//   : null;
 
 export const listCategories = () => async (dispatch) => {
   try {
@@ -42,7 +42,7 @@ export const listCategories = () => async (dispatch) => {
   }
 };
 
-export const createCategory = (newCategory) => async (dispatch, getState) => {
+export const createCategory = (newCategory) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_CREATE_REQUEST });
     const { name } = newCategory;
@@ -112,7 +112,7 @@ export const categoryDelete = (id) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_DELETE_REQUEST });
     const config = configFunc();
-    const data = await axios.delete(
+    await axios.delete(
       `${process.env.REACT_APP_API_BASE_URL}/api/categories/${id}`,
       config
     );

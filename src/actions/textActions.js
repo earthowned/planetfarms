@@ -1,5 +1,4 @@
 import { Axios, GET_LESSON_TEXT, ADD_LESSON_TEXT } from "../utils/urlConstants";
-import { postApi } from "../utils/apiFunc";
 
 import {
   TEXT_CREATE_REQUEST,

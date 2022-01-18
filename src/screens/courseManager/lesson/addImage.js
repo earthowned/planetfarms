@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import { createLessonImg, updatePhoto } from "../../../actions/photoActions";
 
 export const addImage = function ({ data, richtextId, order, dispatch }) {

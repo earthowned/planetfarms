@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import { createText, updateText } from "../../../actions/textActions";
 
 export const addText = function ({ data, richtextId, order, dispatch }) {

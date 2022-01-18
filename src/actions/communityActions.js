@@ -122,7 +122,7 @@ export const searchUserCommunities = (userId, search) => async (dispatch) => {
   }
 };
 
-export const createCommunity = (newCommunity) => async (dispatch, getState) => {
+export const createCommunity = (newCommunity) => async (dispatch) => {
   const formData = new FormData();
   formData.append("name", newCommunity.name);
   formData.append("description", newCommunity.description);
@@ -153,7 +153,7 @@ export const createCommunity = (newCommunity) => async (dispatch, getState) => {
   }
 };
 
-export const joinCommunity = (communityId) => async (dispatch, getState) => {
+export const joinCommunity = (communityId) => async (dispatch) => {
   try {
     dispatch({ type: COMMUNITY_JOIN_REQUEST });
     await postApi(

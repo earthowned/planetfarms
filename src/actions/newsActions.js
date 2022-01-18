@@ -37,7 +37,7 @@ const currentCommunity = localStorage.getItem("currentCommunity")
   : null;
 
 export const listNews =
-  ({ sort = "", pageNumber = "" }) =>
+  ({ pageNumber = "" }) =>
   async (dispatch) => {
     try {
       dispatch({ type: NEWS_LIST_REQUEST });
@@ -78,7 +78,7 @@ export const searchNews = (search) => async (dispatch) => {
 
 export const createNews =
   ({ newsDetail, newNews, history }) =>
-  async (dispatch, getState) => {
+  async (dispatch) => {
     const formData = getFormData(newsDetail);
     try {
       dispatch({ type: NEWS_CREATE_REQUEST });
@@ -111,7 +111,7 @@ export const createNews =
     }
   };
 
-export const deleteNews = (id) => async (dispatch, getState) => {
+export const deleteNews = (id) => async (dispatch) => {
   try {
     dispatch({ type: NEWS_DELETE_REQUEST });
     // eslint-disable-next-line no-undef

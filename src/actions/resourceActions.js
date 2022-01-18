@@ -12,7 +12,7 @@ import {
 } from "../constants/resourceConstants";
 
 export const listResources =
-  ({ sort, pageNumber }) =>
+  ({ pageNumber }) =>
   async (dispatch) => {
     try {
       dispatch({ type: RESOURCE_LIST_REQUEST });
@@ -51,7 +51,7 @@ export const searchResources = (search) => async (dispatch) => {
   }
 };
 
-export const createResource = (newResource) => async (dispatch, getState) => {
+export const createResource = (newResource) => async (dispatch) => {
   const formData = new FormData();
   formData.append("title", newResource.title);
   formData.append("description", newResource.description);
@@ -59,9 +59,9 @@ export const createResource = (newResource) => async (dispatch, getState) => {
   formData.append("resourceType", newResource.resourceType || "articles");
   try {
     dispatch({ type: RESOURCE_CREATE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
+    // const {
+    //   userLogin: { userInfo },
+    // } = getState();
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",

@@ -56,7 +56,7 @@ export const createLesson =
         const lessonId = data?.data?.id;
         // creating rich text
         await createRichText(lessonData, richtextId, dispatch);
-        const mat = await addMaterialFunc(material, lessonId, dispatch);
+        await addMaterialFunc(material, lessonId, dispatch);
         history.push(`/lesson/${lessonId}`);
       }
     } catch (error) {
