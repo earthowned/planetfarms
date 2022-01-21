@@ -12,13 +12,18 @@ on:
 jobs:
   build:
     name: Planetfarm Docker build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: Node 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
@@ -30,7 +35,7 @@ jobs:
           export gitter_channel="${{ secrets.CHANNEL }}"
           node -v
           npm -v
-          npm install -f
+          npm install
           npm run build
           ls -la build
           export DOCKER_CLI_EXPERIMENTAL=enabled
