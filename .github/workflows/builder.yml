@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     name: Planetfarm Docker build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
       - name: Checkout Code
@@ -28,6 +28,8 @@ jobs:
           export CI=false
           sudo npm install -g @treehouses/cli
           export gitter_channel="${{ secrets.CHANNEL }}"
+          node -v
+          npm -v
           npm install -f
           npm run build
           ls -la build
