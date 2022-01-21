@@ -9,9 +9,6 @@
 }
 
 .header-container h3 {
-  font-size: 24px;
-  font-family: "IBM Plex Sans", sans-serif;
-  font-weight: 600;
   text-transform: capitalize;
 }
 
@@ -19,15 +16,18 @@
   list-style: none;
   display: flex;
   align-items: center;
-  font-size: 16px;
-  font-family: "IBM Plex Sans", sans-serif;
-  font-weight: 600;
+  color: var(--primary-white);
+  font: 600 16px/24px var(--font-family);
 }
 
 .header-container ul li {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.header-container ul li span {
+  margin-left: 8px;
 }
 
 .header-container ul li:not(:last-child) {
@@ -42,13 +42,13 @@
   background: none;
   outline: none;
   border: none;
-  color: var(--background-color);
   background-color: var(--primary-color);
   padding: 6px 8px;
   border-radius: 4px;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
+
+  color: var(--primary-black);
+  font: 600 16px/24px var(--font-family);
 }
 
 .message {

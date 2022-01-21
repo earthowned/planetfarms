@@ -109,15 +109,15 @@ const DragDropComponent = ({
             <img className="avatar" src={dataImg} alt="files[0].preview" />
             <div className="drag-drop-icon-container">
               <img src="/img/camera-outline.svg" alt="camera icon" />
-              <h6 className="dragDropText">{text}</h6>
+              <h4 className="dragDropText">{text}</h4>
             </div>
           </>
         ) : text ? (
-          <h6 className="dragDropText ddtext">{text}</h6>
+          <h4 className="dragDropText ddtext">{text}</h4>
         ) : (
-          <h6 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
+          <h4 className="text-4 valign-text-middle ibmplexsans-semi-bold-quarter-spanish-white-16px">
             Drag & Drop files in this area or Click Here to attach video cover
-          </h6>
+          </h4>
         )}
       </div>
       {files || videoTitle ? (

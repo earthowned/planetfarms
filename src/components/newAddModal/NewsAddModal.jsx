@@ -60,7 +60,7 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
     <div className="news-modal-container">
       <form className="news-modal-inner-container">
         <div className="news-modal-header">
-          <h4>Add news</h4>
+          <h3>Add news</h3>
           <img
             src="/img/close-outline.svg"
             alt="close-icon"
@@ -87,23 +87,16 @@ const NewsAddModal = ({ setAddModal, editData, setEditData }) => {
           />
           {categoryError && <p className="error">{categoryError}</p>}
         </div>
-        {editData ? (
-          <button
-            type="button"
-            className="default-btn-btn btn-variation"
-            onClick={handleSubmit(editNewsTitle)}
-          >
-            Update
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="default-btn-btn btn-variation"
-            onClick={handleSubmit(AddNews)}
-          >
-            Continue
-          </button>
-        )}
+
+        <button
+          type="button"
+          className="default-btn-btn"
+          onClick={
+            editData ? handleSubmit(editNewsTitle) : handleSubmit(AddNews)
+          }
+        >
+          {editData ? "Update" : "Continue"}
+        </button>
       </form>
     </div>
   );

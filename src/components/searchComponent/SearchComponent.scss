@@ -17,7 +17,7 @@
 }
 
 .search-btn img {
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
 .search-btn input {
@@ -25,6 +25,7 @@
   outline: none;
   border: none;
   color: var(--primary-white);
+  font: 400 16px/24px var(--font-family);
   width: 100%;
   height: 100%;
 }
@@ -49,19 +50,4 @@
   overflow: hidden;
   padding: 0 16px;
   width: 100%;
-}
-
-.search-1 {
-  color: var(--primary-white);
-  font-family: "IBM Plex Sans", Helvetica, sans-serif;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 24px;
-  margin-left: 8px;
-  min-height: 24px;
-  min-width: 65px;
-  white-space: nowrap;
-  background-color: var(--background-color);
-  border: none;
-  outline: none;
 }

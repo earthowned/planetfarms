@@ -20,8 +20,6 @@
 }
 
 .button-cancel {
-  background: var(--background-color-light);
-  color: var(--primary-white);
   border-radius: 4px;
   height: 50px;
   outline: none;
@@ -29,6 +27,10 @@
   font-weight: bolder;
   width: 200px;
   margin-left: 20px;
+
+  color: var(--primary-white);
+  font: 600 16px/24px var(--font-family);
+  background: var(--background-color-light);
 }
 
 .video-row-3 {
@@ -223,8 +225,8 @@
         outline: none;
         background-color: var(--cards);
         color: #ffff;
-        font-size: 1.05em;
-        font-family: inherit;
+
+        font: 16px/24px var(--font-family);
 
         &__error {
           border-color: var(--secondary-red);
@@ -256,10 +258,11 @@
       height: 100%;
       border: none;
 
-      h6 {
+      h4 {
         text-transform: lowercase;
         letter-spacing: 0.8px;
         line-height: 2;
+        text-align: center;
 
         &::first-letter {
           text-transform: uppercase;
