@@ -15,9 +15,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Manual Lint Code Base
-        uses: github/super-linter@v3
+      - name: Manual Lint Code Base Prettier
+        uses: github/super-linter@v4
         env:
-          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_JSX: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JAVASCRIPT_DEFAULT_STYLE: 'prettier'
+
+      - name: Manual Lint Code Base Standard
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_JSX: false
+          VALIDATE_JAVASCRIPT_ES: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JAVASCRIPT_DEFAULT_STYLE: 'standard'
