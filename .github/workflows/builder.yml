@@ -27,7 +27,7 @@ jobs:
           export CI=false
           sudo npm install -g @treehouses/cli
           export gitter_channel="${{ secrets.CHANNEL }}"
-          npm install
+          npm install -f
           npm run build
           ls -la build
           export DOCKER_CLI_EXPERIMENTAL=enabled
