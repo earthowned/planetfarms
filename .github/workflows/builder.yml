@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - main
+      - docker-npmforce
   release:
     types: [created]
 
