@@ -108,7 +108,7 @@ const SignIn = () => {
 
   return (
     <form className="sign" onSubmit={handleSubmit(onSubmit)}>
-      <h1 className="welcome">Sign In</h1>
+      <h1>Sign In</h1>
       <div className="container">
         {error && <div className="error">{error}</div>}
 
