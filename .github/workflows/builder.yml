@@ -19,6 +19,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Node 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKERUSERNAME }} -p ${{ secrets.DOCKERAPIKEY }}
 
@@ -27,6 +32,8 @@ jobs:
           export CI=false
           sudo npm install -g @treehouses/cli
           export gitter_channel="${{ secrets.CHANNEL }}"
+          node -v
+          npm -v
           npm install
           npm run build
           ls -la build
