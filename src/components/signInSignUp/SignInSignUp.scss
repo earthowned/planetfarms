@@ -5,7 +5,7 @@
   height: inherit;
 
   //@media only screen and (max-width: 1440px) {
-    width: 100%;
+  width: 100%;
   //}
 
   /*@media only screen and (max-width: 375px) {
@@ -15,26 +15,6 @@
   @media only screen and (max-width: 320px) {
     width: 280px;
   }*/
-
-  .welcome {
-    letter-spacing: 0;
-    line-height: 40px;
-    min-height: 40px;
-    white-space: nowrap;
-    color: var(--primary-white);
-    font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
-    font-size: 35px;
-    font-style: normal;
-    font-weight: 600;
-
-    @media only screen and (max-width: 320px) {
-      font-size: 1.5em;
-    }
-
-    @media only screen and (max-width: 375px) {
-      font-size: 1.6em;
-    }
-  }
 
   .container {
     align-items: flex-start;
@@ -129,7 +109,7 @@
       @media only screen and (min-width: 1024px) {
         flex-direction: row;
       }
-      
+
       @media only screen and (max-width: 1023px) and (min-width: 767px) {
         flex-direction: column;
         align-items: flex-start;
@@ -153,6 +133,14 @@
       align-items: center;
       width: 100%;
       line-height: 25px;
+
+      p {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        color: var(--primary-white);
+        font-family: var(--font-family);
+      }
     }
 
     .btnSignUp {
@@ -178,12 +166,16 @@
 
     .fPassword {
       height: 24px;
-      letter-spacing: 0;
-      line-height: 24px;
       min-height: 24px;
       min-width: 134px;
       text-decoration: underline;
       white-space: nowrap;
+
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0;
+      font-family: var(--font-family);
 
       @media only screen and (max-width: 768px) {
         margin-top: 1em;
@@ -226,7 +218,7 @@
     @media only screen and (min-width: 1024px) {
       flex-direction: row;
     }
-    
+
     @media only screen and (max-width: 1023px) and (min-width: 767px) {
       flex-direction: column;
     }
@@ -243,7 +235,7 @@
     }
 
     .span {
-      font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
+      font-family: var(--font-family);
       font-size: 16px;
 
       &-1 {
@@ -262,7 +254,7 @@
 
 .white16px {
   color: var(--primary-white);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: var(--font-family);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -270,7 +262,7 @@
 
 .green16px {
   color: var(--primary-color);
-  font-family: "IBM Plex Sans-SemiBold", Helvetica, sans-serif;
+  font-family: var(--font-family);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -278,7 +270,7 @@
 
 .transparent16px {
   color: transparent;
-  font-family: "IBM Plex Sans-Regular", Helvetica, sans-serif;
+  font-family: var(--font-family);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

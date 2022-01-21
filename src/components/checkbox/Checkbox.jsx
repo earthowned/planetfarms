@@ -38,7 +38,7 @@ const Checkbox = React.forwardRef(
             />
             {checked && <Tick alt="checkbox-for-terms" />}
           </div>
-          <div className="me white16px">{label}</div>
+          <p>{label}</p>
         </div>
         {errors?.[`${name}`] && (
           <p className="error-message">
