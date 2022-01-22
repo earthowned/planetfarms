@@ -1,12 +1,15 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { ActionButton } from "common/action-button";
+
 import Input from "../../components/input/Input";
 import SignLayout from "../../layout/signLayout/SignLayout";
-import Button from "../../components/button/Button";
 import { resendCodeAction, confirmPin } from "../../actions/userAction";
+
 import { ReactComponent as UserAvatar } from "../../assets/images/user-green-outline.svg";
 import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
 
@@ -79,8 +82,9 @@ const UserVerification = () => {
           >
             <UserAvatar />
           </Input>
-          {isVerifiedUser ? (
-            <>
+
+          <>
+            {isVerifiedUser && (
               <Input
                 placeholder="Code"
                 type="number"
@@ -97,21 +101,29 @@ const UserVerification = () => {
               >
                 <Lock className="error-icon" />
               </Input>
+            )}
 
-              <div className="btnWrapper">
-                <Button name="Verify" onClick={handleSubmit(verifyAccount)} />
-                <Button name="Resend Code" onClick={handleSubmit(resendCode)} />
-              </div>
-            </>
-          ) : (
             <div className="btnWrapper">
-              <Button
-                name="I already have code"
-                onClick={handleSubmit(alreadyHaveCode)}
+              <ActionButton
+                variant="primary"
+                title={isVerifiedUser ? "Verify" : "I already have code"}
+                onClick={
+                  isVerifiedUser
+                    ? handleSubmit(verifyAccount)
+                    : handleSubmit(alreadyHaveCode)
+                }
               />
-              <Button name="Send Code" onClick={handleSubmit(sendCode)} />
+              <ActionButton
+                variant="primary"
+                title={isVerifiedUser ? "Resend Code" : "Send Code"}
+                onClick={
+                  isVerifiedUser
+                    ? handleSubmit(resendCode)
+                    : handleSubmit(sendCode)
+                }
+              />
             </div>
-          )}
+          </>
 
           <div className="option">
             <p className="transparent16px">
