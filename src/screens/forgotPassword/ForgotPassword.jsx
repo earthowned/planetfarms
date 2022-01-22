@@ -2,11 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+
+import { ActionButton } from "common/action-button";
+
 import Input from "../../components/input/Input";
 import SignLayout from "../../layout/signLayout/SignLayout";
-import Button from "../../components/button/Button";
 import { USER_FORGOT_PWD_CODE_RESET } from "../../constants/userConstants";
 import { forgotPassword, forgotPasswordSubmit } from "../../actions/userAction";
+
 import { ReactComponent as UserAvatar } from "../../assets/images/user-green-outline.svg";
 import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
 
@@ -135,20 +138,30 @@ const ForgotPassword = () => {
                 <Lock className="error-icon" />
               </Input>
               <div className="btnWrapper">
-                <Button name="Resend Code" onClick={resendCode} />
-                <Button
-                  name="Change Password"
+                <ActionButton
+                  variant="primary"
+                  title="Resend Code"
+                  onClick={resendCode}
+                />
+                <ActionButton
+                  variant="primary"
+                  title="Change Password"
                   onClick={handleSubmit(verifyAccount)}
                 />
               </div>
             </>
           ) : (
             <div className="btnWrapper">
-              <Button
-                name="I already have code"
+              <ActionButton
+                variant="primary"
+                title="I already have code"
                 onClick={handleSubmit(alreadyHaveCode)}
               />
-              <Button name="Send Code" onClick={handleSubmit(sendCode)} />
+              <ActionButton
+                title="Send Code"
+                variant="primary"
+                onClick={handleSubmit(sendCode)}
+              />
             </div>
           )}
           <div className="option">
