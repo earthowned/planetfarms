@@ -1,3 +1,5 @@
+@import "src/scss/mixins";
+
 .sign {
   display: flex;
   align-items: flex-start;
@@ -77,6 +79,7 @@
     align-items: center;
     display: flex;
     min-width: 140px;
+    margin-bottom: 40px;
 
     .me {
       letter-spacing: 0;
@@ -142,26 +145,18 @@
         font-family: var(--font-family);
       }
     }
-
-    .btnSignUp {
-      width: auto;
-
-      @media only screen and (max-width: 520px) {
-        width: 100%;
-        margin: 1em 0;
-      }
-    }
   }
 
   .btnWrapper {
-    align-items: center;
-    display: flex;
     width: 100%;
-    justify-content: space-between;
-    margin-top: 2em;
+    // margin-top: 48px;
 
-    button {
-      width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .action-btn {
+      width: 35%;
     }
 
     .fPassword {
@@ -171,45 +166,66 @@
       text-decoration: underline;
       white-space: nowrap;
 
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 24px;
       letter-spacing: 0;
-      font-family: var(--font-family);
+      font: 600 16px/24px var(--font-family);
+    }
 
-      @media only screen and (max-width: 768px) {
-        margin-top: 1em;
+    .terms {
+      width: auto;
+      display: flex;
+      align-items: center;
+
+      p {
+        color: var(--primary-white);
+        font: 400 16px/24px var(--font-family);
       }
     }
 
-    @media only screen and (max-width: 520px) {
+    @include breakpoint("mobile") {
+      row-gap: 24px;
+      margin-top: -12px;
       flex-direction: column;
       align-items: flex-start;
 
-      button {
+      .action-btn {
         width: 100%;
+      }
+
+      .fPassword {
+        margin-top: 24px;
       }
     }
   }
 
-  .oauth {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-    min-height: 96px;
+  .socials {
     width: 100%;
+    margin-top: 48px;
+    text-align: center;
+
+    .btns-container {
+      display: flex;
+      margin-top: 24px;
+      column-gap: 24px;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    @include breakpoint("mobile") {
+      .btns-container {
+        row-gap: 24px;
+        flex-wrap: wrap;
+      }
+    }
   }
 
   .option {
-    max-width: 504px;
     width: 100%;
     background: var(--cards);
     border: 1px solid var(--strokes);
     border-radius: 4px;
     padding: 1.5em 1em;
     text-align: center;
-    margin: 2em auto;
+    margin: 48px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -225,7 +241,7 @@
 
     @media only screen and (max-width: 520px) {
       width: 100%;
-      margin-top: 4em;
+      // margin-top: 4em;
       display: flex;
       flex-direction: column;
 

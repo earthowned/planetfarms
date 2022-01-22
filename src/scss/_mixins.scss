@@ -1,0 +1,13 @@
+@import "./variables";
+
+@mixin breakpoint($point) {
+  @if $point == "mobile" {
+    @media (min-width: 0) and (max-width: $media-mobile-max-width) {
+      @content;
+    }
+  } @else if $point == "tablet" {
+    @media (min-width: ($media-mobile-max-width + 1)) and (max-width: $media-tablet-max-width) {
+      @content;
+    }
+  }
+}

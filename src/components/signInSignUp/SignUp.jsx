@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
 
+import { ActionButton } from "common/action-button";
+
+import Input from "../input/Input";
+import Checkbox from "../checkbox/Checkbox";
 import { register } from "../../actions/userAction";
 import { SignInSignUpData } from "./SignInSignUpData";
 
-import Button from "../button/Button";
-import Checkbox from "../checkbox/Checkbox";
-import OAuthBtn from "../oAuthBtn/OAuthBtn";
-import Input from "../input/Input";
 import { ReactComponent as UserAvatar } from "../../assets/images/user-green-outline.svg";
 import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
+
 import "./SignInSignUp.scss";
 
 const SignIn = () => {
-  const { welcomeBack, spanText, text2, google, facebook, signIn } =
-    SignInSignUpData;
+  const { welcomeBack, spanText, signIn } = SignInSignUpData;
 
   const history = useHistory();
   const { register: regi, handleSubmit, errors } = useForm();
@@ -83,27 +83,48 @@ const SignIn = () => {
         >
           <Lock className="error-icon" />
         </Input>
-        <div className="remember remember-signup">
-          <div className="signupCheckBtn">
-            <Checkbox
-              label={spanText}
-              name="terms"
-              ref={regi({
-                required: {
-                  value: true,
-                  message: "Please read the terms of service",
-                },
-              })}
-              errors={errors}
+
+        {/* <div className="signup-btn-wrapper"> */}
+        <div className="btnWrapper">
+          <Checkbox
+            label={spanText}
+            name="terms"
+            ref={regi({
+              required: {
+                value: true,
+                message: "Please read the terms of service",
+              },
+            })}
+            errors={errors}
+          />
+
+          <ActionButton
+            title="Sign Up"
+            variant="primary"
+            onClick={handleSubmit}
+          />
+        </div>
+
+        <div className="socials">
+          <h5>Sign In with services</h5>
+
+          <div className="btns-container">
+            <ActionButton
+              type="button"
+              icon="google"
+              title="Google"
+              variant="secondary"
             />
-            <div className="btnSignUp">
-              <Button name="Sign Up" />
-            </div>
+
+            <ActionButton
+              type="button"
+              icon="facebook"
+              title="Facebook"
+              variant="secondary"
+            />
           </div>
         </div>
-        <div className="oauth">
-          <OAuthBtn google={google} facebook={facebook} name={text2} />
-        </div>
+
         <div className="option">
           <p className="span span-1">Already have an Account?</p>
           <Link className="span span-2" to="/">
