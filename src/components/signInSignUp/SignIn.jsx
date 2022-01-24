@@ -1,23 +1,24 @@
 /* eslint-disable consistent-return */
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
 
+import { ActionButton } from "common/action-button";
+
+import Input from "../input/Input";
+import Checkbox from "../checkbox/Checkbox";
 import { login } from "../../actions/userAction";
 import { SignInSignUpData } from "./SignInSignUpData";
 
-import Button from "../button/Button";
-import Checkbox from "../checkbox/Checkbox";
-import Input from "../input/Input";
-import OAuthBtn from "../oAuthBtn/OAuthBtn";
-import { ReactComponent as UserAvatar } from "../../assets/images/user-green-outline.svg";
-import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
-import "./SignInSignUp.scss";
 import { visitCommunity } from "../../actions/communityActions";
+import { ReactComponent as Lock } from "../../assets/images/lock-outline.svg";
+import { ReactComponent as UserAvatar } from "../../assets/images/user-green-outline.svg";
+
+import "./SignInSignUp.scss";
 
 const SignIn = () => {
-  const { rememberMe, text1, google, facebook } = SignInSignUpData;
+  const { rememberMe } = SignInSignUpData;
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -151,20 +152,37 @@ const SignIn = () => {
         </div>
 
         <div className="btnWrapper">
-          <Button name="Sign In" />
+          <ActionButton
+            title="Sign In"
+            variant="primary"
+            onClick={handleSubmit}
+          />
+
           <Link to="/forgot-password" className="fPassword green16px">
             Forgot Password?
           </Link>
         </div>
 
-        <div className="oauth">
-          <OAuthBtn
-            loginWithFacebook={loginWithFacebook}
-            loginWithGoogle={loginWithGoogle}
-            google={google}
-            facebook={facebook}
-            name={text1}
-          />
+        <div className="socials">
+          <h5>Sign In with services</h5>
+
+          <div className="btns-container">
+            <ActionButton
+              type="button"
+              icon="google"
+              title="Google"
+              variant="secondary"
+              onClick={loginWithGoogle}
+            />
+
+            <ActionButton
+              type="button"
+              icon="facebook"
+              title="Facebook"
+              variant="secondary"
+              onClick={loginWithFacebook}
+            />
+          </div>
         </div>
 
         <div className="option">

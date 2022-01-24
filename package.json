@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "aws-amplify": "^3.3.27",
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
     "dotenv": "^8.2.0",
     "file-saver": "^2.0.5",
     "immutability-helper": "^3.1.1",

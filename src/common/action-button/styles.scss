@@ -1,0 +1,70 @@
+@import "src/scss/variables";
+
+.action-btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+
+  font-style: normal;
+  font: 600 16px/24px var(--font-family);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    margin-right: 8px;
+  }
+
+  &-tint-icon {
+    svg {
+      path {
+        fill: currentColor;
+      }
+    }
+  }
+
+  &-primary {
+    color: #2b2b2c;
+    background-color: #00c688;
+
+    &:hover {
+      background-color: #02f2a7;
+    }
+
+    &:active {
+      background-color: #05a875;
+    }
+
+    &:disabled {
+      color: $color-primary-white;
+      background-color: #8a8a8a;
+    }
+  }
+
+  &-secondary {
+    color: $color-primary-white;
+    border: 0.5px solid #f8ebdf;
+    background-color: rgba(255, 255, 255, 0.16);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(10px);
+
+    &:hover {
+      border-width: 1px;
+      background-color: rgba(255, 255, 255, 0.24);
+    }
+
+    &:active {
+      border-width: 0.5px;
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &:disabled {
+      border-width: 0.5px;
+      background-color: $color-primary-grey;
+    }
+  }
+}
