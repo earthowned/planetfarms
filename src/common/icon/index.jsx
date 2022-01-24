@@ -7,9 +7,13 @@ import { ReactComponent as FacebookIcon } from "assets/icons/facebook.svg";
 import { ReactComponent as PersonIcon } from "assets/icons/person.svg";
 import { ReactComponent as EyeOpenIcon } from "assets/icons/eye-on.svg";
 import { ReactComponent as EyeCloseIcon } from "assets/icons/eye-off.svg";
+import { ReactComponent as CheckmarkIcon } from "assets/icons/checkmark.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
+    case "checkmark":
+      return <CheckmarkIcon />;
+
     case "google":
       return <GoogleIcon />;
 
