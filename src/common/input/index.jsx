@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import cx from "classnames";
+import { useField } from "formik";
 
 import { Icon } from "common/icon";
 
@@ -23,9 +24,10 @@ const FloatingPlaceholder = ({ placeholder, value, required = false }) => {
 export const Input = ({
   icon,
   error,
+  onBlur,
+  onChange,
   value = "",
   placeholder,
-  onChangeText,
   type = "text",
   required = false,
   withFloatingPlaceholder = true,
@@ -54,8 +56,9 @@ export const Input = ({
         <div className="pf-input-container">
           <input
             value={value}
+            onBlur={onBlur}
             type={inputType}
-            onChange={(event) => onChangeText(event.target.value)}
+            onChange={(event) => onChange(event.target.value)}
           />
 
           {withFloatingPlaceholder && (
@@ -78,5 +81,20 @@ export const Input = ({
 
       {hasError && <p className="error-message">{error}</p>}
     </div>
+  );
+};
+
+export const InputField = ({ name, ...props }) => {
+  const [field, meta, helpers] = useField(name);
+
+  return (
+    <Input
+      id={name}
+      error={meta?.error}
+      value={field.value}
+      onBlur={field.onBlur}
+      onChange={(text) => helpers.setValue(text)}
+      {...props}
+    />
   );
 };
