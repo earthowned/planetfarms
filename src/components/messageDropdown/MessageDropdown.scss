@@ -36,16 +36,17 @@
 
 .secondary-btn {
   outline: none;
-  padding: 1em;
+  // padding: 1em;
+  padding: 12px 0px;
   width: 200px;
   border-radius: 4px;
-  background: var(--background-color-light);
-  color: var(--primary-white);
   border: 0.5px solid var(--primary-white);
-  font-weight: 400;
   cursor: pointer;
   text-align: center;
   text-transform: capitalize;
+  color: var(--primary-white);
+  font: 600 16px/24px var(--font-family);
+  background: var(--background-color-light);
 }
 
 .messenger-btn-container {

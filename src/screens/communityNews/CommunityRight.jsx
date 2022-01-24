@@ -14,11 +14,11 @@ const CommunityRight = ({
       <div className="community-news-right-bar-inner-container">
         <h4>{text}</h4>
         <div className="community-news-filter-container">
-          <h6>{farming}</h6>
-          <h6>{people}</h6>
-          <h6>{nature}</h6>
-          <h6>{carsIndustry}</h6>
-          <h6>{mediaNews}</h6>
+          <h4>{farming}</h4>
+          <h4>{people}</h4>
+          <h4>{nature}</h4>
+          <h4>{carsIndustry}</h4>
+          <h4>{mediaNews}</h4>
         </div>
         <Link to="/community-switching" className="nav-link">
           {seeAllTopics}

@@ -37,10 +37,11 @@
   background: none;
   outline: none;
   border: none;
-  height: 48px;
+  // height: 48px;
   width: 100%;
-  font-size: 40px;
+  // font-size: 40px;
   color: var(--primary-white);
+  font: 600 32px/40px var(--font-family);
 
   &::first-letter {
     text-transform: uppercase;
@@ -163,8 +164,9 @@
 .primary-btn {
   background: var(--primary-color);
   border: 1px solid var(--primary-color);
-  color: #000;
   margin-left: 20px;
+  color: var(--primary-black);
+  font: 600 16px/24px var(--font-family);
 }
 
 .addMaterial {

@@ -110,8 +110,8 @@
   width: 100%;
   height: 100%;
   background: var(--primary-color);
-  font-weight: 700;
-  font-size: 16px;
+  font: 600 16px/24px var(--font-family);
+  color: var(--primary-black);
   cursor: pointer;
 }
 

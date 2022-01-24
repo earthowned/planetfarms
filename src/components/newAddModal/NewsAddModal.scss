@@ -10,13 +10,13 @@
 
 .news-modal-inner-container {
   position: absolute;
-  background: var(--cards);
+  background: #191b1d;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   width: 600px;
-  padding: 4em;
+  padding: 24px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -38,11 +38,6 @@
   cursor: pointer;
 }
 
-.btn-variation {
-  padding: 1.7em 0;
-  color: var(--primary-white);
-}
-
 .nav-link {
   color: (--primary-white);
   text-decoration: none;
@@ -55,12 +50,19 @@
   display: flex;
   height: 48px;
   overflow: hidden;
-  padding: 0 97px;
-  width: 248px;
-  margin-top: 10px;
+  padding: 0 66px;
   border: none;
   outline: none;
   cursor: pointer;
+
+  color: var(--primary-black);
+  font: 600 16px/24px var(--font-family);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0px;
+    justify-content: center;
+  }
 }
 .newsCategory {
   margin-top: 0;
@@ -70,14 +72,15 @@
   width: 100%;
   height: 5em;
   display: block;
-  margin-bottom: 2em;
-  background: var(--cards);
+  margin-bottom: 24px;
+  background: #212225;
   border: 1px solid var(--dropdowns);
-  color: var(--primary-white);
   outline: none;
-  padding: 1em;
-  font-family: inherit;
+  padding: 0px 16px;
   border-radius: 0.3em;
+
+  color: var(--primary-white);
+  font: 400 16px/24px var(--font-family);
 
   &-select {
     line-height: 5em;
