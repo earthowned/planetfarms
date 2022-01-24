@@ -1,0 +1,42 @@
+@import "./fonts";
+@import "./mixins";
+@import "./variables";
+
+h1 {
+  color: $color-primary-white;
+  font: 40px/48px $font-semi-bold;
+
+  @include breakpoint("mobile") {
+    font: 24px/32px $font-semi-bold;
+  }
+}
+
+h2 {
+  color: $color-primary-white;
+  font: 32px/40px $font-semi-bold;
+}
+
+h3 {
+  color: $color-primary-white;
+  font: 24px/32px $font-semi-bold;
+}
+
+h4 {
+  color: $color-primary-white;
+  font: 16px/24px $font-semi-bold;
+}
+
+h5 {
+  color: $color-primary-white;
+  font: 16px/24px $font-regular;
+}
+
+h6 {
+  color: $color-primary-white;
+  font: 14px/20px $font-semi-bold;
+}
+
+.h7 {
+  color: $color-primary-white;
+  font: 14px/20px $font-regular;
+}
