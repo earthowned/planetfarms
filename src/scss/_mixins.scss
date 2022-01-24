@@ -11,3 +11,9 @@
     }
   }
 }
+
+@mixin setSvgColor($color) {
+  path {
+    fill: $color;
+  }
+}

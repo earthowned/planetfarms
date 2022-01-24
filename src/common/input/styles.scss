@@ -1,0 +1,129 @@
+@import "./mixins.scss";
+@import "src/scss/mixins";
+
+// TODO: Use colors from scss/variables when it will be done in Figma;
+
+.pf-input {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    width: 100%;
+    height: 80px;
+    padding: 0px 16px;
+    border-radius: 4px;
+    border: 1px solid #3a3939;
+    background-color: #141414;
+
+    display: flex;
+    align-items: center;
+
+    input {
+      width: 100%;
+      color: #f8ebdf;
+      background-color: transparent;
+      font: 400 16px/24px var(--font-family);
+
+      border: none;
+      outline: none;
+      text-size-adjust: none;
+
+      transform-origin: top left;
+      transition: all 0.2s ease-out;
+      @include setInputPosition("default");
+
+      :focus {
+        outline: none;
+      }
+    }
+
+    .input-icon {
+      margin-right: 16px;
+      @include setSvgColor(#8a8a8a);
+    }
+
+    .password-visible-icon {
+      cursor: pointer;
+      margin-left: 16px;
+      @include setSvgColor(#00c688);
+      user-select: none;
+      -webkit-user-select: none; /* Safari */
+      -webkit-touch-callout: none; /* iOS Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      -moz-user-select: none; /* Old versions of Firefox */
+    }
+
+    &-error {
+      border: 1px solid #da3443;
+      .input-icon {
+        @include setSvgColor(#da3443);
+      }
+    }
+
+    &:hover {
+      border: 1px solid #8a8a8a;
+    }
+
+    &:focus-within {
+      border: 1px solid #3a3939;
+
+      .pf-floating-placeholder {
+        @include setPlaceholderPosition("active");
+      }
+
+      input {
+        @include setInputPosition("active");
+      }
+    }
+
+    &-with-value {
+      .input-icon {
+        @include setSvgColor(#00c688);
+      }
+
+      .pf-floating-placeholder {
+        @include setPlaceholderPosition("active");
+      }
+
+      input {
+        @include setInputPosition("active");
+      }
+    }
+
+    .pf-input-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  .error-message {
+    color: #da3443;
+    margin-top: 4px;
+    font: 400 14px/24px var(--font-family);
+  }
+}
+
+.pf-floating-placeholder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  pointer-events: none;
+  background-color: transparent;
+
+  color: #8a8a8a;
+  position: absolute;
+
+  transform-origin: top left;
+  transition: all 0.2s ease-out;
+  @include setPlaceholderPosition("default");
+
+  p {
+    transition: all 0.2s linear;
+  }
+}
