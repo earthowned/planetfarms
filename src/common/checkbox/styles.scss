@@ -1,3 +1,5 @@
+@import "src/scss/variables";
+
 .pf-checkbox {
   display: flex;
   cursor: pointer;
@@ -42,7 +44,7 @@
     color: #f8ebdf;
     margin-left: 10px;
     user-select: none;
-    font: 600 16px/24px var(--font-family);
+    font: $font-body-bold;
   }
 
   input[type="checkbox"]:checked + .checkbox {
