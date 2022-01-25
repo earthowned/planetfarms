@@ -9,8 +9,12 @@ import {
 import { QueryClientProvider } from "react-query";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+
+import { SignInPage } from "screens/auth";
+
 import { queryClient } from "./reactQuery";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
+
 // Screens
 import LoginScreen from "./screens/login/LoginScreen";
 import SignupScreen from "./screens/signUp/SignupScreen";
@@ -63,7 +67,7 @@ function App() {
       <Router>
         <ScrollToTop>
           <Switch>
-            <Route component={LoginScreen} path="/login" exact />
+            <Route component={SignInPage} path="/login" exact />
             <Route component={SignupScreen} path="/register" exact />
             <Route component={ForgotPassword} path="/forgot-password" />
             <PrivateRoute

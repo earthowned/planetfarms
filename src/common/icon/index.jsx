@@ -9,6 +9,7 @@ import { ReactComponent as PersonIcon } from "assets/icons/person.svg";
 import { ReactComponent as EyeOpenIcon } from "assets/icons/eye-on.svg";
 import { ReactComponent as EyeCloseIcon } from "assets/icons/eye-off.svg";
 import { ReactComponent as CheckmarkIcon } from "assets/icons/checkmark.svg";
+import { ReactComponent as LockIcon } from "assets/icons/lock.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -32,6 +33,9 @@ const getIcon = (iconName) => {
 
     case "logo-small":
       return <SmallLogoIcon />;
+
+    case "lock":
+      return <LockIcon />;
 
     default:
       return <GoogleIcon />;

@@ -9,13 +9,13 @@ import "./styles.scss";
 export const Checkbox = ({ value = false, onChange, title, error }) => {
   return (
     <div className="pf-checkbox" onClick={onChange}>
-      <input type="checkbox" checked={value} />
+      <input type="checkbox" checked={value} onChange={onChange} />
 
       <div className={cx("checkbox", { "checkbox-error": !!error })}>
         <Icon icon="checkmark" />
       </div>
 
-      {title && <p className="checkbox-title">Checkbox title</p>}
+      {title && <p className="checkbox-title">{title}</p>}
     </div>
   );
 };

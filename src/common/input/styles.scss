@@ -127,4 +127,10 @@
   p {
     transition: all 0.2s linear;
   }
+
+  .required {
+    color: #00c688;
+    margin-left: 1px;
+    font: $font-placeholder;
+  }
 }

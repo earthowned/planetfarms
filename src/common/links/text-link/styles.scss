@@ -1,0 +1,11 @@
+@import "src/scss/variables";
+
+.pf-text-link {
+  color: #00c688;
+  font: $font-body-bold;
+  text-decoration: underline;
+
+  &:hover {
+    color: #009466;
+  }
+}

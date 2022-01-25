@@ -16,7 +16,7 @@ const FloatingPlaceholder = ({ placeholder, value, required = false }) => {
   return (
     <div className={placeholderClassName}>
       <p>{placeholder}</p>
-      {required && <span>*</span>}
+      {required && <p className="required">*</p>}
     </div>
   );
 };
