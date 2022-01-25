@@ -104,7 +104,7 @@ const SignIn = () => {
   };
 
   const onSubmit = ({ username, password }) => {
-    dispatch(login(username, password));
+    dispatch(login({ username, password }));
   };
 
   return (

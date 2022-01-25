@@ -5,6 +5,11 @@
 /* eslint-disable no-nested-ternary */
 import Amplify, { Auth } from "aws-amplify";
 import FormData from "form-data";
+
+import { api } from "api";
+import { authConfig } from "config/amplify";
+import { getErrorMessage } from "utils/error";
+
 import { getApi, postApi, putApi } from "../utils/apiFunc";
 
 import {
@@ -50,60 +55,74 @@ import {
   USER_SEARCH_FAIL,
 } from "../constants/userConstants";
 
-if (process.env.REACT_APP_AUTH_METHOD === "cognito") {
-  Amplify.configure({
-    Auth: {
-      // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-      // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
-      // REQUIRED - Amazon Cognito Region
-      region: process.env.REACT_APP_COGNITO_REGION,
-      // OPTIONAL - Amazon Cognito Federated Identity Pool Region
-      // Required only if it's different from Amazon Cognito Region
-      // identityPoolRegion: 'XX-XXXX-X',
-      // OPTIONAL - Amazon Cognito User Pool ID
-      userPoolId: process.env.REACT_APP_COGNITO_POOL_ID,
-      // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-      userPoolWebClientId: process.env.REACT_APP_COGNITO_CLIENT_ID,
-      // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
-      mandatorySignIn: false,
-      // OPTIONAL - Configuration for cookie storage
-      // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
-      /* cookieStorage: {
-      // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-          domain: '.yourdomain.com',
-      // OPTIONAL - Cookie path
-          path: '/',
-      // OPTIONAL - Cookie expiration in days
-          expires: 365,
-      // OPTIONAL - See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
-          sameSite: "strict" | "lax",
-      // OPTIONAL - Cookie secure flag
-      // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-          secure: true
-      }, */
-      // OPTIONAL - customized storage object
-      // storage: MyStorage,
-      // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
-      authenticationFlowType: "USER_PASSWORD_AUTH",
-      // OPTIONAL - Manually set key value pairs that can be passed to Cognito Lambda Triggers
-      // clientMetadata: { myCustomKey: 'myCustomValue' },
-      // OPTIONAL - Hosted UI configuration
-      oauth: {
-        domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
-        scope: [
-          "phone",
-          "email",
-          "profile",
-          "openid",
-          "aws.cognito.signin.user.admin",
-        ],
-        redirectSignIn: process.env.FRONTEND_URL,
-        redirectSignOut: process.env.FRONTEND_URL,
-        responseType: "token", // or 'token', note that REFRESH token will only be generated when the responseType is code
-      },
-    },
-  });
+const isCognito = process.env.REACT_APP_AUTH_METHOD === "cognito";
+
+if (isCognito) {
+  Amplify.configure({ Auth: { ...authConfig } });
 }
+
+const commonLogin = async ({ name, password }) => {
+  try {
+    const response = await api.auth.login({ name, password });
+    const { data: token, id } = response.data;
+
+    const payload = { token, id };
+    localStorage.setItem("userInfo", JSON.stringify(payload));
+
+    return Promise.resolve(payload);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const cognitoLogin = async ({ name, password }) => {
+  try {
+    const response = await Auth.signIn(name, password);
+
+    const id = response?.attributes?.sub || "";
+    const token = response?.signInUserSession?.idToken?.jwtToken || "";
+
+    const payload = { token, id };
+    localStorage.setItem("userInfo", JSON.stringify(payload));
+
+    await api.auth.register({ id });
+
+    await api.profile.update({
+      email: response.attributes.email,
+      birthday: response.attributes.birthdate,
+      phone: response.attributes.phone_number,
+      firstName: response.attributes.given_name,
+      lastName: response.attributes.family_name,
+    });
+
+    return Promise.resolve(payload);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const login =
+  ({ name, password }) =>
+  async (dispatch) => {
+    try {
+      let response;
+
+      if (isCognito) {
+        response = await cognitoLogin({ name, password });
+      } else {
+        response = await commonLogin({ name, password });
+      }
+
+      dispatch({ type: USER_LOGIN_SUCCESS, payload: response });
+      return Promise.resolve(response);
+    } catch (error) {
+      dispatch({
+        type: USER_LOGIN_FAIL,
+        payload: getErrorMessage(error),
+      });
+      return Promise.reject(error);
+    }
+  };
 
 export const routingCommunityNews = async (dispatch, route = false) => {
   const data = window.localStorage.getItem("userInfo");
@@ -200,67 +219,6 @@ export const register = (name, password) => async (dispatch) => {
   }
 };
 
-export const login = (name, password) => async (dispatch) => {
-  let data = {};
-  try {
-    dispatch({ type: USER_LOGIN_REQUEST });
-    if (process.env.REACT_APP_AUTH_METHOD !== "cognito") {
-      const { data: userData } = await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
-        {
-          name,
-          password,
-        }
-      );
-      data = getTokenAndSetToLocalStorage(data, userData.data, userData.id);
-    } else {
-      const response = await Auth.signIn(name, password);
-      data = getTokenAndSetToLocalStorage(
-        data,
-        response?.signInUserSession?.idToken?.jwtToken || "",
-        response?.attributes?.sub || ""
-      );
-      await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-        { id: data.id },
-        {
-          headers: {
-            Authorization: `Bearer ${data.token}`,
-          },
-        }
-      );
-      await putApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`,
-        {
-          firstName: response.attributes.given_name,
-          lastName: response.attributes.family_name,
-          birthday: response.attributes.birthdate,
-          phone: response.attributes.phone_number,
-          email: response.attributes.email,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${data.token}`,
-          },
-        }
-      );
-    }
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-    await routingCommunityNews(dispatch, true);
-  } catch (error) {
-    dispatch({
-      type: USER_LOGIN_FAIL,
-      payload:
-        +error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    });
-  }
-};
-
 function checkErrorReturnMessage(error, dispatch) {
   const message =
     error.response && error.response.data.error
@@ -285,6 +243,41 @@ export const getUserDetails = (id) => async (dispatch) => {
       type: USER_DETAILS_FAIL,
       payload: checkErrorReturnMessage(error, dispatch),
     });
+  }
+};
+
+const makeLogout = (dispatch) => {
+  // dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  localStorage.clear();
+  dispatch({ type: USER_LOGOUT });
+  window.location.href = "/login";
+};
+
+export const commonLogout = () => async (dispatch) => {
+  try {
+    if (isCognito) await Auth.signOut();
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(error);
+  } finally {
+    makeLogout(dispatch);
+  }
+};
+
+export const getAccessToken = () => async (dispatch) => {
+  try {
+    const response = await api.auth.getToken();
+
+    if (response.status !== 201) {
+      makeLogout(dispatch);
+      return Promise.reject();
+    }
+
+    dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true });
+    return Promise.resolve();
+  } catch (error) {
+    makeLogout(dispatch);
+    return Promise.reject(error);
   }
 };
 

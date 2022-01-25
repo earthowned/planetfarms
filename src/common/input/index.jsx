@@ -23,6 +23,7 @@ const FloatingPlaceholder = ({ placeholder, value, required = false }) => {
 
 export const Input = ({
   icon,
+  name,
   error,
   onBlur,
   onChange,
@@ -55,6 +56,7 @@ export const Input = ({
 
         <div className="pf-input-container">
           <input
+            name={name}
             value={value}
             onBlur={onBlur}
             type={inputType}
@@ -90,6 +92,7 @@ export const InputField = ({ name, ...props }) => {
   return (
     <Input
       id={name}
+      name={name}
       error={meta?.error}
       value={field.value}
       onBlur={field.onBlur}
