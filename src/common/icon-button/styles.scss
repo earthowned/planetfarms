@@ -1,0 +1,40 @@
+@import "src/scss/mixins";
+
+.pf-icon-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  margin: 0px;
+  padding: 0px 0px;
+  cursor: pointer;
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  -moz-user-select: none; /* Old versions of Firefox */
+
+  &-transparent {
+    svg {
+      @include setSvgColor(#00c688);
+    }
+
+    &:hover {
+      svg {
+        @include setSvgColor(#02f2a7);
+      }
+    }
+
+    &:active {
+      svg {
+        @include setSvgColor(#05a875);
+      }
+    }
+  }
+}
