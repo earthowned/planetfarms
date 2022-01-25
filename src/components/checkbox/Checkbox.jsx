@@ -3,6 +3,8 @@ import "./Checkbox.scss";
 import { ErrorMessage } from "@hookform/error-message";
 import { ReactComponent as Tick } from "../../assets/images/tick.svg";
 
+// TODO: Remove after common/checkbox will be implemented in all files;
+
 // eslint-disable-next-line react/display-name
 const Checkbox = React.forwardRef(
   ({ label, name, value, errors, onChange }, ref) => {

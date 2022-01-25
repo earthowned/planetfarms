@@ -1,0 +1,43 @@
+.auth-container {
+  width: 100%;
+  height: 100vh;
+  padding: 0px 80px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .form-container {
+    width: 48%;
+    // background-color: red;
+
+    h1 {
+      margin-bottom: 40px;
+    }
+
+    .header {
+      width: 100%;
+      height: 72px;
+      margin-bottom: 40px;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  .big-logo-container {
+    width: 48%;
+    padding-left: 110px;
+    padding-right: 110px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      max-width: 481px;
+    }
+  }
+}

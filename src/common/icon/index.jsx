@@ -3,6 +3,7 @@ import React from "react";
 // Logo
 import { ReactComponent as GoogleIcon } from "assets/icons/google.svg";
 import { ReactComponent as FacebookIcon } from "assets/icons/facebook.svg";
+import { ReactComponent as SmallLogoIcon } from "assets/icons/logo/small.svg";
 
 import { ReactComponent as PersonIcon } from "assets/icons/person.svg";
 import { ReactComponent as EyeOpenIcon } from "assets/icons/eye-on.svg";
@@ -28,6 +29,9 @@ const getIcon = (iconName) => {
 
     case "eye-off":
       return <EyeCloseIcon />;
+
+    case "logo-small":
+      return <SmallLogoIcon />;
 
     default:
       return <GoogleIcon />;
