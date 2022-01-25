@@ -32,55 +32,6 @@ body {
   --dropdowns: #3a3a3a;
 }
 
-h1 {
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  color: var(--primary-white);
-}
-
-h2 {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: 600;
-  color: var(--primary-white);
-}
-
-h3 {
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
-  color: var(--primary-white);
-}
-
-h4 {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 600;
-  color: var(--primary-white);
-}
-
-h5 {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  color: var(--primary-white);
-}
-
-h6 {
-  font-size: 14px;
-  line-height: 24px;
-  font-weight: 400;
-  color: var(--primary-white);
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 24px;
-    line-height: 32px;
-  }
-}
-
 #app {
   max-width: 2560px;
   margin: 0 auto;

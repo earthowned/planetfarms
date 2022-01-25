@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "IBM Plex Sans Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/regular/IBMPlexSans-Regular.eot");
+  src: local(""),
+    url("../assets/fonts/regular/IBMPlexSans-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../assets/fonts/regular/IBMPlexSans-Regular.woff2") format("woff2"),
+    url("../assets/fonts/regular/IBMPlexSans-Regular.woff") format("woff"),
+    url("../assets/fonts/regular/IBMPlexSans-Regular.ttf") format("truetype"),
+    url("../assets/fonts/regular/IBMPlexSans-Regular.svg#IBMPlexSans")
+      format("svg");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Semibold";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../assets/fonts/semi-bold/IBMPlexSans-SemiBold.eot");
+  src: local(""),
+    url("../assets/fonts/semi-bold/IBMPlexSans-SemiBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../assets/fonts/semi-bold/IBMPlexSans-SemiBold.woff2") format("woff2"),
+    url("../assets/fonts/semi-bold/IBMPlexSans-SemiBold.woff") format("woff"),
+    url("../assets/fonts/semi-bold/IBMPlexSans-SemiBold.ttf") format("truetype"),
+    url("../assets/fonts/semi-bold/IBMPlexSans-SemiBold.svg#IBMPlexSans")
+      format("svg");
+}

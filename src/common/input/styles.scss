@@ -1,5 +1,6 @@
 @import "./mixins.scss";
 @import "src/scss/mixins";
+@import "src/scss/variables";
 
 // TODO: Use colors from scss/variables when it will be done in Figma;
 
@@ -23,8 +24,8 @@
     input {
       width: 100%;
       color: #f8ebdf;
+      font: $font-body;
       background-color: transparent;
-      font: 400 16px/24px var(--font-family);
 
       border: none;
       outline: none;
@@ -104,7 +105,7 @@
   .error-message {
     color: #da3443;
     margin-top: 4px;
-    font: 400 14px/24px var(--font-family);
+    font: $font-placeholder;
   }
 }
 
