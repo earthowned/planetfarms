@@ -155,7 +155,7 @@ const SignIn = () => {
           <ActionButton
             title="Sign In"
             variant="primary"
-            onClick={handleSubmit}
+            onClick={handleSubmit(onSubmit)}
           />
 
           <Link to="/forgot-password" className="fPassword green16px">

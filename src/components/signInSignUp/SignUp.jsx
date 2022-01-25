@@ -101,7 +101,7 @@ const SignIn = () => {
           <ActionButton
             title="Sign Up"
             variant="primary"
-            onClick={handleSubmit}
+            onClick={handleSubmit(onSubmit)}
           />
         </div>
 
