@@ -21,7 +21,6 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_LOGIN_FAIL,
-  USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
   USER_CONFIRM_CODE_REQUEST,
@@ -44,9 +43,6 @@ import {
   USER_PASSWORD_CHANGE_REQUEST,
   USER_PASSWORD_CHANGE_SUCCESS,
   USER_PASSWORD_CHANGE_FAIL,
-  USER_REGISTER_FAIL,
-  USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS,
   USER_UPDATE_REQUEST,
   USER_UPDATE_FAIL,
   USER_LIST_FAIL,
@@ -151,11 +147,10 @@ export const login =
       dispatch({ type: USER_LOGIN_SUCCESS, payload: response });
       return Promise.resolve(response);
     } catch (error) {
-      dispatch({
-        type: USER_LOGIN_FAIL,
-        payload: getErrorMessage(error),
-      });
-      return Promise.reject(error);
+      const message = getErrorMessage(error);
+
+      dispatch({ type: USER_LOGIN_FAIL, payload: message });
+      return Promise.reject(message);
     }
   };
 
@@ -198,52 +193,21 @@ export const logout = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const register = (name, password) => async (dispatch) => {
-  try {
-    dispatch({ type: USER_REGISTER_REQUEST });
-    dispatch({ type: USER_LOGIN_REQUEST });
-    let userdata;
-    if (process.env.REACT_APP_AUTH_METHOD !== "cognito") {
-      const { data } = await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-        { name, password }
-      );
-      userdata = data;
-      window.localStorage.setItem("userInfo", JSON.stringify(userdata));
-    } else {
-      await Auth.signUp({
-        username: name,
-        password,
-        attributes: {
-          email: null,
-        },
-      });
-      const response = await Auth.signIn(name, password);
-      userdata = {
-        token: response?.signInUserSession?.idToken?.jwtToken,
-        id: response?.attributes?.sub,
-      };
-      window.localStorage.setItem("userInfo", JSON.stringify(userdata));
-      await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-        { id: userdata?.id }
-      ).catch((err) => console.log(err));
+export const register =
+  ({ name, password }) =>
+  async (dispatch) => {
+    try {
+      if (isCognito) {
+        const attrs = { attributes: { email: null } };
+        await Auth.signUp({ username: name, password, ...attrs });
+      }
+
+      await login({ name, password })(dispatch);
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject(getErrorMessage(error));
     }
-    dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata });
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata });
-    await routingCommunityNews(dispatch, false);
-  } catch (error) {
-    dispatch({
-      type: USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    });
-  }
-};
+  };
 
 function checkErrorReturnMessage(error, dispatch) {
   const message =

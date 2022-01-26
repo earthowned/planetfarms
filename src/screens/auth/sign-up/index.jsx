@@ -1,26 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { TextLink } from "common/links";
 import { InputField } from "common/input";
-import { Checkbox } from "common/checkbox";
+import { CheckboxField } from "common/checkbox";
 import { AuthLayout } from "layout/auth-layout";
 import { ActionButton } from "common/action-button";
 
-import { login } from "actions/userAction";
+import { register } from "actions/userAction";
 
 import { model, validationSchema, initialValues } from "./config";
 
-// TODO: Implement Remember me;
-// TODO: Implement Mobile Layout;
-// TODO: Show some error;
-
-export const SignInPage = () => {
+export const SignUpPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [remember, setRemember] = useState(false);
 
   const onGoogleLogin = () => {
     // Auth.federatedSignIn({ provider: "Google" });
@@ -30,17 +25,17 @@ export const SignInPage = () => {
     // Auth.federatedSignIn({ provider: "Facebook" });
   };
 
-  const handleFormSubmit = async ({ username, password }, formikActions) => {
+  const handleFormSubmit = async ({ username, password }, actions) => {
     try {
-      await login({ name: username, password })(dispatch);
-      history.push("/news");
+      await register(username, password)(dispatch);
+      history.push("/");
     } catch (error) {
-      formikActions.setFieldError(model.username.name, error);
+      actions.setFieldError(model.username.name, error);
     }
   };
 
   return (
-    <AuthLayout title="Sign In">
+    <AuthLayout title="Become a member">
       <Formik
         validateOnBlur={false}
         validateOnChange={false}
@@ -67,21 +62,22 @@ export const SignInPage = () => {
               />
 
               <div className="row-container">
-                <Checkbox
-                  value={remember}
-                  title="Remember Me"
-                  onChange={() => setRemember(!remember)}
-                />
+                <div className="terms-checkbox-container">
+                  <CheckboxField name={model.agrre.name} />
 
-                <TextLink
-                  variant="primary"
-                  to="/forgot-password"
-                  title="Forgot Password?"
-                />
+                  <div className="link-container">
+                    <p>I agree with</p>
+                    <TextLink
+                      to="/register"
+                      variant="white"
+                      title="Terms of Service"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
-            <ActionButton type="submit" variant="primary" title="Sign In" />
+            <ActionButton type="submit" variant="primary" title="Sign Up" />
 
             <div className="socials-container">
               <h5>Sign In with services</h5>
@@ -104,13 +100,8 @@ export const SignInPage = () => {
             </div>
 
             <div className="footer">
-              <h5>Don&apos;t have an account yet?</h5>
-
-              <TextLink
-                to="/register"
-                variant="green"
-                title="Become a member!"
-              />
+              <h5>Already have an account?</h5>
+              <TextLink to="/login" variant="green" title="Sign in!" />
             </div>
           </form>
         )}

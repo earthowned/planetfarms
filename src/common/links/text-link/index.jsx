@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./styles.scss";
 
-export const TextLink = ({ title, variant = "primary", to }) => {
+export const TextLink = ({ title, variant = "green", to }) => {
   const linkClassName = cx("pf-text-link", {
     [`pf-text-link-${variant}`]: true,
   });

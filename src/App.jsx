@@ -10,17 +10,17 @@ import { QueryClientProvider } from "react-query";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { SignInPage } from "screens/auth";
-
 import { queryClient } from "./reactQuery";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
-// Screens
-import SignupScreen from "./screens/signUp/SignupScreen";
+// Auth Pages
+import { SignInPage } from "./screens/auth/sign-in";
+import { SignUpPage } from "./screens/auth/sign-up";
+
+// Home Pages
 import CongratulationScreen from "./screens/congratulation/CongratulationScreen";
 import Messenger from "./screens/messenger/Messenger";
 import Library from "./screens/library/Library";
-import "./App.css";
 import DashboardComponent from "./screens/dashboard/MainDashboard";
 import Achievements from "./screens/dashboard/Achievements";
 import MyLibrary from "./screens/dashboard/MyLibrary";
@@ -60,6 +60,8 @@ import Category from "./screens/category/Category";
 import PageNotFound from "./screens/pageNotFound/PageNotFound";
 import Profile from "./screens/profile/Profile";
 
+import "./App.css";
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -68,8 +70,9 @@ function App() {
           <ScrollToTop>
             <Switch>
               <Route component={SignInPage} path="/login" exact />
-              <Route component={SignupScreen} path="/register" exact />
+              <Route component={SignUpPage} path="/register" exact />
               <Route component={ForgotPassword} path="/forgot-password" />
+
               <PrivateRoute
                 component={UserVerification}
                 path="/verification"
