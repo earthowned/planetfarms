@@ -1,27 +1,28 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
 .auth-container {
-  width: 100%;
-  height: 100vh;
-  padding: 0px 80px;
+  padding: 0px $padding-desktop;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
   .form-container {
-    width: 48%;
-    max-width: 460px;
+    width: 50%;
+    max-width: 560px;
 
     display: flex;
     flex-direction: column;
 
     h1 {
-      margin-bottom: 40px;
+      margin-bottom: $margin-desktop;
     }
 
     .header {
       width: 100%;
       height: 72px;
-      margin-bottom: 40px;
+      margin-bottom: $margin-desktop;
 
       display: flex;
       align-items: center;
@@ -30,23 +31,22 @@
 
     .inputs-container {
       gap: 24px;
-      margin-bottom: 40px;
-
       display: flex;
       flex-direction: column;
+      margin-bottom: $margin-desktop;
     }
 
     .row-container {
+      gap: 24px;
       width: 100%;
       display: flex;
       flex-direction: row;
-      gap: 24px;
       justify-content: space-between;
     }
 
     .socials-container {
       width: 100%;
-      margin-top: 40px;
+      margin-top: $margin-desktop;
 
       gap: 24px;
       display: flex;
@@ -55,10 +55,11 @@
     }
 
     .footer {
-      margin-top: 40px;
+      margin-top: $margin-desktop;
 
       gap: 8px;
       display: flex;
+      flex-wrap: wrap;
       flex-direction: row;
       justify-content: center;
     }
@@ -66,9 +67,8 @@
 
   .big-logo-container {
     width: 48%;
-    padding-left: 110px;
-    padding-right: 110px;
-    // background-color: yellow;
+    // height: 100%;
+    // background-color: red;
 
     display: flex;
     align-items: center;
@@ -77,6 +77,74 @@
     img {
       width: 100%;
       max-width: 481px;
+    }
+  }
+
+  @include breakpoint("tablet") {
+    overflow-y: scroll;
+    padding: 0px $padding-tablet;
+
+    .form-container {
+      width: 100%;
+      max-width: 100%;
+      padding-bottom: $padding-mobile;
+    }
+
+    .big-logo-container {
+      display: none;
+    }
+  }
+
+  @include breakpoint("mobile") {
+    overflow-y: scroll;
+    padding: 0px $padding-mobile;
+
+    .form-container {
+      width: 100%;
+      max-width: 100%;
+      padding-bottom: $padding-mobile;
+
+      h1 {
+        margin-bottom: $margin-mobile;
+      }
+
+      .header {
+        justify-content: center;
+        margin-bottom: $margin-mobile;
+      }
+
+      .inputs-container {
+        margin-bottom: $margin-mobile;
+      }
+
+      .row-container {
+        flex-wrap: wrap;
+      }
+    }
+
+    .big-logo-container {
+      display: none;
+    }
+  }
+
+  @include breakpoint("laptop") {
+    .form-container {
+      .header {
+        // height: 50px;
+        margin-bottom: $margin-mobile;
+      }
+
+      .inputs-container {
+        margin-bottom: $margin-mobile;
+      }
+
+      .socials-container {
+        margin-top: $margin-mobile;
+      }
+
+      .footer {
+        margin-top: $margin-mobile;
+      }
     }
   }
 }
