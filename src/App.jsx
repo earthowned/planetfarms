@@ -16,7 +16,6 @@ import { queryClient } from "./reactQuery";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 // Screens
-import LoginScreen from "./screens/login/LoginScreen";
 import SignupScreen from "./screens/signUp/SignupScreen";
 import CongratulationScreen from "./screens/congratulation/CongratulationScreen";
 import Messenger from "./screens/messenger/Messenger";
