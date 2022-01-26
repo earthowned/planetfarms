@@ -67,9 +67,6 @@
 
   .big-logo-container {
     width: 48%;
-    // height: 100%;
-    // background-color: red;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,7 +127,6 @@
   @include breakpoint("laptop") {
     .form-container {
       .header {
-        // height: 50px;
         margin-bottom: $margin-mobile;
       }
 
