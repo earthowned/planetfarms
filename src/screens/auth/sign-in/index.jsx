@@ -74,7 +74,8 @@ export const SignInPage = () => {
                 />
 
                 <TextLink
-                  variant="primary"
+                  replace
+                  variant="green"
                   to="/forgot-password"
                   title="Forgot Password?"
                 />
@@ -107,6 +108,7 @@ export const SignInPage = () => {
               <h5>Don&apos;t have an account yet?</h5>
 
               <TextLink
+                replace
                 to="/register"
                 variant="green"
                 title="Become a member!"

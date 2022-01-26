@@ -101,7 +101,7 @@ export const SignUpPage = () => {
 
             <div className="footer">
               <h5>Already have an account?</h5>
-              <TextLink to="/login" variant="green" title="Sign in!" />
+              <TextLink replace to="/login" variant="green" title="Sign in!" />
             </div>
           </form>
         )}
