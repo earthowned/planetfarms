@@ -10,6 +10,8 @@ import { api } from "api";
 import { authConfig } from "config/amplify";
 import { getErrorMessage } from "utils/error";
 
+import { news } from "./community";
+import { visitCommunity } from "./communityActions";
 import { getApi, postApi, putApi } from "../utils/apiFunc";
 
 import {
@@ -61,6 +63,33 @@ if (isCognito) {
   Amplify.configure({ Auth: { ...authConfig } });
 }
 
+// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
+const makeLogout = (dispatch) => {
+  // dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  localStorage.clear();
+  dispatch({ type: USER_LOGOUT });
+  window.location.href = "/login";
+};
+
+// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
+export const getAccessToken = () => async (dispatch) => {
+  try {
+    const response = await api.auth.getToken();
+
+    if (response.status !== 201) {
+      makeLogout(dispatch);
+      return Promise.reject();
+    }
+
+    dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true });
+    return Promise.resolve();
+  } catch (error) {
+    makeLogout(dispatch);
+    return Promise.reject(error);
+  }
+};
+
+// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 const commonLogin = async ({ name, password }) => {
   try {
     const response = await api.auth.login({ name, password });
@@ -75,6 +104,7 @@ const commonLogin = async ({ name, password }) => {
   }
 };
 
+// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 const cognitoLogin = async ({ name, password }) => {
   try {
     const response = await Auth.signIn(name, password);
@@ -101,6 +131,7 @@ const cognitoLogin = async ({ name, password }) => {
   }
 };
 
+// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 export const login =
   ({ name, password }) =>
   async (dispatch) => {
@@ -112,6 +143,10 @@ export const login =
       } else {
         response = await commonLogin({ name, password });
       }
+
+      await getAccessToken()(dispatch);
+      const community = await news()(dispatch);
+      await visitCommunity(community.id)(dispatch);
 
       dispatch({ type: USER_LOGIN_SUCCESS, payload: response });
       return Promise.resolve(response);
@@ -144,15 +179,6 @@ export const routingCommunityNews = async (dispatch, route = false) => {
     document.location.href = "/news";
   }
 };
-
-function getTokenAndSetToLocalStorage(data, token, id) {
-  data = {
-    token,
-    id,
-  };
-  window.localStorage.setItem("userInfo", JSON.stringify(data));
-  return data;
-}
 
 const tokenFailure = (dispatch, message) => {
   dispatch({ type: USER_DETAILS_FAIL, payload: message });
@@ -246,13 +272,7 @@ export const getUserDetails = (id) => async (dispatch) => {
   }
 };
 
-const makeLogout = (dispatch) => {
-  // dispatch({ type: USER_DETAILS_FAIL, payload: message });
-  localStorage.clear();
-  dispatch({ type: USER_LOGOUT });
-  window.location.href = "/login";
-};
-
+// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 export const commonLogout = () => async (dispatch) => {
   try {
     if (isCognito) await Auth.signOut();
@@ -261,23 +281,6 @@ export const commonLogout = () => async (dispatch) => {
     return Promise.reject(error);
   } finally {
     makeLogout(dispatch);
-  }
-};
-
-export const getAccessToken = () => async (dispatch) => {
-  try {
-    const response = await api.auth.getToken();
-
-    if (response.status !== 201) {
-      makeLogout(dispatch);
-      return Promise.reject();
-    }
-
-    dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true });
-    return Promise.resolve();
-  } catch (error) {
-    makeLogout(dispatch);
-    return Promise.reject(error);
   }
 };
 

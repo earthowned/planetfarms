@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { TextLink } from "common/links";
@@ -10,7 +10,6 @@ import { AuthLayout } from "layout/auth-layout";
 import { ActionButton } from "common/action-button";
 
 import { actions } from "actions";
-import { visitCommunity } from "actions/communityActions";
 
 import { model, validationSchema, initialValues } from "./config";
 
@@ -19,7 +18,7 @@ import { model, validationSchema, initialValues } from "./config";
 // TODO: Show some error;
 
 export const SignInPage = () => {
-  // const history = useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
   const [remember, setRemember] = useState(false);
 
@@ -35,28 +34,11 @@ export const SignInPage = () => {
     try {
       const payload = { name: username, password };
       await actions.auth.login(payload)(dispatch);
-      await actions.auth.getAccessToken()(dispatch);
-      const community = await actions.community.news()(dispatch);
-
-      await visitCommunity(community.id)(dispatch);
-      // history.push("/news");
+      history.push("/news");
     } catch (error) {
       // console.error(error);
     }
   };
-
-  // useEffect(() => {
-  //   const userInfo = window.localStorage.getItem("userInfo");
-  //   if (userInfo) {
-  //     setLoggedIn(true);
-  //     const route = dispatch(checkAndUpdateToken());
-  //     if (route) {
-  //       routingCommunityNews(dispatch, true);
-  //     }
-  //   } else {
-  //     setLoggedIn(false);
-  //   }
-  // }, [loggedIn]);
 
   return (
     <AuthLayout title="Sign In">
