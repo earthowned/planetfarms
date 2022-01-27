@@ -3,10 +3,16 @@ import * as Yup from "yup";
 export const model = {
   username: {
     name: "username",
+    icon: "person",
+    required: true,
+    placeholder: "Username",
   },
 
   password: {
     name: "password",
+    icon: "lock",
+    required: true,
+    placeholder: "Password",
   },
 };
 

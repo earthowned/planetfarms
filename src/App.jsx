@@ -16,6 +16,7 @@ import PrivateRoute from "./components/privateRoute/PrivateRoute";
 // Auth Pages
 import { SignInPage } from "./screens/auth/sign-in";
 import { SignUpPage } from "./screens/auth/sign-up";
+import { ForgotPasswordPage } from "./screens/auth/forgot-password";
 
 // Home Pages
 import CongratulationScreen from "./screens/congratulation/CongratulationScreen";
@@ -52,7 +53,6 @@ import AddLesson from "./screens/courseManager/lesson/AddLesson";
 import CourseUsers from "./screens/courses/courseUsers/CourseUsers";
 import ScrollToTop from "./utils/scrollToTop";
 import CalendarScreen from "./screens/calendarScreen/CalendarScreen";
-import ForgotPassword from "./screens/forgotPassword/ForgotPassword";
 import UserVerification from "./screens/verification/UserVerification";
 import AddTest from "./screens/addTest/AddTest";
 import LogoutUser from "./screens/logoutUser/LogoutUser";
@@ -69,9 +69,9 @@ function App() {
         <Router>
           <ScrollToTop>
             <Switch>
-              <Route component={SignInPage} path="/login" exact />
-              <Route component={SignUpPage} path="/register" exact />
-              <Route component={ForgotPassword} path="/forgot-password" />
+              <Route component={SignInPage} path="/login" />
+              <Route component={SignUpPage} path="/register" />
+              <Route component={ForgotPasswordPage} path="/forgot-password" />
 
               <PrivateRoute
                 component={UserVerification}

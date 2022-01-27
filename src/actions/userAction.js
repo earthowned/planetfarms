@@ -499,6 +499,31 @@ export const verifyCurrentUserAttributeSubmit =
     }
   };
 
+// TODO: Why there is no functionality to request code without cognito?
+export const requestCode = async (username) => {
+  try {
+    let response = "phone number";
+    if (isCognito) {
+      const data = await Auth.forgotPassword(username);
+      response = data.CodeDeliveryDetails.AttributeName.split("_").join(" ");
+    }
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
+
+export const resetPassword = async ({ username, code, password }) => {
+  try {
+    if (isCognito) {
+      await Auth.forgotPasswordSubmit(username, code, password);
+    }
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
+
 export const forgotPassword = (username) => async (dispatch) => {
   try {
     dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_REQUEST });

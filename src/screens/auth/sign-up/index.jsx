@@ -30,6 +30,7 @@ export const SignUpPage = () => {
       await register(username, password)(dispatch);
       history.push("/");
     } catch (error) {
+      // TODO: Show Error Alert
       actions.setFieldError(model.username.name, error);
     }
   };
@@ -46,20 +47,8 @@ export const SignUpPage = () => {
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <div className="inputs-container">
-              <InputField
-                required
-                icon="person"
-                placeholder="Username"
-                name={model.username.name}
-              />
-
-              <InputField
-                required
-                icon="lock"
-                type="password"
-                placeholder="Password"
-                name={model.password.name}
-              />
+              <InputField {...model.username} />
+              <InputField type="password" {...model.password} />
 
               <div className="row-container">
                 <div className="terms-checkbox-container">

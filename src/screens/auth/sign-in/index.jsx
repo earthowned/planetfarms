@@ -14,8 +14,6 @@ import { login } from "actions/userAction";
 import { model, validationSchema, initialValues } from "./config";
 
 // TODO: Implement Remember me;
-// TODO: Implement Mobile Layout;
-// TODO: Show some error;
 
 export const SignInPage = () => {
   const history = useHistory();
@@ -35,6 +33,7 @@ export const SignInPage = () => {
       await login({ name: username, password })(dispatch);
       history.push("/news");
     } catch (error) {
+      // TODO: Show Error Alert;
       formikActions.setFieldError(model.username.name, error);
     }
   };
@@ -51,20 +50,8 @@ export const SignInPage = () => {
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <div className="inputs-container">
-              <InputField
-                required
-                icon="person"
-                placeholder="Username"
-                name={model.username.name}
-              />
-
-              <InputField
-                required
-                icon="lock"
-                type="password"
-                placeholder="Password"
-                name={model.password.name}
-              />
+              <InputField {...model.username} />
+              <InputField type="password" {...model.password} />
 
               <div className="row-container">
                 <Checkbox
