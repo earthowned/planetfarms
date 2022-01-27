@@ -10,9 +10,13 @@ import { ReactComponent as EyeOpenIcon } from "assets/icons/eye-on.svg";
 import { ReactComponent as EyeCloseIcon } from "assets/icons/eye-off.svg";
 import { ReactComponent as CheckmarkIcon } from "assets/icons/checkmark.svg";
 import { ReactComponent as LockIcon } from "assets/icons/lock.svg";
+import { ReactComponent as CrossIcon } from "assets/icons/cross.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
+    case "cross":
+      return <CrossIcon />;
+
     case "checkmark":
       return <CheckmarkIcon />;
 

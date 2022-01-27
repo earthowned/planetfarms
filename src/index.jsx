@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { Provider as AlertProvider } from "react-alert";
+
+import { Alert, alertOptions } from "common/alert";
 
 import App from "./App";
 import { store } from "./store";
@@ -11,7 +14,9 @@ import "./scss/styles.scss";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AlertProvider template={Alert} {...alertOptions}>
+      <App />
+    </AlertProvider>
   </Provider>,
   document.getElementById("app")
 );

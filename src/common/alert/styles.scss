@@ -1,0 +1,31 @@
+.pf-alert {
+  width: 344px;
+  min-height: 104px;
+  padding: 16px;
+  margin-top: 40px;
+  margin-right: 16px;
+
+  display: flex;
+  flex-direction: row;
+
+  z-index: 9999;
+
+  border-width: 1px;
+  border-radius: 4px;
+  border-style: solid;
+
+  &-success {
+    border-color: #00c688;
+    background-color: #0e1e16;
+  }
+
+  &-error {
+    border-color: #da3443;
+    background-color: #23080b;
+  }
+
+  &-info {
+    border-color: #eaa534;
+    background-color: #251a08;
+  }
+}
