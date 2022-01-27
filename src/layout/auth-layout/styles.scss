@@ -2,14 +2,33 @@
 @import "src/scss/variables";
 
 .auth-container {
+  flex: 1;
   padding: 0px $padding-desktop;
+  overflow-y: scroll;
 
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+
+  .header {
+    width: 100%;
+    height: 72px;
+    margin-bottom: $margin-desktop;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 
   .form-container {
     width: 50%;
+    height: 100%;
     max-width: 560px;
 
     display: flex;
@@ -17,16 +36,6 @@
 
     h1 {
       margin-bottom: $margin-desktop;
-    }
-
-    .header {
-      width: 100%;
-      height: 72px;
-      margin-bottom: $margin-desktop;
-
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
     }
 
     .inputs-container {
@@ -75,6 +84,7 @@
 
     .footer {
       margin-top: $margin-desktop;
+      margin-bottom: 10px;
 
       gap: 8px;
       display: flex;
@@ -97,68 +107,72 @@
   }
 
   @include breakpoint("tablet") {
-    overflow-y: scroll;
     padding: 0px $padding-tablet;
 
-    .form-container {
-      width: 100%;
-      max-width: 100%;
-      padding-bottom: $padding-mobile;
-    }
+    .content-container {
+      .form-container {
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: $padding-mobile;
+      }
 
-    .big-logo-container {
-      display: none;
+      .big-logo-container {
+        display: none;
+      }
     }
   }
 
   @include breakpoint("mobile") {
-    overflow-y: scroll;
     padding: 0px $padding-mobile;
 
-    .form-container {
-      width: 100%;
-      max-width: 100%;
-      padding-bottom: $padding-mobile;
-
-      h1 {
-        margin-bottom: $margin-mobile;
-      }
-
-      .header {
-        justify-content: center;
-        margin-bottom: $margin-mobile;
-      }
-
-      .inputs-container {
-        margin-bottom: $margin-mobile;
-      }
-
-      .row-container {
-        flex-wrap: wrap;
-      }
+    .header {
+      justify-content: center;
+      margin-bottom: $margin-mobile;
     }
 
-    .big-logo-container {
-      display: none;
+    .content-container {
+      .form-container {
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: $padding-mobile;
+
+        h1 {
+          margin-bottom: $margin-mobile;
+        }
+
+        .inputs-container {
+          margin-bottom: $margin-mobile;
+        }
+
+        .row-container {
+          flex-wrap: wrap;
+        }
+      }
+
+      .big-logo-container {
+        display: none;
+      }
     }
   }
 
   @include breakpoint("laptop") {
-    .form-container {
-      .header {
-        margin-bottom: $margin-mobile;
-      }
+    .header {
+      margin-bottom: $margin-mobile;
+    }
 
-      .inputs-container {
-        margin-bottom: $margin-mobile;
-      }
+    .content-container {
+      .form-container {
+        .inputs-container {
+          margin-bottom: $margin-mobile;
+        }
 
-      .socials-container {
-        margin-top: $margin-mobile;
-      }
+        .socials-container {
+          margin-top: $margin-mobile;
+        }
 
-      .footer {
-        margin-top: $margin-mobile;
+        .footer {
+          margin-top: $margin-mobile;
+        }
       }
     }
   }

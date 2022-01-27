@@ -33,6 +33,9 @@
 
       transform-origin: top left;
       transition: all 0.2s ease-out;
+      -webkit-transform-origin: top left;
+      -webkit-transition: all 0.2s ease-out;
+      will-change: transform;
       @include setInputPosition("default");
 
       :focus {
@@ -99,6 +102,8 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
+
+      position: relative;
     }
   }
 
@@ -121,12 +126,11 @@
   position: absolute;
 
   transform-origin: top left;
-  transition: all 0.2s ease-out;
+  -webkit-transform-origin: top left;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  will-change: transform;
   @include setPlaceholderPosition("default");
-
-  p {
-    transition: all 0.2s linear;
-  }
 
   .required {
     color: #00c688;
