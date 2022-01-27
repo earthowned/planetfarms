@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
+import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -14,6 +15,7 @@ import { register } from "actions/userAction";
 import { model, validationSchema, initialValues } from "./config";
 
 export const SignUpPage = () => {
+  const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -25,13 +27,12 @@ export const SignUpPage = () => {
     // Auth.federatedSignIn({ provider: "Facebook" });
   };
 
-  const handleFormSubmit = async ({ username, password }, actions) => {
+  const handleFormSubmit = async ({ username, password }) => {
     try {
-      await register(username, password)(dispatch);
+      await register({ name: username, password })(dispatch);
       history.push("/");
     } catch (error) {
-      // TODO: Show Error Alert
-      actions.setFieldError(model.username.name, error);
+      alert.error(error);
     }
   };
 

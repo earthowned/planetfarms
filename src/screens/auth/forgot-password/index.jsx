@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
+import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 
 import { TextLink } from "common/links";
@@ -17,6 +18,7 @@ import {
 } from "./helpers";
 
 export const ForgotPasswordPage = () => {
+  const alert = useAlert();
   const history = useHistory();
 
   const handleFormSubmit = async (values, actions) => {
@@ -30,14 +32,14 @@ export const ForgotPasswordPage = () => {
       if (!codeRequested) {
         await requestCode(username);
         actions.setFieldValue(model.codeRequested.name, true);
-        // TODO: Show Success Alert
+        alert.success("Code has been sent to your phone!");
       } else {
         await resetPassword({ username, code, password });
-        // TODO: Show Success Alert (Password has been successfully changed);
+        alert.success("Password has been successfully changed!");
         history.push("/login");
       }
     } catch (error) {
-      // TODO: Show Error alert;
+      alert.error(error);
     }
   };
 
@@ -48,15 +50,15 @@ export const ForgotPasswordPage = () => {
     }
 
     if (!values.username) {
-      // TODO: Show Error Alert;
+      alert.info("Username is required field!");
       return;
     }
 
     try {
       await requestCode(values.username);
-      // TODO: Show Success Alert;
+      alert.success("Code has been sent to your phone!");
     } catch (error) {
-      // TODO: Show Error alert;
+      alert.error(error);
     }
   };
 

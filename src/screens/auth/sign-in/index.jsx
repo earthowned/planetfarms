@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
+import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -16,8 +17,10 @@ import { model, validationSchema, initialValues } from "./config";
 // TODO: Implement Remember me;
 
 export const SignInPage = () => {
+  const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
+
   const [remember, setRemember] = useState(false);
 
   const onGoogleLogin = () => {
@@ -28,13 +31,12 @@ export const SignInPage = () => {
     // Auth.federatedSignIn({ provider: "Facebook" });
   };
 
-  const handleFormSubmit = async ({ username, password }, formikActions) => {
+  const handleFormSubmit = async ({ username, password }) => {
     try {
       await login({ name: username, password })(dispatch);
       history.push("/news");
     } catch (error) {
-      // TODO: Show Error Alert;
-      formikActions.setFieldError(model.username.name, error);
+      alert.error(error);
     }
   };
 
