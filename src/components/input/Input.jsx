@@ -6,6 +6,8 @@ import { ReactComponent as EyeCloseIcon } from "../../assets/images/eye-close-ic
 import { ReactComponent as EyeOpenIcon } from "../../assets/images/eye-open-icon.svg";
 import "./Input.scss";
 
+// TODO: Remove after common/input will be implemented in all files;
+
 const Input = React.forwardRef(
   (
     {

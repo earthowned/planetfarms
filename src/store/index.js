@@ -6,46 +6,46 @@ import {
   newsCreateReducer,
   newsDeleteReducer,
   newsUpdateReducer,
-} from "./reducers/newsReducers";
-import { resourceListReducer } from "./reducers/resourceReducers";
+} from "reducers/newsReducers";
+import { resourceListReducer } from "reducers/resourceReducers";
 import {
   courseCreateReducer,
   updateCourseReducer,
   deleteCourseReducer,
-} from "./reducers/courseReducers";
+} from "reducers/courseReducers";
 import {
   lessonCreateReducer,
   lessonUpdateReducer,
   lessonDeleteReducer,
-} from "./reducers/lessonReducers";
+} from "reducers/lessonReducers";
 import {
   videoCreateReducer,
   videoDeleteReducer,
   videoUpdateReducer,
-} from "./reducers/videoReducers";
+} from "reducers/videoReducers";
 import {
   photoCreateReducer,
   photoDeleteReducer,
   photoUpdateReducer,
-} from "./reducers/photoReducer";
+} from "reducers/photoReducer";
 import {
   textCreateReducer,
   textDeleteReducer,
   textUpdateReducer,
-} from "./reducers/textReducer";
+} from "reducers/textReducer";
 import {
   materialCreateReducer,
   materialDeleteReducer,
-} from "./reducers/materiallReducer";
+} from "reducers/materiallReducer";
 import {
   lessonProgressCreateReducer,
   lessonProgressUpdateReducer,
-} from "./reducers/lessonProgressReducer";
+} from "reducers/lessonProgressReducer";
 import {
   testCreateReducer,
   testQuestionEditReducer,
   testQuestionListReducer,
-} from "./reducers/testReducers";
+} from "reducers/testReducers";
 
 import {
   enterpriseCreateReducer,
@@ -54,7 +54,7 @@ import {
   enterpriseListReducer,
   enterpriseUpdateReducer,
   userEnterpriseListReducer,
-} from "./reducers/enterpriseReducers";
+} from "reducers/enterpriseReducers";
 import {
   groupCreateReducer,
   groupDeleteReducer,
@@ -63,7 +63,7 @@ import {
   groupUpdateReducer,
   groupViewReducer,
   userGroupListReducer,
-} from "./reducers/communityGroupReducers";
+} from "reducers/communityGroupReducers";
 import {
   accessTokenReducer,
   userDetailsReducer,
@@ -79,8 +79,8 @@ import {
   userForgotPwdConfirmCodeReducer,
   userForgotPwdResendCodeReducer,
   userForgotPwdCodeMessageReducer,
-} from "./reducers/userReducers";
-import { eventListReducer } from "./reducers/calendarEventReducer";
+} from "reducers/userReducers";
+import { eventListReducer } from "reducers/calendarEventReducer";
 import {
   communityListReducer,
   communityCreateReducer,
@@ -89,21 +89,21 @@ import {
   communityVisitReducer,
   communityDeleteReducer,
   communityUpdateReducer,
-} from "./reducers/communityReducers";
-import { memberListReducer } from "./reducers/memberReducers";
-import { addEnrollReducer, leaveCourseReducer } from "./reducers/enrollReducer";
+} from "reducers/communityReducers";
+import { memberListReducer } from "reducers/memberReducers";
+import { addEnrollReducer, leaveCourseReducer } from "reducers/enrollReducer";
 import {
   questionDeleteReducer,
   questionListReducer,
   questionUpdateReducer,
-} from "./reducers/questionReducers";
+} from "reducers/questionReducers";
 import {
   categoryCreateReducer,
   categoryDeleteReducer,
   categoryListReducer,
   categoryUpdateReducer,
   categoryViewReducer,
-} from "./reducers/categoryReducer";
+} from "reducers/categoryReducer";
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -197,10 +197,9 @@ const initialState = {
 };
 
 const middleware = [thunk];
-const store = createStore(
+
+export const store = createStore(
   reducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
-
-export default store;

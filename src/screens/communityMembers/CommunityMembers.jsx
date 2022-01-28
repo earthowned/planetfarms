@@ -20,6 +20,7 @@ function CommunityMembers() {
   const currentCommunity = useSelector(
     (state) => state.activeCommunity.currentCommunity
   );
+
   /* const currentCommunity = window.localStorage.getItem('currentCommunity')
     ? JSON.parse(window.localStorage.getItem('currentCommunity'))
     : null */

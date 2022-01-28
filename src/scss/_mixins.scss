@@ -9,6 +9,10 @@
     @media (min-width: ($media-mobile-max-width + 1)) and (max-width: $media-tablet-max-width) {
       @content;
     }
+  } @else if $point == "laptop" {
+    @media (min-width: ($media-tablet-max-width + 1)) and (max-width: $media-laptop-max-width) {
+      @content;
+    }
   }
 }
 

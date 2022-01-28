@@ -5,6 +5,9 @@
 /* eslint-disable no-nested-ternary */
 import Amplify, { Auth } from "aws-amplify";
 import FormData from "form-data";
+
+import { authConfig } from "config/amplify";
+
 import { getApi, postApi, putApi } from "../utils/apiFunc";
 
 import {
@@ -13,9 +16,6 @@ import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
-  USER_LOGIN_FAIL,
-  USER_LOGIN_REQUEST,
-  USER_LOGIN_SUCCESS,
   USER_LOGOUT,
   USER_CONFIRM_CODE_REQUEST,
   USER_CONFIRM_CODE_SUCCESS,
@@ -29,17 +29,9 @@ import {
   USER_ATTR_RESEND_CODE_REQUEST,
   USER_ATTR_RESEND_CODE_SUCCESS,
   USER_ATTR_RESEND_CODE_FAIL,
-  USER_FORGOT_PWD_CONFIRM_CODE_REQUEST,
-  USER_FORGOT_PWD_CODE_SUCCESS,
-  USER_FORGOT_PWD_CODE_FAIL,
-  USER_FORGOT_PWD_CODE_RESET,
-  USER_FORGOT_PWD_RESEND_CODE_REQUEST,
   USER_PASSWORD_CHANGE_REQUEST,
   USER_PASSWORD_CHANGE_SUCCESS,
   USER_PASSWORD_CHANGE_FAIL,
-  USER_REGISTER_FAIL,
-  USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS,
   USER_UPDATE_REQUEST,
   USER_UPDATE_FAIL,
   USER_LIST_FAIL,
@@ -50,89 +42,10 @@ import {
   USER_SEARCH_FAIL,
 } from "../constants/userConstants";
 
-if (process.env.REACT_APP_AUTH_METHOD === "cognito") {
-  Amplify.configure({
-    Auth: {
-      // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-      // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
-      // REQUIRED - Amazon Cognito Region
-      region: process.env.REACT_APP_COGNITO_REGION,
-      // OPTIONAL - Amazon Cognito Federated Identity Pool Region
-      // Required only if it's different from Amazon Cognito Region
-      // identityPoolRegion: 'XX-XXXX-X',
-      // OPTIONAL - Amazon Cognito User Pool ID
-      userPoolId: process.env.REACT_APP_COGNITO_POOL_ID,
-      // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-      userPoolWebClientId: process.env.REACT_APP_COGNITO_CLIENT_ID,
-      // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
-      mandatorySignIn: false,
-      // OPTIONAL - Configuration for cookie storage
-      // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
-      /* cookieStorage: {
-      // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-          domain: '.yourdomain.com',
-      // OPTIONAL - Cookie path
-          path: '/',
-      // OPTIONAL - Cookie expiration in days
-          expires: 365,
-      // OPTIONAL - See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
-          sameSite: "strict" | "lax",
-      // OPTIONAL - Cookie secure flag
-      // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-          secure: true
-      }, */
-      // OPTIONAL - customized storage object
-      // storage: MyStorage,
-      // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
-      authenticationFlowType: "USER_PASSWORD_AUTH",
-      // OPTIONAL - Manually set key value pairs that can be passed to Cognito Lambda Triggers
-      // clientMetadata: { myCustomKey: 'myCustomValue' },
-      // OPTIONAL - Hosted UI configuration
-      oauth: {
-        domain: process.env.REACT_APP_COGNITO_DOMAIN_NAME, // domain_name
-        scope: [
-          "phone",
-          "email",
-          "profile",
-          "openid",
-          "aws.cognito.signin.user.admin",
-        ],
-        redirectSignIn: process.env.FRONTEND_URL,
-        redirectSignOut: process.env.FRONTEND_URL,
-        responseType: "token", // or 'token', note that REFRESH token will only be generated when the responseType is code
-      },
-    },
-  });
-}
+const isCognito = process.env.REACT_APP_AUTH_METHOD === "cognito";
 
-export const routingCommunityNews = async (dispatch, route = false) => {
-  const data = window.localStorage.getItem("userInfo");
-  const token = data && JSON.parse(data).token;
-  const communityData = await getApi(
-    dispatch,
-    `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  window.localStorage.setItem(
-    "currentCommunity",
-    JSON.stringify(communityData.data.communities[0])
-  );
-  if (route) {
-    document.location.href = "/news";
-  }
-};
-
-function getTokenAndSetToLocalStorage(data, token, id) {
-  data = {
-    token,
-    id,
-  };
-  window.localStorage.setItem("userInfo", JSON.stringify(data));
-  return data;
+if (isCognito) {
+  Amplify.configure({ Auth: { ...authConfig } });
 }
 
 const tokenFailure = (dispatch, message) => {
@@ -151,114 +64,6 @@ export const logout = () => (dispatch) => {
       document.location.href = "/login";
     })
     .catch((err) => console.log(err));
-};
-
-export const register = (name, password) => async (dispatch) => {
-  try {
-    dispatch({ type: USER_REGISTER_REQUEST });
-    dispatch({ type: USER_LOGIN_REQUEST });
-    let userdata;
-    if (process.env.REACT_APP_AUTH_METHOD !== "cognito") {
-      const { data } = await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-        { name, password }
-      );
-      userdata = data;
-      window.localStorage.setItem("userInfo", JSON.stringify(userdata));
-    } else {
-      await Auth.signUp({
-        username: name,
-        password,
-        attributes: {
-          email: null,
-        },
-      });
-      const response = await Auth.signIn(name, password);
-      userdata = {
-        token: response?.signInUserSession?.idToken?.jwtToken,
-        id: response?.attributes?.sub,
-      };
-      window.localStorage.setItem("userInfo", JSON.stringify(userdata));
-      await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-        { id: userdata?.id }
-      ).catch((err) => console.log(err));
-    }
-    dispatch({ type: USER_REGISTER_SUCCESS, payload: userdata });
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: userdata });
-    await routingCommunityNews(dispatch, false);
-  } catch (error) {
-    dispatch({
-      type: USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    });
-  }
-};
-
-export const login = (name, password) => async (dispatch) => {
-  let data = {};
-  try {
-    dispatch({ type: USER_LOGIN_REQUEST });
-    if (process.env.REACT_APP_AUTH_METHOD !== "cognito") {
-      const { data: userData } = await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
-        {
-          name,
-          password,
-        }
-      );
-      data = getTokenAndSetToLocalStorage(data, userData.data, userData.id);
-    } else {
-      const response = await Auth.signIn(name, password);
-      data = getTokenAndSetToLocalStorage(
-        data,
-        response?.signInUserSession?.idToken?.jwtToken || "",
-        response?.attributes?.sub || ""
-      );
-      await postApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users`,
-        { id: data.id },
-        {
-          headers: {
-            Authorization: `Bearer ${data.token}`,
-          },
-        }
-      );
-      await putApi(
-        dispatch,
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/profile`,
-        {
-          firstName: response.attributes.given_name,
-          lastName: response.attributes.family_name,
-          birthday: response.attributes.birthdate,
-          phone: response.attributes.phone_number,
-          email: response.attributes.email,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${data.token}`,
-          },
-        }
-      );
-    }
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-    await routingCommunityNews(dispatch, true);
-  } catch (error) {
-    dispatch({
-      type: USER_LOGIN_FAIL,
-      payload:
-        +error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    });
-  }
 };
 
 function checkErrorReturnMessage(error, dispatch) {
@@ -533,57 +338,6 @@ export const verifyCurrentUserAttributeSubmit =
         type: USER_ATTR_CONFIRM_CODE_FAIL,
         payload:
           error.response && error.response.data.error
-            ? error.response.data.error
-            : error.message,
-      });
-    }
-  };
-
-export const forgotPassword = (username) => async (dispatch) => {
-  try {
-    dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_REQUEST });
-    if (process.env.REACT_APP_AUTH_METHOD === "cognito") {
-      const data = await Auth.forgotPassword(username);
-      dispatch({
-        type: USER_FORGOT_PWD_CODE_SUCCESS,
-        payload: `Code has been sent to your ${data.CodeDeliveryDetails.AttributeName.split(
-          "_"
-        ).join(" ")}.`,
-      });
-      return data;
-    }
-    document.location.href = "/";
-  } catch (error) {
-    dispatch({
-      type: USER_FORGOT_PWD_CODE_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    });
-  }
-};
-
-export const forgotPasswordSubmit =
-  (username, code, confirmPassword, history) => async (dispatch) => {
-    try {
-      dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_REQUEST });
-      if (process.env.REACT_APP_AUTH_METHOD === "cognito") {
-        await Auth.forgotPasswordSubmit(username, code, confirmPassword);
-        dispatch({
-          type: USER_FORGOT_PWD_CODE_SUCCESS,
-          payload: "Password has been changed successfully.",
-        });
-        dispatch({ type: USER_FORGOT_PWD_CODE_RESET });
-        history.push("/login");
-      } else {
-        document.location.href = "/";
-      }
-    } catch (error) {
-      dispatch({
-        type: USER_FORGOT_PWD_CODE_FAIL,
-        payload:
-          error?.response && error.response.data.error
             ? error.response.data.error
             : error.message,
       });
