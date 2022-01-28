@@ -35,9 +35,10 @@ export const ForgotPasswordPage = () => {
       setIsLoading(true);
 
       if (!codeRequested) {
-        await requestCode(username);
+        const response = await requestCode(username);
         actions.setFieldValue(model.codeRequested.name, true);
-        alert.success("Code has been sent to your phone!");
+        if (response) alert.success(`Code has been sent to ${response}!`);
+        else alert.success("Code has been sent!");
       } else {
         await resetPassword({ username, code, password });
         alert.success("Password has been successfully changed!");
@@ -63,8 +64,9 @@ export const ForgotPasswordPage = () => {
 
     try {
       setIsLoading(true);
-      await requestCode(values.username);
-      alert.success("Code has been sent to your phone!");
+      const response = await requestCode(values.username);
+      if (response) alert.success(`Code has been sent to ${response}!`);
+      else alert.success("Code has been sent!");
     } catch (error) {
       alert.error(getErrorMessage(error));
     } finally {

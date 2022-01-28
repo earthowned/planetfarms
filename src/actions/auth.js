@@ -133,7 +133,7 @@ export const register =
 // TODO: Why there is no functionality to request code without cognito?
 export const requestCode = async (username) => {
   try {
-    let response = "phone number";
+    let response;
     if (isCognito) {
       const data = await Auth.forgotPassword(username);
       response = data.CodeDeliveryDetails.AttributeName.split("_").join(" ");

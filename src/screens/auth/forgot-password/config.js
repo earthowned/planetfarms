@@ -51,7 +51,7 @@ export const validationSchema = Yup.object().shape({
     ),
 
   [confirmPassword.name]: Yup.string()
-    .min(6, "Password must be at least 6 characters")
+    .min(8, "Password must be at least 8 characters")
     .test(
       "passwords-match",
       "Passwords must match",

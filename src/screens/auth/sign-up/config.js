@@ -23,7 +23,7 @@ export const model = {
 export const validationSchema = Yup.object().shape({
   [model.username.name]: Yup.string().required("Username is required field!"),
   [model.password.name]: Yup.string()
-    .min(6, "Password must be at least 6 characters")
+    .min(8, "Password must be at least 8 characters")
     .required("Password is required field!"),
   [model.agrre.name]: Yup.bool().isTrue().required(),
 });
