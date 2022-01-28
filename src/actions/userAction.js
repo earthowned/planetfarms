@@ -6,12 +6,8 @@
 import Amplify, { Auth } from "aws-amplify";
 import FormData from "form-data";
 
-import { api } from "api";
 import { authConfig } from "config/amplify";
-import { getErrorMessage } from "utils/error";
 
-import { news } from "./community";
-import { visitCommunity } from "./communityActions";
 import { getApi, postApi, putApi } from "../utils/apiFunc";
 
 import {
@@ -20,8 +16,6 @@ import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
-  USER_LOGIN_FAIL,
-  USER_LOGIN_SUCCESS,
   USER_LOGOUT,
   USER_CONFIRM_CODE_REQUEST,
   USER_CONFIRM_CODE_SUCCESS,
@@ -35,11 +29,6 @@ import {
   USER_ATTR_RESEND_CODE_REQUEST,
   USER_ATTR_RESEND_CODE_SUCCESS,
   USER_ATTR_RESEND_CODE_FAIL,
-  USER_FORGOT_PWD_CONFIRM_CODE_REQUEST,
-  USER_FORGOT_PWD_CODE_SUCCESS,
-  USER_FORGOT_PWD_CODE_FAIL,
-  USER_FORGOT_PWD_CODE_RESET,
-  USER_FORGOT_PWD_RESEND_CODE_REQUEST,
   USER_PASSWORD_CHANGE_REQUEST,
   USER_PASSWORD_CHANGE_SUCCESS,
   USER_PASSWORD_CHANGE_FAIL,
@@ -59,122 +48,6 @@ if (isCognito) {
   Amplify.configure({ Auth: { ...authConfig } });
 }
 
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-const makeLogout = (dispatch) => {
-  // dispatch({ type: USER_DETAILS_FAIL, payload: message });
-  localStorage.clear();
-  dispatch({ type: USER_LOGOUT });
-  window.location.href = "/login";
-};
-
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-export const getAccessToken = () => async (dispatch) => {
-  try {
-    const response = await api.auth.getToken();
-
-    if (response.status !== 201) {
-      makeLogout(dispatch);
-      return Promise.reject();
-    }
-
-    dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: true });
-    return Promise.resolve();
-  } catch (error) {
-    makeLogout(dispatch);
-    return Promise.reject(error);
-  }
-};
-
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-const commonLogin = async ({ name, password }) => {
-  try {
-    const response = await api.auth.login({ name, password });
-    const { data: token, id } = response.data;
-
-    const payload = { token, id };
-    localStorage.setItem("userInfo", JSON.stringify(payload));
-
-    return Promise.resolve(payload);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-const cognitoLogin = async ({ name, password }) => {
-  try {
-    const response = await Auth.signIn(name, password);
-
-    const id = response?.attributes?.sub || "";
-    const token = response?.signInUserSession?.idToken?.jwtToken || "";
-
-    const payload = { token, id };
-    localStorage.setItem("userInfo", JSON.stringify(payload));
-
-    await api.auth.register({ id });
-
-    await api.profile.update({
-      email: response.attributes.email,
-      birthday: response.attributes.birthdate,
-      phone: response.attributes.phone_number,
-      firstName: response.attributes.given_name,
-      lastName: response.attributes.family_name,
-    });
-
-    return Promise.resolve(payload);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-export const login =
-  ({ name, password }) =>
-  async (dispatch) => {
-    try {
-      let response;
-
-      if (isCognito) {
-        response = await cognitoLogin({ name, password });
-      } else {
-        response = await commonLogin({ name, password });
-      }
-
-      await getAccessToken()(dispatch);
-      const community = await news()(dispatch);
-      await visitCommunity(community.id)(dispatch);
-
-      dispatch({ type: USER_LOGIN_SUCCESS, payload: response });
-      return Promise.resolve(response);
-    } catch (error) {
-      const message = getErrorMessage(error);
-
-      dispatch({ type: USER_LOGIN_FAIL, payload: message });
-      return Promise.reject(message);
-    }
-  };
-
-export const routingCommunityNews = async (dispatch, route = false) => {
-  const data = window.localStorage.getItem("userInfo");
-  const token = data && JSON.parse(data).token;
-  const communityData = await getApi(
-    dispatch,
-    `${process.env.REACT_APP_API_BASE_URL}/api/communities/user`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  window.localStorage.setItem(
-    "currentCommunity",
-    JSON.stringify(communityData.data.communities[0])
-  );
-  if (route) {
-    document.location.href = "/news";
-  }
-};
-
 const tokenFailure = (dispatch, message) => {
   dispatch({ type: USER_DETAILS_FAIL, payload: message });
   window.localStorage.clear();
@@ -192,22 +65,6 @@ export const logout = () => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
-
-export const register =
-  ({ name, password }) =>
-  async (dispatch) => {
-    try {
-      if (isCognito) {
-        const attrs = { attributes: { email: null } };
-        await Auth.signUp({ username: name, password, ...attrs });
-      }
-
-      await login({ name, password })(dispatch);
-      return Promise.resolve();
-    } catch (error) {
-      return Promise.reject(getErrorMessage(error));
-    }
-  };
 
 function checkErrorReturnMessage(error, dispatch) {
   const message =
@@ -233,18 +90,6 @@ export const getUserDetails = (id) => async (dispatch) => {
       type: USER_DETAILS_FAIL,
       payload: checkErrorReturnMessage(error, dispatch),
     });
-  }
-};
-
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-export const commonLogout = () => async (dispatch) => {
-  try {
-    if (isCognito) await Auth.signOut();
-    return Promise.resolve();
-  } catch (error) {
-    return Promise.reject(error);
-  } finally {
-    makeLogout(dispatch);
   }
 };
 
@@ -493,82 +338,6 @@ export const verifyCurrentUserAttributeSubmit =
         type: USER_ATTR_CONFIRM_CODE_FAIL,
         payload:
           error.response && error.response.data.error
-            ? error.response.data.error
-            : error.message,
-      });
-    }
-  };
-
-// TODO: Why there is no functionality to request code without cognito?
-export const requestCode = async (username) => {
-  try {
-    let response = "phone number";
-    if (isCognito) {
-      const data = await Auth.forgotPassword(username);
-      response = data.CodeDeliveryDetails.AttributeName.split("_").join(" ");
-    }
-    return Promise.resolve(response);
-  } catch (error) {
-    return Promise.reject(getErrorMessage(error));
-  }
-};
-
-export const resetPassword = async ({ username, code, password }) => {
-  try {
-    if (isCognito) {
-      await Auth.forgotPasswordSubmit(username, code, password);
-    }
-    return Promise.resolve();
-  } catch (error) {
-    return Promise.reject(getErrorMessage(error));
-  }
-};
-
-export const forgotPassword = (username) => async (dispatch) => {
-  try {
-    dispatch({ type: USER_FORGOT_PWD_RESEND_CODE_REQUEST });
-    if (process.env.REACT_APP_AUTH_METHOD === "cognito") {
-      const data = await Auth.forgotPassword(username);
-      dispatch({
-        type: USER_FORGOT_PWD_CODE_SUCCESS,
-        payload: `Code has been sent to your ${data.CodeDeliveryDetails.AttributeName.split(
-          "_"
-        ).join(" ")}.`,
-      });
-      return data;
-    }
-    document.location.href = "/";
-  } catch (error) {
-    dispatch({
-      type: USER_FORGOT_PWD_CODE_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    });
-  }
-};
-
-export const forgotPasswordSubmit =
-  (username, code, confirmPassword, history) => async (dispatch) => {
-    try {
-      dispatch({ type: USER_FORGOT_PWD_CONFIRM_CODE_REQUEST });
-      if (process.env.REACT_APP_AUTH_METHOD === "cognito") {
-        await Auth.forgotPasswordSubmit(username, code, confirmPassword);
-        dispatch({
-          type: USER_FORGOT_PWD_CODE_SUCCESS,
-          payload: "Password has been changed successfully.",
-        });
-        dispatch({ type: USER_FORGOT_PWD_CODE_RESET });
-        history.push("/login");
-      } else {
-        document.location.href = "/";
-      }
-    } catch (error) {
-      dispatch({
-        type: USER_FORGOT_PWD_CODE_FAIL,
-        payload:
-          error?.response && error.response.data.error
             ? error.response.data.error
             : error.message,
       });

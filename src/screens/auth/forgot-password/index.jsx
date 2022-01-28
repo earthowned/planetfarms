@@ -8,7 +8,7 @@ import { InputField } from "common/input";
 import { AuthLayout } from "layout/auth-layout";
 import { ActionButton } from "common/action-button";
 
-import { requestCode, resetPassword } from "actions/userAction";
+import { requestCode, resetPassword } from "actions/auth";
 
 import { validationSchema, initialValues, model } from "./config";
 import {

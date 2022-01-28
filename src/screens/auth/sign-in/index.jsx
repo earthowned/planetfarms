@@ -10,7 +10,7 @@ import { Checkbox } from "common/checkbox";
 import { AuthLayout } from "layout/auth-layout";
 import { ActionButton } from "common/action-button";
 
-import { login } from "actions/userAction";
+import { login } from "actions/auth";
 
 import { model, validationSchema, initialValues } from "./config";
 
