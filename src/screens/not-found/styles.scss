@@ -1,0 +1,30 @@
+@import "src/scss/mixins";
+
+.not-found-page-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  .content-container {
+    padding: 48px;
+    border-radius: 16px;
+    background-color: #191b1d;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 48px;
+
+    .action-btn {
+      width: 200px;
+    }
+
+    @include breakpoint("mobile") {
+      padding: 24px;
+    }
+  }
+}

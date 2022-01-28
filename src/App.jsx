@@ -18,6 +18,9 @@ import { SignInPage } from "./screens/auth/sign-in";
 import { SignUpPage } from "./screens/auth/sign-up";
 import { ForgotPasswordPage } from "./screens/auth/forgot-password";
 
+// Not Found
+import { NotFoundPage } from "./screens/not-found";
+
 // Home Pages
 import CongratulationScreen from "./screens/congratulation/CongratulationScreen";
 import Messenger from "./screens/messenger/Messenger";
@@ -57,7 +60,6 @@ import UserVerification from "./screens/verification/UserVerification";
 import AddTest from "./screens/addTest/AddTest";
 import LogoutUser from "./screens/logoutUser/LogoutUser";
 import Category from "./screens/category/Category";
-import PageNotFound from "./screens/pageNotFound/PageNotFound";
 import Profile from "./screens/profile/Profile";
 
 import "./App.css";
@@ -249,7 +251,8 @@ function App() {
                 component={() => <MyCoursePage unpaid="unpaid" />}
                 path="/coursepage"
               />
-              <PrivateRoute component={PageNotFound} />
+
+              <Route component={NotFoundPage} />
             </Switch>
           </ScrollToTop>
         </Router>
