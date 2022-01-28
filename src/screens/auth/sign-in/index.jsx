@@ -22,6 +22,7 @@ export const SignInPage = () => {
   const dispatch = useDispatch();
 
   const [remember, setRemember] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onGoogleLogin = () => {
     // Auth.federatedSignIn({ provider: "Google" });
@@ -33,15 +34,18 @@ export const SignInPage = () => {
 
   const handleFormSubmit = async ({ username, password }) => {
     try {
+      setIsLoading(true);
       await login({ name: username, password })(dispatch);
       history.push("/news");
     } catch (error) {
       alert.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <AuthLayout title="Sign In">
+    <AuthLayout title="Sign In" isLoading={isLoading}>
       <Formik
         validateOnBlur={false}
         validateOnChange={false}

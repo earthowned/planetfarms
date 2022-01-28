@@ -16,6 +16,7 @@
     "formik": "^2.2.9",
     "immutability-helper": "^3.1.1",
     "js-file-download": "^0.4.12",
+    "lottie-react": "^2.2.1",
     "moment": "^2.29.1",
     "node-sass": "^6.0.0",
     "parcel": "^2.0.0-rc.0",

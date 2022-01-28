@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
@@ -19,6 +19,8 @@ export const SignUpPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onGoogleLogin = () => {
     // Auth.federatedSignIn({ provider: "Google" });
   };
@@ -29,15 +31,18 @@ export const SignUpPage = () => {
 
   const handleFormSubmit = async ({ username, password }) => {
     try {
+      setIsLoading(true);
       await register({ name: username, password })(dispatch);
       history.push("/");
     } catch (error) {
       alert.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <AuthLayout title="Become a member">
+    <AuthLayout title="Become a member" isLoading={isLoading}>
       <Formik
         validateOnBlur={false}
         validateOnChange={false}

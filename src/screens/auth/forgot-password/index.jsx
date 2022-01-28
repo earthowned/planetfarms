@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
@@ -21,6 +21,8 @@ export const ForgotPasswordPage = () => {
   const alert = useAlert();
   const history = useHistory();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleFormSubmit = async (values, actions) => {
     const { codeRequested, username, code, password } = values;
 
@@ -29,6 +31,8 @@ export const ForgotPasswordPage = () => {
     }
 
     try {
+      setIsLoading(true);
+
       if (!codeRequested) {
         await requestCode(username);
         actions.setFieldValue(model.codeRequested.name, true);
@@ -40,6 +44,8 @@ export const ForgotPasswordPage = () => {
       }
     } catch (error) {
       alert.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,15 +61,18 @@ export const ForgotPasswordPage = () => {
     }
 
     try {
+      setIsLoading(true);
       await requestCode(values.username);
       alert.success("Code has been sent to your phone!");
     } catch (error) {
       alert.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <AuthLayout title="Forgot Password">
+    <AuthLayout title="Forgot Password" isLoading={isLoading}>
       <Formik
         validateOnBlur={false}
         validateOnChange={false}
