@@ -11,6 +11,7 @@ import { AuthLayout } from "layout/auth-layout";
 import { ActionButton } from "common/action-button";
 
 import { register } from "actions/auth";
+import { getErrorMessage } from "utils/error";
 
 import { model, validationSchema, initialValues } from "./config";
 
@@ -35,7 +36,7 @@ export const SignUpPage = () => {
       await register({ name: username, password })(dispatch);
       history.push("/");
     } catch (error) {
-      alert.error(error);
+      alert.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

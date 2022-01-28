@@ -8,6 +8,7 @@ import { InputField } from "common/input";
 import { AuthLayout } from "layout/auth-layout";
 import { ActionButton } from "common/action-button";
 
+import { getErrorMessage } from "utils/error";
 import { requestCode, resetPassword } from "actions/auth";
 
 import { validationSchema, initialValues, model } from "./config";
@@ -43,7 +44,7 @@ export const ForgotPasswordPage = () => {
         history.push("/login");
       }
     } catch (error) {
-      alert.error(error);
+      alert.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
@@ -65,7 +66,7 @@ export const ForgotPasswordPage = () => {
       await requestCode(values.username);
       alert.success("Code has been sent to your phone!");
     } catch (error) {
-      alert.error(error);
+      alert.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

@@ -11,6 +11,7 @@ import { AuthLayout } from "layout/auth-layout";
 import { ActionButton } from "common/action-button";
 
 import { login } from "actions/auth";
+import { getErrorMessage } from "utils/error";
 
 import { model, validationSchema, initialValues } from "./config";
 
@@ -38,7 +39,7 @@ export const SignInPage = () => {
       await login({ name: username, password })(dispatch);
       history.push("/news");
     } catch (error) {
-      alert.error(error);
+      alert.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

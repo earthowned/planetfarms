@@ -107,10 +107,8 @@ export const login =
       dispatch({ type: USER_LOGIN_SUCCESS, payload: response });
       return Promise.resolve(response);
     } catch (error) {
-      const message = getErrorMessage(error);
-
-      dispatch({ type: USER_LOGIN_FAIL, payload: message });
-      return Promise.reject(message);
+      dispatch({ type: USER_LOGIN_FAIL, payload: getErrorMessage(error) });
+      return Promise.reject(error);
     }
   };
 
@@ -128,7 +126,7 @@ export const register =
       await login({ name, password })(dispatch);
       return Promise.resolve();
     } catch (error) {
-      return Promise.reject(getErrorMessage(error));
+      return Promise.reject(error);
     }
   };
 
@@ -142,7 +140,7 @@ export const requestCode = async (username) => {
     }
     return Promise.resolve(response);
   } catch (error) {
-    return Promise.reject(getErrorMessage(error));
+    return Promise.reject(error);
   }
 };
 
@@ -153,6 +151,6 @@ export const resetPassword = async ({ username, code, password }) => {
     }
     return Promise.resolve();
   } catch (error) {
-    return Promise.reject(getErrorMessage(error));
+    return Promise.reject(error);
   }
 };
