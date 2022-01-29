@@ -1,0 +1,75 @@
+@import "src/scss/variables";
+
+.side-nav-link {
+  width: 100%;
+  height: 56px;
+  padding: 0px 24px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font: $font-body-bold;
+
+  .icon-container {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      path {
+        stroke: #00c688;
+      }
+    }
+
+    .graduation-cap-icon {
+      path {
+        fill: #00c688;
+      }
+    }
+  }
+
+  &-primary {
+    color: #f8ebdf;
+    background-color: transparent;
+
+    &:hover {
+      background-color: #191b1d;
+    }
+  }
+
+  &-secondary {
+    color: #f8ebdf;
+    background-color: #2a2a2a;
+
+    &:hover {
+      background-color: #3a3a3a;
+    }
+  }
+
+  &-active {
+    .icon-container {
+      svg {
+        path {
+          stroke: #2b2b2c;
+        }
+      }
+
+      .graduation-cap-icon {
+        path {
+          fill: #2b2b2c;
+        }
+      }
+    }
+
+    color: #2b2b2c;
+    background-color: #00c688;
+
+    &:hover {
+      background-color: #02f2a7;
+    }
+  }
+}
