@@ -8,7 +8,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { visitCommunity } from "../../actions/communityActions";
-import Calendar from "../calendar/Calendar";
+// import Calendar from "../calendar/Calendar";
+import { Calendar } from "common/navigation/calendar";
 
 import "./Sidebar.css";
 

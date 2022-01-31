@@ -1,16 +1,18 @@
-import moment from "moment";
 import React, { useState, useEffect, useRef } from "react";
+import moment from "moment";
 import { useHistory } from "react-router";
-import buildCalendar from "./Build";
-import "./Calendar.css";
-import CalendarHeader from "./Header";
-import dayStyles from "./Styles";
-import events from "../../screens/calendarScreen/EventsData";
 
-const Calendar = () => {
+import events from "screens/calendarScreen/EventsData";
+
+import { DateHeader } from "./date-header";
+import { prevMonth, nextMonth, buildCalendar, dayStyles } from "./helpers";
+
+import "./styles.scss";
+
+export const Calendar = () => {
   const [calendar, setCalendar] = useState([]);
   const [value, setValue] = useState(moment());
-  const history = useHistory();
+
   useEffect(() => {
     setCalendar(buildCalendar(value));
   }, [value]);
@@ -28,22 +30,18 @@ const Calendar = () => {
 
   return (
     <div className="calendar">
-      <CalendarHeader value={value} setValue={setValue} />
-      <CalendarBody
-        calendar={calendar}
-        value={value}
-        checkEvents={checkEvents}
-        setValue={setValue}
+      <DateHeader
+        currentDate={value}
+        onDateUp={() => setValue(nextMonth(value))}
+        onDateDown={() => setValue(prevMonth(value))}
       />
-      <div className="calendar-footer">
-        <button
-          type="button"
-          className="calendar-btn"
-          onClick={() => history.push("/calendar/my-events")}
-        >
-          View Calendar
-        </button>
-      </div>
+
+      <CalendarBody
+        value={value}
+        calendar={calendar}
+        setValue={setValue}
+        checkEvents={checkEvents}
+      />
     </div>
   );
 };
@@ -89,5 +87,3 @@ const CalendarBody = ({ calendar, value, checkEvents, setValue }) => {
     </div>
   );
 };
-
-export default Calendar;

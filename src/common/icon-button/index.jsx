@@ -13,7 +13,7 @@ export const IconButton = ({
 }) => {
   const buttonClassName = useMemo(
     () => cx("pf-icon-btn", { [`pf-icon-btn-${variant}`]: true }, className),
-    [variant]
+    [variant, className]
   );
 
   return (

@@ -9,6 +9,10 @@ import { ReactComponent as MobileLogoIcon } from "assets/icons/logo/mobile.svg";
 // Chevrons
 import { ReactComponent as ChevronsRightIcon } from "assets/icons/chevrons/right.svg";
 
+// Chevron
+import { ReactComponent as ChevronLeftIcon } from "assets/icons/chevron/left.svg";
+import { ReactComponent as ChevronRightIcon } from "assets/icons/chevron/right.svg";
+
 import { ReactComponent as PersonIcon } from "assets/icons/person.svg";
 import { ReactComponent as EyeOpenIcon } from "assets/icons/eye-on.svg";
 import { ReactComponent as EyeCloseIcon } from "assets/icons/eye-off.svg";
@@ -30,6 +34,12 @@ const getIcon = (iconName) => {
 
     case "checkmark":
       return <CheckmarkIcon />;
+
+    case "chevron-left":
+      return <ChevronLeftIcon />;
+
+    case "chevron-right":
+      return <ChevronRightIcon />;
 
     case "chevrons-right":
       return <ChevronsRightIcon />;

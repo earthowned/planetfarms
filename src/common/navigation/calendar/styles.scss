@@ -3,25 +3,6 @@
   font-size: 14px;
   font-weight: 400;
   width: 248px;
-  margin-top: 40px;
-}
-
-.calendar .header {
-  background-color: #2a2a2a;
-  border: 0.4px solid #3f3f3f;
-  text-align: center;
-  height: 40px;
-  width: 100%;
-  line-height: 40px;
-  color: var(--primary-white);
-  font-weight: 700;
-  display: flex;
-}
-
-.calendar .header .current {
-  font-weight: 400;
-  font-size: 14px;
-  color: #e3e3e3;
 }
 
 .calendar .day-names {
@@ -30,20 +11,6 @@
   max-width: 1000px;
   margin: 0 auto;
   align-items: center;
-}
-
-.calendar .header .previous {
-  flex: 1;
-  text-align: left;
-  margin-left: 1rem;
-  cursor: pointer;
-}
-
-.calendar .header .next {
-  flex: 1;
-  text-align: right;
-  margin-right: 1rem;
-  cursor: pointer;
 }
 
 .calendar .week {
@@ -96,23 +63,6 @@
 
 .calendar .day div.today {
   background-color: var(--primary-color);
-}
-
-.calendar-footer {
-  width: 100%;
-  height: 48px;
-  border-top: 2.5px solid var(--strokes);
-}
-
-.calendar-btn {
-  outline: none;
-  border: none;
-  width: 100%;
-  height: 100%;
-  background: var(--primary-color);
-  font: 600 16px/24px var(--font-family);
-  color: var(--primary-black);
-  cursor: pointer;
 }
 
 .events {

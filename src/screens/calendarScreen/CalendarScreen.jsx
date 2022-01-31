@@ -1,25 +1,27 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import moment from "moment";
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { useLocation, useHistory } from "react-router";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+
 import {
   prevMonth,
-  currMonthName,
-  currYearName,
   nextMonth,
-} from "../../components/calendar/DateFunctions";
+  dayStyles,
+  currYearName,
+  currMonthName,
+  buildCalendar,
+} from "common/navigation/calendar/helpers";
 
-import "./CalendarScreen.css";
+import useSizeFinder from "../../utils/sizeFinder";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/InputComponent";
-import buildCalendar from "../../components/calendar/Build";
-import dayStyles from "../../components/calendar/Styles";
-import useSizeFinder from "../../utils/sizeFinder";
 import SimpleFilter from "../../components/simpleFilter/SimpleFilter";
+import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+
 import data from "./EventsData";
+import "./CalendarScreen.css";
 
 const nav = [
   {

@@ -8,9 +8,8 @@ import { IconButton } from "common/icon-button";
 import { ActionButton } from "common/action-button";
 import { SideNavLink } from "common/links/side-nav-link";
 
-// import Calendar from "components/calendar/Calendar";
-
 import { links } from "./config";
+import { Calendar } from "./calendar";
 import { ExpandButton } from "./expand-button";
 
 import "./styles.scss";
@@ -49,7 +48,7 @@ export const Navigation = () => {
       </nav>
 
       <div className="footer">
-        {/* <Calendar /> */}
+        {isExpanded && <Calendar />}
 
         {isExpanded ? (
           <ActionButton
@@ -60,6 +59,7 @@ export const Navigation = () => {
         ) : (
           <IconButton
             icon="calendar"
+            className="side-menu-icon-btn"
             onClick={() => history.replace("/calendar/my-events")}
           />
         )}

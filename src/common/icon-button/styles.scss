@@ -37,4 +37,22 @@
       }
     }
   }
+
+  &-white {
+    svg {
+      @include setSvgColor(#f8ebdf);
+    }
+
+    &:hover {
+      svg {
+        @include setSvgColor(#8a8a8a);
+      }
+    }
+
+    &:active {
+      svg {
+        @include setSvgColor(#3a3939);
+      }
+    }
+  }
 }
