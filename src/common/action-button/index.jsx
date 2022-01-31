@@ -30,7 +30,7 @@ export const ActionButton = ({
       className={btnClassName}
     >
       {icon && <Icon icon={icon} />}
-      {title}
+      <p className="btn-title">{title}</p>
     </button>
   );
 };

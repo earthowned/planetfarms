@@ -1,4 +1,5 @@
 @import "src/scss/variables";
+@import "src/scss/mixins";
 
 .action-btn {
   width: 100%;
@@ -10,8 +11,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-style: normal;
-  font: $font-body-bold;
+
+  .btn-title {
+    font-style: normal;
+    font: $font-body-bold;
+  }
 
   svg {
     margin-right: 8px;
@@ -64,6 +68,37 @@
     &:disabled {
       border-width: 0.5px;
       background-color: $color-primary-grey;
+    }
+  }
+
+  &-header-nav {
+    border: none;
+    color: $color-primary-white;
+    background-color: transparent;
+
+    svg {
+      flex-shrink: 0;
+      @include setSvgColor(#00c688);
+    }
+
+    .btn-title {
+      flex-shrink: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+
+    &:hover {
+      svg {
+        @include setSvgColor(#02f2a7);
+      }
+    }
+
+    &:active {
+      svg {
+        @include setSvgColor(#05a875);
+      }
     }
   }
 }

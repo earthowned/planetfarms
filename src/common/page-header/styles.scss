@@ -1,0 +1,44 @@
+.main-page-header {
+  width: 100%;
+  padding: 16px 40px;
+  background-color: #000000;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  h3 {
+    flex-shrink: 0;
+  }
+
+  .right-nav-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+
+    .avatar-container {
+      width: 48px;
+      height: 48px;
+    }
+
+    .modal-btns-container {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+    }
+
+    .nav-btns-container {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+
+      .action-btn {
+        width: auto;
+      }
+    }
+  }
+}

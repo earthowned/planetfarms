@@ -23,9 +23,18 @@ import { ReactComponent as GlobeIcon } from "assets/icons/globe.svg";
 import { ReactComponent as BookIcon } from "assets/icons/book.svg";
 import { ReactComponent as GraduationCapIcon } from "assets/icons/graduation-cap.svg";
 import { ReactComponent as CalendarIcon } from "assets/icons/calendar.svg";
+import { ReactComponent as EmailIcon } from "assets/icons/email.svg";
+import { ReactComponent as BellIcon } from "assets/icons/bell.svg";
+import { ReactComponent as GridIcon } from "assets/icons/grid.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
+    case "book":
+      return <BookIcon />;
+
+    case "bell":
+      return <BellIcon />;
+
     case "calendar":
       return <CalendarIcon />;
 
@@ -44,8 +53,8 @@ const getIcon = (iconName) => {
     case "chevrons-right":
       return <ChevronsRightIcon />;
 
-    case "book":
-      return <BookIcon />;
+    case "email":
+      return <EmailIcon />;
 
     case "google":
       return <GoogleIcon />;
@@ -55,6 +64,9 @@ const getIcon = (iconName) => {
 
     case "graduation-cap":
       return <GraduationCapIcon />;
+
+    case "grid":
+      return <GridIcon />;
 
     case "facebook":
       return <FacebookIcon />;
