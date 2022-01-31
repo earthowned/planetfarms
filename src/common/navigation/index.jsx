@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import cx from "classnames";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { Icon } from "common/icon";
@@ -14,8 +15,14 @@ import { ExpandButton } from "./expand-button";
 
 import "./styles.scss";
 
+const selectCurrentCommunity = (state) => state.activeCommunity;
+
 export const Navigation = () => {
   const history = useHistory();
+
+  // TODO: There is no current community in redux store;
+  const { currentCommunity } = useSelector(selectCurrentCommunity);
+
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
@@ -30,7 +37,7 @@ export const Navigation = () => {
 
       <div className="current-community">
         <Avatar placeholderIcon="person" />
-        <h4>Ragrarians</h4>
+        <h4>{currentCommunity?.name || "PlanetFarms"}</h4>
       </div>
 
       <nav>
