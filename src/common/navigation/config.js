@@ -1,7 +1,7 @@
 export const links = [
   {
     title: "News",
-    path: "/news/my-news",
+    path: "/news",
     icon: "globe",
     variant: "primary",
   },

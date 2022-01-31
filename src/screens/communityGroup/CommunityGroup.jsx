@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { PageLayout } from "layout/page-layout";
 import FormModal from "../../components/formModal/FormModal";
 import CommunityGroupCard from "../../components/communityGroupCard/CommunityGroupCard";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import "./CommunityGroup.scss";
 import {
   searchGroups,
@@ -122,7 +122,7 @@ const CommunityGroup = () => {
           confirmDelete={confirmDelete}
         />
       )}
-      <DashboardLayout title="Community Group">
+      <PageLayout>
         <div className="x05-0-0-all-groups">
           <div className="group-flex-col-4">
             <SubHeader
@@ -166,7 +166,7 @@ const CommunityGroup = () => {
             )}
           </div>
         </div>
-      </DashboardLayout>
+      </PageLayout>
     </>
   );
 };

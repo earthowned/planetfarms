@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+
+import { PageLayout } from "layout/page-layout";
+
 import NewsAddModal from "../../components/newAddModal/NewsAddModal";
 import { deleteNews } from "../../actions/newsActions";
 import DeleteContent from "../../components/deleteContent/DeleteContent";
@@ -31,6 +33,7 @@ function CommunityNews() {
   const editCard = async (id) => {
     history.push(`/news/edit/${id}`);
   };
+
   return (
     <>
       {deleteModal && (
@@ -41,7 +44,8 @@ function CommunityNews() {
           confirmDelete={confirmDelete}
         />
       )}
-      <DashboardLayout title="Ragrarians News">
+
+      <PageLayout>
         {addModal && (
           <NewsAddModal
             setAddModal={setAddModal}
@@ -55,7 +59,7 @@ function CommunityNews() {
           editCard={editCard}
           deleteNewsCard={deleteNewsCard}
         />
-      </DashboardLayout>
+      </PageLayout>
     </>
   );
 }

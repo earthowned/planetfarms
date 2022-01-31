@@ -2,6 +2,20 @@
 @import "./mixins";
 @import "./variables";
 
+.app-container {
+  // flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.main-app {
+  display: flex;
+  flex-direction: column;
+  background-color: green;
+}
+
 h1 {
   color: $color-primary-white;
   font: 40px/48px $font-semi-bold;

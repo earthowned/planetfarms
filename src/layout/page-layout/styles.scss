@@ -1,0 +1,10 @@
+.page-layout {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  background-color: #000000;
+}
