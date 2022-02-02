@@ -71,6 +71,20 @@
     }
   }
 
+  &-logout {
+    color: $color-primary-white;
+    border: none;
+    background-color: #da3443;
+
+    &:hover {
+      background-color: #df535e;
+    }
+
+    &:active {
+      background-color: #ac202b;
+    }
+  }
+
   &-header-nav {
     border: none;
     color: $color-primary-white;

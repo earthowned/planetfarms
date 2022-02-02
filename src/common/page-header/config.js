@@ -19,5 +19,19 @@ export const buttons = [
     type: ButtonType.Settings,
     title: "Your settings",
     position: { top: "65px", right: "-12px" },
+    width: "350px",
+  },
+];
+
+export const actionButtons = [
+  {
+    icon: "grid",
+    title: "Switch Community",
+    path: "/community-switching",
+  },
+  {
+    icon: "person",
+    title: "My dashboard",
+    path: "/dashboard",
   },
 ];

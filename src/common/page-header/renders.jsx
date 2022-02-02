@@ -1,35 +1,32 @@
+import React from "react";
+
 import { Avatar } from "common/avatar";
+import { Divider } from "common/divider";
 import { IconButton } from "common/icon-button";
+import { ActionButton } from "common/action-button";
 import { NotificationItem } from "common/list-items/notification-item";
 
 import { mockNotifications, mockMessages } from "mock";
 
 import { ButtonType } from "./config";
 
-export const renderComponent = (type, onClick) => {
-  let component;
-
+export const renderComponent = ({ type, onClick }) => {
   switch (type) {
     case ButtonType.Messages:
-      component = <IconButton icon="email" onClick={onClick} />;
-      break;
+      return <IconButton icon="email" onClick={onClick} />;
 
     case ButtonType.Notifications:
-      component = <IconButton icon="bell" onClick={onClick} />;
-      break;
+      return <IconButton icon="bell" onClick={onClick} />;
 
     case ButtonType.Settings:
-      component = <Avatar placeholderIcon="person" onClick={onClick} />;
-      break;
+      return <Avatar placeholderIcon="person" onClick={onClick} />;
 
     default:
-      component = null;
+      return null;
   }
-
-  return component;
 };
 
-export const renderContent = (type) => {
+export const renderContent = ({ type, onLogout, onChangePassword }) => {
   switch (type) {
     case ButtonType.Messages:
       return mockNotifications.map((item) => (
@@ -53,6 +50,15 @@ export const renderContent = (type) => {
           createdAt={item.createdAt}
         />
       ));
+
+    case ButtonType.Settings:
+      return (
+        <div className="settings-modal-header-container">
+          <ActionButton title="Change Password" onClick={onChangePassword} />
+          <Divider marginTop="24px" marginBottom="24px" />
+          <ActionButton title="Logout" variant="logout" onClick={onLogout} />
+        </div>
+      );
 
     default:
       return null;

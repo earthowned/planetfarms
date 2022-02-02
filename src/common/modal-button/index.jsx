@@ -35,9 +35,14 @@ export const ModalButton = ({
     };
   }, []);
 
+  const handleActionButtonClick = () => {
+    onActionButtonClick();
+    setIsVisible(false);
+  };
+
   return (
     <div className="modal-icon-btn-container" ref={ref}>
-      {component(() => setIsVisible(!isVisible))}
+      {component({ visible: isVisible, setVisible: setIsVisible })}
 
       {isVisible && (
         <div
@@ -53,14 +58,16 @@ export const ModalButton = ({
             />
           </div>
 
-          <div className="content">{renderContent}</div>
+          <div className="content">
+            {renderContent({ visible: isVisible, setVisible: setIsVisible })}
+          </div>
 
           {actionButtonTitle && onActionButtonClick && (
             <div className="footer">
               <ActionButton
                 variant="secondary"
                 title={actionButtonTitle}
-                onClick={onActionButtonClick}
+                onClick={handleActionButtonClick}
               />
             </div>
           )}
