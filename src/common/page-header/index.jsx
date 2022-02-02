@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 
-import { ActionButton } from "common/action-button";
+import { Icon } from "common/icon";
 import { ModalButton } from "common/modal-button";
-
+import { ActionButton } from "common/action-button";
 import SettingsActionModal from "components/settingsActionModal/SettingsActionModal";
 
-import { buttons, actionButtons } from "./config";
+import useSizeFinder from "utils/sizeFinder";
+import { TABLET_SCREEN_WIDTH } from "constants/sizeConstants";
+
+import { desktopButtons, mobileButtons } from "./config";
 import { renderContent, renderComponent } from "./renders";
 
 import "./styles.scss";
 
 export const PageHeader = ({ title = "Kek" }) => {
   const history = useHistory();
+  const screenWidth = useSizeFinder();
+  const isTablet = screenWidth <= TABLET_SCREEN_WIDTH;
 
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
 
-  const handleLogout = (setVisible) => {};
+  const modalButtons = useMemo(
+    () => (isTablet ? mobileButtons : desktopButtons),
+    [isTablet]
+  );
+
+  const handleLogout = () => {};
 
   const handleChangePassword = (setVisible) => {
     setVisible(false);
@@ -25,23 +35,33 @@ export const PageHeader = ({ title = "Kek" }) => {
 
   return (
     <div className="main-page-header">
-      <h3>{title}</h3>
+      {isTablet ? (
+        <Icon icon="logo-mobile" onClick={() => history.replace("/news")} />
+      ) : (
+        <h3>{title}</h3>
+      )}
 
       <div className="right-nav-container">
         <div className="nav-btns-container">
-          {actionButtons.map((item) => (
+          <ActionButton
+            icon="grid"
+            title={!isTablet && "Switch Community"}
+            variant="header-nav"
+            onClick={() => history.replace("/community-switching")}
+          />
+
+          {!isTablet && (
             <ActionButton
-              icon={item.icon}
-              key={item.title}
-              title={item.title}
+              icon="person"
+              title="My dashboard"
               variant="header-nav"
-              onClick={() => history.replace(item.path)}
+              onClick={() => history.replace("/dashboard")}
             />
-          ))}
+          )}
         </div>
 
         <div className="modal-btns-container">
-          {buttons.map((item) => (
+          {modalButtons.map((item) => (
             <ModalButton
               key={item.title}
               width={item.width}

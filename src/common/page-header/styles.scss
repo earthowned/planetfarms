@@ -1,3 +1,5 @@
+@import "src/scss/mixins";
+
 .main-page-header {
   width: 100%;
   padding: 16px 40px;
@@ -46,5 +48,24 @@
   .settings-modal-header-container {
     display: flex;
     flex-direction: column;
+  }
+
+  @include breakpoint("tablet", "max") {
+    height: 48px;
+    padding: 0px 16px;
+
+    .right-nav-container {
+      width: 50%;
+
+      .avatar-container {
+        width: 24px;
+        height: 24px;
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
   }
 }

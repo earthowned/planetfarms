@@ -1,17 +1,33 @@
 @import "./variables";
 
-@mixin breakpoint($point) {
-  @if $point == "mobile" {
-    @media (min-width: 0) and (max-width: $media-mobile-max-width) {
-      @content;
+@mixin breakpoint($point, $sizeType: "minMax") {
+  @if $sizeType == "minMax" {
+    @if $point == "mobile" {
+      @media (min-width: 0) and (max-width: $media-mobile-max-width) {
+        @content;
+      }
+    } @else if $point == "tablet" {
+      @media (min-width: ($media-mobile-max-width + 1)) and (max-width: $media-tablet-max-width) {
+        @content;
+      }
+    } @else if $point == "laptop" {
+      @media (min-width: ($media-tablet-max-width + 1)) and (max-width: $media-laptop-max-width) {
+        @content;
+      }
     }
-  } @else if $point == "tablet" {
-    @media (min-width: ($media-mobile-max-width + 1)) and (max-width: $media-tablet-max-width) {
-      @content;
-    }
-  } @else if $point == "laptop" {
-    @media (min-width: ($media-tablet-max-width + 1)) and (max-width: $media-laptop-max-width) {
-      @content;
+  } @else if $sizeType == "max" {
+    @if $point == "mobile" {
+      @media (max-width: $media-mobile-max-width) {
+        @content;
+      }
+    } @else if $point == "tablet" {
+      @media (max-width: $media-tablet-max-width) {
+        @content;
+      }
+    } @else if $point == "laptop" {
+      @media (max-width: $media-laptop-max-width) {
+        @content;
+      }
     }
   }
 }
