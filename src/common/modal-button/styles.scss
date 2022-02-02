@@ -45,10 +45,31 @@
 
     .footer {
       width: 100%;
+      display: flex;
       margin-top: 24px;
 
       .action-btn {
         width: 200px;
+      }
+    }
+
+    &-mobile {
+      left: 0;
+      right: 0;
+      top: 48px;
+      bottom: 48px;
+      position: fixed;
+      overflow-y: scroll;
+      border-radius: 0px;
+
+      &::before {
+        content: none;
+      }
+
+      .footer {
+        .action-btn {
+          width: 100%;
+        }
       }
     }
   }
