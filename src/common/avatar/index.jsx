@@ -4,9 +4,13 @@ import { Icon } from "common/icon";
 
 import "./styles.scss";
 
-export const Avatar = ({ src, placeholderIcon }) => {
+export const Avatar = ({ src, placeholderIcon, onClick }) => {
   return (
-    <div className="avatar-container">
+    <div
+      onClick={onClick}
+      className="avatar-container"
+      style={{ cursor: onClick ? "pointer" : "unset" }}
+    >
       {src ? <img src={src} alt="" /> : <Icon icon={placeholderIcon} />}
     </div>
   );

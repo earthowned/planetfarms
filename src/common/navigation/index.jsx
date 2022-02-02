@@ -17,8 +17,9 @@ import "./styles.scss";
 
 const selectCurrentCommunity = (state) => state.activeCommunity;
 
-export const Navigation = () => {
+const DesktopSideBarNavigation = () => {
   const history = useHistory();
+  console.log("Desktop Nav Rendered");
 
   // TODO: There is no current community in redux store;
   const { currentCommunity } = useSelector(selectCurrentCommunity);
@@ -76,6 +77,28 @@ export const Navigation = () => {
         isExpanded={isExpanded}
         onClick={() => setIsExpanded(!isExpanded)}
       />
+    </div>
+  );
+};
+
+const MobileNavigation = () => {
+  const history = useHistory();
+
+  return (
+    <div className="mobile-navigation">
+      <IconButton variant="transparent" icon="person" />
+      <IconButton variant="transparent" icon="email" />
+      <IconButton variant="transparent" icon="bell" />
+      <IconButton variant="transparent" icon="gamburger" />
+    </div>
+  );
+};
+
+export const Navigation = () => {
+  return (
+    <div className="pf-navigation-container">
+      <DesktopSideBarNavigation />
+      <MobileNavigation />
     </div>
   );
 };

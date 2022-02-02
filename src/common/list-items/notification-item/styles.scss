@@ -1,0 +1,45 @@
+.notification-list-item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+
+  .avatar-container {
+    width: 48px;
+    height: 48px;
+    margin-right: 16px;
+  }
+
+  &-square-avatar {
+    .avatar-container {
+      border-radius: 4px;
+    }
+  }
+
+  .content {
+    .top-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    h5,
+    .h7 {
+      color: #8a8a8a;
+    }
+  }
+}
+
+.is-live-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+
+  .red-circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background-color: #da3443;
+  }
+}

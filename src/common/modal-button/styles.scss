@@ -1,0 +1,55 @@
+@import "src/scss/mixins";
+
+.modal-icon-btn-container {
+  position: relative;
+
+  .modal-container {
+    border-radius: 4px;
+    background-color: #191b1d;
+    padding: 0px 16px 16px 16px;
+
+    z-index: 999;
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+
+    &::before {
+      content: "";
+      position: absolute;
+
+      width: 12px;
+      height: 12px;
+      top: -5px;
+      right: 30px;
+      transform: rotate(45deg);
+
+      border-width: 1px 0 0 1px;
+      background-color: #191b1d;
+      border-top-left-radius: 2px;
+    }
+
+    .header {
+      height: 64px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer {
+      width: 100%;
+      margin-top: 24px;
+
+      .action-btn {
+        width: 200px;
+      }
+    }
+  }
+}

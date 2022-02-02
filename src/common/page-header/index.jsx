@@ -1,21 +1,16 @@
-import React, { useMemo } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import React from "react";
+import { useHistory } from "react-router-dom";
 
-import { Avatar } from "common/avatar";
-import { IconButton } from "common/icon-button";
 import { ActionButton } from "common/action-button";
+import { ModalButton } from "common/modal-button";
 
-import { getPageTitle } from "./config";
+import { buttons } from "./config";
+import { renderContent, renderComponent } from "./renders";
 
 import "./styles.scss";
 
-export const PageHeader = () => {
+export const PageHeader = ({ title = "Kek" }) => {
   const history = useHistory();
-  const location = useLocation();
-
-  const title = useMemo(() => {
-    return getPageTitle(location.pathname);
-  }, [location.pathname]);
 
   return (
     <div className="main-page-header">
@@ -39,11 +34,18 @@ export const PageHeader = () => {
         </div>
 
         <div className="modal-btns-container">
-          <IconButton icon="email" />
-          <IconButton icon="bell" />
+          {buttons.map((item) => (
+            <ModalButton
+              key={item.title}
+              modalTitle={item.title}
+              onActionButtonClick={() => {}}
+              renderContent={renderContent(item.type)}
+              actionButtonTitle={item.actionButtonTitle}
+              {...(item.position && { position: item.position })}
+              component={(onClick) => renderComponent(item.type, onClick)}
+            />
+          ))}
         </div>
-
-        <Avatar placeholderIcon="person" />
       </div>
     </div>
   );

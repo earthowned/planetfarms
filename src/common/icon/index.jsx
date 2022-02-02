@@ -26,6 +26,7 @@ import { ReactComponent as CalendarIcon } from "assets/icons/calendar.svg";
 import { ReactComponent as EmailIcon } from "assets/icons/email.svg";
 import { ReactComponent as BellIcon } from "assets/icons/bell.svg";
 import { ReactComponent as GridIcon } from "assets/icons/grid.svg";
+import { ReactComponent as GamburgerIcon } from "assets/icons/gamburger.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -55,6 +56,9 @@ const getIcon = (iconName) => {
 
     case "email":
       return <EmailIcon />;
+
+    case "gamburger":
+      return <GamburgerIcon />;
 
     case "google":
       return <GoogleIcon />;
