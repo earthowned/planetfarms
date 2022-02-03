@@ -7,10 +7,16 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
+
+  @include breakpoint("tablet", "max") {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
 }
 
 .main-app {
   display: flex;
+  flex: 1;
   flex-direction: column;
   background-color: green;
 }

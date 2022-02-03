@@ -56,4 +56,17 @@
       }
     }
   }
+
+  &-selected {
+    background-color: #05a875;
+    svg {
+      @include setSvgColor(black);
+    }
+
+    .gamburger-icon {
+      path {
+        stroke: black;
+      }
+    }
+  }
 }

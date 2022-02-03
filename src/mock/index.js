@@ -37,4 +37,25 @@ export const mockMessages = [
     message: "Hi there! Can you help me with my course",
     createdAt: "08/12/2020",
   },
+  {
+    id: "cvijxcvij342",
+    imageUrl: "",
+    fullName: "Bessie Cooper",
+    message: "Hi there! Can you help me with my course",
+    createdAt: "08/12/2020",
+  },
+  {
+    id: "dlfmdlsmf",
+    imageUrl: "",
+    fullName: "Bessie Cooper",
+    message: "Hi there! Can you help me with my course",
+    createdAt: "08/12/2020",
+  },
+  {
+    id: "dkfmsl34242",
+    imageUrl: "",
+    fullName: "Bessie Cooper",
+    message: "Hi there! Can you help me with my course",
+    createdAt: "08/12/2020",
+  },
 ];

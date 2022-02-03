@@ -10,13 +10,16 @@ import { mockNotifications, mockMessages } from "mock";
 
 import { ButtonType } from "./config";
 
+const ButtonIcon = {
+  [ButtonType.Messages]: "email",
+  [ButtonType.Notifications]: "bell",
+};
+
 export const renderComponent = ({ type, onClick }) => {
   switch (type) {
     case ButtonType.Messages:
-      return <IconButton icon="email" onClick={onClick} />;
-
     case ButtonType.Notifications:
-      return <IconButton icon="bell" onClick={onClick} />;
+      return <IconButton icon={ButtonIcon[type]} onClick={onClick} />;
 
     case ButtonType.Settings:
       return <Avatar placeholderIcon="person" onClick={onClick} />;

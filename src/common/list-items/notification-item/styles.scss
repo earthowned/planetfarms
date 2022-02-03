@@ -1,31 +1,49 @@
-.notification-list-item {
+@import "src/scss/mixins";
+
+.notification-list-item-container {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  margin-top: 16px;
+  flex-direction: column;
 
-  .avatar-container {
-    width: 48px;
-    height: 48px;
-    margin-right: 16px;
-  }
+  .notification-list-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 16px;
 
-  &-square-avatar {
     .avatar-container {
-      border-radius: 4px;
-    }
-  }
-
-  .content {
-    .top-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      width: 48px;
+      height: 48px;
+      margin-right: 16px;
     }
 
-    h5,
-    .h7 {
-      color: #8a8a8a;
+    &-square-avatar {
+      .avatar-container {
+        border-radius: 4px;
+      }
+    }
+
+    .content {
+      width: 100%;
+
+      .top-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      h5,
+      .h7 {
+        color: #8a8a8a;
+      }
+    }
+
+    @include breakpoint("mobile", "max") {
+      .content {
+        .top-container {
+          flex-direction: column-reverse;
+        }
+      }
     }
   }
 }

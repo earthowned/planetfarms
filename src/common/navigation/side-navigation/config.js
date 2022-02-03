@@ -1,3 +1,22 @@
+export const ButtonType = {
+  Profile: "Profile",
+  Messages: "Messages",
+  Notifications: "Notifications",
+  Menu: "Menu",
+};
+
+export const modalButtons = [
+  {
+    type: ButtonType.Messages,
+  },
+  {
+    type: ButtonType.Notifications,
+  },
+  {
+    type: ButtonType.Menu,
+  },
+];
+
 export const links = [
   {
     title: "News",

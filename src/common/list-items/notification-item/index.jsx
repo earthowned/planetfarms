@@ -29,7 +29,7 @@ export const NotificationItem = ({
   );
 
   return (
-    <>
+    <div className="notification-list-item-container">
       <div className={containerClass}>
         <Avatar placeholderIcon="person" src={imageUrl} />
 
@@ -45,6 +45,6 @@ export const NotificationItem = ({
       </div>
 
       <Divider marginTop="24px" />
-    </>
+    </div>
   );
 };

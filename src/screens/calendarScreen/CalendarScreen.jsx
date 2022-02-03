@@ -12,7 +12,7 @@ import {
   currYearName,
   currMonthName,
   buildCalendar,
-} from "common/navigation/calendar/helpers";
+} from "common/navigation/side-navigation/calendar/helpers";
 
 import useSizeFinder from "../../utils/sizeFinder";
 import Button from "../../components/button/Button";

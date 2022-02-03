@@ -1,11 +1,7 @@
-import React, { useState, useMemo, useEffect } from "react";
-import cx from "classnames";
+import React, { useState, useEffect } from "react";
 
 import { IconButton } from "common/icon-button";
 import { ActionButton } from "common/action-button";
-
-import useSizeFinder from "utils/sizeFinder";
-import { TABLET_SCREEN_WIDTH } from "constants/sizeConstants";
 
 import "./styles.scss";
 
@@ -21,19 +17,6 @@ export const ModalButton = ({
 }) => {
   const ref = React.useRef();
   const [isVisible, setIsVisible] = useState(false);
-
-  const screenWidth = useSizeFinder();
-  const isMobile = screenWidth <= TABLET_SCREEN_WIDTH;
-
-  const modalClassName = useMemo(() => {
-    const className = "modal-container";
-    return cx(className, { [`${className}-mobile`]: isMobile });
-  }, [isMobile]);
-
-  const modalStyles = useMemo(
-    () => (isMobile ? null : { width, maxHeight: height, ...position }),
-    [isMobile, width, height, position]
-  );
 
   useEffect(() => {
     const listener = (event) => {
@@ -62,7 +45,10 @@ export const ModalButton = ({
       {component({ visible: isVisible, setVisible: setIsVisible })}
 
       {isVisible && (
-        <div className={modalClassName} style={modalStyles}>
+        <div
+          className="modal-container"
+          style={{ width, maxHeight: height, ...position }}
+        >
           <div className="header">
             <h3>{modalTitle}</h3>
             <IconButton

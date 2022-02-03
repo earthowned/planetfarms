@@ -1,0 +1,14 @@
+@import "src/scss/mixins";
+
+.portal-modal-container {
+  &-mobile-page {
+    backdrop-filter: blur(4px);
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 48px; // bottom-nav-height
+    position: fixed;
+    padding-top: 48px;
+  }
+}
