@@ -71,6 +71,19 @@
     }
   }
 
+  &-transparent {
+    color: #00c688;
+    background-color: transparent;
+
+    &:hover {
+      color: #02f2a7;
+    }
+
+    &:active {
+      color: #05a875;
+    }
+  }
+
   &-logout {
     color: $color-primary-white;
     border: none;

@@ -67,7 +67,7 @@ import AllCommunitiesCard from "../screens/communitySwitching/CommunitySwitching
 import CalendarScreen from "../screens/calendarScreen/CalendarScreen";
 
 // NotFound
-import PageNotFound from "../screens/pageNotFound/PageNotFound";
+import { NotFoundPage } from "../screens/not-found";
 
 export const Routes = () => {
   return (
@@ -170,7 +170,7 @@ export const Routes = () => {
       <Route component={Profile} exact path="/profile/:id" />
       <Route component={UserInfo} exact path="/userInfo" />
 
-      <Route component={PageNotFound} />
+      <Route component={NotFoundPage} />
     </Switch>
   );
 };
