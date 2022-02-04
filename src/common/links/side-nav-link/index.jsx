@@ -11,6 +11,7 @@ export const SideNavLink = ({
   icon,
   title,
   variant,
+  onClick,
   compactTitle,
   isCompact = false,
 }) => {
@@ -25,7 +26,11 @@ export const SideNavLink = ({
   );
 
   return (
-    <RouterNavLink to={to} className={(isActive) => linkClassName(isActive)}>
+    <RouterNavLink
+      to={to}
+      onClick={onClick}
+      className={(isActive) => linkClassName(isActive)}
+    >
       <div className="icon-container">
         {variant === "primary" && icon && <Icon icon={icon} />}
         {variant === "secondary" && isCompact && <p>{compactTitle}</p>}

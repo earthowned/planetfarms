@@ -1,24 +1,42 @@
 import React, { useCallback, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { Modal } from "common/modal";
 import { IconButton } from "common/icon-button";
-import { MessagesModalContainer } from "common/modal-containers/messages";
-import { NotificationsModalContainer } from "common/modal-containers/notifications";
+import {
+  MessagesModalContainer,
+  MobileNavModalContainer,
+  NotificationsModalContainer,
+} from "common/modal-containers";
 
 import { MobileNavType, buttons } from "./config";
 
 import "./styles.scss";
 
 export const BottomNavigation = () => {
+  const history = useHistory();
+
   const [selectedType, setSelectedType] = useState(undefined);
 
+  const handleClose = () => setSelectedType(undefined);
+
   const handleClick = useCallback(
-    (type) => {
+    (type, path) => {
       switch (type) {
-        case MobileNavType.Menu:
+        case MobileNavType.Profile: {
+          history.replace("/dashboard");
+          break;
+        }
+
         case MobileNavType.Messages:
         case MobileNavType.Notifications: {
           setSelectedType(selectedType === type ? undefined : type);
+          break;
+        }
+
+        case MobileNavType.Menu: {
+          setSelectedType(selectedType === type ? undefined : type);
+          history.push(path);
           break;
         }
 
@@ -42,20 +60,18 @@ export const BottomNavigation = () => {
         ))}
       </div>
 
-      <Modal
-        variant="mobile-page"
-        visible={selectedType === MobileNavType.Messages}
-      >
-        <MessagesModalContainer onClose={() => setSelectedType(undefined)} />
-      </Modal>
+      <Modal variant="mobile-page" visible={selectedType}>
+        {selectedType === MobileNavType.Messages && (
+          <MessagesModalContainer onClose={handleClose} />
+        )}
 
-      <Modal
-        variant="mobile-page"
-        visible={selectedType === MobileNavType.Notifications}
-      >
-        <NotificationsModalContainer
-          onClose={() => setSelectedType(undefined)}
-        />
+        {selectedType === MobileNavType.Notifications && (
+          <NotificationsModalContainer onClose={handleClose} />
+        )}
+
+        {selectedType === MobileNavType.Menu && (
+          <MobileNavModalContainer onClose={handleClose} />
+        )}
       </Modal>
     </>
   );
