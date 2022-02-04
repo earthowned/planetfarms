@@ -29,7 +29,12 @@ export const renderComponent = ({ type, onClick }) => {
   }
 };
 
-export const renderContent = ({ type, onLogout, onChangePassword }) => {
+export const renderContent = ({
+  type,
+  onLogout,
+  onMessageClick,
+  onChangePassword,
+}) => {
   switch (type) {
     case ButtonType.Messages:
       return mockNotifications.map((item) => (
@@ -39,6 +44,7 @@ export const renderContent = ({ type, onLogout, onChangePassword }) => {
           isLive={item.isLive}
           message={item.message}
           imageUrl={item.imageUrl}
+          onClick={onMessageClick}
         />
       ));
 
@@ -50,6 +56,7 @@ export const renderContent = ({ type, onLogout, onChangePassword }) => {
           title={item.fullName}
           message={item.message}
           imageUrl={item.imageUrl}
+          onClick={onMessageClick}
           createdAt={item.createdAt}
         />
       ));

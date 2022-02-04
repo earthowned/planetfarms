@@ -16,6 +16,7 @@ const LiveContainer = () => (
 export const NotificationItem = ({
   title,
   message,
+  onClick,
   imageUrl,
   createdAt,
   isLive = false,
@@ -29,7 +30,7 @@ export const NotificationItem = ({
   );
 
   return (
-    <div className="notification-list-item-container">
+    <div className="notification-list-item-container" onClick={onClick}>
       <div className={containerClass}>
         <Avatar placeholderIcon="person" src={imageUrl} />
 

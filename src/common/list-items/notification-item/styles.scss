@@ -3,6 +3,7 @@
 .notification-list-item-container {
   width: 100%;
   display: flex;
+  cursor: pointer;
   flex-direction: column;
 
   .notification-list-item {
@@ -44,6 +45,12 @@
           flex-direction: column-reverse;
         }
       }
+    }
+  }
+
+  &:hover {
+    .divider {
+      background-color: #00c688;
     }
   }
 }

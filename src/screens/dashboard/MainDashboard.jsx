@@ -129,7 +129,7 @@ function DashboardComponent() {
             <div className="dashboard-my-profile-side-header">
               {/* my-profile  */}
               <Link
-                to={{ pathname: `/profile/${user.userID}`, state: { user } }}
+                to={{ pathname: `/profile/${user?.userID}`, state: { user } }}
                 className="dasboard-my-profile-box"
               >
                 <HeaderContent title="My Profile" image="/img/user.svg" />

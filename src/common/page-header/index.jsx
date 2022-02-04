@@ -33,6 +33,11 @@ export const PageHeader = ({ title = "Kek" }) => {
     setPasswordModalVisible(true);
   };
 
+  const handleMessageClick = (setVisible) => {
+    setVisible(false);
+    history.push("/messenger");
+  };
+
   return (
     <div className="main-page-header">
       {isTablet ? (
@@ -73,6 +78,7 @@ export const PageHeader = ({ title = "Kek" }) => {
                 renderContent({
                   type: item.type,
                   onLogout: () => handleLogout(setVisible),
+                  onMessageClick: () => handleMessageClick(setVisible),
                   onChangePassword: () => handleChangePassword(setVisible),
                 })
               }
