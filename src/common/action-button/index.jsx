@@ -16,19 +16,21 @@ export const ActionButton = ({
   tintIcon = false,
   variant = "secondary",
 }) => {
+  const btnClassName = cx(
+    "action-btn",
+    { [`action-btn-${variant}`]: true, "action-btn-tint-icon": tintIcon },
+    className
+  );
+
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={cx(
-        "action-btn",
-        { [`action-btn-${variant}`]: true, "action-btn-tint-icon": tintIcon },
-        className
-      )}
+      className={btnClassName}
     >
       {icon && <Icon icon={icon} />}
-      {title}
+      <p className="btn-title">{title}</p>
     </button>
   );
 };

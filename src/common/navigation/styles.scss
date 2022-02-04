@@ -1,0 +1,10 @@
+@import "src/scss/mixins";
+
+.pf-navigation-container {
+  height: 100%;
+
+  @include breakpoint("tablet", "max") {
+    width: 100%;
+    height: 48px;
+  }
+}

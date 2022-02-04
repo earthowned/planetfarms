@@ -8,16 +8,23 @@ import "./styles.scss";
 export const IconButton = ({
   icon,
   onClick,
+  disabled,
   className,
+  isSelected,
   variant = "transparent",
 }) => {
   const buttonClassName = useMemo(
     () => cx("pf-icon-btn", { [`pf-icon-btn-${variant}`]: true }, className),
-    [variant]
+    [variant, className, isSelected]
   );
 
   return (
-    <button type="button" onClick={onClick} className={buttonClassName}>
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={buttonClassName}
+    >
       <Icon icon={icon} />
     </button>
   );

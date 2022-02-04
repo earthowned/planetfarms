@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { checkAndUpdateToken } from "../../actions/userAction";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+export const PrivateRoute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch();
 
   // TODO: Refactor;
@@ -22,5 +22,3 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
-
-export default PrivateRoute;

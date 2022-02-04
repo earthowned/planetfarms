@@ -27,6 +27,17 @@ const makeLogout = (dispatch) => {
   window.location.href = "/login";
 };
 
+export const logout = () => async (dispatch) => {
+  try {
+    if (isCognito) await Auth.signOut();
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(error);
+  } finally {
+    makeLogout(dispatch);
+  }
+};
+
 // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 export const getAccessToken = () => async (dispatch) => {
   try {
@@ -151,6 +162,23 @@ export const resetPassword = async ({ username, code, password }) => {
     }
     return Promise.resolve();
   } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const changePassword = async ({ oldPassword, newPassword }) => {
+  try {
+    if (isCognito) {
+      const response = await Auth.currentAuthenticatedUser();
+      await Auth.changePassword(response, oldPassword, newPassword);
+    } else {
+      await api.auth.changePassword({ oldPassword, newPassword });
+    }
+
+    return Promise.resolve();
+  } catch (error) {
+    // TODO: From backend receive wrong error object;
+    // TODO: Backend_Bug: Always incorrect password error, but password has been changed;
     return Promise.reject(error);
   }
 };

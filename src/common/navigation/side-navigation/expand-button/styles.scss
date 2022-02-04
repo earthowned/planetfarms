@@ -1,0 +1,37 @@
+@import "src/scss/mixins";
+
+.expand-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  background-color: #00c688;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  right: 0;
+  top: 250px;
+  position: absolute;
+  transform: translateX(50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .chevrons-right-icon {
+    transform: rotate(0deg);
+    @include transition(all, 0.2s, ease-out);
+  }
+
+  &:hover {
+    background-color: #02f2a7;
+  }
+
+  &-expanded {
+    .chevrons-right-icon {
+      transform: rotate(-180deg);
+    }
+  }
+}

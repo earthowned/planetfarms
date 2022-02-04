@@ -1,0 +1,19 @@
+.avatar-container {
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background-color: #f8ebdf;
+
+  user-select: none;
+
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    path {
+      fill: #141414;
+    }
+  }
+}

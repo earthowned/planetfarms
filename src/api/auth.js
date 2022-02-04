@@ -7,3 +7,6 @@ export const register = ({ id, name, password }) =>
   apiInstance.post("users", { id, name, password });
 
 export const getToken = () => apiInstance.get("users/token");
+
+export const changePassword = ({ oldPassword, newPassword }) =>
+  apiInstance.post("/users/changePassword", { oldPassword, newPassword });

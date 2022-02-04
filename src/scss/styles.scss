@@ -2,6 +2,24 @@
 @import "./mixins";
 @import "./variables";
 
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+
+  @include breakpoint("tablet", "max") {
+    flex-direction: column-reverse;
+  }
+}
+
+.main-app {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+}
+
 h1 {
   color: $color-primary-white;
   font: 40px/48px $font-semi-bold;
