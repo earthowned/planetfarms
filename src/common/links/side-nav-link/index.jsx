@@ -15,9 +15,10 @@ export const SideNavLink = ({
   compactTitle,
   isCompact = false,
 }) => {
+  // isActive
   const linkClassName = cx("side-nav-link", {
         [`side-nav-link-${variant}`]: true,
-        "side-nav-link-active": isActive,
+        "side-nav-link-active": false,
         "side-nav-link-compact": isCompact,
       });
 
