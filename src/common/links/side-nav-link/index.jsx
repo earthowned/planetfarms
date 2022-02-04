@@ -15,15 +15,11 @@ export const SideNavLink = ({
   compactTitle,
   isCompact = false,
 }) => {
-  const linkClassName = useCallback(
-    (isActive) =>
-      cx("side-nav-link", {
+  const linkClassName = cx("side-nav-link", {
         [`side-nav-link-${variant}`]: true,
         "side-nav-link-active": isActive,
         "side-nav-link-compact": isCompact,
-      }),
-    [isCompact, variant]
-  );
+      });
 
   return (
     <RouterNavLink
