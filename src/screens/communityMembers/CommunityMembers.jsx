@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { PageLayout } from "layout/page-layout";
 import CardImage from "../../components/cardImage/CardImage";
 import SearchComponent from "../../components/searchComponent/SearchComponent";
+import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import Pagination from "../../components/pagination/Pagination";
 import "./CommunityMembers.css";
 import useSizeFinder from "../../utils/sizeFinder";
@@ -50,7 +50,7 @@ function CommunityMembers() {
   );
 
   return (
-    <PageLayout>
+    <DashboardLayout title={currentCommunity.name}>
       <div className="community-members">
         <div className="community-members-flex-col">
           <div className="search-container">
@@ -72,7 +72,7 @@ function CommunityMembers() {
           />
         </div>
       </div>
-    </PageLayout>
+    </DashboardLayout>
   );
 }
 export default CommunityMembers;

@@ -37,8 +37,13 @@ body {
   margin: 0 auto;
 }
 
+::-webkit-scrollbar {
+  width: 0;
+}
+
 main {
   width: 100%;
+  overflow: hidden;
   /* height: 100vh; */
 }
 

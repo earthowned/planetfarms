@@ -10,15 +10,14 @@
 
   @include breakpoint("tablet", "max") {
     flex-direction: column-reverse;
-    justify-content: flex-end;
   }
 }
 
 .main-app {
-  display: flex;
   flex: 1;
+  display: flex;
+  overflow: hidden;
   flex-direction: column;
-  background-color: green;
 }
 
 h1 {

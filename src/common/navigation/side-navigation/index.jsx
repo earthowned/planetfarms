@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { Icon } from "common/icon";
 import { Avatar } from "common/avatar";
@@ -35,10 +35,10 @@ export const SideNavigation = () => {
         <Icon icon={isExpanded ? "logo-small" : "logo-mobile"} />
       </div>
 
-      <div className="current-community">
+      <Link to="/community-switching" className="current-community">
         <Avatar placeholderIcon="person" />
         <h4>{currentCommunity?.name || "PlanetFarms"}</h4>
-      </div>
+      </Link>
 
       <nav>
         {links.map((link, index) => (

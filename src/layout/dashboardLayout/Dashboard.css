@@ -80,3 +80,19 @@
     padding: 1em 1.5em;
   }
 }
+
+.dashboard-container {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.dashboard-page-container {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.dashboard-page {
+  padding: 40px;
+}

@@ -8,7 +8,6 @@ import { SignUpPage } from "screens/auth/sign-up";
 import { ForgotPasswordPage } from "screens/auth/forgot-password";
 
 import { Navigation } from "common/navigation";
-import { PageHeader } from "common/page-header";
 import { PrivateRoute } from "components/privateRoute";
 
 import { Routes } from "routes";
@@ -24,7 +23,6 @@ const MainApp = () => (
       <Navigation />
     </aside>
     <main className="main-app">
-      <PageHeader />
       <Routes />
     </main>
   </div>
