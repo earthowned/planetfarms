@@ -29,7 +29,7 @@ export const SideNavLink = ({
     <RouterNavLink
       to={to}
       onClick={onClick}
-      className={(isActive) => linkClassName(isActive)}
+      className={linkClassName}
     >
       <div className="icon-container">
         {variant === "primary" && icon && <Icon icon={icon} />}
