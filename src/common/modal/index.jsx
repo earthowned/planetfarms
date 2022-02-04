@@ -5,7 +5,7 @@ import { Portal } from "react-portal";
 import "./styles.scss";
 
 const ModalVariant = {
-  full: "full",
+  "full-screen": "full-screen",
   "mobile-page": "mobile-page",
 };
 
@@ -13,7 +13,7 @@ export const Modal = ({
   visible,
   children,
   modalRef,
-  variant = ModalVariant.full,
+  variant = ModalVariant["full-screen"],
 }) => {
   if (!visible) return null;
 

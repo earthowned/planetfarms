@@ -1,12 +1,18 @@
 import React, { useState, useMemo } from "react";
+import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { Icon } from "common/icon";
+import { Modal } from "common/modal";
 import { ModalButton } from "common/modal-button";
 import { ActionButton } from "common/action-button";
+import { DestructionModalContainer } from "common/modal-containers/destruction";
 import SettingsActionModal from "components/settingsActionModal/SettingsActionModal";
 
+import { logout } from "actions/auth";
 import useSizeFinder from "utils/sizeFinder";
+import { getErrorMessage } from "utils/error";
 import { TABLET_SCREEN_WIDTH } from "constants/sizeConstants";
 
 import { desktopButtons, mobileButtons } from "./config";
@@ -15,10 +21,14 @@ import { renderContent, renderComponent } from "./renders";
 import "./styles.scss";
 
 export const PageHeader = ({ title = "Kek" }) => {
+  const alert = useAlert();
   const history = useHistory();
+  const dispatch = useDispatch();
   const screenWidth = useSizeFinder();
+
   const isTablet = screenWidth <= TABLET_SCREEN_WIDTH;
 
+  const [showLogout, setShowLogout] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
 
   const modalButtons = useMemo(
@@ -26,9 +36,12 @@ export const PageHeader = ({ title = "Kek" }) => {
     [isTablet]
   );
 
-  const handleLogout = () => {};
+  const handleLogoutClick = (setVisible) => {
+    setVisible(false);
+    setShowLogout(true);
+  };
 
-  const handleChangePassword = (setVisible) => {
+  const handleChangePasswordClick = (setVisible) => {
     setVisible(false);
     setPasswordModalVisible(true);
   };
@@ -36,6 +49,16 @@ export const PageHeader = ({ title = "Kek" }) => {
   const handleMessageClick = (setVisible) => {
     setVisible(false);
     history.push("/messenger");
+  };
+
+  const onLogout = async () => {
+    try {
+      await logout()(dispatch);
+    } catch (error) {
+      alert.error(getErrorMessage(error));
+    } finally {
+      // TODO: Hide Loading;
+    }
   };
 
   return (
@@ -77,9 +100,9 @@ export const PageHeader = ({ title = "Kek" }) => {
               renderContent={({ setVisible }) =>
                 renderContent({
                   type: item.type,
-                  onLogout: () => handleLogout(setVisible),
+                  onLogout: () => handleLogoutClick(setVisible),
                   onMessageClick: () => handleMessageClick(setVisible),
-                  onChangePassword: () => handleChangePassword(setVisible),
+                  onChangePassword: () => handleChangePasswordClick(setVisible),
                 })
               }
               component={({ visible, setVisible }) =>
@@ -94,6 +117,16 @@ export const PageHeader = ({ title = "Kek" }) => {
       </div>
 
       {passwordModalVisible && <SettingsActionModal />}
+
+      <Modal visible={showLogout}>
+        <DestructionModalContainer
+          title="Logout"
+          onActionClick={onLogout}
+          actionButtonTitle="Logout"
+          onClose={() => setShowLogout(false)}
+          message="Are you sure you want to logout?"
+        />
+      </Modal>
     </div>
   );
 };

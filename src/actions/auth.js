@@ -27,6 +27,17 @@ const makeLogout = (dispatch) => {
   window.location.href = "/login";
 };
 
+export const logout = () => async (dispatch) => {
+  try {
+    if (isCognito) await Auth.signOut();
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(error);
+  } finally {
+    makeLogout(dispatch);
+  }
+};
+
 // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 export const getAccessToken = () => async (dispatch) => {
   try {
