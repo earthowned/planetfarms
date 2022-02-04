@@ -5,7 +5,7 @@ import { ActionButton } from "common/action-button";
 
 import "./styles.scss";
 
-export const DestructionModalContainer = ({
+export const DestructiveModalContainer = ({
   title,
   message,
   onClose,

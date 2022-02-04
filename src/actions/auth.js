@@ -165,3 +165,20 @@ export const resetPassword = async ({ username, code, password }) => {
     return Promise.reject(error);
   }
 };
+
+export const changePassword = async ({ oldPassword, newPassword }) => {
+  try {
+    if (isCognito) {
+      const response = await Auth.currentAuthenticatedUser();
+      await Auth.changePassword(response, oldPassword, newPassword);
+    } else {
+      await api.auth.changePassword({ oldPassword, newPassword });
+    }
+
+    return Promise.resolve();
+  } catch (error) {
+    // TODO: From backend receive wrong error object;
+    // TODO: Backend_Bug: Always incorrect password error, but password has been changed;
+    return Promise.reject(error);
+  }
+};

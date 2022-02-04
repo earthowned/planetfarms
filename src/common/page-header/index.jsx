@@ -7,8 +7,10 @@ import { Icon } from "common/icon";
 import { Modal } from "common/modal";
 import { ModalButton } from "common/modal-button";
 import { ActionButton } from "common/action-button";
-import { DestructionModalContainer } from "common/modal-containers/destruction";
-import SettingsActionModal from "components/settingsActionModal/SettingsActionModal";
+import {
+  DestructiveModalContainer,
+  ChangePasswordModalContainer,
+} from "common/modal-containers";
 
 import { logout } from "actions/auth";
 import useSizeFinder from "utils/sizeFinder";
@@ -29,7 +31,7 @@ export const PageHeader = ({ title = "Kek" }) => {
   const isTablet = screenWidth <= TABLET_SCREEN_WIDTH;
 
   const [showLogout, setShowLogout] = useState(false);
-  const [passwordModalVisible, setPasswordModalVisible] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
 
   const modalButtons = useMemo(
     () => (isTablet ? mobileButtons : desktopButtons),
@@ -43,7 +45,7 @@ export const PageHeader = ({ title = "Kek" }) => {
 
   const handleChangePasswordClick = (setVisible) => {
     setVisible(false);
-    setPasswordModalVisible(true);
+    setShowChangePassword(true);
   };
 
   const handleMessageClick = (setVisible) => {
@@ -116,16 +118,23 @@ export const PageHeader = ({ title = "Kek" }) => {
         </div>
       </div>
 
-      {passwordModalVisible && <SettingsActionModal />}
+      <Modal visible={showLogout || showChangePassword}>
+        {showLogout && (
+          <DestructiveModalContainer
+            title="Logout"
+            onActionClick={onLogout}
+            actionButtonTitle="Logout"
+            onClose={() => setShowLogout(false)}
+            message="Are you sure you want to logout?"
+          />
+        )}
 
-      <Modal visible={showLogout}>
-        <DestructionModalContainer
-          title="Logout"
-          onActionClick={onLogout}
-          actionButtonTitle="Logout"
-          onClose={() => setShowLogout(false)}
-          message="Are you sure you want to logout?"
-        />
+        {showChangePassword && (
+          <ChangePasswordModalContainer
+            onClose={() => setShowChangePassword(false)}
+            onChangePassword={() => {}}
+          />
+        )}
       </Modal>
     </div>
   );
