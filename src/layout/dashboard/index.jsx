@@ -2,9 +2,9 @@ import React from "react";
 
 import { PageHeader } from "common/page-header";
 
-import "./Dashboard.css";
+import "./styles.scss";
 
-const DashboardLayout = ({ title, children }) => {
+export const DashboardLayout = ({ title, children }) => {
   return (
     <div className="dashboard-container">
       <PageHeader title={title} />
@@ -14,5 +14,3 @@ const DashboardLayout = ({ title, children }) => {
     </div>
   );
 };
-
-export default DashboardLayout;

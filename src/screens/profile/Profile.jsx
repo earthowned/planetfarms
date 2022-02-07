@@ -4,7 +4,7 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+import { DashboardLayout } from "layout/dashboard";
 import BackButton from "../../components/backButton/BackButton";
 import PersonalInformation from "../../components/profileFormCard/PersonalInformation";
 import AdditionalInformation from "../../components/profileFormCard/AdditionalInformation";

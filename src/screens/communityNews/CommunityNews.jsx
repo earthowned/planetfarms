@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+import { DashboardLayout } from "layout/dashboard";
 import NewsAddModal from "../../components/newAddModal/NewsAddModal";
 import { deleteNews } from "../../actions/newsActions";
 import DeleteContent from "../../components/deleteContent/DeleteContent";

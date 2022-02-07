@@ -5,10 +5,11 @@ import { useForm, Controller } from "react-hook-form";
 import moment from "moment";
 import PhoneInput from "react-phone-number-input";
 
+import { DashboardLayout } from "layout/dashboard";
+
 import Input from "../../components/input/Input";
 import { ErrorText } from "../../components/formUI/FormUI";
 import Button from "../../components/button/Button";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import BackButton from "../../components/backButton/BackButton";
 import DragDrop from "../../components/dragDrop/DragDrop";
 import { updateUser } from "../../actions/userAction";

@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import BackButton from "../../../components/backButton/BackButton";
 import FarmsDetailsCard from "../../../components/farmsDetailsCard/FarmsDetailsCard";
 import CommunityGroupPhotos from "../../../components/communityGroupPhotos/CommunityGroupPhotos";
 import CommunityGroupPost from "../../../components/communityGroupPost/CommunityGroupPost";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import { listGroupById } from "../../../actions/communityGroupActions";
+import FilterSearch from "../../../components/filterSearch/FilterSearch";
 
 import "./GroupViewPage.css";
-import FilterSearch from "../../../components/filterSearch/FilterSearch";
 
 const CommunityGroupViewPage = () => {
   const { id } = useParams();

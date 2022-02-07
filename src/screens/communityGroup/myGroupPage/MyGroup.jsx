@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from "react";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import BackButton from "../../../components/backButton/BackButton";
 import CommunityGroupPost from "../../../components/communityGroupPost/CommunityGroupPost";
 import CommunityGroupPhotos from "../../../components/communityGroupPhotos/CommunityGroupPhotos";
 import NewsCreateModal from "../../../components/newsCreateModal/NewsCreateModal";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 
 function App() {
   const [editGroupModal, setEditGroupModal] = useState(false);

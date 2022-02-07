@@ -5,10 +5,13 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import { listTestQuestions } from "../../actions/testActions";
 import BackButton from "../../components/backButton/BackButton";
 import Radiobox from "../../components/radioBox/Radiobox";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+
 import "./LessonTestPage.scss";
 
 const LessonTestPage = () => {

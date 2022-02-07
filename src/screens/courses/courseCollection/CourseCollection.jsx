@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import Background from "../../../components/background/Background";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import nav from "../courseNav";
 import "./CourseCollection.css";
 import CardLayout from "../../../layout/cardLayout/CardLayout";

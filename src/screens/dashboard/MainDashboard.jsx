@@ -2,15 +2,18 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useRef, useEffect } from "react";
 import moment from "moment";
-import "./MainDashboard.scss";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ATTACHMENT } from "../../utils/urlConstants";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import useSizeFinder from "../../utils/sizeFinder";
 import useScroll from "../../utils/scrollFunc";
 import { getMyDetails } from "../../actions/userAction";
+
+import "./MainDashboard.scss";
 
 const DashboardData = [
   {

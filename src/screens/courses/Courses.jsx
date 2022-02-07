@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import nav from "./courseNav";
 import useGetFetchData from "../../utils/useGetFetchData";
 import { CATEGORY } from "../../utils/urlConstants";
-
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import CoursesCard from "../../components/coursesCard/CoursesCard";
 import PopUpModal from "./PopUpModal";
 import SubHeader from "../../components/subHeader/SubHeader";
+
 import "./Courses.css";
 
 const Courses = () => {

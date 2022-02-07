@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import Background from "../../../components/background/Background";
 import SubHeader from "../../../components/subHeader/SubHeader";
 import CardLayout from "../../../layout/cardLayout/CardLayout";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import nav from "../courseNav";
 import "./CourseUsers.css";
 

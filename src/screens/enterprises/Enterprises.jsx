@@ -3,7 +3,7 @@ import "./Enterprises.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+import { DashboardLayout } from "layout/dashboard";
 import CommunityGroupCard from "../../components/communityGroupCard/CommunityGroupCard";
 import {
   enterpriseDelete,

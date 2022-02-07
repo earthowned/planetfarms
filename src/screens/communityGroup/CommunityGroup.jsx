@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import FormModal from "../../components/formModal/FormModal";
 import CommunityGroupCard from "../../components/communityGroupCard/CommunityGroupCard";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
-import "./CommunityGroup.scss";
 import {
   searchGroups,
   listGroups,
@@ -16,6 +17,8 @@ import Pagination from "../../components/pagination/Pagination";
 import { getApi } from "../../utils/apiFunc";
 import SubHeader from "../../components/subHeader/SubHeader";
 import DeleteContent from "../../components/deleteContent/DeleteContent";
+
+import "./CommunityGroup.scss";
 
 const CommunityGroup = () => {
   // fetching current community

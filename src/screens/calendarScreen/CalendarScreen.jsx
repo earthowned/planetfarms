@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { useLocation, useHistory } from "react-router";
 
+import { DashboardLayout } from "layout/dashboard";
 import {
   prevMonth,
   nextMonth,
@@ -18,7 +19,6 @@ import useSizeFinder from "../../utils/sizeFinder";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/InputComponent";
 import SimpleFilter from "../../components/simpleFilter/SimpleFilter";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 
 import data from "./EventsData";
 import "./CalendarScreen.css";

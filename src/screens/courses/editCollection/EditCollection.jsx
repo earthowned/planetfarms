@@ -1,8 +1,10 @@
 import React from "react";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import BackButton from "../../../components/backButton/BackButton";
 import Button from "../../../components/button/Button";
 import Secondarybtn from "../../../components/secondaryBtn/Secondarybtn";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import "./EditCollection.css";
 
 const travelling = Array(2)

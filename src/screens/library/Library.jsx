@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+import { DashboardLayout } from "layout/dashboard";
 import SimpleModal from "../../components/simpleModal/SimpleModal";
 import CollectionModal from "../../components/collectionModal/CollectionModal";
 import GroupModal from "../../components/groupModal/GroupModal";

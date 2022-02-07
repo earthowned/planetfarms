@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import CardImage from "../../components/cardImage/CardImage";
 import SearchComponent from "../../components/searchComponent/SearchComponent";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
 import Pagination from "../../components/pagination/Pagination";
-import "./CommunityMembers.css";
 import useSizeFinder from "../../utils/sizeFinder";
 import useGetFetchData from "../../utils/useGetFetchData";
 import { GET_MEMBERS } from "../../utils/urlConstants";
+
+import "./CommunityMembers.css";
 
 function CommunityMembers() {
   const [col, setCol] = useState(3);

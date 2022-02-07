@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { DashboardLayout } from "layout/dashboard";
+
 import BackButton from "../../../components/backButton/BackButton";
 import Button from "../../../components/button/Button";
 import CourseDescription from "../../../components/myCoursesCard/courseDescription/CourseDescription";
@@ -11,7 +13,6 @@ import {
   PurchaseModal,
   PurchaseSuccessModal,
 } from "../../../components/purchaseModal/PurchaseModal";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import "./CoursePage.scss";
 import { ADD_COURSE_VIEW, GET_COURSE } from "../../../utils/urlConstants";
 import useGetFetchData from "../../../utils/useGetFetchData";

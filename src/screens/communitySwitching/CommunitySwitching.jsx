@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-
 import axios from "axios";
 import { useForm } from "react-hook-form";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import Button from "../../components/button/Button";
 import {
   listCommunities,
@@ -16,16 +18,13 @@ import {
 } from "../../actions/communityActions";
 import CommunitiesCard from "../../components/communitiesCard/CommunitiesCard";
 import DragDrop from "../../components/dragDrop/DragDrop";
-
 import CollectionModalHeader from "../../components/newsCreateModal/CollectionModalHeader";
-
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
-
-import "./CommunitySwitching.scss";
 import Pagination from "../../components/pagination/Pagination";
 import { InputFields, SelectFields } from "../../components/formUI/FormUI";
 import ToggleSwitch from "../../components/toggleSwitch/ToggleSwitch";
 import SubHeader from "../../components/subHeader/SubHeader";
+
+import "./CommunitySwitching.scss";
 
 function App() {
   const communitiesState = useSelector((state) => state.listCommunities);
