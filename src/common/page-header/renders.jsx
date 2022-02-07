@@ -64,9 +64,21 @@ export const renderContent = ({
     case ButtonType.Settings:
       return (
         <div className="settings-modal-header-container">
-          <ActionButton title="Change Password" onClick={onChangePassword} />
-          <Divider marginTop="24px" marginBottom="24px" />
-          <ActionButton title="Logout" variant="logout" onClick={onLogout} />
+          <ActionButton
+            icon="lock"
+            title="Change Password"
+            onClick={onChangePassword}
+            variant="transparent-white"
+          />
+
+          <Divider marginTop="12px" marginBottom="12px" />
+
+          <ActionButton
+            icon="logout"
+            title="Logout"
+            onClick={onLogout}
+            variant="transparent-red"
+          />
         </div>
       );
 

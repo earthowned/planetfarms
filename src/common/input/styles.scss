@@ -43,6 +43,16 @@
       }
     }
 
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+      border: none;
+      -webkit-text-fill-color: #f8ebdf;
+      box-shadow: 0 0 0px 1000px #141414 inset;
+      -webkit-box-shadow: 0 0 0px 1000px #141414 inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
     .input-icon {
       margin-right: 16px;
       @include setSvgColor(#8a8a8a);

@@ -20,7 +20,7 @@ const settingsButton = {
   type: ButtonType.Settings,
   title: "Your settings",
   position: { top: "65px", right: "-12px" },
-  width: "350px",
+  width: "400px",
 };
 
 export const desktopButtons = [

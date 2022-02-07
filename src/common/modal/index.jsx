@@ -1,6 +1,8 @@
 import React from "react";
 import { Portal } from "react-portal";
 
+import { IconButton } from "common/icon-button";
+
 import "./styles.scss";
 
 export const Modal = ({ visible, children, modalRef }) => {
@@ -24,5 +26,21 @@ export const MobileMenuModal = ({ visible, children, modalRef }) => {
         {children}
       </div>
     </Portal>
+  );
+};
+
+export const CommonModal = ({ visible, title, onClose, children }) => {
+  if (!visible) return null;
+
+  return (
+    <Modal visible={visible}>
+      <div className="common-modal-container">
+        <div className="top-container">
+          <h3>{title}</h3>
+          <IconButton icon="cross" variant="white" onClick={onClose} />
+        </div>
+        {children}
+      </div>
+    </Modal>
   );
 };

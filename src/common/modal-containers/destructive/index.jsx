@@ -1,34 +1,32 @@
 import React from "react";
 
-import { IconButton } from "common/icon-button";
+import { CommonModal } from "common/modal";
 import { ActionButton } from "common/action-button";
 
 import "./styles.scss";
 
 export const DestructiveModalContainer = ({
   title,
+  visible,
   message,
   onClose,
   onActionClick,
   actionButtonTitle,
 }) => {
   return (
-    <div className="destruction-modal-container">
-      <div className="top-container">
-        <h3>{title}</h3>
-        <IconButton icon="cross" variant="white" onClick={onClose} />
-      </div>
+    <CommonModal visible={visible} title={title} onClose={onClose}>
+      <div className="destruction-modal-container">
+        {message && <h5>{message}</h5>}
 
-      {message && <h5>{message}</h5>}
-
-      <div className="buttons-container">
-        <ActionButton title="Cancel" variant="secondary" onClick={onClose} />
-        <ActionButton
-          variant="logout"
-          onClick={onActionClick}
-          title={actionButtonTitle}
-        />
+        <div className="buttons-container">
+          <ActionButton title="Cancel" variant="secondary" onClick={onClose} />
+          <ActionButton
+            variant="logout"
+            onClick={onActionClick}
+            title={actionButtonTitle}
+          />
+        </div>
       </div>
-    </div>
+    </CommonModal>
   );
 };

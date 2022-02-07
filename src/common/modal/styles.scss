@@ -25,3 +25,30 @@
   position: fixed;
   padding-top: 48px;
 }
+
+.common-modal-container {
+  width: 80%;
+  max-width: 608px;
+  padding: 24px;
+  border-radius: 4px;
+  background-color: #191b1d;
+
+  display: flex;
+  flex-direction: column;
+
+  .top-container {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  @include breakpoint("mobile") {
+    width: 100%;
+    height: 100%;
+    max-width: unset;
+  }
+}
