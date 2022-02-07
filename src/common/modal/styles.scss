@@ -1,29 +1,27 @@
 @import "src/scss/mixins";
 
 .portal-modal-container {
-  &-mobile-page {
-    backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.3);
 
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 48px; // bottom-nav-height
-    position: fixed;
-    padding-top: 48px;
-  }
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
 
-  &-full-screen {
-    backdrop-filter: blur(4px);
-    background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
+.portal-mobile-modal-container {
+  backdrop-filter: blur(4px);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 48px; // bottom-nav-height
+  position: fixed;
+  padding-top: 48px;
 }
