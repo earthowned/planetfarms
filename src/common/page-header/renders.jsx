@@ -2,8 +2,8 @@ import React from "react";
 
 import { Avatar } from "common/avatar";
 import { Divider } from "common/divider";
-import { IconButton } from "common/icon-button";
-import { ActionButton } from "common/action-button";
+import { IconButton } from "common/buttons/icon-button";
+import { ActionButton } from "common/buttons/action-button";
 import { NotificationItem } from "common/list-items/notification-item";
 
 import { mockNotifications, mockMessages } from "mock";

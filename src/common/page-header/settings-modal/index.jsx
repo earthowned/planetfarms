@@ -1,6 +1,6 @@
 import { Divider } from "common/divider";
 import { CommonModal } from "common/modal";
-import { ActionButton } from "common/action-button";
+import { ActionButton } from "common/buttons/action-button";
 
 import "./styles.scss";
 

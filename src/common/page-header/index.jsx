@@ -5,8 +5,8 @@ import { useHistory } from "react-router-dom";
 
 import { Icon } from "common/icon";
 import { Avatar } from "common/avatar";
-import { ModalButton } from "common/modal-button";
-import { ActionButton } from "common/action-button";
+import { ModalButton } from "common/buttons/modal-button";
+import { ActionButton } from "common/buttons/action-button";
 import { DestructiveModalContainer } from "common/modal-containers";
 
 import { logout } from "actions/auth";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IconButton } from "common/icon-button";
+import { IconButton } from "common/buttons/icon-button";
 
 import { currYearName, currMonthName } from "../helpers";
 

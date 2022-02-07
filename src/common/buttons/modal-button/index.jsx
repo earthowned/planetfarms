@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import { IconButton } from "common/icon-button";
-import { ActionButton } from "common/action-button";
+import { IconButton } from "common/buttons/icon-button";
+import { ActionButton } from "common/buttons/action-button";
 
 import "./styles.scss";
 

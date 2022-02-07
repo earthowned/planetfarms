@@ -8,7 +8,7 @@ import { TextLink } from "common/links";
 import { InputField } from "common/input";
 import { Checkbox } from "common/checkbox";
 import { AuthLayout } from "layout/auth-layout";
-import { ActionButton } from "common/action-button";
+import { ActionButton } from "common/buttons/action-button";
 
 import { login } from "actions/auth";
 import { getErrorMessage } from "utils/error";

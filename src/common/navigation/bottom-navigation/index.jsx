@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { IconButton } from "common/icon-button";
+import { IconButton } from "common/buttons/icon-button";
 
 import { MobileNavType, buttons } from "./config";
 import {

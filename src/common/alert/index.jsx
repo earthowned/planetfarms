@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 
-// import { IconButton } from "common/icon-button";
+// import { IconButton } from "common/buttons/icon-button";
 
 import "./styles.scss";
 

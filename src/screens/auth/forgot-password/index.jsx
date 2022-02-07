@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { TextLink } from "common/links";
 import { InputField } from "common/input";
 import { AuthLayout } from "layout/auth-layout";
-import { ActionButton } from "common/action-button";
+import { ActionButton } from "common/buttons/action-button";
 
 import { getErrorMessage } from "utils/error";
 import { requestCode, resetPassword } from "actions/auth";

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ActionButton } from "common/action-button";
+import { ActionButton } from "common/buttons/action-button";
 
 import Input from "../../components/input/Input";
 import SignLayout from "../../layout/signLayout/SignLayout";

@@ -2,7 +2,7 @@ import React from "react";
 
 import { mockMessages } from "mock";
 import { MobileMenuModal } from "common/modal";
-import { ActionButton } from "common/action-button";
+import { ActionButton } from "common/buttons/action-button";
 import { NotificationItem } from "common/list-items/notification-item";
 
 import "./styles.scss";

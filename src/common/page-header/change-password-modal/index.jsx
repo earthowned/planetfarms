@@ -4,7 +4,7 @@ import { useAlert } from "react-alert";
 
 import { InputField } from "common/input";
 import { CommonModal } from "common/modal";
-import { ActionButton } from "common/action-button";
+import { ActionButton } from "common/buttons/action-button";
 
 import { getErrorMessage } from "utils/error";
 import { changePassword } from "actions/auth";
