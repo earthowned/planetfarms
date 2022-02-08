@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import {
   MATERIAL,
   LESSON_PROGRESS,
@@ -12,7 +15,6 @@ import {
 } from "../../../utils/urlConstants";
 import useGetLessonData from "../../../utils/useGetLessonData";
 import BackButton from "../../../components/backButton/BackButton";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import Material from "../../../components/material/Material";
 import Button from "../../../components/button/Button";
 

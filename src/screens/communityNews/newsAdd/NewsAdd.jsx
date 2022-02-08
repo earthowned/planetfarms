@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import NewsCreateModal from "../../../components/newsCreateModal/NewsCreateModal";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import useGetFetchData from "../../../utils/useGetFetchData";
 import BackButton from "../../../components/backButton/BackButton";
 import { createNews, newsUpdate } from "../../../actions/newsActions";

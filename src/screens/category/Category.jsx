@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import {
   categoryDelete,
   categoryUpdate,
@@ -15,10 +18,10 @@ import Button from "../../components/button/Button";
 import { InputFields } from "../../components/formUI/FormUI";
 import CollectionModalHeader from "../../components/newsCreateModal/CollectionModalHeader";
 import Table from "../../components/table/Table";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
-import "./Category.scss";
 import CheckPermit from "../../utils/checkPermit.jsx";
 import { getApi } from "../../utils/apiFunc";
+
+import "./Category.scss";
 
 const Category = () => {
   const [deleteModal, setDeleteModal] = useState(false);

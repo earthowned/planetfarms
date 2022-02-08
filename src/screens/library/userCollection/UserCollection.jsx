@@ -1,6 +1,7 @@
 import { useState } from "react";
-import "./UserCollection.css";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import CollectionModal from "../../../components/collectionModal/CollectionModal";
 import SimpleModal from "../../../components/simpleModal/SimpleModal";
 import Background from "../../../components/background/Background";
@@ -8,6 +9,8 @@ import { farming, groupCollection, nav } from "../CollectionData";
 import GroupModal from "../../../components/groupModal/GroupModal";
 import CardLayout from "../../../layout/cardLayout/CardLayout";
 import SubHeader from "../../../components/subHeader/SubHeader";
+
+import "./UserCollection.css";
 
 const UserCollection = () => {
   const [modalActive, setModalActive] = useState(false);

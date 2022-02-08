@@ -1,31 +1,46 @@
 import React from "react";
-import cx from "classnames";
 import { Portal } from "react-portal";
+
+import { IconButton } from "common/buttons/icon-button";
 
 import "./styles.scss";
 
-const ModalVariant = {
-  "full-screen": "full-screen",
-  "mobile-page": "mobile-page",
-};
-
-export const Modal = ({
-  visible,
-  children,
-  modalRef,
-  variant = ModalVariant["full-screen"],
-}) => {
+export const Modal = ({ visible, children, modalRef }) => {
   if (!visible) return null;
-
-  const modalClassName = cx("portal-modal-container", {
-    [`portal-modal-container-${variant}`]: true,
-  });
 
   return (
     <Portal node={document && document.getElementById("app-portal-container")}>
-      <div ref={modalRef} className={modalClassName}>
+      <div ref={modalRef} className="portal-modal-container">
         {children}
       </div>
     </Portal>
+  );
+};
+
+export const MobileMenuModal = ({ visible, children, modalRef }) => {
+  if (!visible) return null;
+
+  return (
+    <Portal node={document && document.getElementById("app-portal-container")}>
+      <div ref={modalRef} className="portal-mobile-modal-container">
+        {children}
+      </div>
+    </Portal>
+  );
+};
+
+export const CommonModal = ({ visible, title, onClose, children }) => {
+  if (!visible) return null;
+
+  return (
+    <Modal visible={visible}>
+      <div className="common-modal-container">
+        <div className="top-container">
+          <h3>{title}</h3>
+          <IconButton icon="cross" variant="white" onClick={onClose} />
+        </div>
+        {children}
+      </div>
+    </Modal>
   );
 };

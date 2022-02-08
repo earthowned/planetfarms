@@ -5,8 +5,8 @@ import { useHistory, Link } from "react-router-dom";
 
 import { Icon } from "common/icon";
 import { Avatar } from "common/avatar";
-import { IconButton } from "common/icon-button";
-import { ActionButton } from "common/action-button";
+import { IconButton } from "common/buttons/icon-button";
+import { ActionButton } from "common/buttons/action-button";
 import { SideNavLink } from "common/links/side-nav-link";
 
 import { links } from "./config";

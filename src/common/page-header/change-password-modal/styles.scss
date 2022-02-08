@@ -1,24 +1,7 @@
 @import "src/scss/mixins";
 
 .change-password-modal-container {
-  width: 80%;
-  max-width: 608px;
-  max-height: 90%;
-  border-radius: 4px;
-  padding: 24px;
-  background-color: #191b1d;
-
-  overflow-y: auto;
-
-  .top-container {
-    width: 100%;
-    height: 56px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 24px;
-  }
+  width: 100%;
 
   .inputs-container {
     gap: 24px;
@@ -29,10 +12,12 @@
 
   .buttons-container {
     width: 70%;
+    height: 48px;
     gap: 24px;
     display: flex;
     flex-direction: row;
     margin-top: 40px;
+    flex-shrink: 0;
   }
 
   @include breakpoint("tablet") {
@@ -42,11 +27,6 @@
   }
 
   @include breakpoint("mobile") {
-    width: 100%;
-    height: 100%;
-    max-width: unset;
-    max-height: unset;
-
     .buttons-container {
       width: 100%;
       flex-wrap: wrap;

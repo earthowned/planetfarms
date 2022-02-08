@@ -2,10 +2,12 @@
 import { useState, useEffect } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import { createLesson, updateLesson } from "../../../actions/lessonActions";
 import BackButton from "../../../components/backButton/BackButton";
 import NewsCreateModal from "../../../components/newsCreateModal/NewsCreateModal";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import "./AddLesson.scss";
 import useGetFetchData from "../../../utils/useGetFetchData";
 import { deletePhoto, updatePhoto } from "../../../actions/photoActions";

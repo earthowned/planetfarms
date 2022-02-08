@@ -1,7 +1,10 @@
 import React from "react";
-import "./Messenger.scss";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import MessengerMain from "../../components/messengerMain/MessengerMain";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+
+import "./Messenger.scss";
 
 const Messenger = () => {
   return (

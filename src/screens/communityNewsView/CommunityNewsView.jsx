@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CommunityNewsView.scss";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+import { DashboardLayout } from "layout/dashboard";
 import BackButton from "../../components/backButton/BackButton";
 import { getApi } from "../../utils/apiFunc";
 import RichTextView from "../../components/richTextView/RichTextView";

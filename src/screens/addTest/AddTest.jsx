@@ -5,15 +5,17 @@ import update from "immutability-helper";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation, useParams, useHistory } from "react-router-dom";
-import { createTest } from "../../actions/testActions";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
-import "./AddTest.scss";
 
+import { DashboardLayout } from "layout/dashboard";
+
+import { createTest } from "../../actions/testActions";
 import { checkArrayForFilledValue } from "../../utils/checkFilledArray";
 import { deleteSingleQuestion } from "../../actions/questionActions";
 import BackButton from "../../components/backButton/BackButton";
 import DeleteQuestionModal from "./DeleteQuestionModal";
 import Card from "./Card";
+
+import "./AddTest.scss";
 
 const AddTest = () => {
   const [cards, setCards] = useState([]);

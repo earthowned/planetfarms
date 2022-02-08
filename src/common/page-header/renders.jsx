@@ -2,8 +2,8 @@ import React from "react";
 
 import { Avatar } from "common/avatar";
 import { Divider } from "common/divider";
-import { IconButton } from "common/icon-button";
-import { ActionButton } from "common/action-button";
+import { IconButton } from "common/buttons/icon-button";
+import { ActionButton } from "common/buttons/action-button";
 import { NotificationItem } from "common/list-items/notification-item";
 
 import { mockNotifications, mockMessages } from "mock";
@@ -64,9 +64,21 @@ export const renderContent = ({
     case ButtonType.Settings:
       return (
         <div className="settings-modal-header-container">
-          <ActionButton title="Change Password" onClick={onChangePassword} />
-          <Divider marginTop="24px" marginBottom="24px" />
-          <ActionButton title="Logout" variant="logout" onClick={onLogout} />
+          <ActionButton
+            icon="lock"
+            title="Change Password"
+            onClick={onChangePassword}
+            variant="transparent-white"
+          />
+
+          <Divider marginTop="12px" marginBottom="12px" />
+
+          <ActionButton
+            icon="logout"
+            title="Logout"
+            onClick={onLogout}
+            variant="transparent-red"
+          />
         </div>
       );
 

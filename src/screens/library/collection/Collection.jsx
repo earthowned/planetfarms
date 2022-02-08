@@ -1,11 +1,13 @@
 import { useState } from "react";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import CollectionModal from "../../../components/collectionModal/CollectionModal";
 import GroupModal from "../../../components/groupModal/GroupModal";
 import LibraryCard from "../../../components/libraryCard/LibraryCard";
 // import LibraryHeader from '../../../components/libraryHeader/LibraryHeader'
 import SimpleModal from "../../../components/simpleModal/SimpleModal";
 import SubHeader from "../../../components/subHeader/SubHeader";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import { groupCollection, collections, nav } from "../CollectionData";
 
 import "./Collection.css";

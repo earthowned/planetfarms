@@ -1,7 +1,10 @@
 import React from "react";
+
+import { DashboardLayout } from "layout/dashboard";
+
 import BackButton from "../../components/backButton/BackButton";
 import MyCoursesCard from "../../components/myCoursesCard/MyCoursesCard";
-import DashboardLayout from "../../layout/dashboardLayout/DashboardLayout";
+
 import "./MyCourses.scss";
 
 function App() {

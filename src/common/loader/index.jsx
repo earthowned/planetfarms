@@ -19,7 +19,13 @@ const options = {
 export const Loader = () => {
   return (
     <div className="loader-container">
-      <Lottie animationData={loaderAnimation} {...options} />
+      <div style={{ height: "100%", maxHeight: "800px" }}>
+        <Lottie
+          animationData={loaderAnimation}
+          style={{ width: "100%", height: "100%" }}
+          {...options}
+        />
+      </div>
     </div>
   );
 };

@@ -1,15 +1,14 @@
 import React, { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { Modal } from "common/modal";
-import { IconButton } from "common/icon-button";
+import { IconButton } from "common/buttons/icon-button";
+
+import { MobileNavType, buttons } from "./config";
 import {
   MessagesModalContainer,
   MobileNavModalContainer,
   NotificationsModalContainer,
-} from "common/modal-containers";
-
-import { MobileNavType, buttons } from "./config";
+} from "./mobile-menu-modals";
 
 import "./styles.scss";
 
@@ -19,6 +18,11 @@ export const BottomNavigation = () => {
   const [selectedType, setSelectedType] = useState(undefined);
 
   const handleClose = () => setSelectedType(undefined);
+
+  const handleMessageClick = () => {
+    setSelectedType(undefined);
+    history.push("/messenger");
+  };
 
   const handleClick = useCallback(
     (type, path) => {
@@ -60,19 +64,22 @@ export const BottomNavigation = () => {
         ))}
       </div>
 
-      <Modal variant="mobile-page" visible={selectedType}>
-        {selectedType === MobileNavType.Messages && (
-          <MessagesModalContainer onClose={handleClose} />
-        )}
+      <MessagesModalContainer
+        onClose={handleClose}
+        onMessageClick={handleMessageClick}
+        visible={selectedType === MobileNavType.Messages}
+      />
 
-        {selectedType === MobileNavType.Notifications && (
-          <NotificationsModalContainer onClose={handleClose} />
-        )}
+      <NotificationsModalContainer
+        onClose={handleClose}
+        onMessageClick={handleMessageClick}
+        visible={selectedType === MobileNavType.Notifications}
+      />
 
-        {selectedType === MobileNavType.Menu && (
-          <MobileNavModalContainer onClose={handleClose} />
-        )}
-      </Modal>
+      <MobileNavModalContainer
+        onClose={handleClose}
+        visible={selectedType === MobileNavType.Menu}
+      />
     </>
   );
 };

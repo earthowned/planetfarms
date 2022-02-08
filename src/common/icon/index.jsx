@@ -27,6 +27,7 @@ import { ReactComponent as EmailIcon } from "assets/icons/email.svg";
 import { ReactComponent as BellIcon } from "assets/icons/bell.svg";
 import { ReactComponent as GridIcon } from "assets/icons/grid.svg";
 import { ReactComponent as GamburgerIcon } from "assets/icons/gamburger.svg";
+import { ReactComponent as LogoutIcon } from "assets/icons/logout.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -92,6 +93,9 @@ const getIcon = (iconName) => {
 
     case "logo-mobile":
       return <MobileLogoIcon />;
+
+    case "logout":
+      return <LogoutIcon />;
 
     default:
       return <GoogleIcon />;

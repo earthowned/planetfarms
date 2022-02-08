@@ -49,6 +49,10 @@
   .settings-modal-header-container {
     display: flex;
     flex-direction: column;
+
+    .action-btn {
+      justify-content: flex-start;
+    }
   }
 
   @include breakpoint("tablet", "max") {

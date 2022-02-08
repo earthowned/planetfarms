@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import { DashboardLayout } from "layout/dashboard";
+
 import useGetFetchData from "../../../utils/useGetFetchData";
 import { GET_COURSE } from "../../../utils/urlConstants";
 import { deleteCourse } from "../../../actions/courseActions";
 
 import BackButton from "../../../components/backButton/BackButton";
-import DashboardLayout from "../../../layout/dashboardLayout/DashboardLayout";
 import CourseDescription from "./CourseDescription";
 import LessonBlock from "./LessonBlock";
 import EditCourseModal from "../../../components/courseCreateModal/EditCourseModal";

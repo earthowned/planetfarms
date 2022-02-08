@@ -1,29 +1,54 @@
 @import "src/scss/mixins";
 
 .portal-modal-container {
-  &-mobile-page {
-    backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.3);
 
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 48px; // bottom-nav-height
-    position: fixed;
-    padding-top: 48px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portal-mobile-modal-container {
+  backdrop-filter: blur(4px);
+
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 48px; // bottom-nav-height
+  position: fixed;
+  padding-top: 48px;
+}
+
+.common-modal-container {
+  width: 80%;
+  max-width: 608px;
+  padding: 24px;
+  border-radius: 4px;
+  background-color: #191b1d;
+
+  display: flex;
+  flex-direction: column;
+
+  .top-container {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
   }
 
-  &-full-screen {
-    backdrop-filter: blur(4px);
-    background-color: rgba(0, 0, 0, 0.3);
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  @include breakpoint("mobile") {
+    width: 100%;
+    height: 100%;
+    max-width: unset;
   }
 }
