@@ -1,0 +1,75 @@
+@import "src/scss/mixins";
+
+.congratulations-page-container {
+  // width: 100%;
+  height: 100vh;
+  background-color: green;
+
+  // display: flex;
+  // flex-direction: row-reverse;
+  // flex-wrap: wrap;
+  // justify-content: flex-end;
+
+  .wrap-content {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    .drag-drop-container {
+      flex: 3;
+      // flex-grow: 2;
+      // width: 320px;
+      height: 320px;
+      flex-shrink: 0;
+      min-width: 320px;
+      max-width: 320px;
+      background-color: yellowgreen;
+    }
+
+    .inputs {
+      flex: 1;
+      // flex-grow: 1;
+      min-width: 440px;
+      // max-width: 1000px;
+      // padding: 20px;
+      // height: 320px;
+      background-color: red;
+
+      gap: 40px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+
+      .pf-input {
+        max-width: 440px;
+        min-width: 440px;
+      }
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    .wrap-content {
+      .drag-drop-container {
+        width: 100%;
+        // min-width: unset;
+        max-width: unset;
+      }
+
+      .inputs {
+        .pf-input {
+          width: 100%;
+          max-width: unset;
+          min-width: unset;
+        }
+      }
+    }
+  }
+
+  .buttons {
+    width: 440px;
+    height: 48px;
+    background-color: burlywood;
+  }
+}
