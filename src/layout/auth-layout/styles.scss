@@ -4,8 +4,8 @@
 .auth-container {
   padding: 0px $padding-desktop;
 
-  // flex: 1;
-  height: 100vh;
+  flex: 1;
+  // height: 100vh;
   display: flex;
   flex-direction: column;
   // background-color: red;
@@ -22,7 +22,7 @@
 
   .content-container {
     width: 100%;
-    height: 100%;
+    // height: 100%;
 
     gap: 48px;
     display: flex;
@@ -33,8 +33,6 @@
 
   .form-container {
     width: 100%;
-    height: 100%;
-    // background-color: yellow;
 
     display: flex;
     flex-direction: column;

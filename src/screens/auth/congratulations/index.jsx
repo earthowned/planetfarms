@@ -1,32 +1,16 @@
-import { Input } from "common/input";
+import { Formik, Form } from "formik";
+
+import { InputField } from "common/input";
 import { AuthLayout } from "layout/auth-layout";
+import { ActionButton } from "common/buttons/action-button";
+
+import { inputs, validationSchema, intitalValues } from "./config";
 
 import "./styles.scss";
 
-const inputs = [
-  {
-    type: "text",
-    placeholder: "First Name",
-  },
-  {
-    type: "text",
-    placeholder: "Last Name",
-  },
-  {
-    type: "email",
-    placeholder: "Email",
-  },
-  {
-    type: "phone",
-    placeholder: "Phone Number",
-  },
-  {
-    type: "text",
-    placeholder: "Birthday",
-  },
-];
-
 export const CongratulationsPage = () => {
+  const handleFormSubmit = () => {};
+
   return (
     <AuthLayout
       withLogo={false}
@@ -34,31 +18,39 @@ export const CongratulationsPage = () => {
       subtitle="Please fill these fields to communicate with other people easier:"
     >
       <div className="congratulations-page-container">
-        <div className="wrap-content">
-          <div className="drag-drop-container" />
-          <div className="inputs">
-            {inputs.map((item) => (
-              <Input
-                placeholder={item.placeholder}
-                type={item.type}
-                key={item.placeholder}
-              />
-            ))}
-          </div>
-        </div>
+        <Formik
+          validateOnBlur={false}
+          validateOnChange={false}
+          onSubmit={handleFormSubmit}
+          initialValues={intitalValues}
+          validationSchema={validationSchema}
+        >
+          <Form>
+            <div className="form-grid-layout">
+              <div className="grag-and-drop-container" />
 
-        <div className="buttons" />
+              {inputs.map((inputData) => (
+                <InputField key={inputData.placeholder} {...inputData} />
+              ))}
+
+              <div className="buttons-container">
+                <ActionButton
+                  type="button"
+                  title="Skip for now"
+                  variant="secondary"
+                  onClick={() => {}}
+                />
+
+                <ActionButton
+                  type="submit"
+                  title="Continue"
+                  variant="primary"
+                />
+              </div>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </AuthLayout>
   );
 };
-
-/* <div className="inputs">
-        {inputs.map((item) => (
-          <Input
-            placeholder={item.placeholder}
-            type={item.type}
-            key={item.placeholder}
-          />
-        ))}
-      </div> */
