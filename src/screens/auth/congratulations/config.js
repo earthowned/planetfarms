@@ -1,6 +1,10 @@
 import * as Yup from "yup";
 
 export const model = {
+  avatar: {
+    name: "avatar",
+    placeholder: "Drag & Drop files in this area or Click Here to attach",
+  },
   firstName: {
     name: "firstName",
     type: "text",
@@ -37,6 +41,7 @@ export const inputs = [
 ];
 
 export const validationSchema = Yup.object().shape({
+  [model.avatar.name]: Yup.object().optional(),
   [model.firstName.name]: Yup.string().optional(),
   [model.lastName.name]: Yup.string().optional(),
   [model.email.name]: Yup.string().email().optional(),
@@ -44,6 +49,7 @@ export const validationSchema = Yup.object().shape({
 });
 
 export const intitalValues = {
+  [model.avatar.name]: {},
   [model.firstName.name]: "",
   [model.lastName.name]: "",
   [model.email.name]: "",

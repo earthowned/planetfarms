@@ -2,14 +2,17 @@ import { Formik, Form } from "formik";
 
 import { InputField } from "common/input";
 import { AuthLayout } from "layout/auth-layout";
+import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
 
-import { inputs, validationSchema, intitalValues } from "./config";
+import { model, inputs, validationSchema, intitalValues } from "./config";
 
 import "./styles.scss";
 
 export const CongratulationsPage = () => {
-  const handleFormSubmit = () => {};
+  const handleFormSubmit = (values) => {
+    console.log(values);
+  };
 
   return (
     <AuthLayout
@@ -27,7 +30,13 @@ export const CongratulationsPage = () => {
         >
           <Form>
             <div className="form-grid-layout">
-              <div className="grag-and-drop-container" />
+              <div className="grag-and-drop-container">
+                <DragDropZoneField
+                  name={model.avatar.name}
+                  fileTypes={["JPG", "PNG"]}
+                  placeholder={model.avatar.placeholder}
+                />
+              </div>
 
               {inputs.map((inputData) => (
                 <InputField key={inputData.placeholder} {...inputData} />
