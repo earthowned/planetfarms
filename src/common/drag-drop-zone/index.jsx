@@ -14,29 +14,20 @@ export const DragDropZone = ({
 }) => {
   const alert = useAlert();
 
-  const handleChange = (data) => {
-    onChange({
-      name: data?.name,
-      size: data?.size,
-      type: data?.type,
-      url: URL.createObjectURL(data),
-    });
-  };
-
-  const handleError = (error) => {
-    alert.error(error);
-  };
-
   return (
     <FileUploader
       name={name}
       types={fileTypes}
       disabled={disabled}
-      onTypeError={handleError}
-      handleChange={handleChange}
+      handleChange={(data) => onChange(data)}
+      onTypeError={(error) => alert.error(error)}
     >
       <div className="pf-drag-drop-zone">
-        {file?.url ? <img src={file.url} alt="" /> : <h4>{placeholder}</h4>}
+        {file ? (
+          <img src={URL.createObjectURL(file)} alt="" />
+        ) : (
+          <h4>{placeholder}</h4>
+        )}
       </div>
     </FileUploader>
   );
@@ -52,7 +43,7 @@ export const DragDropZoneField = ({ name, ...props }) => {
     <DragDropZone
       name={name}
       file={field.value}
-      onChange={(file) => helpers.setValue({ ...file })}
+      onChange={(file) => helpers.setValue(file)}
       {...props}
     />
   );

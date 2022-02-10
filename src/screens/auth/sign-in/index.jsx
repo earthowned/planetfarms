@@ -39,9 +39,8 @@ export const SignInPage = () => {
       await login({ name: username, password })(dispatch);
       history.push("/news");
     } catch (error) {
-      alert.error(getErrorMessage(error));
-    } finally {
       setIsLoading(false);
+      alert.error(getErrorMessage(error));
     }
   };
 

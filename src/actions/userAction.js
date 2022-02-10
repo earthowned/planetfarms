@@ -8,6 +8,7 @@ import FormData from "form-data";
 
 import { authConfig } from "config/amplify";
 
+import { api } from "api";
 import { getApi, postApi, putApi } from "../utils/apiFunc";
 
 import {
@@ -215,6 +216,54 @@ export const updateUser = (user, history) => async (dispatch, getState) => {
     });
   }
 };
+
+export const updateUserInfo =
+  ({ firstName, lastName, avatar, phoneNumber, email, birthdate }) =>
+  async (dispatch) => {
+    try {
+      const formData = new FormData();
+      if (firstName) formData.append("firstName", firstName);
+      if (lastName) formData.append("lastName", lastName);
+      if (email) formData.append("email", email);
+      if (phoneNumber) formData.append("phone", phoneNumber);
+      if (birthdate) formData.append("birthday", birthdate);
+      // if (avatar)
+      //   formData.append("file", {
+      //     ...avatar,
+      //   });
+      if (avatar) formData.append("attachments", avatar);
+
+      let authedUser;
+
+      if (isCognito) {
+        authedUser = await Auth.currentAuthenticatedUser({
+          bypassCache: true,
+        });
+      }
+
+      const response = await api.profile.update({ formData });
+      // const updatedUser = await api.profile.get();
+      // console.log("updatedUser", updatedUser);
+
+      if (isCognito) {
+        await Auth.updateUserAttributes(authedUser, {
+          email: email || authedUser.email,
+          birthdate: birthdate || authedUser.birthdate,
+          given_name: firstName || authedUser.given_name,
+          family_name: lastName || authedUser.family_name,
+          phoneNumber: phoneNumber || authedUser.phone_number,
+        });
+      }
+
+      dispatch({
+        type: USER_DETAILS_SUCCESS,
+        payload: { user: response.data },
+      });
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
 
 export const listUsers = () => async (dispatch) => {
   try {

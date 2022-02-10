@@ -31,8 +31,8 @@ export const model = {
     type: "tel",
     placeholder: "Phone Number",
   },
-  birthday: {
-    name: "birthday",
+  birthdate: {
+    name: "birthdate",
     type: "date",
     placeholder: "Birthday",
   },
@@ -43,31 +43,32 @@ export const inputs = [
   model.lastName,
   model.email,
   model.phoneNumber,
-  model.birthday,
+  model.birthdate,
 ];
 
 export const validationSchema = Yup.object().shape({
-  [model.avatar.name]: Yup.object().optional(),
+  [model.avatar.name]: Yup.string().optional(),
   [model.firstName.name]: Yup.string().optional(),
   [model.lastName.name]: Yup.string().optional(),
   [model.phoneNumber.name]: Yup.string()
     .optional()
     .matches(phoneRegex, "Invalid Phone Number"),
   [model.email.name]: Yup.string().email().optional(),
-  [model.birthday.name]: Yup.string()
+  [model.birthdate.name]: Yup.string()
     .optional()
     .matches(dateRegex, "Invalid Date")
     .test("valid-birthdate", "Invalid Birthday", (value) => {
+      if (!value) return true;
       const date = dayjs(value, "DD/MM/YYYY");
       return date.isValid() && date.isBefore(dayjs());
     }),
 });
 
 export const intitalValues = {
-  [model.avatar.name]: {},
+  [model.avatar.name]: undefined,
   [model.firstName.name]: "",
   [model.lastName.name]: "",
   [model.phoneNumber.name]: "",
   [model.email.name]: "",
-  [model.birthday.name]: "",
+  [model.birthdate.name]: "",
 };

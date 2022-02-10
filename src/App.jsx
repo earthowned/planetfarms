@@ -39,7 +39,11 @@ function App() {
               <Route component={SignInPage} path="/login" />
               <Route component={SignUpPage} path="/register" />
               <Route component={ForgotPasswordPage} path="/forgot-password" />
-              <Route component={CongratulationsPage} path="/congratulations" />
+              <PrivateRoute
+                path="/congratulations"
+                component={CongratulationsPage}
+              />
+
               <PrivateRoute component={MainApp} />
             </Switch>
           </ScrollToTop>

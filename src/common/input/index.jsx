@@ -26,7 +26,7 @@ const InputWithType = ({ type, onBlur, ...props }) => {
     );
   }
 
-  return <input onBlur={onBlur} {...props} />;
+  return <input type={type} onBlur={onBlur} {...props} />;
 };
 
 export const Input = ({

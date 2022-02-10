@@ -45,9 +45,8 @@ export const ForgotPasswordPage = () => {
         history.push("/login");
       }
     } catch (error) {
-      alert.error(getErrorMessage(error));
-    } finally {
       setIsLoading(false);
+      alert.error(getErrorMessage(error));
     }
   };
 

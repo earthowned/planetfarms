@@ -21,7 +21,7 @@ import { ChangePasswordModalContainer } from "./change-password-modal";
 
 import "./styles.scss";
 
-export const PageHeader = ({ title = "Kek" }) => {
+export const PageHeader = ({ title = "PlanetFarms" }) => {
   const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
