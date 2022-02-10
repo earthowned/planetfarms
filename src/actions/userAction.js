@@ -227,10 +227,6 @@ export const updateUserInfo =
       if (email) formData.append("email", email);
       if (phoneNumber) formData.append("phone", phoneNumber);
       if (birthdate) formData.append("birthday", birthdate);
-      // if (avatar)
-      //   formData.append("file", {
-      //     ...avatar,
-      //   });
       if (avatar) formData.append("attachments", avatar);
 
       let authedUser;
@@ -242,8 +238,6 @@ export const updateUserInfo =
       }
 
       const response = await api.profile.update({ formData });
-      // const updatedUser = await api.profile.get();
-      // console.log("updatedUser", updatedUser);
 
       if (isCognito) {
         await Auth.updateUserAttributes(authedUser, {
