@@ -34,7 +34,7 @@ export const SignUpPage = () => {
     try {
       setIsLoading(true);
       await register({ name: username, password })(dispatch);
-      history.push("/");
+      history.push("/congratulations");
     } catch (error) {
       setIsLoading(false);
       alert.error(getErrorMessage(error));
