@@ -4,7 +4,7 @@ export const configurePayload = (values) => {
   let phone;
   if (phoneNumber) {
     // remove all special characters ("+", "-", "(", ")")
-    phone = phoneNumber.replace(/[\W_]/g, "");
+    phone = `+${phoneNumber.replace(/[\W_]/g, "")}`;
   }
 
   let date;

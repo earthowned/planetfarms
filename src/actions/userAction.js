@@ -245,7 +245,7 @@ export const updateUserInfo =
           birthdate: birthdate || authedUser.birthdate,
           given_name: firstName || authedUser.given_name,
           family_name: lastName || authedUser.family_name,
-          phoneNumber: phoneNumber || authedUser.phone_number,
+          phone_number: phoneNumber || authedUser.phone_number,
         });
       }
 
