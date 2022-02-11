@@ -1,0 +1,27 @@
+@import "src/scss/variables";
+
+.pf-tab-link {
+  height: 48px;
+  min-width: 171px;
+  padding: 0px 24px;
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #f8ebdf;
+  font: $font-body-bold;
+  background-color: #000000;
+  border: 0.5px solid #f8ebdf;
+
+  &:hover {
+    color: #f8ebdf;
+    background: rgba(248, 235, 223, 0.16);
+  }
+
+  &-active {
+    color: #2b2b2c;
+    background-color: #f8ebdf;
+  }
+}
