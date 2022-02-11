@@ -2,10 +2,16 @@
 /* eslint-disable radix */
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { joinCommunity, visitCommunity } from "../../actions/communityActions";
-import "./CommunitiesCard.scss";
+import { useHistory } from "react-router-dom";
+
+import { useAlert } from "react-alert";
+import { getErrorMessage } from "utils/error";
+
 import Background from "../background/Background";
 import CardLayout from "../../layout/cardLayout/CardLayout";
+import { joinCommunity, visitCommunity } from "../../actions/communityActions";
+
+import "./CommunitiesCard.scss";
 
 const CommunitiesCard = ({ data = [], editCard, deleteCard }) => {
   return (
@@ -39,8 +45,9 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
 
   // const { success } = useSelector((state) => state.joinCommunity);
   // const { currentCommunity } = useSelector((state) => state.activeCommunity);
+  const alert = useAlert();
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const history = useHistory();
   // choose userid according to the user data in your database
 
   useEffect(() => {
@@ -59,8 +66,13 @@ const CommunityCard = ({ community, editCard, deleteCard }) => {
     }
   };
 
-  const visitCurrentCommunity = () => {
-    dispatch(visitCommunity(community.id));
+  const visitCurrentCommunity = async () => {
+    try {
+      await visitCommunity(community.id)(dispatch);
+      history.push("/news");
+    } catch (error) {
+      alert.error(getErrorMessage(error));
+    }
   };
 
   const communityEditCard = (id) => {
