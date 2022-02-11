@@ -186,7 +186,7 @@ export const visitCommunity = (id) => async (dispatch) => {
       payload: data,
     });
     localStorage.setItem("currentCommunity", JSON.stringify(data));
-    document.location.href = "/news";
+    return Promise.resolve();
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -196,6 +196,7 @@ export const visitCommunity = (id) => async (dispatch) => {
       type: COMMUNITY_VISIT_FAIL,
       payload: message,
     });
+    return Promise.reject(error);
   }
 };
 

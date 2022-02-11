@@ -220,9 +220,12 @@ function MainContainer() {
   return (
     <div className="dashboard-main-container border-1px-onyx">
       <div className="dashboard-inner-container">
-        {headers.map((head) => {
+        {headers.map((head, index) => {
           return (
-            <div className="mylibrary-container" key={head.name}>
+            <div
+              className="mylibrary-container"
+              key={`${head.name}-${index.toString()}`}
+            >
               <div className="mylibrary-container--header">
                 <img src={head.image} alt={head.name} />
                 <h4>{head.name}</h4>
@@ -271,9 +274,12 @@ function ScrollItems({ head }) {
 function Tiles({ data, title }) {
   return (
     <>
-      {data.map((item) => {
+      {data.map((item, index) => {
         return (
-          <div className="tiles-container" key={item.title}>
+          <div
+            className="tiles-container"
+            key={`${item.title}-${index.toString()}`}
+          >
             <div className="tiles-container-img-wrapper">
               <img src={item.img} alt={item.title} />
             </div>

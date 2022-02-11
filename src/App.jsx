@@ -6,6 +6,7 @@ import { QueryClientProvider } from "react-query";
 import { SignInPage } from "screens/auth/sign-in";
 import { SignUpPage } from "screens/auth/sign-up";
 import { ForgotPasswordPage } from "screens/auth/forgot-password";
+import { CongratulationsPage } from "screens/auth/congratulations";
 
 import { Navigation } from "common/navigation";
 import { PrivateRoute } from "components/privateRoute";
@@ -38,6 +39,11 @@ function App() {
               <Route component={SignInPage} path="/login" />
               <Route component={SignUpPage} path="/register" />
               <Route component={ForgotPasswordPage} path="/forgot-password" />
+              <PrivateRoute
+                path="/congratulations"
+                component={CongratulationsPage}
+              />
+
               <PrivateRoute component={MainApp} />
             </Switch>
           </ScrollToTop>
