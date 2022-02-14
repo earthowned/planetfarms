@@ -1,1 +1,1 @@
-export { TabsContainer } from "./tabs-container";
+export { NavTabsContainer } from "./nav-tabs-container";

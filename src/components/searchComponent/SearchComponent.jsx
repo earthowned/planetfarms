@@ -8,9 +8,9 @@ const SearchComponent = ({ search, setSearch, showEditIcon }) => {
 
       <input
         type="text"
-        value={search}
+        value={search || ""}
         placeholder="Search..."
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => setSearch(e.target.value || "")}
       />
 
       {showEditIcon && <img src="/img/edit-icon.svg" alt="edit icon" />}
