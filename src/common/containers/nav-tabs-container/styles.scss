@@ -1,0 +1,10 @@
+.navigation-tabs-container {
+  width: 100%;
+  gap: 16px;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
