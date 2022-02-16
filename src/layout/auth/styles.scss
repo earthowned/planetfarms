@@ -1,0 +1,66 @@
+.auth-page-container {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  //   position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row;
+
+  .left-container {
+    height: 100%;
+    width: 40%;
+    overflow-y: scroll;
+    background-color: rgba(20, 20, 20, 0.6);
+
+    .left-scroll-container {
+      width: 100%;
+      height: auto;
+
+      display: flex;
+      flex-direction: column;
+
+      .logo-container {
+        width: 100%;
+        height: 120px;
+        padding-left: 80px;
+        margin-bottom: 80px;
+
+        display: flex;
+        align-items: flex-end;
+
+        .left-logo-icon {
+          width: 100%;
+          height: 100%;
+          max-width: 255px;
+          max-height: 40px;
+        }
+      }
+
+      .form-container {
+        width: 80%;
+        margin: auto;
+      }
+    }
+  }
+
+  .right-container {
+    height: 100%;
+    width: 60%;
+    overflow: hidden;
+    background-color: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .right-logo-icon {
+      width: 80%;
+      height: 80%;
+      max-width: 561px;
+      max-height: 88px;
+    }
+  }
+}
