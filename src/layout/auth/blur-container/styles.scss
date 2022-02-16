@@ -1,3 +1,5 @@
+@import "src/scss/mixins";
+
 @mixin dropShadow($color, $blur, $spread) {
   background-color: $color;
   box-shadow: 0px 0px $blur $spread $color;
@@ -72,6 +74,12 @@
         opacity: 0.3;
         @include dropShadow(#eaa533, 5vw, 25vw);
       }
+    }
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    .blur-circles-container {
+      display: none;
     }
   }
 }

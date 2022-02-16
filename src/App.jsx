@@ -39,10 +39,7 @@ function App() {
               <Route component={SignInPage} path="/login" />
               <Route component={SignUpPage} path="/register" />
               <Route component={ForgotPasswordPage} path="/forgot-password" />
-              <PrivateRoute
-                path="/congratulations"
-                component={CongratulationsPage}
-              />
+              <Route path="/congratulations" component={CongratulationsPage} />
 
               <PrivateRoute component={MainApp} />
             </Switch>
