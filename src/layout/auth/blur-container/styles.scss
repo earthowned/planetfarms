@@ -40,28 +40,36 @@
       &-top {
         top: -1vw;
         left: 45vw;
-        opacity: 0.6;
+        opacity: 0.4;
         @include dropShadow(#3a84d9, 8vw, 18vw);
       }
 
       &-right {
+        width: 549px;
+        height: 549px;
+        border-radius: 549px;
         top: 50vh;
-        right: -8vw;
+        right: -231px;
+        transform: translateY(-50%);
+
+        // opacity: 0.3;
+        // @include dropShadow(#58bd88, 5vw, 30vw);
+        background: #58bd88;
         opacity: 0.4;
-        @include dropShadow(#58bd88, 5vw, 30vw);
+        filter: blur(135px);
       }
 
       &-bottom {
         bottom: -1vw;
         left: 48vw;
-        opacity: 0.6;
+        opacity: 0.4;
         @include dropShadow(#da3443, 8vw, 18vw);
       }
 
       &-left {
         top: 50vh;
         left: -5vw;
-        opacity: 0.4;
+        opacity: 0.3;
         @include dropShadow(#eaa533, 5vw, 25vw);
       }
     }

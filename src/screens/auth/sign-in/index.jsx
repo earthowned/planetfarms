@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Formik } from "formik";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -7,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { TextLink } from "common/links";
 import { InputField } from "common/input";
 import { Checkbox } from "common/checkbox";
-import { AuthLayout } from "layout/auth-layout";
+import { AuthPageContainer } from "layout/auth";
 import { ActionButton } from "common/buttons/action-button";
 
 import { login } from "actions/auth";
@@ -45,71 +44,69 @@ export const SignInPage = () => {
   };
 
   return (
-    <AuthLayout title="Sign In" isLoading={isLoading}>
-      <Formik
-        validateOnBlur={false}
-        validateOnChange={false}
-        onSubmit={handleFormSubmit}
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-      >
-        {({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <div className="inputs-container">
-              <InputField {...model.username} />
-              <InputField type="password" {...model.password} />
+    <AuthPageContainer
+      title="Sign In"
+      isLoading={isLoading}
+      onSubmit={handleFormSubmit}
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+    >
+      {() => (
+        <>
+          <div className="inputs-container">
+            <InputField {...model.username} />
+            <InputField type="password" {...model.password} />
 
-              <div className="row-container">
-                <Checkbox
-                  value={remember}
-                  title="Remember Me"
-                  onChange={() => setRemember(!remember)}
-                />
-
-                <TextLink
-                  replace
-                  variant="green"
-                  to="/forgot-password"
-                  title="Forgot Password?"
-                />
-              </div>
-            </div>
-
-            <ActionButton type="submit" variant="primary" title="Sign In" />
-
-            <div className="socials-container">
-              <h5>Sign In with services</h5>
-
-              <div className="row-container">
-                <ActionButton
-                  icon="google"
-                  title="Google"
-                  variant="secondary"
-                  onClick={onGoogleLogin}
-                />
-
-                <ActionButton
-                  icon="facebook"
-                  title="Facebook"
-                  variant="secondary"
-                  onClick={onFacebookLogin}
-                />
-              </div>
-            </div>
-
-            <div className="footer">
-              <h5>Don&apos;t have an account yet?</h5>
+            <div className="row-container">
+              <Checkbox
+                value={remember}
+                title="Remember Me"
+                onChange={() => setRemember(!remember)}
+              />
 
               <TextLink
                 replace
-                to="/register"
                 variant="green"
-                title="Become a member!"
+                to="/forgot-password"
+                title="Forgot Password?"
               />
             </div>
-          </form>
-        )}
-      </Formik>
-    </AuthLayout>
+          </div>
+
+          <ActionButton type="submit" variant="primary" title="Sign In" />
+
+          <div className="socials-container">
+            <h5>Sign In with services</h5>
+
+            <div className="row-container">
+              <ActionButton
+                icon="google"
+                title="Google"
+                variant="secondary"
+                onClick={onGoogleLogin}
+              />
+
+              <ActionButton
+                icon="facebook"
+                title="Facebook"
+                variant="secondary"
+                onClick={onFacebookLogin}
+              />
+            </div>
+          </div>
+
+          <div className="footer">
+            <h5>Don&apos;t have an account yet?</h5>
+
+            <TextLink
+              replace
+              to="/register"
+              variant="green"
+              title="Become a member!"
+            />
+          </div>
+        </>
+      )}
+    </AuthPageContainer>
   );
 };
