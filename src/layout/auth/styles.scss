@@ -74,24 +74,24 @@
             justify-content: space-between;
           }
 
-          // .terms-checkbox-container {
-          //   display: flex;
-          //   flex-direction: row;
+          .terms-checkbox-container {
+            display: flex;
+            flex-direction: row;
 
-          //   .link-container {
-          //     display: flex;
-          //     align-items: center;
-          //     flex-direction: row;
+            .link-container {
+              display: flex;
+              align-items: center;
+              flex-direction: row;
 
-          //     p {
-          //       user-select: none;
-          //       color: #f8ebdf;
-          //       font: $font-body;
-          //       margin-left: 10px;
-          //       margin-right: 4px;
-          //     }
-          //   }
-          // }
+              p {
+                user-select: none;
+                color: #f8ebdf;
+                font: $font-body;
+                margin-left: 10px;
+                margin-right: 4px;
+              }
+            }
+          }
 
           .socials-container {
             width: 100%;
