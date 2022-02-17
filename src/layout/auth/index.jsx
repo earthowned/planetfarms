@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 
 import { Icon } from "common/icon";
 import { Loader } from "common/loader";
-import { BlurContainer } from "./blur-container";
+import { BlurContainer } from "layout/blur-container";
 
 import "./styles.scss";
 
@@ -17,7 +17,7 @@ export const AuthPageContainer = ({
   isLoading = false,
 }) => {
   return (
-    <BlurContainer>
+    <BlurContainer variant="auth">
       <div className="auth-page-container">
         <div className="left-container">
           <div className="auth-scroll-container">

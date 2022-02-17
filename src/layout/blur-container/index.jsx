@@ -1,4 +1,7 @@
+import { useMemo } from "react";
 import cx from "classnames";
+
+import { circles, Variant } from "./config";
 
 import "./styles.scss";
 
@@ -7,16 +10,23 @@ const BlurCircle = ({ position }) => {
   return <div className={className} />;
 };
 
-const circles = ["top", "right", "bottom", "left"];
+export const BlurContainer = ({ children, variant = Variant.dashboard }) => {
+  const containerClassName = useMemo(
+    () =>
+      cx("blur-circles-container", {
+        [`blur-circles-container-${variant}`]: true,
+      }),
+    [variant]
+  );
 
-export const BlurContainer = ({ children }) => {
   return (
-    <div className="auth-blur-container">
-      <div className="blur-circles-container">
+    <div className="blur-page-container">
+      <div className={containerClassName}>
         {circles.map((position) => (
           <BlurCircle key={`blur-circle-${position}`} position={position} />
         ))}
       </div>
+
       <div className="page-container">{children}</div>
     </div>
   );

@@ -1,0 +1,167 @@
+@import "src/scss/mixins";
+
+@mixin createBluredCircle($min, $max, $color, $opacity, $blur) {
+  position: absolute;
+
+  width: $max;
+  min-width: $min;
+  height: $max;
+  min-height: $min;
+  border-radius: $min;
+
+  opacity: $opacity;
+  background: $color;
+
+  filter: url(#blur);
+  filter: blur($blur);
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='10');
+
+  -o-filter: blur($blur);
+  -ms-filter: blur($blur);
+  -moz-filter: blur($blur);
+  -webkit-filter: blur($blur);
+}
+
+.blur-page-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-color: #141414;
+  overflow: hidden;
+
+  .page-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    overflow: hidden;
+  }
+
+  .blur-circles-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+
+    overflow: hidden;
+    background-color: transparent;
+
+    &-auth {
+      .blur-circle {
+        &-top {
+          top: -200px;
+          left: 350px;
+          @include createBluredCircle(500px, 25vw, #3a84d9, 0.2, 65px);
+        }
+
+        &-right {
+          top: 50vh;
+          right: -400px;
+          transform: translateY(-50%);
+          @include createBluredCircle(720px, 35vw, #58bd88, 0.2, 70px);
+        }
+
+        &-bottom {
+          bottom: -200px;
+          left: 485px;
+          @include createBluredCircle(450px, 25vw, #da3443, 0.2, 65px);
+        }
+
+        &-left {
+          top: 50vh;
+          left: -400px;
+          transform: translateY(-50%);
+          @include createBluredCircle(680px, 35vw, #eaa533, 0.2, 70px);
+        }
+      }
+    }
+
+    &-dashboard {
+      top: 30vh;
+      overflow: visible;
+
+      opacity: 0.6;
+      background: rgba(20, 20, 20, 0.01);
+      filter: blur(100px);
+
+      .blur-circle {
+        &-top {
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          @include createBluredCircle(700px, 30vw, #3a84d9, 0.2, 0px);
+        }
+
+        &-right {
+          top: 50vh;
+          right: -20vw;
+          transform: translateY(-50%);
+          @include createBluredCircle(700px, 30vw, #58bd88, 0.2, 0px);
+        }
+
+        &-bottom {
+          bottom: -75%;
+          left: 50%;
+          transform: translateX(-50%);
+          @include createBluredCircle(700px, 30vw, #da3443, 0.2, 0px);
+        }
+
+        &-left {
+          top: 50vh;
+          left: -20vw;
+          transform: translateY(-50%);
+          @include createBluredCircle(700px, 30vw, #eaa533, 0.2, 0px);
+        }
+      }
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    .blur-circles-container {
+      top: 30vh;
+      overflow: visible;
+
+      opacity: 0.4;
+      background: rgba(20, 20, 20, 0.01);
+      filter: blur(80px);
+
+      .blur-circle {
+        &-top {
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          @include createBluredCircle(50vw, 50vw, #3a84d9, 1, 40px);
+        }
+
+        &-right {
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          @include createBluredCircle(50vw, 50vw, #58bd88, 1, 40px);
+        }
+
+        &-bottom {
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          @include createBluredCircle(50vw, 50vw, #da3443, 1, 40px);
+        }
+
+        &-left {
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          @include createBluredCircle(50vw, 50vw, #eaa533, 1, 40px);
+        }
+      }
+    }
+  }
+
+  @include breakpoint("tablet", "minMax") {
+    .blur-circles-container {
+      filter: blur(100px);
+    }
+  }
+}
