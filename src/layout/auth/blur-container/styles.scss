@@ -1,10 +1,25 @@
 @import "src/scss/mixins";
 
-@mixin dropShadow($color, $blur, $spread) {
-  background-color: $color;
-  box-shadow: 0px 0px $blur $spread $color;
-  -moz-box-shadow: 0px 0px $blur $spread $color;
-  -webkit-box-shadow: 0px 0px $blur $spread $color;
+@mixin createBluredCircle($min, $max, $color, $opacity, $blur) {
+  position: absolute;
+
+  width: $max;
+  min-width: $min;
+  height: $max;
+  min-height: $min;
+  border-radius: 100%;
+
+  opacity: $opacity;
+  background: $color;
+
+  filter: url(#blur);
+  filter: blur($blur);
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='10');
+
+  -o-filter: blur($blur);
+  -ms-filter: blur($blur);
+  -moz-filter: blur($blur);
+  -webkit-filter: blur($blur);
 }
 
 .auth-blur-container {
@@ -29,57 +44,36 @@
     right: 0;
     bottom: 0;
     position: absolute;
+
     overflow: hidden;
     background-color: transparent;
 
     .blur-circle {
-      width: 2px;
-      height: 2px;
-      // opacity: 0.3;
-      border-radius: 2px;
-      position: absolute;
-
       &-top {
-        top: -1vw;
-        left: 45vw;
-        opacity: 0.4;
-        @include dropShadow(#3a84d9, 8vw, 18vw);
+        top: -200px;
+        left: 350px;
+        @include createBluredCircle(500px, 25vw, #3a84d9, 0.2, 65px);
       }
 
       &-right {
-        width: 549px;
-        height: 549px;
-        border-radius: 549px;
         top: 50vh;
-        right: -231px;
+        right: -400px;
         transform: translateY(-50%);
-
-        // opacity: 0.3;
-        // @include dropShadow(#58bd88, 5vw, 30vw);
-        background: #58bd88;
-        opacity: 0.4;
-        filter: blur(135px);
+        @include createBluredCircle(720px, 35vw, #58bd88, 0.2, 70px);
       }
 
       &-bottom {
-        bottom: -1vw;
-        left: 48vw;
-        opacity: 0.4;
-        @include dropShadow(#da3443, 8vw, 18vw);
+        bottom: -200px;
+        left: 485px;
+        @include createBluredCircle(450px, 25vw, #da3443, 0.2, 65px);
       }
 
       &-left {
         top: 50vh;
-        left: -5vw;
-        opacity: 0.3;
-        @include dropShadow(#eaa533, 5vw, 25vw);
+        left: -400px;
+        transform: translateY(-50%);
+        @include createBluredCircle(680px, 35vw, #eaa533, 0.2, 70px);
       }
-    }
-  }
-
-  @include breakpoint("mobile", "minMax") {
-    .blur-circles-container {
-      display: none;
     }
   }
 }

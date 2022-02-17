@@ -16,6 +16,7 @@
     min-width: 430px;
     max-width: 600px;
     overflow-y: scroll;
+
     background-color: rgba(20, 20, 20, 0.6);
 
     display: flex;
@@ -112,8 +113,9 @@
   }
 
   .right-container {
-    height: 100%;
-    width: 60%;
+    flex: 1;
+    // height: 100%;
+    // width: 60%;
     overflow: hidden;
     background-color: transparent;
 
