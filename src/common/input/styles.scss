@@ -12,18 +12,18 @@
 
   .content {
     width: 100%;
-    height: 80px;
+    height: 56px;
     padding: 0px 16px;
     border-radius: 4px;
-    border: 1px solid #3a3939;
-    background-color: #141414;
+    border: 1px solid #555656;
+    background-color: rgba(20, 20, 20, 0.8);
 
     display: flex;
     align-items: center;
 
     input {
       width: 100%;
-      color: #f8ebdf;
+      color: #eeefef;
       font: $font-body;
       background-color: transparent;
 
@@ -43,25 +43,39 @@
       }
     }
 
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
+    input:-webkit-autofill {
+      border: none;
+      -webkit-text-fill-color: #eeefef;
+      box-shadow: 0 0 0px 1000px rgba(20, 20, 20, 0.8) inset;
+      -webkit-box-shadow: 0 0 0px 1000px rgba(20, 20, 20, 0.8) inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-webkit-autofill:hover {
+      border: none;
+      -webkit-text-fill-color: #eeefef;
+      box-shadow: 0 0 0px 1000px rgba(20, 20, 20, 0.8) inset;
+      -webkit-box-shadow: 0 0 0px 1000px rgba(20, 20, 20, 0.8) inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
     input:-webkit-autofill:focus {
       border: none;
-      -webkit-text-fill-color: #f8ebdf;
-      box-shadow: 0 0 0px 1000px #141414 inset;
-      -webkit-box-shadow: 0 0 0px 1000px #141414 inset;
+      -webkit-text-fill-color: #eeefef;
+      box-shadow: 0 0 0px 1000px #27332f inset;
+      -webkit-box-shadow: 0 0 0px 1000px #27332f inset;
       transition: background-color 5000s ease-in-out 0s;
     }
 
     .input-icon {
-      margin-right: 16px;
-      @include setSvgColor(#8a8a8a);
+      margin-right: 8px;
+      @include setSvgColor(#555656);
     }
 
     .password-visible-icon {
       cursor: pointer;
-      margin-left: 16px;
-      @include setSvgColor(#00c688);
+      margin-left: 8px;
+      @include setSvgColor(#555656);
       user-select: none;
       -webkit-user-select: none; /* Safari */
       -webkit-touch-callout: none; /* iOS Safari */
@@ -82,7 +96,9 @@
     }
 
     &:focus-within {
-      border: 1px solid #3a3939;
+      // border: 1px solid #3a3939;
+      border: 1px solid #58bd88;
+      background-color: #27332f;
 
       .pf-floating-placeholder {
         @include setPlaceholderPosition("active");
@@ -95,7 +111,7 @@
 
     &-with-value {
       .input-icon {
-        @include setSvgColor(#00c688);
+        @include setSvgColor(#58bd88);
       }
 
       .pf-floating-placeholder {
@@ -119,8 +135,9 @@
 
   .error-message {
     color: #da3443;
-    margin-top: 4px;
     font: $font-placeholder;
+    font-size: 18px;
+    line-height: 18px;
   }
 }
 
@@ -132,7 +149,7 @@
   pointer-events: none;
   background-color: transparent;
 
-  color: #8a8a8a;
+  color: #555656;
   position: absolute;
 
   transform-origin: top left;
@@ -143,7 +160,7 @@
   @include setPlaceholderPosition("default");
 
   .required {
-    color: #00c688;
+    color: #58bd88;
     margin-left: 1px;
     font: $font-placeholder;
   }

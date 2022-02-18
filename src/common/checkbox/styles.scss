@@ -37,24 +37,24 @@
   }
 
   &:hover .checkbox {
-    border-color: #f8ebdf;
+    border-color: #cadcd6;
   }
 
   .checkbox-title {
-    color: #f8ebdf;
+    color: #eeefef;
     margin-left: 10px;
     user-select: none;
     font: $font-body-bold;
   }
 
   input[type="checkbox"]:checked + .checkbox {
-    border: 2px solid #00c688;
-    background-color: #00c688;
+    border: 2px solid #58bd88;
+    background-color: #58bd88;
     animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
 
     .checkmark-icon {
       path {
-        fill: #2b2b2c;
+        fill: #141414;
       }
     }
   }

@@ -1,6 +1,6 @@
 @mixin setPlaceholderPosition($event) {
   @if $event == "active" {
-    transform: translate(0px, -12px);
+    transform: translate(0px, -11px);
     p {
       font: 400 14px/24px var(--font-family);
     }
@@ -14,7 +14,7 @@
 
 @mixin setInputPosition($event) {
   @if $event == "active" {
-    transform: translate(0px, 12px);
+    transform: translate(0px, 11px);
   } @else if $event == "default" {
     transform: translate(0px, 0px) scale(1);
   }
