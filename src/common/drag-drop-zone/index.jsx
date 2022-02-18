@@ -7,7 +7,6 @@ import "./styles.scss";
 export const DragDropZone = ({
   file,
   onChange,
-  placeholder,
   name = "file",
   fileTypes = [],
   disabled = false,
@@ -26,7 +25,10 @@ export const DragDropZone = ({
         {file ? (
           <img src={URL.createObjectURL(file)} alt="" />
         ) : (
-          <h4>{placeholder}</h4>
+          <div className="placeholder-container">
+            <h5>Drag & Drop files in this area or</h5>
+            <h4>Click Here to attach</h4>
+          </div>
         )}
       </div>
     </FileUploader>

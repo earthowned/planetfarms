@@ -29,20 +29,21 @@
     }
   }
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
   &-primary {
     color: #141414;
     background-color: #58bd88;
 
-    &:hover {
+    &:hover:enabled {
       background-color: #009466;
     }
 
-    &:active {
+    &:active:enabled {
       background-color: #007a54;
-    }
-
-    &:disabled {
-      opacity: 0.5;
     }
   }
 
@@ -50,16 +51,12 @@
     color: #eeefef;
     background-color: rgba(238, 239, 239, 0.1);
 
-    &:hover {
+    &:hover:enabled {
       background-color: rgba(202, 220, 214, 0.2);
     }
 
-    &:active {
+    &:active:enabled {
       background-color: rgba(186, 207, 200, 0.3);
-    }
-
-    &:disabled {
-      opacity: 0.5;
     }
   }
 
@@ -67,11 +64,11 @@
     color: #00c688;
     background-color: transparent;
 
-    &:hover {
+    &:hover:enabled {
       color: #02f2a7;
     }
 
-    &:active {
+    &:active:enabled {
       color: #05a875;
     }
   }
@@ -83,14 +80,14 @@
       @include setSvgColor(#da3443);
     }
 
-    &:hover {
+    &:hover:enabled {
       color: #df535e;
       svg {
         @include setSvgColor(#df535e);
       }
     }
 
-    &:active {
+    &:active:enabled {
       color: #ac202b;
       svg {
         @include setSvgColor(#ac202b);
@@ -105,14 +102,14 @@
       @include setSvgColor(#f8ebdf);
     }
 
-    &:hover {
+    &:hover:enabled {
       color: #8a8a8a;
       svg {
         @include setSvgColor(#8a8a8a);
       }
     }
 
-    &:active {
+    &:active:enabled {
       color: #3a3939;
       svg {
         @include setSvgColor(#3a3939);
@@ -125,11 +122,11 @@
     border: none;
     background-color: #da3443;
 
-    &:hover {
+    &:hover:enabled {
       background-color: #df535e;
     }
 
-    &:active {
+    &:active:enabled {
       background-color: #ac202b;
     }
   }
@@ -152,13 +149,13 @@
       -webkit-box-orient: vertical;
     }
 
-    &:hover {
+    &:hover:enabled {
       svg {
         @include setSvgColor(#02f2a7);
       }
     }
 
-    &:active {
+    &:active:enabled {
       svg {
         @include setSvgColor(#05a875);
       }

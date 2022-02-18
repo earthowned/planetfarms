@@ -10,9 +10,9 @@ export const ActionButton = ({
   icon,
   title,
   onClick,
-  disabled,
   className,
   type = "button",
+  disabled = false,
   tintIcon = false,
   variant = "secondary",
 }) => {

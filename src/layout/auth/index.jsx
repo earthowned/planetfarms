@@ -15,6 +15,7 @@ export const AuthPageContainer = ({
   withLogo = true,
   validationSchema,
   isLoading = false,
+  enableReinitialize = false,
 }) => {
   return (
     <BlurContainer variant="auth">
@@ -32,13 +33,15 @@ export const AuthPageContainer = ({
                 validateOnChange={false}
                 initialValues={initialValues}
                 validationSchema={validationSchema}
+                enableReinitialize={enableReinitialize}
               >
                 {(props) => (
                   <Form>
                     <div className="title-container">
                       <h1>{title}</h1>
-                      {subtitle && <h4>{subtitle}</h4>}
                     </div>
+
+                    {subtitle && <h5 className="auth-subtitle">{subtitle}</h5>}
 
                     <div className="form-container">{children(props)}</div>
                   </Form>
