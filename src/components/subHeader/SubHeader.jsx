@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import useSizeFinder from "../../utils/sizeFinder";
+import { useHistory } from "react-router-dom";
+
+import { NavTabsContainer } from "common/containers";
+
 import Filter from "../filter/Filter";
 import SearchComponent from "../searchComponent/SearchComponent";
+
 import "./SubHeader.scss";
 
 const SubHeader = ({ search, setSearch, nav, setCreateActive, btnName }) => {
-  const windowWidth = useSizeFinder();
-  const { pathname } = useLocation();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const history = useHistory();
@@ -21,43 +22,20 @@ const SubHeader = ({ search, setSearch, nav, setCreateActive, btnName }) => {
     }
   }, [search, dispatch, history, userInfo]);
 
+  const options = useMemo(() => {
+    return nav.map((item) => ({ value: item.link, label: item.label }));
+  }, [nav]);
+
   return (
     <div className="sub-header-main-container">
       <div className="sub-header-left-container">
-        {windowWidth > 640 ? (
-          <>
-            <ul className="sub-header-list-container">
-              {nav.map((menu) => (
-                <li key={menu.link}>
-                  <Link
-                    className={`nav-link ${
-                      pathname === menu.link
-                        ? "sub-header-list-item active"
-                        : "sub-header-list-item"
-                    }`}
-                    to={menu.link}
-                  >
-                    {menu.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <SearchComponent
-              search={search}
-              setSearch={setSearch}
-              className="search-btn margin-0"
-            />
-          </>
-        ) : (
-          <>
-            <Filter newFilter data={nav} />
-            <SearchComponent
-              search={search}
-              setSearch={setSearch}
-              className="search search-btn margin-0"
-            />
-          </>
-        )}
+        <NavTabsContainer options={options} />
+
+        <SearchComponent
+          search={search}
+          setSearch={setSearch}
+          className="search-btn margin-0"
+        />
       </div>
       <div className="sub-header-right-container">
         <div className="row-1">
