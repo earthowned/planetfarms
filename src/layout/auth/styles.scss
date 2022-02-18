@@ -16,7 +16,6 @@
     min-width: 430px;
     max-width: 600px;
     overflow-y: scroll;
-
     background-color: rgba(20, 20, 20, 0.6);
 
     display: flex;
@@ -26,7 +25,6 @@
     .auth-scroll-container {
       gap: 80px;
       width: 80%;
-      height: 100%;
 
       display: flex;
       flex-direction: column;
@@ -83,7 +81,7 @@
 
               p {
                 user-select: none;
-                color: #f8ebdf;
+                color: #eeefef;
                 font: $font-body;
                 margin-left: 10px;
                 margin-right: 4px;
@@ -114,8 +112,6 @@
 
   .right-container {
     flex: 1;
-    // height: 100%;
-    // width: 60%;
     overflow: hidden;
     background-color: transparent;
 
@@ -177,8 +173,17 @@
   }
 
   @include breakpoint("mobile", "minMax") {
-    .left-container .auth-scroll-container .form-container .row-container {
-      flex-wrap: wrap;
+    .left-container {
+      .auth-scroll-container {
+        width: 100%;
+        padding: 0px 16px;
+
+        .form-container {
+          .row-container {
+            flex-wrap: wrap;
+          }
+        }
+      }
     }
   }
 }
