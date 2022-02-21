@@ -3,6 +3,7 @@ import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { Icon } from "common/icon";
 import { TextLink } from "common/links";
 import { InputField } from "common/input";
 import { CheckboxField } from "common/checkbox";
@@ -20,6 +21,7 @@ export const SignUpPage = () => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isSidngedUp, setIsSignedUp] = useState(true);
 
   const onGoogleLogin = () => {
     // Auth.federatedSignIn({ provider: "Google" });
@@ -33,69 +35,101 @@ export const SignUpPage = () => {
     try {
       setIsLoading(true);
       await register({ name: username, password })(dispatch);
-      history.push("/congratulations");
+      setIsSignedUp(true);
     } catch (error) {
-      setIsLoading(false);
       alert.error(getErrorMessage(error));
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <AuthPageContainer
-      title="Sign Up"
       isLoading={isLoading}
       onSubmit={handleFormSubmit}
       initialValues={initialValues}
       validationSchema={validationSchema}
+      title={isSidngedUp ? "Congratulations!" : "Sign Up"}
     >
       {() => (
         <>
-          <div className="inputs-container">
-            <InputField {...model.username} />
-            <InputField type="password" {...model.password} />
+          {isSidngedUp && (
+            <>
+              <div className="image-container">
+                <Icon icon="congratulations" />
+              </div>
 
-            <div className="row-container">
-              <div className="terms-checkbox-container">
-                <CheckboxField name={model.agrre.name} />
+              <div className="row-container">
+                <ActionButton
+                  variant="secondary"
+                  title="Go to dashboard"
+                  onClick={() => history.replace("/news")}
+                />
 
-                <div className="link-container">
-                  <p>I agree with</p>
-                  <TextLink
-                    to="/register"
-                    variant="white"
-                    title="Terms of Service"
+                <ActionButton
+                  title="Continue"
+                  variant="primary"
+                  onClick={() => history.replace("/additional-info")}
+                />
+              </div>
+            </>
+          )}
+
+          {!isSidngedUp && (
+            <>
+              <div className="inputs-container">
+                <InputField {...model.username} />
+                <InputField type="password" {...model.password} />
+
+                <div className="row-container">
+                  <div className="terms-checkbox-container">
+                    <CheckboxField name={model.agrre.name} />
+
+                    <div className="link-container">
+                      <p>I agree with</p>
+                      <TextLink
+                        to="/register"
+                        variant="white"
+                        title="Terms of Service"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ActionButton type="submit" variant="primary" title="Sign Up" />
+
+              <div className="socials-container">
+                <h5>Sign In with services</h5>
+
+                <div className="row-container">
+                  <ActionButton
+                    icon="google"
+                    title="Google"
+                    variant="secondary"
+                    onClick={onGoogleLogin}
+                  />
+
+                  <ActionButton
+                    icon="facebook"
+                    title="Facebook"
+                    variant="secondary"
+                    onClick={onFacebookLogin}
                   />
                 </div>
               </div>
-            </div>
-          </div>
 
-          <ActionButton type="submit" variant="primary" title="Sign Up" />
-
-          <div className="socials-container">
-            <h5>Sign In with services</h5>
-
-            <div className="row-container">
-              <ActionButton
-                icon="google"
-                title="Google"
-                variant="secondary"
-                onClick={onGoogleLogin}
-              />
-
-              <ActionButton
-                icon="facebook"
-                title="Facebook"
-                variant="secondary"
-                onClick={onFacebookLogin}
-              />
-            </div>
-          </div>
-
-          <div className="footer">
-            <h5>Already have an account?</h5>
-            <TextLink replace to="/login" variant="green" title="Sign in!" />
-          </div>
+              <div className="footer">
+                <h5>Already have an account?</h5>
+                <TextLink
+                  replace
+                  to="/login"
+                  variant="green"
+                  title="Sign in!"
+                />
+              </div>
+            </>
+          )}
         </>
       )}
     </AuthPageContainer>

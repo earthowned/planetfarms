@@ -30,6 +30,7 @@ import { ReactComponent as GamburgerIcon } from "assets/icons/gamburger.svg";
 import { ReactComponent as LogoutIcon } from "assets/icons/logout.svg";
 import { ReactComponent as TrashIcon } from "assets/icons/trash.svg";
 import { ReactComponent as CropIcon } from "assets/icons/crop.svg";
+import { ReactComponent as CongratulationsIcon } from "assets/icons/congratulations.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -41,6 +42,9 @@ const getIcon = (iconName) => {
 
     case "calendar":
       return <CalendarIcon />;
+
+    case "congratulations":
+      return <CongratulationsIcon />;
 
     case "cross":
       return <CrossIcon />;

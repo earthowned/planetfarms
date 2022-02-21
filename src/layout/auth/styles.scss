@@ -66,6 +66,14 @@
             flex-direction: column;
           }
 
+          .image-container {
+            width: 100%;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
           .row-container {
             gap: 24px;
             width: 100%;
@@ -175,6 +183,7 @@
         .form-content-container {
           .title-container {
             padding: 24px 0px 48px 0px;
+            text-align: center;
           }
         }
       }

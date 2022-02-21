@@ -21,7 +21,6 @@ import {
   validationSchema,
 } from "./config";
 
-// TODO: Implement Congratulations Pop Up;
 // TODO: Ask about migrating to email only sign up;
 // TODO: Remove Congratulations Page;
 
@@ -31,13 +30,14 @@ export const AdditionalInfoPage = () => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [step, setStep] = useState(AdditionalStep.Avatar);
+  const [step, setStep] = useState(AdditionalStep.Info);
 
   const onSubmit = async (values) => {
     try {
       setIsLoading(true);
-      const payload = configurePayload(values);
-      await updateUserInfo(payload)(dispatch);
+      console.log(values);
+      // const payload = configurePayload(values);
+      // await updateUserInfo(payload)(dispatch);
 
       if (step === AdditionalStep.Info) {
         setStep(AdditionalStep.Avatar);
