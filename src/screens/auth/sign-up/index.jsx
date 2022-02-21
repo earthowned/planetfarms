@@ -21,7 +21,7 @@ export const SignUpPage = () => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isSidngedUp, setIsSignedUp] = useState(true);
+  const [isSidngedUp, setIsSignedUp] = useState(false);
 
   const onGoogleLogin = () => {
     // Auth.federatedSignIn({ provider: "Google" });
