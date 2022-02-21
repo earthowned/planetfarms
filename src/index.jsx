@@ -9,7 +9,6 @@ import App from "./App";
 import { store } from "./store";
 import reportWebVitals from "./reportWebVitals";
 
-import "./index.css";
 import "./scss/styles.scss";
 
 ReactDOM.render(

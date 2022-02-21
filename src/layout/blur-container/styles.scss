@@ -1,0 +1,29 @@
+@import "src/scss/mixins";
+
+.blur-page-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  display: flex;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &-auth {
+    background-image: url(../../assets/images/auth-background.svg);
+  }
+
+  &-dashboard {
+    background-position: top;
+    background-repeat: repeat;
+    background-image: url(../../assets/images/desktop-background.svg);
+  }
+
+  @include breakpoint("tablet", "max") {
+    background-position: top;
+    background-repeat: repeat;
+    background-image: url(../../assets/images/desktop-background.svg);
+  }
+}

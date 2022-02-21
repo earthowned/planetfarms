@@ -2,11 +2,45 @@
 @import "./mixins";
 @import "./variables";
 
+body {
+  width: 100%;
+  height: 100%;
+  background: black;
+  font-style: normal;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #141414;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
 .app-container {
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
   display: flex;
   flex-direction: row;
-  overflow: hidden;
 
   @include breakpoint("tablet", "max") {
     flex-direction: column-reverse;
@@ -14,14 +48,42 @@
 }
 
 .main-app {
-  flex: 1;
+  width: 100%;
+  height: 100%;
   display: flex;
   overflow: hidden;
   flex-direction: column;
 }
 
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+:root {
+  --font-family: "IBM Plex Sans", sans-serif;
+  --primary-color: rgba(0, 198, 136, 1);
+  --primary-black: #2b2b2c;
+  --primary-grey: #8a8a8a;
+  --primary-white: #f8ebdf;
+  --secondary-red: #da3443;
+  --secondary-black: #eaeaea;
+  --secondary-yellow: #eaa534;
+  --secondary-blue: #3641d9;
+  --background-color: #000;
+  --background-color-light: rgba(255, 255, 255, 0.16);
+  --background-color-image: rgba(0, 0, 0, 0.8);
+  --background-color-modal: rgba(0, 0, 0, 0.8);
+  --cards: #141414;
+  --popups: #1d1f22;
+  --strokes: #2b2b2b;
+  --dropdowns: #3a3a3a;
+}
+
 h1 {
-  color: $color-primary-white;
+  color: #eeefef;
   font: 40px/48px $font-semi-bold;
 
   @include breakpoint("mobile") {
@@ -30,31 +92,41 @@ h1 {
 }
 
 h2 {
-  color: $color-primary-white;
+  color: #eeefef;
   font: 32px/40px $font-semi-bold;
 }
 
 h3 {
-  color: $color-primary-white;
+  color: #eeefef;
   font: 24px/32px $font-semi-bold;
 }
 
 h4 {
-  color: $color-primary-white;
+  color: #eeefef;
   font: 16px/24px $font-semi-bold;
 }
 
 h5 {
-  color: $color-primary-white;
+  color: #eeefef;
   font: 16px/24px $font-regular;
 }
 
 h6 {
-  color: $color-primary-white;
+  color: #eeefef;
   font: 14px/24px $font-semi-bold;
 }
 
 .h7 {
-  color: $color-primary-white;
+  color: #eeefef;
   font: 14px/24px $font-regular;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}
+a {
+  font-family: inherit;
+  text-decoration: none;
+  color: inherit;
 }
