@@ -3,8 +3,8 @@ import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { AuthLayout } from "layout/auth";
 import { InputField } from "common/input";
-import { AuthPageContainer } from "layout/auth";
 import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
 
@@ -60,7 +60,7 @@ export const AdditionalInfoPage = () => {
   };
 
   return (
-    <AuthPageContainer
+    <AuthLayout
       enableReinitialize
       onSubmit={onSubmit}
       isLoading={isLoading}
@@ -104,6 +104,6 @@ export const AdditionalInfoPage = () => {
           </div>
         </>
       )}
-    </AuthPageContainer>
+    </AuthLayout>
   );
 };

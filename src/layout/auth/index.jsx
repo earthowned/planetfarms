@@ -6,7 +6,7 @@ import { BlurContainer } from "layout/blur-container";
 
 import "./styles.scss";
 
-export const AuthPageContainer = ({
+export const AuthLayout = ({
   title,
   subtitle,
   children,

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Cropper from "react-easy-crop";
+import { useAlert } from "react-alert";
 
 import { CommonModal } from "common/modal";
 import { ActionButton } from "common/buttons/action-button";
@@ -15,17 +16,18 @@ export const CropperModal = ({
   onClose,
   ...cropperProps
 }) => {
+  const alert = useAlert();
+
   const [zoom, setZoom] = useState(1);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [pixelCrop, setPixelCrop] = useState(undefined);
 
   const handleCrop = async () => {
-    // console.log(crop);
     try {
       const file = await getCroppedImage({ src: image, pixelCrop });
       onCrop(file);
     } catch (error) {
-      console.error(error);
+      alert.error(error.message);
     }
   };
 
@@ -52,7 +54,6 @@ export const CropperModal = ({
 
         <div className="buttons-container">
           <ActionButton title="Cancel" variant="secondary" onClick={onClose} />
-
           <ActionButton title="Save" variant="primary" onClick={handleCrop} />
         </div>
       </div>

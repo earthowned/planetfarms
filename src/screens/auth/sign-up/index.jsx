@@ -5,9 +5,9 @@ import { useHistory } from "react-router-dom";
 
 import { Icon } from "common/icon";
 import { TextLink } from "common/links";
+import { AuthLayout } from "layout/auth";
 import { InputField } from "common/input";
 import { CheckboxField } from "common/checkbox";
-import { AuthPageContainer } from "layout/auth";
 import { ActionButton } from "common/buttons/action-button";
 
 import { register } from "actions/auth";
@@ -44,7 +44,7 @@ export const SignUpPage = () => {
   };
 
   return (
-    <AuthPageContainer
+    <AuthLayout
       isLoading={isLoading}
       onSubmit={handleFormSubmit}
       initialValues={initialValues}
@@ -132,6 +132,6 @@ export const SignUpPage = () => {
           )}
         </>
       )}
-    </AuthPageContainer>
+    </AuthLayout>
   );
 };

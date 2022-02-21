@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { TextLink } from "common/links";
+import { AuthLayout } from "layout/auth";
 import { InputField } from "common/input";
 import { Checkbox } from "common/checkbox";
-import { AuthPageContainer } from "layout/auth";
 import { ActionButton } from "common/buttons/action-button";
 
 import { login } from "actions/auth";
@@ -44,7 +44,7 @@ export const SignInPage = () => {
   };
 
   return (
-    <AuthPageContainer
+    <AuthLayout
       title="Sign In"
       isLoading={isLoading}
       onSubmit={handleFormSubmit}
@@ -107,6 +107,6 @@ export const SignInPage = () => {
           </div>
         </>
       )}
-    </AuthPageContainer>
+    </AuthLayout>
   );
 };
