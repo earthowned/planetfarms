@@ -21,9 +21,6 @@ import {
   validationSchema,
 } from "./config";
 
-// TODO: Ask about migrating to email only sign up;
-// TODO: Remove Congratulations Page;
-
 export const AdditionalInfoPage = () => {
   const alert = useAlert();
   const history = useHistory();
@@ -35,9 +32,9 @@ export const AdditionalInfoPage = () => {
   const onSubmit = async (values) => {
     try {
       setIsLoading(true);
-      console.log(values);
-      // const payload = configurePayload(values);
-      // await updateUserInfo(payload)(dispatch);
+
+      const payload = configurePayload(values);
+      await updateUserInfo(payload)(dispatch);
 
       if (step === AdditionalStep.Info) {
         setStep(AdditionalStep.Avatar);
@@ -49,6 +46,16 @@ export const AdditionalInfoPage = () => {
     } catch (error) {
       setIsLoading(false);
       alert.error(getErrorMessage(error));
+    }
+  };
+
+  const handleSkip = () => {
+    if (step === AdditionalStep.Info) {
+      setStep(AdditionalStep.Avatar);
+    }
+
+    if (step === AdditionalStep.Avatar) {
+      history.replace("/news");
     }
   };
 
@@ -85,7 +92,7 @@ export const AdditionalInfoPage = () => {
             <ActionButton
               title="Skip"
               variant="secondary"
-              onClick={() => history.push("/additional-info/avatar")}
+              onClick={handleSkip}
             />
 
             <ActionButton

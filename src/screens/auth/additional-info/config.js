@@ -66,7 +66,7 @@ const infoValidation = Yup.object().shape({
     .matches(dateRegex, "Invalid Date")
     .test("valid-birthdate", "Invalid Birthday", (value) => {
       if (!value) return true;
-      const date = dayjs(value, "DD/MM/YYYY");
+      const date = dayjs(value, "MM/DD/YYYY");
       return date.isValid() && date.isBefore(dayjs());
     }),
 });

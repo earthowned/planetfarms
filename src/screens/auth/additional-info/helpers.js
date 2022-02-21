@@ -9,7 +9,7 @@ export const configurePayload = (values) => {
 
   let date;
   if (birthdate) {
-    const [day, month, year] = birthdate.split("/");
+    const [month, day, year] = birthdate.split("/");
     date = `${year}-${month}-${day}`;
   }
 
