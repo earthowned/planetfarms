@@ -28,6 +28,8 @@ import { ReactComponent as BellIcon } from "assets/icons/bell.svg";
 import { ReactComponent as GridIcon } from "assets/icons/grid.svg";
 import { ReactComponent as GamburgerIcon } from "assets/icons/gamburger.svg";
 import { ReactComponent as LogoutIcon } from "assets/icons/logout.svg";
+import { ReactComponent as TrashIcon } from "assets/icons/trash.svg";
+import { ReactComponent as CropIcon } from "assets/icons/crop.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -42,6 +44,9 @@ const getIcon = (iconName) => {
 
     case "cross":
       return <CrossIcon />;
+
+    case "crop":
+      return <CropIcon />;
 
     case "checkmark":
       return <CheckmarkIcon />;
@@ -96,6 +101,9 @@ const getIcon = (iconName) => {
 
     case "logout":
       return <LogoutIcon />;
+
+    case "trash":
+      return <TrashIcon />;
 
     default:
       return <GoogleIcon />;

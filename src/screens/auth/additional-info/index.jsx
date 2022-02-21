@@ -21,7 +21,6 @@ import {
   validationSchema,
 } from "./config";
 
-// TODO: Implement Cropper;
 // TODO: Implement Congratulations Pop Up;
 // TODO: Ask about migrating to email only sign up;
 // TODO: Remove Congratulations Page;
@@ -32,7 +31,7 @@ export const AdditionalInfoPage = () => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [step, setStep] = useState(AdditionalStep.Info);
+  const [step, setStep] = useState(AdditionalStep.Avatar);
 
   const onSubmit = async (values) => {
     try {
@@ -77,7 +76,6 @@ export const AdditionalInfoPage = () => {
             <div className="drag-and-drop-zone-container">
               <DragDropZoneField
                 name={model.avatar.name}
-                fileTypes={["JPG", "PNG", "JPEG"]}
                 placeholder={model.avatar.placeholder}
               />
             </div>

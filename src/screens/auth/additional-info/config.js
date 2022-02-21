@@ -84,7 +84,7 @@ const infoInitialValues = {
 };
 
 const avatarInitialValues = {
-  [model.avatar.name]: undefined,
+  [model.avatar.name]: null,
 };
 
 export const validationSchema = {

@@ -1,37 +1,74 @@
+import { useCallback, useState, useEffect } from "react";
 import { useField } from "formik";
-import { useAlert } from "react-alert";
-import { FileUploader } from "react-drag-drop-files";
+import { useDropzone } from "react-dropzone";
+
+import { CropperModal } from "common/modal-containers";
+import { IconButton } from "common/buttons/icon-button";
 
 import "./styles.scss";
 
 export const DragDropZone = ({
   file,
   onChange,
-  name = "file",
-  fileTypes = [],
-  disabled = false,
+  fileTypes = ["image/png", "image/jpeg"],
 }) => {
-  const alert = useAlert();
+  const [isCropVisible, setIsCropVisible] = useState(false);
+
+  const dropzone = useDropzone({
+    accept: fileTypes,
+    onDrop: (files) => onChange(files[0]),
+  });
+
+  useEffect(() => {
+    return () => {
+      if (file) URL.revokeObjectURL(file);
+    };
+  }, [file]);
+
+  const handleRemove = useCallback(() => {
+    URL.revokeObjectURL(file);
+    onChange(null);
+  }, [file]);
+
+  const handleCroppedImage = (newFile) => {
+    setIsCropVisible(false);
+    URL.revokeObjectURL(file);
+    onChange(newFile);
+  };
 
   return (
-    <FileUploader
-      name={name}
-      types={fileTypes}
-      disabled={disabled}
-      handleChange={(data) => onChange(data)}
-      onTypeError={(error) => alert.error(error)}
-    >
-      <div className="pf-drag-drop-zone">
+    <div className="pf-drag-drop-zone">
+      <div className="dropzone-container" {...dropzone.getRootProps()}>
+        <input {...dropzone.getInputProps()} />
         {file ? (
           <img src={URL.createObjectURL(file)} alt="" />
         ) : (
-          <div className="placeholder-container">
+          <div className="placeholders-container">
             <h5>Drag & Drop files in this area or</h5>
             <h4>Click Here to attach</h4>
           </div>
         )}
       </div>
-    </FileUploader>
+
+      {file && (
+        <div className="buttons-container">
+          <IconButton
+            icon="crop"
+            variant="grey"
+            onClick={() => setIsCropVisible(true)}
+          />
+
+          <IconButton variant="grey" icon="trash" onClick={handleRemove} />
+        </div>
+      )}
+
+      <CropperModal
+        visible={isCropVisible}
+        onCrop={handleCroppedImage}
+        onClose={() => setIsCropVisible(false)}
+        image={file ? URL.createObjectURL(file) : null}
+      />
+    </div>
   );
 };
 
