@@ -1,10 +1,11 @@
 @import "src/scss/mixins";
 
 .desktop-side-bar {
-  width: 80px;
+  width: 72px;
   height: 100%;
   position: relative;
-  background-color: #141414;
+  background-color: rgba(20, 20, 20, 0.2);
+  border-right: 1px solid #141414;
   @include transition(width, 0.5s, ease-in-out);
 
   display: flex;
@@ -14,8 +15,8 @@
 
   .header {
     width: 100%;
-    height: 72px;
-    padding-left: 28px;
+    height: 104px;
+    padding-left: 24px;
     flex-shrink: 0;
     overflow: hidden;
     user-select: none;
@@ -54,7 +55,22 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+
+    .nav-board {
+      left: 0;
+      position: absolute;
+
+      width: 4px;
+      height: 56px;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      background-color: #58bd88;
+      box-shadow: 5px 0px 25px #58bd88;
+
+      @include transition(top, 0.5s, ease-in-out);
+    }
   }
 
   .footer {
@@ -83,10 +99,6 @@
   &-expanded {
     width: 248px;
     height: 100%;
-
-    .header {
-      padding-left: 16px;
-    }
 
     .current-community {
       padding-left: 16px;

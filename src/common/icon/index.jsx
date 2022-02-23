@@ -31,6 +31,7 @@ import { ReactComponent as LogoutIcon } from "assets/icons/logout.svg";
 import { ReactComponent as TrashIcon } from "assets/icons/trash.svg";
 import { ReactComponent as CropIcon } from "assets/icons/crop.svg";
 import { ReactComponent as CongratulationsIcon } from "assets/icons/congratulations.svg";
+import { ReactComponent as UsersIcon } from "assets/icons/users.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -108,6 +109,9 @@ const getIcon = (iconName) => {
 
     case "trash":
       return <TrashIcon />;
+
+    case "users":
+      return <UsersIcon />;
 
     default:
       return <GoogleIcon />;

@@ -6,52 +6,45 @@ export const ButtonType = {
 };
 
 export const modalButtons = [
-  {
-    type: ButtonType.Messages,
-  },
-  {
-    type: ButtonType.Notifications,
-  },
-  {
-    type: ButtonType.Menu,
-  },
+  { type: ButtonType.Messages },
+  { type: ButtonType.Notifications },
+  { type: ButtonType.Menu },
 ];
 
 export const links = [
   {
+    title: "My Dashboard",
+    icon: "grid",
+    to: "/dashboard",
+  },
+  {
+    title: "Communities",
+    icon: "users",
+    to: "/communities",
+  },
+  {
     title: "News",
-    path: "/news",
     icon: "globe",
-    variant: "primary",
-  },
-  {
-    title: "Members",
-    compactTitle: "Mb",
-    path: "/members",
-    variant: "secondary",
-  },
-  {
-    title: "Groups",
-    compactTitle: "Gr",
-    path: "/groups",
-    variant: "secondary",
-  },
-  {
-    title: "Enterprises",
-    compactTitle: "Er",
-    path: "/enterprises",
-    variant: "secondary",
+    to: "/news",
   },
   {
     title: "Library",
-    path: "/library",
     icon: "book",
-    variant: "primary",
+    to: "/library",
   },
   {
     title: "Courses",
-    path: "/courses",
     icon: "graduation-cap",
-    variant: "primary",
+    to: "/courses",
+  },
+  {
+    title: "Calendar",
+    icon: "calendar",
+    to: "/calendar/my-events",
+  },
+  {
+    title: "Messanger",
+    icon: "email",
+    to: "/messenger",
   },
 ];

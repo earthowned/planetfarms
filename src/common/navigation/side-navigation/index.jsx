@@ -1,29 +1,40 @@
-import React, { useState } from "react";
+import { useState, useMemo } from "react";
 import cx from "classnames";
-import { useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+// import { useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { Icon } from "common/icon";
-import { Avatar } from "common/avatar";
-import { IconButton } from "common/buttons/icon-button";
-import { ActionButton } from "common/buttons/action-button";
 import { SideNavLink } from "common/links/side-nav-link";
 
 import { links } from "./config";
-import { Calendar } from "./calendar";
 import { ExpandButton } from "./expand-button";
 
 import "./styles.scss";
 
-const selectCurrentCommunity = (state) => state.activeCommunity;
+// const selectCurrentCommunity = (state) => state.activeCommunity;
 
 export const SideNavigation = () => {
   const history = useHistory();
+  const location = useLocation();
 
   // TODO: There is no current community in redux store;
-  const { currentCommunity } = useSelector(selectCurrentCommunity);
+  // const { currentCommunity } = useSelector(selectCurrentCommunity);
 
   const [isExpanded, setIsExpanded] = useState(true);
+
+  const navBoardPosition = useMemo(() => {
+    const defaultPosition = 0;
+    const linkHeight = 56;
+
+    const index = links.findIndex((item) =>
+      location.pathname.includes(item.to)
+    );
+    if (index > -1) {
+      return index === 0 ? defaultPosition : linkHeight * index;
+    }
+
+    return defaultPosition;
+  }, [location.pathname]);
 
   return (
     <div
@@ -32,45 +43,25 @@ export const SideNavigation = () => {
       })}
     >
       <div className="header">
-        <Icon icon={isExpanded ? "logo-small" : "logo-mobile"} />
+        <Icon
+          onClick={() => history.push("/news")}
+          icon={isExpanded ? "logo-small" : "logo-mobile"}
+        />
       </div>
-
-      <Link to="/community-switching" className="current-community">
-        <Avatar placeholderIcon="person" />
-        <h4>{currentCommunity?.name || "PlanetFarms"}</h4>
-      </Link>
 
       <nav>
         {links.map((link, index) => (
           <SideNavLink
-            to={link.path}
+            to={link.to}
             icon={link.icon}
             title={link.title}
-            variant={link.variant}
             isCompact={!isExpanded}
-            compactTitle={link.compactTitle}
             key={`${link.title}-${index.toString()}`}
           />
         ))}
+
+        <div className="nav-board" style={{ top: `${navBoardPosition}px` }} />
       </nav>
-
-      <div className="footer">
-        {isExpanded && <Calendar />}
-
-        {isExpanded ? (
-          <ActionButton
-            variant="primary"
-            title="View calendar"
-            onClick={() => history.replace("/calendar/my-events")}
-          />
-        ) : (
-          <IconButton
-            icon="calendar"
-            className="side-menu-icon-btn"
-            onClick={() => history.replace("/calendar/my-events")}
-          />
-        )}
-      </div>
 
       <ExpandButton
         isExpanded={isExpanded}
