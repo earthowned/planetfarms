@@ -1,16 +1,20 @@
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import { dateRegex, phoneRegex } from "utils/regex";
 
-dayjs.extend(customParseFormat);
+export const AdditionalStep = {
+  Info: "Info",
+  Avatar: "Avatar",
+};
+
+export const Subtitle = {
+  [AdditionalStep.Info]:
+    "Please fill these fields to communicate with other people easier:",
+  [AdditionalStep.Avatar]: "You can upload a photo for your account.",
+};
 
 export const model = {
-  avatar: {
-    name: "avatar",
-    placeholder: "Drag & Drop files in this area or Click Here to attach",
-  },
   firstName: {
     name: "firstName",
     type: "text",
@@ -36,6 +40,10 @@ export const model = {
     type: "date",
     placeholder: "Birthday",
   },
+  avatar: {
+    name: "avatar",
+    placeholder: "Drag & Drop files in this area or Click Here to attach",
+  },
 };
 
 export const inputs = [
@@ -46,8 +54,7 @@ export const inputs = [
   model.birthdate,
 ];
 
-export const validationSchema = Yup.object().shape({
-  [model.avatar.name]: Yup.string().optional(),
+const infoValidation = Yup.object().shape({
   [model.firstName.name]: Yup.string().optional(),
   [model.lastName.name]: Yup.string().optional(),
   [model.phoneNumber.name]: Yup.string()
@@ -59,16 +66,33 @@ export const validationSchema = Yup.object().shape({
     .matches(dateRegex, "Invalid Date")
     .test("valid-birthdate", "Invalid Birthday", (value) => {
       if (!value) return true;
-      const date = dayjs(value, "DD/MM/YYYY");
+      const date = dayjs(value, "MM/DD/YYYY");
       return date.isValid() && date.isBefore(dayjs());
     }),
 });
 
-export const intitalValues = {
-  [model.avatar.name]: undefined,
+const avatarValidation = Yup.object().shape({
+  [model.avatar.name]: Yup.string().optional(),
+});
+
+const infoInitialValues = {
   [model.firstName.name]: "",
   [model.lastName.name]: "",
   [model.phoneNumber.name]: "",
   [model.email.name]: "",
   [model.birthdate.name]: "",
+};
+
+const avatarInitialValues = {
+  [model.avatar.name]: null,
+};
+
+export const validationSchema = {
+  [AdditionalStep.Info]: infoValidation,
+  [AdditionalStep.Avatar]: avatarValidation,
+};
+
+export const initialValues = {
+  [AdditionalStep.Info]: infoInitialValues,
+  [AdditionalStep.Avatar]: avatarInitialValues,
 };

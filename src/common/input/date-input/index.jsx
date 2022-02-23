@@ -15,8 +15,8 @@ export const DateInput = ({ name, value, onChange }) => {
     if (!nextValue) return { value: nextValue, selection };
 
     const dateParts = nextValue.split("/");
-    const dayPart = dateParts[0];
-    const monthPart = dateParts[1];
+    const dayPart = dateParts[1];
+    const monthPart = dateParts[0];
 
     // Conditional mask for the 2nd digit of day based on the first digit
     if (dayPart.startsWith("3")) formatCharecters.D = "[0-1]";
@@ -38,7 +38,7 @@ export const DateInput = ({ name, value, onChange }) => {
       name={name}
       type="text"
       value={value}
-      mask="dD/mM/YYYY"
+      mask="mM/dD/YYYY"
       onChange={onChange}
       alwaysShowMask={false}
       formatChars={formatCharecters}

@@ -1,12 +1,14 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from "react";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import dayjs from "dayjs";
 import { QueryClientProvider } from "react-query";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import { SignInPage } from "screens/auth/sign-in";
 import { SignUpPage } from "screens/auth/sign-up";
 import { ForgotPasswordPage } from "screens/auth/forgot-password";
-import { CongratulationsPage } from "screens/auth/congratulations";
+import { AdditionalInfoPage } from "screens/auth/additional-info";
 
 import { Navigation } from "common/navigation";
 import { PrivateRoute } from "components/privateRoute";
@@ -17,6 +19,8 @@ import ScrollToTop from "utils/scrollToTop";
 import { queryClient } from "./reactQuery";
 
 import "./App.css";
+
+dayjs.extend(customParseFormat);
 
 const MainApp = () => (
   <div className="app-container">
@@ -39,9 +43,11 @@ function App() {
               <Route component={SignInPage} path="/login" />
               <Route component={SignUpPage} path="/register" />
               <Route component={ForgotPasswordPage} path="/forgot-password" />
+
               <PrivateRoute
-                path="/congratulations"
-                component={CongratulationsPage}
+                exact
+                path="/additional-info"
+                component={AdditionalInfoPage}
               />
 
               <PrivateRoute component={MainApp} />

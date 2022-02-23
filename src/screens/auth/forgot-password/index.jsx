@@ -3,8 +3,8 @@ import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 
 import { TextLink } from "common/links";
+import { AuthLayout } from "layout/auth";
 import { InputField } from "common/input";
-import { AuthPageContainer } from "layout/auth";
 import { ActionButton } from "common/buttons/action-button";
 
 import { getErrorMessage } from "utils/error";
@@ -74,7 +74,7 @@ export const ForgotPasswordPage = () => {
   };
 
   return (
-    <AuthPageContainer
+    <AuthLayout
       isLoading={isLoading}
       title="Forgot Password"
       onSubmit={handleFormSubmit}
@@ -116,6 +116,6 @@ export const ForgotPasswordPage = () => {
           </div>
         </>
       )}
-    </AuthPageContainer>
+    </AuthLayout>
   );
 };

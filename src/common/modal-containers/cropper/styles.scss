@@ -1,0 +1,34 @@
+@import "src/scss/mixins";
+
+.cropper-modal-container {
+  width: 100%;
+
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+
+  .cropper-container {
+    width: 100%;
+    height: 392px;
+    position: relative;
+    background-color: rgba(20, 20, 20, 0.92);
+  }
+
+  .buttons-container {
+    gap: 24px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    .cropper-container {
+      width: 100%;
+      height: unset;
+      aspect-ratio: 1 / 1;
+    }
+
+    .buttons-container {
+      flex-direction: column;
+    }
+  }
+}

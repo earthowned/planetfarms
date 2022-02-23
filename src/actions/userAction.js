@@ -241,11 +241,12 @@ export const updateUserInfo =
 
       if (isCognito) {
         await Auth.updateUserAttributes(authedUser, {
-          email: email || authedUser.email,
-          birthdate: birthdate || authedUser.birthdate,
-          given_name: firstName || authedUser.given_name,
-          family_name: lastName || authedUser.family_name,
-          phone_number: phoneNumber || authedUser.phone_number,
+          email: email || authedUser?.attributes?.email || "",
+          birthdate: birthdate || authedUser?.attributes?.birthdate || "",
+          given_name: firstName || authedUser?.attributes?.given_name || "",
+          family_name: lastName || authedUser?.attributes?.family_name || "",
+          phone_number:
+            phoneNumber || authedUser?.attributes?.phone_number || "",
         });
       }
 
