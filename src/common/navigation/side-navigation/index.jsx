@@ -8,6 +8,7 @@ import { SideNavLink } from "common/links/side-nav-link";
 
 import { links } from "./config";
 import { ExpandButton } from "./expand-button";
+import { Navigation } from "../nav";
 
 import "./styles.scss";
 
@@ -29,6 +30,7 @@ export const SideNavigation = () => {
     const index = links.findIndex((item) =>
       location.pathname.includes(item.to)
     );
+
     if (index > -1) {
       return index === 0 ? defaultPosition : linkHeight * index;
     }
@@ -49,7 +51,9 @@ export const SideNavigation = () => {
         />
       </div>
 
-      <nav>
+      <Navigation links={links} isExpanded={isExpanded} />
+
+      {/* <nav>
         {links.map((link, index) => (
           <SideNavLink
             to={link.to}
@@ -61,7 +65,7 @@ export const SideNavigation = () => {
         ))}
 
         <div className="nav-board" style={{ top: `${navBoardPosition}px` }} />
-      </nav>
+      </nav> */}
 
       <ExpandButton
         isExpanded={isExpanded}

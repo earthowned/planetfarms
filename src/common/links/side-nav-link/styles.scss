@@ -123,4 +123,8 @@
       @include setSvgColor(#cadcd6);
     }
   }
+
+  @include breakpoint("tablet", "max") {
+    width: 100%;
+  }
 }

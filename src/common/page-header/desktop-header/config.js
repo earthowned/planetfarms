@@ -24,8 +24,8 @@ const settingsButton = {
 };
 
 export const desktopButtons = [
-  messageButton,
-  notificationButton,
+  // messageButton,
+  // notificationButton,
   settingsButton,
 ];
 

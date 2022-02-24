@@ -1,0 +1,36 @@
+@import "src/scss/mixins";
+
+.mobile-header-container {
+  width: 100%;
+  height: 72px;
+  padding: 0px 16px;
+  position: relative;
+  z-index: 10;
+  background-color: #141414;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .buttons-container {
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.menu-modal-container {
+  top: calc(-100vh + 72px);
+  width: 100%;
+  height: calc(100vh - 72px);
+  background-color: red;
+
+  z-index: 1;
+  position: fixed;
+  @include transition(top, 0.3s, ease-in-out);
+
+  &-expanded {
+    top: 72px;
+  }
+}

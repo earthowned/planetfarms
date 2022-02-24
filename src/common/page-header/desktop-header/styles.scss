@@ -17,11 +17,11 @@
   }
 
   .right-nav-container {
+    gap: 24px;
+
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 40px;
 
     .avatar-container {
       width: 48px;
@@ -33,16 +33,6 @@
       flex-direction: row;
       align-items: center;
       gap: 32px;
-    }
-
-    .nav-btns-container {
-      display: flex;
-      flex-direction: row;
-      gap: 32px;
-
-      .action-btn {
-        width: auto;
-      }
     }
   }
 
@@ -56,21 +46,14 @@
   }
 
   @include breakpoint("tablet", "max") {
-    height: 48px;
+    height: 72px;
     padding: 0px 16px;
 
+    z-index: 10;
+    position: relative;
+
     .right-nav-container {
-      width: 50%;
-
-      .avatar-container {
-        width: 24px;
-        height: 24px;
-
-        svg {
-          width: 16px;
-          height: 16px;
-        }
-      }
+      gap: 16px;
     }
   }
 }

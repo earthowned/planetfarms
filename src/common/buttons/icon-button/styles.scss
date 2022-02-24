@@ -50,15 +50,31 @@
       @include setSvgColor(#f8ebdf);
     }
 
+    .gamburger-icon {
+      path {
+        stroke: #f8ebdf;
+      }
+    }
+
     &:hover {
       svg {
         @include setSvgColor(#8a8a8a);
+      }
+      .gamburger-icon {
+        path {
+          stroke: #8a8a8a;
+        }
       }
     }
 
     &:active {
       svg {
         @include setSvgColor(#3a3939);
+      }
+      .gamburger-icon {
+        path {
+          stroke: #3a3939;
+        }
       }
     }
   }
