@@ -27,6 +27,17 @@
 
     background-color: transparent;
 
+    .avatar-container {
+      width: 24px;
+      height: 24px;
+      border-radius: 32px;
+
+      .person-icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
     svg {
       path {
         stroke: #eeefef;
@@ -126,5 +137,6 @@
 
   @include breakpoint("tablet", "max") {
     width: 100%;
+    padding: 0px 16px;
   }
 }

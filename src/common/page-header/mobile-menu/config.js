@@ -1,11 +1,9 @@
-import { useMemo } from "react";
-import cx from "classnames";
-
-import { Navigation } from "common/navigation/nav";
-
-import "./styles.scss";
-
 export const links = [
+  {
+    title: "My Profile",
+    variant: "profile",
+    to: "/profile",
+  },
   {
     title: "My Dashboard",
     icon: "grid",
@@ -42,19 +40,3 @@ export const links = [
     to: "/messenger",
   },
 ];
-
-export const MobileMenu = ({ visible }) => {
-  const className = useMemo(
-    () =>
-      cx("mobile-menu-container", {
-        "mobile-menu-container-visible": visible,
-      }),
-    [visible]
-  );
-
-  return (
-    <div className={className}>
-      <Navigation links={links} />
-    </div>
-  );
-};

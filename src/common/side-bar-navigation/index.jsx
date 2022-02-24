@@ -1,42 +1,35 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import cx from "classnames";
 // import { useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { Icon } from "common/icon";
-import { SideNavLink } from "common/links/side-nav-link";
+import { Navigation } from "common/navigation";
+
+import useSizeFinder from "utils/sizeFinder";
+import { TABLET_SCREEN_WIDTH } from "constants/sizeConstants";
 
 import { links } from "./config";
 import { ExpandButton } from "./expand-button";
-import { Navigation } from "../nav";
 
 import "./styles.scss";
 
 // const selectCurrentCommunity = (state) => state.activeCommunity;
 
-export const SideNavigation = () => {
+export const SideBarNavigation = () => {
   const history = useHistory();
-  const location = useLocation();
+  const windowWidth = useSizeFinder();
+
+  const isTablet = windowWidth <= TABLET_SCREEN_WIDTH;
 
   // TODO: There is no current community in redux store;
   // const { currentCommunity } = useSelector(selectCurrentCommunity);
 
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const navBoardPosition = useMemo(() => {
-    const defaultPosition = 0;
-    const linkHeight = 56;
-
-    const index = links.findIndex((item) =>
-      location.pathname.includes(item.to)
-    );
-
-    if (index > -1) {
-      return index === 0 ? defaultPosition : linkHeight * index;
-    }
-
-    return defaultPosition;
-  }, [location.pathname]);
+  if (isTablet) {
+    return null;
+  }
 
   return (
     <div
@@ -52,20 +45,6 @@ export const SideNavigation = () => {
       </div>
 
       <Navigation links={links} isExpanded={isExpanded} />
-
-      {/* <nav>
-        {links.map((link, index) => (
-          <SideNavLink
-            to={link.to}
-            icon={link.icon}
-            title={link.title}
-            isCompact={!isExpanded}
-            key={`${link.title}-${index.toString()}`}
-          />
-        ))}
-
-        <div className="nav-board" style={{ top: `${navBoardPosition}px` }} />
-      </nav> */}
 
       <ExpandButton
         isExpanded={isExpanded}

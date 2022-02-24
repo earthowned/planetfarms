@@ -41,10 +41,6 @@ html {
 
   display: flex;
   flex-direction: row;
-
-  @include breakpoint("tablet", "max") {
-    flex-direction: column-reverse;
-  }
 }
 
 .main-app {

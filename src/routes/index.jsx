@@ -167,7 +167,7 @@ export const Routes = () => {
 
       <Route component={LessonTestPage} path="/test-:title/:id/:testId" exact />
 
-      <Route component={Profile} exact path="/profile/:id" />
+      <Route component={Profile} exact path="/profile/:id?" />
       <Route component={UserInfo} exact path="/userInfo" />
 
       <Route component={NotFoundPage} />

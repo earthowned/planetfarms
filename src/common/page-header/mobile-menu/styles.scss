@@ -14,4 +14,10 @@
   &-visible {
     top: 72px;
   }
+
+  .action-btn {
+    height: 64px;
+    padding-left: 16px;
+    justify-content: flex-start;
+  }
 }

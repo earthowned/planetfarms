@@ -10,8 +10,8 @@ import { SignUpPage } from "screens/auth/sign-up";
 import { ForgotPasswordPage } from "screens/auth/forgot-password";
 import { AdditionalInfoPage } from "screens/auth/additional-info";
 
-import { Navigation } from "common/navigation";
 import { PrivateRoute } from "components/privateRoute";
+import { SideBarNavigation } from "common/side-bar-navigation";
 
 import { Routes } from "routes";
 import ScrollToTop from "utils/scrollToTop";
@@ -25,7 +25,7 @@ dayjs.extend(customParseFormat);
 const MainApp = () => (
   <div className="app-container">
     <aside className="aside">
-      <Navigation />
+      <SideBarNavigation />
     </aside>
     <main className="main-app">
       <Routes />
