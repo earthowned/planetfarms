@@ -1,10 +1,42 @@
 @import "src/scss/mixins";
 
-.pf-navigation-container {
-  height: 100%;
+.navigation-container {
+  width: 100%;
+  position: relative;
+
+  nav {
+    width: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-side-board {
+    left: 0;
+    position: absolute;
+
+    width: 4px;
+    height: 56px;
+
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    background-color: #58bd88;
+    box-shadow: 5px 0px 25px #58bd88;
+
+    @include transition(top, 0.5s, ease-in-out);
+  }
 
   @include breakpoint("tablet", "max") {
-    width: 100%;
-    height: 48px;
+    .nav-side-board {
+      right: -1px;
+      left: unset;
+
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+
+      box-shadow: -5px 0px 25px #58bd88;
+    }
   }
 }

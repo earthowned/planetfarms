@@ -1,0 +1,23 @@
+@import "src/scss/mixins";
+
+.mobile-menu-container {
+  left: 0;
+  right: 0;
+  top: calc(100vh + 72px);
+  height: calc(100vh - 72px);
+  background-color: #141414;
+
+  z-index: 1;
+  position: absolute;
+  @include transition(top, 0.3s, ease-in-out);
+
+  &-visible {
+    top: 72px;
+  }
+
+  .action-btn {
+    height: 64px;
+    padding-left: 16px;
+    justify-content: flex-start;
+  }
+}

@@ -1,12 +1,10 @@
-import React, { useState, useMemo } from "react";
+import { useState } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { Icon } from "common/icon";
-import { Avatar } from "common/avatar";
+import { IconButton } from "common/buttons/icon-button";
 import { ModalButton } from "common/buttons/modal-button";
-import { ActionButton } from "common/buttons/action-button";
 import { DestructiveModalContainer } from "common/modal-containers";
 
 import { logout } from "actions/auth";
@@ -14,8 +12,8 @@ import useSizeFinder from "utils/sizeFinder";
 import { getErrorMessage } from "utils/error";
 import { TABLET_SCREEN_WIDTH } from "constants/sizeConstants";
 
-import { SettingsModal } from "./settings-modal";
-import { desktopButtons, mobileButtons } from "./config";
+import { MobileMenu } from "./mobile-menu";
+import { TitleContainer } from "./title-container";
 import { renderContent, renderComponent } from "./renders";
 import { ChangePasswordModalContainer } from "./change-password-modal";
 
@@ -29,14 +27,9 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
 
   const isTablet = screenWidth <= TABLET_SCREEN_WIDTH;
 
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [logoutVisible, setLogoutVisible] = useState(false);
-  const [settingsVisible, setSettingsVisible] = useState(false);
   const [changePasswordVisible, setChangePasswordVisible] = useState(false);
-
-  const modalButtons = useMemo(
-    () => (isTablet ? mobileButtons : desktopButtons),
-    [isTablet]
-  );
 
   const handleLogoutClick = (setMobileModalVisible) => {
     setMobileModalVisible(false);
@@ -48,85 +41,69 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
     setChangePasswordVisible(true);
   };
 
-  const handleMessageClick = (setMobileModalVisible) => {
-    setMobileModalVisible(false);
-    history.push("/messenger");
-  };
-
   const onLogout = async () => {
     try {
       await logout()(dispatch);
     } catch (error) {
       alert.error(getErrorMessage(error));
-    } finally {
-      // TODO: Hide Loading;
     }
   };
 
   return (
     <div className="main-page-header">
-      {isTablet ? (
-        <Icon icon="logo-mobile" onClick={() => history.replace("/news")} />
-      ) : (
-        <h3>{title}</h3>
-      )}
+      <TitleContainer
+        title={title}
+        isTablet={isTablet}
+        withBackButton={false}
+        onHomeClick={() => {
+          history.push("/news");
+          setIsMenuVisible(false);
+        }}
+      />
 
       <div className="right-nav-container">
-        <div className="nav-btns-container">
-          <ActionButton
-            icon="grid"
-            title={!isTablet && "Switch Community"}
-            variant="header-nav"
-            onClick={() => history.replace("/community-switching")}
-          />
-
-          {!isTablet && (
-            <ActionButton
-              icon="person"
-              title="My dashboard"
-              variant="header-nav"
-              onClick={() => history.replace("/dashboard")}
-            />
-          )}
-        </div>
+        <IconButton icon="search" variant="white" />
+        <IconButton variant="white" icon="bell" />
 
         {isTablet && (
-          <Avatar
-            placeholderIcon="person"
-            onClick={() => setSettingsVisible(!settingsVisible)}
+          <IconButton
+            variant="white"
+            icon={isMenuVisible ? "cross" : "gamburger"}
+            onClick={() => setIsMenuVisible(!isMenuVisible)}
           />
         )}
 
         {!isTablet && (
           <div className="modal-btns-container">
-            {modalButtons.map((item) => (
-              <ModalButton
-                key={item.title}
-                width={item.width}
-                modalTitle={item.title}
-                onActionButtonClick={() => {}}
-                actionButtonTitle={item.actionButtonTitle}
-                {...(item.position && { position: item.position })}
-                renderContent={({ setVisible }) =>
-                  renderContent({
-                    type: item.type,
-                    onLogout: () => handleLogoutClick(setVisible),
-                    onMessageClick: () => handleMessageClick(setVisible),
-                    onChangePassword: () =>
-                      handleChangePasswordClick(setVisible),
-                  })
-                }
-                component={({ visible, setVisible }) =>
-                  renderComponent({
-                    type: item.type,
-                    onClick: () => setVisible(!visible),
-                  })
-                }
-              />
-            ))}
+            <ModalButton
+              width="400px"
+              modalTitle="Your settings"
+              position={{ top: "65px", right: "-12px" }}
+              renderContent={({ setVisible }) =>
+                renderContent({
+                  onLogout: () => handleLogoutClick(setVisible),
+                  onChangePassword: () => handleChangePasswordClick(setVisible),
+                })
+              }
+              component={({ visible, setVisible }) =>
+                renderComponent({
+                  onClick: () => setVisible(!visible),
+                })
+              }
+            />
           </div>
         )}
       </div>
+
+      {isTablet && (
+        <MobileMenu
+          visible={isMenuVisible}
+          onLogout={() => {
+            setIsMenuVisible(false);
+            setLogoutVisible(true);
+          }}
+        />
+      )}
 
       <DestructiveModalContainer
         title="Logout"
@@ -142,21 +119,6 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
         onClose={() => setChangePasswordVisible(false)}
         onChangePassword={() => {}}
       />
-
-      {isTablet && (
-        <SettingsModal
-          visible={settingsVisible}
-          onClose={() => setSettingsVisible(false)}
-          onLogout={() => {
-            setSettingsVisible(false);
-            setLogoutVisible(true);
-          }}
-          onChangePassword={() => {
-            setSettingsVisible(false);
-            setChangePasswordVisible(true);
-          }}
-        />
-      )}
     </div>
   );
 };

@@ -40,8 +40,11 @@ function Profile() {
   };
 
   useEffect(() => {
-    if (currentUser === id) dispatch(getMyDetails());
-    else dispatch(getUserDetails(id));
+    if (!id || currentUser === id) {
+      dispatch(getMyDetails());
+    } else {
+      dispatch(getUserDetails(id));
+    }
 
     if (status) {
       emailClickHandler(false);

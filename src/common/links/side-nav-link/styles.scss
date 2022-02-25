@@ -2,7 +2,7 @@
 @import "src/scss/variables";
 
 .side-nav-link {
-  width: 100%;
+  width: 248px;
   height: 56px;
   padding: 0px 24px;
   overflow: hidden;
@@ -11,9 +11,8 @@
   align-items: center;
   flex-direction: row;
 
-  p {
-    font: $font-body-bold;
-  }
+  color: #eeefef;
+  font: $font-body-bold;
 
   .icon-container {
     flex-shrink: 0;
@@ -26,75 +25,118 @@
     align-items: center;
     justify-content: center;
 
+    background-color: transparent;
+
+    .avatar-container {
+      width: 24px;
+      height: 24px;
+      border-radius: 32px;
+
+      .person-icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
     svg {
       path {
-        stroke: #00c688;
+        stroke: #eeefef;
       }
+    }
+
+    .users-icon {
+      @include setSvgColor(#eeefef);
     }
 
     .graduation-cap-icon {
-      path {
-        fill: #00c688;
-      }
-    }
-  }
-
-  &-primary {
-    background-color: transparent;
-
-    p {
-      color: #f8ebdf;
+      @include setSvgColor(#eeefef);
     }
 
-    &:hover {
-      background-color: #191b1d;
-    }
-  }
-
-  &-secondary {
-    background-color: #2a2a2a;
-    @include transition(padding, 0.5s, ease-in-out);
-
-    p {
-      color: #f8ebdf;
+    .calendar-icon {
+      @include setSvgColor(#eeefef);
     }
 
-    &:hover {
-      background-color: #3a3a3a;
+    .email-icon {
+      @include setSvgColor(#eeefef);
+    }
+
+    .grid-icon {
+      @include setSvgColor(#eeefef);
     }
   }
 
   &-active {
+    color: #58bd88;
+
     .icon-container {
       svg {
         path {
-          stroke: #2b2b2c;
+          stroke: #58bd88;
         }
+      }
+
+      .users-icon {
+        @include setSvgColor(#58bd88);
       }
 
       .graduation-cap-icon {
-        path {
-          fill: #2b2b2c;
-        }
+        @include setSvgColor(#58bd88);
       }
-    }
 
-    p {
-      color: #2b2b2c;
-    }
+      .calendar-icon {
+        @include setSvgColor(#58bd88);
+      }
 
-    background-color: #00c688;
+      .email-icon {
+        @include setSvgColor(#58bd88);
+      }
 
-    &:hover {
-      background-color: #02f2a7;
+      .grid-icon {
+        @include setSvgColor(#58bd88);
+      }
     }
   }
 
   &-compact {
-    padding: 0px 28px;
+    color: transparent !important;
 
     .icon-container {
       margin-right: 0px;
     }
+  }
+
+  &:hover:not(.active) {
+    color: #cadcd6;
+
+    svg {
+      path {
+        stroke: #cadcd6;
+      }
+    }
+
+    .users-icon {
+      @include setSvgColor(#cadcd6);
+    }
+
+    .graduation-cap-icon {
+      @include setSvgColor(#cadcd6);
+    }
+
+    .calendar-icon {
+      @include setSvgColor(#cadcd6);
+    }
+
+    .email-icon {
+      @include setSvgColor(#cadcd6);
+    }
+
+    .grid-icon {
+      @include setSvgColor(#cadcd6);
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    width: 100%;
+    padding: 0px 16px;
   }
 }
