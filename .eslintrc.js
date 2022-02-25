@@ -29,6 +29,7 @@ module.exports = {
   plugins: ["react", "prettier"],
   ignorePatterns: ["styles.js"],
   rules: {
+    "react/jsx-key": ["warn"], 
     "prettier/prettier": ["warn"],
     "arrow-parens": [2, "always"],
     "react/function-component-definition": "off",
