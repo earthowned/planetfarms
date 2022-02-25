@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - main
+      - node_version
   release:
     types: [created]
   workflow_dispatch:
