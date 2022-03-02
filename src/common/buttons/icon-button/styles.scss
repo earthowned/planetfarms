@@ -27,6 +27,21 @@
     height: 24px !important;
   }
 
+  &-secondary {
+    background-color: rgba(238, 239, 239, 0.1);
+    svg {
+      @include setSvgColor(#eeefef);
+    }
+
+    &:hover:enabled {
+      background-color: rgba(202, 220, 214, 0.2);
+    }
+
+    &:active:enabled {
+      background-color: rgba(186, 207, 200, 0.3);
+    }
+  }
+
   &-transparent {
     svg {
       @include setSvgColor(#00c688);

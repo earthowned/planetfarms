@@ -1,0 +1,20 @@
+.filters-container {
+  width: 100%;
+  gap: 16px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .action-btn {
+    width: auto !important;
+    height: 40px;
+    padding: 0px 12px;
+  }
+
+  .pf-icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+}

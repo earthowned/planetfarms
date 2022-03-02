@@ -33,6 +33,7 @@ import { ReactComponent as CropIcon } from "assets/icons/crop.svg";
 import { ReactComponent as CongratulationsIcon } from "assets/icons/congratulations.svg";
 import { ReactComponent as UsersIcon } from "assets/icons/users.svg";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
+import { ReactComponent as PlusIcon } from "assets/icons/plus.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -89,6 +90,9 @@ const getIcon = (iconName) => {
 
     case "person":
       return <PersonIcon />;
+
+    case "plus":
+      return <PlusIcon />;
 
     case "eye-on":
       return <EyeOpenIcon />;
