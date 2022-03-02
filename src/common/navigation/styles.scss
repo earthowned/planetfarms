@@ -39,4 +39,12 @@
       box-shadow: -5px 0px 25px #58bd88;
     }
   }
+
+  @include breakpoint("mobile", "max") {
+    @media (orientation: landscape) {
+      .nav-side-board {
+        display: none;
+      }
+    }
+  }
 }

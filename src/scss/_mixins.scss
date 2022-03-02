@@ -50,3 +50,27 @@
   -moz-transition: $property $time $easing;
   -webkit-transition: $property $time $easing;
 }
+
+@mixin supports-safe-area-top {
+  @supports (padding-top: env(safe-area-inset-top)) {
+    @content;
+  }
+}
+
+@mixin supports-safe-area-bottom {
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    @content;
+  }
+}
+
+@mixin supports-safe-area-right {
+  @supports (padding-right: env(safe-area-inset-right)) {
+    @content;
+  }
+}
+
+@mixin supports-safe-area-left {
+  @supports (padding-left: env(safe-area-inset-left)) {
+    @content;
+  }
+}
