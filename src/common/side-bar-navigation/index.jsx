@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom";
 import { Icon } from "common/icon";
 import { Navigation } from "common/navigation";
 
-import useSizeFinder from "utils/sizeFinder";
-import { TABLET_SCREEN_WIDTH } from "constants/sizeConstants";
+import { useDeviceType } from "hooks";
+import { DeviceType } from "constants/enums";
 
 import { links } from "./config";
 import { ExpandButton } from "./expand-button";
@@ -18,16 +18,15 @@ import "./styles.scss";
 
 export const SideBarNavigation = () => {
   const history = useHistory();
-  const windowWidth = useSizeFinder();
-
-  const isTablet = windowWidth <= TABLET_SCREEN_WIDTH;
+  const device = useDeviceType();
+  const isMobile = device === DeviceType.Tablet || device === DeviceType.Mobile;
 
   // TODO: There is no current community in redux store;
   // const { currentCommunity } = useSelector(selectCurrentCommunity);
 
   const [isExpanded, setIsExpanded] = useState(true);
 
-  if (isTablet) {
+  if (isMobile) {
     return null;
   }
 
