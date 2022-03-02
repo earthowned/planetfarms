@@ -13,13 +13,12 @@ import { DeviceType } from "constants/enums";
 import { getErrorMessage } from "utils/error";
 
 import { MobileMenu } from "./mobile-menu";
-import { TitleContainer } from "./title-container";
 import { renderContent, renderComponent } from "./renders";
 import { ChangePasswordModalContainer } from "./change-password-modal";
 
 import "./styles.scss";
 
-export const PageHeader = ({ title = "PlanetFarms" }) => {
+export const PageHeader = ({ title, withBackButton = false }) => {
   const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -51,58 +50,73 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
 
   return (
     <div className="main-page-header">
-      <TitleContainer
-        title={title}
-        isTablet={isMobile}
-        withBackButton={false}
-        onHomeClick={() => {
-          history.push("/news");
-          setIsMenuVisible(false);
-        }}
-      />
+      <div className="top-header-container">
+        <>
+          {withBackButton && <p>Back Button</p>}
 
-      <div className="right-nav-container">
-        <IconButton icon="search" variant="white" />
-        <IconButton variant="white" icon="bell" />
+          {!withBackButton && isMobile && (
+            <IconButton
+              icon="logo-mobile"
+              onClick={() => {
+                history.push("/news");
+                setIsMenuVisible(false);
+              }}
+            />
+          )}
+
+          {!withBackButton && !isMobile && <h2>{title || "PlanetFarms"}</h2>}
+        </>
+
+        <div className="right-nav-container">
+          <IconButton icon="search" variant="white" />
+          <IconButton variant="white" icon="bell" />
+
+          {isMobile && (
+            <IconButton
+              variant="white"
+              icon={isMenuVisible ? "cross" : "gamburger"}
+              onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+          )}
+
+          {!isMobile && (
+            <div className="modal-btns-container">
+              <ModalButton
+                width="400px"
+                modalTitle="Your settings"
+                position={{ top: "65px", right: "-12px" }}
+                renderContent={({ setVisible }) =>
+                  renderContent({
+                    onLogout: () => handleLogoutClick(setVisible),
+                    onChangePassword: () =>
+                      handleChangePasswordClick(setVisible),
+                  })
+                }
+                component={({ visible, setVisible }) =>
+                  renderComponent({
+                    onClick: () => setVisible(!visible),
+                  })
+                }
+              />
+            </div>
+          )}
+        </div>
 
         {isMobile && (
-          <IconButton
-            variant="white"
-            icon={isMenuVisible ? "cross" : "gamburger"}
-            onClick={() => setIsMenuVisible(!isMenuVisible)}
+          <MobileMenu
+            visible={isMenuVisible}
+            onLogout={() => {
+              setIsMenuVisible(false);
+              setLogoutVisible(true);
+            }}
           />
-        )}
-
-        {!isMobile && (
-          <div className="modal-btns-container">
-            <ModalButton
-              width="400px"
-              modalTitle="Your settings"
-              position={{ top: "65px", right: "-12px" }}
-              renderContent={({ setVisible }) =>
-                renderContent({
-                  onLogout: () => handleLogoutClick(setVisible),
-                  onChangePassword: () => handleChangePasswordClick(setVisible),
-                })
-              }
-              component={({ visible, setVisible }) =>
-                renderComponent({
-                  onClick: () => setVisible(!visible),
-                })
-              }
-            />
-          </div>
         )}
       </div>
 
-      {isMobile && (
-        <MobileMenu
-          visible={isMenuVisible}
-          onLogout={() => {
-            setIsMenuVisible(false);
-            setLogoutVisible(true);
-          }}
-        />
+      {isMobile && title && (
+        <div className="bottom-header-container">
+          <h2>{title}</h2>
+        </div>
       )}
 
       <DestructiveModalContainer
