@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { SideModal } from "common/side-modal";
 import { DashboardLayout } from "layout/dashboard";
 import { ActionButton } from "common/buttons/action-button";
 
@@ -11,7 +12,7 @@ const mockFilters = ["Farming", "People", "Nature", "Cars industry"];
 
 export const NewsListPage = () => {
   const [filters, setFilters] = useState(mockFilters);
-  // const [addFilterVisible, setAddFilterVisible] = useState(false);
+  const [addFilterVisible, setAddFilterVisible] = useState(true);
 
   const onFilterRemove = (filterIndex) => {
     setFilters(filters.filter((_, index) => index !== filterIndex));
@@ -30,6 +31,12 @@ export const NewsListPage = () => {
       </div>
 
       <div className="news-list-container" />
+
+      <SideModal
+        title="Add Filters"
+        visible={addFilterVisible}
+        onClose={() => setAddFilterVisible(false)}
+      />
     </DashboardLayout>
   );
 };
