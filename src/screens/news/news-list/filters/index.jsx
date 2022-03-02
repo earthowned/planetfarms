@@ -8,7 +8,7 @@ export const Filters = ({ filters = [], onRemove, onAdd }) => {
 
   return (
     <div className="filters-container">
-      <h4>Filters:</h4>
+      <h4>{filters.length > 0 ? "Filters:" : "Filter by:"}</h4>
 
       {filtersToPresent.map((filter, index) => (
         <ActionButton
