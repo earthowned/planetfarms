@@ -8,9 +8,9 @@ import { ModalButton } from "common/buttons/modal-button";
 import { DestructiveModalContainer } from "common/modal-containers";
 
 import { logout } from "actions/auth";
-import useSizeFinder from "utils/sizeFinder";
+import { useDeviceType } from "hooks";
+import { DeviceType } from "constants/enums";
 import { getErrorMessage } from "utils/error";
-import { TABLET_SCREEN_WIDTH } from "constants/sizeConstants";
 
 import { MobileMenu } from "./mobile-menu";
 import { TitleContainer } from "./title-container";
@@ -23,9 +23,9 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
   const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
-  const screenWidth = useSizeFinder();
+  const device = useDeviceType();
 
-  const isTablet = screenWidth <= TABLET_SCREEN_WIDTH;
+  const isMobile = device === DeviceType.Tablet || device === DeviceType.Mobile;
 
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [logoutVisible, setLogoutVisible] = useState(false);
@@ -53,7 +53,7 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
     <div className="main-page-header">
       <TitleContainer
         title={title}
-        isTablet={isTablet}
+        isTablet={isMobile}
         withBackButton={false}
         onHomeClick={() => {
           history.push("/news");
@@ -65,7 +65,7 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
         <IconButton icon="search" variant="white" />
         <IconButton variant="white" icon="bell" />
 
-        {isTablet && (
+        {isMobile && (
           <IconButton
             variant="white"
             icon={isMenuVisible ? "cross" : "gamburger"}
@@ -73,7 +73,7 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
           />
         )}
 
-        {!isTablet && (
+        {!isMobile && (
           <div className="modal-btns-container">
             <ModalButton
               width="400px"
@@ -95,7 +95,7 @@ export const PageHeader = ({ title = "PlanetFarms" }) => {
         )}
       </div>
 
-      {isTablet && (
+      {isMobile && (
         <MobileMenu
           visible={isMenuVisible}
           onLogout={() => {
