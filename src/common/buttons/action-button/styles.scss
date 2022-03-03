@@ -34,6 +34,9 @@
   &-primary {
     color: #141414;
     background-color: #58bd88;
+    svg {
+      @include setSvgColor(#141414);
+    }
 
     &:hover:enabled {
       background-color: #009466;

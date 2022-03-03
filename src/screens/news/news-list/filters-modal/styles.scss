@@ -1,0 +1,41 @@
+.filters-modal-container {
+  width: 100%;
+  padding: 16px 24px;
+
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+
+  .filter-section-container {
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+
+    .row-container {
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      .action-btn {
+        width: auto;
+        height: auto;
+      }
+    }
+
+    .filters-row-container {
+      gap: 16px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .action-btn {
+        width: auto;
+        height: auto;
+        padding: 8px 12px;
+      }
+    }
+  }
+}

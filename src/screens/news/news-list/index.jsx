@@ -1,21 +1,24 @@
 import { useState } from "react";
 
-import { SideModal } from "common/side-modal";
 import { DashboardLayout } from "layout/dashboard";
 import { ActionButton } from "common/buttons/action-button";
 
 import { Filters } from "./filters";
+import { FiltersModal } from "./filters-modal";
 
 import "./styles.scss";
 
-const mockFilters = ["Farming", "People", "Nature", "Cars industry"];
-
 export const NewsListPage = () => {
-  const [filters, setFilters] = useState(mockFilters);
-  const [addFilterVisible, setAddFilterVisible] = useState(true);
+  const [filters, setFilters] = useState([]);
+  const [addFilterVisible, setAddFilterVisible] = useState(false);
 
-  const onFilterRemove = (filterIndex) => {
-    setFilters(filters.filter((_, index) => index !== filterIndex));
+  const onFilterRemove = (filter) => {
+    setFilters(filters.filter((item) => item !== filter));
+  };
+
+  const handleFiltersApply = (selected) => {
+    setFilters([...selected]);
+    setAddFilterVisible(false);
   };
 
   return (
@@ -24,7 +27,7 @@ export const NewsListPage = () => {
         <Filters
           filters={filters}
           onRemove={onFilterRemove}
-          // onAdd={() => setAddFilterVisible(true)}
+          onAdd={() => setAddFilterVisible(true)}
         />
 
         <ActionButton variant="primary" title="Add New" icon="plus" />
@@ -32,9 +35,10 @@ export const NewsListPage = () => {
 
       <div className="news-list-container" />
 
-      <SideModal
-        title="Add Filters"
+      <FiltersModal
+        selectedFilters={filters}
         visible={addFilterVisible}
+        onApply={handleFiltersApply}
         onClose={() => setAddFilterVisible(false)}
       />
     </DashboardLayout>

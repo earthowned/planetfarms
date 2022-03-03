@@ -15,7 +15,7 @@ export const Filters = ({ filters = [], onRemove, onAdd }) => {
           title={filter}
           rightIcon="cross"
           variant="secondary"
-          onClick={() => onRemove(index)}
+          onClick={() => onRemove(filter)}
           key={`${filter}-${index.toString()}`}
         />
       ))}
