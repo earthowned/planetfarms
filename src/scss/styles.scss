@@ -121,8 +121,16 @@ input,
 textarea {
   font-family: inherit;
 }
+
 a {
   font-family: inherit;
   text-decoration: none;
   color: inherit;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 3px;
+  background-color: #555656;
 }
