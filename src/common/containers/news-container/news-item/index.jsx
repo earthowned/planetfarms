@@ -12,11 +12,7 @@ export const NewsItem = ({ variant, news }) => {
   return (
     <div className={containerClassName}>
       <div className="cover-image-container">
-        <img
-          src={news.image}
-          alt=""
-          style={{ width: "100%", height: "100%" }}
-        />
+        <img src={news.image} alt="" />
       </div>
 
       <div className="news-data-container">

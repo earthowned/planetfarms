@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { DashboardLayout } from "layout/dashboard";
-import { NewsItem } from "common/list-items/news-item";
 import { ActionButton } from "common/buttons/action-button";
+import { NewsListContainer } from "common/containers/news-container";
 
 import { Filters } from "./filters";
 import { FiltersModal } from "./filters-modal";
@@ -16,7 +16,7 @@ const newsList = [
       "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
     title: "Fueling the ethanol industry",
     smallText:
-      "Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and grain or indirectly from paper waste. It’s also the...",
+      "Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and grain or indirectly from paper waste. It’s also the... Ethanol, which is sometimes known as ethyl alcohol, is a kind of alcohol derived from corn, sugarcane, and grain or indirectly from paper waste. It’s also the...",
     createdAt: "November 01, 2020",
     readTime: "5 min read",
     tag: "Farming",
@@ -169,11 +169,6 @@ export const NewsListPage = () => {
     setAddFilterVisible(false);
   };
 
-  const getNewsItemVariant = (index) => {
-    if (index === 0 || index % 4 === 0) return "big";
-    return "default";
-  };
-
   return (
     <DashboardLayout title="News">
       <div className="news-page-header">
@@ -186,15 +181,7 @@ export const NewsListPage = () => {
         <ActionButton variant="primary" title="Add New" icon="plus" />
       </div>
 
-      <div className="news-list-container">
-        {newsList.map((item, index) => (
-          <NewsItem
-            news={item}
-            key={item.id}
-            variant={getNewsItemVariant(index)}
-          />
-        ))}
-      </div>
+      <NewsListContainer list={newsList} onNewsClick={() => {}} />
 
       <FiltersModal
         selectedFilters={filters}
