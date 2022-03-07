@@ -20,6 +20,7 @@
 
     h2,
     h3,
+    h4,
     h5 {
       overflow: hidden;
       display: -webkit-box;
@@ -113,6 +114,43 @@
       h5 {
         margin-bottom: 16px;
         -webkit-line-clamp: 2;
+      }
+    }
+  }
+
+  &-mobile {
+    gap: 8px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .cover-image-container {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .news-data-container {
+      gap: 8px;
+
+      h4 {
+        -webkit-line-clamp: 2;
+      }
+
+      h5 {
+        display: none;
+      }
+
+      .top-container {
+        .dot-container + .read-time-text {
+          display: none;
+        }
+      }
+
+      .news-author-container {
+        display: none;
       }
     }
   }

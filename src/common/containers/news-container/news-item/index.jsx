@@ -27,7 +27,7 @@ export const NewsItem = ({ variant, news }) => {
           )}
 
           {news.readTime && (
-            <div className="dot-container">
+            <div className="dot-container read-time-text">
               <div className="dot" />
               <h6 className="grey">{news.readTime}</h6>
             </div>
@@ -36,6 +36,7 @@ export const NewsItem = ({ variant, news }) => {
 
         {variant === "default" && <h3>{news.title}</h3>}
         {variant === "big" && <h2>{news.title}</h2>}
+        {variant === "mobile" && <h4>{news.title}</h4>}
 
         <h5>{news.smallText}</h5>
 

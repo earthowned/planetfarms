@@ -17,7 +17,7 @@ export const NewsListContainer = ({ list = [], onNewsClick }) => {
           return "default";
 
         case DeviceType.Mobile:
-          return "default";
+          return index === 0 || index % 4 === 0 ? "default" : "mobile";
 
         default:
           return index === 0 ? "big" : "default";
@@ -32,6 +32,7 @@ export const NewsListContainer = ({ list = [], onNewsClick }) => {
         <NewsItem
           news={item}
           key={`news-item-${item.id}`}
+          onClick={() => onNewsClick(item)}
           variant={getNewsItemVariant(index)}
         />
       ))}
