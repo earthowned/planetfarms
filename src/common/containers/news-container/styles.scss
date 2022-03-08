@@ -39,3 +39,17 @@
     }
   }
 }
+
+.news-list-loader-container {
+  width: 100%;
+  height: 100px;
+  background-color: red;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include breakpoint("tablet", "max") {
+    height: 50px;
+  }
+}

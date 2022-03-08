@@ -14,3 +14,12 @@
   backdrop-filter: blur(8px);
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.component-loader-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

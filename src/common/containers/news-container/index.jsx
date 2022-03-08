@@ -1,7 +1,8 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useMemo } from "react";
 
 import { useDeviceType } from "hooks";
 import { DeviceType } from "constants/enums";
+import { ComponentLoader } from "common/loader";
 
 import { NewsItem } from "./news-item";
 
@@ -49,24 +50,37 @@ export const NewsListContainer = ({
     [isLastPage, isLoading]
   );
 
-  return (
-    <div className="news-list-container">
-      {list.map((item, index) => {
-        const onSetObserver = (node) => {
-          if (index === list.length - 1) return lastElementObserver(node);
-          return null;
-        };
+  const loaderWidth = useMemo(() => {
+    if (device === DeviceType.Mobile) return "100%";
+    return "50%";
+  }, [device]);
 
-        return (
-          <NewsItem
-            news={item}
-            ref={onSetObserver}
-            key={`news-item-${item.id}`}
-            variant={getNewsItemVariant(index)}
-            onClick={() => onNewsClick(item.id)}
-          />
-        );
-      })}
-    </div>
+  return (
+    <>
+      <div className="news-list-container">
+        {list.map((item, index) => {
+          const onSetObserver = (node) => {
+            if (index === list.length - 1) return lastElementObserver(node);
+            return null;
+          };
+
+          return (
+            <NewsItem
+              news={item}
+              ref={onSetObserver}
+              key={`news-item-${item.id}`}
+              variant={getNewsItemVariant(index)}
+              onClick={() => onNewsClick(item.id)}
+            />
+          );
+        })}
+      </div>
+
+      {isLoading && (
+        <div className="news-list-loader-container">
+          <ComponentLoader width={loaderWidth} />
+        </div>
+      )}
+    </>
   );
 };
