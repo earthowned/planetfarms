@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import cx from "classnames";
 
 import { Avatar } from "common/avatar";
+import newsPlaceholderImage from "assets/images/news-placeholder.png";
 
 import { parseCoverImage } from "./helpers";
 
@@ -14,12 +15,10 @@ export const NewsItem = forwardRef(({ variant, news, onClick }, ref) => {
     [`news-item-container-${variant}`]: true,
   });
 
-  const imageUrl = parseCoverImage(news) || "";
-
   return (
     <div ref={ref} className={containerClassName} onClick={onClick}>
       <div className="cover-image-container">
-        <img src={imageUrl} alt="" />
+        <img src={parseCoverImage(news) || newsPlaceholderImage} alt="" />
       </div>
 
       <div className="news-data-container">

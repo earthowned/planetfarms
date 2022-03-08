@@ -70,8 +70,10 @@ export const NewsListPage = () => {
         list={news}
         isLoading={isLoading}
         isLastPage={page === totalPages}
-        onLoadMore={() => setPage(page + 1)}
         onNewsClick={(id) => history.push(`/news/${id}`)}
+        onLoadMore={() => {
+          if (page < totalPages) setPage(page + 1);
+        }}
       />
 
       <FiltersModal
