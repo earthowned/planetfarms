@@ -1,28 +1,37 @@
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
+import dayjs from "dayjs";
 import cx from "classnames";
 
 import { Avatar } from "common/avatar";
 
+import { parseCoverImage } from "./helpers";
+
 import "./styles.scss";
 
-export const NewsItem = ({ variant, news }) => {
+export const NewsItem = forwardRef(({ variant, news, onClick }, ref) => {
   const containerClassName = cx("news-item-container", {
     [`news-item-container-${variant}`]: true,
   });
 
+  const imageUrl = parseCoverImage(news) || "";
+
   return (
-    <div className={containerClassName}>
+    <div ref={ref} className={containerClassName} onClick={onClick}>
       <div className="cover-image-container">
-        <img src={news.image} alt="" />
+        <img src={imageUrl} alt="" />
       </div>
 
       <div className="news-data-container">
         <div className="top-container">
-          {news.tag && <h6>{news.tag}</h6>}
+          {news.category && <h6>{news.category}</h6>}
 
           {news.createdAt && (
             <div className="dot-container">
               <div className="dot" />
-              <h6 className="grey">{news.createdAt}</h6>
+              <h6 className="grey">
+                {dayjs(news.createdAt).format("MMMM DD, YYYY")}
+              </h6>
             </div>
           )}
 
@@ -42,9 +51,9 @@ export const NewsItem = ({ variant, news }) => {
 
         <div className="news-author-container">
           <Avatar placeholderIcon="person" />
-          <h4>{news.authorName}</h4>
+          <h4>{news.authorName || "Unknown author"}</h4>
         </div>
       </div>
     </div>
   );
-};
+});
