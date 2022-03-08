@@ -34,8 +34,8 @@ export const NewsItem = ({ variant, news }) => {
           )}
         </div>
 
-        {variant === "default" && <h3>{news.title}</h3>}
         {variant === "big" && <h2>{news.title}</h2>}
+        {variant === "default" && <h3>{news.title}</h3>}
         {variant === "mobile" && <h4>{news.title}</h4>}
 
         <h5>{news.smallText}</h5>

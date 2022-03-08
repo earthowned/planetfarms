@@ -5,6 +5,7 @@
   .cover-image-container {
     overflow: hidden;
     border-radius: 6px;
+    background-color: #1e1f1f;
 
     img {
       width: 100%;
@@ -68,7 +69,6 @@
       width: 100%;
       flex-shrink: 1;
       max-width: calc(66%);
-      background-color: red;
     }
 
     .news-data-container {
