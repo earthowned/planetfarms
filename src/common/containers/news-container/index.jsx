@@ -76,7 +76,7 @@ export const NewsListContainer = ({
         })}
       </div>
 
-      {isLoading && (
+      {isLoading && list.length > 0 && (
         <div className="news-list-loader-container">
           <ComponentLoader width={loaderWidth} />
         </div>
