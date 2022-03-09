@@ -19,13 +19,11 @@
     width: 24px;
     height: 24px;
     margin-right: 8px;
-    @include transition(margin-right, 0.5s, ease-in-out);
+    background-color: transparent;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background-color: transparent;
 
     .avatar-container {
       width: 24px;
@@ -38,62 +36,15 @@
       }
     }
 
-    svg {
-      path {
-        stroke: #eeefef;
-      }
-    }
-
-    .users-icon {
-      @include setSvgColor(#eeefef);
-    }
-
-    .graduation-cap-icon {
-      @include setSvgColor(#eeefef);
-    }
-
-    .calendar-icon {
-      @include setSvgColor(#eeefef);
-    }
-
-    .email-icon {
-      @include setSvgColor(#eeefef);
-    }
-
-    .grid-icon {
-      @include setSvgColor(#eeefef);
-    }
+    @include setSvgColor(#eeefef);
+    @include transition(margin-right, 0.5s, ease-in-out);
   }
 
   &-active {
     color: #58bd88;
 
     .icon-container {
-      svg {
-        path {
-          stroke: #58bd88;
-        }
-      }
-
-      .users-icon {
-        @include setSvgColor(#58bd88);
-      }
-
-      .graduation-cap-icon {
-        @include setSvgColor(#58bd88);
-      }
-
-      .calendar-icon {
-        @include setSvgColor(#58bd88);
-      }
-
-      .email-icon {
-        @include setSvgColor(#58bd88);
-      }
-
-      .grid-icon {
-        @include setSvgColor(#58bd88);
-      }
+      @include setSvgColor(#58bd88);
     }
   }
 
@@ -107,32 +58,7 @@
 
   &:hover:not(.active) {
     color: #cadcd6;
-
-    svg {
-      path {
-        stroke: #cadcd6;
-      }
-    }
-
-    .users-icon {
-      @include setSvgColor(#cadcd6);
-    }
-
-    .graduation-cap-icon {
-      @include setSvgColor(#cadcd6);
-    }
-
-    .calendar-icon {
-      @include setSvgColor(#cadcd6);
-    }
-
-    .email-icon {
-      @include setSvgColor(#cadcd6);
-    }
-
-    .grid-icon {
-      @include setSvgColor(#cadcd6);
-    }
+    @include setSvgColor(#cadcd6);
   }
 
   @include breakpoint("tablet", "max") {
