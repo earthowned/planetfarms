@@ -35,66 +35,24 @@ export const SearchBar = ({ expanded = false }) => {
     if (!isExpanded) setIsExpanded(true);
   };
 
-  const searchBarClassName = useMemo(
-    () =>
-      cx("search-bar-input-container", {
-        "search-bar-input-container-expanded": isExpanded,
-      }),
-    [isExpanded]
-  );
-
   return (
-    <div className="pf-search-bar-container">
-      <IconButton
-        icon="search"
-        variant="white"
-        onClick={handleContainerClick}
-      />
-
-      <div className={searchBarClassName}>
-        <Icon icon="search" />
-
-        {isExpanded && (
-          <input
-            type="text"
-            value={value}
-            ref={inputRef}
-            onChange={(e) => setValue(e.target.value)}
-          />
-        )}
-
-        {isExpanded && (
-          <IconButton
-            icon="cross"
-            variant="white"
-            onClick={() => setIsExpanded(false)}
-          />
-        )}
-      </div>
-    </div>
-  );
-};
-
-/*
-return (
     <div className={containerClassName} onClick={handleContainerClick}>
       <Icon icon="search" />
-      <div className="search-bar-input-container" />
 
-       <input
+      <input
         type="text"
         value={value}
         ref={inputRef}
         onChange={(e) => setValue(e.target.value)}
-      /> 
+      />
 
-       {isExpanded && (
+      {isExpanded && (
         <IconButton
           icon="cross"
           variant="white"
           onClick={() => setIsExpanded(false)}
         />
-      )} 
-      </div>
-      );
-*/
+      )}
+    </div>
+  );
+};

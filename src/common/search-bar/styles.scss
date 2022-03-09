@@ -54,44 +54,4 @@
       justify-self: flex-end;
     }
   }
-
-  //   .search-bar-input-container {
-  //     height: 56px;
-  //     // max-width: 200px;
-
-  //     left: -400px;
-  //     right: 0;
-
-  //     position: absolute;
-  //     background-color: palegreen;
-  //   }
-}
-
-.pf-search-bar-container {
-  position: relative;
-
-  .search-bar-input-container {
-    width: 24px;
-    height: 56px;
-    visibility: hidden;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    top: 50%;
-    right: 0;
-    // left: 0;
-    // left: -400px;
-    position: absolute;
-    transform: translateY(-50%);
-    background-color: red;
-
-    transition: width 0.5s linear, visibility 1s linear;
-
-    &-expanded {
-      visibility: visible;
-      width: 400px;
-    }
-  }
 }
