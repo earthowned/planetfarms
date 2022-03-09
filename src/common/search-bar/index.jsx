@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useMemo, useRef, useEffect } from "react";
 import cx from "classnames";
 
 import { Icon } from "common/icon";
@@ -6,11 +6,8 @@ import { IconButton } from "common/buttons/icon-button";
 
 import "./styles.scss";
 
-export const SearchBar = ({ expanded = false }) => {
+export const SearchBar = ({ value, isExpanded, onExpand, onChangeValue }) => {
   const inputRef = useRef();
-
-  const [value, setValue] = useState("");
-  const [isExpanded, setIsExpanded] = useState(expanded);
 
   const containerClassName = useMemo(
     () =>
@@ -32,7 +29,7 @@ export const SearchBar = ({ expanded = false }) => {
   }, [isExpanded, inputRef]);
 
   const handleContainerClick = () => {
-    if (!isExpanded) setIsExpanded(true);
+    if (!isExpanded) onExpand(true);
   };
 
   return (
@@ -43,14 +40,14 @@ export const SearchBar = ({ expanded = false }) => {
         type="text"
         value={value}
         ref={inputRef}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => onChangeValue(e.target.value)}
       />
 
       {isExpanded && (
         <IconButton
           icon="cross"
           variant="white"
-          onClick={() => setIsExpanded(false)}
+          onClick={() => onExpand(false)}
         />
       )}
     </div>
