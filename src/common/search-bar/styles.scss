@@ -1,0 +1,97 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.search-bar-container {
+  width: 24px;
+  height: 56px;
+  padding: 0px 0px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: transparent;
+
+  position: relative;
+
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  transition: width 0.5s ease-in-out, border-color 1s linear, padding 1s linear;
+
+  input {
+    width: 0px;
+    height: 100%;
+
+    font: $font-body;
+    color: #eeefef;
+    background-color: transparent;
+
+    display: none;
+    border: none;
+    outline: none;
+    text-size-adjust: none;
+
+    :focus {
+      outline: none;
+    }
+  }
+
+  &-expanded {
+    width: 400px;
+    padding: 0px 16px;
+    border-color: #58bd88;
+    background-color: #27332f;
+    cursor: default;
+
+    input {
+      width: 100%;
+      display: flex;
+    }
+
+    .pf-icon-btn {
+      margin-left: auto;
+      justify-self: flex-end;
+    }
+  }
+
+  //   .search-bar-input-container {
+  //     height: 56px;
+  //     // max-width: 200px;
+
+  //     left: -400px;
+  //     right: 0;
+
+  //     position: absolute;
+  //     background-color: palegreen;
+  //   }
+}
+
+.pf-search-bar-container {
+  position: relative;
+
+  .search-bar-input-container {
+    width: 24px;
+    height: 56px;
+    visibility: hidden;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    top: 50%;
+    right: 0;
+    // left: 0;
+    // left: -400px;
+    position: absolute;
+    transform: translateY(-50%);
+    background-color: red;
+
+    transition: width 0.5s linear, visibility 1s linear;
+
+    &-expanded {
+      visibility: visible;
+      width: 400px;
+    }
+  }
+}
