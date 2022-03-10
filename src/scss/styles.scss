@@ -42,13 +42,13 @@ html {
   display: flex;
   flex-direction: row;
 
-  background: linear-gradient(
+  background: -webkit-linear-gradient(
     144.56deg,
-    rgba(20, 20, 20, 0.15) -3.06%,
-    rgba(88, 189, 136, 0.15) 26.79%,
-    rgba(218, 52, 67, 0.15) 60.6%,
-    rgba(234, 165, 51, 0.15) 93.24%,
-    rgba(20, 20, 20, 0.15) 122.75%
+    rgba(20, 20, 20, 0.05) -1.06%,
+    rgba(88, 189, 136, 0.05) 26.79%,
+    rgba(218, 52, 67, 0.05) 60.6%,
+    rgba(234, 165, 51, 0.05) 93.24%,
+    rgba(20, 20, 20, 0.05) 122.75%
   );
 }
 

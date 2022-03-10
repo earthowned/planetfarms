@@ -9,7 +9,6 @@
 
   .top-header-container {
     display: flex;
-    flex-wrap: wrap;
     flex-shrink: 0;
     flex-direction: row;
     align-items: center;
@@ -23,10 +22,15 @@
 
     .right-nav-container {
       gap: 24px;
+      width: 100%;
 
       display: flex;
       align-items: center;
       flex-direction: row;
+      justify-content: flex-end;
+
+      margin-left: auto;
+      justify-self: flex-end;
 
       .avatar-container {
         width: 48px;

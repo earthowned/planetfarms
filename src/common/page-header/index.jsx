@@ -14,6 +14,7 @@ import { DeviceType } from "constants/enums";
 import { getErrorMessage } from "utils/error";
 import { useSearchBar } from "providers/search-bar";
 
+import { getVisibility } from "./helpers";
 import { MobileMenu } from "./mobile-menu";
 import { renderContent, renderComponent } from "./renders";
 import { ChangePasswordModalContainer } from "./change-password-modal";
@@ -35,19 +36,13 @@ export const PageHeader = ({ title, withBackButton = false }) => {
   const [logoutVisible, setLogoutVisible] = useState(false);
   const [changePasswordVisible, setChangePasswordVisible] = useState(false);
 
-  const showBakcButton = useMemo(
-    () => withBackButton && !isExpanded,
-    [withBackButton, isExpanded]
-  );
-
-  const showLogo = useMemo(
-    () => !withBackButton && !isExpanded && isMobile,
-    [withBackButton, isExpanded, isMobile]
-  );
-
-  const showTitle = useMemo(
-    () => !withBackButton && !isMobile,
-    [withBackButton, isMobile]
+  const {
+    logo: showLogo,
+    title: showTitle,
+    backButton: showBakcButton,
+  } = useMemo(
+    () => getVisibility({ withBackButton, isExpanded, device }),
+    [withBackButton, isExpanded, device]
   );
 
   const handleLogoutClick = (setMobileModalVisible) => {

@@ -10,8 +10,6 @@
   cursor: pointer;
   background-color: transparent;
 
-  position: relative;
-
   gap: 8px;
   display: flex;
   align-items: center;
@@ -52,6 +50,12 @@
     .pf-icon-btn {
       margin-left: auto;
       justify-self: flex-end;
+    }
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    &-expanded {
+      width: 100%;
     }
   }
 }
