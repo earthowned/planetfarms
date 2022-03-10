@@ -1,0 +1,87 @@
+@import "src/scss/mixins";
+
+.nav-tabs-main-container {
+  width: 100%;
+  height: 59px;
+  overflow: hidden;
+  background-color: transparent;
+
+  .nav-tabs-container {
+    padding-left: 24px;
+    overflow-x: scroll;
+
+    gap: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .tabs-container {
+      padding-right: 24px;
+
+      gap: 40px;
+      display: flex;
+
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      background-color: red;
+    }
+
+    .navigation-tab-active-bar {
+      height: 2px;
+      border-radius: 4px;
+      background-color: #58bd88;
+
+      position: relative;
+      @include transition(margin-left, 0.2s, linear);
+
+      .bar-half-shadow {
+        width: 95%;
+        height: 1px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        box-shadow: 0px -2px 15px 0px #58bd88;
+      }
+    }
+  }
+}
+
+// .nav-tabs-container {
+//   height: 56px;
+//   padding: 0 24px;
+//   background-color: transparent;
+
+//   overflow-x: auto;
+
+//   gap: 14px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+
+//   .tabs-container {
+//     gap: 40px;
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     justify-content: flex-start;
+//   }
+
+//   .navigation-tab-active-bar {
+//     height: 2px;
+//     border-radius: 4px;
+//     background-color: #58bd88;
+
+//     position: relative;
+//     @include transition(margin-left, 0.2s, linear);
+
+//     .bar-half-shadow {
+//       width: 95%;
+//       height: 1px;
+//       margin-left: auto;
+//       margin-right: auto;
+//       border-radius: 10px;
+//       box-shadow: 0px -2px 15px 0px #58bd88;
+//     }
+//   }
+// }
