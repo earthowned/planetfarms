@@ -165,6 +165,10 @@ export const PageHeader = ({ title, withBackButton = false }) => {
       <NotificationsModal
         visible={isNotificationsVisible}
         onClose={() => setIsNotificationsVisible(false)}
+        onSelect={() => {
+          setIsNotificationsVisible(false);
+          history.push("/messenger");
+        }}
       />
     </div>
   );

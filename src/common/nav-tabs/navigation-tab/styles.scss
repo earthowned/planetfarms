@@ -1,5 +1,6 @@
 .nav-tab-container {
   cursor: pointer;
+  user-select: none;
 
   gap: 8px;
   display: flex;
