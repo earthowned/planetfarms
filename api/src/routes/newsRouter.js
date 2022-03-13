@@ -6,6 +6,7 @@ const checkCommunity = require('../middleware/checkCommunity')
 const { addNews, getNews, updateNews, getNewsById, deleteNews, searchNewsTitle } = require('../controllers/newsController')
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
+router.route('/community/').get(getNews)
 router.route('/community/:id').get(checkCommunity, getNews)
 router.route('/add/community/:id').post(checkCommunity, upload.single('news'), resizeImage, addNews)
 router.route('/community/:id/search').get(checkCommunity, searchNewsTitle)

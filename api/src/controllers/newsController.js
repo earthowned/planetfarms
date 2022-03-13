@@ -6,34 +6,66 @@ const { changeFormat } = require('../helpers/filehelpers')
 // @desc    Fetch all News
 // @route   GET/api/news/community/:id
 // @access  Public
-const getNews = (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
-  const order = req.query.order || 'DESC'
-  const ordervalue = order && [['createdAt', order]]
-  db.News.findAndCountAll({
-    offset: (page - 1) * pageSize,
-    limit: pageSize,
-    order: ordervalue,
-    where: { deleted: false },
-    attributes: { exclude: ['deleted'] },
-    include: [{
-      model: db.Community,
-      attributes: ['id'],
-      where: { id: req.params.id }
-    }]
-  })
-    .then(news => {
-      const totalPages = Math.ceil(news.count / pageSize)
-      res.json({
-        news: news.rows.map(rec => ({ ...rec.dataValues, _attachments: changeFormat(rec._attachments) })),
-        totalItems: news.count,
-        totalPages,
-        page,
-        pageSize
-      }).status(200)
+const getNews = async (req, res) => {
+  try {
+    const pageSize = 10
+    const page = Number(req.query.pageNumber) || 1
+    const order = req.query.order || 'DESC'
+    const ordervalue = order && [['createdAt', order]]
+    const { title = '', filter = '' } = req.query
+    const userId = req?.user?.id || 1
+    whereQuery = { [Op.and]: [
+      { deleted: false },
+      { title: { [Op.iLike]: '%' + title + '%' } },
+      filter ? { category: { [Op.contains] : filter.split(',')} } : {}
+    ] }
+    const followIdArrays = await db.CommunityUser.findAll({
+      attributes: ['communityId'],
+      where: { userId: userId }
+    }).then(communities => {
+      return (communities || []).reduce((acc, community) => {
+        acc.push(community.communityId)
+        return acc
+      }, [0])
     })
-    .catch((err) => res.json({ err }).status(400))
+    whereCommunity = { where: {[Op.and]: [ { id: {[Op.or]: followIdArrays} }, req.params.id ? {id: req.params.id}: {}] } }
+    db.News.findAndCountAll({
+      offset: (page - 1) * pageSize,
+      limit: pageSize,
+      order: ordervalue,
+      where: whereQuery,
+      attributes: { include: [
+        'news.*',
+        [
+          db.sequelize.literal(`(
+            SELECT "texts"."textDescription" FROM "rich_texts" LEFT JOIN "texts" ON "texts"."richtextId" = "rich_texts"."id" WHERE "rich_texts"."id" = "news"."richtextId" ORDER BY "texts"."order" LIMIT 1
+          )`),
+          'smallText'
+        ]
+      ], exclude: ['deleted'] },
+      include: [{
+        model: db.Community,
+        attributes: ['id'],
+        ...whereCommunity
+      },
+      {
+        model: db.User
+      }]
+    })
+      .then(news => {
+        const totalPages = Math.ceil(news.count / pageSize)
+        res.json({
+          news: news.rows.map(rec => ({ ...rec.dataValues, _attachments: changeFormat(rec._attachments) })),
+          totalItems: news.count,
+          totalPages,
+          page,
+          pageSize
+        }).status(200)
+      })
+      .catch((err) => res.json({ err }).status(400))
+  } catch (err) {
+    res.json({ error: err.message }).status(400)
+  }
 }
 
 // @desc    Add individual News
