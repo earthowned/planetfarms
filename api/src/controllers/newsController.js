@@ -13,7 +13,7 @@ const getNews = async (req, res) => {
     const order = req.query.order || 'DESC'
     const ordervalue = order && [['createdAt', order]]
     const { title = '', filter = '' } = req.query
-    const userId = req?.user?.id || 1
+    const userId = req?.user?.id || 0
     whereQuery = { [Op.and]: [
       { deleted: false },
       { title: { [Op.iLike]: '%' + title + '%' } },
