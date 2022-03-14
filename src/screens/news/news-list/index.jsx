@@ -38,7 +38,12 @@ export const NewsListPage = () => {
           onAdd={() => setAddFilterVisible(true)}
         />
 
-        <ActionButton variant="primary" title="Add New" icon="plus" />
+        <ActionButton
+          icon="plus"
+          title="Add New"
+          variant="primary"
+          onClick={() => history.push("/news/create")}
+        />
       </div>
 
       <NewsListContainer

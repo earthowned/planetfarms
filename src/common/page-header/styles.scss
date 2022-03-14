@@ -2,7 +2,7 @@
 
 .main-page-header {
   width: 100%;
-  padding: 16px 40px;
+  padding: 24px 40px;
 
   display: flex;
   flex-direction: column;
@@ -56,7 +56,9 @@
   }
 
   .bottom-header-container {
-    background-color: transparent;
+    height: 72px;
+    display: flex;
+    align-items: center;
   }
 
   @include breakpoint("tablet", "max") {

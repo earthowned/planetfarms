@@ -51,6 +51,13 @@
   -webkit-transition: $property $time $easing;
 }
 
+@mixin removeTransition() {
+  transition: none;
+  -o-transition: none;
+  -moz-transition: none;
+  -webkit-transition: none;
+}
+
 @mixin supports-safe-area-top {
   @supports (padding-top: env(safe-area-inset-top)) {
     @content;
