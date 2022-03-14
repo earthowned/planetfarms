@@ -41,6 +41,15 @@ html {
 
   display: flex;
   flex-direction: row;
+
+  background: linear-gradient(
+    144.56deg,
+    rgba(20, 20, 20, 0.15) -3.06%,
+    rgba(88, 189, 136, 0.15) 26.79%,
+    rgba(218, 52, 67, 0.15) 60.6%,
+    rgba(234, 165, 51, 0.15) 93.24%,
+    rgba(20, 20, 20, 0.15) 122.75%
+  );
 }
 
 .main-app {
@@ -121,8 +130,16 @@ input,
 textarea {
   font-family: inherit;
 }
+
 a {
   font-family: inherit;
   text-decoration: none;
   color: inherit;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 3px;
+  background-color: #555656;
 }

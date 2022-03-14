@@ -24,7 +24,7 @@ export const SideBarNavigation = () => {
   // TODO: There is no current community in redux store;
   // const { currentCommunity } = useSelector(selectCurrentCommunity);
 
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   if (isMobile) {
     return null;

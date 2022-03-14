@@ -5,8 +5,9 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 // News
+import { NewsListPage } from "screens/news";
 import NewsAdd from "../screens/communityNews/newsAdd/NewsAdd";
-import CommunityPagenews from "../screens/communityNews/CommunityNews";
+// import CommunityPagenews from "../screens/communityNews/CommunityNews";
 import CommunityNewsViewPage from "../screens/communityNewsView/CommunityNewsView";
 
 // Members
@@ -72,7 +73,7 @@ import { NotFoundPage } from "../screens/not-found";
 export const Routes = () => {
   return (
     <Switch>
-      <Route component={CommunityPagenews} exact path="/news" />
+      <Route component={NewsListPage} exact path="/news" />
       <Route component={NewsAdd} path="/news/add" exact />
       <Route component={NewsAdd} path="/news/edit/:id" exact />
       <Route component={CommunityNewsViewPage} path="/news/:id" exact />

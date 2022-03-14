@@ -8,6 +8,7 @@
   cursor: pointer;
   border-radius: 4px;
 
+  gap: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,10 +16,6 @@
   .btn-title {
     font-style: normal;
     font: $font-body-bold;
-  }
-
-  svg {
-    margin-right: 8px;
   }
 
   &-tint-icon {
@@ -37,6 +34,9 @@
   &-primary {
     color: #141414;
     background-color: #58bd88;
+    svg {
+      @include setSvgColor(#141414);
+    }
 
     &:hover:enabled {
       background-color: #009466;
@@ -50,6 +50,9 @@
   &-secondary {
     color: #eeefef;
     background-color: rgba(238, 239, 239, 0.1);
+    svg {
+      @include setSvgColor(#eeefef);
+    }
 
     &:hover:enabled {
       background-color: rgba(202, 220, 214, 0.2);

@@ -24,4 +24,10 @@
   .dashboard-page {
     padding: 40px;
   }
+
+  @include breakpoint("tablet", "max") {
+    .dashboard-page {
+      padding: 24px 16px;
+    }
+  }
 }
