@@ -4,6 +4,7 @@ const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc    Fetch all News
+// @route   GET/api/news
 // @route   GET/api/news/community/:id
 // @access  Public
 const getNews = async (req, res) => {
@@ -69,7 +70,7 @@ const getNews = async (req, res) => {
 }
 
 // @desc    Add individual News
-// @route POST /api/news/add/community/:id
+// @route POST /api/news/add
 // @access  Public
 const addNews = (req, res) => {
   let filename = ''
@@ -78,8 +79,11 @@ const addNews = (req, res) => {
   }
 
   const {
-    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category, richtextId
+    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category, richtextId, communityId
   } = req.body
+  if (communityId == null) {
+    res.json({ error: 'communityId must be provided' }).status(400)
+  }
   db.News.create({
     _attachments: 'news/' + filename,
     title,
@@ -93,14 +97,14 @@ const addNews = (req, res) => {
     videoDetail,
     category,
     richtextId,
-    communityId: req.params.id
+    communityId
   })
     .then((data) => res.json({ data }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Update a News
-// @route   PUT /api/news/:newsId/community/:id
+// @route   PUT /api/news/:newsId
 // @access  Public
 const updateNews = (req, res) => {
   let filename = ''
@@ -112,15 +116,7 @@ const updateNews = (req, res) => {
   } = req.body
   const id = req.params.newsId
 
-  db.News.findByPk(id,
-    {
-      include: [{
-        model: db.Community,
-        attributes: [],
-        where: { id: req.params.id }
-      }]
-    }
-  ).then(news => {
+  db.News.findByPk(id).then(news => {
     if (news) {
       const { id } = news
 
@@ -165,14 +161,13 @@ const updateNews = (req, res) => {
 }
 
 // @desc    Fetch single News
-// @route   GET /api/news/:newsId/community/:id
+// @route   GET /api/news/:newsId
 // @access  Public
 const getNewsById = (req, res) => {
   db.News.findByPk(req.params.newsId, {
     include: [{
       model: db.Community,
-      attributes: [],
-      where: { id: req.params.id }
+      attributes: []
     },
     {
       model: db.RichText,
@@ -192,17 +187,11 @@ const getNewsById = (req, res) => {
 }
 
 // @desc    Delete a News
-// @route   DELETE /api/news/:newsId/community/:id
+// @route   DELETE /api/news/:newsId
 // @access  Public
 const deleteNews = (req, res) => {
   const id = req.params.newsId
-  db.News.findByPk(id, {
-    include: [{
-      model: db.Community,
-      attributes: [],
-      where: { id: req.params.id }
-    }]
-  }).then(news => {
+  db.News.findByPk(id).then(news => {
     if (news) {
       const { id } = news
       db.News.update({ deleted: true }, { where: { id } })
@@ -214,24 +203,4 @@ const deleteNews = (req, res) => {
   })
 }
 
-// @desc    Search title
-// @route   POST /api/news/community/:id/search
-// @access  Private
-const searchNewsTitle = (req, res) => {
-  const { title } = req.query
-  const order = req.query.order || 'ASC'
-
-  db.News.findAll({
-    where: { title: { [Op.iLike]: '%' + title + '%' } },
-    order: [['title', order]],
-    include: [{
-      model: db.Community,
-      attributes: [],
-      where: { id: req.params.id }
-    }]
-  })
-    .then(news => res.json({ news: news.map(rec => ({ ...rec.dataValues, _attachments: changeFormat(rec._attachments) })) }).status(200))
-    .catch(err => res.json({ error: err }).status(400))
-}
-
-module.exports = { addNews, getNews, updateNews, getNewsById, deleteNews, searchNewsTitle }
+module.exports = { addNews, getNews, updateNews, getNewsById, deleteNews }
