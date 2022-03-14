@@ -29,7 +29,7 @@ export const parseUser = (user) => ({
   avatar: parseUserAvatar(user?.attachments),
 });
 
-export const parseCategory = (categories = []) => {
-  if (categories?.length > 0) return categories[0];
+export const parseCategory = () => {
+  // TODO: Store and response string value, not an array/object
   return "No category";
 };
