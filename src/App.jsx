@@ -15,6 +15,7 @@ import { SideBarNavigation } from "common/side-bar-navigation";
 
 import { Routes } from "routes";
 import ScrollToTop from "utils/scrollToTop";
+import { SearchBarProvider } from "providers/search-bar";
 
 import { queryClient } from "./reactQuery";
 
@@ -28,7 +29,9 @@ const MainApp = () => (
       <SideBarNavigation />
     </aside>
     <main className="main-app">
-      <Routes />
+      <SearchBarProvider>
+        <Routes />
+      </SearchBarProvider>
     </main>
   </div>
 );

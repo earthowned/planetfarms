@@ -7,8 +7,12 @@
   .notifications-list-header {
     width: 100%;
     height: 56px;
-    padding: 0 24px;
     background-color: rgba(39, 51, 47, 0.5);
+
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: Max(24px, env(safe-area-inset-left));
+    padding-right: Max(24px, env(safe-area-inset-right));
 
     display: flex;
     align-items: center;
@@ -21,7 +25,11 @@
 
 .notification-list-item-container {
   width: 100%;
-  padding: 0px 24px;
+
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: Max(24px, env(safe-area-inset-left));
+  padding-right: Max(24px, env(safe-area-inset-right));
 
   cursor: pointer;
   user-select: none;

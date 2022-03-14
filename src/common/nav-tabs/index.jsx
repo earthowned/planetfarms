@@ -17,7 +17,7 @@ export const NavigationTabs = ({ tabs = [], selectedIndex = 0, onChange }) => {
       .filter((_, index) => index < selectedIndex)
       .reduce((a, b) => a + b, 0);
 
-    setBarOffset(sumWidth + selectedIndex * 40 + 24);
+    setBarOffset(sumWidth + selectedIndex * 40);
   }, [selectedIndex]);
 
   return (
