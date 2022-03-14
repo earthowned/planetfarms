@@ -18,9 +18,7 @@ export const NewsListPage = () => {
   const [filters, setFilters] = useState([]);
   const [addFilterVisible, setAddFilterVisible] = useState(false);
 
-  const { news, isLoading, isLastPage, onLoadMore } = useFetchNews({
-    filters: [],
-  });
+  const { news, isLoading, isLastPage, onLoadMore } = useFetchNews({ filters });
 
   const onFilterRemove = (filter) => {
     setFilters(filters.filter((item) => item !== filter));

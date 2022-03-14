@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import { useAlert } from "react-alert";
 import axios from "axios";
+import { useAlert } from "react-alert";
+
 import { api } from "api";
 import { useSearchBar } from "providers/search-bar";
 
@@ -17,7 +18,7 @@ export const useFetchNews = ({ filters = [] }) => {
   useEffect(() => {
     setNews([]);
     setCurrentPage(1);
-  }, [searchValue]);
+  }, [searchValue, filters]);
 
   useEffect(() => {
     let cancel;
@@ -25,9 +26,9 @@ export const useFetchNews = ({ filters = [] }) => {
 
     api.news
       .list({
+        filters,
         page: currentPage,
         query: searchValue,
-        // filters,
         cancelToken: new axios.CancelToken((c) => {
           cancel = c;
         }),
@@ -47,7 +48,7 @@ export const useFetchNews = ({ filters = [] }) => {
       });
 
     return () => cancel();
-  }, [currentPage, searchValue]);
+  }, [currentPage, searchValue, filters]);
 
   const onLoadMore = useCallback(() => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
