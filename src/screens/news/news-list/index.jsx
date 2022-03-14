@@ -36,17 +36,17 @@ export const NewsListPage = () => {
 
   useEffect(async () => {
     try {
-      // TODO - Need to fetch news from all user communities;
       // TODO - Implement search when search bar will be ready;
       // TODO - Need to fetch with array of filters;
       // TODO - Cancel request when search query changed;
       // TODO - Store news in redux;
 
       setIsLoading(true);
-      const response = await api.news.list({ community: 1, page });
+      const response = await api.news.list({ page });
+      const { totalPages: pages, news: list } = response.data;
 
-      setTotalPages(response.totalPages);
-      setNews((prev) => [...prev, ...response.news]);
+      setTotalPages(pages);
+      setNews((prev) => [...prev, ...list]);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
