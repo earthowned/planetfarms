@@ -4,40 +4,73 @@ const Op = Sequelize.Op
 const { changeFormat } = require('../helpers/filehelpers')
 
 // @desc    Fetch all News
+// @route   GET/api/news
 // @route   GET/api/news/community/:id
 // @access  Public
-const getNews = (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
-  const order = req.query.order || 'DESC'
-  const ordervalue = order && [['createdAt', order]]
-  db.News.findAndCountAll({
-    offset: (page - 1) * pageSize,
-    limit: pageSize,
-    order: ordervalue,
-    where: { deleted: false },
-    attributes: { exclude: ['deleted'] },
-    include: [{
-      model: db.Community,
-      attributes: ['id'],
-      where: { id: req.params.id }
-    }]
-  })
-    .then(news => {
-      const totalPages = Math.ceil(news.count / pageSize)
-      res.json({
-        news: news.rows.map(rec => ({ ...rec.dataValues, _attachments: changeFormat(rec._attachments) })),
-        totalItems: news.count,
-        totalPages,
-        page,
-        pageSize
-      }).status(200)
+const getNews = async (req, res) => {
+  try {
+    const pageSize = 10
+    const page = Number(req.query.pageNumber) || 1
+    const order = req.query.order || 'DESC'
+    const ordervalue = order && [['createdAt', order]]
+    const { title = '', filter = '' } = req.query
+    const userId = req?.user?.id || 0
+    whereQuery = { [Op.and]: [
+      { deleted: false },
+      { title: { [Op.iLike]: '%' + title + '%' } },
+      filter ? { category: { [Op.contains] : filter.split(',')} } : {}
+    ] }
+    const followIdArrays = await db.CommunityUser.findAll({
+      attributes: ['communityId'],
+      where: { userId: userId }
+    }).then(communities => {
+      return (communities || []).reduce((acc, community) => {
+        acc.push(community.communityId)
+        return acc
+      }, [0])
     })
-    .catch((err) => res.json({ err }).status(400))
+    whereCommunity = { where: {[Op.and]: [ { id: {[Op.or]: followIdArrays} }, req.params.id ? {id: req.params.id}: {}] } }
+    db.News.findAndCountAll({
+      offset: (page - 1) * pageSize,
+      limit: pageSize,
+      order: ordervalue,
+      where: whereQuery,
+      attributes: { include: [
+        'news.*',
+        [
+          db.sequelize.literal(`(
+            SELECT "texts"."textDescription" FROM "rich_texts" LEFT JOIN "texts" ON "texts"."richtextId" = "rich_texts"."id" WHERE "rich_texts"."id" = "news"."richtextId" ORDER BY "texts"."order" LIMIT 1
+          )`),
+          'smallText'
+        ]
+      ], exclude: ['deleted'] },
+      include: [{
+        model: db.Community,
+        attributes: ['id'],
+        ...whereCommunity
+      },
+      {
+        model: db.User
+      }]
+    })
+      .then(news => {
+        const totalPages = Math.ceil(news.count / pageSize)
+        res.json({
+          news: news.rows.map(rec => ({ ...rec.dataValues, _attachments: changeFormat(rec._attachments) })),
+          totalItems: news.count,
+          totalPages,
+          page,
+          pageSize
+        }).status(200)
+      })
+      .catch((err) => res.json({ err }).status(400))
+  } catch (err) {
+    res.json({ error: err.message }).status(400)
+  }
 }
 
 // @desc    Add individual News
-// @route POST /api/news/add/community/:id
+// @route POST /api/news/add
 // @access  Public
 const addNews = (req, res) => {
   let filename = ''
@@ -46,8 +79,11 @@ const addNews = (req, res) => {
   }
 
   const {
-    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category, richtextId
+    title, message, docType, readTime, language, creator, textDetail, imageDetail, videoDetail, category, richtextId, communityId
   } = req.body
+  if (communityId == null) {
+    res.json({ error: 'communityId must be provided' }).status(400)
+  }
   db.News.create({
     _attachments: 'news/' + filename,
     title,
@@ -61,14 +97,14 @@ const addNews = (req, res) => {
     videoDetail,
     category,
     richtextId,
-    communityId: req.params.id
+    communityId
   })
     .then((data) => res.json({ data }).status(200))
     .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Update a News
-// @route   PUT /api/news/:newsId/community/:id
+// @route   PUT /api/news/:newsId
 // @access  Public
 const updateNews = (req, res) => {
   let filename = ''
@@ -80,15 +116,7 @@ const updateNews = (req, res) => {
   } = req.body
   const id = req.params.newsId
 
-  db.News.findByPk(id,
-    {
-      include: [{
-        model: db.Community,
-        attributes: [],
-        where: { id: req.params.id }
-      }]
-    }
-  ).then(news => {
+  db.News.findByPk(id).then(news => {
     if (news) {
       const { id } = news
 
@@ -133,14 +161,13 @@ const updateNews = (req, res) => {
 }
 
 // @desc    Fetch single News
-// @route   GET /api/news/:newsId/community/:id
+// @route   GET /api/news/:newsId
 // @access  Public
 const getNewsById = (req, res) => {
   db.News.findByPk(req.params.newsId, {
     include: [{
       model: db.Community,
-      attributes: [],
-      where: { id: req.params.id }
+      attributes: []
     },
     {
       model: db.RichText,
@@ -160,17 +187,11 @@ const getNewsById = (req, res) => {
 }
 
 // @desc    Delete a News
-// @route   DELETE /api/news/:newsId/community/:id
+// @route   DELETE /api/news/:newsId
 // @access  Public
 const deleteNews = (req, res) => {
   const id = req.params.newsId
-  db.News.findByPk(id, {
-    include: [{
-      model: db.Community,
-      attributes: [],
-      where: { id: req.params.id }
-    }]
-  }).then(news => {
+  db.News.findByPk(id).then(news => {
     if (news) {
       const { id } = news
       db.News.update({ deleted: true }, { where: { id } })
@@ -182,24 +203,4 @@ const deleteNews = (req, res) => {
   })
 }
 
-// @desc    Search title
-// @route   POST /api/news/community/:id/search
-// @access  Private
-const searchNewsTitle = (req, res) => {
-  const { title } = req.query
-  const order = req.query.order || 'ASC'
-
-  db.News.findAll({
-    where: { title: { [Op.iLike]: '%' + title + '%' } },
-    order: [['title', order]],
-    include: [{
-      model: db.Community,
-      attributes: [],
-      where: { id: req.params.id }
-    }]
-  })
-    .then(news => res.json({ news: news.map(rec => ({ ...rec.dataValues, _attachments: changeFormat(rec._attachments) })) }).status(200))
-    .catch(err => res.json({ error: err }).status(400))
-}
-
-module.exports = { addNews, getNews, updateNews, getNewsById, deleteNews, searchNewsTitle }
+module.exports = { addNews, getNews, updateNews, getNewsById, deleteNews }

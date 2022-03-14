@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.JSON
     },
     category: {
-      type: DataTypes.STRING
+      type: DataTypes.ARRAY(DataTypes.TEXT)
     },
     _attachments: {
       type: DataTypes.STRING
@@ -57,6 +57,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // association
   News.associate = (models) => {
+    News.belongsTo(models.User, { foreignKey: 'creator', targetKey: 'userID' })
     News.belongsTo(models.Community, { foreignKey: 'communityId' })
     News.belongsTo(models.RichText, { foreignKey: 'richtextId', constraints: true })
   }
