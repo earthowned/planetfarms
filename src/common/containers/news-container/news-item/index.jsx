@@ -6,7 +6,7 @@ import cx from "classnames";
 import { Avatar } from "common/avatar";
 import newsPlaceholderImage from "assets/images/news-placeholder.png";
 
-import { parseCoverImage } from "./helpers";
+import { parseCoverImage, parseUser, parseCategory } from "./helpers";
 
 import "./styles.scss";
 
@@ -14,6 +14,8 @@ export const NewsItem = forwardRef(({ variant, news, onClick }, ref) => {
   const containerClassName = cx("news-item-container", {
     [`news-item-container-${variant}`]: true,
   });
+
+  const { userName, avatar } = parseUser(news.user);
 
   return (
     <div ref={ref} className={containerClassName} onClick={onClick}>
@@ -23,7 +25,7 @@ export const NewsItem = forwardRef(({ variant, news, onClick }, ref) => {
 
       <div className="news-data-container">
         <div className="top-container">
-          {news.category && <h6>{news.category}</h6>}
+          <h6>{parseCategory(news.category)}</h6>
 
           {news.createdAt && (
             <div className="dot-container">
@@ -49,8 +51,8 @@ export const NewsItem = forwardRef(({ variant, news, onClick }, ref) => {
         <h5>{news.smallText}</h5>
 
         <div className="news-author-container">
-          <Avatar placeholderIcon="person" />
-          <h4>{news.authorName || "Unknown author"}</h4>
+          <Avatar src={avatar} placeholderIcon="person" />
+          <h4>{userName}</h4>
         </div>
       </div>
     </div>

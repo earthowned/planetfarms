@@ -1,6 +1,8 @@
 import { apiInstance } from "./instance";
 
-export const list = ({ community, page = 0 }) =>
-  apiInstance
-    .get(`news/community/${community}?pageNumber=${page}`)
-    .then((response) => response.data);
+export const list = ({ page = 0, query = "", filters = [], cancelToken }) => {
+  return apiInstance.get("news", {
+    cancelToken,
+    params: { pageNumber: page, title: query, filter: filters.toString() },
+  });
+};

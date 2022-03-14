@@ -32,6 +32,11 @@ export const SearchBar = ({ value, isExpanded, onExpand, onChangeValue }) => {
     if (!isExpanded) onExpand(true);
   };
 
+  const onClose = () => {
+    onExpand(false);
+    onChangeValue("");
+  };
+
   return (
     <div className={containerClassName} onClick={handleContainerClick}>
       <Icon icon="search" />
@@ -44,11 +49,7 @@ export const SearchBar = ({ value, isExpanded, onExpand, onChangeValue }) => {
       />
 
       {isExpanded && (
-        <IconButton
-          icon="cross"
-          variant="white"
-          onClick={() => onExpand(false)}
-        />
+        <IconButton icon="cross" variant="white" onClick={onClose} />
       )}
     </div>
   );
