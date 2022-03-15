@@ -22,15 +22,23 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   -moz-user-select: none; /* Old versions of Firefox */
 
-  svg {
-    width: 24px !important;
-    height: 24px !important;
+  .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px !important;
+      height: 24px !important;
+    }
   }
 
   &-secondary {
     background-color: rgba(238, 239, 239, 0.1);
-    svg {
-      @include setSvgColor(#eeefef);
+    .icon-container {
+      svg {
+        @include setSvgColor(#eeefef);
+      }
     }
 
     &:hover:enabled {
@@ -43,52 +51,48 @@
   }
 
   &-transparent {
-    svg {
-      @include setSvgColor(#00c688);
-    }
-
-    &:hover {
+    .icon-container {
       svg {
-        @include setSvgColor(#02f2a7);
-      }
-    }
-
-    &:active {
-      svg {
-        @include setSvgColor(#05a875);
-      }
-    }
-  }
-
-  &-white {
-    svg {
-      @include setSvgColor(#f8ebdf);
-    }
-
-    .gamburger-icon {
-      path {
-        stroke: #f8ebdf;
+        @include setSvgColor(#00c688);
       }
     }
 
     &:hover {
-      svg {
-        @include setSvgColor(#8a8a8a);
-      }
-      .gamburger-icon {
-        path {
-          stroke: #8a8a8a;
+      .icon-container {
+        svg {
+          @include setSvgColor(#02f2a7);
         }
       }
     }
 
     &:active {
-      svg {
-        @include setSvgColor(#3a3939);
+      .icon-container {
+        svg {
+          @include setSvgColor(#05a875);
+        }
       }
-      .gamburger-icon {
-        path {
-          stroke: #3a3939;
+    }
+  }
+
+  &-white {
+    .icon-container {
+      svg {
+        @include setSvgColor(#f8ebdf);
+      }
+    }
+
+    &:hover {
+      .icon-container {
+        svg {
+          @include setSvgColor(#8a8a8a);
+        }
+      }
+    }
+
+    &:active {
+      .icon-container {
+        svg {
+          @include setSvgColor(#3a3939);
         }
       }
     }
@@ -96,21 +100,19 @@
 
   &-selected {
     background-color: #05a875;
-    svg {
-      @include setSvgColor(black);
-    }
-
-    .gamburger-icon {
-      path {
-        stroke: black;
+    .icon-container {
+      svg {
+        @include setSvgColor(black);
       }
     }
   }
 
   &-grey {
     background-color: #eeefef;
-    svg {
-      @include setSvgColor(#141414);
+    .icon-container {
+      svg {
+        @include setSvgColor(#141414);
+      }
     }
 
     &:hover {
@@ -119,6 +121,47 @@
 
     &:active {
       background-color: #bacfc8;
+    }
+  }
+
+  &-news-builder {
+    width: 48px;
+    height: 80px;
+    background-color: transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #eeefef;
+    font-weight: 400;
+    font: 16px/24px $font-regular;
+
+    .icon-container {
+      width: 48px;
+      height: 48px;
+      border-radius: 48px;
+      background-color: #58bd88;
+    }
+
+    &:hover:enabled {
+      color: #cadcd6;
+      .icon-container {
+        background-color: #009466;
+      }
+    }
+
+    &:active:enabled {
+      color: #9bb0a9;
+      .icon-container {
+        background-color: #007a54;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
     }
   }
 }
