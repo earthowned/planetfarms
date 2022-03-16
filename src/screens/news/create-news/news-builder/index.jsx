@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { IconButton } from "common/buttons/icon-button";
 
-import { TextFieldBlock } from "./text-field-block";
-import { ContentType, TextFieldConfig } from "./config";
+import { Fields } from "./fields";
+import { ContentType, TextFieldConfig, PictureFieldConfig } from "./config";
 
 import "./styles.scss";
 
@@ -35,6 +35,10 @@ export const NewsBuilder = () => {
     setContent([...content, TextFieldConfig]);
   };
 
+  const onAddPictureField = () => {
+    setContent([...content, PictureFieldConfig]);
+  };
+
   const onRemoveField = (index) => {
     setContent(content.filter((_, i) => i !== index));
   };
@@ -45,11 +49,20 @@ export const NewsBuilder = () => {
         switch (item.type) {
           case ContentType.TextField: {
             return (
-              <TextFieldBlock
+              <Fields.TextField
                 title={item.title}
                 content={item.content}
                 onRemove={() => onRemoveField(index)}
                 key={`text-field-block-${index.toString()}`}
+              />
+            );
+          }
+
+          case ContentType.Picture: {
+            return (
+              <Fields.PictureField
+                onRemove={() => onRemoveField(index)}
+                key={`picture-field-block-${index.toString()}`}
               />
             );
           }
@@ -61,7 +74,7 @@ export const NewsBuilder = () => {
 
       <NewsActions
         onAddText={onAddTextField}
-        onAddImage={() => {}}
+        onAddImage={onAddPictureField}
         onAddVideo={() => {}}
       />
     </div>

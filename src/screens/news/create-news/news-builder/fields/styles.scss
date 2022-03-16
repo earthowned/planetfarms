@@ -1,0 +1,28 @@
+.news-field-block-container {
+  width: 100%;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(238, 239, 239, 0.1);
+
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+
+  .header-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    h6 {
+      color: #676969;
+      user-select: none;
+    }
+  }
+
+  .drag-and-drop-container {
+    width: 100%;
+    height: 224px;
+  }
+}

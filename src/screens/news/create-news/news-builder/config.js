@@ -9,3 +9,7 @@ export const TextFieldConfig = {
   title: "",
   content: "",
 };
+
+export const PictureFieldConfig = {
+  type: ContentType.Picture,
+};
