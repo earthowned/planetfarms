@@ -4,8 +4,8 @@ import "./styles.scss";
 
 export const TextArea = ({
   name,
-  value,
   maxLength,
+  value = "",
   placeholder,
   onChangeValue,
   minHeight = "72px",
