@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IconButton } from "common/buttons/icon-button";
 
 import { Fields } from "./fields";
-import { ContentType, TextFieldConfig, PictureFieldConfig } from "./config";
+import { ContentType } from "./config";
 
 import "./styles.scss";
 
@@ -31,12 +31,8 @@ const NewsActions = ({ onAddText, onAddImage, onAddVideo }) => {
 export const NewsBuilder = () => {
   const [content, setContent] = useState([]);
 
-  const onAddTextField = () => {
-    setContent([...content, TextFieldConfig]);
-  };
-
-  const onAddPictureField = () => {
-    setContent([...content, PictureFieldConfig]);
+  const onAddField = (type) => {
+    setContent([...content, { type }]);
   };
 
   const onRemoveField = (index) => {
@@ -50,8 +46,6 @@ export const NewsBuilder = () => {
           case ContentType.TextField: {
             return (
               <Fields.TextField
-                title={item.title}
-                content={item.content}
                 onRemove={() => onRemoveField(index)}
                 key={`text-field-block-${index.toString()}`}
               />
@@ -67,15 +61,24 @@ export const NewsBuilder = () => {
             );
           }
 
+          case ContentType.Video: {
+            return (
+              <Fields.VideoField
+                onRemove={() => onRemoveField(index)}
+                key={`video-field-block-${index.toString()}`}
+              />
+            );
+          }
+
           default:
             return null;
         }
       })}
 
       <NewsActions
-        onAddText={onAddTextField}
-        onAddImage={onAddPictureField}
-        onAddVideo={() => {}}
+        onAddVideo={() => onAddField(ContentType.Video)}
+        onAddImage={() => onAddField(ContentType.Picture)}
+        onAddText={() => onAddField(ContentType.TextField)}
       />
     </div>
   );

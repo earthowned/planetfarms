@@ -47,7 +47,26 @@ const PictureFieldBlock = ({ onRemove }) => {
   );
 };
 
+const VideoFieldBlock = ({ onRemove }) => {
+  return (
+    <FieldBlock title="Video Field" onRemove={onRemove}>
+      <div className="drag-and-drop-container">
+        <DragDropZone
+          name="test"
+          placeholder="Drag Drop image in this area or"
+        />
+      </div>
+
+      <Input placeholder="Video Title (optional)" />
+      <TextArea placeholder="Description (optional)" minHeight="96px" />
+
+      <Input placeholder="Video Link" />
+    </FieldBlock>
+  );
+};
+
 export const Fields = {
   TextField: TextFieldBlock,
+  VideoField: VideoFieldBlock,
   PictureField: PictureFieldBlock,
 };
