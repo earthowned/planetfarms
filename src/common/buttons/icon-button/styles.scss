@@ -124,6 +124,31 @@
     }
   }
 
+  &-grey-transparent {
+    background-color: transparent;
+    .icon-container {
+      svg {
+        @include setSvgColor(#676969);
+      }
+    }
+
+    &:hover {
+      .icon-container {
+        svg {
+          @include setSvgColor(#4b4d4d);
+        }
+      }
+    }
+
+    &:active {
+      .icon-container {
+        svg {
+          @include setSvgColor(#323333);
+        }
+      }
+    }
+  }
+
   &-news-builder {
     width: 48px;
     height: 80px;
