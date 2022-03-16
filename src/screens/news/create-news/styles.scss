@@ -10,7 +10,7 @@
   flex-direction: row;
 
   .left-block {
-    flex-grow: 3;
+    flex-grow: 4;
     min-width: 344px;
 
     gap: 40px;
@@ -25,6 +25,17 @@
   .right-block {
     flex-grow: 1;
     min-width: 344px;
+
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+
+    .form-actions-container {
+      gap: 24px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
   @include breakpoint("tablet", "max") {
@@ -36,6 +47,10 @@
 
     .right-block {
       flex-grow: 1;
+
+      .form-actions-container {
+        flex-direction: column;
+      }
     }
   }
 }
