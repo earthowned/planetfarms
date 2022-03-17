@@ -1,3 +1,6 @@
+import { api } from "api";
+import { getErrorMessage } from "utils/error";
+
 import {
   getApi,
   putApi,
@@ -75,6 +78,29 @@ export const searchNews = (search) => async (dispatch) => {
     });
   }
 };
+
+export const create =
+  ({ title, userId, content, category, readTime, coverImage, communityId }) =>
+  async (dispatch) => {
+    try {
+      const { richtext } = await api.richText.create();
+
+      const { data } = await api.news.create({
+        title,
+        readTime,
+        communityId,
+        creator: userId,
+        news: coverImage,
+        category: [category],
+        richtextId: richtext.id,
+      });
+
+      await createRichText(content, richtext.id, dispatch);
+      return Promise.resolve({ newsId: data.id });
+    } catch (error) {
+      return Promise.reject(getErrorMessage(error));
+    }
+  };
 
 export const createNews =
   ({ newsDetail, newNews, history }) =>

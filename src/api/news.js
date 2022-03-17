@@ -6,3 +6,24 @@ export const list = ({ page = 0, query = "", filters = [], cancelToken }) => {
     params: { pageNumber: page, title: query, filter: filters.toString() },
   });
 };
+
+export const create = async ({
+  news,
+  title,
+  creator,
+  category,
+  readTime,
+  richtextId,
+  communityId,
+}) =>
+  apiInstance
+    .post("news/add", {
+      news,
+      title,
+      creator,
+      category,
+      readTime,
+      richtextId,
+      communityId,
+    })
+    .then((response) => response.data);

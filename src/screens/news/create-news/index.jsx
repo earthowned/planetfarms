@@ -1,38 +1,61 @@
+import { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { DashboardLayout } from "layout/dashboard";
-import { DragDropZone } from "common/drag-drop-zone";
-import { Dropdown } from "common/dropdown";
-import { ActionButton } from "common/buttons/action-button";
+import { DropdownField } from "common/dropdown";
 import { TextAreaField } from "common/text-area";
+import { DashboardLayout } from "layout/dashboard";
+import { DragDropZoneField } from "common/drag-drop-zone";
+import { ActionButton } from "common/buttons/action-button";
 
+import { api } from "api";
+import { create } from "actions/newsActions";
+
+import { generatePayload } from "./helpers";
 import { NewsBuilder } from "./news-builder";
-import { model, initialValues, validationSchema } from "./config";
+import {
+  model,
+  initialValues,
+  readTimeOptions,
+  categoryOptions,
+  validationSchema,
+} from "./config";
 
 import "./styles.scss";
 
-const categoryOptions = [
-  { value: "farming", label: "Farming" },
-  { value: "people", label: "People" },
-  { value: "nature", label: "Nature" },
-  { value: "cars", label: "Cars industry" },
-  { value: "media", label: "Media news" },
-  { value: "fertilizer", label: "Fertilizer" },
-];
-
-const readTimeOptions = [
-  { value: "1min", label: "1 min" },
-  { value: "5min", label: "5 min" },
-  { value: "10min", label: "10 min" },
-  { value: "30min", label: "30 min" },
-  { value: "moreAnHour", label: "> 1 hour" },
-];
-
-const communitiesOptions = [{ value: "planetFarmm", label: "Planet Farm" }];
-
 export const CreateNewsPage = () => {
-  const handleSubmit = (values) => {
-    console.log(values);
+  const alert = useAlert();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [communities, setCommunities] = useState([]);
+  const user = useSelector((state) => state.userLogin);
+
+  useEffect(async () => {
+    try {
+      const { data } = await api.community.userList({ page: 1 });
+      const list = data.communities.map((item) => ({
+        value: item.id,
+        label: item.name,
+      }));
+      setCommunities(list);
+    } catch (error) {
+      alert.error(error.message);
+    }
+  }, []);
+
+  const handleSubmit = async (values) => {
+    try {
+      const response = await create({
+        userId: user.userInfo.id,
+        ...generatePayload({ values }),
+      })(dispatch);
+      history.replace(`/news/${response.newsId}`);
+    } catch (error) {
+      alert.error(error);
+    }
   };
 
   return (
@@ -44,7 +67,7 @@ export const CreateNewsPage = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
       >
-        {({ values }) => (
+        {() => (
           <Form>
             <div className="create-news-page-container">
               <div className="left-block">
@@ -55,32 +78,39 @@ export const CreateNewsPage = () => {
                 />
 
                 <div className="drag-and-drop-container">
-                  <DragDropZone
-                    name="kek"
+                  <DragDropZoneField
+                    name={model.coverImage.name}
                     placeholder="Drag Drop main image in this area or"
                   />
                 </div>
 
                 <NewsBuilder name={model.newsContent.name} />
               </div>
+
               <div className="right-block">
-                <Dropdown
+                <DropdownField
                   isSearchable
                   placeholder="Category"
                   options={categoryOptions}
-                  onChange={(value) => console.log(value)}
+                  name={model.category.name}
                 />
 
-                <Dropdown placeholder="Read Time" options={readTimeOptions} />
+                <DropdownField
+                  placeholder="Read time"
+                  options={readTimeOptions}
+                  name={model.readTime.name}
+                />
 
-                <Dropdown
+                <DropdownField
+                  options={communities}
                   placeholder="Community"
-                  options={communitiesOptions}
+                  name={model.community.name}
                   label={`You can add your news to one\u000A of the communities.`}
                 />
 
                 <div className="form-actions-container">
                   <ActionButton variant="secondary" title="Preview" />
+
                   <ActionButton
                     type="submit"
                     title="Add News"

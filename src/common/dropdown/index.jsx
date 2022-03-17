@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
+import { useField } from "formik";
 import Select from "react-select";
 
 import { selectStyles } from "./styles";
@@ -8,6 +9,7 @@ import "./styles.scss";
 export const Dropdown = ({
   value,
   label,
+  error,
   options,
   onChange,
   placeholder,
@@ -40,13 +42,26 @@ export const Dropdown = ({
         options={options}
         blurInputOnSelect
         onBlur={handleBlur}
-        styles={selectStyles}
         inputValue={inputValue}
         onChange={handleChange}
         placeholder={placeholder}
         isSearchable={isSearchable}
         onInputChange={handleInputChange}
+        styles={selectStyles({ error: value ? undefined : error })}
       />
     </div>
+  );
+};
+
+export const DropdownField = ({ name, ...props }) => {
+  const [field, meta, helpers] = useField(name);
+
+  return (
+    <Dropdown
+      value={field.value}
+      error={meta?.error}
+      onChange={(option) => helpers.setValue(option)}
+      {...props}
+    />
   );
 };

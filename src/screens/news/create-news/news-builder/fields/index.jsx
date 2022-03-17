@@ -1,7 +1,7 @@
 import { InputField, Input } from "common/input";
+import { IconButton } from "common/buttons/icon-button";
 import { TextArea, TextAreaField } from "common/text-area";
 import { DragDropZone, DragDropZoneField } from "common/drag-drop-zone";
-import { IconButton } from "common/buttons/icon-button";
 
 import "./styles.scss";
 
@@ -23,7 +23,7 @@ const FieldBlock = ({ title, onRemove, children }) => {
   );
 };
 
-const TextFieldBlock = ({ onRemove, titleFieldName, textFieldName }) => {
+export const TextFieldBlock = ({ onRemove, titleFieldName, textFieldName }) => {
   return (
     <FieldBlock title="Text Field" onRemove={onRemove}>
       <InputField placeholder="Heading (optional)" name={titleFieldName} />
@@ -32,7 +32,7 @@ const TextFieldBlock = ({ onRemove, titleFieldName, textFieldName }) => {
   );
 };
 
-const PictureFieldBlock = ({
+export const ImageFieldBlock = ({
   onRemove,
   fileFieldName,
   descriptionFieldName,
@@ -54,7 +54,7 @@ const PictureFieldBlock = ({
   );
 };
 
-const VideoFieldBlock = ({ onRemove }) => {
+export const VideoFieldBlock = ({ onRemove }) => {
   return (
     <FieldBlock title="Video Field" onRemove={onRemove}>
       <div className="drag-and-drop-container">
@@ -70,10 +70,4 @@ const VideoFieldBlock = ({ onRemove }) => {
       <Input placeholder="Video Link" />
     </FieldBlock>
   );
-};
-
-export const Fields = {
-  TextField: TextFieldBlock,
-  VideoField: VideoFieldBlock,
-  PictureField: PictureFieldBlock,
 };

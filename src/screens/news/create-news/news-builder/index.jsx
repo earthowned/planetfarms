@@ -1,9 +1,9 @@
-// import { useState } from "react";
 import { FieldArray, useField } from "formik";
 
-import { Fields } from "./fields";
-import { ContentType } from "./config";
+import { NewsContentType } from "constants/enums";
+
 import { NewsActions } from "./actions";
+import { TextFieldBlock, ImageFieldBlock, VideoFieldBlock } from "./fields";
 
 import "./styles.scss";
 
@@ -18,9 +18,9 @@ export const NewsBuilder = ({ name }) => {
             const fieldName = `${name}[${index}]`;
 
             switch (item.type) {
-              case ContentType.TextField: {
+              case NewsContentType.Text: {
                 return (
-                  <Fields.TextField
+                  <TextFieldBlock
                     onRemove={() => remove(index)}
                     textFieldName={`${fieldName}.text`}
                     titleFieldName={`${fieldName}.title`}
@@ -29,9 +29,9 @@ export const NewsBuilder = ({ name }) => {
                 );
               }
 
-              case ContentType.Picture: {
+              case NewsContentType.Image: {
                 return (
-                  <Fields.PictureField
+                  <ImageFieldBlock
                     onRemove={() => remove(index)}
                     fileFieldName={`${fieldName}.imageFile`}
                     key={`picture-field-block-${index.toString()}`}
@@ -40,15 +40,27 @@ export const NewsBuilder = ({ name }) => {
                 );
               }
 
+              // case ContentType.Video: {
+              //   return (
+              //     <Fields.VideoField
+              //       videoFileName={`${fieldName}.videoFile`}
+              //       videoTitleName={`${fieldName}.videoTitle`}
+              //       video={`${fieldName}.videoTitle`}
+              //       onRemove={() => remove(index)}
+              //       key={`video-field-block-${index.toString()}`}
+              //     />
+              //   );
+              // }
+
               default:
                 return null;
             }
           })}
 
           <NewsActions
-            onAddVideo={() => push({ type: ContentType.Video })}
-            onAddImage={() => push({ type: ContentType.Picture })}
-            onAddText={() => push({ type: ContentType.TextField })}
+            onAddText={() => push({ type: NewsContentType.Text })}
+            onAddVideo={() => push({ type: NewsContentType.Video })}
+            onAddImage={() => push({ type: NewsContentType.Image })}
           />
         </>
       )}

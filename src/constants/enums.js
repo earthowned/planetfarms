@@ -10,3 +10,9 @@ export const DeviceType = {
   Laptop: "Laptop",
   Desktop: "Desktop",
 };
+
+export const NewsContentType = {
+  Text: "Text",
+  Video: "Video",
+  Image: "Image",
+};
