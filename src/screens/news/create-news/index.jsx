@@ -1,10 +1,13 @@
+import { Formik, Form } from "formik";
+
 import { DashboardLayout } from "layout/dashboard";
 import { DragDropZone } from "common/drag-drop-zone";
 import { Dropdown } from "common/dropdown";
 import { ActionButton } from "common/buttons/action-button";
-import { TextArea } from "common/text-area";
+import { TextAreaField } from "common/text-area";
 
 import { NewsBuilder } from "./news-builder";
+import { model, initialValues, validationSchema } from "./config";
 
 import "./styles.scss";
 
@@ -28,42 +31,67 @@ const readTimeOptions = [
 const communitiesOptions = [{ value: "planetFarmm", label: "Planet Farm" }];
 
 export const CreateNewsPage = () => {
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <DashboardLayout title="Create News" withBackButton>
-      <div className="create-news-page-container">
-        <div className="left-block">
-          <TextArea placeholder="Title" maxLength={100} />
+      <Formik
+        validateOnBlur={false}
+        onSubmit={handleSubmit}
+        validateOnChange={false}
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+      >
+        {({ values }) => (
+          <Form>
+            <div className="create-news-page-container">
+              <div className="left-block">
+                <TextAreaField
+                  maxLength={100}
+                  placeholder="Title"
+                  name={model.title.name}
+                />
 
-          <div className="drag-and-drop-container">
-            <DragDropZone
-              name="kek"
-              placeholder="Drag Drop main image in this area or"
-            />
-          </div>
+                <div className="drag-and-drop-container">
+                  <DragDropZone
+                    name="kek"
+                    placeholder="Drag Drop main image in this area or"
+                  />
+                </div>
 
-          <NewsBuilder />
-        </div>
-        <div className="right-block">
-          <Dropdown
-            isSearchable
-            placeholder="Category"
-            options={categoryOptions}
-          />
+                <NewsBuilder name={model.newsContent.name} />
+              </div>
+              <div className="right-block">
+                <Dropdown
+                  isSearchable
+                  placeholder="Category"
+                  options={categoryOptions}
+                  onChange={(value) => console.log(value)}
+                />
 
-          <Dropdown placeholder="Read Time" options={readTimeOptions} />
+                <Dropdown placeholder="Read Time" options={readTimeOptions} />
 
-          <Dropdown
-            placeholder="Community"
-            options={communitiesOptions}
-            label={`You can add your news to one\u000A of the communities.`}
-          />
+                <Dropdown
+                  placeholder="Community"
+                  options={communitiesOptions}
+                  label={`You can add your news to one\u000A of the communities.`}
+                />
 
-          <div className="form-actions-container">
-            <ActionButton variant="secondary" title="Preview" />
-            <ActionButton variant="primary" title="Add News" />
-          </div>
-        </div>
-      </div>
+                <div className="form-actions-container">
+                  <ActionButton variant="secondary" title="Preview" />
+                  <ActionButton
+                    type="submit"
+                    title="Add News"
+                    variant="primary"
+                  />
+                </div>
+              </div>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </DashboardLayout>
   );
 };

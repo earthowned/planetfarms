@@ -1,6 +1,6 @@
-import { Input } from "common/input";
-import { TextArea } from "common/text-area";
-import { DragDropZone } from "common/drag-drop-zone";
+import { InputField, Input } from "common/input";
+import { TextArea, TextAreaField } from "common/text-area";
+import { DragDropZone, DragDropZoneField } from "common/drag-drop-zone";
 import { IconButton } from "common/buttons/icon-button";
 
 import "./styles.scss";
@@ -23,26 +23,33 @@ const FieldBlock = ({ title, onRemove, children }) => {
   );
 };
 
-const TextFieldBlock = ({ onRemove }) => {
+const TextFieldBlock = ({ onRemove, titleFieldName, textFieldName }) => {
   return (
     <FieldBlock title="Text Field" onRemove={onRemove}>
-      <Input placeholder="Heading (optional)" />
-      <TextArea placeholder="Text" minHeight="96px" />
+      <InputField placeholder="Heading (optional)" name={titleFieldName} />
+      <TextAreaField name={textFieldName} placeholder="Text" minHeight="96px" />
     </FieldBlock>
   );
 };
 
-const PictureFieldBlock = ({ onRemove }) => {
+const PictureFieldBlock = ({
+  onRemove,
+  fileFieldName,
+  descriptionFieldName,
+}) => {
   return (
     <FieldBlock title="Picture Field" onRemove={onRemove}>
       <div className="drag-and-drop-container">
-        <DragDropZone
-          name="test"
+        <DragDropZoneField
+          name={fileFieldName}
           placeholder="Drag Drop image in this area or"
         />
       </div>
 
-      <Input placeholder="Image Desctiption (optional)" />
+      <InputField
+        name={descriptionFieldName}
+        placeholder="Image Desctiption (optional)"
+      />
     </FieldBlock>
   );
 };

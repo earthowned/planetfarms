@@ -1,85 +1,57 @@
-import { useState } from "react";
-import { IconButton } from "common/buttons/icon-button";
+// import { useState } from "react";
+import { FieldArray, useField } from "formik";
 
 import { Fields } from "./fields";
 import { ContentType } from "./config";
+import { NewsActions } from "./actions";
 
 import "./styles.scss";
 
-const NewsActions = ({ onAddText, onAddImage, onAddVideo }) => {
-  const data = [
-    { icon: "file", title: "Text", onClick: onAddText },
-    { icon: "camera", title: "Picture", onClick: onAddImage },
-    { icon: "youtube", title: "Video", onClick: onAddVideo },
-  ];
+export const NewsBuilder = ({ name }) => {
+  const [field] = useField(name);
 
   return (
-    <div className="news-actions-container">
-      {data.map((item) => (
-        <IconButton
-          icon={item.icon}
-          title={item.title}
-          variant="news-builder"
-          onClick={item.onClick}
-          key={`news-action-button-${item.title}`}
-        />
-      ))}
-    </div>
-  );
-};
+    <FieldArray name={name}>
+      {({ push, remove }) => (
+        <>
+          {field.value.map((item, index) => {
+            const fieldName = `${name}[${index}]`;
 
-export const NewsBuilder = () => {
-  const [content, setContent] = useState([]);
+            switch (item.type) {
+              case ContentType.TextField: {
+                return (
+                  <Fields.TextField
+                    onRemove={() => remove(index)}
+                    textFieldName={`${fieldName}.text`}
+                    titleFieldName={`${fieldName}.title`}
+                    key={`text-field-block-${index.toString()}`}
+                  />
+                );
+              }
 
-  const onAddField = (type) => {
-    setContent([...content, { type }]);
-  };
+              case ContentType.Picture: {
+                return (
+                  <Fields.PictureField
+                    onRemove={() => remove(index)}
+                    fileFieldName={`${fieldName}.imageFile`}
+                    key={`picture-field-block-${index.toString()}`}
+                    descriptionFieldName={`${fieldName}.imageDescription`}
+                  />
+                );
+              }
 
-  const onRemoveField = (index) => {
-    setContent(content.filter((_, i) => i !== index));
-  };
+              default:
+                return null;
+            }
+          })}
 
-  return (
-    <div className="news-builder-container">
-      {content.map((item, index) => {
-        switch (item.type) {
-          case ContentType.TextField: {
-            return (
-              <Fields.TextField
-                onRemove={() => onRemoveField(index)}
-                key={`text-field-block-${index.toString()}`}
-              />
-            );
-          }
-
-          case ContentType.Picture: {
-            return (
-              <Fields.PictureField
-                onRemove={() => onRemoveField(index)}
-                key={`picture-field-block-${index.toString()}`}
-              />
-            );
-          }
-
-          case ContentType.Video: {
-            return (
-              <Fields.VideoField
-                onRemove={() => onRemoveField(index)}
-                key={`video-field-block-${index.toString()}`}
-              />
-            );
-          }
-
-          default:
-            return null;
-        }
-      })}
-
-      <NewsActions
-        onAddVideo={() => onAddField(ContentType.Video)}
-        onAddImage={() => onAddField(ContentType.Picture)}
-        onAddText={() => onAddField(ContentType.TextField)}
-      />
-    </div>
+          <NewsActions
+            onAddVideo={() => push({ type: ContentType.Video })}
+            onAddImage={() => push({ type: ContentType.Picture })}
+            onAddText={() => push({ type: ContentType.TextField })}
+          />
+        </>
+      )}
+    </FieldArray>
   );
 };
