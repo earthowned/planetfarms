@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { SearchBar } from "common/search-bar";
 import { IconButton } from "common/buttons/icon-button";
 import { ModalButton } from "common/buttons/modal-button";
 import { DestructiveModalContainer } from "common/modal-containers";
@@ -11,7 +12,9 @@ import { logout } from "actions/auth";
 import { useDeviceType } from "hooks";
 import { DeviceType } from "constants/enums";
 import { getErrorMessage } from "utils/error";
+import { useSearchBar } from "providers/search-bar";
 
+import { getVisibility } from "./helpers";
 import { MobileMenu } from "./mobile-menu";
 import { renderContent, renderComponent } from "./renders";
 import { ChangePasswordModalContainer } from "./change-password-modal";
@@ -24,11 +27,23 @@ export const PageHeader = ({ title, withBackButton = false }) => {
   const dispatch = useDispatch();
   const device = useDeviceType();
 
+  const { searchValue, isExpanded, onChangeExpand, onChangeValue } =
+    useSearchBar();
+
   const isMobile = device === DeviceType.Tablet || device === DeviceType.Mobile;
 
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [logoutVisible, setLogoutVisible] = useState(false);
   const [changePasswordVisible, setChangePasswordVisible] = useState(false);
+
+  const {
+    logo: showLogo,
+    title: showTitle,
+    backButton: showBakcButton,
+  } = useMemo(
+    () => getVisibility({ withBackButton, isExpanded, device }),
+    [withBackButton, isExpanded, device]
+  );
 
   const handleLogoutClick = (setMobileModalVisible) => {
     setMobileModalVisible(false);
@@ -52,9 +67,9 @@ export const PageHeader = ({ title, withBackButton = false }) => {
     <div className="main-page-header">
       <div className="top-header-container">
         <>
-          {withBackButton && <p>Back Button</p>}
+          {showBakcButton && <p>Back Button</p>}
 
-          {!withBackButton && isMobile && (
+          {showLogo && (
             <IconButton
               icon="logo-mobile"
               onClick={() => {
@@ -64,11 +79,17 @@ export const PageHeader = ({ title, withBackButton = false }) => {
             />
           )}
 
-          {!withBackButton && !isMobile && <h2>{title || "PlanetFarms"}</h2>}
+          {showTitle && <h2>{title || "PlanetFarms"}</h2>}
         </>
 
         <div className="right-nav-container">
-          <IconButton icon="search" variant="white" />
+          <SearchBar
+            value={searchValue}
+            isExpanded={isExpanded}
+            onExpand={onChangeExpand}
+            onChangeValue={onChangeValue}
+          />
+
           <IconButton variant="white" icon="bell" />
 
           {isMobile && (
