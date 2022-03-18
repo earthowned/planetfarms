@@ -15,15 +15,14 @@ export const NewsBuilder = ({ name }) => {
       {({ push, remove }) => (
         <>
           {field.value.map((item, index) => {
-            const fieldName = `${name}[${index}]`;
+            const fieldName = `${name}[${index}].data`;
 
             switch (item.type) {
               case NewsContentType.Text: {
                 return (
                   <TextFieldBlock
+                    name={fieldName}
                     onRemove={() => remove(index)}
-                    textFieldName={`${fieldName}.text`}
-                    titleFieldName={`${fieldName}.title`}
                     key={`text-field-block-${index.toString()}`}
                   />
                 );
@@ -32,25 +31,22 @@ export const NewsBuilder = ({ name }) => {
               case NewsContentType.Image: {
                 return (
                   <ImageFieldBlock
+                    name={fieldName}
                     onRemove={() => remove(index)}
-                    fileFieldName={`${fieldName}.imageFile`}
                     key={`picture-field-block-${index.toString()}`}
-                    descriptionFieldName={`${fieldName}.imageDescription`}
                   />
                 );
               }
 
-              // case ContentType.Video: {
-              //   return (
-              //     <Fields.VideoField
-              //       videoFileName={`${fieldName}.videoFile`}
-              //       videoTitleName={`${fieldName}.videoTitle`}
-              //       video={`${fieldName}.videoTitle`}
-              //       onRemove={() => remove(index)}
-              //       key={`video-field-block-${index.toString()}`}
-              //     />
-              //   );
-              // }
+              case NewsContentType.Video: {
+                return (
+                  <VideoFieldBlock
+                    name={fieldName}
+                    onRemove={() => remove(index)}
+                    key={`video-field-block-${index.toString()}`}
+                  />
+                );
+              }
 
               default:
                 return null;

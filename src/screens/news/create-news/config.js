@@ -13,16 +13,6 @@ export const model = {
 
 const { title, category, readTime, community, newsContent, coverImage } = model;
 
-const isImageFieldType = (type, validation) => {
-  if (type === NewsContentType.Image) return validation.required();
-  return validation.optional();
-};
-
-const isTextFieldType = (type, validation) => {
-  if (type === NewsContentType.Text) return validation.required();
-  return validation.optional();
-};
-
 const dropdownSchema = Yup.object().nullable().shape({
   value: Yup.string(),
   label: Yup.string(),
@@ -34,22 +24,48 @@ export const validationSchema = Yup.object().shape({
   [category.name]: dropdownSchema.required(),
   [readTime.name]: dropdownSchema.optional(),
   [community.name]: dropdownSchema.required(),
+
   [newsContent.name]: Yup.array()
     .of(
       Yup.object().shape({
         type: Yup.string().required(),
-
-        // TextField
-        title: Yup.string().optional(),
-        text: Yup.string().when("type", (type) =>
-          isTextFieldType(type, Yup.string())
-        ),
-
-        // ImageField
-        imageFile: Yup.mixed().when("type", (type) =>
-          isImageFieldType(type, Yup.mixed())
-        ),
-        imageDescription: Yup.string().optional(),
+        data: Yup.object()
+          .when("type", {
+            is: NewsContentType.Text,
+            then: Yup.object().shape({
+              title: Yup.string().optional(),
+              text: Yup.string().required(),
+            }),
+          })
+          .when("type", {
+            is: NewsContentType.Image,
+            then: Yup.object().shape({
+              imageFile: Yup.mixed().required(),
+              imageDescription: Yup.string().optional(),
+            }),
+          })
+          .when("type", {
+            is: NewsContentType.Video,
+            then: Yup.object().shape(
+              {
+                videoTitle: Yup.string().optional(),
+                videoDescription: Yup.string().optional(),
+                videoFile: Yup.mixed().when("videoLink", (videoLink) => {
+                  return videoLink
+                    ? Yup.mixed().optional()
+                    : Yup.mixed().required();
+                }),
+                videoLink: Yup.string().when("videoFile", (videoFile) => {
+                  return videoFile
+                    ? Yup.string().url().optional()
+                    : Yup.string()
+                        .url("URL is not valid")
+                        .required("Provide Link or choose file from device");
+                }),
+              },
+              ["videoFile", "videoLink"]
+            ),
+          }),
       })
     )
     .min(1)

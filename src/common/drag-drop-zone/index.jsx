@@ -1,4 +1,5 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useMemo } from "react";
+import cx from "classnames";
 import { useField } from "formik";
 import { useDropzone } from "react-dropzone";
 
@@ -9,13 +10,23 @@ import "./styles.scss";
 
 export const DragDropZone = ({
   file,
+  error,
   onChange,
   fileTypes = ["image/png", "image/jpeg"],
 }) => {
   const [isCropVisible, setIsCropVisible] = useState(false);
 
+  const className = useMemo(
+    () =>
+      cx("dropzone-container", {
+        "dropzone-container-error": error,
+      }),
+    [error, file]
+  );
+
   const dropzone = useDropzone({
     accept: fileTypes,
+    maxSize: 52428800, // 50MB
     onDrop: (files) => onChange(files[0]),
   });
 
@@ -38,7 +49,7 @@ export const DragDropZone = ({
 
   return (
     <div className="pf-drag-drop-zone">
-      <div className="dropzone-container" {...dropzone.getRootProps()}>
+      <div className={className} {...dropzone.getRootProps()}>
         <input {...dropzone.getInputProps()} />
         {file ? (
           <img src={URL.createObjectURL(file)} alt="" />
@@ -73,14 +84,11 @@ export const DragDropZone = ({
 };
 
 export const DragDropZoneField = ({ name, ...props }) => {
-  const fieldObject = useField(name);
-
-  const field = fieldObject[0];
-  const helpers = fieldObject[2];
-
+  const [field, meta, helpers] = useField(name);
   return (
     <DragDropZone
       name={name}
+      error={meta.error}
       file={field.value}
       onChange={(file) => helpers.setValue(file)}
       {...props}

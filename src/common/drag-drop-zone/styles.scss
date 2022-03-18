@@ -15,9 +15,12 @@
     justify-content: center;
 
     border-radius: 4px;
-    // border: 1px dashed #f8ebdf;
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%23F8EBDFFF' stroke-width='2' stroke-dasharray='10%2c 16' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e");
     background-color: rgba(20, 20, 20, 0.92);
+
+    &-error {
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='red' stroke-width='2' stroke-dasharray='10%2c 16' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e");
+    }
 
     .placeholders-container {
       width: 164px;

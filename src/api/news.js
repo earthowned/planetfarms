@@ -1,6 +1,8 @@
 import { getFormData } from "utils/getFormData";
 import { apiInstance, multipartApiInstance } from "./instance";
 
+export const get = ({ id }) => apiInstance.get(`news/${id}`);
+
 export const list = ({ page = 0, query = "", filters = [], cancelToken }) => {
   return apiInstance.get("news", {
     cancelToken,

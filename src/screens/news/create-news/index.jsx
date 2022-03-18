@@ -67,7 +67,7 @@ export const CreateNewsPage = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
       >
-        {() => (
+        {({ values }) => (
           <Form>
             <div className="create-news-page-container">
               <div className="left-block">
@@ -115,6 +115,7 @@ export const CreateNewsPage = () => {
                     type="submit"
                     title="Add News"
                     variant="primary"
+                    disabled={values[model.newsContent.name].length === 0}
                   />
                 </div>
               </div>
