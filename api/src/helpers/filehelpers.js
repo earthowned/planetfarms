@@ -54,7 +54,7 @@ const resizeImage = (req, res, next) => {
   try {
     // user might not send image sometimes
     if (!req.file) {
-      return next()
+      return next(null, true);
     } else {
       const filename = path
         .basename(req.file.path)
@@ -85,7 +85,7 @@ const resizeImage = (req, res, next) => {
       } else {
         const savePath = dir + '.' + format
         newImage = newImage.toFile(savePath)
-        return next(null, true)
+        return next(null, true);
       }
     }
   } catch (error) {
