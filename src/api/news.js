@@ -7,7 +7,7 @@ export const list = ({ page = 0, query = "", filters = [], cancelToken }) => {
   });
 };
 
-export const create = async ({
+export const create = ({
   news,
   title,
   creator,
@@ -16,14 +16,12 @@ export const create = async ({
   richtextId,
   communityId,
 }) =>
-  apiInstance
-    .post("news/add", {
-      news,
-      title,
-      creator,
-      category,
-      readTime,
-      richtextId,
-      communityId,
-    })
-    .then((response) => response.data);
+  apiInstance.post("news/add", {
+    news,
+    title,
+    creator,
+    category,
+    readTime,
+    richtextId,
+    communityId,
+  });

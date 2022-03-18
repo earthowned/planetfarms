@@ -84,8 +84,7 @@ export const create =
   async (dispatch) => {
     try {
       const { richtext } = await api.richText.create();
-
-      const { data } = await api.news.create({
+      const response = await api.news.create({
         title,
         readTime,
         communityId,
@@ -95,8 +94,10 @@ export const create =
         richtextId: richtext.id,
       });
 
+      const { id: newsId } = response?.data?.data || {};
       await createRichText(content, richtext.id, dispatch);
-      return Promise.resolve({ newsId: data.id });
+
+      return Promise.resolve({ newsId });
     } catch (error) {
       return Promise.reject(getErrorMessage(error));
     }
@@ -117,6 +118,8 @@ export const createNews =
       const richtextId = richText?.data?.richtext?.id;
       if (richtextId) {
         details.richtextId = richtextId;
+        console.log("details", details);
+
         const response = await postApi(
           dispatch,
           `${process.env.REACT_APP_API_BASE_URL}/api/news/add`,
@@ -128,6 +131,7 @@ export const createNews =
 
         dispatch({ type: NEWS_CREATE_SUCCESS, payload: data });
         // creating rich text
+        console.log("newNews", newNews);
         await createRichText(newNews, richtextId, dispatch);
         dispatch({ type: NEWS_CLEAR, payload: data });
         history.push(`/news/${data?.data?.id}`);

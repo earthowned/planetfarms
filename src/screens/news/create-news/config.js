@@ -30,9 +30,9 @@ const dropdownSchema = Yup.object().nullable().shape({
 
 export const validationSchema = Yup.object().shape({
   [title.name]: Yup.string().required(),
-  [coverImage.name]: Yup.mixed().required(),
+  [coverImage.name]: Yup.mixed().optional(),
   [category.name]: dropdownSchema.required(),
-  [readTime.name]: dropdownSchema.required(),
+  [readTime.name]: dropdownSchema.optional(),
   [community.name]: dropdownSchema.required(),
   [newsContent.name]: Yup.array()
     .of(

@@ -24,9 +24,9 @@ export const generatePayload = ({ values }) => {
   return {
     title: values.title,
     coverImage: values.coverImage,
-    category: values.category.label,
-    readTime: values.readTime.label,
-    communityId: values.community.value,
+    category: values.category?.label,
+    readTime: values.readTime?.label,
+    communityId: values.community?.value,
     content: prepareNewsContent(values.newsContent),
   };
 };
