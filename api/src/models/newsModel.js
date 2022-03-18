@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     readTime: {
-      type: DataTypes.DATE
+      type: DataTypes.STRING
     },
     language: {
       type: DataTypes.STRING
