@@ -55,12 +55,6 @@
     }
   }
 
-  .bottom-header-container {
-    height: 72px;
-    display: flex;
-    align-items: center;
-  }
-
   @include breakpoint("tablet", "max") {
     padding: 0;
 

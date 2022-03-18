@@ -44,7 +44,6 @@ export const PageHeader = ({ title, withBackButton = false }) => {
     logo: showLogo,
     title: showTitle,
     backButton: showBakcButton,
-    bottomTitle: showBottomTitle,
   } = useMemo(
     () => getVisibility({ withBackButton, isExpanded, device }),
     [withBackButton, isExpanded, device]
@@ -142,12 +141,6 @@ export const PageHeader = ({ title, withBackButton = false }) => {
           />
         )}
       </div>
-
-      {showBottomTitle && title && (
-        <div className="bottom-header-container">
-          <h2>{title}</h2>
-        </div>
-      )}
 
       <DestructiveModalContainer
         title="Logout"
