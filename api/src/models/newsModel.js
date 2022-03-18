@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.JSON
     },
     category: {
-      type: DataTypes.ARRAY(DataTypes.TEXT)
+      type: DataTypes.STRING
     },
     _attachments: {
       type: DataTypes.STRING

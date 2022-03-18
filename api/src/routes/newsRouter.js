@@ -8,11 +8,11 @@ const { upload, resizeImage } = require('../helpers/filehelpers')
 
 router.route('/').get(protect, getNews)
 router.route('/community/:id').get(protect, checkCommunity, getNews)
-router.route('/add').post(protect, addNews)
+router.route('/add').post(protect, upload.single('news'), resizeImage, checkCommunity, addNews)
 router
   .route('/:newsId')
   .get(protect, checkCommunity, getNewsById)
   .delete(protect, checkCommunity, deleteNews)
-  .put(protect, checkCommunity, upload.single('news'), resizeImage, updateNews)
+  .put(protect, upload.single('news'), resizeImage, checkCommunity, updateNews)
 
 module.exports = router

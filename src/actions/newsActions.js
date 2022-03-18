@@ -3,7 +3,7 @@ import {
   putApi,
   postApi,
   deleteApi,
-  // fileHeader,
+  fileHeader,
 } from "../utils/apiFunc";
 import {
   NEWS_LIST_REQUEST,
@@ -79,7 +79,7 @@ export const searchNews = (search) => async (dispatch) => {
 export const createNews =
   ({ newsDetail, newNews, history }) =>
   async (dispatch) => {
-    const details = { communityId: currentCommunity.id, ...newsDetail };
+    const formData = getFormData({ communityId: currentCommunity.id, ...newsDetail });
 
     try {
       dispatch({ type: NEWS_CREATE_REQUEST });
@@ -90,12 +90,12 @@ export const createNews =
       );
       const richtextId = richText?.data?.richtext?.id;
       if (richtextId) {
-        details.richtextId = richtextId;
+        formData.append("richtextId", richtextId);
         const response = await postApi(
           dispatch,
           `${process.env.REACT_APP_API_BASE_URL}/api/news/add`,
-          details
-          // fileHeader
+          formData,
+          fileHeader
         );
 
         const { data } = response;
