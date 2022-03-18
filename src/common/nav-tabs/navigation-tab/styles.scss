@@ -1,0 +1,54 @@
+.nav-tab-container {
+  cursor: pointer;
+  user-select: none;
+
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .nav-badge-container {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background-color: #eeefef;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h5 {
+      color: #141414;
+    }
+  }
+
+  &:hover {
+    h4 {
+      color: #cadcd6;
+    }
+
+    .nav-badge-container {
+      background-color: #cadcd6;
+    }
+  }
+
+  &-active {
+    h4 {
+      color: #58bd88;
+    }
+
+    .nav-badge-container {
+      background-color: #58bd88;
+    }
+
+    &:hover {
+      h4 {
+        color: #009466;
+      }
+
+      .nav-badge-container {
+        background-color: #009466;
+      }
+    }
+  }
+}

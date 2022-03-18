@@ -30,7 +30,11 @@
     .top-container {
       width: 100%;
       height: 80px;
-      padding: 0px 24px;
+
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: Max(24px, env(safe-area-inset-left));
+      padding-right: Max(24px, env(safe-area-inset-right));
 
       display: flex;
       flex-direction: row;
@@ -56,6 +60,7 @@
 
     .side-container {
       width: 100%;
+      min-width: unset;
       height: 100%;
     }
   }

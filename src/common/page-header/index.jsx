@@ -16,6 +16,7 @@ import { useSearchBar } from "providers/search-bar";
 
 import { getVisibility } from "./helpers";
 import { MobileMenu } from "./mobile-menu";
+import { NotificationsModal } from "./notifications-modal";
 import { renderContent, renderComponent } from "./renders";
 import { ChangePasswordModalContainer } from "./change-password-modal";
 
@@ -35,6 +36,8 @@ export const PageHeader = ({ title, withBackButton = false }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [logoutVisible, setLogoutVisible] = useState(false);
   const [changePasswordVisible, setChangePasswordVisible] = useState(false);
+
+  const [isNotificationsVisible, setIsNotificationsVisible] = useState(false);
 
   const {
     logo: showLogo,
@@ -90,7 +93,11 @@ export const PageHeader = ({ title, withBackButton = false }) => {
             onChangeValue={onChangeValue}
           />
 
-          <IconButton variant="white" icon="bell" />
+          <IconButton
+            icon="bell"
+            variant="white"
+            onClick={() => setIsNotificationsVisible(true)}
+          />
 
           {isMobile && (
             <IconButton
@@ -153,6 +160,15 @@ export const PageHeader = ({ title, withBackButton = false }) => {
         visible={changePasswordVisible}
         onClose={() => setChangePasswordVisible(false)}
         onChangePassword={() => {}}
+      />
+
+      <NotificationsModal
+        visible={isNotificationsVisible}
+        onClose={() => setIsNotificationsVisible(false)}
+        onSelect={() => {
+          setIsNotificationsVisible(false);
+          history.push("/messenger");
+        }}
       />
     </div>
   );
