@@ -118,7 +118,6 @@ export const createNews =
       const richtextId = richText?.data?.richtext?.id;
       if (richtextId) {
         details.richtextId = richtextId;
-        console.log("details", details);
 
         const response = await postApi(
           dispatch,
@@ -131,7 +130,6 @@ export const createNews =
 
         dispatch({ type: NEWS_CREATE_SUCCESS, payload: data });
         // creating rich text
-        console.log("newNews", newNews);
         await createRichText(newNews, richtextId, dispatch);
         dispatch({ type: NEWS_CLEAR, payload: data });
         history.push(`/news/${data?.data?.id}`);

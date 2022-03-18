@@ -18,7 +18,7 @@ const getNews = async (req, res) => {
     whereQuery = { [Op.and]: [
       { deleted: false },
       { title: { [Op.iLike]: '%' + title + '%' } },
-      filter ? { category: { [Op.contains] : filter.split(',')} } : {}
+      filter ? { category: { [Op.iLike] : {[Op.any]: filter.split(',')}} } : {}
     ] }
     const followIdArrays = await db.CommunityUser.findAll({
       attributes: ['communityId'],
