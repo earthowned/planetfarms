@@ -8,10 +8,12 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  // justify-content: space-between;
 
   .left-block {
     flex-grow: 5;
     min-width: 344px;
+    max-width: 1000px;
 
     gap: 40px;
     display: flex;
@@ -25,6 +27,7 @@
   .right-block {
     flex-grow: 1;
     min-width: 344px;
+    max-width: 700px;
 
     gap: 24px;
     display: flex;
@@ -47,6 +50,7 @@
 
     .right-block {
       flex-grow: 1;
+      max-width: unset;
 
       .form-actions-container {
         flex-direction: column;
