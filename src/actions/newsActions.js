@@ -3,7 +3,7 @@ import {
   putApi,
   postApi,
   deleteApi,
-  // fileHeader,
+  fileHeader,
 } from "../utils/apiFunc";
 import {
   NEWS_LIST_REQUEST,
