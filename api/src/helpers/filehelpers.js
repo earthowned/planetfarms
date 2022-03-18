@@ -54,7 +54,7 @@ const resizeImage = (req, res, next) => {
   try {
     // user might not send image sometimes
     if (!req.file) {
-      return next()
+      return next(null, true)
     } else {
       const filename = path
         .basename(req.file.path)
