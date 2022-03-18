@@ -84,6 +84,7 @@ export const create =
   async (dispatch) => {
     try {
       const { richtext } = await api.richText.create();
+
       const response = await api.news.create({
         title,
         readTime,

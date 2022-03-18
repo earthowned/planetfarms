@@ -1,4 +1,5 @@
-import { apiInstance } from "./instance";
+import { getFormData } from "utils/getFormData";
+import { apiInstance, multipartApiInstance } from "./instance";
 
 export const list = ({ page = 0, query = "", filters = [], cancelToken }) => {
   return apiInstance.get("news", {
@@ -16,12 +17,15 @@ export const create = ({
   richtextId,
   communityId,
 }) =>
-  apiInstance.post("news/add", {
-    news,
-    title,
-    creator,
-    category,
-    readTime,
-    richtextId,
-    communityId,
-  });
+  multipartApiInstance.post(
+    "news/add",
+    getFormData({
+      news,
+      title,
+      creator,
+      category,
+      readTime,
+      richtextId,
+      communityId,
+    })
+  );

@@ -29,7 +29,6 @@ export const parseUser = (user) => ({
   avatar: parseUserAvatar(user?.attachments),
 });
 
-export const parseCategory = () => {
-  // TODO: Store and response string value, not an array/object
-  return "No category";
+export const parseCategory = (category) => {
+  return category || "No category";
 };
