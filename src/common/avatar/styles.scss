@@ -5,11 +5,18 @@
   background-color: #f8ebdf;
 
   user-select: none;
+  overflow: hidden;
 
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   svg {
     path {
