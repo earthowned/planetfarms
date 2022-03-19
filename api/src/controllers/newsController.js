@@ -163,11 +163,24 @@ const updateNews = (req, res) => {
 // @desc    Fetch single News
 // @route   GET /api/news/:newsId
 // @access  Public
-const getNewsById = (req, res) => {
+const getNewsById = async (req, res) => {
+  const userId = req?.user?.id || 0
+  const followIdArrays = await db.CommunityUser.findAll({
+    attributes: ['communityId'],
+    where: { userId: userId }
+  }).then(communities => {
+    return (communities || []).reduce((acc, community) => {
+      acc.push(community.communityId)
+      return acc
+    }, [0])
+  })
+  whereCommunity = { where: {[Op.and]: [ { id: {[Op.or]: followIdArrays} }] } }
+
   db.News.findByPk(req.params.newsId, {
     include: [{
       model: db.Community,
-      attributes: []
+      attributes: [],
+      ...whereCommunity
     },
     {
       model: db.RichText,
