@@ -11,8 +11,8 @@ router.route('/community/:id').get(protect, checkCommunity, getNews)
 router.route('/add').post(protect, upload.single('news'), resizeImage, checkCommunity, addNews)
 router
   .route('/:newsId')
-  .get(protect, checkCommunity, getNewsById)
-  .delete(protect, checkCommunity, deleteNews)
-  .put(protect, upload.single('news'), resizeImage, checkCommunity, updateNews)
+  .get(protect, getNewsById)
+  .delete(protect, deleteNews)
+  .put(protect, upload.single('news'), resizeImage, updateNews)
 
 module.exports = router

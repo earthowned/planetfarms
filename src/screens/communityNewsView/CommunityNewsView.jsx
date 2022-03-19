@@ -18,7 +18,7 @@ function CommunityNewsViewPage() {
   async function getSingleNews(newsId) {
     const { data } = await getApi(
       dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/news/${newsId}/community/${currentCommunity.id}`
+      `${process.env.REACT_APP_API_BASE_URL}/api/news/${newsId}`
     );
     setNews(data);
   }
