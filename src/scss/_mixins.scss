@@ -17,6 +17,10 @@
       @media (min-width: ($media-tablet-max-width + 1)) and (max-width: $media-laptop-max-width) {
         @content;
       }
+    } @else if $point = "desktop" {
+      @media (min-width: ($media-laptop-max-width + 1)) {
+        @content;
+      }
     }
   } @else if $sizeType == "max" {
     @if $point == "mobile" {

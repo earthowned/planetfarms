@@ -77,12 +77,12 @@ export const CreateNewsPage = () => {
                   name={model.title.name}
                 />
 
-                <div className="drag-and-drop-container">
-                  <DragDropZoneField
-                    name={model.coverImage.name}
-                    placeholder="Drag Drop main image in this area or"
-                  />
-                </div>
+                <DragDropZoneField
+                  type="Image"
+                  name={model.coverImage.name}
+                  mobilePlaceholder="Upload cover image"
+                  placeholder="Drag & Drop cover image in this area or"
+                />
 
                 <NewsBuilder name={model.newsContent.name} />
               </div>
@@ -96,8 +96,8 @@ export const CreateNewsPage = () => {
                 />
 
                 <DropdownField
-                  placeholder="Read time"
                   options={readTimeOptions}
+                  placeholder="Reading time"
                   name={model.readTime.name}
                 />
 
@@ -105,7 +105,7 @@ export const CreateNewsPage = () => {
                   options={communities}
                   placeholder="Community"
                   name={model.community.name}
-                  label={`You can add your news to one\u000A of the communities.`}
+                  label="You can add your news to one of the communities."
                 />
 
                 <div className="form-actions-container">

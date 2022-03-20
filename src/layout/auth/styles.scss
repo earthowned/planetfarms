@@ -117,11 +117,6 @@
             flex-direction: row;
             justify-content: center;
           }
-
-          .drag-and-drop-zone-container {
-            width: 100%;
-            height: 320px;
-          }
         }
       }
     }
@@ -205,16 +200,6 @@
       .auth-scroll-container {
         width: 100%;
         padding: 0px 16px;
-
-        .form-content-container {
-          .form-container {
-            .drag-and-drop-zone-container {
-              width: 100%;
-              height: unset;
-              aspect-ratio: 1 / 1;
-            }
-          }
-        }
 
         .form-container {
           .row-container {

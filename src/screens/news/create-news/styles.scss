@@ -8,26 +8,20 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  // justify-content: space-between;
+  justify-content: stretch;
 
   .left-block {
-    flex-grow: 5;
+    flex: 2;
     min-width: 344px;
-    max-width: 1000px;
 
     gap: 40px;
     display: flex;
     flex-direction: column;
-
-    .drag-and-drop-container {
-      height: 280px;
-    }
   }
 
   .right-block {
-    flex-grow: 1;
-    min-width: 344px;
-    max-width: 700px;
+    flex: 1;
+    min-width: 400px;
 
     gap: 24px;
     display: flex;
@@ -46,15 +40,20 @@
 
     .left-block {
       flex-grow: 1;
+      min-width: unset;
     }
 
     .right-block {
       flex-grow: 1;
-      max-width: unset;
+      min-width: unset;
 
       .form-actions-container {
         flex-direction: column;
       }
     }
+  }
+
+  @include breakpoint("desktop") {
+    max-width: 1500px;
   }
 }

@@ -43,12 +43,7 @@ export const TextFieldBlock = ({ name, onRemove }) => {
 export const ImageFieldBlock = ({ name, onRemove }) => {
   return (
     <FieldBlock title="Picture Field" onRemove={onRemove}>
-      <div className="drag-and-drop-container">
-        <DragDropZoneField
-          name={`${name}.imageFile`}
-          placeholder="Drag Drop image in this area or"
-        />
-      </div>
+      <DragDropZoneField type="Image" name={`${name}.imageFile`} />
 
       <InputField
         name={`${name}.imageDescription`}
@@ -94,13 +89,7 @@ export const VideoFieldBlock = ({ name, onRemove }) => {
       )}
 
       {isFileVisible && (
-        <div className="drag-and-drop-container">
-          <DragDropZoneField
-            name={`${name}.videoFile`}
-            placeholder="Drag Drop video in this area or"
-            fileTypes={["video/mp4", "video/mov", "video/mkv", "video/m4v"]}
-          />
-        </div>
+        <DragDropZoneField type="Video" name={`${name}.videoFile`} />
       )}
 
       {isLinkVisible && isFileVisible && <h4>or</h4>}
