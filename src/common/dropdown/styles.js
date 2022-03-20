@@ -66,19 +66,23 @@ export const selectStyles = ({ error }) => {
       return {
         ...base,
         height: "56px",
+        padding: "0px",
         color: "#EEEFEF",
         backgroundColor: "transparent",
+
         display: "flex",
-        alignItems: "center",
-        borderBottom: "1px solid rgba(88, 189, 136, 1)",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "space-between",
 
         fontFamily: "IBM Plex Sans Regular",
         fontWeight: "400",
         fontSize: "16px",
         lineHeight: "24px",
+        textAlign: "center",
 
         "&:hover": {
-          backgroundColor: "#1D2120",
+          backgroundColor: "rgba(0, 148, 102, 0.15)",
         },
       };
     },

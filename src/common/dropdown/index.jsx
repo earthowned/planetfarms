@@ -1,10 +1,21 @@
 import { useState } from "react";
 import { useField } from "formik";
-import Select from "react-select";
+import Select, { components } from "react-select";
+
+import { Divider } from "common/divider";
 
 import { selectStyles } from "./styles";
 
 import "./styles.scss";
+
+const Option = ({ children, ...props }) => {
+  return (
+    <components.Option {...props}>
+      <div className="react-select-option-container">{children}</div>
+      <Divider backgroundColor="#58BD88" withGradient />
+    </components.Option>
+  );
+};
 
 export const Dropdown = ({
   value,
@@ -44,6 +55,7 @@ export const Dropdown = ({
         onBlur={handleBlur}
         inputValue={inputValue}
         onChange={handleChange}
+        components={{ Option }}
         placeholder={placeholder}
         isSearchable={isSearchable}
         onInputChange={handleInputChange}
