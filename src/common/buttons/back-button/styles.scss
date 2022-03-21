@@ -1,0 +1,43 @@
+@import "src/scss/variables";
+@import "src/scss/mixins";
+
+.pf-back-button {
+  width: auto;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  color: #eeefef;
+  font: 16px/24px $font-semi-bold;
+
+  @include transition(gap, 0.2s, ease-in-out);
+
+  svg {
+    @include setSvgColor(#eeefef);
+  }
+
+  &:hover:enabled {
+    gap: 10px;
+    color: #cadcd6;
+    svg {
+      @include setSvgColor(#cadcd6);
+    }
+  }
+
+  &:active:enabled {
+    color: #9bb0a9;
+    svg {
+      @include setSvgColor(#9bb0a9);
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    @include removeTransition();
+  }
+}

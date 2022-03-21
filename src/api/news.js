@@ -1,4 +1,7 @@
-import { apiInstance } from "./instance";
+import { getFormData } from "utils/getFormData";
+import { apiInstance, multipartApiInstance } from "./instance";
+
+export const get = ({ id }) => apiInstance.get(`news/${id}`);
 
 export const list = ({ page = 0, query = "", filters = [], cancelToken }) => {
   return apiInstance.get("news", {
@@ -6,3 +9,25 @@ export const list = ({ page = 0, query = "", filters = [], cancelToken }) => {
     params: { pageNumber: page, title: query, filter: filters.toString() },
   });
 };
+
+export const create = ({
+  news,
+  title,
+  creator,
+  category,
+  readTime,
+  richtextId,
+  communityId,
+}) =>
+  multipartApiInstance.post(
+    "news/add",
+    getFormData({
+      news,
+      title,
+      creator,
+      category,
+      readTime,
+      richtextId,
+      communityId,
+    })
+  );

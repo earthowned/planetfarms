@@ -1,9 +1,12 @@
+import { api } from "api";
+import { getErrorMessage } from "utils/error";
+
 import {
   getApi,
   putApi,
   postApi,
   deleteApi,
-  fileHeader,
+  // fileHeader,
 } from "../utils/apiFunc";
 import {
   NEWS_LIST_REQUEST,
@@ -76,10 +79,35 @@ export const searchNews = (search) => async (dispatch) => {
   }
 };
 
+export const create =
+  ({ title, userId, content, category, readTime, coverImage, communityId }) =>
+  async (dispatch) => {
+    try {
+      const { richtext } = await api.richText.create();
+
+      const response = await api.news.create({
+        title,
+        readTime,
+        communityId,
+        creator: userId,
+        news: coverImage,
+        category: [category],
+        richtextId: richtext.id,
+      });
+
+      const { id: newsId } = response?.data?.data || {};
+      await createRichText(content, richtext.id, dispatch);
+
+      return Promise.resolve({ newsId });
+    } catch (error) {
+      return Promise.reject(getErrorMessage(error));
+    }
+  };
+
 export const createNews =
   ({ newsDetail, newNews, history }) =>
   async (dispatch) => {
-    const formData = getFormData({ communityId: currentCommunity.id, ...newsDetail });
+    const details = { communityId: currentCommunity.id, ...newsDetail };
 
     try {
       dispatch({ type: NEWS_CREATE_REQUEST });
@@ -90,12 +118,13 @@ export const createNews =
       );
       const richtextId = richText?.data?.richtext?.id;
       if (richtextId) {
-        formData.append("richtextId", richtextId);
+        details.richtextId = richtextId;
+
         const response = await postApi(
           dispatch,
           `${process.env.REACT_APP_API_BASE_URL}/api/news/add`,
-          formData,
-          fileHeader
+          details
+          // fileHeader
         );
 
         const { data } = response;

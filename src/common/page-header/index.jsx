@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import { SearchBar } from "common/search-bar";
 import { IconButton } from "common/buttons/icon-button";
+import { BackButton } from "common/buttons/back-button";
 import { ModalButton } from "common/buttons/modal-button";
 import { DestructiveModalContainer } from "common/modal-containers";
 
@@ -70,7 +71,7 @@ export const PageHeader = ({ title, withBackButton = false }) => {
     <div className="main-page-header">
       <div className="top-header-container">
         <>
-          {showBakcButton && <p>Back Button</p>}
+          {showBakcButton && <BackButton onClick={() => history.goBack()} />}
 
           {showLogo && (
             <IconButton
@@ -140,12 +141,6 @@ export const PageHeader = ({ title, withBackButton = false }) => {
           />
         )}
       </div>
-
-      {isMobile && title && (
-        <div className="bottom-header-container">
-          <h2>{title}</h2>
-        </div>
-      )}
 
       <DestructiveModalContainer
         title="Logout"

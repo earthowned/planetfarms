@@ -15,7 +15,7 @@
     height: 56px;
     padding: 0px 16px;
     border-radius: 4px;
-    border: 1px solid #555656;
+    border: 1px solid rgba(238, 239, 239, 0.1);
     background-color: rgba(20, 20, 20, 0.8);
 
     display: flex;
@@ -92,7 +92,7 @@
     }
 
     &:hover {
-      border: 1px solid #8a8a8a;
+      background-color: #1d2120;
     }
 
     &:focus-within {
@@ -135,9 +135,7 @@
 
   .error-message {
     color: #da3443;
-    font: $font-placeholder;
-    font-size: 18px;
-    line-height: 18px;
+    font: 16px/24px $font-regular;
   }
 }
 

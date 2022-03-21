@@ -9,9 +9,9 @@ import RichTextView from "../../components/richTextView/RichTextView";
 
 function CommunityNewsViewPage() {
   const [news, setNews] = useState({});
-  const currentCommunity = localStorage.getItem("currentCommunity")
-    ? JSON.parse(localStorage.getItem("currentCommunity"))
-    : null;
+  // const currentCommunity = localStorage.getItem("currentCommunity")
+  //   ? JSON.parse(localStorage.getItem("currentCommunity"))
+  //   : null;
   const dispatch = useDispatch();
   const { id } = useParams();
 

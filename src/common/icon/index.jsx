@@ -34,6 +34,9 @@ import { ReactComponent as CongratulationsIcon } from "assets/icons/congratulati
 import { ReactComponent as UsersIcon } from "assets/icons/users.svg";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import { ReactComponent as PlusIcon } from "assets/icons/plus.svg";
+import { ReactComponent as FileIcon } from "assets/icons/file.svg";
+import { ReactComponent as CameraIcon } from "assets/icons/camera.svg";
+import { ReactComponent as VideoIcon } from "assets/icons/video.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -45,6 +48,9 @@ const getIcon = (iconName) => {
 
     case "calendar":
       return <CalendarIcon />;
+
+    case "camera":
+      return <CameraIcon />;
 
     case "congratulations":
       return <CongratulationsIcon />;
@@ -88,6 +94,9 @@ const getIcon = (iconName) => {
     case "facebook":
       return <FacebookIcon />;
 
+    case "file":
+      return <FileIcon />;
+
     case "person":
       return <PersonIcon />;
 
@@ -120,6 +129,9 @@ const getIcon = (iconName) => {
 
     case "search":
       return <SearchIcon />;
+
+    case "youtube":
+      return <VideoIcon />;
 
     default:
       return <GoogleIcon />;

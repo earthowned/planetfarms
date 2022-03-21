@@ -108,7 +108,7 @@ const NewsAdd = () => {
     const creator = userInfo.id;
     dispatch(
       createNews({
-        newsDetail: { title, category, news: newsCover, creator },
+        newsDetail: { title, category: [category], news: newsCover, creator },
         newNews: newsData.splice(1),
         history,
       })

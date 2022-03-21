@@ -5,17 +5,27 @@ import { useDropzone } from "react-dropzone";
 import { CropperModal } from "common/modal-containers";
 import { IconButton } from "common/buttons/icon-button";
 
+import { useDeviceType } from "hooks";
+
+import { Dropzone } from "./dropzone";
+import { ContentType, FileTypes, IconName, Placeholder } from "./config";
+
 import "./styles.scss";
 
 export const DragDropZone = ({
   file,
+  error,
   onChange,
-  fileTypes = ["image/png", "image/jpeg"],
+  placeholder,
+  mobilePlaceholder,
+  type = ContentType.Image,
 }) => {
+  const device = useDeviceType();
   const [isCropVisible, setIsCropVisible] = useState(false);
 
   const dropzone = useDropzone({
-    accept: fileTypes,
+    accept: FileTypes[type],
+    maxSize: 52428800, // 50MB
     onDrop: (files) => onChange(files[0]),
   });
 
@@ -38,17 +48,16 @@ export const DragDropZone = ({
 
   return (
     <div className="pf-drag-drop-zone">
-      <div className="dropzone-container" {...dropzone.getRootProps()}>
-        <input {...dropzone.getInputProps()} />
-        {file ? (
-          <img src={URL.createObjectURL(file)} alt="" />
-        ) : (
-          <div className="placeholders-container">
-            <h5>Drag & Drop files in this area or</h5>
-            <h4>Click Here to attach</h4>
-          </div>
-        )}
-      </div>
+      <Dropzone
+        file={file}
+        device={device}
+        withError={!!error}
+        icon={IconName[type]}
+        rootProps={dropzone.getRootProps()}
+        inputProps={dropzone.getInputProps()}
+        placeholder={placeholder || Placeholder[device][type]}
+        mobilePlaceholder={mobilePlaceholder || Placeholder[device][type]}
+      />
 
       {file && (
         <div className="buttons-container">
@@ -73,14 +82,11 @@ export const DragDropZone = ({
 };
 
 export const DragDropZoneField = ({ name, ...props }) => {
-  const fieldObject = useField(name);
-
-  const field = fieldObject[0];
-  const helpers = fieldObject[2];
-
+  const [field, meta, helpers] = useField(name);
   return (
     <DragDropZone
       name={name}
+      error={meta.error}
       file={field.value}
       onChange={(file) => helpers.setValue(file)}
       {...props}
