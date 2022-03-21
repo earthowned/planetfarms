@@ -1,3 +1,3 @@
 import * as news from "./newsActions";
 
-export { news };
+export const actions = { news };

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useAlert } from "react-alert";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { DashboardLayout } from "layout/dashboard";
@@ -7,7 +8,7 @@ import { IconButton } from "common/buttons/icon-button";
 import { NewsAuthorInfo, NewsArticleInfo } from "common/containers/news";
 import { ArticleContentList } from "common/containers/news/article-content";
 
-import { news } from "actions";
+import { actions } from "actions";
 import { parseCoverImage } from "utils/parsers/news";
 
 import "./styles.scss";
@@ -15,13 +16,17 @@ import "./styles.scss";
 export const ArticlePage = () => {
   const alert = useAlert();
   const { id } = useParams();
+  const currentUser = useSelector((state) => state.userLogin);
 
   const [article, setArticle] = useState(null);
 
+  const showEditButton = useMemo(() => {
+    return currentUser?.userInfo?.id === article?.creator;
+  }, [currentUser, article]);
+
   useEffect(async () => {
     try {
-      const response = await news.get({ id });
-      // console.log(response);
+      const response = await actions.news.get({ id });
       setArticle(response.article);
     } catch (error) {
       alert.error(error);
@@ -33,8 +38,12 @@ export const ArticlePage = () => {
       <div className="article-page-container">
         <div className="header">
           <div className="user-info">
-            <NewsAuthorInfo author={{ firstName: "Kek", lastName: "Lol" }} />
-            <IconButton variant="white" onClick={() => {}} icon="more" />
+            <NewsAuthorInfo
+              author={{ firstName: "Unknown", lastName: "User" }}
+            />
+            {showEditButton && (
+              <IconButton variant="white" onClick={() => {}} icon="more" />
+            )}
           </div>
 
           <NewsArticleInfo

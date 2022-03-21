@@ -11,7 +11,7 @@ import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
 
 import { api } from "api";
-import { create } from "actions/newsActions";
+import { actions } from "actions";
 
 import { generatePayload } from "./helpers";
 import { NewsBuilder } from "./news-builder";
@@ -48,7 +48,7 @@ export const CreateNewsPage = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await create({
+      const response = await actions.news.create({
         userId: user.userInfo.id,
         ...generatePayload({ values }),
       })(dispatch);

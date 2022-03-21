@@ -1,13 +1,20 @@
+import { useMemo } from "react";
 import ReactPlayer from "react-player";
 
-import { NewsContentType } from "constants/enums";
+import { useDeviceType } from "hooks";
+import { DeviceType, NewsContentType } from "constants/enums";
 import { parseArticleImage, parseArticleVideo } from "utils/parsers/news";
 
 import "./styles.scss";
 
-const TextBlock = ({ title, text }) => (
+const Title = ({ isMobile, title }) => {
+  if (!title) return null;
+  return isMobile ? <h4>{title}</h4> : <h3>{title}</h3>;
+};
+
+const TextBlock = ({ title, text, isMobile }) => (
   <div className="article-text-block">
-    {title && <h3>{title}</h3>}
+    <Title title={title} isMobile={isMobile} />
     {text && <h5>{text}</h5>}
   </div>
 );
@@ -23,12 +30,12 @@ const ImageBlock = ({ url, description }) => {
   );
 };
 
-const VideoBlock = ({ link, resource, description, title }) => {
+const VideoBlock = ({ link, resource, description, title, isMobile }) => {
   const url = resource ? parseArticleVideo(resource) : link;
 
   return (
     <div className="article-video-block">
-      {title && <h3>{title}</h3>}
+      <Title title={title} isMobile={isMobile} />
       <div className="video-container">
         <ReactPlayer
           controls
@@ -44,12 +51,13 @@ const VideoBlock = ({ link, resource, description, title }) => {
 };
 
 export const ArticleContentList = ({ content = [] }) => {
-  if (content.length === 0) return null;
+  const device = useDeviceType();
+
+  const isMobile = useMemo(() => device === DeviceType.Mobile, [device]);
 
   return (
     <div className="article-content-list-container">
       {content.map((item, index) => {
-        console.log(item);
         switch (item.type) {
           case NewsContentType.Image:
             return (
@@ -63,6 +71,7 @@ export const ArticleContentList = ({ content = [] }) => {
           case NewsContentType.Text:
             return (
               <TextBlock
+                isMobile={isMobile}
                 title={item?.textHeading}
                 text={item?.textDescription}
                 key={`article-text-block-${index.toString()}`}
@@ -72,6 +81,7 @@ export const ArticleContentList = ({ content = [] }) => {
           case NewsContentType.Video:
             return (
               <VideoBlock
+                isMobile={isMobile}
                 link={item?.videoLink}
                 title={item?.videoTitle}
                 resource={item?.videoResource}
