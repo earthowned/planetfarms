@@ -37,6 +37,7 @@ import { ReactComponent as PlusIcon } from "assets/icons/plus.svg";
 import { ReactComponent as FileIcon } from "assets/icons/file.svg";
 import { ReactComponent as CameraIcon } from "assets/icons/camera.svg";
 import { ReactComponent as VideoIcon } from "assets/icons/video.svg";
+import { ReactComponent as MoreIcon } from "assets/icons/more.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -120,6 +121,9 @@ const getIcon = (iconName) => {
 
     case "logout":
       return <LogoutIcon />;
+
+    case "more":
+      return <MoreIcon />;
 
     case "trash":
       return <TrashIcon />;
