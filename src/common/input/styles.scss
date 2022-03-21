@@ -69,13 +69,17 @@
 
     .input-icon {
       margin-right: 8px;
-      @include setSvgColor(#555656);
+      path {
+        fill: #555656;
+      }
     }
 
     .password-visible-icon {
       cursor: pointer;
       margin-left: 8px;
-      @include setSvgColor(#555656);
+      path {
+        fill: #555656;
+      }
       user-select: none;
       -webkit-user-select: none; /* Safari */
       -webkit-touch-callout: none; /* iOS Safari */
@@ -87,7 +91,9 @@
     &-error {
       border: 1px solid #da3443;
       .input-icon {
-        @include setSvgColor(#da3443);
+        path {
+          fill: #da3443;
+        }
       }
     }
 
@@ -96,7 +102,6 @@
     }
 
     &:focus-within {
-      // border: 1px solid #3a3939;
       border: 1px solid #58bd88;
       background-color: #27332f;
 
@@ -111,7 +116,9 @@
 
     &-with-value {
       .input-icon {
-        @include setSvgColor(#58bd88);
+        path {
+          fill: #58bd88;
+        }
       }
 
       .pf-floating-placeholder {

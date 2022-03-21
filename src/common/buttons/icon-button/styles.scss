@@ -1,5 +1,11 @@
 @import "src/scss/mixins";
 
+@mixin flexCenter() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .pf-icon-btn {
   width: 24px;
   height: 24px;
@@ -11,9 +17,7 @@
   border-radius: 4px;
   background-color: transparent;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexCenter();
 
   user-select: none;
   -webkit-user-select: none; /* Safari */
@@ -23,9 +27,7 @@
   -moz-user-select: none; /* Old versions of Firefox */
 
   .icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flexCenter();
 
     svg {
       width: 24px !important;
@@ -36,9 +38,7 @@
   &-secondary {
     background-color: rgba(238, 239, 239, 0.1);
     .icon-container {
-      svg {
-        @include setSvgColor(#eeefef);
-      }
+      @include setSvgColor(#eeefef);
     }
 
     &:hover:enabled {
@@ -52,48 +52,36 @@
 
   &-transparent {
     .icon-container {
-      svg {
-        @include setSvgColor(#00c688);
-      }
+      @include setSvgColor(#00c688);
     }
 
     &:hover {
       .icon-container {
-        svg {
-          @include setSvgColor(#02f2a7);
-        }
+        @include setSvgColor(#02f2a7);
       }
     }
 
     &:active {
       .icon-container {
-        svg {
-          @include setSvgColor(#05a875);
-        }
+        @include setSvgColor(#05a875);
       }
     }
   }
 
   &-white {
     .icon-container {
-      svg {
-        @include setSvgColor(#f8ebdf);
-      }
+      @include setSvgColor(#f8ebdf);
     }
 
     &:hover {
       .icon-container {
-        svg {
-          @include setSvgColor(#8a8a8a);
-        }
+        @include setSvgColor(#8a8a8a);
       }
     }
 
     &:active {
       .icon-container {
-        svg {
-          @include setSvgColor(#3a3939);
-        }
+        @include setSvgColor(#3a3939);
       }
     }
   }
@@ -101,18 +89,14 @@
   &-selected {
     background-color: #05a875;
     .icon-container {
-      svg {
-        @include setSvgColor(black);
-      }
+      @include setSvgColor(black);
     }
   }
 
   &-grey {
     background-color: #eeefef;
     .icon-container {
-      svg {
-        @include setSvgColor(#141414);
-      }
+      @include setSvgColor(#141414);
     }
 
     &:hover {
@@ -127,24 +111,18 @@
   &-grey-transparent {
     background-color: transparent;
     .icon-container {
-      svg {
-        @include setSvgColor(#676969);
-      }
+      @include setSvgColor(#676969);
     }
 
     &:hover {
       .icon-container {
-        svg {
-          @include setSvgColor(#4b4d4d);
-        }
+        @include setSvgColor(#4b4d4d);
       }
     }
 
     &:active {
       .icon-container {
-        svg {
-          @include setSvgColor(#323333);
-        }
+        @include setSvgColor(#323333);
       }
     }
   }
@@ -181,6 +159,36 @@
       color: #9bb0a9;
       .icon-container {
         background-color: #007a54;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+
+  &-socials {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #eeefef;
+
+    .icon-container {
+      @include setSvgColor(#141414);
+    }
+
+    &:hover {
+      background-color: #cadcd6;
+      .icon-container {
+        @include setSvgColor(#1d2120);
+      }
+    }
+
+    &:active {
+      background-color: #9bb0a9;
+      .icon-container {
+        @include setSvgColor(#27332f);
       }
     }
 

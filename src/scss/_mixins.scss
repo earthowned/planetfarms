@@ -43,8 +43,10 @@
 }
 
 @mixin setSvgColor($color) {
-  path {
-    fill: $color;
+  svg {
+    path {
+      fill: $color;
+    }
   }
 }
 

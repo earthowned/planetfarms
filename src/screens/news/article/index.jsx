@@ -53,7 +53,15 @@ export const ArticlePage = () => {
 
         <div className="article-content-container">
           <ArticleContentList content={article?.content} />
-          <div className="socials-container" />
+          <div className="socials-container">
+            <IconButton variant="socials" icon="link" onClick={() => {}} />
+            <IconButton
+              variant="socials"
+              onClick={() => {}}
+              icon="facebook-outline"
+            />
+            <IconButton variant="socials" icon="twitter" onClick={() => {}} />
+          </div>
         </div>
       </div>
     </DashboardLayout>
