@@ -1,6 +1,6 @@
 import { Avatar } from "common/avatar";
 
-import { parseAuthor } from "./helpers.js";
+import { parseAuthor } from "utils/parsers/news";
 
 import "./styles.scss";
 

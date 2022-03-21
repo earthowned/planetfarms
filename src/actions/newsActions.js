@@ -1,5 +1,6 @@
 import { api } from "api";
 import { getErrorMessage } from "utils/error";
+import { parseArticleContent } from "utils/parsers/news";
 
 import {
   getApi,
@@ -209,3 +210,16 @@ export const newsUpdate =
       dispatch({ type: NEWS_UPDATE_FAIL, payload: message });
     }
   };
+
+export const get = async ({ id }) => {
+  try {
+    const { data: article } = await api.news.get({ id });
+    // const author = await api.user.get({ id: article.creator });
+
+    return Promise.resolve({
+      article: { ...article, content: parseArticleContent(article) },
+    });
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};

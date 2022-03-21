@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import cx from "classnames";
@@ -5,7 +6,7 @@ import cx from "classnames";
 import newsPlaceholderImage from "assets/images/news-placeholder.png";
 import { NewsAuthorInfo, NewsArticleInfo } from "common/containers/news";
 
-import { parseCoverImage } from "./helpers";
+import { parseCoverImage } from "utils/parsers/news";
 
 import "./styles.scss";
 
@@ -17,7 +18,7 @@ export const NewsItem = forwardRef(({ variant, news, onClick }, ref) => {
   return (
     <div ref={ref} className={containerClassName} onClick={onClick}>
       <div className="cover-image-container">
-        <img src={parseCoverImage(news) || newsPlaceholderImage} alt="" />
+        <img alt="" src={parseCoverImage(news) || newsPlaceholderImage} />
       </div>
 
       <div className="news-data-container">
