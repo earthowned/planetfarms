@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import { NewsGrid } from "common/containers/news";
 import { DashboardLayout } from "layout/dashboard";
 import { ActionButton } from "common/buttons/action-button";
-import { NewsListContainer } from "common/containers/news-container";
 
 import { useFetchNews } from "hooks";
 
@@ -46,7 +46,7 @@ export const NewsListPage = () => {
         />
       </div>
 
-      <NewsListContainer
+      <NewsGrid
         list={news}
         isLoading={isLoading}
         isLastPage={isLastPage}
