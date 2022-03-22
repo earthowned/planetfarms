@@ -1,32 +1,34 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
-import { ActionButton } from "common/buttons/action-button";
-import { Divider } from "common/divider";
 import { DashboardLayout } from "layout/dashboard";
 import { IconButton } from "common/buttons/icon-button";
-import { ModalButton } from "common/buttons/modal-button";
+import { DestructiveModalContainer } from "common/modal-containers";
 import { NewsAuthorInfo, NewsArticleInfo } from "common/containers/news";
+import { ModalOptionsButton } from "common/buttons/modal-options-button";
 import { ArticleContentList } from "common/containers/news/article-content";
 
 import { actions } from "actions";
 import { parseCoverImage } from "utils/parsers/news";
+import newsPlaceholderImage from "assets/images/news-placeholder.png";
+
+import { moreOptions, MoreActionType } from "./config";
 
 import "./styles.scss";
-import { ModalOptionsButton } from "common/buttons/modal-options-button";
 
-// TODO: Implement More Modal Button;
-// TODO: Cover Image - set placeholder;
 // TODO: Parse user info by id;
 
 export const ArticlePage = () => {
   const alert = useAlert();
   const { id } = useParams();
+  const history = useHistory();
+
   const currentUser = useSelector((state) => state.userLogin);
 
   const [article, setArticle] = useState(null);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const showEditButton = useMemo(() => {
     return currentUser?.userInfo?.id === article?.creator;
@@ -41,20 +43,30 @@ export const ArticlePage = () => {
     }
   }, [id]);
 
-  const renderComponent = useCallback(
-    () => <IconButton icon="more" variant="white" />,
-    []
-  );
+  const handleMoreOptionSelect = (option) => {
+    switch (option.label) {
+      case MoreActionType.Edit:
+        break;
 
-  const renderContent = useCallback(() => {
-    return (
-      <>
-        <ActionButton icon="lock" variant="transparent-white" />
-        <Divider />
-        <ActionButton icon="logout" variant="transparent-red" />
-      </>
-    );
-  }, []);
+      case MoreActionType.Delete:
+        setIsDeleteModalVisible(true);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const onDeleteArticle = async () => {
+    try {
+      setIsDeleteModalVisible(false);
+      await actions.news.remove({ newsId: id });
+      alert.success("Article successfully deleted");
+      history.goBack();
+    } catch (error) {
+      alert.error(error);
+    }
+  };
 
   return (
     <DashboardLayout withBackButton>
@@ -67,12 +79,9 @@ export const ArticlePage = () => {
             {showEditButton && (
               <ModalOptionsButton
                 icon="more"
+                options={moreOptions}
                 variant="transparent-white"
-                options={[
-                  { icon: "edit", label: "Edit", variant: "white" },
-                  { icon: "trash", label: "Delete", variant: "red" },
-                ]}
-                onOptionSelect={(option) => console.log(option)}
+                onOptionSelect={handleMoreOptionSelect}
               />
             )}
           </div>
@@ -86,7 +95,10 @@ export const ArticlePage = () => {
           <div className="article-title-container">
             {article?.title && <h2>{article.title}</h2>}
             <div className="image-cover-container">
-              <img src={parseCoverImage(article)} alt="" />
+              <img
+                alt=""
+                src={parseCoverImage(article) || newsPlaceholderImage}
+              />
             </div>
           </div>
         </div>
@@ -104,6 +116,15 @@ export const ArticlePage = () => {
           </div>
         </div>
       </div>
+
+      <DestructiveModalContainer
+        title="Delete News"
+        actionButtonTitle="Delete"
+        visible={isDeleteModalVisible}
+        onActionClick={onDeleteArticle}
+        onClose={() => setIsDeleteModalVisible(false)}
+        message="Are you sure you want to delete this news?"
+      />
     </DashboardLayout>
   );
 };

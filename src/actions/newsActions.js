@@ -80,31 +80,6 @@ export const searchNews = (search) => async (dispatch) => {
   }
 };
 
-export const create =
-  ({ title, userId, content, category, readTime, coverImage, communityId }) =>
-  async (dispatch) => {
-    try {
-      const { richtext } = await api.richText.create();
-
-      const response = await api.news.create({
-        title,
-        readTime,
-        communityId,
-        creator: userId,
-        news: coverImage,
-        category: [category],
-        richtextId: richtext.id,
-      });
-
-      const { id: newsId } = response?.data?.data || {};
-      await createRichText(content, richtext.id, dispatch);
-
-      return Promise.resolve({ newsId });
-    } catch (error) {
-      return Promise.reject(getErrorMessage(error));
-    }
-  };
-
 export const createNews =
   ({ newsDetail, newNews, history }) =>
   async (dispatch) => {
@@ -211,6 +186,31 @@ export const newsUpdate =
     }
   };
 
+export const create =
+  ({ title, userId, content, category, readTime, coverImage, communityId }) =>
+  async (dispatch) => {
+    try {
+      const { richtext } = await api.richText.create();
+
+      const response = await api.news.create({
+        title,
+        readTime,
+        communityId,
+        creator: userId,
+        news: coverImage,
+        category: [category],
+        richtextId: richtext.id,
+      });
+
+      const { id: newsId } = response?.data?.data || {};
+      await createRichText(content, richtext.id, dispatch);
+
+      return Promise.resolve({ newsId });
+    } catch (error) {
+      return Promise.reject(getErrorMessage(error));
+    }
+  };
+
 export const get = async ({ id }) => {
   try {
     const { data: article } = await api.news.get({ id });
@@ -219,6 +219,15 @@ export const get = async ({ id }) => {
     return Promise.resolve({
       article: { ...article, content: parseArticleContent(article) },
     });
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
+
+export const remove = async ({ newsId }) => {
+  try {
+    await api.news.remove({ newsId });
+    return Promise.resolve();
   } catch (error) {
     return Promise.reject(getErrorMessage(error));
   }

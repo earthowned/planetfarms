@@ -31,3 +31,5 @@ export const create = ({
       communityId,
     })
   );
+
+export const remove = ({ newsId }) => apiInstance.delete(`/news/${newsId}`);
