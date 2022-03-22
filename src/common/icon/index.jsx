@@ -41,6 +41,7 @@ import { ReactComponent as MoreIcon } from "assets/icons/more.svg";
 import { ReactComponent as LinkIcon } from "assets/icons/link.svg";
 import { ReactComponent as FacebookOutlineIcon } from "assets/icons/facebook-outline.svg";
 import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
+import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -76,6 +77,9 @@ const getIcon = (iconName) => {
 
     case "chevrons-right":
       return <ChevronsRightIcon />;
+
+    case "edit":
+      return <EditIcon />;
 
     case "email":
       return <EmailIcon />;
