@@ -18,8 +18,6 @@ import { moreOptions, MoreActionType } from "./config";
 
 import "./styles.scss";
 
-// TODO: Parse user info by id;
-
 export const ArticlePage = () => {
   const alert = useAlert();
   const { id } = useParams();

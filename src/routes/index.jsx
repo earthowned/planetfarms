@@ -7,8 +7,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 // News
 import { NewsListPage, CreateNewsPage, ArticlePage } from "screens/news";
 import NewsAdd from "../screens/communityNews/newsAdd/NewsAdd";
-import CommunityPagenews from "../screens/communityNews/CommunityNews";
-import CommunityNewsViewPage from "../screens/communityNewsView/CommunityNewsView";
+// import CommunityPagenews from "../screens/communityNews/CommunityNews";
+// import CommunityNewsViewPage from "../screens/communityNewsView/CommunityNewsView";
 
 // Members
 import CommunityMembers from "../screens/communityMembers/CommunityMembers";
