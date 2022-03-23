@@ -16,3 +16,8 @@ export const NewsContentType = {
   Video: "Video",
   Image: "Image",
 };
+
+export const ArticleEditorType = {
+  Create: "Create",
+  Edit: "Edit",
+};

@@ -219,7 +219,8 @@ export const get = async ({ id }) => {
     // const author = await api.user.get({ id: article.creator });
 
     return Promise.resolve({
-      article: { ...article, content: parseArticleContent(article) },
+      ...article,
+      content: parseArticleContent(article),
     });
   } catch (error) {
     return Promise.reject(getErrorMessage(error));

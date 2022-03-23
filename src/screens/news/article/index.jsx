@@ -35,7 +35,7 @@ export const ArticlePage = () => {
   useEffect(async () => {
     try {
       const response = await actions.news.get({ id });
-      setArticle(response.article);
+      setArticle(response);
     } catch (error) {
       alert.error(error);
     }
