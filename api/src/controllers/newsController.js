@@ -134,7 +134,7 @@ const updateNews = (req, res) => {
           videoDetail,
           category
         },
-        { where: { id } })
+        { where: { id,  deleted: false } })
           .then(() => res.json({ message: 'News Updated !!!' }).status(200))
           .catch((err) => res.json({ error: err.message }).status(400))
       } else {
@@ -177,6 +177,7 @@ const getNewsById = async (req, res) => {
   whereCommunity = { where: {[Op.and]: [ { id: {[Op.or]: followIdArrays} }] } }
 
   db.News.findByPk(req.params.newsId, {
+    where: { deleted: false },
     include: [{
       model: db.Community,
       attributes: [],
