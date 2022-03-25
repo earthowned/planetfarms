@@ -119,9 +119,9 @@ export const getPromises = ({
     id: data.id,
     order: data.order,
     link: data.videoLink,
-    title: data.videoTitle,
     richTextId: data.richTextId,
-    description: data.videoDescription,
+    title: data.videoTitle || "",
+    description: data.videoDescription || "",
     file: isFileInstanse(data.videoFile) ? data.videoFile : data.videoResource,
   });
 

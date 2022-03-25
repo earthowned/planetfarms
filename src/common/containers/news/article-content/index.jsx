@@ -9,6 +9,7 @@ import "./styles.scss";
 
 const Title = ({ isMobile, title }) => {
   if (!title) return null;
+  if (title === "undefined") return null;
   return isMobile ? <h4>{title}</h4> : <h3>{title}</h3>;
 };
 
@@ -45,7 +46,7 @@ const VideoBlock = ({ link, resource, description, title, isMobile }) => {
           height="100%"
         />
       </div>
-      {description && <h5>{description}</h5>}
+      {description && description !== "undefined" && <h5>{description}</h5>}
     </div>
   );
 };

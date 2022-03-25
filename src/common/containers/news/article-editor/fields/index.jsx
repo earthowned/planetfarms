@@ -118,7 +118,7 @@ export const VideoFieldBlock = ({ name, onRemove }) => {
       {videoUrl && (
         <TextAreaField
           minHeight="96px"
-          name={`${name}.description`}
+          name={`${name}.videoDescription`}
           placeholder="Description (optional)"
         />
       )}

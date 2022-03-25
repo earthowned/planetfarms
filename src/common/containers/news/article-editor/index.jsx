@@ -23,7 +23,7 @@ import {
 
 import "./styles.scss";
 
-export const ArticleEditor = ({ article, onSubmit, onPreview, type }) => {
+export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
   const alert = useAlert();
   const [communities, setCommunities] = useState([]);
 

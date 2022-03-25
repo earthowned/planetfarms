@@ -1,5 +1,9 @@
 import { NewsContentType } from "constants/enums";
-import { parseArticleImage, parseArticleVideo } from "utils/parsers/news";
+import {
+  parseArticleImage,
+  parseArticleVideo,
+  parseCoverImage,
+} from "utils/parsers/news";
 
 import { model, readTimeOptions, categoryOptions } from "./config";
 
@@ -19,6 +23,8 @@ export const getInitialValues = (article) => {
     if (article.title) {
       initialValues[title.name] = article.title || "";
     }
+
+    initialValues[model.coverImage.name] = parseCoverImage(article);
 
     if (article.category) {
       initialValues[category.name] =
