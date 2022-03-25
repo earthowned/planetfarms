@@ -16,7 +16,7 @@ export const CreateArticlePage = () => {
 
   const user = useSelector((state) => state.userLogin);
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async ({ values }) => {
     try {
       const response = await actions.news.create({
         userId: user.userInfo.id,

@@ -44,6 +44,7 @@ export const ArticlePage = () => {
   const handleMoreOptionSelect = (option) => {
     switch (option.label) {
       case MoreActionType.Edit:
+        history.push(`/news/edit/${id}`);
         break;
 
       case MoreActionType.Delete:

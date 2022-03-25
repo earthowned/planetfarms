@@ -7,6 +7,8 @@ import { TextAreaField } from "common/text-area";
 import { IconButton } from "common/buttons/icon-button";
 import { DragDropZoneField } from "common/drag-drop-zone";
 
+import { isFileInstanse } from "utils/parsers/file";
+
 import "./styles.scss";
 
 const FieldBlock = ({ title, onRemove, children }) => {
@@ -58,9 +60,17 @@ export const VideoFieldBlock = ({ name, onRemove }) => {
   const { videoFile, videoLink } = field?.value || {};
 
   const videoUrl = useMemo(() => {
-    if (videoLink) return videoLink;
-    if (videoFile) return URL.createObjectURL(videoFile);
-    return undefined;
+    if (videoFile) {
+      return isFileInstanse(videoFile)
+        ? URL.createObjectURL(videoFile)
+        : videoFile;
+    }
+
+    if (videoLink) {
+      return videoLink;
+    }
+
+    return null;
   }, [videoFile, videoLink]);
 
   const isFileVisible = useMemo(() => {

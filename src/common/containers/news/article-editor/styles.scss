@@ -35,6 +35,13 @@
     }
   }
 
+  .news-actions-container {
+    gap: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   @include breakpoint("tablet", "max") {
     flex-direction: column;
 

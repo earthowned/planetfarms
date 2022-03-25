@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import cx from "classnames";
 
 import { Icon } from "common/icon";
-
 import { DeviceType } from "constants/enums";
+import { isFileInstanse } from "utils/parsers/file";
 
 import "./styles.scss";
 
@@ -17,10 +17,7 @@ export const Dropzone = ({
   mobilePlaceholder,
   withError = false,
 }) => {
-  const isMobile = useMemo(
-    () => device === DeviceType.Mobile || device === DeviceType.Tablet,
-    [device]
-  );
+  const isMobile = useMemo(() => device === DeviceType.Mobile, [device]);
 
   const containerClassName = useMemo(() => {
     const className = isMobile ? "mobile-drop-zone" : "desktop-drop-zone";
@@ -49,9 +46,11 @@ export const Dropzone = ({
       );
     }
 
+    const imageSrc = isFileInstanse(file) ? URL.createObjectURL(file) : file;
+
     return (
       <div className="image-container">
-        <img src={URL.createObjectURL(file)} alt="" />
+        <img alt="" src={imageSrc} />
       </div>
     );
   }, [file, isMobile, placeholder, mobilePlaceholder, icon]);

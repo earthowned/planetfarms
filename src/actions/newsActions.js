@@ -1,6 +1,7 @@
 import { api } from "api";
 import { getErrorMessage } from "utils/error";
 import { parseArticleContent } from "utils/parsers/news";
+import { getActionLists, getPromises } from "utils/article";
 
 import {
   getApi,
@@ -195,10 +196,10 @@ export const create =
       const response = await api.news.create({
         title,
         readTime,
+        category,
         communityId,
         creator: userId,
         news: coverImage,
-        category: [category],
         richtextId: richtext.id,
       });
 
@@ -210,6 +211,45 @@ export const create =
       return Promise.reject(getErrorMessage(error));
     }
   };
+
+export const edit = async ({
+  title,
+  userId,
+  category,
+  readTime,
+  articleId,
+  oldContent,
+  newContent,
+  coverImage,
+  richTextId,
+  communityId,
+}) => {
+  try {
+    await api.news.edit({
+      title,
+      readTime,
+      category,
+      articleId,
+      communityId,
+      creator: userId,
+      news: coverImage,
+      richtextId: richTextId,
+    });
+
+    const { editList, deleteList, createList } = getActionLists(
+      oldContent,
+      newContent
+    );
+
+    await Promise.all(
+      getPromises({ editList, createList, deleteList, richTextId })
+    );
+
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
 
 export const get = async ({ id }) => {
   try {

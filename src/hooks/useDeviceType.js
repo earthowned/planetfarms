@@ -7,7 +7,7 @@ const getPortraitDeviceType = (width) => {
     case width <= DeviceMaxWidth.Mobile:
       return DeviceType.Mobile;
 
-    case width <= DeviceMaxWidth.Tablet:
+    case width > DeviceMaxWidth.Mobile && width <= DeviceMaxWidth.Tablet:
       return DeviceType.Tablet;
 
     case width <= DeviceMaxWidth.Laptop:

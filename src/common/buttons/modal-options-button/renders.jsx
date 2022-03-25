@@ -11,10 +11,9 @@ export const renderOptions = ({ options = [], onClick }) => {
   };
 
   return options.map((option, index) => (
-    <>
+    <div key={`${option.label}-${index.toString()}`}>
       <div
         onClick={() => onClick(option)}
-        key={`${option.label}-${index.toString()}`}
         className={getOptionClassName(option.variant)}
       >
         {option?.icon && <Icon icon={option.icon} />}
@@ -28,6 +27,6 @@ export const renderOptions = ({ options = [], onClick }) => {
           backgroundColor="rgba(238, 239, 239, 0.1)"
         />
       )}
-    </>
+    </div>
   ));
 };

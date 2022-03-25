@@ -6,6 +6,7 @@ import { CropperModal } from "common/modal-containers";
 import { IconButton } from "common/buttons/icon-button";
 
 import { useDeviceType } from "hooks";
+import { isFileInstanse } from "utils/parsers/file";
 
 import { Dropzone } from "./dropzone";
 import { ContentType, FileTypes, IconName, Placeholder } from "./config";
@@ -75,7 +76,7 @@ export const DragDropZone = ({
         visible={isCropVisible}
         onCrop={handleCroppedImage}
         onClose={() => setIsCropVisible(false)}
-        image={file ? URL.createObjectURL(file) : null}
+        image={file && isFileInstanse(file) ? URL.createObjectURL(file) : file}
       />
     </div>
   );
@@ -83,6 +84,7 @@ export const DragDropZone = ({
 
 export const DragDropZoneField = ({ name, ...props }) => {
   const [field, meta, helpers] = useField(name);
+
   return (
     <DragDropZone
       name={name}

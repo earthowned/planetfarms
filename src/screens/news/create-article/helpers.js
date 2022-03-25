@@ -24,7 +24,7 @@ const prepareNewsContent = (fields) => {
         return {
           videoTitle: data.videoTitle || "",
           videoDescription: data.videoDescription || "",
-          videoLink: data.videoLink,
+          videoLink: data.videoLink || "",
           videoResource: data.videoFile,
         };
       }
