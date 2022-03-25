@@ -187,30 +187,38 @@ export const newsUpdate =
     }
   };
 
-export const create =
-  ({ title, userId, content, category, readTime, coverImage, communityId }) =>
-  async (dispatch) => {
-    try {
-      const { richtext } = await api.richText.create();
+export const create = async ({
+  title,
+  userId,
+  content,
+  category,
+  readTime,
+  coverImage,
+  communityId,
+}) => {
+  try {
+    const { richtext } = await api.richText.create();
 
-      const response = await api.news.create({
-        title,
-        readTime,
-        category,
-        communityId,
-        creator: userId,
-        news: coverImage,
-        richtextId: richtext.id,
-      });
+    const response = await api.news.create({
+      title,
+      readTime,
+      category,
+      communityId,
+      creator: userId,
+      news: coverImage,
+      richtextId: richtext.id,
+    });
 
-      const { id: newsId } = response?.data?.data || {};
-      await createRichText(content, richtext.id, dispatch);
+    const { id: newsId } = response?.data?.data || {};
 
-      return Promise.resolve({ newsId });
-    } catch (error) {
-      return Promise.reject(getErrorMessage(error));
-    }
-  };
+    const { createList } = getActionLists([], content);
+    await Promise.all(getPromises({ createList, richTextId: richtext.id }));
+
+    return Promise.resolve({ newsId });
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
 
 export const edit = async ({
   title,
