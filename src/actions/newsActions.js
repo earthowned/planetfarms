@@ -262,12 +262,11 @@ export const edit = async ({
 export const get = async ({ id }) => {
   try {
     const { data: article } = await api.news.get({ id });
-
-    // TODO: Parse user info by id;
-    // const author = await api.user.get({ id: article.creator });
+    const author = await api.user.get({ id: article.creator });
 
     return Promise.resolve({
       ...article,
+      author: { ...author.data?.results },
       content: parseArticleContent(article),
     });
   } catch (error) {
