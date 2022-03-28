@@ -81,6 +81,7 @@ export const Routes = () => {
       <Route component={NewsListPage} exact path="/news" />
       <Route component={CreateArticlePage} exact path="/news/create" />
       <Route component={ArticlePage} exact path="/news/:id" />
+      <Route component={ArticlePage} exact path="/news/preview" />
       <Route component={EditArticlePage} exact path="/news/edit/:id" />
       {/* <Route component={CommunityPagenews} exact path="/news1" /> */}
 
