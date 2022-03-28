@@ -1,9 +1,10 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo, useCallback } from "react";
 import { useAlert } from "react-alert";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useLocation, useHistory } from "react-router-dom";
 
 import { actions } from "actions";
+import { useStateIfMounted } from "hooks";
 import { parsePreviewArticle } from "utils/parsers/news";
 import { selectPreviewedArticle } from "store/news/selectors";
 import { removePreviewedArticleThunk } from "store/news/thunks";
@@ -21,9 +22,9 @@ export const useArticle = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const [article, setArticle] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isPreviewMode, setIsPreviewMode] = useState(false);
+  const [article, setArticle] = useStateIfMounted(null);
+  const [isLoading, setIsLoading] = useStateIfMounted(false);
+  const [isPreviewMode, setIsPreviewMode] = useStateIfMounted(false);
 
   const currentUser = useSelector((state) => state.userLogin);
   const previewedArticle = useSelector(selectPreviewedArticle);
@@ -34,13 +35,16 @@ export const useArticle = () => {
     return ArticlePageType.View;
   }, [location.pathname]);
 
-  useEffect(() => {
-    if (location.pathname === "/news/preview") {
-      setIsPreviewMode(true);
-    }
-  }, [location.pathname]);
+  const dependencies = [
+    id,
+    location,
+    pageType,
+    currentUser,
+    isPreviewMode,
+    previewedArticle,
+  ];
 
-  useEffect(async () => {
+  const getArticle = useCallback(async () => {
     try {
       setIsLoading(true);
 
@@ -84,7 +88,22 @@ export const useArticle = () => {
       setIsLoading(false);
       alert.error(error);
     }
-  }, [id, location, previewedArticle, isPreviewMode, pageType, currentUser]);
+  }, [...dependencies]);
+
+  useEffect(() => {
+    if (location.pathname === "/news/preview") {
+      setIsPreviewMode(true);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    getArticle();
+
+    return () => {
+      abortController.abort();
+    };
+  }, []);
 
   return { article, isLoading, isPreviewMode };
 };

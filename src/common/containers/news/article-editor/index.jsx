@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import { useAlert } from "react-alert";
 import { Formik, Form, FieldArray } from "formik";
 
@@ -8,6 +8,7 @@ import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
 
 import { api } from "api";
+import { useStateIfMounted } from "hooks";
 import { getErrorMessage } from "utils/error";
 import { GET_NEWS } from "utils/urlConstants";
 import { NewsContentType } from "constants/enums";
@@ -26,7 +27,7 @@ import "./styles.scss";
 
 export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
   const alert = useAlert();
-  const [communities, setCommunities] = useState([]);
+  const [communities, setCommunities] = useStateIfMounted([]);
 
   useEffect(async () => {
     try {
