@@ -8,6 +8,8 @@ import { IconButton } from "common/buttons/icon-button";
 import { DragDropZoneField } from "common/drag-drop-zone";
 
 import { isFileInstanse } from "utils/parsers/file";
+import { parseArticleVideo } from "utils/parsers/news";
+import { GET_VIDEO, LESSON_IMG } from "utils/urlConstants";
 
 import "./styles.scss";
 
@@ -32,11 +34,14 @@ const FieldBlock = ({ title, onRemove, children }) => {
 export const TextFieldBlock = ({ name, onRemove }) => {
   return (
     <FieldBlock title="Text Field" onRemove={onRemove}>
-      <InputField placeholder="Heading (optional)" name={`${name}.title`} />
+      <InputField
+        name={`${name}.textHeading`}
+        placeholder="Heading (optional)"
+      />
       <TextAreaField
         minHeight="96px"
         placeholder="Text"
-        name={`${name}.text`}
+        name={`${name}.textDescription`}
       />
     </FieldBlock>
   );
@@ -45,10 +50,14 @@ export const TextFieldBlock = ({ name, onRemove }) => {
 export const ImageFieldBlock = ({ name, onRemove }) => {
   return (
     <FieldBlock title="Picture Field" onRemove={onRemove}>
-      <DragDropZoneField type="Image" name={`${name}.imageFile`} />
+      <DragDropZoneField
+        type="Image"
+        downloadUrl={LESSON_IMG}
+        name={`${name}.lessonImg`}
+      />
 
       <InputField
-        name={`${name}.imageDescription`}
+        name={`${name}.photoDescription`}
         placeholder="Image Desctiption (optional)"
       />
     </FieldBlock>
@@ -57,13 +66,13 @@ export const ImageFieldBlock = ({ name, onRemove }) => {
 
 export const VideoFieldBlock = ({ name, onRemove }) => {
   const [field] = useField(name);
-  const { videoFile, videoLink } = field?.value || {};
+  const { videoResource, videoLink } = field?.value || {};
 
   const videoUrl = useMemo(() => {
-    if (videoFile) {
-      return isFileInstanse(videoFile)
-        ? URL.createObjectURL(videoFile)
-        : videoFile;
+    if (videoResource) {
+      return isFileInstanse(videoResource)
+        ? URL.createObjectURL(videoResource)
+        : parseArticleVideo(videoResource);
     }
 
     if (videoLink) {
@@ -71,7 +80,7 @@ export const VideoFieldBlock = ({ name, onRemove }) => {
     }
 
     return null;
-  }, [videoFile, videoLink]);
+  }, [videoResource, videoLink]);
 
   const isFileVisible = useMemo(() => {
     if (videoUrl) return false;
@@ -80,9 +89,9 @@ export const VideoFieldBlock = ({ name, onRemove }) => {
   }, [videoLink, videoUrl]);
 
   const isLinkVisible = useMemo(() => {
-    if (videoFile) return false;
+    if (videoResource) return false;
     return true;
-  }, [videoFile]);
+  }, [videoResource]);
 
   return (
     <FieldBlock title="Video Field" onRemove={onRemove}>
@@ -99,7 +108,11 @@ export const VideoFieldBlock = ({ name, onRemove }) => {
       )}
 
       {isFileVisible && (
-        <DragDropZoneField type="Video" name={`${name}.videoFile`} />
+        <DragDropZoneField
+          type="Video"
+          downloadUrl={GET_VIDEO}
+          name={`${name}.videoResource`}
+        />
       )}
 
       {isLinkVisible && isFileVisible && <h4>or</h4>}

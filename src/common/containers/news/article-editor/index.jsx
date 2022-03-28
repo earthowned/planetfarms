@@ -9,6 +9,7 @@ import { ActionButton } from "common/buttons/action-button";
 
 import { api } from "api";
 import { getErrorMessage } from "utils/error";
+import { GET_NEWS } from "utils/urlConstants";
 import { NewsContentType } from "constants/enums";
 
 import { NewsActions } from "./actions";
@@ -72,6 +73,7 @@ export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
 
                 <DragDropZoneField
                   type="Image"
+                  downloadUrl={GET_NEWS}
                   name={model.coverImage.name}
                   mobilePlaceholder="Upload cover image"
                   placeholder="Drag & Drop cover image in this area or"

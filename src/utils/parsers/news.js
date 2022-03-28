@@ -1,13 +1,31 @@
 /* eslint-disable no-underscore-dangle */
 import { NewsContentType } from "constants/enums";
-import { GET_VIDEO, LESSON_IMG } from "utils/urlConstants";
-
-const filesUrl = process.env.REACT_APP_CDN_BASE_URL;
+import {
+  GET_NEWS,
+  GET_VIDEO,
+  LESSON_IMG,
+  ATTACHMENT,
+} from "utils/urlConstants";
 
 export const parseCoverImage = (news) => {
-  const attachment = news?._attachments;
+  const { _attachments: attachment, coverImage } = news ?? {};
+
+  if (attachment) {
+    if (attachment === ".webp") return null;
+    return `${GET_NEWS}${attachment}`;
+  }
+
+  if (coverImage) {
+    return `${GET_NEWS}${coverImage}`;
+  }
+
+  return null;
+};
+
+export const getAttachmentUrl = (article) => {
+  const attachment = article?._attachments;
   if (attachment === ".webp") return null;
-  return attachment ? `${filesUrl}/news/${attachment}` : null;
+  return attachment;
 };
 
 export const parseAuthor = (author) => {
@@ -18,7 +36,7 @@ export const parseAuthor = (author) => {
   };
 
   const parseUserAvatar = (attachment) => {
-    return attachment ? `${filesUrl}/attachments/${attachment}` : null;
+    return attachment ? `${ATTACHMENT}${attachment}` : null;
   };
 
   return {
@@ -66,4 +84,23 @@ export const parseArticleImage = (fileName) => {
 
 export const parseArticleVideo = (fileName) => {
   return `${GET_VIDEO}${fileName}`;
+};
+
+export const parsePreviewArticle = (article) => {
+  const data = {};
+
+  if (!article) return {};
+
+  data.title = article.title || "";
+  data.category = article.category?.label || "";
+  data.community = article.community?.label || "";
+  data.readTime = article.readTime?.label || "";
+  data.coverImage = article.coverImage || null;
+
+  data.content = article.newsContent?.map((item) => ({
+    ...item.data,
+    type: item.type,
+  }));
+
+  return data;
 };

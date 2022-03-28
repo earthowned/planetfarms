@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import ReactPlayer from "react-player";
 
 import { useDeviceType } from "hooks";
@@ -6,6 +6,7 @@ import { DeviceType, NewsContentType } from "constants/enums";
 import { parseArticleImage, parseArticleVideo } from "utils/parsers/news";
 
 import "./styles.scss";
+import { isFileInstanse } from "utils/parsers/file";
 
 const Title = ({ isMobile, title }) => {
   if (!title) return null;
@@ -20,11 +21,25 @@ const TextBlock = ({ title, text, isMobile }) => (
   </div>
 );
 
-const ImageBlock = ({ url, description }) => {
+const ImageBlock = ({ image, description }) => {
+  const getImageUrl = (src) => {
+    if (isFileInstanse(src)) return URL.createObjectURL(src);
+    return parseArticleImage(src);
+  };
+
+  useEffect(
+    () => () => {
+      if (isFileInstanse(image)) {
+        URL.revokeObjectURL(image);
+      }
+    },
+    [image]
+  );
+
   return (
     <div className="article-image-block">
       <div className="image-container">
-        <img src={url} alt="" />
+        <img src={getImageUrl(image)} alt="" />
       </div>
       {description && <h5>{description}</h5>}
     </div>
@@ -32,7 +47,23 @@ const ImageBlock = ({ url, description }) => {
 };
 
 const VideoBlock = ({ link, resource, description, title, isMobile }) => {
-  const url = resource ? parseArticleVideo(resource) : link;
+  const getUrl = (videoSrc, videoLink) => {
+    if (videoSrc) {
+      if (isFileInstanse(videoSrc)) return URL.createObjectURL(videoSrc);
+      return parseArticleVideo(videoSrc);
+    }
+    if (videoLink) return videoLink;
+    return null;
+  };
+
+  useEffect(
+    () => () => {
+      if (resource && isFileInstanse(resource)) {
+        URL.revokeObjectURL(resource);
+      }
+    },
+    [resource]
+  );
 
   return (
     <div className="article-video-block">
@@ -40,10 +71,10 @@ const VideoBlock = ({ link, resource, description, title, isMobile }) => {
       <div className="video-container">
         <ReactPlayer
           controls
-          url={url}
           width="100%"
           loop={false}
           height="100%"
+          url={getUrl(resource, link)}
         />
       </div>
       {description && description !== "undefined" && <h5>{description}</h5>}
@@ -64,7 +95,8 @@ export const ArticleContentList = ({ content = [] }) => {
             return (
               <ImageBlock
                 description={item?.photoDescription}
-                url={parseArticleImage(item?.lessonImg)}
+                // url={parseArticleImage(item?.lessonImg)}
+                image={item?.lessonImg}
                 key={`article-image-block-${index.toString()}`}
               />
             );

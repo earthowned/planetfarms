@@ -14,6 +14,7 @@ export const Dropzone = ({
   rootProps,
   inputProps,
   placeholder,
+  downloadUrl,
   mobilePlaceholder,
   withError = false,
 }) => {
@@ -46,11 +47,15 @@ export const Dropzone = ({
       );
     }
 
-    const imageSrc = isFileInstanse(file) ? URL.createObjectURL(file) : file;
+    const getImageSrc = () => {
+      if (isFileInstanse(file)) return URL.createObjectURL(file);
+      if (downloadUrl && file) return `${downloadUrl}${file}`;
+      return file;
+    };
 
     return (
       <div className="image-container">
-        <img alt="" src={imageSrc} />
+        <img alt="" src={getImageSrc()} />
       </div>
     );
   }, [file, isMobile, placeholder, mobilePlaceholder, icon]);

@@ -1,7 +1,7 @@
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { DashboardLayout } from "layout/dashboard";
 import { IconButton } from "common/buttons/icon-button";
@@ -11,10 +11,9 @@ import { ModalOptionsButton } from "common/buttons/modal-options-button";
 import { ArticleContentList } from "common/containers/news/article-content";
 
 import { actions } from "actions";
-import { useArticle } from "hooks/useArticle";
-import { parseCoverImage } from "utils/parsers/news";
-import newsPlaceholderImage from "assets/images/news-placeholder.png";
+import { useArticle } from "hooks/news/useArticle";
 
+import { getCoverImageUrl } from "./helpers";
 import { moreOptions, MoreActionType } from "./config";
 
 import "./styles.scss";
@@ -23,41 +22,14 @@ export const ArticlePage = () => {
   const alert = useAlert();
   const { id } = useParams();
   const history = useHistory();
-  // const location = useLocation();
-  // console.log(location);
-
-  // const previewedArticle = useSelector(selectPreviewedArticle);
-  // console.log("previewedArticle", previewedArticle);
-
-  const { article } = useArticle();
+  const { article, isPreviewMode } = useArticle();
 
   const currentUser = useSelector((state) => state.userLogin);
-
-  // const [article, setArticle] = useState(null);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-
-  // const isPreviewMode = useMemo(() => location.pathname === '/news/preview', [location]);
 
   const showEditButton = useMemo(() => {
     return currentUser?.userInfo?.id === article?.creator;
   }, [currentUser, article]);
-
-  // useEffect(async () => {
-  //   try {
-
-  //   } catch (error) {
-  //     alert.error()
-  //   }
-  // }, [isPreviewMode, previewedArticle, id])
-
-  // useEffect(async () => {
-  //   try {
-  //     const response = await actions.news.get({ id });
-  //     setArticle(response);
-  //   } catch (error) {
-  //     alert.error(error);
-  //   }
-  // }, [id]);
 
   const handleMoreOptionSelect = (option) => {
     switch (option.label) {
@@ -110,11 +82,9 @@ export const ArticlePage = () => {
 
           <div className="article-title-container">
             {article?.title && <h2>{article.title}</h2>}
+
             <div className="image-cover-container">
-              <img
-                alt=""
-                src={parseCoverImage(article) || newsPlaceholderImage}
-              />
+              <img alt="" src={getCoverImageUrl({ article, isPreviewMode })} />
             </div>
           </div>
         </div>

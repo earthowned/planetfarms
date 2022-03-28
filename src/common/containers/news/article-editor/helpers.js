@@ -1,10 +1,4 @@
-import { NewsContentType } from "constants/enums";
-import {
-  parseArticleImage,
-  parseArticleVideo,
-  parseCoverImage,
-} from "utils/parsers/news";
-
+import { getAttachmentUrl } from "utils/parsers/news";
 import { model, readTimeOptions, categoryOptions } from "./config";
 
 const { title, readTime, category, newsContent } = model;
@@ -20,11 +14,13 @@ export const getInitialValues = (article) => {
   };
 
   if (article) {
+    if (article.isFromPreview) return article;
+
     if (article.title) {
       initialValues[title.name] = article.title || "";
     }
 
-    initialValues[model.coverImage.name] = parseCoverImage(article);
+    initialValues[model.coverImage.name] = getAttachmentUrl(article);
 
     if (article.category) {
       initialValues[category.name] =
@@ -36,54 +32,17 @@ export const getInitialValues = (article) => {
         readTimeOptions.find((item) => item.label === article.readTime) || "";
     }
 
-    if (article.content.length > 0) {
-      initialValues[newsContent.name] = article.content.map((item) => {
-        switch (item.type) {
-          case NewsContentType.Text: {
-            const { type, textDescription, textHeading, ...rest } = item;
-            return {
-              type: item.type,
-              data: {
-                title: textHeading || "",
-                text: textDescription || "",
-                ...rest,
-              },
-            };
-          }
+    if (article.content && article.content.length > 0) {
+      initialValues[newsContent.name] = article.content.map(
+        ({ type, ...props }) => ({
+          type,
+          data: { ...props },
+        })
+      );
+    }
 
-          case NewsContentType.Image: {
-            return {
-              type: item.type,
-              data: {
-                imageDescription: item.photoDescription || "",
-                imageFile: item.lessonImg
-                  ? parseArticleImage(item.lessonImg)
-                  : "",
-                ...item,
-              },
-            };
-          }
-
-          case NewsContentType.Video: {
-            const { videoLink, videoResource } = item;
-
-            return {
-              type: item.type,
-              data: {
-                videoFile: videoResource
-                  ? parseArticleVideo(videoResource)
-                  : "",
-                videoLink:
-                  videoLink && videoLink !== "undefined" ? videoLink : "",
-                ...item,
-              },
-            };
-          }
-
-          default:
-            return null;
-        }
-      });
+    if (article.newsContent && article.newsContent > 0) {
+      initialValues[newsContent.name] = [...article.newsContent];
     }
 
     return initialValues;

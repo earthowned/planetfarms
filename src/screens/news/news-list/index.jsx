@@ -5,7 +5,7 @@ import { NewsGrid } from "common/containers/news";
 import { DashboardLayout } from "layout/dashboard";
 import { ActionButton } from "common/buttons/action-button";
 
-import { useFetchNews } from "hooks";
+import { useFetchNews } from "hooks/news/useFetchNews";
 
 import { Filters } from "./filters";
 import { FiltersModal } from "./filters-modal";
