@@ -72,9 +72,8 @@ export const ArticlePage = () => {
       <div className="article-page-container">
         <div className="header">
           <div className="user-info">
-            <NewsAuthorInfo
-              author={{ firstName: "Unknown", lastName: "User" }}
-            />
+            <NewsAuthorInfo author={article?.author} />
+
             {showEditButton && (
               <ModalOptionsButton
                 icon="more"
