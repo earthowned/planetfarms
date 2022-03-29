@@ -41,6 +41,7 @@ import CourseUsers from "../screens/courses/courseUsers/CourseUsers";
 import MyCoursePage from "../screens/dashboard/coursePage/CoursePage";
 import EditCollection from "../screens/courses/editCollection/EditCollection";
 import CourseCollection from "../screens/courses/courseCollection/CourseCollection";
+import { CoursesListPage } from "../screens/courses";
 
 // Messanger
 import Messenger from "../screens/messenger/Messenger";
@@ -114,7 +115,8 @@ export const Routes = () => {
       />
       <Route component={MyLibrary} path="/mylibrary" exact />
 
-      <Route component={Courses} exact path="/courses" />
+      <Route component={CoursesListPage} exact path="/courses" />
+      {/* <Route component={Courses} exact path="/courses" /> */}
       <Route component={CourseCollection} exact path="/courses/my-courses" />
       <Route
         component={CourseCollection}
