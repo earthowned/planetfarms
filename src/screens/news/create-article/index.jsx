@@ -8,11 +8,14 @@ import { ArticleEditor } from "common/containers/news";
 
 import { actions } from "actions";
 import { setPreviewedArticleThunk } from "store/news/thunks";
+import { useArticle } from "hooks/news/useArticle";
 
 export const CreateArticlePage = () => {
   const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const { article: previewedArticle } = useArticle();
 
   const user = useSelector((state) => state.userLogin);
 
@@ -43,6 +46,7 @@ export const CreateArticlePage = () => {
       <ArticleEditor
         onSubmit={handleSubmit}
         onPreview={handlePreview}
+        article={previewedArticle}
         type={ArticleEditorType.Create}
       />
     </DashboardLayout>
