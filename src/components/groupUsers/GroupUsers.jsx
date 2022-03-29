@@ -7,7 +7,10 @@ const GroupUsers = () => {
   return (
     <>
       {groupUsersData.map((user, index) => (
-        <div key={index.toString()} className="group-user-container">
+        <div
+          key={`group-users-data-${index.toString()}`}
+          className="group-user-container"
+        >
           <div>
             <div className="img-wrapper">
               <img src={user.image} alt="users" />

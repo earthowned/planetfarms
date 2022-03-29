@@ -36,7 +36,7 @@ function EnterprisesPage() {
           <div>
             {[...Array(3)].map((_, index) => (
               <CommunityGroupPost
-                key={index.toString()}
+                key={`community-group-post-${index.toString()}`}
                 title="Think like a farmer"
                 timestamps="November 18 at 05:45 AM"
                 content="Over the last ten years, the emphasis on reducing fuel emissions has been an agenda for many governments. In a bid to reduce their collective carbon footprint, many people have started looking for a way to control their impact on the environment. "

@@ -22,10 +22,10 @@ const CommunitiesCard = ({ data = [], editCard, deleteCard }) => {
             data.map((community, index) => {
               return (
                 <CommunityCard
-                  key={index.toString()}
-                  community={community}
                   editCard={editCard}
+                  community={community}
                   deleteCard={deleteCard}
+                  key={`communities-card-container-${index.toString()}`}
                 />
               );
             })}

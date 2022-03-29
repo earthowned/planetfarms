@@ -151,7 +151,7 @@ function Star({ num }) {
       {stars.map((item, index) => {
         return (
           <svg
-            key={index.toString()}
+            key={`course-page-star-${index.toString()}`}
             width="25"
             height="25"
             viewBox="0 0 22 21"

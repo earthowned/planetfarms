@@ -24,11 +24,11 @@ const CommunityGroupCard = ({
           data.map((item, index) => {
             return (
               <CommunityGroupSingleCard
-                key={index.toString()}
                 item={item}
                 type={type}
                 editCard={editCard}
                 deleteCard={deleteCard}
+                key={`community-group-single-card-${index.toString()}`}
               />
             );
           })}

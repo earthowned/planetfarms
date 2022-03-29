@@ -66,7 +66,10 @@ const CommunityGroupPost = ({ title, timestamps, content, postImage }) => {
           </div>
         </div>
         {[...Array(3)].map((_, index) => (
-          <div key={index.toString()} className="user-post-cmnt-1">
+          <div
+            className="user-post-cmnt-1"
+            key={`user-post-cmnt-${index.toString()}`}
+          >
             <div className="comment-details-container">
               <div className="user-cmnt-avatar" />
               <div className="cmnt-details">

@@ -39,7 +39,9 @@ const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
           <tr>
             {addSymbolNumber && <th>S.N.</th>}
             {header.map((propKey, index) => {
-              return <th key={index.toString()}>{propKey}</th>;
+              return (
+                <th key={`header-prop-key-${index.toString()}`}>{propKey}</th>
+              );
             })}
             {options.length && <th>Options</th>}
           </tr>
@@ -48,10 +50,14 @@ const Table = ({ addSymbolNumber, data = { tblData: [] }, options = [] }) => {
           {tblData.length &&
             tblData.map((item, index) => {
               return (
-                <tr key={index.toString()}>
+                <tr key={`table-tbl-tr-${index.toString()}`}>
                   {addSymbolNumber && <td>{index + 1}</td>}
                   {property.map((propkey, index) => {
-                    return <td key={index.toString()}>{item[propkey]}</td>;
+                    return (
+                      <td key={`table-tbl-td-${index.toString()}`}>
+                        {item[propkey]}
+                      </td>
+                    );
                   })}
                   {options.length && (
                     <td>

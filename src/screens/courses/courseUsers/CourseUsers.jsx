@@ -43,7 +43,12 @@ const CourseUserCard = ({ name }) => {
       <h4 className="courses-users-collection-header">{name}</h4>
       <CardLayout data={farming}>
         {farming.map((item, index) => {
-          return <BackgroundUserCard key={index.toString()} item={item} />;
+          return (
+            <BackgroundUserCard
+              item={item}
+              key={`background-user-card-${index.toString()}`}
+            />
+          );
         })}
       </CardLayout>
     </>

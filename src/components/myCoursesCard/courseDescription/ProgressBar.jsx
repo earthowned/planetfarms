@@ -27,7 +27,10 @@ const ProgressBar = ({ data = {}, isLoading, isEnroll }) => {
       {lessonData &&
         lessonData?.map((item, index) => {
           return (
-            <div className="lesson-progress-content" key={index.toString()}>
+            <div
+              className="lesson-progress-content"
+              key={`lesson-progress-content-${index.toString()}`}
+            >
               <div>
                 <div
                   className={

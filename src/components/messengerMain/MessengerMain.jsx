@@ -49,7 +49,7 @@ const MessengerMain = () => {
             {contacts.map((contact, index) => {
               return (
                 <MessageCard
-                  key={index.toString()}
+                  key={`message-card-${index.toString()}`}
                   contact={contact}
                   clickHandler={setActive}
                 />
@@ -61,7 +61,7 @@ const MessengerMain = () => {
             {contacts.map((contact, index) => {
               return (
                 <MessageCard
-                  key={index.toString()}
+                  key={`contact-message-card-${index.toString()}`}
                   contact={contact}
                   clickHandler={setActive}
                 />

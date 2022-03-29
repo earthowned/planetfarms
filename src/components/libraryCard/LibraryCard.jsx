@@ -7,7 +7,7 @@ const LibraryCard = ({ data }) => {
     <CardLayout data={data}>
       {data.map((item, index) => {
         return (
-          <div key={index.toString()}>
+          <div key={`library-card-data-${index.toString()}`}>
             <LibraryBackgroundCard item={item} />
           </div>
         );

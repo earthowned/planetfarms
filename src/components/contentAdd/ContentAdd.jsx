@@ -33,7 +33,7 @@ const ContentAdd = ({
     <>
       {data.length > 0 &&
         data.map((vid, index) => (
-          <div key={index.toString()}>
+          <div key={`communities-card-content-add-${index.toString()}`}>
             <Video
               title={vid.videoTitle}
               description={vid.videoDescription}

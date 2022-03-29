@@ -43,7 +43,12 @@ const MoreCourse = () => {
         <MoreCourseTitle />
         <div className="more-course-container">
           {moreCourseData.map((data, index) => {
-            return <MoreCourseItem key={index.toString()} data={data} />;
+            return (
+              <MoreCourseItem
+                data={data}
+                key={`more-course-item-${index.toString()}`}
+              />
+            );
           })}
         </div>
         {screenSize < 650 && (
