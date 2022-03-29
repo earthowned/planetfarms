@@ -13,6 +13,7 @@ const ArticlePageType = {
   Edit: "Edit",
   View: "View",
   Preview: "Preview",
+  Create: "Create",
 };
 
 export const useArticle = () => {
@@ -32,6 +33,7 @@ export const useArticle = () => {
   const pageType = useMemo(() => {
     if (location.pathname.includes("edit")) return ArticlePageType.Edit;
     if (location.pathname.includes("preview")) return ArticlePageType.Preview;
+    if (location.pathname.includes("create")) return ArticlePageType.Create;
     return ArticlePageType.View;
   }, [location.pathname]);
 
@@ -76,6 +78,15 @@ export const useArticle = () => {
 
         case ArticlePageType.Preview: {
           setArticle(parsePreviewArticle(previewedArticle));
+          break;
+        }
+
+        case ArticlePageType.Create: {
+          if (previewedArticle) {
+            setArticle({ ...previewedArticle, isFromPreview: true });
+            dispatch(removePreviewedArticleThunk());
+            return;
+          }
           break;
         }
 
