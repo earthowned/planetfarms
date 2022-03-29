@@ -3,18 +3,21 @@ import { model, readTimeOptions, categoryOptions } from "./config";
 
 const { title, readTime, category, newsContent } = model;
 
+const initialState = {
+  [model.title.name]: "",
+  [model.coverImage.name]: null,
+  [model.category.name]: null,
+  [model.readTime.name]: null,
+  [model.community.name]: null,
+  [model.newsContent.name]: [],
+};
+
 export const getInitialValues = (article) => {
-  const initialValues = {
-    [model.title.name]: "",
-    [model.coverImage.name]: null,
-    [model.category.name]: null,
-    [model.readTime.name]: null,
-    [model.community.name]: null,
-    [model.newsContent.name]: [],
-  };
+  let initialValues = { ...initialState };
 
   if (article) {
     if (article.isFromPreview) return article;
+    initialValues = { ...initialState, ...article };
 
     if (article.title) {
       initialValues[title.name] = article.title || "";

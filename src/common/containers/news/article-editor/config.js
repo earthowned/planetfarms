@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-import { NewsContentType } from "constants/enums";
+import { ArticleEditorType, NewsContentType } from "constants/enums";
 
 export const model = {
   title: { name: "title" },
@@ -88,3 +88,8 @@ export const readTimeOptions = [
   { value: "30min", label: "30 min" },
   { value: "moreAnHour", label: "> 1 hour" },
 ];
+
+export const ActionButtonTitle = {
+  [ArticleEditorType.Create]: "Add News",
+  [ArticleEditorType.Edit]: "Edit News",
+};

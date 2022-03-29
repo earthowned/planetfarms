@@ -11,5 +11,5 @@ export const getCoverImageUrl = ({ article, isPreviewMode }) => {
       : parseCoverImage(article);
   }
 
-  return newsPlaceholderImage;
+  return parseCoverImage(article) || newsPlaceholderImage;
 };

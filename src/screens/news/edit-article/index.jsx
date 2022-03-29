@@ -15,7 +15,7 @@ export const EditArticlePage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const { article, isLoading } = useArticle();
+  const { article } = useArticle();
   const currentUser = useSelector((state) => state.userLogin);
 
   const handleSubmit = async ({ initialValues, values }) => {
@@ -44,10 +44,6 @@ export const EditArticlePage = () => {
     setPreviewedArticleThunk({ article: privewArticle })(dispatch);
     history.push("/news/preview");
   };
-
-  if (isLoading) {
-    return null;
-  }
 
   return (
     <DashboardLayout title="Edit Article" withBackButton>

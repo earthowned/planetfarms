@@ -21,11 +21,12 @@ import {
   readTimeOptions,
   categoryOptions,
   validationSchema,
+  ActionButtonTitle,
 } from "./config";
 
 import "./styles.scss";
 
-export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
+export const ArticleEditor = ({ article, onSubmit, onPreview, type }) => {
   const alert = useAlert();
   const [communities, setCommunities] = useStateIfMounted([]);
 
@@ -162,8 +163,8 @@ export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
 
                   <ActionButton
                     type="submit"
-                    title="Add News"
                     variant="primary"
+                    title={ActionButtonTitle[type]}
                     disabled={values[model.newsContent.name].length === 0}
                   />
                 </div>
