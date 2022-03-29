@@ -1,77 +1,31 @@
-.notifications-list-container {
-  width: 100%;
-  padding-top: 24px;
-  display: flex;
-  flex-direction: column;
-
-  .notifications-list-header {
+.notifications-modal-container {
+  .nav-tabs-container {
     width: 100%;
-    height: 56px;
-    background-color: rgba(39, 51, 47, 0.5);
-
-    padding-top: 0px;
-    padding-bottom: 0px;
     padding-left: Max(24px, env(safe-area-inset-left));
-    padding-right: Max(24px, env(safe-area-inset-right));
-
-    display: flex;
-    align-items: center;
-
-    h5 {
-      color: #676969;
-    }
   }
-}
 
-.notification-list-item-container {
-  width: 100%;
-
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: Max(24px, env(safe-area-inset-left));
-  padding-right: Max(24px, env(safe-area-inset-right));
-
-  cursor: pointer;
-  user-select: none;
-
-  display: flex;
-  flex-direction: column;
-
-  .main-container {
+  .notifications-list-container {
     width: 100%;
-    padding: 16px 0px;
-    gap: 16px;
+    padding-top: 24px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
-    .avatar-container {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-    }
-
-    .data-container {
+    .notifications-list-header {
       width: 100%;
-      display: flex;
-      flex-direction: column;
+      height: 56px;
+      background-color: rgba(39, 51, 47, 0.5);
 
-      .date-text {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: Max(24px, env(safe-area-inset-left));
+      padding-right: Max(24px, env(safe-area-inset-right));
+
+      display: flex;
+      align-items: center;
+
+      h5 {
         color: #676969;
       }
     }
-  }
-
-  .divider {
-    width: 100%;
-    height: 1px;
-    border-radius: 1px;
-    background-color: #676969;
-
-    margin-top: auto;
-    justify-self: flex-end;
-  }
-
-  &:hover {
-    background-color: #27332f;
   }
 }

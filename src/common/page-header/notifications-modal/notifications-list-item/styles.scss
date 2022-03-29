@@ -1,0 +1,52 @@
+.notification-list-item-container {
+  width: 100%;
+
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: Max(24px, env(safe-area-inset-left));
+  padding-right: Max(24px, env(safe-area-inset-right));
+
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  flex-direction: column;
+
+  .main-container {
+    width: 100%;
+    padding: 16px 0px;
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+
+    .avatar-container {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .data-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .date-text {
+        color: #676969;
+      }
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    border-radius: 1px;
+    background-color: #676969;
+
+    margin-top: auto;
+    justify-self: flex-end;
+  }
+
+  &:hover {
+    background-color: #27332f;
+  }
+}

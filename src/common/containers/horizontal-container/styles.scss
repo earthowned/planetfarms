@@ -1,0 +1,34 @@
+@import "src/scss/mixins";
+
+.horizontal-page-block-container {
+  width: 100%;
+
+  gap: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .left-block-container {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  .right-block-container {
+    width: 248px;
+    flex-shrink: 0;
+  }
+
+  @include breakpoint("tablet", "max") {
+    flex-direction: column;
+    justify-content: unset;
+
+    .left-block-container {
+      width: 100%;
+    }
+
+    .right-block-container {
+      width: 100%;
+    }
+  }
+}

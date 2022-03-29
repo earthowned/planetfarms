@@ -1,25 +1,2 @@
-@import "src/scss/mixins";
-@import "src/scss/variables";
 
-.news-page-header {
-  width: 100%;
 
-  gap: 24px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  .action-btn {
-    width: 152px;
-    flex-shrink: 0;
-  }
-
-  @include breakpoint("tablet", "max") {
-    flex-direction: column;
-
-    .action-btn {
-      width: 100%;
-    }
-  }
-}

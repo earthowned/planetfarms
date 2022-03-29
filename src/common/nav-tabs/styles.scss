@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
 
-  padding-left: Max(24px, env(safe-area-inset-left));
+  // padding-left: Max(24px, env(safe-area-inset-left));
   padding-right: Max(24px, env(safe-area-inset-right));
 
   .tabs-container {
