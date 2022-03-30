@@ -42,6 +42,8 @@ import { ReactComponent as LinkIcon } from "assets/icons/link.svg";
 import { ReactComponent as FacebookOutlineIcon } from "assets/icons/facebook-outline.svg";
 import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
 import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
+import { ReactComponent as StarOutlineIcon } from "assets/icons/star-outline.svg";
+import { ReactComponent as StarIcon } from "assets/icons/star.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -149,6 +151,12 @@ const getIcon = (iconName) => {
 
     case "search":
       return <SearchIcon />;
+
+    case "star":
+      return <StarIcon />;
+
+    case "star-outline":
+      return <StarOutlineIcon />;
 
     case "youtube":
       return <VideoIcon />;

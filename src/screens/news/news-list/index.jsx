@@ -11,8 +11,6 @@ import { useFetchNews } from "hooks/news/useFetchNews";
 import { Filters } from "./filters";
 import { FiltersModal } from "./filters-modal";
 
-import "./styles.scss";
-
 export const NewsListPage = () => {
   const history = useHistory();
 
