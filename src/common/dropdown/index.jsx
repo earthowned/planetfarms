@@ -12,7 +12,7 @@ const Option = ({ children, ...props }) => {
   return (
     <components.Option {...props}>
       <div className="react-select-option-container">{children}</div>
-      <Divider backgroundColor="#58BD88" withGradient />
+      <Divider backgroundColor="#58BD88" withRightGradient />
     </components.Option>
   );
 };

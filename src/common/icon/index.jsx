@@ -37,6 +37,11 @@ import { ReactComponent as PlusIcon } from "assets/icons/plus.svg";
 import { ReactComponent as FileIcon } from "assets/icons/file.svg";
 import { ReactComponent as CameraIcon } from "assets/icons/camera.svg";
 import { ReactComponent as VideoIcon } from "assets/icons/video.svg";
+import { ReactComponent as MoreIcon } from "assets/icons/more.svg";
+import { ReactComponent as LinkIcon } from "assets/icons/link.svg";
+import { ReactComponent as FacebookOutlineIcon } from "assets/icons/facebook-outline.svg";
+import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
+import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -73,6 +78,9 @@ const getIcon = (iconName) => {
     case "chevrons-right":
       return <ChevronsRightIcon />;
 
+    case "edit":
+      return <EditIcon />;
+
     case "email":
       return <EmailIcon />;
 
@@ -93,6 +101,9 @@ const getIcon = (iconName) => {
 
     case "facebook":
       return <FacebookIcon />;
+
+    case "facebook-outline":
+      return <FacebookOutlineIcon />;
 
     case "file":
       return <FileIcon />;
@@ -121,8 +132,17 @@ const getIcon = (iconName) => {
     case "logout":
       return <LogoutIcon />;
 
+    case "link":
+      return <LinkIcon />;
+
+    case "more":
+      return <MoreIcon />;
+
     case "trash":
       return <TrashIcon />;
+
+    case "twitter":
+      return <TwitterIcon />;
 
     case "users":
       return <UsersIcon />;

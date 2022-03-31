@@ -34,9 +34,7 @@
   &-primary {
     color: #141414;
     background-color: #58bd88;
-    svg {
-      @include setSvgColor(#141414);
-    }
+    @include setSvgColor(#141414);
 
     &:hover:enabled {
       background-color: #009466;
@@ -50,9 +48,7 @@
   &-secondary {
     color: #eeefef;
     background-color: rgba(238, 239, 239, 0.1);
-    svg {
-      @include setSvgColor(#eeefef);
-    }
+    @include setSvgColor(#eeefef);
 
     &:hover:enabled {
       background-color: rgba(202, 220, 214, 0.2);
@@ -79,44 +75,32 @@
   &-transparent-red {
     color: #da3443;
     background-color: transparent;
-    svg {
-      @include setSvgColor(#da3443);
-    }
+    @include setSvgColor(#da3443);
 
     &:hover:enabled {
       color: #df535e;
-      svg {
-        @include setSvgColor(#df535e);
-      }
+      @include setSvgColor(#df535e);
     }
 
     &:active:enabled {
       color: #ac202b;
-      svg {
-        @include setSvgColor(#ac202b);
-      }
+      @include setSvgColor(#ac202b);
     }
   }
 
   &-transparent-white {
     color: #f8ebdf;
     background-color: transparent;
-    svg {
-      @include setSvgColor(#f8ebdf);
-    }
+    @include setSvgColor(#f8ebdf);
 
     &:hover:enabled {
       color: #8a8a8a;
-      svg {
-        @include setSvgColor(#8a8a8a);
-      }
+      @include setSvgColor(#8a8a8a);
     }
 
     &:active:enabled {
       color: #3a3939;
-      svg {
-        @include setSvgColor(#3a3939);
-      }
+      @include setSvgColor(#3a3939);
     }
   }
 
@@ -138,10 +122,10 @@
     border: none;
     color: #eeefef;
     background-color: transparent;
+    @include setSvgColor(#00c688);
 
     svg {
       flex-shrink: 0;
-      @include setSvgColor(#00c688);
     }
 
     .btn-title {
@@ -153,15 +137,11 @@
     }
 
     &:hover:enabled {
-      svg {
-        @include setSvgColor(#02f2a7);
-      }
+      @include setSvgColor(#02f2a7);
     }
 
     &:active:enabled {
-      svg {
-        @include setSvgColor(#05a875);
-      }
+      @include setSvgColor(#05a875);
     }
   }
 }

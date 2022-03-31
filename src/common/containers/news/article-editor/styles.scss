@@ -1,7 +1,7 @@
 @import "src/scss/mixins";
 @import "src/scss/variables";
 
-.create-news-page-container {
+.article-editor-container {
   width: 100%;
 
   gap: 40px;
@@ -33,6 +33,13 @@
       flex-direction: row;
       justify-content: space-between;
     }
+  }
+
+  .news-actions-container {
+    gap: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 
   @include breakpoint("tablet", "max") {

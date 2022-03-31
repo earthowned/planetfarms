@@ -16,25 +16,18 @@
   color: #eeefef;
   font: 16px/24px $font-semi-bold;
 
+  @include setSvgColor(#eeefef);
   @include transition(gap, 0.2s, ease-in-out);
-
-  svg {
-    @include setSvgColor(#eeefef);
-  }
 
   &:hover:enabled {
     gap: 10px;
     color: #cadcd6;
-    svg {
-      @include setSvgColor(#cadcd6);
-    }
+    @include setSvgColor(#cadcd6);
   }
 
   &:active:enabled {
     color: #9bb0a9;
-    svg {
-      @include setSvgColor(#9bb0a9);
-    }
+    @include setSvgColor(#9bb0a9);
   }
 
   @include breakpoint("tablet", "max") {

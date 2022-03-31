@@ -1,2 +1,4 @@
+export { ArticlePage } from "./article";
 export { NewsListPage } from "./news-list";
-export { CreateNewsPage } from "./create-news";
+export { EditArticlePage } from "./edit-article";
+export { CreateArticlePage } from "./create-article";

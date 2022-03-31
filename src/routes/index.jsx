@@ -5,10 +5,15 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 // News
-import { NewsListPage, CreateNewsPage } from "screens/news";
+import {
+  ArticlePage,
+  NewsListPage,
+  EditArticlePage,
+  CreateArticlePage,
+} from "screens/news";
 import NewsAdd from "../screens/communityNews/newsAdd/NewsAdd";
-import CommunityPagenews from "../screens/communityNews/CommunityNews";
-import CommunityNewsViewPage from "../screens/communityNewsView/CommunityNewsView";
+// import CommunityPagenews from "../screens/communityNews/CommunityNews";
+// import CommunityNewsViewPage from "../screens/communityNewsView/CommunityNewsView";
 
 // Members
 import CommunityMembers from "../screens/communityMembers/CommunityMembers";
@@ -74,11 +79,14 @@ export const Routes = () => {
   return (
     <Switch>
       <Route component={NewsListPage} exact path="/news" />
-      <Route component={CommunityPagenews} exact path="/news1" />
-      <Route component={CreateNewsPage} exact path="/news/create" />
+      <Route component={CreateArticlePage} exact path="/news/create" />
+      <Route component={ArticlePage} exact path="/news/:id" />
+      <Route component={EditArticlePage} exact path="/news/edit/:id" />
+      {/* <Route component={CommunityPagenews} exact path="/news1" /> */}
+
       <Route component={NewsAdd} path="/news/add" exact />
-      <Route component={NewsAdd} path="/news/edit/:id" exact />
-      <Route component={CommunityNewsViewPage} path="/news/:id" exact />
+      {/* <Route component={NewsAdd} path="/news/edit/:id" exact /> */}
+      {/* <Route component={CommunityNewsViewPage} path="/news/:id" exact /> */}
 
       <Route component={CommunityMembers} path="/members" exact />
       {/* <Route component={CommunityMembersProfile} path='/members/profile/:id' exact /> */}

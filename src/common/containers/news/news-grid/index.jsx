@@ -8,7 +8,7 @@ import { NewsItem } from "./news-item";
 
 import "./styles.scss";
 
-export const NewsListContainer = ({
+export const NewsGrid = ({
   list = [],
   onLoadMore,
   isLastPage,

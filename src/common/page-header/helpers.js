@@ -1,7 +1,9 @@
 import { DeviceType } from "constants/enums";
 
 const isTitleVisible = (withBackButton, device) =>
-  !withBackButton && device !== DeviceType.Mobile;
+  !withBackButton &&
+  device !== DeviceType.Mobile &&
+  device !== DeviceType.Tablet;
 
 const isLogoVisible = (withBackButton, isExpanded, device) => {
   switch (device) {

@@ -57,7 +57,7 @@ export const validationSchema = Yup.object().shape({
                 }),
                 videoLink: Yup.string().when("videoFile", (videoFile) => {
                   return videoFile
-                    ? Yup.string().url().optional()
+                    ? Yup.string().optional()
                     : Yup.string()
                         .url("URL is not valid")
                         .required("Provide Link or choose file from device");
@@ -71,15 +71,6 @@ export const validationSchema = Yup.object().shape({
     .min(1)
     .required(),
 });
-
-export const initialValues = {
-  [title.name]: "",
-  [coverImage.name]: null,
-  [category.name]: null,
-  [readTime.name]: null,
-  [community.name]: null,
-  [newsContent.name]: [],
-};
 
 export const categoryOptions = [
   { value: "farming", label: "Farming" },
