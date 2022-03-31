@@ -40,7 +40,11 @@
       backdrop-filter: blur(5px);
       background: rgba(20, 20, 20, 0.7);
 
-      padding: 16px;
+      padding-top: Max(16px, env(safe-area-inset-top));
+      padding-left: Max(16px, env(safe-area-inset-left));
+      padding-right: Max(16px, env(safe-area-inset-right));
+      padding-bottom: Max(16px, env(safe-area-inset-bottom));
+
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -48,9 +52,8 @@
 
     .list-container {
       width: 216px;
-      min-height: 300px;
 
-      overflow: hidden;
+      overflow: scroll;
       border-radius: 4px;
       background-color: #141414;
       border: 1px solid rgba(238, 239, 239, 0.1);
@@ -69,10 +72,18 @@
         flex-direction: column;
         justify-content: flex-end;
 
-        h5 {
+        .content-container {
+          gap: 8px;
+          display: flex;
+          flex-direction: row;
           justify-self: center;
           margin: auto 0 auto 16px;
-          @include setTextLines(1);
+
+          @include setSvgColor(#eeefef);
+
+          h5 {
+            @include setTextLines(1);
+          }
         }
 
         &:hover {
@@ -80,8 +91,11 @@
         }
 
         &-selected {
-          h5 {
-            color: #676969;
+          .content-container {
+            h5 {
+              color: #676969;
+            }
+            @include setSvgColor(#676969);
           }
         }
       }

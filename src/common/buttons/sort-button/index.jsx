@@ -92,7 +92,11 @@ export const SortButton = ({ options, selectedOption, onChange }) => {
                 className={getOptionClassName(option)}
                 key={`sort-button-option-${index.toString()}`}
               >
-                <h5>{option.label}</h5>
+                <div className="content-container">
+                  {option.icon && <Icon icon={option.icon} />}
+                  <h5>{option.label}</h5>
+                </div>
+
                 <Divider
                   withLeftGradient
                   withRightGradient

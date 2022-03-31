@@ -53,7 +53,7 @@ function App() {
                 component={AdditionalInfoPage}
               />
 
-              <PrivateRoute component={MainApp} />
+              <Route component={MainApp} />
             </Switch>
           </ScrollToTop>
         </Router>
