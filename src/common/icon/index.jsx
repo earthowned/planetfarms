@@ -12,6 +12,8 @@ import { ReactComponent as ChevronsRightIcon } from "assets/icons/chevrons/right
 // Chevron
 import { ReactComponent as ChevronLeftIcon } from "assets/icons/chevron/left.svg";
 import { ReactComponent as ChevronRightIcon } from "assets/icons/chevron/right.svg";
+import { ReactComponent as ChevronUpIcon } from "assets/icons/chevron/up.svg";
+import { ReactComponent as ChevronDownIcon } from "assets/icons/chevron/down.svg";
 
 import { ReactComponent as PersonIcon } from "assets/icons/person.svg";
 import { ReactComponent as EyeOpenIcon } from "assets/icons/eye-on.svg";
@@ -76,6 +78,12 @@ const getIcon = (iconName) => {
 
     case "chevron-right":
       return <ChevronRightIcon />;
+
+    case "chevron-down":
+      return <ChevronDownIcon />;
+
+    case "chevron-up":
+      return <ChevronUpIcon />;
 
     case "chevrons-right":
       return <ChevronsRightIcon />;

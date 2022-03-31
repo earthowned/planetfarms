@@ -1,14 +1,9 @@
 import { Avatar } from "common/avatar";
-
 import { StarsRating } from "common/stars-rating";
 
-import "./styles.scss";
+import { CourseListType } from "constants/enums";
 
-export const CourseItemType = {
-  My: "My",
-  All: "All",
-  Paid: "Paid",
-};
+import "./styles.scss";
 
 export const CoursesListItem = ({
   title,
@@ -23,19 +18,19 @@ export const CoursesListItem = ({
   //   category,
 }) => {
   const priceComponent = () => {
-    if (variant !== CourseItemType.All) return null;
+    if (variant !== CourseListType.All) return null;
     const coursePrice = price ? Number(price) / 100 : "0.00";
     return <h4 className="price">{`$${coursePrice}`}</h4>;
   };
 
   const progressComponent = () => {
-    if (variant !== CourseItemType.Paid) return null;
+    if (variant !== CourseListType.Paid) return null;
     const courseProgress = progress ? `${progress}%` : "0%";
     return <h4 className="price">{courseProgress}</h4>;
   };
 
   const membersComponent = () => {
-    if (variant !== CourseItemType.My) return null;
+    if (variant !== CourseListType.My) return null;
     const courseMembers = members ? `${members} students` : "0 students";
     return <h4 className="members">{courseMembers}</h4>;
   };

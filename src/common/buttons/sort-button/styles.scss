@@ -1,0 +1,90 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.sort-button-container {
+  position: relative;
+
+  .sort-button {
+    width: fit-content;
+    border: none;
+    cursor: pointer;
+
+    background-color: transparent;
+
+    color: #eeefef;
+    font: $font-body-bold;
+
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &:hover {
+      color: #cadcd6;
+      @include setSvgColor(#cadcd6);
+    }
+  }
+
+  .sort-modal-container {
+    left: 0;
+    top: 40px;
+    position: absolute;
+    background-color: transparent;
+
+    &-mobile {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: fixed;
+      backdrop-filter: blur(5px);
+      background: rgba(20, 20, 20, 0.7);
+
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .list-container {
+      width: 216px;
+      min-height: 300px;
+
+      overflow: hidden;
+      border-radius: 4px;
+      background-color: #141414;
+      border: 1px solid rgba(238, 239, 239, 0.1);
+
+      &-mobile {
+        width: 100%;
+      }
+
+      .option-container {
+        width: 100%;
+        height: 56px;
+        cursor: pointer;
+        overflow: hidden;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        h5 {
+          justify-self: center;
+          margin: auto 0 auto 16px;
+          @include setTextLines(1);
+        }
+
+        &:hover {
+          background-color: rgba(202, 220, 214, 0.2);
+        }
+
+        &-selected {
+          h5 {
+            color: #676969;
+          }
+        }
+      }
+    }
+  }
+}
