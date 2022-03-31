@@ -1,8 +1,10 @@
+import { SortOption } from "constants/enums";
+
 export const mockedAllCourses = [
   {
     id: 0,
-    title: "Fueling the ethanol industry",
-    price: 2599,
+    title: "A Fueling the ethanol industry",
+    price: 2333,
     description:
       "Sit ultrices et, arcu posuere dolor sollicitudin lorem sed. Nisi non felis, in sem quisque neque scelerisque.",
     avatar:
@@ -14,7 +16,7 @@ export const mockedAllCourses = [
   },
   {
     id: 1,
-    title: "Fueling the ethanol industry",
+    title: "B Fueling the ethanol industry",
     price: 2599,
     description:
       "Sit ultrices et, arcu posuere dolor sollicitudin lorem sed. Nisi non felis, in sem quisque neque scelerisque.",
@@ -26,8 +28,8 @@ export const mockedAllCourses = [
   },
   {
     id: 2,
-    title: "Fueling the ethanol industry",
-    price: 2599,
+    title: "C Fueling the ethanol industry",
+    price: 122,
     description:
       "Sit ultrices et, arcu posuere dolor sollicitudin lorem sed. Nisi non felis, in sem quisque neque scelerisque.",
     avatar: null,
@@ -64,7 +66,7 @@ export const mockedAllCourses = [
   {
     id: 5,
     title: "Fueling the ethanol industry",
-    price: 2599,
+    price: 3400,
     description:
       "Sit ultrices et, arcu posuere dolor sollicitudin lorem sed. Nisi non felis, in sem quisque neque scelerisque.",
     avatar:
@@ -76,7 +78,46 @@ export const mockedAllCourses = [
   },
 ];
 
+const sortCoursesBy = ({ list = [], sortType }) => {
+  return list.sort((a, b) => {
+    switch (sortType) {
+      case SortOption.Popular: {
+        return b.members - a.members;
+      }
+
+      case SortOption.Cheap: {
+        return a.price - b.price;
+      }
+
+      case SortOption.Expensive: {
+        return b.price - a.price;
+      }
+
+      case SortOption.RateDescending: {
+        return b.rating - a.rating;
+      }
+
+      case SortOption.RateAscending: {
+        return a.rating - b.rating;
+      }
+
+      case SortOption.AlphabetDescending: {
+        return a.title.localeCompare(b.title);
+      }
+
+      case SortOption.AlphabetAscending: {
+        return b.title.localeCompare(a.title);
+      }
+
+      default:
+        return a;
+    }
+  });
+};
+
 // export const useCoursesList = ({ sorting, type }) => {
-export const useCoursesList = () => {
-  return { courses: mockedAllCourses };
+export const useCoursesList = ({ sortType }) => {
+  return {
+    courses: sortCoursesBy({ list: mockedAllCourses, sortType }),
+  };
 };

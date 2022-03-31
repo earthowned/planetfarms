@@ -21,7 +21,7 @@ export const CoursesListPage = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const { courses } = useCoursesList({
-    sorting: sortBy.value,
+    sortType: sortBy.value,
     type: navigationTabs[selectedIndex].value,
   });
 
