@@ -16,6 +16,9 @@ import "./styles.scss";
 
 const options = createSortingOptions();
 
+// TODO: Implement Filter by Course Type (All, Paid, My) when BE will be ready;
+// TODO: Implement infinity scroll when BE will be ready;
+
 export const CoursesListPage = () => {
   const [sortBy, setSortBy] = useState(options[0]);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -35,7 +38,7 @@ export const CoursesListPage = () => {
             selectedIndex={selectedIndex}
           />
 
-          <ActionButton title="Add Course" variant="primary" />
+          <ActionButton icon="plus" title="Add Course" variant="primary" />
         </HorizontalContainer>
 
         <SortButton
