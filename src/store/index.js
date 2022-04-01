@@ -107,6 +107,7 @@ import {
 } from "reducers/categoryReducer";
 
 import { newsReducer } from "./news/slices";
+import { userReducer } from "./user/slices";
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -184,6 +185,7 @@ const reducer = combineReducers({
   addCategory: categoryCreateReducer,
 
   news: newsReducer,
+  user: userReducer,
 });
 
 const userInfoFromStorage = window.localStorage.getItem("userInfo")

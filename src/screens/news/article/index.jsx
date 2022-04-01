@@ -12,6 +12,7 @@ import { ArticleContentList } from "common/containers/news/article-content";
 
 import { actions } from "actions";
 import { useArticle } from "hooks/news/useArticle";
+import { selectCurrentUser } from "store/user/selectors";
 
 import { getCoverImageUrl } from "./helpers";
 import { moreOptions, MoreActionType } from "./config";
@@ -23,12 +24,13 @@ export const ArticlePage = () => {
   const { id } = useParams();
   const history = useHistory();
   const { article, isPreviewMode } = useArticle();
+  const currentUser = useSelector(selectCurrentUser);
 
-  const currentUser = useSelector((state) => state.userLogin);
+  // const currentUser = useSelector((state) => state.userLogin);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const showEditButton = useMemo(() => {
-    return currentUser?.userInfo?.id === article?.creator;
+    return currentUser?.userID === article?.creator;
   }, [currentUser, article]);
 
   const handleMoreOptionSelect = (option) => {
@@ -62,7 +64,9 @@ export const ArticlePage = () => {
       <div className="article-page-container">
         <div className="header">
           <div className="user-info">
-            <NewsAuthorInfo author={article?.author} />
+            <NewsAuthorInfo
+              author={isPreviewMode ? currentUser : article?.author}
+            />
 
             {showEditButton && (
               <ModalOptionsButton
