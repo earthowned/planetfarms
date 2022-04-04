@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const { sequelize } = require('../models')
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 const CircularJSON = require('circular-json')
@@ -10,12 +11,46 @@ const { paginatedResponse } = require('../utils/query')
 // @route   GET /api/courses?pageNumber=${pageNumber}&category=${category}&search=${search}
 // @access  Public
 const getCourses = async (req, res) => {
-  const { category, search, pageNumber = 1, pageSize = 6 } = req.query
-  const order = req.query.order || 'ASC'
+  const { filter = 'All', search, pageNumber = 1, pageSize = 6, sort = 'AlphabetAscending' } = req.query
+  hasPurchase = false
+  filterBy = {}
+  enrollQuery = sequelize.literal(`(SELECT COUNT("userId") FROM enrolls WHERE "courseId" = courses.id)`)
+  switch (filter) {
+    case 'My':
+      filterBy = { creator: { [Op.eq]: ''+req.user.userID+'' } }
+      break;
+    case 'Paid':
+      hasPurchase = true
+      break;
+  }
+  switch (sort) {
+    case 'Popular':
+      order = [enrollQuery, 'DESC']
+      break;
+    case 'Cheap':
+      order = ['price', 'ASC']
+      break;
+    case 'Expensive':
+      order = ['price', 'DESC']
+      break;
+    // case 'RateDescending':
+    //   order = ['rating', 'DESC']
+    //   break;
+    // case 'RateAscending':
+    //   order = ['rating', 'ASC']
+    //   break;
+    case 'AlphabetDescending':
+      order = ['title', 'DESC']
+      break;
+    case 'AlphabetAscending':
+      order = ['title', 'ASC']
+      break;
+  }
   const courses = await db.Courses.findAndCountAll({
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
-    order: [['title', order]],
+    order: [order],
+    attributes: ['id', 'title', 'description', 'creator', 'thumbnail', 'price', 'isFree', [enrollQuery, 'members']],
     include: [
       db.Lesson,
       db.Category,
@@ -28,16 +63,16 @@ const getCourses = async (req, res) => {
             [Op.eq]: req.user.id
           }
         },
-        required: false,
+        required: hasPurchase,
         attributes: [['id', 'userId']],
         through: {
-          attributes: ['isEnroll', 'courseId']
+          attributes: ['isEnroll']
         }
-      }
+      },
     ],
     where: {
       ...(search ? { title: { [Op.iLike]: '%' + search + '%' } } : {}),
-      ...(category ? { categoryId: Number(category) } : {})
+      ...filterBy
     },
     distinct: true
   })
