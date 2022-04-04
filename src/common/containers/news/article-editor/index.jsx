@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import { useAlert } from "react-alert";
 import { Formik, Form, FieldArray } from "formik";
 
@@ -8,7 +8,9 @@ import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
 
 import { api } from "api";
+import { useStateIfMounted } from "hooks";
 import { getErrorMessage } from "utils/error";
+import { GET_NEWS } from "utils/urlConstants";
 import { NewsContentType } from "constants/enums";
 
 import { NewsActions } from "./actions";
@@ -19,13 +21,14 @@ import {
   readTimeOptions,
   categoryOptions,
   validationSchema,
+  ActionButtonTitle,
 } from "./config";
 
 import "./styles.scss";
 
-export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
+export const ArticleEditor = ({ article, onSubmit, onPreview, type }) => {
   const alert = useAlert();
-  const [communities, setCommunities] = useState([]);
+  const [communities, setCommunities] = useStateIfMounted([]);
 
   useEffect(async () => {
     try {
@@ -40,7 +43,10 @@ export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
     }
   }, []);
 
-  const initialValues = useMemo(() => getInitialValues(article), [article]);
+  const initialValues = useMemo(
+    () => getInitialValues({ article, communities }),
+    [article, communities]
+  );
 
   const onPreviewClick = (values) => {
     onPreview(values);
@@ -72,6 +78,7 @@ export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
 
                 <DragDropZoneField
                   type="Image"
+                  downloadUrl={GET_NEWS}
                   name={model.coverImage.name}
                   mobilePlaceholder="Upload cover image"
                   placeholder="Drag & Drop cover image in this area or"
@@ -159,8 +166,8 @@ export const ArticleEditor = ({ article, onSubmit, onPreview }) => {
 
                   <ActionButton
                     type="submit"
-                    title="Add News"
                     variant="primary"
+                    title={ActionButtonTitle[type]}
                     disabled={values[model.newsContent.name].length === 0}
                   />
                 </div>

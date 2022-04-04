@@ -10,20 +10,19 @@ const needToUpdate = ({ oldItem, newItem }) => {
   switch (newItem.type) {
     case NewsContentType.Text: {
       return (
-        oldItem.data?.title !== newItem.data?.title ||
-        oldItem.data?.text !== newItem.data?.text
+        oldItem.data?.textHeading !== newItem.data?.textHeading ||
+        oldItem.data?.textDescription !== newItem.data?.textDescription
       );
     }
 
     case NewsContentType.Image: {
-      const { imageFile, imageDescription, photoDescription } =
-        newItem.data || {};
+      const { lessonImg, photoDescription } = newItem.data || {};
 
-      if (imageFile && isFileInstanse(imageFile)) {
+      if (lessonImg && isFileInstanse(lessonImg)) {
         return true;
       }
 
-      if (imageDescription !== photoDescription) {
+      if (photoDescription !== oldItem.data?.photoDescription) {
         return true;
       }
 
@@ -31,10 +30,10 @@ const needToUpdate = ({ oldItem, newItem }) => {
     }
 
     case NewsContentType.Video: {
-      const { videoFile, videoLink, videoTitle, videoDescription } =
+      const { videoResource, videoLink, videoTitle, videoDescription } =
         newItem.data || {};
 
-      if (videoFile && isFileInstanse(videoFile)) {
+      if (videoResource && isFileInstanse(videoResource)) {
         return true;
       }
 
@@ -101,28 +100,28 @@ export const getPromises = ({
 
   const createTextPayload = (data) => ({
     id: data.id,
-    text: data.text,
     order: data.order,
-    title: data.title,
+    title: data.textHeading,
+    text: data.textDescription,
     richTextId: data.richTextId,
   });
 
   const createImagePayload = (data) => ({
     id: data.id,
     order: data.order,
+    file: data.lessonImg,
     richTextId: data.richTextId,
-    description: data.imageDescription,
-    file: isFileInstanse(data.imageFile) ? data.imageFile : data.lessonImg,
+    description: data.photoDescription,
   });
 
   const createVideoPayload = (data) => ({
     id: data.id,
     order: data.order,
     link: data.videoLink,
+    file: data.videoResource,
     richTextId: data.richTextId,
     title: data.videoTitle || "",
     description: data.videoDescription || "",
-    file: isFileInstanse(data.videoFile) ? data.videoFile : data.videoResource,
   });
 
   const payload = {

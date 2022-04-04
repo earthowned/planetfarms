@@ -1,36 +1,23 @@
-import { useEffect, useState } from "react";
 import { useAlert } from "react-alert";
-import { useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import { DashboardLayout } from "layout/dashboard";
 import { ArticleEditorType } from "constants/enums";
 import { ArticleEditor } from "common/containers/news";
 
 import { actions } from "actions";
+import { useArticle } from "hooks/news/useArticle";
+import { selectCurrentUser } from "store/user/selectors";
+import { setPreviewedArticleThunk } from "store/news/thunks";
 
 export const EditArticlePage = () => {
   const alert = useAlert();
-  const { id } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
 
-  const [article, setArticle] = useState(undefined);
-  const currentUser = useSelector((state) => state.userLogin);
-
-  useEffect(async () => {
-    try {
-      const response = await actions.news.get({ id });
-
-      if (response.creator !== currentUser?.userInfo?.id) {
-        history.goBack();
-        return;
-      }
-
-      setArticle(response);
-    } catch (error) {
-      alert.error(error);
-    }
-  }, [id, currentUser]);
+  const { article } = useArticle();
 
   const handleSubmit = async ({ initialValues, values }) => {
     try {
@@ -42,7 +29,7 @@ export const EditArticlePage = () => {
         richTextId: article.richtextId,
         readTime: values.readTime.label,
         category: values.category.label,
-        userId: currentUser?.userInfo?.id,
+        userId: currentUser.userID,
         communityId: values.community?.value,
         oldContent: initialValues.newsContent,
       });
@@ -54,7 +41,12 @@ export const EditArticlePage = () => {
     }
   };
 
-  const handlePreview = () => {};
+  const handlePreview = (privewArticle) => {
+    setPreviewedArticleThunk({
+      article: privewArticle,
+    })(dispatch);
+    history.push("/news/preview");
+  };
 
   return (
     <DashboardLayout title="Edit Article" withBackButton>

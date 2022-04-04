@@ -60,3 +60,6 @@ export const MATERIAL = `${CDN_URL}/material/`;
 // members
 export const GET_MEMBERS = `${BASE_URL}communities-users/community/`;
 export const ATTACHMENT = `${CDN_URL}/attachments/`;
+
+// news
+export const GET_NEWS = `${CDN_URL}/news/`;

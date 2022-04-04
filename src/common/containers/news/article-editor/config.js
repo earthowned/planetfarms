@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-import { NewsContentType } from "constants/enums";
+import { ArticleEditorType, NewsContentType } from "constants/enums";
 
 export const model = {
   title: { name: "title" },
@@ -33,15 +33,15 @@ export const validationSchema = Yup.object().shape({
           .when("type", {
             is: NewsContentType.Text,
             then: Yup.object().shape({
-              title: Yup.string().optional(),
-              text: Yup.string().required(),
+              textHeading: Yup.string().optional(),
+              textDescription: Yup.string().required(),
             }),
           })
           .when("type", {
             is: NewsContentType.Image,
             then: Yup.object().shape({
-              imageFile: Yup.mixed().required(),
-              imageDescription: Yup.string().optional(),
+              lessonImg: Yup.mixed().required(),
+              photoDescription: Yup.string().optional(),
             }),
           })
           .when("type", {
@@ -50,12 +50,12 @@ export const validationSchema = Yup.object().shape({
               {
                 videoTitle: Yup.string().optional(),
                 videoDescription: Yup.string().optional(),
-                videoFile: Yup.mixed().when("videoLink", (videoLink) => {
+                videoResource: Yup.mixed().when("videoLink", (videoLink) => {
                   return videoLink
                     ? Yup.mixed().optional()
                     : Yup.mixed().required();
                 }),
-                videoLink: Yup.string().when("videoFile", (videoFile) => {
+                videoLink: Yup.string().when("videoResource", (videoFile) => {
                   return videoFile
                     ? Yup.string().optional()
                     : Yup.string()
@@ -63,7 +63,7 @@ export const validationSchema = Yup.object().shape({
                         .required("Provide Link or choose file from device");
                 }),
               },
-              ["videoFile", "videoLink"]
+              ["videoResource", "videoLink"]
             ),
           }),
       })
@@ -88,3 +88,8 @@ export const readTimeOptions = [
   { value: "30min", label: "30 min" },
   { value: "moreAnHour", label: "> 1 hour" },
 ];
+
+export const ActionButtonTitle = {
+  [ArticleEditorType.Create]: "Add News",
+  [ArticleEditorType.Edit]: "Edit News",
+};

@@ -18,6 +18,7 @@ export const DragDropZone = ({
   error,
   onChange,
   placeholder,
+  downloadUrl,
   mobilePlaceholder,
   type = ContentType.Image,
 }) => {
@@ -54,6 +55,7 @@ export const DragDropZone = ({
         device={device}
         withError={!!error}
         icon={IconName[type]}
+        downloadUrl={downloadUrl}
         rootProps={dropzone.getRootProps()}
         inputProps={dropzone.getInputProps()}
         placeholder={placeholder || Placeholder[device][type]}
