@@ -43,7 +43,10 @@ export const ArticleEditor = ({ article, onSubmit, onPreview, type }) => {
     }
   }, []);
 
-  const initialValues = useMemo(() => getInitialValues(article), [article]);
+  const initialValues = useMemo(
+    () => getInitialValues({ article, communities }),
+    [article, communities]
+  );
 
   const onPreviewClick = (values) => {
     onPreview(values);

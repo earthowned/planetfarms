@@ -1,7 +1,7 @@
 import { getAttachmentUrl } from "utils/parsers/news";
 import { model, readTimeOptions, categoryOptions } from "./config";
 
-const { title, readTime, category, newsContent } = model;
+const { title, readTime, category, newsContent, community } = model;
 
 const initialState = {
   [model.title.name]: "",
@@ -12,7 +12,7 @@ const initialState = {
   [model.newsContent.name]: [],
 };
 
-export const getInitialValues = (article) => {
+export const getInitialValues = ({ article, communities = [] }) => {
   let initialValues = { ...initialState };
 
   if (article) {
@@ -46,6 +46,15 @@ export const getInitialValues = (article) => {
 
     if (article.newsContent && article.newsContent > 0) {
       initialValues[newsContent.name] = [...article.newsContent];
+    }
+
+    if (communities.length > 0) {
+      const communityIndex = communities.findIndex(
+        (item) => item.value === article.communityId
+      );
+      if (communityIndex > -1) {
+        initialValues[community.name] = communities[communityIndex];
+      }
     }
 
     return initialValues;

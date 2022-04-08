@@ -7,16 +7,17 @@ import { ArticleEditorType } from "constants/enums";
 import { ArticleEditor } from "common/containers/news";
 
 import { actions } from "actions";
-import { setPreviewedArticleThunk } from "store/news/thunks";
 import { useArticle } from "hooks/news/useArticle";
+import { selectCurrentUser } from "store/user/selectors";
+import { setPreviewedArticleThunk } from "store/news/thunks";
 
 export const EditArticlePage = () => {
   const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
 
   const { article } = useArticle();
-  const currentUser = useSelector((state) => state.userLogin);
 
   const handleSubmit = async ({ initialValues, values }) => {
     try {
@@ -28,7 +29,7 @@ export const EditArticlePage = () => {
         richTextId: article.richtextId,
         readTime: values.readTime.label,
         category: values.category.label,
-        userId: currentUser?.userInfo?.id,
+        userId: currentUser.userID,
         communityId: values.community?.value,
         oldContent: initialValues.newsContent,
       });
@@ -41,7 +42,9 @@ export const EditArticlePage = () => {
   };
 
   const handlePreview = (privewArticle) => {
-    setPreviewedArticleThunk({ article: privewArticle })(dispatch);
+    setPreviewedArticleThunk({
+      article: privewArticle,
+    })(dispatch);
     history.push("/news/preview");
   };
 
