@@ -7,6 +7,7 @@ import { HorizontalContainer } from "common/containers";
 import { SortButton } from "common/buttons/sort-button";
 import { ActionButton } from "common/buttons/action-button";
 
+import { useLoadMore } from "hooks";
 import { useCoursesList } from "hooks/courses/useCoursesList";
 
 import { createSortingOptions } from "./helpers";
@@ -16,16 +17,20 @@ import "./styles.scss";
 
 const options = createSortingOptions();
 
-// TODO: Implement Filter by Course Type (All, Paid, My) when BE will be ready;
-// TODO: Implement infinity scroll when BE will be ready;
-
 export const CoursesListPage = () => {
   const [sortBy, setSortBy] = useState(options[0]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const { courses } = useCoursesList({
-    sortType: sortBy.value,
-    type: navigationTabs[selectedIndex].value,
+  const { courses, onLoadMore, isLastPage, isLoading } = useCoursesList({
+    withFakeData: true,
+    sort: sortBy.value,
+    filter: navigationTabs[selectedIndex].value,
+  });
+
+  const { setElementObserver } = useLoadMore({
+    isLoading,
+    onLoadMore,
+    isLastPage,
   });
 
   return (
@@ -48,7 +53,7 @@ export const CoursesListPage = () => {
         />
 
         <div className="courses-list-container">
-          {courses.map((item) => (
+          {courses.map((item, index) => (
             <CoursesListItem
               title={item.title}
               price={item.price}
@@ -61,6 +66,11 @@ export const CoursesListPage = () => {
               key={`courses-list-item-${item.id}`}
               variant={CourseListItemVariants[selectedIndex]}
               onClick={() => {}}
+              ref={
+                index === courses.length - 1
+                  ? (node) => setElementObserver(node)
+                  : null
+              }
             />
           ))}
         </div>

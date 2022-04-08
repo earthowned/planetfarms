@@ -6,6 +6,7 @@ import * as user from "./user";
 import * as profile from "./profile";
 import * as richText from "./richText";
 import * as community from "./community";
+import * as courses from "./courses";
 
 export const api = {
   apiInstance,
@@ -15,4 +16,5 @@ export const api = {
   profile,
   richText,
   community,
+  courses,
 };
