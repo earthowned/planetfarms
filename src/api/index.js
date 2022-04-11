@@ -16,5 +16,5 @@ export const api = {
   profile,
   richText,
   community,
-  courses,
+  courses
 };
