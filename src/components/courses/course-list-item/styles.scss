@@ -1,0 +1,79 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.courses-list-item-container {
+  width: 100%;
+  height: 112px;
+  cursor: pointer;
+
+  gap: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  .avatar-container {
+    width: 112px;
+    height: 112px;
+    border-radius: 112px;
+  }
+
+  .content-container {
+    flex-grow: 1;
+
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+
+    .top-container {
+      gap: 24px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      .course-title-text {
+        color: #eeefef;
+        font: $font-subtitle;
+        @include setTextLines(1);
+      }
+    }
+
+    .bottom-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .price {
+        color: #58bd88;
+      }
+
+      .members {
+        color: #676969;
+      }
+
+      .course-list-description {
+        max-width: 455px;
+        @include setTextLines(2);
+      }
+    }
+  }
+
+  @include breakpoint("mobile") {
+    height: 56px;
+
+    .avatar-container {
+      width: 56px;
+      height: 56px;
+    }
+
+    .content-container {
+      .top-container .course-title-text {
+        font: $font-body-bold;
+      }
+
+      .bottom-container .course-list-description {
+        display: none;
+      }
+    }
+  }
+}

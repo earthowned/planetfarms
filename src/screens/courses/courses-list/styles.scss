@@ -1,0 +1,19 @@
+@import "src/scss/mixins";
+
+.courses-list-page {
+  width: 100%;
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+
+  .courses-list-container {
+    width: 100%;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint("mobile") {
+      gap: 24px;
+    }
+  }
+}

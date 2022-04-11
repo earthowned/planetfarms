@@ -39,7 +39,7 @@ function CabinetUserInfo() {
             {windowWidth > 600 ? (
               <ul className="library-list-container">
                 {data.map((menu, index) => (
-                  <li key={index.toString()}>
+                  <li key={`cabinet-user-info-li-${index.toString()}`}>
                     <Link
                       className={`nav-link ${
                         pathname === menu.link

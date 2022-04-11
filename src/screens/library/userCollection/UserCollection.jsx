@@ -54,7 +54,12 @@ const UserCollection = () => {
 
         <CardLayout data={farming}>
           {farming.map((item, index) => {
-            return <UserCollectionCard key={index.toString()} item={item} />;
+            return (
+              <UserCollectionCard
+                item={item}
+                key={`user-collection-user-card-${index.toString()}`}
+              />
+            );
           })}
         </CardLayout>
       </DashboardLayout>

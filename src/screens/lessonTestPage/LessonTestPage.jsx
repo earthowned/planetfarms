@@ -110,7 +110,7 @@ const LessonTestPage = () => {
                         count={index + 1}
                         pos={index}
                         choices={choices}
-                        key={index.toString()}
+                        key={`subjective-question-${index.toString()}`}
                       />
                     );
                   }
@@ -120,7 +120,7 @@ const LessonTestPage = () => {
                       count={index + 1}
                       pos={index}
                       choices={choices}
-                      key={index.toString()}
+                      key={`mcq-test-question-${index.toString()}`}
                     />
                   );
                 })

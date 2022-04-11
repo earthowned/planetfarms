@@ -36,7 +36,10 @@ const EditCollection = () => {
       <BackButton location="/courses/my-courses" />
       <div className="edit-collection-container">
         {travelling.map((item, index) => (
-          <EditCollectionCard key={index.toString()} item={item} />
+          <EditCollectionCard
+            item={item}
+            key={`edit-collection-card-${index.toString()}`}
+          />
         ))}
       </div>
     </DashboardLayout>

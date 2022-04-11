@@ -52,7 +52,7 @@ const EditContent = ({
       {flattenData
         .sort((a, b) => a.order - b.order)
         .map((data, index) => (
-          <div key={index.toString()}>
+          <div key={`edit-content-${index.toString()}`}>
             <Text
               heading={data?.textHeading}
               desc={data?.textDescription}

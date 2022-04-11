@@ -52,7 +52,7 @@ export const SelectFields = React.forwardRef(
           onChange={onChange}
         >
           {option.map((x, i) => (
-            <React.Fragment key={i.toString()}>
+            <React.Fragment key={`form-ui-select-fields-${i.toString()}`}>
               {x === "Select Category" ? (
                 <option value="" disabled selected hidden>
                   Select Category

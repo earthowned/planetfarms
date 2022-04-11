@@ -12,6 +12,8 @@ import { ReactComponent as ChevronsRightIcon } from "assets/icons/chevrons/right
 // Chevron
 import { ReactComponent as ChevronLeftIcon } from "assets/icons/chevron/left.svg";
 import { ReactComponent as ChevronRightIcon } from "assets/icons/chevron/right.svg";
+import { ReactComponent as ChevronUpIcon } from "assets/icons/chevron/up.svg";
+import { ReactComponent as ChevronDownIcon } from "assets/icons/chevron/down.svg";
 
 import { ReactComponent as PersonIcon } from "assets/icons/person.svg";
 import { ReactComponent as EyeOpenIcon } from "assets/icons/eye-on.svg";
@@ -42,6 +44,8 @@ import { ReactComponent as LinkIcon } from "assets/icons/link.svg";
 import { ReactComponent as FacebookOutlineIcon } from "assets/icons/facebook-outline.svg";
 import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
 import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
+import { ReactComponent as StarOutlineIcon } from "assets/icons/star-outline.svg";
+import { ReactComponent as StarIcon } from "assets/icons/star.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -74,6 +78,12 @@ const getIcon = (iconName) => {
 
     case "chevron-right":
       return <ChevronRightIcon />;
+
+    case "chevron-down":
+      return <ChevronDownIcon />;
+
+    case "chevron-up":
+      return <ChevronUpIcon />;
 
     case "chevrons-right":
       return <ChevronsRightIcon />;
@@ -149,6 +159,12 @@ const getIcon = (iconName) => {
 
     case "search":
       return <SearchIcon />;
+
+    case "star":
+      return <StarIcon />;
+
+    case "star-outline":
+      return <StarOutlineIcon />;
 
     case "youtube":
       return <VideoIcon />;

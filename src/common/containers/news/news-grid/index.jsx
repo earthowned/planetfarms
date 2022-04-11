@@ -1,8 +1,9 @@
-import { useCallback, useRef, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
-import { useDeviceType } from "hooks";
-import { DeviceType } from "constants/enums";
 import { ComponentLoader } from "common/loader";
+
+import { DeviceType } from "constants/enums";
+import { useDeviceType, useLoadMore } from "hooks";
 
 import { NewsItem } from "./news-item";
 
@@ -15,8 +16,13 @@ export const NewsGrid = ({
   onNewsClick,
   isLoading = false,
 }) => {
-  const observer = useRef();
   const device = useDeviceType();
+
+  const { setElementObserver } = useLoadMore({
+    isLoading,
+    isLastPage,
+    onLoadMore,
+  });
 
   const getNewsItemVariant = useCallback(
     (index) => {
@@ -34,22 +40,6 @@ export const NewsGrid = ({
     [device]
   );
 
-  const lastElementObserver = useCallback(
-    (node) => {
-      if (isLoading) return;
-      if (observer.current) observer.current.disconnect();
-
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && !isLastPage) {
-          onLoadMore();
-        }
-      });
-
-      if (node) observer.current.observe(node);
-    },
-    [isLastPage, isLoading]
-  );
-
   const loaderWidth = useMemo(() => {
     if (device === DeviceType.Mobile) return "100%";
     return "50%";
@@ -60,7 +50,7 @@ export const NewsGrid = ({
       <div className="news-list-container">
         {list.map((item, index) => {
           const onSetObserver = (node) => {
-            if (index === list.length - 1) return lastElementObserver(node);
+            if (index === list.length - 1) return setElementObserver(node);
             return null;
           };
 

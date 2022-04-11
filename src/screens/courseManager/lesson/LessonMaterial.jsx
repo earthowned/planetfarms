@@ -29,7 +29,7 @@ const LessonMaterial = ({
           {materialList.map((mater, i) => {
             return (
               <Material
-                key={i.toString()}
+                key={`lesson-material-${i.toString()}`}
                 name={mater?.mData ? mater?.mData?.name : mater?.name}
               >
                 <a

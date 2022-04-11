@@ -43,7 +43,10 @@ const SavedCollection = () => {
       <DashboardLayout title="library">
         <SubHeader nav={nav} btnName="Add files" setCreateActive={setActive} />
         {["Farming", "Branding"].map((category, index) => (
-          <div key={index.toString()} className="library-collection">
+          <div
+            className="library-collection"
+            key={`saved-library-collection-${index.toString()}`}
+          >
             <h4>{category} Collections</h4>
             <LibraryCard data={library} />
           </div>

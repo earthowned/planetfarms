@@ -1,0 +1,21 @@
+.rating-container {
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &-mobile {
+    gap: 4px;
+  }
+
+  .rating-star-icon {
+    path {
+      fill: #676969;
+    }
+    &-filled {
+      path {
+        fill: #eaa533;
+      }
+    }
+  }
+}

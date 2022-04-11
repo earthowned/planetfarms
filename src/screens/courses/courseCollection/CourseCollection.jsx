@@ -68,7 +68,7 @@ const CourseUserCard = ({ name, data, btnName, subName }) => {
         {data.map((item, index) => {
           return (
             <BackgroundUserCard
-              key={index.toString()}
+              key={`course-collection-background-user-card-${index.toString()}`}
               item={item}
               btnName={btnName}
               subName={subName}

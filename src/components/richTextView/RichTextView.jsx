@@ -62,7 +62,7 @@ const RichTextView = ({ data, news }) => {
       {flattenData
         .sort((a, b) => a.order - b.order)
         .map((data, index) => (
-          <div key={index.toString()}>
+          <div key={`rich-text-view-data-container-${index.toString()}`}>
             <Text heading={data?.textHeading} desc={data?.textDescription} />
             <Video
               title={data?.videoTitle}

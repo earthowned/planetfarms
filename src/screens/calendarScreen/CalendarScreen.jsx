@@ -154,7 +154,10 @@ const CalendarHeader = ({ value, changeValue, showModal }) => {
         {windowWidth > 650 ? (
           <ul>
             {nav.map((item, index) => (
-              <NavItem key={index.toString()} item={item} />
+              <NavItem
+                item={item}
+                key={`calendar-nav-item-${index.toString()}`}
+              />
             ))}
           </ul>
         ) : (
@@ -202,7 +205,7 @@ const Calendar = ({ calendar, value, changeValue, events }) => {
           {week.map((day, index) => (
             <DayComponent
               day={day}
-              key={index.toString()}
+              key={`calendar-screen-day-component-${index.toString()}`}
               events={events}
               value={value}
               setValue={changeValue}

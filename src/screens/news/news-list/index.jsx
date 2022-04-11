@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { NewsGrid } from "common/containers/news";
 import { DashboardLayout } from "layout/dashboard";
+import { HorizontalContainer } from "common/containers";
 import { ActionButton } from "common/buttons/action-button";
 
 import { useFetchNews } from "hooks/news/useFetchNews";
@@ -31,7 +32,7 @@ export const NewsListPage = () => {
 
   return (
     <DashboardLayout title="News">
-      <div className="news-page-header">
+      <HorizontalContainer>
         <Filters
           filters={filters}
           onRemove={onFilterRemove}
@@ -44,7 +45,7 @@ export const NewsListPage = () => {
           variant="primary"
           onClick={() => history.push("/news/create")}
         />
-      </div>
+      </HorizontalContainer>
 
       <NewsGrid
         list={news}

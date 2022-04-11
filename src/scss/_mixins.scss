@@ -87,3 +87,10 @@
     @content;
   }
 }
+
+@mixin setTextLines($number: 1) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $number;
+  -webkit-box-orient: vertical;
+}
