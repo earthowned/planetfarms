@@ -1,0 +1,105 @@
+.desktop-drop-zone {
+  height: 280px;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+  background-color: rgba(20, 20, 20, 0.92);
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%23F8EBDFFF' stroke-width='2' stroke-dasharray='10%2c 16' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e");
+
+  &-with-error {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='red' stroke-width='2' stroke-dasharray='10%2c 16' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e");
+  }
+
+  .placeholders-container {
+    width: 164px;
+    height: 100%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h4 {
+      color: #58bd88;
+    }
+  }
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+    }
+  }
+}
+
+.mobile-drop-zone {
+  width: 100%;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: rgba(238, 239, 239, 0.1);
+
+  cursor: pointer;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+
+  .mobile-placeholders {
+    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-with-error {
+    .mobile-placeholders {
+      h4 {
+        color: #da3443;
+      }
+
+      svg {
+        path {
+          fill: #da3443;
+        }
+      }
+    }
+  }
+
+  &-with-file {
+    padding: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    .image-container {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+      }
+    }
+  }
+}

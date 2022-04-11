@@ -32,6 +32,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 0;
+  display: none;
 }
 
 .app-container {
@@ -41,6 +42,15 @@ html {
 
   display: flex;
   flex-direction: row;
+
+  background: -webkit-linear-gradient(
+    144.56deg,
+    rgba(20, 20, 20, 0.1) -1.06%,
+    rgba(88, 189, 136, 0.1) 26.79%,
+    rgba(218, 52, 67, 0.1) 60.6%,
+    rgba(234, 165, 51, 0.1) 93.24%,
+    rgba(20, 20, 20, 0.1) 122.75%
+  );
 }
 
 .main-app {
@@ -109,7 +119,7 @@ h5 {
 
 h6 {
   color: #eeefef;
-  font: 14px/24px $font-semi-bold;
+  font: 14px/24px $font-regular;
 }
 
 .h7 {
@@ -121,8 +131,16 @@ input,
 textarea {
   font-family: inherit;
 }
+
 a {
   font-family: inherit;
   text-decoration: none;
   color: inherit;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 3px;
+  background-color: #555656;
 }

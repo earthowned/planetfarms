@@ -2,56 +2,77 @@
 
 .main-page-header {
   width: 100%;
-  padding: 16px 40px;
-  background-color: transparent;
+  padding: 24px 40px;
 
   display: flex;
-  flex-wrap: wrap;
-  flex-shrink: 0;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
 
-  h3 {
+  .top-header-container {
+    display: flex;
     flex-shrink: 0;
-  }
-
-  .right-nav-container {
-    gap: 24px;
-
-    display: flex;
-    align-items: center;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 
-    .avatar-container {
-      width: 48px;
-      height: 48px;
+    background-color: transparent;
+
+    h2 {
+      flex-shrink: 0;
     }
 
-    .modal-btns-container {
+    .right-nav-container {
+      gap: 24px;
+      width: 100%;
+
       display: flex;
-      flex-direction: row;
       align-items: center;
-      gap: 32px;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      margin-left: auto;
+      justify-self: flex-end;
+
+      .avatar-container {
+        width: 48px;
+        height: 48px;
+      }
+
+      .modal-btns-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 32px;
+      }
     }
-  }
 
-  .settings-modal-header-container {
-    display: flex;
-    flex-direction: column;
+    .settings-modal-header-container {
+      display: flex;
+      flex-direction: column;
 
-    .action-btn {
-      justify-content: flex-start;
+      .action-btn {
+        justify-content: flex-start;
+      }
     }
   }
 
   @include breakpoint("tablet", "max") {
-    height: 72px;
-    padding: 0px 16px;
-    position: relative;
+    padding: 0;
 
-    .right-nav-container {
-      gap: 16px;
+    .top-header-container {
+      height: 72px;
+      padding: 0px 16px;
+      position: relative;
+      background-color: rgba(20, 20, 20, 0.2);
+
+      .right-nav-container {
+        gap: 16px;
+      }
+    }
+
+    .bottom-header-container {
+      padding: 24px 16px 0px 16px;
+      display: flex;
+      align-items: center;
     }
   }
 }

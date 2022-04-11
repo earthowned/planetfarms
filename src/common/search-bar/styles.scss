@@ -1,0 +1,61 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.search-bar-container {
+  width: 24px;
+  height: 56px;
+  padding: 0px 0px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: transparent;
+
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  transition: width 0.5s ease-in-out, border-color 1s linear, padding 1s linear;
+
+  input {
+    width: 0px;
+    height: 100%;
+
+    font: $font-body;
+    color: #eeefef;
+    background-color: transparent;
+
+    display: none;
+    border: none;
+    outline: none;
+    text-size-adjust: none;
+
+    :focus {
+      outline: none;
+    }
+  }
+
+  &-expanded {
+    width: 400px;
+    padding: 0px 16px;
+    border-color: #58bd88;
+    background-color: #27332f;
+    cursor: default;
+
+    input {
+      width: 100%;
+      display: flex;
+    }
+
+    .pf-icon-btn {
+      margin-left: auto;
+      justify-self: flex-end;
+    }
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    &-expanded {
+      width: 100%;
+    }
+  }
+}

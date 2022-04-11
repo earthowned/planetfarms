@@ -20,7 +20,7 @@ export const SettingsModal = ({
           variant="transparent-white"
         />
 
-        <Divider marginTop="12px" marginBottom="12px" />
+        <Divider style={{ marginTop: "12px", marginBottom: "12px" }} />
 
         <ActionButton
           icon="logout"

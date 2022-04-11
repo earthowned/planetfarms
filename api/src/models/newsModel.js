@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     readTime: {
-      type: DataTypes.DATE
+      type: DataTypes.STRING
     },
     language: {
       type: DataTypes.STRING
@@ -57,6 +57,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // association
   News.associate = (models) => {
+    News.belongsTo(models.User, { foreignKey: 'creator', targetKey: 'userID' })
     News.belongsTo(models.Community, { foreignKey: 'communityId' })
     News.belongsTo(models.RichText, { foreignKey: 'richtextId', constraints: true })
   }

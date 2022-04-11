@@ -33,6 +33,15 @@ import { ReactComponent as CropIcon } from "assets/icons/crop.svg";
 import { ReactComponent as CongratulationsIcon } from "assets/icons/congratulations.svg";
 import { ReactComponent as UsersIcon } from "assets/icons/users.svg";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
+import { ReactComponent as PlusIcon } from "assets/icons/plus.svg";
+import { ReactComponent as FileIcon } from "assets/icons/file.svg";
+import { ReactComponent as CameraIcon } from "assets/icons/camera.svg";
+import { ReactComponent as VideoIcon } from "assets/icons/video.svg";
+import { ReactComponent as MoreIcon } from "assets/icons/more.svg";
+import { ReactComponent as LinkIcon } from "assets/icons/link.svg";
+import { ReactComponent as FacebookOutlineIcon } from "assets/icons/facebook-outline.svg";
+import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
+import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -44,6 +53,9 @@ const getIcon = (iconName) => {
 
     case "calendar":
       return <CalendarIcon />;
+
+    case "camera":
+      return <CameraIcon />;
 
     case "congratulations":
       return <CongratulationsIcon />;
@@ -66,6 +78,9 @@ const getIcon = (iconName) => {
     case "chevrons-right":
       return <ChevronsRightIcon />;
 
+    case "edit":
+      return <EditIcon />;
+
     case "email":
       return <EmailIcon />;
 
@@ -87,8 +102,17 @@ const getIcon = (iconName) => {
     case "facebook":
       return <FacebookIcon />;
 
+    case "facebook-outline":
+      return <FacebookOutlineIcon />;
+
+    case "file":
+      return <FileIcon />;
+
     case "person":
       return <PersonIcon />;
+
+    case "plus":
+      return <PlusIcon />;
 
     case "eye-on":
       return <EyeOpenIcon />;
@@ -108,14 +132,26 @@ const getIcon = (iconName) => {
     case "logout":
       return <LogoutIcon />;
 
+    case "link":
+      return <LinkIcon />;
+
+    case "more":
+      return <MoreIcon />;
+
     case "trash":
       return <TrashIcon />;
+
+    case "twitter":
+      return <TwitterIcon />;
 
     case "users":
       return <UsersIcon />;
 
     case "search":
       return <SearchIcon />;
+
+    case "youtube":
+      return <VideoIcon />;
 
     default:
       return <GoogleIcon />;

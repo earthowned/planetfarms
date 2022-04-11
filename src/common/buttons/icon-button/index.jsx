@@ -7,6 +7,7 @@ import "./styles.scss";
 
 export const IconButton = ({
   icon,
+  title,
   onClick,
   disabled,
   className,
@@ -25,7 +26,10 @@ export const IconButton = ({
       disabled={disabled}
       className={buttonClassName}
     >
-      <Icon icon={icon} />
+      <div className="icon-container">
+        <Icon icon={icon} />
+      </div>
+      {title && title}
     </button>
   );
 };

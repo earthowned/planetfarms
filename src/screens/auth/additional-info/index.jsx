@@ -80,12 +80,7 @@ export const AdditionalInfoPage = () => {
           )}
 
           {step === AdditionalStep.Avatar && (
-            <div className="drag-and-drop-zone-container">
-              <DragDropZoneField
-                name={model.avatar.name}
-                placeholder={model.avatar.placeholder}
-              />
-            </div>
+            <DragDropZoneField type="Image" name={model.avatar.name} />
           )}
 
           <div className="row-container">

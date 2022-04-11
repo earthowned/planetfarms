@@ -19,9 +19,28 @@
     height: 100%;
     width: 100%;
     overflow-y: scroll;
+
+    .page-title-header {
+      width: 100%;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      padding: 0 40px;
+    }
   }
 
   .dashboard-page {
-    padding: 40px;
+    padding: 24px 40px 40px 40px;
+  }
+
+  @include breakpoint("tablet", "max") {
+    .dashboard-page-container {
+      .page-title-header {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+    .dashboard-page {
+      padding: 24px 16px;
+    }
   }
 }

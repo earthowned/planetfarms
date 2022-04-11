@@ -17,6 +17,10 @@
       @media (min-width: ($media-tablet-max-width + 1)) and (max-width: $media-laptop-max-width) {
         @content;
       }
+    } @else if $point = "desktop" {
+      @media (min-width: ($media-laptop-max-width + 1)) {
+        @content;
+      }
     }
   } @else if $sizeType == "max" {
     @if $point == "mobile" {
@@ -39,8 +43,10 @@
 }
 
 @mixin setSvgColor($color) {
-  path {
-    fill: $color;
+  svg {
+    path {
+      fill: $color;
+    }
   }
 }
 
@@ -49,6 +55,13 @@
   -o-transition: $property $time $easing;
   -moz-transition: $property $time $easing;
   -webkit-transition: $property $time $easing;
+}
+
+@mixin removeTransition() {
+  transition: none;
+  -o-transition: none;
+  -moz-transition: none;
+  -webkit-transition: none;
 }
 
 @mixin supports-safe-area-top {

@@ -1,0 +1,75 @@
+@import "src/scss/variables";
+
+.text-area-container {
+  width: 100%;
+  padding: 16px 16px 0 16px;
+  border-radius: 4px;
+
+  background-color: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(238, 239, 239, 0.1);
+
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    background-color: #1d2120;
+  }
+
+  &:focus-within {
+    border: 1px solid #58bd88;
+    background-color: #27332f;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 24px;
+    background-color: transparent;
+
+    resize: none;
+    border: none;
+    outline: none;
+
+    color: #eeefef;
+    font-weight: 400;
+    font: 16px/24px $font-regular;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  textarea::-webkit-input-placeholder {
+    color: #676969;
+  }
+
+  textarea:-moz-placeholder {
+    color: #676969;
+  }
+
+  textarea::-moz-placeholder {
+    color: #676969;
+  }
+
+  textarea:-ms-input-placeholder {
+    color: #676969;
+  }
+
+  textarea::placeholder {
+    color: #676969;
+  }
+
+  .characters-count-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    h6 {
+      color: #676969;
+    }
+  }
+
+  &-error {
+    border-color: #da3443;
+  }
+}

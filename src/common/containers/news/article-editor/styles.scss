@@ -1,0 +1,66 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.article-editor-container {
+  width: 100%;
+
+  gap: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: stretch;
+
+  .left-block {
+    flex: 2;
+    min-width: 344px;
+
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right-block {
+    flex: 1;
+    min-width: 400px;
+
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+
+    .form-actions-container {
+      gap: 24px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .news-actions-container {
+    gap: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  @include breakpoint("tablet", "max") {
+    flex-direction: column;
+
+    .left-block {
+      flex-grow: 1;
+      min-width: unset;
+    }
+
+    .right-block {
+      flex-grow: 1;
+      min-width: unset;
+
+      .form-actions-container {
+        flex-direction: column;
+      }
+    }
+  }
+
+  @include breakpoint("desktop") {
+    max-width: 1500px;
+  }
+}

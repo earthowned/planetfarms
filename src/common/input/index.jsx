@@ -10,7 +10,7 @@ import { FloatingPlaceholder } from "./placeholder";
 
 import "./styles.scss";
 
-const InputWithType = ({ type, onBlur, ...props }) => {
+const InputWithType = ({ type, onBlur, onFocus, ...props }) => {
   if (type === "date") {
     return <DateInput {...props} />;
   }
@@ -26,7 +26,7 @@ const InputWithType = ({ type, onBlur, ...props }) => {
     );
   }
 
-  return <input type={type} onBlur={onBlur} {...props} />;
+  return <input type={type} onFocus={onFocus} onBlur={onBlur} {...props} />;
 };
 
 export const Input = ({
@@ -34,6 +34,7 @@ export const Input = ({
   name,
   error,
   onBlur,
+  onFocus,
   onChange,
   value = "",
   placeholder,
@@ -68,6 +69,7 @@ export const Input = ({
             value={value}
             onBlur={onBlur}
             type={inputType}
+            onFocus={onFocus}
             onChange={(event) => onChange(event.target.value)}
           />
 

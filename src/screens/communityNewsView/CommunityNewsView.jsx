@@ -9,16 +9,16 @@ import RichTextView from "../../components/richTextView/RichTextView";
 
 function CommunityNewsViewPage() {
   const [news, setNews] = useState({});
-  const currentCommunity = localStorage.getItem("currentCommunity")
-    ? JSON.parse(localStorage.getItem("currentCommunity"))
-    : null;
+  // const currentCommunity = localStorage.getItem("currentCommunity")
+  //   ? JSON.parse(localStorage.getItem("currentCommunity"))
+  //   : null;
   const dispatch = useDispatch();
   const { id } = useParams();
 
   async function getSingleNews(newsId) {
     const { data } = await getApi(
       dispatch,
-      `${process.env.REACT_APP_API_BASE_URL}/api/news/${newsId}/community/${currentCommunity.id}`
+      `${process.env.REACT_APP_API_BASE_URL}/api/news/${newsId}`
     );
     setNews(data);
   }

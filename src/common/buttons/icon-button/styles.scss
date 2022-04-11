@@ -1,5 +1,11 @@
 @import "src/scss/mixins";
 
+@mixin flexCenter() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .pf-icon-btn {
   width: 24px;
   height: 24px;
@@ -11,9 +17,7 @@
   border-radius: 4px;
   background-color: transparent;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexCenter();
 
   user-select: none;
   -webkit-user-select: none; /* Safari */
@@ -22,79 +26,76 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   -moz-user-select: none; /* Old versions of Firefox */
 
-  svg {
-    width: 24px !important;
-    height: 24px !important;
+  .icon-container {
+    @include flexCenter();
+
+    svg {
+      width: 24px !important;
+      height: 24px !important;
+    }
+  }
+
+  &-secondary {
+    background-color: rgba(238, 239, 239, 0.1);
+    .icon-container {
+      @include setSvgColor(#eeefef);
+    }
+
+    &:hover:enabled {
+      background-color: rgba(202, 220, 214, 0.2);
+    }
+
+    &:active:enabled {
+      background-color: rgba(186, 207, 200, 0.3);
+    }
   }
 
   &-transparent {
-    svg {
+    .icon-container {
       @include setSvgColor(#00c688);
     }
 
     &:hover {
-      svg {
+      .icon-container {
         @include setSvgColor(#02f2a7);
       }
     }
 
     &:active {
-      svg {
+      .icon-container {
         @include setSvgColor(#05a875);
       }
     }
   }
 
   &-white {
-    svg {
+    .icon-container {
       @include setSvgColor(#f8ebdf);
     }
 
-    .gamburger-icon {
-      path {
-        stroke: #f8ebdf;
-      }
-    }
-
     &:hover {
-      svg {
+      .icon-container {
         @include setSvgColor(#8a8a8a);
-      }
-      .gamburger-icon {
-        path {
-          stroke: #8a8a8a;
-        }
       }
     }
 
     &:active {
-      svg {
+      .icon-container {
         @include setSvgColor(#3a3939);
-      }
-      .gamburger-icon {
-        path {
-          stroke: #3a3939;
-        }
       }
     }
   }
 
   &-selected {
     background-color: #05a875;
-    svg {
+    .icon-container {
       @include setSvgColor(black);
-    }
-
-    .gamburger-icon {
-      path {
-        stroke: black;
-      }
     }
   }
 
   &-grey {
     background-color: #eeefef;
-    svg {
+    .icon-container {
       @include setSvgColor(#141414);
     }
 
@@ -104,6 +105,96 @@
 
     &:active {
       background-color: #bacfc8;
+    }
+  }
+
+  &-grey-transparent {
+    background-color: transparent;
+    .icon-container {
+      @include setSvgColor(#676969);
+    }
+
+    &:hover {
+      .icon-container {
+        @include setSvgColor(#4b4d4d);
+      }
+    }
+
+    &:active {
+      .icon-container {
+        @include setSvgColor(#323333);
+      }
+    }
+  }
+
+  &-news-builder {
+    width: 48px;
+    height: 80px;
+    background-color: transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #eeefef;
+    font-weight: 400;
+    font: 16px/24px $font-regular;
+
+    .icon-container {
+      width: 48px;
+      height: 48px;
+      border-radius: 48px;
+      background-color: #58bd88;
+    }
+
+    &:hover:enabled {
+      color: #cadcd6;
+      .icon-container {
+        background-color: #009466;
+      }
+    }
+
+    &:active:enabled {
+      color: #9bb0a9;
+      .icon-container {
+        background-color: #007a54;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+
+  &-socials {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #eeefef;
+
+    .icon-container {
+      @include setSvgColor(#141414);
+    }
+
+    &:hover {
+      background-color: #cadcd6;
+      .icon-container {
+        @include setSvgColor(#1d2120);
+      }
+    }
+
+    &:active {
+      background-color: #9bb0a9;
+      .icon-container {
+        @include setSvgColor(#27332f);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
     }
   }
 }

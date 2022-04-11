@@ -1,0 +1,31 @@
+.news-field-block-container {
+  padding: 16px;
+  border-radius: 4px;
+  background-color: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(238, 239, 239, 0.1);
+
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    h6 {
+      color: #676969;
+      user-select: none;
+    }
+  }
+
+  .video-player-container {
+    width: 100%;
+    height: 224px;
+  }
+
+  h4 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

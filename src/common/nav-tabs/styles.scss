@@ -1,0 +1,39 @@
+@import "src/scss/mixins";
+
+.nav-tabs-main-container {
+  height: 56px;
+  overflow-x: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-left: Max(24px, env(safe-area-inset-left));
+  padding-right: Max(24px, env(safe-area-inset-right));
+
+  .tabs-container {
+    height: 100%;
+    width: max-content;
+
+    gap: 40px;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.navigation-tab-active-bar {
+  height: 2px;
+  border-radius: 4px;
+  background-color: #58bd88;
+
+  position: relative;
+  @include transition(margin-left, 0.2s, linear);
+
+  .bar-half-shadow {
+    width: 95%;
+    height: 1px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    box-shadow: 0px -2px 15px 0px #58bd88;
+  }
+}

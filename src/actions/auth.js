@@ -3,6 +3,7 @@ import Amplify, { Auth } from "aws-amplify";
 import { api } from "api";
 import { authConfig } from "config/amplify";
 import { getErrorMessage } from "utils/error";
+import { setCurrentUser } from "store/user/slices";
 import {
   USER_LOGOUT,
   USER_LOGIN_FAIL,
@@ -10,8 +11,8 @@ import {
   ACCESS_TOKEN_SUCCESS,
 } from "constants/userConstants";
 
-import { news } from "./community";
-import { visitCommunity } from "./communityActions";
+// import { news } from "./community";
+// import { visitCommunity } from "./communityActions";
 
 const isCognito = process.env.REACT_APP_AUTH_METHOD === "cognito";
 
@@ -111,9 +112,12 @@ export const login =
         response = await commonLogin({ name, password });
       }
 
+      const profile = await api.user.get({ id: response.id });
+      dispatch(setCurrentUser({ ...response, ...profile?.data?.results }));
+
       await getAccessToken()(dispatch);
-      const community = await news()(dispatch);
-      await visitCommunity(community.id)(dispatch);
+      // const community = await news()(dispatch);
+      // await visitCommunity(community.id)(dispatch);
 
       dispatch({ type: USER_LOGIN_SUCCESS, payload: response });
       return Promise.resolve(response);

@@ -1,0 +1,74 @@
+@import "src/scss/mixins";
+
+.pf-modal-options-button {
+  width: 24px;
+  height: 24px;
+  margin: 0px;
+  border: none;
+  cursor: pointer;
+  padding: 0px 0px;
+  position: relative;
+
+  .options-container {
+    width: 216px;
+    min-height: 112px;
+    border-radius: 4px;
+    background-color: #141414;
+    border: 1px solid rgba(238, 239, 239, 0.1);
+
+    top: 32px;
+    right: 0;
+    position: absolute;
+
+    .option-container {
+      width: 100%;
+      height: 56px;
+      padding: 0 16px;
+
+      gap: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      svg {
+        width: 24px !important;
+        height: 24px !important;
+      }
+
+      &-white {
+        @include setSvgColor(#eeefef);
+        background-color: transparent;
+        h4 {
+          color: #eeefef;
+        }
+
+        &:hover {
+          background-color: #1d2120;
+        }
+      }
+
+      &-red {
+        color: #da3443;
+        @include setSvgColor(#da3443);
+        background-color: transparent;
+
+        &:hover {
+          background-color: #1d2120;
+        }
+      }
+    }
+  }
+
+  &-transparent-white {
+    @include setSvgColor(#f8ebdf);
+    background-color: transparent;
+
+    &:hover {
+      @include setSvgColor(#8a8a8a);
+    }
+
+    &:active {
+      @include setSvgColor(#3a3939);
+    }
+  }
+}

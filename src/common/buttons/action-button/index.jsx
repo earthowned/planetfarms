@@ -10,6 +10,7 @@ export const ActionButton = ({
   icon,
   title,
   onClick,
+  rightIcon,
   className,
   type = "button",
   disabled = false,
@@ -30,7 +31,8 @@ export const ActionButton = ({
       className={btnClassName}
     >
       {icon && <Icon icon={icon} />}
-      <p className="btn-title">{title}</p>
+      {title && <p className="btn-title">{title}</p>}
+      {rightIcon && <Icon icon={rightIcon} />}
     </button>
   );
 };

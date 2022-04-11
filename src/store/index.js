@@ -1,5 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+// import { createStore, applyMiddleware } from "redux";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+// import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import {
   newsListReducer,
@@ -105,6 +106,9 @@ import {
   categoryViewReducer,
 } from "reducers/categoryReducer";
 
+import { newsReducer } from "./news/slices";
+import { userReducer } from "./user/slices";
+
 const reducer = combineReducers({
   listEvents: eventListReducer,
   groupView: groupViewReducer,
@@ -179,6 +183,9 @@ const reducer = combineReducers({
   categoryUpdate: categoryUpdateReducer,
   categoryView: categoryViewReducer,
   addCategory: categoryCreateReducer,
+
+  news: newsReducer,
+  user: userReducer,
 });
 
 const userInfoFromStorage = window.localStorage.getItem("userInfo")
@@ -198,8 +205,14 @@ const initialState = {
 
 const middleware = [thunk];
 
-export const store = createStore(
+// export const store = createStore(
+//   reducer,
+//   initialState,
+//   composeWithDevTools(applyMiddleware(...middleware))
+// );
+
+export const store = configureStore({
   reducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+  middleware,
+  preloadedState: initialState,
+});

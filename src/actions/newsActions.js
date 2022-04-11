@@ -1,9 +1,14 @@
+import { api } from "api";
+import { getErrorMessage } from "utils/error";
+import { parseArticleContent } from "utils/parsers/news";
+import { getActionLists, getPromises } from "utils/article";
+
 import {
   getApi,
   putApi,
   postApi,
   deleteApi,
-  fileHeader,
+  // fileHeader,
 } from "../utils/apiFunc";
 import {
   NEWS_LIST_REQUEST,
@@ -79,7 +84,8 @@ export const searchNews = (search) => async (dispatch) => {
 export const createNews =
   ({ newsDetail, newNews, history }) =>
   async (dispatch) => {
-    const formData = getFormData(newsDetail);
+    const details = { communityId: currentCommunity.id, ...newsDetail };
+
     try {
       dispatch({ type: NEWS_CREATE_REQUEST });
       const richText = await postApi(
@@ -89,13 +95,17 @@ export const createNews =
       );
       const richtextId = richText?.data?.richtext?.id;
       if (richtextId) {
-        formData.append("richtextId", richtextId);
-        const { data } = await postApi(
+        details.richtextId = richtextId;
+
+        const response = await postApi(
           dispatch,
-          `${process.env.REACT_APP_API_BASE_URL}/api/news/add/community/${currentCommunity.id}`,
-          formData,
-          fileHeader
+          `${process.env.REACT_APP_API_BASE_URL}/api/news/add`,
+          details
+          // fileHeader
         );
+
+        const { data } = response;
+
         dispatch({ type: NEWS_CREATE_SUCCESS, payload: data });
         // creating rich text
         await createRichText(newNews, richtextId, dispatch);
@@ -176,3 +186,99 @@ export const newsUpdate =
       dispatch({ type: NEWS_UPDATE_FAIL, payload: message });
     }
   };
+
+export const create = async ({
+  title,
+  userId,
+  content,
+  category,
+  readTime,
+  coverImage,
+  communityId,
+}) => {
+  try {
+    const { richtext } = await api.richText.create();
+
+    const response = await api.news.create({
+      title,
+      readTime,
+      category,
+      communityId,
+      creator: userId,
+      news: coverImage,
+      richtextId: richtext.id,
+    });
+
+    const { id: newsId } = response?.data?.data || {};
+
+    const { createList } = getActionLists([], content);
+    await Promise.all(getPromises({ createList, richTextId: richtext.id }));
+
+    return Promise.resolve({ newsId });
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
+
+export const edit = async ({
+  title,
+  userId,
+  category,
+  readTime,
+  articleId,
+  oldContent,
+  newContent,
+  coverImage,
+  richTextId,
+  communityId,
+}) => {
+  try {
+    await api.news.edit({
+      title,
+      readTime,
+      category,
+      articleId,
+      communityId,
+      creator: userId,
+      news: coverImage,
+      richtextId: richTextId,
+    });
+
+    const { editList, deleteList, createList } = getActionLists(
+      oldContent,
+      newContent
+    );
+
+    await Promise.all(
+      getPromises({ editList, createList, deleteList, richTextId })
+    );
+
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
+
+export const get = async ({ id }) => {
+  try {
+    const { data: article } = await api.news.get({ id });
+    const author = await api.user.get({ id: article.creator });
+
+    return Promise.resolve({
+      ...article,
+      author: { ...author.data?.results },
+      content: parseArticleContent(article),
+    });
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
+
+export const remove = async ({ newsId }) => {
+  try {
+    await api.news.remove({ newsId });
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(getErrorMessage(error));
+  }
+};
