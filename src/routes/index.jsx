@@ -43,7 +43,7 @@ import CourseUsers from "../screens/courses/courseUsers/CourseUsers";
 import MyCoursePage from "../screens/dashboard/coursePage/CoursePage";
 import EditCollection from "../screens/courses/editCollection/EditCollection";
 import CourseCollection from "../screens/courses/courseCollection/CourseCollection";
-import { CoursesListPage } from "../screens/courses";
+import { CoursesListPage, CreateCoursePage } from "../screens/courses";
 
 // Messanger
 import Messenger from "../screens/messenger/Messenger";
@@ -161,6 +161,7 @@ export const Routes = () => {
       <PrivateRoute component={MobileMessage} path="/messenger/:id" exact />
 
       <PrivateRoute component={Courses} path="/admin/courses" exact />
+      <PrivateRoute component={CreateCoursePage} path="/courses/create" exact />
       <PrivateRoute
         component={AdminCoursePage}
         path="/admin/course/:courseId"

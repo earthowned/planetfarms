@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { NavigationTabs } from "common/nav-tabs";
 import { DashboardLayout } from "layout/dashboard";
@@ -18,6 +19,8 @@ import "./styles.scss";
 const options = createSortingOptions();
 
 export const CoursesListPage = () => {
+  const history = useHistory();
+
   const [sortBy, setSortBy] = useState(options[0]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -43,7 +46,12 @@ export const CoursesListPage = () => {
             selectedIndex={selectedIndex}
           />
 
-          <ActionButton icon="plus" title="Add Course" variant="primary" />
+          <ActionButton
+            icon="plus"
+            variant="primary"
+            title="Add Course"
+            onClick={() => history.push("/courses/create")}
+          />
         </HorizontalContainer>
 
         <SortButton

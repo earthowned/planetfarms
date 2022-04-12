@@ -1,0 +1,31 @@
+@import "src/scss/mixins";
+
+.create-course-page-container {
+  width: 100%;
+
+  gap: 40px;
+  display: flex;
+  flex-direction: row;
+
+  .left-block {
+    width: 344px;
+    height: 344px;
+  }
+
+  .right-block {
+    flex-grow: 1;
+
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include breakpoint("tablet", "max") {
+    flex-direction: column;
+
+    .left-block {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
