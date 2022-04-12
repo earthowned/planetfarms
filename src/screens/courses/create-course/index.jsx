@@ -39,6 +39,7 @@ export const CreateCoursePage = () => {
                 />
 
                 <InputField
+                  type="currency"
                   name={model.price.name}
                   placeholder="Course Price"
                 />
