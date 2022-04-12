@@ -18,6 +18,18 @@
     gap: 24px;
     display: flex;
     flex-direction: column;
+
+    .section-block {
+      gap: 24px;
+      @include flexColumn(center, flex-start);
+    }
+
+    .buttons-section {
+      @include flexRow(center, space-between);
+      button {
+        width: 152px;
+      }
+    }
   }
 
   @include breakpoint("tablet", "max") {
@@ -26,6 +38,11 @@
     .left-block {
       width: 100%;
       height: auto;
+    }
+
+    .right-block {
+      gap: 40px;
+      @include flexColumn(center, flex-start);
     }
   }
 }

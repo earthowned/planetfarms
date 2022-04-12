@@ -11,7 +11,7 @@ export const DeviceType = {
   Desktop: "Desktop",
 };
 
-export const NewsContentType = {
+export const ContentBuilderAction = {
   Text: "Text",
   Video: "Video",
   Image: "Image",

@@ -94,3 +94,17 @@
   -webkit-line-clamp: $number;
   -webkit-box-orient: vertical;
 }
+
+@mixin flexColumn($alignItems, $justifyContent) {
+  display: flex;
+  flex-direction: column;
+  align-items: $alignItems;
+  justify-content: $justifyContent;
+}
+
+@mixin flexRow($alignItems, $justifyContent) {
+  display: flex;
+  flex-direction: row;
+  align-items: $alignItems;
+  justify-content: $justifyContent;
+}

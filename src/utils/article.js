@@ -1,6 +1,6 @@
 import { api } from "api";
-import { NewsContentType } from "constants/enums";
 import { isFileInstanse } from "utils/parsers/file";
+import { ContentBuilderAction } from "constants/enums";
 
 const needToUpdate = ({ oldItem, newItem }) => {
   if (oldItem.data?.order !== newItem.data?.order) {
@@ -8,14 +8,14 @@ const needToUpdate = ({ oldItem, newItem }) => {
   }
 
   switch (newItem.type) {
-    case NewsContentType.Text: {
+    case ContentBuilderAction.Text: {
       return (
         oldItem.data?.textHeading !== newItem.data?.textHeading ||
         oldItem.data?.textDescription !== newItem.data?.textDescription
       );
     }
 
-    case NewsContentType.Image: {
+    case ContentBuilderAction.Image: {
       const { lessonImg, photoDescription } = newItem.data || {};
 
       if (lessonImg && isFileInstanse(lessonImg)) {
@@ -29,7 +29,7 @@ const needToUpdate = ({ oldItem, newItem }) => {
       return false;
     }
 
-    case NewsContentType.Video: {
+    case ContentBuilderAction.Video: {
       const { videoResource, videoLink, videoTitle, videoDescription } =
         newItem.data || {};
 
@@ -125,27 +125,27 @@ export const getPromises = ({
   });
 
   const payload = {
-    [NewsContentType.Text]: createTextPayload,
-    [NewsContentType.Image]: createImagePayload,
-    [NewsContentType.Video]: createVideoPayload,
+    [ContentBuilderAction.Text]: createTextPayload,
+    [ContentBuilderAction.Image]: createImagePayload,
+    [ContentBuilderAction.Video]: createVideoPayload,
   };
 
   const deleteRequest = {
-    [NewsContentType.Text]: api.news.deleteTextBlock,
-    [NewsContentType.Image]: api.news.deleteImageBlock,
-    [NewsContentType.Video]: api.news.deleteVideoBlock,
+    [ContentBuilderAction.Text]: api.news.deleteTextBlock,
+    [ContentBuilderAction.Image]: api.news.deleteImageBlock,
+    [ContentBuilderAction.Video]: api.news.deleteVideoBlock,
   };
 
   const editRequest = {
-    [NewsContentType.Text]: api.news.updateTextBlock,
-    [NewsContentType.Image]: api.news.updateImageBlock,
-    [NewsContentType.Video]: api.news.updateVideoBlock,
+    [ContentBuilderAction.Text]: api.news.updateTextBlock,
+    [ContentBuilderAction.Image]: api.news.updateImageBlock,
+    [ContentBuilderAction.Video]: api.news.updateVideoBlock,
   };
 
   const createRequest = {
-    [NewsContentType.Text]: api.news.createTextBlock,
-    [NewsContentType.Image]: api.news.createImageBlock,
-    [NewsContentType.Video]: api.news.createVideoBlock,
+    [ContentBuilderAction.Text]: api.news.createTextBlock,
+    [ContentBuilderAction.Image]: api.news.createImageBlock,
+    [ContentBuilderAction.Video]: api.news.createVideoBlock,
   };
 
   editList.forEach((item) => {
