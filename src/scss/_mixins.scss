@@ -3,10 +3,7 @@
 @mixin breakpoint($point, $sizeType: "minMax") {
   @if $sizeType == "minMax" {
     @if $point == "mobile" {
-      @media (orientation: portrait) and (min-width: 0) and (max-width: $media-mobile-max-width) {
-        @content;
-      }
-      @media (orientation: landscape) and (min-width: 0) and (max-width: $media-tablet-max-width) {
+      @media (min-width: 0) and (max-width: $media-mobile-max-width) {
         @content;
       }
     } @else if $point == "tablet" {
@@ -24,10 +21,7 @@
     }
   } @else if $sizeType == "max" {
     @if $point == "mobile" {
-      @media (orientation: portrait) and (max-width: $media-mobile-max-width) {
-        @content;
-      }
-      @media (orientation: landscape) and (max-width: $media-tablet-max-width) {
+      @media (max-width: $media-mobile-max-width) {
         @content;
       }
     } @else if $point == "tablet" {
