@@ -10,6 +10,10 @@
   .left-block {
     width: 344px;
     height: 344px;
+
+    .pf-drag-drop-zone {
+      height: 344px;
+    }
   }
 
   .right-block {
@@ -37,12 +41,33 @@
 
     .left-block {
       width: 100%;
-      height: auto;
+      height: unset;
     }
 
     .right-block {
       gap: 40px;
       @include flexColumn(center, flex-start);
+
+      .section-block {
+        width: 100%;
+      }
+
+      .buttons-section {
+        width: 100%;
+        gap: 24px;
+        @include flexColumn(center, flex-start);
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    .left-block {
+      .pf-drag-drop-zone {
+        height: unset;
+      }
     }
   }
 }

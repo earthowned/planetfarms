@@ -1,0 +1,43 @@
+@import "./mixins";
+
+.switch-container {
+  gap: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .switch-input {
+    display: none;
+  }
+
+  .switch-checkbox-container {
+    width: 40px;
+    height: 24px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    border-radius: 18px;
+
+    .switch {
+      width: 16px;
+      height: 16px;
+      border-radius: 16px;
+      transition: all 0.1s linear;
+
+      top: 4px;
+      position: absolute;
+    }
+  }
+
+  .switch-input:not(:checked) + .switch-checkbox-container {
+    @include switch-off;
+  }
+
+  .switch-input:checked + .switch-checkbox-container {
+    @include switch-on;
+  }
+
+  .switch-input:disabled + .switch-checkbox-container {
+    cursor: default;
+  }
+}

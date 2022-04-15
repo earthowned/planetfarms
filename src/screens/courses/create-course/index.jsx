@@ -1,16 +1,19 @@
 import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
 
+import { Switch } from "common/switch";
 import { InputField } from "common/input";
 import { TextAreaField } from "common/text-area";
 import { DashboardLayout } from "layout/dashboard";
 import { DragDropZoneField } from "common/drag-drop-zone";
-import { ContentBuilderField } from "common/content-builder";
 import { ActionButton } from "common/buttons/action-button";
+import { ContentBuilderField } from "common/content-builder";
 
 import { validationSchema, initialValues, model } from "./config";
 
 import "./styles.scss";
+
+// TODO: Implement custom switch;
 
 export const CreateCoursePage = () => {
   const history = useHistory();
@@ -27,7 +30,10 @@ export const CreateCoursePage = () => {
         {() => (
           <Form className="create-course-page-container">
             <div className="left-block">
-              <DragDropZoneField name={model.avatar.name} />
+              <DragDropZoneField
+                name={model.avatar.name}
+                dropZoneStyles={{ height: "344px" }}
+              />
             </div>
 
             <div className="right-block">
@@ -37,6 +43,8 @@ export const CreateCoursePage = () => {
                   placeholder="Title"
                   name={model.title.name}
                 />
+
+                <Switch />
 
                 <InputField
                   type="currency"
