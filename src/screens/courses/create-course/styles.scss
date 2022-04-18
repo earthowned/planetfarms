@@ -28,6 +28,11 @@
       @include flexColumn(center, flex-start);
     }
 
+    .switch-container {
+      width: 100%;
+      @include flexRow(flex-start, flex-start);
+    }
+
     .buttons-section {
       @include flexRow(center, space-between);
       button {

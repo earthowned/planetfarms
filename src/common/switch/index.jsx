@@ -1,34 +1,33 @@
+import { useField } from "formik";
+
 import "./styles.scss";
 
-const LabelPosition = {
-  Left: "left",
-  Right: "right",
-};
-
 export const Switch = ({
-  label,
+  leftLabel,
+  rightLabel,
   onChangeValue,
   value = false,
   name = "switch",
   disabled = false,
-  labelPosition = LabelPosition.Left,
 }) => {
   const handleClick = () => {
     if (!disabled && onChangeValue) {
-      onChangeValue(!value);
+      const currentValue = !!value;
+      onChangeValue(!currentValue);
     }
   };
 
   return (
     <div className="switch-container">
-      {label && labelPosition === LabelPosition.Left && <h4>{label}</h4>}
+      {leftLabel && <h4>{leftLabel}</h4>}
 
       <input
         id={name}
         name={name}
         type="checkbox"
-        checked={value}
+        checked={!!value}
         disabled={disabled}
+        defaultChecked={!!value}
         className="switch-input"
       />
 
@@ -36,7 +35,29 @@ export const Switch = ({
         <div className="switch" />
       </div>
 
-      {label && labelPosition === LabelPosition.Right && <h4>{label}</h4>}
+      {rightLabel && <h4>{rightLabel}</h4>}
     </div>
+  );
+};
+
+export const SwitchField = ({
+  name,
+  disabled,
+  leftLabel,
+  rightLabel,
+  labelPosition,
+}) => {
+  const [field, meta, helpers] = useField(name);
+
+  return (
+    <Switch
+      value={field.value}
+      error={meta?.error}
+      disabled={disabled}
+      leftLabel={leftLabel}
+      rightLabel={rightLabel}
+      labelPosition={labelPosition}
+      onChangeValue={helpers.setValue}
+    />
   );
 };

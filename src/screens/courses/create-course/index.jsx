@@ -1,8 +1,8 @@
 import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
 
-import { Switch } from "common/switch";
 import { InputField } from "common/input";
+import { SwitchField } from "common/switch";
 import { TextAreaField } from "common/text-area";
 import { DashboardLayout } from "layout/dashboard";
 import { DragDropZoneField } from "common/drag-drop-zone";
@@ -13,16 +13,18 @@ import { validationSchema, initialValues, model } from "./config";
 
 import "./styles.scss";
 
-// TODO: Implement custom switch;
-
 export const CreateCoursePage = () => {
   const history = useHistory();
+
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
 
   return (
     <DashboardLayout title="Add Course" withBackButton>
       <Formik
-        onSubmit={() => {}}
         validateOnBlur={false}
+        onSubmit={handleSubmit}
         validateOnChange={false}
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -44,7 +46,12 @@ export const CreateCoursePage = () => {
                   name={model.title.name}
                 />
 
-                <Switch />
+                <div className="switch-container">
+                  <SwitchField
+                    leftLabel="Publish"
+                    name={model.isPublished.name}
+                  />
+                </div>
 
                 <InputField
                   type="currency"
