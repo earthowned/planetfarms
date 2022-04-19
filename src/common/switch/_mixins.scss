@@ -1,0 +1,36 @@
+@mixin switch-off {
+  background-color: rgba(238, 239, 239, 0.1);
+
+  .switch {
+    left: 4px;
+    background-color: #676969;
+    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.32),
+      inset -2px 0px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  &:hover {
+    background-color: #27332f;
+    .switch {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@mixin switch-on {
+  background-color: #009466;
+
+  .switch {
+    left: 50%;
+    background-color: #eeefef;
+    box-shadow: -2px 0px 4px rgba(31, 68, 49, 0.4),
+      inset -2px 0px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  &:hover {
+    .switch {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}

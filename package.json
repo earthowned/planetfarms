@@ -2,6 +2,9 @@
   "name": "planet-farm",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "react-error-overlay": "6.0.9"
+  },
   "dependencies": {
     "@hookform/error-message": "^2.0.0",
     "@react-pdf/renderer": "^2.0.16",
@@ -24,6 +27,7 @@
     "parcel": "^2.0.0-rc.0",
     "react": "^17.0.2",
     "react-alert": "^7.0.3",
+    "react-currency-input-field": "^3.6.4",
     "react-dnd": "^14.0.2",
     "react-dnd-html5-backend": "^14.0.0",
     "react-dom": "^17.0.2",

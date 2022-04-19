@@ -31,7 +31,7 @@ const FieldBlock = ({ title, onRemove, children }) => {
   );
 };
 
-export const TextFieldBlock = ({ name, onRemove }) => {
+export const Text = ({ name, onRemove }) => {
   return (
     <FieldBlock title="Text Field" onRemove={onRemove}>
       <InputField
@@ -47,7 +47,7 @@ export const TextFieldBlock = ({ name, onRemove }) => {
   );
 };
 
-export const ImageFieldBlock = ({ name, onRemove }) => {
+export const Image = ({ name, onRemove }) => {
   return (
     <FieldBlock title="Picture Field" onRemove={onRemove}>
       <DragDropZoneField
@@ -64,7 +64,7 @@ export const ImageFieldBlock = ({ name, onRemove }) => {
   );
 };
 
-export const VideoFieldBlock = ({ name, onRemove }) => {
+export const Video = ({ name, onRemove }) => {
   const [field] = useField(name);
   const { videoResource, videoLink } = field?.value || {};
 

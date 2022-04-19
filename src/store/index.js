@@ -108,6 +108,7 @@ import {
 
 import { newsReducer } from "./news/slices";
 import { userReducer } from "./user/slices";
+import { coursesReducer } from "./courses";
 
 const reducer = combineReducers({
   listEvents: eventListReducer,
@@ -186,6 +187,7 @@ const reducer = combineReducers({
 
   news: newsReducer,
   user: userReducer,
+  courses: coursesReducer,
 });
 
 const userInfoFromStorage = window.localStorage.getItem("userInfo")

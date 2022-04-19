@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import ReactPlayer from "react-player";
 
 import { useDeviceType } from "hooks";
-import { DeviceType, NewsContentType } from "constants/enums";
+import { DeviceType, ContentBuilderAction } from "constants/enums";
 import { parseArticleImage, parseArticleVideo } from "utils/parsers/news";
 
 import "./styles.scss";
@@ -91,7 +91,7 @@ export const ArticleContentList = ({ content = [] }) => {
     <div className="article-content-list-container">
       {content.map((item, index) => {
         switch (item.type) {
-          case NewsContentType.Image:
+          case ContentBuilderAction.Image:
             return (
               <ImageBlock
                 description={item?.photoDescription}
@@ -101,7 +101,7 @@ export const ArticleContentList = ({ content = [] }) => {
               />
             );
 
-          case NewsContentType.Text:
+          case ContentBuilderAction.Text:
             return (
               <TextBlock
                 isMobile={isMobile}
@@ -111,7 +111,7 @@ export const ArticleContentList = ({ content = [] }) => {
               />
             );
 
-          case NewsContentType.Video:
+          case ContentBuilderAction.Video:
             return (
               <VideoBlock
                 isMobile={isMobile}

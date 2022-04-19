@@ -1,33 +1,13 @@
 import React, { useState, useMemo } from "react";
 import cx from "classnames";
 import { useField } from "formik";
-import InputMask from "react-input-mask";
 
 import { Icon } from "common/icon";
 
-import { DateInput } from "./date-input";
+import { InputComponent } from "./input-component";
 import { FloatingPlaceholder } from "./placeholder";
 
 import "./styles.scss";
-
-const InputWithType = ({ type, onBlur, onFocus, ...props }) => {
-  if (type === "date") {
-    return <DateInput {...props} />;
-  }
-
-  if (type === "tel") {
-    return (
-      <InputMask
-        type={type}
-        alwaysShowMask={false}
-        mask="+1 (999) 999-99-99"
-        {...props}
-      />
-    );
-  }
-
-  return <input type={type} onFocus={onFocus} onBlur={onBlur} {...props} />;
-};
 
 export const Input = ({
   icon,
@@ -64,13 +44,13 @@ export const Input = ({
         {icon && <Icon icon={icon} className="input-icon" />}
 
         <div className="pf-input-container">
-          <InputWithType
+          <InputComponent
             name={name}
             value={value}
             onBlur={onBlur}
             type={inputType}
             onFocus={onFocus}
-            onChange={(event) => onChange(event.target.value)}
+            onChange={onChange}
           />
 
           {withFloatingPlaceholder && (

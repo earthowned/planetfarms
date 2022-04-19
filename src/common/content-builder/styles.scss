@@ -1,0 +1,12 @@
+@import "src/scss/mixins";
+
+.content-builder-container {
+  gap: 24px;
+  width: 100%;
+  @include flexColumn(stretch, flex-start);
+
+  .actions-container {
+    gap: 48px;
+    @include flexRow(center, center);
+  }
+}

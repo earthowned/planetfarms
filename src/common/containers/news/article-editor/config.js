@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 
-import { ArticleEditorType, NewsContentType } from "constants/enums";
+import { ArticleEditorType } from "constants/enums";
+import { contentBuilderValidationSchema } from "common/content-builder";
 
 export const model = {
   title: { name: "title" },
@@ -24,52 +25,7 @@ export const validationSchema = Yup.object().shape({
   [category.name]: dropdownSchema.required(),
   [readTime.name]: dropdownSchema.optional(),
   [community.name]: dropdownSchema.required(),
-
-  [newsContent.name]: Yup.array()
-    .of(
-      Yup.object().shape({
-        type: Yup.string().required(),
-        data: Yup.object()
-          .when("type", {
-            is: NewsContentType.Text,
-            then: Yup.object().shape({
-              textHeading: Yup.string().optional(),
-              textDescription: Yup.string().required(),
-            }),
-          })
-          .when("type", {
-            is: NewsContentType.Image,
-            then: Yup.object().shape({
-              lessonImg: Yup.mixed().required(),
-              photoDescription: Yup.string().optional(),
-            }),
-          })
-          .when("type", {
-            is: NewsContentType.Video,
-            then: Yup.object().shape(
-              {
-                videoTitle: Yup.string().optional(),
-                videoDescription: Yup.string().optional(),
-                videoResource: Yup.mixed().when("videoLink", (videoLink) => {
-                  return videoLink
-                    ? Yup.mixed().optional()
-                    : Yup.mixed().required();
-                }),
-                videoLink: Yup.string().when("videoResource", (videoFile) => {
-                  return videoFile
-                    ? Yup.string().optional()
-                    : Yup.string()
-                        .url("URL is not valid")
-                        .required("Provide Link or choose file from device");
-                }),
-              },
-              ["videoResource", "videoLink"]
-            ),
-          }),
-      })
-    )
-    .min(1)
-    .required(),
+  [newsContent.name]: contentBuilderValidationSchema.min(1).required(),
 });
 
 export const categoryOptions = [

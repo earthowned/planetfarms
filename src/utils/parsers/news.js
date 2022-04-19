@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { NewsContentType } from "constants/enums";
+import { ContentBuilderAction } from "constants/enums";
 import {
   GET_NEWS,
   GET_VIDEO,
@@ -61,15 +61,15 @@ export const parseArticleContent = (article) => {
       } = item;
 
       if (textDescription || textHeading) {
-        return { ...item, type: NewsContentType.Text };
+        return { ...item, type: ContentBuilderAction.Text };
       }
 
       if (lessonImg) {
-        return { ...item, type: NewsContentType.Image };
+        return { ...item, type: ContentBuilderAction.Image };
       }
 
       if (videoResource || videoLink) {
-        return { ...item, type: NewsContentType.Video };
+        return { ...item, type: ContentBuilderAction.Video };
       }
 
       return item;
