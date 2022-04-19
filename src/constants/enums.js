@@ -1,6 +1,6 @@
 export const DeviceMaxWidth = {
-  Mobile: 425,
-  Tablet: 845,
+  Mobile: 767,
+  Tablet: 1023,
   Laptop: 1440,
 };
 

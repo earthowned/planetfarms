@@ -1,0 +1,54 @@
+@import "src/scss/mixins";
+
+.current-course-page-container {
+  width: 100%;
+  background-color: transparent;
+  @include flexColumn(flex-start, flex-start);
+
+  .header-container {
+    width: 100%;
+    gap: 40px;
+    @include flexRow(center, space-between);
+
+    .info-container {
+      flex-grow: 1;
+      gap: 24px;
+      @include flexRow(flex-start, flex-start);
+
+      .avatar-container {
+        width: 152px;
+        height: 152px;
+        border-radius: 152px;
+      }
+
+      .info-column-container {
+        height: 152px;
+        @include flexColumn(flex-start, space-between);
+      }
+    }
+
+    button {
+      width: 248px;
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    .header-container {
+      @include flexColumn(flex-start, center);
+
+      .info-container {
+        @include flexRow(center, flex-start);
+
+        .avatar-container {
+          width: 64px;
+          height: 64px;
+          border-radius: 64px;
+        }
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
