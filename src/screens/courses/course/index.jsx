@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
 
 import { DashboardLayout } from "layout/dashboard";
@@ -37,7 +38,9 @@ export const CoursePage = () => {
           />
         </div>
 
-        <div className="course-content-container" />
+        <div className="course-content-container">
+          <ContentBlocks contentList={course?.content} />
+        </div>
       </div>
     </DashboardLayout>
   );

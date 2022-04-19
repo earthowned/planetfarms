@@ -1,7 +1,9 @@
+import { ContentBuilderAction } from "constants/enums";
+
 export const mockedCourses = [
   {
     id: "0",
-    title: "A Fueling the ethanol industry",
+    title: "A Fueling the Content",
     price: 2333,
     description:
       "Sit ultrices et, arcu posuere dolor sollicitudin lorem sed. Nisi non felis, in sem quisque neque scelerisque.",
@@ -12,6 +14,44 @@ export const mockedCourses = [
     progress: 12,
     members: 20,
     createdAt: new Date(2021, 11, 17),
+
+    content: [
+      {
+        type: ContentBuilderAction.Text,
+        title: "Senectus sed facilisis egestas adipiscing mauris.",
+        text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+      },
+      {
+        type: ContentBuilderAction.Image,
+        url: "https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864,0,1728,2304&wid=600&hei=800&scl=2.88",
+        description: "Combine Harvester swather",
+      },
+      {
+        type: ContentBuilderAction.Text,
+        title: "Senectus sed facilisis egestas adipiscing mauris.",
+        text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+      },
+      {
+        type: ContentBuilderAction.Text,
+        // title: "Senectus sed facilisis egestas adipiscing mauris.",
+        text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+      },
+      {
+        type: ContentBuilderAction.Text,
+        // title: "Senectus sed facilisis egestas adipiscing mauris.",
+        text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+      },
+      {
+        type: ContentBuilderAction.Image,
+        url: "https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864,0,1728,2304&wid=600&hei=800&scl=2.88",
+        description: "Combine Harvester swather",
+      },
+      {
+        type: ContentBuilderAction.Text,
+        title: "Senectus sed facilisis egestas adipiscing mauris.",
+        text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+      },
+    ],
   },
   {
     id: "1",

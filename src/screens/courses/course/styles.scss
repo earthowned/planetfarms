@@ -1,54 +1,38 @@
 @import "src/scss/mixins";
+@import "src/scss/variables";
 
 .current-course-page-container {
   width: 100%;
+  gap: $gap-small;
   background-color: transparent;
   @include flexColumn(flex-start, flex-start);
 
   .header-container {
     width: 100%;
-    gap: 40px;
+    gap: $gap-big;
     @include flexRow(center, space-between);
-
-    .info-container {
-      flex-grow: 1;
-      gap: 24px;
-      @include flexRow(flex-start, flex-start);
-
-      .avatar-container {
-        width: 152px;
-        height: 152px;
-        border-radius: 152px;
-      }
-
-      .info-column-container {
-        height: 152px;
-        @include flexColumn(flex-start, space-between);
-      }
-    }
 
     button {
       width: 248px;
     }
   }
 
+  .course-content-container {
+    width: 100%;
+    padding-right: calc(248px + #{$gap-big});
+  }
+
   @include breakpoint("tablet", "max") {
     .header-container {
       @include flexColumn(flex-start, center);
 
-      .info-container {
-        @include flexRow(center, flex-start);
-
-        .avatar-container {
-          width: 64px;
-          height: 64px;
-          border-radius: 64px;
-        }
-      }
-
       button {
         width: 100%;
       }
+    }
+
+    .course-content-container {
+      padding-right: 0px;
     }
   }
 }

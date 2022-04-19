@@ -2,11 +2,14 @@ import { useMemo, useEffect } from "react";
 import ReactPlayer from "react-player";
 
 import { useDeviceType } from "hooks";
+import { isFileInstanse } from "utils/parsers/file";
 import { DeviceType, ContentBuilderAction } from "constants/enums";
 import { parseArticleImage, parseArticleVideo } from "utils/parsers/news";
 
 import "./styles.scss";
-import { isFileInstanse } from "utils/parsers/file";
+
+// TODO: Refactor;
+// TODO: Use blocks in News flow from common/content;
 
 const Title = ({ isMobile, title }) => {
   if (!title) return null;
