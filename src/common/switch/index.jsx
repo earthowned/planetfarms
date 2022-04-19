@@ -25,7 +25,6 @@ export const Switch = ({
         id={name}
         name={name}
         type="checkbox"
-        checked={!!value}
         disabled={disabled}
         defaultChecked={!!value}
         className="switch-input"

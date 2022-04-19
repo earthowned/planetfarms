@@ -1,4 +1,6 @@
 import { Formik, Form } from "formik";
+import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { InputField } from "common/input";
@@ -9,15 +11,24 @@ import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
 import { ContentBuilderField } from "common/content-builder";
 
+import { createCourseThunk } from "store/courses";
+
 import { validationSchema, initialValues, model } from "./config";
 
 import "./styles.scss";
 
 export const CreateCoursePage = () => {
+  const alert = useAlert;
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values) => {
+    try {
+      await createCourseThunk(values)(dispatch);
+      history.goBack();
+    } catch (error) {
+      alert.error(error);
+    }
   };
 
   return (
