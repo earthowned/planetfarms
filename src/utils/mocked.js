@@ -1,6 +1,6 @@
 export const mockedCourses = [
   {
-    id: 0,
+    id: "0",
     title: "A Fueling the ethanol industry",
     price: 2333,
     description:
@@ -14,7 +14,7 @@ export const mockedCourses = [
     createdAt: new Date(2021, 11, 17),
   },
   {
-    id: 1,
+    id: "1",
     title: "B Fueling the ethanol industry",
     price: 2599,
     description:
@@ -27,7 +27,7 @@ export const mockedCourses = [
     createdAt: new Date(2020, 5, 17),
   },
   {
-    id: 2,
+    id: "2",
     title: "C Fueling the ethanol industry",
     price: 122,
     description:
@@ -40,7 +40,7 @@ export const mockedCourses = [
     createdAt: new Date(2020, 11, 5),
   },
   {
-    id: 3,
+    id: "3",
     title: "Fueling the ethanol industry",
     price: 2599,
     description:
@@ -54,7 +54,7 @@ export const mockedCourses = [
     createdAt: new Date(2022, 4, 17),
   },
   {
-    id: 4,
+    id: "4",
     title: "Fueling the ethanol industry",
     price: 2599,
     description:
@@ -67,7 +67,7 @@ export const mockedCourses = [
     createdAt: new Date(2022, 11, 17),
   },
   {
-    id: 5,
+    id: "5",
     title: "Fueling the ethanol industry",
     price: 3400,
     description:
