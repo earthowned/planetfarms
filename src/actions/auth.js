@@ -57,65 +57,61 @@ export const getAccessToken = () => async (dispatch) => {
   }
 };
 
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-const commonLogin = async ({ name, password }) => {
-  try {
-    const response = await api.auth.login({ name, password });
-    const { data: token, id } = response.data;
+// // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
+// const commonLogin = async ({ name, password }) => {
+//   try {
+//     const response = await api.auth.login({ name, password });
+//     const { data: token, id } = response.data;
 
-    const payload = { token, id };
-    localStorage.setItem("userInfo", JSON.stringify(payload));
+//     const payload = { token, id };
+//     localStorage.setItem("userInfo", JSON.stringify(payload));
 
-    return Promise.resolve(payload);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+//     return Promise.resolve(payload);
+//   } catch (error) {
+//     return Promise.reject(error);
+//   }
+// };
 
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-const cognitoLogin = async ({ name, password }) => {
-  try {
-    const response = await Auth.signIn(name, password);
+// // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
+// const cognitoLogin = async ({ name, password }) => {
+//   try {
+//     const response = await Auth.signIn(name, password);
 
-    const id = response?.attributes?.sub || "";
-    const token = response?.signInUserSession?.idToken?.jwtToken || "";
+//     const id = response?.attributes?.sub || "";
+//     const token = response?.signInUserSession?.idToken?.jwtToken || "";
 
-    const payload = { token, id };
-    localStorage.setItem("userInfo", JSON.stringify(payload));
+//     const payload = { token, id };
+//     localStorage.setItem("userInfo", JSON.stringify(payload));
 
-    await api.auth.register({ id });
+//     await api.auth.register({ id }); // I do not see a need to register in login
 
-    await api.profile.update({
-      email: response.attributes.email,
-      birthday: response.attributes.birthdate,
-      phone: response.attributes.phone_number,
-      firstName: response.attributes.given_name,
-      lastName: response.attributes.family_name,
-    });
+//     await api.profile.update({
+//       email: response.attributes.email,
+//       birthday: response.attributes.birthdate,
+//       phone: response.attributes.phone_number,
+//       firstName: response.attributes.given_name,
+//       lastName: response.attributes.family_name,
+//     }); // do we need to update this every login?
 
-    return Promise.resolve(payload);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+//     return Promise.resolve(payload);
+//   } catch (error) {
+//     return Promise.reject(error);
+//   }
+// };
 
 // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 export const login =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      let response;
+      const response = await api.auth.login({ name, password });
+      const { data: authData } = response;
+      localStorage.setItem("userInfo", JSON.stringify(authData));
 
-      if (isCognito) {
-        response = await cognitoLogin({ name, password });
-      } else {
-        response = await commonLogin({ name, password });
-      }
-
-      const profile = await api.user.get({ id: response.id });
+      const profile = await api.user.get({ id: authData.id });
       dispatch(setCurrentUser({ ...response, ...profile?.data?.results }));
 
-      await getAccessToken()(dispatch);
+      // await getAccessToken()(dispatch); // access token is already received in login response
       // const community = await news()(dispatch);
       // await visitCommunity(community.id)(dispatch);
 
@@ -131,13 +127,14 @@ export const register =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      if (isCognito) {
-        const attrs = { attributes: { email: null } };
-        await Auth.signUp({ username: name, password, ...attrs });
-      } else {
-        await api.auth.register({ name, password });
-      }
+      // if (isCognito) {
+      //   const attrs = { attributes: { email: null } };
+      //   await Auth.signUp({ username: name, password, ...attrs });
+      // } else {
+      //   await api.auth.register({ name, password });
+      // }
 
+      await api.auth.register({ name, password });
       await login({ name, password })(dispatch);
       return Promise.resolve();
     } catch (error) {

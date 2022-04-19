@@ -72,17 +72,9 @@ if (process.env.AUTH_METHOD === 'cognito') {
 const authUser = async (req, res) => {
   try {
     const { name, password } = req.body
-    const user = await localAuth(name, password)
-    if (user && (await subscribeCommunity(user, false))) {
-      res.json({
-        data: generateToken(user.dataValues.userID),
-        id: user.dataValues.userID
-      })
-    } else {
-      await res.status(401).json({
-        error: 'Please type correct email or password'
-      })
-    }
+    const data = await login(name, password);
+
+    res.json(data)
   } catch (e) {
     res.status(401).json({
       error: 'Please type correct email or password'
@@ -90,14 +82,42 @@ const authUser = async (req, res) => {
   }
 }
 
-const localAuth = async (name, password) => {
-  const user = await db.LocalAuth.findOne({
-    where: { username: name, password: password }
+const login = async (name, password) => {
+  let id;
+  let token;
+
+  if (process.env.AUTH_METHOD === 'cognito') {
+    const response = await Auth.signIn(name, password);
+
+    id = response?.attributes?.sub || "";
+    token = response?.signInUserSession?.idToken?.jwtToken || "";
+  } else {
+    const localAuth = await db.LocalAuth.findOne({
+      where: { username: name, password: password }
+    })
+    const user = await db.User.findOne({
+      where: { userID: localAuth.id }
+    })
+
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    token = generateToken(user.userID),
+    id = user.userID
+  }
+
+  // update last login and number of visit
+  await db.User.update({
+    lastLogin: new Date(),
+    numberOfVisit: Sequelize.literal('"numberOfVisit" + 1')
+  }, {
+    where: {
+      userID: id
+    }
   })
-  const newUser = await db.User.findOne({
-    where: { userID: { [Op.like]: user.dataValues.id.toString() } }
-  })
-  return newUser
+
+  return { id, token };
 }
 
 // @desc    Register a new user
@@ -105,98 +125,79 @@ const localAuth = async (name, password) => {
 // @access  Public
 const registerUser = async (req, res) => {
   try {
-    const { name, password, id } = req.body
+    const { name, password } = req.body
+
     if (process.env.AUTH_METHOD === 'cognito') {
-      const data = await db.User.findOne({ where: { userID: id } })
-      if (!data) {
+      const response = await Auth.signUp({ username: name, password })
+      await db.sequelize.transaction(async (t) => {
         const user = await db.User.create({
-          userID: id,
+          userID: response.userSub,
           isLocalAuth: false,
-          lastLogin: new Date(),
           numberOfVisit: 0
         })
-        if (user && (await subscribeCommunity(user, true))) {
-          res.status(201).send('SUCCESS')
-        }
-      } else {
-        res.status(201).send('SUCCESS')
-      }
+        await subscribeCommunity(user, true, t)
+      })
     } else {
-      registerLocal(name, password, res)
+      await registerLocal(name, password, res)
     }
+    res.status(201).send('SUCCESS')
   } catch (err) {
     res.status(409).json({ error: err.message })
   }
 }
 
-const registerLocal = async (name, password, res) => {
-  try {
-    const userExists = await db.LocalAuth.findOne({ where: { username: name } })
-    if (userExists) {
-      return res.json({ message: 'Users already Exists !!!' }).status(400)
-    }
-    const newUser = await db.sequelize.transaction(async (t) => {
-      const user = await db.LocalAuth.create(
-        { username: name, password: password },
-        { transaction: t }
-      )
-      return await db.User.create(
-        {
-          userID: user.id,
-          isLocalAuth: true,
-          lastLogin: new Date(),
-          numberOfVisit: 0
-        },
-        { transaction: t }
-      )
-    })
-    if (newUser && (await subscribeCommunity(newUser, true))) {
-      res.status(201).json({
-        id: newUser.dataValues.userID,
-        userID: newUser.dataValues.userID,
-        token: generateToken(newUser.dataValues.userID)
-      })
-    } else {
-      res.status(400).json({ error: 'Invalid user data' })
-    }
-  } catch (error) {
-    res.json(error)
+const registerLocal = async (name, password) => {
+  const localAuth = await db.LocalAuth.findOne({ where: { username: name } })
+  if (localAuth) {
+    throw new Error('Users already exists')
   }
+
+  await db.sequelize.transaction(async (t) => {
+    const localAuth = await db.LocalAuth.create(
+      { username: name, password: password },
+      { transaction: t }
+    )
+    const user = await db.User.create(
+      {
+        userID: localAuth.id,
+        isLocalAuth: true,
+        lastLogin: new Date(),
+        numberOfVisit: 0
+      },
+      { transaction: t }
+    )
+
+    await subscribeCommunity(user, true, t)
+  })
 }
 
-const subscribeCommunity = async (user, register) => {
-  try {
-    return await db.sequelize.transaction(async (t) => {
-      const communitiesArray = await db.Community.findAll(
-        {
-          attributes: ['id'],
-          where: { auto_follow: true }
-        },
-        { transaction: t }
-      )
-      const communityUser = await db.CommunityUser.findOne({
-        where: { userId: user.dataValues.id }
-      })
-      const allFollow = []
-      for (let i = 0; i < communitiesArray.length; i++) {
-        const followObj = {
-          userId: user.dataValues.id,
-          communityId: parseInt(communitiesArray[i].id)
-        }
-        if (register) {
-          allFollow.push(followObj)
-        } else if (
-          followObj.userId !== communityUser.dataValues.userId &&
-          followObj.communityId !== communityUser.dataValues.communityId
-        ) {
-          allFollow.push(followObj)
-        }
-      }
-      await db.CommunityUser.bulkCreate(allFollow)
-      return true
+const subscribeCommunity = async (user, register, t) => {
+  const communitiesArray = await db.Community.findAll(
+    {
+      attributes: ['id'],
+      where: { auto_follow: true }
+    },
+    { transaction: t }
+  )
+  const communityUser = await db.CommunityUser.findAll({
+    where: { userId: user.dataValues.id }
+  })
+  const userCommunityIds = communityUser.map(item => item.communityId)
+  const allFollow = []
+  for (let i = 0; i < communitiesArray.length; i++) {
+    const followObj = {
+      userId: user.dataValues.id,
+      communityId: parseInt(communitiesArray[i].id)
+    }
+    if (register || !userCommunityIds.includes(followObj.communityId)) {
+      allFollow.push(followObj)
+    }
+  }
+
+  if (allFollow.length) {
+    await db.CommunityUser.bulkCreate(allFollow, {
+      transaction: t
     })
-  } catch (error) {
-    return false
   }
 }
 
