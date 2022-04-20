@@ -62,7 +62,9 @@ function amplifyConfig () {
   })
 }
 
-if (process.env.AUTH_METHOD === 'cognito') {
+const isCognito = process.env.AUTH_METHOD === 'cognito'
+
+if (isCognito) {
   amplifyConfig()
 }
 
@@ -71,10 +73,10 @@ if (process.env.AUTH_METHOD === 'cognito') {
 // @access  Public
 const authUser = async (req, res) => {
   try {
-    const { name, password } = req.body
-    const data = await login(name, password);
+    const { name, password, id } = req.body
+    const data = await login(name, password, id)
 
-    res.json(data)
+    res.status(200).json(data)
   } catch (e) {
     res.status(401).json({
       error: 'Please type correct email or password'
@@ -82,29 +84,25 @@ const authUser = async (req, res) => {
   }
 }
 
-const login = async (name, password) => {
-  let id;
-  let token;
+const login = async (name, password, userId) => {
+  let id = userId
+  let token
 
-  if (process.env.AUTH_METHOD === 'cognito') {
-    const response = await Auth.signIn(name, password);
-
-    id = response?.attributes?.sub || "";
-    token = response?.signInUserSession?.idToken?.jwtToken || "";
-  } else {
+  if (!isCognito) {
     const localAuth = await db.LocalAuth.findOne({
       where: { username: name, password: password }
     })
-    const user = await db.User.findOne({
-      where: { userID: localAuth.id }
-    })
 
-    if (!user) {
-      throw new Error('User not found')
-    }
+    token = generateToken(localAuth.id),
+    id = localAuth.id
+  }
 
-    token = generateToken(user.userID),
-    id = user.userID
+  const user = await db.User.findOne({
+    where: { userID: id }
+  })
+
+  if (!user) {
+    throw new Error('User not found')
   }
 
   // update last login and number of visit
@@ -117,7 +115,7 @@ const login = async (name, password) => {
     }
   })
 
-  return { id, token };
+  return token ? { id, token } : { id }
 }
 
 // @desc    Register a new user
@@ -125,10 +123,15 @@ const login = async (name, password) => {
 // @access  Public
 const registerUser = async (req, res) => {
   try {
-    const { name, password } = req.body
+    const { name, password, email } = req.body
+    const attributes = {}
 
-    if (process.env.AUTH_METHOD === 'cognito') {
-      const response = await Auth.signUp({ username: name, password })
+    if (email) {
+      attributes.email = email
+    }
+
+    if (isCognito) {
+      const response = await Auth.signUp({ username: name, password, attributes })
       await db.sequelize.transaction(async (t) => {
         const user = await db.User.create({
           userID: response.userSub,
@@ -208,7 +211,7 @@ const sendTokenStatus = (req, res) => {
 const changePassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
   const userID = req.user.userID
-  if (process.env.AUTH_METHOD !== 'cognito') {
+  if (!isCognito) {
     const oldUser = await db.LocalAuth.findByPk(userID)
     if (oldUser.dataValues.password === oldPassword) {
       await db.LocalAuth.update(
@@ -226,27 +229,41 @@ const changePassword = async (req, res) => {
 const forgotPassword = async (req, res) => {
   // Send confirmation code to user's email
   const { username } = req.body
-  Auth.forgotPassword(username)
-    .then((CodeDeliveryDetails) =>
-      res.json({ details: CodeDeliveryDetails }).status(200)
-    )
-    .catch((err) => console.log(err))
+  try {
+    const details = await Auth.forgotPassword(username)
+    res.status(200).json({ details })
+  } catch (error) {
+    res.status(400).json({
+      error: error.message
+    })
+  }
 }
 
 const forgotPasswordSubmit = async (req, res) => {
   // Send confirmation code to user's email
   const { username, code, newPassword } = req.body
-  Auth.forgotPasswordSubmit(username, code, newPassword)
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err))
+
+  try {
+    await Auth.forgotPasswordSubmit(username, code, newPassword)
+    res.status(200).json({
+      message: 'Password has been updated'
+    })
+  } catch (error) {
+    res.status(400).json({
+      error: error.message
+    })
+  }
 }
 
 const confirmSignUpWithCode = async (req, res) => {
   const { username, code } = req.body
   try {
     await Auth.confirmSignUp(username, code)
+    res.status(200).json({ message: 'Sign up has been confirmed' })
   } catch (error) {
-    console.log('error confirming sign up', error)
+    res.status(400).json({
+      error: error.message
+    })
   }
 }
 
@@ -348,8 +365,7 @@ const updateUser = async (req, res) => {
           .then(() => res.sendStatus(200))
           .catch((err) => res.status(403).json({ error: err.message }))
       } else {
-        res.status(404)
-        throw new Error('User not found')
+        res.status(404).json({ error: 'User not found' })
       }
     })
   } catch (err) {

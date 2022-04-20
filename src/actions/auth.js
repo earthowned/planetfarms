@@ -57,55 +57,26 @@ export const getAccessToken = () => async (dispatch) => {
   }
 };
 
-// // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-// const commonLogin = async ({ name, password }) => {
-//   try {
-//     const response = await api.auth.login({ name, password });
-//     const { data: token, id } = response.data;
-
-//     const payload = { token, id };
-//     localStorage.setItem("userInfo", JSON.stringify(payload));
-
-//     return Promise.resolve(payload);
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
-
-// // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
-// const cognitoLogin = async ({ name, password }) => {
-//   try {
-//     const response = await Auth.signIn(name, password);
-
-//     const id = response?.attributes?.sub || "";
-//     const token = response?.signInUserSession?.idToken?.jwtToken || "";
-
-//     const payload = { token, id };
-//     localStorage.setItem("userInfo", JSON.stringify(payload));
-
-//     await api.auth.register({ id }); // I do not see a need to register in login
-
-//     await api.profile.update({
-//       email: response.attributes.email,
-//       birthday: response.attributes.birthdate,
-//       phone: response.attributes.phone_number,
-//       firstName: response.attributes.given_name,
-//       lastName: response.attributes.family_name,
-//     }); // do we need to update this every login?
-
-//     return Promise.resolve(payload);
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
-
 // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 export const login =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      const response = await api.auth.login({ name, password });
-      const { data: authData } = response;
+      let authData = {};
+      let response;
+      if (isCognito) {
+        response = await Auth.signIn(name, password);
+        const id = response?.attributes?.sub || "";
+        authData = {
+          id,
+          token: response?.signInUserSession?.idToken?.jwtToken || "",
+        };
+        await api.auth.login({ id });
+      } else {
+        response = await api.auth.login({ name, password });
+        authData = response.data;
+      }
+
       localStorage.setItem("userInfo", JSON.stringify(authData));
 
       const profile = await api.user.get({ id: authData.id });
@@ -127,13 +98,6 @@ export const register =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      // if (isCognito) {
-      //   const attrs = { attributes: { email: null } };
-      //   await Auth.signUp({ username: name, password, ...attrs });
-      // } else {
-      //   await api.auth.register({ name, password });
-      // }
-
       await api.auth.register({ name, password });
       await login({ name, password })(dispatch);
       return Promise.resolve();
@@ -147,7 +111,7 @@ export const requestCode = async (username) => {
   try {
     let response;
     if (isCognito) {
-      const data = await Auth.forgotPassword(username);
+      const data = await api.auth.forgotPassword(username);
       response = data.CodeDeliveryDetails.AttributeName.split("_").join(" ");
     }
     return Promise.resolve(response);
@@ -159,7 +123,7 @@ export const requestCode = async (username) => {
 export const resetPassword = async ({ username, code, password }) => {
   try {
     if (isCognito) {
-      await Auth.forgotPasswordSubmit(username, code, password);
+      await api.auth.forgotPasswordSubmit(username, code, password);
     }
     return Promise.resolve();
   } catch (error) {
@@ -170,8 +134,8 @@ export const resetPassword = async ({ username, code, password }) => {
 export const changePassword = async ({ oldPassword, newPassword }) => {
   try {
     if (isCognito) {
-      const response = await Auth.currentAuthenticatedUser();
-      await Auth.changePassword(response, oldPassword, newPassword);
+      const user = await Auth.currentAuthenticatedUser();
+      await Auth.changePassword(user, oldPassword, newPassword);
     } else {
       await api.auth.changePassword({ oldPassword, newPassword });
     }
