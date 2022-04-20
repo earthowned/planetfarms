@@ -3,7 +3,8 @@
 
 .current-course-page-container {
   width: 100%;
-  gap: $gap-small;
+  // max-width: 1112px;
+  gap: $gap-medium;
   background-color: transparent;
   @include flexColumn(flex-start, flex-start);
 

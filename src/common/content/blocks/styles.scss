@@ -4,7 +4,7 @@
 
 .content-text-block {
   width: 100%;
-  gap: $gap-smallest;
+  gap: $gap-small;
   @include flexColumn();
 }
 

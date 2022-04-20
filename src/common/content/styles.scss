@@ -3,6 +3,6 @@
 
 .content-blocks-container {
   width: 100%;
-  gap: $gap-small;
+  gap: $gap-medium;
   @include flexColumn(flex-start, flex-start);
 }

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import { Members } from "components/courses";
 import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
 
@@ -41,6 +42,12 @@ export const CoursePage = () => {
         <div className="course-content-container">
           <ContentBlocks contentList={course?.content} />
         </div>
+
+        <Members
+          list={course?.membersList}
+          onSelectMember={() => {}}
+          onViewAll={() => {}}
+        />
       </div>
     </DashboardLayout>
   );

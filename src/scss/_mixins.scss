@@ -89,6 +89,13 @@
   -webkit-box-orient: vertical;
 }
 
+@mixin breakEachWord() {
+  width: min-intrinsic; /* old Chrome, Safari */
+  width: -webkit-min-content; /* less old Chrome, Safari */
+  width: -moz-min-content; /* current Firefox */
+  width: min-content; /* current Chrome, Safari; not IE or Edge */
+}
+
 @mixin flexColumn($alignItems: normal, $justifyContent: normal) {
   display: flex;
   flex-direction: column;
@@ -102,4 +109,24 @@
   flex-direction: row;
   align-items: $alignItems;
   justify-content: $justifyContent;
+}
+
+@mixin circle($size) {
+  width: $size;
+  height: $size;
+  border-radius: $size;
+}
+
+@mixin position(
+  $position,
+  $top: auto,
+  $right: auto,
+  $bottom: auto,
+  $left: auto
+) {
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+  position: $position;
 }
