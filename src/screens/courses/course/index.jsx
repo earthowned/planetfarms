@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Members } from "components/courses";
 import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
+import { TwoColumnsGrid } from "common/grids";
 
 import { DashboardLayout } from "layout/dashboard";
 import { selectCurrentCourse } from "store/courses";
@@ -11,6 +12,8 @@ import { selectCurrentCourse } from "store/courses";
 import { CourseMainInfo } from "./main-info";
 
 import "./styles.scss";
+
+const gridTemplateColumns = "1fr 248px";
 
 export const CoursePage = () => {
   const { id } = useParams();
@@ -22,7 +25,10 @@ export const CoursePage = () => {
   return (
     <DashboardLayout withBackButton>
       <div className="current-course-page-container">
-        <div className="header-container">
+        <TwoColumnsGrid
+          reverseMobile={false}
+          templateColumns={gridTemplateColumns}
+        >
           <CourseMainInfo
             title={course?.title}
             price={course?.price}
@@ -37,11 +43,11 @@ export const CoursePage = () => {
             title="Buy course"
             onClick={handleBuyCourse}
           />
-        </div>
+        </TwoColumnsGrid>
 
-        <div className="course-content-container">
+        <TwoColumnsGrid templateColumns={gridTemplateColumns}>
           <ContentBlocks contentList={course?.content} />
-        </div>
+        </TwoColumnsGrid>
 
         <Members
           list={course?.membersList}

@@ -3,37 +3,10 @@
 
 .current-course-page-container {
   width: 100%;
-  // max-width: 1112px;
   gap: $gap-medium;
   background-color: transparent;
   @include flexColumn(flex-start, flex-start);
 
-  .header-container {
-    width: 100%;
-    gap: $gap-big;
-    @include flexRow(center, space-between);
-
-    button {
-      width: 248px;
-    }
-  }
-
-  .course-content-container {
-    width: 100%;
-    padding-right: calc(248px + #{$gap-big});
-  }
-
   @include breakpoint("tablet", "max") {
-    .header-container {
-      @include flexColumn(flex-start, center);
-
-      button {
-        width: 100%;
-      }
-    }
-
-    .course-content-container {
-      padding-right: 0px;
-    }
   }
 }

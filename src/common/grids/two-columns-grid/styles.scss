@@ -1,0 +1,18 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.two-columns-grid-container {
+  width: 100%;
+  display: grid;
+  gap: $gap-big $gap-big;
+
+  &-reversed {
+    .second-column {
+      order: -1;
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    gap: $gap-medium $gap-medium;
+  }
+}
