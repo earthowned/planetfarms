@@ -1,0 +1,9 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.reviews-block-container {
+  width: 100%;
+  gap: $gap-small;
+  @include flexColumn(flex-start, flex-start);
+}

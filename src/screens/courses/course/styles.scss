@@ -7,6 +7,11 @@
   background-color: transparent;
   @include flexColumn(flex-start, flex-start);
 
+  .column-container {
+    gap: $gap-big;
+    @include flexColumn();
+  }
+
   @include breakpoint("tablet", "max") {
   }
 }

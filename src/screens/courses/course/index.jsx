@@ -1,10 +1,16 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { Members } from "components/courses";
+import { TwoColumnsGrid } from "common/grids";
 import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
-import { TwoColumnsGrid } from "common/grids";
+import {
+  MembersBlock,
+  ReviewsBlock,
+  LessonsBlock,
+  MeterialsBlock,
+} from "components/courses/blocks";
 
 import { DashboardLayout } from "layout/dashboard";
 import { selectCurrentCourse } from "store/courses";
@@ -17,8 +23,10 @@ const gridTemplateColumns = "1fr 248px";
 
 export const CoursePage = () => {
   const { id } = useParams();
-
   const course = useSelector((state) => selectCurrentCourse(state, id));
+
+  const [isReviewsVisible, setIsReviewsVisible] = useState(false);
+  const [isMaterialsVisible, setMaterialsVisible] = useState(false);
 
   const handleBuyCourse = () => {};
 
@@ -49,11 +57,20 @@ export const CoursePage = () => {
           <ContentBlocks contentList={course?.content} />
         </TwoColumnsGrid>
 
-        <Members
+        <MembersBlock
           list={course?.membersList}
           onSelectMember={() => {}}
           onViewAll={() => {}}
         />
+
+        <TwoColumnsGrid reverseMobile templateColumns={gridTemplateColumns}>
+          <LessonsBlock />
+
+          <div className="column-container">
+            <MeterialsBlock />
+            <ReviewsBlock />
+          </div>
+        </TwoColumnsGrid>
       </div>
     </DashboardLayout>
   );

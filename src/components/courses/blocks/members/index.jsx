@@ -13,7 +13,7 @@ const ViewAllComponent = () => (
   </div>
 );
 
-export const Members = ({ list = [], onSelectMember, onViewAll }) => {
+export const MembersBlock = ({ list = [], onSelectMember, onViewAll }) => {
   if (!list || list.length === 0) return null;
 
   const members = list.slice(0, 6);

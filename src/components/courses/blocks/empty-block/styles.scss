@@ -1,0 +1,17 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.courses-empty-block-container {
+  width: 100%;
+  gap: $gap-medium;
+  @include flexColumn(center, center);
+
+  img {
+    height: 100%;
+    width: fit-content;
+  }
+
+  button {
+    width: 100%;
+  }
+}

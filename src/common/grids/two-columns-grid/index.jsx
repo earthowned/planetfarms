@@ -26,7 +26,7 @@ export const TwoColumnsGrid = ({
 
   return (
     <div className={className} style={{ gridTemplateColumns: grid }}>
-      {children.length && (
+      {children?.length && (
         <>
           <div className="first-column">{children[0] && children[0]}</div>
           <div className="second-column">{children[1] && children[1]}</div>
