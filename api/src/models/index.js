@@ -32,7 +32,6 @@ const db = {
     sequelize,
     Sequelize.DataTypes
   ),
-  LocalAuth: require('./localAuthModel')(sequelize, Sequelize.DataTypes),
   Courses: require('./courseModel')(sequelize, Sequelize.DataTypes),
   CourseView: require('./courseViewModel')(sequelize, Sequelize.DataTypes),
   Lesson: require('./lessonModel')(sequelize, Sequelize.DataTypes),

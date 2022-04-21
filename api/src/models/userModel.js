@@ -8,9 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     userID: {
       type: DataTypes.STRING
     },
-    isLocalAuth: {
-      type: DataTypes.BOOLEAN
-    },
     firstName: {
       type: DataTypes.STRING
     },

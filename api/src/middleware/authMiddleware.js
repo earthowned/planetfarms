@@ -30,9 +30,8 @@ const throwError = (message) =>
 
 const verifyToken = (token) => {
   try {
-    return process.env.AUTH_METHOD !== 'cognito'
-    ? (jwt.verify(token, process.env.JWT_SECRET)).id
-    : (cognitoJwkPem(token)).sub
+    const decoded = cognitoJwkPem(token)
+    return decoded.sub
   } catch (error) {
     checkAuthorization(error)
   }

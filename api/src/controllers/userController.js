@@ -62,60 +62,41 @@ function amplifyConfig () {
   })
 }
 
-const isCognito = process.env.AUTH_METHOD === 'cognito'
-
-if (isCognito) {
-  amplifyConfig()
-}
+amplifyConfig()
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
 const authUser = async (req, res) => {
   try {
-    const { name, password, id } = req.body
-    const data = await login(name, password, id)
+    const { id } = req.body
 
-    res.status(200).json(data)
+    const user = await db.User.findOne({
+      where: { userID: id }
+    })
+
+    if (!user) {
+      throw new NotFoundError()
+    }
+
+    // update last login and number of visit
+    await db.User.update({
+      lastLogin: new Date(),
+      numberOfVisit: Sequelize.literal('"numberOfVisit" + 1')
+    }, {
+      where: {
+        userID: id
+      }
+    })
+
+    res.status(200).json({
+      id
+    })
   } catch (e) {
     res.status(401).json({
       error: 'Please type correct email or password'
     })
   }
-}
-
-const login = async (name, password, userId) => {
-  let id = userId
-  let token
-
-  if (!isCognito) {
-    const localAuth = await db.LocalAuth.findOne({
-      where: { username: name, password: password }
-    })
-
-    token = generateToken(localAuth.id),
-    id = localAuth.id
-  }
-
-  const user = await db.User.findOne({
-    where: { userID: id }
-  })
-
-  if (!user) {
-    throw new Error('User not found')
-  }
-
-  // update last login and number of visit
-  await db.User.update({
-    lastLogin: new Date(),
-    numberOfVisit: Sequelize.literal('"numberOfVisit" + 1')
-  }, {
-    where: {
-      userID: id
-    }
-  })
-
-  return token ? { id, token } : { id }
 }
 
 // @desc    Register a new user
@@ -130,49 +111,22 @@ const registerUser = async (req, res) => {
       attributes.email = email
     }
 
-    if (isCognito) {
-      const response = await Auth.signUp({ username: name, password, attributes })
+    const response = await Auth.signUp({ username: name, password, attributes })
       await db.sequelize.transaction(async (t) => {
         const user = await db.User.create({
           userID: response.userSub,
-          isLocalAuth: false,
           numberOfVisit: 0
         })
         await subscribeCommunity(user, true, t)
       })
-    } else {
-      await registerLocal(name, password, res)
-    }
-    res.status(201).send('SUCCESS')
+    res.status(201).send({
+      message: 'The user has been registered'
+    })
   } catch (err) {
     res.status(409).json({ error: err.message })
   }
 }
 
-const registerLocal = async (name, password) => {
-  const localAuth = await db.LocalAuth.findOne({ where: { username: name } })
-  if (localAuth) {
-    throw new Error('Users already exists')
-  }
-
-  await db.sequelize.transaction(async (t) => {
-    const localAuth = await db.LocalAuth.create(
-      { username: name, password: password },
-      { transaction: t }
-    )
-    const user = await db.User.create(
-      {
-        userID: localAuth.id,
-        isLocalAuth: true,
-        lastLogin: new Date(),
-        numberOfVisit: 0
-      },
-      { transaction: t }
-    )
-
-    await subscribeCommunity(user, true, t)
-  })
-}
 
 const subscribeCommunity = async (user, register, t) => {
   const communitiesArray = await db.Community.findAll(
@@ -206,24 +160,6 @@ const subscribeCommunity = async (user, register, t) => {
 
 const sendTokenStatus = (req, res) => {
   res.status(201).json({ message: 'accepted' })
-}
-
-const changePassword = async (req, res) => {
-  const { oldPassword, newPassword } = req.body
-  const userID = req.user.userID
-  if (!isCognito) {
-    const oldUser = await db.LocalAuth.findByPk(userID)
-    if (oldUser.dataValues.password === oldPassword) {
-      await db.LocalAuth.update(
-        { password: newPassword },
-        { where: { id: userID } }
-      ).then(() =>
-        res.json({ message: 'The user password has been updated.' }).status(200)
-      )
-    } else {
-      res.status(401).json({ message: 'Incorrect old password' })
-    }
-  }
 }
 
 const forgotPassword = async (req, res) => {
@@ -281,22 +217,6 @@ const getUsers = (req, res) => {
       })
     })
     .catch((err) => res.json({ err }).status(400))
-}
-
-// @desc    Fetch single user for auth
-// @route   GET /api/user/:id
-// @access  Public
-const getUserById = (req, res) => {
-  const id = req.params.id
-  db.LocalAuth.findByPk(id)
-    .then((user) => {
-      if (user) {
-        res.json(user)
-      } else {
-        throw new Error('User not found')
-      }
-    })
-    .catch((err) => res.json({ error: err.message }).status(400))
 }
 
 // @desc    Fetch single user profile details
@@ -390,11 +310,9 @@ const searchUserName = (req, res) => {
 module.exports = {
   registerUser,
   authUser,
-  changePassword,
   forgotPassword,
   forgotPasswordSubmit,
   confirmSignUpWithCode,
-  getUserById,
   getUserProfileByUserID,
   getMyProfile,
   getUsers,

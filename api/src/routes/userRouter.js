@@ -3,7 +3,6 @@ const router = express.Router()
 const {
   registerUser,
   authUser,
-  changePassword,
   forgotPassword,
   forgotPasswordSubmit,
   confirmSignUpWithCode,
@@ -31,7 +30,6 @@ router
 router.post('/login', authUser)
 router.route('/token').get(protect, sendTokenStatus)
 router.route('/search').get(searchUserName)
-router.route('/changePassword').post(protect, changePassword)
 router.post('/forgotPassword', forgotPassword)
 router.post('/forgotPasswordSubmit', forgotPasswordSubmit)
 router.post('/confirmSignUp', confirmSignUpWithCode)
