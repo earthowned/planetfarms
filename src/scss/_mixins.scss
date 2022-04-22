@@ -130,3 +130,18 @@
   bottom: $bottom;
   position: $position;
 }
+
+@mixin safe-area-padding($direction, $value) {
+  @if $direction == "top" {
+    padding-top: Max($value, env(safe-area-inset-top));
+  }
+  @if $direction == "bottom" {
+    padding-bottom: Max($value, env(safe-area-inset-bottom));
+  }
+  @if $direction == "left" {
+    padding-left: Max($value, env(safe-area-inset-left));
+  }
+  @if $direction == "right" {
+    padding-right: Max($value, env(safe-area-inset-right));
+  }
+}

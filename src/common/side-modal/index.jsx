@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Portal } from "react-portal";
 
 import { IconButton } from "common/buttons/icon-button";
@@ -5,15 +6,20 @@ import { ActionButton } from "common/buttons/action-button";
 
 import "./styles.scss";
 
+const actionBtnConfig = { variant: "primary", title: "", onClick: () => {} };
+
 export const SideModal = ({
   title,
   visible,
   onClose,
   children,
-  actionTitle,
-  onActionClick,
+  actionProps = undefined,
 }) => {
   if (!visible) return null;
+
+  const buttonProps = useMemo(() => {
+    return { ...actionBtnConfig, ...(actionProps && actionProps) };
+  }, [actionProps]);
 
   return (
     <Portal node={document && document.getElementById("app-portal-container")}>
@@ -28,13 +34,9 @@ export const SideModal = ({
 
           <div className="content-container">{children}</div>
 
-          {actionTitle && onActionClick && (
+          {actionProps && (
             <div className="bottom-container">
-              <ActionButton
-                variant="primary"
-                title={actionTitle}
-                onClick={onActionClick}
-              />
+              <ActionButton {...buttonProps} />
             </div>
           )}
         </div>

@@ -20,5 +20,19 @@
       gap: $gap-smallest;
       @include flexRow();
     }
+
+    .buttons-container {
+      gap: $gap-small;
+      @include flexRow();
+    }
+  }
+}
+
+.materials-side-modal-container {
+  padding: 0 24px;
+
+  @include breakpoint("tablet", "max") {
+    @include safe-area-padding("left", 16px);
+    @include safe-area-padding("right", 16px);
   }
 }

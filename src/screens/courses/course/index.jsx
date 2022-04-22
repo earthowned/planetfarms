@@ -14,6 +14,7 @@ import {
 
 import { DashboardLayout } from "layout/dashboard";
 import { selectCurrentCourse } from "store/courses";
+import { selectCurrentUser } from "store/user/selectors";
 
 import { CourseMainInfo } from "./main-info";
 import { getCourseMatarials } from "./helpers";
@@ -25,6 +26,7 @@ const gridTemplateColumns = "1fr 248px";
 export const CoursePage = () => {
   const { id } = useParams();
   const course = useSelector((state) => selectCurrentCourse(state, id));
+  const currentUser = useSelector(selectCurrentUser);
 
   const [isReviewsVisible, setIsReviewsVisible] = useState(false);
   const [isMaterialsVisible, setMaterialsVisible] = useState(false);
@@ -68,7 +70,11 @@ export const CoursePage = () => {
           <LessonsBlock />
 
           <div className="column-container">
-            <MeterialsBlock materials={getCourseMatarials(id)} />
+            <MeterialsBlock
+              materials={getCourseMatarials(id)}
+              isEditMode
+              // isEditMode={course?.author === currentUser?.id}
+            />
             <ReviewsBlock />
           </div>
         </TwoColumnsGrid>
