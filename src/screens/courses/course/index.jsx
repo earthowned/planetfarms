@@ -16,6 +16,7 @@ import { DashboardLayout } from "layout/dashboard";
 import { selectCurrentCourse } from "store/courses";
 
 import { CourseMainInfo } from "./main-info";
+import { getCourseMatarials } from "./helpers";
 
 import "./styles.scss";
 
@@ -67,7 +68,7 @@ export const CoursePage = () => {
           <LessonsBlock />
 
           <div className="column-container">
-            <MeterialsBlock />
+            <MeterialsBlock materials={getCourseMatarials(id)} />
             <ReviewsBlock />
           </div>
         </TwoColumnsGrid>

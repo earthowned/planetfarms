@@ -47,3 +47,13 @@ export const CourseListType = {
   All: "All",
   Paid: "Paid",
 };
+
+export const FileExtension = {
+  zip: "zip",
+  xls: "xls",
+  doc: "doc",
+  txt: "txt",
+  pdf: "pdf",
+  jpg: "jpg",
+  png: "png",
+};

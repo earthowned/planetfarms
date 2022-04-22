@@ -7,3 +7,18 @@
   gap: $gap-small;
   @include flexColumn(flex-start, flex-start);
 }
+
+.materials-list-container {
+  width: 100%;
+  gap: $gap-medium;
+  @include flexColumn();
+
+  .material-container {
+    @include flexRow(center, space-between);
+
+    .info-container {
+      gap: $gap-smallest;
+      @include flexRow();
+    }
+  }
+}
