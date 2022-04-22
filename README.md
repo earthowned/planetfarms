@@ -46,17 +46,16 @@ DATABASE_USERNAME=<database username>
 DATABASE_PASSWORD=<database password>
 DATABASE_HOST=<database server>
 FRONTEND_URL=<url of your frontend>
-AUTH_METHOD=<**local** or **cognito**>
-COGNITO_REGION=<required only if using cognito auth method>
-COGNITO_POOL_ID=<required only if using cognito auth method>
-COGNITO_CLIENT_ID=<required only if using cognito auth method>
-COGNITO_DOMAIN_NAME=<required only if using cognito auth method>
+COGNITO_REGION=<cognito region>
+COGNITO_POOL_ID=<cognito pool id>
+COGNITO_CLIENT_ID=<cognito client id>
+COGNITO_DOMAIN_NAME=<cognito domain name>
 ```
 
 ### `initial setup`
 
-If you are running cognito authentication then you need to copy file from https://cognito-idp.{region}.amazonaws.com/{poolId}/.well-known/jwks.json
- and save it under **api/src/middleware** folder
+Copy the file from https://cognito-idp.{region}.amazonaws.com/{poolId}/.well-known/jwks.json
+and save it under **api/src/middleware** folder
 
 ### `docker-compose up`
 

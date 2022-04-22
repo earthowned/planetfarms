@@ -112,13 +112,13 @@ const registerUser = async (req, res) => {
     }
 
     const response = await Auth.signUp({ username: name, password, attributes })
-      await db.sequelize.transaction(async (t) => {
-        const user = await db.User.create({
-          userID: response.userSub,
-          numberOfVisit: 0
-        })
-        await subscribeCommunity(user, true, t)
+    await db.sequelize.transaction(async (t) => {
+      const user = await db.User.create({
+        userID: response.userSub,
+        numberOfVisit: 0
       })
+      await subscribeCommunity(user, true, t)
+    })
     res.status(201).send({
       message: 'The user has been registered'
     })

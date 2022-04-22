@@ -1,6 +1,6 @@
 name: Manual API init DB Test
 
-on: 
+on:
   workflow_dispatch:
     inputs:
 
@@ -38,7 +38,6 @@ jobs:
           echo "DATABASE_USERNAME=${{ secrets.POSTGRES_USER }}" >> .env
           echo "DATABASE_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
           echo "DATABASE_HOST=localhost" >> .env
-          echo "AUTH_METHOD=local" >> .env
           echo "**********************1"
           npm i
           echo "**********************2"

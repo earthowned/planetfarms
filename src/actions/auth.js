@@ -13,12 +13,7 @@ import {
 
 // import { news } from "./community";
 // import { visitCommunity } from "./communityActions";
-
-const isCognito = process.env.REACT_APP_AUTH_METHOD === "cognito";
-
-if (isCognito) {
-  Amplify.configure({ Auth: { ...authConfig } });
-}
+Amplify.configure({ Auth: { ...authConfig } });
 
 // TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 const makeLogout = (dispatch) => {
@@ -30,7 +25,7 @@ const makeLogout = (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    if (isCognito) await Auth.signOut();
+    await Auth.signOut();
     return Promise.resolve();
   } catch (error) {
     return Promise.reject(error);
@@ -62,20 +57,13 @@ export const login =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      let authData = {};
-      let response;
-      if (isCognito) {
-        response = await Auth.signIn(name, password);
-        const id = response?.attributes?.sub || "";
-        authData = {
-          id,
-          token: response?.signInUserSession?.idToken?.jwtToken || "",
-        };
-        await api.auth.login({ id });
-      } else {
-        response = await api.auth.login({ name, password });
-        authData = response.data;
-      }
+      const response = await Auth.signIn(name, password);
+      const id = response?.attributes?.sub || "";
+      const authData = {
+        id,
+        token: response?.signInUserSession?.idToken?.jwtToken || "",
+      };
+      await api.auth.login({ id });
 
       localStorage.setItem("userInfo", JSON.stringify(authData));
 
@@ -106,14 +94,12 @@ export const register =
     }
   };
 
-// TODO: Why there is no functionality to request code without cognito?
 export const requestCode = async (username) => {
   try {
-    let response;
-    if (isCognito) {
-      const data = await api.auth.forgotPassword(username);
-      response = data.CodeDeliveryDetails.AttributeName.split("_").join(" ");
-    }
+    const data = await api.auth.forgotPassword(username);
+    const response =
+      data.CodeDeliveryDetails.AttributeName.split("_").join(" ");
+
     return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error);
@@ -122,9 +108,7 @@ export const requestCode = async (username) => {
 
 export const resetPassword = async ({ username, code, password }) => {
   try {
-    if (isCognito) {
-      await api.auth.forgotPasswordSubmit(username, code, password);
-    }
+    await api.auth.forgotPasswordSubmit(username, code, password);
     return Promise.resolve();
   } catch (error) {
     return Promise.reject(error);
@@ -133,17 +117,11 @@ export const resetPassword = async ({ username, code, password }) => {
 
 export const changePassword = async ({ oldPassword, newPassword }) => {
   try {
-    if (isCognito) {
-      const user = await Auth.currentAuthenticatedUser();
-      await Auth.changePassword(user, oldPassword, newPassword);
-    } else {
-      await api.auth.changePassword({ oldPassword, newPassword });
-    }
+    const user = await Auth.currentAuthenticatedUser();
+    await Auth.changePassword(user, oldPassword, newPassword);
 
     return Promise.resolve();
   } catch (error) {
-    // TODO: From backend receive wrong error object;
-    // TODO: Backend_Bug: Always incorrect password error, but password has been changed;
     return Promise.reject(error);
   }
 };

@@ -11,18 +11,14 @@ const ContactInformation = ({ user, verification, isCurrentUser }) => {
           secondValue: user?.phone,
         }
       : {}),
-    ...(process.env.REACT_APP_AUTH_METHOD === "cognito"
-      ? {
-          firstVerify: {
-            isVerified: user?.emailVerified || false,
-            clickHandler: verification?.emailClickHandler,
-          },
-          secondVerify: {
-            isVerified: user?.phoneVerified || false,
-            clickHandler: verification?.phoneClickHandler,
-          },
-        }
-      : {}),
+    firstVerify: {
+      isVerified: user?.emailVerified || false,
+      clickHandler: verification?.emailClickHandler,
+    },
+    secondVerify: {
+      isVerified: user?.phoneVerified || false,
+      clickHandler: verification?.phoneClickHandler,
+    },
   };
   return (
     <ProfileFormCard
