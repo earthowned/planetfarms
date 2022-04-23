@@ -1,12 +1,8 @@
 import { useState } from "react";
 
 import { Icon } from "common/icon";
-import { SideModal } from "common/side-modal";
 import { IconButton } from "common/buttons/icon-button";
 import { DownloadButton } from "common/buttons/download-button";
-
-import { BlockHeader } from "../header";
-import { EmptyBllock } from "../empty-block";
 
 import { FileIconName } from "./config";
 
@@ -55,7 +51,11 @@ const Material = ({ material, isEditMode = true }) => {
   );
 };
 
-const MaterialsList = ({ materials = [], maxLength, isEditMode = false }) => {
+export const MaterialsList = ({
+  maxLength,
+  materials = [],
+  isEditMode = false,
+}) => {
   if (materials.length === 0) {
     return null;
   }
@@ -71,50 +71,6 @@ const MaterialsList = ({ materials = [], maxLength, isEditMode = false }) => {
           key={`material-list-item-${index.toString()}`}
         />
       ))}
-    </div>
-  );
-};
-
-export const MeterialsBlock = ({
-  materials = [],
-  isEditMode = false,
-  withAddButton = true,
-}) => {
-  const [isAllVisible, setIsAllVisible] = useState(false);
-  const [isAddVisible, setIsAddVisible] = useState(false);
-
-  return (
-    <div className="materials-block-container">
-      <BlockHeader
-        title="Materials"
-        onViewAll={materials.length > 0 ? () => setIsAllVisible(true) : null}
-      />
-
-      <MaterialsList materials={materials} maxLength={4} />
-
-      <EmptyBllock
-        imageSize="small"
-        variant="Material"
-        isAddButtonVisible={withAddButton}
-        onAdd={() => setIsAddVisible(true)}
-        isImageVisible={materials.length === 0}
-      />
-
-      <SideModal
-        title="Materials"
-        visible={isAllVisible}
-        onClose={() => setIsAllVisible(false)}
-        actionProps={{
-          icon: "plus",
-          variant: "secondary",
-          title: "Add Material",
-          onClick: () => setIsAddVisible(true),
-        }}
-      >
-        <div className="materials-side-modal-container">
-          <MaterialsList materials={materials} isEditMode={isEditMode} />
-        </div>
-      </SideModal>
     </div>
   );
 };

@@ -9,8 +9,8 @@ import {
   MembersBlock,
   ReviewsBlock,
   LessonsBlock,
-  MeterialsBlock,
 } from "components/courses/blocks";
+import { MeterialsBlock } from "components/courses";
 
 import { DashboardLayout } from "layout/dashboard";
 import { selectCurrentCourse } from "store/courses";
