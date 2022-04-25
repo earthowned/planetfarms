@@ -9,20 +9,20 @@ export const register = ({ name, password }) =>
 export const getToken = () => apiInstance.get("users/token");
 
 export const changePassword = ({ oldPassword, newPassword }) =>
-  apiInstance.post("/users/changePassword", { oldPassword, newPassword });
+  apiInstance.post("/users/change-password", { oldPassword, newPassword });
 
 export const forgotPassword = (username) =>
-  apiInstance.post("/users/forgotPassword", { username });
+  apiInstance.post("/users/forgot-password", { username });
 
 export const forgotPasswordSubmit = ({ username, code, newPassword }) =>
-  apiInstance.post("/users/forgotPasswordSubmit", {
+  apiInstance.post("/users/forgot-password-submit", {
     username,
     code,
     newPassword,
   });
 
 export const confirmSignup = ({ username, code }) =>
-  apiInstance.post("/users/confirmSignUp", {
+  apiInstance.post("/users/confirm-sign-up", {
     username,
     code,
   });
