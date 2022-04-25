@@ -19,7 +19,7 @@ require('express-async-errors')
 const protect = require('../middleware/authMiddleware')
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
-router.route('/').post(registerUser).get(protect, getUsers)
+router.route('/').get(protect, getUsers)
 router
   .route('/profile')
   .get(protect, getMyProfile)
@@ -28,6 +28,7 @@ router
   .route('/profile/:userID')
   .get(protect, getUserProfileByUserID)
   .put(protect, upload.single('attachments'), resizeImage, updateUser)
+router.post('/register', registerUser)
 router.post('/login', authUser)
 router.route('/token').get(protect, sendTokenStatus)
 router.route('/search').get(searchUserName)
