@@ -31,9 +31,8 @@ router
 router.post('/login', authUser)
 router.route('/token').get(protect, sendTokenStatus)
 router.route('/search').get(searchUserName)
-router.route('/changePassword').post(protect, changePassword)
-router.post('/forgotPassword', forgotPassword)
-router.post('/forgotPasswordSubmit', forgotPasswordSubmit)
-router.post('/confirmSignUp', confirmSignUpWithCode)
+router.post('/forgot-password', forgotPassword)
+router.post('/forgot-password-submit', forgotPasswordSubmit)
+router.post('/confirm-sign-up', confirmSignUpWithCode)
 
 module.exports = router

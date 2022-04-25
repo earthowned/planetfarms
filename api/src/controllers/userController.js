@@ -208,6 +208,9 @@ const sendTokenStatus = (req, res) => {
   res.status(201).json({ message: 'accepted' })
 }
 
+// @desc    Forgot password of a user
+// @route   POST /api/users/forgot-password
+// @access  Public
 const changePassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
   const userID = req.user.userID
@@ -239,6 +242,9 @@ const forgotPassword = async (req, res) => {
   }
 }
 
+// @desc    Submit forgot password of a user
+// @route   POST /api/users/forgot-password-submit
+// @access  Public
 const forgotPasswordSubmit = async (req, res) => {
   // Send confirmation code to user's email
   const { username, code, newPassword } = req.body
@@ -255,6 +261,9 @@ const forgotPasswordSubmit = async (req, res) => {
   }
 }
 
+// @desc    Confirm sign up of a user
+// @route   POST /api/users/confirm-sign-up
+// @access  Public
 const confirmSignUpWithCode = async (req, res) => {
   const { username, code } = req.body
   try {
