@@ -3,6 +3,8 @@ import { useState } from "react";
 import { EmptyBllock, BlockHeader } from "components/courses/common";
 
 import { ReviewsList } from "../list";
+import { AddReviewModal } from "../add-review-modal";
+import { AllReviewsModal } from "../all-reviews-modal";
 
 import "./styles.scss";
 
@@ -25,6 +27,18 @@ export const ReviewsBlock = ({ reviews = [], withAddButton = false }) => {
         isAddButtonVisible={withAddButton}
         onAdd={() => setIsAddVisible(true)}
         isImageVisible={reviews.length === 0}
+      />
+
+      <AddReviewModal
+        visible={isAddVisible}
+        onClose={() => setIsAddVisible(false)}
+      />
+
+      <AllReviewsModal
+        reviews={reviews}
+        visible={isAllVisible}
+        onClose={() => setIsAllVisible(false)}
+        onAddReview={() => setIsAddVisible(true)}
       />
     </div>
   );

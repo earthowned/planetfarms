@@ -7,10 +7,18 @@
   @include flexColumn(center, center);
 
   img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 
   button {
     width: 100%;
+  }
+
+  @include breakpoint("tablet", "max") {
+    img {
+      width: unset;
+    }
   }
 }
