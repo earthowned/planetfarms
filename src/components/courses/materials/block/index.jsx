@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-// TODO: REFACTOR
-import { BlockHeader } from "../../blocks/header";
-import { EmptyBllock } from "../../blocks/empty-block";
+import { EmptyBllock, BlockHeader } from "components/courses/common";
 
 import { MaterialsList } from "../list";
 import { AddMaterialsModal } from "../add-modal";

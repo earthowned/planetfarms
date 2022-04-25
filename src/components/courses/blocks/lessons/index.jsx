@@ -1,5 +1,4 @@
-import { EmptyBllock } from "../empty-block";
-import { BlockHeader } from "../header";
+import { EmptyBllock, BlockHeader } from "components/courses/common";
 
 import "./styles.scss";
 

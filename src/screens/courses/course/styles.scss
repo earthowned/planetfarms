@@ -8,10 +8,8 @@
   @include flexColumn(flex-start, flex-start);
 
   .column-container {
+    width: 100%;
     gap: $gap-big;
     @include flexColumn();
-  }
-
-  @include breakpoint("tablet", "max") {
   }
 }

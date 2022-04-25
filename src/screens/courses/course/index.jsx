@@ -1,23 +1,18 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { TwoColumnsGrid } from "common/grids";
 import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
-import {
-  MembersBlock,
-  ReviewsBlock,
-  LessonsBlock,
-} from "components/courses/blocks";
-import { MeterialsBlock } from "components/courses";
+import { MembersBlock, LessonsBlock } from "components/courses/blocks";
+import { MeterialsBlock, ReviewsBlock } from "components/courses";
 
 import { DashboardLayout } from "layout/dashboard";
 import { selectCurrentCourse } from "store/courses";
-import { selectCurrentUser } from "store/user/selectors";
+// import { selectCurrentUser } from "store/user/selectors";
 
 import { CourseMainInfo } from "./main-info";
-import { getCourseMatarials } from "./helpers";
+import { getCourseMatarials, getCourseReviews } from "./helpers";
 
 import "./styles.scss";
 
@@ -26,10 +21,7 @@ const gridTemplateColumns = "1fr 248px";
 export const CoursePage = () => {
   const { id } = useParams();
   const course = useSelector((state) => selectCurrentCourse(state, id));
-  const currentUser = useSelector(selectCurrentUser);
-
-  const [isReviewsVisible, setIsReviewsVisible] = useState(false);
-  const [isMaterialsVisible, setMaterialsVisible] = useState(false);
+  // const currentUser = useSelector(selectCurrentUser);
 
   const handleBuyCourse = () => {};
 
@@ -71,11 +63,12 @@ export const CoursePage = () => {
 
           <div className="column-container">
             <MeterialsBlock
+              isEditMode={false}
               materials={getCourseMatarials(id)}
-              isEditMode
               // isEditMode={course?.author === currentUser?.id}
             />
-            <ReviewsBlock />
+
+            <ReviewsBlock reviews={getCourseReviews(id)} />
           </div>
         </TwoColumnsGrid>
       </div>
