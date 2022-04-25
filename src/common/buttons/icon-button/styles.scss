@@ -211,4 +211,28 @@
       @include setSvgColor($color-red-active);
     }
   }
+
+  &-star {
+    @include setSvgColor($color-grey);
+
+    &:hover:enabled {
+      @include setSvgColor($color-grey-hover);
+    }
+
+    &:active:enabled {
+      @include setSvgColor($color-grey-active);
+    }
+  }
+
+  &-star-selected {
+    @include setSvgColor($color-yellow);
+
+    &:hover:enabled {
+      @include setSvgColor($color-yellow-hover);
+    }
+
+    &:active:enabled {
+      @include setSvgColor($color-yellow-active);
+    }
+  }
 }

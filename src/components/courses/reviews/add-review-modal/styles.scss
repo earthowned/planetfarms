@@ -1,0 +1,31 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.add-review-side-modal-container {
+  padding: 0 24px;
+  gap: $gap-medium;
+  @include flexColumn();
+
+  @include breakpoint("tablet", "max") {
+    @include safe-area-padding("left", 16px);
+    @include safe-area-padding("right", 16px);
+  }
+
+  .reviews-section-container {
+    width: 100%;
+    gap: $gap-small;
+    @include flexColumn();
+
+    .label-container {
+      gap: $gap-smallest;
+      @include flexRow(center, flex-start);
+
+      @include setSvgColor($color-grey);
+
+      h5 {
+        color: $color-grey;
+      }
+    }
+  }
+}

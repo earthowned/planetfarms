@@ -1,21 +1,12 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
 .rating-container {
-  gap: 8px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  gap: $gap-smallest;
+  @include flexRow(center);
 
   &-mobile {
     gap: 4px;
-  }
-
-  .rating-star-icon {
-    path {
-      fill: #676969;
-    }
-    &-filled {
-      path {
-        fill: #eaa533;
-      }
-    }
+    @include flexRow(center);
   }
 }
