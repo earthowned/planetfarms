@@ -8,9 +8,16 @@ import { FileIconName } from "./config";
 
 import "./styles.scss";
 
-const Material = ({ material, isEditMode = true }) => {
-  const [isCompleted, setIsCompleted] = useState(false);
+const Material = ({
+  id,
+  material,
+  onRemove,
+  onDownloaded,
+  isDownloaded,
+  isEditMode = true,
+}) => {
   const [isDownloading, setIsDownloading] = useState(false);
+  const iconName = FileIconName[material.extension] || "file";
 
   // TODO: Implement downloading functionality;
   const handleDownloadClick = () => {
@@ -18,23 +25,26 @@ const Material = ({ material, isEditMode = true }) => {
 
     setTimeout(() => {
       setIsDownloading(false);
-      setIsCompleted(true);
+      if (onDownloaded) onDownloaded(id);
     }, 2000);
   };
 
   // TODO: Remove Material from related course;
-  const handleRemoveClick = () => {};
+  const handleRemoveClick = () => {
+    setIsDownloading(false);
+    if (onRemove) onRemove(id);
+  };
 
   return (
     <div className="material-container">
       <div className="info-container">
-        <Icon icon={FileIconName[material.extension]} />
+        <Icon icon={iconName} />
         <h5>{`${material.name}.${material.extension}`}</h5>
       </div>
 
       <div className="buttons-container">
         <DownloadButton
-          isCompleted={isCompleted}
+          isCompleted={isDownloaded}
           onClick={handleDownloadClick}
           isDownloading={isDownloading}
         />
@@ -54,23 +64,40 @@ const Material = ({ material, isEditMode = true }) => {
 export const MaterialsList = ({
   maxLength,
   materials = [],
+  onRemoveMaterial,
   isEditMode = false,
 }) => {
+  const [downloaded, setDowloaded] = useState([]);
+
   if (materials.length === 0) {
     return null;
   }
 
   const list = maxLength ? materials.slice(0, maxLength) : materials;
 
+  const handleDownloadedFile = (id) => setDowloaded([...downloaded, id]);
+
+  const handleRemoveFile = (id) => {
+    const filtered = downloaded.filter((d) => d !== id);
+    setDowloaded([...filtered]);
+    onRemoveMaterial(id);
+  };
+
   return (
     <div className="materials-list-container">
-      {list.map((material, index) => (
-        <Material
-          material={material}
-          isEditMode={isEditMode}
-          key={`material-list-item-${index.toString()}`}
-        />
-      ))}
+      {list.map((material, index) => {
+        return (
+          <Material
+            id={material.id}
+            material={material}
+            isEditMode={isEditMode}
+            onRemove={handleRemoveFile}
+            onDownloaded={handleDownloadedFile}
+            key={`material-list-item-${index.toString()}`}
+            isDownloaded={downloaded.includes(material.id)}
+          />
+        );
+      })}
     </div>
   );
 };

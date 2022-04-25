@@ -57,3 +57,9 @@ export const FileExtension = {
   jpg: "jpg",
   png: "png",
 };
+
+export const ContentType = {
+  Image: "Image",
+  Video: "Video",
+  Material: "Material",
+};

@@ -12,7 +12,7 @@ export const DownloadButton = ({
 }) => {
   const icon = useMemo(() => {
     return isCompleted ? "checkmark" : "download";
-  }, [isCompleted]);
+  }, [isCompleted, isDownloading]);
 
   return (
     <button type="button" className="download-button" onClick={onClick}>
