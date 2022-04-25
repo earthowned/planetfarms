@@ -4,7 +4,7 @@ export const login = ({ id, name, password }) =>
   apiInstance.post("users/login", { id, name, password });
 
 export const register = ({ name, password }) =>
-  apiInstance.post("users", { name, password });
+  apiInstance.post("users/register", { name, password });
 
 export const getToken = () => apiInstance.get("users/token");
 
