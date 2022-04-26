@@ -1,3 +1,4 @@
+const { Joi } = require('express-validation')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const { sequelize } = require('../models')
@@ -83,10 +84,23 @@ const getCourses = async (req, res) => {
     })
   })
   res.status(200).json({
-    status: true,
     message: 'Fetched successfully',
     ...paginatedResponse({ data: courses, pageSize, pageNumber })
   })
+}
+
+const addCourseSchema = {
+  body: Joi.object({
+    title: Joi.string().required(),
+    price: Joi.number().positive(),
+    isPublished: Joi.boolean().required(),
+    thumbnail: Joi.object().required(),
+    text_description: Joi.array().items(Joi.object({
+      heading: Joi.string(),
+      text: Joi.string().required()
+    })),
+    order: Joi.array().items(Joi.string().valid('text', 'image'))
+  }),
 }
 
 // @desc    Add individual course
@@ -94,18 +108,31 @@ const getCourses = async (req, res) => {
 // @access  Public
 const addCourse = async (req, res) => {
   try {
-    let thumbnail = ''
+    // doing some debugging
+    res.status(201).json({
+      body: {
+        ...req.body
+      },
+      file: {
+        ...req.file
+      },
+      files: {
+        ...req.files
+      }
+    })
+    return
+
+    let thumbnail
     if (req.file) {
       thumbnail = req.file.filename
     }
     const course = await db.Courses.create({ ...req.body, thumbnail })
     res.status(201).json({
-      status: true,
-      message: ' new course added successfully',
+      message: 'New course added successfully',
       data: course
     })
   } catch (error) {
-    return res.json({ error: 'error.message' })
+    return res.status(400).json({ error: error.message })
   }
 }
 
@@ -115,21 +142,23 @@ const addCourse = async (req, res) => {
 const updateCourse = async (req, res) => {
   const { id } = req.params
   try {
-    let thumbnail
+    const toUpdate = {
+      ...req.body
+    }
+
     if (req.file) {
-      thumbnail = req.file.filename
+      toUpdate.thumbnail = req.file.filename
     }
     const course = await db.Courses.update(
-      { ...req.body, thumbnail },
+      toUpdate,
       { where: { id } }
     )
-    res.status(202).json({
-      status: true,
-      message: 'course updated successfully',
+    res.status(200).json({
+      message: 'Course updated successfully',
       data: course
     })
   } catch (error) {
-    res.json({ status: true, message: error.message })
+    res.json({ message: error.message })
   }
 }
 
@@ -184,8 +213,7 @@ const getCourseById = async (req, res) => {
   })
   const str = JSON.parse(CircularJSON.stringify(data))
   res.status(200).json({
-    status: true,
-    message: 'fetched course successfully',
+    message: 'Course fetched successfully',
     data: str.dataValues
   })
 }
@@ -199,9 +227,8 @@ const deleteCourse = async (req, res) => {
   if (!course) {
     throw new NotFoundError()
   }
-  res.status(202).json({
-    status: true,
-    message: 'course deleted successfully',
+  res.status(200).json({
+    message: 'Course deleted successfully',
     data: course
   })
 }
@@ -211,5 +238,6 @@ module.exports = {
   getCourses,
   updateCourse,
   getCourseById,
-  deleteCourse
+  deleteCourse,
+  addCourseSchema
 }
