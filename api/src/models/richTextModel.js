@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 
     RichText.hasOne(models.Lesson, { constraints: true, foreignKey: 'richtextId' })
     RichText.hasOne(models.News, { constraints: true, foreignKey: 'richtextId' })
+    RichText.hasOne(models.Courses, { constraints: true, foreignKey: 'richtextId' })
   }
   return RichText
 }

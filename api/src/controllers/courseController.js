@@ -4,9 +4,9 @@ const Op = Sequelize.Op
 const { sequelize } = require('../models')
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
-const CircularJSON = require('circular-json')
 const { changeFormat } = require('../helpers/filehelpers')
 const { paginatedResponse } = require('../utils/query')
+const BadRequestError = require('../errors/badRequestError')
 
 // @desc    Fetch all course
 // @route   GET /api/courses?pageNumber=${pageNumber}&category=${category}&search=${search}
@@ -94,12 +94,23 @@ const addCourseSchema = {
     title: Joi.string().required(),
     price: Joi.number().positive(),
     isPublished: Joi.boolean().required(),
-    thumbnail: Joi.object().required(),
-    text_description: Joi.array().items(Joi.object({
-      heading: Joi.string(),
-      text: Joi.string().required()
-    })),
-    order: Joi.array().items(Joi.string().valid('text', 'image'))
+    categoryId: Joi.string().required(),
+    text_heading: Joi.alternatives().try(
+      Joi.string(),
+      Joi.array().items(Joi.string())
+    ),
+    text_description: Joi.alternatives().try(
+      Joi.string(),
+      Joi.array().items(Joi.string())
+    ),
+    photo_description: Joi.alternatives().try(
+      Joi.string(),
+      Joi.array().items(Joi.string())
+    ),
+    order: Joi.alternatives().try(
+      Joi.string().valid('text', 'image'),
+      Joi.array().items(Joi.string().valid('text', 'image'))
+    ).required()
   }),
 }
 
@@ -108,28 +119,73 @@ const addCourseSchema = {
 // @access  Public
 const addCourse = async (req, res) => {
   try {
-    // doing some debugging
-    res.status(201).json({
-      body: {
-        ...req.body
-      },
-      file: {
-        ...req.file
-      },
-      files: {
-        ...req.files
-      }
-    })
-    return
+    const { body, user, files } = req
+    const thumbnail = files.thumbnail?.[0]?.filename || null
+    const price = body.price > 0 ? Number(body.price) : null
 
-    let thumbnail
-    if (req.file) {
-      thumbnail = req.file.filename
+    const courseData = {
+      title: body.title,
+      description: body.description,
+      thumbnail: thumbnail ? `thumbnail/${thumbnail}` : null,
+      price,
+      isPublished: body.isPublished,
+      isFree: price === null ? true : false,
+      creatorId: user.id,
+      categoryId: body.categoryId
     }
-    const course = await db.Courses.create({ ...req.body, thumbnail })
-    res.status(201).json({
-      message: 'New course added successfully',
-      data: course
+
+    await db.sequelize.transaction(async (transaction) => {
+      let richtext = null
+      let richtextId = null
+
+      if (body.order) {
+        richtext = await db.RichText.create({}, { transaction })
+        richtextId = richtext.id
+
+        const richtextCount = Array.isArray(body.text_description) ? body.text_description.length : 1
+        const photoCount = files.courses?.length || 0
+        const orderCount = Array.isArray(body.order) ? body.order.length : 1
+
+        // add validation if texts and photo tallies the order count
+        if (photoCount + richtextCount !== orderCount) {
+          throw new BadRequestError('Contents don\'t match the ordering count')
+        }
+
+        await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
+          if (order === 'text') {
+            return db.Text.create({
+              richtextId,
+              textHeading: Array.isArray(body.text_heading) ? body.text_heading.shift() : body.text_heading,
+              textDescription: Array.isArray(body.text_description) ? body.text_description.shift() : body.text_description,
+              order: index + 1
+            }, {
+              transaction
+            })
+          }
+
+          return db.Photo.create({
+            richtextId,
+            lessonImg: `courses/${files.courses.shift().filename}`,
+            photoDescription: Array.isArray(body.photo_description) ? body.photo_description.shift() : body.photo_description,
+            isImgDesc: false,
+            order: index + 1
+          }, {
+            transaction
+          })
+        }))
+      }
+
+      const course = await db.Courses.create({
+        ...courseData,
+        richtextId
+      }, {
+        transaction
+      })
+
+      res.status(201).json({
+        message: 'New course added successfully',
+        data: course.get()
+      })
     })
   } catch (error) {
     return res.status(400).json({ error: error.message })
@@ -197,24 +253,28 @@ const getCourseById = async (req, res) => {
           attributes: ['isEnroll']
         }
       },
-      db.Category
-    ]
+      db.Category,
+      {
+        model: db.RichText,
+        include: [db.Text, db.Photo]
+      },
+    ],
   })
+
   if (!course) {
-    return res.json({ message: 'course not found' })
+    return res.status(404).json({ message: 'Course not found' })
   }
-  const data = Object.assign({
-    ...course,
-    dataValues: {
-      ...course.dataValues,
-      thumbnail: changeFormat(course?.dataValues?.thumbnail),
-      coverImg: changeFormat(course?.dataValues?.lessons?.coverImg)
-    }
-  })
-  const str = JSON.parse(CircularJSON.stringify(data))
+
+  const data = {
+    ...course.get(),
+    // TODO: need to fix resizing of image when used with multiple files
+    // thumbnail: changeFormat(course?.thumbnail),
+    // coverImg: changeFormat(course?.lessons?.coverImg)
+  }
+
   res.status(200).json({
     message: 'Course fetched successfully',
-    data: str.dataValues
+    data
   })
 }
 
@@ -228,8 +288,7 @@ const deleteCourse = async (req, res) => {
     throw new NotFoundError()
   }
   res.status(200).json({
-    message: 'Course deleted successfully',
-    data: course
+    message: 'Course deleted successfully'
   })
 }
 
