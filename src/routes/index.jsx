@@ -168,7 +168,6 @@ export const Routes = () => {
       <PrivateRoute component={MobileMessage} path="/messenger/:id" exact />
 
       <PrivateRoute component={Courses} path="/admin/courses" exact />
-
       <PrivateRoute
         component={AdminCoursePage}
         path="/admin/course/:courseId"
