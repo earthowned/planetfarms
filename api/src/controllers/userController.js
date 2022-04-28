@@ -93,8 +93,8 @@ const login = async (name, password, userId) => {
       where: { username: name, password: password }
     })
 
-    token = generateToken(localAuth.id),
-    id = localAuth.id
+    id = localAuth.id.toString()
+    token = generateToken(id)
   }
 
   const user = await db.User.findOne({
@@ -132,18 +132,22 @@ const registerUser = async (req, res) => {
 
     if (isCognito) {
       const response = await Auth.signUp({ username: name, password, attributes })
-      await db.sequelize.transaction(async (t) => {
+      await db.sequelize.transaction(async (transaction) => {
         const user = await db.User.create({
           userID: response.userSub,
           isLocalAuth: false,
           numberOfVisit: 0
+        }, {
+          transaction
         })
-        await subscribeCommunity(user, true, t)
+        await subscribeCommunity(user, true, transaction)
       })
     } else {
       await registerLocal(name, password, res)
     }
-    res.status(201).send('SUCCESS')
+    res.status(201).send({
+      message: 'The user has been registered'
+    })
   } catch (err) {
     res.status(409).json({ error: err.message })
   }
@@ -155,10 +159,10 @@ const registerLocal = async (name, password) => {
     throw new Error('Users already exists')
   }
 
-  await db.sequelize.transaction(async (t) => {
+  await db.sequelize.transaction(async (transaction) => {
     const localAuth = await db.LocalAuth.create(
       { username: name, password: password },
-      { transaction: t }
+      { transaction }
     )
     const user = await db.User.create(
       {
@@ -167,10 +171,10 @@ const registerLocal = async (name, password) => {
         lastLogin: new Date(),
         numberOfVisit: 0
       },
-      { transaction: t }
+      { transaction }
     )
 
-    await subscribeCommunity(user, true, t)
+    await subscribeCommunity(user, true, transaction)
   })
 }
 

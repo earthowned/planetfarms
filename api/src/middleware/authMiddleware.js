@@ -45,13 +45,10 @@ const cognitoJwkPem = (token) => {
 }
 
 async function maintainState (req, userID) {
-  try {
-    req.user = await db.User.findOne({
-      where: { userID }
-    })
-  } catch (error) {
-    throw Error('User not found')
-  }
+  const user = await db.User.findOne({
+    where: { userID: userID }
+  })
+  req.user = user?.get?.()
 }
 
 module.exports = async (req, res, next) => {
