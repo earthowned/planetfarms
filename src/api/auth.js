@@ -1,10 +1,10 @@
 import { apiInstance } from "./instance";
 
-export const login = ({ id, name, password }) =>
-  apiInstance.post("users/login", { id, name, password });
+export const login = ({ id, username, password }) =>
+  apiInstance.post("users/login", { id, username, password });
 
-export const register = ({ name, password }) =>
-  apiInstance.post("users/register", { name, password });
+export const register = ({ username, password }) =>
+  apiInstance.post("users/register", { username, password });
 
 export const getToken = () => apiInstance.get("users/token");
 

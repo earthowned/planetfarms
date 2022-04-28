@@ -73,7 +73,7 @@ export const login =
         };
         await api.auth.login({ id });
       } else {
-        response = await api.auth.login({ name, password });
+        response = await api.auth.login({ username: name, password });
         authData = response.data;
       }
 
@@ -98,8 +98,13 @@ export const register =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      await api.auth.register({ name, password });
-      await login({ name, password })(dispatch);
+      await api.auth.register({ username: name, password });
+
+      // no auto login for cognito since it needs to confirm email with a code
+      if (!isCognito) {
+        await login({ name, password })(dispatch);
+      }
+
       return Promise.resolve();
     } catch (error) {
       return Promise.reject(error);

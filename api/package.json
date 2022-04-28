@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-async-handler": "^1.1.4",
+    "isemail": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.5",
     "multer": "^1.4.2",
