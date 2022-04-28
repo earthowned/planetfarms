@@ -219,21 +219,24 @@ const changePassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
   const userID = req.user.userID
   if (!isCognito) {
-    const oldUser = await db.LocalAuth.findByPk(userID)
-    if (oldUser.dataValues.password === oldPassword) {
-      await db.LocalAuth.update(
-        { password: newPassword },
-        { where: { id: userID } }
-      ).then(() =>
-        res.json({ message: 'The user password has been updated.' }).status(200)
-      )
+    const user = await db.LocalAuth.findByPk(userID)
+    if (user.password === oldPassword) {
+      await user.update({ password: newPassword })
+
+      res.status(200).json({ message: 'The user password has been updated.' })
     } else {
       res.status(401).json({ message: 'Incorrect old password' })
     }
+  } else {
+    res.status(405).json({ message: 'Local auth change password is not supported' })
   }
 }
 
 const forgotPassword = async (req, res) => {
+  if (!isCognito) {
+    return res.status(405).json({ message: 'Local auth forgot password is not supported' })
+  }
+
   // Send confirmation code to user's email
   const { username } = req.body
   try {
@@ -250,6 +253,10 @@ const forgotPassword = async (req, res) => {
 // @route   POST /api/users/forgot-password-submit
 // @access  Public
 const forgotPasswordSubmit = async (req, res) => {
+  if (!isCognito) {
+    return res.status(405).json({ message: 'Local auth forgot password submit is not supported' })
+  }
+
   // Send confirmation code to user's email
   const { username, code, newPassword } = req.body
 
@@ -269,6 +276,10 @@ const forgotPasswordSubmit = async (req, res) => {
 // @route   POST /api/users/confirm-sign-up
 // @access  Public
 const confirmSignUpWithCode = async (req, res) => {
+  if (!isCognito) {
+    return res.status(405).json({ message: 'Local auth confirm signup with code is not supported' })
+  }
+
   const { username, code } = req.body
   try {
     await Auth.confirmSignUp(username, code)
