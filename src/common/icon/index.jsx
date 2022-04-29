@@ -56,6 +56,7 @@ import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
 import { ReactComponent as StarOutlineIcon } from "assets/icons/star-outline.svg";
 import { ReactComponent as StarIcon } from "assets/icons/star.svg";
 import { ReactComponent as DownloadIcon } from "assets/icons/download.svg";
+import { ReactComponent as CheckmarkRoundIcon } from "assets/icons/checkmark-round.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -82,6 +83,10 @@ const getIcon = (iconName) => {
 
     case "checkmark":
       return <CheckmarkIcon />;
+
+    case "checkmark-round": {
+      return <CheckmarkRoundIcon />;
+    }
 
     case "chevron-left":
       return <ChevronLeftIcon />;

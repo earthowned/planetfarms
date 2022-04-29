@@ -1,0 +1,105 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.course-progress-bar-container {
+  width: 72px;
+  height: 72px;
+  position: relative;
+  border-radius: 100%;
+  backdrop-filter: blur(12px);
+
+  .CircularProgressbar-trail {
+    stroke-width: 4px;
+  }
+  .CircularProgressbar-path {
+    stroke-width: 4px;
+  }
+
+  .inner-circle {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .checkmark-round-icon {
+      width: 32px;
+      height: 32px;
+      path {
+        fill: $color-black;
+      }
+    }
+  }
+
+  &-green {
+    .inner-circle {
+      background-color: $color-green;
+      h4 {
+        color: $color-black-active;
+      }
+    }
+    .CircularProgressbar-trail {
+      stroke: rgba($color: $color-green, $alpha: 0.4);
+    }
+    .CircularProgressbar-path {
+      stroke: $color-green;
+    }
+  }
+
+  &-red {
+    .inner-circle {
+      background-color: $color-red;
+      h4 {
+        color: $color-white;
+      }
+    }
+    .CircularProgressbar-trail {
+      stroke: rgba($color: $color-red, $alpha: 0.4);
+    }
+    .CircularProgressbar-path {
+      stroke: $color-red;
+    }
+  }
+
+  &-grey {
+    .inner-circle {
+      background-color: #555550;
+    }
+    .CircularProgressbar-trail {
+      stroke: rgba($color: #555550, $alpha: 1);
+    }
+    .CircularProgressbar-path {
+      stroke: #555550;
+    }
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    width: 40px;
+    height: 40px;
+
+    .CircularProgressbar-trail {
+      stroke-width: 8px;
+    }
+    .CircularProgressbar-path {
+      stroke-width: 8px;
+    }
+
+    .inner-circle {
+      width: 24px;
+      height: 24px;
+
+      .checkmark-round-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}

@@ -14,6 +14,22 @@
     .outter-circle {
       stroke: $color-green;
     }
+    .outter-circle {
+      fill: red;
+    }
+  }
+
+  &-red {
+    .outter-circle {
+      stroke: $color-red;
+      fill: yellow;
+    }
+  }
+
+  &-grey {
+    .outter-circle {
+      stroke: #555550;
+    }
   }
 
   &-infinite {

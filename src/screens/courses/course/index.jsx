@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 import { TwoColumnsGrid } from "common/grids";
 import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
-import { MembersBlock, LessonsBlock } from "components/courses/blocks";
-import { MeterialsBlock, ReviewsBlock } from "components/courses";
+import { MembersBlock } from "components/courses/blocks";
+import { MeterialsBlock, ReviewsBlock, LessonsBlock } from "components/courses";
 
 import { DashboardLayout } from "layout/dashboard";
 import { selectCurrentCourse } from "store/courses";
