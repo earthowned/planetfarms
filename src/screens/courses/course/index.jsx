@@ -12,7 +12,11 @@ import { selectCurrentCourse } from "store/courses";
 // import { selectCurrentUser } from "store/user/selectors";
 
 import { CourseMainInfo } from "./main-info";
-import { getCourseMatarials, getCourseReviews } from "./helpers";
+import {
+  getCourseMatarials,
+  getCourseReviews,
+  getCourseLessons,
+} from "./helpers";
 
 import "./styles.scss";
 
@@ -59,7 +63,7 @@ export const CoursePage = () => {
         />
 
         <TwoColumnsGrid reverseMobile templateColumns={gridTemplateColumns}>
-          <LessonsBlock />
+          <LessonsBlock lessons={getCourseLessons(id)} />
 
           <div className="column-container">
             <MeterialsBlock
