@@ -137,6 +137,10 @@ const login = async (username, password, userId) => {
   return token ? { id, token } : { id }
 }
 
+const getCognitoUsername = (email) => {
+  return email.replace(/@/g, '')
+}
+
 // @desc    Register a new user
 // @route   POST /api/users
 // @access  Public
@@ -171,7 +175,7 @@ const registerCognito = async (email, password) => {
     throw new Error('User already exists')
   }
 
-  const response = await Auth.signUp({ username: `random-${Date.now()}`, password, attributes: { email } })
+  const response = await Auth.signUp({ username: getCognitoUsername(email), password, attributes: { email } })
   await db.sequelize.transaction(async (transaction) => {
     const user = await db.User.create({
       userID: response.userSub,
@@ -245,8 +249,8 @@ const sendTokenStatus = (req, res) => {
   res.status(201).json({ message: 'accepted' })
 }
 
-// @desc    Forgot password of a user
-// @route   POST /api/users/forgot-password
+// @desc    Change password of a user
+// @route   POST /api/users/change-password
 // @access  Public
 const changePassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
@@ -265,6 +269,9 @@ const changePassword = async (req, res) => {
   }
 }
 
+// @desc    Forgot password of a user
+// @route   POST /api/users/forgot-password
+// @access  Public
 const forgotPassword = async (req, res) => {
   if (!isCognito) {
     return res.status(405).json({ message: 'Local auth forgot password is not supported' })
@@ -315,8 +322,27 @@ const confirmSignUpWithCode = async (req, res) => {
 
   const { username, code } = req.body
   try {
-    await Auth.confirmSignUp(username, code)
+    await Auth.confirmSignUp(getCognitoUsername(username), code)
     res.status(200).json({ message: 'Sign up has been confirmed' })
+  } catch (error) {
+    res.status(400).json({
+      error: error.message
+    })
+  }
+}
+
+// @desc    Resend sign up code of a user
+// @route   POST /api/users/resend-sign-up-code
+// @access  Public
+const resendSignUpWithCode = async (req, res) => {
+  if (!isCognito) {
+    return res.status(405).json({ message: 'Local auth resend signup with code is not supported' })
+  }
+
+  const { username } = req.body
+  try {
+    await Auth.resendSignUp(getCognitoUsername(username))
+    res.status(200).json({ message: 'Sign up code has been resent' })
   } catch (error) {
     res.status(400).json({
       error: error.message
@@ -457,5 +483,6 @@ module.exports = {
   getUsers,
   updateUser,
   searchUserName,
-  sendTokenStatus
+  sendTokenStatus,
+  resendSignUpWithCode
 }

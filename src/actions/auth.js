@@ -117,7 +117,10 @@ export const requestCode = async (username) => {
     let response;
     if (isCognito) {
       const data = await api.auth.forgotPassword(username);
-      response = data.CodeDeliveryDetails.AttributeName.split("_").join(" ");
+      response =
+        data.data.details.CodeDeliveryDetails.AttributeName.split("_").join(
+          " "
+        );
     }
     return Promise.resolve(response);
   } catch (error) {

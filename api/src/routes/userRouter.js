@@ -12,7 +12,8 @@ const {
   getUsers,
   updateUser,
   searchUserName,
-  sendTokenStatus
+  sendTokenStatus,
+  resendSignUpWithCode
 } = require('../controllers/userController.js')
 require('express-async-errors')
 
@@ -36,5 +37,6 @@ router.post('/change-password', protect, changePassword)
 router.post('/forgot-password', forgotPassword)
 router.post('/forgot-password-submit', forgotPasswordSubmit)
 router.post('/confirm-sign-up', confirmSignUpWithCode)
+router.post('/resend-sign-up-code', resendSignUpWithCode)
 
 module.exports = router
