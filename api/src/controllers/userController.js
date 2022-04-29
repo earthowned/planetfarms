@@ -95,25 +95,43 @@ const login = async (name, password, userId) => {
 
     id = localAuth.id.toString()
     token = generateToken(id)
-  }
 
-  const user = await db.User.findOne({
-    where: { userID: id }
-  })
+    const user = await db.User.findOne({
+      where: { userID: id }
+    })
 
-  if (!user) {
-    throw new Error('User not found')
-  }
-
-  // update last login and number of visit
-  await db.User.update({
-    lastLogin: new Date(),
-    numberOfVisit: Sequelize.literal('"numberOfVisit" + 1')
-  }, {
-    where: {
-      userID: id
+    if (!user) {
+      throw new Error('User not found')
     }
-  })
+
+    await user.update({
+      lastLogin: new Date(),
+      numberOfVisit: Sequelize.literal('"numberOfVisit" + 1')
+    })
+  } else {
+    const user = await db.User.findOne({
+      where: { userID: id }
+    })
+
+    if (!user) {
+      await db.sequelize.transaction(async (transaction) => {
+        const user = await db.User.create({
+          userID: id,
+          isLocalAuth: false,
+          numberOfVisit: 1,
+          lastLogin: new Date(),
+        }, {
+          transaction
+        })
+        await subscribeCommunity(user, true, transaction)
+      })
+    } else {
+      await user.update({
+        lastLogin: new Date(),
+        numberOfVisit: Sequelize.literal('"numberOfVisit" + 1')
+      })
+    }
+  }
 
   return token ? { id, token } : { id }
 }
