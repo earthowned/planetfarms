@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 
-import { MobileUp, LaptopUp } from "common/responsive";
+import { TabletUp, LaptopUp } from "common/responsive";
 
 import { isFileInstanse } from "utils/parsers/file";
 
@@ -10,7 +10,7 @@ export const TextBlock = ({ title, text }) => {
   return (
     <div className="content-text-block">
       <LaptopUp>{title && <h3>{title}</h3>}</LaptopUp>
-      <MobileUp>{title && <h4>{title}</h4>}</MobileUp>
+      <TabletUp>{title && <h4>{title}</h4>}</TabletUp>
       {text && <h5>{text}</h5>}
     </div>
   );

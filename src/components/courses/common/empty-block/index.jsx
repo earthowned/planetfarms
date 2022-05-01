@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { isMobileUp } from "hooks/useResponsive";
+import { isTabletUp } from "hooks/useResponsive";
 import { ActionButton } from "common/buttons/action-button";
 
 import * as Config from "./config";
@@ -16,7 +16,7 @@ export const EmptyBllock = ({
 }) => {
   if (!isImageVisible && !isAddButtonVisible) return null;
 
-  const isMobile = isMobileUp();
+  const isMobile = isTabletUp();
 
   const buttonTitle = Config.ButtonTitle[variant];
   const buttonVariant = Config.ButtonVariant[variant];

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import cx from "classnames";
 
-import { isMobileUp } from "hooks/useResponsive";
+import { isTabletUp } from "hooks/useResponsive";
 
 import "./styles.scss";
 
@@ -10,7 +10,7 @@ export const TwoColumnsGrid = ({
   templateColumns,
   reverseMobile = false,
 }) => {
-  const isTablet = isMobileUp();
+  const isTablet = isTabletUp();
 
   const grid = useMemo(
     () => (isTablet ? "1fr" : templateColumns),

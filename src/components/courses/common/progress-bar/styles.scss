@@ -4,12 +4,17 @@
 
 @mixin setProgress($firstColor, $secondColor) {
   background: linear-gradient(180deg, $firstColor 50%, $secondColor 50%);
+
+  @include breakpoint("tablet", "max") {
+    background: $secondColor;
+  }
 }
 
 .course-progress-bar-container {
   position: relative;
-  height: 100%;
+  // height: 100%;
   @include flexColumn(center, center);
+  align-self: stretch;
 
   .progress-line {
     width: 4px;
@@ -137,7 +142,7 @@
     }
   }
 
-  @include breakpoint("mobile", "minMax") {
+  @include breakpoint("tablet", "max") {
     @include flexColumn(flex-start, flex-start);
 
     .course-progress-bar {

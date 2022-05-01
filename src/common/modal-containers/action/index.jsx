@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Formik, Form } from "formik";
 
 import { Modal } from "common/modal";
-import { MobileUp, LaptopUp } from "common/responsive";
+import { TabletUp, LaptopUp } from "common/responsive";
 import { IconButton } from "common/buttons/icon-button";
 import { ActionButton } from "common/buttons/action-button";
 
@@ -34,10 +34,10 @@ export const ActionModal = ({
     <Modal visible={visible}>
       <div className="action-modal-container">
         <div className="modal-header-container">
-          <MobileUp>
+          <TabletUp>
             <h3>{title}</h3>
             <IconButton icon="cross" variant="white" onClick={onClose} />
-          </MobileUp>
+          </TabletUp>
 
           <LaptopUp>
             <h2>{title}</h2>

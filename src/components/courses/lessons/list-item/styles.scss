@@ -1,0 +1,37 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.lesson-item {
+  gap: $gap-big;
+  height: calc(120px + #{$gap-big});
+  @include flexRow(center, flex-start);
+
+  .avatar-container {
+    @include circle(120px);
+  }
+
+  .info-block {
+    gap: $gap-small;
+    @include flexColumn(flex-start, flex-start);
+
+    h5 {
+      @include setTextLines(3);
+    }
+  }
+
+  .mobile-row-container {
+    gap: $gap-small;
+    @include flexRow(center, flex-start);
+
+    .avatar-container {
+      @include circle(48px);
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    gap: $gap-small;
+    height: calc(128px + #{$gap-medium});
+    @include flexColumn(flex-start, flex-start);
+  }
+}

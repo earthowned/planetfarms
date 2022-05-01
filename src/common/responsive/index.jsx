@@ -4,7 +4,7 @@ import {
   isTablet,
   isDesktop,
   isLaptopUp,
-  isMobileUp,
+  isTabletUp,
 } from "hooks/useResponsive";
 
 export const Desktop = ({ children }) => {
@@ -23,8 +23,8 @@ export const Mobile = ({ children }) => {
   return isMobile() ? <>{children}</> : null;
 };
 
-export const MobileUp = ({ children }) => {
-  return isMobileUp() ? <>{children}</> : null;
+export const TabletUp = ({ children }) => {
+  return isTabletUp() ? <>{children}</> : null;
 };
 
 export const LaptopUp = ({ children }) => {

@@ -1,6 +1,6 @@
 import { Avatar } from "common/avatar";
 import { StarsRating } from "common/stars-rating";
-import { MobileUp, LaptopUp } from "common/responsive";
+import { TabletUp, LaptopUp } from "common/responsive";
 
 import "./styles.scss";
 
@@ -20,26 +20,26 @@ export const CourseMainInfo = ({ avatar, title, price, members, rating }) => {
           <h2>{title}</h2>
         </LaptopUp>
 
-        <MobileUp>
+        <TabletUp>
           <h4>{title}</h4>
-        </MobileUp>
+        </TabletUp>
 
         <LaptopUp>
           <h3>{coursePrice}</h3>
         </LaptopUp>
 
-        <MobileUp>
+        <TabletUp>
           <h4>{coursePrice}</h4>
-        </MobileUp>
+        </TabletUp>
 
         <div className="bottom-container">
           <LaptopUp>
             <h5>{courseMembers}</h5>
           </LaptopUp>
 
-          <MobileUp>
+          <TabletUp>
             <h6>{courseMembers}</h6>
-          </MobileUp>
+          </TabletUp>
 
           <StarsRating rate={rating || 0} />
         </div>

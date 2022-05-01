@@ -1,6 +1,6 @@
 import { useField } from "formik";
 
-import { LaptopUp, MobileUp } from "common/responsive";
+import { LaptopUp, TabletUp } from "common/responsive";
 import { IconButton } from "common/buttons/icon-button";
 
 import "./styles.scss";
@@ -31,7 +31,7 @@ export const Stars = ({ count, onChangeValue, isFilled }) => {
 export const StarsRating = ({ rate = 5, isFilledStarIcon = true }) => {
   return (
     <>
-      <MobileUp>
+      <TabletUp>
         <div className="rating-container-mobile">
           <IconButton
             disabled
@@ -40,7 +40,7 @@ export const StarsRating = ({ rate = 5, isFilledStarIcon = true }) => {
           />
           <h4>{rate}</h4>
         </div>
-      </MobileUp>
+      </TabletUp>
 
       <LaptopUp>
         <Stars count={rate} isFilled={isFilledStarIcon} />
