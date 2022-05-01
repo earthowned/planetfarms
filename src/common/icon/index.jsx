@@ -57,9 +57,14 @@ import { ReactComponent as StarOutlineIcon } from "assets/icons/star-outline.svg
 import { ReactComponent as StarIcon } from "assets/icons/star.svg";
 import { ReactComponent as DownloadIcon } from "assets/icons/download.svg";
 import { ReactComponent as CheckmarkRoundIcon } from "assets/icons/checkmark-round.svg";
+import { ReactComponent as MessageIcon } from "assets/icons/message.svg";
+import { ReactComponent as ArchiveIcon } from "assets/icons/archive.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
+    case "archive":
+      return <ArchiveIcon />;
+
     case "book":
       return <BookIcon />;
 
@@ -162,6 +167,9 @@ const getIcon = (iconName) => {
 
     case "link":
       return <LinkIcon />;
+
+    case "message":
+      return <MessageIcon />;
 
     case "more":
       return <MoreIcon />;

@@ -1,28 +1,56 @@
 import { Avatar } from "common/avatar";
 import { StarsRating } from "common/stars-rating";
 import { TabletUp, LaptopUp } from "common/responsive";
+import { ModalOptionsButton } from "common/buttons/modal-options-button";
+
+import { MoreOption, moreOptions } from "./config";
 
 import "./styles.scss";
 
-export const CourseMainInfo = ({ avatar, title, price, members, rating }) => {
+export const CourseMainInfo = ({
+  title,
+  price,
+  avatar,
+  rating,
+  isPaid,
+  members,
+  onAddReview,
+  onAddToArchive,
+}) => {
   const coursePrice = price
     ? `$${parseFloat(parseFloat(price) / 100).toFixed(2)}`
     : "$00.00";
 
   const courseMembers = `${members || 0} people tried`;
 
+  const handleMoreOptionClick = (option) => {
+    if (option === MoreOption.Review && onAddReview) onAddReview();
+    if (option === MoreOption.Archive && onAddToArchive) onAddToArchive();
+  };
+
   return (
     <div className="course-main-info-container">
       <Avatar src={avatar} placeholderIcon="graduation-cap" />
 
       <div className="info-column-container">
-        <LaptopUp>
-          <h2>{title}</h2>
-        </LaptopUp>
+        <div className="title-container">
+          <LaptopUp>
+            <h2>{title}</h2>
+          </LaptopUp>
 
-        <TabletUp>
-          <h4>{title}</h4>
-        </TabletUp>
+          <TabletUp>
+            <h4>{title}</h4>
+          </TabletUp>
+
+          {isPaid && (
+            <ModalOptionsButton
+              icon="more"
+              options={moreOptions}
+              variant="transparent-white"
+              onOptionSelect={handleMoreOptionClick}
+            />
+          )}
+        </div>
 
         <LaptopUp>
           <h3>{coursePrice}</h3>

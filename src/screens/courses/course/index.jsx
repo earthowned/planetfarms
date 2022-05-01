@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -27,6 +28,12 @@ export const CoursePage = () => {
   const course = useSelector((state) => selectCurrentCourse(state, id));
   // const currentUser = useSelector(selectCurrentUser);
 
+  // TODO: Check course.isPaid === true;
+  const isPaidCourse = useMemo(() => id === "0", [id]);
+
+  // TODO: Check course.author === currentUser.id;
+  const isMyCourse = useMemo(() => id === "0", [id]);
+
   const handleBuyCourse = () => {};
 
   return (
@@ -39,17 +46,20 @@ export const CoursePage = () => {
           <CourseMainInfo
             title={course?.title}
             price={course?.price}
+            isPaid={isPaidCourse}
             avatar={course?.avatar}
             rating={course?.rating}
             members={course?.members}
           />
 
-          <ActionButton
-            disabled
-            variant="primary"
-            title="Buy course"
-            onClick={handleBuyCourse}
-          />
+          {!isPaidCourse && !isMyCourse && (
+            <ActionButton
+              disabled
+              variant="primary"
+              title="Buy course"
+              onClick={handleBuyCourse}
+            />
+          )}
         </TwoColumnsGrid>
 
         <TwoColumnsGrid templateColumns={gridTemplateColumns}>

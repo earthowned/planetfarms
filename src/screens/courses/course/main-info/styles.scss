@@ -6,15 +6,18 @@
   @include flexRow(flex-start, flex-start);
 
   .avatar-container {
-    width: 152px;
-    height: 152px;
-    border-radius: 152px;
+    @include circle(152px);
   }
 
   .info-column-container {
     flex-grow: 1;
     gap: 8px;
     @include flexColumn(flex-start, space-between);
+
+    .title-container {
+      width: 100%;
+      @include flexRow(center, space-between);
+    }
 
     .bottom-container {
       gap: 8px;
