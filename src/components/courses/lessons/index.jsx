@@ -10,7 +10,7 @@ import { LessonListItem } from "./list-item";
 
 import "./styles.scss";
 
-export const LessonsBlock = ({ lessons = [] }) => {
+export const LessonsBlock = ({ lessons = [], isMyCourse = false }) => {
   const list = useMemo(() => {
     if (!lessons || lessons.length === 0) return [];
 
@@ -40,6 +40,7 @@ export const LessonsBlock = ({ lessons = [] }) => {
           list={list}
           render={(item, index) => (
             <LessonListItem
+              isMyCourse={isMyCourse}
               thumbnail={item.thumbnail}
               subtitle={item.description}
               title={`Lesson ${index + 1}`}

@@ -15,14 +15,25 @@
     gap: $gap-small;
     @include flexColumn(flex-start, flex-start);
 
+    .title-container {
+      width: 100%;
+      @include flexRow(center, space-between);
+    }
+
     h5 {
       @include setTextLines(3);
     }
   }
 
   .mobile-row-container {
+    width: 100%;
     gap: $gap-small;
     @include flexRow(center, flex-start);
+
+    .title-container {
+      width: 100%;
+      @include flexRow(center, space-between);
+    }
 
     .avatar-container {
       @include circle(48px);

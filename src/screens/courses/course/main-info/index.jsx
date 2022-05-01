@@ -3,9 +3,15 @@ import { StarsRating } from "common/stars-rating";
 import { TabletUp, LaptopUp } from "common/responsive";
 import { ModalOptionsButton } from "common/buttons/modal-options-button";
 
-import { MoreOption, moreOptions } from "./config";
+import { MoreOption } from "constants/enums";
+import { createMoreOption } from "utils/createMoreOption";
 
 import "./styles.scss";
+
+const moreOptions = [
+  createMoreOption(MoreOption.Review),
+  createMoreOption(MoreOption.Archive),
+];
 
 export const CourseMainInfo = ({
   title,

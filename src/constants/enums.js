@@ -63,3 +63,31 @@ export const ContentType = {
   Video: "Video",
   Material: "Material",
 };
+
+export const MoreOption = {
+  Edit: "Edit",
+  Review: "Review",
+  Delete: "Delete",
+  Archive: "Archive",
+};
+
+export const MoreOptionLabel = {
+  [MoreOption.Edit]: "Edit",
+  [MoreOption.Review]: "Add Review",
+  [MoreOption.Archive]: "Add to Archive",
+  [MoreOption.Delete]: "Delete",
+};
+
+export const MoreOptionIcon = {
+  [MoreOption.Edit]: "edit",
+  [MoreOption.Review]: "message",
+  [MoreOption.Archive]: "archive",
+  [MoreOption.Delete]: "trash",
+};
+
+export const MoreOptionVariant = {
+  [MoreOption.Edit]: "white",
+  [MoreOption.Review]: "white",
+  [MoreOption.Archive]: "white",
+  [MoreOption.Delete]: "red",
+};

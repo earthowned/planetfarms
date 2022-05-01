@@ -73,7 +73,10 @@ export const CoursePage = () => {
         />
 
         <TwoColumnsGrid reverseMobile templateColumns={gridTemplateColumns}>
-          <LessonsBlock lessons={getCourseLessons(id)} />
+          <LessonsBlock
+            isMyCourse={isMyCourse}
+            lessons={getCourseLessons(id)}
+          />
 
           <div className="column-container">
             <MeterialsBlock
