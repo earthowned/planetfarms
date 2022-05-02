@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 const jwkToPem = require('jwk-to-pem')
 const db = require('../models')
 
-let coded
 const responses = [
   {
     name: 'InvalidToken',
@@ -30,40 +29,26 @@ const throwError = (message) =>
   responses.find((response) => response.name.match(message))
 
 const verifyToken = (token) => {
-  process.env.AUTH_METHOD !== 'cognito'
-    ? jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-        decodeTokenFnc(err, decodedToken)
-      })
-    : cognitoJwkPem(token)
+  try {
+    return process.env.AUTH_METHOD !== 'cognito'
+    ? (jwt.verify(token, process.env.JWT_SECRET)).id
+    : (cognitoJwkPem(token)).sub
+  } catch (error) {
+    checkAuthorization(error)
+  }
 }
 
 const cognitoJwkPem = (token) => {
   const jwk = require('./jwks.json')
   const pem = jwkToPem(jwk.keys[0])
-  jwt.verify(token, pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
-    decodeTokenFnc(err, decodedToken)
+  return jwt.verify(token, pem, { algorithms: ['RS256'] })
+}
+
+async function maintainState (req, userID) {
+  const user = await db.User.findOne({
+    where: { userID: userID }
   })
-}
-
-const decodeTokenFnc = (err, decodedToken) => {
-  if (err) {
-    checkAuthorization(err)
-  }
-  coded = decodedToken
-}
-
-async function maintainState (req) {
-  try {
-    process.env.AUTH_METHOD !== 'cognito'
-      ? (req.user = await db.User.findOne({
-          where: { userID: coded.id }
-        }))
-      : (req.user = await db.User.findOne({
-          where: { userID: coded.sub }
-        }))
-  } catch (error) {
-    throw Error('User not found')
-  }
+  req.user = user?.get?.()
 }
 
 module.exports = async (req, res, next) => {
@@ -72,8 +57,8 @@ module.exports = async (req, res, next) => {
   if (headers) {
     try {
       const token = req.headers.authorization.split(' ')[1]
-      verifyToken(token)
-      await maintainState(req)
+      const userId = verifyToken(token)
+      await maintainState(req, userId)
       next()
     } catch (error) {
       res.status(401).json(throwError(error.message))
