@@ -18,7 +18,7 @@ export const LessonListItem = ({
   subtitle,
   isMyCourse = true,
 }) => {
-  const handleOptionSelect = (option) => {};
+  const handleOptionSelect = () => {};
 
   return (
     <div className="lesson-item">
