@@ -118,7 +118,7 @@ const courseSchema = {
     order: Joi.alternatives().try(
       Joi.string().valid('text', 'image'),
       Joi.array().items(Joi.string().valid('text', 'image'))
-    ).required()
+    )
   }),
 }
 
@@ -388,7 +388,8 @@ const deleteCourse = async (req, res) => {
 
     await course.destroy({ transaction })
     await db.RichText.destroy({
-      where: { id: course.richtextId }
+      where: { id: course.richtextId },
+      transaction
     })
   })
 
