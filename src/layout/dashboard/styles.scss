@@ -29,11 +29,19 @@
     justify-content: flex-start;
 
     .page-title-header {
+      gap: 16px;
       width: 100%;
       max-width: $max-content-width;
       margin-top: 16px;
       margin-bottom: 8px;
       padding: 0 40px;
+
+      flex-wrap: wrap;
+      @include flexRow(center, space-between);
+
+      button {
+        width: 248px;
+      }
     }
   }
 
@@ -46,8 +54,11 @@
   @include breakpoint("tablet", "max") {
     .dashboard-page-container {
       .page-title-header {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding: 0 16px;
+
+        button {
+          width: 100%;
+        }
       }
     }
     .dashboard-page {

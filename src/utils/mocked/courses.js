@@ -12,7 +12,6 @@ export const mockedCourses = [
     category: "Farm",
     rating: 4,
     progress: 12,
-    members: 20,
     createdAt: new Date(2021, 11, 17),
 
     content: [
@@ -53,7 +52,7 @@ export const mockedCourses = [
       },
     ],
 
-    membersList: [
+    members: [
       {
         id: "0",
         name: "Jenny Wilson",
@@ -120,7 +119,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 5,
     progress: 70,
-    members: 10,
+    members: [],
     createdAt: new Date(2020, 5, 17),
   },
   {
@@ -133,7 +132,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 5,
     progress: 40,
-    members: 50,
+    members: [],
     createdAt: new Date(2020, 11, 5),
   },
   {
@@ -147,7 +146,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 1,
     progress: 40,
-    members: 100,
+    members: [],
     createdAt: new Date(2022, 4, 17),
   },
   {
@@ -160,7 +159,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 2,
     progress: 45,
-    members: 0,
+    members: [],
     createdAt: new Date(2022, 11, 17),
   },
   {
@@ -174,7 +173,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 3,
     progress: 90,
-    members: 200,
+    members: [],
     createdAt: new Date(2022, 11, 17),
   },
 ];

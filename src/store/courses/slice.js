@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { mockedCourses } from "utils/mocked";
+import { mockedCourses } from "utils/mocked/courses";
 
 const initialState = {
-  list: mockedCourses,
+  list: [...mockedCourses],
   selectedArticle: null,
 };
 

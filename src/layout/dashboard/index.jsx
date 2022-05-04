@@ -5,10 +5,12 @@ import { DeviceType } from "constants/enums";
 import { PageHeader } from "common/page-header";
 
 import "./styles.scss";
+import { ActionButton } from "common/buttons/action-button";
 
 export const DashboardLayout = ({
   title,
   children,
+  addButtonProps,
   withBackButton = false,
 }) => {
   const { device } = useDeviceType();
@@ -29,6 +31,10 @@ export const DashboardLayout = ({
         {showPageTitle && (
           <div className="page-title-header">
             <h2>{title}</h2>
+
+            {addButtonProps && (
+              <ActionButton type="button" {...addButtonProps} />
+            )}
           </div>
         )}
         <div className="dashboard-page">{children}</div>

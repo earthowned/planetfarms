@@ -27,7 +27,7 @@ export const CourseMainInfo = ({
     ? `$${parseFloat(parseFloat(price) / 100).toFixed(2)}`
     : "$00.00";
 
-  const courseMembers = `${members || 0} people tried`;
+  const courseMembers = `${members.length || 0} people tried`;
 
   const handleMoreOptionClick = (option) => {
     if (option === MoreOption.Review && onAddReview) onAddReview();

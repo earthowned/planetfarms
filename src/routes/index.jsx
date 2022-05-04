@@ -5,6 +5,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { Switch, Redirect } from "react-router-dom";
 
 import { PrivateRoute } from "components/privateRoute";
+import { Routes as PathRoutes } from "constants/routes";
 
 // News
 import {
@@ -45,6 +46,7 @@ import EditCollection from "../screens/courses/editCollection/EditCollection";
 import CourseCollection from "../screens/courses/courseCollection/CourseCollection";
 import {
   CoursePage,
+  MembersPage,
   CoursesListPage,
   CreateCoursePage,
 } from "../screens/courses";
@@ -85,11 +87,55 @@ import { NotFoundPage } from "../screens/not-found";
 export const Routes = () => {
   return (
     <Switch>
-      <PrivateRoute component={NewsListPage} exact path="/news" />
-      <PrivateRoute component={CreateArticlePage} exact path="/news/create" />
-      <PrivateRoute component={ArticlePage} exact path="/news/:id" />
-      <PrivateRoute component={ArticlePage} exact path="/news/preview" />
-      <PrivateRoute component={EditArticlePage} exact path="/news/edit/:id" />
+      {/* News */}
+      <PrivateRoute
+        exact
+        component={NewsListPage}
+        path={PathRoutes.News.Home}
+      />
+      <PrivateRoute
+        exact
+        component={CreateArticlePage}
+        path={PathRoutes.News.Create}
+      />
+      <PrivateRoute
+        exact
+        component={ArticlePage}
+        path={PathRoutes.News.Article}
+      />
+      <PrivateRoute
+        exact
+        component={ArticlePage}
+        path={PathRoutes.News.Preview}
+      />
+      <PrivateRoute
+        exact
+        component={EditArticlePage}
+        path={PathRoutes.News.Edit}
+      />
+
+      {/* Courses */}
+      <PrivateRoute
+        exact
+        component={CoursesListPage}
+        path={PathRoutes.Courses.Home}
+      />
+      <PrivateRoute
+        exact
+        component={CoursePage}
+        path={PathRoutes.Courses.Course}
+      />
+      <PrivateRoute
+        exact
+        component={MembersPage}
+        path={PathRoutes.Courses.Members}
+      />
+      <PrivateRoute
+        exact
+        component={CreateCoursePage}
+        path={PathRoutes.Courses.Create}
+      />
+
       {/* <PrivateRoute component={CommunityPagenews} exact path="/news1" /> */}
 
       <PrivateRoute component={NewsAdd} path="/news/add" exact />
@@ -132,10 +178,6 @@ export const Routes = () => {
         exact
       />
       <PrivateRoute component={MyLibrary} path="/mylibrary" exact />
-
-      <PrivateRoute component={CoursesListPage} exact path="/courses" />
-      <PrivateRoute component={CoursePage} exact path="/courses/:id" />
-      <PrivateRoute component={CreateCoursePage} path="/courses/create" exact />
 
       {/* <Route component={Courses} exact path="/courses" /> */}
       <PrivateRoute
