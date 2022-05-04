@@ -73,7 +73,7 @@ export const CoursesListPage = () => {
               description={item.description}
               key={`courses-list-item-${item.id}`}
               variant={CourseListItemVariants[selectedIndex]}
-              onClick={() => {}}
+              onClick={() => history.push(`/courses/${item.id}`)}
               ref={
                 index === courses.length - 1
                   ? (node) => setElementObserver(node)

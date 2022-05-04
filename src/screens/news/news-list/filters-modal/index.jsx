@@ -41,8 +41,7 @@ export const FiltersModal = ({
       visible={visible}
       onClose={onClose}
       title="Add Filters"
-      actionTitle="Apply"
-      onActionClick={() => onApply(selected)}
+      actionProps={{ title: "Apply", onClick: () => onApply(selected) }}
     >
       <div className="filters-modal-container">
         <div className="filter-section-container">

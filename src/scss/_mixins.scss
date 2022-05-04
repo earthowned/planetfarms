@@ -89,16 +89,65 @@
   -webkit-box-orient: vertical;
 }
 
-@mixin flexColumn($alignItems, $justifyContent) {
+@mixin breakEachWord() {
+  width: min-intrinsic; /* old Chrome, Safari */
+  width: -webkit-min-content; /* less old Chrome, Safari */
+  width: -moz-min-content; /* current Firefox */
+  width: min-content; /* current Chrome, Safari; not IE or Edge */
+}
+
+@mixin flexColumn($alignItems: normal, $justifyContent: normal) {
   display: flex;
   flex-direction: column;
+
   align-items: $alignItems;
   justify-content: $justifyContent;
 }
 
-@mixin flexRow($alignItems, $justifyContent) {
+@mixin flexRow($alignItems: normal, $justifyContent: normal) {
   display: flex;
   flex-direction: row;
   align-items: $alignItems;
   justify-content: $justifyContent;
+}
+
+@mixin circle($size) {
+  width: $size;
+  height: $size;
+  border-radius: $size;
+}
+
+@mixin position(
+  $position,
+  $top: auto,
+  $right: auto,
+  $bottom: auto,
+  $left: auto
+) {
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+  position: $position;
+}
+
+@mixin safe-area-padding($direction, $value) {
+  @if $direction == "top" {
+    padding-top: Max($value, env(safe-area-inset-top));
+  }
+  @if $direction == "bottom" {
+    padding-bottom: Max($value, env(safe-area-inset-bottom));
+  }
+  @if $direction == "left" {
+    padding-left: Max($value, env(safe-area-inset-left));
+  }
+  @if $direction == "right" {
+    padding-right: Max($value, env(safe-area-inset-right));
+  }
+  @if $direction == "all" {
+    padding-top: Max($value, env(safe-area-inset-top));
+    padding-left: Max($value, env(safe-area-inset-left));
+    padding-right: Max($value, env(safe-area-inset-right));
+    padding-bottom: Max($value, env(safe-area-inset-bottom));
+  }
 }

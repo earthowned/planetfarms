@@ -1,0 +1,13 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.lessons-block-container {
+  width: 100%;
+  gap: $gap-big;
+  @include flexColumn(flex-start, flex-start);
+
+  .courses-empty-block-container {
+    gap: $gap-big;
+  }
+}

@@ -17,18 +17,6 @@ export const Modal = ({ visible, children, modalRef }) => {
   );
 };
 
-export const MobileMenuModal = ({ visible, children, modalRef }) => {
-  if (!visible) return null;
-
-  return (
-    <Portal node={document && document.getElementById("app-portal-container")}>
-      <div ref={modalRef} className="portal-mobile-modal-container">
-        {children}
-      </div>
-    </Portal>
-  );
-};
-
 export const CommonModal = ({ visible, title, onClose, children }) => {
   if (!visible) return null;
 

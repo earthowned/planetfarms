@@ -1,0 +1,11 @@
+@import "src/scss/mixins";
+
+.block-header-container {
+  width: 100%;
+  height: 64px;
+  @include flexRow(center, space-between);
+
+  button {
+    width: fit-content;
+  }
+}

@@ -15,6 +15,15 @@ import { ReactComponent as ChevronRightIcon } from "assets/icons/chevron/right.s
 import { ReactComponent as ChevronUpIcon } from "assets/icons/chevron/up.svg";
 import { ReactComponent as ChevronDownIcon } from "assets/icons/chevron/down.svg";
 
+// Files
+import { ReactComponent as FileDocIcon } from "assets/icons/files/doc.svg";
+import { ReactComponent as FileJpgIcon } from "assets/icons/files/jpg.svg";
+import { ReactComponent as FilePdfIcon } from "assets/icons/files/pdf.svg";
+import { ReactComponent as FilePngIcon } from "assets/icons/files/png.svg";
+import { ReactComponent as FileTxtIcon } from "assets/icons/files/txt.svg";
+import { ReactComponent as FileXlsIcon } from "assets/icons/files/xls.svg";
+import { ReactComponent as FileZioIcon } from "assets/icons/files/zip.svg";
+
 import { ReactComponent as PersonIcon } from "assets/icons/person.svg";
 import { ReactComponent as EyeOpenIcon } from "assets/icons/eye-on.svg";
 import { ReactComponent as EyeCloseIcon } from "assets/icons/eye-off.svg";
@@ -46,9 +55,16 @@ import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
 import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
 import { ReactComponent as StarOutlineIcon } from "assets/icons/star-outline.svg";
 import { ReactComponent as StarIcon } from "assets/icons/star.svg";
+import { ReactComponent as DownloadIcon } from "assets/icons/download.svg";
+import { ReactComponent as CheckmarkRoundIcon } from "assets/icons/checkmark-round.svg";
+import { ReactComponent as MessageIcon } from "assets/icons/message.svg";
+import { ReactComponent as ArchiveIcon } from "assets/icons/archive.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
+    case "archive":
+      return <ArchiveIcon />;
+
     case "book":
       return <BookIcon />;
 
@@ -73,6 +89,10 @@ const getIcon = (iconName) => {
     case "checkmark":
       return <CheckmarkIcon />;
 
+    case "checkmark-round": {
+      return <CheckmarkRoundIcon />;
+    }
+
     case "chevron-left":
       return <ChevronLeftIcon />;
 
@@ -87,6 +107,9 @@ const getIcon = (iconName) => {
 
     case "chevrons-right":
       return <ChevronsRightIcon />;
+
+    case "download":
+      return <DownloadIcon />;
 
     case "edit":
       return <EditIcon />;
@@ -145,6 +168,9 @@ const getIcon = (iconName) => {
     case "link":
       return <LinkIcon />;
 
+    case "message":
+      return <MessageIcon />;
+
     case "more":
       return <MoreIcon />;
 
@@ -168,6 +194,29 @@ const getIcon = (iconName) => {
 
     case "youtube":
       return <VideoIcon />;
+
+    // Files
+
+    case "file-doc":
+      return <FileDocIcon />;
+
+    case "file-jpg":
+      return <FileJpgIcon />;
+
+    case "file-pdf":
+      return <FilePdfIcon />;
+
+    case "file-png":
+      return <FilePngIcon />;
+
+    case "file-txt":
+      return <FileTxtIcon />;
+
+    case "file-xls":
+      return <FileXlsIcon />;
+
+    case "file-zip":
+      return <FileZioIcon />;
 
     default:
       return <GoogleIcon />;
