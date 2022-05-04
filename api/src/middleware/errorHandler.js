@@ -3,6 +3,7 @@ const { ValidationError } = require('express-validation')
 const CustomError = require('../errors/customError')
 
 const errorHandler = (err, _req, res, _next) => {
+  console.log(err)
   if (err instanceof CustomError) {
     return res.status(err.statusCode).send({ errors: err.serializeErrors() })
   }

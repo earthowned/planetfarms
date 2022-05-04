@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING
       },
-      coverImg: {
+      thumbnail: {
         type: DataTypes.STRING
       },
       lessonDesc: {
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       richtextId: {
         type: DataTypes.INTEGER,
         unique: true,
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
