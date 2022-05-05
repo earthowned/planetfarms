@@ -12,14 +12,15 @@ const {
   getUsers,
   updateUser,
   searchUserName,
-  sendTokenStatus
+  sendTokenStatus,
+  resendSignUpWithCode
 } = require('../controllers/userController.js')
 require('express-async-errors')
 
 const protect = require('../middleware/authMiddleware')
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
-router.route('/').post(registerUser).get(protect, getUsers)
+router.route('/').get(protect, getUsers)
 router
   .route('/profile')
   .get(protect, getMyProfile)
@@ -28,12 +29,14 @@ router
   .route('/profile/:userID')
   .get(protect, getUserProfileByUserID)
   .put(protect, upload.single('attachments'), resizeImage, updateUser)
+router.post('/register', registerUser)
 router.post('/login', authUser)
 router.route('/token').get(protect, sendTokenStatus)
 router.route('/search').get(searchUserName)
-router.route('/changePassword').post(protect, changePassword)
-router.post('/forgotPassword', forgotPassword)
-router.post('/forgotPasswordSubmit', forgotPasswordSubmit)
-router.post('/confirmSignUp', confirmSignUpWithCode)
+router.post('/change-password', protect, changePassword)
+router.post('/forgot-password', forgotPassword)
+router.post('/forgot-password-submit', forgotPasswordSubmit)
+router.post('/confirm-sign-up', confirmSignUpWithCode)
+router.post('/resend-sign-up-code', resendSignUpWithCode)
 
 module.exports = router

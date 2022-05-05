@@ -14,6 +14,15 @@ module.exports = {
         updatedAt: date
       })
     }
+
+    // hard coded user
+    data.push({
+      username: 'test@test.com',
+      password: 'test1234',
+      createdAt: date,
+      updatedAt: date
+    })
+
     queryInterface.bulkInsert('localauths', data, {})
   },
 
