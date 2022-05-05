@@ -48,7 +48,12 @@ module.exports = (sequelize, DataTypes) => {
       constraints: true,
       foreignKey: 'courseId'
     })
-    Lesson.belongsTo(models.RichText, { foreignKey: 'richtextId', constraints: true, onDelete: 'CASCADE' })
+    Lesson.belongsTo(models.RichText, {
+      foreignKey: 'richtextId',
+      constraints: true,
+      allowNull: true,
+      onDelete: 'SET NULL'
+    })
     Lesson.hasMany(models.LessonProgress, {
       constraints: true,
       foreignKey: 'lessonId',
