@@ -6,6 +6,11 @@ import { TextLink } from "common/links";
 import { AuthLayout } from "layout/auth";
 import { InputField } from "common/input";
 import { ActionButton } from "common/buttons/action-button";
+import {
+  FooterContainer,
+  InputsContainer,
+  ButtonsContainer,
+} from "components/auth";
 
 import { getErrorMessage } from "utils/error";
 import { requestCode, resetPassword } from "actions/auth";
@@ -73,6 +78,13 @@ export const ForgotPasswordPage = () => {
     }
   };
 
+  const generateInputs = (values) => {
+    const { username, code, password, confirmPassword } = model;
+    return isCodeRequested(values)
+      ? [username, code, password, confirmPassword]
+      : [username];
+  };
+
   return (
     <AuthLayout
       isLoading={isLoading}
@@ -83,37 +95,26 @@ export const ForgotPasswordPage = () => {
     >
       {({ values, setFieldValue }) => (
         <>
-          <div className="inputs-container">
-            <InputField {...model.username} />
+          <InputsContainer inputs={generateInputs(values)} />
 
-            {values[model.codeRequested.name] && (
-              <>
-                <InputField {...model.code} />
-                <InputField type="password" {...model.password} />
-                <InputField type="password" {...model.confirmPassword} />
-              </>
-            )}
+          <ButtonsContainer>
+            <ActionButton
+              type="button"
+              variant="secondary"
+              title={secondaryButtonTitle(values)}
+              onClick={() => handleCodeResend(values, setFieldValue)}
+            />
 
-            <div className="row-container">
-              <ActionButton
-                type="button"
-                variant="secondary"
-                title={secondaryButtonTitle(values)}
-                onClick={() => handleCodeResend(values, setFieldValue)}
-              />
+            <ActionButton
+              type="submit"
+              variant="primary"
+              title={primaryButtonTitle(values)}
+            />
+          </ButtonsContainer>
 
-              <ActionButton
-                type="submit"
-                variant="primary"
-                title={primaryButtonTitle(values)}
-              />
-            </div>
-          </div>
-
-          <div className="footer">
-            <h5>Go back to</h5>
+          <FooterContainer title="Go back to">
             <TextLink replace to="/login" variant="green" title="Login" />
-          </div>
+          </FooterContainer>
         </>
       )}
     </AuthLayout>

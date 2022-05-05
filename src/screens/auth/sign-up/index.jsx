@@ -5,16 +5,19 @@ import { useHistory } from "react-router-dom";
 
 import { TextLink } from "common/links";
 import { AuthLayout } from "layout/auth";
-import { InputField } from "common/input";
 import { CheckboxField } from "common/checkbox";
-import { ButtonsContainer } from "components/auth";
 import { ActionButton } from "common/buttons/action-button";
+import {
+  FooterContainer,
+  InputsContainer,
+  ButtonsContainer,
+} from "components/auth";
 
 import { register } from "actions/auth";
 import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
 
-import { model, validationSchema, initialValues } from "./config";
+import { model, validationSchema, initialValues, inputs } from "./config";
 
 export const SignUpPage = () => {
   const alert = useAlert();
@@ -57,25 +60,15 @@ export const SignUpPage = () => {
     >
       {() => (
         <>
-          <div className="inputs-container">
-            <InputField {...model.email} />
-            <InputField type="password" {...model.password} />
-
-            <div className="row-container">
-              <div className="terms-checkbox-container">
-                <CheckboxField name={model.agrre.name} />
-
-                <div className="link-container">
-                  <p>I agree with</p>
-                  <TextLink
-                    to="/register"
-                    variant="white"
-                    title="Terms of Service"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <InputsContainer inputs={inputs}>
+            <CheckboxField title="I agree with" name={model.agrre.name}>
+              <TextLink
+                to="/register"
+                variant="white"
+                title="Terms of Service"
+              />
+            </CheckboxField>
+          </InputsContainer>
 
           <ActionButton type="submit" variant="primary" title="Sign Up" />
 
@@ -95,10 +88,9 @@ export const SignUpPage = () => {
             />
           </ButtonsContainer>
 
-          <div className="footer">
-            <h5>Already have an account?</h5>
+          <FooterContainer title="Already have an account?">
             <TextLink replace to="/login" variant="green" title="Sign in!" />
-          </div>
+          </FooterContainer>
         </>
       )}
     </AuthLayout>

@@ -7,8 +7,7 @@
   overflow: hidden;
   background-color: transparent;
 
-  display: flex;
-  flex-direction: row;
+  @include flexRow();
 
   .left-container {
     width: 40%;
@@ -18,26 +17,19 @@
     overflow-y: scroll;
     background-color: rgba(20, 20, 20, 0.6);
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flexColumn(center, auto);
 
     .auth-scroll-container {
       gap: 80px;
       width: 80%;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+      padding-bottom: 16px;
+      @include flexColumn(auto, flex-start);
 
       .logo-container {
         width: 100%;
         height: 120px;
         flex-shrink: 0;
-
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-start;
+        @include flexColumn(flex-start, flex-end);
 
         .left-logo-icon {
           width: 100%;
@@ -57,72 +49,7 @@
 
         .form-container {
           gap: 40px;
-          display: flex;
-          flex-direction: column;
-
-          .inputs-container {
-            gap: 24px;
-            display: flex;
-            flex-direction: column;
-          }
-
-          .image-container {
-            width: 100%;
-            padding: 12px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: contain;
-            }
-          }
-
-          .row-container {
-            gap: 24px;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-          }
-
-          .terms-checkbox-container {
-            display: flex;
-            flex-direction: row;
-
-            .link-container {
-              display: flex;
-              align-items: center;
-              flex-direction: row;
-
-              p {
-                user-select: none;
-                color: #eeefef;
-                font: $font-body;
-                margin-left: 10px;
-                margin-right: 4px;
-              }
-            }
-          }
-
-          .socials-container {
-            width: 100%;
-            gap: 24px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-
-          .footer {
-            gap: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            justify-content: center;
-          }
+          @include flexColumn();
         }
       }
     }
@@ -134,8 +61,7 @@
     background-color: transparent;
 
     display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flexColumn(center, center);
 
     .right-logo-icon {
       width: 80%;
@@ -173,8 +99,7 @@
 
         .logo-container {
           height: 72px;
-          align-items: center;
-          justify-content: center;
+          @include flexColumn(center, center);
 
           .left-logo-icon {
             height: 24px;
@@ -206,12 +131,6 @@
       .auth-scroll-container {
         width: 100%;
         padding: 0px 16px;
-
-        .form-container {
-          .row-container {
-            flex-wrap: wrap;
-          }
-        }
       }
     }
   }

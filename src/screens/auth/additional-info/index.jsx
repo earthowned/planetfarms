@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { AuthLayout } from "layout/auth";
-import { InputField } from "common/input";
 import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
+import { InputsContainer, ButtonsContainer } from "components/auth";
 
 import { getErrorMessage } from "utils/error";
 import { updateUserInfo } from "actions/userAction";
@@ -71,19 +71,13 @@ export const AdditionalInfoPage = () => {
     >
       {({ dirty }) => (
         <>
-          {step === AdditionalStep.Info && (
-            <div className="inputs-container">
-              {inputs.map((item) => (
-                <InputField key={`${item.name}-input`} {...item} />
-              ))}
-            </div>
-          )}
+          {step === AdditionalStep.Info && <InputsContainer inputs={inputs} />}
 
           {step === AdditionalStep.Avatar && (
             <DragDropZoneField type="Image" name={model.avatar.name} />
           )}
 
-          <div className="row-container">
+          <ButtonsContainer>
             <ActionButton
               title="Skip"
               variant="secondary"
@@ -96,7 +90,7 @@ export const AdditionalInfoPage = () => {
               disabled={!dirty}
               variant="primary"
             />
-          </div>
+          </ButtonsContainer>
         </>
       )}
     </AuthLayout>

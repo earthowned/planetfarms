@@ -1,0 +1,12 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.auth-footer-container {
+  width: 100%;
+  gap: $gap-smallest;
+  @include flexRow(center, center);
+
+  @include breakpoint("mobile", "minMax") {
+    @include flexColumn(center, center);
+  }
+}

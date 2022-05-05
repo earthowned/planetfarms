@@ -1,5 +1,7 @@
 import * as yup from "yup";
 
+import { emailCode } from "utils/validators";
+
 const model = {
   code: {
     name: "code",
@@ -12,14 +14,7 @@ const model = {
 export const inputs = [model.code];
 
 export const validationSchema = yup.object().shape({
-  [model.code.name]: yup
-    .string()
-    .test({
-      name: "email-code",
-      message: "Must be 6 digits",
-      test: (value) => !value.includes("_"),
-    })
-    .required("Code is required"),
+  [model.code.name]: emailCode.required("Code is required"),
 });
 
 export const initialValues = {
