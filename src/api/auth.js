@@ -21,8 +21,11 @@ export const forgotPasswordSubmit = ({ username, code, newPassword }) =>
     newPassword,
   });
 
-export const confirmSignup = ({ username, code }) =>
+export const confirmEmail = ({ email, code }) =>
   apiInstance.post("/users/confirm-sign-up", {
-    username,
     code,
+    username: email,
   });
+
+export const resendEmailCode = ({ email }) =>
+  apiInstance.post("/users/resend-sign-up-code", { username: email });

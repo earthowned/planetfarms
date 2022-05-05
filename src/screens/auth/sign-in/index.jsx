@@ -10,6 +10,7 @@ import { Checkbox } from "common/checkbox";
 import { ActionButton } from "common/buttons/action-button";
 
 import { login } from "actions/auth";
+import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
 
 import { model, validationSchema, initialValues } from "./config";
@@ -36,7 +37,7 @@ export const SignInPage = () => {
     try {
       setIsLoading(true);
       await login({ name: username, password })(dispatch);
-      history.push("/news");
+      history.push(Routes.News.Home);
     } catch (error) {
       setIsLoading(false);
       alert.error(getErrorMessage(error));

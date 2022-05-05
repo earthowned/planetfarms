@@ -1,11 +1,11 @@
 import * as Yup from "yup";
 
 export const model = {
-  username: {
-    name: "username",
+  email: {
+    name: "email",
     icon: "person",
     required: true,
-    placeholder: "Username",
+    placeholder: "Email",
   },
 
   password: {
@@ -21,7 +21,9 @@ export const model = {
 };
 
 export const validationSchema = Yup.object().shape({
-  [model.username.name]: Yup.string().required("Username is required field!"),
+  [model.email.name]: Yup.string()
+    .email("Email is not valid")
+    .required("Username is required field!"),
   [model.password.name]: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .required("Password is required field!"),
@@ -29,7 +31,7 @@ export const validationSchema = Yup.object().shape({
 });
 
 export const initialValues = {
-  [model.username.name]: "",
+  [model.email.name]: "",
   [model.password.name]: "",
   [model.agrre.name]: false,
 };

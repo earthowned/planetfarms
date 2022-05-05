@@ -26,6 +26,18 @@ export const InputComponent = ({
     );
   }
 
+  if (type === "email-code") {
+    return (
+      <InputMask
+        type="text"
+        mask="999999"
+        alwaysShowMask={false}
+        onChange={(event) => onChange(event.target.value)}
+        {...props}
+      />
+    );
+  }
+
   if (type === "currency") {
     return (
       <CurrencyInput

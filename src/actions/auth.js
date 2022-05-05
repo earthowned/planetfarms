@@ -98,7 +98,8 @@ export const register =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      await api.auth.register({ username: name, password });
+      const response = await api.auth.register({ username: name, password });
+      console.log("register", response);
 
       // no auto login for cognito since it needs to confirm email with a code
       if (!isCognito) {
@@ -107,6 +108,7 @@ export const register =
 
       return Promise.resolve();
     } catch (error) {
+      console.error("register", error);
       return Promise.reject(error);
     }
   };
