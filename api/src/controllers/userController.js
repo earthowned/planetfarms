@@ -155,15 +155,18 @@ const registerUser = async (req, res) => {
       })
     }
 
+    const responseData = {}
+
     if (isCognito) {
       await registerCognito(username, password)
+      responseData.message = 'Code for sign up confirmation was sent to your email'
+      responseData.forSignUpConfirmation = true
     } else {
       await registerLocal(username, password)
+      responseData.message = 'The user has been registered'
     }
 
-    res.status(201).send({
-      message: 'The user has been registered'
-    })
+    res.status(201).send(responseData)
   } catch (err) {
     res.status(409).json({ error: err.message })
   }

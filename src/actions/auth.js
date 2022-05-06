@@ -65,7 +65,19 @@ export const login =
       let authData = {};
       let response;
       if (isCognito) {
-        response = await Auth.signIn(name, password);
+        try {
+          // try to use formatted username
+          const username = name.replace(/@/g, "");
+          response = await Auth.signIn(username, password);
+        } catch (error) {
+          if (error.code === "UserNotConfirmedException") {
+            // TODO: add handling unconfirmed user
+            throw error;
+          }
+          // try non formatted email
+          response = await Auth.signIn(name, password);
+        }
+
         const id = response?.attributes?.sub || "";
         authData = {
           id,
@@ -104,6 +116,8 @@ export const register =
       // no auto login for cognito since it needs to confirm email with a code
       if (!isCognito) {
         await login({ name, password })(dispatch);
+      } else if (response.data.forSignUpConfirmation) {
+        // TODO: add handling for sign up confirmation
       }
 
       return Promise.resolve();
