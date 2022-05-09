@@ -3,6 +3,7 @@ import { Auth, Amplify } from "aws-amplify";
 import { api } from "api";
 import { authConfig } from "config/amplify";
 import { getErrorMessage } from "utils/error";
+import { setIsLoading } from "store/loader/slices";
 
 import { setCurrentUser } from "./slices";
 
@@ -16,7 +17,7 @@ export const registerThunk =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      // TODO: Set isLoading;
+      dispatch(setIsLoading(true));
       await api.auth.register({ username: name, password });
 
       if (isCognito) {
@@ -26,6 +27,8 @@ export const registerThunk =
       return Promise.resolve({ confirmEmail: false });
     } catch (error) {
       return Promise.reject(error);
+    } finally {
+      dispatch(setIsLoading(false));
     }
   };
 
@@ -33,7 +36,7 @@ export const loginThunk =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      // TODO: Set isLoading
+      dispatch(setIsLoading(true));
 
       let response;
       let data = {};
@@ -65,11 +68,14 @@ export const loginThunk =
       return Promise.resolve(response);
     } catch (error) {
       return Promise.reject(error);
+    } finally {
+      dispatch(setIsLoading(false));
     }
   };
 
 export const getCurrentUserThunk = () => async (dispatch) => {
   try {
+    dispatch(setIsLoading(true));
     const storage = JSON.parse(window.localStorage.getItem("userInfo"));
 
     if (!storage || !storage.id) {
@@ -82,5 +88,98 @@ export const getCurrentUserThunk = () => async (dispatch) => {
     return Promise.resolve({ isAuthed: true });
   } catch (error) {
     return Promise.reject(getErrorMessage(error));
+  } finally {
+    dispatch(setIsLoading(false));
   }
 };
+
+// TODO: Why there is no functionality to request code without cognito?
+export const requestCodeThunk = (username) => async (dispatch) => {
+  try {
+    dispatch(setIsLoading(true));
+
+    let response;
+    if (isCognito) {
+      const data = await api.auth.forgotPassword(username);
+      response =
+        data.data.details.CodeDeliveryDetails.AttributeName.split("_").join(
+          " "
+        );
+    }
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error);
+  } finally {
+    dispatch(setIsLoading(false));
+  }
+};
+
+export const resetPasswordThunk =
+  ({ username, code, password }) =>
+  async (dispatch) => {
+    try {
+      dispatch(setIsLoading(true));
+      if (isCognito) {
+        await api.auth.forgotPasswordSubmit(username, code, password);
+      }
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };
+
+export const changePasswordThunk =
+  ({ oldPassword, newPassword }) =>
+  async (dispatch) => {
+    try {
+      dispatch(setIsLoading(true));
+
+      if (isCognito) {
+        const user = await Auth.currentAuthenticatedUser();
+        await Auth.changePassword(user, oldPassword, newPassword);
+      } else {
+        await api.auth.changePassword({ oldPassword, newPassword });
+      }
+
+      return Promise.resolve();
+    } catch (error) {
+      // TODO: From backend receive wrong error object;
+      // TODO: Backend_Bug: Always incorrect password error, but password has been changed;
+      return Promise.reject(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };
+
+export const confirmEmailThunk =
+  ({ code, email, password }) =>
+  async (dispatch) => {
+    try {
+      dispatch(setIsLoading(true));
+
+      await api.auth.confirmEmail({ email, code });
+      await dispatch(loginThunk({ name: email, password }));
+
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };
+
+export const requestConfirmEmailCodeThunk =
+  ({ email }) =>
+  async (dispatch) => {
+    try {
+      dispatch(setIsLoading(true));
+      await api.auth.resendEmailCode({ email });
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };

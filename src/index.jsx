@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Provider as AlertProvider } from "react-alert";
 
+import { store } from "store";
+import { LoaderProvider } from "providers";
 import { Alert, alertOptions } from "common/alert";
 
 import App from "./App";
-import { store } from "./store";
+
 import reportWebVitals from "./reportWebVitals";
 
 import "./scss/styles.scss";
@@ -14,7 +16,9 @@ import "./scss/styles.scss";
 ReactDOM.render(
   <Provider store={store}>
     <AlertProvider template={Alert} {...alertOptions}>
-      <App />
+      <LoaderProvider>
+        <App />
+      </LoaderProvider>
     </AlertProvider>
   </Provider>,
   document.getElementById("app")

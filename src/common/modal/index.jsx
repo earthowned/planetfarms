@@ -17,6 +17,18 @@ export const Modal = ({ visible, children, modalRef }) => {
   );
 };
 
+export const LoaderModal = ({ visible, children, modalRef }) => {
+  if (!visible) return null;
+
+  return (
+    <Portal node={document && document.getElementById("app-loader-container")}>
+      <div ref={modalRef} className="app-portal-loader-container">
+        {children}
+      </div>
+    </Portal>
+  );
+};
+
 export const CommonModal = ({ visible, title, onClose, children }) => {
   if (!visible) return null;
 

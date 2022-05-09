@@ -3,42 +3,43 @@ import { useAlert } from "react-alert";
 import { Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Loader } from "common/loader";
-
+import { setIsLoading } from "store/loader/slices";
 import { getCurrentUserThunk } from "store/user/thunks";
 import { selectCurrentUser } from "store/user/selectors";
+import { selectIsLoading } from "store/loader/selectors";
 
 // import { checkAndUpdateToken } from "../../actions/userAction";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const currentUser = useSelector(selectCurrentUser);
 
   const [isAuthed, setIsAuthed] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const isLoading = useSelector(selectIsLoading);
+  const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     if (!currentUser) {
       setIsAuthed(false);
-      setIsLoading(true);
+      dispatch(setIsLoading(true));
     }
     if (currentUser) {
       setIsAuthed(true);
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
     }
   }, [currentUser]);
 
   useEffect(async () => {
     if (!isAuthed && isLoading) {
       try {
-        const response = await getCurrentUserThunk()(dispatch);
+        const response = await dispatch(getCurrentUserThunk());
         setIsAuthed(response.isAuthed);
-        setIsLoading(false);
       } catch (error) {
         if (error) alert.error(error);
         setIsAuthed(false);
-        setIsLoading(false);
+      } finally {
+        dispatch(setIsLoading(false));
       }
     }
   }, [isAuthed, isLoading]);
@@ -48,10 +49,6 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
   //   console.log(userInfo);
   //   return userInfo && dispatch(checkAndUpdateToken());
   // };
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <Route

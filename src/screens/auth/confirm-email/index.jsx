@@ -11,10 +11,12 @@ import {
   ButtonsContainer,
 } from "components/auth";
 
-import { api } from "api";
 import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
-import { loginThunk } from "store/user/thunks";
+import {
+  confirmEmailThunk,
+  requestConfirmEmailCodeThunk,
+} from "store/user/thunks";
 
 import {
   Title,
@@ -31,8 +33,6 @@ export const ConfirmEmailPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [variant, setVariant] = useState(Variant.Confirm);
   const [isFromRegister, setIsFromRegister] = useState(true);
   const [data, setData] = useState({ email: "", password: "" });
@@ -53,20 +53,19 @@ export const ConfirmEmailPage = () => {
   const handleSubmit = useCallback(
     async ({ code }) => {
       try {
-        setIsLoading(true);
-
-        await api.auth.confirmEmail({ email: data.email, code });
         await dispatch(
-          loginThunk({
-            name: data.email,
+          confirmEmailThunk({
+            code,
+            email: data.email,
             password: data.password,
           })
         );
 
-        if (isFromRegister) setVariant(Variant.Success);
-        else history.push(Routes.News.Home);
-
-        setIsLoading(false);
+        if (isFromRegister) {
+          setVariant(Variant.Success);
+        } else {
+          history.push(Routes.News.Home);
+        }
       } catch (error) {
         alert.error(getErrorMessage(error));
       }
@@ -76,19 +75,19 @@ export const ConfirmEmailPage = () => {
 
   const handleResendClick = useCallback(async () => {
     try {
-      setIsLoading(true);
-      await api.auth.resendEmailCode({ email: data.email });
+      await dispatch(
+        requestConfirmEmailCodeThunk({
+          email: data.email,
+        })
+      );
       alert.success(`We've sent new confirmation code at ${data.email}`);
     } catch (error) {
       alert.error(getErrorMessage(error));
-    } finally {
-      setIsLoading(false);
     }
   }, [data.email]);
 
   return (
     <AuthLayout
-      isLoading={isLoading}
       title={Title[variant]}
       onSubmit={handleSubmit}
       initialValues={initialValues}

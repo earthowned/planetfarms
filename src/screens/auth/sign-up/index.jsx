@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -13,7 +12,6 @@ import {
   ButtonsContainer,
 } from "components/auth";
 
-// import { register } from "actions/auth";
 import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
 import { registerThunk, loginThunk } from "store/user/thunks";
@@ -25,8 +23,6 @@ export const SignUpPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const onGoogleLogin = () => {
     // Auth.federatedSignIn({ provider: "Google" });
   };
@@ -37,8 +33,6 @@ export const SignUpPage = () => {
 
   const handleFormSubmit = async ({ email, password }) => {
     try {
-      setIsLoading(true);
-
       const { confirmEmail } = await dispatch(
         registerThunk({ name: email, password })
       );
@@ -56,10 +50,8 @@ export const SignUpPage = () => {
         state.variant = "Success";
       }
 
-      setIsLoading(false);
       history.push({ pathname, state });
     } catch (error) {
-      setIsLoading(false);
       alert.error(getErrorMessage(error));
     }
   };
@@ -67,7 +59,6 @@ export const SignUpPage = () => {
   return (
     <AuthLayout
       title="Sign Up"
-      isLoading={isLoading}
       onSubmit={handleFormSubmit}
       initialValues={initialValues}
       validationSchema={validationSchema}

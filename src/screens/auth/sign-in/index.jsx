@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -14,10 +14,9 @@ import {
 } from "components/auth";
 
 import { api } from "api";
-// import { login } from "actions/auth";
-import { loginThunk } from "store/user/thunks";
 import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
+import { loginThunk } from "store/user/thunks";
 
 import { isNonConfirmedError } from "./helpers";
 import { validationSchema, initialValues, inputs } from "./config";
@@ -30,7 +29,6 @@ export const SignInPage = () => {
   const dispatch = useDispatch();
 
   const [remember, setRemember] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const onGoogleLogin = () => {
     // Auth.federatedSignIn({ provider: "Google" });
@@ -42,12 +40,9 @@ export const SignInPage = () => {
 
   const handleFormSubmit = async ({ username, password }) => {
     try {
-      setIsLoading(true);
       await dispatch(loginThunk({ name: username, password }));
       history.push(Routes.News.Home);
-      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false);
       alert.error(getErrorMessage(error));
 
       if (isNonConfirmedError(error)) {
@@ -63,7 +58,6 @@ export const SignInPage = () => {
   return (
     <AuthLayout
       title="Sign In"
-      isLoading={isLoading}
       onSubmit={handleFormSubmit}
       initialValues={initialValues}
       validationSchema={validationSchema}

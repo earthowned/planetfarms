@@ -25,11 +25,6 @@ export const model = {
     type: "text",
     placeholder: "Last Name",
   },
-  email: {
-    name: "email",
-    type: "email",
-    placeholder: "Email",
-  },
   phoneNumber: {
     name: "phoneNumber",
     type: "tel",
@@ -49,7 +44,6 @@ export const model = {
 export const inputs = [
   model.firstName,
   model.lastName,
-  model.email,
   model.phoneNumber,
   model.birthdate,
 ];
@@ -60,7 +54,6 @@ const infoValidation = Yup.object().shape({
   [model.phoneNumber.name]: Yup.string()
     .optional()
     .matches(phoneRegex, "Invalid Phone Number"),
-  [model.email.name]: Yup.string().email().optional(),
   [model.birthdate.name]: Yup.string()
     .optional()
     .matches(dateRegex, "Invalid Date")
@@ -79,7 +72,6 @@ const infoInitialValues = {
   [model.firstName.name]: "",
   [model.lastName.name]: "",
   [model.phoneNumber.name]: "",
-  [model.email.name]: "",
   [model.birthdate.name]: "",
 };
 
