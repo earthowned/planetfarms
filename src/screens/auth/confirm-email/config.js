@@ -39,5 +39,5 @@ export const Title = {
 export const Subtitle = {
   [Variant.Success]: null,
   [Variant.Confirm]:
-    "Please check your mail. Enter the code you received in the email.",
+    "Please check your mail. Enter the code you received at the email.",
 };

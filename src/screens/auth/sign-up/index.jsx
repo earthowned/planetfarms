@@ -13,9 +13,10 @@ import {
   ButtonsContainer,
 } from "components/auth";
 
-import { register } from "actions/auth";
+// import { register } from "actions/auth";
 import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
+import { registerThunk, loginThunk } from "store/user/thunks";
 
 import { model, validationSchema, initialValues, inputs } from "./config";
 
@@ -37,13 +38,26 @@ export const SignUpPage = () => {
   const handleFormSubmit = async ({ email, password }) => {
     try {
       setIsLoading(true);
-      await register({ name: email, password })(dispatch);
-      setIsLoading(false);
 
-      history.push({
-        pathname: Routes.Auth.ConfirmEmail,
-        state: { email, isFromRegister: true },
-      });
+      const { confirmEmail } = await dispatch(
+        registerThunk({ name: email, password })
+      );
+
+      const pathname = Routes.Auth.ConfirmEmail;
+      const state = {
+        email,
+        password,
+        variant: "Confirm",
+        isFromRegister: true,
+      };
+
+      if (!confirmEmail) {
+        await dispatch(loginThunk({ name: email, password }));
+        state.variant = "Success";
+      }
+
+      setIsLoading(false);
+      history.push({ pathname, state });
     } catch (error) {
       setIsLoading(false);
       alert.error(getErrorMessage(error));

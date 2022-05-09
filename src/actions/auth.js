@@ -57,54 +57,95 @@ export const getAccessToken = () => async (dispatch) => {
   }
 };
 
-// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
 export const login =
   ({ name, password }) =>
   async (dispatch) => {
     try {
-      let authData = {};
-      let response;
-      if (isCognito) {
-        try {
-          // try to use formatted username
-          const username = name.replace(/@/g, "");
-          response = await Auth.signIn(username, password);
-        } catch (error) {
-          if (error.code === "UserNotConfirmedException") {
-            // TODO: add handling unconfirmed user
-            throw error;
-          }
-          // try non formatted email
-          response = await Auth.signIn(name, password);
-        }
+      // TODO: Set isLoading
 
-        const id = response?.attributes?.sub || "";
-        authData = {
-          id,
+      let response;
+      let data = {};
+      let username = name;
+
+      if (isCognito) {
+        if (username.includes("@")) username = username.replace(/@/g, "");
+        response = await Auth.signIn(username, password);
+
+        data = {
+          id: response?.attributes?.sub || "",
           token: response?.signInUserSession?.idToken?.jwtToken || "",
         };
-        await api.auth.login({ id });
-      } else {
-        response = await api.auth.login({ username: name, password });
-        authData = response.data;
+
+        await api.auth.login({ id: data.id });
       }
 
-      localStorage.setItem("userInfo", JSON.stringify(authData));
+      if (!isCognito) {
+        response = await api.auth.login({ username, password });
+        data = { ...response.data };
+      }
 
-      const profile = await api.user.get({ id: authData.id });
-      dispatch(setCurrentUser({ ...response, ...profile?.data?.results }));
+      localStorage.setItem("userInfo", JSON.stringify(data));
 
-      // await getAccessToken()(dispatch); // access token is already received in login response
-      // const community = await news()(dispatch);
-      // await visitCommunity(community.id)(dispatch);
+      const user = await api.user.get({ id: data.id });
 
       dispatch({ type: USER_LOGIN_SUCCESS, payload: response });
+      dispatch(setCurrentUser({ ...response, ...user?.data?.results }));
+
       return Promise.resolve(response);
     } catch (error) {
-      dispatch({ type: USER_LOGIN_FAIL, payload: getErrorMessage(error) });
       return Promise.reject(error);
     }
   };
+
+// TODO: Move to store/thunk when reduxjs/toolkit will be setuped
+// export const login =
+//   ({ name, password }) =>
+//   async (dispatch) => {
+//     try {
+//       let authData = {};
+//       let response;
+//       if (isCognito) {
+//         try {
+//           // try to use formatted username
+//           const username = name.replace(/@/g, "");
+//           response = await Auth.signIn(username, password);
+//         } catch (error) {
+//           console.log(error);
+//           if (error.code === "UserNotConfirmedException") {
+//             // TODO: add handling unconfirmed user
+//             throw error;
+//           }
+//           // try non formatted email
+//           response = await Auth.signIn(name, password);
+//         }
+
+//         const id = response?.attributes?.sub || "";
+//         authData = {
+//           id,
+//           token: response?.signInUserSession?.idToken?.jwtToken || "",
+//         };
+//         await api.auth.login({ id });
+//       } else {
+//         response = await api.auth.login({ username: name, password });
+//         authData = response.data;
+//       }
+
+//       localStorage.setItem("userInfo", JSON.stringify(authData));
+
+//       const profile = await api.user.get({ id: authData.id });
+//       dispatch(setCurrentUser({ ...response, ...profile?.data?.results }));
+
+//       // await getAccessToken()(dispatch); // access token is already received in login response
+//       // const community = await news()(dispatch);
+//       // await visitCommunity(community.id)(dispatch);
+
+//       dispatch({ type: USER_LOGIN_SUCCESS, payload: response });
+//       return Promise.resolve(response);
+//     } catch (error) {
+//       dispatch({ type: USER_LOGIN_FAIL, payload: getErrorMessage(error) });
+//       return Promise.reject(error);
+//     }
+//   };
 
 export const register =
   ({ name, password }) =>

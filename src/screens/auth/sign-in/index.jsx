@@ -13,10 +13,13 @@ import {
   ButtonsContainer,
 } from "components/auth";
 
-import { login } from "actions/auth";
+import { api } from "api";
+// import { login } from "actions/auth";
+import { loginThunk } from "store/user/thunks";
 import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
 
+import { isNonConfirmedError } from "./helpers";
 import { validationSchema, initialValues, inputs } from "./config";
 
 // TODO: Implement Remember me;
@@ -40,18 +43,20 @@ export const SignInPage = () => {
   const handleFormSubmit = async ({ username, password }) => {
     try {
       setIsLoading(true);
-      await login({ name: username, password })(dispatch);
+      await dispatch(loginThunk({ name: username, password }));
       history.push(Routes.News.Home);
+      setIsLoading(false);
     } catch (error) {
-      // TODO: Navigate to ConfirmEmail if email is not confirmed;
-      /*
-        history.push({
-          pathname: Routes.Auth.ConfirmEmail, 
-          state: { email, isFromRegister: false }
-        })
-      */
       setIsLoading(false);
       alert.error(getErrorMessage(error));
+
+      if (isNonConfirmedError(error)) {
+        await api.auth.resendEmailCode({ email: username });
+        history.push({
+          pathname: Routes.Auth.ConfirmEmail,
+          state: { email: username, password, isFromRegister: false },
+        });
+      }
     }
   };
 

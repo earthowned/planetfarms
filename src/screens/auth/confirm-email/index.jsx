@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { AuthLayout } from "layout/auth";
@@ -13,6 +14,7 @@ import {
 import { api } from "api";
 import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
+import { loginThunk } from "store/user/thunks";
 
 import {
   Title,
@@ -27,49 +29,62 @@ import {
 export const ConfirmEmailPage = () => {
   const alert = useAlert();
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [variant, setVariant] = useState(Variant.Confirm);
   const [isFromRegister, setIsFromRegister] = useState(true);
+  const [data, setData] = useState({ email: "", password: "" });
 
   useEffect(() => {
     const state = history.location?.state || {};
 
-    if (state.email) {
-      setEmail(state.email);
-      setIsFromRegister(state.isFromRegister);
-    } else {
+    if (!state.email) {
       history.replace(Routes.Auth.Login);
+      return;
     }
+
+    setVariant(state.variant || Variant.Confirm);
+    setIsFromRegister(state.isFromRegister || false);
+    setData({ email: state.email || "", password: state.password || "" });
   }, [history.location]);
 
   const handleSubmit = useCallback(
     async ({ code }) => {
       try {
         setIsLoading(true);
-        await api.auth.confirmEmail({ email, code });
-        setVariant(Variant.Success);
+
+        await api.auth.confirmEmail({ email: data.email, code });
+        await dispatch(
+          loginThunk({
+            name: data.email,
+            password: data.password,
+          })
+        );
+
+        if (isFromRegister) setVariant(Variant.Success);
+        else history.push(Routes.News.Home);
+
+        setIsLoading(false);
       } catch (error) {
         alert.error(getErrorMessage(error));
-      } finally {
-        setIsLoading(false);
       }
     },
-    [email]
+    [data, isFromRegister]
   );
 
   const handleResendClick = useCallback(async () => {
     try {
       setIsLoading(true);
-      await api.auth.resendEmailCode({ email });
-      alert.success(`We've sent new confirmation code at ${email}`);
+      await api.auth.resendEmailCode({ email: data.email });
+      alert.success(`We've sent new confirmation code at ${data.email}`);
     } catch (error) {
       alert.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
-  }, [email]);
+  }, [data.email]);
 
   return (
     <AuthLayout
@@ -81,7 +96,10 @@ export const ConfirmEmailPage = () => {
     >
       {({ dirty }) => (
         <>
-          <Placeholder image={Image[variant]} title={Subtitle[variant]} />
+          <Placeholder
+            image={Image[variant]}
+            title={Subtitle[variant].replace("email", data.email)}
+          />
 
           {variant === Variant.Confirm && (
             <>
