@@ -1,13 +1,20 @@
 @import "src/scss/mixins";
+@import "src/scss/variables";
 
 .main-page-header {
   width: 100%;
-  padding: 24px 40px;
+  padding: 24px 0;
+  // background-color: red;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   .top-header-container {
+    padding: 0 40px;
+    width: 100%;
+    max-width: $max-content-width;
+
     display: flex;
     flex-shrink: 0;
     flex-direction: row;

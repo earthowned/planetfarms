@@ -1,0 +1,170 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+@mixin setProgress($firstColor, $secondColor) {
+  background: linear-gradient(180deg, $firstColor 50%, $secondColor 50%);
+
+  @include breakpoint("tablet", "max") {
+    background: $secondColor;
+  }
+}
+
+.course-progress-bar-container {
+  position: relative;
+  // height: 100%;
+  @include flexColumn(center, center);
+  align-self: stretch;
+
+  .progress-line {
+    width: 4px;
+    @include position(absolute, 0, auto, 0, 50%);
+
+    &-transparent-green {
+      @include setProgress(transparent, $color-green);
+    }
+
+    &-transparent-grey {
+      @include setProgress(transparent, $color-progress-line);
+    }
+
+    &-green-transparent {
+      @include setProgress($color-green, transparent);
+    }
+
+    &-grey-transparent {
+      @include setProgress($color-progress-line, transparent);
+    }
+
+    &-green-green {
+      @include setProgress($color-green, $color-green);
+    }
+
+    &-green-grey {
+      @include setProgress($color-green, $color-progress-line);
+    }
+
+    &-grey-grey {
+      @include setProgress($color-progress-line, $color-progress-line);
+    }
+
+    &-grey-green {
+      @include setProgress($color-progress-line, $color-green);
+    }
+  }
+
+  .course-progress-bar {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 100%;
+    backdrop-filter: blur(4px);
+
+    z-index: 10;
+
+    .CircularProgressbar-trail {
+      stroke-width: 4px;
+    }
+    .CircularProgressbar-path {
+      stroke-width: 4px;
+    }
+
+    .inner-circle {
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%) translateY(-50%);
+
+      width: 56px;
+      height: 56px;
+      border-radius: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .checkmark-round-icon {
+        width: 32px;
+        height: 32px;
+        path {
+          fill: $color-black;
+        }
+      }
+    }
+  }
+
+  &-green {
+    .course-progress-bar {
+      .inner-circle {
+        background-color: $color-green;
+        h4 {
+          color: $color-black-active;
+        }
+      }
+      .CircularProgressbar-trail {
+        stroke: rgba($color: $color-green, $alpha: 0.4);
+      }
+      .CircularProgressbar-path {
+        stroke: $color-green;
+      }
+    }
+  }
+
+  &-red {
+    .course-progress-bar {
+      .inner-circle {
+        background-color: $color-red;
+        h4 {
+          color: $color-white;
+        }
+      }
+      .CircularProgressbar-trail {
+        stroke: rgba($color: $color-red, $alpha: 0.4);
+      }
+      .CircularProgressbar-path {
+        stroke: $color-red;
+      }
+    }
+  }
+
+  &-grey {
+    .course-progress-bar {
+      .inner-circle {
+        background-color: #555550;
+      }
+      .CircularProgressbar-trail {
+        stroke: rgba($color: #555550, $alpha: 1);
+      }
+      .CircularProgressbar-path {
+        stroke: #555550;
+      }
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    @include flexColumn(flex-start, flex-start);
+
+    .course-progress-bar {
+      width: 40px;
+      height: 40px;
+
+      .CircularProgressbar-trail {
+        stroke-width: 8px;
+      }
+      .CircularProgressbar-path {
+        stroke-width: 8px;
+      }
+
+      .inner-circle {
+        width: 24px;
+        height: 24px;
+
+        .checkmark-round-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.content-blocks-container {
+  width: 100%;
+  gap: $gap-medium;
+  @include flexColumn(flex-start, flex-start);
+}

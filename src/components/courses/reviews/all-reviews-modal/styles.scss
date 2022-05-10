@@ -1,0 +1,10 @@
+@import "src/scss/mixins";
+
+.all-reviews-side-modal-container {
+  padding: 0 24px;
+
+  @include breakpoint("tablet", "max") {
+    @include safe-area-padding("left", 16px);
+    @include safe-area-padding("right", 16px);
+  }
+}

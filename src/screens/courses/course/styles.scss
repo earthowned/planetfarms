@@ -1,0 +1,15 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.current-course-page-container {
+  width: 100%;
+  gap: $gap-medium;
+  background-color: transparent;
+  @include flexColumn(flex-start, flex-start);
+
+  .column-container {
+    width: 100%;
+    gap: $gap-big;
+    @include flexColumn();
+  }
+}

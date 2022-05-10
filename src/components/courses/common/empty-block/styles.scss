@@ -1,0 +1,25 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.courses-empty-block-container {
+  width: 100%;
+  gap: $gap-medium;
+  overflow: hidden;
+  @include flexColumn(center, center);
+
+  img {
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  @include breakpoint("tablet", "max") {
+    img {
+      width: unset;
+    }
+  }
+}

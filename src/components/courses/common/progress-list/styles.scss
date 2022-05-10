@@ -1,0 +1,19 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.progress-list-container {
+  width: 100%;
+  margin-top: -$gap-big;
+  @include flexColumn(flex-start, flex-start);
+
+  .list-item-container {
+    gap: $gap-big;
+    @include flexRow(center, center);
+  }
+
+  @include breakpoint("tablet", "max") {
+    .list-item-container {
+      gap: $gap-small;
+    }
+  }
+}

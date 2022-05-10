@@ -1,0 +1,45 @@
+@import "src/scss/colors";
+
+.progress-circle {
+  .inner-circle {
+    fill: none;
+  }
+
+  .outter-circle {
+    fill: none;
+    transition: all 0.5s;
+  }
+
+  &-green {
+    .outter-circle {
+      stroke: $color-green;
+    }
+    .outter-circle {
+      fill: red;
+    }
+  }
+
+  &-red {
+    .outter-circle {
+      stroke: $color-red;
+      fill: yellow;
+    }
+  }
+
+  &-grey {
+    .outter-circle {
+      stroke: #555550;
+    }
+  }
+
+  &-infinite {
+    animation: spin 2s linear infinite;
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
