@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     Courses.belongsTo(models.User, { foreignKey: 'creatorId', as: 'creator' })
     Courses.belongsTo(models.RichText, { foreignKey: 'richtextId' })
     Courses.hasMany(models.CourseView, { foreignKey: 'courseId' })
+    Courses.hasMany(models.Enroll, { foreignKey: 'courseId' })
   }
   return Courses
 }

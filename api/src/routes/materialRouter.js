@@ -7,15 +7,22 @@ const {
   getMaterialById,
   addMaterial,
   deleteMaterial,
-  updateMaterial
+  downloadMaterial
 } = require('../controllers/materialController')
+const protect = require('../middleware/authMiddleware')
 
-router.route('/').get(getMaterials)
-router.route('/add').post(upload.single('material'), addMaterial)
+router.use(protect)
+
+router
+  .route('/')
+  .get(getMaterials)
+  .post(upload.fields([{ name: 'materials' }]), addMaterial)
 router
   .route('/:id')
   .get(getMaterialById)
   .delete(deleteMaterial)
-  .put(updateMaterial)
+router
+  .route('/:id/download')
+  .get(downloadMaterial)
 
 module.exports = router
