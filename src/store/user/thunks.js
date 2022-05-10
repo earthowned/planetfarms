@@ -2,10 +2,9 @@ import { Auth, Amplify } from "aws-amplify";
 
 import { api } from "api";
 import { authConfig } from "config/amplify";
-import { getErrorMessage } from "utils/error";
 import { setIsLoading } from "store/loader/slices";
 
-import { setCurrentUser } from "./slices";
+import { setCurrentUser, setIsAuthed } from "./slices";
 
 const isCognito = process.env.REACT_APP_AUTH_METHOD === "cognito";
 
@@ -38,34 +37,33 @@ export const loginThunk =
     try {
       dispatch(setIsLoading(true));
 
-      let response;
-      let data = {};
+      let data;
       let username = name;
 
       if (isCognito) {
         if (username.includes("@")) username = username.replace(/@/g, "");
-        response = await Auth.signIn(username, password);
+        const response = await Auth.signIn(username, password);
 
         data = {
           id: response?.attributes?.sub || "",
           token: response?.signInUserSession?.idToken?.jwtToken || "",
         };
-
-        await api.auth.login({ id: data.id });
-      }
-
-      if (!isCognito) {
-        response = await api.auth.login({ username, password });
+      } else {
+        const response = await api.auth.login({ username, password });
         data = { ...response.data };
       }
 
-      const user = await api.user.get({ id: data.id });
-      const profile = { ...response, ...user?.data?.results };
-
-      dispatch(setCurrentUser(profile));
       localStorage.setItem("userInfo", JSON.stringify(data));
+      const authData = isCognito ? { id: data.id } : { username, password };
 
-      return Promise.resolve(response);
+      await api.auth.login(authData);
+      const user = await api.user.get({ id: data.id });
+      const profile = { ...user?.data?.results };
+
+      dispatch(setIsAuthed(true));
+      dispatch(setCurrentUser(profile));
+
+      return Promise.resolve();
     } catch (error) {
       return Promise.reject(error);
     } finally {
@@ -83,11 +81,14 @@ export const getCurrentUserThunk = () => async (dispatch) => {
     }
 
     const response = await api.user.get({ id: storage.id });
+
+    dispatch(setIsAuthed(true));
     dispatch(setCurrentUser({ ...response?.data?.results }));
 
-    return Promise.resolve({ isAuthed: true });
+    return Promise.resolve();
   } catch (error) {
-    return Promise.reject(getErrorMessage(error));
+    dispatch(setIsAuthed(false));
+    return Promise.reject(error);
   } finally {
     dispatch(setIsLoading(false));
   }
