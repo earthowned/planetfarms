@@ -11,6 +11,8 @@ const errorHandler = (err, _req, res, _next) => {
     return res.status(err.statusCode).json(err)
   }
 
+  console.log(err)
+
   res.status(500).send({
     errors: [{ message: 'Something went wrong' }]
   })

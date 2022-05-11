@@ -126,182 +126,201 @@ const courseSchema = {
 // @route   POST /api/courses/add
 // @access  Public
 const addCourse = async (req, res) => {
-  try {
-    const { body, user, files } = req
-    const thumbnail = files.thumbnail?.[0]?.filename || null
-    const price = body.price > 0 ? Number(body.price) : null
+  const { body, user, files } = req
 
-    const courseData = {
-      title: body.title,
-      description: body.description,
-      thumbnail: thumbnail ? `thumbnail/${thumbnail}` : null,
-      price,
-      isPublished: body.isPublished,
-      isFree: price === null ? true : false,
-      creatorId: user.id,
-      categoryId: body.categoryId
-    }
-    let createdCourseId;
+  const category = await db.Category.findByPk(body.categoryId)
 
-    await db.sequelize.transaction(async (transaction) => {
-      let richtext = null
-      let richtextId = null
+  if (!category) {
+    throw new BadRequestError('Provided categoryId does not exist')
+  }
 
-      if (body.order) {
-        richtext = await db.RichText.create({}, { transaction })
-        richtextId = richtext.id
+  const thumbnail = files.thumbnail?.[0]?.filename || null
+  const price = body.price > 0 ? Number(body.price) : null
 
-        const richtextCount = Array.isArray(body.text_description) ? body.text_description.length : 1
-        const photoCount = files.courses?.length || 0
-        const orderCount = Array.isArray(body.order) ? body.order.length : 1
+  const courseData = {
+    title: body.title,
+    description: body.description,
+    thumbnail: thumbnail ? `thumbnail/${thumbnail}` : null,
+    price,
+    isPublished: body.isPublished,
+    isFree: price === null ? true : false,
+    creatorId: user.id,
+    categoryId: body.categoryId
+  }
+  let createdCourseId;
 
-        // add validation if texts and photo tallies the order count
-        if (photoCount + richtextCount !== orderCount) {
-          throw new BadRequestError('Contents don\'t match the ordering count')
-        }
+  await db.sequelize.transaction(async (transaction) => {
+    let richtext = null
+    let richtextId = null
 
-        await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
-          if (order === 'text') {
-            return db.Text.create({
-              richtextId,
-              textHeading: Array.isArray(body.text_heading) ? body.text_heading.shift() : body.text_heading,
-              textDescription: Array.isArray(body.text_description) ? body.text_description.shift() : body.text_description,
-              order: index + 1
-            }, {
-              transaction
-            })
-          }
+    if (body.order) {
+      richtext = await db.RichText.create({}, { transaction })
+      richtextId = richtext.id
 
-          return db.Photo.create({
+      const richtextCount = Array.isArray(body.text_description) ? body.text_description.length : 1
+      const photoCount = files.courses?.length || 0
+      const orderCount = Array.isArray(body.order) ? body.order.length : 1
+
+      // validation if texts and photo tallies the order count
+      if (photoCount + richtextCount !== orderCount) {
+        throw new BadRequestError('Combined photo and text contents don\'t match the ordering count')
+      }
+
+      if (photoCount === body.order.filter(i => i === 'image').length) {
+        throw new BadRequestError('Photo details don\'t match the ordering details')
+      }
+
+      if (richtextCount === body.order.filter(i => i === 'text').length) {
+        throw new BadRequestError('Text details don\'t match the ordering details')
+      }
+
+      await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
+        if (order === 'text') {
+          return db.Text.create({
             richtextId,
-            lessonImg: `courses/${files.courses.shift().filename}`,
-            photoDescription: Array.isArray(body.photo_description) ? body.photo_description.shift() : body.photo_description,
-            isImgDesc: false,
+            textHeading: Array.isArray(body.text_heading) ? body.text_heading.shift() : body.text_heading,
+            textDescription: Array.isArray(body.text_description) ? body.text_description.shift() : body.text_description,
             order: index + 1
           }, {
             transaction
           })
-        }))
-      }
+        }
 
-      const createdCourse = await db.Courses.create({
-        ...courseData,
-        richtextId
-      }, {
-        transaction
-      })
-      createdCourseId = createdCourse.id
+        return db.Photo.create({
+          richtextId,
+          lessonImg: `courses/${files.courses.shift().filename}`,
+          photoDescription: Array.isArray(body.photo_description) ? body.photo_description.shift() : body.photo_description,
+          isImgDesc: false,
+          order: index + 1
+        }, {
+          transaction
+        })
+      }))
+    }
+
+    const createdCourse = await db.Courses.create({
+      ...courseData,
+      richtextId
+    }, {
+      transaction
     })
+    createdCourseId = createdCourse.id
+  })
 
-    const course = await findCourseById(createdCourseId)
+  const course = await findCourseById(createdCourseId)
 
-    res.status(201).json({
-      message: 'New course added successfully',
-      data: course.get()
-    })
-  } catch (error) {
-    return res.status(400).json({ error: error.message })
-  }
+  res.status(201).json({
+    message: 'New course added successfully',
+    data: course.get()
+  })
 }
 
 // @desc    Update a course
 // @route   PUT /api/courses/:id
 // @access  Public
 const updateCourse = async (req, res) => {
-  try {
-    const { body, user, files, params: { id: courseId } } = req
+  const { body, user, files, params: { id: courseId } } = req
 
-    let course = await db.Courses.findByPk(courseId)
+  let course = await db.Courses.findByPk(courseId)
 
-    if (!course) {
-      throw new NotFoundError()
-    }
+  if (!course) {
+    throw new NotFoundError()
+  }
 
-    if (course.creatorId !== user.id) {
-      throw new ForbiddenRequestError()
-    }
+  if (course.creatorId !== user.id) {
+    throw new ForbiddenRequestError()
+  }
 
-    const thumbnail = files.thumbnail?.[0]?.filename || null
-    const price = body.price > 0 ? Number(body.price) : null
+  const category = await db.Category.findByPk(body.categoryId)
 
-    const courseData = {
-      title: body.title,
-      description: body.description,
-      thumbnail: thumbnail ? `thumbnail/${thumbnail}` : null,
-      price,
-      isPublished: body.isPublished,
-      isFree: price === null ? true : false,
-      creatorId: user.id,
-      categoryId: body.categoryId
-    }
+  if (!category) {
+    throw new BadRequestError('Provided categoryId does not exist')
+  }
 
-    await db.sequelize.transaction(async (transaction) => {
-      let richtext = null
-      let richtextId = null
+  const thumbnail = files.thumbnail?.[0]?.filename || null
+  const price = body.price > 0 ? Number(body.price) : null
 
-      if (body.order) {
-        richtext = await db.RichText.create({}, { transaction })
-        richtextId = richtext.id
+  const courseData = {
+    title: body.title,
+    description: body.description,
+    thumbnail: thumbnail ? `thumbnail/${thumbnail}` : null,
+    price,
+    isPublished: body.isPublished,
+    isFree: price === null ? true : false,
+    creatorId: user.id,
+    categoryId: body.categoryId
+  }
 
-        const richtextCount = Array.isArray(body.text_description) ? body.text_description.length : 1
-        const photoCount = files.courses?.length || 0
-        const orderCount = Array.isArray(body.order) ? body.order.length : 1
+  await db.sequelize.transaction(async (transaction) => {
+    let richtext = null
+    let richtextId = null
 
-        // add validation if texts and photo tallies the order count
-        if (photoCount + richtextCount !== orderCount) {
-          throw new BadRequestError('Contents don\'t match the ordering count')
-        }
+    if (body.order) {
+      richtext = await db.RichText.create({}, { transaction })
+      richtextId = richtext.id
 
-        await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
-          if (order === 'text') {
-            return db.Text.create({
-              richtextId,
-              textHeading: Array.isArray(body.text_heading) ? body.text_heading.shift() : body.text_heading,
-              textDescription: Array.isArray(body.text_description) ? body.text_description.shift() : body.text_description,
-              order: index + 1
-            }, {
-              transaction
-            })
-          }
+      const richtextCount = Array.isArray(body.text_description) ? body.text_description.length : 1
+      const photoCount = files.courses?.length || 0
+      const orderCount = Array.isArray(body.order) ? body.order.length : 1
 
-          return db.Photo.create({
+      // add validation if texts and photo tallies the order count
+      if (photoCount + richtextCount !== orderCount) {
+        throw new BadRequestError('Combined photo and text contents don\'t match the ordering count')
+      }
+
+      if (photoCount === body.order.filter(i => i === 'image').length) {
+        throw new BadRequestError('Photo details don\'t match the ordering details')
+      }
+
+      if (richtextCount === body.order.filter(i => i === 'text').length) {
+        throw new BadRequestError('Text details don\'t match the ordering details')
+      }
+
+      await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
+        if (order === 'text') {
+          return db.Text.create({
             richtextId,
-            lessonImg: `courses/${files.courses.shift().filename}`,
-            photoDescription: Array.isArray(body.photo_description) ? body.photo_description.shift() : body.photo_description,
-            isImgDesc: false,
+            textHeading: Array.isArray(body.text_heading) ? body.text_heading.shift() : body.text_heading,
+            textDescription: Array.isArray(body.text_description) ? body.text_description.shift() : body.text_description,
             order: index + 1
           }, {
             transaction
           })
-        }))
-      }
-
-
-      await db.RichText.destroy({
-        where: {
-          id: course.richtextId
         }
-      }, {
-        transaction
-      })
-      await course.update({
-        ...courseData,
-        richtextId
-      }, {
-        transaction
-      })
 
+        return db.Photo.create({
+          richtextId,
+          lessonImg: `courses/${files.courses.shift().filename}`,
+          photoDescription: Array.isArray(body.photo_description) ? body.photo_description.shift() : body.photo_description,
+          isImgDesc: false,
+          order: index + 1
+        }, {
+          transaction
+        })
+      }))
+    }
+
+    await db.RichText.destroy({
+      where: {
+        id: course.richtextId
+      }
+    }, {
+      transaction
     })
-
-    course = await findCourseById(courseId)
-
-    res.status(200).json({
-      message: 'Course updated successfully',
-      data: course
+    await course.update({
+      ...courseData,
+      richtextId
+    }, {
+      transaction
     })
-  } catch (error) {
-    res.status(400).json({ message: error.message })
-  }
+  })
+
+  course = await findCourseById(courseId)
+
+  res.status(200).json({
+    message: 'Course updated successfully',
+    data: course
+  })
 }
 
 const findCourseById = (id) => db.Courses.findOne({
