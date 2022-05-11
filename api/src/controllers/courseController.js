@@ -159,12 +159,6 @@ const addCourse = async (req, res) => {
 
       const richtextCount = Array.isArray(body.textDescription) ? body.textDescription.length : 1
       const photoCount = files.courses?.length || 0
-      const orderCount = Array.isArray(body.order) ? body.order.length : 1
-
-      // validation if texts and photo tallies the order count
-      if (photoCount + richtextCount !== orderCount) {
-        throw new BadRequestError('Combined photo and text contents don\'t match the ordering count')
-      }
 
       if (photoCount !== body.order.filter(i => i === 'image').length) {
         throw new BadRequestError('Photo details don\'t match the ordering details')
@@ -174,8 +168,15 @@ const addCourse = async (req, res) => {
         throw new BadRequestError('Text details don\'t match the ordering details')
       }
 
-      if (richtextCount > 1 && body.textDescription?.length && body.textHeader?.length) {
+      if (richtextCount > 1 && body.textDescription?.length !== body.textHeader?.length) {
         throw new BadRequestError('Text header and description items do not match')
+      }
+
+      const orderCount = Array.isArray(body.order) ? body.order.length : 1
+
+      // validation if texts and photo tallies the order count
+      if (photoCount + richtextCount !== orderCount) {
+        throw new BadRequestError('Combined photo and text contents don\'t match the ordering count')
       }
 
       await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
@@ -265,12 +266,6 @@ const updateCourse = async (req, res) => {
 
       const richtextCount = Array.isArray(body.textDescription) ? body.textDescription.length : 1
       const photoCount = files.courses?.length || 0
-      const orderCount = Array.isArray(body.order) ? body.order.length : 1
-
-      // add validation if texts and photo tallies the order count
-      if (photoCount + richtextCount !== orderCount) {
-        throw new BadRequestError('Combined photo and text contents don\'t match the ordering count')
-      }
 
       if (photoCount !== body.order.filter(i => i === 'image').length) {
         throw new BadRequestError('Photo details don\'t match the ordering details')
@@ -280,8 +275,15 @@ const updateCourse = async (req, res) => {
         throw new BadRequestError('Text details don\'t match the ordering details')
       }
 
-      if (richtextCount > 1 && body.textDescription?.length && body.textHeader?.length) {
+      if (richtextCount > 1 && body.textDescription?.length !== body.textHeader?.length) {
         throw new BadRequestError('Text header and description items do not match')
+      }
+
+      const orderCount = Array.isArray(body.order) ? body.order.length : 1
+
+      // add validation if texts and photo tallies the order count
+      if (photoCount + richtextCount !== orderCount) {
+        throw new BadRequestError('Combined photo and text contents don\'t match the ordering count')
       }
 
       await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
