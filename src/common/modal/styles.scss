@@ -15,17 +15,6 @@
   justify-content: center;
 }
 
-.portal-mobile-modal-container {
-  backdrop-filter: blur(4px);
-
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 48px; // bottom-nav-height
-  position: fixed;
-  padding-top: 48px;
-}
-
 .common-modal-container {
   width: 80%;
   max-width: 608px;

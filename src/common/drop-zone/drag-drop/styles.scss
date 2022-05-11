@@ -1,0 +1,48 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+$dashed-border: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%23F8EBDFFF' stroke-width='2' stroke-dasharray='10%2c 16' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e");
+$dashed-border-error: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='red' stroke-width='2' stroke-dasharray='10%2c 16' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e");
+
+.desktop-drag-and-drop-container {
+  width: 100%;
+  height: 224px;
+  border-radius: 4px;
+  background-image: $dashed-border;
+  @include flexColumn(center, center);
+  background-color: rgba($color: $color-black, $alpha: 0.9);
+
+  p {
+    width: 164px;
+    text-align: center;
+    color: $color-white;
+    user-select: none;
+  }
+
+  h4 {
+    text-align: center;
+    color: $color-green;
+    user-select: none;
+  }
+
+  &-error {
+    background-image: $dashed-border-error;
+  }
+}
+
+.mobile-drag-and-drop-container {
+  width: 100%;
+  height: 56px;
+  gap: $gap-smallest;
+  @include flexRow(center, center);
+  background-color: rgba($color: $color-white, $alpha: 0.1);
+
+  &-error {
+    @include setSvgColor($color-red);
+    h4 {
+      color: $color-red;
+      user-select: none;
+    }
+  }
+}

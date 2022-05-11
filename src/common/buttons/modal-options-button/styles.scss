@@ -18,6 +18,7 @@
 
     top: 32px;
     right: 0;
+    z-index: 1;
     position: absolute;
 
     .option-container {
@@ -51,6 +52,10 @@
         color: #da3443;
         @include setSvgColor(#da3443);
         background-color: transparent;
+
+        h4 {
+          color: #da3443;
+        }
 
         &:hover {
           background-color: #1d2120;

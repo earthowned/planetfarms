@@ -1,0 +1,22 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.materials-list-container {
+  width: 100%;
+  gap: $gap-medium;
+  @include flexColumn();
+
+  .material-container {
+    @include flexRow(center, space-between);
+
+    .info-container {
+      gap: $gap-smallest;
+      @include flexRow();
+    }
+
+    .buttons-container {
+      gap: $gap-small;
+      @include flexRow();
+    }
+  }
+}

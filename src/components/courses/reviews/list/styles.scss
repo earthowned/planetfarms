@@ -1,0 +1,34 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.reviews-list-container {
+  width: 100%;
+  gap: $gap-medium;
+  @include flexColumn();
+
+  .review-container {
+    width: 100%;
+    gap: $gap-small;
+    @include flexColumn();
+
+    .author-container {
+      gap: $gap-smallest;
+      @include flexRow(center, flex-start);
+    }
+
+    .text-container {
+      gap: $gap-smallest;
+      @include flexColumn();
+
+      .review-text {
+        color: $color-white;
+        @include setTextLines(4);
+      }
+
+      .date-text {
+        color: $color-grey;
+      }
+    }
+  }
+}

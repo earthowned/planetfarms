@@ -1,10 +1,13 @@
 @import "src/scss/mixins";
+@import "src/scss/variables";
 
 .dashboard-container {
   flex: 1;
-  display: flex;
+
   overflow: hidden;
+  display: flex;
   flex-direction: column;
+
   background-color: transparent;
 
   @include supports-safe-area-left {
@@ -20,8 +23,14 @@
     width: 100%;
     overflow-y: scroll;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
     .page-title-header {
       width: 100%;
+      max-width: $max-content-width;
       margin-top: 16px;
       margin-bottom: 8px;
       padding: 0 40px;
@@ -29,6 +38,8 @@
   }
 
   .dashboard-page {
+    width: 100%;
+    max-width: $max-content-width;
     padding: 24px 40px 40px 40px;
   }
 

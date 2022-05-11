@@ -1,0 +1,20 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+
+.download-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+
+  @include setSvgColor($color-green);
+
+  &:hover {
+    @include setSvgColor($color-green-hover);
+  }
+
+  &:active {
+    @include setSvgColor($color-green-active);
+  }
+}

@@ -1,6 +1,7 @@
 @import "./fonts";
 @import "./mixins";
 @import "./variables";
+@import "./colors";
 
 body {
   width: 100%;
@@ -111,6 +112,11 @@ h4 {
   color: #eeefef;
   font: 16px/24px $font-semi-bold;
 }
+
+// p {
+//   color: #eeefef;
+//   font: 16px/24px $font-regular;
+// }
 
 h5 {
   color: #eeefef;

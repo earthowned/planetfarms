@@ -1,3 +1,4 @@
+const isEmail = require('isemail');
 const generateToken = require('../utils/generateToken.js')
 const db = require('../models')
 const Amplify = require('aws-amplify').Amplify
@@ -73,8 +74,8 @@ if (isCognito) {
 // @access  Public
 const authUser = async (req, res) => {
   try {
-    const { name, password, id } = req.body
-    const data = await login(name, password, id)
+    const { username, password, id } = req.body
+    const data = await login(username, password, id)
 
     res.status(200).json(data)
   } catch (e) {
@@ -84,13 +85,13 @@ const authUser = async (req, res) => {
   }
 }
 
-const login = async (name, password, userId) => {
+const login = async (username, password, userId) => {
   let id = userId
   let token
 
   if (!isCognito) {
     const localAuth = await db.LocalAuth.findOne({
-      where: { username: name, password: password }
+      where: { username, password: password }
     })
 
     id = localAuth.id.toString()
@@ -136,33 +137,30 @@ const login = async (name, password, userId) => {
   return token ? { id, token } : { id }
 }
 
+const getCognitoUsername = (email) => {
+  return email.replace(/@/g, '')
+}
+
 // @desc    Register a new user
 // @route   POST /api/users
 // @access  Public
 const registerUser = async (req, res) => {
   try {
-    const { name, password, email } = req.body
-    const attributes = {}
+    const { password, username } = req.body
 
-    if (email) {
-      attributes.email = email
+    // username should be in email format
+    if (!isEmail.validate(username)) {
+      return res.status(400).json({
+        error: "Invalid username. Username not in email format"
+      })
     }
 
     if (isCognito) {
-      const response = await Auth.signUp({ username: name, password, attributes })
-      await db.sequelize.transaction(async (transaction) => {
-        const user = await db.User.create({
-          userID: response.userSub,
-          isLocalAuth: false,
-          numberOfVisit: 0
-        }, {
-          transaction
-        })
-        await subscribeCommunity(user, true, transaction)
-      })
+      await registerCognito(username, password)
     } else {
-      await registerLocal(name, password, res)
+      await registerLocal(username, password)
     }
+
     res.status(201).send({
       message: 'The user has been registered'
     })
@@ -171,15 +169,35 @@ const registerUser = async (req, res) => {
   }
 }
 
-const registerLocal = async (name, password) => {
-  const localAuth = await db.LocalAuth.findOne({ where: { username: name } })
+const registerCognito = async (email, password) => {
+  const user = await db.User.findOne({ where: { email } })
+  if (user) {
+    throw new Error('User already exists')
+  }
+
+  const response = await Auth.signUp({ username: getCognitoUsername(email), password, attributes: { email } })
+  await db.sequelize.transaction(async (transaction) => {
+    const user = await db.User.create({
+      userID: response.userSub,
+      email,
+      isLocalAuth: false,
+      numberOfVisit: 0
+    }, {
+      transaction
+    })
+    await subscribeCommunity(user, true, transaction)
+  })
+}
+
+const registerLocal = async (email, password) => {
+  const localAuth = await db.LocalAuth.findOne({ where: { username: email } })
   if (localAuth) {
-    throw new Error('Users already exists')
+    throw new Error('User already exists')
   }
 
   await db.sequelize.transaction(async (transaction) => {
     const localAuth = await db.LocalAuth.create(
-      { username: name, password: password },
+      { username: email, password },
       { transaction }
     )
     const user = await db.User.create(
@@ -187,7 +205,8 @@ const registerLocal = async (name, password) => {
         userID: localAuth.id,
         isLocalAuth: true,
         lastLogin: new Date(),
-        numberOfVisit: 0
+        numberOfVisit: 0,
+        email
       },
       { transaction }
     )
@@ -230,8 +249,8 @@ const sendTokenStatus = (req, res) => {
   res.status(201).json({ message: 'accepted' })
 }
 
-// @desc    Forgot password of a user
-// @route   POST /api/users/forgot-password
+// @desc    Change password of a user
+// @route   POST /api/users/change-password
 // @access  Public
 const changePassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
@@ -250,6 +269,9 @@ const changePassword = async (req, res) => {
   }
 }
 
+// @desc    Forgot password of a user
+// @route   POST /api/users/forgot-password
+// @access  Public
 const forgotPassword = async (req, res) => {
   if (!isCognito) {
     return res.status(405).json({ message: 'Local auth forgot password is not supported' })
@@ -300,8 +322,27 @@ const confirmSignUpWithCode = async (req, res) => {
 
   const { username, code } = req.body
   try {
-    await Auth.confirmSignUp(username, code)
+    await Auth.confirmSignUp(getCognitoUsername(username), code)
     res.status(200).json({ message: 'Sign up has been confirmed' })
+  } catch (error) {
+    res.status(400).json({
+      error: error.message
+    })
+  }
+}
+
+// @desc    Resend sign up code of a user
+// @route   POST /api/users/resend-sign-up-code
+// @access  Public
+const resendSignUpWithCode = async (req, res) => {
+  if (!isCognito) {
+    return res.status(405).json({ message: 'Local auth resend signup with code is not supported' })
+  }
+
+  const { username } = req.body
+  try {
+    await Auth.resendSignUp(getCognitoUsername(username))
+    res.status(200).json({ message: 'Sign up code has been resent' })
   } catch (error) {
     res.status(400).json({
       error: error.message
@@ -442,5 +483,6 @@ module.exports = {
   getUsers,
   updateUser,
   searchUserName,
-  sendTokenStatus
+  sendTokenStatus,
+  resendSignUpWithCode
 }
