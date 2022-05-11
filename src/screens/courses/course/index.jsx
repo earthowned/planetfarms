@@ -43,6 +43,11 @@ export const CoursePage = () => {
 
   const handleBuyCourse = () => {};
 
+  const onAddLessonClick = () => {
+    const path = Routes.Courses.CreateLesson.replace(":courseId", id);
+    history.push(path);
+  };
+
   return (
     <DashboardLayout withBackButton>
       <div className="current-course-page-container">
@@ -88,6 +93,7 @@ export const CoursePage = () => {
           <LessonsBlock
             isMyCourse={isMyCourse}
             lessons={getCourseLessons(id)}
+            onAddLesson={onAddLessonClick}
           />
 
           <div className="column-container">

@@ -10,7 +10,11 @@ import { LessonListItem } from "./list-item";
 
 import "./styles.scss";
 
-export const LessonsBlock = ({ lessons = [], isMyCourse = false }) => {
+export const LessonsBlock = ({
+  onAddLesson,
+  lessons = [],
+  isMyCourse = false,
+}) => {
   const list = useMemo(() => {
     if (!lessons || lessons.length === 0) return [];
 
@@ -33,7 +37,14 @@ export const LessonsBlock = ({ lessons = [], isMyCourse = false }) => {
   return (
     <div className="lessons-block-container">
       <BlockHeader title="Lessons" />
-      {list.length === 0 && <EmptyBllock variant="Lesson" imageSize="big" />}
+
+      <EmptyBllock
+        imageSize="big"
+        variant="Lesson"
+        onAdd={onAddLesson}
+        isImageVisible={list.length === 0}
+        // isAddButtonVisible={isMyCourse}
+      />
 
       {list.length > 0 && (
         <ProgressList

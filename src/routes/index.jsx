@@ -48,6 +48,7 @@ import {
   CoursePage,
   MembersPage,
   CoursesListPage,
+  CreateLessonPage,
   CreateCoursePage,
 } from "../screens/courses";
 
@@ -134,6 +135,11 @@ export const Routes = () => {
         exact
         component={CreateCoursePage}
         path={PathRoutes.Courses.Create}
+      />
+      <PrivateRoute
+        exact
+        component={CreateLessonPage}
+        path={PathRoutes.Courses.CreateLesson}
       />
 
       {/* <PrivateRoute component={CommunityPagenews} exact path="/news1" /> */}

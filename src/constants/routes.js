@@ -19,9 +19,13 @@ const News = {
 
 const Courses = {
   Home: courses,
+
   Course: `${courses}/:id`,
   Create: `${courses}/create`,
   Members: `${courses}/:id/members`,
+
+  Lesson: `${courses}/:courseId/lessons/:lessonId`,
+  CreateLesson: `${courses}/:courseId/lessons/create`,
 };
 
 export const Routes = { Auth, News, Courses };
