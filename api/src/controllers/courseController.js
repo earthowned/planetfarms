@@ -103,15 +103,15 @@ const courseSchema = {
     price: Joi.number().positive(),
     isPublished: Joi.boolean().required(),
     categoryId: Joi.string().required(),
-    text_heading: Joi.alternatives().try(
+    textHeader: Joi.alternatives().try(
       Joi.string(),
       Joi.array().items(Joi.string())
     ),
-    text_description: Joi.alternatives().try(
+    textDescription: Joi.alternatives().try(
       Joi.string(),
       Joi.array().items(Joi.string())
     ),
-    photo_description: Joi.alternatives().try(
+    photoDescription: Joi.alternatives().try(
       Joi.string(),
       Joi.array().items(Joi.string())
     ),
@@ -157,7 +157,7 @@ const addCourse = async (req, res) => {
       richtext = await db.RichText.create({}, { transaction })
       richtextId = richtext.id
 
-      const richtextCount = Array.isArray(body.text_description) ? body.text_description.length : 1
+      const richtextCount = Array.isArray(body.textDescription) ? body.textDescription.length : 1
       const photoCount = files.courses?.length || 0
       const orderCount = Array.isArray(body.order) ? body.order.length : 1
 
@@ -166,20 +166,24 @@ const addCourse = async (req, res) => {
         throw new BadRequestError('Combined photo and text contents don\'t match the ordering count')
       }
 
-      if (photoCount === body.order.filter(i => i === 'image').length) {
+      if (photoCount !== body.order.filter(i => i === 'image').length) {
         throw new BadRequestError('Photo details don\'t match the ordering details')
       }
 
-      if (richtextCount === body.order.filter(i => i === 'text').length) {
+      if (richtextCount !== body.order.filter(i => i === 'text').length) {
         throw new BadRequestError('Text details don\'t match the ordering details')
+      }
+
+      if (richtextCount > 1 && body.textDescription?.length && body.textHeader?.length) {
+        throw new BadRequestError('Text header and description items do not match')
       }
 
       await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
         if (order === 'text') {
           return db.Text.create({
             richtextId,
-            textHeading: Array.isArray(body.text_heading) ? body.text_heading.shift() : body.text_heading,
-            textDescription: Array.isArray(body.text_description) ? body.text_description.shift() : body.text_description,
+            textHeading: Array.isArray(body.textHeader) ? body.textHeader.shift() : body.textHeader,
+            textDescription: Array.isArray(body.textDescription) ? body.textDescription.shift() : body.textDescription,
             order: index + 1
           }, {
             transaction
@@ -189,7 +193,7 @@ const addCourse = async (req, res) => {
         return db.Photo.create({
           richtextId,
           lessonImg: `courses/${files.courses.shift().filename}`,
-          photoDescription: Array.isArray(body.photo_description) ? body.photo_description.shift() : body.photo_description,
+          photoDescription: Array.isArray(body.photoDescription) ? body.photoDescription.shift() : body.photoDescription,
           isImgDesc: false,
           order: index + 1
         }, {
@@ -259,7 +263,7 @@ const updateCourse = async (req, res) => {
       richtext = await db.RichText.create({}, { transaction })
       richtextId = richtext.id
 
-      const richtextCount = Array.isArray(body.text_description) ? body.text_description.length : 1
+      const richtextCount = Array.isArray(body.textDescription) ? body.textDescription.length : 1
       const photoCount = files.courses?.length || 0
       const orderCount = Array.isArray(body.order) ? body.order.length : 1
 
@@ -268,20 +272,24 @@ const updateCourse = async (req, res) => {
         throw new BadRequestError('Combined photo and text contents don\'t match the ordering count')
       }
 
-      if (photoCount === body.order.filter(i => i === 'image').length) {
+      if (photoCount !== body.order.filter(i => i === 'image').length) {
         throw new BadRequestError('Photo details don\'t match the ordering details')
       }
 
-      if (richtextCount === body.order.filter(i => i === 'text').length) {
+      if (richtextCount !== body.order.filter(i => i === 'text').length) {
         throw new BadRequestError('Text details don\'t match the ordering details')
+      }
+
+      if (richtextCount > 1 && body.textDescription?.length && body.textHeader?.length) {
+        throw new BadRequestError('Text header and description items do not match')
       }
 
       await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
         if (order === 'text') {
           return db.Text.create({
             richtextId,
-            textHeading: Array.isArray(body.text_heading) ? body.text_heading.shift() : body.text_heading,
-            textDescription: Array.isArray(body.text_description) ? body.text_description.shift() : body.text_description,
+            textHeading: Array.isArray(body.textHeader) ? body.textHeader.shift() : body.textHeader,
+            textDescription: Array.isArray(body.textDescription) ? body.textDescription.shift() : body.textDescription,
             order: index + 1
           }, {
             transaction
@@ -291,7 +299,7 @@ const updateCourse = async (req, res) => {
         return db.Photo.create({
           richtextId,
           lessonImg: `courses/${files.courses.shift().filename}`,
-          photoDescription: Array.isArray(body.photo_description) ? body.photo_description.shift() : body.photo_description,
+          photoDescription: Array.isArray(body.photoDescription) ? body.photoDescription.shift() : body.photoDescription,
           isImgDesc: false,
           order: index + 1
         }, {
