@@ -1,10 +1,5 @@
-const path = require('path')
 const express = require('express')
-const multer = require('multer')
 const router = express.Router()
-const shortid = require('shortid')
-const fs = require('fs')
-require('express-async-errors')
 const protect = require('../middleware/authMiddleware')
 const validation = require('../middleware/validation')
 
@@ -14,9 +9,15 @@ const {
   updateCourse,
   getCourseById,
   deleteCourse,
-  courseSchema
+  courseSchema,
+  createCourseImages
 } = require('../controllers/courseController.js')
-const { upload, resizeImage } = require('../helpers/filehelpers')
+const { uploadWithMapping, resizeImage } = require('../helpers/filehelpers')
+
+const uploadHandler = uploadWithMapping({
+  images: 'courses',
+  thumbnail: 'thumbnail'
+}).fields([{ name: 'thumbnail' }, { name: 'images' }])
 
 router.use(protect)
 
@@ -24,18 +25,22 @@ router
   .route('/')
   .get(getCourses)
   .post(
-    upload.fields([{ name: 'thumbnail' }, { name: 'courses' }]),
+    uploadHandler,
     resizeImage,
     validation(courseSchema),
     addCourse
   )
 
 router
+  .route('/images')
+  .post(uploadHandler, createCourseImages)
+
+router
   .route('/:id')
   .get(getCourseById)
   .delete(deleteCourse)
   .put(
-    upload.fields([{ name: 'thumbnail' }, { name: 'courses' }]),
+    uploadHandler,
     resizeImage,
     validation(courseSchema),
     updateCourse

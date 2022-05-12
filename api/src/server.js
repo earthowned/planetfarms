@@ -76,7 +76,7 @@ app.get('/', (request, response) => {
 })
 
 // Set static folder
-app.use(express.static(path.join(__dirname, '../files')))
+app.use('/resources', express.static(path.join(__dirname, '../files')))
 
 // error handeling
 app.all('*', async (_req, _res) => {
