@@ -38,10 +38,6 @@ module.exports = (sequelize, DataTypes) => {
       as: 'enrolledUser',
       onDelete: 'CASCADE'
     })
-    Courses.belongsTo(models.Category, {
-      foreignKey: 'categoryId',
-      onDelete: 'CASCADE'
-    })
     Courses.belongsTo(models.User, { foreignKey: 'creatorId', as: 'creator' })
     Courses.belongsTo(models.RichText, { foreignKey: 'richtextId' })
     Courses.hasMany(models.CourseView, { foreignKey: 'courseId' })

@@ -56,8 +56,7 @@ const getCourses = async (req, res) => {
     attributes: ['id', 'title', 'description', 'creatorId', 'thumbnail', 'price', 'isFree', [enrollQuery, 'members']],
     include: [
       db.Lesson,
-      db.Category,
-      db.CourseView,
+      // db.CourseView,
       {
         model: db.User,
         as: 'creator',
@@ -103,50 +102,75 @@ const courseSchema = {
     title: Joi.string().required(),
     price: Joi.number().positive(),
     isPublished: Joi.boolean().required(),
-    categoryId: Joi.string().required(),
-    textHeader: Joi.alternatives().try(
-      Joi.string(),
-      Joi.array().items(Joi.string())
-    ),
-    textDescription: Joi.alternatives().try(
-      Joi.string(),
-      Joi.array().items(Joi.string())
-    ),
-    imageDescription: Joi.alternatives().try(
-      Joi.string(),
-      Joi.array().items(Joi.string())
-    ),
-    order: Joi.alternatives().try(
-      Joi.string().valid('text', 'image'),
-      Joi.array().items(Joi.string().valid('text', 'image'))
+    thumbnail: Joi.string().uri(),
+    description: Joi.array().items(
+      Joi.alternatives().try(
+        Joi.object({
+          heading: Joi.string(),
+          text: Joi.string().required(),
+        }),
+        Joi.object({
+          image: Joi.string().uri().required(),
+          description: Joi.string()
+        })
+      )
     )
-  }),
+  })
+}
+
+const formatCourse = (course) => {
+  const description = course.rich_text ? [
+    ...course.rich_text.photos, ...course.rich_text.texts
+  ] : []
+  const sortedDescription = description
+    .sort((a, b) => a.order - b.order)
+    .map(item => {
+      if (item.image) {
+        return {
+          image: item.image,
+          description: item.description
+        }
+      }
+
+      return {
+        heading: item.heading,
+        text: item.description
+      }
+    })
+
+  const formattedData = {
+    id: course.id,
+    title: course.title,
+    description: sortedDescription,
+    thumbnail: course.thumbnail,
+    price: course.price,
+    isPublished: course.isPublished,
+    isFree: course.isFree,
+    createdAt: course.createdAt,
+    updatedAt: course.updatedAt,
+    creatorId: course.creatorId,
+    lessons: course.lessons,
+    members: course.enrolledUser,
+    materials: [] // TODO get all course lessons's materials
+  }
+
+  return formattedData
 }
 
 // @desc    Add individual course
 // @route   POST /api/courses/add
 // @access  Public
 const addCourse = async (req, res) => {
-  const { body, user, files } = req
-
-  const category = await db.Category.findByPk(body.categoryId)
-
-  if (!category) {
-    throw new BadRequestError('Provided categoryId does not exist')
-  }
-
-  const thumbnail = files.thumbnail?.[0]?.filename || null
+  const { body, user } = req
   const price = body.price > 0 ? Number(body.price) : null
 
   const courseData = {
     title: body.title,
-    description: body.description,
-    thumbnail: thumbnail ? `thumbnail/${thumbnail}` : null,
+    thumbnail: body.thumbnail,
     price,
     isPublished: body.isPublished,
     isFree: price === null ? true : false,
-    creatorId: user.id,
-    categoryId: body.categoryId
+    creatorId: user.id
   }
   let createdCourseId;
 
@@ -154,35 +178,27 @@ const addCourse = async (req, res) => {
     let richtext = null
     let richtextId = null
 
-    if (body.order) {
+    if (body.description) {
       richtext = await db.RichText.create({}, { transaction })
       richtextId = richtext.id
 
-      checkTextAndImageUploads({
-        order: body.order,
-        textDescription: body.textDescription,
-        textHeader: body.textHeader,
-        imageContent: files.imageContent,
-        imageDescription: body.imageDescription
-      })
-
-      await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
-        if (order === 'text') {
-          return db.Text.create({
+      await Promise.all(body.description.map((item, index) => {
+        if (item.image) {
+          return db.Photo.create({
             richtextId,
-            textHeading: Array.isArray(body.textHeader) ? body.textHeader.shift() : body.textHeader,
-            textDescription: Array.isArray(body.textDescription) ? body.textDescription.shift() : body.textDescription,
+            image: item.image,
+            description: item.description,
+            isImgDesc: true,
             order: index + 1
           }, {
             transaction
           })
         }
 
-        return db.Photo.create({
+        return db.Text.create({
           richtextId,
-          lessonImg: `courses/${files.imageContent.shift().filename}`,
-          photoDescription: Array.isArray(body.imageDescription) ? body.imageDescription.shift() : body.imageDescription,
-          isImgDesc: false,
+          heading: item.heading,
+          description: item.text,
           order: index + 1
         }, {
           transaction
@@ -203,7 +219,7 @@ const addCourse = async (req, res) => {
 
   res.status(201).json({
     message: 'New course added successfully',
-    data: course.get()
+    data: formatCourse(course.get())
   })
 }
 
@@ -223,12 +239,6 @@ const updateCourse = async (req, res) => {
     throw new ForbiddenRequestError()
   }
 
-  const category = await db.Category.findByPk(body.categoryId)
-
-  if (!category) {
-    throw new BadRequestError('Provided categoryId does not exist')
-  }
-
   const thumbnail = files.thumbnail?.[0]?.filename || null
   const price = body.price > 0 ? Number(body.price) : null
 
@@ -239,8 +249,7 @@ const updateCourse = async (req, res) => {
     price,
     isPublished: body.isPublished,
     isFree: price === null ? true : false,
-    creatorId: user.id,
-    categoryId: body.categoryId
+    creatorId: user.id
   }
 
   await db.sequelize.transaction(async (transaction) => {
@@ -291,8 +300,8 @@ const updateCourse = async (req, res) => {
 
         return db.Photo.create({
           richtextId,
-          lessonImg: `courses/${files.imageContent.shift().filename}`,
-          photoDescription: Array.isArray(body.imageDescription) ? body.imageDescription.shift() : body.imageDescription,
+          image: `courses/${files.imageContent.shift().filename}`,
+          description: Array.isArray(body.imageDescription) ? body.imageDescription.shift() : body.imageDescription,
           isImgDesc: false,
           order: index + 1
         }, {
@@ -320,7 +329,7 @@ const updateCourse = async (req, res) => {
 
   res.status(200).json({
     message: 'Course updated successfully',
-    data: course
+    data: formattedData
   })
 }
 
@@ -357,7 +366,6 @@ const findCourseById = (id) => db.Courses.findOne({
         attributes: ['isEnroll']
       }
     },
-    db.Category,
     {
       model: db.RichText,
       include: [db.Text, db.Photo]
@@ -376,16 +384,9 @@ const getCourseById = async (req, res) => {
     return res.status(404).json({ message: 'Course not found' })
   }
 
-  const data = {
-    ...course.get(),
-    // TODO: need to fix resizing of image when used with multiple files
-    // thumbnail: changeFormat(course?.thumbnail),
-    // coverImg: changeFormat(course?.lessons?.coverImg)
-  }
-
   res.status(200).json({
     message: 'Course fetched successfully',
-    data
+    data: formatCourse(course.get())
   })
 }
 
@@ -423,6 +424,10 @@ const createCourseImages = async (req, res) => {
 
   if (!files.thumbnail && !files.images) {
     throw new BadRequestError('Missing file to upload. No thumbnail or images found')
+  }
+
+  if (files.thumbnail > 1) {
+    throw new BadRequestError('Only one thumbnail is allowed')
   }
 
   const baseUrl = `${req.protocol}://${req.get('host')}/resources`

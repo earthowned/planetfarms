@@ -15,8 +15,5 @@ module.exports = (sequelize, DataTypes) => {
     { timestamps: true }
   )
 
-  Category.associate = (models) => {
-    Category.hasMany(models.Courses)
-  }
   return Category
 }

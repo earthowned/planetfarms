@@ -7,10 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true
       },
-      textHeading: {
+      heading: {
         type: DataTypes.STRING
       },
-      textDescription: {
+      description: {
         type: DataTypes.TEXT
       },
       richtextId: {

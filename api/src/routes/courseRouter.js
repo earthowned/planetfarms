@@ -25,8 +25,6 @@ router
   .route('/')
   .get(getCourses)
   .post(
-    uploadHandler,
-    resizeImage,
     validation(courseSchema),
     addCourse
   )
