@@ -8,8 +8,7 @@
   @include flexRow(center, flex-start);
 
   .avatar-container {
-    width: 152px;
-    height: 152px;
+    @include circle(152px);
   }
 
   .right-block {
@@ -21,6 +20,17 @@
       gap: $gap-small;
       @include setSvgColor($color-green);
       @include flexRow(center, flex-start);
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    gap: $gap-small;
+    .avatar-container {
+      @include circle(64px);
+    }
+
+    .right-block {
+      gap: $gap-small;
     }
   }
 }
