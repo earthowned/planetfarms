@@ -1,0 +1,26 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.lesson-header-container {
+  width: 100%;
+  gap: $gap-big;
+  @include flexRow(center, flex-start);
+
+  .avatar-container {
+    width: 152px;
+    height: 152px;
+  }
+
+  .right-block {
+    width: 100%;
+    gap: $gap-medium;
+    @include flexColumn();
+
+    .title-container {
+      gap: $gap-small;
+      @include setSvgColor($color-green);
+      @include flexRow(center, flex-start);
+    }
+  }
+}

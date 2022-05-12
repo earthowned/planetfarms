@@ -13,15 +13,16 @@ const moreOptions = [
 ];
 
 export const LessonListItem = ({
-  thumbnail,
   title,
+  onClick,
   subtitle,
+  thumbnail,
   isMyCourse = true,
 }) => {
   const handleOptionSelect = () => {};
 
   return (
-    <div className="lesson-item">
+    <div className="lesson-item" onClick={onClick}>
       <LaptopUp>
         <Avatar src={thumbnail} placeholderIcon="graduation-cap" />
       </LaptopUp>

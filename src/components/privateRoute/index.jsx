@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Routes } from "constants/routes";
 import { useStateIfMounted } from "hooks";
-
+import { getErrorMessage } from "utils/error";
 import { selectIsAuthed } from "store/user/selectors";
 import { getCurrentUserThunk } from "store/user/thunks";
 
@@ -19,7 +19,7 @@ const CheckAuthRoute = ({ isAuthed }) => {
     try {
       await dispatch(getCurrentUserThunk());
     } catch (error) {
-      if (error) alert.error(error);
+      alert.error(getErrorMessage(error));
     } finally {
       setIsRequesting(false);
     }

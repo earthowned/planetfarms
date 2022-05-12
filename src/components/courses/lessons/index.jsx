@@ -13,6 +13,7 @@ import "./styles.scss";
 export const LessonsBlock = ({
   onAddLesson,
   lessons = [],
+  onSelectLesson,
   isMyCourse = false,
 }) => {
   const list = useMemo(() => {
@@ -55,6 +56,7 @@ export const LessonsBlock = ({
               thumbnail={item.thumbnail}
               subtitle={item.description}
               title={`Lesson ${index + 1}`}
+              onClick={() => onSelectLesson(item)}
             />
           )}
         />

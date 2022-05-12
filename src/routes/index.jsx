@@ -45,11 +45,15 @@ import MyCoursePage from "../screens/dashboard/coursePage/CoursePage";
 import EditCollection from "../screens/courses/editCollection/EditCollection";
 import CourseCollection from "../screens/courses/courseCollection/CourseCollection";
 import {
+  // Courses
   CoursePage,
   MembersPage,
   CoursesListPage,
-  CreateLessonPage,
   CreateCoursePage,
+
+  // Lessons
+  LessonPage,
+  CreateLessonPage,
 } from "../screens/courses";
 
 // Messanger
@@ -73,7 +77,7 @@ import UserVerification from "../screens/verification/UserVerification";
 import CongratulationScreen from "../screens/congratulation/CongratulationScreen";
 
 // Lesson
-import LessonPage from "../screens/dashboard/lessonPage/LessonPage";
+// import LessonPage from "../screens/dashboard/lessonPage/LessonPage";
 import LessonTestPage from "../screens/lessonTestPage/LessonTestPage";
 
 // Community
@@ -140,6 +144,11 @@ export const Routes = () => {
         exact
         component={CreateLessonPage}
         path={PathRoutes.Courses.CreateLesson}
+      />
+      <PrivateRoute
+        exact
+        component={LessonPage}
+        path={PathRoutes.Courses.Lesson}
       />
 
       {/* <PrivateRoute component={CommunityPagenews} exact path="/news1" /> */}
@@ -277,7 +286,7 @@ export const Routes = () => {
       <PrivateRoute component={MySurvey} path="/mysurvey" exact />
       <PrivateRoute component={MyCourse} path="/mycourse" exact />
       {/* <PrivateRoute component={MyCoursePage} exact path="/mycoursepage" /> */}
-      <PrivateRoute component={LessonPage} path="/lesson/:id" exact />
+      {/* <PrivateRoute component={LessonPage} path="/lesson/:id" exact /> */}
       {/* <PrivateRoute component={LessonTestPage} exact path='/lesson/:id/testpage' /> */}
 
       <PrivateRoute

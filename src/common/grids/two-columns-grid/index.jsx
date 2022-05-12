@@ -7,6 +7,7 @@ import "./styles.scss";
 
 export const TwoColumnsGrid = ({
   children,
+  className,
   templateColumns,
   reverseMobile = false,
 }) => {
@@ -17,15 +18,16 @@ export const TwoColumnsGrid = ({
     [isTablet, templateColumns]
   );
 
-  const className = useMemo(() => {
+  const containerClassName = useMemo(() => {
     const classname = "two-columns-grid-container";
     return cx(classname, {
       [`${classname}-reversed`]: isTablet && reverseMobile,
+      [`${className}`]: className,
     });
-  }, [isTablet, reverseMobile]);
+  }, [isTablet, reverseMobile, className]);
 
   return (
-    <div className={className} style={{ gridTemplateColumns: grid }}>
+    <div className={containerClassName} style={{ gridTemplateColumns: grid }}>
       {children?.length && (
         <>
           <div className="first-column">{children[0] && children[0]}</div>

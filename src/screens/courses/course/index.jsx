@@ -48,6 +48,14 @@ export const CoursePage = () => {
     history.push(path);
   };
 
+  const onLessonClick = (lesson) => {
+    const path = Routes.Courses.Lesson.replace(":courseId", id).replace(
+      ":lessonId",
+      lesson.id
+    );
+    history.push(path);
+  };
+
   return (
     <DashboardLayout withBackButton>
       <div className="current-course-page-container">
@@ -94,6 +102,7 @@ export const CoursePage = () => {
             isMyCourse={isMyCourse}
             lessons={getCourseLessons(id)}
             onAddLesson={onAddLessonClick}
+            onSelectLesson={onLessonClick}
           />
 
           <div className="column-container">
