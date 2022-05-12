@@ -438,7 +438,7 @@ const createCourseImages = async (req, res) => {
   }
 
   if (files.images) {
-    data.images = files.images.map(img => `${baseUrl}/thumbnail/${img.filename}`)
+    data.images = files.images.map(img => `${baseUrl}/courses/${img.filename}`)
   }
 
   res.status(201).json({
