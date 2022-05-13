@@ -1,20 +1,20 @@
+const fs = require('fs/promises')
+const path = require('path')
 const { Joi } = require('express-validation')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const { sequelize } = require('../models')
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
-const { changeFormat } = require('../helpers/filehelpers')
 const { paginatedResponse } = require('../utils/query')
 const BadRequestError = require('../errors/badRequestError')
 const ForbiddenRequestError = require('../errors/forbiddenRequestError')
-const { checkTextAndImageUploads } = require('./common')
 
 // @desc    Fetch all course
 // @route   GET /api/courses?pageNumber=${pageNumber}&category=${category}&search=${search}
 // @access  Public
 const getCourses = async (req, res) => {
-  const { filter = 'All', search, pageNumber = 1, pageSize = 6, sort = 'AlphabetAscending' } = req.query
+  const { filter = 'All', search, pageNumber = 1, pageSize = 10, sort = 'AlphabetAscending' } = req.query
   hasPurchase = false
   filterBy = {}
   enrollQuery = sequelize.literal(`(SELECT COUNT("userId") FROM enrolls WHERE "courseId" = courses.id)`)
@@ -151,10 +151,45 @@ const formatCourse = (course) => {
     creatorId: course.creatorId,
     lessons: course.lessons,
     members: course.enrolledUser,
+    creator: course.creator,
     materials: [] // TODO get all course lessons's materials
   }
 
   return formattedData
+}
+
+const createRichtextData = async (data, transaction) => {
+  let richtextId = null
+
+  if (data) {
+    const richtext = await db.RichText.create({}, { transaction })
+    richtextId = richtext.id
+
+    await Promise.all(data.map((item, index) => {
+      if (item.image) {
+        return db.Photo.create({
+          richtextId,
+          image: item.image,
+          description: item.description,
+          isImgDesc: true,
+          order: index + 1
+        }, {
+          transaction
+        })
+      }
+
+      return db.Text.create({
+        richtextId,
+        heading: item.heading,
+        description: item.text,
+        order: index + 1
+      }, {
+        transaction
+      })
+    }))
+  }
+
+  return richtextId
 }
 
 // @desc    Add individual course
@@ -175,36 +210,7 @@ const addCourse = async (req, res) => {
   let createdCourseId;
 
   await db.sequelize.transaction(async (transaction) => {
-    let richtext = null
-    let richtextId = null
-
-    if (body.description) {
-      richtext = await db.RichText.create({}, { transaction })
-      richtextId = richtext.id
-
-      await Promise.all(body.description.map((item, index) => {
-        if (item.image) {
-          return db.Photo.create({
-            richtextId,
-            image: item.image,
-            description: item.description,
-            isImgDesc: true,
-            order: index + 1
-          }, {
-            transaction
-          })
-        }
-
-        return db.Text.create({
-          richtextId,
-          heading: item.heading,
-          description: item.text,
-          order: index + 1
-        }, {
-          transaction
-        })
-      }))
-    }
+    const richtextId = await createRichtextData(body.description, transaction)
 
     const createdCourse = await db.Courses.create({
       ...courseData,
@@ -223,6 +229,25 @@ const addCourse = async (req, res) => {
   })
 }
 
+const deleteCourseImages = async (photos) => {
+  await Promise.all(photos.map(async photo => {
+    const splitted = photo.split('/resources/')
+    const filename = splitted.pop()
+
+    if (splitted.length === 1 || !filename) return
+
+    const photoPath = path.join(__dirname, '..', '..', 'files', filename)
+
+    try {
+      await fs.rm(photoPath)
+    } catch (error) {
+      if (error.code !== 'ENOENT') {
+        throw error
+      }
+    }
+  }))
+}
+
 // @desc    Update a course
 // @route   PUT /api/courses/:id
 // @access  Public
@@ -239,13 +264,11 @@ const updateCourse = async (req, res) => {
     throw new ForbiddenRequestError()
   }
 
-  const thumbnail = files.thumbnail?.[0]?.filename || null
   const price = body.price > 0 ? Number(body.price) : null
 
   const courseData = {
     title: body.title,
-    description: body.description,
-    thumbnail: thumbnail ? `thumbnail/${thumbnail}` : null,
+    thumbnail: body.thumbnail,
     price,
     isPublished: body.isPublished,
     isFree: price === null ? true : false,
@@ -253,63 +276,19 @@ const updateCourse = async (req, res) => {
   }
 
   await db.sequelize.transaction(async (transaction) => {
-    let richtext = null
-    let richtextId = null
+    const richtextId = await createRichtextData(body.description, transaction)
 
-    if (body.order) {
-      richtext = await db.RichText.create({}, { transaction })
-      richtextId = richtext.id
-
-      const richtextCount = Array.isArray(body.textDescription) ? body.textDescription.length : 1
-      const photoCount = files.imageContent?.length || 0
-
-      if (photoCount !== body.order.filter(i => i === 'image').length) {
-        throw new BadRequestError('Image details don\'t match the ordering details')
-      }
-
-      if (richtextCount !== body.order.filter(i => i === 'text').length) {
-        throw new BadRequestError('Text details don\'t match the ordering details')
-      }
-
-      if (richtextCount > 1 && body.textDescription?.length !== body.textHeader?.length) {
-        throw new BadRequestError('Text header and description items do not match')
-      }
-
-      if (photoCount > 1 && body.imageDescription?.length !== photoCount) {
-        throw new BadRequestError('Image content and description items do not match')
-      }
-
-      const orderCount = Array.isArray(body.order) ? body.order.length : 1
-
-      // validation if texts and photo tallies the order count
-      if (photoCount + richtextCount !== orderCount) {
-        throw new BadRequestError('Combined image and text contents don\'t match the ordering count')
-      }
-
-      await Promise.all([...(orderCount === 1 ? [body.order] : body.order)].map(async (order, index) => {
-        if (order === 'text') {
-          return db.Text.create({
-            richtextId,
-            textHeading: Array.isArray(body.textHeader) ? body.textHeader.shift() : body.textHeader,
-            textDescription: Array.isArray(body.textDescription) ? body.textDescription.shift() : body.textDescription,
-            order: index + 1
-          }, {
-            transaction
-          })
-        }
-
-        return db.Photo.create({
-          richtextId,
-          image: `courses/${files.imageContent.shift().filename}`,
-          description: Array.isArray(body.imageDescription) ? body.imageDescription.shift() : body.imageDescription,
-          isImgDesc: false,
-          order: index + 1
-        }, {
-          transaction
-        })
-      }))
-    }
-
+    const photos = await db.Photo.findAll({
+      where: { richtextId: course.richtextId }
+    })
+    const photosToDelete = [
+      ...photos.map(photo => photo.image),
+      ...(
+        course.thumbnail && course.thumbnail !== body.thumbnail ?
+        [course.thumbnail] : []
+      )
+    ]
+    await deleteCourseImages(photosToDelete)
     await db.RichText.destroy({
       where: {
         id: course.richtextId
@@ -329,7 +308,7 @@ const updateCourse = async (req, res) => {
 
   res.status(200).json({
     message: 'Course updated successfully',
-    data: formattedData
+    data: formatCourse(course.get())
   })
 }
 
@@ -370,6 +349,11 @@ const findCourseById = (id) => db.Courses.findOne({
       model: db.RichText,
       include: [db.Text, db.Photo]
     },
+    {
+      model: db.User,
+      as: 'creator',
+      attributes: ['id', 'userID', 'firstName', 'lastName', 'attachments', 'phone', 'email']
+    }
   ],
 })
 
@@ -407,43 +391,23 @@ const deleteCourse = async (req, res) => {
       throw new ForbiddenRequestError()
     }
 
+    const photos = await db.Photo.findAll({
+      where: { richtextId: course.richtextId }
+    })
     await course.destroy({ transaction })
     await db.RichText.destroy({
       where: { id: course.richtextId },
       transaction
     })
+    const photosToDelete = [
+      ...photos.map(photo => photo.image),
+      ...(course.thumbnail ? [course.thumbnail] : [])
+    ]
+    await deleteCourseImages(photosToDelete)
   })
 
   res.status(200).json({
     message: 'Course deleted successfully'
-  })
-}
-
-const createCourseImages = async (req, res) => {
-  const { files } = req
-
-  if (!files.thumbnail && !files.images) {
-    throw new BadRequestError('Missing file to upload. No thumbnail or images found')
-  }
-
-  if (files.thumbnail > 1) {
-    throw new BadRequestError('Only one thumbnail is allowed')
-  }
-
-  const baseUrl = `${req.protocol}://${req.get('host')}/resources`
-  const data = {}
-
-  if (files.thumbnail) {
-    data.thumbnail = `${baseUrl}/thumbnail/${files.thumbnail[0].filename}`
-  }
-
-  if (files.images) {
-    data.images = files.images.map(img => `${baseUrl}/courses/${img.filename}`)
-  }
-
-  res.status(201).json({
-    message: 'New course images created successfully',
-    data
   })
 }
 
@@ -453,6 +417,5 @@ module.exports = {
   updateCourse,
   getCourseById,
   deleteCourse,
-  courseSchema,
-  createCourseImages
+  courseSchema
 }

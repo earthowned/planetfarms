@@ -10,14 +10,7 @@ const {
   getCourseById,
   deleteCourse,
   courseSchema,
-  createCourseImages
 } = require('../controllers/courseController.js')
-const { uploadWithMapping, resizeImage } = require('../helpers/filehelpers')
-
-const uploadHandler = uploadWithMapping({
-  images: 'courses',
-  thumbnail: 'thumbnail'
-}).fields([{ name: 'thumbnail' }, { name: 'images' }])
 
 router.use(protect)
 
@@ -30,16 +23,10 @@ router
   )
 
 router
-  .route('/images')
-  .post(uploadHandler, createCourseImages)
-
-router
   .route('/:id')
   .get(getCourseById)
   .delete(deleteCourse)
   .put(
-    uploadHandler,
-    resizeImage,
     validation(courseSchema),
     updateCourse
   )

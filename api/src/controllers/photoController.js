@@ -82,10 +82,27 @@ const deletePhoto = async (req, res) => {
   })
 }
 
+const uploadImages = async (req, res) => {
+  const { files } = req
+
+  if (!files?.images) {
+    throw new BadRequestError('Missing images to upload')
+  }
+
+  const baseUrl = `${req.protocol}://${req.get('host')}/resources`
+  data = files.images.map(img => `${baseUrl}/courses/${img.filename}`)
+
+  res.status(201).json({
+    message: 'New photos uploaded successfully',
+    data
+  })
+}
+
 module.exports = {
   getPhotos,
   getPhotoById,
   addphoto,
   deletePhoto,
-  updatePhoto
+  updatePhoto,
+  uploadImages
 }
