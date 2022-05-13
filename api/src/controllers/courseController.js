@@ -207,7 +207,7 @@ const addCourse = async (req, res) => {
     isFree: price === null ? true : false,
     creatorId: user.id
   }
-  let createdCourseId;
+  let createdCourseId
 
   await db.sequelize.transaction(async (transaction) => {
     const richtextId = await createRichtextData(body.description, transaction)
@@ -231,10 +231,8 @@ const addCourse = async (req, res) => {
 
 const deleteCourseImages = async (photos) => {
   await Promise.all(photos.map(async photo => {
-    const splitted = photo.split('/resources/')
-    const filename = splitted.pop()
-
-    if (splitted.length === 1 || !filename) return
+    const [_, filename] = photo.split('/resources/')
+    if (!filename) return
 
     const photoPath = path.join(__dirname, '..', '..', 'files', filename)
 
@@ -252,7 +250,7 @@ const deleteCourseImages = async (photos) => {
 // @route   PUT /api/courses/:id
 // @access  Public
 const updateCourse = async (req, res) => {
-  const { body, user, files, params: { id: courseId } } = req
+  const { body, user, params: { id: courseId } } = req
 
   let course = await db.Courses.findByPk(courseId)
 
@@ -268,7 +266,7 @@ const updateCourse = async (req, res) => {
 
   const courseData = {
     title: body.title,
-    thumbnail: body.thumbnail,
+    thumbnail: body.thumbnail || null,
     price,
     isPublished: body.isPublished,
     isFree: price === null ? true : false,
@@ -281,8 +279,18 @@ const updateCourse = async (req, res) => {
     const photos = await db.Photo.findAll({
       where: { richtextId: course.richtextId }
     })
+    const images = (body.description || []).reduce((acc, curr) => {
+      if (curr.image) {
+        acc.push(curr.image)
+      }
+
+      return acc
+    }, [])
+
     const photosToDelete = [
-      ...photos.map(photo => photo.image),
+      ...photos
+        .map(photo => photo.image)
+        .filter(photo => !images.includes(photo)),
       ...(
         course.thumbnail && course.thumbnail !== body.thumbnail ?
         [course.thumbnail] : []
