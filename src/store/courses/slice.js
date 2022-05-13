@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { mockedCourses } from "utils/mocked";
-
 const initialState = {
-  list: mockedCourses,
-  selectedArticle: null,
+  list: [],
 };
 
 const coursesSlice = createSlice({
@@ -14,35 +11,12 @@ const coursesSlice = createSlice({
     setCourses: (state, { payload }) => {
       state.list = [...payload];
     },
-
-    createCourse: (state, { payload }) => {
-      state.list = [...state.list, payload];
-    },
-
-    setSelectedCourse: (state, { payload }) => {
-      state.selectedArticle = payload;
-    },
-
-    removeSelectedCourse: (state) => {
-      state.selectedArticle = null;
-    },
   },
 });
 
 const {
   reducer: coursesReducer,
-  actions: {
-    setCourses,
-    createCourse,
-    setSelectedCourse,
-    removeSelectedCourse,
-  },
+  actions: { setCourses },
 } = coursesSlice;
 
-export {
-  coursesReducer,
-  setCourses,
-  createCourse,
-  setSelectedCourse,
-  removeSelectedCourse,
-};
+export { coursesReducer, setCourses };

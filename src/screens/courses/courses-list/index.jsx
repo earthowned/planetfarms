@@ -66,8 +66,8 @@ export const CoursesListPage = () => {
               title={item.title}
               price={item.price}
               rating={item.rating}
-              avatar={item.avatar}
               members={item.members}
+              avatar={item.thumbnail}
               progress={item.progress}
               category={item.category}
               description={item.description}

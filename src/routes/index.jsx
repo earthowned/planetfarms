@@ -134,8 +134,8 @@ export const Routes = () => {
       <PrivateRoute component={MyLibrary} path="/mylibrary" exact />
 
       <PrivateRoute component={CoursesListPage} exact path="/courses" />
-      <PrivateRoute component={CoursePage} exact path="/courses/:id" />
       <PrivateRoute component={CreateCoursePage} path="/courses/create" exact />
+      <PrivateRoute component={CoursePage} exact path="/courses/:id" />
 
       {/* <Route component={Courses} exact path="/courses" /> */}
       <PrivateRoute

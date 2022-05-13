@@ -11,6 +11,7 @@ import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
 import { ContentBuilderField } from "common/content-builder";
 
+import { getErrorMessage } from "utils/error";
 import { createCourseThunk } from "store/courses";
 
 import { validationSchema, initialValues, model } from "./config";
@@ -18,16 +19,17 @@ import { validationSchema, initialValues, model } from "./config";
 import "./styles.scss";
 
 export const CreateCoursePage = () => {
-  const alert = useAlert;
+  const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
     try {
-      await createCourseThunk(values)(dispatch);
+      await dispatch(createCourseThunk(values));
+      alert.success("Course successfully created");
       history.goBack();
     } catch (error) {
-      alert.error(error);
+      alert.error(getErrorMessage(error));
     }
   };
 
@@ -44,7 +46,7 @@ export const CreateCoursePage = () => {
           <Form className="create-course-page-container">
             <div className="left-block">
               <DragDropZoneField
-                name={model.avatar.name}
+                name={model.thumbnail.name}
                 dropZoneStyles={{ height: "344px" }}
               />
             </div>
@@ -73,8 +75,8 @@ export const CreateCoursePage = () => {
 
               <ContentBuilderField
                 label="Description"
-                name={model.content.name}
                 actions={["Image", "Text"]}
+                name={model.description.name}
               />
 
               <div className="buttons-section">
