@@ -1,0 +1,57 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.tests-block-container {
+  width: 100%;
+  gap: $gap-big;
+  @include flexColumn(flex-start, flex-start);
+}
+
+.test-list-item-container {
+  width: 100%;
+  min-height: calc(168px + 40px);
+  @include flexRow(center, space-between);
+
+  .left-container {
+    gap: $gap-smallest;
+    width: 100%;
+    max-width: 422px;
+    @include flexColumn(flex-start, center);
+
+    button {
+      width: 152px;
+      margin-top: $gap-small;
+    }
+  }
+
+  .right-container {
+    gap: $gap-small;
+    @include flexColumn(flex-end, center);
+
+    button {
+      height: 24px;
+      justify-content: flex-end;
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    min-height: calc(224px + 24px);
+    gap: $gap-smallest;
+    @include flexColumn(flex-start, space-between);
+
+    .left-container {
+    }
+
+    .right-container {
+      gap: $gap-smallest;
+      @include flexColumn(flex-start, center);
+
+      button {
+        height: 24px;
+        margin-top: 0;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

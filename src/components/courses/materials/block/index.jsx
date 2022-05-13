@@ -8,11 +8,7 @@ import { AllMaterialsModal } from "../all-modal";
 
 import "./styles.scss";
 
-export const MeterialsBlock = ({
-  materials = [],
-  isEditMode = false,
-  withAddButton = true,
-}) => {
+export const MeterialsBlock = ({ materials = [], isEditMode = false }) => {
   const [isAllVisible, setIsAllVisible] = useState(false);
   const [isAddVisible, setIsAddVisible] = useState(false);
 
@@ -28,7 +24,7 @@ export const MeterialsBlock = ({
       <EmptyBllock
         imageSize="small"
         variant="Material"
-        isAddButtonVisible={withAddButton}
+        isAddButtonVisible={isEditMode}
         onAdd={() => setIsAddVisible(true)}
         isImageVisible={materials.length === 0}
       />

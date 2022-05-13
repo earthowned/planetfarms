@@ -1,6 +1,6 @@
 import { Avatar } from "common/avatar";
-import { ModalOptionsButton } from "common/buttons/modal-options-button";
 import { TabletUp, LaptopUp } from "common/responsive";
+import { ModalOptionsButton } from "common/buttons/modal-options-button";
 
 import { MoreOption } from "constants/enums";
 import { createMoreOption } from "utils/createMoreOption";
@@ -22,9 +22,13 @@ export const LessonListItem = ({
   const handleOptionSelect = () => {};
 
   return (
-    <div className="lesson-item" onClick={onClick}>
+    <div className="lesson-item">
       <LaptopUp>
-        <Avatar src={thumbnail} placeholderIcon="graduation-cap" />
+        <Avatar
+          src={thumbnail}
+          onClick={onClick}
+          placeholderIcon="graduation-cap"
+        />
       </LaptopUp>
 
       <LaptopUp>
@@ -47,7 +51,11 @@ export const LessonListItem = ({
 
       <TabletUp>
         <div className="mobile-row-container">
-          <Avatar src={thumbnail} placeholderIcon="graduation-cap" />
+          <Avatar
+            src={thumbnail}
+            onClick={onClick}
+            placeholderIcon="graduation-cap"
+          />
 
           <div className="title-container">
             <h4>{title}</h4>

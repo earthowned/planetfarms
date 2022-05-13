@@ -1,0 +1,7 @@
+@import "src/scss/mixins";
+
+.lesson-page-header-grid {
+  .second-column {
+    @include flexColumn(center, center);
+  }
+}

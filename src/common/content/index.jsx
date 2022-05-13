@@ -5,9 +5,13 @@ import { TextBlock, ImageBlock } from "./blocks";
 import "./styles.scss";
 
 export const ContentBlocks = ({ contentList = [] }) => {
+  if (!contentList || contentList.length === 0) {
+    return null;
+  }
+
   return (
     <div className="content-blocks-container">
-      {contentList.map((content, index) => {
+      {contentList?.map((content, index) => {
         switch (content.type) {
           case ContentBuilderAction.Text:
             return (

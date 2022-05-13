@@ -8,16 +8,22 @@
   @include flexRow(center, flex-start);
 
   .avatar-container {
+    cursor: pointer;
     @include circle(120px);
   }
 
   .info-block {
+    width: 100%;
     gap: $gap-small;
     @include flexColumn(flex-start, flex-start);
 
     .title-container {
       width: 100%;
       @include flexRow(center, space-between);
+
+      h3 {
+        flex-shrink: 0;
+      }
     }
 
     h5 {
@@ -36,6 +42,7 @@
     }
 
     .avatar-container {
+      cursor: pointer;
       @include circle(48px);
     }
   }

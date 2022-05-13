@@ -26,6 +26,7 @@ const Courses = {
 
   Lesson: `${courses}/:courseId/lessons/:lessonId`,
   CreateLesson: `${courses}/:courseId/lessons/create`,
+  EditLesson: `${courses}/:courseId/lessons/:lessonId/edit`,
 };
 
 export const Routes = { Auth, News, Courses };

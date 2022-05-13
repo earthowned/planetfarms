@@ -114,6 +114,33 @@ export const mockedCourses = [
         id: "1232lkfd",
         title: "Lesson 1",
         progress: 100,
+        content: [
+          {
+            type: ContentBuilderAction.Text,
+            title: "Senectus sed facilisis egestas adipiscing mauris.",
+            text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+          },
+          {
+            type: ContentBuilderAction.Image,
+            url: "https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864,0,1728,2304&wid=600&hei=800&scl=2.88",
+            description: "Combine Harvester swather",
+          },
+          {
+            type: ContentBuilderAction.Text,
+            title: "Senectus sed facilisis egestas adipiscing mauris.",
+            text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+          },
+          {
+            type: ContentBuilderAction.Text,
+            // title: "Senectus sed facilisis egestas adipiscing mauris.",
+            text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+          },
+          {
+            type: ContentBuilderAction.Text,
+            // title: "Senectus sed facilisis egestas adipiscing mauris.",
+            text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+          },
+        ],
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
         thumbnail:
@@ -123,6 +150,7 @@ export const mockedCourses = [
         id: "1232lkfdfds",
         title: "Lesson 2",
         progress: 50,
+        content: [],
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
         thumbnail:
@@ -132,6 +160,7 @@ export const mockedCourses = [
         id: "1232lkffsdd",
         title: "Lesson 3",
         progress: 0,
+        content: [],
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
         thumbnail:
@@ -141,6 +170,7 @@ export const mockedCourses = [
         id: "1232lfdsfkfd",
         title: "Lesson 4",
         progress: 0,
+        content: [],
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
         thumbnail:
@@ -150,6 +180,7 @@ export const mockedCourses = [
         id: "1232lasdadkfd",
         title: "Lesson 5",
         progress: 0,
+        content: [],
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
       },
@@ -157,6 +188,7 @@ export const mockedCourses = [
         id: "1232lqweqwekfd",
         title: "Lesson 6",
         progress: 0,
+        content: [],
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
       },
@@ -164,6 +196,7 @@ export const mockedCourses = [
         id: "1232lcvcxvxvkfd",
         title: "Lesson 7",
         progress: 0,
+        content: [],
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
       },

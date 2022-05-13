@@ -1,23 +1,69 @@
-import { Flex } from "common/grids";
-import { DashboardLayout } from "layout/dashboard";
+import { useParams } from "react-router-dom";
 
+import { ContentBlocks } from "common/content";
+import { DashboardLayout } from "layout/dashboard";
+import { Flex, TwoColumnsGrid } from "common/grids";
+import { MeterialsBlock, TestsBlock } from "components/courses";
+import { ActionButton } from "common/buttons/action-button";
+
+// import { Routes } from "constants/routes";
 import { useCurrentLesson } from "hooks/courses";
 
 import { LessonHeader } from "./header";
 
 import "./styles.scss";
 
+const grid = "1fr 248px";
+
 export const LessonPage = () => {
-  const lesson = useCurrentLesson();
+  const { courseId, lessonId } = useParams();
+  const { lesson, isMyLesson } = useCurrentLesson({ courseId, lessonId });
+
+  const onEditClick = () => {
+    // history.push(Routes.Courses.EditLesson);
+  };
 
   return (
     <DashboardLayout withBackButton>
       <Flex direction="column" gap="40px">
-        <LessonHeader
-          title={lesson?.title}
-          progress={lesson?.progress}
-          thumbnail={lesson?.thumbnail}
-        />
+        <TwoColumnsGrid
+          templateColumns={grid}
+          className="lesson-page-header-grid"
+        >
+          <LessonHeader
+            title={lesson?.title}
+            progress={lesson?.progress}
+            thumbnail={lesson?.thumbnail}
+          />
+
+          {isMyLesson && (
+            <ActionButton
+              icon="edit"
+              variant="secondary"
+              title="Edit Lesson"
+              onClick={onEditClick}
+            />
+          )}
+        </TwoColumnsGrid>
+
+        <TwoColumnsGrid templateColumns={grid}>
+          <ContentBlocks contentList={lesson?.content || []} />
+          <MeterialsBlock
+            isEditMode={isMyLesson}
+            materials={lesson?.materials}
+          />
+        </TwoColumnsGrid>
+
+        <TwoColumnsGrid templateColumns={grid}>
+          <TestsBlock
+            onStart={() => {}}
+            onAddTest={() => {}}
+            isMyLesson={isMyLesson}
+            tests={lesson?.tests || []}
+            onViewAllResults={() => {}}
+          />
+          <div />
+        </TwoColumnsGrid>
       </Flex>
     </DashboardLayout>
   );

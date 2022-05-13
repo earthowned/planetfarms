@@ -49,6 +49,11 @@ export const ModalOptionsButton = ({
     return cx(className, { [`${className}-${variant}`]: true });
   }, [variant]);
 
+  const handleButtonClick = (event) => {
+    event.stopPropagation();
+    setIsModalVisible((prev) => !prev);
+  };
+
   const handleOptionSelect = (option) => {
     setIsModalVisible(false);
     onOptionSelect(option);
@@ -59,7 +64,7 @@ export const ModalOptionsButton = ({
       type="button"
       ref={buttonRef}
       className={buttonClassName}
-      onClick={() => setIsModalVisible(!isModalVisible)}
+      onClick={handleButtonClick}
     >
       <Icon icon={icon} />
 

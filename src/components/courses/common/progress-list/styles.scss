@@ -7,6 +7,7 @@
   @include flexColumn(flex-start, flex-start);
 
   .list-item-container {
+    width: 100%;
     gap: $gap-big;
     @include flexRow(center, center);
   }
