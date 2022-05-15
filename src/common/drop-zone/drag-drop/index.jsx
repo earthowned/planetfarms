@@ -24,7 +24,7 @@ export const DragAndDropZone = ({
   const handleDrop = useCallback(
     (files) => {
       if (isMultiple) onDrop(files);
-      else onDrop([0]);
+      else onDrop(files[0]);
     },
     [isMultiple]
   );

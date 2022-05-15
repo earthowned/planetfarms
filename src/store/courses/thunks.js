@@ -1,6 +1,6 @@
 import { api } from "api";
+import { Generator } from "utils/generator";
 import { mockedCourses } from "utils/mocked";
-import { ContentBuilderAction } from "constants/enums";
 
 import { setCourses } from "./slice";
 
@@ -22,67 +22,35 @@ export const getCoursesThunk = () => async (dispatch) => {
   }
 };
 
-const createFormData = (images = []) => {
-  const formdata = new FormData();
-  images.forEach((image) => formdata.append("images", image));
-  return formdata;
-};
+export const createCourseThunk = (values) => async (dispatch) => {
+  try {
+    // dispatch(setIsLoading(true));
 
-const updateDescription = (description, images) => {
-  if (images.size > 1) {
-    return description.map(({ type, data }, index) => {
-      switch (type) {
-        case ContentBuilderAction.Image:
-          return {
-            image: images.get(index + 1),
-            description: data.photoDescription,
-          };
+    const coursePayload = await Generator.course.create(values);
+    const response = await api.courses.create(coursePayload);
 
-        default:
-          return { heading: data.textHeading, text: data.textDescription };
-      }
-    });
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error);
+  } finally {
+    // dispatch(setIsLoading(false));
   }
-
-  return description;
 };
 
-export const createCourseThunk =
-  ({ thumbnail, title, price, description, isPublished }) =>
+export const updateCourseThunk =
+  ({ id, ...values }) =>
   async (dispatch) => {
     try {
-      // TODO: setIsLoading
-      const images = new Map();
-      images.set(0, thumbnail);
+      // dispatch(setIsLoading(true));
 
-      description.forEach(({ type, data }, index) => {
-        if (type === ContentBuilderAction.Image) {
-          images.set(index + 1, data.lessonImg);
-        }
-      });
-
-      const urls = await api.courses.uploadImages(
-        createFormData([...images.values()])
-      );
-
-      urls.forEach((url, index) =>
-        images.set(index === 0 ? index : index + 1, url)
-      );
-
-      const course = {
-        title,
-        isPublished,
-        thumbnail: images.get(0),
-        price: parseFloat(price).toFixed(2),
-        description: updateDescription(description, images),
-      };
-
-      const response = await api.courses.create(course);
+      const coursePayload = await Generator.course.create(values);
+      console.log("payload", coursePayload);
+      const response = await api.courses.update({ id, ...coursePayload });
 
       return Promise.resolve(response);
     } catch (error) {
       return Promise.reject(error);
     } finally {
-      // TODO: setIsLoading
+      // dispatch(setIsLoading(false));
     }
   };

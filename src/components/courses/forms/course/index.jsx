@@ -14,7 +14,7 @@ import { model, validationSchema } from "./config";
 
 import "./styles.scss";
 
-const CourseForm = ({ initialValues, onSubmit }) => {
+const CourseForm = ({ initialValues, onSubmit, submitTitle }) => {
   const history = useHistory();
 
   return (
@@ -69,7 +69,11 @@ const CourseForm = ({ initialValues, onSubmit }) => {
                   onClick={() => history.goBack()}
                 />
 
-                <ActionButton type="submit" title="Create" variant="primary" />
+                <ActionButton
+                  type="submit"
+                  variant="primary"
+                  title={submitTitle}
+                />
               </div>
             </div>
           </TwoColumnsGrid>

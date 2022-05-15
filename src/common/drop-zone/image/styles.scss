@@ -9,10 +9,16 @@
   background-image: $dashed-border;
   background-color: rgba($color: $color-black, $alpha: 0.9);
 
-  img {
+  .image-container {
     width: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: 100%;
+    @include flexColumn(center, center);
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
   }
 
   .buttons-container {

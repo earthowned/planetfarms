@@ -23,8 +23,9 @@ export const ImageDragAndDropZone = ({ image, error, onDrop, sizeType }) => {
       <DragAndDropZone
         type="Image"
         error={error}
+        isMultiple={false}
         sizeType={sizeType}
-        onDrop={onDrop ? (files) => onDrop(files) : null}
+        onDrop={(file) => onDrop(file)}
       />
     );
 
@@ -61,7 +62,9 @@ export const ImageDragAndDropZone = ({ image, error, onDrop, sizeType }) => {
 
   return (
     <div className={className}>
-      <img src={imagePath} alt="" />
+      <div className="image-container">
+        <img src={imagePath} alt="" />
+      </div>
 
       <div className="buttons-container">
         <IconButton icon="crop" variant="grey" onClick={onCropClick} />
@@ -86,7 +89,7 @@ export const ImageDragAndDropZoneField = ({ name, sizeType }) => {
       sizeType={sizeType}
       image={field.value}
       error={meta?.error}
-      onDrop={(files) => helpers.setValue(files)}
+      onDrop={(file) => helpers.setValue(file)}
     />
   );
 };

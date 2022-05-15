@@ -34,7 +34,11 @@ export const CreateCoursePage = () => {
 
   return (
     <DashboardLayout title="Add Course" withBackButton>
-      <CourseForm initialValues={initialValues} onSubmit={handleSubmit} />
+      <CourseForm
+        submitTitle="Create"
+        onSubmit={handleSubmit}
+        initialValues={initialValues}
+      />
     </DashboardLayout>
   );
 };
