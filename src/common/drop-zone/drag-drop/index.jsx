@@ -9,22 +9,9 @@ import { FileTypes, PlaceholderMobileTitle, PlaceholderIcon } from "./config";
 
 import "./styles.scss";
 
-const DesktopPlaceholder = () => {
-  return (
-    <>
-      <p>Drag & Drop files in this area or</p>
-      <h4>Click Here to attach</h4>
-    </>
-  );
-};
-
-const MobilePlaceholder = ({ icon, title }) => {
-  return (
-    <>
-      <Icon icon={icon} />
-      <h4>{title}</h4>
-    </>
-  );
+const SizeType = {
+  square: "square",
+  rectangle: "rectangle",
 };
 
 export const DragAndDropZone = ({
@@ -32,6 +19,7 @@ export const DragAndDropZone = ({
   error,
   onDrop,
   isMultiple = false,
+  sizeType = SizeType.square,
 }) => {
   const handleDrop = useCallback(
     (files) => {
@@ -48,41 +36,54 @@ export const DragAndDropZone = ({
     accept: FileTypes[type],
   });
 
-  const getClassName = (className, withError) =>
-    cx(className, { [`${className}-error`]: withError });
+  const getClassName = useCallback(
+    (className) => {
+      return cx(className, {
+        [`${className}-error`]: !!error,
+        [`${className}-${sizeType}`]: true,
+      });
+    },
+    [sizeType, error]
+  );
 
   return (
     <>
       <Mobile>
         <div
-          className={getClassName("mobile-drag-and-drop-container", !!error)}
+          className={getClassName("mobile-drag-and-drop-container")}
           {...getRootProps()}
         >
           <input {...getInputProps()} />
-          <MobilePlaceholder
-            icon={PlaceholderIcon[type]}
-            title={PlaceholderMobileTitle[type]}
-          />
+          <>
+            <Icon icon={PlaceholderIcon[type]} />
+            <h4>{PlaceholderMobileTitle[type]}</h4>
+          </>
         </div>
       </Mobile>
 
       <Tablet>
         <div
-          className={getClassName("desktop-drag-and-drop-container", !!error)}
+          className={getClassName("desktop-drag-and-drop-container")}
           {...getRootProps()}
         >
           <input {...getInputProps()} />
-          <DesktopPlaceholder />
+          <>
+            <p>Drag & Drop files in this area or</p>
+            <h4>Click Here to attach</h4>
+          </>
         </div>
       </Tablet>
 
       <LaptopUp>
         <div
-          className={getClassName("desktop-drag-and-drop-container", !!error)}
+          className={getClassName("desktop-drag-and-drop-container")}
           {...getRootProps()}
         >
           <input {...getInputProps()} />
-          <DesktopPlaceholder />
+          <>
+            <p>Drag & Drop files in this area or</p>
+            <h4>Click Here to attach</h4>
+          </>
         </div>
       </LaptopUp>
     </>

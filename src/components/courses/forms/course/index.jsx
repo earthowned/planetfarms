@@ -5,9 +5,10 @@ import { InputField } from "common/input";
 import { SwitchField } from "common/switch";
 import { TwoColumnsGrid } from "common/grids";
 import { TextAreaField } from "common/text-area";
-import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
 import { ContentBuilderField } from "common/content-builder";
+
+import { ImageDragAndDropZoneField } from "common/drop-zone";
 
 import { model, validationSchema } from "./config";
 
@@ -28,9 +29,9 @@ const CourseForm = ({ initialValues, onSubmit }) => {
       {() => (
         <Form className="course-builder-container">
           <TwoColumnsGrid templateColumns="344px 1fr">
-            <DragDropZoneField
+            <ImageDragAndDropZoneField
+              sizeType="square"
               name={model.thumbnail.name}
-              dropZoneStyles={{ height: "344px" }}
             />
 
             <div className="right-block">

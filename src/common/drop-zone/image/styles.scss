@@ -1,0 +1,44 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.image-drag-drop-container {
+  width: 100%;
+  position: relative;
+  border-radius: 4px;
+  background-image: $dashed-border;
+  background-color: rgba($color: $color-black, $alpha: 0.9);
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .buttons-container {
+    gap: $gap-small;
+    @include flexRow(center, flex-end);
+    @include position(absolute, auto, 16px, 16px, auto);
+
+    .pf-icon-btn {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  &-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  &-rectangle {
+    aspect-ratio: 4 / 1;
+  }
+
+  @include breakpoint("tablet", "minMax") {
+    aspect-ratio: 3 / 1;
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    aspect-ratio: 1 / 1;
+  }
+}
