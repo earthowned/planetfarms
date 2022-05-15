@@ -45,6 +45,7 @@ export const update = ({
     description,
   });
 
-export const get = ({ id }) => apiInstance.get(`/courses/${id}`);
+export const get = ({ id }) =>
+  apiInstance.get(`/courses/${id}`).then((response) => response?.data?.data);
 
 export const remove = ({ id }) => apiInstance.delete(`/courses/${id}`);

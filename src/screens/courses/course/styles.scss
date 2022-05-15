@@ -7,6 +7,12 @@
   background-color: transparent;
   @include flexColumn(flex-start, flex-start);
 
+  .two-columns-grid-container {
+    .second-column {
+      @include flexColumn(flex-end, flex-start);
+    }
+  }
+
   .column-container {
     width: 100%;
     gap: $gap-big;

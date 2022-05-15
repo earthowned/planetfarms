@@ -45,6 +45,7 @@ import EditCollection from "../screens/courses/editCollection/EditCollection";
 import CourseCollection from "../screens/courses/courseCollection/CourseCollection";
 import {
   CoursePage,
+  EditCoursePage,
   CoursesListPage,
   CreateCoursePage,
 } from "../screens/courses";
@@ -136,6 +137,7 @@ export const Routes = () => {
       <PrivateRoute component={CoursesListPage} exact path="/courses" />
       <PrivateRoute component={CreateCoursePage} path="/courses/create" exact />
       <PrivateRoute component={CoursePage} exact path="/courses/:id" />
+      <PrivateRoute component={EditCoursePage} exact path="/courses/:id/edit" />
 
       {/* <Route component={Courses} exact path="/courses" /> */}
       <PrivateRoute

@@ -16,11 +16,3 @@ export const validationSchema = Yup.object().shape({
   [model.isPublished.name]: Yup.boolean().required(),
   [model.description.name]: contentBuilderValidationSchema.min(1).required(),
 });
-
-export const initialValues = {
-  [model.thumbnail.name]: null,
-  [model.title.name]: "",
-  [model.price.name]: "",
-  [model.description.name]: [],
-  [model.isPublished.name]: false,
-};
