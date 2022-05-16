@@ -7,7 +7,6 @@ const { sequelize } = require('../models')
 const db = require('../models')
 const NotFoundError = require('../errors/notFoundError')
 const { paginatedResponse } = require('../utils/query')
-const BadRequestError = require('../errors/badRequestError')
 const ForbiddenRequestError = require('../errors/forbiddenRequestError')
 
 // @desc    Fetch all course
@@ -116,7 +115,7 @@ const courseSchema = {
         }),
         Joi.object({
           image: Joi.string().uri().required(),
-          description: Joi.string()
+          description: Joi.string().allow(null, '')
         })
       )
     )
