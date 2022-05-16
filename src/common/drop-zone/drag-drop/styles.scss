@@ -4,6 +4,7 @@
 
 .desktop-drag-and-drop-container {
   width: 100%;
+  cursor: pointer;
   border-radius: 4px;
   background-image: $dashed-border;
   @include flexColumn(center, center);
@@ -32,6 +33,10 @@
 
   &-reactangle {
     aspect-ratio: 1 / 2;
+  }
+
+  &:hover {
+    background-color: rgba($color: $color-black, $alpha: 0.7);
   }
 }
 

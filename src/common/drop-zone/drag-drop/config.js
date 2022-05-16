@@ -7,10 +7,12 @@ export const FileTypes = {
 };
 
 export const PlaceholderIcon = {
+  [ContentType.Image]: "camera",
   [ContentType.Material]: "file",
 };
 
 export const PlaceholderMobileTitle = {
+  [ContentType.Image]: "Add Image",
   [ContentType.Material]: "Add Material",
 };
 

@@ -69,6 +69,7 @@ export const MoreOption = {
   Review: "Review",
   Delete: "Delete",
   Archive: "Archive",
+  Statistic: "Statistic",
 };
 
 export const MoreOptionLabel = {
@@ -76,6 +77,7 @@ export const MoreOptionLabel = {
   [MoreOption.Review]: "Add Review",
   [MoreOption.Archive]: "Add to Archive",
   [MoreOption.Delete]: "Delete",
+  [MoreOption.Statistic]: "Statistic",
 };
 
 export const MoreOptionIcon = {
@@ -83,6 +85,7 @@ export const MoreOptionIcon = {
   [MoreOption.Review]: "message",
   [MoreOption.Archive]: "archive",
   [MoreOption.Delete]: "trash",
+  [MoreOption.Statistic]: "info",
 };
 
 export const MoreOptionVariant = {
@@ -90,4 +93,5 @@ export const MoreOptionVariant = {
   [MoreOption.Review]: "white",
   [MoreOption.Archive]: "white",
   [MoreOption.Delete]: "red",
+  [MoreOption.Statistic]: "white",
 };

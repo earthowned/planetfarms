@@ -14,7 +14,7 @@ import { model, validationSchema } from "./config";
 
 import "./styles.scss";
 
-const CourseForm = ({ initialValues, onSubmit, submitTitle }) => {
+const CourseForm = ({ initialValues, onSubmit, submitTitle, onRemove }) => {
   const history = useHistory();
 
   return (
@@ -61,6 +61,17 @@ const CourseForm = ({ initialValues, onSubmit, submitTitle }) => {
                 actions={["Image", "Text"]}
                 name={model.description.name}
               />
+
+              {onRemove && (
+                <div className="remove-button-container">
+                  <ActionButton
+                    icon="trash"
+                    onClick={onRemove}
+                    title="Remove Course"
+                    variant="transparent-red"
+                  />
+                </div>
+              )}
 
               <div className="buttons-section">
                 <ActionButton

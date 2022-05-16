@@ -3,47 +3,8 @@ import axios from "axios";
 import { useAlert } from "react-alert";
 
 import { api } from "api";
-// import { SortOption } from "constants/enums";
-// import { mockedCourses } from "utils/mocked";
 import { getErrorMessage } from "utils/error";
 import { useSearchBar } from "providers/search-bar";
-
-// const sortCoursesBy = ({ list = [], sortType }) => {
-//   return list.sort((a, b) => {
-//     switch (sortType) {
-//       case SortOption.Popular: {
-//         return b.members - a.members;
-//       }
-
-//       case SortOption.Cheap: {
-//         return a.price - b.price;
-//       }
-
-//       case SortOption.Expensive: {
-//         return b.price - a.price;
-//       }
-
-//       case SortOption.RateDescending: {
-//         return b.rating - a.rating;
-//       }
-
-//       case SortOption.RateAscending: {
-//         return a.rating - b.rating;
-//       }
-
-//       case SortOption.AlphabetDescending: {
-//         return a.title.localeCompare(b.title);
-//       }
-
-//       case SortOption.AlphabetAscending: {
-//         return b.title.localeCompare(a.title);
-//       }
-
-//       default:
-//         return a;
-//     }
-//   });
-// };
 
 export const useCoursesList = ({ filter, sort }) => {
   const alert = useAlert();
@@ -54,37 +15,51 @@ export const useCoursesList = ({ filter, sort }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [currentSort, setCurrentSort] = useState(null);
+  const [currentFilter, setCurrentFilter] = useState(null);
+
   const isLastPage = useMemo(() => page === totalPages, [page, totalPages]);
 
-  useEffect(() => {
+  const payload = useMemo(() => {
+    return {
+      page,
+      sort,
+      filter,
+      pageSize: 10,
+      search: searchValue || "",
+    };
+  }, [page, filter, sort, searchValue]);
+
+  useEffect(async () => {
     let cancel;
 
-    setIsLoading(true);
-
-    api.courses
-      .list({
-        page,
-        sort,
-        filter,
-        pageSize: 10,
-        search: searchValue || "",
+    try {
+      setIsLoading(true);
+      const response = await api.courses.list({
+        ...payload,
         cancelToken: new axios.CancelToken((c) => {
           cancel = c;
         }),
-      })
-      .then((response) => {
-        const { data: list, totalPages: pages } = response?.data || {};
-
-        setTotalPages(pages);
-        setCourses((prev) => [...prev, ...list]);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        if (!axios.isCancel(error)) {
-          alert.error(getErrorMessage(error));
-        }
       });
+
+      const { data: list, totalPages: pages } = response?.data || {};
+
+      if (filter !== currentFilter || sort !== currentSort) {
+        setCourses([...list]);
+      } else {
+        setCourses((prev) => [...prev, ...list]);
+      }
+
+      setIsLoading(false);
+      setTotalPages(pages);
+      setCurrentSort(sort);
+      setCurrentFilter(filter);
+    } catch (error) {
+      setIsLoading(false);
+      if (!axios.isCancel(error)) {
+        alert.error(getErrorMessage(error));
+      }
+    }
 
     return () => {
       if (cancel) cancel();

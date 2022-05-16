@@ -3,8 +3,6 @@
 
 .course-builder-container {
   width: 100%;
-  //   gap: $gap-big;
-  //   @include flexRow(auto, auto);
 
   .right-block {
     width: 100%;
@@ -20,6 +18,13 @@
     .switch-container {
       width: 100%;
       @include flexRow(flex-start, flex-start);
+    }
+
+    .remove-button-container {
+      .action-btn {
+        height: 24px;
+        width: fit-content;
+      }
     }
 
     .buttons-section {

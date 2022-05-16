@@ -44,9 +44,22 @@ export const updateCourseThunk =
       // dispatch(setIsLoading(true));
 
       const coursePayload = await Generator.course.create(values);
-      console.log("payload", coursePayload);
       const response = await api.courses.update({ id, ...coursePayload });
 
+      return Promise.resolve(response);
+    } catch (error) {
+      return Promise.reject(error);
+    } finally {
+      // dispatch(setIsLoading(false));
+    }
+  };
+
+export const deleteCourseThunk =
+  ({ id }) =>
+  async (dispatch) => {
+    try {
+      // dispatch(setIsLoading(true));
+      const response = await api.courses.remove({ id });
       return Promise.resolve(response);
     } catch (error) {
       return Promise.reject(error);

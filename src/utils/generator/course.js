@@ -59,8 +59,6 @@ export const create = async ({
       price: parseFloat(price).toFixed(2),
     };
 
-    console.log("thumbnail", thumbnail);
-
     const files = getImageFiles({ thumbnail, description });
 
     if (files.size > 0) {

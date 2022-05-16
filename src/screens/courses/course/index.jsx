@@ -3,19 +3,22 @@ import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
 import { TwoColumnsGrid } from "common/grids";
-import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
-import { ModalOptionsButton } from "common/buttons/modal-options-button";
 
 import { DashboardLayout } from "layout/dashboard";
 import { MembersBlock } from "components/courses/blocks";
-import { MeterialsBlock, ReviewsBlock, LessonsBlock } from "components/courses";
+import {
+  ReviewsBlock,
+  LessonsBlock,
+  MeterialsBlock,
+  CourseDescription,
+} from "components/courses";
 
+import { MoreOption } from "constants/enums";
 import { useCourse } from "hooks/courses/useCourse";
 import { selectCurrentUser } from "store/user/selectors";
 
 import { CourseMainInfo } from "./main-info";
-import { gridTemplateColumns, MoreOption, moreOptions } from "./config";
 import {
   getCourseReviews,
   getCourseLessons,
@@ -24,35 +27,7 @@ import {
 
 import "./styles.scss";
 
-const HeaderActionsBlock = ({
-  onMore,
-  isMyCourse,
-  onBuyCourse,
-  isPaidCourse,
-}) => {
-  if (isMyCourse)
-    return (
-      <ModalOptionsButton
-        icon="more"
-        options={moreOptions}
-        onOptionSelect={onMore}
-        variant="transparent-white"
-      />
-    );
-
-  if (isPaidCourse) {
-    return (
-      <ActionButton
-        disabled
-        variant="primary"
-        title="Buy course"
-        onClick={onBuyCourse}
-      />
-    );
-  }
-
-  return null;
-};
+const gridTemplateColumns = "1fr 248px";
 
 export const CoursePage = () => {
   const history = useHistory();
@@ -69,12 +44,18 @@ export const CoursePage = () => {
     [course, currentUser]
   );
 
-  const onBuyCourseClick = () => {};
+  const handleBuyCourse = () => {};
 
-  const onMoreOptionSelect = (option) => {
+  const handleMoreOptionSelect = (option) => {
     switch (option.value) {
       case MoreOption.Edit:
         history.push(`/courses/${id}/edit`);
+        break;
+
+      case MoreOption.Review:
+      case MoreOption.Archive:
+      case MoreOption.Statistic:
+        // TODO: Implement;
         break;
 
       default:
@@ -93,27 +74,31 @@ export const CoursePage = () => {
             title={course?.title}
             price={course?.price}
             isPaid={isPaidCourse}
-            avatar={course?.avatar}
+            isMyCourse={isMyCourse}
             rating={course?.rating}
             members={course?.members}
+            avatar={course?.thumbnail}
+            onMoreOptionSelect={handleMoreOptionSelect}
           />
 
-          <HeaderActionsBlock
-            isMyCourse={isMyCourse}
-            isPaidCourse={isPaidCourse}
-            onMore={onMoreOptionSelect}
-            onBuyCourse={onBuyCourseClick}
-          />
+          {!isMyCourse && !isPaidCourse && (
+            <ActionButton
+              disabled
+              variant="primary"
+              title="Buy course"
+              onClick={handleBuyCourse}
+            />
+          )}
         </TwoColumnsGrid>
 
         <TwoColumnsGrid templateColumns={gridTemplateColumns}>
-          <ContentBlocks contentList={course?.content} />
+          <CourseDescription description={course?.description} />
         </TwoColumnsGrid>
 
         <MembersBlock
-          list={course?.membersList}
-          onSelectMember={() => {}}
           onViewAll={() => {}}
+          onSelectMember={() => {}}
+          list={course?.membersList}
         />
 
         <TwoColumnsGrid reverseMobile templateColumns={gridTemplateColumns}>

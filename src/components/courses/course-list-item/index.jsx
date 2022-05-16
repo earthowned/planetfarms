@@ -26,7 +26,7 @@ export const CoursesListItem = forwardRef(
   ) => {
     const priceComponent = () => {
       if (variant !== CourseListType.All) return null;
-      const coursePrice = price ? Number(price) / 100 : "0.00";
+      const coursePrice = price ? parseFloat(price).toFixed(2) : "0.00";
       return <h4 className="price">{`$${coursePrice}`}</h4>;
     };
 

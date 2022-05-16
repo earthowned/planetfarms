@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { Avatar } from "common/avatar";
 import { StarsRating } from "common/stars-rating";
 import { TabletUp, LaptopUp } from "common/responsive";
@@ -8,11 +10,6 @@ import { createMoreOption } from "utils/createMoreOption";
 
 import "./styles.scss";
 
-const moreOptions = [
-  createMoreOption(MoreOption.Review),
-  createMoreOption(MoreOption.Archive),
-];
-
 export const CourseMainInfo = ({
   title,
   price,
@@ -20,19 +17,30 @@ export const CourseMainInfo = ({
   rating,
   isPaid,
   members,
-  onAddReview,
-  onAddToArchive,
+  isMyCourse,
+  onMoreOptionSelect,
 }) => {
   const coursePrice = price
-    ? `$${parseFloat(parseFloat(price) / 100).toFixed(2)}`
+    ? `$${parseFloat(parseFloat(price)).toFixed(2)}`
     : "$00.00";
 
-  const courseMembers = `${members || 0} people tried`;
+  const courseMembers = `${members?.length || 0} people tried`;
 
-  const handleMoreOptionClick = (option) => {
-    if (option === MoreOption.Review && onAddReview) onAddReview();
-    if (option === MoreOption.Archive && onAddToArchive) onAddToArchive();
-  };
+  const moreOptions = useMemo(() => {
+    if (isMyCourse)
+      return [
+        createMoreOption(MoreOption.Edit),
+        createMoreOption(MoreOption.Statistic),
+      ];
+
+    if (isPaid)
+      return [
+        createMoreOption(MoreOption.Review),
+        createMoreOption(MoreOption.Archive),
+      ];
+
+    return [];
+  }, [isPaid, isMyCourse]);
 
   return (
     <div className="course-main-info-container">
@@ -48,12 +56,12 @@ export const CourseMainInfo = ({
             <h4>{title}</h4>
           </TabletUp>
 
-          {isPaid && (
+          {moreOptions.length > 0 && (
             <ModalOptionsButton
               icon="more"
               options={moreOptions}
               variant="transparent-white"
-              onOptionSelect={handleMoreOptionClick}
+              onOptionSelect={onMoreOptionSelect}
             />
           )}
         </div>
