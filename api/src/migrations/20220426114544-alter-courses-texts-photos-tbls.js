@@ -27,13 +27,9 @@ module.exports = {
     await queryInterface.removeColumn('courses', 'categoryId')
     await queryInterface.renameColumn('photos', 'photoDescription', 'description')
     await queryInterface.renameColumn('photos', 'lessonImg', 'image')
-    await queryInterface.renameColumn('texts', 'textHeading', 'heading')
-    await queryInterface.renameColumn('texts', 'textDescription', 'description')
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.renameColumn('texts', 'description', 'textDescription')
-    await queryInterface.renameColumn('texts', 'heading', 'textHeading')
     await queryInterface.renameColumn('photos', 'image', 'lessonImg')
     await queryInterface.renameColumn('photos', 'description', 'photoDescription')
     await queryInterface.addColumn('courses', 'categoryId', Sequelize.INTEGER)

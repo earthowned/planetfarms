@@ -76,6 +76,10 @@ const getCourses = async (req, res) => {
           attributes: ['isEnroll']
         }
       },
+      {
+        model: db.RichText,
+        include: [db.Text, db.Photo]
+      }
     ],
     where: {
       ...(search ? { title: { [Op.iLike]: `%${search}%` } } : {}),
@@ -91,6 +95,7 @@ const getCourses = async (req, res) => {
   //     lesson.coverImg = changeFormat(lesson.coverImg)
   //   })
   // })
+  courses.rows = courses.rows.map(formatCourse)
   res.status(200).json({
     message: 'Fetched courses successfully',
     ...paginatedResponse({ data: courses, pageSize, pageNumber })
@@ -133,8 +138,8 @@ const formatCourse = (course) => {
       }
 
       return {
-        heading: item.heading,
-        text: item.description
+        heading: item.textHeading,
+        text: item.textDescription
       }
     })
 
@@ -180,8 +185,8 @@ const createRichtextData = async (data, transaction) => {
 
       return db.Text.create({
         richtextId,
-        heading: item.heading,
-        description: item.text,
+        textHeading: item.heading,
+        textDescription: item.text,
         order: index + 1
       }, {
         transaction
