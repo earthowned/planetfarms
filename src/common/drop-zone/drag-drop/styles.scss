@@ -31,21 +31,37 @@
     aspect-ratio: 1 / 1;
   }
 
-  &-reactangle {
-    aspect-ratio: 1 / 2;
+  &-rectangle {
+    aspect-ratio: 3 / 1;
   }
 
   &:hover {
     background-color: rgba($color: $color-black, $alpha: 0.7);
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    &-square {
+      aspect-ratio: 2 / 1;
+    }
+
+    &-rectangle {
+      aspect-ratio: 2 / 1;
+    }
   }
 }
 
 .mobile-drag-and-drop-container {
   width: 100%;
   height: 56px;
+  cursor: pointer;
   gap: $gap-smallest;
   @include flexRow(center, center);
   background-color: rgba($color: $color-white, $alpha: 0.1);
+
+  .placeholder-container {
+    gap: $gap-smallest;
+    @include flexRow(center, center);
+  }
 
   &-error {
     @include setSvgColor($color-red);
@@ -53,5 +69,9 @@
       color: $color-red;
       user-select: none;
     }
+  }
+
+  &:hover {
+    background-color: rgba($color: $color-white, $alpha: 0.05);
   }
 }

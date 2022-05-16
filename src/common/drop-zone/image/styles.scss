@@ -4,6 +4,7 @@
 
 .image-drag-drop-container {
   width: 100%;
+  padding: 2px;
   overflow: hidden;
   position: relative;
   border-radius: 4px;
@@ -13,6 +14,8 @@
   .image-container {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
     @include flexColumn(center, center);
 
     img {
@@ -38,14 +41,33 @@
   }
 
   &-rectangle {
-    aspect-ratio: 4 / 1;
-  }
-
-  @include breakpoint("tablet", "minMax") {
     aspect-ratio: 3 / 1;
   }
 
+  @include breakpoint("tablet", "minMax") {
+    &-square {
+      aspect-ratio: 1 / 1;
+    }
+
+    &-rectangle {
+      aspect-ratio: 2 / 1;
+    }
+  }
+
   @include breakpoint("mobile", "minMax") {
-    aspect-ratio: 1 / 1;
+    &-square {
+      aspect-ratio: 1 / 1;
+    }
+
+    &-rectangle {
+      aspect-ratio: 2 / 1;
+    }
+
+    .buttons-container {
+      .pf-icon-btn {
+        width: 40px;
+        height: 40px;
+      }
+    }
   }
 }

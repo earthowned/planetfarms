@@ -49,7 +49,7 @@ export const CoursesListItem = forwardRef(
         <div className="content-container">
           <div className="top-container">
             <p className="course-title-text">{title}</p>
-            <StarsRating rate={rating} />
+            <StarsRating rate={rating || 0} />
           </div>
 
           <div className="bottom-container">

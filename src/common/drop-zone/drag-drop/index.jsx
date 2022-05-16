@@ -3,7 +3,7 @@ import cx from "classnames";
 import { useDropzone } from "react-dropzone";
 
 import { Icon } from "common/icon";
-import { Mobile, Tablet, LaptopUp } from "common/responsive";
+import { TabletUp, LaptopUp } from "common/responsive";
 
 import { FileTypes, PlaceholderMobileTitle, PlaceholderIcon } from "./config";
 
@@ -48,22 +48,22 @@ export const DragAndDropZone = ({
 
   return (
     <>
-      <Mobile>
+      <TabletUp>
         <div
           className={getClassName("mobile-drag-and-drop-container")}
           {...getRootProps()}
         >
           <input {...getInputProps()} />
-          <>
+          <div className="placeholder-container">
             <Icon icon={PlaceholderIcon[type]} />
             <h4>{PlaceholderMobileTitle[type]}</h4>
-          </>
+          </div>
         </div>
-      </Mobile>
+      </TabletUp>
 
-      <Tablet>
+      {/* <Tablet>
         <div
-          className={getClassName("desktop-drag-and-drop-container")}
+          className={getClassName("mobile-drag-and-drop-container")}
           {...getRootProps()}
         >
           <input {...getInputProps()} />
@@ -72,7 +72,7 @@ export const DragAndDropZone = ({
             <h4>Click Here to attach</h4>
           </>
         </div>
-      </Tablet>
+      </Tablet> */}
 
       <LaptopUp>
         <div

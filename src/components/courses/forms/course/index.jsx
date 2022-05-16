@@ -57,6 +57,7 @@ const CourseForm = ({ initialValues, onSubmit, submitTitle, onRemove }) => {
               </div>
 
               <ContentBuilderField
+                isFromCourse
                 label="Description"
                 actions={["Image", "Text"]}
                 name={model.description.name}

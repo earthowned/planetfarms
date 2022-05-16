@@ -7,7 +7,7 @@ import { Actions } from "./actions";
 
 import "./styles.scss";
 
-const ContentBuilderField = ({ actions = [], name, label }) => {
+const ContentBuilderField = ({ actions = [], name, label, isFromCourse }) => {
   const [field] = useField(name);
 
   if (!name) return null;
@@ -35,6 +35,7 @@ const ContentBuilderField = ({ actions = [], name, label }) => {
                 return (
                   <Blocks.Image
                     name={fieldName}
+                    isFromCourse={isFromCourse}
                     onRemove={() => remove(index)}
                     key={`picture-field-block-${index.toString()}`}
                   />
