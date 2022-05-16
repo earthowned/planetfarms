@@ -4,6 +4,7 @@
 
 .image-drag-drop-container {
   width: 100%;
+  overflow: hidden;
   position: relative;
   border-radius: 4px;
   background-image: $dashed-border;

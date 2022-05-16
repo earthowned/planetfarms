@@ -5,16 +5,24 @@ import { ContentBuilderAction } from "constants/enums";
 const getImageFiles = ({ thumbnail, description }) => {
   const images = new Map();
 
+  // console.log("thumbnail", thumbnail);
+  // console.log("description", description);
+
   if (isFileInstanse(thumbnail)) {
     images.set(0, thumbnail);
   }
 
+  // console.log("image_before_for_each", images);
+
   description.forEach(({ type, data }, index) => {
     if (type === ContentBuilderAction.Image) {
-      const { lessonImg } = data;
-      if (isFileInstanse(lessonImg)) images.set(index + 1, lessonImg);
+      if (isFileInstanse(data.lessonImg)) {
+        images.set(index + 1, data.lessonImg);
+      }
     }
   });
+
+  // console.log(images);
 
   return images;
 };
@@ -32,9 +40,10 @@ const generateDescription = ({ description, imageUrls }) => {
         const { lessonImg, photoDescription } = data;
 
         let image = lessonImg;
+        // console.log(image);
         if (isFileInstanse(lessonImg)) image = imageUrls.get(index + 1);
 
-        return { image, description: photoDescription };
+        return { image, description: photoDescription || "" };
       }
 
       default: {
@@ -60,17 +69,35 @@ export const create = async ({
     };
 
     const files = getImageFiles({ thumbnail, description });
+    console.log(files, files.size);
 
     if (files.size > 0) {
       const formData = createFormData([...files.values()]);
       const imageUrls = await api.courses.uploadImages(formData);
+      console.log("urls", imageUrls);
 
       // Update files Map with received URL's;
       imageUrls.forEach((url, index) => {
         const isThumbnail = files.has(0) && index === 0;
-        files.set(isThumbnail ? index : index + 1, url);
+
+        if (isThumbnail) {
+          files.set(0, url);
+        } else {
+          files.forEach((value, key) => {
+            if (isFileInstanse(value)) files.set(key, url);
+          });
+        }
+
+        // if (index === 0 && withThumbnail) files.set(0, url);
+        // else files.set(withThumbnail ? index + 1 : index + 2, url);
+
+        // const isThumbnail = files.has(0) && index === 0;
+        // console.log(isThumbnail, index);
+        // files.set(isThumbnail ? index : index + 1, url);
       });
     }
+
+    console.log("files_uploaded", files);
 
     payload.thumbnail = files.get(0) || thumbnail;
     payload.description = generateDescription({

@@ -36,6 +36,20 @@ export const CoursesListPage = () => {
     isLastPage,
   });
 
+  const getPrviewDesription = (description = []) => {
+    let text = "";
+
+    description.every((item) => {
+      if (item.text) {
+        text = item.text;
+        return false;
+      }
+      return true;
+    });
+
+    return text;
+  };
+
   return (
     <DashboardLayout title="Courses">
       <div className="courses-list-page">
@@ -70,9 +84,9 @@ export const CoursesListPage = () => {
               avatar={item.thumbnail}
               progress={item.progress}
               category={item.category}
-              description={item.description}
               key={`courses-list-item-${item.id}`}
               variant={CourseListItemVariants[selectedIndex]}
+              description={getPrviewDesription(item.description)}
               onClick={() => history.push(`/courses/${item.id}`)}
               ref={
                 index === courses.length - 1

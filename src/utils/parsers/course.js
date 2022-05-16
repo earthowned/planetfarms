@@ -12,14 +12,20 @@ export const initialValues = (course) => {
       if (item.heading || item.text) {
         return {
           type: "Text",
-          data: { textDescription: item.text, textHeading: item.heading },
+          data: {
+            textHeading: item.heading || "",
+            textDescription: item.text || "",
+          },
         };
       }
 
       if (item.image) {
         return {
           type: "Image",
-          data: { lessonImg: item.image, photoDescription: item.description },
+          data: {
+            lessonImg: item.image,
+            photoDescription: item.description || "",
+          },
         };
       }
 
