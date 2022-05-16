@@ -1,6 +1,8 @@
+import { api } from "api";
+import { Generator } from "utils/generator";
 import { mockedCourses } from "utils/mocked";
 
-import { createCourse, setCourses } from "./slice";
+import { setCourses } from "./slice";
 
 // const CourseFilterType = {
 //   Browse: "Browse",
@@ -20,22 +22,48 @@ export const getCoursesThunk = () => async (dispatch) => {
   }
 };
 
-export const createCourseThunk =
-  ({ avatar, title, price, content, isPublished }) =>
+export const createCourseThunk = (values) => async (dispatch) => {
+  try {
+    // dispatch(setIsLoading(true));
+
+    const coursePayload = await Generator.course.create(values);
+    const response = await api.courses.create(coursePayload);
+
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error);
+  } finally {
+    // dispatch(setIsLoading(false));
+  }
+};
+
+export const updateCourseThunk =
+  ({ id, ...values }) =>
   async (dispatch) => {
     try {
-      const createdCourse = {
-        title,
-        price,
-        content,
-        isPublished,
-        createdAt: new Date(),
-        avatar: avatar ? URL.createObjectURL(avatar) : null,
-      };
+      // dispatch(setIsLoading(true));
 
-      dispatch(createCourse(createdCourse));
-      return Promise.resolve();
+      const coursePayload = await Generator.course.create(values);
+      const response = await api.courses.update({ id, ...coursePayload });
+
+      return Promise.resolve(response);
     } catch (error) {
       return Promise.reject(error);
+    } finally {
+      // dispatch(setIsLoading(false));
+    }
+  };
+
+export const deleteCourseThunk =
+  ({ id }) =>
+  async (dispatch) => {
+    try {
+      // dispatch(setIsLoading(true));
+      const response = await api.courses.remove({ id });
+      return Promise.resolve(response);
+    } catch (error) {
+      return Promise.reject(error);
+    } finally {
+      // dispatch(setIsLoading(false));
     }
   };

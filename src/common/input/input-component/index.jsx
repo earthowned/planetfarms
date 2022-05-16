@@ -30,7 +30,7 @@ export const InputComponent = ({
     return (
       <CurrencyInput
         prefix="$"
-        maxLength={4}
+        maxLength={5}
         onValueChange={(value) => onChange(value)}
         {...props}
       />

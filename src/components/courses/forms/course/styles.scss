@@ -1,0 +1,48 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.course-builder-container {
+  width: 100%;
+
+  .right-block {
+    width: 100%;
+    gap: $gap-big;
+    @include flexColumn(auto, auto);
+
+    .section-block {
+      width: 100%;
+      gap: $gap-medium;
+      @include flexColumn(center, flex-start);
+    }
+
+    .switch-container {
+      width: 100%;
+      @include flexRow(flex-start, flex-start);
+    }
+
+    .remove-button-container {
+      .action-btn {
+        height: 24px;
+        width: fit-content;
+      }
+    }
+
+    .buttons-section {
+      @include flexRow(center, space-between);
+      button {
+        width: 152px;
+      }
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    .buttons-section {
+      width: 100%;
+      gap: $gap-medium;
+      @include flexColumn(center, flex-start);
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -3,18 +3,15 @@ import { useField } from "formik";
 import "./styles.scss";
 
 export const Switch = ({
+  value,
   leftLabel,
   rightLabel,
   onChangeValue,
-  value = false,
   name = "switch",
   disabled = false,
 }) => {
   const handleClick = () => {
-    if (!disabled && onChangeValue) {
-      const currentValue = !!value;
-      onChangeValue(!currentValue);
-    }
+    if (!disabled && onChangeValue) onChangeValue(!value);
   };
 
   return (
@@ -24,9 +21,10 @@ export const Switch = ({
       <input
         id={name}
         name={name}
+        checked={value}
         type="checkbox"
         disabled={disabled}
-        defaultChecked={!!value}
+        onChange={handleClick}
         className="switch-input"
       />
 
@@ -56,7 +54,7 @@ export const SwitchField = ({
       leftLabel={leftLabel}
       rightLabel={rightLabel}
       labelPosition={labelPosition}
-      onChangeValue={helpers.setValue}
+      onChangeValue={() => helpers.setValue(!field.value)}
     />
   );
 };

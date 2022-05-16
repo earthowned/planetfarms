@@ -15,6 +15,7 @@
 
   button {
     width: 100%;
+    flex-shrink: 0;
   }
 
   @include breakpoint("tablet", "max") {

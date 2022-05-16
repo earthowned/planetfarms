@@ -6,6 +6,7 @@ import { InputField } from "common/input";
 import { TextAreaField } from "common/text-area";
 import { IconButton } from "common/buttons/icon-button";
 import { DragDropZoneField } from "common/drag-drop-zone";
+import { ImageDragAndDropZoneField } from "common/drop-zone";
 
 import { isFileInstanse } from "utils/parsers/file";
 import { parseArticleVideo } from "utils/parsers/news";
@@ -47,14 +48,21 @@ export const Text = ({ name, onRemove }) => {
   );
 };
 
-export const Image = ({ name, onRemove }) => {
+export const Image = ({ name, onRemove, isFromCourse }) => {
   return (
     <FieldBlock title="Picture Field" onRemove={onRemove}>
-      <DragDropZoneField
-        type="Image"
-        downloadUrl={LESSON_IMG}
-        name={`${name}.lessonImg`}
-      />
+      {isFromCourse ? (
+        <ImageDragAndDropZoneField
+          sizeType="rectangle"
+          name={`${name}.lessonImg`}
+        />
+      ) : (
+        <DragDropZoneField
+          type="Image"
+          downloadUrl={LESSON_IMG}
+          name={`${name}.lessonImg`}
+        />
+      )}
 
       <InputField
         name={`${name}.photoDescription`}

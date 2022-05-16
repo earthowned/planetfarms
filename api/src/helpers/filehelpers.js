@@ -23,6 +23,26 @@ const storage = multer.diskStorage({
   }
 })
 
+const storageWithDestinationMapping = (mapping) =>
+  multer.diskStorage({
+    destination: function (req, file, cb) {
+      const { fieldname } = file
+      const dir = path.join(
+        path.dirname(__dirname),
+        '..',
+        'files',
+        mapping[fieldname] || fieldname
+      )
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir)
+      }
+      cb(null, dir)
+    },
+    filename: function (req, file, cb) {
+      cb(null, shortid.generate() + path.extname(file.originalname).toLowerCase())
+    }
+  })
+
 function checkFileType (file, cb) {
   const filetypes = /jpg|jpeg|png|mp4|mov|pdf|doc|docx|ppt|pptx|txt|xlsx/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
@@ -41,6 +61,14 @@ const upload = multer({
     checkFileType(file, cb)
   }
 })
+
+const uploadWithMapping = (mapping) =>
+  multer({
+    storage: storageWithDestinationMapping(mapping),
+    fileFilter: function (req, file, cb) {
+      checkFileType(file, cb)
+    }
+  })
 
 const multipleUpload = upload.fields([
   { name: 'avatar' },
@@ -101,7 +129,8 @@ module.exports = {
   multipleUpload,
   uploadArray,
   upload,
+  uploadWithMapping,
   resizeImage,
   changeFormat,
-  storage
+  storage,
 }

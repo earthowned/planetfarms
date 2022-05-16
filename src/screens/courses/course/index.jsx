@@ -1,22 +1,28 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { TwoColumnsGrid } from "common/grids";
-import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
-import { MembersBlock } from "components/courses/blocks";
-import { MeterialsBlock, ReviewsBlock, LessonsBlock } from "components/courses";
 
 import { DashboardLayout } from "layout/dashboard";
-import { selectCurrentCourse } from "store/courses";
-// import { selectCurrentUser } from "store/user/selectors";
+import { MembersBlock } from "components/courses/blocks";
+import {
+  ReviewsBlock,
+  LessonsBlock,
+  MeterialsBlock,
+  CourseDescription,
+} from "components/courses";
+
+import { MoreOption } from "constants/enums";
+import { useCourse } from "hooks/courses/useCourse";
+import { selectCurrentUser } from "store/user/selectors";
 
 import { CourseMainInfo } from "./main-info";
 import {
-  getCourseMatarials,
   getCourseReviews,
   getCourseLessons,
+  getCourseMatarials,
 } from "./helpers";
 
 import "./styles.scss";
@@ -24,17 +30,38 @@ import "./styles.scss";
 const gridTemplateColumns = "1fr 248px";
 
 export const CoursePage = () => {
+  const history = useHistory();
+  const currentUser = useSelector(selectCurrentUser);
+
   const { id } = useParams();
-  const course = useSelector((state) => selectCurrentCourse(state, id));
-  // const currentUser = useSelector(selectCurrentUser);
+  const { course } = useCourse({ id });
 
   // TODO: Check course.isPaid === true;
   const isPaidCourse = useMemo(() => id === "0", [id]);
 
-  // TODO: Check course.author === currentUser.id;
-  const isMyCourse = useMemo(() => id === "0", [id]);
+  const isMyCourse = useMemo(
+    () => currentUser?.userID === course?.creator?.userID,
+    [course, currentUser]
+  );
 
   const handleBuyCourse = () => {};
+
+  const handleMoreOptionSelect = (option) => {
+    switch (option.value) {
+      case MoreOption.Edit:
+        history.push(`/courses/${id}/edit`);
+        break;
+
+      case MoreOption.Review:
+      case MoreOption.Archive:
+      case MoreOption.Statistic:
+        // TODO: Implement;
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <DashboardLayout withBackButton>
@@ -47,12 +74,14 @@ export const CoursePage = () => {
             title={course?.title}
             price={course?.price}
             isPaid={isPaidCourse}
-            avatar={course?.avatar}
+            isMyCourse={isMyCourse}
             rating={course?.rating}
             members={course?.members}
+            avatar={course?.thumbnail}
+            onMoreOptionSelect={handleMoreOptionSelect}
           />
 
-          {!isPaidCourse && !isMyCourse && (
+          {!isMyCourse && !isPaidCourse && (
             <ActionButton
               disabled
               variant="primary"
@@ -63,13 +92,13 @@ export const CoursePage = () => {
         </TwoColumnsGrid>
 
         <TwoColumnsGrid templateColumns={gridTemplateColumns}>
-          <ContentBlocks contentList={course?.content} />
+          <CourseDescription description={course?.description} />
         </TwoColumnsGrid>
 
         <MembersBlock
-          list={course?.membersList}
-          onSelectMember={() => {}}
           onViewAll={() => {}}
+          onSelectMember={() => {}}
+          list={course?.membersList}
         />
 
         <TwoColumnsGrid reverseMobile templateColumns={gridTemplateColumns}>
@@ -80,9 +109,8 @@ export const CoursePage = () => {
 
           <div className="column-container">
             <MeterialsBlock
-              isEditMode={false}
+              isEditMode={isMyCourse}
               materials={getCourseMatarials(id)}
-              // isEditMode={course?.author === currentUser?.id}
             />
 
             <ReviewsBlock reviews={getCourseReviews(id)} />

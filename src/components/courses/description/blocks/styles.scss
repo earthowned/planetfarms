@@ -20,7 +20,7 @@
 
   .image-container {
     width: 100%;
-    max-height: 368px;
+    height: 368px;
     display: flex;
     overflow: hidden;
     border-radius: 4px;
@@ -29,6 +29,13 @@
     img {
       width: 100%;
       object-fit: cover;
+    }
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    .image-container {
+      height: unset;
+      aspect-ratio: 2 / 1;
     }
   }
 }

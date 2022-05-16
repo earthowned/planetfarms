@@ -59,6 +59,7 @@ import { ReactComponent as DownloadIcon } from "assets/icons/download.svg";
 import { ReactComponent as CheckmarkRoundIcon } from "assets/icons/checkmark-round.svg";
 import { ReactComponent as MessageIcon } from "assets/icons/message.svg";
 import { ReactComponent as ArchiveIcon } from "assets/icons/archive.svg";
+import { ReactComponent as InfoIcon } from "assets/icons/info.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -116,6 +117,9 @@ const getIcon = (iconName) => {
 
     case "email":
       return <EmailIcon />;
+
+    case "info":
+      return <InfoIcon />;
 
     case "gamburger":
       return <GamburgerIcon />;
