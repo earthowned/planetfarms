@@ -24,7 +24,8 @@ export const TestsBlock = ({
         imageSize="big"
         variant="Tests"
         onAdd={onAddTest}
-        isAddButtonVisible={isMyLesson}
+        isAddButtonVisible
+        // isAddButtonVisible={isMyLesson}
         isImageVisible={tests.length === 0}
       >
         {tests.length > 0 && (

@@ -7,3 +7,6 @@ export { CreateCoursePage } from "./create-course";
 // Lessons
 export { LessonPage } from "./lesson";
 export { CreateLessonPage } from "./create-lesson";
+
+// Tests
+export { CreateTestPage } from "./create-test";

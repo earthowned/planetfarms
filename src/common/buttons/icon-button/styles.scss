@@ -235,4 +235,32 @@
       @include setSvgColor($color-yellow-active);
     }
   }
+
+  &-checkmark-grey {
+    background-color: $color-dark-white;
+
+    &:hover:enabled {
+      background-color: $color-dark-white-hover;
+      // @include setSvgColor($color-yellow-hover);
+    }
+
+    &:active:enabled {
+      background-color: $color-dark-white-active;
+      // @include setSvgColor($color-yellow-active);
+    }
+  }
+
+  &-checkmark-green {
+    border: 1px solid $color-green;
+    @include setSvgColor($color-green);
+    background-color: $color-dark-green;
+
+    &:hover:enabled {
+      background-color: $color-dark-green-hover;
+    }
+
+    &:active:enabled {
+      background-color: $color-dark-green-active;
+    }
+  }
 }

@@ -1,0 +1,41 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.question-container {
+  width: 100%;
+  gap: $gap-small;
+  @include flexColumn();
+
+  .header-container {
+    width: 100%;
+    @include flexRow(center, space-between);
+
+    h4 {
+      color: $color-grey;
+    }
+  }
+
+  .answer-container {
+    width: 100%;
+    gap: $gap-small;
+    @include flexRow(center, center);
+
+    .pf-icon-btn {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+    }
+
+    .title-block {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      @include flexColumn(center, center);
+
+      border-radius: 4px;
+      background-color: rgba(20, 20, 20, 0.8);
+      border: 1px solid $color-secondary-white;
+    }
+  }
+}

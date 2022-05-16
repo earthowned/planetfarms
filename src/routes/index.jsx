@@ -54,6 +54,9 @@ import {
   // Lessons
   LessonPage,
   CreateLessonPage,
+
+  // Tests
+  CreateTestPage,
 } from "../screens/courses";
 
 // Messanger
@@ -149,6 +152,11 @@ export const Routes = () => {
         exact
         component={LessonPage}
         path={PathRoutes.Courses.Lesson}
+      />
+      <PrivateRoute
+        exact
+        component={CreateTestPage}
+        path={PathRoutes.Courses.CreateTest}
       />
 
       {/* <PrivateRoute component={CommunityPagenews} exact path="/news1" /> */}

@@ -1,309 +1,309 @@
-.question-modal-container {
-  position: fixed;
-  width: 100%;
-  background: var(--background-color-modal);
-  height: 100%;
-  z-index: 5005;
-  color: var(--primary-white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// .question-modal-container {
+//   position: fixed;
+//   width: 100%;
+//   background: var(--background-color-modal);
+//   height: 100%;
+//   z-index: 5005;
+//   color: var(--primary-white);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-  .question-modal-inner-container {
-    width: 80%;
-    height: auto;
-    background: var(--cards);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-around;
-    overflow-y: scroll;
+//   .question-modal-inner-container {
+//     width: 80%;
+//     height: auto;
+//     background: var(--cards);
+//     padding: 24px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     justify-content: space-around;
+//     overflow-y: scroll;
 
-    .question-modal-header {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+//     .question-modal-header {
+//       width: 100%;
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
 
-      h4 {
-        margin-bottom: 16px;
-      }
+//       h4 {
+//         margin-bottom: 16px;
+//       }
 
-      img {
-        cursor: pointer;
-      }
-    }
+//       img {
+//         cursor: pointer;
+//       }
+//     }
 
-    .question-form-conatiner {
-      width: 100%;
+//     .question-form-conatiner {
+//       width: 100%;
 
-      .input-container {
-        width: 100%;
-        margin-bottom: 12px;
-      }
+//       .input-container {
+//         width: 100%;
+//         margin-bottom: 12px;
+//       }
 
-      .option-answers {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 12px 0;
+//       .option-answers {
+//         display: flex;
+//         flex-wrap: wrap;
+//         margin: 12px 0;
 
-        .question-modal-options {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 48%;
-          margin-bottom: 12px;
+//         .question-modal-options {
+//           display: flex;
+//           align-items: center;
+//           justify-content: space-between;
+//           width: 48%;
+//           margin-bottom: 12px;
 
-          input {
-            width: 90%;
-          }
+//           input {
+//             width: 90%;
+//           }
 
-          img {
-            cursor: pointer;
-          }
-        }
-      }
-    }
-  }
-}
+//           img {
+//             cursor: pointer;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
-.add-test-container {
-  width: 100%;
-  position: relative;
-  margin-top: 24px;
+// .add-test-container {
+//   width: 100%;
+//   position: relative;
+//   margin-top: 24px;
 
-  .add-test-inner-container {
-    margin-top: 40px;
-    width: 100%;
-  }
-}
+//   .add-test-inner-container {
+//     margin-top: 40px;
+//     width: 100%;
+//   }
+// }
 
-.test-answers-wrapper {
-  width: 100%;
-}
+// .test-answers-wrapper {
+//   width: 100%;
+// }
 
-.test-correct-answer {
-  width: 45%;
+// .test-correct-answer {
+//   width: 45%;
 
-  @media only screen and (max-width: 767px) {
-    width: 100%;
-  }
-}
+//   @media only screen and (max-width: 767px) {
+//     width: 100%;
+//   }
+// }
 
-.option-answers {
-  margin-bottom: 24px;
+// .option-answers {
+//   margin-bottom: 24px;
 
-  .incorrect-option {
-    margin: 12px 0;
-  }
+//   .incorrect-option {
+//     margin: 12px 0;
+//   }
 
-  button {
-    outline: none;
-    border: none;
-    background: none;
-    display: flex;
-    align-items: center;
-    color: var(--primary-color);
-    height: 24px;
-    cursor: pointer;
-    margin: 12px 0;
-  }
+//   button {
+//     outline: none;
+//     border: none;
+//     background: none;
+//     display: flex;
+//     align-items: center;
+//     color: var(--primary-color);
+//     height: 24px;
+//     cursor: pointer;
+//     // margin: 12px 0;
+//   }
 
-  span {
-    margin-left: 8px;
-  }
-}
+//   span {
+//     margin-left: 8px;
+//   }
+// }
 
-.test-correct-answer > h4 {
-  color: var(--primary-white);
-}
+// .test-correct-answer > h4 {
+//   color: var(--primary-white);
+// }
 
-.questions-btn-contaianer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 14px;
+// .questions-btn-contaianer {
+//   width: 100%;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-top: 14px;
 
-  button {
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 48px;
-    outline: none;
-    padding: 1em;
-    border-radius: 4px;
-    background: var(--background-color-light);
-    color: var(--primary-white);
-    border: 0.5px solid var(--primary-white);
-    font-weight: 400;
-    cursor: pointer;
-    text-align: center;
-    text-transform: capitalize;
-  }
-}
+//   button {
+//     width: 40%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     flex-direction: column;
+//     height: 48px;
+//     outline: none;
+//     padding: 1em;
+//     border-radius: 4px;
+//     background: var(--background-color-light);
+//     color: var(--primary-white);
+//     border: 0.5px solid var(--primary-white);
+//     font-weight: 400;
+//     cursor: pointer;
+//     text-align: center;
+//     text-transform: capitalize;
+//   }
+// }
 
-.question-answer-container {
-  width: 100%;
-  position: relative;
-  margin-bottom: 10px;
+// .question-answer-container {
+//   width: 100%;
+//   position: relative;
+//   margin-bottom: 10px;
 
-  .test-error {
-    position: absolute;
-    top: -30px;
-  }
+//   .test-error {
+//     position: absolute;
+//     top: -30px;
+//   }
 
-  .question-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+//   .question-header {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
 
-    .question-title {
-      margin: 20px 0;
-      color: var(--primary-grey);
-    }
+//     .question-title {
+//       margin: 20px 0;
+//       color: var(--primary-grey);
+//     }
 
-    img {
-      cursor: pointer;
-    }
-  }
-}
+//     img {
+//       cursor: pointer;
+//     }
+//   }
+// }
 
-.question-container {
-  width: 100%;
+// .question-container {
+//   width: 100%;
 
-  // p {
-  //   color: var(--secondary-red);
-  //   margin-bottom: 8px;
-  // }
-}
+//   // p {
+//   //   color: var(--secondary-red);
+//   //   margin-bottom: 8px;
+//   // }
+// }
 
-.question-container input {
-  border-radius: 4px;
-}
+// .question-container input {
+//   border-radius: 4px;
+// }
 
-.question-container button {
-  outline: none;
-  border: none;
-  background: none;
-  display: flex;
-  align-items: center;
-  color: var(--primary-color);
-  height: 24px;
-  cursor: pointer;
-  margin-top: 12px;
-}
+// .question-container button {
+//   outline: none;
+//   border: none;
+//   background: none;
+//   display: flex;
+//   align-items: center;
+//   color: var(--primary-color);
+//   height: 24px;
+//   cursor: pointer;
+//   // margin-top: 12px;
+// }
 
-.question-container button h4 {
-  margin-left: 8px;
-}
+// .question-container button h4 {
+//   margin-left: 8px;
+// }
 
-.test-answers-wrapper {
-  margin: 20px 0;
+// .test-answers-wrapper {
+//   margin: 20px 0;
 
-  .test-answer-input-field {
-    display: flex;
-    align-items: center;
+//   .test-answer-input-field {
+//     display: flex;
+//     align-items: center;
 
-    img {
-      margin-left: 12px;
-      cursor: pointer;
-    }
-  }
-}
+//     img {
+//       margin-left: 12px;
+//       cursor: pointer;
+//     }
+//   }
+// }
 
-.test-correct-answer {
-  margin-bottom: 12px;
-}
+// .test-correct-answer {
+//   margin-bottom: 12px;
+// }
 
-.test-correct-answer input {
-  margin: 8px 0;
-  height: 48px;
-  border-radius: 4px;
-}
+// .test-correct-answer input {
+//   margin: 8px 0;
+//   height: 48px;
+//   border-radius: 4px;
+// }
 
-.test-correct-answer span {
-  font-size: 14px;
-  color: var(--primary-grey);
-}
+// .test-correct-answer span {
+//   font-size: 14px;
+//   color: var(--primary-grey);
+// }
 
-.test-answer-options {
-  margin-bottom: 40px;
-}
+// .test-answer-options {
+//   margin-bottom: 40px;
+// }
 
-.test-answer-options input {
-  height: 48px;
-  border-radius: 4px;
-}
+// .test-answer-options input {
+//   height: 48px;
+//   border-radius: 4px;
+// }
 
-.add-new-course {
-  outline: none;
-  border: none;
-  background: none;
-  display: flex;
-  align-items: center;
-  color: var(--primary-color);
-  height: 24px;
-  cursor: pointer;
+// .add-new-course {
+//   outline: none;
+//   border: none;
+//   background: none;
+//   display: flex;
+//   align-items: center;
+//   color: var(--primary-color);
+//   height: 24px;
+//   cursor: pointer;
 
-  span {
-    margin-left: 8px;
-  }
-}
+//   span {
+//     margin-left: 8px;
+//   }
+// }
 
-.add-question-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
+// .add-question-btn {
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   flex-direction: column;
+// }
 
-.add-question-btn span {
-  margin-top: 8px;
-}
+// .add-question-btn span {
+//   margin-top: 8px;
+// }
 
-.questions-btn-container {
-  display: flex;
-  width: 50%;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 40px;
+// .questions-btn-container {
+//   display: flex;
+//   width: 50%;
+//   align-items: center;
+//   justify-content: space-between;
+//   margin-top: 40px;
 
-  button {
-    width: 45%;
+//   button {
+//     width: 45%;
 
-    span {
-      line-height: 1.6;
-    }
-  }
+//     span {
+//       line-height: 1.6;
+//     }
+//   }
 
-  @media screen and (max-width: 1440px) {
-    width: 80%;
-  }
+//   @media screen and (max-width: 1440px) {
+//     width: 80%;
+//   }
 
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-}
+//   @media screen and (max-width: 768px) {
+//     width: 100%;
+//   }
+// }
 
-.btn-container {
-  margin-top: 24px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+// .btn-container {
+//   margin-top: 24px;
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+// }
 
-.reset-test-btn {
-  width: 45%;
-}
+// .reset-test-btn {
+//   width: 45%;
+// }
 
-.color-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  width: 45%;
-}
+// .color-primary {
+//   background-color: var(--primary-color);
+//   border-color: var(--primary-color);
+//   width: 45%;
+// }

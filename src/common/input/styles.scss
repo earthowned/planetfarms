@@ -1,14 +1,18 @@
 @import "./mixins.scss";
 @import "src/scss/mixins";
+@import "src/scss/colors";
 @import "src/scss/variables";
 
 // TODO: Use colors from scss/variables when it will be done in Figma;
 
 .pf-input {
   width: 100%;
+  gap: $gap-small;
+  @include flexColumn(flex-start, flex-start);
 
-  display: flex;
-  flex-direction: column;
+  h4 {
+    color: $color-grey;
+  }
 
   .content {
     width: 100%;
@@ -142,6 +146,7 @@
 
   .error-message {
     color: #da3443;
+    margin-top: -8px;
     font: 16px/24px $font-regular;
   }
 }

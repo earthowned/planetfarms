@@ -1,6 +1,9 @@
 const news = "/news";
 const courses = "/courses";
 
+const lessons = `${courses}/:courseId/lessons`;
+const lesson = `${lessons}/:lessonId`;
+
 const Auth = {
   Login: "/login",
   Register: "/register",
@@ -24,9 +27,11 @@ const Courses = {
   Create: `${courses}/create`,
   Members: `${courses}/:id/members`,
 
-  Lesson: `${courses}/:courseId/lessons/:lessonId`,
-  CreateLesson: `${courses}/:courseId/lessons/create`,
-  EditLesson: `${courses}/:courseId/lessons/:lessonId/edit`,
+  Lesson: `${lesson}`,
+  CreateLesson: `${lessons}/create`,
+  EditLesson: `${lesson}/edit`,
+
+  CreateTest: `${lesson}/tests/create`,
 };
 
 export const Routes = { Auth, News, Courses };

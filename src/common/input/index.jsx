@@ -13,6 +13,7 @@ export const Input = ({
   icon,
   name,
   error,
+  label,
   onBlur,
   onFocus,
   onChange,
@@ -35,6 +36,8 @@ export const Input = ({
 
   return (
     <div className="pf-input">
+      {label && <h4>{label}</h4>}
+
       <div
         className={cx("content", {
           "content-error": hasError,
