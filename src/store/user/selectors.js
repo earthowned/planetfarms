@@ -6,3 +6,8 @@ export const selectCurrentUser = createSelector(
   [selectUserStore],
   (store) => store.currentProfile
 );
+
+export const selectIsAuthed = createSelector(
+  [selectUserStore],
+  (store) => store.isAuthed
+);

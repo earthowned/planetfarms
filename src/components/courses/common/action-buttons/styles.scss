@@ -1,0 +1,20 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.course-action-buttons-container {
+  width: 100%;
+  gap: $gap-medium;
+  @include flexRow(center, space-between);
+
+  button {
+    width: 152px;
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    @include flexColumn(center, center);
+
+    button {
+      width: 100%;
+    }
+  }
+}

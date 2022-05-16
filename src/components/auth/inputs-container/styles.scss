@@ -1,0 +1,19 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.auth-inputs-container {
+  width: 100%;
+  gap: $gap-medium;
+  @include flexColumn(center, center);
+
+  .bottom-container {
+    width: 100%;
+    gap: $gap-smallest;
+    @include flexRow(center, space-between);
+
+    button {
+      height: 24px;
+      width: fit-content;
+    }
+  }
+}

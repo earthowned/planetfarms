@@ -12,7 +12,6 @@ export const mockedCourses = [
     category: "Farm",
     rating: 4,
     progress: 12,
-    members: 20,
     createdAt: new Date(2021, 11, 17),
 
     content: [
@@ -53,7 +52,7 @@ export const mockedCourses = [
       },
     ],
 
-    membersList: [
+    members: [
       {
         id: "0",
         name: "Jenny Wilson",
@@ -109,6 +108,99 @@ export const mockedCourses = [
           "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80",
       },
     ],
+
+    lessons: [
+      {
+        id: "1232lkfd",
+        title: "Lesson 1",
+        progress: 100,
+        content: [
+          {
+            type: ContentBuilderAction.Text,
+            title: "Senectus sed facilisis egestas adipiscing mauris.",
+            text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+          },
+          {
+            type: ContentBuilderAction.Image,
+            url: "https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864,0,1728,2304&wid=600&hei=800&scl=2.88",
+            description: "Combine Harvester swather",
+          },
+          {
+            type: ContentBuilderAction.Text,
+            title: "Senectus sed facilisis egestas adipiscing mauris.",
+            text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+          },
+          {
+            type: ContentBuilderAction.Text,
+            // title: "Senectus sed facilisis egestas adipiscing mauris.",
+            text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+          },
+          {
+            type: ContentBuilderAction.Text,
+            // title: "Senectus sed facilisis egestas adipiscing mauris.",
+            text: "Malesuada sit ac at at eu non, magna. Ut fringilla dui euismod congue bibendum leo venenatis convallis. Platea bibendum mauris etiam in ut nunc praesent. Neque diam proin diam a, id malesuada. Ut faucibus est turpis ullamcorper. Adipiscing adipiscing pretium faucibus vulputate fringilla. Tortor risus aliquam sit orci et adipiscing. Euismod nunc interdum donec purus etiam diam imperdiet facilisis. Ligula egestas sit commodo purus, amet ut rhoncus, et.",
+          },
+        ],
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
+        thumbnail:
+          "https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZmFybXxlbnwwfHwwfHw%3D&w=1000&q=80",
+      },
+      {
+        id: "1232lkfdfds",
+        title: "Lesson 2",
+        progress: 50,
+        content: [],
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
+        thumbnail:
+          "https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZmFybXxlbnwwfHwwfHw%3D&w=1000&q=80",
+      },
+      {
+        id: "1232lkffsdd",
+        title: "Lesson 3",
+        progress: 0,
+        content: [],
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
+        thumbnail:
+          "https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZmFybXxlbnwwfHwwfHw%3D&w=1000&q=80",
+      },
+      {
+        id: "1232lfdsfkfd",
+        title: "Lesson 4",
+        progress: 0,
+        content: [],
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
+        thumbnail:
+          "https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZmFybXxlbnwwfHwwfHw%3D&w=1000&q=80",
+      },
+      {
+        id: "1232lasdadkfd",
+        title: "Lesson 5",
+        progress: 0,
+        content: [],
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
+      },
+      {
+        id: "1232lqweqwekfd",
+        title: "Lesson 6",
+        progress: 0,
+        content: [],
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
+      },
+      {
+        id: "1232lcvcxvxvkfd",
+        title: "Lesson 7",
+        progress: 0,
+        content: [],
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm",
+      },
+    ],
   },
   {
     id: "1",
@@ -120,7 +212,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 5,
     progress: 70,
-    members: 10,
+    members: [],
     createdAt: new Date(2020, 5, 17),
   },
   {
@@ -133,7 +225,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 5,
     progress: 40,
-    members: 50,
+    members: [],
     createdAt: new Date(2020, 11, 5),
   },
   {
@@ -147,7 +239,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 1,
     progress: 40,
-    members: 100,
+    members: [],
     createdAt: new Date(2022, 4, 17),
   },
   {
@@ -160,7 +252,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 2,
     progress: 45,
-    members: 0,
+    members: [],
     createdAt: new Date(2022, 11, 17),
   },
   {
@@ -174,7 +266,7 @@ export const mockedCourses = [
     category: "Farm",
     rating: 3,
     progress: 90,
-    members: 200,
+    members: [],
     createdAt: new Date(2022, 11, 17),
   },
 ];

@@ -8,8 +8,8 @@ import { SwitchField } from "common/switch";
 import { TextAreaField } from "common/text-area";
 import { DashboardLayout } from "layout/dashboard";
 import { DragDropZoneField } from "common/drag-drop-zone";
-import { ActionButton } from "common/buttons/action-button";
 import { ContentBuilderField } from "common/content-builder";
+import { ActionButtonsContainer } from "components/courses/common";
 
 import { createCourseThunk } from "store/courses";
 
@@ -77,15 +77,7 @@ export const CreateCoursePage = () => {
                 actions={["Image", "Text"]}
               />
 
-              <div className="buttons-section">
-                <ActionButton
-                  title="Cancel"
-                  variant="secondary"
-                  onClick={() => history.goBack()}
-                />
-
-                <ActionButton type="submit" title="Create" variant="primary" />
-              </div>
+              <ActionButtonsContainer submitProps={{ title: "Create" }} />
             </div>
           </Form>
         )}

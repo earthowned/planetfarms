@@ -4,13 +4,15 @@
 .courses-empty-block-container {
   width: 100%;
   gap: $gap-medium;
-  overflow: hidden;
+  // overflow: hidden;
   @include flexColumn(center, center);
 
-  img {
-    height: 100%;
-    max-width: 100%;
-    object-fit: contain;
+  .image-container {
+    img {
+      height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
   }
 
   button {

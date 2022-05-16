@@ -4,11 +4,12 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { AuthLayout } from "layout/auth";
-import { InputField } from "common/input";
 import { DragDropZoneField } from "common/drag-drop-zone";
 import { ActionButton } from "common/buttons/action-button";
+import { InputsContainer, ButtonsContainer } from "components/auth";
 
 import { getErrorMessage } from "utils/error";
+import { setIsLoading } from "store/loader/slices";
 import { updateUserInfo } from "actions/userAction";
 
 import { configurePayload } from "./helpers";
@@ -26,26 +27,24 @@ export const AdditionalInfoPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(AdditionalStep.Info);
 
   const onSubmit = async (values) => {
     try {
-      setIsLoading(true);
+      dispatch(setIsLoading(true));
 
       const payload = configurePayload(values);
       await updateUserInfo(payload)(dispatch);
 
       if (step === AdditionalStep.Info) {
         setStep(AdditionalStep.Avatar);
-        setIsLoading(false);
       } else {
-        setIsLoading(false);
         history.replace("/news");
       }
     } catch (error) {
-      setIsLoading(false);
       alert.error(getErrorMessage(error));
+    } finally {
+      dispatch(setIsLoading(false));
     }
   };
 
@@ -63,7 +62,6 @@ export const AdditionalInfoPage = () => {
     <AuthLayout
       enableReinitialize
       onSubmit={onSubmit}
-      isLoading={isLoading}
       subtitle={Subtitle[step]}
       title="Additional Information"
       initialValues={initialValues[step]}
@@ -71,19 +69,13 @@ export const AdditionalInfoPage = () => {
     >
       {({ dirty }) => (
         <>
-          {step === AdditionalStep.Info && (
-            <div className="inputs-container">
-              {inputs.map((item) => (
-                <InputField key={`${item.name}-input`} {...item} />
-              ))}
-            </div>
-          )}
+          {step === AdditionalStep.Info && <InputsContainer inputs={inputs} />}
 
           {step === AdditionalStep.Avatar && (
             <DragDropZoneField type="Image" name={model.avatar.name} />
           )}
 
-          <div className="row-container">
+          <ButtonsContainer>
             <ActionButton
               title="Skip"
               variant="secondary"
@@ -96,7 +88,7 @@ export const AdditionalInfoPage = () => {
               disabled={!dirty}
               variant="primary"
             />
-          </div>
+          </ButtonsContainer>
         </>
       )}
     </AuthLayout>

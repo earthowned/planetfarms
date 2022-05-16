@@ -1,0 +1,36 @@
+@import "src/scss/mixins";
+@import "src/scss/colors";
+@import "src/scss/variables";
+
+.lesson-header-container {
+  width: 100%;
+  gap: $gap-big;
+  @include flexRow(center, flex-start);
+
+  .avatar-container {
+    @include circle(152px);
+  }
+
+  .right-block {
+    width: 100%;
+    gap: $gap-medium;
+    @include flexColumn();
+
+    .title-container {
+      gap: $gap-small;
+      @include setSvgColor($color-green);
+      @include flexRow(center, flex-start);
+    }
+  }
+
+  @include breakpoint("tablet", "max") {
+    gap: $gap-small;
+    .avatar-container {
+      @include circle(64px);
+    }
+
+    .right-block {
+      gap: $gap-small;
+    }
+  }
+}

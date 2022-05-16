@@ -1,14 +1,15 @@
 import materialImage from "assets/images/placeholders/file.png";
-import lessonSmallImage from "assets/images/placeholders/lesson-small.png";
-import lessonBigImage from "assets/images/placeholders/lesson-big.png";
 import memberImage from "assets/images/placeholders/member.png";
 import reviewImage from "assets/images/placeholders/review.png";
+import lessonBigImage from "assets/images/placeholders/lesson-big.png";
+import lessonSmallImage from "assets/images/placeholders/lesson-small.png";
 
 export const Variant = {
-  Material: "Material",
+  Tests: "Tests",
   Member: "Member",
   Review: "Review",
   Lesson: "Lesson",
+  Material: "Material",
 };
 
 export const ImageSize = {
@@ -33,18 +34,24 @@ export const Image = {
     [ImageSize.big]: reviewImage,
     [ImageSize.small]: reviewImage,
   },
+  [Variant.Tests]: {
+    [ImageSize.big]: lessonBigImage,
+    [ImageSize.small]: lessonSmallImage,
+  },
 };
 
 export const ButtonTitle = {
-  [Variant.Material]: "Add Materials",
-  [Variant.Lesson]: "Add Lesson",
   [Variant.Member]: "Invite",
+  [Variant.Tests]: "Add Test",
+  [Variant.Lesson]: "Add Lesson",
   [Variant.Review]: "Add Review",
+  [Variant.Material]: "Add Materials",
 };
 
 export const ButtonVariant = {
-  [Variant.Material]: "secondary",
+  [Variant.Tests]: "secondary",
   [Variant.Lesson]: "secondary",
   [Variant.Member]: "secondary",
   [Variant.Review]: "secondary",
+  [Variant.Material]: "secondary",
 };

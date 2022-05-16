@@ -1,0 +1,20 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.auth-action-buttons-container {
+  width: 100%;
+  gap: $gap-medium;
+  @include flexColumn(center, flex-start);
+
+  .buttons-container {
+    width: 100%;
+    gap: $gap-medium;
+    @include flexRow(center, space-between);
+  }
+
+  @include breakpoint("mobile", "minMax") {
+    .buttons-container {
+      @include flexColumn(center, flex-start);
+    }
+  }
+}

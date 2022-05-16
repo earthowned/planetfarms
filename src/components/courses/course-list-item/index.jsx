@@ -38,7 +38,8 @@ export const CoursesListItem = forwardRef(
 
     const membersComponent = () => {
       if (variant !== CourseListType.My) return null;
-      const courseMembers = members ? `${members} students` : "0 students";
+      const courseMembers =
+        members?.length > 0 ? `${members.length} students` : "0 students";
       return <h4 className="members">{courseMembers}</h4>;
     };
 

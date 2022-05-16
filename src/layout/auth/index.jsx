@@ -1,7 +1,6 @@
 import { Formik, Form } from "formik";
 
 import { Icon } from "common/icon";
-import { Loader } from "common/loader";
 import { BlurContainer } from "layout/blur-container";
 
 import "./styles.scss";
@@ -14,7 +13,6 @@ export const AuthLayout = ({
   initialValues,
   withLogo = true,
   validationSchema,
-  isLoading = false,
   enableReinitialize = false,
 }) => {
   return (
@@ -57,8 +55,6 @@ export const AuthLayout = ({
           </div>
         )}
       </div>
-
-      {isLoading && <Loader />}
     </BlurContainer>
   );
 };

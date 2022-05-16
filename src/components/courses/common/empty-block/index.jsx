@@ -9,6 +9,7 @@ import "./styles.scss";
 
 export const EmptyBllock = ({
   onAdd,
+  children,
   isImageVisible = true,
   isAddButtonVisible = true,
   variant = Config.Variant.Review,
@@ -29,7 +30,13 @@ export const EmptyBllock = ({
 
   return (
     <div className="courses-empty-block-container">
-      {isImageVisible && <img src={image} alt="" />}
+      {isImageVisible && (
+        <div className="image-container">
+          <img src={image} alt="" />
+        </div>
+      )}
+
+      {children && children}
 
       {isAddButtonVisible && (
         <ActionButton

@@ -1,14 +1,18 @@
-import React, { useState } from "react";
 import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { TextLink } from "common/links";
 import { AuthLayout } from "layout/auth";
-import { InputField } from "common/input";
 import { ActionButton } from "common/buttons/action-button";
+import {
+  FooterContainer,
+  InputsContainer,
+  ButtonsContainer,
+} from "components/auth";
 
 import { getErrorMessage } from "utils/error";
-import { requestCode, resetPassword } from "actions/auth";
+import { requestCodeThunk, resetPasswordThunk } from "store/user/thunks";
 
 import { validationSchema, initialValues, model } from "./config";
 import {
@@ -20,8 +24,7 @@ import {
 export const ForgotPasswordPage = () => {
   const alert = useAlert();
   const history = useHistory();
-
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleFormSubmit = async (values, actions) => {
     const { codeRequested, username, code, password } = values;
@@ -31,21 +34,22 @@ export const ForgotPasswordPage = () => {
     }
 
     try {
-      setIsLoading(true);
-
       if (!codeRequested) {
-        const response = await requestCode(username);
+        const response = await dispatch(requestCodeThunk(username));
         actions.setFieldValue(model.codeRequested.name, true);
-        if (response) alert.success(`Code has been sent to ${response}!`);
-        else alert.success("Code has been sent!");
-        setIsLoading(false);
+
+        alert.success(
+          response
+            ? `Code has been sent to ${response}!`
+            : "Code has been sent!"
+        );
       } else {
-        await resetPassword({ username, code, password });
+        await dispatch(resetPasswordThunk({ username, code, password }));
+
         alert.success("Password has been successfully changed!");
         history.push("/login");
       }
     } catch (error) {
-      setIsLoading(false);
       alert.error(getErrorMessage(error));
     }
   };
@@ -62,20 +66,25 @@ export const ForgotPasswordPage = () => {
     }
 
     try {
-      setIsLoading(true);
-      const response = await requestCode(values.username);
-      if (response) alert.success(`Code has been sent to ${response}!`);
-      else alert.success("Code has been sent!");
+      const response = await dispatch(requestCodeThunk(values.username));
+
+      alert.success(
+        response ? `Code has been sent to ${response}!` : "Code has been sent!"
+      );
     } catch (error) {
       alert.error(getErrorMessage(error));
-    } finally {
-      setIsLoading(false);
     }
+  };
+
+  const generateInputs = (values) => {
+    const { username, code, password, confirmPassword } = model;
+    return isCodeRequested(values)
+      ? [username, code, password, confirmPassword]
+      : [username];
   };
 
   return (
     <AuthLayout
-      isLoading={isLoading}
       title="Forgot Password"
       onSubmit={handleFormSubmit}
       initialValues={initialValues}
@@ -83,37 +92,26 @@ export const ForgotPasswordPage = () => {
     >
       {({ values, setFieldValue }) => (
         <>
-          <div className="inputs-container">
-            <InputField {...model.username} />
+          <InputsContainer inputs={generateInputs(values)} />
 
-            {values[model.codeRequested.name] && (
-              <>
-                <InputField {...model.code} />
-                <InputField type="password" {...model.password} />
-                <InputField type="password" {...model.confirmPassword} />
-              </>
-            )}
+          <ButtonsContainer>
+            <ActionButton
+              type="button"
+              variant="secondary"
+              title={secondaryButtonTitle(values)}
+              onClick={() => handleCodeResend(values, setFieldValue)}
+            />
 
-            <div className="row-container">
-              <ActionButton
-                type="button"
-                variant="secondary"
-                title={secondaryButtonTitle(values)}
-                onClick={() => handleCodeResend(values, setFieldValue)}
-              />
+            <ActionButton
+              type="submit"
+              variant="primary"
+              title={primaryButtonTitle(values)}
+            />
+          </ButtonsContainer>
 
-              <ActionButton
-                type="submit"
-                variant="primary"
-                title={primaryButtonTitle(values)}
-              />
-            </div>
-          </div>
-
-          <div className="footer">
-            <h5>Go back to</h5>
+          <FooterContainer title="Go back to">
             <TextLink replace to="/login" variant="green" title="Login" />
-          </div>
+          </FooterContainer>
         </>
       )}
     </AuthLayout>

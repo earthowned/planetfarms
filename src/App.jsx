@@ -5,16 +5,20 @@ import { QueryClientProvider } from "react-query";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
-import { SignInPage } from "screens/auth/sign-in";
-import { SignUpPage } from "screens/auth/sign-up";
-import { ForgotPasswordPage } from "screens/auth/forgot-password";
-import { AdditionalInfoPage } from "screens/auth/additional-info";
+import {
+  SignInPage,
+  SignUpPage,
+  ConfirmEmailPage,
+  ForgotPasswordPage,
+  AdditionalInfoPage,
+} from "screens/auth";
 
 import { PrivateRoute } from "components/privateRoute";
 import { SideBarNavigation } from "common/side-bar-navigation";
 
 import { Routes } from "routes";
 import ScrollToTop from "utils/scrollToTop";
+import { Routes as PathRoutes } from "constants/routes";
 import { SearchBarProvider } from "providers/search-bar";
 
 import { queryClient } from "./reactQuery";
@@ -43,14 +47,21 @@ function App() {
         <Router>
           <ScrollToTop>
             <Switch>
-              <Route component={SignInPage} path="/login" />
-              <Route component={SignUpPage} path="/register" />
-              <Route component={ForgotPasswordPage} path="/forgot-password" />
+              <Route component={SignInPage} path={PathRoutes.Auth.Login} />
+              <Route component={SignUpPage} path={PathRoutes.Auth.Register} />
+              <Route
+                component={ConfirmEmailPage}
+                path={PathRoutes.Auth.ConfirmEmail}
+              />
+              <Route
+                component={ForgotPasswordPage}
+                path={PathRoutes.Auth.ForgotPassword}
+              />
 
               <PrivateRoute
                 exact
-                path="/additional-info"
                 component={AdditionalInfoPage}
+                path={PathRoutes.Auth.AdditionalInfo}
               />
 
               <Route component={MainApp} />

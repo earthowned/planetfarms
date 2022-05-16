@@ -1,27 +1,27 @@
-import React, { useState } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { Icon } from "common/icon";
 import { TextLink } from "common/links";
 import { AuthLayout } from "layout/auth";
-import { InputField } from "common/input";
 import { CheckboxField } from "common/checkbox";
 import { ActionButton } from "common/buttons/action-button";
+import {
+  FooterContainer,
+  InputsContainer,
+  ButtonsContainer,
+} from "components/auth";
 
-import { register } from "actions/auth";
+import { Routes } from "constants/routes";
 import { getErrorMessage } from "utils/error";
+import { registerThunk, loginThunk } from "store/user/thunks";
 
-import { model, validationSchema, initialValues } from "./config";
+import { model, validationSchema, initialValues, inputs } from "./config";
 
 export const SignUpPage = () => {
   const alert = useAlert();
   const history = useHistory();
   const dispatch = useDispatch();
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSidngedUp, setIsSignedUp] = useState(false);
 
   const onGoogleLogin = () => {
     // Auth.federatedSignIn({ provider: "Google" });
@@ -31,105 +31,71 @@ export const SignUpPage = () => {
     // Auth.federatedSignIn({ provider: "Facebook" });
   };
 
-  const handleFormSubmit = async ({ username, password }) => {
+  const handleFormSubmit = async ({ email, password }) => {
     try {
-      setIsLoading(true);
-      await register({ name: username, password })(dispatch);
-      setIsSignedUp(true);
+      const { confirmEmail } = await dispatch(
+        registerThunk({ name: email, password })
+      );
+
+      const pathname = Routes.Auth.ConfirmEmail;
+      const state = {
+        email,
+        password,
+        variant: "Confirm",
+        isFromRegister: true,
+      };
+
+      if (!confirmEmail) {
+        await dispatch(loginThunk({ name: email, password }));
+        state.variant = "Success";
+      }
+
+      history.push({ pathname, state });
     } catch (error) {
       alert.error(getErrorMessage(error));
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
     <AuthLayout
-      isLoading={isLoading}
+      title="Sign Up"
       onSubmit={handleFormSubmit}
       initialValues={initialValues}
       validationSchema={validationSchema}
-      title={isSidngedUp ? "Congratulations!" : "Sign Up"}
     >
       {() => (
         <>
-          {isSidngedUp && (
-            <>
-              <div className="image-container">
-                <Icon icon="congratulations" />
-              </div>
+          <InputsContainer inputs={inputs}>
+            <CheckboxField title="I agree with" name={model.agrre.name}>
+              <TextLink
+                to="/register"
+                variant="white"
+                title="Terms of Service"
+              />
+            </CheckboxField>
+          </InputsContainer>
 
-              <div className="row-container">
-                <ActionButton
-                  variant="secondary"
-                  title="Go to dashboard"
-                  onClick={() => history.replace("/news")}
-                />
+          <ActionButton type="submit" variant="primary" title="Sign Up" />
 
-                <ActionButton
-                  title="Continue"
-                  variant="primary"
-                  onClick={() => history.replace("/additional-info")}
-                />
-              </div>
-            </>
-          )}
+          <ButtonsContainer label="Sign In with services">
+            <ActionButton
+              icon="google"
+              title="Google"
+              variant="secondary"
+              onClick={onGoogleLogin}
+            />
 
-          {!isSidngedUp && (
-            <>
-              <div className="inputs-container">
-                <InputField {...model.username} />
-                <InputField type="password" {...model.password} />
+            <ActionButton
+              icon="facebook"
+              title="Facebook"
+              variant="secondary"
+              onClick={onFacebookLogin}
+            />
+          </ButtonsContainer>
 
-                <div className="row-container">
-                  <div className="terms-checkbox-container">
-                    <CheckboxField name={model.agrre.name} />
-
-                    <div className="link-container">
-                      <p>I agree with</p>
-                      <TextLink
-                        to="/register"
-                        variant="white"
-                        title="Terms of Service"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <ActionButton type="submit" variant="primary" title="Sign Up" />
-
-              <div className="socials-container">
-                <h5>Sign In with services</h5>
-
-                <div className="row-container">
-                  <ActionButton
-                    icon="google"
-                    title="Google"
-                    variant="secondary"
-                    onClick={onGoogleLogin}
-                  />
-
-                  <ActionButton
-                    icon="facebook"
-                    title="Facebook"
-                    variant="secondary"
-                    onClick={onFacebookLogin}
-                  />
-                </div>
-              </div>
-
-              <div className="footer">
-                <h5>Already have an account?</h5>
-                <TextLink
-                  replace
-                  to="/login"
-                  variant="green"
-                  title="Sign in!"
-                />
-              </div>
-            </>
-          )}
+          <FooterContainer title="Already have an account?">
+            <TextLink replace to="/login" variant="green" title="Sign in!" />
+          </FooterContainer>
         </>
       )}
     </AuthLayout>
