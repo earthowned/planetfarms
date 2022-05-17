@@ -1,0 +1,17 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.members-list-container {
+  width: 100%;
+
+  &-row {
+    gap: $gap-big;
+    flex-wrap: wrap;
+    @include flexRow(flex-start, flex-start);
+  }
+
+  &-column {
+    gap: $gap-medium;
+    @include flexColumn(flex-start, flex-start);
+  }
+}

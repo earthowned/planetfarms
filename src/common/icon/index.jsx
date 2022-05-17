@@ -59,6 +59,8 @@ import { ReactComponent as DownloadIcon } from "assets/icons/download.svg";
 import { ReactComponent as CheckmarkRoundIcon } from "assets/icons/checkmark-round.svg";
 import { ReactComponent as MessageIcon } from "assets/icons/message.svg";
 import { ReactComponent as ArchiveIcon } from "assets/icons/archive.svg";
+import { ReactComponent as GridFourIcon } from "assets/icons/grid-four.svg";
+import { ReactComponent as GridTwoIcon } from "assets/icons/grid-two.svg";
 
 const getIcon = (iconName) => {
   switch (iconName) {
@@ -89,9 +91,8 @@ const getIcon = (iconName) => {
     case "checkmark":
       return <CheckmarkIcon />;
 
-    case "checkmark-round": {
+    case "checkmark-round":
       return <CheckmarkRoundIcon />;
-    }
 
     case "chevron-left":
       return <ChevronLeftIcon />;
@@ -131,6 +132,12 @@ const getIcon = (iconName) => {
 
     case "grid":
       return <GridIcon />;
+
+    case "grid-four":
+      return <GridFourIcon />;
+
+    case "grid-two":
+      return <GridTwoIcon />;
 
     case "facebook":
       return <FacebookIcon />;

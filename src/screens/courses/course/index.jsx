@@ -1,22 +1,28 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { TwoColumnsGrid } from "common/grids";
 import { ContentBlocks } from "common/content";
 import { ActionButton } from "common/buttons/action-button";
-import { MembersBlock } from "components/courses/blocks";
-import { MeterialsBlock, ReviewsBlock, LessonsBlock } from "components/courses";
+// import { MembersBlock } from "components/courses/blocks";
+import {
+  MeterialsBlock,
+  ReviewsBlock,
+  LessonsBlock,
+  MembersList,
+} from "components/courses";
 
+import { Routes } from "constants/routes";
 import { DashboardLayout } from "layout/dashboard";
 import { selectCurrentCourse } from "store/courses";
 // import { selectCurrentUser } from "store/user/selectors";
 
 import { CourseMainInfo } from "./main-info";
 import {
-  getCourseMatarials,
   getCourseReviews,
   getCourseLessons,
+  getCourseMatarials,
 } from "./helpers";
 
 import "./styles.scss";
@@ -25,6 +31,7 @@ const gridTemplateColumns = "1fr 248px";
 
 export const CoursePage = () => {
   const { id } = useParams();
+  const history = useHistory();
   const course = useSelector((state) => selectCurrentCourse(state, id));
   // const currentUser = useSelector(selectCurrentUser);
 
@@ -66,10 +73,15 @@ export const CoursePage = () => {
           <ContentBlocks contentList={course?.content} />
         </TwoColumnsGrid>
 
-        <MembersBlock
-          list={course?.membersList}
-          onSelectMember={() => {}}
-          onViewAll={() => {}}
+        <MembersList
+          variant="preview"
+          list={course?.members || []}
+          onViewAll={() =>
+            history.push(Routes.Courses.Members.replace(":id", id))
+          }
+          onSelectMember={() =>
+            history.push(Routes.Courses.Members.replace(":id", id))
+          }
         />
 
         <TwoColumnsGrid reverseMobile templateColumns={gridTemplateColumns}>

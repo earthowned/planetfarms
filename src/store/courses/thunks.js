@@ -1,4 +1,4 @@
-import { mockedCourses } from "utils/mocked";
+import { mockedCourses } from "utils/mocked/courses";
 
 import { createCourse, setCourses } from "./slice";
 

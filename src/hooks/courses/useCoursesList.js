@@ -4,9 +4,9 @@ import { useAlert } from "react-alert";
 
 import { api } from "api";
 import { SortOption } from "constants/enums";
-import { mockedCourses } from "utils/mocked";
 import { getErrorMessage } from "utils/error";
 import { useSearchBar } from "providers/search-bar";
+import { mockedCourses } from "utils/mocked/courses";
 
 const sortCoursesBy = ({ list = [], sortType }) => {
   return list.sort((a, b) => {
