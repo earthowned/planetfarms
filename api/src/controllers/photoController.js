@@ -89,8 +89,7 @@ const uploadImages = async (req, res) => {
     throw new BadRequestError('Missing images to upload')
   }
 
-  const baseUrl = `${req.protocol}://${req.get('host')}`
-  const data = files.images.map(img => `${baseUrl}/images/${img.filename}`)
+  const data = files.images.map(img => `/images/${img.filename}`)
 
   res.status(201).json({
     message: 'New photos uploaded successfully',
