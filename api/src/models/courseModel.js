@@ -13,14 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.TEXT
       },
-      creator: {
-        type: DataTypes.STRING
-      },
       thumbnail: {
         type: DataTypes.STRING
       },
       price: {
         type: DataTypes.DOUBLE
+      },
+      isPublished: {
+        type: DataTypes.BOOLEAN,
       },
       isFree: {
         type: DataTypes.BOOLEAN,
@@ -38,11 +38,8 @@ module.exports = (sequelize, DataTypes) => {
       as: 'enrolledUser',
       onDelete: 'CASCADE'
     })
-    Courses.belongsTo(models.Category, {
-      foreignKey: 'categoryId',
-      onDelete: 'CASCADE'
-    })
-
+    Courses.belongsTo(models.User, { foreignKey: 'creatorId', as: 'creator' })
+    Courses.belongsTo(models.RichText, { foreignKey: 'richtextId' })
     Courses.hasMany(models.CourseView, { foreignKey: 'courseId' })
   }
   return Courses
