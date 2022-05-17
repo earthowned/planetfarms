@@ -1,18 +1,11 @@
 @import "src/scss/mixins";
 
 .portal-modal-container {
+  @include position(fixed, 0, 0, 0, 0);
+  @include flexColumn(center, center);
+
   backdrop-filter: blur(4px);
   background-color: rgba(0, 0, 0, 0.3);
-
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .common-modal-container {
@@ -22,17 +15,13 @@
   border-radius: 4px;
   background-color: #191b1d;
 
-  display: flex;
-  flex-direction: column;
+  @include flexColumn(auto, auto);
 
   .top-container {
     width: 100%;
     height: 56px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: 24px;
+    @include flexRow(center, space-between);
   }
 
   @include breakpoint("mobile") {
@@ -40,4 +29,16 @@
     height: 100%;
     max-width: unset;
   }
+}
+
+.app-portal-loader-container {
+  width: 100%;
+  height: 100%;
+
+  z-index: 1000;
+  @include flexColumn(center, center);
+  @include position(fixed, 0, 0, 0, 0);
+
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.5);
 }

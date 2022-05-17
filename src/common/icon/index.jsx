@@ -41,7 +41,6 @@ import { ReactComponent as GamburgerIcon } from "assets/icons/gamburger.svg";
 import { ReactComponent as LogoutIcon } from "assets/icons/logout.svg";
 import { ReactComponent as TrashIcon } from "assets/icons/trash.svg";
 import { ReactComponent as CropIcon } from "assets/icons/crop.svg";
-import { ReactComponent as CongratulationsIcon } from "assets/icons/congratulations.svg";
 import { ReactComponent as UsersIcon } from "assets/icons/users.svg";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import { ReactComponent as PlusIcon } from "assets/icons/plus.svg";
@@ -78,9 +77,6 @@ const getIcon = (iconName) => {
 
     case "camera":
       return <CameraIcon />;
-
-    case "congratulations":
-      return <CongratulationsIcon />;
 
     case "cross":
       return <CrossIcon />;

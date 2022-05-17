@@ -5,13 +5,14 @@ export const model = {
     name: "username",
     icon: "person",
     required: true,
-    placeholder: "Username",
+    placeholder: "Username or Email",
   },
 
   password: {
     name: "password",
     icon: "lock",
     required: true,
+    type: "password",
     placeholder: "Password",
   },
 };
@@ -25,3 +26,5 @@ export const initialValues = {
   [model.username.name]: "",
   [model.password.name]: "",
 };
+
+export const inputs = [model.username, model.password];

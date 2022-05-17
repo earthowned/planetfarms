@@ -1,5 +1,7 @@
 import * as Yup from "yup";
 
+import { password, repeatPassword } from "utils/validators";
+
 export const model = {
   username: {
     name: "username",
@@ -19,53 +21,49 @@ export const model = {
 
   password: {
     name: "password",
+    type: "password",
     icon: "lock",
     placeholder: "New Password",
   },
 
   confirmPassword: {
     name: "confirmPassword",
+    type: "password",
     icon: "lock",
     placeholder: "Confirm Password",
   },
 };
 
-const { username, codeRequested, code, password, confirmPassword } = model;
-
 const isRequiredField = (value, schema, message) =>
   value ? schema.required(message) : schema.optional();
 
 export const validationSchema = Yup.object().shape({
-  [username.name]: Yup.string().required("Username is required field!"),
+  [model.username.name]: Yup.string().required("Username is required field!"),
 
-  [codeRequested.name]: Yup.bool().optional(),
+  [model.codeRequested.name]: Yup.bool().optional(),
 
-  [code.name]: Yup.string().when([codeRequested.name], (value, schema) =>
-    isRequiredField(value, schema, "Code is required field!")
+  [model.code.name]: Yup.string().when(
+    [model.codeRequested.name],
+    (value, schema) => isRequiredField(value, schema, "Code is required field!")
   ),
 
-  [password.name]: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .when([codeRequested.name], (value, schema) =>
+  [model.password.name]: password(8).when(
+    [model.codeRequested.name],
+    (value, schema) =>
       isRequiredField(value, schema, "Password is required field!")
-    ),
+  ),
 
-  [confirmPassword.name]: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .test(
-      "passwords-match",
-      "Passwords must match",
-      (value, context) => context.parent.password === value
-    )
-    .when([codeRequested.name], (value, schema) =>
+  [model.confirmPassword.name]: repeatPassword(8).when(
+    [model.codeRequested.name],
+    (value, schema) =>
       isRequiredField(value, schema, "Confirm Password is required field!")
-    ),
+  ),
 });
 
 export const initialValues = {
-  [username.name]: "",
-  [codeRequested.name]: false,
-  [code.name]: "",
-  [password.name]: "",
-  [confirmPassword.name]: "",
+  [model.code.name]: "",
+  [model.username.name]: "",
+  [model.password.name]: "",
+  [model.confirmPassword.name]: "",
+  [model.codeRequested.name]: false,
 };

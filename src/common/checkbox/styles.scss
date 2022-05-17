@@ -1,12 +1,13 @@
+@import "src/scss/mixins";
 @import "src/scss/variables";
 
 .pf-checkbox {
   cursor: pointer;
   user-select: none;
 
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+  height: 24px;
+  gap: $gap-smallest;
+  @include flexRow(center, center);
 
   input[type="checkbox"] {
     height: 0;
@@ -37,17 +38,19 @@
     &-error {
       border-color: #da3443;
     }
+
+    &:hover {
+      border-color: #cadcd6;
+    }
   }
 
-  &:hover .checkbox {
-    border-color: #cadcd6;
-  }
+  .checkbox-title-container {
+    gap: 4px;
+    @include flexRow(center, flex-start);
 
-  .checkbox-title {
-    color: #eeefef;
-    margin-left: 10px;
-    user-select: none;
-    font: $font-body;
+    h5 {
+      user-select: none;
+    }
   }
 
   input[type="checkbox"]:checked + .checkbox {

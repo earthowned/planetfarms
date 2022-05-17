@@ -1,15 +1,18 @@
 import * as Yup from "yup";
 
+import { password } from "utils/validators";
+
 export const model = {
-  username: {
-    name: "username",
+  email: {
+    name: "email",
     icon: "person",
     required: true,
-    placeholder: "Username",
+    placeholder: "Email",
   },
 
   password: {
     name: "password",
+    type: "password",
     icon: "lock",
     required: true,
     placeholder: "Password",
@@ -20,16 +23,18 @@ export const model = {
   },
 };
 
+export const inputs = [model.email, model.password];
+
 export const validationSchema = Yup.object().shape({
-  [model.username.name]: Yup.string().required("Username is required field!"),
-  [model.password.name]: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required field!"),
+  [model.email.name]: Yup.string()
+    .email("Email is not valid")
+    .required("Username is required field!"),
+  [model.password.name]: password(8).required("Password is required field!"),
   [model.agrre.name]: Yup.bool().isTrue().required(),
 });
 
 export const initialValues = {
-  [model.username.name]: "",
+  [model.email.name]: "",
   [model.password.name]: "",
   [model.agrre.name]: false,
 };

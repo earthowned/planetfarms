@@ -1,0 +1,19 @@
+@import "src/scss/mixins";
+@import "src/scss/variables";
+
+.auth-placeholder-container {
+  width: 100%;
+  gap: $gap-big;
+  @include flexColumn(center, center);
+
+  img {
+    max-height: 256px;
+    object-fit: contain;
+  }
+
+  @include breakpoint("mobile") {
+    img {
+      max-height: unset;
+    }
+  }
+}

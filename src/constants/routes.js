@@ -1,6 +1,14 @@
 const news = "/news";
 const courses = "/courses";
 
+const Auth = {
+  Login: "/login",
+  Register: "/register",
+  ConfirmEmail: "/confirm-email",
+  ForgotPassword: "/forgot-password",
+  AdditionalInfo: "/additional-info",
+};
+
 const News = {
   Home: news,
   Article: `${news}/:id`,
@@ -16,4 +24,4 @@ const Courses = {
   Members: `${courses}/:id/members`,
 };
 
-export const Routes = { News, Courses };
+export const Routes = { Auth, News, Courses };

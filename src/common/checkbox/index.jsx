@@ -6,7 +6,13 @@ import { Icon } from "common/icon";
 
 import "./styles.scss";
 
-export const Checkbox = ({ value = false, onChange, title, error }) => {
+export const Checkbox = ({
+  title,
+  error,
+  onChange,
+  children,
+  value = false,
+}) => {
   return (
     <div className="pf-checkbox" onClick={onChange}>
       <input type="checkbox" checked={value} onChange={onChange} />
@@ -15,7 +21,12 @@ export const Checkbox = ({ value = false, onChange, title, error }) => {
         <Icon icon="checkmark" />
       </div>
 
-      {title && <p className="checkbox-title">{title}</p>}
+      {(title || children) && (
+        <div className="checkbox-title-container">
+          {title && <h5>{title}</h5>}
+          {children && children}
+        </div>
+      )}
     </div>
   );
 };

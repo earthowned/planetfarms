@@ -122,6 +122,11 @@ export const Routes = () => {
       />
       <PrivateRoute
         exact
+        component={CreateCoursePage}
+        path={PathRoutes.Courses.Create}
+      />
+      <PrivateRoute
+        exact
         component={CoursePage}
         path={PathRoutes.Courses.Course}
       />

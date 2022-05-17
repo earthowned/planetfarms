@@ -1,63 +1,49 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAlert } from "react-alert";
 import { Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Loader } from "common/loader";
+import { Routes } from "constants/routes";
+import { useStateIfMounted } from "hooks";
 
+import { selectIsAuthed } from "store/user/selectors";
 import { getCurrentUserThunk } from "store/user/thunks";
-import { selectCurrentUser } from "store/user/selectors";
 
-// import { checkAndUpdateToken } from "../../actions/userAction";
-
-export const PrivateRoute = ({ component: Component, ...rest }) => {
+const CheckAuthRoute = ({ isAuthed }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const currentUser = useSelector(selectCurrentUser);
 
-  const [isAuthed, setIsAuthed] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!currentUser) {
-      setIsAuthed(false);
-      setIsLoading(true);
-    }
-    if (currentUser) {
-      setIsAuthed(true);
-      setIsLoading(false);
-    }
-  }, [currentUser]);
+  const [isRequesting, setIsRequesting] = useStateIfMounted(true);
 
   useEffect(async () => {
-    if (!isAuthed && isLoading) {
-      try {
-        const response = await getCurrentUserThunk()(dispatch);
-        setIsAuthed(response.isAuthed);
-        setIsLoading(false);
-      } catch (error) {
-        if (error) alert.error(error);
-        setIsAuthed(false);
-        setIsLoading(false);
-      }
+    try {
+      await dispatch(getCurrentUserThunk());
+    } catch (error) {
+      if (error) alert.error(error);
+    } finally {
+      setIsRequesting(false);
     }
-  }, [isAuthed, isLoading]);
+  }, []);
 
-  // const hasAccess = () => {
-  //   const userInfo = window.localStorage.getItem("userInfo");
-  //   console.log(userInfo);
-  //   return userInfo && dispatch(checkAndUpdateToken());
-  // };
+  if (!isAuthed && isRequesting) return <></>;
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (!isAuthed && !isRequesting) return <Redirect to={Routes.Auth.Login} />;
+
+  return null;
+};
+
+export const PrivateRoute = ({ component: Component, ...rest }) => {
+  const isAuthed = useSelector(selectIsAuthed);
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthed ? <Component {...props} /> : <Redirect to="/login" />
+        isAuthed ? (
+          <Component {...props} />
+        ) : (
+          <CheckAuthRoute isAuthed={isAuthed} />
+        )
       }
     />
   );
