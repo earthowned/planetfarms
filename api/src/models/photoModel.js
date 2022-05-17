@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    photoDescription: {
+    description: {
       type: DataTypes.STRING
     },
-    lessonImg: {
+    image: {
       type: DataTypes.STRING
     },
     isImgDesc: {

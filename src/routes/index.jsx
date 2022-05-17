@@ -135,6 +135,11 @@ export const Routes = () => {
         component={MembersPage}
         path={PathRoutes.Courses.Members}
       />
+      <PrivateRoute
+        exact
+        component={CreateCoursePage}
+        path={PathRoutes.Courses.Create}
+      />
 
       {/* <PrivateRoute component={CommunityPagenews} exact path="/news1" /> */}
 
