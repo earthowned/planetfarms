@@ -11,6 +11,14 @@ const {
   deleteCourse,
   courseSchema,
 } = require('../controllers/courseController.js')
+const {
+  getLessons,
+  getLessonById,
+  addLesson,
+  deleteLesson,
+  updateLesson,
+  lessonSchema
+} = require('../controllers/lessonController')
 
 router.use(protect)
 
@@ -29,6 +37,24 @@ router
   .put(
     validation(courseSchema),
     updateCourse
+  )
+
+// Course Lessons
+router
+  .route('/:courseId/lessons')
+  .get(getLessons)
+  .post(
+    validation(lessonSchema),
+    addLesson
+  )
+
+router
+  .route('/:courseId/lessons/:id')
+  .get(getLessonById)
+  .delete(deleteLesson)
+  .put(
+    validation(lessonSchema),
+    updateLesson
   )
 
 module.exports = router

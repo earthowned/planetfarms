@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING
       },
-      coverImg: {
+      thumbnail: {
         type: DataTypes.STRING
       },
       lessonDesc: {
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       richtextId: {
         type: DataTypes.INTEGER,
         unique: true,
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -48,7 +48,12 @@ module.exports = (sequelize, DataTypes) => {
       constraints: true,
       foreignKey: 'courseId'
     })
-    Lesson.belongsTo(models.RichText, { foreignKey: 'richtextId', constraints: true, onDelete: 'CASCADE' })
+    Lesson.belongsTo(models.RichText, {
+      foreignKey: 'richtextId',
+      constraints: true,
+      allowNull: true,
+      onDelete: 'SET NULL'
+    })
     Lesson.hasMany(models.LessonProgress, {
       constraints: true,
       foreignKey: 'lessonId',

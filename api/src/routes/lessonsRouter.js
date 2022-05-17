@@ -1,21 +1,39 @@
 const express = require('express')
-const router = express.Router()
-
+const protect = require('../middleware/authMiddleware')
+const validation = require('../middleware/validation')
 const {
   getLessons,
   getLessonById,
   addLesson,
   deleteLesson,
-  updateLesson
+  updateLesson,
+  lessonSchema
 } = require('../controllers/lessonController')
+const router = express.Router()
+
 const { upload, resizeImage } = require('../helpers/filehelpers')
 
-router.route('/course/:courseId').get(getLessons)
-router.route('/add').post(upload.single('coverImg'), resizeImage, addLesson)
+router.use(protect)
+
+router
+  .route('/')
+  .get(getLessons)
+  .post(
+    upload.fields([{ name: 'thumbnail' }, { name: 'lessons' }]),
+    resizeImage,
+    validation(lessonSchema),
+    addLesson
+  )
+
 router
   .route('/:id')
   .get(getLessonById)
-  .put(upload.single('coverImg'), resizeImage, updateLesson)
+  .put(
+    upload.fields([{ name: 'thumbnail' }, { name: 'lessons' }]),
+    resizeImage,
+    validation(lessonSchema),
+    updateLesson
+  )
   .delete(deleteLesson)
 
 module.exports = router

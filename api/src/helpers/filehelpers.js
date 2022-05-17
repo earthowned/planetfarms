@@ -2,6 +2,7 @@ const multer = require('multer')
 const shortid = require('shortid')
 const path = require('path')
 const fs = require('fs')
+const fsPromises = require('fs/promises')
 const sharp = require('sharp')
 const BadRequestError = require('../errors/badRequestError')
 
@@ -125,6 +126,23 @@ const changeFormat = (filename) =>
   filename &&
   path.basename(filename).split('.').slice(0, -1).join('.') + '.webp'
 
+const deleteImages = async (images) => {
+  await Promise.all(images.map(async photo => {
+    const [_, filename] = photo.split('/resources/')
+    if (!filename) return
+
+    const imagePath = path.join(__dirname, '..', '..', 'files', filename)
+
+    try {
+      await fsPromises.rm(imagePath)
+    } catch (error) {
+      if (error.code !== 'ENOENT') {
+        throw error
+      }
+    }
+  }))
+}
+
 module.exports = {
   multipleUpload,
   uploadArray,
@@ -133,4 +151,5 @@ module.exports = {
   resizeImage,
   changeFormat,
   storage,
+  deleteImages
 }
