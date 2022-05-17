@@ -106,7 +106,7 @@ const courseSchema = {
     title: Joi.string().required(),
     price: Joi.number().positive(),
     isPublished: Joi.boolean().required(),
-    thumbnail: Joi.string().uri(),
+    thumbnail: Joi.string(),
     description: Joi.array().items(
       Joi.alternatives().try(
         Joi.object({
@@ -114,7 +114,7 @@ const courseSchema = {
           text: Joi.string().required(),
         }),
         Joi.object({
-          image: Joi.string().uri().required(),
+          image: Joi.string().required(),
           description: Joi.string().allow(null, '')
         })
       )
