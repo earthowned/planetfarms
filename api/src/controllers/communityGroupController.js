@@ -147,7 +147,7 @@ const addGroups = async (req, res) => {
     }
 
     const followGroup = await db.sequelize.transaction(async (t) => {
-      const group = await db.Group.create({ ...req.body, communityId: req.params.id, creatorId: req.user.id, slug: '', filename: 'uploads/' + filename }, { transaction: t })
+      const group = await db.Group.create({ ...req.body, communityId: req.params.id, creatorId: req.user.id, slug: '', filename: `uploads/${filename}` }, { transaction: t })
       await db.GroupUser.create({ userId: req.user.id, groupId: group.id }, { transaction: t })
       return true
     })
@@ -251,7 +251,7 @@ const updateGroups = (req, res) => {
 
       if (filename) {
         db.Group.update({
-          title, description, category, filename: 'group/' + filename
+          title, description, category, filename: `group/${filename}`
         },
         { where: { id } })
           .then(() => res.json({ message: 'Groups Updated !!!' }).status(200))
@@ -278,7 +278,7 @@ const searchGroupsTitle = (req, res) => {
   const order = req.query.order || 'ASC'
 
   db.Group.findAll({
-    where: { title: { [Op.iLike]: '%' + title + '%' } },
+    where: { title: { [Op.iLike]: `%${title}%` } },
     order: [['title', order]],
     include: [{
       model: db.Community,
